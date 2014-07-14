@@ -118,6 +118,19 @@ Processed 1728 (0 created, 1728 updated, 0 failed, 0 ignored) in 185.1 sec (560/
 'all' cache was cleared.                                                                                              [success]
 ```
 
+Running tests
+=============
+
+You can use the test.sh script to launch the set of tests designed for the OSHA project.
+
+Command usage:
+
+* `./test.sh` - Runs all tests from the OSHA group
+* `./test.sh ClassNameTest` - Runs all the test methods from the ClassNameTest test class
+* `./test.sh ClassNameTest testName1,testName2` - Runs only the two tests from the entire class
+
+
+
 ##Repository Layout##
 Breakdown for what each directory/file is used for. See also readme inside directories.
 

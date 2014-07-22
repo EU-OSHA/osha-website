@@ -231,7 +231,7 @@ class OshaMigrationsTest extends DrupalWebTestCase {
 
         $translations = array(
             "Accident prevention" => array(
-                "name_field" => 19, "description_field" => 19
+                "name_field" => 21, "description_field" => 21
             ),
             "Ageing and OSH" => array(
                 "name_field" => 1, "description_field" => 1
@@ -240,7 +240,7 @@ class OshaMigrationsTest extends DrupalWebTestCase {
                 "name_field" => 24, "description_field" => 24
             ),
             "Dangerous substances" => array(
-                "name_field" => 19, "description_field" => 19
+                "name_field" => 21, "description_field" => 21
             ),
             "Emerging risks" => array(
                 "name_field" => 1, "description_field" => 1
@@ -249,7 +249,7 @@ class OshaMigrationsTest extends DrupalWebTestCase {
                 "name_field" => 1, "description_field" => 1
             ),
             "Good OSH is good for business" => array(
-                "name_field" => 1, "description_field" => 1
+                "name_field" => 24, "description_field" => 24
             ),
             "Green jobs" => array(
                 "name_field" => 23, "description_field" => 23
@@ -258,22 +258,22 @@ class OshaMigrationsTest extends DrupalWebTestCase {
                 "name_field" => 1, "description_field" => 1
             ),
             "Legislation" => array(
-                "name_field" => 1, "description_field" => 1
+                "name_field" => 7, "description_field" => 7
             ),
             "Mainstreaming OSH into education" => array(
                 "name_field" => 1, "description_field" => 1
             ),
             "Musculoskeletal disorders" => array(
-                "name_field" => 1, "description_field" => 1
+                "name_field" => 21, "description_field" => 21
             ),
             "Nanomaterials" => array(
-                "name_field" => 1, "description_field" => 1
+                "name_field" => 23, "description_field" => 23
             ),
             "OSH and young people" => array(
                 "name_field" => 1, "description_field" => 1
             ),
             "Psychosocial risks and stress" => array(
-                "name_field" => 1, "description_field" => 1
+                "name_field" => 19, "description_field" => 19
             ),
             "Women and OSH" => array(
                 "name_field" => 1, "description_field" => 1

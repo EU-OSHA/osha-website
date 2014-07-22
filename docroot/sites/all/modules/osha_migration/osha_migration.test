@@ -218,6 +218,75 @@ class OshaMigrationsTest extends DrupalWebTestCase {
         Migration::deregisterMigration(MIGRATION_THESAURUS);
     }
 
+    public function testCategoriesMigration() {
+        $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_CATEGORIES);
+
+        $sourceFile = 'data/categories.json';
+        $result = $this->runMigration(MIGRATION_CATEGORIES, CLASS_CATEGORIES, $sourceFile);
+        $this->assertEqual($result, Migration::RESULT_COMPLETED,
+            t(MIGRATION_CATEGORIES . ' returned RESULT_COMPLETED'));
+
+        $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
+        $this->assertEqual(16, count($terms));
+
+        $translations = array(
+            "Accident prevention" => array(
+                "name_field" => 19, "description_field" => 19
+            ),
+            "Ageing and OSH" => array(
+                "name_field" => 1, "description_field" => 1
+            ),
+            "Campaign 2014-2015" => array(
+                "name_field" => 24, "description_field" => 24
+            ),
+            "Dangerous substances" => array(
+                "name_field" => 19, "description_field" => 19
+            ),
+            "Emerging risks" => array(
+                "name_field" => 1, "description_field" => 1
+            ),
+            "ESENER" => array(
+                "name_field" => 1, "description_field" => 1
+            ),
+            "Good OSH is good for business" => array(
+                "name_field" => 1, "description_field" => 1
+            ),
+            "Green jobs" => array(
+                "name_field" => 23, "description_field" => 23
+            ),
+            "Leadership" => array(
+                "name_field" => 1, "description_field" => 1
+            ),
+            "Legislation" => array(
+                "name_field" => 1, "description_field" => 1
+            ),
+            "Mainstreaming OSH into education" => array(
+                "name_field" => 1, "description_field" => 1
+            ),
+            "Musculoskeletal disorders" => array(
+                "name_field" => 1, "description_field" => 1
+            ),
+            "Nanomaterials" => array(
+                "name_field" => 1, "description_field" => 1
+            ),
+            "OSH and young people" => array(
+                "name_field" => 1, "description_field" => 1
+            ),
+            "Psychosocial risks and stress" => array(
+                "name_field" => 1, "description_field" => 1
+            ),
+            "Women and OSH" => array(
+                "name_field" => 1, "description_field" => 1
+            )
+        );
+
+        foreach($terms as $term) {
+            $this->assertTranslations($translations, $term);
+        }
+
+        Migration::deregisterMigration(MIGRATION_CATEGORIES);
+    }
+
     private function assertTranslations($translations, $term) {
         $items = $translations[$term->name];
         foreach($items as $field => $count) {

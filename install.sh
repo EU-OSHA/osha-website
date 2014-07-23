@@ -29,6 +29,9 @@ if [ "$1" != "--skip-migrations" ]; then
 	echo "Importing Multilingual Thesaurus taxonomy"
 	drush migrate-import ThesaurusTaxonomy
 
+	echo "Importing Categories taxonomy"
+	drush migrate-import TagsTaxonomy
+
 fi
 
 drush cc all

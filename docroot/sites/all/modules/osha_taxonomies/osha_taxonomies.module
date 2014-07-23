@@ -5,6 +5,7 @@
  */
 
 // Taxonomies names
+define('TAXONOMY_CATEGORIES', 'tags');
 define('TAXONOMY_ESENER', 'esener');
 define('TAXONOMY_NACE_CODES', 'nace_codes');
 define('TAXONOMY_PUBLICATION_TYPES', 'publication_types');

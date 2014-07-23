@@ -9,31 +9,6 @@
  */
 function osha_taxonomies_taxonomy_default_vocabularies() {
   return array(
-    'categories' => array(
-      'name' => 'Categories',
-      'machine_name' => 'categories',
-      'description' => 'This taxonomy will be used to classify content by theme/topic',
-      'hierarchy' => 0,
-      'module' => 'taxonomy',
-      'weight' => 0,
-      'language' => 'und',
-      'i18n_mode' => 1,
-      'rdf_mapping' => array(
-        'rdftype' => array(
-          0 => 'skos:ConceptScheme',
-        ),
-        'name' => array(
-          'predicates' => array(
-            0 => 'dc:title',
-          ),
-        ),
-        'description' => array(
-          'predicates' => array(
-            0 => 'rdfs:comment',
-          ),
-        ),
-      ),
-    ),
     'esener' => array(
       'name' => 'Esener',
       'machine_name' => 'esener',

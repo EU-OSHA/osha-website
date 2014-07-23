@@ -246,7 +246,7 @@ class OshaMigrationsTest extends DrupalWebTestCase {
                 "name_field" => 1, "description_field" => 1
             ),
             "ESENER" => array(
-                "name_field" => 1, "description_field" => 1
+                "name_field" => 24, "description_field" => 24
             ),
             "Good OSH is good for business" => array(
                 "name_field" => 24, "description_field" => 24
@@ -258,10 +258,10 @@ class OshaMigrationsTest extends DrupalWebTestCase {
                 "name_field" => 1, "description_field" => 1
             ),
             "Legislation" => array(
-                "name_field" => 7, "description_field" => 7
+                "name_field" => 23, "description_field" => 23
             ),
             "Mainstreaming OSH into education" => array(
-                "name_field" => 1, "description_field" => 1
+                "name_field" => 21, "description_field" => 21
             ),
             "Musculoskeletal disorders" => array(
                 "name_field" => 21, "description_field" => 21

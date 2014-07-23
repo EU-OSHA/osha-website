@@ -269,6 +269,7 @@ $options['init-modules'] = array(
 	'entity_translation',
 	'i18n',
 	'variable',
+	'tmgmt',
 
 	'views',
 	'views_ui',
@@ -293,6 +294,10 @@ $options['init-modules'] = array(
 	'apachesolr_search',
 	'search_api_solr',
 	'strongarm',
+
+	'workbench',
+	'workbench_access',
+	'workbench_moderation',
 
 	'imce_wysiwyg',
 	'osha',

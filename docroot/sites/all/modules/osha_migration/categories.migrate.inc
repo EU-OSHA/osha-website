@@ -10,7 +10,7 @@ class MigrateOshaCategories extends DynamicMigration {
         $file_name = $arguments['file_name'];
         $source_file = sprintf("%s/%s", drupal_get_path('module', 'osha_migration'), $file_name);
 
-        $this->map =  new MigrateSQLMap(
+        $this->map = new MigrateSQLMap(
             $this->machineName,
             array(
                 'code' => array(
@@ -88,12 +88,9 @@ class MigrateOshaCategories extends DynamicMigration {
     protected function generateMachineName($class_name = NULL) {
         return 'TagsTaxonomy';
     }
-
-
 }
 
 class CategoriesTaxonomyMigrationListJSON extends MigrateListJSON {
-
     protected function getIDsFromJSON(array $data) {
         $ids = array();
         foreach($data as $item) {

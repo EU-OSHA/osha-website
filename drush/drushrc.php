@@ -302,5 +302,6 @@ $options['init-modules'] = array(
 
 	'imce_wysiwyg',
 	'osha',
-	'osha_migration'
+	'osha_migration',
+	'osha_publication'
 );

@@ -263,7 +263,8 @@ if(file_exists($json_path)) {
 }
 
 $options['init-modules'] = array(
-	'ctools', 'entity',
+	'ctools',
+	'entity',
 
 	'locale',
 	'entity_translation',

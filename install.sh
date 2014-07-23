@@ -30,7 +30,7 @@ if [ "$1" != "--skip-migrations" ]; then
 	drush migrate-import ThesaurusTaxonomy
 
 	echo "Importing Categories taxonomy"
-    drush migrate-import CategoriesTaxonomy
+	drush migrate-import TagsTaxonomy
 
 fi
 

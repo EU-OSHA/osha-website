@@ -5,8 +5,8 @@ class MigrateOshaCategories extends DynamicMigration {
     public function __construct($arguments) {
         parent::__construct();
 
-        $this->description = 'Import "Categories" taxonomy from JSON file';
-        $this->vocabulary = 'categories';
+        $this->description = 'Import "Tags" taxonomy from JSON file';
+        $this->vocabulary = 'tags';
         $file_name = $arguments['file_name'];
         $source_file = sprintf("%s/%s", drupal_get_path('module', 'osha_migration'), $file_name);
 
@@ -32,7 +32,7 @@ class MigrateOshaCategories extends DynamicMigration {
         $term_options = MigrateDestinationTerm::options('en', 'text', TRUE);
         $this->destination = new MigrateDestinationTerm($this->vocabulary, $term_options);
 
-        $this->addFieldMapping('field_categories_code', 'code');
+        $this->addFieldMapping('field_tags_code', 'code');
         $this->addFieldMapping('parent', 'parent');
         $this->addFieldMapping('format')->defaultValue('plain_text');
         $this->addFieldMapping('name', 'en');
@@ -86,7 +86,7 @@ class MigrateOshaCategories extends DynamicMigration {
     }
 
     protected function generateMachineName($class_name = NULL) {
-        return 'CategoriesTaxonomy';
+        return 'TagsTaxonomy';
     }
 
 

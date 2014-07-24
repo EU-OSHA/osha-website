@@ -263,12 +263,14 @@ if(file_exists($json_path)) {
 }
 
 $options['init-modules'] = array(
-	'ctools', 'entity',
+	'ctools',
+	'entity',
 
 	'locale',
 	'entity_translation',
 	'i18n',
 	'variable',
+	'tmgmt',
 
 	'views',
 	'views_ui',
@@ -294,7 +296,13 @@ $options['init-modules'] = array(
 	'search_api_solr',
 	'strongarm',
 
+	'workbench',
+	'workbench_access',
+	'workbench_moderation',
+
 	'imce_wysiwyg',
 	'osha',
-	'osha_migration'
+	'osha_migration',
+	'osha_news',
+	'osha_publication'
 );

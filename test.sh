@@ -14,7 +14,7 @@ drush en -y simpletest > /dev/null 2>&1
 drush dis -y apache-solr > /dev/null 2>&1
 
 if [ "$1" == "" ]; then
-	echo "Stand back! I'm running ALL tests from the OSHA group ..."
+	echo "Stand back! I'm running ALL the tests from group OSHA ..."
 	drush test-run OSHA
 else
 	if [ "$2" != "" ]; then

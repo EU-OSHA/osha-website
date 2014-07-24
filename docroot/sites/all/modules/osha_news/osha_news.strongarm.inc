@@ -71,10 +71,10 @@ function osha_news_strongarm() {
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '7',
+          'weight' => '8',
         ),
         'workbench_access' => array(
-          'weight' => '6',
+          'weight' => '7',
         ),
         'language' => array(
           'weight' => '1',

@@ -63,10 +63,10 @@ class MigrateOshaNaceCodes extends DynamicMigration {
 
     public function getWeightByCode($row) {
         $weight = NULL;
-        if ($row->Level > 2) {
+        if($row->Level > 2) {
             $weightAsString = substr($row->NACE_REV_2_CODE, -1);
             $weight = intval($weightAsString);
-        } else if ($row->Level == 2) {
+        } else if($row->Level == 2) {
             $weightAsString = substr($row->NACE_REV_2_CODE, -2);
             $weight = intval($weightAsString);
         } else {
@@ -132,7 +132,7 @@ class MigrateOshaNaceCodes extends DynamicMigration {
 			->entityCondition('entity_type', 'taxonomy_term')
 			->fieldCondition('field_nace_code', 'value', $code, '=')
 			->execute();
-		if (!empty($result['taxonomy_term'])) {
+		if(!empty($result['taxonomy_term'])) {
 			return current(array_keys($result['taxonomy_term']));
 		}
 		return array();
@@ -141,13 +141,13 @@ class MigrateOshaNaceCodes extends DynamicMigration {
 	private function getParentCode($row) {
 		$parent_code = NULL;
 		$cached = NaceCodesMigrationItemJSON::$cache[$row->NACE_REV_2_CODE];
-		if ($cached['Level'] > 3) {
+		if($cached['Level'] > 3) {
 			$parent_code = substr($cached['NACE_REV_2_CODE'], 0, -1);
 		} else {
-			if ($cached['Level'] == 3) {
+			if($cached['Level'] == 3) {
 				$parent_code = substr($cached['NACE_REV_2_CODE'], 0, -2);
 			} else {
-				if ($cached['Level'] == 2) {
+				if($cached['Level'] == 2) {
 					$parent_code = $cached['Sections for publication'];
 				}
 			}
@@ -184,8 +184,8 @@ class MigrateOshaNaceCodes extends DynamicMigration {
 		$defaultLanguage = 'en';
 
 		$languageFieldsMap = array();
-		foreach ($languages as $language => $field_language_code) {
-			if ($language == $defaultLanguage) {
+		foreach($languages as $language => $field_language_code) {
+			if($language == $defaultLanguage) {
 				$languageFieldsMap[$language] = array(
 					'description' => 'NACE_REV_2_DESCRIPTION',
 					'excludes' => 'excludes',
@@ -193,7 +193,7 @@ class MigrateOshaNaceCodes extends DynamicMigration {
 					'includes_also' => 'includes also'
 				);
 			} else {
-				if (in_array($language, $languagesWithDifferentFieldNameTemplates)) {
+				if(in_array($language, $languagesWithDifferentFieldNameTemplates)) {
 					$languageFieldsMap[$language] = array(
 						'description' => $field_language_code . "_Description",
 						'excludes' => $field_language_code . "_Excludes",
@@ -240,7 +240,7 @@ class NaceCodesMigrationListJSON extends MigrateListJSON {
      */
     protected function getIDsFromJSON(array $data) {
         $ids = array();
-        foreach ($data as $item) {
+        foreach($data as $item) {
             $ids[] = $item['NACE_REV_2_CODE'];
         }
         return $ids;
@@ -253,9 +253,9 @@ class NaceCodesMigrationItemJSON extends MigrateItemJSON {
 
     public function getItem($id) {
         // Object caching
-        if (empty($this->data)) {
+        if(empty($this->data)) {
             $cache = $this->loadJSONUrl($this->itemUrl);
-            foreach ($cache as $item) {
+            foreach($cache as $item) {
                 self::$cache[$item['NACE_REV_2_CODE']] = $item;
                 $this->data[$item['NACE_REV_2_CODE']] = json_decode(json_encode($item), FALSE);
             }
@@ -265,7 +265,7 @@ class NaceCodesMigrationItemJSON extends MigrateItemJSON {
     }
 
     protected function loadJSONUrl($item_url) {
-        if (empty($this->httpOptions)) {
+        if(empty($this->httpOptions)) {
             $json = file_get_contents($item_url);
         }
         else {

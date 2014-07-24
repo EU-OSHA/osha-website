@@ -76,9 +76,60 @@ to `config.json` and customize to suit your environment
     
 3. Run [install.sh](https://github.com/EU-OSHA/osha-website/blob/master/install.sh) (wrapper around few drush commands)
 
+*Warning*: Running install.sh on an existing instance *will destroy* that instance (database) loosing all customisations
+
 *Note:* You can pass `--skip-migrations` to not install the migrations for you.
 
 4. (Optional) To run the migration/migration tests see the documentation from [osha_migration](https://github.com/EU-OSHA/osha-website/tree/master/docroot/sites/all/modules/osha_migration) module
+
+Updating an existing instance
+=============================
+
+To update an existing instance without reinstalling (and loosing existing content):
+
+* Update the code repository from Github (`git pull [origin develop]`)
+* Run `update.sh` which reverts all features and updates the migrated data
+
+*Note:* You can pass `--skip-migrations` to not install the migrations for you.
+
+The output of the console should look like this:
+
+```
+No database updates required                                                                                          [success]
+'all' cache was cleared.                                                                                              [success]
+Finished performing updates.                                                                                          [ok]
+The following modules will be reverted: osha_taxonomies, osha
+Do you really want to continue? (y/n): y
+Reverted osha_taxonomies.field_base.                                                                                  [ok]
+Reverted osha_taxonomies.field_instance.                                                                              [ok]
+Reverted osha_taxonomies.taxonomy.                                                                                    [ok]
+Reverted osha.language.                                                                                               [ok]
+Reverted osha.variable.                                                                                               [ok]
+'all' cache was cleared.                                                                                              [success]
+Built!                                                                                                                [success]
+Updating NACE codes taxonomy
+Processed 996 (0 created, 996 updated, 0 failed, 0 ignored) in 117.9 sec (507/min) - done with 'NaceCodes'            [completed]
+Updating ESENER taxonomy
+Processed 147 (0 created, 147 updated, 0 failed, 0 ignored) in 9.1 sec (967/min) - done with 'EsenerTaxonomy'         [completed]
+Updating Publication types taxonomy
+Processed 9 (0 created, 9 updated, 0 failed, 0 ignored) in 0.6 sec (957/min) - done with 'PublicationTypesTaxonomy'   [completed]
+Updating Multilingual Thesaurus taxonomy
+Processed 1728 (0 created, 1728 updated, 0 failed, 0 ignored) in 185.1 sec (560/min) - done with 'ThesaurusTaxonomy'  [completed]
+'all' cache was cleared.                                                                                              [success]
+```
+
+Running tests
+=============
+
+You can use the test.sh script to launch the set of tests designed for the OSHA project.
+
+Command usage:
+
+* `./test.sh` - Runs all tests from the OSHA group
+* `./test.sh ClassNameTest` - Runs all the test methods from the ClassNameTest test class
+* `./test.sh ClassNameTest testName1,testName2` - Runs only the two tests from the entire class
+
+
 
 ##Repository Layout##
 Breakdown for what each directory/file is used for. See also readme inside directories.

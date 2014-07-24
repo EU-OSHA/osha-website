@@ -11,7 +11,7 @@ class MigrateOshaThesaurus extends DynamicMigration {
         $file_name = $arguments['file_name'];
         $source_file = sprintf("%s/%s", drupal_get_path('module', 'osha_migration'), $file_name);
 
-        $this->map =  new MigrateSQLMap(
+        $this->map = new MigrateSQLMap(
             $this->machineName,
             array(
                 'code' => array(
@@ -59,7 +59,6 @@ class MigrateOshaThesaurus extends DynamicMigration {
     public function prepareRow($row) {
         $row->parent = 0;
         $row->language = 'en';
-
         $row->parent = $this->getParent($row);
 
         return TRUE;
@@ -99,9 +98,9 @@ class MigrateOshaThesaurus extends DynamicMigration {
 
     private function getParent($row) {
         $parent_code = $row->parent_code;
-        if (!empty($parent_code)) {
+        if(!empty($parent_code)) {
             $parent_id = self::_getTidByCode($parent_code);
-            if (empty($parent_id)) {
+            if(empty($parent_id)) {
                 $parent_id = $this->handleSourceMigration($this->generateMachineName(), $parent_code);
             }
             return $parent_id;
@@ -115,7 +114,7 @@ class MigrateOshaThesaurus extends DynamicMigration {
             ->entityCondition('entity_type', 'taxonomy_term')
             ->fieldCondition('field_thesaurus_code', 'value', $code, '=')
             ->execute();
-        if (!empty($result['taxonomy_term'])) {
+        if(!empty($result['taxonomy_term'])) {
             return current(array_keys($result['taxonomy_term']));
         }
         return array();
@@ -137,7 +136,7 @@ class MigrateOshaThesaurus extends DynamicMigration {
 class ThesaurusMigrationListJSON extends MigrateListJSON {
     protected function getIDsFromJSON(array $data) {
         $ids = array();
-        foreach ($data['@graph'] as $item) {
+        foreach($data['@graph'] as $item) {
             $ids[] = substr($item['@id'], 6);
         }
         return $ids;
@@ -145,12 +144,13 @@ class ThesaurusMigrationListJSON extends MigrateListJSON {
 
     public function computeCount() {
         $count = 0;
-        if (empty($this->httpOptions)) {
+        $json = null;
+        if(empty($this->httpOptions)) {
             $json = file_get_contents($this->listUrl);
         }
-        if ($json) {
+        if($json) {
             $data = drupal_json_decode($json);
-            if ($data) {
+            if($data) {
                 $count = count($data['@graph']);
             }
         }
@@ -163,7 +163,7 @@ class ThesaurusMigrationItemJSON extends MigrateItemJSON {
 
     public function getItem($id) {
         // Object caching
-        if (empty($this->data)) {
+        if(empty($this->data)) {
             $dataArray = $this->loadJSONUrl($this->itemUrl);
             foreach($dataArray['@graph'] as $rawItem) {
                 $item = array();
@@ -182,7 +182,7 @@ class ThesaurusMigrationItemJSON extends MigrateItemJSON {
     }
 
     protected function loadJSONUrl($item_url) {
-        if (empty($this->httpOptions)) {
+        if(empty($this->httpOptions)) {
             $json = file_get_contents($item_url);
         }
         else {

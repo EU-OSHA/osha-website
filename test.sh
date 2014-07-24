@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # This script allows you to run OSHA related tests on your existing instance (created with install.sh, btw)
 #

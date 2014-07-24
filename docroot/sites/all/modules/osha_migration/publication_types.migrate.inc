@@ -73,7 +73,6 @@ class MigrateOshaPublicationTypesTaxonomy extends DynamicMigration {
             $sourceLanguage = ($language == 'en') ? '' : 'en';
             $translationsData[$language] = array(
                 'entity_type' => 'term',
-                'entity_id'   => $entity->tid,
                 'language'    => $language,
                 'source'      => $sourceLanguage,
                 'uid'         => '1',

@@ -1,11 +1,15 @@
 <?php
 
+define('MIGRATION_CATEGORIES', 'TagsTest');
 define('MIGRATION_ESENER', 'EsenerTest');
 define('MIGRATION_NACE_CODES', 'NaceCodesTest');
 define('MIGRATION_PUBLICATION_TYPES', 'PublicationTypesTest');
+define('MIGRATION_THESAURUS', 'ThesaurusTest');
+define('CLASS_CATEGORIES', 'MigrateOshaCategories');
 define('CLASS_ESENER', 'MigrateOshaEsenerTaxonomy');
 define('CLASS_NACE_CODES', 'MigrateOshaNaceCodes');
 define('CLASS_PUBLICATION_TYPES', 'MigrateOshaPublicationTypesTaxonomy');
+define('CLASS_THESAURUS', 'MigrateOshaThesaurus');
 
 /**
  * You must implement hook_migrate_api(), setting the API level to 2, for
@@ -29,6 +33,16 @@ function osha_migration_migrate_api() {
 			'PublicationTypesTaxonomy' => array(
                 'class_name' => 'MigrateOshaPublicationTypesTaxonomy',
                 'group_name' => 'OSHA MIGRATIONS'
+            ),
+            'ThesaurusTaxonomy' => array(
+                'class_name' => 'MigrateOshaThesaurus',
+                'file_name' => 'data/OSHA-MultilingualThesaurus.json',
+                'group_name' => 'OSHA MIGRATION'
+            ),
+            'TagsTaxonomy' => array(
+                'class_name' => 'MigrateOshaCategories',
+                'file_name' => 'data/categories.json',
+                'group_name' => 'OSHA MIGRATION'
             )
 		)
 	);

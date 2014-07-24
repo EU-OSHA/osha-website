@@ -14,4 +14,6 @@ files[] = nace_codes.migrate.inc
 files[] = news.migrate.inc
 files[] = esener.migrate.inc
 files[] = publication_types.migrate.inc
+files[] = thesaurus.migrate.inc
+files[] = categories.migrate.inc
 files[] = osha_migration.test

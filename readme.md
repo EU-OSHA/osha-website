@@ -78,7 +78,7 @@ to `config.json` and customize to suit your environment
 
 *Warning*: Running install.sh on an existing instance *will destroy* that instance (database) loosing all customisations
 
-*Note:* You can pass `--skip-migrations` to not install the migrations for you.
+*Note:* You have to pass `--migrate` to install the migrations (taxonomies)
 
 4. (Optional) To run the migration/migration tests see the documentation from [osha_migration](https://github.com/EU-OSHA/osha-website/tree/master/docroot/sites/all/modules/osha_migration) module
 
@@ -90,7 +90,7 @@ To update an existing instance without reinstalling (and loosing existing conten
 * Update the code repository from Github (`git pull [origin develop]`)
 * Run `update.sh` which reverts all features and updates the migrated data
 
-*Note:* You can pass `--skip-migrations` to not install the migrations for you.
+*Note:* You have to pass `--migrate` to update the migrations (taxonomies)
 
 The output of the console should look like this:
 

@@ -5,7 +5,7 @@ cd docroot/
 
 drush build
 
-if [ "$1" != "--skip-migrations" ]; then
+if [ "$1" == "--migrate" ]; then
 
 	echo "Updating NACE codes taxonomy"
 	drush migrate-import NaceCodes --update

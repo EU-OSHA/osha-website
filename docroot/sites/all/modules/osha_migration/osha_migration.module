@@ -16,79 +16,80 @@ define('CLASS_THESAURUS', 'MigrateOshaThesaurus');
  * your migration classes to be recognized by the Migrate module.
  */
 function osha_migration_migrate_api() {
-	$api = array(
-		'api' => 2,
-		'migrations' => array(
-			'News' => array('class_name' => 'MigrateOshaNews'),
-            'NaceCodes' => array(
-                'class_name' => 'MigrateOshaNaceCodes',
-                'file_name' => 'data/nace_codes.json',
-                'group_name' => 'OSHA MIGRATIONS'
-            ),
-            'EsenerTaxonomy' => array(
-                'class_name' => 'MigrateOshaEsenerTaxonomy',
-                'file_name' => 'data/esener.json',
-                'group_name' => 'OSHA MIGRATIONS'
-            ),
-			'PublicationTypesTaxonomy' => array(
-                'class_name' => 'MigrateOshaPublicationTypesTaxonomy',
-                'group_name' => 'OSHA MIGRATIONS'
-            ),
-            'ThesaurusTaxonomy' => array(
-                'class_name' => 'MigrateOshaThesaurus',
-                'file_name' => 'data/OSHA-MultilingualThesaurus.json',
-                'group_name' => 'OSHA MIGRATION'
-            ),
-            'TagsTaxonomy' => array(
-                'class_name' => 'MigrateOshaCategories',
-                'file_name' => 'data/categories.json',
-                'group_name' => 'OSHA MIGRATION'
-            )
-		)
-	);
-	return $api;
+  $api = array(
+    'api' => 2,
+    'migrations' => array(
+      'News' => array('class_name' => 'MigrateOshaNews'),
+      'NaceCodes' => array(
+        'class_name' => 'MigrateOshaNaceCodes',
+        'file_name' => 'data/nace_codes.json',
+        'group_name' => 'OSHA MIGRATIONS'
+      ),
+      'EsenerTaxonomy' => array(
+        'class_name' => 'MigrateOshaEsenerTaxonomy',
+        'file_name' => 'data/esener.json',
+        'group_name' => 'OSHA MIGRATIONS'
+      ),
+      'PublicationTypesTaxonomy' => array(
+        'class_name' => 'MigrateOshaPublicationTypesTaxonomy',
+        'group_name' => 'OSHA MIGRATIONS'
+      ),
+      'ThesaurusTaxonomy' => array(
+        'class_name' => 'MigrateOshaThesaurus',
+        'file_name' => 'data/OSHA-MultilingualThesaurus.json',
+        'group_name' => 'OSHA MIGRATION'
+      ),
+      'TagsTaxonomy' => array(
+        'class_name' => 'MigrateOshaCategories',
+        'file_name' => 'data/categories.json',
+        'group_name' => 'OSHA MIGRATION'
+      )
+    )
+  );
+  return $api;
 }
 
 /**
  * Implements hook_schema_alter()
  */
 function osha_migration_schema_alter(&$schema) {
-	if(isset($schema['taxonomy_term_data'])) {
-		$schema['taxonomy_term_data']['fields']['name'] = array(
-			'type' => 'varchar',
-			'length' => 768,
-			'not null' => TRUE,
-			'default' => '',
-		);
-	}
+  if (isset($schema['taxonomy_term_data'])) {
+    $schema['taxonomy_term_data']['fields']['name'] = array(
+      'type' => 'varchar',
+      'length' => 768,
+      'not null' => TRUE,
+      'default' => '',
+    );
+  }
 
-	if(isset($schema['field_data_name_field'])) {
-		$schema['field_data_name_field']['fields']['name_field_value'] = array(
-			'type' => 'varchar',
-			'length' => 768,
-			'not null' => TRUE,
-			'default' => '',
-		);
-	}
+  if (isset($schema['field_data_name_field'])) {
+    $schema['field_data_name_field']['fields']['name_field_value'] = array(
+      'type' => 'varchar',
+      'length' => 768,
+      'not null' => TRUE,
+      'default' => '',
+    );
+  }
 
-	if(isset($schema['field_revision_name_field'])) {
-		$schema['field_revision_name_field']['fields']['name_field_value'] = array(
-			'type' => 'varchar',
-			'length' => 768,
-			'not null' => TRUE,
-			'default' => '',
-		);
-	}
+  if (isset($schema['field_revision_name_field'])) {
+    $schema['field_revision_name_field']['fields']['name_field_value'] = array(
+      'type' => 'varchar',
+      'length' => 768,
+      'not null' => TRUE,
+      'default' => '',
+    );
+  }
 }
 
 /**
- * @return null
- * @throws MigrateException
+ * Retrieve the root directory for the migration data folder
+ * @return string|null Path on local disk
+ * @throws MigrateException When the variable is empty
  */
 function osha_migration_get_data_dir() {
-	$ret = variable_get('osha_data_dir', NULL);
-	if(empty($ret)) {
-		throw new MigrateException('Please configure the "osha_data_dir" variable to point to your data storage');
-	}
-	return $ret;
+  $ret = variable_get('osha_data_dir', NULL);
+  if (empty($ret)) {
+    throw new MigrateException('Please configure the "osha_data_dir" variable to point to your data storage');
+  }
+  return $ret;
 }

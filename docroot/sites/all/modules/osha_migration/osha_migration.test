@@ -1,313 +1,361 @@
 <?php
 
 class OshaMigrationsTest extends DrupalWebTestCase {
-    public static function getInfo() {
-        return array(
-            'name' => 'OSHA migrations tests',
-            'description' => 'Tests functionalities provided by this module',
-            'group' => 'OSHA',
-        );
+  public static function getInfo() {
+    return array(
+      'name' => 'OSHA migrations tests',
+      'description' => 'Tests functionalities provided by this module',
+      'group' => 'OSHA',
+    );
+  }
+
+  public function setUp() {
+    parent::setUp('features', 'osha', 'taxonomy', 'migrate', 'osha_migration');
+  }
+
+  /**
+   * Tests the NaceCodesTaxonomy
+   */
+  public function testNaceCodesMigration() {
+    $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_NACE_CODES);
+
+    $sourceFile = 'data/test/nace_codes.json';
+    $result = $this->runMigration(MIGRATION_NACE_CODES, CLASS_NACE_CODES, $sourceFile);
+    $this->assertEqual($result, Migration::RESULT_COMPLETED,
+      t('NaceCodesTest returned RESULT_COMPLETED'));
+
+    $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
+    $this->assertEqual(3, count($terms));
+
+    $translations = array(
+      "Crop and animal production, hunting and related service activities" => array(
+        "name_field" => 26,
+        "description_field" => 26,
+        "field_nace_excludes" => 13,
+        "field_nace_includes" => 13,
+        "field_nace_includes_also" => 8
+      ),
+      "Growing of non-perennial crops" => array(
+        "name_field" => 26,
+        "description_field" => 26,
+        "field_nace_excludes" => 1,
+        "field_nace_includes" => 13,
+        "field_nace_includes_also" => 1
+      ),
+      "AGRICULTURE, FORESTRY AND FISHING" => array(
+        "name_field" => 26,
+        "description_field" => 26,
+        "field_nace_excludes" => 1,
+        "field_nace_includes" => 13,
+        "field_nace_includes_also" => 1
+      )
+    );
+
+    $weights = array(
+      "Crop and animal production, hunting and related service activities" => 1,
+      "Growing of non-perennial crops" => 1,
+      "AGRICULTURE, FORESTRY AND FISHING" => 0
+    );
+
+    $parentRelations = array(
+      "Crop and animal production, hunting and related service activities" => "AGRICULTURE, FORESTRY AND FISHING",
+      "Growing of non-perennial crops" => "Crop and animal production, hunting and related service activities",
+      "AGRICULTURE, FORESTRY AND FISHING" => NULL
+    );
+
+    foreach ($terms as $term) {
+      $this->assertTranslations($translations, $term);
+      $this->assertEqual($weights[$term->name], $term->weight, "Wrong weight for term {$term->name}");
+
+      $parents = taxonomy_get_parents($term->tid);
+      switch ($term->name) {
+        case 'AGRICULTURE, FORESTRY AND FISHING':
+          $this->assertEqual(0, count($parents));
+          break;
+        default:
+          $this->assertEqual(1, count($parents));
+          $p = array_pop($parents);
+          $this->assertEqual($parentRelations[$term->name], $p->name);
+          break;
+      }
+    }
+    Migration::deregisterMigration(MIGRATION_NACE_CODES);
+  }
+
+  /**
+   * Tests the Esener Migration
+   */
+  public function testEsenerMigration() {
+    $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_ESENER);
+
+    $sourceFile = 'data/test/esener.json';
+    $result = $this->runMigration(MIGRATION_ESENER, CLASS_ESENER, $sourceFile);
+    $this->assertEqual($result, Migration::RESULT_COMPLETED,
+      t('EsenerTest returned RESULT_COMPLETED'));
+
+    $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
+    $this->assertEqual(2, count($terms));
+
+    $translations = array(
+      "General health and safety management in the establishment" => array(
+        "name_field" => 23,
+        "description_field" => 23,
+        "field_esener_code" => 1
+      ),
+      "Indicator" => array(
+        "name_field" => 1,
+        "description_field" => 1,
+        "field_esener_code" => 1
+      )
+    );
+
+    $parentRelations = array(
+      "General health and safety management in the establishment" => "Indicator",
+      "Indicator" => NULL
+    );
+
+    foreach ($terms as $term) {
+      $this->assertTranslations($translations, $term);
+
+      $parents = taxonomy_get_parents($term->tid);
+      switch ($term->name) {
+        case 'Indicator':
+          $this->assertEqual(0, count($parents));
+          break;
+        default:
+          $this->assertEqual(1, count($parents));
+          $p = array_pop($parents);
+          $this->assertEqual($parentRelations[$term->name], $p->name);
+          break;
+      }
     }
 
-    public function setUp() {
-        parent::setUp('features', 'osha', 'taxonomy', 'migrate', 'osha_migration');
+    Migration::deregisterMigration(MIGRATION_ESENER);
+  }
+
+
+  /**
+   * Tests the PublicationTypes Migration
+   */
+  public function testPublicationTypesMigration() {
+    $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_PUBLICATION_TYPES);
+
+    $sourceFile = 'data/test/esener.json';
+    $result = $this->runMigration(MIGRATION_PUBLICATION_TYPES, CLASS_PUBLICATION_TYPES, $sourceFile);
+    $this->assertEqual($result, Migration::RESULT_COMPLETED,
+      t('PublicationTypesTest returned RESULT_COMPLETED'));
+
+    $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
+    $this->assertEqual(9, count($terms));
+
+    $translations = array(
+      "Corporate publications" => array(
+        "name_field" => 21,
+        "description_field" => 21,
+        "field_publication_type_code" => 1
+      ),
+      "Reports" => array(
+        "name_field" => 21,
+        "description_field" => 21,
+        "field_publication_type_code" => 1
+      ),
+      "Literature reviews" => array(
+        "name_field" => 21,
+        "description_field" => 21,
+        "field_publication_type_code" => 1
+      ),
+      "E-facts" => array(
+        "name_field" => 21,
+        "description_field" => 21,
+        "field_publication_type_code" => 1
+      ),
+      "Articles" => array(
+        "name_field" => 21,
+        "description_field" => 21,
+        "field_publication_type_code" => 1
+      ),
+      "Promotional Material" => array(
+        "name_field" => 21,
+        "description_field" => 21,
+        "field_publication_type_code" => 1
+      ),
+      "Factsheets" => array(
+        "name_field" => 21,
+        "description_field" => 21,
+        "field_publication_type_code" => 1
+      ),
+      "Magazine" => array(
+        "name_field" => 21,
+        "description_field" => 21,
+        "field_publication_type_code" => 1
+      ),
+      "Evaluation reports" => array(
+        "name_field" => 21,
+        "description_field" => 21,
+        "field_publication_type_code" => 1
+      )
+    );
+
+    foreach ($terms as $term) {
+      $this->assertTranslations($translations, $term);
     }
 
-    /**
-     * Tests the NaceCodesTaxonomy
-     */
-    public function testNaceCodesMigration() {
-        $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_NACE_CODES);
+    Migration::deregisterMigration(MIGRATION_ESENER);
+  }
 
-        $sourceFile = 'data/test/nace_codes.json';
-        $result = $this->runMigration(MIGRATION_NACE_CODES, CLASS_NACE_CODES, $sourceFile);
-        $this->assertEqual($result, Migration::RESULT_COMPLETED,
-            t('NaceCodesTest returned RESULT_COMPLETED'));
+  /**
+   * Tests for the Thesaurus Migration
+   */
+  public function testThesaurusMigration() {
+    $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_THESAURUS);
 
-        $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
-        $this->assertEqual(3, count($terms));
+    $sourceFile = 'data/test/thesaurus2.json';
+    $result = $this->runMigration(MIGRATION_THESAURUS, CLASS_THESAURUS, $sourceFile);
+    $this->assertEqual($result, Migration::RESULT_COMPLETED,
+      t(MIGRATION_THESAURUS . ' returned RESULT_COMPLETED'));
 
-        $translations = array(
-            "Crop and animal production, hunting and related service activities" => array(
-                "name_field" => 26, "description_field" => 26,
-                "field_nace_excludes" => 13, "field_nace_includes" => 13, "field_nace_includes_also" => 8
-            ),
-            "Growing of non-perennial crops" => array(
-                "name_field" => 26, "description_field" => 26,
-                "field_nace_excludes" => 1, "field_nace_includes" => 13, "field_nace_includes_also" => 1
-            ),
-            "AGRICULTURE, FORESTRY AND FISHING" => array(
-                "name_field" => 26, "description_field" => 26,
-                "field_nace_excludes" => 1, "field_nace_includes" => 13, "field_nace_includes_also" => 1
-            )
-        );
+    $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
+    $this->assertEqual(2, count($terms));
 
-        $weights = array(
-            "Crop and animal production, hunting and related service activities" => 1,
-            "Growing of non-perennial crops" => 1,
-            "AGRICULTURE, FORESTRY AND FISHING" => 0
-        );
+    $translations = array(
+      "European organisations" => array(
+        "name_field" => 23,
+        "description_field" => 23
+      ),
+      "Senior Labour Inspectors Committee" => array(
+        "name_field" => 23,
+        "description_field" => 23
+      )
+    );
 
-        $parentRelations = array(
-            "Crop and animal production, hunting and related service activities" => "AGRICULTURE, FORESTRY AND FISHING",
-            "Growing of non-perennial crops" => "Crop and animal production, hunting and related service activities",
-            "AGRICULTURE, FORESTRY AND FISHING" => null
-        );
+    $parentRelations = array(
+      "Senior Labour Inspectors Committee" => "European organisations",
+      "European organisations" => NULL
+    );
 
-        foreach($terms as $term) {
-            $this->assertTranslations($translations, $term);
-            $this->assertEqual($weights[$term->name], $term->weight, "Wrong weight for term {$term->name}");
+    foreach ($terms as $term) {
+      $this->assertTranslations($translations, $term);
 
-            $parents = taxonomy_get_parents($term->tid);
-            switch($term->name) {
-                case 'AGRICULTURE, FORESTRY AND FISHING':
-                    $this->assertEqual(0, count($parents));
-                    break;
-                default:
-                    $this->assertEqual(1, count($parents));
-                    $p = array_pop($parents);
-                    $this->assertEqual($parentRelations[$term->name], $p->name);
-                    break;
-            }
-        }
-        Migration::deregisterMigration(MIGRATION_NACE_CODES);
+      $parents = taxonomy_get_parents($term->tid);
+      switch ($term->name) {
+        case 'European organisations':
+          $this->assertEqual(0, count($parents));
+          break;
+        default:
+          $this->assertEqual(1, count($parents));
+          $p = array_pop($parents);
+          $this->assertEqual($parentRelations[$term->name], $p->name);
+          break;
+      }
+    }
+    Migration::deregisterMigration(MIGRATION_THESAURUS);
+  }
+
+  public function testCategoriesMigration() {
+    $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_CATEGORIES);
+
+    $sourceFile = 'data/categories.json';
+    $result = $this->runMigration(MIGRATION_CATEGORIES, CLASS_CATEGORIES, $sourceFile);
+    $this->assertEqual($result, Migration::RESULT_COMPLETED,
+      t(MIGRATION_CATEGORIES . ' returned RESULT_COMPLETED'));
+
+    $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
+    $this->assertEqual(16, count($terms));
+
+    $translations = array(
+      "Accident prevention" => array(
+        "name_field" => 21,
+        "description_field" => 21
+      ),
+      "Ageing and OSH" => array(
+        "name_field" => 1,
+        "description_field" => 1
+      ),
+      "Campaign 2014-2015" => array(
+        "name_field" => 24,
+        "description_field" => 24
+      ),
+      "Dangerous substances" => array(
+        "name_field" => 21,
+        "description_field" => 21
+      ),
+      "Emerging risks" => array(
+        "name_field" => 1,
+        "description_field" => 1
+      ),
+      "ESENER" => array(
+        "name_field" => 24,
+        "description_field" => 24
+      ),
+      "Good OSH is good for business" => array(
+        "name_field" => 24,
+        "description_field" => 24
+      ),
+      "Green jobs" => array(
+        "name_field" => 23,
+        "description_field" => 23
+      ),
+      "Leadership" => array(
+        "name_field" => 1,
+        "description_field" => 1
+      ),
+      "Legislation" => array(
+        "name_field" => 23,
+        "description_field" => 23
+      ),
+      "Mainstreaming OSH into education" => array(
+        "name_field" => 21,
+        "description_field" => 21
+      ),
+      "Musculoskeletal disorders" => array(
+        "name_field" => 21,
+        "description_field" => 21
+      ),
+      "Nanomaterials" => array(
+        "name_field" => 23,
+        "description_field" => 23
+      ),
+      "OSH and young people" => array(
+        "name_field" => 1,
+        "description_field" => 1
+      ),
+      "Psychosocial risks and stress" => array(
+        "name_field" => 19,
+        "description_field" => 19
+      ),
+      "Women and OSH" => array(
+        "name_field" => 1,
+        "description_field" => 1
+      )
+    );
+
+    foreach ($terms as $term) {
+      $this->assertTranslations($translations, $term);
     }
 
-    /**
-     * Tests the Esener Migration
-     */
-    public function testEsenerMigration() {
-        $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_ESENER);
+    Migration::deregisterMigration(MIGRATION_CATEGORIES);
+  }
 
-        $sourceFile = 'data/test/esener.json';
-        $result = $this->runMigration(MIGRATION_ESENER, CLASS_ESENER, $sourceFile);
-        $this->assertEqual($result, Migration::RESULT_COMPLETED,
-            t('EsenerTest returned RESULT_COMPLETED'));
-
-        $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
-        $this->assertEqual(2, count($terms));
-
-        $translations = array(
-            "General health and safety management in the establishment" => array(
-                "name_field" => 23, "description_field" => 23, "field_esener_code" => 1
-            ),
-            "Indicator" => array(
-                "name_field" => 1, "description_field" => 1, "field_esener_code" => 1
-            )
-        );
-
-        $parentRelations = array(
-            "General health and safety management in the establishment" => "Indicator",
-            "Indicator" => null
-        );
-
-        foreach($terms as $term) {
-            $this->assertTranslations($translations, $term);
-
-            $parents = taxonomy_get_parents($term->tid);
-            switch($term->name) {
-                case 'Indicator':
-                    $this->assertEqual(0, count($parents));
-                    break;
-                default:
-                    $this->assertEqual(1, count($parents));
-                    $p = array_pop($parents);
-                    $this->assertEqual($parentRelations[$term->name], $p->name);
-                    break;
-            }
-        }
-
-        Migration::deregisterMigration(MIGRATION_ESENER);
+  private function assertTranslations($translations, $term) {
+    $items = $translations[$term->name];
+    foreach ($items as $field => $count) {
+      $c = count($term->$field);
+      $this->assertEqual($count, $c,
+        sprintf('Translations for %s.%s are invalid (%s != %s)', $term->name, $field, $count, $c)
+      );
     }
+  }
 
-
-    /**
-     * Tests the PublicationTypes Migration
-     */
-    public function testPublicationTypesMigration() {
-        $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_PUBLICATION_TYPES);
-
-        $sourceFile = 'data/test/esener.json';
-        $result = $this->runMigration(MIGRATION_PUBLICATION_TYPES, CLASS_PUBLICATION_TYPES, $sourceFile);
-        $this->assertEqual($result, Migration::RESULT_COMPLETED,
-            t('PublicationTypesTest returned RESULT_COMPLETED'));
-
-        $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
-        $this->assertEqual(9, count($terms));
-
-        $translations = array(
-            "Corporate publications" => array(
-                "name_field" => 21, "description_field" => 21, "field_publication_type_code" => 1
-            ),
-            "Reports" => array(
-                "name_field" => 21, "description_field" => 21, "field_publication_type_code" => 1
-            ),
-            "Literature reviews" => array(
-                "name_field" => 21, "description_field" => 21, "field_publication_type_code" => 1
-            ),
-            "E-facts" => array(
-                "name_field" => 21, "description_field" => 21, "field_publication_type_code" => 1
-            ),
-            "Articles" => array(
-                "name_field" => 21, "description_field" => 21, "field_publication_type_code" => 1
-            ),
-            "Promotional Material" => array(
-                "name_field" => 21, "description_field" => 21, "field_publication_type_code" => 1
-            ),
-            "Factsheets" => array(
-                "name_field" => 21, "description_field" => 21, "field_publication_type_code" => 1
-            ),
-            "Magazine" => array(
-                "name_field" => 21, "description_field" => 21, "field_publication_type_code" => 1
-            ),
-            "Evaluation reports" => array(
-                "name_field" => 21, "description_field" => 21, "field_publication_type_code" => 1
-            )
-        );
-
-        foreach($terms as $term) {
-            $this->assertTranslations($translations, $term);
-        }
-
-        Migration::deregisterMigration(MIGRATION_ESENER);
-    }
-
-    /**
-     * Tests for the Thesaurus Migration
-     */
-    public function testThesaurusMigration() {
-        $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_THESAURUS);
-
-        $sourceFile = 'data/test/thesaurus2.json';
-        $result = $this->runMigration(MIGRATION_THESAURUS, CLASS_THESAURUS, $sourceFile);
-        $this->assertEqual($result, Migration::RESULT_COMPLETED,
-            t(MIGRATION_THESAURUS . ' returned RESULT_COMPLETED'));
-
-        $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
-        $this->assertEqual(2, count($terms));
-
-        $translations = array(
-            "European organisations" => array(
-                "name_field" => 23, "description_field" => 23
-            ),
-            "Senior Labour Inspectors Committee" => array(
-                "name_field" => 23, "description_field" => 23
-            )
-        );
-
-        $parentRelations = array(
-            "Senior Labour Inspectors Committee" => "European organisations",
-            "European organisations" => null
-        );
-
-        foreach($terms as $term) {
-            $this->assertTranslations($translations, $term);
-
-            $parents = taxonomy_get_parents($term->tid);
-            switch($term->name) {
-                case 'European organisations':
-                    $this->assertEqual(0, count($parents));
-                    break;
-                default:
-                    $this->assertEqual(1, count($parents));
-                    $p = array_pop($parents);
-                    $this->assertEqual($parentRelations[$term->name], $p->name);
-                    break;
-            }
-        }
-        Migration::deregisterMigration(MIGRATION_THESAURUS);
-    }
-
-    public function testCategoriesMigration() {
-        $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_CATEGORIES);
-
-        $sourceFile = 'data/categories.json';
-        $result = $this->runMigration(MIGRATION_CATEGORIES, CLASS_CATEGORIES, $sourceFile);
-        $this->assertEqual($result, Migration::RESULT_COMPLETED,
-            t(MIGRATION_CATEGORIES . ' returned RESULT_COMPLETED'));
-
-        $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
-        $this->assertEqual(16, count($terms));
-
-        $translations = array(
-            "Accident prevention" => array(
-                "name_field" => 21, "description_field" => 21
-            ),
-            "Ageing and OSH" => array(
-                "name_field" => 1, "description_field" => 1
-            ),
-            "Campaign 2014-2015" => array(
-                "name_field" => 24, "description_field" => 24
-            ),
-            "Dangerous substances" => array(
-                "name_field" => 21, "description_field" => 21
-            ),
-            "Emerging risks" => array(
-                "name_field" => 1, "description_field" => 1
-            ),
-            "ESENER" => array(
-                "name_field" => 24, "description_field" => 24
-            ),
-            "Good OSH is good for business" => array(
-                "name_field" => 24, "description_field" => 24
-            ),
-            "Green jobs" => array(
-                "name_field" => 23, "description_field" => 23
-            ),
-            "Leadership" => array(
-                "name_field" => 1, "description_field" => 1
-            ),
-            "Legislation" => array(
-                "name_field" => 23, "description_field" => 23
-            ),
-            "Mainstreaming OSH into education" => array(
-                "name_field" => 21, "description_field" => 21
-            ),
-            "Musculoskeletal disorders" => array(
-                "name_field" => 21, "description_field" => 21
-            ),
-            "Nanomaterials" => array(
-                "name_field" => 23, "description_field" => 23
-            ),
-            "OSH and young people" => array(
-                "name_field" => 1, "description_field" => 1
-            ),
-            "Psychosocial risks and stress" => array(
-                "name_field" => 19, "description_field" => 19
-            ),
-            "Women and OSH" => array(
-                "name_field" => 1, "description_field" => 1
-            )
-        );
-
-        foreach($terms as $term) {
-            $this->assertTranslations($translations, $term);
-        }
-
-        Migration::deregisterMigration(MIGRATION_CATEGORIES);
-    }
-
-    private function assertTranslations($translations, $term) {
-        $items = $translations[$term->name];
-        foreach($items as $field => $count) {
-            $c = count($term->$field);
-            $this->assertEqual($count, $c,
-                sprintf('Translations for %s.%s are invalid (%s != %s)', $term->name, $field, $count, $c)
-            );
-        }
-    }
-
-    private function runMigration($machineName, $className, $fileName) {
-        Migration::registerMigration(
-            $className,
-            $machineName,
-            array(
-                'group_name' => 'OSHA TEST MIGRATIONS',
-                'file_name' => $fileName
-            )
-        );
-        $migration = Migration::getInstance($machineName);
-        return $migration->processImport();
-    }
-
+  private function runMigration($machineName, $className, $fileName) {
+    Migration::registerMigration(
+      $className,
+      $machineName,
+      array(
+        'group_name' => 'OSHA TEST MIGRATIONS',
+        'file_name' => $fileName
+      )
+    );
+    $migration = Migration::getInstance($machineName);
+    return $migration->processImport();
+  }
 }

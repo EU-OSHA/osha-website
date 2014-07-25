@@ -2,70 +2,53 @@
 
 class MigrateOshaNews extends Migration {
 
-	public function __construct() {
-		parent::__construct(MigrateGroup::getInstance('json_migration'));
+  public function __construct() {
+    parent::__construct(MigrateGroup::getInstance('json_migration'));
 
-		$import_root = $import_root = osha_migration_get_data_dir();
-		$source_file = sprintf('%s/news/news.json', $import_root);
+    $import_root = $import_root = osha_migration_get_data_dir();
+    $source_file = sprintf('%s/news/news.json', $import_root);
 
-		// no options, or you could specify some
-		$http_options = array();
-		// map for the migration
-		$this->map = new MigrateSQLMap($this->machineName,
-			array(
-				'id' => array(
-					'type' => 'int',
-					'not null' => TRUE,
-					'unassigned' => TRUE,
-				),
-			),
-			MigrateDestinationNode::getKeySchema()
-		);
+    $this->map = new MigrateSQLMap($this->machineName,
+      array(
+        'id' => array(
+          'type' => 'int',
+          'not null' => TRUE,
+          'unassigned' => TRUE,
+        ),
+      ),
+      MigrateDestinationNode::getKeySchema()
+    );
 
-		$this->source = new MigrateSourceJSON($source_file, 'id', $this->fields());
+    $this->source = new MigrateSourceJSON($source_file, 'id', $this->fields());
+    $this->destination = new MigrateDestinationNode('news');
 
-		// destination node type is json (because this is an example)
-		$this->destination = new MigrateDestinationNode('news');
+    $this->addFieldMapping('title', 'title');
+    $this->addFieldMapping('body', 'text');
+    $this->addFieldMapping('body:summary', 'description');
+    $this->addFieldMapping('field_news_tags', 'subject')->separator(',');
+    $this->addFieldMapping('field_news_tags:create_term')->defaultValue(TRUE);
 
-		// map node's title field to the title in the json content
-		$this->addFieldMapping('title', 'title');
-		// map node's body field to the content in the json content
-		$this->addFieldMapping('body', 'text');
-		// map node's body summary field to the title in the json content
-		$this->addFieldMapping('body:summary', 'description');
+    $this->addFieldMapping('field_news_image', 'image_link');
+    $this->addFieldMapping('field_news_image:alt')->defaultValue('Something');
+    $this->addFieldMapping('field_news_image:title')->defaultValue('Title custom');
+    $this->addFieldMapping('comment', NULL)->defaultValue(COMMENT_NODE_CLOSED);
+  }
 
-		// map node's tags with create term if not exist
-		$this->addFieldMapping('field_news_tags', 'subject')
-			->separator(',');
-		$this->addFieldMapping('field_news_tags:create_term')
-			->defaultValue(TRUE);
+  protected function generateMachineName() {
+    return 'News';
+  }
 
-		// example image migration
-		$this->addFieldMapping('field_news_image', 'image_link');
-		$this->addFieldMapping('field_news_image:alt')
-			->defaultValue('Something');
-		$this->addFieldMapping('field_news_image:title')
-			->defaultValue('Title custom');
-
-		//apparently you can do stuff like this:
-		$this->addFieldMapping('comment', NULL)->defaultValue(COMMENT_NODE_CLOSED);
-	}
-
-	protected function generateMachineName($class_name = NULL) {
-		return 'News';
-	}
-
-	/**
-	 * @return array Fields present in the source file
-	 */
-	function fields() {
-		return array(
-			"id" => "unique ID for each source row",
-			"description" => "the summary of each news node",
-			"text" => "the content of each news node",
-			"title" => "the title of the news",
-			"subject" => "news tags",
-			"image_link" => "the link to the image"
-		);
-	}
+  /**
+   * @return array Fields present in the source file
+   */
+  function fields() {
+    return array(
+      "id" => "unique ID for each source row",
+      "description" => "the summary of each news node",
+      "text" => "the content of each news node",
+      "title" => "the title of the news",
+      "subject" => "news tags",
+      "image_link" => "the link to the image"
+    );
+  }
 }

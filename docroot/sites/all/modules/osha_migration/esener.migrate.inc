@@ -7,8 +7,6 @@ class MigrateOshaEsenerTaxonomy extends DynamicMigration {
     public function __construct($arguments) {
         parent::__construct();
 
-        $this->changeFieldSize();
-
         $this->description = 'Import the "Esener" taxonomy into Esener';
         $this->vocabulary = 'Esener';
 
@@ -46,36 +44,6 @@ class MigrateOshaEsenerTaxonomy extends DynamicMigration {
         $this->addFieldMapping('format')->defaultValue('plain_text');
         $this->addFieldMapping('name', 'en');
         $this->addFieldMapping('description_field:format')->defaultValue('plain_text');
-    }
-
-    /**
-     * Change field size to 768 characters to accomodate Esener questions which are very long. Applies to
-     *  - taxonomy_term_data.name
-     *  - field_data_name_field.name_field_value
-     *  - field_revision_name_field.name_field_value
-     */
-    private function changeFieldSize() {
-        $column_size = 768;
-        if(osha_get_mysql_column_size('taxonomy_term_data', 'name') < $column_size) {
-            drupal_set_message("Changing taxonomy_term_data size to $column_size");
-            db_change_field('taxonomy_term_data', 'name', 'name',
-                array('type' => 'varchar','length' => $column_size)
-            );
-        }
-
-        if(osha_get_mysql_column_size('field_data_name_field', 'name_field_value') < $column_size) {
-            drupal_set_message("Changing field_data_name size to $column_size");
-            db_change_field('field_data_name_field', 'name_field_value', 'name_field_value',
-                array('type' => 'varchar', 'length' => $column_size)
-            );
-        }
-
-        if(osha_get_mysql_column_size('field_revision_name_field', 'name_field_value') < $column_size) {
-            drupal_set_message("Changing field_revision_name size to $column_size");
-            db_change_field('field_revision_name_field', 'name_field_value', 'name_field_value',
-                array('type' => 'varchar','length' => $column_size)
-            );
-        }
     }
 
     protected  function createStub($migration, array $source) {

@@ -252,69 +252,33 @@ class OshaMigrationsTest extends DrupalWebTestCase {
   public function testCategoriesMigration() {
     $vocabulary = taxonomy_vocabulary_machine_name_load(TAXONOMY_CATEGORIES);
 
-    $sourceFile = 'data/categories.json';
-    $result = $this->runMigration(MIGRATION_CATEGORIES, CLASS_CATEGORIES, $sourceFile);
+    $source = 'data/categories.json';
+    $result = $this->runMigration(MIGRATION_CATEGORIES, CLASS_CATEGORIES, $source);
     $this->assertEqual($result, Migration::RESULT_COMPLETED,
       t(MIGRATION_CATEGORIES . ' returned RESULT_COMPLETED'));
 
     $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
     $this->assertEqual(16, count($terms));
 
-    $translations = array(
-      "Accident prevention" => array(
-        "name_field" => 21, "description_field" => 21
-      ),
-      "Ageing and OSH" => array(
-        "name_field" => 1, "description_field" => 1
-      ),
-      "Campaign 2014-2015" => array(
-        "name_field" => 24, "description_field" => 24
-      ),
-      "Dangerous substances" => array(
-        "name_field" => 21, "description_field" => 21
-      ),
-      "Emerging risks" => array(
-        "name_field" => 1, "description_field" => 1
-      ),
-      "ESENER" => array(
-        "name_field" => 24, "description_field" => 24
-      ),
-      "Good OSH is good for business" => array(
-        "name_field" => 24, "description_field" => 24
-      ),
-      "Green jobs" => array(
-        "name_field" => 23, "description_field" => 23
-      ),
-      "Leadership" => array(
-        "name_field" => 6, "description_field" => 6
-      ),
-      "Legislation" => array(
-        "name_field" => 24, "description_field" => 24
-      ),
-      "Mainstreaming OSH into education" => array(
-        "name_field" => 21, "description_field" => 21
-      ),
-      "Musculoskeletal disorders" => array(
-        "name_field" => 21, "description_field" => 21
-      ),
-      "Nanomaterials" => array(
-        "name_field" => 24, "description_field" => 24
-      ),
-      "OSH and young people" => array(
-        "name_field" => 1, "description_field" => 1
-      ),
-      "Psychosocial risks and stress" => array(
-        "name_field" => 24, "description_field" => 24
-      ),
-      "Women and OSH" => array(
-        "name_field" => 1, "description_field" => 1
-      )
-    );
+    $source_abs = sprintf("%s/%s", drupal_get_path('module', 'osha_migration'), $source);
+    $json = json_decode(file_get_contents($source_abs), TRUE);
 
-    foreach ($terms as $term) {
-      $this->assertTranslations($translations, $term);
+    $this->assertEqual(count($json), count($terms));
+
+    $witness = array();
+    foreach($json as $arr) {
+      $code = $arr['code'];
+      $witness[$code] = count(array_filter($arr)) - 1;
     }
 
+    foreach($terms as $term) {
+      $code = $term->field_tags_code[LANGUAGE_NONE][0]['value'];
+      $this->assertEqual(
+        $witness[$code], count($term->name_field),
+        sprintf('Invalid translations for %s.%s (%s != %s)',
+          $term->name, 'name_field', $witness[$code], count($term->name_field))
+      );
+    }
     Migration::deregisterMigration(MIGRATION_CATEGORIES);
   }
 

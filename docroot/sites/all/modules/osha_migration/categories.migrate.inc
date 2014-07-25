@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Class MigrateOshaCategories migrates categories.json taxonomy. The data
+ * is stored inside the <em>Tags</em> taxonomy.
+ *
+ * Part of the <em>OSHA Taxonomies</em> translation group
+ */
 class MigrateOshaCategories extends DynamicMigration {
 
   /** @var string Target vocabulary */
@@ -57,60 +63,34 @@ class MigrateOshaCategories extends DynamicMigration {
   public function prepareRow($row) {
     $row->parent = 0;
     $row->language = 'en';
-
     return TRUE;
   }
 
   public function prepare($entity, stdClass $row) {
-    $entity->language = 'en';
-    $translationsData = array();
-    $languages = array(
-      'bg',
-      'cs',
-      'da',
-      'de',
-      'el',
-      'en',
-      'es',
-      'et',
-      'fi',
-      'fr',
-      'hr',
-      'hu',
-      'it',
-      'is',
-      'lt',
-      'lv',
-      'mt',
-      'nl',
-      'no',
-      'pl',
-      'pt',
-      'ro',
-      'sk',
-      'el',
-      'sv'
-    );
-
-    foreach ($languages as $language) {
-      if (!empty($row->$language)) {
-        $entity->name_field[$language][0]['value'] = $row->$language;
-        $entity->description_field[$language][0]['value'] = $row->$language;
-        $sourceLanguage = ($language == 'en' ? '' : 'en');
-        $translationsData[$language] = array(
-          'entity_type' => 'term',
-          'language' => $language,
-          'source' => $sourceLanguage,
-          'uid' => '1',
-          'status' => '1',
-          'translate' => '0',
-        );
+    $migration = Migration::currentMigration();
+    $entity_type = $migration->getDestination()->getEntityType();
+    $translation_handler = entity_translation_get_handler($entity_type, $entity);
+    $entity->translations = $translation_handler->getTranslations();
+    $supported_languages = array_keys(language_list());
+    foreach ($supported_languages as $lang_code) {
+      if (!empty($row->$lang_code)) {
+        $entity->name_field[$lang_code][0]['value'] = $row->$lang_code;
+        $entity->description_field[$lang_code][0]['value'] = $row->$lang_code;
+        if($lang_code != $row->language) { // Don't translate default language (en)
+          if (!isset($entity->translations->data[$entity->$lang_code])) {
+            $changed = (property_exists($entity, 'changed')) ? $entity->changed : time();
+            $translation_handler->setTranslation(array(
+              'translate' => 0, 'status' => 1, 'uid' => 1,
+              'language' => $lang_code, 'source' => $row->language,
+              'created' => time(), 'changed' => $changed,
+            ));
+          }
+        }
       }
-      $entity->translations = (object) array(
-        'original' => 'en',
-        'data' => $translationsData
-      );
     }
+    // Preserve original language setting
+    $entity->field_language = $entity->language;
+    $entity->language = $entity->translations->original;
   }
 
   private function fields() {

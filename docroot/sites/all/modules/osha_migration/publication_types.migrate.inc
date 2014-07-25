@@ -6,7 +6,7 @@ class MigrateOshaPublicationTypesTaxonomy extends DynamicMigration {
   protected $cache = NULL;
 
   public function __construct($arguments) {
-    parent::__construct($arguments);
+    parent::__construct(MigrateGroup::getInstance('OSHA Taxonomies'));
 
     $this->description = 'Import the "Publication Types" taxonomy';
 

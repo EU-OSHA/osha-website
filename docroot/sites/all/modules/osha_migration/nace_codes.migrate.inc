@@ -5,7 +5,7 @@ class MigrateOshaNaceCodes extends DynamicMigration {
   protected $vocabulary = 'nace_codes';
 
   public function __construct($arguments) {
-    parent::__construct();
+    parent::__construct(MigrateGroup::getInstance('OSHA Taxonomies'));
 
     $this->description = 'Import "Nace Codes" taxonomy from JSON file';
 
@@ -114,7 +114,7 @@ class MigrateOshaNaceCodes extends DynamicMigration {
     );
   }
 
-  protected function generateMachineName() {
+  protected function generateMachineName($machine=NULL) {
     return 'NaceCodes';
   }
 

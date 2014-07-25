@@ -7,7 +7,7 @@ class MigrateOshaCategories extends DynamicMigration
   protected $vocabulary = 'tags';
 
   public function __construct($arguments) {
-    parent::__construct();
+    parent::__construct(MigrateGroup::getInstance('OSHA Taxonomies'));
 
     $this->description = 'Import "Tags" taxonomy from JSON file';
     $file_name = $arguments['file_name'];

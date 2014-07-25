@@ -6,7 +6,7 @@ class MigrateOshaEsenerTaxonomy extends DynamicMigration {
   protected $cache = NULL;
 
   public function __construct($arguments) {
-    parent::__construct();
+    parent::__construct(MigrateGroup::getInstance('OSHA Taxonomies'));
 
     $this->description = 'Import the "Esener" taxonomy into Esener';
 

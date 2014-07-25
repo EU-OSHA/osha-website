@@ -3,7 +3,7 @@
 class MigrateOshaNews extends Migration {
 
   public function __construct() {
-    parent::__construct(MigrateGroup::getInstance('json_migration'));
+    parent::__construct(MigrateGroup::getInstance('OSHA Content'));
 
     $import_root = $import_root = osha_migration_get_data_dir();
     $source_file = sprintf('%s/news/news.json', $import_root);

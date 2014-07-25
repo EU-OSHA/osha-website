@@ -1,15 +1,15 @@
 <?php
 
-class MigrateOshaCategories extends DynamicMigration
-{
+class MigrateOshaCategories extends DynamicMigration {
 
   /** @var string Target vocabulary */
-  protected $vocabulary = 'tags';
+  protected $vocabulary = TAXONOMY_CATEGORIES;
 
   public function __construct($arguments) {
     parent::__construct(MigrateGroup::getInstance('OSHA Taxonomies'));
 
     $this->description = 'Import "Tags" taxonomy from JSON file';
+
     $file_name = $arguments['file_name'];
     $source_file = sprintf("%s/%s", drupal_get_path('module', 'osha_migration'), $file_name);
 
@@ -40,6 +40,18 @@ class MigrateOshaCategories extends DynamicMigration
     $this->addFieldMapping('format')->defaultValue('plain_text');
     $this->addFieldMapping('name', 'en');
     $this->addFieldMapping('description_field:format')->defaultValue('plain_text');
+    $this->addUnmigratedDestinations(array(
+      'weight',
+      'description_field',
+      'description_field:summary',
+      'description_field:language',
+      'field_tags_code:language',
+      'name_field',
+      'name_field:language',
+      'parent_name',
+      'description',
+      'path'
+    ));
   }
 
   public function prepareRow($row) {
@@ -103,8 +115,9 @@ class MigrateOshaCategories extends DynamicMigration
 
   private function fields() {
     return array(
-      'code' => 'The unique identifier',
-      'en' => 'The description/name of the item',
+      'code' => 'Identifier',
+      'en' => 'Term name in english',
+      'parent' => 'Parent term',
     );
   }
 

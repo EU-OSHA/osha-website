@@ -92,7 +92,7 @@ function osha_publication_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 12,
+      'weight' => 11,
     ),
     'workbench_access_field' => 0,
   );
@@ -280,7 +280,7 @@ function osha_publication_field_default_field_instances() {
         'input_format_custom' => '',
         'label_position' => 'above',
         'text_parts' => array(),
-        'year_range' => '-3:+3',
+        'year_range' => '2006:+3',
       ),
       'type' => 'date_select',
       'weight' => 2,
@@ -314,10 +314,10 @@ function osha_publication_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'description_field' => 1,
-      'entity_translation_sync' => FALSE,
+      'entity_translation_sync' => 0,
       'file_directory' => 'publications/documents',
       'file_extensions' => 'pdf doc docx ppt pptx',
-      'max_filesize' => 256,
+      'max_filesize' => '50 MB',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -328,47 +328,6 @@ function osha_publication_field_default_field_instances() {
       ),
       'type' => 'file_generic',
       'weight' => 7,
-    ),
-    'workbench_access_field' => 0,
-  );
-
-  // Exported field_instance: 'node-publication-field_publication_related_pubs'
-  $field_instances['node-publication-field_publication_related_pubs'] = array(
-    'bundle' => 'publication',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 11,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_publication_related_pubs',
-    'label' => 'Related publications',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 13,
     ),
     'workbench_access_field' => 0,
   );
@@ -399,10 +358,10 @@ function osha_publication_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'description_field' => 1,
-      'entity_translation_sync' => FALSE,
+      'entity_translation_sync' => 0,
       'file_directory' => 'publications/related_resources',
       'file_extensions' => 'pdf doc docx odt rtf txt csv xsl ods xslx ppt pptx epub',
-      'max_filesize' => '',
+      'max_filesize' => '50 MB',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -454,6 +413,50 @@ function osha_publication_field_default_field_instances() {
       'weight' => 3,
     ),
     'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'node-publication-field_related_publications'
+  $field_instances['node-publication-field_related_publications'] = array(
+    'bundle' => 'publication',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 16,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_related_publications',
+    'label' => 'Related publications',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 13,
+    ),
   );
 
   // Exported field_instance: 'node-publication-field_tags'
@@ -540,6 +543,49 @@ function osha_publication_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-publication-title_field'
+  $field_instances['node-publication-title_field'] = array(
+    'bundle' => 'publication',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 15,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'title_field',
+    'label' => 'Title',
+    'required' => TRUE,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'hide_label' => array(
+        'entity' => FALSE,
+        'page' => FALSE,
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 0,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Author(s)');
@@ -554,6 +600,7 @@ function osha_publication_field_default_field_instances() {
   t('Related resources');
   t('Tags');
   t('Thesaurus');
+  t('Title');
 
   return $field_instances;
 }

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Setup a clean site in docroot/
 cd docroot/

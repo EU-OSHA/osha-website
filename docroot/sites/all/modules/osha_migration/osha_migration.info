@@ -8,7 +8,7 @@ dependencies[] = file
 dependencies[] = image
 dependencies[] = number
 dependencies[] = text
-dependenceis[] = osha_taxonomies
+dependencies[] = osha_taxonomies
 
 files[] = nace_codes.migrate.inc
 files[] = news.migrate.inc

@@ -94,45 +94,21 @@ function osha_get_mysql_column_size($table, $column) {
 }
 
 function osha_replace_title_field() {
-	if(!module_load_include('inc', 'node', 'content_types')) {
-		throw new Exception('Cannot load content_types.inc');
-	}
-
-	if(!module_load_include('inc', 'title', 'title.admin')) {
-		throw new Exception('Cannot load title.admin.inc');
-	}
-
-	$types = array(
-		'article',
-		'page'
-	);
-
-	foreach ($types as $type) {
-		$form_state = array();
-
-		$form_state['values']['enabled'] = 1;
-
-		$type = node_type_load($type);
-
-		$form_state['build_info']['args']    = array('node', &$type, 'title');
-		$form_state['build_info']['form_id'] = 'title_field_replacement_form';
-		$form_state['build_info']['files']   = array(
-			'menu' => 'sites/all/modules/contrib/title/title.admin.inc'
-		);
-
-		drupal_form_submit('title_field_replacement_form', $form_state);
-
-		$errors = form_get_errors();
-
-		if (!empty($errors)) {
-			foreach ($errors as $error) {
-				$msg = 'Error: %error';
-				$var = array('%error' => $error);
-
-				watchdog('osha.module.install', $msg, $var, WATCHDOG_ERROR);
-			}
-		}
-	}
+  if(!module_load_include('module', 'title', 'title')) {
+    throw new Exception('Cannot load title.module.inc');
+  }
+  $types = array(
+    'article',
+    'page'
+  );
+  foreach ($types as $bundle) {
+    // Inspired from https://www.drupal.org/files/1801242-title-upgrade.patch
+    title_field_replacement_toggle('node', $bundle, 'title');
+    // We don't need batch processing here, as there is no content at this stage
+    watchdog('osha', "Replacing title_field for !bundle",
+      array('!bundle' => $bundle), WATCHDOG_INFO
+    );
+  }
 }
 
 function osha_configure_article() {

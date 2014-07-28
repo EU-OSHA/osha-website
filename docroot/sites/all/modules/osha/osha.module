@@ -104,78 +104,64 @@ function osha_replace_title_field() {
   foreach ($types as $bundle) {
     // Inspired from https://www.drupal.org/files/1801242-title-upgrade.patch
     title_field_replacement_toggle('node', $bundle, 'title');
-    // We don't need batch processing here, as there is no content at this stage
-    watchdog('osha', "Replacing title_field for !bundle",
-      array('!bundle' => $bundle), WATCHDOG_INFO
+    // We don't need batch processing here, there is no content at this stage
+    drupal_set_message(
+      t("Replacing title_field for !bundle", array('!bundle' => $bundle))
     );
   }
 }
 
 function osha_configure_article() {
-	// /admin/structure/types/manage/article
-	if(!module_load_include('inc', 'node', 'content_types')) {
-		throw new Exception('Cannot load content_types.inc');
-	}
-
-	$form_state = array();
-
-	// entity_translation/entity_translation.node.inc
-	$form_state['values']['language_content_type'] = ENTITY_TRANSLATION_ENABLED;
-	$form_state['values']['entity_translation_hide_translation_links'] = 1;
-
-	$type = node_type_load('article');
-
-	$form_state['build_info']['args']    = array(&$type);
-	$form_state['build_info']['form_id'] = 'node_type_form';
-	$form_state['build_info']['files']   = array(
-		'menu' => 'modules/node/content_types.inc'
-	);
-
-	drupal_form_submit('node_type_form', $form_state);
-
-	$errors = form_get_errors();
-
-	if (!empty($errors)) {
-		foreach ($errors as $error) {
-			$msg = 'Error: %error';
-			$var = array('%error' => $error);
-
-			watchdog('module.osha.install', $msg, $var, WATCHDOG_ERROR);
-		}
-	}
+  if(!module_load_include('inc', 'node', 'content_types')) {
+    throw new Exception('Cannot load content_types.inc');
+  }
+  $form_state['values']['language_content_type'] = ENTITY_TRANSLATION_ENABLED;
+  $form_state['values']['entity_translation_hide_translation_links'] = 1;
+  $form_state['values']['promote'] = NULL;
+  $form_state['values']['comment'] = 1;
+  $type = node_type_load('article');
+  drupal_form_submit('node_type_form', $form_state, $type);
+  $errors = form_get_errors();
+  if (!empty($errors)) {
+    foreach ($errors as $error) {
+      drupal_set_message(
+        t("Article setup error: !error", array('!error' => $error))
+      );
+    }
+  }
 }
 
 function osha_configure_basic_page() {
-	// /admin/structure/types/manage/page
-	if(!module_load_include('inc', 'node', 'content_types')) {
-		throw new Exception('Cannot load content_types.inc');
-	}
-
-	$form_state = array();
-	// entity_translation/entity_translation.node.inc
-	$form_state['values']['language_content_type'] = ENTITY_TRANSLATION_ENABLED;
-	$form_state['values']['entity_translation_hide_translation_links'] = 1;
-
-	$type = node_type_load('page');
-	$form_state['build_info']['args'] = array(&$type);
-	$form_state['build_info']['form_id'] = 'node_type_form';
-	$form_state['build_info']['files'] = array(
-		'menu' => 'modules/node/content_types.inc'
-	);
-	drupal_form_submit('node_type_form', $form_state);
-	
-	$errors = form_get_errors();
-	if(!empty($errors)) {
-		foreach ($errors as $error) {
-			$msg = 'Error: %error';
-			$var = array('%error' => $error);
-
-			watchdog('module.osha.install', $msg, $var, WATCHDOG_ERROR);
-		}
-	}
+  if(!module_load_include('inc', 'node', 'content_types')) {
+    throw new Exception('Cannot load content_types.inc');
+  }
+  $form_state['values']['language_content_type'] = ENTITY_TRANSLATION_ENABLED;
+  $form_state['values']['entity_translation_hide_translation_links'] = 1;
+  $form_state['values']['promote'] = NULL;
+  $form_state['values']['comment'] = 1;
+  $type = node_type_load('page');
+  drupal_form_submit('node_type_form', $form_state, $type);
+  $errors = form_get_errors();
+  if(!empty($errors)) {
+    foreach ($errors as $error) {
+      drupal_set_message(
+        t("Basic page setup error: !error", array('!error' => $error))
+      );
+    }
+  }
 }
 
 function osha_enable_body_translations() {
-	module_load_include('inc', 'entity_translation', 'entity_translation.admin');
-	entity_translation_translatable_switch(TRUE, 'body');
+  if(!module_load_include('inc', 'entity_translation', 'entity_translation.admin')) {
+    throw new Exception('Cannot load content_types.inc');
+  }
+  $info = field_info_field('body');
+  if($info !== NULL) { // During tests, body may not be available
+    drupal_set_message(t("Making body field translatable"));
+    $form_state['values']['translatable'] = "0";
+    $form_state['field']['field_name'] = 'body';
+    drupal_form_submit('entity_translation_translatable_form', $form_state, 'body');
+  } else {
+    drupal_set_message(t("Body field not available yet"), 'error');
+  }
 }

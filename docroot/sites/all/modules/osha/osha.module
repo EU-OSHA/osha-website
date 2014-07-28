@@ -6,73 +6,74 @@
 
 include_once 'osha.features.inc';
 
-function osha_form_field_ui_field_edit_form_alter(&$form, &$form_state){
-	//dpm($form_state);
+function osha_form_field_ui_field_edit_form_alter(&$form, &$form_state) {
+  //dpm($form_state);
 }
 
 function osha_configure_date_settings() {
-	/* Set default country, first day of the month and date format */
-	variable_set('date_first_day', '1');
-	variable_set('site_default_country', 'ES');
-	variable_set('date_default_timezone', 'Europe/Madrid');
-	variable_set('configurable_timezones', '0');
-	variable_set('user_default_timezone', '0');
+  /* Set default country, first day of the month and date format */
+  variable_set('date_first_day', '1');
+  variable_set('site_default_country', 'ES');
+  variable_set('date_default_timezone', 'Europe/Madrid');
+  variable_set('configurable_timezones', '0');
+  variable_set('user_default_timezone', '0');
 }
 
 function osha_configure_entity_translation() {
-	// /admin/config/regional/entity_translation
-	if(!module_load_include('inc', 'entity_translation', 'entity_translation.admin'))
-		throw new Exception('module_load_include: entity_translation.admin.inc: No such file or directory');
+  // /admin/config/regional/entity_translation
+  if (!module_load_include('inc', 'entity_translation', 'entity_translation.admin')) {
+    throw new Exception('module_load_include: entity_translation.admin.inc: No such file or directory');
+  }
 
-	$form_state = array();
+  $form_state = array();
 
-	$form_state['values']['locale_field_language_fallback'] = 1;
-	$form_state['values']['entity_translation_settings_node__article']['default_language'] = ENTITY_TRANSLATION_LANGUAGE_DEFAULT;
-	$form_state['values']['entity_translation_settings_node__page']['default_language']    = ENTITY_TRANSLATION_LANGUAGE_DEFAULT;
+  $form_state['values']['locale_field_language_fallback'] = 1;
+  $form_state['values']['entity_translation_settings_node__article']['default_language'] = ENTITY_TRANSLATION_LANGUAGE_DEFAULT;
+  $form_state['values']['entity_translation_settings_node__page']['default_language'] = ENTITY_TRANSLATION_LANGUAGE_DEFAULT;
 
-	drupal_form_submit('entity_translation_admin_form', $form_state);
+  drupal_form_submit('entity_translation_admin_form', $form_state);
 
-	$errors = form_get_errors();
+  $errors = form_get_errors();
 
-	if (!empty($errors)) {
-		foreach ($errors as $error) {
-			$msg = 'Error: %error';
-			$var = array('%error' => $error);
+  if (!empty($errors)) {
+    foreach ($errors as $error) {
+      $msg = 'Error: %error';
+      $var = array('%error' => $error);
 
-			watchdog('osha.module.install', $msg, $var, WATCHDOG_ERROR);
-		}
-	}
+      watchdog('osha.module.install', $msg, $var, WATCHDOG_ERROR);
+    }
+  }
 }
 
 function osha_configure_entity_translation_types() {
-	variable_set(
-		'entity_translation_entity_types',
-		array(
-			'node' => 'node',
-			'taxonomy_term' => 'taxonomy_term',
-			'comment' => 0,
-			'user' => 0,
-		)
-	);
+  variable_set(
+    'entity_translation_entity_types',
+    array(
+      'node' => 'node',
+      'taxonomy_term' => 'taxonomy_term',
+      'comment' => 0,
+      'user' => 0,
+    )
+  );
 }
 
 function osha_configure_language_detection() {
-	module_load_include('inc', 'locale', 'locale.admin');
+  module_load_include('inc', 'locale', 'locale.admin');
 
-	$form_state['values']['language']['enabled']['locale-url'] = 1;
-	$form_state['values']['language']['weight']['locale-url'] = -8;
+  $form_state['values']['language']['enabled']['locale-url'] = 1;
+  $form_state['values']['language']['weight']['locale-url'] = -8;
 
-	$form_state['values']['language']['enabled']['language-default'] = 1;
-	$form_state['values']['language']['weight']['language-default'] = 10;
+  $form_state['values']['language']['enabled']['language-default'] = 1;
+  $form_state['values']['language']['weight']['language-default'] = 10;
 
 
-	$form_state['values']['language_content']['enabled']['locale-url'] = 1;
-	$form_state['values']['language_content']['weight']['locale-url'] = -8;
+  $form_state['values']['language_content']['enabled']['locale-url'] = 1;
+  $form_state['values']['language_content']['weight']['locale-url'] = -8;
 
-	$form_state['values']['language_content']['enabled']['language-default'] = 1;
-	$form_state['values']['language_content']['weight']['language-default'] = 10;
+  $form_state['values']['language_content']['enabled']['language-default'] = 1;
+  $form_state['values']['language_content']['weight']['language-default'] = 10;
 
-	drupal_form_submit('locale_languages_configure_form', $form_state);
+  drupal_form_submit('locale_languages_configure_form', $form_state);
 }
 
 
@@ -83,18 +84,18 @@ function osha_configure_language_detection() {
  * @return int
  */
 function osha_get_mysql_column_size($table, $column) {
-	$result = db_query("
+  $result = db_query("
 		SELECT CHARACTER_MAXIMUM_LENGTH
 		FROM information_schema.columns
 		WHERE table_schema = DATABASE()
 			AND table_name = :table AND COLUMN_NAME = :column",
-		array(':table' => $table, ':column' => $column)
-	);
-	return $result->fetchField(0);
+    array(':table' => $table, ':column' => $column)
+  );
+  return $result->fetchField(0);
 }
 
 function osha_replace_title_field() {
-  if(!module_load_include('module', 'title', 'title')) {
+  if (!module_load_include('module', 'title', 'title')) {
     throw new Exception('Cannot load title.module.inc');
   }
   $types = array(
@@ -112,7 +113,7 @@ function osha_replace_title_field() {
 }
 
 function osha_configure_article() {
-  if(!module_load_include('inc', 'node', 'content_types')) {
+  if (!module_load_include('inc', 'node', 'content_types')) {
     throw new Exception('Cannot load content_types.inc');
   }
   $form_state['values']['language_content_type'] = ENTITY_TRANSLATION_ENABLED;
@@ -132,7 +133,7 @@ function osha_configure_article() {
 }
 
 function osha_configure_basic_page() {
-  if(!module_load_include('inc', 'node', 'content_types')) {
+  if (!module_load_include('inc', 'node', 'content_types')) {
     throw new Exception('Cannot load content_types.inc');
   }
   $form_state['values']['language_content_type'] = ENTITY_TRANSLATION_ENABLED;
@@ -142,7 +143,7 @@ function osha_configure_basic_page() {
   $type = node_type_load('page');
   drupal_form_submit('node_type_form', $form_state, $type);
   $errors = form_get_errors();
-  if(!empty($errors)) {
+  if (!empty($errors)) {
     foreach ($errors as $error) {
       drupal_set_message(
         t("Basic page setup error: !error", array('!error' => $error))
@@ -152,16 +153,17 @@ function osha_configure_basic_page() {
 }
 
 function osha_enable_body_translations() {
-  if(!module_load_include('inc', 'entity_translation', 'entity_translation.admin')) {
+  if (!module_load_include('inc', 'entity_translation', 'entity_translation.admin')) {
     throw new Exception('Cannot load content_types.inc');
   }
   $info = field_info_field('body');
-  if($info !== NULL) { // During tests, body may not be available
+  if ($info !== NULL) { // During tests, body may not be available
     drupal_set_message(t("Making body field translatable"));
     $form_state['values']['translatable'] = "0";
     $form_state['field']['field_name'] = 'body';
     drupal_form_submit('entity_translation_translatable_form', $form_state, 'body');
-  } else {
+  }
+  else {
     drupal_set_message(t("Body field not available yet"), 'error');
   }
 }

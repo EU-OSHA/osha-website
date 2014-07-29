@@ -45,6 +45,7 @@ features[variable][] = comment_default_per_page_case_study
 features[variable][] = comment_form_location_case_study
 features[variable][] = comment_preview_case_study
 features[variable][] = comment_subject_field_case_study
+features[variable][] = entity_translation_hide_translation_links_case_study
 features[variable][] = field_bundle_settings_node__case_study
 features[variable][] = language_content_type_case_study
 features[variable][] = menu_options_case_study

@@ -6,9 +6,6 @@
  */
 class MigrateOshaNews extends DynamicMigration {
 
-    /** @var string Target content type */
-    protected $content_type = CONTENT_TYPE_NEWS;
-
     public function __construct($arguments) {
         parent::__construct();
 
@@ -36,7 +33,7 @@ class MigrateOshaNews extends DynamicMigration {
         );
 
         $node_options = MigrateDestinationNode::options('en', 'text');
-        $this->destination = new MigrateDestinationNode($this->content_type, $node_options);
+        $this->destination = new MigrateDestinationNode(CONTENT_TYPE_NEWS, $node_options);
 
         $this->addFieldMapping('field_news_image', 'image');
         $this->addFieldMapping('field_news_image:title', 'imageCaption');
@@ -103,8 +100,8 @@ class MigrateOshaNews extends DynamicMigration {
     public function prepareRow($row) {
         $row->language = 'en';
 
-        $tags = explode(', ', news_map_categories($row->subject));
-        $subcat = explode(', ', news_map_categories($row->subcategory));
+        $tags = explode(', ', $this->news_map_categories($row->subject));
+        $subcat = explode(', ', $this->news_map_categories($row->subcategory));
         $tags = array_unique(array_merge($tags, $subcat));
 
         $row->subject = $this->getTidsFromField('tags', 'field_tags_code', implode(', ', $tags));
@@ -115,7 +112,7 @@ class MigrateOshaNews extends DynamicMigration {
 
     private function getTidsFromField($voc, $field, $data) {
         $dataArray = explode(', ', $data);
-        $results = news_get_tids($voc, $field, $dataArray);
+        $results = $this->news_get_tids($voc, $field, $dataArray);
         if (!empty($results)) {
             return implode(', ', $results);
         }
@@ -147,6 +144,86 @@ class MigrateOshaNews extends DynamicMigration {
                 }
             }
         }
+    }
+
+    private function news_get_tids($vocabulary, $field_match, $termCodes) {
+        static $cache = array();
+        $ret = array();
+
+        if (empty($cache[$vocabulary][$field_match])) {
+            $voc = taxonomy_vocabulary_machine_name_load($vocabulary);
+            $terms = taxonomy_get_tree($voc->vid, 0, NULL, TRUE);
+            foreach ($terms as $term) {
+                if (!empty($term->$field_match)) {
+                    $field = $term->$field_match;
+                    $cache[$vocabulary][$field_match][$field['und'][0]['value']] = $term->tid;
+                }
+            }
+        }
+
+        if (!empty($cache[$vocabulary][$field_match])) {
+            foreach ($termCodes as $t) {
+                if (!empty($cache[$vocabulary][$field_match][$t])) {
+                    $ret[] = $cache[$vocabulary][$field_match][$t];
+                }
+            }
+        }
+
+        return $ret;
+    }
+
+    private function news_map_categories($categories) {
+        $categories = explode(', ', $categories);
+
+        $new_categories = array();
+        foreach ($categories as $cat) {
+            if ($cat == 'young_people::educators_mainstreaming') {
+                $new_categories[] = 'mainstreaming_osh_into_education';
+            }
+            elseif (count(explode('::', $cat)) == 2) {
+                $exp = explode('::', $cat);
+                $new_categories[] = $exp[0];
+            } else {
+                $new_categories[] = $cat;
+            }
+        }
+
+        $categories = $new_categories;
+
+        $replace = array(
+            'accident_prevention' => 'accident_prevention',
+            'ageing' => 'ageing_and_osh',
+            'businessOSH' => 'good_osh_is_good_for_business',
+            'campaign_2014_15' => 'campaign_2014_2015',
+            'dangerous_substances' => 'dangerous_substances',
+            'economic_incentives' => 'good_osh_is_good_for_business',
+            'education' => 'mainstreaming_osh_into_education',
+            'osh_education' => 'mainstreaming_osh_into_education',
+            'osheducation' => 'mainstreaming_osh_into_education',
+            'esener' => 'esener',
+            'foresight' => 'emerging_risks',
+            'gender' => 'women_and_osh',
+            'green_jobs' => 'green_jobs',
+            'legislation' => 'legislation',
+            'management_leadership' => 'leadership',
+            'msd' => 'musculoskeletal_disorders',
+            'nanotechnology' => 'nanomaterials',
+            'prevention' => 'accident_prevention',
+            'risk_observatory' => 'emerging_risks',
+            'risks' => 'emerging_risks',
+            'stress' => 'psychosocial_risks_and_stress',
+            'young_people' => 'osh_and_young_people'
+        );
+
+        $new_categories = array();
+
+        foreach ($categories as $cat) {
+            if (isset($replace[$cat])) {
+                $new_categories[] = $replace[$cat];
+            }
+        }
+
+        return implode(', ', $new_categories);
     }
 
     function fields() {
@@ -276,111 +353,4 @@ class NewsContentItemCSV extends MigrateItem {
 
         return isset($this->data[$id]) ? $this->data[$id] : NULL;
     }
-}
-
-
-function news_get_tids($vocabulary, $field_match, $termCodes) {
-    static $cache = array();
-    $ret = array();
-
-    if (empty($cache[$vocabulary][$field_match])) {
-        $voc = taxonomy_vocabulary_machine_name_load($vocabulary);
-        $terms = taxonomy_get_tree($voc->vid, 0, NULL, TRUE);
-        foreach ($terms as $term) {
-            if (!empty($term->$field_match)) {
-                $field = $term->$field_match;
-                $cache[$vocabulary][$field_match][$field['und'][0]['value']] = $term->tid;
-            }
-        }
-    }
-
-    if (!empty($cache[$vocabulary][$field_match])) {
-        foreach ($termCodes as $t) {
-            if (!empty($cache[$vocabulary][$field_match][$t])) {
-                $ret[] = $cache[$vocabulary][$field_match][$t];
-            }
-        }
-    }
-
-    return $ret;
-}
-
-function news_map_categories($categories) {
-    $categories = explode(', ', $categories);
-
-    $new_categories = array();
-    foreach ($categories as $cat) {
-        if ($cat == 'young_people::educators_mainstreaming') {
-            $new_categories[] = 'mainstreaming_osh_into_education';
-        }
-        elseif (count(explode('::', $cat)) == 2) {
-            $exp = explode('::', $cat);
-            $new_categories[] = $exp[0];
-        } else {
-            $new_categories[] = $cat;
-        }
-    }
-
-    $categories = $new_categories;
-
-    $initial = array(
-        'accident_prevention',
-        'ageing',
-        'businessOSH',
-        'campaign_2014_15',
-        'dangerous_substances',
-        'economic_incentives',
-        'education',
-        'osh_education',
-        'osheducation',
-        'esener',
-        'foresight',
-        'gender',
-        'green_jobs',
-        'legislation',
-        'management_leadership',
-        'msd',
-        'nanotechnology',
-        'prevention',
-        'risk_observatory',
-        'risks',
-        'stress',
-        'young_people'
-    );
-
-    $replace = array(
-        'accident_prevention',
-        'ageing_and_osh',
-        'good_osh_is_good_for_business',
-        'campaign_2014_2015',
-        'dangerous_substances',
-        'good_osh_is_good_for_business',
-        'mainstreaming_osh_into_education',
-        'mainstreaming_osh_into_education',
-        'mainstreaming_osh_into_education',
-        'esener',
-        'emerging_risks',
-        'women_and_osh',
-        'green_jobs',
-        'legislation',
-        'leadership',
-        'musculoskeletal_disorders',
-        'nanomaterials',
-        'accident_prevention',
-        'emerging_risks',
-        'emerging_risks',
-        'psychosocial_risks_and_stress',
-        'osh_and_young_people'
-    );
-
-    $replace = array_combine($initial, $replace);
-    $new_categories = array();
-
-    foreach ($categories as $cat) {
-        if (isset($replace[$cat])) {
-            $new_categories[] = $replace[$cat];
-        }
-    }
-
-    return implode(', ', $new_categories);
 }

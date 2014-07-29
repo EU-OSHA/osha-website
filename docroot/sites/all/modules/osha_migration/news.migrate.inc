@@ -1,24 +1,27 @@
 <?php
+
+/**
+ * Class MigrateOshaNews migrates news.txt contents. The data
+ * is stored inside the <em>News</em> content type.
+ */
 class MigrateOshaNews extends DynamicMigration {
-    protected $vocabulary = NULL;
+
+    /** @var string Target content type */
+    protected $content_type = CONTENT_TYPE_NEWS;
 
     public function __construct($arguments) {
         parent::__construct();
 
-        $this->description = 'Import "News" taxonomy from JSON file';
-        $this->contentType = 'news';
+        $this->description = 'Import "News" contents from CSV file';
 
-        if(isset($arguments['file_name'])) {
-            $file_name = $arguments['file_name'];
-        }
-        else {
-            $file_name = '';
-        }
+        $arguments['file_name'] = isset($arguments['file_name']) ? $arguments['file_name'] : '';
+        $file_name = $arguments['file_name'];
+        $source_file = sprintf("%s/%s", drupal_get_path('module', 'osha_migration'), $file_name);
 
-        $multilingualFields = array('title', 'description', 'text');
-        $source_file = sprintf('%s/%s', drupal_get_path('module', 'osha_migration'), $file_name);
-        $this->source = new MigrateSourceList(new OSHAMigrateListCSV($source_file, $multilingualFields),
-            new OSHAMigrateItemCSV(), $this->fields());
+        $this->source = new MigrateSourceList(
+            new NewsContentListCSV($source_file, array('title', 'description', 'text')),
+            new NewsContentItemCSV(),
+            $this->fields());
 
         $this->map = new MigrateSQLMap($this->machineName,
             array(
@@ -26,35 +29,71 @@ class MigrateOshaNews extends DynamicMigration {
                     'type' => 'varchar',
                     'length' => 200,
                     'not null' => TRUE,
-                    'description' => 'Nace code'
+                    'description' => 'News code'
                 ),
             ),
             MigrateDestinationNode::getKeySchema()
         );
 
         $node_options = MigrateDestinationNode::options('en', 'text');
-        $this->destination = new MigrateDestinationNode('news', $node_options);
+        $this->destination = new MigrateDestinationNode($this->content_type, $node_options);
 
-        $this->addFieldMapping('field_tags', 'subjectTids')->separator(',');
+        $this->addFieldMapping('field_news_image', 'image');
+        $this->addFieldMapping('field_news_image:title', 'imageCaption');
+        $this->addFieldMapping('field_news_image:file_replace')->defaultValue(MigrateFile::FILE_EXISTS_REUSE);
+        $this->addFieldmapping('field_news_image:preserve_files')->defaultValue(TRUE);
+        $this->addFieldMapping('field_news_image:source_dir')->defaultValue(osha_migration_get_data_dir() . '/export/');
+
+        $this->addFieldMapping('field_tags', 'subject')->separator(',');
         $this->addFieldMapping('field_tags:source_type')->defaultValue('tid');
-
-        $this->addFieldMapping('field_thesaurus', 'thesaurusTids')->separator(',');
+        $this->addFieldMapping('field_thesaurus', 'multilingual_thesaurus')->separator(',');
         $this->addFieldMapping('field_thesaurus:source_type')->defaultValue('tid');
-
         $this->addFieldMapping('field_news_publication_date', 'publication_date');
 
         $this->addFieldMapping('path', 'id');
         $this->addFieldMapping('created', 'creation_date');
         $this->addFieldMapping('changed', 'modification_date');
 
-        //images migration
-        $this->addFieldMapping('field_news_image:file_replace')->defaultValue(MigrateFile::FILE_EXISTS_REUSE);
-        $this->addFieldmapping('field_news_image:preserve_files')->defaultValue(TRUE);
-        $this->addFieldMapping('field_news_image:source_dir')->defaultValue(osha_migration_get_data_dir() . '/export/');
+        $this->addUnmigratedSources(array(
+            'path',
+            'language',
+            'workflow_state',
+            'creator',
+            'country'
+        ));
 
-        $this->addFieldMapping('field_news_image', 'image');
-        $this->addFieldMapping('field_news_image:title', 'imageCaption');
-        $this->addUnmigratedSources(array('creator', 'nace'));
+        $this->addUnmigratedDestinations(array(
+            'uid',
+            'promote',
+            'status',
+            'sticky',
+            'revision',
+            'log',
+            'language',
+            'tnid',
+            'translate',
+            'revision_uid',
+            'is_new',
+            'body:language',
+            'field_news_image:file_class',
+            'field_news_image:language',
+            'field_news_image:destination_dir',
+            'field_news_image:destination_file',
+            'field_news_image:alt',
+            'field_news_publication_date:timezone',
+            'field_news_publication_date:rrule',
+            'field_news_publication_date:to',
+            'field_news_summary',
+            'field_news_summary:format',
+            'field_news_summary:language',
+            'field_tags:create_term',
+            'field_tags:ignore_case',
+            'field_thesaurus:create_term',
+            'field_thesaurus:ignore_case',
+            'title_field',
+            'title_field:language',
+            'comment'
+        ));
     }
 
     protected function generateMachineName($class_name = NULL) {
@@ -64,86 +103,56 @@ class MigrateOshaNews extends DynamicMigration {
     public function prepareRow($row) {
         $row->language = 'en';
 
-        $tags = explode(', ', mapCategories($row->subject));
-        $subcat = explode(', ', mapCategories($row->subcategory));
+        $tags = explode(', ', news_map_categories($row->subject));
+        $subcat = explode(', ', news_map_categories($row->subcategory));
         $tags = array_unique(array_merge($tags, $subcat));
-        $row->subjectTids = $this->getTidsFromField('tags', 'field_tags_code', implode(', ', $tags));
-        $row->thesaurusTids = $this->getTidsFromField('thesaurus', 'field_thesaurus_code', $row->multilingual_thesaurus);
+
+        $row->subject = $this->getTidsFromField('tags', 'field_tags_code', implode(', ', $tags));
+        $row->multilingual_thesaurus = $this->getTidsFromField('thesaurus', 'field_thesaurus_code', $row->multilingual_thesaurus);
 
         return TRUE;
     }
 
     private function getTidsFromField($voc, $field, $data) {
         $dataArray = explode(', ', $data);
-        $results = getTids($voc, $field, $dataArray);
-        if(!empty($results)) {
+        $results = news_get_tids($voc, $field, $dataArray);
+        if (!empty($results)) {
             return implode(', ', $results);
         }
         return null;
     }
 
-    function prepare($entity, stdClass $row) {
-        $entity->language = 'en';
-        $translationsData = array();
-
-        foreach ($row->title as $language => $translation) {
-            if(!empty($row->title->$language)) {
-                $entity->title_field[$language][0]['value'] = $translation;
+    public function prepare($entity, stdClass $row) {
+        $migration = Migration::currentMigration();
+        $entity_type = $migration->getDestination()->getEntityType();
+        $translation_handler = entity_translation_get_handler($entity_type, $entity);
+        $entity->translations = $translation_handler->getTranslations();
+        $supported_languages = array_keys(language_list());
+        $entity->title = $row->title->en;
+        foreach ($supported_languages as $lang_code) {
+            if (!empty($row->title->$lang_code)) {
+                $entity->title_field[$lang_code][0]['value'] = $row->title->$lang_code;
+                $entity->field_news_summary[$lang_code][0]['value'] = str_replace('<@#&>', '"', $row->description->$lang_code);
+                $entity->field_news_summary[$lang_code][0]['format'] = 'full_html';
+                $entity->body[$lang_code][0]['value'] = str_replace('<@#&>', '"', $row->text->$lang_code);
+                $entity->body[$lang_code][0]['format'] = 'full_html';
+                if ($lang_code != $row->language) { // Don't translate default language (en)
+                    if (!isset($entity->translations->data[$lang_code])) {
+                        $translation_handler->setTranslation(array(
+                            'translate' => 0, 'status' => 1, 'uid' => 1,
+                            'language' => $lang_code, 'source' => $row->language,
+                            'created' => time(),
+                        ));
+                    }
+                }
             }
-            $sourceLanguage = ($language == 'en' ? '' : 'en');
-            $translationsData[$language] = array(
-                'entity_type' => 'term',
-                'language' => $language,
-                'source' => $sourceLanguage,
-                'uid' => '1',
-                'status' => '1',
-                'translate' => '0',
-            );
         }
-
-        foreach ($row->text as $language => $translation) {
-            if(!empty($row->text->$language)) {
-                $entity->body[$language][0]['value'] = str_replace('<@#&>', '"', $translation);
-                $entity->body[$language][0]['format'] = 'full_html';
-            }
-            $sourceLanguage = ($language == 'en' ? '' : 'en');
-            $translationsData[$language] = array(
-                'entity_type' => 'term',
-                'language' => $language,
-                'source' => $sourceLanguage,
-                'uid' => '1',
-                'status' => '1',
-                'translate' => '0',
-            );
-        }
-
-        foreach ($row->description as $language => $translation) {
-            if(!empty($row->description->$language)) {
-                $entity->field_news_summary[$language][0]['value'] = str_replace('<@#&>', '"', $translation);
-                $entity->field_news_summary[$language][0]['format'] = 'full_html';
-            }
-            $sourceLanguage = ($language == 'en' ? '' : 'en');
-            $translationsData[$language] = array(
-                'entity_type' => 'term',
-                'language' => $language,
-                'source' => $sourceLanguage,
-                'uid' => '1',
-                'status' => '1',
-                'translate' => '0',
-            );
-        }
-
-        #$entity->path['pathauto'] = 0;
-        $entity->translations = (object)array(
-            'original' => 'en',
-            'data' => $translationsData
-        );
     }
 
     function fields() {
         return array(
             'id' => 'Primary Key (URL pattern)',
-            'path' => '',
+            'path' => 'URL pattern without language',
             'language' => 'Row language',
             'workflow_state' => '',
             'creation_date' => '',
@@ -170,7 +179,7 @@ class MigrateOshaNews extends DynamicMigration {
      */
     function complete($entity, stdClass $row) {
         $languages = array_keys(language_list());
-        foreach($languages as $lang_code) {
+        foreach ($languages as $lang_code) {
             $args = array(
                 'source' => 'node/'. $entity->nid,
                 'alias' => $row->id, // Same alias for all languages (see mappings)
@@ -179,4 +188,199 @@ class MigrateOshaNews extends DynamicMigration {
             path_save($args);
         }
     }
+}
+
+class NewsContentListCSV extends MigrateList {
+    protected $fileUrl = '';
+    protected $httpOptions;
+    protected $multilingualFields;
+    public static $csvData;
+
+    public function __construct($file_url, $multilingualFields = array(), $http_options = array()) {
+        parent::__construct();
+        $this->fileUrl = $file_url;
+        $this->httpOptions = $http_options;
+        $this->multilingualFields = $multilingualFields;
+    }
+
+    public function  __toString() {
+        return $this->fileUrl;
+    }
+
+    protected function parse_multilingual_csv($file, $multiFields = array()) {
+        $handle = fopen($file, 'r');
+        $fields = $data = fgetcsv($handle, 1000, ';');
+
+        $final = [];
+
+        while (($data = fgetcsv($handle, 100000, ';')) !== FALSE) {
+            $country = $data[1];
+            $id = explode('/', $data[0], 3)[2];
+
+
+            foreach ($fields as $key => $field) {
+                if (in_array($field, $multiFields)) {
+                    $final[$id][$field][$country] = $data[$key];
+                    continue;
+                }
+                $final[$id][$field] = $data[$key];
+            }
+
+            $final[$id]['id'] = $id;
+        }
+
+        foreach ($final as $id => $id_value) {
+            foreach ($id_value as $key_field => $field) {
+                if (is_array($field) && !isset($final[$id][$key_field]['en'])) {
+                    unset($final[$id]);
+                }
+            }
+        }
+
+        return $final;
+    }
+
+    public function getIdList() {
+        self::$csvData = $this->parse_multilingual_csv($this->fileUrl, $this->multilingualFields);
+        if (self::$csvData) {
+            return $this->getIDsFromCSV(self::$csvData);
+        }
+        Migration::displayMessage(t('Loading of !fileUrl failed:',
+            array('!listurl' => $this->fileUrl)));
+        return NULL;
+    }
+
+    protected function getIDsFromCSV(array $data) {
+        $ids = array();
+        foreach ($data as $key => $value) {
+            $ids[] = $key;
+        }
+        return $ids;
+    }
+
+    public function computeCount() {
+        return count(self::$csvData);
+    }
+}
+
+class NewsContentItemCSV extends MigrateItem {
+    protected $data;
+
+    public function getItem($id) {
+        if (empty($this->data)) {
+            $csvData = NewsContentListCSV::$csvData;
+            foreach ($csvData as $csvId => $item) {
+                $this->data[$csvId] = json_decode(json_encode($item), FALSE);
+            }
+        }
+
+        return isset($this->data[$id]) ? $this->data[$id] : NULL;
+    }
+}
+
+
+function news_get_tids($vocabulary, $field_match, $termCodes) {
+    static $cache = array();
+    $ret = array();
+
+    if (empty($cache[$vocabulary][$field_match])) {
+        $voc = taxonomy_vocabulary_machine_name_load($vocabulary);
+        $terms = taxonomy_get_tree($voc->vid, 0, NULL, TRUE);
+        foreach ($terms as $term) {
+            if (!empty($term->$field_match)) {
+                $field = $term->$field_match;
+                $cache[$vocabulary][$field_match][$field['und'][0]['value']] = $term->tid;
+            }
+        }
+    }
+
+    if (!empty($cache[$vocabulary][$field_match])) {
+        foreach ($termCodes as $t) {
+            if (!empty($cache[$vocabulary][$field_match][$t])) {
+                $ret[] = $cache[$vocabulary][$field_match][$t];
+            }
+        }
+    }
+
+    return $ret;
+}
+
+function news_map_categories($categories) {
+    $categories = explode(', ', $categories);
+
+    $new_categories = array();
+    foreach ($categories as $cat) {
+        if ($cat == 'young_people::educators_mainstreaming') {
+            $new_categories[] = 'mainstreaming_osh_into_education';
+        }
+        elseif (count(explode('::', $cat)) == 2) {
+            $exp = explode('::', $cat);
+            $new_categories[] = $exp[0];
+        } else {
+            $new_categories[] = $cat;
+        }
+    }
+
+    $categories = $new_categories;
+
+    $initial = array(
+        'accident_prevention',
+        'ageing',
+        'businessOSH',
+        'campaign_2014_15',
+        'dangerous_substances',
+        'economic_incentives',
+        'education',
+        'osh_education',
+        'osheducation',
+        'esener',
+        'foresight',
+        'gender',
+        'green_jobs',
+        'legislation',
+        'management_leadership',
+        'msd',
+        'nanotechnology',
+        'prevention',
+        'risk_observatory',
+        'risks',
+        'stress',
+        'young_people'
+    );
+
+    $replace = array(
+        'accident_prevention',
+        'ageing_and_osh',
+        'good_osh_is_good_for_business',
+        'campaign_2014_2015',
+        'dangerous_substances',
+        'good_osh_is_good_for_business',
+        'mainstreaming_osh_into_education',
+        'mainstreaming_osh_into_education',
+        'mainstreaming_osh_into_education',
+        'esener',
+        'emerging_risks',
+        'women_and_osh',
+        'green_jobs',
+        'legislation',
+        'leadership',
+        'musculoskeletal_disorders',
+        'nanomaterials',
+        'accident_prevention',
+        'emerging_risks',
+        'emerging_risks',
+        'psychosocial_risks_and_stress',
+        'osh_and_young_people'
+    );
+
+    $replace = array_combine($initial, $replace);
+    $new_categories = array();
+
+    foreach ($categories as $cat) {
+        if (isset($replace[$cat])) {
+            $new_categories[] = $replace[$cat];
+        }
+    }
+
+    return implode(', ', $new_categories);
 }

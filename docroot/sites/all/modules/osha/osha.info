@@ -11,6 +11,7 @@ dependencies[] = locale
 dependencies[] = osha_taxonomies
 dependencies[] = search_api
 dependencies[] = strongarm
+dependencies[] = title
 dependencies[] = variable
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2

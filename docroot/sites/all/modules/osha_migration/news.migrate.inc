@@ -150,6 +150,16 @@ class MigrateOshaNews extends DynamicMigration {
         static $cache = array();
         $ret = array();
 
+        $newTerms = array();
+
+        foreach($termCodes as $code) {
+            if (strlen($code)) {
+                $newTerms[] = $code;
+            }
+        }
+
+        $termCodes = $newTerms;
+
         if (empty($cache[$vocabulary][$field_match])) {
             $voc = taxonomy_vocabulary_machine_name_load($vocabulary);
             $terms = taxonomy_get_tree($voc->vid, 0, NULL, TRUE);
@@ -167,6 +177,10 @@ class MigrateOshaNews extends DynamicMigration {
                     $ret[] = $cache[$vocabulary][$field_match][$t];
                 }
             }
+        }
+
+        if (count($ret) != count($termCodes)) {
+            drupal_set_message(sprintf('Invalid tags [%s] => [%s]', implode(', ', $termCodes), implode(', ', $ret)), 'warning');
         }
 
         return $ret;

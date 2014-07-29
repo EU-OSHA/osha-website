@@ -35,6 +35,7 @@ features[field_instance][] = node-case_study-field_nace_codes
 features[field_instance][] = node-case_study-field_publication_date
 features[field_instance][] = node-case_study-field_tags
 features[field_instance][] = node-case_study-field_thesaurus
+features[field_instance][] = node-case_study-title_field
 features[node][] = case_study
 features[taxonomy][] = tags
 features[variable][] = comment_anonymous_case_study

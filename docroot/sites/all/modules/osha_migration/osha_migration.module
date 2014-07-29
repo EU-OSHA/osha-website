@@ -43,6 +43,11 @@ function osha_migration_migrate_api() {
         'class_name' => 'MigrateOshaCategories',
         'file_name' => 'data/categories.json',
         'group_name' => 'OSHA MIGRATION'
+      ),
+      'NewsContent' => array(
+         'class_name' => 'MigrateOshaNews',
+         'file_name' => 'data/news.txt',
+         'group_name' => 'OSHA MIGRATION'
       )
     )
   );

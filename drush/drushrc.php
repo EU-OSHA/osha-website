@@ -299,7 +299,7 @@ $options['init-modules'] = array(
   'osha_migration',
   'osha_news',
   'osha_publication',
-  'osha_case_study',
+  'osha_case_study'
 );
 
 if (file_exists(dirname(__FILE__) . '/drushrc.local.php')) {

@@ -32,6 +32,9 @@ if [ "$1" == "--migrate" ]; then
   echo "Importing Categories taxonomy"
   drush migrate-import TagsTaxonomy
 
+  echo "Importing News content"
+  drush migrate-import NewsContent
+
 fi
 
 drush cc all

@@ -76,20 +76,16 @@ class MigrateOshaCategories extends DynamicMigration {
       if (!empty($row->$lang_code)) {
         $entity->name_field[$lang_code][0]['value'] = $row->$lang_code;
         if($lang_code != $row->language) { // Don't translate default language (en)
-          if (!isset($entity->translations->data[$entity->$lang_code])) {
-            $changed = (property_exists($entity, 'changed')) ? $entity->changed : time();
+          if (!isset($entity->translations->data[$lang_code])) {
             $translation_handler->setTranslation(array(
               'translate' => 0, 'status' => 1, 'uid' => 1,
               'language' => $lang_code, 'source' => $row->language,
-              'created' => time(), 'changed' => $changed,
+              'created' => time()
             ));
           }
         }
       }
     }
-    // Preserve original language setting
-    $entity->field_language = $entity->language;
-    $entity->language = $entity->translations->original;
   }
 
   private function fields() {

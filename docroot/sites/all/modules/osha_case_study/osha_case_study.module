@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Case study feature.
+ */
+
+include_once 'osha_case_study.features.inc';

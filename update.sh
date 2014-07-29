@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Setup a clean site in docroot/
 cd docroot/
@@ -6,6 +6,9 @@ cd docroot/
 drush build
 
 if [ "$1" == "--migrate" ]; then
+
+  echo "Registering migrations ..."
+  drush migrate-auto-register
 
   echo "Updating NACE codes taxonomy"
   drush migrate-import NaceCodes --update

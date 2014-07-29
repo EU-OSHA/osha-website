@@ -14,23 +14,23 @@ drush php-script ../scripts/drupal_post_install.php
 
 if [ "$1" == "--migrate" ]; then
 
-	echo "Registering migrations ..."
-	drush migrate-auto-register
+  echo "Registering migrations ..."
+  drush migrate-auto-register
 
-	echo "Importing NACE codes taxonomy"
-	drush migrate-import NaceCodes
+  echo "Importing NACE codes taxonomy"
+  drush migrate-import NaceCodes
 
-	echo "Importing ESENER taxonomy"
-	drush migrate-import EsenerTaxonomy
+  echo "Importing ESENER taxonomy"
+  drush migrate-import EsenerTaxonomy
 
-	echo "Importing Publication types taxonomy"
-	drush migrate-import PublicationTypesTaxonomy
+  echo "Importing Publication types taxonomy"
+  drush migrate-import PublicationTypesTaxonomy
 
-	echo "Importing Multilingual Thesaurus taxonomy"
-	drush migrate-import ThesaurusTaxonomy
+  echo "Importing Multilingual Thesaurus taxonomy"
+  drush migrate-import ThesaurusTaxonomy
 
-	echo "Importing Categories taxonomy"
-	drush migrate-import TagsTaxonomy
+  echo "Importing Categories taxonomy"
+  drush migrate-import TagsTaxonomy
 
 fi
 

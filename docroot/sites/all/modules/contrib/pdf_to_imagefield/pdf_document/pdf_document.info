@@ -1,0 +1,23 @@
+name = PDF Document
+description = Document type containing a PDF attachment and a preview image. Demonstrates PDF_to_Image functionality.
+core = 7.x
+package = Testing
+dependencies[] = features
+dependencies[] = field_sql_storage
+dependencies[] = file
+dependencies[] = image
+dependencies[] = node
+dependencies[] = pdf_to_image
+dependencies[] = text
+features[features_api][] = api:1
+features[field][] = node-document-body
+features[field][] = node-document-field_document
+features[field][] = node-document-field_image
+features[node][] = document
+
+; Information added by Drupal.org packaging script on 2014-03-18
+version = "7.x-3.3"
+core = "7.x"
+project = "pdf_to_imagefield"
+datestamp = "1395169456"
+

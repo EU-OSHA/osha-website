@@ -13,6 +13,7 @@ class DocToImagefieldTest extends DrupalWebTestCase {
   static $content_type_name = 'doc_to_imagefield_test';
   static $field_cover_name = 'doc_to_imagefield_cover';
   static $field_file_name = 'doc_to_imagefield_file';
+  static $file_types = array('txt', 'pdf', 'ppt');
 
   function setUp(){
     $list = module_list();
@@ -78,103 +79,106 @@ class DocToImagefieldTest extends DrupalWebTestCase {
       drupal_form_submit('node_type_form', $form_state, $content_type);
       $errors = form_get_errors();
       $this->assertTrue(empty($error), "Could not enable translations for $content_type_name");
-      if (!empty($errors)) {
-        $entity_translation_exists = FALSE;
-      }
-
-      //Enable fields as translatable
-      $image_field['settings']['entity_translation_sync'] = 0;
-      $image_field['translatable'] = 1;
 
       //this settings is needed otherwise raise error
       $image_field['settings']['default_image'] = 0;
       field_update_instance($image_field);
-
-      $file_field['settings']['entity_translation_sync'] = 0;
-      $file_field['translatable'] = 1;
-      field_update_instance($file_field);
     }
 
     $language_default = language_default('language');
-
-    $node = new stdClass();
-    $node->title = 'Node test doc_to_imagefield';
-    $node->type = self::$content_type_name;
-    $node->language = $language_default;
-    $node->status = 1;
-    node_object_prepare($node);
-
-    $node->body[$node->language][0]['value']   = 'Node test';
-    $node->body[$node->language][0]['summary']   = 'Node test';
-    $node->body[$node->language][0]['format']  = 'filtered_html';
-
-    $filepath = doc_to_imagefield_get_test_filepath();
-    $file = (object) array(
-      'uid' => 1,
-      'uri' => $filepath,
-      'filemime' => file_get_mimetype($filepath),
-      'status' => 1,
-    );
-    $file = (array) file_copy($file, 'public://');
-    $node->{self::$field_file_name}[$node->language][0] = $file;
-    $node->{self::$field_cover_name}[$node->language] = array();
-
-    //set Translations
     $languages = language_list('language');
-
     //Overwrite global languages with desired language
     global $language_content;
     $language_content = $languages[$language_default];
     global $language;
     $language = $languages[$language_default];
 
-    foreach($languages as $lang) {
-      $lang = $lang->language;
-      if ($lang == $node->language) {
-        continue;
-      }
-      $handler = entity_translation_get_handler('node', $node, TRUE);
-      $handler->initTranslations();
+    foreach(self::$file_types as  $file_type) {
+      //reset language
+      $language = $languages[$language_default];
+      $language_content = $languages[$language_default];
 
-      $translation = array(
-        'language'  => $lang,
-        'source'    => $node->language,
-        'status'    => 1,
-        'translate' => 0
+      $node = new stdClass();
+      $node->title = 'Node test doc_to_imagefield';
+      $node->type = self::$content_type_name;
+      $node->language = $language_default;
+      $node->status = 1;
+      node_object_prepare($node);
+
+      $node->body[$node->language][0]['value']   = 'Node test';
+      $node->body[$node->language][0]['summary']   = 'Node test';
+      $node->body[$node->language][0]['format']  = 'filtered_html';
+
+      $filepath = doc_to_imagefield_get_test_filepath($file_type);
+      $file = (object) array(
+        'uid' => 1,
+        'uri' => $filepath,
+        'filemime' => file_get_mimetype($filepath),
+        'status' => 1,
+        'display' => 1,
       );
+      $file = (array) file_copy($file, 'public://');
+      $node->{self::$field_file_name}[$node->language][0] = $file;
+      $node->{self::$field_cover_name}[$node->language] = array();
 
-      $handler->setTranslation($translation, $node);
-    }
-
-    node_save($node);
-
-
-    //Add the fields in other languages to test multilingual
-    foreach($languages as $lang) {
-      //overwrite global languages for each available language
-      $language = $lang;
-      $language_content = $lang;
-
-      //get lang code
-      $lang = $lang->language;
-      if ($lang == $node->language) {
-        continue;
+      foreach($languages as $lang) {
+        $lang = $lang->language;
+        if ($lang == $node->language) {
+          continue;
+        }
+        $handler = entity_translation_get_handler('node', $node, TRUE);
+        $handler->initTranslations();
+        $translation = array(
+          'language'  => $lang,
+          'source'    => $node->language,
+          'status'    => 1,
+          'translate' => 0
+        );
+        $handler->setTranslation($translation, $node);
+      }
+      //save the node with translation settings and fields on default lang
+      node_save($node);
+      if ($file_type == 'pdf') {
+        //Simulate the batch job from pdf_to_image
+        self::node_save_for_pdf('node', $node, $node->nid, self::$field_cover_name, $file_field,(object) $file);
       }
 
-      //Add values to fields
-      $node->{self::$field_file_name}[$lang][0] = $file;
-      $node->{self::$field_cover_name}[$lang] = array();
-        //if not set will add the image to und
+      //Add the fields in other languages to test multilingual
+      foreach($languages as $lang) {
+        //overwrite global languages for each available language
+        $language = $lang;
+        $language_content = $lang;
+        //get lang code
+        $lang = $lang->language;
+        //skipp for default language - it was saved before this foreach
+        if ($lang == $node->language) {
+          continue;
+        }
 
-      node_save($node);
-    }
+        //Add values to fields
+        $node->{self::$field_file_name}[$lang][0] = $file;
+        $node->{self::$field_cover_name}[$lang] = array();
+        //if not set will add the image to und language - because of the field_language function
 
-    $this->assertTrue(!empty($node->nid),"$node->title could not be saved");
+        if ($file_type == 'pdf') {
+          //Simulate the batch job from pdf_to_image
+          //because it's not triggered by node save
+          self::node_save_for_pdf('node', $node, $node->nid, self::$field_cover_name, $file_field,(object) $file);
+        }
+        else {
+          node_save($node);
+        }
+      }
 
-    //Check if image was saved in every language
-    foreach($languages as $lang) {
-      $lang = $lang->language;
-      $this->assertTrue(!empty($node->{self::$field_cover_name}[$lang][0]),"Thumbnail could not be created for $lang");
+      $this->assertTrue(!empty($node->nid),"$node->title could not be saved");
+
+      //Reload the node from db
+      $node = entity_load_unchanged('node', $node->nid);
+      //Check if image was saved in every language
+      foreach($languages as $lang) {
+        $lang = $lang->language;
+        $this->assertTrue(!empty($node->{self::$field_cover_name}[$lang][0]),"Thumbnail could not be created for $lang from $file_type file");
+      }
     }
 
   }
@@ -186,6 +190,7 @@ class DocToImagefieldTest extends DrupalWebTestCase {
     $field = array(
       'field_name' => self::$field_cover_name,
       'type' => 'image',
+      'translatable' => 1,
     );
     field_create_field($field);
 
@@ -207,6 +212,7 @@ class DocToImagefieldTest extends DrupalWebTestCase {
     $field = array(
       'field_name' => self::$field_file_name,
       'type' => 'file',
+      'translatable' => 1,
     );
     field_create_field($field);
 
@@ -233,5 +239,29 @@ class DocToImagefieldTest extends DrupalWebTestCase {
       )
     );
     return field_create_instance($instance);
+  }
+
+  /**
+   * Function that simulate the behaviour of the batch job from pdf_to_image
+   * Inspired from pdf_to_image module
+  */
+  static function node_save_for_pdf($entity_type, $entity, $entity_id, $target_field, $source_field_instance, $pdf_file){
+    $params = array(
+      'entity' => $entity,
+      'entity_type' => $entity_type,
+      'entity_id' => $entity_id,
+      'image'  => array(
+        'field'    => field_info_field($target_field),
+        'instance' => field_info_instance($entity_type, $target_field, $source_field_instance['bundle']),
+      ),
+      'pdf'    => array(
+        'instance' => $source_field_instance,
+        'file'     => $pdf_file,
+      ),
+    );
+    $file = pdf_to_image_generate_page($params, 0);
+    $results['files'] = array($file);
+    $results['params'] = $params;
+    pdf_to_image_generate_process_attach('', $results, '');
   }
 }

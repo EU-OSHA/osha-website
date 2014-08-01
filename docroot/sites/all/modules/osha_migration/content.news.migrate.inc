@@ -17,7 +17,7 @@ class MigrateOshaNews extends DynamicMigration {
 
     $source_file = MigrationUtil::getSourceFile($arguments);
     $this->source = new MigrateSourceList(
-      new NewsContentListCSV($source_file, array('title', 'description', 'text')),
+      new NewsContentListCSV($source_file),
       new NewsContentItemCSV(),
       $this->fields()
     );
@@ -211,16 +211,14 @@ class MigrateOshaNews extends DynamicMigration {
 
 class NewsContentListCSV extends MigrateList {
   protected $file = '';
-  protected $multilingualFields;
   public static $data = array();
 
   /**
    * {@inheritdoc}
    */
-  public function __construct($file, $multilingual_fields = array()) {
+  public function __construct($file) {
     parent::__construct();
     $this->file = $file;
-    $this->multilingualFields = $multilingual_fields;
   }
 
   /**
@@ -234,6 +232,7 @@ class NewsContentListCSV extends MigrateList {
    * Parse the CSV file and populate the local cache.
    */
   protected function parseMultilingualCSV() {
+    $multilingual_fields = array('title', 'description', 'text');
     $handle = fopen($this->file, 'r');
     $fields = $data = fgetcsv($handle, 1000, ';');
     $final = array();
@@ -241,7 +240,7 @@ class NewsContentListCSV extends MigrateList {
       $country = $data[1];
       $path = explode('/', $data[0], 3)[2];
       foreach ($fields as $key => $field) {
-        if (in_array($field, $this->multilingualFields)) {
+        if (in_array($field, $multilingual_fields)) {
           $final[$path][$field][$country] = $data[$key];
           continue;
         }

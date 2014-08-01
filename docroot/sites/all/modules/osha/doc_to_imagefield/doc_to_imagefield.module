@@ -126,16 +126,10 @@ function doc_to_imagefield_test_exec_command() {
  */
 
 function doc_to_imagefield_get_test_filepath($type = 'txt') {
-  $doc_realpath = FALSE;
-  switch ($type) {
-    case 'txt':
-      $module_path = drupal_get_path('module', 'doc_to_imagefield');
-      $doc_realpath = drupal_realpath($module_path . '/tests/test.txt');
-      break;
-    default:
-      $module_path = drupal_get_path('module', 'doc_to_imagefield');
-      $doc_realpath = drupal_realpath($module_path . '/tests/test.txt');
-      break;
+  $module_path = drupal_get_path('module', 'doc_to_imagefield');
+  $doc_realpath = drupal_realpath($module_path . '/tests/test.'.$type);
+  if (!is_file($doc_realpath)) {
+    $doc_realpath = FALSE;
   }
   return $doc_realpath;
 }

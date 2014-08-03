@@ -6,6 +6,8 @@ define('OSHA_MIGRATION_TAXONOMY_NACE_CODES', 'TaxonomyNaceCodes');
 define('OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES', 'TaxonomyPublicationTypes');
 define('OSHA_MIGRATION_TAXONOMY_THESAURUS', 'TaxonomyThesaurus');
 define('OSHA_MIGRATION_CONTENT_TYPE_NEWS', 'News');
+define('OSHA_MIGRATION_CONTENT_TYPE_PUBLICATION', 'Publication');
+define('OSHA_MIGRATION_FILES_PUBLICATION', 'FilesPublication');
 
 /**
  * Implements hook_migrate_api().
@@ -40,6 +42,10 @@ function osha_migration_migrate_api() {
       OSHA_MIGRATION_CONTENT_TYPE_NEWS => array(
         'class_name' => 'MigrateOshaNews',
         'file_name' => osha_migration_get_data_dir() . '/export/news.txt',
+      ),
+      OSHA_MIGRATION_CONTENT_TYPE_PUBLICATION => array(
+        'class_name' => 'OshaMigratePublications',
+        'file_name' => osha_migration_get_data_dir() . '/export/publications.txt',
       ),
     ),
   );

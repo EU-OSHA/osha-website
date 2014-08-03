@@ -332,3 +332,171 @@ class MigrateOshaNewsTest extends DrupalWebTestCase {
     }
   }
 }
+
+class MigrationUtilTest extends DrupalWebTestCase {
+
+  private $tmpFile = NULL;
+
+  /**
+   * Test information.
+   *
+   * {@inheritdoc}
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Utilities testing',
+      'description' => 'Tests the migration utilities',
+      'group' => 'OSHA',
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp() {
+    parent::setUp('osha_migration');
+    $this->tmpFile = file_directory_temp() . '/test.tmp';
+    file_put_contents($this->tmpFile, 'Delete me ...');
+    $this->assertTrue(file_exists($this->tmpFile));
+    $this->assertTrue(is_readable($this->tmpFile));
+
+    $voc = taxonomy_vocabulary_machine_name_load(OSHA_TAXONOMIES_TAGS);
+
+    $term1 = new stdClass();
+    $term1->name = 'Accident prevention';
+    $term1->name_field['en'][0]['value'] = 'Accident prevention';
+    $term1->name_field['ro'][0]['value'] = 'Prevenirea accidentelor';
+    $term1->field_tags_code['und'][0]['value'] = 'accident_prevention';
+    $term1->vid = $voc->vid;
+    taxonomy_term_save($term1);
+
+    $term2 = new stdClass();
+    $term2->name = 'Dangerous substances';
+    $term2->name_field['en'][0]['value'] = 'Dangerous substances';
+    $term2->name_field['ro'][0]['value'] = 'Substanţe periculoase';
+    $term2->field_tags_code['und'][0]['value'] = 'dangerous_substances';
+    $term2->vid = $voc->vid;
+
+    taxonomy_term_save($term2);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function tearDown() {
+    unlink($this->tmpFile);
+    parent::tearDown();
+  }
+
+  /**
+   * Test getSourceFile().
+   */
+  public function testGetSourceFile() {
+    try {
+      MigrationUtil::getSourceFile(NULL);
+      $this->fail('Throw exception about missing `file_name` argument');
+    }
+    catch(Exception $e) {}
+
+    try {
+      MigrationUtil::getSourceFile(array());
+      $this->fail('Throw exception about missing `file_name` argument');
+    }
+    catch(Exception $e) {}
+
+    $arguments = array('file_name' => $this->tmpFile);
+    $subject = MigrationUtil::getSourceFile($arguments);
+    $this->assertEqual($this->tmpFile, $subject);
+  }
+
+
+  /**
+   * Test findTidByTaxonomyField().
+   */
+  public function testFindTidByTaxonomyField() {
+    $subject = MigrationUtil::findTidByTaxonomyField(
+      array(' accident_prevention ', ' dangerous_substances', '  '),
+      'field_tags_code',
+      OSHA_TAXONOMIES_TAGS
+    );
+    $this->assertEqual(2, count($subject));
+    $this->assertTrue(in_array(1, $subject));
+    $this->assertTrue(in_array(2, $subject));
+
+    $subject = MigrationUtil::findTidByTaxonomyField(
+      array(' dangerous_substances', 'x'),
+      'field_tags_code',
+      OSHA_TAXONOMIES_TAGS
+    );
+    $this->assertEqual(1, count($subject));
+    $this->assertTrue(in_array(2, $subject));
+
+    $subject = MigrationUtil::findTidByTaxonomyField(
+      array(' Dangerous substances ', ' Accident prevention', '  '),
+      'name_field',
+      OSHA_TAXONOMIES_TAGS,
+      'en'
+    );
+    $this->assertEqual(2, count($subject));
+    $this->assertTrue(in_array(1, $subject));
+    $this->assertTrue(in_array(2, $subject));
+
+    $subject = MigrationUtil::findTidByTaxonomyField(
+      array(' Prevenirea accidentelor ', ' Substanţe periculoase', '  '),
+      'name_field',
+      OSHA_TAXONOMIES_TAGS,
+      'ro'
+    );
+    $this->assertEqual(2, count($subject));
+    $this->assertTrue(in_array(1, $subject));
+    $this->assertTrue(in_array(2, $subject));
+
+    $subject = MigrationUtil::findTidByTaxonomyField(
+      NULL,
+      'name_field',
+      OSHA_TAXONOMIES_TAGS,
+      'ro'
+    );
+    $this->assertEqual(0, count($subject));
+  }
+
+  /**
+   * Test decodeTagsTerms().
+   */
+  public function testDecodeTagsTerms() {
+    $subject = MigrationUtil::decodeTagsTerms(
+      ' accident_prevention,  dangerous_substances, '
+    );
+    $this->assertEqual(2, count($subject));
+    $this->assertTrue(in_array(1, $subject));
+    $this->assertTrue(in_array(2, $subject));
+
+    $subject = MigrationUtil::decodeTagsTerms(NULL);
+    $this->assertEqual(0, count($subject));
+  }
+
+  /**
+   * Test parseRelatedItemsString().
+   */
+  public function testParseRelatedItemsString() {
+    $input = '';
+    $subject = MigrationUtil::parseRelatedItemsString($input);
+    $this->assertEqual(array('items' => NULL, 'files' => NULL), $subject);
+
+    $input = '/en/publication1/en/p2, /en/publication2, /file1.pptx, /file2.ppt';
+    $subject = MigrationUtil::parseRelatedItemsString($input);
+    $this->assertEqual(2, count($subject['items']));
+    $this->assertTrue(in_array('publication1/en/p2', $subject['items']));
+    $this->assertTrue(in_array('publication2', $subject['items']));
+
+    $this->assertEqual(2, count($subject['files']));
+    $this->assertTrue(in_array('/file1.pptx', $subject['files']));
+    $this->assertTrue(in_array('/file2.ppt', $subject['files']));
+
+
+    $input = '/en/publication1, /en/publication2, /file1.pptx, /file2.XXX';
+    $subject = MigrationUtil::parseRelatedItemsString($input);
+    $this->assertEqual(1, count($subject['files']));
+    $this->assertTrue(in_array('/file1.pptx', $subject['files']));
+  }
+}

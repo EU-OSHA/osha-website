@@ -7,11 +7,12 @@ dependencies[] = osha
 dependencies[] = osha_taxonomies
 
 files[] = content.news.migrate.inc
+files[] = content.publications.migrate.inc
 files[] = utils.api.inc
-files[] = news.migrate.inc
 files[] = taxonomy.esener.migrate.inc
 files[] = taxonomy.nace_codes.migrate.inc
 files[] = taxonomy.publication_types.migrate.inc
 files[] = taxonomy.tags.migrate.inc
 files[] = taxonomy.thesaurus.migrate.inc
 files[] = osha_migration.test
+files[] = tests/content.publications.test

@@ -5,3 +5,5 @@
  */
 
 include_once 'osha_publication.features.inc';
+
+define('OSHA_PUBLICATION_CONTENT_TYPE_PUBLICATION', 'publication');

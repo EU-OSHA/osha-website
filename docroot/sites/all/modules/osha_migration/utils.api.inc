@@ -20,11 +20,15 @@ class MigrationUtil {
     if (isset($arguments['file_name'])) {
       $file = $arguments['file_name'];
       if (!file_exists($file) || !is_readable($file)) {
-        throw new Exception("Cannot read migration file $file");
+        throw new Exception(
+          t('Cannot read migration file @file', array('@file' => $file))
+        );
       }
     }
     else {
-      throw new Exception('Missing "file_name" migration argument');
+      throw new Exception(
+        t('Invalid migration setup: missing `file_name` parameter (source)')
+      );
     }
     return $file;
   }
@@ -37,7 +41,7 @@ class MigrationUtil {
    *   Vocabulary machine name
    * @param string $field_match
    *   Name of the field to match against (i.e. name)
-   * @param string $terms
+   * @param array $terms
    *   Array of field values to match
    * @param string $language
    *   Field will be inspected on this language
@@ -49,10 +53,13 @@ class MigrationUtil {
    * Note: This method does static caching and loads entire vocabulary for reuse
    * thus is recommended to use when taxonomy does not change during migration.
    */
-  public static function findTidByTaxonomyField($vocabulary_name, $field_match, $terms, $language = LANGUAGE_NONE) {
+  public static function findTidByTaxonomyField($terms, $field_match, $vocabulary_name, $language = LANGUAGE_NONE) {
+    if (empty($terms)) {
+      return array();
+    }
     $ret = array();
-    $terms = array_filter($terms, 'strlen');
     $terms = array_map('trim', $terms);
+    $terms = array_filter($terms, 'strlen');
     $field_values = self::cacheVocabularyTermsFields($vocabulary_name, $field_match, $language);
     $misses = array();
     foreach ($terms as $t) {
@@ -71,7 +78,6 @@ class MigrationUtil {
         'warning'
       );
     }
-
     return $ret;
   }
 
@@ -120,6 +126,9 @@ class MigrationUtil {
    *   Array of tids
    */
   public static function decodeTagsTerms($terms_str, $term_field = 'field_tags_code') {
+    if (empty($terms_str)) {
+      return array();
+    }
     $terms = explode(',', $terms_str);
     $terms = array_unique($terms);
     $terms = array_map('trim', $terms);
@@ -164,7 +173,49 @@ class MigrationUtil {
         }
       }
     }
-    return self::findTidByTaxonomyField(OSHA_TAXONOMIES_TAGS, $term_field, $ret, LANGUAGE_NONE);
+    return self::findTidByTaxonomyField($ret, $term_field, OSHA_TAXONOMIES_TAGS, LANGUAGE_NONE);
+  }
+
+  /**
+   * Parse 'related items' field (i.e. related_publications).
+   *
+   * Extract the values as entities (i.e. related publications) and physical
+   * files (i.e. /local/storage/path/file.pptx)
+   *
+   * @param string $field_value
+   *   Value to parse
+   * @param string $supported_extensions
+   *   (Optional) Supported file extensions.
+   *   Default: PDF,DOC,DOCX,PPT,PPTX,XLS,XLSX
+   *
+   * @return array
+   *   Array with two keys (`items` and `files`) of related content
+   */
+  public static function parseRelatedItemsString($field_value, $supported_extensions = 'pdf|doc|docx|ppt|pptx|xls|xlsx') {
+    $ret = array('items' => NULL, 'files' => NULL);
+    if (empty($field_value)) {
+      return $ret;
+    }
+    $items = array_map('trim', explode(',', $field_value));
+    foreach ($items as $item) {
+      $file_match = sprintf('/^.*\.(%s)$/i', $supported_extensions);
+      if (preg_match($file_match, $item)) {
+        $ret['files'][] = $item;
+      }
+      else {
+        $path = preg_replace('/^\/en\//i', '', $item);
+        $ret['items'][] = $path;
+      }
+    }
+    if (count($ret['items']) + count($ret['files']) != count($items)) {
+      drupal_set_message(
+        t('Could not extract all related items from string: @input (Possible unsupported file extensions: @ext)',
+          array('@input' => $field_value, '@ext' => $supported_extensions)
+        ),
+        'warning'
+      );
+    }
+    return $ret;
   }
 
   /**
@@ -191,6 +242,54 @@ class MigrationUtil {
     );
     $migration = Migration::getInstance($machine_name);
     return $migration->processImport();
+  }
+
+  /**
+   * Check and remove invalid files to be migrated from the given field.
+   *
+   * @param object $row
+   *   Migrated source row
+   * @param string $field
+   *   File field from the object
+   * @param string $path_prefix
+   *   Additional path added to 'sites/default/files' ...
+   */
+  public static function cleanMigratedFileField(&$row, $field, $path_prefix = 'public://') {
+    if (empty($row->{$field})) {
+      return;
+    }
+    $migration = Migration::currentMigration();
+    /* Validate file path length */
+    $valid = array();
+    foreach ($row->{$field} as $language => $path) {
+      if (is_string($path)) {
+        if (strlen($path_prefix) + strlen($path) > 255) {
+          $migration->saveMessage(
+            "File path cannot be larger than 255 characters, ignoring {$row->file}",
+            MigrationBase::MESSAGE_WARNING
+          );
+        }
+        else {
+          $valid[$language] = $path;
+        }
+      }
+      else {
+        $valid_inner = array();
+        foreach ($path as $file) {
+          if (strlen($path_prefix) + strlen($file) > 255) {
+            $migration->saveMessage(
+              "File path cannot be larger than 255 characters, ignoring {$file}",
+              MigrationBase::MESSAGE_WARNING
+            );
+          }
+          else {
+            $valid_inner[] = $file;
+          }
+        }
+        $valid[$language] = $valid_inner;
+      }
+    }
+    $row->{$field} = $valid;
   }
 
   /**

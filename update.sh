@@ -28,6 +28,9 @@ if [ "$1" == "--migrate" ]; then
 	echo "Importing News content"
 	drush migrate-import --update News
 
+	echo "Importing Publications content"
+	drush migrate-import --update Publication
+
 fi
 
 drush cc all

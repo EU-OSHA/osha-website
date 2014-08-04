@@ -135,7 +135,7 @@ function osha_publication_field_default_field_bases() {
       ),
       'uri_scheme' => 'public',
     ),
-    'translatable' => 0,
+    'translatable' => 1,
     'type' => 'image',
   );
 
@@ -234,7 +234,7 @@ function osha_publication_field_default_field_bases() {
       ),
       'uri_scheme' => 'public',
     ),
-    'translatable' => 1,
+    'translatable' => 0,
     'type' => 'file',
   );
 

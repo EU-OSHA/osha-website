@@ -12,6 +12,7 @@ dependencies[] = i18n_taxonomy
 dependencies[] = image
 dependencies[] = osha_news
 dependencies[] = osha_taxonomies
+dependencies[] = pdf_to_image
 dependencies[] = strongarm
 dependencies[] = taxonomy
 dependencies[] = text

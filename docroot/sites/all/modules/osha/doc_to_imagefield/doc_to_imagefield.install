@@ -1,0 +1,36 @@
+<?php
+/**
+ * @file
+ * Installation file
+ */
+
+/**
+ * Implements hook_requirements().
+ *
+ * Check module's requirements.
+ */
+function doc_to_imagefield_requirements($phase) {
+  $results = array();
+  if ($phase === 'runtime') {
+    $results = doc_to_imagefield_check_requirements();
+  }
+  return $results;
+}
+
+/**
+ * Check if module requirements are met.
+ *
+ * - shell_exec executes successfully.
+ */
+function doc_to_imagefield_check_requirements() {
+  $results = array();
+
+  if (!doc_to_imagefield_test_exec_command()) {
+    $result['title'] = 'Requires a converter (ex: soffice)';
+    $result['description'] = 'Converter library is not working. Check configuration interface of the module.';
+    $result['severity'] = REQUIREMENT_ERROR;
+    $results['doc_img'] = $result;
+  }
+
+  return $results;
+}

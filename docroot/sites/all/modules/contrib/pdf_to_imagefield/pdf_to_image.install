@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * @file
+ * PDF to Image install and enable hooks.
+ */
+
+
+/**
+ * Implements hook_requirements().
+ */
+function pdf_to_image_requirements($phase) {
+  $requirements = array();
+  // Ensure translations don't break at install time
+  $t = get_t();
+
+  if ($phase == 'runtime') {
+    if ($response = pdf_to_image_check_imagemagick()) {
+      $requirements['pdf_to_image_check_imagemagick'] = array(
+        'title' => $t('Imagemagick support for PDF to Image'),
+        'value' => $response,
+        'severity' => REQUIREMENT_OK,
+      );
+    }
+    else {
+      $requirements['pdf_to_image_check_imagemagick'] = array(
+        'title' => $t('Imagemagick support for PDF to Image'),
+        'description' => $t('Imagemagick must be installed and the <a href="!admin_path">path on the server set</a> for PDFs to be processed.', array('!admin_path' => url('admin/config/media/image-toolkit'))),
+        'value' => $t("Imagemagick doesn't seem to be available at %path.", array('%path' => variable_get('imagemagick_convert', '/usr/bin/convert'))),
+        'severity' => REQUIREMENT_WARNING,
+      );
+    }
+  }
+
+  return $requirements;
+}
+

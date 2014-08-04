@@ -260,43 +260,46 @@ if(file_exists($json_path)) {
 }
 
 $options['init-modules'] = array(
-  'ctools', 'entity',
+    'ctools', 'entity',
 
-  'locale',
-  'entity_translation',
-  'i18n',
-  'variable',
+    'locale',
+    'entity_translation',
+    'i18n',
+    'variable',
 
-  'views',
-  'views_ui',
-  'views_bulk_operations',
+    'views',
+    'views_ui',
+    'views_bulk_operations',
 
-  'taxonomy_access_fix',
-  'date',
-  'migrate',
-  'features',
+    'taxonomy_access_fix',
+    'date',
+    'migrate',
+    'features',
 
-  'entityreference',
-  'link',
-  'title',
-  'wysiwyg',
-  'pathauto',
-  'uuid',
+    'entityreference',
+    'link',
+    'title',
+    'wysiwyg',
+    'pathauto',
+    'uuid',
 
-  'search_api',
-  'facetapi',
-  'search_api_facetapi',
-  'apachesolr',
-  'apachesolr_search',
-  'search_api_solr',
-  'strongarm',
+    'search_api',
+    'facetapi',
+    'search_api_facetapi',
+    'apachesolr',
+    'apachesolr_search',
+    'search_api_solr',
+    'strongarm',
 
-  'imce_wysiwyg',
-  'osha',
-  'osha_migration',
-  'osha_news',
-  'osha_publication',
-  'osha_case_study'
+    'pdf_to_image',
+    'doc_to_imagefield',
+
+    'imce_wysiwyg',
+    'osha',
+    'osha_migration',
+    'osha_news',
+    'osha_publication',
+    'osha_case_study',
 );
 
 if (file_exists(dirname(__FILE__) . '/drushrc.local.php')) {

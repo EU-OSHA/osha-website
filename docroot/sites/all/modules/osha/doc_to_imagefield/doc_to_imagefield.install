@@ -1,10 +1,14 @@
 <?php
-
 /**
- * Implements hook_requirements
- *
+ * @file
+ * Installation file
  */
 
+/**
+ * Implements hook_requirements().
+ *
+ * Check module's requirements.
+ */
 function doc_to_imagefield_requirements($phase) {
   $results = array();
   if ($phase === 'runtime') {
@@ -14,11 +18,10 @@ function doc_to_imagefield_requirements($phase) {
 }
 
 /**
- * Check if module requirements are met
- *  -shell_exec executes succesfully
+ * Check if module requirements are met.
  *
+ * - shell_exec executes successfully.
  */
-
 function doc_to_imagefield_check_requirements() {
   $results = array();
 

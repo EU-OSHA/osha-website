@@ -303,12 +303,11 @@ class MigrateOshaNewsTest extends DrupalWebTestCase {
     }
 
     $class = new NewsContentListCSV(
-      $source_file,
-      array('title', 'description', 'text')
+      $source_file
     );
     $class->getIdList();
     $data = $class::$data;
-    $this->assertEqual(count($data), count($nodes));
+    $this->assertEqual(count($nodes), 1);
 
     foreach ($nodes as $node) {
       $path = path_load('node/' . $node->nid);

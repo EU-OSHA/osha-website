@@ -9,7 +9,6 @@ function osha_install() {
   osha_configure_entity_translation_types();
   osha_configure_language_detection();
   osha_replace_title_field();
-  osha_configure_article();
   osha_configure_basic_page();
   osha_enable_body_translations();
 }

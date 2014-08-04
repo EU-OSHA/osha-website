@@ -212,31 +212,6 @@ function osha_replace_title_field() {
 }
 
 /**
- * Enable translation for the article entity.
- */
-function osha_configure_article() {
-  if (module_load_include('inc', 'node', 'content_types')) {
-    $form_state['values']['language_content_type'] = ENTITY_TRANSLATION_ENABLED;
-    $form_state['values']['entity_translation_hide_translation_links'] = 1;
-    $form_state['values']['promote'] = NULL;
-    $form_state['values']['comment'] = 1;
-    $type = node_type_load('article');
-    drupal_form_submit('node_type_form', $form_state, $type);
-    $errors = form_get_errors();
-    if (!empty($errors)) {
-      foreach ($errors as $error) {
-        drupal_set_message(
-          t("Article setup error: !error", array('!error' => $error))
-        );
-      }
-    }
-  }
-  else {
-    drupal_set_message('osha_configure_article: content_types module not available', 'warning');
-  }
-}
-
-/**
  * Enable translation for the basic page entity.
  */
 function osha_configure_basic_page() {

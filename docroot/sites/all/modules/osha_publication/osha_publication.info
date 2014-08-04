@@ -55,6 +55,6 @@ features[variable][] = node_options_publication
 features[variable][] = node_preview_publication
 features[variable][] = node_submitted_publication
 features_exclude[dependencies][options] = options
-features_exclude[taxonomy][tags] = tags
 features_exclude[field_base][field_tags] = field_tags
 features_exclude[field_base][body] = body
+features_exclude[taxonomy][tags] = tags

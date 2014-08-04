@@ -34,6 +34,7 @@ function osha_taxonomies_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'entity_translation_sync' => FALSE,
+      'max_length' => 768,
     ),
     'translatable' => 1,
     'type' => 'text_with_summary',
@@ -329,7 +330,7 @@ function osha_taxonomies_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'entity_translation_sync' => FALSE,
-      'max_length' => 255,
+      'max_length' => 768,
     ),
     'translatable' => 1,
     'type' => 'text',

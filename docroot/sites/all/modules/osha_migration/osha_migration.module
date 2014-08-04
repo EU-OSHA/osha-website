@@ -1,95 +1,67 @@
 <?php
 
-define('MIGRATION_CATEGORIES', 'TagsTest');
-define('MIGRATION_ESENER', 'EsenerTest');
-define('MIGRATION_NACE_CODES', 'NaceCodesTest');
-define('MIGRATION_PUBLICATION_TYPES', 'PublicationTypesTest');
-define('MIGRATION_THESAURUS', 'ThesaurusTest');
-define('CLASS_CATEGORIES', 'MigrateOshaCategories');
-define('CLASS_ESENER', 'MigrateOshaEsenerTaxonomy');
-define('CLASS_NACE_CODES', 'MigrateOshaNaceCodes');
-define('CLASS_PUBLICATION_TYPES', 'MigrateOshaPublicationTypesTaxonomy');
-define('CLASS_THESAURUS', 'MigrateOshaThesaurus');
+define('OSHA_MIGRATION_TAXONOMY_TAGS', 'TaxonomyTags');
+define('OSHA_MIGRATION_TAXONOMY_ESENER', 'TaxonomyEsener');
+define('OSHA_MIGRATION_TAXONOMY_NACE_CODES', 'TaxonomyNaceCodes');
+define('OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES', 'TaxonomyPublicationTypes');
+define('OSHA_MIGRATION_TAXONOMY_THESAURUS', 'TaxonomyThesaurus');
+define('OSHA_MIGRATION_CONTENT_TYPE_NEWS', 'News');
+define('OSHA_MIGRATION_CONTENT_TYPE_PUBLICATION', 'Publication');
+define('OSHA_MIGRATION_FILES_PUBLICATION', 'FilesPublication');
 
 /**
- * You must implement hook_migrate_api(), setting the API level to 2, for
- * your migration classes to be recognized by the Migrate module.
+ * Implements hook_migrate_api().
+ *
+ * Set the API level to 2, for migration classes to be recognized by Migrate.
  */
 function osha_migration_migrate_api() {
+  $migration_module_dir = drupal_get_path('module', 'osha_migration');
   $api = array(
     'api' => 2,
     'migrations' => array(
-      'News' => array('class_name' => 'MigrateOshaNews'),
-      'NaceCodes' => array(
-        'class_name' => 'MigrateOshaNaceCodes',
-        'file_name' => 'data/nace_codes.json',
-        'group_name' => 'OSHA MIGRATIONS'
+      OSHA_MIGRATION_TAXONOMY_TAGS => array(
+        'class_name' => 'MigrateOshaTaxonomyTags',
+        'file_name' => $migration_module_dir . '/data/tags.json',
       ),
-      'EsenerTaxonomy' => array(
-        'class_name' => 'MigrateOshaEsenerTaxonomy',
-        'file_name' => 'data/esener.json',
-        'group_name' => 'OSHA MIGRATIONS'
+      OSHA_MIGRATION_TAXONOMY_ESENER => array(
+        'class_name' => 'MigrateOshaTaxonomyEsener',
+        'file_name' => $migration_module_dir . '/data/esener.json',
       ),
-      'PublicationTypesTaxonomy' => array(
-        'class_name' => 'MigrateOshaPublicationTypesTaxonomy',
-        'group_name' => 'OSHA MIGRATIONS'
+      OSHA_MIGRATION_TAXONOMY_NACE_CODES => array(
+        'class_name' => 'MigrateOshaTaxonomyNaceCodes',
+        'file_name' => $migration_module_dir . '/data/nace_codes.json',
       ),
-      'ThesaurusTaxonomy' => array(
-        'class_name' => 'MigrateOshaThesaurus',
-        'file_name' => 'data/OSHA-MultilingualThesaurus.json',
-        'group_name' => 'OSHA MIGRATION'
+      OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES => array(
+        'class_name' => 'MigrateOshaTaxonomyPublicationTypes',
+        'file_name' => $migration_module_dir . '/data/publication_types.json',
       ),
-      'TagsTaxonomy' => array(
-        'class_name' => 'MigrateOshaCategories',
-        'file_name' => 'data/categories.json',
-        'group_name' => 'OSHA MIGRATION'
-      )
-    )
+      OSHA_MIGRATION_TAXONOMY_THESAURUS => array(
+        'class_name' => 'MigrateOshaTaxonomyThesaurus',
+        'file_name' => $migration_module_dir . '/data/thesaurus.json',
+      ),
+      OSHA_MIGRATION_CONTENT_TYPE_NEWS => array(
+        'class_name' => 'MigrateOshaNews',
+        'file_name' => osha_migration_get_data_dir() . '/export/news.txt',
+      ),
+      OSHA_MIGRATION_CONTENT_TYPE_PUBLICATION => array(
+        'class_name' => 'OshaMigratePublications',
+        'file_name' => osha_migration_get_data_dir() . '/export/publications.txt',
+      ),
+    ),
   );
   return $api;
 }
 
 /**
- * Implements hook_schema_alter()
- */
-function osha_migration_schema_alter(&$schema) {
-  if (isset($schema['taxonomy_term_data'])) {
-    $schema['taxonomy_term_data']['fields']['name'] = array(
-      'type' => 'varchar',
-      'length' => 768,
-      'not null' => TRUE,
-      'default' => '',
-    );
-  }
-
-  if (isset($schema['field_data_name_field'])) {
-    $schema['field_data_name_field']['fields']['name_field_value'] = array(
-      'type' => 'varchar',
-      'length' => 768,
-      'not null' => TRUE,
-      'default' => '',
-    );
-  }
-
-  if (isset($schema['field_revision_name_field'])) {
-    $schema['field_revision_name_field']['fields']['name_field_value'] = array(
-      'type' => 'varchar',
-      'length' => 768,
-      'not null' => TRUE,
-      'default' => '',
-    );
-  }
-}
-
-/**
- * Retrieve the root directory for the migration data folder
- * @return string|null Path on local disk
- * @throws MigrateException When the variable is empty
+ * Retrieve the root directory for the migration data folder.
+ *
+ * @return string|null
+ *   Path on local disk
  */
 function osha_migration_get_data_dir() {
   $ret = variable_get('osha_data_dir', NULL);
   if (empty($ret)) {
-    throw new MigrateException('Please configure the "osha_data_dir" variable to point to your data storage');
+    drupal_set_message('Please configure the "osha_data_dir" variable to point to your data storage', 'error');
   }
   return $ret;
 }

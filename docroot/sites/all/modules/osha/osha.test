@@ -1,48 +1,68 @@
 <?php
-/**
- * Author: Cristian Romanescu <cristi _at_ eaudeweb dot ro>
- * Created: 201407101633
- */
 
 class OshaTest extends DrupalWebTestCase {
 
+  /**
+   * {@inheritdoc}
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'OSHA base tests',
+      'description' => 'Tests functionalities provided by this module',
+      'group' => 'OSHA',
+    );
+  }
 
-	public static function getInfo() {
-		return array(
-			'name' => 'OSHA base tests',
-			'description' => 'Tests functionalities provided by this module',
-			'group' => 'OSHA',
-		);
-	}
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp() {
+    parent::setUp('features', 'osha');
+  }
 
+  /**
+   * All required languages have been enabled.
+   */
+  public function testLanguages() {
+    features_revert(array('osha' => array('language')));
+    $languages = array(
+      'en',
+      'bg',
+      'cs',
+      'da',
+      'el',
+      'et',
+      'es',
+      'fi',
+      'hr',
+      'hu',
+      'fr',
+      'is',
+      'it',
+      'lt',
+      'lv',
+      'mt',
+      'nl',
+      'no',
+      'pl',
+      'pt',
+      'ro',
+      'ru',
+      'sv',
+      'sl',
+      'sk',
+      'tr',
+      'de',
+    );
+    $enabled = language_list('language');
+    $codes = array_keys($enabled);
+    $this->assertEqual(count($languages), count($codes));
 
-	public function setUp() {
-		parent::setUp('features', 'osha');
-	}
+    // @todo: See http://redmine.eaudeweb.ro/issues/2493
+    // $this->assertEqual($codes[0], $languages[0]);
 
-
-	/**
-	 * Tests that all required languages have been enabled
-	 */
-	public function testLanguages() {
-		features_revert(array('osha' => array('language')));
-		$languages = array(
-			'en', 'bg', 'cs', 'da', 'el',
-			'et', 'es', 'fi', 'hr', 'hu',
-			'fr', 'is', 'it', 'lt', 'lv',
-			'mt', 'nl', 'no', 'pl', 'pt',
-			'ro', 'ru', 'sv', 'sl', 'sk',
-			'tr', 'de'
-		);
-		$enabled = language_list('language');
-		$codes = array_keys($enabled);
-		$this->assertEqual(count($languages), count($codes));
-
-		// @todo: See http://redmine.eaudeweb.ro/issues/2493
-		// $this->assertEqual($codes[0], $languages[0]);
-
-		foreach($languages as $iso_code) {
-			$this->assertTrue(in_array($iso_code, $codes), "Language $iso_code is enabled");
-		}
-	}
+    foreach ($languages as $iso_code) {
+      $this->assertTrue(in_array($iso_code, $codes), "Language $iso_code is enabled");
+    }
+  }
 }

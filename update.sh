@@ -7,23 +7,29 @@ drush build
 
 if [ "$1" == "--migrate" ]; then
 
-  echo "Registering migrations ..."
-  drush migrate-auto-register
+	echo "Registering migrations ..."
+	drush migrate-auto-register
 
-  echo "Updating NACE codes taxonomy"
-  drush migrate-import NaceCodes --update
+	echo "Importing NACE codes taxonomy"
+	drush migrate-import --update TaxonomyNaceCodes
 
-  echo "Updating ESENER taxonomy"
-  drush migrate-import EsenerTaxonomy --update
+	echo "Importing ESENER taxonomy"
+	drush migrate-import --update TaxonomyEsener
 
-  echo "Updating Publication types taxonomy"
-  drush migrate-import PublicationTypesTaxonomy --update
+	echo "Importing Publication types taxonomy"
+	drush migrate-import --update TaxonomyPublicationTypes
 
-  echo "Updating Multilingual Thesaurus taxonomy"
-  drush migrate-import ThesaurusTaxonomy --update
+	echo "Importing multilingual Thesaurus taxonomy"
+	drush migrate-import --update TaxonomyThesaurus
 
-  echo "Importing Categories taxonomy"
-  drush migrate-import TagsTaxonomy
+	echo "Importing Tags taxonomy"
+	drush migrate-import --update TaxonomyTags
+
+	echo "Importing News content"
+	drush migrate-import --update News
+
+	echo "Importing Publications content"
+	drush migrate-import --update Publication
 
 fi
 

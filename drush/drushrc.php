@@ -249,14 +249,14 @@
 // Read JSON configuration file from conf/ and pre-configure drush commands
 $json_path = getcwd() . '/../conf/config.json';
 if(file_exists($json_path)) {
-    $cfg = json_decode(file_get_contents($json_path));
-    $db_url = sprintf('mysql://%s:%s@%s:%s/%s', $cfg->db->username, $cfg->db->password, $cfg->db->host, $cfg->db->port, $cfg->db->database);
-    $command_specific['site-install'] = array(
-        'db-url' => $db_url,
-        'account-mail' => $cfg->admin->email, 'account-name' => $cfg->admin->username, 'account-pass' => $cfg->admin->password,
-        'db-su' => $cfg->db->root_username, "db-su-pw" => $cfg->db->root_password,
-        'site-mail' => $cfg->site_mail
-    );
+  $cfg = json_decode(file_get_contents($json_path));
+  $db_url = sprintf('mysql://%s:%s@%s:%s/%s', $cfg->db->username, $cfg->db->password, $cfg->db->host, $cfg->db->port, $cfg->db->database);
+  $command_specific['site-install'] = array(
+    'db-url' => $db_url,
+    'account-mail' => $cfg->admin->email, 'account-name' => $cfg->admin->username, 'account-pass' => $cfg->admin->password,
+    'db-su' => $cfg->db->root_username, "db-su-pw" => $cfg->db->root_password,
+    'site-mail' => $cfg->site_mail
+  );
 }
 
 $options['init-modules'] = array(
@@ -299,7 +299,7 @@ $options['init-modules'] = array(
     'osha_migration',
     'osha_news',
     'osha_publication',
-    'osha_case_study'
+    'osha_case_study',
 );
 
 if (file_exists(dirname(__FILE__) . '/drushrc.local.php')) {

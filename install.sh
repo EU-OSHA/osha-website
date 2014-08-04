@@ -18,20 +18,25 @@ if [ "$1" == "--migrate" ]; then
 	drush migrate-auto-register
 
 	echo "Importing NACE codes taxonomy"
-	drush migrate-import NaceCodes
+	drush migrate-import TaxonomyNaceCodes
 
 	echo "Importing ESENER taxonomy"
-	drush migrate-import EsenerTaxonomy
+	drush migrate-import TaxonomyEsener
 
 	echo "Importing Publication types taxonomy"
-	drush migrate-import PublicationTypesTaxonomy
+	drush migrate-import TaxonomyPublicationTypes
 
-	echo "Importing Multilingual Thesaurus taxonomy"
-	drush migrate-import ThesaurusTaxonomy
+	echo "Importing multilingual Thesaurus taxonomy"
+	drush migrate-import TaxonomyThesaurus
 
-	echo "Importing Categories taxonomy"
-	drush migrate-import TagsTaxonomy
+	echo "Importing Tags taxonomy"
+	drush migrate-import TaxonomyTags
 
+	echo "Importing News content"
+	drush migrate-import News
+
+	echo "Importing Publications content"
+	drush migrate-import Publication
 fi
 
 drush cc all

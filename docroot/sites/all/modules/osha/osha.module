@@ -1,50 +1,98 @@
 <?php
-/**
- * @file
- * Code for the osha feature.
- */
 
 include_once 'osha.features.inc';
 
-function osha_form_field_ui_field_edit_form_alter(&$form, &$form_state) {
-  //dpm($form_state);
+/**
+ * Implements hook_schema_alter().
+ */
+function osha_schema_alter(&$schema) {
+  if (isset($schema['taxonomy_term_data'])) {
+    $schema['taxonomy_term_data']['fields']['name'] = array(
+      'type' => 'varchar',
+      'length' => 768,
+      'not null' => TRUE,
+      'default' => '',
+    );
+  }
+
+  if (isset($schema['field_data_name_field'])) {
+    $schema['field_data_name_field']['fields']['name_field_value'] = array(
+      'type' => 'varchar',
+      'length' => 768,
+      'not null' => TRUE,
+      'default' => '',
+    );
+  }
+
+  if (isset($schema['field_revision_name_field'])) {
+    $schema['field_revision_name_field']['fields']['name_field_value'] = array(
+      'type' => 'varchar',
+      'length' => 768,
+      'not null' => TRUE,
+      'default' => '',
+    );
+  }
+
+  if (isset($schema['field_data_title_field'])) {
+    $schema['field_data_title_field']['fields']['title_field_value'] = array(
+      'type' => 'varchar',
+      'length' => 768,
+      'not null' => TRUE,
+      'default' => '',
+    );
+  }
+
+  if (isset($schema['field_revision_title_field'])) {
+    $schema['field_revision_title_field']['fields']['title_field_value'] = array(
+      'type' => 'varchar',
+      'length' => 768,
+      'not null' => TRUE,
+      'default' => '',
+    );
+  }
 }
 
+/**
+ * Configure date and time-zone related settings.
+ */
 function osha_configure_date_settings() {
-  /* Set default country, first day of the month and date format */
   variable_set('date_first_day', '1');
   variable_set('site_default_country', 'ES');
-  variable_set('date_default_timezone', 'Europe/Madrid');
+  variable_set('date_default_timezone', 'UTC');
   variable_set('configurable_timezones', '0');
   variable_set('user_default_timezone', '0');
 }
 
+/**
+ * Configure Entity translation handling for article and basic pages.
+ *
+ * /admin/config/regional/entity_translation
+ */
 function osha_configure_entity_translation() {
-  // /admin/config/regional/entity_translation
-  if (!module_load_include('inc', 'entity_translation', 'entity_translation.admin')) {
-    throw new Exception('module_load_include: entity_translation.admin.inc: No such file or directory');
-  }
+  if (module_load_include('inc', 'entity_translation', 'entity_translation.admin')) {
+    $form_state = array();
+    $form_state['values']['locale_field_language_fallback'] = 1;
+    $form_state['values']['entity_translation_settings_node__article']['default_language'] = ENTITY_TRANSLATION_LANGUAGE_DEFAULT;
+    $form_state['values']['entity_translation_settings_node__page']['default_language'] = ENTITY_TRANSLATION_LANGUAGE_DEFAULT;
+    drupal_form_submit('entity_translation_admin_form', $form_state);
+    $errors = form_get_errors();
+    if (!empty($errors)) {
+      foreach ($errors as $error) {
+        $msg = 'Error: %error';
+        $var = array('%error' => $error);
 
-  $form_state = array();
-
-  $form_state['values']['locale_field_language_fallback'] = 1;
-  $form_state['values']['entity_translation_settings_node__article']['default_language'] = ENTITY_TRANSLATION_LANGUAGE_DEFAULT;
-  $form_state['values']['entity_translation_settings_node__page']['default_language'] = ENTITY_TRANSLATION_LANGUAGE_DEFAULT;
-
-  drupal_form_submit('entity_translation_admin_form', $form_state);
-
-  $errors = form_get_errors();
-
-  if (!empty($errors)) {
-    foreach ($errors as $error) {
-      $msg = 'Error: %error';
-      $var = array('%error' => $error);
-
-      watchdog('osha.module.install', $msg, $var, WATCHDOG_ERROR);
+        watchdog('osha.module.install', $msg, $var, WATCHDOG_ERROR);
+      }
     }
+  }
+  else {
+    drupal_set_message('osha_configure_entity_translation: module not available', 'warning');
   }
 }
 
+/**
+ * Configure Entity translation to handle nodes and taxonomy terms.
+ */
 function osha_configure_entity_translation_types() {
   variable_set(
     'entity_translation_entity_types',
@@ -57,31 +105,79 @@ function osha_configure_entity_translation_types() {
   );
 }
 
+/**
+ * Set-up language detection to use URL pattern.
+ */
 function osha_configure_language_detection() {
   module_load_include('inc', 'locale', 'locale.admin');
-
   $form_state['values']['language']['enabled']['locale-url'] = 1;
   $form_state['values']['language']['weight']['locale-url'] = -8;
-
   $form_state['values']['language']['enabled']['language-default'] = 1;
   $form_state['values']['language']['weight']['language-default'] = 10;
-
-
   $form_state['values']['language_content']['enabled']['locale-url'] = 1;
   $form_state['values']['language_content']['weight']['locale-url'] = -8;
-
   $form_state['values']['language_content']['enabled']['language-default'] = 1;
   $form_state['values']['language_content']['weight']['language-default'] = 10;
-
   drupal_form_submit('locale_languages_configure_form', $form_state);
+}
+
+/**
+ * Change field size to 768 characters for Esener questions.
+ *
+ * Applies to the following fields:
+ *  - taxonomy_term_data.name
+ *  - field_data_name_field.name_field_value
+ *  - field_revision_name_field.name_field_value
+ */
+function osha_change_field_size() {
+  $column_size = 768;
+  if (osha_get_mysql_column_size('taxonomy_term_data', 'name') < $column_size) {
+    drupal_set_message("Changing taxonomy_term_data size to $column_size");
+    db_change_field('taxonomy_term_data', 'name', 'name',
+      array('type' => 'varchar','length' => $column_size)
+    );
+  }
+
+  if (osha_get_mysql_column_size('field_data_name_field', 'name_field_value') < $column_size) {
+    drupal_set_message("Changing field_data_name size to $column_size");
+    db_change_field('field_data_name_field', 'name_field_value', 'name_field_value',
+      array('type' => 'varchar', 'length' => $column_size)
+    );
+  }
+
+  if (osha_get_mysql_column_size('field_revision_name_field', 'name_field_value') < $column_size) {
+    drupal_set_message("Changing field_revision_name size to $column_size");
+    db_change_field('field_revision_name_field', 'name_field_value', 'name_field_value',
+      array('type' => 'varchar','length' => $column_size)
+    );
+  }
+
+  if (osha_get_mysql_column_size('field_data_title_field', 'title_field_value') < $column_size) {
+    drupal_set_message("Changing field_data_title_field size to $column_size");
+    db_change_field('field_data_title_field', 'title_field_value', 'title_field_value',
+      array('type' => 'varchar', 'length' => $column_size)
+    );
+  }
+
+  if (osha_get_mysql_column_size('field_revision_title_field', 'title_field_value') < $column_size) {
+    drupal_set_message("Changing field_revision_title_field size to $column_size");
+    db_change_field('field_revision_title_field', 'title_field_value', 'title_field_value',
+      array('type' => 'varchar','length' => $column_size)
+    );
+  }
 }
 
 
 /**
- * Function to retrive the size of a MySQL varchar column from a table
- * @param string $table Table name
- * @param string $column Target column
+ * Function to retrive the size of a MySQL varchar column from a table.
+ *
+ * @param string $table
+ *   Target database table name
+ * @param string $column
+ *   Target column
+ *
  * @return int
+ *   Column size in characters
  */
 function osha_get_mysql_column_size($table, $column) {
   $result = db_query("
@@ -94,76 +190,95 @@ function osha_get_mysql_column_size($table, $column) {
   return $result->fetchField(0);
 }
 
+/**
+ * Replace the node title with field_tile for page/article. Uses title module.
+ *
+ * Warning: Assuming no content is present
+ */
 function osha_replace_title_field() {
-  if (!module_load_include('module', 'title', 'title')) {
-    throw new Exception('Cannot load title.module.inc');
-  }
-  $types = array(
-    'article',
-    'page'
-  );
-  foreach ($types as $bundle) {
-    // Inspired from https://www.drupal.org/files/1801242-title-upgrade.patch
-    title_field_replacement_toggle('node', $bundle, 'title');
-    // We don't need batch processing here, there is no content at this stage
-    drupal_set_message(
-      t("Replacing title_field for !bundle", array('!bundle' => $bundle))
-    );
-  }
-}
-
-function osha_configure_article() {
-  if (!module_load_include('inc', 'node', 'content_types')) {
-    throw new Exception('Cannot load content_types.inc');
-  }
-  $form_state['values']['language_content_type'] = ENTITY_TRANSLATION_ENABLED;
-  $form_state['values']['entity_translation_hide_translation_links'] = 1;
-  $form_state['values']['promote'] = NULL;
-  $form_state['values']['comment'] = 1;
-  $type = node_type_load('article');
-  drupal_form_submit('node_type_form', $form_state, $type);
-  $errors = form_get_errors();
-  if (!empty($errors)) {
-    foreach ($errors as $error) {
+  if (module_load_include('module', 'title', 'title')) {
+    $types = array('article', 'page');
+    foreach ($types as $bundle) {
+      // Inspired by https://www.drupal.org/files/1801242-title-upgrade.patch
+      title_field_replacement_toggle('node', $bundle, 'title');
       drupal_set_message(
-        t("Article setup error: !error", array('!error' => $error))
+        t('Replacing title_field for !bundle', array('!bundle' => $bundle))
       );
     }
-  }
-}
-
-function osha_configure_basic_page() {
-  if (!module_load_include('inc', 'node', 'content_types')) {
-    throw new Exception('Cannot load content_types.inc');
-  }
-  $form_state['values']['language_content_type'] = ENTITY_TRANSLATION_ENABLED;
-  $form_state['values']['entity_translation_hide_translation_links'] = 1;
-  $form_state['values']['promote'] = NULL;
-  $form_state['values']['comment'] = 1;
-  $type = node_type_load('page');
-  drupal_form_submit('node_type_form', $form_state, $type);
-  $errors = form_get_errors();
-  if (!empty($errors)) {
-    foreach ($errors as $error) {
-      drupal_set_message(
-        t("Basic page setup error: !error", array('!error' => $error))
-      );
-    }
-  }
-}
-
-function osha_enable_body_translations() {
-  if (!module_load_include('inc', 'entity_translation', 'entity_translation.admin')) {
-    throw new Exception('Cannot load content_types.inc');
-  }
-  $info = field_info_field('body');
-  if ($info !== NULL) { // During tests, body may not be available
-    drupal_set_message(t("Making body field translatable"));
-    $form_state['values']['translatable'] = "0";
-    $form_state['field']['field_name'] = 'body';
-    drupal_form_submit('entity_translation_translatable_form', $form_state, 'body');
   }
   else {
-    drupal_set_message(t("Body field not available yet"), 'error');
+    drupal_set_message('osha_replace_title_field: Title module not available', 'warning');
+  }
+}
+
+/**
+ * Enable translation for the article entity.
+ */
+function osha_configure_article() {
+  if (module_load_include('inc', 'node', 'content_types')) {
+    $form_state['values']['language_content_type'] = ENTITY_TRANSLATION_ENABLED;
+    $form_state['values']['entity_translation_hide_translation_links'] = 1;
+    $form_state['values']['promote'] = NULL;
+    $form_state['values']['comment'] = 1;
+    $type = node_type_load('article');
+    drupal_form_submit('node_type_form', $form_state, $type);
+    $errors = form_get_errors();
+    if (!empty($errors)) {
+      foreach ($errors as $error) {
+        drupal_set_message(
+          t("Article setup error: !error", array('!error' => $error))
+        );
+      }
+    }
+  }
+  else {
+    drupal_set_message('osha_configure_article: content_types module not available', 'warning');
+  }
+}
+
+/**
+ * Enable translation for the basic page entity.
+ */
+function osha_configure_basic_page() {
+  if (module_load_include('inc', 'node', 'content_types')) {
+    $form_state['values']['language_content_type'] = ENTITY_TRANSLATION_ENABLED;
+    $form_state['values']['entity_translation_hide_translation_links'] = 1;
+    $form_state['values']['promote'] = NULL;
+    $form_state['values']['comment'] = 1;
+    $type = node_type_load('page');
+    drupal_form_submit('node_type_form', $form_state, $type);
+    $errors = form_get_errors();
+    if (!empty($errors)) {
+      foreach ($errors as $error) {
+        drupal_set_message(
+          t('Basic page setup error: !error', array('!error' => $error))
+        );
+      }
+    }
+  }
+  else {
+    drupal_set_message('osha_configure_basic_page: content_types module not available', 'warning');
+  }
+}
+
+/**
+ * Make the body field translatable.
+ */
+function osha_enable_body_translations() {
+  if (module_load_include('inc', 'entity_translation', 'entity_translation.admin')) {
+    $info = field_info_field('body');
+    /* @todo: Breaks the tests! */
+    if ($info !== NULL) {
+      drupal_set_message(t("Making body field translatable"));
+      $form_state['values']['translatable'] = "0";
+      $form_state['field']['field_name'] = 'body';
+      drupal_form_submit('entity_translation_translatable_form', $form_state, 'body');
+    }
+    else {
+      drupal_set_message(t("Body field not available yet"), 'error');
+    }
+  }
+  else {
+    drupal_set_message('osha_configure_basic_page: content_types module not available', 'warning');
   }
 }

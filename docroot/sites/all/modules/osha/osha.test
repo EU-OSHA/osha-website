@@ -64,4 +64,14 @@ class OshaTest extends DrupalWebTestCase {
       $this->assertTrue(in_array($iso_code, $codes), "Language $iso_code is enabled");
     }
   }
+
+  /**
+   * Tests the correct prefix en is set for English language.
+   *
+   * @link http://redmine.eaudeweb.ro/issues/2641
+   */
+  public function test2641LanguagePrefixEnglish() {
+    $default = language_default();
+    $this->assertEqual($default->prefix, 'en');
+  }
 }

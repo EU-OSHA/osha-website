@@ -12,4 +12,7 @@ function osha_install() {
   osha_configure_article();
   osha_configure_basic_page();
   osha_enable_body_translations();
+  $english = language_default();
+  $english->prefix = 'en';
+  variable_set('language_default', $english);
 }

@@ -137,7 +137,9 @@ class MigrationUtilTest extends DrupalWebTestCase {
    */
   public function testDecodeTagsTerms() {
     $subject = MigrationUtil::decodeTagsTerms(
-      ' accident_prevention,  dangerous_substances, '
+      ' accident_prevention,  dangerous_substances, accident_prevention::construction_work,
+      accident_prevention::ds, accident_prevention::electricity, accident_prevention::emergency_planning,
+      accident_prevention::falls, accident_prevention::fire'
     );
     $this->assertEqual(2, count($subject));
     $this->assertTrue(in_array(1, $subject));

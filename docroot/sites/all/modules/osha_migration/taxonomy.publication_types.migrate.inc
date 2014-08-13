@@ -39,6 +39,7 @@ class MigrateOshaTaxonomyPublicationTypes extends DynamicMigration {
 
     $this->addUnmigratedDestinations(array(
       'description',
+      'parent',
       'parent_name',
       'weight',
       'description_field',

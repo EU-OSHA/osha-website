@@ -95,6 +95,7 @@ class OshaMigrateArticles extends DynamicMigration {
       'field_image:file_class',
       'field_image:title',
       'field_image:alt',
+      'field_image:destination_dir',
       'field_publication_date:timezone',
       'field_publication_date:rrule',
       'field_publication_date:to',
@@ -102,6 +103,8 @@ class OshaMigrateArticles extends DynamicMigration {
       'field_tags:ignore_case',
       'field_thesaurus:create_term',
       'field_thesaurus:ignore_case',
+      'field_nace_codes:create_term',
+      'field_nace_codes:ignore_case',
       'comment',
     ));
   }

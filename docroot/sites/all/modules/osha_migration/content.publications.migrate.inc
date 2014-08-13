@@ -34,7 +34,7 @@ class OshaMigratePublications extends DynamicMigration {
         'order_id' => 'Publication Order ID',
         'subject' => 'Item tags',
         'file' => 'Publication document file',
-        'relatedItems' => 'Related publications',
+        'related_publications' => 'Related publications',
         'related_resources' => 'Comes from relatedItems - Files with extensions',
         'multilingual_thesaurus' => 'Item Tesaurus tags merged into tags',
         'nace' => 'Item NACE Codes',
@@ -106,11 +106,14 @@ class OshaMigratePublications extends DynamicMigration {
       'field_tags:ignore_case',
       'field_thesaurus:create_term',
       'field_thesaurus:ignore_case',
+      'field_publication_author:language',
       'field_publication_cover_image:alt',
       'field_publication_cover_image:title',
       'field_publication_date:timezone',
       'field_publication_date:rrule',
       'field_publication_date:to',
+      'field_publication_type:create_term',
+      'field_publication_type:ignore_case',
       'comment',
     ));
   }

@@ -1,0 +1,26 @@
+diff --git a/pdf_to_image.module b/pdf_to_image.module
+index d674c8c..0705115 100644
+--- a/pdf_to_image.module
++++ b/pdf_to_image.module
+@@ -366,13 +366,15 @@ function pdf_to_image_entity_insert($entity, $entity_type) {
+  * @param string $type
+  */
+ function pdf_to_image_entity_update($entity, $entity_type) {
+-  // What is this thing?
+-  $info = entity_get_info($entity_type);
+-  list($id, $vid, $bundle) = entity_extract_ids($entity_type, $entity);
++  if (!drupal_is_cli()) {
++    // What is this thing?
++    $info = entity_get_info($entity_type);
++    list($id, $vid, $bundle) = entity_extract_ids($entity_type, $entity);
+
+-  $pdf_fields = pdf_to_image_source_fields($entity_type, $bundle);
+-  foreach ($pdf_fields as $field_id => $field_instance) {
+-    pdf_to_image_generate_process($entity_type, $entity, $field_id, $field_instance);
++    $pdf_fields = pdf_to_image_source_fields($entity_type, $bundle);
++    foreach ($pdf_fields as $field_id => $field_instance) {
++      pdf_to_image_generate_process($entity_type, $entity, $field_id, $field_instance);
++    }
+   }
+ }
+

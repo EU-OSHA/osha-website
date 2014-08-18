@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the pdf_document feature.
+ */
+
+include_once 'pdf_document.features.inc';

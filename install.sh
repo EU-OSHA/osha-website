@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Setup a clean site in docroot/
 cd docroot/
@@ -12,22 +12,44 @@ drush build
 
 drush php-script ../scripts/drupal_post_install.php
 
-if [ "$1" != "--skip-migrations" ]; then
+# Enable required blocks
+echo "Enable required blocks ..."
+drush block-configure language --module=locale --region=header
 
-	echo "Registering migrations ..."
-	drush migrate-auto-register
+echo "Registering migrations ..."
+drush migrate-auto-register
+
+if [ "$1" == "--migrate" ]; then
+
+	echo "Importing Activity taxonomy"
+	drush migrate-import TaxonomyActivity
 
 	echo "Importing NACE codes taxonomy"
-	drush migrate-import NaceCodes
+	drush migrate-import TaxonomyNaceCodes
 
 	echo "Importing ESENER taxonomy"
-	drush migrate-import EsenerTaxonomy
+	drush migrate-import TaxonomyEsener
 
 	echo "Importing Publication types taxonomy"
-	drush migrate-import PublicationTypesTaxonomy
+	drush migrate-import TaxonomyPublicationTypes
 
-	echo "Importing Multilingual Thesaurus taxonomy"
-	drush migrate-import ThesaurusTaxonomy
+	echo "Importing multilingual Thesaurus taxonomy"
+	drush migrate-import TaxonomyThesaurus
+
+	echo "Importing Tags taxonomy"
+	drush migrate-import TaxonomyTags
+
+	echo "Importing News content"
+	drush migrate-import News
+
+	echo "Importing Publications content"
+	drush migrate-import Publication
+
+	echo "Importing Articles content"
+	drush migrate-import Article
+
+	echo "Importing Blog content"
+	drush migrate-import Blog
 
 fi
 

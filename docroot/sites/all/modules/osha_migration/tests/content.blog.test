@@ -1,0 +1,139 @@
+<?php
+
+/**
+ * Class MigrateOshaBlogTest tests blog content type migration
+ */
+class MigrateOshaBlogTest extends DrupalWebTestCase {
+
+  /**
+   * Test information.
+   *
+   * {@inheritdoc}
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'OSHA Blog migration testing',
+      'description' => 'Tests the Blog migration',
+      'group' => 'OSHA',
+    );
+  }
+
+  /**
+   * Set environment.
+   *
+   * {@inheritdoc}
+   */
+  public function setUp() {
+    parent::setUp();
+    /* We enable osha_migration after standard profile installation! */
+    module_enable(array('osha_migration'));
+    $cfg = MigrationUtil::getProjectConfig();
+    variable_set('osha_data_dir', $cfg['variables']['osha_data_dir']);
+  }
+
+  /**
+   * Test the migration.
+   */
+  public function testMigration() {
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/nace_codes.json';
+    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_NACE_CODES, 'MigrateOshaTaxonomyNaceCodes', $source_file);
+
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/thesaurus.json';
+    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_THESAURUS, 'MigrateOshaTaxonomyThesaurus', $source_file);
+
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/tags.json';
+    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_TAGS, 'MigrateOshaTaxonomyTags', $source_file);
+
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/blog.txt';
+    $result = MigrationUtil::runMigration(OSHA_MIGRATION_CONTENT_TYPE_BLOG, 'MigrateOshaBlog', $source_file);
+
+    $this->assertEqual($result, Migration::RESULT_COMPLETED);
+
+    $query = new EntityFieldQuery();
+    $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', OSHA_BLOG_CONTENT_TYPE_BLOG)
+      ->propertyCondition('status', 1);
+    $result = $query->execute();
+    $nodes = array();
+    if (isset($result['node'])) {
+      $nodes_nids = array_keys($result['node']);
+      $nodes = entity_load('node', $nodes_nids);
+    }
+
+    $class = new BlogContentListCSV($source_file);
+    $class->getIdList();
+    $data = $class::$data;
+    $this->assertEqual(2, count($nodes));
+    $node = current($nodes);
+
+    $path = path_load('node/' . $node->nid);
+    $path = $path['alias'];
+    $witness = $data[$path];
+
+    $this->assertEqual("en", $node->language);
+    $this->assertEqual(strtotime($witness['creation_date']), $node->created);
+    $this->assertEqual(strtotime($witness['modification_date']), $node->changed);
+
+    $this->assertEqual(
+      strtotime($witness['publication_date']),
+      strtotime($node->field_publication_date['und'][0]['value'])
+    );
+
+    $this->drupalGet(substr($witness['path'], 4));
+    $this->assertText($node->title_field['en'][0]['value']);
+
+    foreach ($witness['title_field'] as $lang => $title) {
+      $this->assertEqual($title, $node->title_field[$lang][0]['value']);
+    }
+
+    foreach ($witness['text'] as $lang => $value) {
+      $this->assertEqual(
+        str_replace('<@#&>', '"', $value),
+        $node->body[$lang][0]['value']
+      );
+    }
+
+    // Check that tags have been mapped properly.
+    $this->assertEqual(2, count($node->field_tags[LANGUAGE_NONE]));
+    $tags_ids = array(
+      $node->field_tags[LANGUAGE_NONE][0]['tid'],
+      $node->field_tags[LANGUAGE_NONE][1]['tid'],
+    );
+
+    $tags = taxonomy_term_load_multiple($tags_ids);
+    $terms = array();
+    foreach ($tags as $term) {
+      $terms[] = $term->field_tags_code[LANGUAGE_NONE][0]['value'];
+    }
+    $this->assertTrue(in_array('women_and_osh', $terms));
+    $this->assertTrue(in_array('legislation', $terms));
+
+    // Check that thesaurus terms have been mapped properly.
+    $this->assertEqual(2, count($node->field_thesaurus[LANGUAGE_NONE]));
+    $thesaurus_ids = array(
+      $node->field_thesaurus[LANGUAGE_NONE][0]['tid'],
+      $node->field_thesaurus[LANGUAGE_NONE][1]['tid'],
+    );
+
+    $thesaurus = taxonomy_term_load_multiple($thesaurus_ids);
+    $terms = array();
+    foreach ($thesaurus as $term) {
+      $terms[] = $term->field_thesaurus_code[LANGUAGE_NONE][0]['value'];
+    }
+    $this->assertTrue(in_array('06641B', $terms));
+    $this->assertTrue(in_array('07401C', $terms));
+
+    // Check that the nace codes have been mapped properly.
+    $this->assertEqual(1, count($node->field_nace_codes[LANGUAGE_NONE]));
+    $nace_ids = array(
+      $node->field_nace_codes[LANGUAGE_NONE][0]['tid'],
+    );
+
+    $nace_codes = taxonomy_term_load_multiple($nace_ids);
+    $terms = array();
+    foreach ($nace_codes as $term) {
+      $terms[] = $term->field_nace_code[LANGUAGE_NONE][0]['value'];
+    }
+    $this->assertTrue(in_array('01', $terms));
+  }
+}

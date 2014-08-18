@@ -1,0 +1,297 @@
+<?php
+
+/**
+ * Class MigrateOshaTaxonomyTest test taxonomies migrations
+ */
+class MigrateOshaTaxonomyTest extends DrupalWebTestCase {
+
+  /**
+   * Test information.
+   *
+   * {@inheritdoc}
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'OSHA migrations tests',
+      'description' => 'Tests functionalities provided by this module',
+      'group' => 'OSHA',
+    );
+  }
+
+  /**
+   * Set environment.
+   *
+   * {@inheritdoc}
+   */
+  public function setUp() {
+    parent::setUp('osha', 'osha_migration');
+  }
+
+  /**
+   * Tests NACE codes migration.
+   */
+  public function testNaceCodesMigration() {
+    $vocabulary = taxonomy_vocabulary_machine_name_load(OSHA_TAXONOMIES_NACE_CODES);
+
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/nace_codes.json';
+    $json = json_decode(file_get_contents($source_file), TRUE);
+    $result = MigrationUtil::runMigration(
+      OSHA_MIGRATION_TAXONOMY_NACE_CODES,
+      'MigrateOshaTaxonomyNaceCodes',
+      $source_file
+    );
+    $this->assertEqual($result, Migration::RESULT_COMPLETED);
+
+    $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
+    $this->assertEqual(count($json), count($terms));
+
+    $witnesses = array();
+    foreach ($json as $arr) {
+      $code = $arr['NACE_REV_2_CODE'];
+      $witnesses[$code] = $arr;
+    }
+
+    $weights = array("01" => 1, "01.1" => 1, "A" => 0);
+    $parents = array("01" => 1, "01.1" => 1, "A" => 0);
+
+    $field_mappings = MigrateOshaTaxonomyNaceCodes::getSourceDestinationFieldMappings();
+    /* Test each node field value in all languages */
+    foreach ($terms as $term) {
+      $this->assertEqual("en", $term->language);
+      $code = $term->field_nace_code[LANGUAGE_NONE][0]['value'];
+      $source = $witnesses[$code];
+      foreach ($field_mappings as $language => $mapping) {
+        foreach ($mapping as $dest_field => $source_field) {
+          if (!empty($source[$source_field])) {
+            $subject = $term->{$dest_field}[$language][0]['value'];
+            $this->assertEqual(
+              $source[$source_field],
+              $subject,
+              sprintf('Invalid "%s" translation for "%s.%s"', $language, $code, $source_field)
+            );
+          }
+        }
+      }
+      $this->assertEqual($weights[$code], $term->weight,
+        sprintf('Wrong weight for term %s', $code)
+      );
+      $actual_parents = taxonomy_get_parents($term->tid);
+      $this->assertEqual($parents[$code], count($actual_parents));
+    }
+    Migration::deregisterMigration(OSHA_MIGRATION_TAXONOMY_NACE_CODES);
+  }
+
+  /**
+   * Test the ESENER migration.
+   */
+  public function testEsenerMigration() {
+    $vocabulary = taxonomy_vocabulary_machine_name_load(OSHA_TAXONOMIES_ESENER);
+
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/esener.json';
+    $json = json_decode(file_get_contents($source_file), TRUE);
+    $result = MigrationUtil::runMigration(
+      OSHA_MIGRATION_TAXONOMY_ESENER,
+      'MigrateOshaTaxonomyEsener',
+      $source_file
+    );
+    $this->assertEqual($result, Migration::RESULT_COMPLETED);
+
+    $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
+    $this->assertEqual(count($json), count($terms));
+
+    $witnesses = array();
+    foreach ($json as $arr) {
+      $code = $arr['code'];
+      $witnesses[$code] = $arr;
+    }
+
+    $parents = array("indicator" => 0, "ghsme" => 1, 'mm154' => 1);
+    /* Test node name_field value in all languages */
+    $languages = array_keys(language_list());
+    foreach ($terms as $term) {
+      $this->assertEqual("en", $term->language);
+      $code = $term->field_esener_code[LANGUAGE_NONE][0]['value'];
+      $source = $witnesses[$code];
+      foreach ($languages as $language) {
+        if (!empty($source[$language])) {
+          $this->assertEqual(
+            $source[$language],
+            $term->name_field[$language][0]['value'],
+            sprintf('Invalid "%s" translation for "%s.name_field"', $language, $code)
+          );
+        }
+      }
+      $actual_parents = taxonomy_get_parents($term->tid);
+      $this->assertEqual($parents[$code], count($actual_parents));
+    }
+    Migration::deregisterMigration(OSHA_MIGRATION_TAXONOMY_ESENER);
+  }
+
+
+  /**
+   * Test publication types migration.
+   */
+  public function testPublicationTypesMigration() {
+    $vocabulary = taxonomy_vocabulary_machine_name_load(OSHA_TAXONOMIES_PUBLICATION_TYPES);
+
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/publication_types.json';
+    $json = json_decode(file_get_contents($source_file), TRUE);
+    $result = MigrationUtil::runMigration(
+      OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES,
+      'MigrateOshaTaxonomyPublicationTypes',
+      $source_file
+    );
+    $this->assertEqual($result, Migration::RESULT_COMPLETED);
+
+    $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
+    $this->assertEqual(count($json), count($terms));
+
+    $witnesses = array();
+    foreach ($json as $arr) {
+      $code = $arr['code'];
+      $witnesses[$code] = $arr;
+    }
+
+    /* Test node name_field value in all languages */
+    $languages = array_keys(language_list());
+    foreach ($terms as $term) {
+      $this->assertEqual("en", $term->language);
+      $code = $term->field_publication_type_code[LANGUAGE_NONE][0]['value'];
+      $source = $witnesses[$code];
+      foreach ($languages as $language) {
+        if (!empty($source[$language])) {
+          $this->assertEqual(
+            $source[$language],
+            $term->name_field[$language][0]['value'],
+            sprintf('Invalid "%s" translation for "%s.name_field"', $language, $code)
+          );
+        }
+      }
+    }
+    Migration::deregisterMigration(OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES);
+  }
+
+  /**
+   * Tests thesaurus migration.
+   */
+  public function testThesaurusMigration() {
+    $vocabulary = taxonomy_vocabulary_machine_name_load(OSHA_TAXONOMIES_THESAURUS);
+
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/thesaurus.json';
+    $result = MigrationUtil::runMigration(
+      OSHA_MIGRATION_TAXONOMY_THESAURUS,
+      'MigrateOshaTaxonomyThesaurus',
+      $source_file
+    );
+    $this->assertEqual($result, Migration::RESULT_COMPLETED);
+
+    $tmp = new ThesaurusMigrationItemJSON($source_file, array());
+    $tmp->getItem(0);
+    $witnesses = $tmp->getData();
+
+    $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
+    $this->assertEqual(count($witnesses), count($terms));
+
+    $parents = array("06641B" => 0, "07401C" => 1);
+
+    /* Test node name_field value in all languages */
+    $languages = array_keys(language_list());
+    foreach ($terms as $term) {
+      $this->assertEqual("en", $term->language);
+      $code = $term->field_thesaurus_code[LANGUAGE_NONE][0]['value'];
+      $source = $witnesses[$code];
+      foreach ($languages as $language) {
+        if (!empty($source->{$language})) {
+          $this->assertEqual(
+            $source->$language,
+            $term->name_field[$language][0]['value'],
+            sprintf('Invalid "%s" translation for "%s.name_field"', $language, $code)
+          );
+        }
+      }
+      $actual_parents = taxonomy_get_parents($term->tid);
+      $this->assertEqual($parents[$code], count($actual_parents));
+    }
+    Migration::deregisterMigration(OSHA_MIGRATION_TAXONOMY_THESAURUS);
+  }
+
+  /**
+   * Test tags migration.
+   */
+  public function testTagsMigration() {
+    $vocabulary = taxonomy_vocabulary_machine_name_load(OSHA_TAXONOMIES_TAGS);
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/tags.json';
+    $json = json_decode(file_get_contents($source_file), TRUE);
+
+    $result = MigrationUtil::runMigration(
+      OSHA_MIGRATION_TAXONOMY_TAGS,
+      'MigrateOshaTaxonomyTags',
+      $source_file
+    );
+    $this->assertEqual($result, Migration::RESULT_COMPLETED);
+
+    $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
+    $this->assertEqual(count($json), count($terms));
+
+    $witness = array();
+    foreach ($json as $arr) {
+      $code = $arr['code'];
+      $witness[$code] = count(array_filter($arr)) - 1;
+    }
+
+    foreach ($terms as $term) {
+      $this->assertEqual("en", $term->language);
+      $code = $term->field_tags_code[LANGUAGE_NONE][0]['value'];
+      $this->assertEqual(
+        $witness[$code], count($term->name_field),
+        sprintf('Invalid translations for %s.%s (%s != %s)',
+          $term->name, 'name_field', $witness[$code], count($term->name_field))
+      );
+    }
+    Migration::deregisterMigration(OSHA_MIGRATION_TAXONOMY_TAGS);
+  }
+
+  /**
+   * Test activity migration.
+   */
+  public function testActivityMigration() {
+    $vocabulary = taxonomy_vocabulary_machine_name_load(OSHA_TAXONOMIES_ACTIVITY);
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/activity.json';
+    $json = json_decode(file_get_contents($source_file), TRUE);
+
+    $result = MigrationUtil::runMigration(
+      OSHA_MIGRATION_TAXONOMY_ACTIVITY,
+      'MigrateOshaTaxonomyActivity',
+      $source_file
+    );
+    $this->assertEqual($result, Migration::RESULT_COMPLETED);
+
+    $terms = taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid));
+    $this->assertEqual(count($json), count($terms));
+
+    $witness = array();
+    foreach ($json as $item) {
+      $code = $item['code'];
+      $witness[$code] = $item;
+    }
+
+    foreach ($terms as $term) {
+      $code = $term->field_activity_code[LANGUAGE_NONE][0]['value'];
+      $this->assertEqual("en", $term->language);
+      $this->assertEqual($witness[$code]['name'], $term->name_field['en'][0]['value']);
+      $this->assertEqual(
+        $witness[$code]['level'],
+        $term->field_activity_level[LANGUAGE_NONE][0]['value']
+      );
+      $actual_parents = taxonomy_get_parents($term->tid);
+      if ($witness[$code]['level'] == 1) {
+        $this->assertEqual(0, count($actual_parents));
+      }
+      else {
+        $this->assertEqual(1, count($actual_parents));
+      }
+
+    }
+    Migration::deregisterMigration(OSHA_MIGRATION_TAXONOMY_ACTIVITY);
+  }
+}

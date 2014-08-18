@@ -1,0 +1,505 @@
+<?php
+
+/**
+ * @file
+ * Extension for pdf_to_image module
+ */
+
+/**
+ * Implements hook_menu().
+ *
+ * Adds config menu.
+ */
+function doc_to_imagefield_menu() {
+  $items = array();
+  $items['admin/config/media/doc_to_imagefield'] = array(
+    'title' => 'Doc to Image Field',
+    'description' => 'Config information for the module',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('doc_to_imagefield_admin'),
+    'access arguments' => array('administer site configuration'),
+  );
+  $items['admin/config/media/doc_to_imagefield/tab1'] = array(
+    'title' => 'Doc to Image Field',
+    'description' => 'Config information for the module',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('doc_to_imagefield_admin'),
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => 1,
+  );
+  $items['admin/config/media/doc_to_imagefield/bulk'] = array(
+    'title' => 'Bulk Update',
+    'description' => 'Bulk Update',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('doc_to_imagefield_bulk_form'),
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 2,
+  );
+
+  return $items;
+}
+/**
+ * Implements hook_admin().
+ */
+function doc_to_imagefield_admin() {
+  $form = array();
+
+  $form['convertor_plugin'] = array(
+    '#type' => 'markup',
+    '#markup' =>
+      '<h3>If you want to change the defaults, you can add this variables to your settings.php:</h3>
+      $conf["doc_to_imagefield_convertor_plugin"] (default: /usr/bin/soffice )<br />
+      $conf["doc_to_imagefield_source_paramters"] (default: --convert-to pdf )<br />
+      $conf["doc_to_imagefield_output_paramters"] (default: --outdir ) <br />
+      $conf["doc_to_imagefield_parameters"] (default: --headless --nofirststartwizard --accept=\'socket,host=127.0.0.1,port=8100;urp;\' ) <br />
+      ',
+  );
+
+  if (!doc_to_imagefield_test_exec_command()) {
+    drupal_set_message("Could not convert the test file to .pdf. Please check the configuration.", 'error');
+  }
+  $form['command'] = array(
+    '#type' => 'markup',
+    '#markup' =>
+      '<h3>Your command looks like this:</h3>
+      <pre>' .doc_to_imagefiled_get_exec_command(doc_to_imagefield_get_test_filepath()) .'</pre>',
+  );
+
+  system_settings_form($form);
+  return $form;
+}
+
+/**
+ * The admin form for bulk update.
+ */
+function doc_to_imagefield_bulk_form() {
+  drupal_set_message('This operation can take a while! Use it with caution!', 'warning');
+  $form = array();
+  $form['overwrite_existing'] = array(
+    '#type' => 'select',
+    '#title' => t('Overwrite existing'),
+    '#options' => array(
+      0 => 'No',
+      1 => 'Yes',
+    ),
+    '#default_value' => 0,
+  );
+
+  $form['entity'] = array(
+    '#title' => 'Entity',
+    '#type' => 'select',
+    '#options' => drupal_map_assoc(array_keys(entity_get_info())),
+  );
+  $form['save'] = array(
+    '#type' => 'submit',
+    '#value' => t('Bulk process'),
+    '#executes_submit_callback' => TRUE,
+  );
+
+  system_settings_form($form);
+  $form['#submit'][] = 'doc_to_imagefiled_admin_bulk_form_submit';
+  return $form;
+}
+
+/**
+ * Callback for bulk admin form.
+ */
+function doc_to_imagefiled_admin_bulk_form_submit($form, &$form_state) {
+  $entity_type = $form_state['values']['entity'];
+  $entities = entity_load($entity_type);
+
+  $options = array();
+  $options['overwrite_existing'] = $form_state['values']['overwrite_existing'];
+
+  $count = count($entities);
+  $operations = array();
+  foreach ($entities as $entity) {
+    $operations[] = array(
+      'doc_to_imagefield_entity_save_bulk',
+      array($entity_type, $entity, $options));
+  }
+  batch_set(array(
+    'title'            => t('Converting PDF, %count pages', array('%count' => $count)),
+    'operations'       => $operations,
+    'finished'       => 'doc_to_imagefield_bulk_finished',
+    'progress_message' => t('Processed @current out of @total.'),
+  ));
+}
+
+function doc_to_imagefield_entity_save_bulk($entity_type, $entity, $options, &$context) {
+  // Initialize results array.
+  if (!isset($context['results']['saved'])) {
+    $context['results']['saved'] = array();
+  }
+
+  list($id, $vid, $bundle) = entity_extract_ids($entity_type, $entity);
+  $pdf_fields = pdf_to_image_source_fields($entity_type, $bundle);
+  foreach ($pdf_fields as $field_id => $field_instance) {
+    $field_lang = field_language($entity_type, $entity, $field_instance['field_name']);
+    $languages = array($field_lang);
+    $count = 0;
+
+    if (!empty($entity->translations->data)) {
+      $languages = array_keys($entity->translations->data);
+    }
+    foreach ($languages as $lang) {
+      $options['field_lang'] = $lang;
+      $converted = doc_to_image_generate_process_bulk($entity_type, $entity, $field_id, $field_instance, $options);
+      if ($converted) {
+        $count++;
+      }
+    }
+    if ($count) {
+      pdf_to_image_entity_save($entity_type, $entity);
+      $context['results']['saved'][] = $entity->title;
+    }
+  }
+
+}
+
+/**
+ * The finish callback for bulk updates.
+ */
+function doc_to_imagefield_bulk_finished($success, $results, $operations) {
+  if ($success) {
+    drupal_set_message(t('@count results processed.', array('@count' => count($results['saved']))));
+  }
+  else {
+    $error_operation = reset($operations);
+    drupal_set_message(t('An error occurred while processing @operation with arguments : @args', array(
+      '@operation' => $error_operation[0],
+      '@args' => print_r($error_operation[0], TRUE),
+    )));
+  }
+}
+
+/**
+ * Return the settings variables of the module.
+ *
+ * - can be overwritten from settings.php
+ * @return array
+ *   Settings variables
+ */
+function doc_to_imagefield_get_settings() {
+  $variables = array();
+  $variables['convertor_plugin']  = variable_get('doc_to_imagefield_convertor_plugin', '/usr/bin/soffice');
+  $variables['source_paramters']  = variable_get('doc_to_imagefield_source_paramters', '--convert-to pdf ');
+  $variables['output_paramters']  = variable_get('doc_to_imagefield_output_paramters', '--outdir ');
+  $variables['parameters']        = variable_get('doc_to_imagefield_parameters', "--headless --nofirststartwizard --nologo --accept='socket,host=127.0.0.1,port=8100;urp;'");
+
+  return $variables;
+}
+
+/**
+ * Function to get the command for shell_exec.
+ *
+ * @param string $doc_realpath
+ *   Real path of the conversion file
+ *
+ * @return string
+ *   Shell command to be executed for conversion
+ */
+function doc_to_imagefiled_get_exec_command($doc_realpath) {
+  $settings = doc_to_imagefield_get_settings();
+
+  $command = sprintf("%s %s %s %s",
+    escapeshellcmd($settings['convertor_plugin']),
+    escapeshellcmd($settings['parameters']),
+    escapeshellcmd($settings['source_paramters']) . str_replace(" ", "\ ", escapeshellcmd($doc_realpath)),
+    escapeshellcmd($settings['output_paramters']) . escapeshellarg(drupal_realpath(file_directory_temp()))
+  );
+
+  return $command;
+}
+
+/**
+ * Test if the command line converter works.
+ *
+ * @return bool
+ *   If test shell command executed successfully
+ */
+function doc_to_imagefield_test_exec_command() {
+  $doc_realpath = doc_to_imagefield_get_test_filepath();
+  $temp_realpath = drupal_realpath(file_directory_temp());
+
+  // If file is not there.
+  if (!is_file($doc_realpath)) {
+    return FALSE;
+  }
+
+  $command = doc_to_imagefiled_get_exec_command($doc_realpath);
+  $exec = shell_exec($command);
+  if ($exec == NULL) {
+    return FALSE;
+  }
+  else {
+    $path_parts = pathinfo($doc_realpath);
+    $pdf_filename = $path_parts['filename'] . '.pdf';
+    $pdf_realpath = $temp_realpath . DIRECTORY_SEPARATOR . $pdf_filename;
+    drupal_unlink($pdf_realpath);
+    return TRUE;
+  }
+}
+
+/**
+ * Get real path of different types of files used in testing.
+ *
+ * @param string $type
+ *   Extension of the file
+ *
+ * @return false|string
+ *   FALSE if file not found. Real path if file found
+ */
+function doc_to_imagefield_get_test_filepath($type = 'txt') {
+  $module_path = drupal_get_path('module', 'doc_to_imagefield');
+  $doc_realpath = drupal_realpath($module_path . '/tests/test_files/test.' . $type);
+  if (!is_file($doc_realpath)) {
+    $doc_realpath = FALSE;
+  }
+  return $doc_realpath;
+}
+
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function doc_to_imagefield_module_implements_alter(&$implementations, $hook) {
+  if ($hook != 'entity_update') {
+    return;
+  }
+
+  // Add this module hook first to be executed before pdf_to_image.
+  if (isset($implementations['pdf_to_image'])) {
+    unset($implementations['ppt_to_imagefield']);
+    $implementations = array('ppt_to_imagefield' => FALSE) + $implementations;
+  }
+}
+
+
+/**
+ * Implements hook_entity_insert().
+ */
+function doc_to_imagefield_entity_insert($entity, $entity_type) {
+  doc_to_imagefield_entity_update($entity, $entity_type);
+}
+
+/**
+ * Implements hook_entity_update().
+ */
+function doc_to_imagefield_entity_update($entity, $entity_type) {
+  // Do not execute if cli.
+  if (!drupal_is_cli()) {
+    // Code adapted from pdf_to_imagefield.
+    list($id, $vid, $bundle) = entity_extract_ids($entity_type, $entity);
+    $pdf_fields = pdf_to_image_source_fields($entity_type, $bundle);
+
+    foreach ($pdf_fields as $field_id => $field_instance) {
+      doc_to_image_generate_process($entity_type, $entity, $field_id, $field_instance);
+    }
+    entity_get_controller($entity_type)->resetCache(array($entity->uid));
+    field_attach_update($entity_type, $entity);
+  }
+}
+
+/**
+ * Processing non-pdf file to image creation.
+ */
+function doc_to_image_generate_process($entity_type, &$entity, $field_id, $field_instance) {
+  $field_lang = field_language($entity_type, $entity, $field_id);
+
+  $items = $entity->{$field_id};
+  list($entity_id, $vid, $bundle) = entity_extract_ids($entity_type, $entity);
+
+  if (empty($items[$field_lang][0]['fid'])) {
+    // No file attachment found in the source field.
+    return;
+  }
+
+  $doc_file = file_load($items[$field_lang][0]['fid']);
+  $doc_realpath = drupal_realpath($doc_file->uri);
+  $path_parts = pathinfo($doc_realpath);
+
+  // If file is not there.
+  if (!is_file($doc_realpath)) {
+    drupal_set_message(t("There was a problem with the file @file.
+     Please contact the administrator", array('@file' => $path_parts['basename'])), 'error');
+  }
+
+  // Take care just for files that are not pdf.
+  if ($doc_file->filemime != 'application/pdf') {
+    if (!empty($field_instance['widget']['settings']['pdf_to_image']['target_field'])) {
+      $target_field = $field_instance['widget']['settings']['pdf_to_image']['target_field'];
+    }
+
+    if (!empty($target_field) && empty($entity->{$target_field}[$field_lang])) {
+      $params = doc_to_imagefield_create_param_array($entity_type, $entity,
+        $field_instance, $entity_id, $target_field, $doc_file);
+      // Set operation for bulk processing.
+      // Use batch for not hanging the save form of the entity.
+      $operations[] = array(
+        'doc_to_imagefield_generate_operation',
+        array($doc_file, $params),
+      );
+      batch_set(array(
+        'title'            => t('Converting PDF, %count pages', array('%count' => 1)),
+        'operations'       => $operations,
+        'finished'         => 'pdf_to_image_generate_process_attach',
+        'progress_message' => t('Processed @current out of @total.'),
+      ));
+    }
+    else {
+      // No target image field set or invalid count from the PDF.
+    }
+
+  }
+}
+
+/**
+ * Used when processing bulk updates.
+ */
+function doc_to_image_generate_process_bulk($entity_type, &$entity, $field_id, $field_instance, $options = array()) {
+  $field_lang = (!empty($options['field_lang'])) ? $options['field_lang'] : field_language($entity_type, $entity, $field_id);
+  $overwrite_existing = (!empty($options['overwrite_existing'])) ? TRUE : FALSE;
+
+  $items = $entity->{$field_id};
+  list($entity_id, $vid, $bundle) = entity_extract_ids($entity_type, $entity);
+
+  $no_target_field = empty($field_instance['widget']['settings']['pdf_to_image']['target_field']);
+  $no_attachement = empty($items[$field_lang][0]['fid']);
+  if ($no_attachement || $no_target_field) {
+    return FALSE;
+  }
+
+  $doc_file = file_load($items[$field_lang][0]['fid']);
+  $doc_realpath = drupal_realpath($doc_file->uri);
+  $path_parts = pathinfo($doc_realpath);
+
+  $target_field = $field_instance['widget']['settings']['pdf_to_image']['target_field'];
+
+  // If file is not there.
+  if (!is_file($doc_realpath)) {
+    watchdog('pdf_to_image', "There was a problem with the file @file for @entity_id",
+      array(
+        '@file' => $path_parts['basename'],
+        '@entity_id' => $entity_id,
+      ), 'error');
+    return FALSE;
+  }
+
+  $is_new_image = empty($entity->{$target_field}[$field_lang]);
+  $overwrite_image = !empty($entity->{$target_field}[$field_lang]) && $overwrite_existing;
+  if ($is_new_image || $overwrite_image) {
+    $params = doc_to_imagefield_create_param_array($entity_type, $entity,
+      $field_instance, $entity_id, $target_field, $doc_file);
+
+    $file = doc_to_imagefield_create_image_file($doc_file, $params);
+    if (!empty($file)) {
+      $entity->{$target_field}[$field_lang] = array((array) $file);
+      return TRUE;
+    }
+  }
+  return FALSE;
+}
+
+/**
+ * Calls the functions for creating an image from a document.
+ */
+function doc_to_imagefield_create_image_file($doc_file, $params) {
+  if ($doc_file->filemime == 'application/pdf') {
+    $file = pdf_to_image_generate_page($params, 0);
+  }
+  else {
+    $file = doc_to_imagefield_generate_image($doc_file, $params);
+  }
+  return $file;
+}
+/**
+ * Func to constructs param array used in multiple areas of module.
+ *
+ * @param string $entity_type
+ *   type of entity.
+ * @param object $entity
+ *   entity object that is saved with cover image
+ * @param object $src_field_instance
+ *   field instance of the field that contains the document
+ * @param string $entity_id
+ *   id of the entity that is saved
+ * @param string $target_field_name
+ *   name of the image field
+ * @param object $file
+ *   document pdf file object
+ *
+ * @return array
+ *   param array
+ */
+function doc_to_imagefield_create_param_array($entity_type, $entity, $src_field_instance, $entity_id, $target_field_name, $file) {
+  $params = array(
+    'entity_type' => $entity_type,
+    'entity' => $entity,
+    'field_instance' => $src_field_instance,
+    'entity_id' => $entity_id,
+    'target_field' => $target_field_name,
+    'image'  => array(
+      'field'    => field_info_field($target_field_name),
+      'instance' => field_info_instance($entity_type, $target_field_name, $src_field_instance['bundle']),
+    ),
+    'pdf'    => array(
+      'instance' => $src_field_instance,
+      'file'     => $file,
+    ),
+  );
+  return $params;
+}
+
+function doc_to_imagefield_generate_operation($doc_file, $params, &$context) {
+  $context['results']['params'] = $params;
+  if (!isset($context['results']['files'])) {
+    $context['results']['files'] = array();
+  }
+  $file = doc_to_imagefield_generate_image($doc_file, $params);
+
+  if (is_object($file) && isset($file->fid)) {
+    $context['results']['files'][] = $file;
+    return $file;
+  }
+  return FALSE;
+}
+
+function doc_to_imagefield_generate_image($doc_file, $params) {
+
+  $doc_realpath = drupal_realpath($doc_file->uri);
+  $path_parts = pathinfo($doc_realpath);
+  $temp_realpath = drupal_realpath(file_directory_temp());
+
+  // Transform document to pdf with a command line converter.
+  $command = doc_to_imagefiled_get_exec_command($doc_realpath);
+  watchdog('doc_to_imagefield', 'Running commandline %command', array('%command' => $command), WATCHDOG_DEBUG);
+  $exec = shell_exec($command);
+
+  if ($exec == NULL) {
+    drupal_set_message(t("Could not convert @file to .pdf", array('@file' => $path_parts['basename'])), 'error');
+    return FALSE;
+  }
+  $pdf_filename = $path_parts['filename'] . '.pdf';
+  $pdf_realpath = $temp_realpath . DIRECTORY_SEPARATOR . $pdf_filename;
+
+  // Save the file in drupal - used in func pdf_to_image_generate_page.
+  $pdf_file = file_save_data(file_get_contents($pdf_realpath),
+    'public://' . $pdf_filename);
+
+  // Replace the file with pdf in param array
+  $params['pdf']['file'] = $pdf_file;
+
+  $count = pdf_to_image_count_pages($pdf_realpath);
+  if ($count) {
+    $image = pdf_to_image_generate_page($params, 0);
+    // Delete the temp pdf file from drupal and temp folder.
+    file_delete($pdf_file);
+    drupal_unlink($pdf_realpath);
+    $image->display = 1;
+    return $image;
+  }
+  return FALSE;
+}

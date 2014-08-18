@@ -1,0 +1,171 @@
+<?php
+
+/**
+ * Class ArticleMigrateListMock mocks ArticleMigrateList
+ */
+class ArticleMigrateListMock extends ArticleMigrateList {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct() {
+    parent::__construct(drupal_get_path('module', 'osha_migration') . '/data/test/pages.txt');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function parseSourceFile() {
+    parent::parseSourceFile();
+  }
+}
+
+
+/**
+ * Class MigrateOshaArticleTest tests article content type migration.
+ */
+class MigrateOshaArticleTest extends DrupalWebTestCase {
+
+  /**
+   * Test information.
+   *
+   * {@inheritdoc}
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Articles migration',
+      'description' => 'Tests the migration of articles content',
+      'group' => 'OSHA',
+    );
+  }
+
+  /**
+   * Set environment.
+   *
+   * {@inheritdoc}
+   */
+  public function setUp() {
+    parent::setUp();
+    module_enable(array('osha_migration'));
+    $cfg = MigrationUtil::getProjectConfig();
+    variable_set('osha_data_dir', $cfg['variables']['osha_data_dir']);
+  }
+
+  /**
+   * Test the migration.
+   */
+  public function testMigration() {
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/nace_codes.json';
+    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_NACE_CODES, 'MigrateOshaTaxonomyNaceCodes', $source_file);
+
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/thesaurus.json';
+    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_THESAURUS, 'MigrateOshaTaxonomyThesaurus', $source_file);
+
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/tags.json';
+    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_TAGS, 'MigrateOshaTaxonomyTags', $source_file);
+
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/thesaurus.json';
+    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_THESAURUS, 'MigrateOshaTaxonomyThesaurus', $source_file);
+
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/pages.txt';
+    $result = MigrationUtil::runMigration(OSHA_ARTICLE_CONTENT_TYPE_ARTICLE, 'OshaMigrateArticles', $source_file);
+
+    $this->assertEqual($result, Migration::RESULT_COMPLETED);
+    $query = new EntityFieldQuery();
+    $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', OSHA_ARTICLE_CONTENT_TYPE_ARTICLE)
+      ->propertyCondition('status', 1);
+    $result = $query->execute();
+    $nodes = array();
+    if (isset($result['node'])) {
+      $nodes_nids = array_keys($result['node']);
+      $nodes = entity_load('node', $nodes_nids);
+    }
+
+    $class = new ArticleMigrateList($source_file);
+    $class->getIdList();
+    $data = $class::$data;
+    // First broken, second good.
+    $this->assertEqual(2, count($nodes));
+
+    $node = current($nodes);
+    $path = path_load('node/' . $node->nid);
+    $path = $path['alias'];
+    $witness = $data[$path];
+
+    $this->assertEqual(strtotime($witness['creation_date']), $node->created);
+    $this->assertEqual(strtotime($witness['modification_date']), $node->changed);
+
+    $this->assertEqual(
+      strtotime($witness['publication_date']),
+      strtotime($node->field_publication_date['und'][0]['value'])
+    );
+
+    $this->drupalGet(substr($witness['path'], 4));
+    $this->assertText($node->title_field['en'][0]['value']);
+
+    foreach ($witness['title_field'] as $language => $title) {
+      $this->assertEqual($title, $node->title_field[$language][0]['value']);
+    }
+    foreach ($witness['description'] as $language => $description) {
+      $this->assertEqual($description, $node->field_summary[$language][0]['value']);
+    }
+    foreach ($witness['text'] as $language => $text) {
+      $this->assertEqual($text, $node->body[$language][0]['value']);
+    }
+    $tids = array(
+      $node->field_tags[LANGUAGE_NONE][0]['tid'],
+      $node->field_tags[LANGUAGE_NONE][1]['tid'],
+    );
+    $tags = taxonomy_term_load_multiple($tids);
+    $terms = array();
+    foreach ($tags as $term) {
+      $terms[] = $term->field_tags_code[LANGUAGE_NONE][0]['value'];
+    }
+    $this->assertTrue(in_array('accident_prevention', $terms));
+    $this->assertTrue(in_array('women_and_osh', $terms));
+  }
+
+  /**
+   * Test parseSourceFile().
+   */
+  public function testParseSourceFile() {
+    $class = new ArticleMigrateListMock();
+    $class->parseSourceFile();
+    $subject = ArticleMigrateListMock::$data;
+    $this->assertEqual(3, count($subject));
+
+    $this->assertTrue(array_key_exists('competitions/hw_film_award_2014/more-about', $subject));
+    $this->assertTrue(array_key_exists('safety-health-in-figures/index_html', $subject));
+
+    $first = $subject['competitions/hw_film_award_2014/more-about'];
+    $this->assertEqual('published', $first['workflow_state']);
+    $this->assertEqual('2012-07-18 17:00:24', $first['creation_date']);
+    $this->assertEqual('2014-05-05 13:08:24', $first['modification_date']);
+    $this->assertEqual('2012-07-31 15:30:00', $first['publication_date']);
+    $this->assertEqual('moral_osha_europa_eu', $first['creator']);
+
+    $this->assertEqual('Bulgarian title', $first['title_field']['bg']);
+    $this->assertEqual('Spanish title', $first['title_field']['es']);
+    $this->assertEqual('English title', $first['title_field']['en']);
+    $this->assertEqual('English title', $first['title']);
+
+    $this->assertEqual('Description bg', $first['description']['bg']);
+    $this->assertEqual('Description es', $first['description']['es']);
+    $this->assertEqual('Description en', $first['description']['en']);
+
+    $this->assertEqual('Text bg', $first['text']['bg']);
+    $this->assertEqual('Text es', $first['text']['es']);
+    $this->assertEqual('Text en', $first['text']['en']);
+
+    $this->assertEqual('/en/safety-health-in-figures/data-survey.jpg', $first['relatedItems']['en']);
+    $this->assertEqual('/es/safety-health-in-figures/data-survey.jpg', $first['relatedItems']['es']);
+    $this->assertEqual('/bg/safety-health-in-figures/data-survey.jpg', $first['relatedItems']['bg']);
+
+    $second = $subject['safety-health-in-figures/index_html'];
+    $this->assertEqual('gender, accident_prevention, risk_assessment, healthcare', $second['subject']);
+    $this->assertEqual('AT, BE, BG, CY, CZ, DK, EE, EU, FI, FR, DE, GR, HU, IE, IT, LV, LT, LU, MT, NL, PL, PT, RO, SK, SI, ES, SE, UK, EUMS', $second['country']);
+    $this->assertEqual('08801A, 11201B, 12521C, 18521C, 19641D, 28521A, 28561B, 29161C, 29201D, 46401A, 49441B, 50921C, 50961D', $second['multilingual_thesaurus']);
+    $this->assertEqual('81.2, 86, 87, 88', $second['nace']);
+  }
+}

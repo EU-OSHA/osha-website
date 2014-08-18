@@ -1,0 +1,10 @@
+name = Document to Image Field
+description = Extension to pdf_to_imagefield module - add support for other doc types like ppt
+core = 7.x
+version = "7.x-1.0"
+package = "OSHA"
+
+dependencies[] = pdf_to_image (3.3)
+configure = admin/config/media/doc_to_imagefield
+
+files[] = tests/doc_to_imagefield.test

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Press release feature.
+ */
+
+include_once 'osha_press_release.features.inc';

@@ -32,7 +32,6 @@ to `config.json` and customize to suit your environment
             "email": "your.email@domain.org"
         },
         "uri": "http://you-vh.localhost",
-        "site_mail": "your.email@domain.org",
         "solr_server": {
             "name": "Apache Solr server",
             "enabled": 1,
@@ -54,7 +53,10 @@ to `config.json` and customize to suit your environment
             "apachesolr_soft_commit": 1
         },
         "variables": {
-            "osha_data_dir": "/var/local/osha/data"
+            "site_mail": "your.email@domain.org",
+            "site_name": "OSHA",
+            "osha_data_dir": "/home/osha/data",
+            "file_temporary_path": "/tmp"
         }
     }
     ```
@@ -78,7 +80,7 @@ to `config.json` and customize to suit your environment
 
 *Warning*: Running install.sh on an existing instance *will destroy* that instance (database) loosing all customisations
 
-*Note:* You can pass `--skip-migrations` to not install the migrations for you.
+*Note:* You have to pass `--migrate` to install the migrations (taxonomies)
 
 4. (Optional) To run the migration/migration tests see the documentation from [osha_migration](https://github.com/EU-OSHA/osha-website/tree/master/docroot/sites/all/modules/osha_migration) module
 
@@ -90,7 +92,7 @@ To update an existing instance without reinstalling (and loosing existing conten
 * Update the code repository from Github (`git pull [origin develop]`)
 * Run `update.sh` which reverts all features and updates the migrated data
 
-*Note:* You can pass `--skip-migrations` to not install the migrations for you.
+*Note:* You have to pass `--migrate` to update the migrations (taxonomies)
 
 The output of the console should look like this:
 
@@ -117,6 +119,19 @@ Updating Multilingual Thesaurus taxonomy
 Processed 1728 (0 created, 1728 updated, 0 failed, 0 ignored) in 185.1 sec (560/min) - done with 'ThesaurusTaxonomy'  [completed]
 'all' cache was cleared.                                                                                              [success]
 ```
+
+Running tests
+=============
+
+You can use the test.sh script to launch the set of tests designed for the OSHA project.
+
+Command usage:
+
+* `./test.sh` - Runs all tests from the OSHA group
+* `./test.sh ClassNameTest` - Runs all the test methods from the ClassNameTest test class
+* `./test.sh ClassNameTest testName1,testName2` - Runs only the two tests from the entire class
+
+
 
 ##Repository Layout##
 Breakdown for what each directory/file is used for. See also readme inside directories.

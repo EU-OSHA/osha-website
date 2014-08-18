@@ -1,87 +1,204 @@
 <?php
 
-define('MIGRATION_ESENER', 'EsenerTest');
-define('MIGRATION_NACE_CODES', 'NaceCodesTest');
-define('MIGRATION_PUBLICATION_TYPES', 'PublicationTypesTest');
-define('MIGRATION_THESAURUS', 'ThesaurusTest');
-define('CLASS_ESENER', 'MigrateOshaEsenerTaxonomy');
-define('CLASS_NACE_CODES', 'MigrateOshaNaceCodes');
-define('CLASS_PUBLICATION_TYPES', 'MigrateOshaPublicationTypesTaxonomy');
-define('CLASS_THESAURUS', 'MigrateOshaThesaurus');
+define('OSHA_MIGRATION_TAXONOMY_ACTIVITY', 'TaxonomyActivity');
+define('OSHA_MIGRATION_TAXONOMY_TAGS', 'TaxonomyTags');
+define('OSHA_MIGRATION_TAXONOMY_ESENER', 'TaxonomyEsener');
+define('OSHA_MIGRATION_TAXONOMY_NACE_CODES', 'TaxonomyNaceCodes');
+define('OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES', 'TaxonomyPublicationTypes');
+define('OSHA_MIGRATION_TAXONOMY_THESAURUS', 'TaxonomyThesaurus');
+define('OSHA_MIGRATION_CONTENT_TYPE_ARTICLE', 'Article');
+define('OSHA_MIGRATION_CONTENT_TYPE_BLOG', 'Blog');
+define('OSHA_MIGRATION_CONTENT_TYPE_NEWS', 'News');
+define('OSHA_MIGRATION_CONTENT_TYPE_PUBLICATION', 'Publication');
+define('OSHA_MIGRATION_FILES_PUBLICATION', 'FilesPublication');
+
+define('OSHA_MIGRATION_EXPORT_DIRECTORY', 'export');
 
 /**
- * You must implement hook_migrate_api(), setting the API level to 2, for
- * your migration classes to be recognized by the Migrate module.
+ * Implements hook_migrate_api().
+ *
+ * Set the API level to 2, for migration classes to be recognized by Migrate.
  */
 function osha_migration_migrate_api() {
-	$api = array(
-		'api' => 2,
-		'migrations' => array(
-			'News' => array('class_name' => 'MigrateOshaNews'),
-            'NaceCodes' => array(
-                'class_name' => 'MigrateOshaNaceCodes',
-                'file_name' => 'data/nace_codes.json',
-                'group_name' => 'OSHA MIGRATIONS'
-            ),
-            'EsenerTaxonomy' => array(
-                'class_name' => 'MigrateOshaEsenerTaxonomy',
-                'file_name' => 'data/esener.json',
-                'group_name' => 'OSHA MIGRATIONS'
-            ),
-			'PublicationTypesTaxonomy' => array(
-                'class_name' => 'MigrateOshaPublicationTypesTaxonomy',
-                'group_name' => 'OSHA MIGRATIONS'
-            ),
-            'ThesaurusTaxonomy' => array(
-                'class_name' => 'MigrateOshaThesaurus',
-                'file_name' => 'data/OSHA-MultilingualThesaurus.json',
-                'group_name' => 'OSHA MIGRATION'
-            )
-		)
-	);
-	return $api;
+  $migration_module_dir = drupal_get_path('module', 'osha_migration');
+  $api = array(
+    'api' => 2,
+    'migrations' => array(
+      OSHA_MIGRATION_TAXONOMY_ACTIVITY => array(
+        'class_name' => 'MigrateOshaTaxonomyActivity',
+        'file_name' => $migration_module_dir . '/data/activity.json',
+      ),
+      OSHA_MIGRATION_TAXONOMY_TAGS => array(
+        'class_name' => 'MigrateOshaTaxonomyTags',
+        'file_name' => $migration_module_dir . '/data/tags.json',
+      ),
+      OSHA_MIGRATION_TAXONOMY_ESENER => array(
+        'class_name' => 'MigrateOshaTaxonomyEsener',
+        'file_name' => $migration_module_dir . '/data/esener.json',
+      ),
+      OSHA_MIGRATION_TAXONOMY_NACE_CODES => array(
+        'class_name' => 'MigrateOshaTaxonomyNaceCodes',
+        'file_name' => $migration_module_dir . '/data/nace_codes.json',
+      ),
+      OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES => array(
+        'class_name' => 'MigrateOshaTaxonomyPublicationTypes',
+        'file_name' => $migration_module_dir . '/data/publication_types.json',
+      ),
+      OSHA_MIGRATION_TAXONOMY_THESAURUS => array(
+        'class_name' => 'MigrateOshaTaxonomyThesaurus',
+        'file_name' => $migration_module_dir . '/data/thesaurus.json',
+      ),
+      OSHA_MIGRATION_CONTENT_TYPE_ARTICLE => array(
+        'class_name' => 'OshaMigrateArticles',
+        'file_name' => osha_migration_get_data_dir() . '/export/pages.txt',
+      ),
+      OSHA_MIGRATION_CONTENT_TYPE_BLOG => array(
+        'class_name' => 'MigrateOshaBlog',
+        'file_name' => osha_migration_get_data_dir() . '/export/blog.txt',
+      ),
+      OSHA_MIGRATION_CONTENT_TYPE_NEWS => array(
+        'class_name' => 'MigrateOshaNews',
+        'file_name' => osha_migration_get_data_dir() . '/export/news.txt',
+      ),
+      OSHA_MIGRATION_CONTENT_TYPE_PUBLICATION => array(
+        'class_name' => 'OshaMigratePublications',
+        'file_name' => osha_migration_get_data_dir() . '/export/publications.txt',
+      ),
+    ),
+    // Declare osha migrate handlers to add some specific functionality.
+    'field handlers' => array(
+      'OSHAMigrateFileFieldHandler',
+      'OSHAMigrateImageFieldHandler',
+    ),
+  );
+  return $api;
 }
 
 /**
- * Implements hook_schema_alter()
+ * Retrieve the root directory for the migration data folder.
+ *
+ * @param string $subdirectory
+ *   subdirectory
+ *
+ * @return string|null
+ *   Path on local disk
  */
-function osha_migration_schema_alter(&$schema) {
-	if(isset($schema['taxonomy_term_data'])) {
-		$schema['taxonomy_term_data']['fields']['name'] = array(
-			'type' => 'varchar',
-			'length' => 768,
-			'not null' => TRUE,
-			'default' => '',
-		);
-	}
-
-	if(isset($schema['field_data_name_field'])) {
-		$schema['field_data_name_field']['fields']['name_field_value'] = array(
-			'type' => 'varchar',
-			'length' => 768,
-			'not null' => TRUE,
-			'default' => '',
-		);
-	}
-
-	if(isset($schema['field_revision_name_field'])) {
-		$schema['field_revision_name_field']['fields']['name_field_value'] = array(
-			'type' => 'varchar',
-			'length' => 768,
-			'not null' => TRUE,
-			'default' => '',
-		);
-	}
+function osha_migration_get_data_dir($subdirectory = '') {
+  $ret = variable_get('osha_data_dir', NULL);
+  if (empty($ret)) {
+    drupal_set_message('Please configure the "osha_data_dir" variable to point to your data storage', 'error');
+  }
+  else {
+    if (!empty($subdirectory)) {
+      $ret .= DIRECTORY_SEPARATOR . $subdirectory;
+    }
+  }
+  return $ret;
 }
 
 /**
- * @return null
- * @throws MigrateException
+ * Class OSHAMigrateFileFieldHandler
+ * Extend MigrateFileFieldHandler from migrate module to add extra functionality
+ * Applies to field type file
  */
-function osha_migration_get_data_dir() {
-	$ret = variable_get('osha_data_dir', NULL);
-	if(empty($ret)) {
-		throw new MigrateException('Please configure the "osha_data_dir" variable to point to your data storage');
-	}
-	return $ret;
+class OSHAMigrateFileFieldHandler extends MigrateFileFieldHandler {
+
+  /**
+   * Function adapted from MigrateFileFieldBaseHandler.
+   *
+   * Adds multilingual support for osha data
+   */
+  public function prepare($entity, array $field_info, array $instance, array $values) {
+    if (isset($values['arguments'])) {
+      $arguments = $values['arguments'];
+      unset($values['arguments']);
+    }
+    else {
+      $arguments = array();
+    }
+
+    $language = $this->getFieldLanguage($entity, $field_info, $arguments);
+    $migration = Migration::currentMigration();
+
+    // One can override the source class via CLI or drushrc.php (the
+    // option is named file_function for historical reasons).
+    if ($migration->getOption('file_function')) {
+      $file_class = $migration->getOption('file_function');
+    }
+    elseif (!empty($arguments['file_class'])) {
+      $file_class = $arguments['file_class'];
+    }
+    else {
+      $file_class = 'MigrateFileUri';
+    }
+
+    // If a destination directory (relative to the Drupal public files directory)
+    // is not explicitly provided, use the default for the field.
+    if (empty($arguments['destination_dir'])) {
+      $arguments['destination_dir'] = $this->destinationDir($field_info, $instance);
+    }
+
+    $return = array();
+
+    // Note that what $value represents depends on the file class -
+    // MigrateFileUri expects a filespec/URI, MigrateFileFid expects a file ID,
+    // etc.
+    foreach ($values as $delta => $value) {
+      if ($value) {
+        // Handle potentially multiple arguments.
+        $instance_arguments = array();
+        foreach ($arguments as $key => $argument) {
+          // For a scalar argument, pass it directly.
+          if (!is_array($argument)) {
+            $instance_arguments[$key] = $argument;
+          }
+          else {
+            if (isset($argument[$delta])) {
+              $instance_arguments[$key] = $argument[$delta];
+            }
+            else {
+              $migration->saveMessage(
+                t('No data for subfield %key at row %delta for field %field',
+                  array('%key' => $key, '%delta' => $delta, '%field' => $field_info['field_name'])),
+                Migration::MESSAGE_WARNING);
+            }
+          }
+        }
+        // If the parent entity doesn't have an explicit uid, give ownership
+        // to the anonymous account.
+        $owner = isset($entity->uid) ? $entity->uid : 0;
+        // Call the MigrateFileInterface implementation to do the real work.
+        $source = new $file_class($instance_arguments);
+        $file = $source->processFile($value, $owner);
+
+        // Assuming we got back a valid file ID, build the proper field
+        // array out of it. We assume that if we did not get back a fid, the
+        // MigrateFile class has saved a message indicating why.
+        if ($file) {
+          $field_array = array('fid' => $file->fid);
+          if ($arguments['multilingual']) {
+            $language = $delta;
+          }
+          $return[$language][] = $this->buildFieldArray($field_array, $instance_arguments, $delta);
+        }
+      }
+    }
+
+    return $return;
+  }
+}
+
+/**
+ * Class OSHAMigrateImageFieldHandler
+ * Applies to field type image
+ */
+class OSHAMigrateImageFieldHandler extends MigrateImageFieldHandler {
+
+  /**
+   * Make use of OSHAMigrateFileFieldHandler prepare function for image fields.
+   */
+  public function prepare($entity, array $field_info, array $instance, array $values) {
+    $file_handler = new OSHAMigrateFileFieldHandler();
+    return $file_handler->prepare($entity, $field_info, $instance, $values);
+  }
 }

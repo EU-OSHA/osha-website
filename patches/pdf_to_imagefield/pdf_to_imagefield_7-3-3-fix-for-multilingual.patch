@@ -1,0 +1,22 @@
+diff --git a/pdf_to_image.module b/pdf_to_image.module
+index 923c045..650d5f1 100644
+--- a/pdf_to_image.module
++++ b/pdf_to_image.module
+@@ -553,7 +553,17 @@ function pdf_to_image_generate_process_attach($success, $results, $operations) {
+     // to it since the batch job began.
+     $entity = entity_load_unchanged($entity_type, $entity_id);
+     if (is_object($entity)) {
++      //Set translation as an empty array and reset static cache
++      //This forces field_language to return the correct lang_code
++      global $language;
++      if (field_is_translatable($entity_type, field_info_field($field_name))
++        && !empty($entity->translations->data[$language->language])) {
++        $entity->{$field_name}[$language->language] = array();
++        drupal_static_reset('field_language');
++      }
+       $field_lang = field_language($entity_type, $entity, $field_name);
++      //Unset the previous empty array to cover the case if $language != $field_lang
++      unset($entity->{$field_name}[$language->language]);
+       // This removes the existing images by emptying the list.
+       // The (re?) attaches the generated ones.
+       $entity->{$field_name}[$field_lang] = array();

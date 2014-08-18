@@ -1,0 +1,39 @@
+; Makefile to assist creating a new Drupal site to demonstrate pdf_to_imagefield module.
+; Get this file, then change to an empty directory and run
+;   drush make --working-copy {path/to/}pdf_to_imagefield.make.stub
+;
+; This will download all the dependencies required to run pdf_to_imagefield 
+; and the demo feature pdf_document. 
+; 
+; This --working-copy command will actually git clone the working copy of the module, 
+; ready for test and development. It's optional.
+; 
+; If you prefer to use 'Quick Drupal' that bootstraps from drush, you may even 
+; be able to get it up and running with a one-liner
+; drush qd --makefile=http://drupalcode.org/project/pdf_to_imagefield.git/blob_plain/refs/heads/7.x-3.x:/pdf_to_image_demo.make.stub pdf_to_imagefield
+
+
+api = 2
+
+; Required version of Drupal core.
+projects[] = drupal
+core = 7.x
+
+; Basic Drupal contributed projects.
+; Get 'features' so we can turn on the demo content type immediately.
+projects[features][subdir] = contrib
+; Get 'filefield_paths' and token to test out the filename changes.
+projects[filefield_paths][subdir] = contrib
+projects[token][subdir] = contrib
+
+; And now get the pdf_to_imagefield checkout, latest version
+projects[pdf_to_imagefield][subdir] = dev
+;projects[pdf_to_imagefield][download][type] = "git"
+;projects[pdf_to_imagefield][download][url] = "git@git.drupal.org:project/pdf_to_imagefield.git"
+;projects[pdf_to_imagefield][download][branch] = "7.x-3.x"
+
+;projects[pdf_to_imagefield][download][type] = "git"
+;projects[pdf_to_imagefield][download][url] = "http://git.drupal.org/project/pdf_to_imagefield.git"
+;projects[pdf_to_imagefield][download][branch] = "7.x-3.x"
+
+projects[pdf_to_imagefield][version] = "3.x"

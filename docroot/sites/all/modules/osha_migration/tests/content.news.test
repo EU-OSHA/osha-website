@@ -3,7 +3,7 @@
 /**
  * Class MigrateOshaNewsTest tests news content type migration
  */
-class MigrateOshaNewsTest extends DrupalWebTestCase {
+class MigrateOshaNewsTest extends OshaWebTestCase {
 
   /**
    * Test information.
@@ -16,19 +16,6 @@ class MigrateOshaNewsTest extends DrupalWebTestCase {
       'description' => 'Tests the News migration',
       'group' => 'OSHA',
     );
-  }
-
-  /**
-   * Set environment.
-   *
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    parent::setUp();
-    /* We enable osha_migration after standard profile installation! */
-    module_enable(array('osha_migration'));
-    $cfg = MigrationUtil::getProjectConfig();
-    variable_set('osha_data_dir', $cfg['variables']['osha_data_dir']);
   }
 
   /**

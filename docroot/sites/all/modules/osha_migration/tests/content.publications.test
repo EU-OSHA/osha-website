@@ -24,7 +24,7 @@ class PublicationMigrateListMock extends PublicationMigrateList {
 /**
  * Class MigrateOshaPublicationTest tests publication content type migration.
  */
-class MigrateOshaPublicationTest extends DrupalWebTestCase {
+class MigrateOshaPublicationTest extends OshaWebTestCase {
 
   /**
    * Test information.
@@ -37,19 +37,6 @@ class MigrateOshaPublicationTest extends DrupalWebTestCase {
       'description' => 'Tests the migration of publications content',
       'group' => 'OSHA',
     );
-  }
-
-  /**
-   * Set environment.
-   *
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    parent::setUp();
-    require_once dirname(__FILE__) . '/setup.inc';
-    osha_migration_enable_modules_simpletest();
-    $data_path = drupal_realpath(drupal_get_path('module', 'osha_migration') . '/data/test');
-    variable_set('osha_data_dir', $data_path);
   }
 
   /**
@@ -75,9 +62,11 @@ class MigrateOshaPublicationTest extends DrupalWebTestCase {
     $source_file = $module_path . '/data/publication_types.json';
     MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES, 'MigrateOshaTaxonomyPublicationTypes', $source_file);
 
+    $source_file = $data_export_path . '/files.txt';
+    MigrationUtil::runMigration(OSHA_MIGRATION_FILES, 'OshaMigrateFiles', $source_file);
+
     $source_file = $data_export_path . '/publications.txt';
     $result = MigrationUtil::runMigration(OSHA_MIGRATION_CONTENT_TYPE_PUBLICATION, 'OshaMigratePublications', $source_file);
-
 
     $this->assertEqual($result, Migration::RESULT_COMPLETED);
 

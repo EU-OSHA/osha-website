@@ -1,6 +1,71 @@
 <?php
 
 /**
+ * Class OshaWebTestCase is the base class for OSHA tests.
+ *
+ * Correctly enables all instance modules in the appropriate order.
+ */
+abstract class OshaWebTestCase extends DrupalWebTestCase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp() {
+    parent::setUp(array('file', 'file_entity'));
+    require DRUPAL_ROOT . '/../drush/drushrc.php';
+    if (!empty($options['init-modules'])) {
+
+      $modules = $options['init-modules'];
+      unset($modules[array_search('file_entity', $modules)]);
+
+      if (!module_enable($modules)) {
+        foreach ($modules as $module) {
+          if (!module_enable(array($module))) {
+            drupal_set_message('Cannot enable module: ' . $module, 'error');
+          }
+        }
+      }
+    }
+    $this->setDataDirTestData();
+  }
+
+  /**
+   * Set the data directory to test directory.
+   */
+  protected function setDataDirTestData() {
+    $data_path = drupal_realpath(drupal_get_path('module', 'osha_migration') . '/data/test');
+    variable_set('osha_data_dir', $data_path);
+  }
+
+  /**
+   * Set the data directory to exported OSHA data.
+   */
+  protected function setDataDirExportedData() {
+    $cfg = MigrationUtil::getProjectConfig();
+    variable_set('osha_data_dir', $cfg['variables']['osha_data_dir']);
+  }
+
+  public static function oshaAssertEqualTaxonomyTerms($entity, $entity_taxon_field, $taxon_field, $raw_taxonomy_terms) {
+    $terms = array();
+    $raw_values = array_unique(array_map('trim', explode(',', $raw_taxonomy_terms)));
+    $entity_values = array();
+    if (!empty($entity->{$entity_taxon_field}[LANGUAGE_NONE])) {
+      foreach ($entity->{$entity_taxon_field}[LANGUAGE_NONE] as $term) {
+        $terms[] = $term['tid'];
+      }
+      $terms = taxonomy_term_load_multiple($terms);
+      $entity_values = array();
+      foreach ($terms as $term) {
+        $entity_values[] = $term->{$taxon_field}[LANGUAGE_NONE][0]['value'];
+      }
+    }
+    $diff = array_diff($entity_values, $raw_values);
+    return empty($diff);
+  }
+}
+
+
+/**
  * Class MigrationUtil provides generic utility functionality to migrations.
  */
 class MigrationUtil {
@@ -156,6 +221,7 @@ class MigrationUtil {
    *
    * @return array
    *   Array of tids
+   * @todo REVIEW THIS FUNCTION
    */
   public static function decodeTagsTerms($terms_str, $term_field = 'field_tags_code') {
     if (empty($terms_str)) {
@@ -223,7 +289,7 @@ class MigrationUtil {
    * @return array
    *   Array with two keys (`items` and `files`) of related content
    */
-  public static function parseRelatedItemsString($field_value, $supported_extensions = 'pdf|doc|docx|ppt|pptx|xls|xlsx') {
+  public static function parseRelatedItemsString($field_value, $item_url_diff = 'publications', $supported_extensions = 'pdf|doc|docx|ppt|pptx|xls|xlsx') {
     $languages = implode('|', array_keys(language_list()));
     $ret = array('items' => NULL, 'files' => NULL);
     if (empty($field_value)) {
@@ -231,14 +297,15 @@ class MigrationUtil {
     }
     $items = array_map('trim', explode(',', $field_value));
     foreach ($items as $item) {
-      $file_match = sprintf('/^.*\.(%s)$/i', $supported_extensions);
+      // $extension_match = sprintf('/^.*\.(%s)$/i', $supported_extensions);
+      $item_url_match = '/\/' . $item_url_diff . '\//';
       $path_match = sprintf('/^\/(%s)\//i', $languages);
-      if (preg_match($file_match, $item)) {
-        $ret['files'][] = $item;
-      }
-      else {
+      if (preg_match($item_url_match, $item)) {
         $path = preg_replace($path_match, '', $item);
         $ret['items'][] = $path;
+      }
+      else {
+        $ret['files'][] = $item;
       }
     }
     if (count($ret['items']) + count($ret['files']) != count($items)) {
@@ -281,10 +348,7 @@ class MigrationUtil {
     Migration::registerMigration(
       $klass,
       $machine_name,
-      array(
-        'group_name' => 'OSHA TEST MIGRATIONS',
-        'file_name' => $file,
-      )
+      array('file_name' => $file)
     );
     $migration = Migration::getInstance($machine_name);
     return $migration->processImport();

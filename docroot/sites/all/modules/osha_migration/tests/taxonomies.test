@@ -3,7 +3,7 @@
 /**
  * Class MigrateOshaTaxonomyTest test taxonomies migrations
  */
-class MigrateOshaTaxonomyTest extends DrupalWebTestCase {
+class MigrateOshaTaxonomyTest extends OshaWebTestCase {
 
   /**
    * Test information.
@@ -16,15 +16,6 @@ class MigrateOshaTaxonomyTest extends DrupalWebTestCase {
       'description' => 'Tests functionalities provided by this module',
       'group' => 'OSHA',
     );
-  }
-
-  /**
-   * Set environment.
-   *
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    parent::setUp('osha', 'osha_migration');
   }
 
   /**

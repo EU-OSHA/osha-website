@@ -247,7 +247,7 @@
  */
 
 // Read JSON configuration file from conf/ and pre-configure drush commands
-$json_path = getcwd() . '/../conf/config.json';
+$json_path = dirname(__FILE__) . '/../conf/config.json';
 if(file_exists($json_path)) {
   $cfg = json_decode(file_get_contents($json_path));
   $db_url = sprintf('mysql://%s:%s@%s:%s/%s', $cfg->db->username, $cfg->db->password, $cfg->db->host, $cfg->db->port, $cfg->db->database);
@@ -288,6 +288,9 @@ $options['init-modules'] = array(
   'pathauto',
   'redirect',
   'uuid',
+  'file_entity',
+  'media',
+  'languagefield',
 
   #'search_api',
   #'facetapi',

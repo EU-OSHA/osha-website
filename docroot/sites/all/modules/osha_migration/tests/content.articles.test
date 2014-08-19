@@ -24,11 +24,9 @@ class ArticleMigrateListMock extends ArticleMigrateList {
 /**
  * Class MigrateOshaArticleTest tests article content type migration.
  */
-class MigrateOshaArticleTest extends DrupalWebTestCase {
+class MigrateOshaArticleTest extends OshaWebTestCase {
 
   /**
-   * Test information.
-   *
    * {@inheritdoc}
    */
   public static function getInfo() {
@@ -37,18 +35,6 @@ class MigrateOshaArticleTest extends DrupalWebTestCase {
       'description' => 'Tests the migration of articles content',
       'group' => 'OSHA',
     );
-  }
-
-  /**
-   * Set environment.
-   *
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    parent::setUp();
-    module_enable(array('osha_migration'));
-    $cfg = MigrationUtil::getProjectConfig();
-    variable_set('osha_data_dir', $cfg['variables']['osha_data_dir']);
   }
 
   /**

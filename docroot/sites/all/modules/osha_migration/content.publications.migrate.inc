@@ -5,6 +5,8 @@
  */
 class OshaMigratePublications extends DynamicMigration {
 
+  public $migrateMapFiles;
+
   /**
    * {@inheritdoc}
    */
@@ -16,6 +18,7 @@ class OshaMigratePublications extends DynamicMigration {
       OSHA_MIGRATION_TAXONOMY_THESAURUS,
       OSHA_MIGRATION_TAXONOMY_NACE_CODES,
       OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES,
+      OSHA_MIGRATION_FILES,
     );
 
     /* Remove limits on time/memory, slower machines will fail */
@@ -88,12 +91,11 @@ class OshaMigratePublications extends DynamicMigration {
     $this->addFieldMapping('field_publication_file:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
     $this->addFieldMapping('field_publication_file:multilingual')->defaultValue(TRUE);
 
-    /*
-    $this->addFieldMapping('field_publication_related_res', 'related_resources');
+    /*$this->addFieldMapping('field_publication_related_res', 'related_resources');
     $this->addFieldMapping('field_publication_related_res:source_dir')->defaultValue($data_path . '/export/');
     $this->addFieldMapping('field_publication_related_res:destination_file', 'related_resources');
-    $this->addFieldMapping('field_publication_related_res:file_replace')->defaultValue(FILE_EXISTS_REPLACE);
-    */
+    $this->addFieldMapping('field_publication_related_res:file_replace')->defaultValue(FILE_EXISTS_REPLACE);*/
+
 
     $this->addFieldMapping('field_related_publications', 'related_publications');
     $this->addFieldMapping('body', 'description');
@@ -130,6 +132,10 @@ class OshaMigratePublications extends DynamicMigration {
       'field_publication_type:ignore_case',
       'comment',
     ));
+
+    $this->migrateMapFiles = db_select('migrate_map_files', 'f')
+      ->fields('f', array('sourceid1', 'destid1'))
+      ->execute()->fetchAllKeyed(0);
   }
 
   /**
@@ -218,7 +224,7 @@ class OshaMigratePublications extends DynamicMigration {
    *   TRUE if row is valid
    */
   public function prepareRow($row) {
-    if(MigrationUtil::entityRowValidator($row, $this) === FALSE) {
+    if (MigrationUtil::entityRowValidator($row, $this) === FALSE) {
       return FALSE;
     }
     $row->language = 'en';
@@ -253,6 +259,33 @@ class OshaMigratePublications extends DynamicMigration {
           $this->saveMessage("Failed to migrate related publication: {$path}", MigrationBase::MESSAGE_WARNING);
         }
       }
+    }
+    if (!empty($row->related_resources)) {
+      $files = array();
+      foreach ($row->related_resources as $path) {
+        if (!empty($this->migrateMapFiles[$path])) {
+          $files[] = $this->migrateMapFiles[$path];
+        }
+        else {
+          $existing_file = file_load_multiple(array(), array('uri' => $path));
+          if (!empty($existing_file)) {
+            $files[] = current($existing_file)->fid;
+          }
+          else {
+            $this->saveMessage("Could not find publication related imported file: {$path}", MigrationBase::MESSAGE_WARNING);
+          }
+          /*$rel_file_fid = $this->handleSourceMigration(OSHA_MIGRATION_FILES, $path);
+          var_dump($path);
+          var_dump($rel_file_fid);
+          if (!empty($rel_file_fid)) {
+            $files[] = $rel_file_fid;
+          }
+          else {
+            $this->saveMessage("Failed to migrate related file: {$path}", MigrationBase::MESSAGE_WARNING);
+          }*/
+        }
+      }
+      $row->related_resources = $files;
     }
 
     MigrationUtil::cleanMigratedFileField($row, 'file', 'public://publications/documents');
@@ -337,6 +370,29 @@ class OshaMigratePublications extends DynamicMigration {
           'language' => $language,
           'source' => $row->language,
         ));
+      }
+    }
+    if (!empty($row->related_resources)) {
+      foreach ($row->related_resources as $fid) {
+        $file = file_load($fid);
+        if (!empty($file)) {
+          if (!empty($file->field_language[LANGUAGE_NONE][0]['value'])) {
+            $file_lang = $file->field_language[LANGUAGE_NONE][0]['value'];
+          }
+          else {
+            $file_lang = 'en';
+          }
+          $entity->field_publication_related_res[$file_lang][] = array(
+            'fid' => $file->fid,
+            'display' => 1,
+          );
+        }
+        else {
+          drupal_set_message(
+            sprintf('Could not find publication related migrated file fid %s', $fid),
+            'warning'
+          );
+        }
       }
     }
   }
@@ -436,14 +492,12 @@ class PublicationMigrateList extends MigrateList {
 
           case 'relatedItems':
             /* Related files and publications */
-            $items = MigrationUtil::parseRelatedItemsString($raw_data[$key]);
+            $items = MigrationUtil::parseRelatedItemsString($raw_data[$key], 'publications');
             if (!empty($items['items'])) {
               self::$data[$path]['related_publications_path'] = $items['items'];
             }
             if (!empty($items['files'])) {
-              /* @todo: cannot migrate this multi-valued field
               self::$data[$path]['related_resources'] = $items['files'];
-               */
             }
             break;
 

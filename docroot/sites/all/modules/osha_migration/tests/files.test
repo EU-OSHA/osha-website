@@ -1,0 +1,112 @@
+<?php
+
+/**
+ * Class PublicationMigrateListMock mocks PublicationMigrateList
+ */
+class OshaMigrateFilesListMock extends OshaMigrateFilesListCSV {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct() {
+    parent::__construct(drupal_get_path('module', 'osha_migration') . '/data/test/export/files.txt');
+  }
+}
+
+
+/**
+ * Class MigrateOshaPublicationTest tests publication content type migration.
+ */
+class MigrateOshaFilesTest extends OshaWebTestCase {
+
+  /**
+   * Test information.
+   *
+   * {@inheritdoc}
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Files migration',
+      'description' => 'Tests the migration of files',
+      'group' => 'OSHA',
+    );
+  }
+
+  /**
+   * Test the migration.
+   */
+  public function testMigration() {
+    $data_path = osha_migration_get_data_dir();
+    $data_export_path  = osha_migration_get_data_dir(OSHA_MIGRATION_EXPORT_DIRECTORY);
+    $module_path = drupal_get_path('module', 'osha_migration');
+
+    $source_file = $module_path . '/data/nace_codes.json';
+    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_NACE_CODES, 'MigrateOshaTaxonomyNaceCodes', $source_file);
+
+    $source_file = $module_path . '/data/tags.json';
+    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_TAGS, 'MigrateOshaTaxonomyTags', $source_file);
+
+    $source_file = $module_path . '/data/thesaurus.json';
+    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_THESAURUS, 'MigrateOshaTaxonomyThesaurus', $source_file);
+
+    $source_file = $module_path . '/data/publication_types.json';
+    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES, 'MigrateOshaTaxonomyPublicationTypes', $source_file);
+
+    $source_file = $data_export_path . '/files.txt';
+    $result = MigrationUtil::runMigration(OSHA_MIGRATION_FILES, 'OshaMigrateFiles', $source_file);
+
+    $this->assertEqual($result, Migration::RESULT_COMPLETED);
+
+    $query = new EntityFieldQuery();
+    $query->entityCondition('entity_type', 'file')
+      ->entityCondition('bundle', 'document')
+      ->propertyCondition('status', 1);
+    $result = $query->execute();
+    $files_fids = array();
+    if (isset($result['file'])) {
+      $files_fids = array_keys($result['file']);
+    }
+    $files = file_load_multiple($files_fids);
+
+    $class = new OshaMigrateFilesListCSV(
+      $source_file
+    );
+    $data = $class::$csvData;
+
+    // Second deleted, first and third good.
+    $this->assertEqual(2, count($files));
+
+    foreach ($files as $file) {
+      $path = str_replace('public:/', '', $file->uri);
+      $raw_file = $data[$path];
+      $this->assertEqual($file->filename, $raw_file['title']);
+
+      $this->assertEqual(
+        $file->field_file_description[LANGUAGE_NONE][0]['value'],
+        $raw_file['description']
+      );
+
+      $this->assertEqual(
+        $file->field_language[LANGUAGE_NONE][0]['value'],
+        $raw_file['language']
+      );
+
+      $raw_tags = $raw_file['subject'] . ', ' . $raw_file['subcategory'];
+      $tags = self::oshaAssertEqualTaxonomyTerms(
+        $file, 'field_tags', 'field_tags_code',
+        $raw_tags);
+      $this->assertTrue($tags);
+
+      $tags = self::oshaAssertEqualTaxonomyTerms(
+        $file, 'field_thesaurus', 'field_thesaurus_code',
+        $raw_file['multilingual_thesaurus']);
+      $this->assertTrue($tags);
+
+
+      $tags = self::oshaAssertEqualTaxonomyTerms(
+        $file, 'field_nace_codes', 'field_nace_code',
+        $raw_file['nace']);
+      $this->assertTrue($tags);
+    }
+  }
+}

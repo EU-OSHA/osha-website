@@ -5,6 +5,7 @@ core = 7.x
 dependencies[] = migrate
 dependencies[] = osha
 dependencies[] = osha_blog
+dependencies[] = osha_calls
 dependencies[] = osha_news
 dependencies[] = osha_publication
 dependencies[] = osha_taxonomies

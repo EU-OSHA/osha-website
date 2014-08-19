@@ -1,0 +1,282 @@
+diff --git a/file_entity.file_default_displays.inc b/file_entity.file_default_displays.inc
+deleted file mode 100644
+index 74ca660..0000000
+--- a/file_entity.file_default_displays.inc
++++ /dev/null
+@@ -1,174 +0,0 @@
+-<?php
+-
+-/**
+- * @file
+- * Default display configuration for the default file types.
+- */
+-
+-/**
+- * Implements hook_file_default_displays().
+- */
+-function file_entity_file_default_displays() {
+-  $file_displays = array();
+-
+-  $file_display = new stdClass();
+-  $file_display->api_version = 1;
+-  $file_display->name = 'audio__default__file_field_file_audio';
+-  $file_display->weight = 50;
+-  $file_display->status = TRUE;
+-  $file_display->settings = array(
+-    'controls' => 1,
+-    'autoplay' => 0,
+-    'loop' => 0,
+-    'multiple_file_behavior' => 'tags',
+-  );
+-  $file_displays['audio__default__file_field_file_audio'] = $file_display;
+-
+-  $file_display = new stdClass();
+-  $file_display->api_version = 1;
+-  $file_display->name = 'audio__preview__file_field_file_default';
+-  $file_display->weight = 50;
+-  $file_display->status = TRUE;
+-  $file_display->settings = '';
+-  $file_displays['audio__preview__file_field_file_default'] = $file_display;
+-
+-  $file_display = new stdClass();
+-  $file_display->api_version = 1;
+-  $file_display->name = 'audio__teaser__file_field_file_audio';
+-  $file_display->weight = 50;
+-  $file_display->status = TRUE;
+-  $file_display->settings = array(
+-    'controls' => 1,
+-    'autoplay' => 0,
+-    'loop' => 0,
+-    'multiple_file_behavior' => 'tags',
+-  );
+-  $file_displays['audio__teaser__file_field_file_audio'] = $file_display;
+-
+-  $file_display = new stdClass();
+-  $file_display->api_version = 1;
+-  $file_display->name = 'document__default__file_field_file_default';
+-  $file_display->weight = 50;
+-  $file_display->status = TRUE;
+-  $file_display->settings = '';
+-  $file_displays['document__default__file_field_file_default'] = $file_display;
+-
+-  $file_display = new stdClass();
+-  $file_display->api_version = 1;
+-  $file_display->name = 'document__preview__file_field_file_default';
+-  $file_display->weight = 50;
+-  $file_display->status = TRUE;
+-  $file_display->settings = '';
+-  $file_displays['document__preview__file_field_file_default'] = $file_display;
+-
+-  $file_display = new stdClass();
+-  $file_display->api_version = 1;
+-  $file_display->name = 'document__teaser__file_field_file_default';
+-  $file_display->weight = 50;
+-  $file_display->status = TRUE;
+-  $file_display->settings = '';
+-  $file_displays['document__teaser__file_field_file_default'] = $file_display;
+-
+-  $file_display = new stdClass();
+-  $file_display->api_version = 1;
+-  $file_display->name = 'image__default__file_field_file_default';
+-  $file_display->weight = 50;
+-  $file_display->status = TRUE;
+-  $file_display->settings = '';
+-  $file_displays['image__default__file_field_file_default'] = $file_display;
+-
+-  $file_display = new stdClass();
+-  $file_display->api_version = 1;
+-  $file_display->name = 'image__preview__file_field_file_default';
+-  $file_display->weight = 50;
+-  $file_display->status = TRUE;
+-  $file_display->settings = '';
+-  $file_displays['image__preview__file_field_file_default'] = $file_display;
+-
+-  $file_display = new stdClass();
+-  $file_display->api_version = 1;
+-  $file_display->name = 'image__teaser__file_field_file_default';
+-  $file_display->weight = 50;
+-  $file_display->status = TRUE;
+-  $file_display->settings = '';
+-  $file_displays['image__teaser__file_field_file_default'] = $file_display;
+-
+-  // Enhance the default image displays if the Image module is enabled.
+-  if (module_exists('image')) {
+-    // Images should be displayed as unstyled images by default.
+-    $file_display = new stdClass();
+-    $file_display->api_version = 1;
+-    $file_display->name = 'image__default__file_field_image';
+-    $file_display->weight = 49;
+-    $file_display->status = TRUE;
+-    $file_display->settings = array(
+-      'image_style' => '',
+-      'image_link' => '',
+-    );
+-    $file_displays['image__default__file_field_image'] = $file_display;
+-
+-    // Image previews should be displayed as image thumbnails by default.
+-    $file_display = new stdClass();
+-    $file_display->api_version = 1;
+-    $file_display->name = 'image__preview__file_field_image';
+-    $file_display->weight = 49;
+-    $file_display->status = TRUE;
+-    $file_display->settings = array(
+-      'image_style' => 'thumbnail',
+-      'image_link' => '',
+-    );
+-    $file_displays['image__preview__file_field_image'] = $file_display;
+-
+-    // Image teasers should be displayed as medium images by default.
+-    $file_display = new stdClass();
+-    $file_display->api_version = 1;
+-    $file_display->name = 'image__teaser__file_field_image';
+-    $file_display->weight = 49;
+-    $file_display->status = TRUE;
+-    $file_display->settings = array(
+-      'image_style' => 'medium',
+-      'image_link' => 'content',
+-    );
+-    $file_displays['image__teaser__file_field_image'] = $file_display;
+-  }
+-
+-  $file_display = new stdClass();
+-  $file_display->api_version = 1;
+-  $file_display->name = 'video__default__file_field_file_video';
+-  $file_display->weight = 50;
+-  $file_display->status = TRUE;
+-  $file_display->settings = array(
+-    'controls' => 1,
+-    'autoplay' => 0,
+-    'loop' => 0,
+-    'width' => '',
+-    'height' => '',
+-    'multiple_file_behavior' => 'tags',
+-  );
+-  $file_displays['video__default__file_field_file_video'] = $file_display;
+-
+-  $file_display = new stdClass();
+-  $file_display->api_version = 1;
+-  $file_display->name = 'video__preview__file_field_file_default';
+-  $file_display->weight = 50;
+-  $file_display->status = TRUE;
+-  $file_display->settings = '';
+-  $file_displays['video__preview__file_field_file_default'] = $file_display;
+-
+-  $file_display = new stdClass();
+-  $file_display->api_version = 1;
+-  $file_display->name = 'video__teaser__file_field_file_video';
+-  $file_display->weight = 50;
+-  $file_display->status = TRUE;
+-  $file_display->settings = array(
+-    'controls' => 1,
+-    'autoplay' => 0,
+-    'loop' => 0,
+-    'width' => '',
+-    'height' => '',
+-    'multiple_file_behavior' => 'tags',
+-  );
+-  $file_displays['video__teaser__file_field_file_video'] = $file_display;
+-
+-  return $file_displays;
+-}
+diff --git a/file_entity.install b/file_entity.install
+index ca4ab06..17950e2 100644
+--- a/file_entity.install
++++ b/file_entity.install
+@@ -222,6 +222,9 @@ function file_entity_install() {
+   if ($queue->numberOfItems()) {
+     drupal_set_message(t('Existing files must be classified according to the currently defined file types. These files have been queued for processing and will have their file type determined during cron runs.'));
+   }
++
++  // Fix File Entity default displays issue with exports.
++  _file_entity_default_displays();
+ }
+ 
+ /**
+@@ -1071,3 +1074,87 @@ function file_entity_update_7215() {
+   db_add_primary_key('file_metadata', array('fid', 'name'));
+   db_drop_index('file_metadata', 'temp');
+ }
++
++
++/**
++ * Fix overridden issues with File Displays
++ */
++function file_entity_update_7216() {
++  _file_entity_default_displays();
++}
++
++/**
++ * Instantiate the File Entity Displays.
++ */
++function _file_entity_default_displays() {
++  // Create initial display settings.
++  module_load_include('inc', 'file_entity', 'file_entity.file_api');
++  $default_image_styles = array(
++    'default' => '',
++    'preview' => 'thumbnail',
++    'teaser' => 'medium',
++  );
++  $default_types = array(
++    'image' => 'image',
++    'audio' => 'audio',
++    'document' => 'document',
++    'video' => 'video',
++  );
++  foreach ($default_types as $type) {
++    foreach ($default_image_styles as $view_mode => $image_style) {
++      $file_field = '';
++      if ($type == 'audio' && ($view_mode == 'default' || $view_mode == 'teaser')) {
++        $file_field = 'file_field_file_audio';
++      }
++      elseif ($type == 'video' && ($view_mode == 'default' || $view_mode == 'teaser')) {
++        $file_field = 'file_field_file_video';
++      }
++      elseif ($type == 'image') {
++        $file_field = 'file_field_image';
++      }
++      else {
++        $file_field = 'file_field_file_default';
++      }
++
++      $settings = array();
++      if ($file_field == 'file_field_image') {
++        $settings = array(
++          'image_style' => $image_style,
++          'image_link' => ($view_mode == 'teaser') ? 'content' : '',
++        );
++      }
++      elseif ($file_field == 'file_field_file_audio') {
++        $settings = array(
++          'controls' => 1,
++          'autoplay' => 0,
++          'loop' => 0,
++          'multiple_file_behavior' => 'tags',
++        );
++      }
++      elseif ($file_field == 'file_field_file_video') {
++        $settings = array(
++          'controls' => 1,
++          'autoplay' => 0,
++          'loop' => 0,
++          'width' => '',
++          'height' => '',
++          'multiple_file_behavior' => 'tags',
++        );
++      }
++
++      $display_name = $type . '__' . $view_mode . '__' . $file_field;
++      $existing_display = file_displays_load($type, $view_mode);
++      if (empty($existing_display[$display_name])) {
++        $display = array(
++          'api_version' => 1,
++          'name' => $display_name,
++          'status' => 1,
++          'weight' => 50,
++          'settings' => $settings,
++          'export_type' => NULL,
++        );
++        file_display_save((object) $display);
++      }
++    }
++  }
++}

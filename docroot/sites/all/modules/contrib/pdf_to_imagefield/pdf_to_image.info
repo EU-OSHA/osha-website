@@ -1,0 +1,11 @@
+name = PDF to Image
+description = Imports PDF file and split pages into image field files
+core = 7.x
+;dependencies[] = imagemagick
+
+; Information added by Drupal.org packaging script on 2014-03-18
+version = "7.x-3.3"
+core = "7.x"
+project = "pdf_to_imagefield"
+datestamp = "1395169456"
+

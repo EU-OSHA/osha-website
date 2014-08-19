@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ * Install/Uninstall functions
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function scs_uninstall() {
+  // Delete created variables
+  variable_del('scs_view_mode');
+  variable_del('scs_node_type');
+}

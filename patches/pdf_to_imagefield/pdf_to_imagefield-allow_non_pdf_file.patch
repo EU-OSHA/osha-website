@@ -1,0 +1,13 @@
+diff --git a/pdf_to_image.module b/pdf_to_image.module
+index 923c045..fe3422a 100644
+--- a/pdf_to_image.module
++++ b/pdf_to_image.module
+@@ -314,7 +314,7 @@ function pdf_to_image_field_widget_form(&$form, &$form_state, $field, $instance,
+ 
+   foreach (element_children($elements) as $delta) {
+     // If not using custom extension validation, ensure this is a pdf.
+-    $elements[$delta]['#upload_validators']['file_validate_extensions'][0] = 'pdf';
++    #$elements[$delta]['#upload_validators']['file_validate_extensions'][0] = 'pdf';
+     // File fields need extra processing. Our one even more so.
+     #$elements[$delta]['#process'][] = 'pdf_to_image_field_widget_process';
+   }

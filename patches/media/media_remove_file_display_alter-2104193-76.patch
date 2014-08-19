@@ -1,0 +1,114 @@
+diff --git a/media.file_default_displays.inc b/media.file_default_displays.inc
+index ec7a378..013bf15 100644
+--- a/media.file_default_displays.inc
++++ b/media.file_default_displays.inc
+@@ -6,51 +6,6 @@
+  */
+ 
+ /**
+- * Implements hook_file_default_displays().
+- */
+-function media_file_default_displays() {
+-  $file_displays = array();
+-
+-  // Audio previews should be displayed using a large filetype icon.
+-  $file_display = new stdClass();
+-  $file_display->api_version = 1;
+-  $file_display->name = 'audio__preview__file_field_media_large_icon';
+-  $file_display->weight = 50;
+-  $file_display->status = TRUE;
+-  $file_display->settings = '';
+-  $file_displays['audio__preview__file_field_media_large_icon'] = $file_display;
+-
+-  // Document previews should be displayed using a large filetype icon.
+-  $file_display = new stdClass();
+-  $file_display->api_version = 1;
+-  $file_display->name = 'document__preview__file_field_media_large_icon';
+-  $file_display->weight = 50;
+-  $file_display->status = TRUE;
+-  $file_display->settings = '';
+-  $file_displays['document__preview__file_field_media_large_icon'] = $file_display;
+-
+-  // Image previews should be displayed using a large filetype icon.
+-  $file_display = new stdClass();
+-  $file_display->api_version = 1;
+-  $file_display->name = 'image__preview__file_field_media_large_icon';
+-  $file_display->weight = 50;
+-  $file_display->status = TRUE;
+-  $file_display->settings = '';
+-  $file_displays['image__preview__file_field_media_large_icon'] = $file_display;
+-
+-  // Video previews should be displayed using a large filetype icon.
+-  $file_display = new stdClass();
+-  $file_display->api_version = 1;
+-  $file_display->name = 'video__preview__file_field_media_large_icon';
+-  $file_display->weight = 50;
+-  $file_display->status = TRUE;
+-  $file_display->settings = '';
+-  $file_displays['video__preview__file_field_media_large_icon'] = $file_display;
+-
+-  return $file_displays;
+-}
+-
+-/**
+  * Implements hook_file_default_displays_alter().
+  */
+ function media_file_default_displays_alter(&$file_displays) {
+diff --git a/media.install b/media.install
+index e909bda..d734a3e 100644
+--- a/media.install
++++ b/media.install
+@@ -22,6 +22,9 @@ function media_install() {
+   catch (Exception $e) {
+     watchdog_exception('media', $e);
+   }
++
++  // Fix File Entity default displays issue with exports.
++  _media_default_displays();
+ }
+ 
+ /**
+@@ -1148,3 +1151,43 @@ function media_update_7226() {
+     user_role_grant_permissions($rid, array('access media browser'));
+   }
+ }
++
++/**
++ * Fix overridden issues with File Displays
++ */
++function media_update_7227() {
++  _media_default_displays();
++}
++
++/**
++ * Instantiate the File Entity display overrides.
++ */
++function _media_default_displays() {
++  // Create initial display settings.
++  module_load_include('inc', 'file_entity', 'file_entity.file_api');
++  $default_image_styles = array(
++    'preview' => 'preview',
++  );
++  $default_types = array(
++    'audio' => 'audio',
++    'document' => 'document',
++    'video' => 'video',
++  );
++  foreach ($default_types as $types) {
++    foreach ($default_image_styles as $view_mode) {
++      $display_name = $types . '__' . $view_mode . '__file_field_media_large_icon';
++      $existing_display = file_displays_load($types, $view_mode);
++      if (empty($existing_display[$display_name])) {
++        $display = array(
++          'api_version' => 1,
++          'name' => $display_name,
++          'status' => 1,
++          'weight' => 50,
++          'settings' => NULL,
++          'export_type' => NULL,
++        );
++        file_display_save((object) $display);
++      }
++    }
++  }
++}

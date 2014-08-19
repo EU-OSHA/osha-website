@@ -1,0 +1,168 @@
+[
+    {
+        "code": "anticipating_change",
+        "level": "1",
+        "name": "1: Anticipating change"
+    },
+    {
+        "code": "anticipating_change_1",
+        "level": "2",
+        "parent_code": "anticipating_change",
+        "name": "1.1. Foresight of new and emerging OSH risks  associated with new technologies in green jobs"
+    },
+    {
+        "code": "anticipating_change_2",
+        "level": "2",
+        "parent_code": "anticipating_change",
+        "name": "1.2. Large-scale foresight"
+    },
+    {
+        "code": "facts_and_figures",
+        "level": "1",
+        "name": "2: Facts and figures"
+    },
+    {
+        "code": "facts_and_figures_1",
+        "level": "2",
+        "parent_code": "facts_and_figures",
+        "name": "2.1. European Survey of Enterprises on New & Emerging Risks (ESENER)"
+    },
+    {
+        "code": "facts_and_figures_2",
+        "level": "2",
+        "parent_code": "facts_and_figures",
+        "name": "2.2. OSH overview: Older workers"
+    },
+    {
+        "code": "facts_and_figures_3",
+        "level": "2",
+        "parent_code": "facts_and_figures",
+        "name": "2.3. OSH overview: Micro and small enterprises"
+    },
+    {
+        "code": "facts_and_figures_4",
+        "level": "2",
+        "parent_code": "facts_and_figures",
+        "name": "2.4. OSH overview : Work-related diseases"
+    },
+    {
+        "code": "facts_and_figures_5",
+        "level": "2",
+        "parent_code": "facts_and_figures",
+        "name": "2.5. Costs and benefits of OSH"
+    },
+    {
+        "code": "tools_for_osh_management",
+        "level": "1",
+        "name": "3: Tools for OSH management"
+    },
+    {
+        "code": "tools_for_osh_management_1",
+        "level": "2",
+        "parent_code": "tools_for_osh_management",
+        "name": "3.1. Online interactive Risk Assessment (OiRA) tool"
+    },
+    {
+        "code": "tools_for_osh_management_2",
+        "level": "2",
+        "parent_code": "tools_for_osh_management",
+        "name": "3.2. Tool for implementing OSH solutions"
+    },
+    {
+        "code": "raising_awareness",
+        "level": "1",
+        "name": "4: Raising awareness"
+    },
+    {
+        "code": "raising_awareness_1",
+        "level": "2",
+        "parent_code": "raising_awareness",
+        "name": "4.1. Healthy Workplace Campaign (HWC): Working together for risk prevention"
+    },
+    {
+        "code": "raising_awareness_2",
+        "level": "2",
+        "parent_code": "raising_awareness",
+        "name": "4.2. Healthy Workplace Campaign (HWC): Healthy Workplaces manage stress"
+    },
+    {
+        "code": "raising_awareness_3",
+        "level": "2",
+        "parent_code": "raising_awareness",
+        "name": "4.3. Healthy Workplace Campaign (HWC): 2016-17"
+    },
+    {
+        "code": "raising_awareness_4",
+        "level": "2",
+        "parent_code": "raising_awareness",
+        "name": "4.4. Awareness raising actions"
+    },
+    {
+        "code": "networking_knowledge",
+        "level": "1",
+        "name": "5: Networking knowledge"
+    },
+    {
+        "code": "networking_knowledge_1",
+        "level": "2",
+        "parent_code": "networking_knowledge",
+        "name": "5.1 OSHwiki"
+    },
+    {
+        "code": "networking_knowledge_2",
+        "level": "2",
+        "parent_code": "networking_knowledge",
+        "name": "5.2. Other networking knowledge actions"
+    },
+    {
+        "code": "networking_and_corporate_communications",
+        "level": "1",
+        "name": "6: Networking and Corporate Communications"
+    },
+    {
+        "code": "networking_and_corporate_communications_1",
+        "level": "2",
+        "parent_code": "networking_and_corporate_communications",
+        "name": "6.1. Strategic Networking"
+    },
+    {
+        "code": "networking_and_corporate_communications_2",
+        "level": "2",
+        "parent_code": "networking_and_corporate_communications",
+        "name": "6.2. Operational Networking"
+    },
+    {
+        "code": "networking_and_corporate_communications_3",
+        "level": "2",
+        "parent_code": "networking_and_corporate_communications",
+        "name": "6.3. Corporate Communications"
+    },
+    {
+        "code": "governance",
+        "level": "1",
+        "name": "7: Governance"
+    },
+    {
+        "code": "governance_1",
+        "level": "2",
+        "parent_code": "governance",
+        "name": "7.1. Finance & Accounting"
+    },
+    {
+        "code": "governance_2",
+        "level": "2",
+        "parent_code": "governance",
+        "name": "7.3. Human Resources"
+    },
+    {
+        "code": "governance_3",
+        "level": "2",
+        "parent_code": "governance",
+        "name": "7.5. Documentation"
+    },
+    {
+        "code": "operational_management_and_support",
+        "level": "1",
+        "name": "8: Operational Management and Support"
+    }
+]

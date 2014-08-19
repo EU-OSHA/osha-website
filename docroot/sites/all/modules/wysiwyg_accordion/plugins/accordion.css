@@ -1,0 +1,18 @@
+div#accordion {
+    border: dotted 2px #888;
+    margin: 10px;
+    padding: 0 10px 10px 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+div#accordion  h3 {
+    color: #597F2B;
+    border: solid 1px #999;
+    font-weight: normal;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    padding: 3px 3px 3px 3px;
+}

@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * Wysiwyg Accordion
+ * 
+ * Works with wysiwyg module and TinyMCE to allow the creation of
+ * accordion elements within the editor.
+ */ 
+
+
+/*
+* implements hook_wysiwyg_include_directory()
+*/
+function wysiwyg_accordion_wysiwyg_include_directory($type) {
+  switch($type) {
+    case 'plugins':
+      return "plugins";
+  }
+}
+
+/**
+ * implements hook_preprocess_node()
+ */
+function wysiwyg_accordion_preprocess_node(&$vars) {
+    drupal_add_library('system', 'ui.accordion');
+	drupal_add_js(drupal_get_path('module', 'wysiwyg_accordion') . '/js/wysiwyg_accordion.js');
+}

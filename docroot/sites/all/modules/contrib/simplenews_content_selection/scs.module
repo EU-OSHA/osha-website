@@ -1,0 +1,169 @@
+<?php
+
+/**
+ * @file
+ * General hooks and commonly-used functions
+ */
+
+/**
+ * Implements hook_menu()
+ */
+function scs_menu() {
+  $items = array();
+
+  $items['admin/config/services/simplenews/settings/scs'] = array(
+    'title' => 'Simplenews Content Selection',
+    'description' => 'Configure what node types could be used for SCS',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('scs_admin_settings_form'),
+    'access arguments' => array('administer scs'),
+    'file' => 'scs.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_permission()
+ */
+function scs_permission() {
+  return array(
+    'administer scs' => array(
+      'title' => t('Administer Simplenews Content Selection'),
+      'description' => t('User can perform administrative tasks like changing view mode and newsletter content type.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_theme()
+ */
+function scs_theme() {
+  return array(
+    'scs_sortable_table' => array(
+      'render element' => 'form',
+      'file' => 'scs.theme.inc',
+    ),
+    'scs_newsletter' => array(
+      'variables' => array('nodes' => array(), 'toc' => FALSE),
+      'template' => 'scs-newsletter',
+      'file' => 'scs.theme.inc',
+    ),
+    'scs_toc' => array(
+      'variables' => array('nodes' => array()),
+      'file' => 'scs.theme.inc',
+    ),
+  );
+}
+
+/**
+ * Implements hook_node_operations().
+ */
+function scs_node_operations() {
+  $operations = array(
+    'scs_create' => array(
+      'label' => t('Create newsletter'),
+      'callback' => NULL,
+    ),
+  );
+
+  return $operations;
+}
+
+/**
+ * Implements hook_entity_info().
+ */
+function scs_entity_info() {
+  $return = array(
+    'node' => array(
+      'view modes' => array(
+        'scs' => array(
+          'label' => t('Simplenews Content Selection'),
+          'custom settings' => TRUE,
+        ),
+      ),
+    ),
+  );
+
+  return $return;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function scs_form_node_admin_content_alter(&$form, &$form_state) {
+  // Add an extra multistep operation to admin/content/node
+  if (isset($form_state['values']['operation']) && $form_state['values']['operation'] == 'scs_create') {
+    unset($form['filter']);
+    unset($form['admin']);
+
+    drupal_set_title(t('Sort nodes'));
+
+    // Show the sorting form + ToC checkbox
+    $form = array_merge($form, scs_node_sort_form($form, $form_state));
+    $form['#submit'][] = 'scs_node_sort_submit';
+
+    // Redirect to the simplenews node form
+    $form['#action'] = url('node/add/' . variable_get('scs_node_type', 'simplenews'));
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function scs_form_node_form_alter(&$form, &$form_state) {
+  // Check that we are creating a newsletter and that we come from the
+  // admin/content/node
+  if (!empty($form['#node_edit_form'])
+    && in_array($form['type']['#value'], simplenews_get_content_types())
+    && $form_state['input']['op'] = t('Create newsletter')
+      && isset($form_state['input']['nodes'])
+  ) {
+    $nodes = node_load_multiple(array_keys($form_state['input']['nodes']));
+    $form['body'][LANGUAGE_NONE][0]['#default_value'] = theme('scs_newsletter', array(
+      'nodes' => $nodes,
+      'toc' => empty($form_state['input']['scs_toc']) ? FALSE : TRUE,
+    ));
+  }
+}
+
+/**
+ * Form callback: second step of the selection form, sorting nodes
+ */
+function scs_node_sort_form($form, &$form_state) {
+  $nodes = array_filter($form_state['values']['nodes']);
+
+  // Checkbox for Table of contents
+  $form['scs_toc'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Create a table of contents'),
+    '#description' => t('Create a table of contents at top of the newsletter with the titles of the selected nodes. If newsletter is HTML format, these table of contents will be bookmarks.'),
+  );
+
+  // Create elements for the tablesort
+  $form['nodes']['#tree'] = TRUE;
+  foreach ($nodes as $nid) {
+    $form['nodes'][$nid] = array(
+      'weight' => array(
+        '#type' => 'weight',
+        '#attributes' => array('class' => array('node-weight')),
+      ),
+    );
+  }
+  $form['#theme'] = 'scs_sortable_table';
+
+  $form['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Create newsletter'),
+  );
+
+  return $form;
+}
+
+/**
+ * Form callback: submit handler for sorting nodes
+ */
+function scs_node_sort_submit(&$form, &$form_state) {
+  uasort($form_state['values']['nodes'], 'drupal_sort_weight');
+}

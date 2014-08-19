@@ -1,0 +1,64 @@
+<?php
+
+/**
+ * @file
+ * Integrate Simplenews Content Selection with views and views bulk operations
+ */
+
+/**
+ * Implementation of hook_action_info().
+ */
+function scs_views_action_info() {
+  return array(
+    'scs_views_create_newsletter_action' => array(
+      'type' => 'node',
+      'label' => t('Create newsletter'),
+      'configurable' => TRUE,
+      'behavior' => array('scs_views_create_newsletter'),
+    ),
+  );
+}
+
+/**
+ * Configuration form for tis action. Not used as form, but used as a step to go to the node sorter.
+ */
+function scs_views_create_newsletter_action_form($context, $form_state) {
+  // Emulate the nodes submitted from admin/content/node
+  $form_state['values']['nodes'] = $form_state['selection'];
+
+  drupal_set_title(t('Sort nodes'));
+
+  $form = array(
+    '#submit' => array('scs_node_sort_submit'),
+  );
+  return scs_node_sort_form($form, $form_state);
+}
+
+/**
+ * Get the selected nodes and create a newsletter from it
+ */
+function scs_views_create_newsletter_action_submit($form, $form_state) {
+  scs_node_sort_submit($form, $form_state);
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function scs_views_form_alter(&$form, &$form_state) {
+  if (isset($form_state['step']) && $form_state['step'] == 'views_bulk_operations_config_form') {
+    $operation = $form_state['operation'];
+    if ($operation->id() == 'action::scs_views_create_newsletter_action') {
+      // Hack into VBO process to redirect to the simplenews node form
+      $form['#action'] = url('node/add/' . variable_get('scs_node_type', 'simplenews'));
+    }
+  }
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function scs_views_views_api() {
+  return array(
+    'api' => 3,
+  );
+}

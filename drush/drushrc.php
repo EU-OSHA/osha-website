@@ -245,56 +245,77 @@
  *
  * Keep this code block at the end of this file to take full effect.
  */
-if (file_exists(dirname(__FILE__) . '/drushrc.local.php')) {
-  include_once dirname(__FILE__) . '/drushrc.local.php';
-}
 
 // Read JSON configuration file from conf/ and pre-configure drush commands
-$json_path = getcwd() . '/../conf/config.json';
+$json_path = dirname(__FILE__) . '/../conf/config.json';
 if(file_exists($json_path)) {
-	$cfg = json_decode(file_get_contents($json_path));
-	$db_url = sprintf('mysql://%s:%s@%s:%s/%s', $cfg->db->username, $cfg->db->password, $cfg->db->host, $cfg->db->port, $cfg->db->database);
-	$command_specific['site-install'] = array(
-		'db-url' => $db_url,
-		'account-mail' => $cfg->admin->email, 'account-name' => $cfg->admin->username, 'account-pass' => $cfg->admin->password,
-		'db-su' => $cfg->db->root_username, "db-su-pw" => $cfg->db->root_password,
-		'site-mail' => $cfg->site_mail
-	);
+  $cfg = json_decode(file_get_contents($json_path));
+  $db_url = sprintf('mysql://%s:%s@%s:%s/%s', $cfg->db->username, $cfg->db->password, $cfg->db->host, $cfg->db->port, $cfg->db->database);
+  $command_specific['site-install'] = array(
+    'db-url' => $db_url,
+    'account-mail' => $cfg->admin->email, 'account-name' => $cfg->admin->username, 'account-pass' => $cfg->admin->password,
+    'db-su' => $cfg->db->root_username, 'db-su-pw' => $cfg->db->root_password
+  );
 }
 
 $options['init-modules'] = array(
-	'ctools', 'entity',
+  'ctools', 'entity',
 
-	'locale',
-	'entity_translation',
-	'i18n',
-	'variable',
+  'locale',
+  'entity_translation',
+  'i18n',
+  'variable',
 
-	'views',
-	'views_ui',
-	'views_bulk_operations',
+  'views',
+  'views_ui',
+  'views_bulk_operations',
 
-	'taxonomy_access_fix',
-	'date',
-	'migrate',
-	'features',
+  'mailsystem',
+  'htmlmail',
+  'simplenews',
+  'scs',
+  'scs_views',
 
-	'entityreference',
-	'link',
-	'title',
-	'wysiwyg',
-	'pathauto',
-	'uuid',
+  'taxonomy_access_fix',
+  'date',
+  'migrate',
+  'features',
 
-	'search_api',
-	'facetapi',
-	'search_api_facetapi',
-	'apachesolr',
-	'apachesolr_search',
-	'search_api_solr',
-	'strongarm',
+  'entityreference',
+  'link',
+  'title',
+  'wysiwyg',
+  'pathauto',
+  'redirect',
+  'uuid',
+  'file_entity',
+  'media',
+  'languagefield',
 
-	'imce_wysiwyg',
-	'osha',
-	'osha_migration'
+  #'search_api',
+  #'facetapi',
+  #'search_api_facetapi',
+  #'apachesolr',
+  #'apachesolr_search',
+  #'search_api_solr',
+  'strongarm',
+
+  'pdf_to_image',
+  'doc_to_imagefield',
+
+  'imce_wysiwyg',
+  'osha',
+  'osha_migration',
+  'osha_news',
+  'osha_publication',
+  'osha_case_study',
+  'osha_blog',
+
+  'devel',
+  'diff',
+  'simpletest'
 );
+
+if (file_exists(dirname(__FILE__) . '/drushrc.local.php')) {
+  include_once dirname(__FILE__) . '/drushrc.local.php';
+}

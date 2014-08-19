@@ -1,0 +1,25 @@
+diff --git a/pdf_to_image.module b/pdf_to_image.module
+index 202ff70..0705115 100644
+--- a/pdf_to_image.module
++++ b/pdf_to_image.module
+@@ -779,14 +779,16 @@ function pdf_to_image_tokens($type, $tokens, array $data = array(), array $optio
+     // Find any fields on this entity that may be source files for a PDF conversion.
+     $pdf_fields = pdf_to_image_source_fields($entity_type, $bundle);
+     foreach ($pdf_fields as $field_id => $field) {
+-      if (isset($entity->{$field_id})) {
++      if (!empty($entity->{$field_id})) {
+         $source_field_values = $entity->{$field_id};
+         $field_lang = field_language($data['entity_type'], $entity, $field_id);
+         $source_values = $source_field_values[$field_lang];
+         // Assumed to be multiple.
+-        foreach ($source_values as $delta => $file_info) {
+-          // Fall-through. We've found $file_info now.
+-          // Messy, but dunno what to do with multiple sources.
++        if (!empty($source_values)) {
++          foreach ($source_values as $delta => $file_info) {
++            // Fall-through. We've found $file_info now.
++            // Messy, but dunno what to do with multiple sources.
++          }
+         }
+       }
+     }

@@ -1,0 +1,93 @@
+<?php
+
+/**
+ * Class MigrateOshaNewsTest tests news content type migration
+ */
+class MigrateOshaNewsTest extends OshaWebTestCase {
+
+  /**
+   * Test information.
+   *
+   * {@inheritdoc}
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'OSHA news migration testing',
+      'description' => 'Tests the News migration',
+      'group' => 'OSHA',
+    );
+  }
+
+  /**
+   * Test the migration.
+   */
+  public function testMigration() {
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/thesaurus.json';
+    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_THESAURUS, 'MigrateOshaTaxonomyThesaurus', $source_file);
+
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/tags.json';
+    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_TAGS, 'MigrateOshaTaxonomyTags', $source_file);
+
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/news.txt';
+    $result = MigrationUtil::runMigration(OSHA_MIGRATION_CONTENT_TYPE_NEWS, 'MigrateOshaNews', $source_file);
+
+    $this->assertEqual($result, Migration::RESULT_COMPLETED);
+
+    $query = new EntityFieldQuery();
+    $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', OSHA_NEWS_CONTENT_TYPE_NEWS)
+      ->propertyCondition('status', 1);
+    $result = $query->execute();
+    $nodes = array();
+    if (isset($result['node'])) {
+      $nodes_nids = array_keys($result['node']);
+      $nodes = entity_load('node', $nodes_nids);
+    }
+
+    $class = new NewsContentListCSV($source_file);
+    $class->getIdList();
+    $data = $class::$data;
+    // One item is broken, two are good.
+    $this->assertEqual(2, count($nodes));
+
+    $node = current($nodes);
+
+    $path = path_load('node/' . $node->nid);
+    $path = $path['alias'];
+    $witness = $data[$path];
+
+    $this->assertEqual(strtotime($witness['creation_date']), $node->created);
+    $this->assertEqual(strtotime($witness['modification_date']), $node->changed);
+    $this->assertEqual(
+      strtotime($witness['publication_date']),
+      strtotime($node->field_news_publication_date[LANGUAGE_NONE][0]['value'])
+    );
+
+    $this->drupalGet(
+      substr($witness['path'], 4)
+    );
+    $this->assertText($node->title_field['en'][0]['value']);
+
+    foreach ($witness['title_field'] as $lang => $title) {
+      $this->assertEqual($title, $node->title_field[$lang][0]['value']);
+    }
+    foreach ($witness['text'] as $lang => $value) {
+      $this->assertEqual(
+        str_replace('<@#&>', '"', $value),
+        $node->body[$lang][0]['value']
+      );
+    }
+    $this->assertEqual(2, count($node->field_tags[LANGUAGE_NONE]));
+    $tids = array(
+      $node->field_tags[LANGUAGE_NONE][0]['tid'],
+      $node->field_tags[LANGUAGE_NONE][1]['tid'],
+    );
+    $tags = taxonomy_term_load_multiple($tids);
+    $terms = array();
+    foreach ($tags as $term) {
+      $terms[] = $term->field_tags_code[LANGUAGE_NONE][0]['value'];
+    }
+    $this->assertTrue(in_array('women_and_osh', $terms));
+    $this->assertTrue(in_array('legislation', $terms));
+  }
+}

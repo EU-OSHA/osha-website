@@ -1,0 +1,9 @@
+<?php
+/**
+ * @file
+ * Code for the Blog feature.
+ */
+
+include_once 'osha_blog.features.inc';
+
+define('OSHA_BLOG_CONTENT_TYPE_BLOG', 'blog');

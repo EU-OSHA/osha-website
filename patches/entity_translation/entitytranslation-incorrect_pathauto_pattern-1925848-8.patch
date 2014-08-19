@@ -1,0 +1,16 @@
+diff --git a/entity_translation.module b/entity_translation.module
+index fa11593..2a45c72 100644
+--- a/entity_translation.module
++++ b/entity_translation.module
+@@ -1640,6 +1640,11 @@ function entity_translation_language($entity_type, $entity) {
+   // callback.
+   $handler = entity_translation_current_form_get_handler();
+ 
++  // Set the entity id for the handler if we have one in the entity.
++  if (!empty($handler) && empty($handler->entityId) && isset($entity->nid)) {
++    $handler->setEntity($entity);
++  }
++
+   // Make sure we always have a translation handler instance available.
+   if (empty($handler)) {
+     $handler = entity_translation_get_handler($entity_type, $entity);

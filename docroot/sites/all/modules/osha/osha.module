@@ -1,55 +1,218 @@
 <?php
-/**
- * @file
- * Code for the osha feature.
- */
 
 include_once 'osha.features.inc';
 
-function osha_configure_entity_translation_types() {
-	variable_set(
-		'entity_translation_entity_types',
-		array(
-			'node' => 'node',
-			'taxonomy_term' => 'taxonomy_term',
-			'comment' => 0,
-			'user' => 0,
-		)
-	);
-}
+define('OSHA_ARTICLE_CONTENT_TYPE_ARTICLE', 'article');
 
-function osha_configure_language_detection() {
-	module_load_include('inc', 'locale', 'locale.admin');
+/**
+ * Implements hook_schema_alter().
+ */
+function osha_schema_alter(&$schema) {
+  if (isset($schema['taxonomy_term_data'])) {
+    $schema['taxonomy_term_data']['fields']['name'] = array(
+      'type' => 'varchar',
+      'length' => 768,
+      'not null' => TRUE,
+      'default' => '',
+    );
+  }
 
-	$form_state['values']['language']['enabled']['locale-url'] = 1;
-	$form_state['values']['language']['weight']['locale-url'] = -8;
+  if (isset($schema['field_data_name_field'])) {
+    $schema['field_data_name_field']['fields']['name_field_value'] = array(
+      'type' => 'varchar',
+      'length' => 768,
+      'not null' => TRUE,
+      'default' => '',
+    );
+  }
 
-	$form_state['values']['language']['enabled']['language-default'] = 1;
-	$form_state['values']['language']['weight']['language-default'] = 10;
+  if (isset($schema['field_revision_name_field'])) {
+    $schema['field_revision_name_field']['fields']['name_field_value'] = array(
+      'type' => 'varchar',
+      'length' => 768,
+      'not null' => TRUE,
+      'default' => '',
+    );
+  }
 
+  if (isset($schema['field_data_title_field'])) {
+    $schema['field_data_title_field']['fields']['title_field_value'] = array(
+      'type' => 'varchar',
+      'length' => 768,
+      'not null' => TRUE,
+      'default' => '',
+    );
+  }
 
-	$form_state['values']['language_content']['enabled']['locale-url'] = 1;
-	$form_state['values']['language_content']['weight']['locale-url'] = -8;
-
-	$form_state['values']['language_content']['enabled']['language-default'] = 1;
-	$form_state['values']['language_content']['weight']['language-default'] = 10;
-
-	drupal_form_submit('locale_languages_configure_form', $form_state);
+  if (isset($schema['field_revision_title_field'])) {
+    $schema['field_revision_title_field']['fields']['title_field_value'] = array(
+      'type' => 'varchar',
+      'length' => 768,
+      'not null' => TRUE,
+      'default' => '',
+    );
+  }
 }
 
 /**
- * Function to retrive the size of a MySQL varchar column from a table
- * @param string $table Table name
- * @param string $column Target column
+ * Configure date and time-zone related settings.
+ */
+function osha_configure_date_settings() {
+  variable_set('date_first_day', '1');
+  variable_set('site_default_country', 'ES');
+  variable_set('date_default_timezone', 'UTC');
+  variable_set('configurable_timezones', '0');
+  variable_set('user_default_timezone', '0');
+}
+
+/**
+ * Set-up language detection to use URL pattern.
+ */
+function osha_configure_language_detection() {
+  module_load_include('inc', 'locale', 'locale.admin');
+  $form_state['values']['language']['enabled']['locale-url'] = 1;
+  $form_state['values']['language']['weight']['locale-url'] = -8;
+  $form_state['values']['language']['enabled']['language-default'] = 1;
+  $form_state['values']['language']['weight']['language-default'] = 10;
+  $form_state['values']['language_content']['enabled']['locale-url'] = 1;
+  $form_state['values']['language_content']['weight']['locale-url'] = -8;
+  $form_state['values']['language_content']['enabled']['language-default'] = 1;
+  $form_state['values']['language_content']['weight']['language-default'] = 10;
+  drupal_form_submit('locale_languages_configure_form', $form_state);
+}
+
+/**
+ * Change field size to 768 characters for Esener questions.
+ *
+ * Applies to the following fields:
+ *  - taxonomy_term_data.name
+ *  - field_data_name_field.name_field_value
+ *  - field_revision_name_field.name_field_value
+ */
+function osha_change_field_size() {
+  $column_size = 768;
+  if (osha_get_mysql_column_size('taxonomy_term_data', 'name') < $column_size) {
+    drupal_set_message("Changing taxonomy_term_data size to $column_size");
+    db_change_field('taxonomy_term_data', 'name', 'name',
+      array('type' => 'varchar','length' => $column_size)
+    );
+  }
+
+  if (osha_get_mysql_column_size('field_data_name_field', 'name_field_value') < $column_size) {
+    drupal_set_message("Changing field_data_name size to $column_size");
+    db_change_field('field_data_name_field', 'name_field_value', 'name_field_value',
+      array('type' => 'varchar', 'length' => $column_size)
+    );
+  }
+
+  if (osha_get_mysql_column_size('field_revision_name_field', 'name_field_value') < $column_size) {
+    drupal_set_message("Changing field_revision_name size to $column_size");
+    db_change_field('field_revision_name_field', 'name_field_value', 'name_field_value',
+      array('type' => 'varchar','length' => $column_size)
+    );
+  }
+
+  if (osha_get_mysql_column_size('field_data_title_field', 'title_field_value') < $column_size) {
+    drupal_set_message("Changing field_data_title_field size to $column_size");
+    db_change_field('field_data_title_field', 'title_field_value', 'title_field_value',
+      array('type' => 'varchar', 'length' => $column_size)
+    );
+  }
+
+  if (osha_get_mysql_column_size('field_revision_title_field', 'title_field_value') < $column_size) {
+    drupal_set_message("Changing field_revision_title_field size to $column_size");
+    db_change_field('field_revision_title_field', 'title_field_value', 'title_field_value',
+      array('type' => 'varchar','length' => $column_size)
+    );
+  }
+}
+
+
+/**
+ * Function to retrive the size of a MySQL varchar column from a table.
+ *
+ * @param string $table
+ *   Target database table name
+ * @param string $column
+ *   Target column
+ *
  * @return int
+ *   Column size in characters
  */
 function osha_get_mysql_column_size($table, $column) {
-	$result = db_query("
+  $result = db_query("
 		SELECT CHARACTER_MAXIMUM_LENGTH
 		FROM information_schema.columns
 		WHERE table_schema = DATABASE()
 			AND table_name = :table AND COLUMN_NAME = :column",
-		array(':table' => $table, ':column' => $column)
-	);
-	return $result->fetchField(0);
+    array(':table' => $table, ':column' => $column)
+  );
+  return $result->fetchField(0);
+}
+
+/**
+ * Replace the node title with field_tile for page/article. Uses title module.
+ *
+ * Warning: Assuming no content is present
+ */
+function osha_replace_title_field() {
+  if (module_load_include('module', 'title', 'title')) {
+    $types = array('article', 'page');
+    foreach ($types as $bundle) {
+      // Inspired by https://www.drupal.org/files/1801242-title-upgrade.patch
+      title_field_replacement_toggle('node', $bundle, 'title');
+      drupal_set_message(
+        t('Replacing title_field for !bundle', array('!bundle' => $bundle))
+      );
+    }
+  }
+  else {
+    drupal_set_message('osha_replace_title_field: Title module not available', 'warning');
+  }
+}
+
+/**
+ * Enable translation for the basic page entity.
+ */
+function osha_configure_basic_page() {
+  if (module_load_include('inc', 'node', 'content_types')) {
+    $form_state['values']['language_content_type'] = ENTITY_TRANSLATION_ENABLED;
+    $form_state['values']['entity_translation_hide_translation_links'] = 1;
+    $form_state['values']['promote'] = NULL;
+    $form_state['values']['comment'] = 1;
+    $type = node_type_load('page');
+    drupal_form_submit('node_type_form', $form_state, $type);
+    $errors = form_get_errors();
+    if (!empty($errors)) {
+      foreach ($errors as $error) {
+        drupal_set_message(
+          t('Basic page setup error: !error', array('!error' => $error))
+        );
+      }
+    }
+  }
+  else {
+    drupal_set_message('osha_configure_basic_page: content_types module not available', 'warning');
+  }
+}
+
+/**
+ * Make the field_image field translatable.
+ */
+function osha_enable_field_image_translations() {
+  if (module_load_include('inc', 'entity_translation', 'entity_translation.admin')) {
+    $info = field_info_field('field_image');
+    if ($info !== NULL) {
+      drupal_set_message('Making field_image field translatable');
+      $form_state['values']['translatable'] = "0";
+      $form_state['field']['field_name'] = 'field_image';
+      drupal_form_submit('entity_translation_translatable_form', $form_state, 'field_image');
+    }
+    else {
+      drupal_set_message(t("field_image field not available yet"), 'error');
+    }
+  }
+  else {
+    drupal_set_message('osha_configure_basic_page: entity_translation module not available', 'error');
+  }
 }

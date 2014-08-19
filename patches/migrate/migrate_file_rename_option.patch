@@ -1,0 +1,20 @@
+diff --git a/plugins/destinations/file.inc b/plugins/destinations/file.inc
+index 688f2c6..503f222 100644
+--- a/plugins/destinations/file.inc
++++ b/plugins/destinations/file.inc
+@@ -189,7 +189,14 @@ abstract class MigrateFile extends MigrateFileBase {
+     $file->uri = $destination;
+     $file->uid = $owner;
+     if (!isset($file->filename)) {
+-      $file->filename = drupal_basename($destination);
++      if ($this->fileReplace == FILE_EXISTS_RENAME) {
++        $basename = drupal_basename($destination);
++        $directory = drupal_dirname($destination);
++        $file->filename = file_create_filename($basename, $directory);
++      }
++      else {
++        $file->filename = drupal_basename($destination);
++      }
+     }
+     if (!isset($file->filemime)) {
+       $file->filemime = file_get_mimetype($destination);

@@ -1,0 +1,9 @@
+<?php
+/**
+ * @file
+ * Code for the Calls feature.
+ */
+
+include_once 'osha_calls.features.inc';
+
+define('OSHA_CALLS_CONTENT_TYPE_CALLS', 'calls');

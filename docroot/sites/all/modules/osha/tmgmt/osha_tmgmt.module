@@ -431,6 +431,9 @@ class OshaTMGMTStatistics {
     }
     elseif (is_array($item)) {
       foreach (element_children($item) as $key) {
+        if (is_string($key) && $key == "node_title") {
+          break;
+        }
         self::count($item[$key], $count);
       }
     }

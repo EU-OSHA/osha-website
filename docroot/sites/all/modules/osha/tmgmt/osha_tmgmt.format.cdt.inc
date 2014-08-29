@@ -62,9 +62,11 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
     $this->writeElement('ContentTitle', 'NO TITLE');
     $this->writeElement('FriendlyUrlName', 'NO FRIENDLY URL');
     $this->writeElement('Keywords', 'NO KEYWORDS');
-
     foreach ($item->getData() as $key => $field) {
       $text = NULL;
+      if ($key == "node_title") {
+        break;
+      }
       if (isset($field['#text'])) {
         $text = $field['#text'];
       }

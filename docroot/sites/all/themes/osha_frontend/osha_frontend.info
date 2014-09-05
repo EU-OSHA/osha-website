@@ -25,4 +25,3 @@ regions[footer_fourthcolumn] = Footer fourth column
 regions[footer] = Footer
 
 stylesheets[all][] = css/menu.css
-stylesheets[all][] = css/newsletter.css

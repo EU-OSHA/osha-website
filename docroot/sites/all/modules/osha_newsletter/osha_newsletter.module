@@ -527,10 +527,25 @@ function osha_newsletter_send_email($key, $email_addresses, $form_values) {
 function osha_newsletter_build_mail(&$message, EntityCollection $source) {
   $content = entity_collection_load_content($source->bundle, $source);
 
+  $items = $content->children;
+  $elements = array();
+  $key = NULL;
+
+  foreach ($items as $item) {
+    if ($item->type == 'taxonomy_term') {
+      $term = taxonomy_term_view($item->content, 'token');
+      $elements[] = $term;
+    } else if ($item->type == 'node') {
+      $style = $item->style;
+      $node = node_view($item->content,$style);
+      $elements[] = $node;
+    }
+  }
+
   // Get message data from source.
-//  $message['headers'] = $source->getHeaders($message['headers']);
+//  $message['headers'] = '';
   $message['subject'] = $source->title;
-  $message['body']['body'] = theme('newsletter_body', array('items' => $content->children));
+  $message['body']['body'] = theme('newsletter_body', array('items' => $elements));//array('items' => $content->children));
   $message['body']['footer'] = theme('newsletter_footer');
 
   // Optional params for HTML mails.
@@ -542,17 +557,59 @@ function osha_newsletter_build_mail(&$message, EntityCollection $source) {
  * Implements hook_theme().
  */
 function osha_newsletter_theme() {
+  $path = drupal_get_path('module', 'osha_newsletter');
   $theme = array();
 
   $theme['newsletter_body'] = array(
     'template' => 'newsletter_body',
     'variables' => array(
       'items' => NULL
-    )
+    ),
+    'path' => $path . '/templates'
   );
   $theme['newsletter_footer'] = array(
-    'template' => 'newsletter_footer'
+    'template' => 'newsletter_footer',
+    'path' => $path . '/templates'
   );
 
   return $theme;
+}
+
+/**
+ * Define custom view mode for entities - newsletter
+ */
+function osha_newsletter_entity_info_alter(&$entity_info) {
+  $entity_info['node']['view modes']['highlights_item'] = array(
+    'label' => t('Newsletter Highlights'),
+    'custom settings' => TRUE
+  );
+
+  $entity_info['node']['view modes']['newsletter_item'] = array(
+    'label' => t('Newsletter Item'),
+    'custom settings' => TRUE
+  );
+}
+
+function osha_newsletter_preprocess_node(&$vars) {
+  if ($vars['view_mode'] == 'highlights_item') {
+
+    if (array_key_exists('links', $vars)) {
+      unset($vars['links']);
+    }
+
+    $vars['theme_hook_suggestions'][] = 'node__highlights_item';
+    $vars['theme_hook_suggestions'][] = 'node__' . $vars['node']->type . '__highlights_item';
+    $vars['theme_hook_suggestions'][] = 'node__' . $vars['node']->nid . '__highlights_item';
+  }
+
+  if ($vars['view_mode'] == 'newsletter_item') {
+
+    if (array_key_exists('links', $vars)) {
+      unset($vars['links']);
+    }
+
+    $vars['theme_hook_suggestions'][] = 'node__newsletter_item';
+    $vars['theme_hook_suggestions'][] = 'node__' . $vars['node']->type . '__newsletter_item';
+    $vars['theme_hook_suggestions'][] = 'node__' . $vars['node']->nid . '__newsletter_item';
+  }
 }

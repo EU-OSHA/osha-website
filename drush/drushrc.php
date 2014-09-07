@@ -337,6 +337,10 @@ $options['init-modules'] = array(
   'mpac',
   'linkit',
 
+  'workbench',
+  'workbench_access',
+  'workbench_moderation',
+
   'osha',
   'osha_migration',
   'osha_news',

@@ -856,7 +856,7 @@ function workbench_moderation_form_node_form_alter(&$form, $form_state) {
   if ($form['options']['#access']) {
     $form['options']['log'] = $form['revision_information']['log'];
     $form['options']['log']['#title'] = t('Moderation notes');
-    $form['options']['workbench_moderation_state_new'] = $form['revision_information']['workbench_moderation_state_new'];
+    $form['options']['workbench_moderation_state_new'] = isset($form['revision_information']['workbench_moderation_state_new']) ? $form['revision_information']['workbench_moderation_state_new'] : '';
 
     // Unset the old placement of the Revision log.
     unset($form['revision_information']['log']);

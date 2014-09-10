@@ -186,6 +186,7 @@ function workbench_moderation_views_data() {
   );
   $data['workbench_moderation_states']['description'] = array(
     'title' => t('Moderation state description'),
+    'help' => t('Shows a description of the moderation state.'),
     'field' => array(
       'handler' => 'views_handler_field',
     ),

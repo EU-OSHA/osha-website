@@ -1,0 +1,13 @@
+<?php
+/**
+ * @file
+ * Code for the Osha Workflow feature.
+ */
+
+include_once 'osha_workflow.features.inc';
+
+function osha_workflow_node_view($node) {
+
+
+
+}

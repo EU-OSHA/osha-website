@@ -1,0 +1,64 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function osha_workflow_install() {
+
+  // Remove exiting transitions.
+  module_load_include('inc', 'workbench_moderation', 'workbench_moderation.admin');
+  $form_state = array();
+  $form = workbench_moderation_admin_transitions_form(array(), $form_state);
+  unset($form['transitions']['#tree']);
+  foreach($form['transitions'] as $transition) {
+    $form_state['values']['transitions'] [] = array(
+      'transition' => (object) $transition,
+      'delete' => 1,
+    );
+  }
+  drupal_form_submit('workbench_moderation_admin_transitions_form', $form_state);
+
+  // Update the form acces settings auto assign checkbox.
+  /*$form_state = array();
+  drupal_build_form('workbench_access_settings_form', $form_state);
+  $form_state['values'] = array(
+    'workbench_access' => 'menu',
+    'workbench_access_menu' => array(
+      'main-menu' => 'main-menu',
+      'devel' => 0,
+      'features' => 0,
+      'management' => 0,
+      'navigation' => 0,
+      'user-menu' => 0,
+    ),
+    'workbench_access_menu_limit' => 1,
+    'workbench_access_taxonomy' => array(
+      'activity' => 0,
+      'esener' => 0,
+      'nace_codes' => 0,
+      'newsletter' => 0,
+      'publication_types' => 0,
+      'section' => 0,
+      'tags' => 0,
+      'thesaurus' => 0,
+      'workflow_status' => 0,
+    ),
+    'workbench_access_node_type_article' => 1,
+    'workbench_access_node_type_page' => 0,
+    'workbench_access_node_type_blog' => 1,
+    'workbench_access_node_type_calls' => 1,
+    'workbench_access_node_type_highlight' => 1,
+    'workbench_access_node_type_job_vacancies' => 1,
+    'workbench_access_node_type_news' => 1,
+    'workbench_access_node_type_press_release' => 1,
+    'workbench_access_node_type_publication' => 1,
+    'workbench_access_node_type_simplenews' => 1,
+    'workbench_access_label' => 'Section',
+    'workbench_access_auto_assign' => 0,
+    'workbench_access_allow_multiple' => 0,
+    'workbench_access_custom_form' => 1,
+  );
+  drupal_form_submit('workbench_access_settings_form', $form_state);
+  $form_state['values']['workbench_access_auto_assign'] = 1;
+  drupal_form_submit('workbench_access_settings_form', $form_state);*/
+}

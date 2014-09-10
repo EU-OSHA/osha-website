@@ -356,6 +356,7 @@ $options['init-modules'] = array(
   'entity_collection',
   'entity_collection_db',
   'osha_newsletter',
+  'osha_workflow',
 
   // Enable last (conflict with rules)
   'uuid',

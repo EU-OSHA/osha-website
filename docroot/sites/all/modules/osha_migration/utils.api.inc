@@ -798,6 +798,17 @@ class OSHADynamicMigration extends DynamicMigration {
     if (isset($entity->field_publication_date) && empty($entity->field_publication_date[LANGUAGE_NONE][0]['value'])) {
       unset($entity->field_publication_date[LANGUAGE_NONE]);
     }
+    if (isset($row->workflow_state)) {
+      switch ($row->workflow_state) {
+        case 'published':
+          $entity->workbench_moderation_state_new = 'published';
+          break;
+
+        default:
+          $entity->workbench_moderation_state_new = 'to_be_approved';
+          break;
+      }
+    }
   }
 
   /**

@@ -173,7 +173,7 @@ class OshaMigrateJobVacancies extends OSHADynamicMigration {
     foreach ($languages as $language) {
       $has_translation = FALSE;
       if (!empty($row->title_field[$language])) {
-        $entity->title_field[$language][0]['value'] = $row->title_field[$language];
+        $entity->title_field[$language][0]['value'] = MigrationUtil::decodeHTMLText($row->title_field[$language]);
         $has_translation = TRUE;
       }
       if (!empty($row->description[$language])) {

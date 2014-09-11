@@ -523,7 +523,7 @@
     },
     {
         "code": "agriculture",
-        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
+        "excluded_from": [ "article", "page", "blog", "highlight", "job_vacancies", "news", "press_release"],
         "bg": "Agriculture",
         "cs": "Zemědělství",
         "da": "Landbrug",
@@ -552,7 +552,7 @@
     },
     {
         "code": "cleaning_workers",
-        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
+        "excluded_from": [ "article", "page", "blog", "highlight", "job_vacancies", "news", "press_release"],
         "bg": "Почистване на работниците",
         "cs": "Čištění pracovníků",
         "da": "Rengøring arbejdstagere",
@@ -581,7 +581,7 @@
     },
     {
         "code": "construction",
-        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
+        "excluded_from": [ "article", "page", "blog", "highlight", "job_vacancies", "news", "press_release"],
         "bg": "Construction",
         "cs": "Construction",
         "da": "Bygge- og anlægssektoren",
@@ -610,7 +610,7 @@
     },
     {
         "code": "corporate_social_responsibility",
-        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
+        "excluded_from": [ "article", "page", "blog", "highlight", "job_vacancies", "news", "press_release"],
         "bg": "Корпоративна социална отговорност",
         "cs": "Společná sociální odpovědnost",
         "da": "Virksomhedernes sociale ansvar",
@@ -639,7 +639,7 @@
     },
     {
         "code": "disabled_people",
-        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
+        "excluded_from": [ "article", "page", "blog", "highlight", "job_vacancies", "news", "press_release"],
         "bg": "",
         "cs": "",
         "da": "",
@@ -668,7 +668,7 @@
     },
     {
         "code": "fisheries",
-        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
+        "excluded_from": [ "article", "page", "blog", "highlight", "job_vacancies", "news", "press_release"],
         "bg": "Fisheries",
         "cs": "Fisheries",
         "da": "Fiskerisektoren",
@@ -697,7 +697,7 @@
     },
     {
         "code": "health_care",
-        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
+        "excluded_from": [ "article", "page", "blog", "highlight", "job_vacancies", "news", "press_release"],
         "bg": "Здравеопазване",
         "cs": "Zdravotní péče",
         "da": "Sundhedspleje",
@@ -726,7 +726,7 @@
     },
     {
         "code": "horeca",
-        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
+        "excluded_from": [ "article", "page", "blog", "highlight", "job_vacancies", "news", "press_release"],
         "bg": "ХОРЕКА",
         "cs": "HORECA",
         "da": "HORECA",
@@ -755,7 +755,7 @@
     },
     {
         "code": "maintenance",
-        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
+        "excluded_from": [ "article", "page", "blog", "highlight", "job_vacancies", "news", "press_release"],
         "bg": "Поддръжка",
         "cs": "Údržba",
         "da": "Vedligeholdelse",
@@ -784,7 +784,7 @@
     },
     {
         "code": "migrant_workers",
-        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
+        "excluded_from": [ "article", "page", "blog", "highlight", "job_vacancies", "news", "press_release"],
         "bg": "Работници мигранти",
         "cs": "Migrující pracovníci",
         "da": "Vandrende arbejdstagere",
@@ -813,7 +813,7 @@
     },
     {
         "code": "noise",
-        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
+        "excluded_from": [ "article", "page", "blog", "highlight", "job_vacancies", "news", "press_release"],
         "bg": "",
         "cs": "Hluk při práci",
         "da": "Støj på arbejdspladsen",
@@ -842,7 +842,7 @@
     },
     {
         "code": "risk_assessment",
-        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
+        "excluded_from": [ "article", "page", "blog", "highlight", "job_vacancies", "news", "press_release"],
         "bg": "Оценка на риска",
         "cs": "Hodnocení rizik",
         "da": "Risikovurdering",
@@ -871,7 +871,7 @@
     },
     {
         "code": "road_transport",
-        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
+        "excluded_from": [ "article", "page", "blog", "highlight", "job_vacancies", "news", "press_release"],
         "bg": "Автомобилен транспорт",
         "cs": "Silniční doprava",
         "da": "Vejtransport",
@@ -900,7 +900,7 @@
     },
     {
         "code": "statistics",
-        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
+        "excluded_from": [ "article", "page", "blog", "highlight", "job_vacancies", "news", "press_release"],
         "bg": "Статистика",
         "cs": "Statistika",
         "da": "Statistik",
@@ -929,7 +929,7 @@
     },
     {
         "code": "transport",
-        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
+        "excluded_from": [ "article", "page", "blog", "highlight", "job_vacancies", "news", "press_release"],
         "bg": "Транспорт",
         "cs": "Doprava",
         "da": "Transport",
@@ -958,7 +958,7 @@
     },
     {
         "code": "worker_participation",
-        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
+        "excluded_from": [ "article", "page", "blog", "highlight", "job_vacancies", "news", "press_release"],
         "bg": "Участие на работниците",
         "cs": "Účast zaměstnanců",
         "da": "Medarbejderdeltagelse",
@@ -987,7 +987,7 @@
     },
     {
         "code": "workplace_health_promotion",
-        "excluded_from": [ "article", "page", "blog", "job_vacancies", "news", "press_release"],
+        "excluded_from": [ "article", "page", "blog", "highlight", "job_vacancies", "news", "press_release"],
         "bg": "Насърчаване на здравето на работното място",
         "cs": "Podpora ochrany zdraví na pracovišti",
         "da": "Fremme af sundheden på arbejdspladsen",

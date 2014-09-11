@@ -1,0 +1,15 @@
+/**
+ * Use 3 grid columns for smaller screens.
+ */
+@media all and (max-width: 600px) {
+	
+	h1{
+		color:red;
+	}
+
+
+}
+
+
+
+	

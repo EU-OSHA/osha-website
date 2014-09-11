@@ -795,6 +795,9 @@ class OSHADynamicMigration extends DynamicMigration {
 
   public function prepare($entity, $row) {
     $entity->path['pathauto'] = 0;
+    if (isset($entity->field_publication_date) && empty($entity->field_publication_date[LANGUAGE_NONE][0]['value'])) {
+      unset($entity->field_publication_date[LANGUAGE_NONE]);
+    }
   }
 
   /**

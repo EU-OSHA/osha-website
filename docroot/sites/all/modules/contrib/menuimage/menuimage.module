@@ -118,6 +118,6 @@ function menuimage_edit_item_submit(&$form, &$form_state) {
           ->execute();
       }
     }
-    $form_state['redirect'] = ("/admin/structure/menu/item/" . $mlid . "/edit");
+    $form_state['redirect'] = ("admin/structure/menu/item/" . $mlid . "/edit");
   }
 }

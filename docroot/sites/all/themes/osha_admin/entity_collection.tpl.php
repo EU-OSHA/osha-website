@@ -43,7 +43,9 @@ if (module_exists('osha_newsletter') && isset($variables['element'])) {
       }
     }
 
-    print theme_render_template($module_templates_path.'/newsletter_header.tpl.php', array('languages' => NULL));
+    $languages = language_list();
+
+    print theme_render_template($module_templates_path.'/newsletter_header.tpl.php', array('languages' => $languages));
     print theme_render_template($module_templates_path.'/newsletter_body.tpl.php', array('items' => $elements, 'blogs' => $blogs, 'news' => $news, 'events' => $events));
     print theme_render_template($module_templates_path.'/newsletter_footer.tpl.php', array());
   }

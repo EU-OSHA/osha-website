@@ -147,6 +147,7 @@ class MigrateOshaCalls extends OSHADynamicMigration {
    * {@inheritdoc}
    */
   public function prepareRow($row) {
+    $row->language = "en";
     if (MigrationUtil::entityRowValidator($row, $this) === FALSE) {
       return FALSE;
     }

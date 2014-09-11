@@ -320,6 +320,7 @@ $options['init-modules'] = array(
   'special_menu_items',
   'menu_block',
   'menuimage',
+  'lang_dropdown',
 
   'imce_wysiwyg',
   'wysiwyg_accordion',
@@ -332,6 +333,8 @@ $options['init-modules'] = array(
   'views_slideshow_cycle',
 
   'taxonomy_manager',
+  'node_export',
+  'mpac',
 
   'osha',
   'osha_migration',
@@ -341,6 +344,8 @@ $options['init-modules'] = array(
   'osha_tmgmt',
   'osha_highlight',
   'osha_menu',
+  'osha_content',
+  'osha_wiki',
 
   // Newsletter modules.
   'entity_collection',

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Osha Content feature.
+ */
+
+include_once 'osha_content.features.inc';

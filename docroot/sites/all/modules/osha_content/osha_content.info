@@ -1,0 +1,15 @@
+name = Osha Content
+description = Feature to export static content like blocks, nodes that are related to theme/structure
+core = 7.x
+package = OSHA
+version = 7.x-1.0
+project = osha_content
+dependencies[] = fe_block
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[fe_block_boxes][] = osha_wiki_intro
+features[fe_block_settings][] = block-osha_wiki_intro
+features[fe_block_settings][] = views-related_content-block
+features[features_api][] = api:2
+features[views_view][] = related_content
+features_exclude[dependencies][ctools] = ctools

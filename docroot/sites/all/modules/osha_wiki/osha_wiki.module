@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the osha_wiki feature.
+ */
+
+include_once 'osha_wiki.features.inc';

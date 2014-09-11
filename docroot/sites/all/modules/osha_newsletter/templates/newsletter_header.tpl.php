@@ -46,15 +46,18 @@
             </tr>
             <tr>
               <td>
-                <table border="0" cellpadding="20" cellspacing="0" width="100%">
+                <table border="0" cellpadding="15" cellspacing="0" width="100%">
                   <tbody>
                     <tr>
-                      <td style="font-size: 13px;">
-                        <div style="list-style-type: none; width: 688px; padding-left: 0; padding-right: 0px; padding-top: 0px; padding-bottom: 0px; margin-top: 0px; margin-bottom: 0px; font-family: Arial,sans-serif;">
-                          <p>
-                             <a href="#" style="text-decoration: none; color: #003399;">Deutsch</a> | <a href="#" style="text-decoration: none; color: #003399;">Deutsch</a> | <a href="#" style="text-decoration: none; color: #003399;">Deutsch</a> | <a href="#" style="text-decoration: none; color: #003399;">Deutsch</a> | <a href="#" style="text-decoration: none; color: #003399;">Deutsch</a> | <a href="#" style="text-decoration: none; color: #003399;">Deutsch</a>
-                           </p>
-                        </div>
+                      <td style="font-size: 12px; padding-left: 30px; padding-right: 30px; font-family: Arial,sans-serif;">
+                        <?php
+                         if ($languages) {
+                            $last_lang = array_pop($languages);
+                            foreach ($languages as $langcode => $language):?>
+                            <a href="#" style="text-decoration: none; color: #003399;"><?php print $language->name . ' | ';?></a><?php  endforeach; ?> <a href="#" style="text-decoration: none; color: #003399;"><?php print $last_lang->name;?></a>
+                         <?php
+                         }
+                        ?>
                       </td>
                     </tr>
                   </tbody>

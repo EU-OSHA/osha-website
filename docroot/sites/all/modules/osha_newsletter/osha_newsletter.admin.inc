@@ -125,7 +125,7 @@ function osha_newsletter_admin_form() {
       '#type' => 'select',
       '#title' => t('View mode for ').$title,
       '#options' => $options_view_modes,
-      '#default_value' => ($content_type == 'highlight') ? 'highlights_item' : 'newsletter_item',
+      '#default_value' => !empty($term_ct_map['view_mode_'.$content_type]) ? $term_ct_map['view_mode_'.$content_type] : _default_view_mode($content_type),
       '#description' => t('Default view mode when render this content type in newsletter'),
     );
   }
@@ -137,5 +137,13 @@ function osha_newsletter_admin_form() {
   }
 
   return $ret;
+}
+
+function _default_view_mode($content_type){
+  if ($content_type == 'highlight') {
+    return 'highlights_item';
+  } else {
+    return 'newsletter_item';
+  }
 }
 

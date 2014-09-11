@@ -213,6 +213,30 @@ function osha_configure_basic_page() {
 }
 
 /**
+ * Enable translation for the tags taxonomy..
+ */
+function osha_configure_tags_taxonomy() {
+  if (module_load_include('inc', 'taxonomy', 'taxonomy.admin')) {
+    $form_state['values']['i18n_mode'] = 1;
+    $form_state['triggering_element']['#value'] = t('Save');
+    $form_state['triggering_element']['#name'] = 'op';
+    $type = taxonomy_vocabulary_machine_name_load(OSHA_TAXONOMIES_TAGS);
+    drupal_form_submit('taxonomy_form_vocabulary', $form_state, $type);
+    $errors = form_get_errors();
+    if (!empty($errors)) {
+      foreach ($errors as $error) {
+        drupal_set_message(
+          t('Tags setup error: !error', array('!error' => $error))
+        );
+      }
+    }
+  }
+  else {
+    drupal_set_message('osha_configure_tags_taxonomy: taxonomy module not available', 'warning');
+  }
+}
+
+/**
  * Make the field_image field translatable.
  */
 function osha_enable_field_image_translations() {

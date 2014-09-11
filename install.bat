@@ -11,10 +11,6 @@ call drush build
 
 call drush php-script ../scripts/drupal_post_install.php
 
-rem Enable required blocks
-echo "Enable required blocks ..."
-call drush block-configure language --module=locale --region=header
-
 echo "Registering migrations ..."
 call drush migrate-auto-register
 

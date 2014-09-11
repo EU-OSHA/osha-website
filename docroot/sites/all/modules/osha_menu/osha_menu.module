@@ -39,3 +39,18 @@ function osha_menu_menu_block_block_delete($form, $form_state) {
   $delta = $form_state['values']['delta'];
   variable_del('menu_block_' . $delta . '_' . OSHA_MENU_RENDER_IMG_VAR_NAME);
 }
+
+/**
+ * Implements hook_menu_breadcrumb_alter().
+ */
+function osha_menu_breadcrumb_alter(&$active_trail, $item) {
+  // Remove parent items from breadcrumb if same title or path as child
+  // (useful when have <nolink> ex: Emerging Risks/Emerging Risks).
+  foreach ($active_trail as $idx => $link) {
+    if (!empty($link['link_title']) && !empty($active_trail[$idx + 1]['link_title'])) {
+      if (($link['link_title'] == $active_trail[$idx + 1]['link_title'])) {
+        unset($active_trail[$idx]);
+      }
+    }
+  }
+}

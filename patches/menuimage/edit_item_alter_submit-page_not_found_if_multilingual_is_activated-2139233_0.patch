@@ -1,0 +1,10 @@
+--- menuimage.module	2013-11-19 16:28:39.197423567 +0100
++++ menuimage.module.fix	2013-11-19 16:17:17.352604163 +0100
+@@ -118,6 +118,6 @@
+           ->execute();
+       }
+     }
+-    $form_state['redirect'] = ("/admin/structure/menu/item/" . $mlid . "/edit");
++    $form_state['redirect'] = ("admin/structure/menu/item/" . $mlid . "/edit");
+   }
+ }

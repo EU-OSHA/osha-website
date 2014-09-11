@@ -14,7 +14,11 @@ files[] = views/osha_tmgmt.views.inc
 files[] = views/handlers/osha_tmgmt_handler_fields_tmgmt_job_item.inc
 files[] = views/handlers/osha_tmgmt_handler_fields_tmgmt_job.inc
 
+; Plugin
+files[] = sources/entity/osha_tmgmt_entity.plugin.inc
+
 ; Translator integration
+files[] = osha_tmgmt_file.plugin.inc
 files[] = osha_tmgmt.format.cdt.inc
 
 files[] = osha_tmgmt.test

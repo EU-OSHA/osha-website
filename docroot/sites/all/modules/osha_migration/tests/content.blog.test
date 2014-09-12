@@ -38,8 +38,8 @@ class MigrateOshaBlogTest extends OshaWebTestCase {
 
     $query = new EntityFieldQuery();
     $query->entityCondition('entity_type', 'node')
-      ->entityCondition('bundle', OSHA_BLOG_CONTENT_TYPE_BLOG)
-      ->propertyCondition('status', 1);
+      ->entityCondition('bundle', OSHA_BLOG_CONTENT_TYPE_BLOG);
+      //->propertyCondition('status', 1);
     $result = $query->execute();
     $nodes_nids = array();
     if (isset($result['node'])) {

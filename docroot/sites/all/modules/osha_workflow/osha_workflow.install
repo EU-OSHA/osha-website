@@ -19,10 +19,10 @@ function osha_workflow_install() {
   drupal_form_submit('workbench_moderation_admin_transitions_form', $form_state);
 
   // Update the form acces settings auto assign checkbox.
-  /*$form_state = array();
+  $form_state = array();
   drupal_build_form('workbench_access_settings_form', $form_state);
   $form_state['values'] = array(
-    'workbench_access' => 'menu',
+  /*  'workbench_access' => 'menu',
     'workbench_access_menu' => array(
       'main-menu' => 'main-menu',
       'devel' => 0,
@@ -41,7 +41,7 @@ function osha_workflow_install() {
       'section' => 0,
       'tags' => 0,
       'thesaurus' => 0,
-      'workflow_status' => 0,
+      'workflow_status' => 1,
     ),
     'workbench_access_node_type_article' => 1,
     'workbench_access_node_type_page' => 0,
@@ -54,11 +54,12 @@ function osha_workflow_install() {
     'workbench_access_node_type_publication' => 1,
     'workbench_access_node_type_simplenews' => 1,
     'workbench_access_label' => 'Section',
-    'workbench_access_auto_assign' => 0,
+    'workbench_access_auto_assign' => 0,*/
+    'workbench_access' => 'menu',
     'workbench_access_allow_multiple' => 0,
-    'workbench_access_custom_form' => 1,
+    'workbench_access_custom_form' => 0,
   );
   drupal_form_submit('workbench_access_settings_form', $form_state);
-  $form_state['values']['workbench_access_auto_assign'] = 1;
-  drupal_form_submit('workbench_access_settings_form', $form_state);*/
+  //$form_state['values']['workbench_access_auto_assign'] = 1;
+  //drupal_form_submit('workbench_access_settings_form', $form_state);
 }

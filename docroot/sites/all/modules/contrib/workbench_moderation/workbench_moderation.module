@@ -1577,6 +1577,7 @@ function workbench_moderation_moderate($node, $state) {
       ->execute();
     $query = db_update('node_revision')
       ->condition('nid', $node->nid)
+      ->condition('vid', $node->vid, '!=')
       ->fields(array('status' => 0))
       ->execute();
   }

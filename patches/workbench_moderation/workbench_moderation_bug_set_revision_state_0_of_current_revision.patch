@@ -1,0 +1,12 @@
+diff --git a/docroot/sites/all/modules/contrib/workbench_moderation/workbench_moderation.module b/docroot/sites/all/modules/contrib/workbench_moderation/workbench_moderation.module
+index 6c7d5ed..270285f 100644
+--- a/docroot/sites/all/modules/contrib/workbench_moderation/workbench_moderation.module
++++ b/docroot/sites/all/modules/contrib/workbench_moderation/workbench_moderation.module
+@@ -1577,6 +1577,7 @@ function workbench_moderation_moderate($node, $state) {
+       ->execute();
+     $query = db_update('node_revision')
+       ->condition('nid', $node->nid)
++      ->condition('vid', $node->vid, '!=')
+       ->fields(array('status' => 0))
+       ->execute();
+   }

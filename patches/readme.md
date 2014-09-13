@@ -7,6 +7,10 @@ When patching a contrib module, the following steps should be followed:
 
 List of patches (most recent first)
 
+* workbench_moderation
+  * Fix bug when insert/update node, current revision exclude form updating
+  * workbench_moderation/workbench_moderation_bug_set_revision_state_0_of_current_revision.patch
+
 * entity_collection
   * Fix bug when saving different entities with same eid (overwrites one another)
   * entity_collection/entity_collection-entities-with-same-eid.patch

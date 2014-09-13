@@ -40,6 +40,7 @@ abstract class OshaWebTestCase extends DrupalWebTestCase {
         }
       }
     }
+
     $this->setDataDirTestData();
     $this->modulePath = drupal_get_path('module', 'osha_migration');
   }
@@ -809,6 +810,7 @@ class OSHADynamicMigration extends DynamicMigration {
           break;
       }
     }
+    $entity->workbench_access = array('main-menu', 'main-menu');
   }
 
   /**

@@ -28,7 +28,6 @@ function osha_configure_solr() {
   }
   if (!empty($cfg['solr_server'])) {
     if (module_exists('search_api_solr') && module_load_include('inc', 'search_api', 'search_api.admin')) {
-      var_dump('xxxx');
       drupal_set_message('Creating Solr server using machine name: search_server ...');
       $cfg = array_merge(
         array(

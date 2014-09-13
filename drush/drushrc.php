@@ -351,12 +351,12 @@ $options['init-modules'] = array(
   'osha_menu',
   'osha_content',
   'osha_wiki',
+  'osha_workflow',
 
   // Newsletter modules.
   'entity_collection',
   'entity_collection_db',
   'osha_newsletter',
-  'osha_workflow',
 
   // Enable last (conflict with rules)
   'uuid',

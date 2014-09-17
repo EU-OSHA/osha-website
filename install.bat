@@ -17,8 +17,8 @@ call drush migrate-auto-register
 IF NOT "%1"=="--migrate" GOTO DONE
 
 :MIGRATE
-    echo "Importing Activity taxonomy"
-    call drush migrate-import TaxonomyActivity
+    rem echo "Importing Activity taxonomy"
+    rem,call drush migrate-import TaxonomyActivity
 
     echo "Importing NACE codes taxonomy"
     call drush migrate-import TaxonomyNaceCodes

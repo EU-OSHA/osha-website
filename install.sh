@@ -17,8 +17,8 @@ drush migrate-auto-register
 
 if [ "$1" == "--migrate" ]; then
 
-    echo "Importing Activity taxonomy"
-    drush migrate-import TaxonomyActivity
+#    echo "Importing Activity taxonomy"
+#    drush migrate-import TaxonomyActivity
 
     echo "Importing NACE codes taxonomy"
     drush migrate-import TaxonomyNaceCodes

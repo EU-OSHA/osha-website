@@ -335,8 +335,12 @@ $options['init-modules'] = array(
   'workbench',
   'workbench_access',
   'workbench_moderation',
+  // Enable last (conflict with rules)
+  'uuid',
+  'uuid_features',
 
   'osha',
+  'osha_taxonomy',
   'osha_migration',
   'osha_news',
   'osha_publication',
@@ -344,9 +348,9 @@ $options['init-modules'] = array(
   'osha_tmgmt',
   'osha_highlight',
   'osha_menu',
-  'osha_content',
   'osha_wiki',
   'osha_workflow',
+  'osha_content',
 
   'search_api',
   'facetapi',
@@ -363,8 +367,6 @@ $options['init-modules'] = array(
   'entity_collection_db',
   'osha_newsletter',
 
-  // Enable last (conflict with rules)
-  'uuid',
 
   'devel',
   'diff',

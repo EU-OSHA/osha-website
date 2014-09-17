@@ -33,10 +33,10 @@ function osha_migration_migrate_api() {
   $api = array(
     'api' => 2,
     'migrations' => array(
-      OSHA_MIGRATION_TAXONOMY_ACTIVITY => array(
-        'class_name' => 'MigrateOshaTaxonomyActivity',
-        'file_name' => $migration_module_dir . '/data/activity.json',
-      ),
+//      OSHA_MIGRATION_TAXONOMY_ACTIVITY => array(
+//        'class_name' => 'MigrateOshaTaxonomyActivity',
+//        'file_name' => $migration_module_dir . '/data/activity.json',
+//      ),
       OSHA_MIGRATION_TAXONOMY_TAGS => array(
         'class_name' => 'MigrateOshaTaxonomyTags',
         'file_name' => $migration_module_dir . '/data/tags.json',

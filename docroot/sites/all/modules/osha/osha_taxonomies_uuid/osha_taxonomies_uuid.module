@@ -3,3 +3,5 @@
  * @file
  * Code for the osha_taxonomies_uuid feature.
  */
+
+include_once 'osha_taxonomies_uuid.features.uuid_term.inc';

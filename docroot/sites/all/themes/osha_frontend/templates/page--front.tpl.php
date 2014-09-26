@@ -4,6 +4,12 @@
  * Alpha's theme implementation to display a single Drupal page.
  */
 ?>
+<?php
+  // This will remove the 'No front page content has been created yet.'
+  if($is_front) {
+    $page['content']['system_main']['default_message'] = array();
+  }
+?>
 <div id="page">
 <script language="JavaScript">
 	image = new Array(2);

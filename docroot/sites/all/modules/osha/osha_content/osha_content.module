@@ -5,3 +5,16 @@
  */
 
 include_once 'osha_content.features.inc';
+
+/**
+ * Implements hook_uuid_node_features_rebuild_alter().
+ */
+function osha_content_uuid_node_features_rebuild_alter(&$node, $module) {
+  // Workbench integration.
+  if (!empty($node->workbench_moderation)) {
+    if (!empty($node->workbench_moderation['published']['published'])) {
+      $node->workbench_moderation_state_new = 'published';
+    }
+    unset($node->workbench_moderation);
+  }
+}

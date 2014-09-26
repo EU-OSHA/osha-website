@@ -53,11 +53,11 @@
 
 <div id="socialNetworksBlue">
 	<div id="icons">
-		<a href=""><img src="/sites/all/themes/osha_frontend/images/twitterTop.png" alt="Twitter"></a>
-		<a href=""><img src="/sites/all/themes/osha_frontend/images/facebookTop.png" alt="Facebook"></a>
-		<a href=""><img src="/sites/all/themes/osha_frontend/images/inTop.png" alt="In"></a>
-		<a href=""><img src="/sites/all/themes/osha_frontend/images/youTubeTop.png" alt="YouTube"></a>
-		<a href=""><img src="/sites/all/themes/osha_frontend/images/bloggerTop.png" alt="Blogger"></a>
+		<a href="https://twitter.com/eu_osha"><img src="/sites/all/themes/osha_frontend/images/twitterTop.png" alt="Twitter"></a>
+		<a href="https://www.facebook.com/EuropeanAgencyforSafetyandHealthatWork"><img src="/sites/all/themes/osha_frontend/images/facebookTop.png" alt="Facebook"></a>
+		<a href="http://www.linkedin.com/company/european-agency-for-safety-and-health-at-work"><img src="/sites/all/themes/osha_frontend/images/inTop.png" alt="In"></a>
+		<a href="https://www.youtube.com/user/EUOSHA"><img src="/sites/all/themes/osha_frontend/images/youTubeTop.png" alt="YouTube"></a>
+		<a href="https://osha.europa.eu/en/about/director_corner/blog"><img src="/sites/all/themes/osha_frontend/images/bloggerTop.png" alt="Blogger"></a>
 	</div>
 </div>
 <div id="languagesAndSearch">

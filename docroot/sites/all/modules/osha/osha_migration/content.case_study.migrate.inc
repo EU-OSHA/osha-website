@@ -13,10 +13,10 @@ class MigrateOshaCaseStudy extends OSHADynamicMigration {
     parent::__construct(MigrateGroup::getInstance('OSHA Content types'));
     $this->description = 'Import "CaseStudy" contents from CSV file';
     $this->dependencies = array(
-      OSHA_MIGRATION_TAXONOMY_TAGS,
+//      OSHA_MIGRATION_TAXONOMY_TAGS,
       OSHA_MIGRATION_TAXONOMY_THESAURUS,
       OSHA_MIGRATION_TAXONOMY_NACE_CODES,
-      OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES,
+//      OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES,
       OSHA_MIGRATION_FILES,
     );
 

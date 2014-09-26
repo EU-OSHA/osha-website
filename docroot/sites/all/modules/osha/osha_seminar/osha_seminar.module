@@ -1,0 +1,9 @@
+<?php
+/**
+ * @file
+ * Code for the Seminar feature.
+ */
+
+include_once 'osha_seminar.features.inc';
+
+define('OSHA_SEMINAR_CONTENT_TYPE_SEMINAR', 'seminar');

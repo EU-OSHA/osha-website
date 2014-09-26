@@ -8,8 +8,17 @@
             <tr>
               <td width="396" style="padding-top: 0px;" class="left-column">
                 <?php
-                  foreach ($items as $item) {
-                    print(render($item));
+                  $elements_no = sizeof($items);
+                  foreach ($items as $idx => $item) {
+                    if ($item['#entity_type'] == 'taxonomy_term' && ($idx+1 < $elements_no)) {
+                      if ($items[$idx+1]['#entity_type'] == 'taxonomy_term') {
+                        continue;
+                      } else {
+                        print(render($item));
+                      }
+                    } else {
+                      print(render($item));
+                    }
                   }
                 ?>
               </td>

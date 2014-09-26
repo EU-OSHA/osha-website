@@ -14,7 +14,6 @@ osha_configure_file_translator();
 osha_newsletter_create_taxonomy();
 osha_configure_newsletter_permissions();
 osha_configure_search_autocomplete();
-osha_configure_feeds();
 osha_configure_addtoany_social_share();
 osha_disable_blocks();
 
@@ -226,52 +225,6 @@ function osha_configure_search_autocomplete() {
   else {
     drupal_set_message('Failed to configure search_autocomplete form', 'error');
   }
-}
-
-/**
- * Add configuration to wiki feed.
- */
-function osha_configure_feeds() {
-  drupal_set_message('Configuring Wiki Feed ...');
-  $importers = feeds_importer_load_all(FALSE);
-  $permissions = array();
-  foreach ($importers as $feed_id => $importer) {
-    $source = feeds_source($feed_id);
-    $config = $importer->getConfig();
-    $config = $config['fetcher']['config'];
-    $url = $config['crawler']['url']['url_pattern'];
-    $source_config['FeedsCrawler'] = array(
-      'source' => $url,
-      'crawler' => $config['crawler'],
-      'crawled' => $config['crawled'],
-      'osh_wiki_importer_language' => $config['crawler']['osh_wiki_importer_language'],
-    );
-    $source->addConfig($source_config);
-    $source->schedule();
-    $importer->schedule();
-    $source->save();
-    $source->startImport();
-
-    $permissions[] = sprintf('import %s feeds', $feed_id);
-    $permissions[] = sprintf('clear %s feeds', $feed_id);
-    $permissions[] = sprintf('unlock %s feeds', $feed_id);
-    variable_set($feed_id, $config['crawler']['osh_wiki_importer_language']);
-  }
-
-  // TODO: Delete malformed nodes created by import. Imports when created.
-  $query = new EntityFieldQuery();
-  $query->entityCondition('entity_type', 'node')
-    ->entityCondition('bundle', 'wiki_page');
-  $result = $query->execute();
-  if (isset($result['node'])) {
-    $nids = array_keys($result['node']);
-    node_delete_multiple($nids);
-    drupal_set_message('Removed !count malformed wiki nodes :-) ', array('!count' => count($nids)));
-  }
-
-  // Grant permissions on all feeds to administrator role.
-  $administrator = user_role_load_by_name('administrator');
-  user_role_grant_permissions($administrator->rid, $permissions);
 }
 
 /**

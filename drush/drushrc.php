@@ -279,11 +279,10 @@ $options['init-modules'] = array(
   'taxonomy_access_fix',
   'date',
   'migrate',
+  'migrate_ui',
   'features',
-  'feeds',
-  'feeds_ui',
-  'feeds_crawler',
 
+  'field_group',
   'entityreference',
   'link',
   'title',
@@ -348,7 +347,7 @@ $options['init-modules'] = array(
   'workbench_moderation',
 
   'osha_taxonomies',
-  'osha_taxonomies_uuid',
+//  'osha_taxonomies_uuid',
   'osha',
   'osha_migration',
   'osha_news',
@@ -359,7 +358,8 @@ $options['init-modules'] = array(
   'osha_menu',
   'osha_wiki',
   'osha_workflow',
-  'osha_content',
+  'osha_blocks',
+//  'osha_content',
 
   'search_api',
   'facetapi',
@@ -371,6 +371,10 @@ $options['init-modules'] = array(
   'entity_collection',
   'entity_collection_db',
   'osha_newsletter',
+
+  // Captcha
+  'captcha',
+  'image_captcha',
 
   // Social share
   'addtoany',

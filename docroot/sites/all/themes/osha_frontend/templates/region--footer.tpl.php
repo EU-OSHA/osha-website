@@ -56,10 +56,10 @@
 	(C) EU-OSHA 2014 | <a onclick="notImplemented()">Site Map</a> | <a onclick="notImplemented()">Contact Us</a> | <a onclick="notImplemented()">Press</a> | <a onclick="notImplemented()">Accessibility</a> | <a onclick="notImplemented()">Privacy Policy</a>
 	</div>
 	<div id="socialNetworksFooter">
-		<a onclick="notImplemented()"><img src="/sites/all/themes/osha_frontend/images/footer-tw.png" alt="Twitter"></a>
-		<a onclick="notImplemented()"><img src="/sites/all/themes/osha_frontend/images/footer-fb.png" alt="Facebook"></a>
-		<a onclick="notImplemented()"><img src="/sites/all/themes/osha_frontend/images/footer-in.png" alt="In"></a>
-		<a onclick="notImplemented()"><img src="/sites/all/themes/osha_frontend/images/footer-ytb.png" alt="YouTube"></a>
-		<a onclick="notImplemented()"><img src="/sites/all/themes/osha_frontend/images/footer-b.png" alt="Blogger"></a>
+		<a href="https://twitter.com/eu_osha"><img src="/sites/all/themes/osha_frontend/images/footer-tw.png" alt="Twitter"></a>
+		<a href="https://www.facebook.com/EuropeanAgencyforSafetyandHealthatWork"><img src="/sites/all/themes/osha_frontend/images/footer-fb.png" alt="Facebook"></a>
+		<a href="http://www.linkedin.com/company/european-agency-for-safety-and-health-at-work"><img src="/sites/all/themes/osha_frontend/images/footer-in.png" alt="LinkedIn"></a>
+		<a href="https://www.youtube.com/user/EUOSHA"><img src="/sites/all/themes/osha_frontend/images/footer-ytb.png" alt="YouTube"></a>
+		<a href="https://osha.europa.eu/en/about/director_corner/blog"><img src="/sites/all/themes/osha_frontend/images/footer-b.png" alt="Blogger"></a>
 	</div>
 </footer>

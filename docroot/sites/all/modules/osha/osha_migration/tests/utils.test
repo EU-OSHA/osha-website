@@ -7,6 +7,8 @@ class MigrationUtilTest extends OshaWebTestCase {
 
   private $tmpFile = NULL;
 
+  private $selected_terms;
+
   /**
    * Test information.
    *
@@ -32,31 +34,19 @@ class MigrationUtilTest extends OshaWebTestCase {
 
     $voc = taxonomy_vocabulary_machine_name_load(OSHA_TAXONOMIES_TAGS);
 
-    $term1 = new stdClass();
-    $term1->name = 'Accident prevention';
-    $term1->name_field['en'][0]['value'] = 'Accident prevention';
-    $term1->name_field['ro'][0]['value'] = 'Prevenirea accidentelor';
-    $term1->field_tags_code['und'][0]['value'] = 'accident_prevention';
-    $term1->vid = $voc->vid;
-    taxonomy_term_save($term1);
-    $this->assertEqual(2, $term1->tid);
+    $terms = taxonomy_get_tree($voc->vid);
+    $this->assertEqual(36, count($terms));
 
-    $term2 = new stdClass();
-    $term2->name = 'Dangerous substances';
-    $term2->name_field['en'][0]['value'] = 'Dangerous substances';
-    $term2->name_field['ro'][0]['value'] = 'Substanţe periculoase';
-    $term2->field_tags_code['und'][0]['value'] = 'dangerous_substances';
-    $term2->vid = $voc->vid;
-    taxonomy_term_save($term2);
-    $this->assertEqual(3, $term2->tid);
-
-    $term3 = new stdClass();
-    $term3->name = 'Health care';
-    $term3->name_field['en'][0]['value'] = 'Health care';
-    $term3->field_tags_code['und'][0]['value'] = 'health_care';
-    $term3->vid = $voc->vid;
-    taxonomy_term_save($term3);
-    $this->assertEqual(4, $term3->tid);
+    $selected_terms = array(
+      '2dd789d4-c119-466a-8791-85c8635d9ca1' => 'Accident prevention',
+      '123af0ff-7a0b-42a9-b0c3-de32c80522fb' => 'Dangerous substances',
+      '84a1bd37-d7af-4d5f-9c14-bb25e3d0d28c' => 'Health Care',
+    );
+    $some_terms = entity_uuid_load('taxonomy_term', array_keys($selected_terms));
+    foreach ($some_terms as $term) {
+      $this->assertEqual($selected_terms[$term->uuid], $term->name);
+    }
+    $this->selected_terms = $some_terms;
   }
 
   /**
@@ -99,8 +89,9 @@ class MigrationUtilTest extends OshaWebTestCase {
       OSHA_TAXONOMIES_TAGS
     );
     $this->assertEqual(2, count($subject));
-    $this->assertTrue(in_array(2, $subject));
-    $this->assertTrue(in_array(3, $subject));
+    foreach ($subject as $tid) {
+      $this->assertTrue(array_key_exists($tid, $this->selected_terms));
+    }
 
     $subject = MigrationUtil::findTidByTaxonomyField(
       array(' dangerous_substances', 'x'),
@@ -108,7 +99,9 @@ class MigrationUtilTest extends OshaWebTestCase {
       OSHA_TAXONOMIES_TAGS
     );
     $this->assertEqual(1, count($subject));
-    $this->assertTrue(in_array(3, $subject));
+    foreach ($subject as $tid) {
+      $this->assertTrue(array_key_exists($tid, $this->selected_terms));
+    }
 
     $subject = MigrationUtil::findTidByTaxonomyField(
       array(' Dangerous substances ', ' Accident prevention', '  '),
@@ -117,8 +110,9 @@ class MigrationUtilTest extends OshaWebTestCase {
       'en'
     );
     $this->assertEqual(2, count($subject));
-    $this->assertTrue(in_array(2, $subject));
-    $this->assertTrue(in_array(3, $subject));
+    foreach ($subject as $tid) {
+      $this->assertTrue(array_key_exists($tid, $this->selected_terms));
+    }
 
     $subject = MigrationUtil::findTidByTaxonomyField(
       array(' Prevenirea accidentelor ', ' Substanţe periculoase', '  '),
@@ -127,8 +121,9 @@ class MigrationUtilTest extends OshaWebTestCase {
       'ro'
     );
     $this->assertEqual(2, count($subject));
-    $this->assertTrue(in_array(2, $subject));
-    $this->assertTrue(in_array(3, $subject));
+    foreach ($subject as $tid) {
+      $this->assertTrue(array_key_exists($tid, $this->selected_terms));
+    }
 
     $subject = MigrationUtil::findTidByTaxonomyField(
       NULL,
@@ -149,8 +144,9 @@ class MigrationUtilTest extends OshaWebTestCase {
       accident_prevention::falls, accident_prevention::fire'
     );
     $this->assertEqual(2, count($subject));
-    $this->assertTrue(in_array(2, $subject));
-    $this->assertTrue(in_array(3, $subject));
+    foreach ($subject as $tid) {
+      $this->assertTrue(array_key_exists($tid, $this->selected_terms));
+    }
 
     $subject = MigrationUtil::decodeTagsTerms(NULL);
     $this->assertEqual(0, count($subject));
@@ -160,8 +156,9 @@ class MigrationUtilTest extends OshaWebTestCase {
       'field_tags_code', TRUE
     );
     $this->assertEqual(2, count($subject));
-    $this->assertTrue(in_array(2, $subject));
-    $this->assertTrue(in_array(4, $subject));
+    foreach ($subject as $tid) {
+      $this->assertTrue(array_key_exists($tid, $this->selected_terms));
+    }
   }
 
   /**
@@ -188,13 +185,13 @@ class MigrationUtilTest extends OshaWebTestCase {
    */
   public function testFindTermByFieldValue() {
     $tid = MigrationUtil::findTermByFieldValue('accident_prevention', 'field_tags_code');
-    $this->assertEqual(2, $tid);
+    $this->assertTrue(array_key_exists($tid, $this->selected_terms));
 
     $tid = MigrationUtil::findTermByFieldValue('Substanţe periculoase', 'name_field');
-    $this->assertEqual(3, $tid);
+    $this->assertTrue(array_key_exists($tid, $this->selected_terms));
 
-    $tid = MigrationUtil::findTermByFieldValue('Dangerous substances', 'name');
-    $this->assertNull($tid);
+    $tid = MigrationUtil::findTermByFieldValue('Dangerous substances', 'name', TRUE);
+    $this->assertTrue(array_key_exists($tid, $this->selected_terms));
   }
 
   /**

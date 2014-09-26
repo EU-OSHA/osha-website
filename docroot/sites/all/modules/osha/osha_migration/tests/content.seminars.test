@@ -1,0 +1,239 @@
+<?php
+
+/**
+ * Class MigrateOshaSeminarsTest tests seminar content type migration
+ */
+class MigrateOshaSeminarsTest extends OshaWebTestCase {
+
+  /**
+   * Test information.
+   *
+   * {@inheritdoc}
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'OSHA seminars migration testing',
+      'description' => 'Tests the Seminar migration',
+      'group' => 'OSHA',
+    );
+  }
+
+  /**
+   * Test the migration.
+   */
+  public function testMigration() {
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/thesaurus.json';
+    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_THESAURUS, 'MigrateOshaTaxonomyThesaurus', $source_file);
+
+//    $source_file = drupal_get_path('module', 'osha_migration') . '/data/tags.json';
+//    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_TAGS, 'MigrateOshaTaxonomyTags', $source_file);
+
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/seminars.txt';
+    $result = MigrationUtil::runMigration(OSHA_MIGRATION_CONTENT_TYPE_SEMINAR, 'OshaMigrateSeminars', $source_file);
+
+    $this->assertEqual($result, Migration::RESULT_COMPLETED);
+
+    $query = new EntityFieldQuery();
+    $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', OSHA_SEMINAR_CONTENT_TYPE_SEMINAR)
+      ->propertyCondition('status', 1);
+    $result = $query->execute();
+    $nodes = array();
+    if (isset($result['node'])) {
+      $nodes_nids = array_keys($result['node']);
+      $nodes = entity_load('node', $nodes_nids);
+    }
+
+    $class = new SeminarsListCSV($source_file);
+    $class->getIdList();
+    $data = $class::$data;
+    // One item is broken, two are good.
+    $this->assertEqual(2, count($nodes));
+
+    $node = current($nodes);
+
+    $path = path_load('node/' . $node->nid);
+    $path = $path['alias'];
+    $witness = $data[$path];
+
+    $this->assertEqual(strtotime($witness['creation_date']), $node->created);
+    $this->assertEqual(strtotime($witness['modification_date']), $node->changed);
+    $this->assertEqual(
+      strtotime($witness['publication_date']),
+      strtotime($node->field_publication_date[LANGUAGE_NONE][0]['value'])
+    );
+    $this->assertEqual(
+      strtotime($witness['startDate']),
+      strtotime($node->field_seminar_start_date[LANGUAGE_NONE][0]['value'])
+    );
+    $this->assertEqual(
+      strtotime($witness['endDate']),
+      strtotime($node->field_seminar_end_date[LANGUAGE_NONE][0]['value'])
+    );
+
+    $this->assertEqual(
+      $witness['dateToBeConfirmed'],
+      $node->field_sem_date_to_be_confirmed[LANGUAGE_NONE][0]['value']
+    );
+
+    $this->assertEqual(
+      $witness['contactName'],
+      $node->field_seminar_contact_name[LANGUAGE_NONE][0]['value']
+    );
+
+    $this->assertEqual(
+      $witness['contactPhone'],
+      $node->field_seminar_contact_phone[LANGUAGE_NONE][0]['value']
+    );
+
+    $this->assertEqual(
+      $witness['contactEmail'],
+      $node->field_seminar_contact_email[LANGUAGE_NONE][0]['value']
+    );
+
+    $this->assertEqual(
+      $witness['showRosterHour'],
+      $node->field_seminar_show_roster_hour[LANGUAGE_NONE][0]['value']
+    );
+    $languages = language_list();
+    foreach ($witness['path'] as $lang_code => $path) {
+      $this->drupalGet(
+        $path,
+        array("language" => $languages[$lang_code])
+      );
+      $this->assertText($node->title_field[$lang_code][0]['value']);
+    }
+
+    foreach ($witness['title_field'] as $language => $title) {
+      $this->assertEqual($title, $node->title_field[$language][0]['value']);
+    }
+
+    foreach ($witness['description'] as $language => $description) {
+      if (!empty($description)) {
+        $this->assertEqual(
+          str_replace('<@#&>', '"', $description),
+          $node->body[$language][0]['value']);
+      }
+      else {
+        $this->assertTrue(!isset($node->body[$language]));
+      }
+    }
+
+    foreach ($witness['summary'] as $language => $text) {
+      if (!empty($text)) {
+        $this->assertEqual(
+          str_replace('<@#&>', '"', $text),
+          $node->field_summary[$language][0]['value']);
+      }
+      else {
+        $this->assertTrue(!isset($node->field_summary[$language]));
+      }
+    }
+
+    foreach ($witness['attendees'] as $language => $info) {
+      if (!empty($info)) {
+        $this->assertEqual(
+          MigrationUtil::decodeHTMLText($info),
+          $node->field_seminar_attendees[$language][0]['value']);
+      }
+      else {
+        $this->assertTrue(!isset($node->field_seminar_attendees[$language]));
+      }
+    }
+
+    foreach ($witness['location'] as $language => $info) {
+      if (!empty($info)) {
+        $this->assertEqual(
+          str_replace('<@#&>', '"', $info),
+          $node->field_seminar_location[$language][0]['value']);
+      }
+      else {
+        $this->assertTrue(!isset($node->field_seminar_location[$language]));
+      }
+    }
+
+    foreach ($witness['eventUrl'] as $language => $info) {
+      if (!empty($info)) {
+        $this->assertEqual(
+          $info,
+          $node->field_seminar_event_url[$language][0]['url']);
+      }
+      else {
+        $this->assertTrue(!isset($node->field_seminar_event_url[$language]));
+      }
+    }
+
+    foreach ($witness['conclusions'] as $language => $info) {
+      if (!empty($info)) {
+        $this->assertEqual(
+          str_replace('<@#&>', '"', $info),
+          $node->field_seminar_conclusions[$language][0]['value']);
+      }
+      else {
+        $this->assertTrue(!isset($node->field_seminar_conclusions[$language]));
+      }
+    }
+
+    foreach ($witness['furtherActions'] as $language => $info) {
+      if (!empty($info)) {
+        $this->assertEqual(
+          str_replace('<@#&>', '"', $info),
+          $node->field_seminar_further_actions[$language][0]['value']);
+      }
+      else {
+        $this->assertTrue(!isset($node->field_seminar_further_actions[$language]));
+      }
+    }
+
+    foreach ($witness['attachment'] as $language => $file) {
+      if (!empty($file)) {
+        $file_name = $node->field_seminar_attachment[$language][0]['uri'];
+        $file_name = str_replace('public://seminars/documents', '', $file_name);
+        $this->assertEqual($file_name, $file);
+      }
+    }
+    foreach ($witness['logo'] as $language => $file) {
+      if (!empty($file)) {
+        $file_name = $node->field_image[$language][0]['uri'];
+        $file_name = str_replace('public://seminars/logos', '', $file_name);
+        $this->assertEqual($file_name, $file);
+      }
+    }
+    foreach ($witness['files'] as $language => $files) {
+      for ($i = 0; $i < count($files); $i++) {
+        if (!empty($files[$i])) {
+          $file_name = $node->field_file[$language][$i]['uri'];
+          $file_name = str_replace('public://seminars/documents', '', $file_name);
+          $this->assertEqual($file_name, $files[$i]);
+        }
+      }
+    }
+
+    $this->assertEqual(2, count($node->field_tags[LANGUAGE_NONE]));
+    $tids = array(
+      $node->field_tags[LANGUAGE_NONE][0]['tid'],
+      $node->field_tags[LANGUAGE_NONE][1]['tid'],
+    );
+    $tags = taxonomy_term_load_multiple($tids);
+    $terms = array();
+    foreach ($tags as $term) {
+      $terms[] = $term->field_tags_code[LANGUAGE_NONE][0]['value'];
+    }
+    $this->assertTrue(in_array('women_and_osh', $terms));
+    $this->assertTrue(in_array('legislation', $terms));
+
+    $this->assertEqual(2, count($node->field_thesaurus[LANGUAGE_NONE]));
+    $thesaurus_ids = array(
+      $node->field_thesaurus[LANGUAGE_NONE][0]['tid'],
+      $node->field_thesaurus[LANGUAGE_NONE][1]['tid'],
+    );
+
+    $thesaurus = taxonomy_term_load_multiple($thesaurus_ids);
+    $terms = array();
+    foreach ($thesaurus as $term) {
+      $terms[] = $term->field_thesaurus_code[LANGUAGE_NONE][0]['value'];
+    }
+    $this->assertTrue(in_array('06641B', $terms));
+    $this->assertTrue(in_array('07401C', $terms));
+  }
+}

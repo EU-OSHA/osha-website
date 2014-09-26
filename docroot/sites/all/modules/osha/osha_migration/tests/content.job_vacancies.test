@@ -31,8 +31,8 @@ class MigrateOshaJobVacanciesTest extends OshaWebTestCase {
     $source_file = $data_path . '/thesaurus.json';
     MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_THESAURUS, 'MigrateOshaTaxonomyThesaurus', $source_file);
 
-    $source_file = $module_path . '/data/tags.json';
-    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_TAGS, 'MigrateOshaTaxonomyTags', $source_file);
+//    $source_file = $module_path . '/data/tags.json';
+//    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_TAGS, 'MigrateOshaTaxonomyTags', $source_file);
 
     $source_file = $data_path . '/job_vacancies.txt';
     $result = MigrationUtil::runMigration(OSHA_MIGRATION_CONTENT_TYPE_JOB_VACANCIES, 'OshaMigrateJobVacancies', $source_file);

@@ -25,8 +25,8 @@ class MigrateOshaNewsTest extends OshaWebTestCase {
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/thesaurus.json';
     MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_THESAURUS, 'MigrateOshaTaxonomyThesaurus', $source_file);
 
-    $source_file = drupal_get_path('module', 'osha_migration') . '/data/tags.json';
-    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_TAGS, 'MigrateOshaTaxonomyTags', $source_file);
+//    $source_file = drupal_get_path('module', 'osha_migration') . '/data/tags.json';
+//    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_TAGS, 'MigrateOshaTaxonomyTags', $source_file);
 
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/news.txt';
     $result = MigrationUtil::runMigration(OSHA_MIGRATION_CONTENT_TYPE_NEWS, 'MigrateOshaNews', $source_file);

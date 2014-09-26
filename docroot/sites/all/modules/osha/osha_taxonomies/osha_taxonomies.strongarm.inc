@@ -151,10 +151,11 @@ function osha_taxonomies_strongarm() {
     'tags' => 'tags',
     'activity' => 'activity',
     'article_types' => 'article_types',
+    'esener' => 'esener',
+    'publication_types' => 'publication_types',
     'newsletter_sections' => 'newsletter_sections',
-    'esener' => 0,
+    'wiki_categories' => 'wiki_categories',
     'nace_codes' => 0,
-    'publication_types' => 0,
     'section' => 0,
     'thesaurus' => 0,
     'workflow_status' => 0,
@@ -168,14 +169,15 @@ function osha_taxonomies_strongarm() {
   $strongarm->value = array(
     'tags' => 0,
     'activity' => 0,
+    'article_types' => 0,
     'esener' => 0,
     'nace_codes' => 0,
-    'publication_types' => 0,
-    'article_types' => 0,
     'section' => 0,
     'thesaurus' => 0,
     'workflow_status' => 0,
+    'publication_types' => 0,
     'newsletter_sections' => 0,
+    'wiki_categories' => 0,
   );
   $export['uuid_features_file_taxonomy_term'] = $strongarm;
 

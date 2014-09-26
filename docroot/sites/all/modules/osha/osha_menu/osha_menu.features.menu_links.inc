@@ -35,7 +35,7 @@ function osha_menu_menu_default_menu_links() {
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_campaigns:node/14',
+    'parent_identifier' => 'main-menu_campaigns:node/15',
   );
   // Exported menu link: main-menu_2014-15-psychosocial-risks:<front>
   $menu_links['main-menu_2014-15-psychosocial-risks:<front>'] = array(
@@ -62,7 +62,7 @@ function osha_menu_menu_default_menu_links() {
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_campaigns:node/14',
+    'parent_identifier' => 'main-menu_campaigns:node/15',
   );
   // Exported menu link: main-menu_ageing-and-osh:node/1
   $menu_links['main-menu_ageing-and-osh:node/1'] = array(
@@ -71,9 +71,7 @@ function osha_menu_menu_default_menu_links() {
     'router_path' => 'node/%',
     'link_title' => 'Ageing and OSH',
     'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
+      'attributes' => array(),
       'identifier' => 'main-menu_ageing-and-osh:node/1',
       'content' => array(
         'image' => 'public://menuimage/ageing.jpg',
@@ -90,7 +88,7 @@ function osha_menu_menu_default_menu_links() {
     'language' => 'und',
     'menu_links_customized' => 1,
     'item_uuid' => '106bb0f7-5519-42a4-8310-5773d228a335',
-    'parent_identifier' => 'main-menu_themes:node/13',
+    'parent_identifier' => 'main-menu_themes:node/14',
   );
   // Exported menu link: main-menu_awards:node/4
   $menu_links['main-menu_awards:node/4'] = array(
@@ -99,9 +97,7 @@ function osha_menu_menu_default_menu_links() {
     'router_path' => 'node/%',
     'link_title' => 'Awards',
     'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
+      'attributes' => array(),
       'identifier' => 'main-menu_awards:node/4',
       'alter' => TRUE,
     ),
@@ -140,17 +136,15 @@ function osha_menu_menu_default_menu_links() {
     'language' => 'und',
     'menu_links_customized' => 1,
   );
-  // Exported menu link: main-menu_campaigns:node/14
-  $menu_links['main-menu_campaigns:node/14'] = array(
+  // Exported menu link: main-menu_campaigns:node/15
+  $menu_links['main-menu_campaigns:node/15'] = array(
     'menu_name' => 'main-menu',
-    'link_path' => 'node/14',
+    'link_path' => 'node/15',
     'router_path' => 'node/%',
     'link_title' => 'Campaigns',
     'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-      'identifier' => 'main-menu_campaigns:node/14',
+      'attributes' => array(),
+      'identifier' => 'main-menu_campaigns:node/15',
       'alter' => TRUE,
     ),
     'module' => 'menu',
@@ -165,17 +159,15 @@ function osha_menu_menu_default_menu_links() {
     'item_uuid' => 'd5745241-8849-44c4-8adb-2a07d1407afb',
     'parent_identifier' => 'main-menu_campaigns:<nolink>',
   );
-  // Exported menu link: main-menu_careers:node/18
-  $menu_links['main-menu_careers:node/18'] = array(
+  // Exported menu link: main-menu_careers:node/19
+  $menu_links['main-menu_careers:node/19'] = array(
     'menu_name' => 'main-menu',
-    'link_path' => 'node/18',
+    'link_path' => 'node/19',
     'router_path' => 'node/%',
     'link_title' => 'Careers',
     'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-      'identifier' => 'main-menu_careers:node/18',
+      'attributes' => array(),
+      'identifier' => 'main-menu_careers:node/19',
       'alter' => TRUE,
     ),
     'module' => 'menu',
@@ -188,19 +180,17 @@ function osha_menu_menu_default_menu_links() {
     'language' => 'und',
     'menu_links_customized' => 1,
     'item_uuid' => 'f4afeb3b-6a7f-4e28-ac56-0d1b9746c5b3',
-    'parent_identifier' => 'main-menu_inside-eu-osha:node/11',
+    'parent_identifier' => 'main-menu_inside-eu-osha:node/12',
   );
-  // Exported menu link: main-menu_costs-and-benefits-of-osh:node/19
-  $menu_links['main-menu_costs-and-benefits-of-osh:node/19'] = array(
+  // Exported menu link: main-menu_costs-and-benefits-of-osh:node/20
+  $menu_links['main-menu_costs-and-benefits-of-osh:node/20'] = array(
     'menu_name' => 'main-menu',
-    'link_path' => 'node/19',
+    'link_path' => 'node/20',
     'router_path' => 'node/%',
     'link_title' => 'Costs and benefits of OSH',
     'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-      'identifier' => 'main-menu_costs-and-benefits-of-osh:node/19',
+      'attributes' => array(),
+      'identifier' => 'main-menu_costs-and-benefits-of-osh:node/20',
       'content' => array(
         'image' => 'public://menuimage/benefits-of-osh.jpg',
       ),
@@ -216,7 +206,7 @@ function osha_menu_menu_default_menu_links() {
     'language' => 'und',
     'menu_links_customized' => 1,
     'item_uuid' => 'fd81ac64-3deb-4118-b4aa-b499e0e2e576',
-    'parent_identifier' => 'main-menu_themes:node/13',
+    'parent_identifier' => 'main-menu_themes:node/14',
   );
   // Exported menu link: main-menu_country-specific-legislation:<front>
   $menu_links['main-menu_country-specific-legislation:<front>'] = array(
@@ -267,7 +257,7 @@ function osha_menu_menu_default_menu_links() {
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_themes:node/13',
+    'parent_identifier' => 'main-menu_themes:node/14',
   );
   // Exported menu link: main-menu_emerging-risks:<nolink>
   $menu_links['main-menu_emerging-risks:<nolink>'] = array(
@@ -299,9 +289,7 @@ function osha_menu_menu_default_menu_links() {
     'router_path' => 'node/%',
     'link_title' => 'Emerging Risks',
     'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
+      'attributes' => array(),
       'identifier' => 'main-menu_emerging-risks:node/3',
       'alter' => TRUE,
     ),
@@ -344,17 +332,15 @@ function osha_menu_menu_default_menu_links() {
     'menu_links_customized' => 1,
     'parent_identifier' => 'main-menu_surveys--statistics:node/5',
   );
-  // Exported menu link: main-menu_eu-directives:node/9
-  $menu_links['main-menu_eu-directives:node/9'] = array(
+  // Exported menu link: main-menu_eu-directives:node/10
+  $menu_links['main-menu_eu-directives:node/10'] = array(
     'menu_name' => 'main-menu',
-    'link_path' => 'node/9',
+    'link_path' => 'node/10',
     'router_path' => 'node/%',
     'link_title' => 'EU Directives',
     'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-      'identifier' => 'main-menu_eu-directives:node/9',
+      'attributes' => array(),
+      'identifier' => 'main-menu_eu-directives:node/10',
       'alter' => TRUE,
     ),
     'module' => 'menu',
@@ -367,7 +353,7 @@ function osha_menu_menu_default_menu_links() {
     'language' => 'und',
     'menu_links_customized' => 1,
     'item_uuid' => '6f6f90f0-e453-40af-b0bd-593af4da286f',
-    'parent_identifier' => 'main-menu_european-legislation:node/12',
+    'parent_identifier' => 'main-menu_european-legislation:node/13',
   );
   // Exported menu link: main-menu_eu-guidelines:<front>
   $menu_links['main-menu_eu-guidelines:<front>'] = array(
@@ -391,7 +377,7 @@ function osha_menu_menu_default_menu_links() {
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_european-legislation:node/12',
+    'parent_identifier' => 'main-menu_european-legislation:node/13',
   );
   // Exported menu link: main-menu_eu-osh-standards:node/7
   $menu_links['main-menu_eu-osh-standards:node/7'] = array(
@@ -400,9 +386,7 @@ function osha_menu_menu_default_menu_links() {
     'router_path' => 'node/%',
     'link_title' => 'EU OSH Standards',
     'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
+      'attributes' => array(),
       'identifier' => 'main-menu_eu-osh-standards:node/7',
       'alter' => TRUE,
     ),
@@ -416,19 +400,17 @@ function osha_menu_menu_default_menu_links() {
     'language' => 'und',
     'menu_links_customized' => 1,
     'item_uuid' => '57d9e0dc-976e-4e5d-b792-ba007ccb98a9',
-    'parent_identifier' => 'main-menu_european-legislation:node/12',
+    'parent_identifier' => 'main-menu_european-legislation:node/13',
   );
-  // Exported menu link: main-menu_european-legislation:node/12
-  $menu_links['main-menu_european-legislation:node/12'] = array(
+  // Exported menu link: main-menu_european-legislation:node/13
+  $menu_links['main-menu_european-legislation:node/13'] = array(
     'menu_name' => 'main-menu',
-    'link_path' => 'node/12',
+    'link_path' => 'node/13',
     'router_path' => 'node/%',
     'link_title' => 'European Legislation',
     'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-      'identifier' => 'main-menu_european-legislation:node/12',
+      'attributes' => array(),
+      'identifier' => 'main-menu_european-legislation:node/13',
       'alter' => TRUE,
     ),
     'module' => 'menu',
@@ -492,7 +474,7 @@ function osha_menu_menu_default_menu_links() {
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_campaigns:node/14',
+    'parent_identifier' => 'main-menu_campaigns:node/15',
   );
   // Exported menu link: main-menu_further-themes-via-oshwiki:<front>
   $menu_links['main-menu_further-themes-via-oshwiki:<front>'] = array(
@@ -519,7 +501,7 @@ function osha_menu_menu_default_menu_links() {
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_themes:node/13',
+    'parent_identifier' => 'main-menu_themes:node/14',
   );
   // Exported menu link: main-menu_future-campaigns:<front>
   $menu_links['main-menu_future-campaigns:<front>'] = array(
@@ -546,7 +528,7 @@ function osha_menu_menu_default_menu_links() {
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_campaigns:node/14',
+    'parent_identifier' => 'main-menu_campaigns:node/15',
   );
   // Exported menu link: main-menu_good-practice-awards:<front>
   $menu_links['main-menu_good-practice-awards:<front>'] = array(
@@ -597,19 +579,17 @@ function osha_menu_menu_default_menu_links() {
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_inside-eu-osha:node/11',
+    'parent_identifier' => 'main-menu_inside-eu-osha:node/12',
   );
-  // Exported menu link: main-menu_green-jobs:node/16
-  $menu_links['main-menu_green-jobs:node/16'] = array(
+  // Exported menu link: main-menu_green-jobs:node/17
+  $menu_links['main-menu_green-jobs:node/17'] = array(
     'menu_name' => 'main-menu',
-    'link_path' => 'node/16',
+    'link_path' => 'node/17',
     'router_path' => 'node/%',
     'link_title' => 'Green jobs',
     'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-      'identifier' => 'main-menu_green-jobs:node/16',
+      'attributes' => array(),
+      'identifier' => 'main-menu_green-jobs:node/17',
       'content' => array(
         'image' => 'public://menuimage/green-jobs.jpg',
       ),
@@ -670,17 +650,15 @@ function osha_menu_menu_default_menu_links() {
     'language' => 'und',
     'menu_links_customized' => 1,
   );
-  // Exported menu link: main-menu_inside-eu-osha:node/11
-  $menu_links['main-menu_inside-eu-osha:node/11'] = array(
+  // Exported menu link: main-menu_inside-eu-osha:node/12
+  $menu_links['main-menu_inside-eu-osha:node/12'] = array(
     'menu_name' => 'main-menu',
-    'link_path' => 'node/11',
+    'link_path' => 'node/12',
     'router_path' => 'node/%',
     'link_title' => 'Inside EU-OSHA',
     'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-      'identifier' => 'main-menu_inside-eu-osha:node/11',
+      'attributes' => array(),
+      'identifier' => 'main-menu_inside-eu-osha:node/12',
       'alter' => TRUE,
     ),
     'module' => 'menu',
@@ -695,17 +673,15 @@ function osha_menu_menu_default_menu_links() {
     'item_uuid' => 'a065ac76-7af7-4164-b44a-596287e6eb65',
     'parent_identifier' => 'main-menu_inside-eu-osha:<nolink>',
   );
-  // Exported menu link: main-menu_leadership--worker-participation:node/15
-  $menu_links['main-menu_leadership--worker-participation:node/15'] = array(
+  // Exported menu link: main-menu_leadership--worker-participation:node/16
+  $menu_links['main-menu_leadership--worker-participation:node/16'] = array(
     'menu_name' => 'main-menu',
-    'link_path' => 'node/15',
+    'link_path' => 'node/16',
     'router_path' => 'node/%',
     'link_title' => 'Leadership & worker participation',
     'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-      'identifier' => 'main-menu_leadership--worker-participation:node/15',
+      'attributes' => array(),
+      'identifier' => 'main-menu_leadership--worker-participation:node/16',
       'content' => array(
         'image' => 'public://menuimage/leadership.jpg',
       ),
@@ -721,7 +697,7 @@ function osha_menu_menu_default_menu_links() {
     'language' => 'und',
     'menu_links_customized' => 1,
     'item_uuid' => 'dc21d794-563b-4ef2-aaac-d0e2dcdfb18f',
-    'parent_identifier' => 'main-menu_themes:node/13',
+    'parent_identifier' => 'main-menu_themes:node/14',
   );
   // Exported menu link: main-menu_legislation:<nolink>
   $menu_links['main-menu_legislation:<nolink>'] = array(
@@ -771,7 +747,7 @@ function osha_menu_menu_default_menu_links() {
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_themes:node/13',
+    'parent_identifier' => 'main-menu_themes:node/14',
   );
   // Exported menu link: main-menu_micro-enterprises:<front>
   $menu_links['main-menu_micro-enterprises:<front>'] = array(
@@ -798,7 +774,7 @@ function osha_menu_menu_default_menu_links() {
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_themes:node/13',
+    'parent_identifier' => 'main-menu_themes:node/14',
   );
   // Exported menu link: main-menu_musculoskeletal-disorders:<front>
   $menu_links['main-menu_musculoskeletal-disorders:<front>'] = array(
@@ -825,7 +801,7 @@ function osha_menu_menu_default_menu_links() {
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_themes:node/13',
+    'parent_identifier' => 'main-menu_themes:node/14',
   );
   // Exported menu link: main-menu_nanomaterials:<front>
   $menu_links['main-menu_nanomaterials:<front>'] = array(
@@ -852,7 +828,7 @@ function osha_menu_menu_default_menu_links() {
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_themes:node/13',
+    'parent_identifier' => 'main-menu_themes:node/14',
   );
   // Exported menu link: main-menu_napo:<front>
   $menu_links['main-menu_napo:<front>'] = array(
@@ -879,30 +855,31 @@ function osha_menu_menu_default_menu_links() {
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_tools--resources:node/17',
+    'parent_identifier' => 'main-menu_tools--resources:node/18',
   );
-  // Exported menu link: main-menu_national-osh-systems:<front>
-  $menu_links['main-menu_national-osh-systems:<front>'] = array(
+  // Exported menu link: main-menu_national-osh-systems:node/6
+  $menu_links['main-menu_national-osh-systems:node/6'] = array(
     'menu_name' => 'main-menu',
-    'link_path' => '<front>',
-    'router_path' => '',
+    'link_path' => 'node/6',
+    'router_path' => 'node/%',
     'link_title' => 'National OSH Systems',
     'options' => array(
       'attributes' => array(
         'title' => '',
       ),
-      'identifier' => 'main-menu_national-osh-systems:<front>',
+      'identifier' => 'main-menu_national-osh-systems:node/6',
       'alter' => TRUE,
     ),
     'module' => 'menu',
     'hidden' => 0,
-    'external' => 1,
+    'external' => 0,
     'has_children' => 0,
     'expanded' => 1,
     'weight' => 0,
-    'customized' => 0,
+    'customized' => 1,
     'language' => 'und',
-    'menu_links_customized' => 0,
+    'menu_links_customized' => 1,
+    'item_uuid' => '4e4c748b-77be-443c-843e-194de4e7a3c1',
     'parent_identifier' => 'main-menu_country-specific-legislation:<front>',
   );
   // Exported menu link: main-menu_oira---risk-assessment:<front>
@@ -930,7 +907,7 @@ function osha_menu_menu_default_menu_links() {
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_tools--resources:node/17',
+    'parent_identifier' => 'main-menu_tools--resources:node/18',
   );
   // Exported menu link: main-menu_online-tools:<front>
   $menu_links['main-menu_online-tools:<front>'] = array(
@@ -957,7 +934,7 @@ function osha_menu_menu_default_menu_links() {
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_tools--resources:node/17',
+    'parent_identifier' => 'main-menu_tools--resources:node/18',
   );
   // Exported menu link: main-menu_organisation:<front>
   $menu_links['main-menu_organisation:<front>'] = array(
@@ -984,29 +961,7 @@ function osha_menu_menu_default_menu_links() {
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_inside-eu-osha:node/11',
-  );
-  // Exported menu link: main-menu_oshmail-newsletter:node/20
-  $menu_links['main-menu_oshmail-newsletter:node/20'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'node/20',
-    'router_path' => 'node/%',
-    'link_title' => 'OSHMail newsletter',
-    'options' => array(
-      'alter' => TRUE,
-      'identifier' => 'main-menu_oshmail-newsletter:node/20',
-    ),
-    'module' => 'menu',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => -50,
-    'customized' => 1,
-    'language' => 'und',
-    'menu_links_customized' => 1,
-    'item_uuid' => '5976d8f5-cd3a-4b9c-9b25-16e6333530f6',
-    'parent_identifier' => 'main-menu_inside-eu-osha:node/11',
+    'parent_identifier' => 'main-menu_inside-eu-osha:node/12',
   );
   // Exported menu link: main-menu_oshwiki:<front>
   $menu_links['main-menu_oshwiki:<front>'] = array(
@@ -1033,7 +988,7 @@ function osha_menu_menu_default_menu_links() {
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_tools--resources:node/17',
+    'parent_identifier' => 'main-menu_tools--resources:node/18',
   );
   // Exported menu link: main-menu_pan-eu-poll-on-safety--health:<front>
   $menu_links['main-menu_pan-eu-poll-on-safety--health:<front>'] = array(
@@ -1087,7 +1042,7 @@ function osha_menu_menu_default_menu_links() {
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_inside-eu-osha:node/11',
+    'parent_identifier' => 'main-menu_inside-eu-osha:node/12',
   );
   // Exported menu link: main-menu_procurement:<front>
   $menu_links['main-menu_procurement:<front>'] = array(
@@ -1114,7 +1069,7 @@ function osha_menu_menu_default_menu_links() {
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_inside-eu-osha:node/11',
+    'parent_identifier' => 'main-menu_inside-eu-osha:node/12',
   );
   // Exported menu link: main-menu_psychosocial-risks-and-stress:<front>
   $menu_links['main-menu_psychosocial-risks-and-stress:<front>'] = array(
@@ -1141,7 +1096,7 @@ function osha_menu_menu_default_menu_links() {
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_themes:node/13',
+    'parent_identifier' => 'main-menu_themes:node/14',
   );
   // Exported menu link: main-menu_publications:publications
   $menu_links['main-menu_publications:publications'] = array(
@@ -1168,7 +1123,7 @@ function osha_menu_menu_default_menu_links() {
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_tools--resources:node/17',
+    'parent_identifier' => 'main-menu_tools--resources:node/18',
   );
   // Exported menu link: main-menu_surveys--statistics:<nolink>
   $menu_links['main-menu_surveys--statistics:<nolink>'] = array(
@@ -1200,9 +1155,7 @@ function osha_menu_menu_default_menu_links() {
     'router_path' => 'node/%',
     'link_title' => 'Surveys & Statistics',
     'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
+      'attributes' => array(),
       'identifier' => 'main-menu_surveys--statistics:node/5',
       'alter' => TRUE,
     ),
@@ -1241,17 +1194,15 @@ function osha_menu_menu_default_menu_links() {
     'language' => 'und',
     'menu_links_customized' => 1,
   );
-  // Exported menu link: main-menu_themes:node/13
-  $menu_links['main-menu_themes:node/13'] = array(
+  // Exported menu link: main-menu_themes:node/14
+  $menu_links['main-menu_themes:node/14'] = array(
     'menu_name' => 'main-menu',
-    'link_path' => 'node/13',
+    'link_path' => 'node/14',
     'router_path' => 'node/%',
     'link_title' => 'Themes',
     'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-      'identifier' => 'main-menu_themes:node/13',
+      'attributes' => array(),
+      'identifier' => 'main-menu_themes:node/14',
       'alter' => TRUE,
     ),
     'module' => 'menu',
@@ -1289,17 +1240,15 @@ function osha_menu_menu_default_menu_links() {
     'language' => 'und',
     'menu_links_customized' => 1,
   );
-  // Exported menu link: main-menu_tools--resources:node/17
-  $menu_links['main-menu_tools--resources:node/17'] = array(
+  // Exported menu link: main-menu_tools--resources:node/18
+  $menu_links['main-menu_tools--resources:node/18'] = array(
     'menu_name' => 'main-menu',
-    'link_path' => 'node/17',
+    'link_path' => 'node/18',
     'router_path' => 'node/%',
     'link_title' => 'Tools & Resources',
     'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-      'identifier' => 'main-menu_tools--resources:node/17',
+      'attributes' => array(),
+      'identifier' => 'main-menu_tools--resources:node/18',
       'content' => array(
         'image' => 'public://menuimage/publications.jpg',
       ),
@@ -1317,17 +1266,17 @@ function osha_menu_menu_default_menu_links() {
     'item_uuid' => 'f3fc72f9-56f7-4026-a707-9b45dccef67a',
     'parent_identifier' => 'main-menu_tools--resources:<nolink>',
   );
-  // Exported menu link: main-menu_what-we-do:<front>
-  $menu_links['main-menu_what-we-do:<front>'] = array(
+  // Exported menu link: main-menu_what-we-do:node/11
+  $menu_links['main-menu_what-we-do:node/11'] = array(
     'menu_name' => 'main-menu',
-    'link_path' => '<front>',
-    'router_path' => '',
+    'link_path' => 'node/11',
+    'router_path' => 'node/%',
     'link_title' => 'What we do',
     'options' => array(
       'attributes' => array(
         'title' => '',
       ),
-      'identifier' => 'main-menu_what-we-do:<front>',
+      'identifier' => 'main-menu_what-we-do:node/11',
       'content' => array(
         'image' => 'public://menuimage/what-we-do.jpg',
       ),
@@ -1335,14 +1284,15 @@ function osha_menu_menu_default_menu_links() {
     ),
     'module' => 'menu',
     'hidden' => 0,
-    'external' => 1,
+    'external' => 0,
     'has_children' => 0,
     'expanded' => 1,
     'weight' => -44,
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_inside-eu-osha:node/11',
+    'item_uuid' => '857d1fbe-f8cc-4359-8cd7-8a2ebcfdd17c',
+    'parent_identifier' => 'main-menu_inside-eu-osha:node/12',
   );
   // Exported menu link: main-menu_women-and-osh:<front>
   $menu_links['main-menu_women-and-osh:<front>'] = array(
@@ -1369,7 +1319,7 @@ function osha_menu_menu_default_menu_links() {
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_themes:node/13',
+    'parent_identifier' => 'main-menu_themes:node/14',
   );
   // Exported menu link: main-menu_work-related-diseases:<front>
   $menu_links['main-menu_work-related-diseases:<front>'] = array(
@@ -1396,7 +1346,7 @@ function osha_menu_menu_default_menu_links() {
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_themes:node/13',
+    'parent_identifier' => 'main-menu_themes:node/14',
   );
   // Exported menu link: main-menu_young-people-and-osh:<front>
   $menu_links['main-menu_young-people-and-osh:<front>'] = array(
@@ -1423,7 +1373,7 @@ function osha_menu_menu_default_menu_links() {
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_themes:node/13',
+    'parent_identifier' => 'main-menu_themes:node/14',
   );
   // Translatables
   // Included for use with string extractors like potx.
@@ -1459,7 +1409,6 @@ function osha_menu_menu_default_menu_links() {
   t('Nanomaterials');
   t('Napo');
   t('National OSH Systems');
-  t('OSHMail newsletter');
   t('OSHwiki');
   t('OiRA - Risk Assessment');
   t('Online tools');

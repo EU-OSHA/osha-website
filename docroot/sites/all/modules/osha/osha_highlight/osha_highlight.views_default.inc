@@ -142,6 +142,12 @@ function osha_highlight_views_default_views() {
   $handler->display->display_options['fields']['field_summary']['id'] = 'field_summary';
   $handler->display->display_options['fields']['field_summary']['table'] = 'field_data_field_summary';
   $handler->display->display_options['fields']['field_summary']['field'] = 'field_summary';
+  $handler->display->display_options['fields']['field_summary']['label'] = '';
+  $handler->display->display_options['fields']['field_summary']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_summary']['type'] = 'text_trimmed';
+  $handler->display->display_options['fields']['field_summary']['settings'] = array(
+    'trim_length' => '300',
+  );
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
@@ -185,7 +191,6 @@ function osha_highlight_views_default_views() {
     t('Highlights on the home page'),
     t('<a href="/highlights">View all</a>'),
     t('queue'),
-    t('Summary'),
     t('See more'),
   );
   $export['highlight'] = $view;

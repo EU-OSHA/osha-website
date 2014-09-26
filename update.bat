@@ -20,6 +20,9 @@ IF NOT "%1"=="--migrate" GOTO DONE
     rem echo "Importing ESENER taxonomy"
     rem call drush migrate-import --update TaxonomyEsener
 
+    echo "Importing Wiki articles"
+    call drush migrate-import Wiki
+
     echo "Importing Publication types taxonomy"
     call drush migrate-import --update TaxonomyPublicationTypes
 

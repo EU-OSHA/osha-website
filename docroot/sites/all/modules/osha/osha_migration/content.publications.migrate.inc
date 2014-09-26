@@ -14,10 +14,10 @@ class OshaMigratePublications extends OSHADynamicMigration {
     parent::__construct(MigrateGroup::getInstance('OSHA Content types'));
     $this->description = 'Import "Publications" taxonomy from CSV file';
     $this->dependencies = array(
-      OSHA_MIGRATION_TAXONOMY_TAGS,
+//      OSHA_MIGRATION_TAXONOMY_TAGS,
       OSHA_MIGRATION_TAXONOMY_THESAURUS,
       OSHA_MIGRATION_TAXONOMY_NACE_CODES,
-      OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES,
+//      OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES,
       OSHA_MIGRATION_FILES,
     );
 
@@ -250,6 +250,7 @@ class OshaMigratePublications extends OSHADynamicMigration {
     $node->title_field['en'][0]['value'] = t('Stub for @code', array('@code' => $source[0]));
     $node->type = OSHA_PUBLICATION_CONTENT_TYPE_PUBLICATION;
     $node->uid = 1;
+    $node->path['pathauto'] = 0;
     node_save($node);
 
     return array($node->nid);

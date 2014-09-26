@@ -7,10 +7,16 @@ When patching a contrib module, the following steps should be followed:
 
 List of patches (most recent first)
 
-* uuid_features (EdW)
-  * Added custom code to support custom text fields on taxonomies (field_article_type_code)
-  * uuid_features-taxonomies-custom-text-fields.patch
-  
+* features_extra
+  * Fix tests error for nodequeue
+  * features_extra-invalid-argument-foreach-2018515-1.patch
+  * https://www.drupal.org/files/features_extra-invalid-argument-foreach-2018515-1.patch
+
+* workbench_moderation
+  * Added patch for node_export
+  * https://www.drupal.org/node/2176841
+  * https://www.drupal.org/files/issues/node_export-2176841-4.patch
+
 * entity_translation
   * Added entity_translation in views (to be able to filter by language)
   * https://www.drupal.org/node/1330332

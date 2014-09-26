@@ -1,0 +1,62 @@
+<?php
+
+/**
+ * Class NewsletterTest.
+ */
+class NewsletterTest extends OshaWebTestCase {
+
+  /**
+   * Test information.
+   *
+   * {@inheritdoc}
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Newsletter testing',
+      'description' => 'Tests the newsletter',
+      'group' => 'OSHA',
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp() {
+    parent::setUp();
+    $success = module_enable(array('entity_collection', 'osha_newsletter'), TRUE);
+    $this->assertTrue($success);
+    // Log in as superuser
+    $user = user_load(1);
+    $user->pass_raw = 'test';
+    $user = user_save($user, array('pass' => 'test'));
+    $this->drupalLogin($user);
+  }
+
+  public function testNewsletter() {
+    // Test if mail is sent
+    $this->drupalPost('', array('email' => 'invalid'), t('Subscribe'));
+    $this->assertText(t('That e-mail address is not valid.'));
+    $this->drupalPost('', array('email' => 'test@example.com'), t('Subscribe'));
+    $this->assertText(t('Your message has been sent to listserv@list.osha.europa.eu.'));
+    $mails = $this->drupalGetMails();
+    $this->assertEqual($mails[0]['to'], 'listserv@list.osha.europa.eu');
+    $this->assertEqual($mails[0]['from'], 'test@example.com');
+    $this->assertEqual($mails[0]['body'], 'subscribe OSHMail-Test anonymous' . "\n");
+
+    // Check if configuration is correct
+    $this->drupalGet('admin/config/content/newsletter');
+    $this->assertField('osha_newsletter_listserv', 'listserv@list.osha.europa.eu');
+    $this->assertField('osha_newsletter_listserv_from', 'oshmail@osha.europa.eu');
+    $this->assertField('osha_newsletter_list_name', 'OSHMail-Test');
+    $this->assertField('osha_newsletter_after_max_nodes', '30');
+    $this->assertField('osha_newsletter_node_view_mode', 'full');
+    $this->assertFieldChecked('edit-osha-newsletter-allowed-bundles-article');
+    $this->assertFieldChecked('edit-osha-newsletter-allowed-bundles-blog');
+    $this->assertFieldChecked('edit-osha-newsletter-allowed-bundles-highlight');
+    $this->assertFieldChecked('edit-osha-newsletter-allowed-bundles-news');
+    $this->assertFieldChecked('edit-osha-newsletter-allowed-bundles-newsletter-article');
+    $this->assertFieldChecked('edit-osha-newsletter-allowed-bundles-press-release');
+    $this->assertFieldChecked('edit-osha-newsletter-allowed-bundles-publication');
+    $this->assertField('osha_newsletter_term_ct_map[view_mode_highlight]', 'highlights_item');
+  }
+}

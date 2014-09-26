@@ -30,11 +30,11 @@ class MigrateOshaCaseStudyTest extends OshaWebTestCase {
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/thesaurus.json';
     MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_THESAURUS, 'MigrateOshaTaxonomyThesaurus', $source_file);
 
-    $source_file = drupal_get_path('module', 'osha_migration') . '/data/tags.json';
-    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_TAGS, 'MigrateOshaTaxonomyTags', $source_file);
+//    $source_file = drupal_get_path('module', 'osha_migration') . '/data/tags.json';
+//    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_TAGS, 'MigrateOshaTaxonomyTags', $source_file);
 
-    $source_file = drupal_get_path('module', 'osha_migration') . '/data/publication_types.json';
-    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES, 'MigrateOshaTaxonomyPublicationTypes', $source_file);
+//    $source_file = drupal_get_path('module', 'osha_migration') . '/data/publication_types.json';
+//    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES, 'MigrateOshaTaxonomyPublicationTypes', $source_file);
 
     $source_file = $data_export_path . '/files.txt';
     MigrationUtil::runMigration(OSHA_MIGRATION_FILES, 'OshaMigrateFiles', $source_file);

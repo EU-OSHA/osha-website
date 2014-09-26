@@ -181,6 +181,7 @@ function osha_content_default_fe_block_settings() {
     'module' => 'views',
     'node_types' => array(
       0 => 'article',
+      1 => 'seminar',
     ),
     'pages' => '',
     'roles' => array(),

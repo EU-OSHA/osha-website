@@ -30,7 +30,9 @@ abstract class OshaWebTestCase extends DrupalWebTestCase {
     if (!empty($options['init-modules'])) {
 
       $modules = $options['init-modules'];
+      $modules[] = 'osha_taxonomies_uuid';
       unset($modules[array_search('file_entity', $modules)]);
+      unset($modules[array_search('osha_search', $modules)]);
 
       if (!module_enable($modules)) {
         foreach ($modules as $module) {
@@ -236,13 +238,18 @@ class MigrationUtil {
    *
    * Note: This method does not cache results, queries the vocabularies
    */
-  public static function findTermByFieldValue($term_name, $field_match) {
+  public static function findTermByFieldValue($term_name, $field_match, $is_property = FALSE) {
     $query = new EntityFieldQuery();
     try {
       $result = $query
-        ->entityCondition('entity_type', 'taxonomy_term')
-        ->fieldCondition($field_match, 'value', $term_name, '=')
-        ->execute();
+        ->entityCondition('entity_type', 'taxonomy_term');
+      if ($is_property) {
+        $query->propertyCondition($field_match, $term_name, '=');
+      }
+      else {
+        $query->fieldCondition($field_match, 'value', $term_name, '=');
+      }
+      $result = $query->execute();
     }
     catch(Exception $e) {
       drupal_set_message(
@@ -273,7 +280,8 @@ class MigrationUtil {
       $terms = taxonomy_get_tree($voc->vid, 0, NULL, TRUE);
       foreach ($terms as $term) {
         if (!empty($term->{$field_name}[$language][0]['value']) ||
-            $term->{$field_name}[$language][0]['value'] == '0') {
+            (isset($term->{$field_name}[$language])
+              && $term->{$field_name}[$language][0]['value'] == '0')) {
           $value = $term->{$field_name}[$language][0]['value'];
           $cache[$vocabulary_name][$field_name][$language][$value] = $term->tid;
         }

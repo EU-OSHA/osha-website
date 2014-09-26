@@ -1,0 +1,28 @@
+diff --git a/fe_nodequeue.module b/fe_nodequeue.module
+index cbb8d91..f20e3c9 100644
+--- a/fe_nodequeue.module
++++ b/fe_nodequeue.module
+@@ -127,6 +127,9 @@ function fe_nodequeue_features_export_render($module_name = '', $data) {
+  */
+ function fe_nodequeue_features_revert($module) {
+   $defaults = features_get_default('fe_nodequeue', $module);
++  if (empty($defaults)) {
++    return;
++  }
+ 
+   // Revert.
+   foreach ($defaults as $object) {
+diff --git a/fe_profile.module b/fe_profile.module
+index afcad1f..3ebe73c 100644
+--- a/fe_profile.module
++++ b/fe_profile.module
+@@ -69,6 +69,9 @@ function fe_profile_features_export_render($module_name, $data) {
+ function fe_profile_features_revert($module) {
+   $table = 'profile_field';
+   $defaults = features_get_default('fe_profile', $module);
++  if (empty($defaults)) {
++    return;
++  }
+ 
+   // Revert.
+   foreach ($defaults as $object) {

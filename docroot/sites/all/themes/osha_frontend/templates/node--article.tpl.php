@@ -39,18 +39,32 @@
   }
   print render($content);
   if ( $node->article_type_code == 'section' ) {
-    if (empty($field_related_oshwiki_articles)) { ?>
+    if (!empty($field_related_oshwiki_articles)) { ?>
+        <div id="related-wiki">
+          <div class="related_wiki_head"><span><?php print t('OSHWiki featured articles');?><span></div>
+        <div>
+    <?php
+        print render($content['field_related_oshwiki_articles']);
+        if ($total_wiki > 0) {
+          foreach ($tagged_wiki as $wiki) {
+            print render($wiki);
+          }
+        }
+      } else if ($total_wiki > 0) {?>
+          <div id="related-wiki">
+            <div class="related_wiki_head"><span><?php print t('OSHWiki featured articles');?><span></div>
+          <div>
+      <?php
+        foreach ($tagged_wiki as $wiki) {
+          print render($wiki);
+        }
+      } else { ?>
       <div id="related-wiki">
         <span><?php print t('Get more info about this topic on OSHWiki');?></span>
         <a href="http://oshwiki.eu/"><?php print t('Open');?></a>
       <div>
-    <?php } else { ?>
-      <div id="related-wiki">
-        <div class="related_wiki_head"><span><?php print t('OSHWiki featured articles');?><span></div>
-      <div>
       <?php
     }
-    print render($content['field_related_oshwiki_articles']);
   }
   ?>
 

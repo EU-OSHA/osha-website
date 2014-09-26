@@ -94,8 +94,57 @@ function osha_frontend_apachesolr_sort_list($vars) {
  */
 function osha_frontend_process_node(&$vars) {
   // Change default text of the read more link.
+  if ($vars['type'] == 'article') {
+    $wiki_articles_no = 0;
+    if (isset($vars['field_related_oshwiki_articles'])) {
+      $wiki_articles_no = sizeof($vars['field_related_oshwiki_articles']);
+    }
+
+    $vars['total_wiki'] = 0;
+    if ($wiki_articles_no < 2) {
+      $limit = 2 - $wiki_articles_no;
+      // get 2-$wiki_articles_no tagged wiki
+      $tags_tids = array();
+      if (isset($vars['field_tags'])) {
+        $tags_tids = $vars['field_tags'][LANGUAGE_NONE];
+      }
+
+      if (!empty($tags_tids)) {
+        $tids = array();
+        foreach ($tags_tids as $tid) {
+          array_push($tids, $tid['tid']);
+        }
+
+        $query = new EntityFieldQuery();
+        $result = $query->entityCondition('entity_type', 'node')
+          ->entityCondition('bundle', 'wiki_page')
+          ->fieldCondition('field_tags', 'tid', $tids, 'IN')
+          ->propertyOrderBy('changed', 'DESC')
+          ->pager($limit)
+          ->execute();
+        if (!empty($result)) {
+          $vars['total_wiki'] = sizeof($result['node']);
+          $vars['tagged_wiki'] = array();
+          foreach ($result['node'] as $n) {
+            $node = node_load($n->nid);
+            $vars['tagged_wiki'][] = node_view($node,'osha_wiki');
+          }
+        }
+      }
+    }
+
+  }
   if (isset($vars['content']['links']['node']['#links']['node-readmore'])) {
     $vars['content']['links']['node']['#links']['node-readmore']['title'] = t('Show details');
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function osha_frontend_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'search_block_form') {
+    $form['search_block_form']['#attributes']['placeholder'] = t('Search');
   }
 }
 

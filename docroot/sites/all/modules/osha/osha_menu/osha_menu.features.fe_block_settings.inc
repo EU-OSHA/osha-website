@@ -100,15 +100,7 @@ function osha_menu_default_fe_block_settings() {
     'i18n_mode' => 0,
     'module' => 'menu_block',
     'node_types' => array(),
-    'pages' => 'articles/inside-eu-osha
-articles/tools-and-resources
-articles/themes
-articles/campaigns
-articles/awards
-articles/emerging-risks
-articles/surveys-and-statistics-osh
-articles/european-risk-observatory
-introduction/*',
+    'pages' => '',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(

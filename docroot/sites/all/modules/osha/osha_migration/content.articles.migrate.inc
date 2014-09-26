@@ -12,7 +12,7 @@ class OshaMigrateArticles extends OSHADynamicMigration {
     parent::__construct(MigrateGroup::getInstance('OSHA Content types'));
     $this->description = 'Import "Articles" contents from CSV file';
     $this->dependencies = array(
-      OSHA_MIGRATION_TAXONOMY_TAGS,
+//      OSHA_MIGRATION_TAXONOMY_TAGS,
       OSHA_MIGRATION_TAXONOMY_THESAURUS,
       OSHA_MIGRATION_TAXONOMY_NACE_CODES,
     );

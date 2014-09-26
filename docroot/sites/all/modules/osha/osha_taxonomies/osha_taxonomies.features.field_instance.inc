@@ -915,6 +915,38 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'taxonomy_term-wiki_categories-field_tags'
+  $field_instances['taxonomy_term-wiki_categories-field_tags'] = array(
+    'bundle' => 'wiki_categories',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'i18n_taxonomy',
+        'settings' => array(),
+        'type' => 'i18n_taxonomy_term_reference_link',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_tags',
+    'label' => 'Tag (mapping)',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 42,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Article Type Code');
@@ -928,6 +960,7 @@ function osha_taxonomies_field_default_field_instances() {
   t('Level');
   t('Name');
   t('Publication type code');
+  t('Tag (mapping)');
   t('code');
 
   return $field_instances;

@@ -108,6 +108,12 @@ function osha_calls_strongarm() {
           'weight' => '19',
         ),
         'language' => array(
+          'weight' => '1',
+        ),
+        'metatags' => array(
+          'weight' => '21',
+        ),
+        'workbench_access' => array(
           'weight' => '0',
         ),
       ),

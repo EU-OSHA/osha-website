@@ -13,7 +13,7 @@ class MigrateOshaPressRelease extends OSHADynamicMigration {
     parent::__construct(MigrateGroup::getInstance('OSHA Content types'));
     $this->description = 'Import "Press release" contents from CSV file';
     $this->dependencies = array(
-      OSHA_MIGRATION_TAXONOMY_TAGS,
+//      OSHA_MIGRATION_TAXONOMY_TAGS,
     );
 
     /* Remove limits on time/memory, slower machines will fail */

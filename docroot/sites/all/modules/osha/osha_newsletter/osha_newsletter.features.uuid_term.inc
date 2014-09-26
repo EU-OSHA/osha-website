@@ -35,7 +35,7 @@ function osha_newsletter_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 35,
+          'entity_id' => 11,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -74,7 +74,7 @@ function osha_newsletter_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 30,
+          'entity_id' => 12,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -113,7 +113,7 @@ function osha_newsletter_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 33,
+          'entity_id' => 13,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -152,7 +152,7 @@ function osha_newsletter_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 34,
+          'entity_id' => 14,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -191,7 +191,7 @@ function osha_newsletter_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 36,
+          'entity_id' => 15,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -230,7 +230,7 @@ function osha_newsletter_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 32,
+          'entity_id' => 16,
           'language' => 'en',
           'source' => '',
           'uid' => 0,
@@ -269,7 +269,7 @@ function osha_newsletter_uuid_features_default_terms() {
       'data' => array(
         'en' => array(
           'entity_type' => 'taxonomy_term',
-          'entity_id' => 31,
+          'entity_id' => 17,
           'language' => 'en',
           'source' => '',
           'uid' => 0,

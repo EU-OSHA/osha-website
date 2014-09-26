@@ -2,7 +2,7 @@
 /**
  * Class MigrateOshaPressReleaseTest tests press release content type migration.
  */
-class MigrateOshaPressReleaseTest extends DrupalWebTestCase {
+class MigrateOshaPressReleaseTest extends OshaWebTestCase {
 
   /**
    * Test information.
@@ -36,8 +36,8 @@ class MigrateOshaPressReleaseTest extends DrupalWebTestCase {
   public function testMigration() {
     $module_path = drupal_get_path('module', 'osha_migration');
 
-    $source_file = $module_path . '/data/tags.json';
-    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_TAGS, 'MigrateOshaTaxonomyTags', $source_file);
+//    $source_file = $module_path . '/data/tags.json';
+//    MigrationUtil::runMigration(OSHA_MIGRATION_TAXONOMY_TAGS, 'MigrateOshaTaxonomyTags', $source_file);
 
     $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/press_release.txt';
     $result = MigrationUtil::runMigration(OSHA_MIGRATION_CONTENT_TYPE_PRESS_RELEASE, 'MigrateOshaPressRelease', $source_file);

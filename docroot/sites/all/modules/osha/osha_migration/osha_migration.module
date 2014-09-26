@@ -14,6 +14,8 @@ define('OSHA_MIGRATION_CONTENT_TYPE_CASE_STUDY', 'CaseStudy');
 define('OSHA_MIGRATION_CONTENT_TYPE_HIGHLIGHT', 'Highlight');
 define('OSHA_MIGRATION_CONTENT_TYPE_NEWS', 'News');
 define('OSHA_MIGRATION_CONTENT_TYPE_PUBLICATION', 'Publication');
+define('OSHA_MIGRATION_CONTENT_TYPE_SEMINAR', 'Seminar');
+define('OSHA_MIGRATION_CONTENT_TYPE_WIKI', 'Wiki');
 define('OSHA_MIGRATION_FILES', 'Files');
 define('OSHA_MIGRATION_IMAGES', 'Images');
 define('OSHA_MIGRATION_CONTENT_TYPE_PRESS_RELEASE', 'PressRelease');
@@ -37,10 +39,10 @@ function osha_migration_migrate_api() {
 //        'class_name' => 'MigrateOshaTaxonomyActivity',
 //        'file_name' => $migration_module_dir . '/data/activity.json',
 //      ),
-      OSHA_MIGRATION_TAXONOMY_TAGS => array(
-        'class_name' => 'MigrateOshaTaxonomyTags',
-        'file_name' => $migration_module_dir . '/data/tags.json',
-      ),
+//      OSHA_MIGRATION_TAXONOMY_TAGS => array(
+//        'class_name' => 'MigrateOshaTaxonomyTags',
+//        'file_name' => $migration_module_dir . '/data/tags.json',
+//      ),
       OSHA_MIGRATION_TAXONOMY_ESENER => array(
         'class_name' => 'MigrateOshaTaxonomyEsener',
         'file_name' => $migration_module_dir . '/data/esener.json',
@@ -49,10 +51,10 @@ function osha_migration_migrate_api() {
         'class_name' => 'MigrateOshaTaxonomyNaceCodes',
         'file_name' => $migration_module_dir . '/data/nace_codes.json',
       ),
-      OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES => array(
-        'class_name' => 'MigrateOshaTaxonomyPublicationTypes',
-        'file_name' => $migration_module_dir . '/data/publication_types.json',
-      ),
+//      OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES => array(
+//        'class_name' => 'MigrateOshaTaxonomyPublicationTypes',
+//        'file_name' => $migration_module_dir . '/data/publication_types.json',
+//      ),
       OSHA_MIGRATION_TAXONOMY_THESAURUS => array(
         'class_name' => 'MigrateOshaTaxonomyThesaurus',
         'file_name' => $migration_module_dir . '/data/thesaurus.json',
@@ -89,6 +91,10 @@ function osha_migration_migrate_api() {
         'class_name' => 'OshaMigratePublications',
         'file_name' => osha_migration_get_data_dir() . '/export/publications.txt',
       ),
+      OSHA_MIGRATION_CONTENT_TYPE_SEMINAR => array(
+        'class_name' => 'OshaMigrateSeminars',
+        'file_name' => osha_migration_get_data_dir() . '/export/seminars.txt',
+      ),
       OSHA_MIGRATION_FILES => array(
         'class_name' => 'OshaMigrateFiles',
         'file_name' => osha_migration_get_data_dir() . '/export/files.txt',
@@ -100,6 +106,9 @@ function osha_migration_migrate_api() {
       OSHA_MIGRATION_CONTENT_TYPE_PRESS_RELEASE => array(
         'class_name' => 'MigrateOshaPressRelease',
         'file_name' => osha_migration_get_data_dir() . '/export/press_release.txt',
+      ),
+      OSHA_MIGRATION_CONTENT_TYPE_WIKI => array(
+        'class_name' => 'OshaMigrateWiki',
       ),
     ),
     // Declare osha migrate handlers to add some specific functionality.

@@ -14,7 +14,7 @@ class MigrateOshaHighlight extends OSHADynamicMigration {
     $this->description = 'Import "Highlight" contents from CSV file';
     $this->dependencies = array(
       OSHA_MIGRATION_TAXONOMY_THESAURUS,
-      OSHA_MIGRATION_TAXONOMY_TAGS,
+//      OSHA_MIGRATION_TAXONOMY_TAGS,
     );
 
     /* Remove limits on time/memory, slower machines will fail */

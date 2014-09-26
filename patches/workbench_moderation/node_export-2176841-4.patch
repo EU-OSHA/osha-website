@@ -1,0 +1,55 @@
+diff --git a/workbench_moderation.module b/workbench_moderation.module
+index 3370981..bd8eece 100644
+--- a/workbench_moderation.module
++++ b/workbench_moderation.module
+@@ -2106,3 +2106,50 @@ function workbench_moderation_ctools_plugin_api($module, $api) {
+ function workbench_moderation_migrate_api() {
+   return array('api' => 2);
+ }
++
++/**
++ * Implements hook_node_export_node_alter().
++ *
++ * Manipulate a node on export.
++ *
++ * @param &$node
++ *   The node to alter.
++ * @param $original_node
++ *   The unaltered node.
++ */
++function workbench_moderation_node_export_node_alter(&$node, $original_node) {
++
++  // Don't proceed if moderation is not enabled on this content type
++  if (!workbench_moderation_node_type_moderated($node->type)) {
++    return;
++  }
++
++  //Set the current state to be the same as the current revision's state.
++  if(!isset($node->workbench_moderation_state_current) && isset($node->workbench_moderation) && isset($node->workbench_moderation['current'])){
++    $node->workbench_moderation_state_current = $node->workbench_moderation['current']->state;
++  }
++
++  // Set default moderation state values if they are not set.
++  if (!isset($node->workbench_moderation_state_current)) {
++    $node->workbench_moderation_state_current = ($node->status ? workbench_moderation_state_published() : workbench_moderation_state_none());
++  };
++
++  if (isset($node->workbench_moderation_state_current)) {
++    // Set the new state to be the same as the current.
++    $node->workbench_moderation_state_new = $node->workbench_moderation_state_current;
++  }
++
++  //Node revisions will not be exported so remove moderation states tied to revisions
++  unset($node->workbench_moderation);
++}
++
++/**
++ * Implements hook_node_export_node_import_alter().
++ */
++function workbench_moderation_node_export_node_import_alter(&$node, $original_node, $save) {
++  // Don't proceed if moderation is not enabled on this content type
++  if (!workbench_moderation_node_type_moderated($node->type)) {
++    return;
++  }
++  $node->revision = 1;
++}

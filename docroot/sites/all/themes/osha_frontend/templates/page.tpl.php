@@ -51,7 +51,7 @@
 <?php print $breadcrumb; ?>
   <div id="main">
 
-	 <?php
+	<?php
       // Render the sidebars to see if there's anything in them.
       $sidebar_first  = render($page['sidebar_first']);
       $sidebar_second = render($page['sidebar_second']);
@@ -62,7 +62,7 @@
         <?php print $sidebar_first; ?>
       </aside>
     <?php endif; ?>
-	<?php if ($sidebar_second): ?>
+	<?php if (($sidebar_second) && ($sidebar_first)): ?>
 		<div id="content" class="three_column">
 	<?php else: ?>
 		<div id="content" class="two_column">

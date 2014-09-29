@@ -89,10 +89,8 @@ global $language ;
 $curr_lang = $language->language;
 $object = isset($variables[\'#object\']->field_publication_related_res[$curr_lang]) ? $variables[\'#object\']->field_publication_related_res[$curr_lang] :$variables[\'#object\']->field_publication_related_res[\'en\'];
 foreach ($object as $obj) {
-	$output .= \'<li><a href="\' . file_create_url($obj[\'uri\']) . \'">\' . $obj[\'filename\'] . \'</a>\';
-	$output .= \' - \';
-	$output .= \'<span>\' . format_size(filesize($obj[\'uri\'])) . \'</span>\';
-	$output .= \'</li>\'; 
+	$name = ($obj[\'description\'] != NULL) ? $obj[\'description\'] : $obj[\'filename\'];
+	$output .= \'<li><a href="\' . file_create_url($obj[\'uri\']) . \'">\' . $name . \' - \' . format_size(filesize($obj[\'uri\'])) . \'</a></li>\';
 }
 $output .= \'</ul>\';
 

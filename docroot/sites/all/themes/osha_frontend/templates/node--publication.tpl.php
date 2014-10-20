@@ -4,6 +4,11 @@
  * Returns the HTML for a publication node.
  */
 ?>
+<?php if($page): ?>
+  <h1 id="page-title" class="page__title title"><?php print t('Publications');?></h1>
+  <div class="view-header"><?php print l(t('Back to publications and filter'), 'publications'); ?></div>
+<?php endif; ?>
+
 <article class="node-<?php print $node->nid; ?> <?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
   <?php if ($title_prefix || $title_suffix || $display_submitted || $unpublished || !$page && $title): ?>

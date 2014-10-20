@@ -20,6 +20,7 @@ files[] = content.calls.migrate.inc
 files[] = content.case_study.migrate.inc
 files[] = content.highlight.migrate.inc
 files[] = content.job_vacancies.migrate.inc
+files[] = content.legislation.migrate.inc
 files[] = content.news.migrate.inc
 files[] = content.publications.migrate.inc
 files[] = content.seminars.migrate.inc

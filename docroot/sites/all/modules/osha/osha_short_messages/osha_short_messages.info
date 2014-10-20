@@ -1,0 +1,9 @@
+;$Id;
+;;
+name =  Short Messages
+description = Generate short messages (header, content and footer) from nodes
+
+core = 7.x
+version = "7.x-1.x-dev"
+package = OSHA
+project = "osha_short_messages"

@@ -273,8 +273,8 @@ function osha_locale_default_languages() {
   // Exported language: pt.
   $languages['pt'] = array(
     'language' => 'pt',
-    'name' => 'Portuguese, International',
-    'native' => 'Portuguese, International',
+    'name' => 'Portuguese',
+    'native' => 'Português',
     'direction' => 0,
     'enabled' => 1,
     'plurals' => 0,

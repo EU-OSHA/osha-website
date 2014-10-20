@@ -268,6 +268,9 @@ $options['init-modules'] = array(
   'i18n_taxonomy',
   'variable',
 
+  // contrib module that add email field
+  'email',
+
   'views',
   'views_ui',
   'views_bulk_operations',
@@ -350,18 +353,18 @@ $options['init-modules'] = array(
   'workbench_moderation',
 
 
-
-
   'osha_taxonomies',
 //  'osha_taxonomies_uuid',
   'osha',
   'osha_migration',
   'osha_news',
+  'osha_note_to_editor',
   'osha_publication',
   'osha_calls',
   'osha_blog',
   'osha_tmgmt',
   'osha_highlight',
+  'osha_press_contact',
   'osha_homepage',
   'osha_menu',
   'osha_wiki',
@@ -369,6 +372,7 @@ $options['init-modules'] = array(
   'osha_blocks',
   'osha_breadcrumbs',
 //  'osha_content',
+  'osha_legislation',
 
   'facetapi',
   'search_api_facetapi',
@@ -389,6 +393,7 @@ $options['init-modules'] = array(
 
   // Social share
   'addtoany',
+  'on_the_web',
 
   // Link content types with main menu items
   'menu_position',

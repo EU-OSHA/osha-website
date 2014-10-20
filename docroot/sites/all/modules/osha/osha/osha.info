@@ -159,6 +159,7 @@ features[variable][] = comment_subject_field_page
 features[variable][] = date_first_day
 features[variable][] = date_format_osha_day_only
 features[variable][] = date_format_short_date_eu
+features[variable][] = date_format_short_date_only
 features[variable][] = date_format_year
 features[variable][] = date_views_day_format_with_year
 features[variable][] = date_views_day_format_without_year

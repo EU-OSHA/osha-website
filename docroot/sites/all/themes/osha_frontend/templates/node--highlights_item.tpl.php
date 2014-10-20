@@ -81,12 +81,6 @@
 <table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%" style="padding-top: 15px;">
   <tbody>
     <tr>
-      <td style="border-style: dotted; border-top-width: 2px; border-bottom-width: 0px; border-left-width: 0px; border-right-width: 0px; border-color: #CFDDEE; padding-top: 0px; padding-bottom: 0px; height: 0px;" class="dotted-line"></td>
-    </tr>
-    <tr>
-      <td style="padding-bottom: 20px;" class="space-beyond-dotted-line"></td>
-    </tr>
-    <tr>
       <td>
         <table border="0" cellpadding="0" cellspacing="0" class="item-thumbnail-and-title" width="100%">
           <tbody>

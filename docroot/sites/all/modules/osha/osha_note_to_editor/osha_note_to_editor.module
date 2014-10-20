@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Note to editor feature.
+ */
+
+include_once 'osha_note_to_editor.features.inc';

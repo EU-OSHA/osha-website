@@ -16,10 +16,12 @@ define('OSHA_MIGRATION_CONTENT_TYPE_NEWS', 'News');
 define('OSHA_MIGRATION_CONTENT_TYPE_PUBLICATION', 'Publication');
 define('OSHA_MIGRATION_CONTENT_TYPE_SEMINAR', 'Seminar');
 define('OSHA_MIGRATION_CONTENT_TYPE_WIKI', 'Wiki');
+define('OSHA_MIGRATION_CONTENT_TYPE_LEGISLATION', 'Legislation');
 define('OSHA_MIGRATION_FILES', 'Files');
 define('OSHA_MIGRATION_IMAGES', 'Images');
 define('OSHA_MIGRATION_CONTENT_TYPE_PRESS_RELEASE', 'PressRelease');
 define('OSHA_MIGRATION_FILES_PUBLICATION', 'FilesPublication');
+
 
 define('OSHA_MIGRATION_EXPORT_DIRECTORY', 'export');
 
@@ -37,29 +39,6 @@ function osha_migration_migrate_api() {
   $migrations[OSHA_MIGRATION_CONTENT_TYPE_WIKI] = array(
     'class_name' => 'OshaMigrateWiki',
   );
-
-  /*
-  if (is_readable($migration_module_dir . '/data/activity.json')) {
-    $migrations[OSHA_MIGRATION_TAXONOMY_ACTIVITY] = array(
-      'class_name' => 'MigrateOshaTaxonomyActivity',
-      'file_name' => $migration_module_dir . '/data/activity.json',
-    );
-  }
-
-  if (is_readable($migration_module_dir . '/data/activity.json')) {
-    $migrations[OSHA_MIGRATION_TAXONOMY_TAGS] = array(
-      'class_name' => 'MigrateOshaTaxonomyTags',
-      'file_name' => $migration_module_dir . '/data/tags.json',
-    );
-  }
-
-  if (is_readable($migration_module_dir . '/data/activity.json')) {
-    $migrations[OSHA_MIGRATION_TAXONOMY_PUBLICATION_TYPES] = array(
-      'class_name' => 'MigrateOshaTaxonomyPublicationTypes',
-      'file_name' => $migration_module_dir . '/data/publication_types.json',
-    );
-  }
-  */
 
   if (is_readable($migration_module_dir . '/data/esener.json')) {
     $migrations[OSHA_MIGRATION_TAXONOMY_ESENER] = array(
@@ -165,6 +144,14 @@ function osha_migration_migrate_api() {
       'file_name' => $external_data_dir . '/export/press_release.txt',
     );
   }
+
+  if (is_readable($external_data_dir . '/export/legislation.txt')) {
+    $migrations[OSHA_MIGRATION_CONTENT_TYPE_LEGISLATION] = array(
+      'class_name' => 'OshaMigrateLegislation',
+      'file_name' => $external_data_dir . '/export/legislation.txt',
+    );
+  }
+
 
   $api = array(
     'api' => 2,

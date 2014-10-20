@@ -1,13 +1,3 @@
-<table border="0" cellpadding="0" cellspacing="0" class="blue-line" width="100%">
-  <tbody>
-    <tr>
-      <td style="padding-top: 15px;" class="space-above-blue-line"></td>
-    </tr>
-    <tr>
-      <td width="100%" style="background-color:#003399; height: 4px;" valign="top"></td>
-    </tr>
-  </tbody>
-</table>
 <table border="0" cellpadding="10" cellspacing="0" class="category-name" width="100%">
   <tbody>
     <tr>

@@ -24,9 +24,10 @@ class OshaMigrateArticles extends OSHADynamicMigration {
     $data_path = osha_migration_get_data_dir();
     $source_file = MigrationUtil::getSourceFile($arguments);
 
+    $list = new ArticleMigrateList($source_file);
     $this->source = new MigrateSourceList(
-      new ArticleMigrateList($source_file),
-      new ArticleMigrateItem(),
+      $list,
+      new ArticleMigrateItem($list->data),
       array(
         'id' => 'Unique entity path, language independent',
         'creation_date' => 'Node creation date',
@@ -211,11 +212,30 @@ class OshaMigrateArticles extends OSHADynamicMigration {
       }
     }
   }
+
+  /**
+   * Sets the node aliases after the migration, nid is available.
+   *
+   * @param object $entity
+   *   Entity to be saved
+   * @param object $row
+   *   Source row
+   */
+  public function complete($entity, $row) {
+    // call MigrationUtil::createAliases
+    parent::complete($entity, $row);
+
+    // create redirects for pages with is_default_page=1
+    if (!empty($row->is_default_page) && $row->is_default_page) {
+      $base_path = pathinfo($entity->path["alias"])["dirname"];
+      MigrationUtil::createRedirects($entity, $base_path);
+    }
+  }
 }
 
 class ArticleMigrateList extends MigrateList {
   protected $file = '';
-  public static $data = array();
+  public $data = array();
 
   /**
    * {@inheritdoc}
@@ -241,14 +261,14 @@ class ArticleMigrateList extends MigrateList {
     $fields = $raw_data = fgetcsv($handle, NULL, ';');
     $work_flow_key = array_search('workflow_state', $fields);
 
-    self::$data = array();
+    $this->data = array();
     while (($raw_data = fgetcsv($handle, NULL, ';')) !== FALSE) {
       $path = MigrationUtil::getIDFromSourceRow($raw_data);
       $language = !empty($raw_data[1]) ? $raw_data[1] : 'en';
-      self::$data[$path]['id'] = $path;
+      $this->data[$path]['id'] = $path;
       // Assign the workflow state of the row from english entry.
       if ($language == 'en') {
-        self::$data[$path]['workflow_state'] = $raw_data[$work_flow_key];
+        $this->data[$path]['workflow_state'] = $raw_data[$work_flow_key];
       }
       // Skip the private translations.
       if (!in_array($raw_data[$work_flow_key],
@@ -258,28 +278,28 @@ class ArticleMigrateList extends MigrateList {
 
       $path_parts = explode('/', $path);
       if (!empty($path_parts[0]) && $path_parts[0] == 'topics') {
-        self::$data[$path]['article_type'] = 'section';
+        $this->data[$path]['article_type'] = 'section';
       } else {
-        self::$data[$path]['article_type'] = 'page';
+        $this->data[$path]['article_type'] = 'page';
       }
       foreach ($fields as $key => $field) {
         switch ($field) {
           case 'title':
             if ($language == 'en') {
-              self::$data[$path]['title'] = $raw_data[$key];
+              $this->data[$path]['title'] = $raw_data[$key];
             }
-            self::$data[$path]['title_field'][$language] = $raw_data[$key];
+            $this->data[$path]['title_field'][$language] = $raw_data[$key];
             break;
 
           case 'relatedItems':
           case 'description':
           case 'text':
-            self::$data[$path][$field][$language] = $raw_data[$key];
+            $this->data[$path][$field][$language] = $raw_data[$key];
             break;
 
           default:
             if ($language == 'en') {
-              self::$data[$path][$field] = $raw_data[$key];
+              $this->data[$path][$field] = $raw_data[$key];
             }
             break;
         }
@@ -291,8 +311,8 @@ class ArticleMigrateList extends MigrateList {
    * {@inheritdoc}
    */
   public function getIdList() {
-    if (self::$data) {
-      return array_keys(self::$data);
+    if ($this->data) {
+      return array_keys($this->data);
     }
     return array();
   }
@@ -301,18 +321,26 @@ class ArticleMigrateList extends MigrateList {
    * {@inheritdoc}
    */
   public function computeCount() {
-    return count(self::$data);
+    return count($this->data);
   }
+
 }
 
 class ArticleMigrateItem extends MigrateItem {
 
+  public function __construct( $data = NULL ) {
+    $this->data = $data;
+  }
+  
   /**
    * {@inheritdoc}
    */
   public function getItem($item_id) {
-    if (!empty(ArticleMigrateList::$data[$item_id])) {
-      return (object) ArticleMigrateList::$data[$item_id];
+    //if (!empty(ArticleMigrateList::$data[$item_id])) {
+    //  return (object) ArticleMigrateList::$data[$item_id];
+    //}
+    if (!empty($this->data[$item_id])) {
+      return (object) $this->data[$item_id];
     }
     return NULL;
   }

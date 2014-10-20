@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Press Contact feature.
+ */
+
+include_once 'osha_press_contact.features.inc';

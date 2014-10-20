@@ -15,7 +15,7 @@ function osha_taxonomies_taxonomy_default_vocabularies() {
       'description' => 'Activities and sub-activities will be used to classify all the content, but only for internal use',
       'hierarchy' => 0,
       'module' => 'taxonomy',
-      'weight' => 0,
+      'weight' => -10,
       'language' => 'und',
       'i18n_mode' => 1,
       'rdf_mapping' => array(
@@ -40,9 +40,34 @@ function osha_taxonomies_taxonomy_default_vocabularies() {
       'description' => '',
       'hierarchy' => 0,
       'module' => 'taxonomy',
-      'weight' => 0,
+      'weight' => -9,
       'language' => 'und',
       'i18n_mode' => 1,
+      'rdf_mapping' => array(
+        'rdftype' => array(
+          0 => 'skos:ConceptScheme',
+        ),
+        'name' => array(
+          'predicates' => array(
+            0 => 'dc:title',
+          ),
+        ),
+        'description' => array(
+          'predicates' => array(
+            0 => 'rdfs:comment',
+          ),
+        ),
+      ),
+    ),
+    'directive_type' => array(
+      'name' => 'Directive type',
+      'machine_name' => 'directive_type',
+      'description' => 'Translation directive type',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => -8,
+      'language' => 'und',
+      'i18n_mode' => 0,
       'rdf_mapping' => array(
         'rdftype' => array(
           0 => 'skos:ConceptScheme',
@@ -65,7 +90,32 @@ function osha_taxonomies_taxonomy_default_vocabularies() {
       'description' => '',
       'hierarchy' => 0,
       'module' => 'taxonomy',
-      'weight' => 0,
+      'weight' => -6,
+      'language' => 'und',
+      'i18n_mode' => 1,
+      'rdf_mapping' => array(
+        'rdftype' => array(
+          0 => 'skos:ConceptScheme',
+        ),
+        'name' => array(
+          'predicates' => array(
+            0 => 'dc:title',
+          ),
+        ),
+        'description' => array(
+          'predicates' => array(
+            0 => 'rdfs:comment',
+          ),
+        ),
+      ),
+    ),
+    'legislation_category' => array(
+      'name' => 'Legislation category',
+      'machine_name' => 'legislation_category',
+      'description' => 'Legislation category',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => -7,
       'language' => 'und',
       'i18n_mode' => 1,
       'rdf_mapping' => array(
@@ -90,7 +140,7 @@ function osha_taxonomies_taxonomy_default_vocabularies() {
       'description' => 'The list of Nace Codes',
       'hierarchy' => 0,
       'module' => 'taxonomy',
-      'weight' => 0,
+      'weight' => -5,
       'language' => 'und',
       'i18n_mode' => 1,
       'rdf_mapping' => array(
@@ -115,7 +165,7 @@ function osha_taxonomies_taxonomy_default_vocabularies() {
       'description' => 'Content section category',
       'hierarchy' => 0,
       'module' => 'taxonomy',
-      'weight' => 0,
+      'weight' => -2,
       'language' => 'und',
       'i18n_mode' => 0,
       'rdf_mapping' => array(
@@ -165,7 +215,7 @@ function osha_taxonomies_taxonomy_default_vocabularies() {
       'description' => '',
       'hierarchy' => 1,
       'module' => 'taxonomy',
-      'weight' => 0,
+      'weight' => 1,
       'language' => 'und',
       'i18n_mode' => 1,
       'rdf_mapping' => array(
@@ -190,7 +240,7 @@ function osha_taxonomies_taxonomy_default_vocabularies() {
       'description' => 'Content status for translation and publishing workflow',
       'hierarchy' => 0,
       'module' => 'taxonomy',
-      'weight' => 0,
+      'weight' => 2,
       'language' => 'und',
       'i18n_mode' => 0,
       'rdf_mapping' => array(

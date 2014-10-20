@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Legislation feature.
+ */
+
+include_once 'osha_legislation.features.inc';

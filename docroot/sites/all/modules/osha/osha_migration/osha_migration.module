@@ -21,6 +21,7 @@ define('OSHA_MIGRATION_FILES', 'Files');
 define('OSHA_MIGRATION_IMAGES', 'Images');
 define('OSHA_MIGRATION_CONTENT_TYPE_PRESS_RELEASE', 'PressRelease');
 define('OSHA_MIGRATION_FILES_PUBLICATION', 'FilesPublication');
+define('OSHA_MIGRATION_CONTENT_TYPE_NOTE_TO_EDITOR', 'NoteToEditor');
 
 
 define('OSHA_MIGRATION_EXPORT_DIRECTORY', 'export');
@@ -142,6 +143,13 @@ function osha_migration_migrate_api() {
     $migrations[OSHA_MIGRATION_CONTENT_TYPE_PRESS_RELEASE] = array(
       'class_name' => 'MigrateOshaPressRelease',
       'file_name' => $external_data_dir . '/export/press_release.txt',
+    );
+  }
+
+  if (is_readable($external_data_dir . '/export/press_release.txt')) {
+    $migrations[OSHA_MIGRATION_CONTENT_TYPE_NOTE_TO_EDITOR] = array(
+      'class_name' => 'MigrateOshaNoteToEditor',
+      'file_name' => $external_data_dir . '/export/notes_to_editors.txt',
     );
   }
 

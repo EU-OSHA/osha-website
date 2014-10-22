@@ -5,3 +5,5 @@
  */
 
 include_once 'osha_note_to_editor.features.inc';
+
+define('OSHA_NOTE_TO_EDITOR_CONTENT_TYPE_NOTE_TO_EDITOR', 'note_to_editor');

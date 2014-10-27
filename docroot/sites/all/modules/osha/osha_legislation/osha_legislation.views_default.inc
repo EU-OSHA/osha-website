@@ -29,7 +29,7 @@ function osha_legislation_views_default_views() {
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'none';
-  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_plugin'] = 'grid';
   $handler->display->display_options['style_options']['grouping'] = array(
     0 => array(
       'field' => 'field_directive_type',
@@ -37,41 +37,8 @@ function osha_legislation_views_default_views() {
       'rendered_strip' => 0,
     ),
   );
-  $handler->display->display_options['style_options']['columns'] = array(
-    'title' => 'title',
-    'field_summary' => 'field_summary',
-    'field_directive_type' => 'field_directive_type',
-  );
-  $handler->display->display_options['style_options']['default'] = '-1';
-  $handler->display->display_options['style_options']['info'] = array(
-    'title' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_summary' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_directive_type' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-  );
-  /* No results behavior: Global: Unfiltered text */
-  $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
-  $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
-  $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
-  $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area_text_custom']['content'] = 'No results';
+  $handler->display->display_options['style_options']['columns'] = '1';
+  $handler->display->display_options['row_plugin'] = 'fields';
   /* Relationship: Content: Legislation category (field_legislation_category) */
   $handler->display->display_options['relationships']['field_legislation_category_tid']['id'] = 'field_legislation_category_tid';
   $handler->display->display_options['relationships']['field_legislation_category_tid']['table'] = 'field_data_field_legislation_category';
@@ -93,31 +60,12 @@ function osha_legislation_views_default_views() {
   $handler->display->display_options['relationships']['nid_1']['field'] = 'nid';
   $handler->display->display_options['relationships']['nid_1']['required'] = TRUE;
   /* Field: Content: Title */
-  $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
-  $handler->display->display_options['fields']['title_field']['table'] = 'field_data_title_field';
-  $handler->display->display_options['fields']['title_field']['field'] = 'title_field';
-  $handler->display->display_options['fields']['title_field']['label'] = '';
-  $handler->display->display_options['fields']['title_field']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['title_field']['link_to_entity'] = 1;
-  /* Field: Content: Link */
-  $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
-  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
-  $handler->display->display_options['fields']['view_node']['label'] = '';
-  $handler->display->display_options['fields']['view_node']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
-  /* Field: Content: Summary */
-  $handler->display->display_options['fields']['field_summary']['id'] = 'field_summary';
-  $handler->display->display_options['fields']['field_summary']['table'] = 'field_data_field_summary';
-  $handler->display->display_options['fields']['field_summary']['field'] = 'field_summary';
-  $handler->display->display_options['fields']['field_summary']['label'] = '';
-  $handler->display->display_options['fields']['field_summary']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_summary']['alter']['text'] = '[title_field]
-[field_summary]';
-  $handler->display->display_options['fields']['field_summary']['alter']['nl2br'] = TRUE;
-  $handler->display->display_options['fields']['field_summary']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_summary']['type'] = 'text_plain';
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   /* Field: Content: Directive Type */
   $handler->display->display_options['fields']['field_directive_type']['id'] = 'field_directive_type';
   $handler->display->display_options['fields']['field_directive_type']['table'] = 'field_data_field_directive_type';
@@ -125,17 +73,22 @@ function osha_legislation_views_default_views() {
   $handler->display->display_options['fields']['field_directive_type']['label'] = '';
   $handler->display->display_options['fields']['field_directive_type']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_directive_type']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_directive_type']['type'] = 'taxonomy_term_reference_plain';
-  /* Sort criterion: Taxonomy term: Weight */
-  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
-  $handler->display->display_options['sorts']['weight']['table'] = 'taxonomy_term_data';
-  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
-  $handler->display->display_options['sorts']['weight']['relationship'] = 'field_legislation_category_tid';
-  /* Sort criterion: Content: Date of directive (field_date_of_directive) */
-  $handler->display->display_options['sorts']['field_date_of_directive_value']['id'] = 'field_date_of_directive_value';
-  $handler->display->display_options['sorts']['field_date_of_directive_value']['table'] = 'field_data_field_date_of_directive';
-  $handler->display->display_options['sorts']['field_date_of_directive_value']['field'] = 'field_date_of_directive_value';
-  $handler->display->display_options['sorts']['field_date_of_directive_value']['order'] = 'DESC';
+  /* Field: Content: Summary */
+  $handler->display->display_options['fields']['field_summary']['id'] = 'field_summary';
+  $handler->display->display_options['fields']['field_summary']['table'] = 'field_data_field_summary';
+  $handler->display->display_options['fields']['field_summary']['field'] = 'field_summary';
+  $handler->display->display_options['fields']['field_summary']['label'] = '';
+  $handler->display->display_options['fields']['field_summary']['element_label_colon'] = FALSE;
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Sort criterion: Content: Published */
+  $handler->display->display_options['sorts']['status']['id'] = 'status';
+  $handler->display->display_options['sorts']['status']['table'] = 'node';
+  $handler->display->display_options['sorts']['status']['field'] = 'status';
+  $handler->display->display_options['sorts']['status']['order'] = 'DESC';
   /* Contextual filter: Taxonomy term: Directive Category Code (field_directive_category_code) */
   $handler->display->display_options['arguments']['field_directive_category_code_value']['id'] = 'field_directive_category_code_value';
   $handler->display->display_options['arguments']['field_directive_category_code_value']['table'] = 'field_data_field_directive_category_code';
@@ -159,12 +112,6 @@ function osha_legislation_views_default_views() {
   $handler->display->display_options['filters']['current']['field'] = 'current';
   $handler->display->display_options['filters']['current']['relationship'] = 'nid';
   $handler->display->display_options['filters']['current']['value'] = '1';
-  /* Filter criterion: Content: Publication Date (field_publication_date) */
-  $handler->display->display_options['filters']['field_publication_date_value']['id'] = 'field_publication_date_value';
-  $handler->display->display_options['filters']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
-  $handler->display->display_options['filters']['field_publication_date_value']['field'] = 'field_publication_date_value';
-  $handler->display->display_options['filters']['field_publication_date_value']['operator'] = '<=';
-  $handler->display->display_options['filters']['field_publication_date_value']['default_date'] = 'now';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -178,13 +125,10 @@ function osha_legislation_views_default_views() {
     t('Sort by'),
     t('Asc'),
     t('Desc'),
-    t('No results'),
     t('term from field_legislation_category'),
     t('term from field_directive_type'),
     t('Node'),
     t('Get the actual content from a content revision.'),
-    t('[title_field]
-[field_summary]'),
     t('All'),
     t('Page'),
   );

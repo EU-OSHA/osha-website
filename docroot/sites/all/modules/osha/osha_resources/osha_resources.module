@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Resources feature.
+ */
+
+include_once 'osha_resources.features.inc';

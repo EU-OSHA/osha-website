@@ -1,6 +1,6 @@
 jQuery(document).ready(function() {
     ZeroClipboard.config({
-        moviePath: 'http://osha.localhost/sites/all/libraries/zeroclipboard/ZeroClipboard.swf',
+        moviePath: '/sites/all/libraries/zeroclipboard/ZeroClipboard.swf',
         forceEnhancedClipboard: true
     });
 

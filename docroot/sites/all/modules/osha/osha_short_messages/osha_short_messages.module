@@ -94,7 +94,6 @@ function osha_short_messages_form($form, &$form_state){
     '#rows' => '20',
     '#format' => 'full_html',
     '#title' => t('Content'),
-    '#description' => t('Click on the Disable rich-text link to get the HTML code'),
     '#default_value' => $header.$body.$footer,
   );
 
@@ -107,6 +106,15 @@ function osha_short_messages_form($form, &$form_state){
     ),
   );
 
+  //copy to clipboard button
+  $form['short_messages_clipboard'] = array(
+    '#type' => 'button',
+    '#value' => t('Copy Html to Clipboard'),
+    '#attributes' => array(
+      'onclick' => 'return false;',
+    ),
+  );
+
   //the container for preview content
   $form['short_messages_markup'] = array(
     '#type' => 'markup',
@@ -115,6 +123,8 @@ function osha_short_messages_form($form, &$form_state){
   );
 
   $form['#attached']['js'][] = drupal_get_path('module', 'osha_short_messages') . '/includes/js/popup.js';
+  $form['#attached']['js'][] = drupal_get_path('module', 'osha_short_messages') . '/includes/js/copytoclipboard.js';
+  $form['#attached']['js'][] = libraries_get_path('zeroclipboard') . '/ZeroClipboard.js';
 
   return $form;
 }

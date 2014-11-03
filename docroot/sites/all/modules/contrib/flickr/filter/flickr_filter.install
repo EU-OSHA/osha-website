@@ -1,0 +1,13 @@
+<?php
+/**
+ * @file
+ * The Flickr Filter uninstall hook
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function flickr_filter_uninstall() {
+  variable_del('flickr_filter_heading');
+  variable_del('flickr_filter_default_size');
+}

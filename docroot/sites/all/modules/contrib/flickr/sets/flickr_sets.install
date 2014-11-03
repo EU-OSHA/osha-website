@@ -1,0 +1,13 @@
+<?php
+/**
+ * @file
+ * The uninstall hook.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function flickr_sets_uninstall() {
+  variable_del('flickr_sets_per_page');
+  variable_del('flickr_photos_per_set');
+}

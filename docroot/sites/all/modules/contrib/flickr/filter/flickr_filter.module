@@ -1,0 +1,436 @@
+<?php
+/**
+ * @file
+ * The Flickr filter module.
+ */
+
+/**
+ * Implements hook_help().
+ */
+function flickr_filter_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#flickr_filter':
+      // Return a line-break version of the README.txt.
+      return _filter_autop(file_get_contents(dirname(__FILE__) . '/README.txt'));
+  }
+}
+
+/**
+ * Implements hook_filter_info().
+ */
+function flickr_filter_info() {
+  $filters['flickr_filter'] = array(
+    'title' => t('Flickr Filter'),
+    'description' => t('Allows you to Insert Flickr images: [flickr-photo:id=7357144724,size=m], [flickr-photoset:id=72157634563269642,size=s,num=8,media=all,sort=random, count=false], [flickr-group:id=91484156@N00, size=q, num=8, tags=southsea, media=all, sort=random, count=false], [flickr-user:id=98518260@N02, size=q, num=8, tags=kids/men, media=all, sort=random, count=false] or [flickr-favorites:id=lolandese, size=q, num=8, tags=tomosborn/people, media=all, sort=random, count=false].'),
+    'process callback' => 'flickr_filter',
+    'tips callback' => 'flickr_filter_tips',
+    'weight' => 9,
+  );
+  return $filters;
+}
+
+/**
+ * Returns the filter information for the filter help page.
+ */
+function flickr_filter_tips($filter, $format, $long = FALSE) {
+  $autofloat = l(t('AutoFloat module'), 'https://drupal.org/project/autofloat/', array(
+    'attributes' => array(
+      'title' => t('AutoFloat | Drupal.org'),
+      'target' => '_blank',
+    ),
+  ));
+  $idgettr = l(t('Find a Flickr group ID.'), 'http://idgettr.com/', array(
+    'attributes' => array(
+      'title' => t('Use the URL of your group to find the Flickr ID.'),
+      'target' => '_blank',
+    ),
+  ));
+  $config = l(t('set in config'), 'admin/config/media/flickr/', array(
+    'attributes' => array(
+      'title' => t('Go to Flickr configuration page'),
+    ),
+  ));
+  $count = variable_get('flickr_counter', 1) ? 'true' : 'false';
+  $default_userid = variable_get('flickr_default_userid', '');
+  $info = empty($default_userid) ? '' : flickr_people_get_info(variable_get('flickr_default_userid', ''));
+  $default_userid = empty($info) ? '[undefined]' : $info['username']['_content'];
+  $output = t("Insert a <strong>Flickr photo</strong>. A working example:
+  <ul>
+    <li>[flickr-<strong>photo</strong>:id=7357144724, size=m, mintitle=999, minmetadata=999] (accepts only the parameters <em>id, class, style, size, mintitle</em> and <em>minmetadata</em>)</li>
+  </ul>
+  To float single photos use [flickr-photo:id=9247386562, <strong>class=floatright</strong>], [flickr-photo:id=9247388074, <strong>style=float:left;</strong>] or use the !autofloat (recommended).<br /><br />
+  Insert a <strong>Flickr album</strong>. Working examples:
+  <ul>
+    <li>[flickr-<strong>photoset</strong>:id=72157634563269642, size=s, num=8, tags=kids/men, media=all, sort=random, count=false, mintitle=999, minmetadata=999, heading=none]</li>
+    <li>[flickr-<strong>gallery</strong>:id=72157645025390895, size=q, num=4, sort=views]</li>
+    <li>[flickr-<strong>group</strong>:id=91484156@N00, size=q, num=8, tags=flowers, media=all, sort=random, count=false, mintitle=999, minmetadata=999, heading=none]</li>
+    <li>[flickr-<strong>user</strong>:id=lolandese1, size=q, num=6, tags=kids/men, media=all, sort=random, count=false, mintitle=999, minmetadata=999, heading=none]</li>
+    <li>[flickr-<strong>favorites</strong>:id=lolandese, size=q, num=4, tags=tomosborn/people, media=all, sort=random, count=false, mintitle=999, minmetadata=999, heading=none]</li>
+  </ul><br />
+  Common sizes:<br />
+  <table style='width:100%'>
+    <tr>
+      <td>
+        s : small square 75<br />
+        t : thumbnail, 100 on longest side<br />
+        q : big square 150
+      </td>
+      <td>
+        m : small, 240 on longest side<br />
+        n : small, 320 on longest side<br />
+        - : medium, 500 on longest side
+      </td>
+      <td>
+        x: Flash responsive slideshow (for group, set and user IDs only)<br />
+        y: Basic responsive slideshow (for set and user IDs only)
+      </td>
+    </tr>
+  </table>
+  n (320px) and c (800px) sizes are missing on \"older\" Flickr images. Photos with non existing sizes will be skipped in albums.<br /><br />
+  <strong>Parameter examples</strong> (omit a parameter to use the default value):<br />
+  <strong>id=lolandese1</strong> : A photo, set, user or group ID. <strong>id=public</strong> grabs CC licensed public photos (only for <em>[flickr-user:...]</em>). <strong>Default: id=@default_userid</strong> (!config).<br />&nbsp;&nbsp;!find_id Valid ID values: numeric ID (the one that contains a '@'), path alias, Flickr username or the user's email.<br />
+  <strong>class=floatleft foo bar</strong> : Note that no quotes are used and a space to separate multiple classes.<br />
+  <strong>style=float:left; border:solid 2px;</strong> : Note that no quotes are used, but with a semicolons between styles.<br />
+  <strong>size=q</strong> : Big square (150px). The sizes x and y display a slideshow and ignore number, media, tags and sort settings. <strong>Default single photo: size=@default_size, album photo: size=@default_size_album</strong> (both !config).<br />
+  <strong>num=4</strong> : Display 4 photos. <strong>Default: num=@default_number</strong> (!config). For albums only.<br />&nbsp;&nbsp;If set to 1, the single image will behave as such. Heading and counter will be omitted, and float might apply. Used to display a single changing random or recent image.<br />
+  <strong>media=all</strong> : Display both photos and videos. <strong>Default: media=photos</strong>. For albums only.<br />
+  <strong>tags=kids/men</strong> : <strong>Separate multiple tags with a slash (/).</strong> Display all set, group or user photos that contain the indicated tags. Case insensitive, matches any tag, for photosets and galleries even partial.<br />&nbsp;&nbsp;Public albums will only display photos that match all tags. Like on Flickr, whitespace gets removed from tags (e.g. 'Victoria park' becomes 'victoriapark'). For albums only.<br />
+  <strong>heading=h3</strong> : Wraps the album title in HTML tags. Use 'p' to apply no style or 'none' to suppress the title. <strong>Default heading=@default_heading</strong> (!config). For albums only.<br />
+  <strong>sort=views</strong> : Display the most viewed Flickr photos first (popularity, slower response after cache clear). Other values: <em>unsorted</em> = recent as delivered by the Flickr API (fastest response), <em>random</em> (slower response after cache clear), <em>taken</em> (newest first), <em>posted</em> (newest first) , <em>added</em> (for groups only, newest first) and <em>id</em> (on photo ID, newest first). <strong>Default: sort=unsorted</strong>. For albums only.<br />
+  <strong>filter=interesting</strong> : Display the most interesting photos. Other possible value: <em>relevant</em>. For user albums only, also public.<br />
+  <strong>count=false</strong> : Suppress display of the counter under the album (e.g. <em>5 out of 124 on Flickr</em>). <strong>Default: count=@default_count</strong> (!config). For albums only.<br />
+  <strong>mintitle=999</strong> : Suppress display of the title in the photo captions for images below a width of 999 px. <strong>Default: mintitle=@default_mintitle</strong> (!config).<br />
+  <strong>minmetadata=999</strong> : Suppress display of the metadata in the photo captions for images below a width of 999 px. <strong>Default: minmetadata=@default_minmetadata</strong> (!config).", array(
+    '!autofloat' => $autofloat,
+    '!find_id' => $idgettr,
+    '@default_userid' => $default_userid,
+    '@default_size' => variable_get('flickr_filter_default_size', 'm'),
+    '@default_size_album' => variable_get('flickr_default_size_album', 's'),
+    '@default_limit' => variable_get('flickr_per_page', 100),
+    '@default_number' => variable_get('flickr_photos_per_page', 6),
+    '@default_mintitle' => variable_get('flickr_title_suppress_on_small', '100'),
+    '@default_minmetadata' => variable_get('flickr_metadata_suppress_on_small', '150'),
+    '@default_heading' => variable_get('flickr_filter_heading', 'p'),
+    '@default_count' => $count,
+    '!config' => $config,
+  ));
+  if ($long) {
+    $output .= ' ' . t('The size parameter can be one of the following:');
+    $items = array();
+    foreach (flickr_photo_sizes() as $key => $text) {
+      $items[] = "<code>$key</code> &mdash; (" . $text['label'] . ') ' . $text['description'];
+    }
+    $output .= theme('item_list', array('items' => $items));
+  }
+  return $output;
+}
+
+/**
+ * Processes the flickr filter.
+ */
+function flickr_filter($text, $filter) {
+  $text = preg_replace_callback('/\[flickr-photo:(.+?)\]/', 'flickr_filter_callback_photo', $text);
+  $text = preg_replace_callback('/\[flickr-photoset:(.+?)\]/', 'flickr_filter_callback_album', $text);
+  $text = preg_replace_callback('/\[flickr-group:(.+?)\]/', 'flickr_filter_callback_group', $text);
+  $text = preg_replace_callback('/\[flickr-gallery:(.+?)\]/', 'flickr_filter_callback_gallery', $text);
+  $text = preg_replace_callback('/\[flickr-user:(.+?)\]/', 'flickr_filter_callback_album', $text);
+  $text = preg_replace_callback('/\[flickr-favorites:(.+?)\]/', 'flickr_filter_callback_favorites', $text);
+  return $text;
+}
+
+/**
+ * Parse parameters to the fiter from a format like:
+ * id=26159919@N00, size=m,num=9,class=something,style=float:left;border:1px
+ * into an associative array with two sub-arrays. The first sub-array are
+ * parameters for the request, the second are HTML attributes (class and style).
+ */
+function flickr_filter_split_config($string) {
+  $config = array();
+  $attribs = array();
+  // Remove whitespace.
+  $string = preg_replace('/\s+/', '', $string);
+  // Put each setting on its own line.
+  $string = str_replace(',', "\n", $string);
+  // Break them up around commas.
+  preg_match_all('/([a-zA-Z]+)=([-@\/0-9a-zA-Z :;]+)/', $string, $parts, PREG_SET_ORDER);
+  foreach ($parts as $part) {
+    // Normalize to lowercase and remove extra spaces.
+    $name = strtolower(trim($part[1]));
+    $value = trim($part[2]);
+    if ($name == 'style' || $name == 'class') {
+      $attribs[$name] = $value;
+    }
+    else {
+      $config[$name] = $value;
+    }
+  }
+  return array($config, $attribs);
+}
+
+/**
+ * Filter callback for a photo.
+ */
+function flickr_filter_callback_photo($matches) {
+  list($config, $attribs) = flickr_filter_split_config($matches[1]);
+  if (isset($config['id'])) {
+    if ($photo = flickr_photo_get_info($config['id'])) {
+      if (!isset($config['size'])) {
+        $config['size'] = variable_get('flickr_filter_default_size', 'm');
+      }
+      if (!isset($config['mintitle'])) {
+        $config['mintitle'] = variable_get('flickr_title_suppress_on_small', '100');
+      }
+      if (!isset($config['minmetadata'])) {
+        $config['minmetadata'] = variable_get('flickr_metadata_suppress_on_small', '150');
+      }
+      switch ($config['size']) {
+        case "x":
+        case "y":
+          drupal_set_message(t("Do not use a slideshow for a single image."), 'error');
+          $config['size'] = variable_get('flickr_filter_default_size', 'm');
+          break;
+      }
+      $sizes = flickr_photo_sizes();
+      if (flickr_in_array_r($sizes[$config['size']]['label'], flickr_photo_get_sizes($photo['id']))) {
+        return theme('flickr_photo', array(
+          'photo' => $photo,
+          'size' => $config['size'],
+          'attribs' => $attribs,
+          'min_title' => $config['mintitle'],
+          'min_metadata' => $config['minmetadata'],
+        ));
+      }
+      else {
+        // Generate an "empty" image of the requested size containing a message.
+        $string = $sizes[$config['size']]['description'];
+        preg_match("/\d*px/", $string, $matches);
+        return '<span class="flickr-wrap" style="width: ' . $matches[0] . '; height: ' . $matches[0] . '; border:solid 1px;"><span class="flickr-empty">' . t('The requested image size is not available for this photo on Flickr (uploaded when this size was not offered yet). Try another size or re-upload this photo on Flickr.') . '</span></span>';
+      }
+    }
+  }
+  return '';
+}
+
+/**
+ * Filter callback for a user.
+ */
+function flickr_filter_callback_album($matches) {
+  list($config, $attribs) = flickr_filter_split_config($matches[1]);
+
+  if (!isset($config['id']) || $config['id'] == 'public') {
+    $default_userid = variable_get('flickr_default_userid', '');
+    $config['id'] = !isset($config['id']) ? $default_userid : $config['id'];
+    $config['id'] = (!empty($default_userid) && $config['id'] != 'public') ? $default_userid : '39873962@N08';
+  }
+  if (!isset($config['size'])) {
+    $config['size'] = NULL;
+  }
+  if (!isset($config['num'])) {
+    $config['num'] = NULL;
+  }
+  if (!isset($config['media'])) {
+    $config['media'] = 'photos';
+  }
+  if (!isset($config['heading'])) {
+    $config['heading'] = variable_get('flickr_filter_heading', 'p');
+  }
+  if (!isset($config['tags'])) {
+    $config['tags'] = '';
+  }
+  else {
+    $config['tags'] = str_replace("/", ",", $config['tags']);
+  }
+  if (!isset($config['count'])) {
+    $config['count'] = variable_get('flickr_counter', 1) ? 'true' : 'false';
+  }
+  if (!isset($config['mintitle'])) {
+    $config['mintitle'] = NULL;
+  }
+  if (!isset($config['minmetadata'])) {
+    $config['minmetadata'] = NULL;
+  }
+  if (!isset($config['filter'])) {
+    $config['filter'] = NULL;
+  }
+  switch ($config['filter']) {
+    case 'interesting':
+      $config['filter'] = 'interestingness-desc';
+      break;
+
+    case 'relevant':
+      $config['filter'] = 'relevance';
+      break;
+  }
+  if (!isset($config['sort'])) {
+    $config['sort'] = 'unsorted';
+  }
+  switch ($config['sort']) {
+    case 'taken':
+      $config['sort'] = 'date-taken-desc';
+      break;
+
+    case 'posted':
+      $config['sort'] = 'date-posted-desc';
+      break;
+  }
+  $type = flickr_get_id_type($config['id']);
+  $config['id'] = $type == 'user' ? flickr_user_find_by_identifier($config['id']) : $config['id'];
+  $output = _flickr_album($type, $config['id'], $config['num'], $config['size'], $config['media'], $config['tags'], '', $config['count'], $config['sort'], $config['heading'], $config['mintitle'], $config['minmetadata'], 0, $config['filter']);
+  return $output;
+}
+
+/**
+ * Filter callback for a group.
+ */
+function flickr_filter_callback_group($matches) {
+  list($config, $attribs) = flickr_filter_split_config($matches[1]);
+
+  if (isset($config['id'])) {
+    if (!isset($config['size'])) {
+      $config['size'] = NULL;
+    }
+    if (!isset($config['num'])) {
+      $config['num'] = NULL;
+    }
+    if (!isset($config['media'])) {
+      $config['media'] = 'photos';
+    }
+    if (!isset($config['sort'])) {
+      $config['sort'] = 'unsorted';
+    }
+    if (!isset($config['heading'])) {
+      $config['heading'] = variable_get('flickr_filter_heading', 'p');
+    }
+    if (!isset($config['tags'])) {
+      $config['tags'] = '';
+    }
+    else {
+      $config['tags'] = str_replace("/", ",", $config['tags']);
+    }
+    if (!isset($config['count'])) {
+      $config['count'] = variable_get('flickr_counter', 1) ? 'true' : 'false';
+    }
+    if (!isset($config['mintitle'])) {
+      $config['mintitle'] = NULL;
+    }
+    if (!isset($config['minmetadata'])) {
+      $config['minmetadata'] = NULL;
+    }
+    switch ($config['sort']) {
+      case 'taken':
+        $config['sort'] = 'date-taken-desc';
+        break;
+
+      case 'posted':
+        $config['sort'] = 'date-posted-desc';
+        break;
+    }
+    $output = _flickr_album('group', $config['id'], $config['num'], $config['size'], $config['media'], $config['tags'], '', $config['count'], $config['sort'], $config['heading'], $config['mintitle'], $config['minmetadata']);
+    return $output;
+  }
+  return 'Specify a Flickr group ID (number@number or path alias).';
+}
+
+/**
+ * Filter callback for a gallery.
+ */
+function flickr_filter_callback_gallery($matches) {
+  list($config, $attribs) = flickr_filter_split_config($matches[1]);
+
+  if (isset($config['id'])) {
+    if (!isset($config['size'])) {
+      $config['size'] = NULL;
+    }
+    if (!isset($config['num'])) {
+      $config['num'] = NULL;
+    }
+    if (!isset($config['media'])) {
+      $config['media'] = 'photos';
+    }
+    if (!isset($config['sort'])) {
+      $config['sort'] = 'unsorted';
+    }
+    if (!isset($config['heading'])) {
+      $config['heading'] = variable_get('flickr_filter_heading', 'p');
+    }
+    if (!isset($config['tags'])) {
+      $config['tags'] = '';
+    }
+    else {
+      $config['tags'] = str_replace("/", ",", $config['tags']);
+    }
+    if (!isset($config['count'])) {
+      $config['count'] = variable_get('flickr_counter', 1) ? 'true' : 'false';
+    }
+    if (!isset($config['mintitle'])) {
+      $config['mintitle'] = NULL;
+    }
+    if (!isset($config['minmetadata'])) {
+      $config['minmetadata'] = NULL;
+    }
+    switch ($config['sort']) {
+      case 'taken':
+        $config['sort'] = 'date-taken-desc';
+        break;
+
+      case 'posted':
+        $config['sort'] = 'date-posted-desc';
+        break;
+    }
+    $output = _flickr_album('gallery', $config['id'], $config['num'], $config['size'], $config['media'], $config['tags'], '', $config['count'], $config['sort'], $config['heading'], $config['mintitle'], $config['minmetadata']);
+    return $output;
+  }
+  return 'Specify a Flickr gallery ID (very long, numbers only).';
+}
+
+/**
+ * Filter callback for a user's favorites.
+ */
+function flickr_filter_callback_favorites($matches) {
+  list($config, $attribs) = flickr_filter_split_config($matches[1]);
+
+  if (!isset($config['id'])) {
+    $default_userid = variable_get('flickr_default_userid', '');
+    $config['id'] = !empty($default_userid) ? $default_userid : NULL;
+  }
+  if (isset($config['id'])) {
+    if (!isset($config['size'])) {
+      $config['size'] = NULL;
+    }
+    if (!isset($config['num'])) {
+      $config['num'] = NULL;
+    }
+    if (!isset($config['media'])) {
+      $config['media'] = 'photos';
+    }
+    if (!isset($config['sort'])) {
+      $config['sort'] = 'unsorted';
+    }
+    if (!isset($config['heading'])) {
+      $config['heading'] = variable_get('flickr_filter_heading', 'p');
+    }
+    if (!isset($config['tags'])) {
+      $config['tags'] = '';
+    }
+    else {
+      $config['tags'] = str_replace("/", ",", $config['tags']);
+    }
+    if (!isset($config['count'])) {
+      $config['count'] = variable_get('flickr_counter', 1) ? 'true' : 'false';
+    }
+    if (!isset($config['mintitle'])) {
+      $config['mintitle'] = NULL;
+    }
+    if (!isset($config['minmetadata'])) {
+      $config['minmetadata'] = NULL;
+    }
+    // Choose between 'recent' or 'random' based on 'random' parameter.
+    // Note that we abuse the $delta parameter pass the random value to override
+    // the default of the counter display.
+    $type = flickr_get_id_type($config['id']);
+    $config['id'] = $type == 'user' ? flickr_user_find_by_identifier($config['id']) : $config['id'];
+    $output = _flickr_album('favorites', $config['id'], $config['num'], $config['size'], $config['media'], $config['tags'], '', $config['count'], $config['sort'], $config['heading'], $config['mintitle'], $config['minmetadata']);
+    return $output;
+  }
+  return 'Specify a Flickr user ID (number@number, path alias, username or the user\'s email).';
+}

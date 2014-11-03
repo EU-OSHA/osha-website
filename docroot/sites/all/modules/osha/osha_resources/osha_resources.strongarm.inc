@@ -164,10 +164,7 @@ function osha_resources_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_options_resources';
-  $strongarm->value = array(
-    0 => 'moderation',
-    1 => 'revision',
-  );
+  $strongarm->value = array();
   $export['node_options_resources'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -195,14 +192,14 @@ function osha_resources_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'print_html_display_resources';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['print_html_display_resources'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'print_html_display_urllist_resources';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['print_html_display_urllist_resources'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -216,14 +213,14 @@ function osha_resources_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'print_pdf_display_resources';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['print_pdf_display_resources'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'print_pdf_display_urllist_resources';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['print_pdf_display_urllist_resources'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -251,7 +248,7 @@ function osha_resources_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'workbench_access_node_type_resources';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['workbench_access_node_type_resources'] = $strongarm;
 
   $strongarm = new stdClass();

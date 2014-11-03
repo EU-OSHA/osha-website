@@ -1,0 +1,483 @@
+<?php
+/**
+ * @file
+ * Defines a Flickr field type.
+ *
+ * @todo - think about how to control access to photos, might be tricky because
+ * of CCK caching.
+ */
+
+/**
+ * Implements hook_help().
+ */
+function flickrfield_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#flickrfield':
+      // Return a line-break version of the README.txt.
+      return _filter_autop(file_get_contents(dirname(__FILE__) . '/README.txt'));
+  }
+}
+
+/**
+ * Implements hook_field_info().
+ */
+function flickrfield_field_info() {
+  $sizes = array_keys(flickr_photo_sizes());
+  return array(
+    'flickrfield' => array(
+      'label' => 'Flickr Photo',
+      'description' => t('Store Flickr Photo or Photoset IDs and display the photos in nodes and views.'),
+      'default_widget' => 'flickrfield',
+      'default_formatter' => $sizes[0],
+    ),
+    'flickrfield_photoset' => array(
+      'label' => 'Flickr photo set',
+      'description' => t('Field for storing a reference to a Flickr photo set.'),
+      'default_widget' => 'flickrfield_flickrid',
+      'default_formatter' => 'photoset_primaryphoto_size' . $sizes[0] . '_nolink',
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_schema().
+ */
+function flickrfield_field_schema($field) {
+  $columns = array();
+  switch ($field['type']) {
+    case 'flickrfield':
+      $columns += array(
+        'id' => array(
+          'type' => 'varchar',
+          'length' => 64,
+          'not null' => FALSE,
+          'sortable' => TRUE,
+        ),
+        'type' => array(
+          'type' => 'varchar',
+          'length' => 10,
+          'not null' => FALSE,
+          'sortable' => TRUE,
+        ),
+        'nsid' => array(
+          'type' => 'varchar',
+          'length' => 64,
+          'not null' => FALSE,
+          'sortable' => TRUE,
+        ),
+      );
+      break;
+
+    case 'flickrfield_photoset':
+      $columns = array(
+        'flickrid' => array(
+          'type' => 'varchar',
+          'length' => 64,
+          'not null' => FALSE,
+          'sortable' => TRUE,
+        ),
+      );
+      break;
+  }
+  return array('columns' => $columns);
+}
+
+/**
+ * Implements hook_field_widget_info().
+ */
+function flickrfield_field_widget_info() {
+  return array(
+    'flickrfield' => array(
+      'label' => 'Flickr Photo',
+      'field types' => array('flickrfield'),
+      'behaviors' => array(
+        'multiple values' => FIELD_BEHAVIOR_DEFAULT,
+        'default value' => FIELD_BEHAVIOR_DEFAULT,
+      ),
+    ),
+    'flickrfield_flickrid' => array(
+      'label' => 'Flickr Id',
+      'field types' => array('flickrfield_photoset'),
+      'behaviors' => array(
+        'multiple values' => FIELD_BEHAVIOR_DEFAULT,
+        'default value' => FIELD_BEHAVIOR_DEFAULT,
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_element_info().
+ */
+function flickrfield_element_info() {
+  return array(
+    'flickrfield' => array(
+      '#input' => TRUE,
+      '#columns' => array('type', 'id', 'uid'),
+      '#process' => array('flickrfield_form_process_flickrfield'),
+    ),
+    'flickrfield_flickrid' => array(
+      '#input' => TRUE,
+      '#columns' => array('flickrid'),
+      '#process' => array('flickrfield_form_process_flickrfield_flickrid'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_widget_form().
+ */
+function flickrfield_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
+  $element = array(
+    '#type' => $instance['widget']['type'],
+    '#default_value' => isset($items[$delta]) ? $items[$delta] : '',
+  );
+  return $element;
+}
+
+/**
+ * Form process callback for flickr photo fields.
+ */
+function flickrfield_form_process_flickrfield($element, $form_state, $form = array()) {
+  $options = array();
+  $options['photo_id'] = t("Photo");
+  $options['id'] = t("Photoset");
+  $element['type'] = array(
+    '#type' => 'select',
+    '#title' => t('Item Type'),
+    '#default_value' => !empty($element['#value']['type']) ? $element['#value']['type'] : '',
+    '#options' => $options,
+  );
+  $element['id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Item id'),
+    '#default_value' => !empty($element['#value']['id']) ? $element['#value']['id'] : '',
+  );
+  $idgettr = l(t('Find your Flickr ID.'), 'http://idgettr.com/', array(
+    'attributes' => array(
+      'title' => t('Use the URL of your photostream to find the Flickr ID.'),
+      'target' => '_blank',
+    ),
+  ));
+  $element['nsid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('User Id'),
+    '#default_value' => !empty($element['#value']['nsid']) ? $element['#value']['nsid'] : variable_get('flickr_default_userid', ''),
+    '#required' => $element['#required'],
+    '#description' => t("The user id of the Flickr user who owns the photos. If this is left blank, the sites's default user will be used. Current default id is @id. !find_id", array(
+      '@id' => variable_get('flickr_default_userid', ''),
+      '!find_id' => $idgettr,
+    )),
+  );
+  return $element;
+}
+
+/**
+ * Form process callback for flickr photoset fields.
+ */
+function flickrfield_form_process_flickrfield_flickrid($element, $form_state, $form) {
+  $element['flickrid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Flickr set ID'),
+    '#description' => t("An example: In the Flickr URL <em>https://www.flickr.com/photos/98518260@N02/sets/72157634563269642</em> the Flickr set ID is the last part, <em>72157634563269642</em>."),
+    '#required' => FALSE || $element['#required'],
+    '#default_value' => !empty($element['#value']['flickrid']) ? $element['#value']['flickrid'] : '',
+    '#size' => 20,
+    '#maxlength' => 20,
+    '#attributes' => array('class' => array('flickrfield_flickrid')),
+  );
+  return $element;
+}
+
+/**
+ * Implements hook_field_is_empty().
+ */
+function flickrfield_field_is_empty($item, $field) {
+  switch ($field['type']) {
+    case 'flickrfield':
+      return empty($item['id']);
+
+    case 'flickrfield_photoset':
+      return empty($item['flickrid']);
+  }
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function flickrfield_field_formatter_info() {
+  require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'flickr') . '/flickr.inc';
+  $sizes = flickr_photo_sizes();
+  // Formatters for general Flickr CCK field.
+  foreach ($sizes as $size => $info) {
+    if (stripos($info['label'], t('slideshow')) == FALSE) {
+      $formatters[$size] = array(
+        'label' => $info['label'],
+        'field types' => array('flickrfield'),
+      );
+    }
+  }
+
+  // Formatters for Flickr photoset field.
+  foreach ($sizes as $size => $info) {
+    if (stripos($info['label'], t('slideshow')) == FALSE) {
+      $formatters['photoset_primaryphoto_size' . $size . '_nolink'] = array(
+        'label' => t('Primary set photo at size "@size"', array('@size' => $info['label'])),
+        'field types' => array('flickrfield_photoset'),
+      );
+      $formatters['photoset_primaryphoto_size' . $size . '_linknode'] = array(
+        'label' => t('Primary set photo at size "@size" with link to node', array('@size' => $info['label'])),
+        'field types' => array('flickrfield_photoset'),
+      );
+      $formatters['photoset_primaryphoto_size' . $size . '_linkflickrcomset'] = array(
+        'label' => t('Primary set photo at size "@size" with link to set on Flickr.com', array('@size' => $info['label'])),
+        'field types' => array('flickrfield_photoset'),
+      );
+    }
+  }
+  $formatters['photoset_flickrcomslideshow'] = array(
+    'label' => 'Embedded Flickr.com slideshow (Flash)',
+    'field types' => array('flickrfield_photoset'),
+  );
+  $formatters['photoset_flickrcomslideshow_simple'] = array(
+    'label' => 'Embedded Flickr.com slideshow (non Flash)',
+    'field types' => array('flickrfield_photoset'),
+  );
+  $formatters['photoset_flickrcomsetlink'] = array(
+    'label' => 'Link to photo set on Flickr.com',
+    'field types' => array('flickrfield_photoset'),
+  );
+  return $formatters;
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ * @todo: the theme definitions for our field-formatters should be removed from
+ * flickrfield_theme() and implemented here
+ * @ see
+ *   http://drupal.org/node/728792 (section "Changed! Hook Formatter")
+ */
+function flickrfield_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+  $sizes = array_keys(flickr_photo_sizes());
+  foreach ($items as $delta => $item) {
+    $variables = array(
+      '#node' => $entity,
+      '#item' => $item,
+      '#formatter' => $display['type'],
+      '#field_name' => $field['field_name'],
+    );
+    $element[$delta]['#markup'] = theme('flickrfield_formatter_' . $display['type'], $variables);
+  }
+  return $element;
+}
+
+/**
+ * Implements hook_theme().
+ * @todo: the theme definitions for our field-formatters should go in
+ * flickrfield_field_formatter_view()
+ * @ see
+ *   http://drupal.org/node/728792 (section "Changed! Hook Formatter")
+ */
+function flickrfield_theme() {
+  require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'flickr') . '/flickr.inc';
+  $themes = array();
+  foreach (flickr_photo_sizes() as $size => $info) {
+    $themes['flickrfield_formatter_' . $size] = array(
+      'variables' => array('element'),
+      'function' => 'theme_flickrfield_field_formatter',
+    );
+    // Theme function for the primary photo formatters of a Flickr photo set.
+    $themes['flickrfield_formatter_photoset_primaryphoto_size' . $size . '_nolink'] = array(
+      'variables' => array('element'),
+      'function' => 'theme_flickrfield_formatter_photoset_primaryphoto',
+    );
+    $themes['flickrfield_formatter_photoset_primaryphoto_size' . $size . '_linknode'] = array(
+      'variables' => array('element'),
+      'function' => 'theme_flickrfield_formatter_photoset_primaryphoto',
+    );
+    $themes['flickrfield_formatter_photoset_primaryphoto_size' . $size . '_linkflickrcomset'] = array(
+      'variables' => array('element'),
+      'function' => 'theme_flickrfield_formatter_photoset_primaryphoto',
+    );
+  }
+  return $themes + array(
+    'flickrfield_photo' => array(
+      'variables' => array(
+        'img',
+        'photo_url',
+        'formatter',
+        'photo_data',
+        'node',
+      ),
+    ),
+    'flickrfield_photoset' => array(
+      'variables' => array(
+        'img',
+        'photo_url',
+        'formatter',
+        'photo_data',
+        'node',
+      ),
+    ),
+    'flickrfield' => array(
+      'variables' => array('element'),
+    ),
+    'flickrfield_flickrid' => array(
+      'variables' => array('element'),
+    ),
+    'flickrfield_photoset_primaryphoto' => array(
+      'variables' => array('element'),
+    ),
+    'flickrfield_formatter_photoset_flickrcomslideshow' => array(
+      'variables' => array('element'),
+    ),
+    'flickrfield_formatter_photoset_flickrcomslideshow_simple' => array(
+      'variables' => array('element'),
+    ),
+    'flickrfield_formatter_photoset_flickrcomsetlink' => array(
+      'variables' => array('element'),
+    ),
+  );
+}
+
+/**
+ * Basic flickrfield formatter.
+ */
+function theme_flickrfield_field_formatter($element) {
+  require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'flickr') . '/flickr.inc';
+  $item = $element['#item'];
+  if (empty($item['id'])) {
+    return;
+  }
+  $node = $element['#node'];
+  $formatter = $element['#formatter'];
+  switch ($item['type']) {
+    case 'photo_id':
+      $photo_data = flickr_photo_get_info($item['id']);
+      return theme('flickr_photo', array(
+        'format' => NULL,
+        'attribs' => NULL,
+        'size' => $formatter,
+        'photo' => $photo_data,
+      ));
+
+    case 'id':
+      $photo_data = flickr_photoset_get_info($item['id']);
+      return theme('flickr_photoset', array(
+        'owner' => $photo_data['owner'],
+        'attribs' => NULL,
+        'size' => $formatter,
+        'photoset' => $photo_data,
+      ));
+  }
+}
+
+/**
+ * Theme a Flickr photo set as the primary photo of that set.
+ */
+function theme_flickrfield_formatter_photoset_primaryphoto($element) {
+  require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'flickr') . '/flickr.inc';
+  if (empty($element['#item']['flickrid'])) {
+    return;
+  }
+  $formatter_info = explode('_', $element['#formatter']);
+  $set_data = flickr_photoset_get_info($element['#item']['flickrid']);
+  $set_url = flickr_photoset_page_url($set_data['owner'], $set_data['id']);
+  $size = substr($formatter_info[2], -1);
+  $img = flickr_img($set_data, $size);
+  switch ($formatter_info[3]) {
+    case 'linknode':
+      $link = 'node/' . $element['#node']->nid;
+      break;
+
+    case 'linkflickrcomset':
+      $link = $set_url;
+      break;
+
+    default:
+      $link = NULL;
+      break;
+  }
+  $title = is_array($set_data['title']) ? $set_data['title']['_content'] : $set_data['title'];
+
+  $vars = array($img, $link, $set_url, $size, $title);
+  return theme('flickrfield_photoset_primaryphoto', $vars);
+}
+
+/**
+ * Theme a Flickr photo set as an embedded Flickr.com slideshow (Flash).
+ */
+function theme_flickrfield_formatter_photoset_flickrcomslideshow($variables) {
+  require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'flickr') . '/flickr.inc';
+  if (empty($variables['#item']['flickrid'])) {
+    return;
+  }
+  $id = $variables['#item']['flickrid'];
+  return theme('flickr_flickrcomslideshow', array(
+    'id' => $id,
+  ));
+}
+
+/**
+ * Theme a Flickr photo set as an embedded Flickr.com slideshow (non Flash).
+ */
+function theme_flickrfield_formatter_photoset_flickrcomslideshow_simple($variables) {
+  require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'flickr') . '/flickr.inc';
+  if (empty($variables['#item']['flickrid'])) {
+    return;
+  }
+  $id = $variables['#item']['flickrid'];
+  return theme('flickr_flickrcomslideshow_simple', array(
+    'id' => $id,
+  ));
+}
+
+/**
+ * Theme a Flickr photoset as a simple link to the photoset page on Flickr.com.
+ */
+function theme_flickrfield_formatter_photoset_flickrcomsetlink($variables) {
+  $set_data = flickr_photoset_get_info($variables['#item']['flickrid']);
+  $set_url = flickr_photoset_page_url($set_data['owner'], $set_data['id']);
+  return l($set_url, $set_url);
+}
+
+/**
+ * Theme function for showing a primary photo of a photo set with optional link.
+ * Also includes a link to Flickr.com photo set page to comply with terms of
+ * service.
+ *
+ * @param array $variables
+ *   Holds the values to assign.
+ * @param string $img
+ *   HTML code for image.
+ * @param string $link
+ *   Link to which the image should link to.
+ * @param string $set_url
+ *   URL of the photo set on Flickr.com.
+ * @param string $size
+ *   The flickr size of the image.
+ * @param string $title
+ *   Title to use for the link.
+ *
+ * @return string
+ *   HTML to render.
+ */
+function theme_flickrfield_photoset_primaryphoto($variables) {
+  $img = $variables['0'];
+  $link = $variables['1'];
+  $set_url = $variables['2'];
+  $size = $variables['3'];
+  $title = $variables['4'];
+  if ($link) {
+    $output = '<div class="flickr-photoset-img">' . l($img, $link, array(
+      'attributes' => array('title' => $title),
+      'html' => TRUE,
+    )) . '</div>';
+  }
+  else {
+    $output = '<div class="flickr-photoset-img">' . $img . '</div>';
+  }
+  $output .= '<div class="flickr-citation">' . l(t('Source: Flickr'), $set_url) . '</div>';
+  return $output;
+}

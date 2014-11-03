@@ -345,6 +345,10 @@ $options['init-modules'] = array(
   'linkit',
   'scanner',
   'search_and_replace',
+  'youtube',
+  'flickr',
+  'flickr_block',
+  'flickrfield',
 
   // Enable last (conflict with rules)
   'uuid',

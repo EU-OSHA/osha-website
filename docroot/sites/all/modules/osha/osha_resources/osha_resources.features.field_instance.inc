@@ -10,75 +10,6 @@
 function osha_resources_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-resources-body'
-  $field_instances['node-resources-body'] = array(
-    'bundle' => 'resources',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 0,
-      ),
-      'highlights_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'newsletter_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_slideshow' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_wiki' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(
-          'trim_length' => 600,
-        ),
-        'type' => 'text_summary_or_trimmed',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'body',
-    'label' => 'Body',
-    'required' => FALSE,
-    'settings' => array(
-      'display_summary' => TRUE,
-      'entity_translation_sync' => FALSE,
-      'text_processing' => 1,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 20,
-        'summary_rows' => 5,
-      ),
-      'type' => 'text_textarea_with_summary',
-      'weight' => 31,
-    ),
-  );
-
   // Exported field_instance: 'node-resources-field_external_url'
   $field_instances['node-resources-field_external_url'] = array(
     'bundle' => 'resources',
@@ -159,7 +90,7 @@ function osha_resources_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 42,
+      'weight' => 45,
     ),
   );
 
@@ -226,7 +157,7 @@ function osha_resources_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 47,
+      'weight' => 44,
     ),
   );
 
@@ -239,10 +170,10 @@ function osha_resources_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'link',
+        'module' => 'flickrfield',
         'settings' => array(),
-        'type' => 'link_default',
-        'weight' => 4,
+        'type' => 's',
+        'weight' => 11,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -280,37 +211,79 @@ function osha_resources_field_default_field_instances() {
     'label' => 'Flickr',
     'required' => 0,
     'settings' => array(
-      'attributes' => array(
-        'class' => '',
-        'configurable_title' => 0,
-        'rel' => '',
-        'target' => 'default',
-        'title' => '',
-      ),
-      'display' => array(
-        'url_cutoff' => 80,
-      ),
-      'enable_tokens' => 1,
       'entity_translation_sync' => FALSE,
-      'linkit' => array(
-        'button_text' => 'Search',
-        'enable' => 0,
-        'profile' => '',
-      ),
-      'rel_remove' => 'default',
-      'title' => 'optional',
-      'title_maxlength' => 128,
-      'title_value' => '',
-      'url' => 0,
       'user_register_form' => FALSE,
-      'validate_url' => 1,
     ),
     'widget' => array(
       'active' => 0,
-      'module' => 'link',
+      'module' => 'flickrfield',
       'settings' => array(),
-      'type' => 'link_field',
-      'weight' => 44,
+      'type' => 'flickrfield',
+      'weight' => 43,
+    ),
+  );
+
+  // Exported field_instance: 'node-resources-field_flickr_tags'
+  $field_instances['node-resources-field_flickr_tags'] = array(
+    'bundle' => 'resources',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Grab Flickr photos with these tags only. Comma separated.',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 10,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_flickr_tags',
+    'label' => 'Flickr tags',
+    'required' => FALSE,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'taxonomy',
+      'settings' => array(
+        'autocomplete_path' => 'taxonomy/autocomplete',
+        'size' => 60,
+      ),
+      'type' => 'taxonomy_autocomplete',
+      'weight' => 42,
     ),
   );
 
@@ -378,91 +351,7 @@ function osha_resources_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 48,
-    ),
-  );
-
-  // Exported field_instance: 'node-resources-field_slideshare'
-  $field_instances['node-resources-field_slideshare'] = array(
-    'bundle' => 'resources',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'link',
-        'settings' => array(),
-        'type' => 'link_default',
-        'weight' => 5,
-      ),
-      'highlights_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'newsletter_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_slideshow' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_wiki' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_slideshare',
-    'label' => 'Slideshare',
-    'required' => 0,
-    'settings' => array(
-      'attributes' => array(
-        'class' => '',
-        'configurable_title' => 0,
-        'rel' => '',
-        'target' => 'default',
-        'title' => '',
-      ),
-      'display' => array(
-        'url_cutoff' => 80,
-      ),
-      'enable_tokens' => 1,
-      'entity_translation_sync' => FALSE,
-      'linkit' => array(
-        'button_text' => 'Search',
-        'enable' => 0,
-        'profile' => '',
-      ),
-      'rel_remove' => 'default',
-      'title' => 'optional',
-      'title_maxlength' => 128,
-      'title_value' => '',
-      'url' => 0,
-      'user_register_form' => FALSE,
-      'validate_url' => 1,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'link',
-      'settings' => array(),
-      'type' => 'link_field',
-      'weight' => 45,
+      'weight' => 46,
     ),
   );
 
@@ -475,10 +364,19 @@ function osha_resources_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'link',
-        'settings' => array(),
-        'type' => 'link_default',
-        'weight' => 3,
+        'module' => 'youtube',
+        'settings' => array(
+          'youtube_autohide' => FALSE,
+          'youtube_autoplay' => FALSE,
+          'youtube_controls' => FALSE,
+          'youtube_height' => NULL,
+          'youtube_iv_load_policy' => FALSE,
+          'youtube_showinfo' => FALSE,
+          'youtube_size' => '420x315',
+          'youtube_width' => NULL,
+        ),
+        'type' => 'youtube_video',
+        'weight' => 8,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -516,37 +414,15 @@ function osha_resources_field_default_field_instances() {
     'label' => 'Youtube',
     'required' => 0,
     'settings' => array(
-      'attributes' => array(
-        'class' => '',
-        'configurable_title' => 0,
-        'rel' => '',
-        'target' => 'default',
-        'title' => '',
-      ),
-      'display' => array(
-        'url_cutoff' => 80,
-      ),
-      'enable_tokens' => 1,
       'entity_translation_sync' => FALSE,
-      'linkit' => array(
-        'button_text' => 'Search',
-        'enable' => 0,
-        'profile' => '',
-      ),
-      'rel_remove' => 'default',
-      'title' => 'optional',
-      'title_maxlength' => 128,
-      'title_value' => '',
-      'url' => 0,
       'user_register_form' => FALSE,
-      'validate_url' => 1,
     ),
     'widget' => array(
       'active' => 0,
-      'module' => 'link',
+      'module' => 'youtube',
       'settings' => array(),
-      'type' => 'link_field',
-      'weight' => 43,
+      'type' => 'youtube',
+      'weight' => 41,
     ),
   );
 
@@ -619,12 +495,12 @@ function osha_resources_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Body');
   t('External URL');
   t('File');
   t('Flickr');
+  t('Flickr tags');
+  t('Grab Flickr photos with these tags only. Comma separated.');
   t('Internal Contents');
-  t('Slideshare');
   t('Title');
   t('Youtube');
 

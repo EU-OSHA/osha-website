@@ -1,0 +1,710 @@
+<?php
+/**
+ * @file
+ * The Flickr module.
+ */
+
+require_once 'flickr.inc';
+
+/**
+ * Implements hook_help().
+ */
+function flickr_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#flickr':
+      // Return a line-break version of the README.txt.
+      return _filter_autop(file_get_contents(dirname(__FILE__) . '/README.txt'));
+  }
+}
+
+/**
+ * Implements hook_page_build().
+ */
+function flickr_page_build(&$page) {
+  // Determine the setting to use flickr.css or not.
+  if (variable_get('flickr_css', 1)) {
+    drupal_add_css(drupal_get_path('module', 'flickr') . '/flickr.css', array(
+      'group' => CSS_DEFAULT,
+      'every_page' => TRUE,
+    ));
+  }
+  // Adds a link to the Flickr photo page in the Colorbox 'default' style.
+  // Tweak the condition to apply on other styles. Also needs CSS changes.
+  // !path_is_admin($_GET['q'])) was added to avoid the JS kicking in on admin
+  // pages. It mangled the dragging of block weight on admin/structure/block.
+  if (module_exists('colorbox') && !path_is_admin($_GET['q'])) {
+    if (variable_get('colorbox_style', 'default') == 'default') {
+      drupal_add_js(drupal_get_path('module', 'flickr') . '/flickr_colorbox.js');
+    }
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function flickr_menu() {
+  $items['admin/config/media/flickr'] = array(
+    'title' => 'Flickr',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('flickr_admin_settings'),
+    'access arguments' => array('administer site configuration'),
+    'description' => 'Change settings for the flickr module.',
+    'file' => 'flickr.admin.inc',
+  );
+  $items['flickr/auth'] = array(
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+    'page callback' => 'flickr_auth_callback',
+  );
+  $items['flickr/%user'] = array(
+    'title callback' => 'flickr_photos_page_title',
+    'title arguments' => array(1),
+    'description' => 'Flickr photos of specified user.',
+    'type' => MENU_CALLBACK,
+    'page callback' => 'flickr_photos',
+    'page arguments' => array(1),
+    'access callback' => 'flickr_photos_access',
+    'access arguments' => array(1),
+  );
+  $items['flickr'] = array(
+    'title' => 'Flickr photos',
+    'type' => MENU_CALLBACK,
+    'page callback' => 'flickr_photos',
+    'access callback' => TRUE,
+    'description' => 'Flickr photos of default user id.',
+  );
+  $items['user/%user/flickr'] = array(
+    'title' => 'Flickr',
+    'description' => 'Display the Flickr photos of this user',
+    'type' => MENU_LOCAL_TASK,
+    'page callback' => 'flickr_user_page',
+    'page arguments' => array(1),
+    'access callback' => 'flickr_photos_access',
+    'access arguments' => array(1),
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function flickr_theme() {
+  return array(
+    'flickr_photo' => array(
+      'variables' => array(
+        'size' => NULL,
+        'format' => NULL,
+        'attribs' => NULL,
+        'min_title' => variable_get('flickr_title_suppress_on_small', '100'),
+        'min_metadata' => variable_get('flickr_metadata_suppress_on_small', '150'),
+      ),
+    ),
+    'flickr_photo_box' => array(
+      'variables' => array(
+        'size' => NULL,
+        'format' => NULL,
+        'attribs' => NULL,
+      ),
+    ),
+    'flickr_photos' => array(
+      'variables' => array(
+        'uid' => NULL,
+        'photos' => NULL,
+      ),
+    ),
+    'flickr_photoset' => array(
+      'variables' => array(
+        'attribs' => NULL,
+        'min_title' => variable_get('flickr_title_suppress_on_small', '100'),
+        'min_metadata' => variable_get('flickr_metadata_suppress_on_small', '150'),
+      ),
+    ),
+    'flickr_flickrcomslideshow' => array(
+      'variables' => array(
+        'id' => NULL,
+      ),
+    ),
+    'flickr_flickrcomslideshow_simple' => array(
+      'variables' => array(
+        'id' => NULL,
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_permission().
+ */
+function flickr_permission() {
+  return array(
+    'view own flickr photos' => array(
+      'title' => t('View Flickr photos on own user profile and specify Flickr ID on own account'),
+      'description' => t("Needed to add a Flickr identifier to own account. This is used for example by the 'Node author' Flickr blocks."),
+    ),
+    'view all flickr photos' => array(
+      'title' => t('View Flickr photos on user profiles'),
+      'description' => t("Consider giving 'View user profiles' permission also, in combination with this one."),
+    ),
+    'administer flickr' => array('title' => t('Administer Flickr settings')),
+  );
+}
+
+/**
+ * Displays the links to the user's photos, sets and tags.
+ */
+function flickr_user_page($user) {
+  drupal_set_title(flickr_photos_page_title($user));
+  $links['items'][] = l(t("@name's photos", array('@name' => $user->name)), 'flickr/' . $user->uid);
+
+  if (module_exists('flickr_sets')) {
+    $links['items'][]  = l(t("@name's photo sets", array('@name' => $user->name)), 'flickr/' . $user->uid . '/sets');
+  }
+
+  if (module_exists('flickr_tags')) {
+    $links['items'][]  = l(t("@name's tags", array('@name' => $user->name)), 'flickr/' . $user->uid . '/tags');
+  }
+  return theme('item_list', $links) . ' ';
+}
+
+/**
+ * Flickr photo access.
+ */
+function flickr_photos_access($account) {
+  $view_access = FALSE;
+  if (!empty($account) && !empty($account->uid)) {
+    if (isset($account->flickr['nsid'])) {
+      $view_access = user_access('administer flickr') ||
+        // Only admins can view blocked accounts.
+        $account->status && (
+          user_access('view all flickr photos') ||
+          user_access('view own flickr photos') && $GLOBALS['user']->uid == $account->uid
+        );
+    }
+  }
+  return $view_access;
+}
+
+/**
+ * Flickr photos (as shown on a user profile).
+ */
+function flickr_photos($user = NULL) {
+  global $pager_page_array, $pager_total, $pager_total_items;
+  // Set this to something else if you want multiple pagers.
+  $element = 0;
+  $pager_page_array[$element] = empty($_GET['page']) ? 0 : (int) $_GET['page'];
+
+  if ($user === NULL) {
+    $nsid = variable_get('flickr_default_userid');
+    if (!$nsid) {
+      drupal_set_message(t('No default Flickr user id has been set.'));
+      return FALSE;
+    }
+    $uid = 0;
+  }
+  else {
+    $account = $user;
+    if ($account->flickr['nsid']) {
+      $nsid = $account->flickr['nsid'];
+    }
+    else {
+      drupal_set_message(t('%user does not have a Flickr account', array('%user' => $account->name)), 'error');
+      return FALSE;
+    }
+    $uid = $account->uid;
+  }
+
+  $nsid = flickr_user_find_by_identifier($nsid);
+  $photos = flickr_photos_search($nsid, $pager_page_array[$element] + 1);
+  if (!$photos) {
+    drupal_set_message(t('No accessible photos found for Flickr %userid', array('%userid' => $nsid)));
+    return FALSE;
+  }
+
+  // Set pager information we just acquired.
+  $pager_total[$element] = $photos['pages'];
+  $pager_total_items[$element] = $photos['total'];
+
+  return theme('flickr_photos', array('uid' => $uid, 'photos' => $photos));
+}
+
+/**
+ * Implements hook_user_load(). Adds the Flickr variables to the user object.
+ */
+function flickr_user_load($users) {
+  $result = db_query('SELECT * FROM {flickr_users} WHERE uid IN (:uids)', array(':uids' => array_keys($users)));
+  foreach ($result as $record) {
+    $users[$record->uid]->flickr['identifier'] = $record->identifier;
+    $users[$record->uid]->flickr['nsid'] = $record->nsid;
+  }
+}
+
+/**
+ * Implements hook_user_presave().
+ */
+function flickr_user_presave(&$edit, $account, $category) {
+  if (isset($edit['flickr_identifier'])) {
+    db_delete('flickr_users')
+      ->condition('uid', $account->uid)
+      ->execute();
+    // $user_affected = db_affected_rows();
+    if (!empty($edit['flickr_identifier'])) {
+      $id = db_insert('flickr_users')
+        ->fields(array(
+          'uid' => $account->uid,
+          'nsid' => flickr_user_find_by_identifier($edit['flickr_identifier']),
+          'identifier' => $edit['flickr_identifier'],
+        ))
+        ->execute();
+    }
+    /*
+    elseif ($user_affected) {
+      //Flickr account deleted
+      drupal_set_message(t("%username's Flickr page has been deleted.", array('%username' => $account->name)));
+    }
+    */
+  }
+  $edit['flickr_identifier'] = NULL;
+}
+
+/**
+ * Implements hook_user_delete().
+ */
+function flickr_user_delete($account) {
+  db_delete('flickr_users')
+    ->condition('uid', $account->uid)
+    ->execute();
+}
+
+/**
+ * Implements hook_form_user_profile_form_alter().
+ * Adds the Flickr form to the user profile form.
+ */
+function flickr_form_user_profile_form_alter(&$form, &$form_state) {
+  if ($form['#user_category'] == 'account' && (user_access('view own flickr photos') || user_access('administer flickr'))) {
+    $account = $form['#user'];
+    $form['flickr'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Flickr settings'),
+      '#collapsible' => FALSE,
+      '#weight' => 4,
+      '#tree' => FALSE,
+    );
+    $form['flickr']['flickr_identifier'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Flickr identifier'),
+      '#default_value' => empty($account->flickr['identifier']) ? '' : $account->flickr['identifier'],
+      '#description' => t('Enter either your Flickr username, URL path alias, the email address associated with your Flickr account, or your Flickr NSID. Leave this box empty to delete your Flickr page on this site.'),
+      '#maxlength' => 64,
+    );
+    $form['#validate'][] = 'flickr_user_account_form_validate';
+  }
+}
+
+/**
+ * Validates a user's Flickr account calling flickr_user_find_by_identifier().
+ */
+function flickr_user_account_form_validate(&$form, &$form_state) {
+  if (!empty($form_state['values']['flickr_identifier'])) {
+    if (!flickr_user_find_by_identifier($form_state['values']['flickr_identifier'])) {
+      form_set_error('flickr_identifier', t('%ident is not a valid Flickr username, email, or NSID.', array('%ident' => $form_state['values']['flickr_identifier'])));
+    }
+  }
+}
+
+/**
+ * Flickr photos page title.
+ */
+function flickr_photos_page_title($user) {
+  return 'Flickr photos - ' . $user->name;
+}
+
+/**
+ * Theme Flickr photo.
+ */
+function theme_flickr_photo($variables) {
+  $class = variable_get('flickr_class');
+  $rel = variable_get('flickr_rel');
+  $photo = $variables['photo'];
+  $size = $variables['size'];
+  $format = $variables['format'];
+  $attribs = $variables['attribs'];
+  $min_title = $variables['min_title'];
+  $min_metadata = $variables['min_metadata'];
+  // If we have a class or style containing the term 'float', prepare it to be
+  // added to the 'flickr-wrapper' span element later on that includes also the
+  // caption.
+  if (isset($attribs['class'])) {
+    $class_float = (stripos($attribs['class'], 'float') !== FALSE) ? ' ' . $attribs['class'] : '';
+  }
+  else {
+    $class_float = '';
+  }
+  if (isset($attribs['style'])) {
+    $style_float = (stripos($attribs['style'], 'float') !== FALSE) ? ' style="' . $attribs['style'] . '"' : '';
+  }
+  else {
+    $style_float = '';
+  }
+  $url = flickr_photo_img($photo, variable_get('flickr_opening_size', ''), $format);
+  $img = flickr_img($photo, $size, $attribs);
+  $img_url = flickr_photo_img($photo, $size);
+  // If the image is a square we know the width (avoids to make a request).
+  switch ($size) {
+    case 's':
+      $width = '75';
+      break;
+
+    case 'q':
+      $width = '150';
+      break;
+  }
+  // If it is not a square.
+  if (!isset($width)) {
+    // Get the real width of the image.
+    list($width) = getimagesize($img_url);
+  }
+  $photo_url = flickr_photo_page_url($photo['owner'], $photo['id']);
+  $info = flickr_photo_get_info($photo['id']);
+  $people = flickr_get_user_info($info['owner']['nsid']);
+  switch ($info['license']) {
+    case '0':
+      $license = ' <span class="flickr-copyright">' . l('©', 'http://en.wikipedia.org/wiki/Copyright', array(
+        'attributes' => array(
+          'title' => t('All Rights Reserved'),
+          'target' => '_blank',
+        ),
+        'html' => TRUE,
+      )) . '</span>';
+      $licenselong = '&copy; ' . t('All Rights Reserved') . '</span>';
+      break;
+
+    case '1':
+      $license = ' <span class="flickr-cc">' . l('cna', 'https://creativecommons.org/licenses/by-nc-sa/2.0/', array(
+        'attributes' => array(
+          'title' => t('Creative Commons — Attribution-NonCommercial-ShareAlike 2.0 Generic — CC BY-NC-SA 2.0'),
+          'target' => '_blank',
+        ),
+      )) . '</span>';
+      $licenselong = t('Creative Commons, Attribution, Non Commercial, ShareAlike');
+      break;
+
+    case '2':
+      $license = ' <span class="flickr-cc">' . l('cn', 'https://creativecommons.org/licenses/by-nc/2.0/', array(
+        'attributes' => array(
+          'title' => t('Creative Commons — Attribution-NonCommercial 2.0 Generic — CC BY-NC 2.0'),
+          'target' => '_blank',
+        ),
+      )) . '</span>';
+      $licenselong = t('Creative Commons, Attribution, Non Commercial');
+      break;
+
+    case '3':
+      $license = ' <span class="flickr-cc">' . l('cnd', 'https://creativecommons.org/licenses/by-nc-nd/2.0/', array(
+        'attributes' => array(
+          'title' => t('Creative Commons — Attribution-NonCommercial-NoDerivs 2.0 Generic — CC BY-NC-ND 2.0'),
+          'target' => '_blank',
+        ),
+      )) . '</span>';
+      $licenselong = t('Creative Commons, Attribution, Non Commercial, No Derivs');
+      break;
+
+    case '4':
+      $license = ' <span class="flickr-cc">' . l('c', 'https://creativecommons.org/licenses/by/2.0/', array(
+        'attributes' => array(
+          'title' => t('Creative Commons — Attribution 2.0 Generic — CC BY 2.0'),
+          'target' => '_blank',
+        ),
+      )) . '</span>';
+      $licenselong = t('Creative Commons, Attribution');
+      break;
+
+    case '5':
+      $license = ' <span class="flickr-cc">' . l('cs', 'https://creativecommons.org/licenses/by-sa/2.0/', array(
+        'attributes' => array(
+          'title' => t('Creative Commons — Attribution-ShareAlike 2.0 Generic — CC BY-SA 2.0'),
+          'target' => '_blank',
+        ),
+      )) . '</span>';
+      $licenselong = t('Creative Commons, Attribution, Share Alike');
+      break;
+
+    case '6':
+      $license = ' <span class="flickr-cc">' . l('cd', 'https://creativecommons.org/licenses/by-nd/2.0/', array(
+        'attributes' => array(
+          'title' => t('Creative Commons — Attribution-NoDerivs 2.0 Generic — CC BY-ND 2.0'),
+          'target' => '_blank',
+        ),
+      )) . '</span>';
+      $licenselong = t('Creative Commons, Attribution, No Derivs');
+      break;
+
+    case '7':
+      $license = ' <span class="flickr-cc">' . l('p', 'https://flickr.com/commons/usage/', array(
+        'attributes' => array(
+          'title' => t('Public Domain - No known copyright restrictions'),
+          'target' => '_blank',
+        ),
+      )) . '</span>';
+      $licenselong = t('Public Domain, no known copyright restrictions');
+      break;
+
+    case '8':
+      $license = '<br />' . l(t('United States Government Work'), 'http://www.usa.gov/copyright.shtml', array(
+        'attributes' => array(
+          'title' => t('Copyright and Other Rights Pertaining to U.S. Government Works | USA.gov'),
+          'target' => '_blank',
+        ),
+      ));
+      $licenselong = t('Copyright and Other Rights Pertaining to U.S. Government Works | USA.gov');
+      break;
+
+    default:
+      // Some deleted Flickr photos can still result within a query but lack
+      // license info in that case.
+      $license = '';
+      $licenselong = '';
+      break;
+  }
+  if (variable_get('flickr_license', 0) == 0) {
+    $license = '';
+  }
+  // Get the Flickr image title for set data or the photo itself. Sanitize.
+  $title = is_array($photo['title']) ? str_replace('"', "'", strip_tags($photo['title']['_content'])) : $photo['title'];
+  // For videos add the '(VIDEO)' to the title if it not already contains it.
+  $title .= (($info['media'] !== 'video') || (stripos($title, 'video') !== FALSE)) ? '' : ' ' . t('(VIDEO)');
+  // Use title if description does not exist, else sanitize the description.
+  $description = !empty($info['description']['_content']) ? str_replace('"', "'", htmlspecialchars_decode(strip_tags($info['description']['_content']))) : $title;
+  // Real name if it exists else the username. Link to Flickr profile page.
+  // Replace with $people['photostream'] if you want to link to the photostream.
+  $username = $people['name'];
+  // The date an image was taken formatted as 'time ago'.
+  $taken = isset($info['dates']['taken']) ? format_interval(time() - strtotime($info['dates']['taken']), 1) . ' ' . t('ago') : '';
+  // A bunch of geo data.
+  $neighbourhood = isset($info['location']['neighbourhood']['_content']) ? strip_tags($info['location']['neighbourhood']['_content']) . ', ' : '';
+  $locality = isset($info['location']['locality']['_content']) ? strip_tags($info['location']['locality']['_content']) . ', ' : '';
+  $region = isset($info['location']['region']['_content']) ? strip_tags($info['location']['region']['_content']) . ', ' : '';
+  $country = isset($info['location']['country']['_content']) ? strip_tags($info['location']['country']['_content']) : '';
+  $loc = $neighbourhood . $locality . $region . $country;
+  $location = !empty($country) ? ' ' . t('at') . ' ' . l($loc, 'https://www.flickr.com/photos/' . $info['owner']['nsid'] . '/map?&location=' . $neighbourhood . $locality . $region . $country, array(
+    'attributes' => array(
+      'title' => t('View photo on Flickr map.'),
+      'target' => '_blank',
+    ),
+  )) : '';
+  // Compose extra Flickr info as HTML to render.
+  $metadata = $taken . $location . ' ' . t('by') . ' ' . $username;
+  // Image width < 150 px is too small for extra info. Can be set differently.
+  $metadatacaption = $width < $min_metadata ? '' : '<span class="flickr-metadata">' . $metadata . $license . '</span>';
+  // Image width < 100 px is too small for most titles. Can be set differently.
+  if (variable_get('flickr_class') == NULL && variable_get('flickr_rel') == NULL) {
+    $notitle = '';
+  }
+  else {
+    // To give best possible attribution given the small space, display license
+    // icon if set to show.
+    $notitle = '<span class="flickr-no-title">' . t('Flickr') . '</span> ';
+    $metadatacaption = $width < $min_metadata ? $license : $metadatacaption;
+  }
+  $credit = $width < $min_title ? $notitle : '<span class="flickr-title">' . $title . '</span><br />';
+  // Determine what info goes with the enlarged version of the image.
+  $overlay = variable_get('flickr_info_overlay', array(
+    'title' => 'title',
+    'metadata' => 'metadata',
+    'description' => 'description',
+    'license' => 0,
+  ));
+  $overlaytitle = (gettype($overlay['title']) == 'integer') ? '' : $title . ' - ';
+  $metadata = (gettype($overlay['metadata']) == 'integer') ? '' : $metadata . ' - ';
+  $description = (gettype($overlay['description']) == 'integer' || $overlaytitle == $description . ' - ') ? '' : $description . ' - ';
+  $licenselong = (gettype($overlay['license']) == 'integer') ? '' : $licenselong;
+  $overlayhtml = $overlaytitle . $metadata . $description . $licenselong;
+  // Final step when NO overlay browser is used that generates the image that
+  // links to the Flickr page to comply with the TOS of Flickr.
+  if (variable_get('flickr_class') == NULL && variable_get('flickr_rel') == NULL && $width < $min_title && $width < $min_metadata) {
+    return '<span class="flickr-wrap' . $class_float . '"' . $style_float . '>' . l($img, $photo_url, array(
+      'attributes' => array(
+        'title' => $title,
+        'target' => '_blank',
+      ),
+      'absolute' => TRUE,
+      'html' => TRUE,
+    )) . '</span>';
+  }
+  else {
+    // If 'class' or 'rel' attribute are defined (overlay browser), use a
+    // caption.
+    // Final step that generates the image with a link to the bigger version and
+    // a link to the Flickr page under it to comply with the TOS of Flickr.
+    if (variable_get('flickr_class') == NULL && variable_get('flickr_rel') == NULL) {
+      $url = $photo_url;
+    }
+    return '<span class="flickr-wrap' . $class_float . '"' . $style_float . '>' . l($img, $url, array(
+      'attributes' => array(
+        'title' => $overlayhtml,
+        'class' => array($class),
+        'rel' => $rel,
+        'target' => '_blank',
+      ),
+      'absolute' => TRUE,
+      'html' => TRUE,
+    )) . '<span class="flickr-credit" style="width: ' . ($width - variable_get('flickr_caption_padding', '0')) . 'px;">' . l($credit, $photo_url, array(
+      'attributes' => array(
+        'title' => t('View on Flickr. To enlarge click image.'),
+        'target' => '_blank',
+      ),
+      'html' => TRUE,
+    )) . $metadatacaption . '</span></span>';
+  }
+}
+
+/**
+ * Theme Flickr photo box on a profile page.
+ */
+function theme_flickr_photo_box($variables) {
+  $photo = $variables['photo'];
+  $size = $variables['size'];
+  $format = $variables['format'];
+  $attribs = $variables['attribs'];
+
+  $img = flickr_img($photo, $size, $attribs);
+  $title = is_array($photo['title']) ? $photo['title']['_content'] : $photo['title'];
+  $photo_url = flickr_photo_page_url($photo['owner'], $photo['id']);
+
+  $output = "<div class='flickr-photo-box'>\n";
+  $output .= "<a href='$photo_url'>$img</a>";
+  $output .= "<a href='$photo_url'>";
+  $output .= '<div class="flickr-photo-title">' . strip_tags($title) . "</div>\n";
+  $output .= "</a>";
+  $output .= "</div>\n";
+  return $output;
+}
+
+/**
+ * Theme Flickr photos on a profile page.
+ */
+function theme_flickr_photos($variables) {
+  $photos = $variables['photos'];
+
+  $output = theme('pager');
+  $output .= "<div class='flickr-photoset'>\n";
+  foreach ($photos['photo'] as $photo) {
+    $output .= theme('flickr_photo_box', array(
+      'photo' => $photo,
+      'size' => 'm',
+    ));
+  }
+  $output .= '</div>';
+  $output .= theme('pager');
+  return $output;
+}
+
+/**
+ * Theme Flickr photoset.
+ */
+function theme_flickr_photoset($variables) {
+  $photoset = $variables['photoset'];
+  $owner = $variables['owner'];
+  $size = $variables['size'];
+  $media = isset($variables['media']) ? $variables['media'] : 'photos';
+  $attribs = $variables['attribs'];
+  $min_title = $variables['min_title'];
+  $min_metadata = $variables['min_metadata'];
+
+  if (module_exists('flickr_sets')) {
+    $output = "<div class='flickr-photoset'>\n";
+    $per_page = variable_get('flickr_block_photos_per_set', 6);
+    $photos = flickr_photosets_getphotos($photoset['id'], array(
+      'per_page' => $per_page,
+      'media' => $media,
+      ));
+    if ($photos['photoset']['total']) {
+      foreach ((array) $photos['photoset']['photo'] as $photo) {
+        // Insert owner into $photo because theme_flickr_photo needs it.
+        $photo['owner'] = $owner;
+        $output .= theme('flickr_photo', array(
+          'photo' => $photo,
+          'size' => $size,
+          'format' => NULL,
+          'attribs' => $attribs,
+          'min_title' => $variables['min_title'],
+          'min_metadata' => $variables['min_metadata'],
+          ));
+      }
+    }
+    else {
+      $output .= t('No media in this set.');
+    }
+    $output .= '</div>';
+    return $output;
+  }
+  else {
+    $img = flickr_img($photoset, $size, $attribs);
+    $output = theme('pager');
+    $photo_url = flickr_photoset_page_url($owner, $photoset['id']);
+    $output .= "<div class='flickr-photoset'>\n";
+    $title = is_array($photoset['title']) ? $photoset['title']['_content'] : $photoset['title'];
+    return l($img, $photo_url, array(
+      'attributes' => array(
+        'title' => $title),
+      'absolute' => TRUE,
+      'html' => TRUE,
+      ));
+  }
+}
+
+/**
+ * Theme a Flickr photo set as an embedded Flickr.com slideshow (Flash).
+ */
+function theme_flickr_flickrcomslideshow($variables) {
+  $id = $variables['id'];
+  if (empty($id)) {
+    return;
+  }
+  switch (flickr_get_id_type($id)) {
+    case 'photoset':
+      $info = flickr_photoset_get_info($id);
+      $user_id = $info['owner'];
+      return '<div class="flickr-slideshow"><object type="application/x-shockwave-flash" data="https://www.flickr.com/apps/slideshow/show.swf?v=71649">
+    <param name="movie" value="https://www.flickr.com/apps/slideshow/show.swf?v=71649" />
+    <param name="allowFullScreen" value="true" />
+    <param name="wmode" value="opaque" />
+    <param name="flashvars" value="offsite=true&amp;lang=en-us&amp;page_show_url=/photos/' . $user_id . '/sets/' . $id . '/show/&amp;page_show_back_url=/photos/' . $user_id . '/sets/' . $id . '/&amp;set_id=' . $id . '" /></object></div>';
+
+    case 'user':
+      return '<div class="flickr-slideshow"><object type="application/x-shockwave-flash" data="https://www.flickr.com/apps/slideshow/show.swf?v=71649">
+      <param name="movie" value="https://www.flickr.com/apps/slideshow/show.swf?v=71649" />
+      <param name="allowFullScreen" value="true" />
+      <param name="wmode" value="opaque" />
+      <param name="flashvars" value="offsite=tru&amp;lang=en-us&amp;page_show_url=%2Fphotos%2F' . $id . '%2Fshow&amp;user_id=' . $id . '" /></object></div>';
+
+    case 'group':
+      return '<div class="flickr-slideshow"><object  type="application/x-shockwave-flash" data="https://www.flickr.com/apps/slideshow/show.swf?v=140556"><param name="movie" value="https://www.flickr.com/apps/slideshow/show.swf?v=140556"></param><param name="flashvars" value="offsite=true&lang=en-us&page_show_url=%2Fgroups%2F' . $id . '%2Fpool%2Fshow%2F&page_show_back_url=%2Fgroups%2F' . $id . '%2Fpool%2F&group_id=' . $id . '&jump_to=&start_index="></param><param name="allowFullScreen" value="true"><param name="wmode" value="opaque" /></param></object></div>';
+  }
+  return;
+}
+
+/**
+ * Theme a Flickr photo set as an embedded Flickr.com slideshow (non Flash).
+ */
+function theme_flickr_flickrcomslideshow_simple($variables) {
+  $id = $variables['id'];
+  if (empty($id)) {
+    return;
+  }
+  switch (flickr_get_id_type($id)) {
+    case 'photoset':
+      $info = flickr_photoset_get_info($id);
+      $user_id = $info['owner'];
+      $src = 'https://www.flickr.com/slideShow/index.gne?group_id=&user_id=' . $user_id . '&set_id=' . $id . '&text=';
+      break;
+
+    case 'user':
+      $src = 'https://www.flickr.com/slideShow/index.gne?group_id=&user_id=' . $id . '&set_id=&text=';
+      break;
+
+    case 'group':
+      $src = 'https://www.flickr.com/slideShow/index.gne?group_id=' . $id . '&user_id=&set_id=&text=';
+      break;
+  }
+  return '<div class="flickr-slideshow"><object type="text/html" data="' . $src . '"></object></div>';
+}

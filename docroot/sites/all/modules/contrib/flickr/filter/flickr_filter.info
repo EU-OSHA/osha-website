@@ -1,0 +1,14 @@
+name = Flickr Filter
+description = A text filter to insert Flickr photos and sets into content.
+core = 7.x
+package = Flickr
+configure = admin/config/content/formats
+dependencies[] = flickr
+
+
+; Information added by Drupal.org packaging script on 2014-06-26
+version = "7.x-1.6"
+core = "7.x"
+project = "flickr"
+datestamp = "1403814832"
+

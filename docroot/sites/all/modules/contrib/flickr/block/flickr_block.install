@@ -1,0 +1,247 @@
+<?php
+/**
+ * @file
+ * The Flickr Block install hook
+ */
+
+/**
+ * Implements hook_install().
+ */
+function flickr_block_install() {
+  $t = get_t();
+  if (module_exists('taxonomy')) {
+    $vocab = (object) array(
+      'name' => 'Flickr tags',
+      'machine_name' => 'flickr_tags',
+      'description' => $t('Grab Flickr photos with these tags only. Comma separated.'),
+    );
+    taxonomy_vocabulary_save($vocab);
+
+    $vocabulary = taxonomy_vocabulary_machine_name_load('flickr_tags');
+
+    $field = array(
+      'field_name' => 'field_' . $vocabulary->machine_name,
+      'type' => 'taxonomy_term_reference',
+      'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+      'settings' => array(
+        'allowed_values' => array(
+          array(
+            'vocabulary' => $vocabulary->machine_name,
+            'parent' => 0,
+          ),
+        ),
+      ),
+    );
+    field_create_field($field);
+
+    $bundles = field_info_bundles($entity_type = 'node');
+    foreach ($bundles as $bundle => $value) {
+      $instance = array(
+        'field_name' => 'field_' . $vocabulary->machine_name,
+        'entity_type' => 'node',
+        'label' => $vocabulary->name,
+        'bundle' => $bundle,
+        'description' => $vocabulary->description,
+        // Use the taxonomy autocomplete widget.
+        'widget' => array(
+          'type' => 'taxonomy_autocomplete',
+          'weight' => 4,
+        ),
+        // Define how the terms will be displayed in full node and teaser mode.
+        'display' => array(
+          'default' => array(
+            'label' => 'inline',
+            'type' => 'taxonomy_term_reference_link',
+            'weight' => 10,
+          ),
+          'teaser' => array(
+            'type' => 'hidden',
+            'weight' => 10,
+          ),
+        ),
+      );
+      field_create_instance($instance);
+    }
+
+    $bundles = field_info_bundles($entity_type = 'user');
+    foreach ($bundles as $bundle => $value) {
+      $instance = array(
+        'field_name' => 'field_' . $vocabulary->machine_name,
+        'entity_type' => 'user',
+        'label' => $vocabulary->name,
+        'bundle' => $bundle,
+        'description' => $t("Limited the photos used from your Flickr account in Flickr blocks to those having a Flickr tag as indicated here (e.g. 'website' or 'blog'). Those have to be added to individual photos on Flickr as well. This is not necessary if the Flickr blocks themselves make use of the Flickr tags attached to a post, as the grabbed photos are filtered by those already."),
+        // Use the taxonomy autocomplete widget.
+        'widget' => array(
+          'type' => 'taxonomy_autocomplete',
+          'weight' => 4,
+        ),
+        // Define how the terms will be displayed on the user profile.
+        'display' => array(
+          'default' => array(
+            'type' => 'hidden',
+            'weight' => 10,
+          ),
+        ),
+      );
+      field_create_instance($instance);
+    }
+
+  }
+}
+
+/**
+ * New vocabulary flickr_tags, extra block variable indexes, removes old vars.
+ */
+function flickr_block_update_7101() {
+  $t = get_t();
+  if (module_exists('taxonomy')) {
+    $vocab = (object) array(
+      'name' => 'Flickr tags',
+      'machine_name' => 'flickr_tags',
+      'description' => $t('Grab Flickr photos with these tags only. Comma separated.'),
+    );
+    taxonomy_vocabulary_save($vocab);
+
+    $vocabulary = taxonomy_vocabulary_machine_name_load('flickr_tags');
+
+    $field = array(
+      'field_name' => 'field_' . $vocabulary->machine_name,
+      'type' => 'taxonomy_term_reference',
+      'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+      'settings' => array(
+        'allowed_values' => array(
+          array(
+            'vocabulary' => $vocabulary->machine_name,
+            'parent' => 0,
+          ),
+        ),
+      ),
+    );
+    field_create_field($field);
+
+    $bundles = field_info_bundles($entity_type = 'node');
+    foreach ($bundles as $bundle => $value) {
+      $instance = array(
+        'field_name' => 'field_' . $vocabulary->machine_name,
+        'entity_type' => 'node',
+        'label' => $vocabulary->name,
+        'bundle' => $bundle,
+        'description' => $vocabulary->description,
+        // Use the taxonomy autocomplete widget.
+        'widget' => array(
+          'type' => 'taxonomy_autocomplete',
+          'weight' => 4,
+        ),
+        // Define how the terms will be displayed in full node and teaser mode.
+        'display' => array(
+          'default' => array(
+            'label' => 'inline',
+            'type' => 'taxonomy_term_reference_link',
+            'weight' => 10,
+          ),
+          'teaser' => array(
+            'type' => 'hidden',
+            'weight' => 10,
+          ),
+        ),
+      );
+      field_create_instance($instance);
+    }
+
+    $bundles = field_info_bundles($entity_type = 'user');
+    foreach ($bundles as $bundle => $value) {
+      $instance = array(
+        'field_name' => 'field_' . $vocabulary->machine_name,
+        'entity_type' => 'user',
+        'label' => $vocabulary->name,
+        'bundle' => $bundle,
+        'description' => $t("Limited the photos used from your Flickr account in Flickr blocks to those having a Flickr tag as indicated here (e.g. 'website' or 'blog'). Those have to be added to individual photos on Flickr as well. This is not necessary if the Flickr blocks themselves make use of the Flickr tags attached to a post, as the grabbed photos are filtered by those already."),
+        // Use the taxonomy autocomplete widget.
+        'widget' => array(
+          'type' => 'taxonomy_autocomplete',
+          'weight' => 4,
+        ),
+        // Define how the terms will be displayed on the user profile.
+        'display' => array(
+          'default' => array(
+            'type' => 'hidden',
+            'weight' => 10,
+          ),
+        ),
+      );
+      field_create_instance($instance);
+    }
+
+  }
+
+  foreach (range(0, 11) as $delta) {
+    $block_vars = variable_get("flickr_block_{$delta}", array(
+      'user_id' => '',
+      'group_id' => '',
+      'photoset_id' => '',
+      'show_n' => variable_get('flickr_photos_per_page', 6),
+      'size' => variable_get('flickr_default_size_album', 's'),
+      'tag' => '',
+      'media' => 'photos',
+      'vocab' => '',
+      'min_title' => variable_get('flickr_title_suppress_on_small', '100'),
+      'min_metadata' => variable_get('flickr_metadata_suppress_on_small', '150'),
+    ));
+    $block_vars['user_id'] = isset($block_vars['user_id']) ? $block_vars['user_id'] : '';
+    $block_vars['show_n'] = isset($block_vars['show_n']) ? $block_vars['show_n'] : variable_get('flickr_photos_per_page', 6);
+    $block_vars['size'] = isset($block_vars['size']) ? $block_vars['size'] : variable_get('flickr_default_size_album', 's');
+    $block_vars['tag'] = isset($block_vars['tag']) ? $block_vars['tag'] : '';
+    if (!isset($block_vars['group_id']) && !isset($block_vars['user_id'])) {
+      $block_vars['group_id'] = '';
+    }
+    else {
+      // In older versions user_id was used to hold the group_id.
+      $block_vars['group_id'] = (!isset($block_vars['group_id']) && isset($block_vars['user_id'])) ? $block_vars['user_id'] : $block_vars['group_id'];
+    }
+    $block_vars['photoset_id'] = isset($block_vars['photoset_id']) ? $block_vars['photoset_id'] : '';
+    $block_vars['sort'] = isset($block_vars['sort']) ? $block_vars['sort'] : 'unsorted';
+    $block_vars['filter'] = isset($block_vars['filter']) ? $block_vars['filter'] : '';
+    $block_vars['media'] = isset($block_vars['media']) ? $block_vars['media'] : 'photos';
+    $block_vars['vocab'] = isset($block_vars['vocab']) ? $block_vars['vocab'] : '';
+    $block_vars['min_title'] = isset($block_vars['min_title']) ? $block_vars['min_title'] : variable_get('flickr_title_suppress_on_small', '100');
+    $block_vars['min_metadata'] = isset($block_vars['min_metadata']) ? $block_vars['min_metadata'] : variable_get('flickr_metadata_suppress_on_small', '150');
+    variable_set('flickr_block_' . $delta, array(
+      'user_id' => $block_vars['user_id'],
+      'show_n' => $block_vars['show_n'],
+      'size' => $block_vars['size'],
+      'tag' => $block_vars['tag'],
+      'group_id' => $block_vars['group_id'],
+      'photoset_id' => $block_vars['photoset_id'],
+      'sort' => $block_vars['sort'],
+      'filter' => $block_vars['filter'],
+      'media' => $block_vars['media'],
+      'vocab' => $block_vars['vocab'],
+      'min_title' => $block_vars['min_title'],
+      'min_metadata' => $block_vars['min_metadata'],
+    ));
+    unset($block_vars);
+  }
+  variable_del("flickr_block_counter");
+  variable_del("flickr_block_maps");
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function flickr_block_uninstall() {
+  variable_del("flickr_block_refresh_random");
+  variable_del("flickr_block_refresh_others");
+  variable_del('flickr_block_heading');
+  variable_del('flickr_block_hide_empty');
+  variable_del('flickr_block_photos_per_set');
+  foreach (range(0, 16) as $delta) {
+    variable_del("flickr_block_{$delta}");
+  }
+  if (module_exists('taxonomy')) {
+    $vocabulary = taxonomy_vocabulary_machine_name_load('flickr_tags');
+    if ($vocabulary) {
+      taxonomy_vocabulary_delete($vocabulary->vid);
+    }
+  }
+}

@@ -20,25 +20,48 @@ function osha_resources_field_default_field_bases() {
     'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
-    'module' => 'link',
+    'module' => 'flickrfield',
     'settings' => array(
-      'attributes' => array(
-        'class' => '',
-        'rel' => '',
-        'target' => 'default',
-      ),
-      'display' => array(
-        'url_cutoff' => 80,
-      ),
-      'enable_tokens' => 1,
       'entity_translation_sync' => FALSE,
-      'title' => 'optional',
-      'title_maxlength' => 128,
-      'title_value' => '',
-      'url' => 0,
     ),
-    'translatable' => 1,
-    'type' => 'link_field',
+    'translatable' => 0,
+    'type' => 'flickrfield',
+  );
+
+  // Exported field_base: 'field_flickr_tags'
+  $field_bases['field_flickr_tags'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_flickr_tags',
+    'foreign keys' => array(
+      'tid' => array(
+        'columns' => array(
+          'tid' => 'tid',
+        ),
+        'table' => 'taxonomy_term_data',
+      ),
+    ),
+    'indexes' => array(
+      'tid' => array(
+        0 => 'tid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'taxonomy',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => array(
+          'vocabulary' => 'flickr_tags',
+          'parent' => 0,
+        ),
+      ),
+      'entity_translation_sync' => FALSE,
+      'options_list_callback' => 'i18n_taxonomy_allowed_values',
+    ),
+    'translatable' => 0,
+    'type' => 'taxonomy_term_reference',
   );
 
   // Exported field_base: 'field_internal_contents'
@@ -90,37 +113,6 @@ function osha_resources_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_slideshare'
-  $field_bases['field_slideshare'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_slideshare',
-    'foreign keys' => array(),
-    'indexes' => array(),
-    'locked' => 0,
-    'module' => 'link',
-    'settings' => array(
-      'attributes' => array(
-        'class' => '',
-        'rel' => '',
-        'target' => 'default',
-      ),
-      'display' => array(
-        'url_cutoff' => 80,
-      ),
-      'enable_tokens' => 1,
-      'entity_translation_sync' => FALSE,
-      'title' => 'optional',
-      'title_maxlength' => 128,
-      'title_value' => '',
-      'url' => 0,
-    ),
-    'translatable' => 1,
-    'type' => 'link_field',
-  );
-
   // Exported field_base: 'field_youtube'
   $field_bases['field_youtube'] = array(
     'active' => 1,
@@ -129,27 +121,18 @@ function osha_resources_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_youtube',
     'foreign keys' => array(),
-    'indexes' => array(),
-    'locked' => 0,
-    'module' => 'link',
-    'settings' => array(
-      'attributes' => array(
-        'class' => '',
-        'rel' => '',
-        'target' => 'default',
+    'indexes' => array(
+      'video_id' => array(
+        0 => 'video_id',
       ),
-      'display' => array(
-        'url_cutoff' => 80,
-      ),
-      'enable_tokens' => 1,
-      'entity_translation_sync' => FALSE,
-      'title' => 'optional',
-      'title_maxlength' => 128,
-      'title_value' => '',
-      'url' => 0,
     ),
-    'translatable' => 1,
-    'type' => 'link_field',
+    'locked' => 0,
+    'module' => 'youtube',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'youtube',
   );
 
   return $field_bases;

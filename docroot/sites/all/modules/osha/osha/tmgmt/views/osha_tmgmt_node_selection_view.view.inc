@@ -36,10 +36,12 @@ $handler->display->display_options['style_options']['columns'] = array(
   'views_bulk_operations' => 'views_bulk_operations',
   'title' => 'title',
   'type' => 'type',
-  'field_workflow_status' => 'field_workflow_status',
+  'state' => 'state',
   'name' => 'name',
   'changed' => 'changed',
   'edit_node' => 'edit_node',
+  'field_character_count' => 'field_character_count',
+  'field_page_count' => 'field_page_count',
 );
 $handler->display->display_options['style_options']['default'] = 'changed';
 $handler->display->display_options['style_options']['info'] = array(
@@ -62,8 +64,8 @@ $handler->display->display_options['style_options']['info'] = array(
     'separator' => '',
     'empty_column' => 0,
   ),
-  'field_workflow_status' => array(
-    'sortable' => 1,
+  'state' => array(
+    'sortable' => 0,
     'default_sort_order' => 'asc',
     'align' => '',
     'separator' => '',
@@ -84,6 +86,20 @@ $handler->display->display_options['style_options']['info'] = array(
     'empty_column' => 0,
   ),
   'edit_node' => array(
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'field_character_count' => array(
+    'sortable' => 1,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'field_page_count' => array(
+    'sortable' => 1,
+    'default_sort_order' => 'asc',
     'align' => '',
     'separator' => '',
     'empty_column' => 0,
@@ -295,11 +311,24 @@ $handler->display->display_options['fields']['changed']['field'] = 'changed';
 $handler->display->display_options['fields']['changed']['label'] = 'Updated';
 $handler->display->display_options['fields']['changed']['date_format'] = 'short';
 $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-/* Field: Content: Edit link */
-$handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-$handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-$handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-$handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
+/* Field: Content: Character count */
+$handler->display->display_options['fields']['field_character_count']['id'] = 'field_character_count';
+$handler->display->display_options['fields']['field_character_count']['table'] = 'field_data_field_character_count';
+$handler->display->display_options['fields']['field_character_count']['field'] = 'field_character_count';
+$handler->display->display_options['fields']['field_character_count']['settings'] = array(
+  'thousand_separator' => ' ',
+  'prefix_suffix' => 1,
+);
+/* Field: Content: Page count */
+$handler->display->display_options['fields']['field_page_count']['id'] = 'field_page_count';
+$handler->display->display_options['fields']['field_page_count']['table'] = 'field_data_field_page_count';
+$handler->display->display_options['fields']['field_page_count']['field'] = 'field_page_count';
+$handler->display->display_options['fields']['field_page_count']['settings'] = array(
+  'thousand_separator' => ' ',
+  'decimal_separator' => '.',
+  'scale' => '2',
+  'prefix_suffix' => 1,
+);
 /* Sort criterion: Content: Post date */
 $handler->display->display_options['sorts']['created']['id'] = 'created';
 $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -336,9 +365,13 @@ $handler->display->display_options['filters']['type']['value'] = array(
   'page' => 'page',
   'blog' => 'blog',
   'calls' => 'calls',
+  'directive' => 'directive',
+  'guideline' => 'guideline',
   'highlight' => 'highlight',
   'job_vacancies' => 'job_vacancies',
   'news' => 'news',
+  'note_to_editor' => 'note_to_editor',
+  'press_contact' => 'press_contact',
   'press_release' => 'press_release',
   'publication' => 'publication',
   'seminar' => 'seminar',
@@ -506,6 +539,7 @@ $handler->display->display_options['filters']['state']['id'] = 'state';
 $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
 $handler->display->display_options['filters']['state']['field'] = 'state';
 $handler->display->display_options['filters']['state']['value'] = array(
+  'ready_to_publish' => 'ready_to_publish',
   'published' => 'published',
 );
 $handler->display->display_options['filters']['state']['group'] = 1;
@@ -563,7 +597,8 @@ $translatables['tmgmt_node_selection_view'] = array(
   t('Workflow state'),
   t('Author'),
   t('Updated'),
-  t('Edit'),
+  t('Character count'),
+  t('Page count'),
   t('Post date'),
   t('Updated date'),
   t('Author name'),

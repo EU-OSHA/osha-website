@@ -52,6 +52,7 @@ features[field_instance][] = node-publication-field_cover_image
 features[field_instance][] = node-publication-field_expiration_date
 features[field_instance][] = node-publication-field_file
 features[field_instance][] = node-publication-field_nace_codes
+features[field_instance][] = node-publication-field_needs_retranslation
 features[field_instance][] = node-publication-field_page_count
 features[field_instance][] = node-publication-field_publication_bookshop_id
 features[field_instance][] = node-publication-field_publication_date

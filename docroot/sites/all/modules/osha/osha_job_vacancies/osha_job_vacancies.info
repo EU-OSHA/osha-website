@@ -36,6 +36,7 @@ features[field_instance][] = node-job_vacancies-field_job_vacancies_deadline
 features[field_instance][] = node-job_vacancies-field_related_resources
 features[field_instance][] = node-job_vacancies-field_job_vacancies_shortlisted
 features[field_instance][] = node-job_vacancies-field_nace_codes
+features[field_instance][] = node-job_vacancies-field_needs_retranslation
 features[field_instance][] = node-job_vacancies-field_page_count
 features[field_instance][] = node-job_vacancies-field_publication_date
 features[field_instance][] = node-job_vacancies-field_summary

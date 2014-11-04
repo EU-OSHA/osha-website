@@ -35,6 +35,7 @@
         "apachesolr_soft_commit": 1
     },
     "variables": {
+        "environment": "production",
         "osha_data_dir": "/var/local/osha/data",
         "site_name": "OSHA",
         "site_mail": "account@example.com",

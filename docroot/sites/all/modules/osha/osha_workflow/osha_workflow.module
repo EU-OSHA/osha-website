@@ -5,9 +5,776 @@
  */
 
 include_once 'osha_workflow.features.inc';
+include_once 'osha_workflow.api.inc';
 
-function osha_workflow_node_view($node) {
+/* Publishing workflow roles */
+define('OSHA_WORKFLOW_ROLE_EDITOR', 'Editor');
+define('OSHA_WORKFLOW_ROLE_REVIEW_MANAGER', 'Review Manager');
+define('OSHA_WORKFLOW_ROLE_PROJECT_MANAGER', 'Project Manager');
+define('OSHA_WORKFLOW_ROLE_APPROVER', 'Approver');
+/* Translation workflow roles */
+define('OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER', 'Translation Manager');
+define('OSHA_WORKFLOW_ROLE_TRANSLATION_LIAISON', 'Translation Liaison');
+define('OSHA_WORKFLOW_ROLE_LAYOUT_VALIDATOR', 'Layout Validator');
+define('OSHA_WORKFLOW_ROLE_CONTENT_VALIDATOR', 'Content Validator');
+/* Drupal administrator role */
+define('OSHA_WORKFLOW_ROLE_ADMINISTRATOR', 'administrator');
+
+/* Workflow states */
+define('OSHA_WORKFLOW_STATE_DRAFT', 'draft');
+define('OSHA_WORKFLOW_STATE_FINAL_DRAFT', 'final_draft');
+define('OSHA_WORKFLOW_STATE_REJECTED', 'rejected');
+define('OSHA_WORKFLOW_STATE_APPROVED', 'approved');
+define('OSHA_WORKFLOW_STATE_TO_BE_REVIEWED', 'needs_review');
+define('OSHA_WORKFLOW_STATE_TO_BE_APPROVED', 'to_be_approved');
+define('OSHA_WORKFLOW_STATE_READY_TO_PUBLISH', 'ready_to_publish');
+define('OSHA_WORKFLOW_STATE_PUBLISHED', 'published');
+
+/**
+ * Implements hook_menu().
+ */
+function osha_workflow_menu() {
+  $items = array();
+  $items['admin/config/workbench/access/managers'] = array(
+    'title' => 'Project Managers',
+    'description' => 'Assignment of project managers for each website section.',
+    'page callback' => 'osha_workflow_workbench_project_managers',
+    'page arguments' => array(),
+    'access arguments' => array('assign workbench access'),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => -12,
+    'file' => 'osha_workflow.admin.inc',
+  );
+  $items['admin/config/workbench/access/managers'] = array(
+    'title' => 'Project Managers',
+    'description' => 'Assignment of project managers for each website section.',
+    'page callback' => 'osha_workflow_workbench_project_managers',
+    'access arguments' => array('assign workbench access'),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => -12,
+    'file' => 'osha_workflow.admin.inc',
+  );
+
+  $items['admin/config/workbench/access/approvers'] = array(
+    'title' => 'Default Approvers',
+    'description' => 'Define the list of default approvers',
+    'page callback' => 'drupal_goto',
+    'page arguments' => array('entity-collection/approvers/content'),
+    'access arguments' => array('manage content in moderators_group entity collections'),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => -13,
+  );
+
+  $items['node/%node/approve'] = array(
+    'title' => 'Approve',
+    'description' => 'Approval page for the OSHA approval workflow.',
+    'type' => MENU_LOCAL_TASK,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('osha_workflow_node_approval_form', 1),
+    'access callback' => 'osha_workflow_node_approval_access',
+    'access arguments' => array(1),
+    'file' => 'osha_workflow.admin.inc',
+    'weight' => 10,
+  );
+  $items['node/%node/review'] = array(
+    'title' => 'Review',
+    'description' => 'Review page for the OSHA reviewing workflow.',
+    'type' => MENU_LOCAL_TASK,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('osha_workflow_node_review_form', 1),
+    'access callback' => 'osha_workflow_node_review_access',
+    'access arguments' => array(1),
+    'file' => 'osha_workflow.admin.inc',
+    'weight' => 9,
+  );
+  return $items;
+}
+
+function osha_workflow_menu_alter(&$items) {
+  // Disable Section Menu from Workbench Dashboard.
+  $items['admin/workbench/sections']['access callback'] = FALSE;
+
+  // Hide Editors tab from Workbench Access config.
+  $items['admin/config/workbench/access']['page callback'] = 'workbench_access_roles';
+  $items['admin/config/workbench/access/editors']['access callback'] = FALSE;
+
+}
+
+function osha_workflow_editor_page() {
+  $output = array(
+    '#markup' => 'Workflow Administration',
+  );
+  return drupal_render($output);
+}
+/**
+ * Permission access to approval local task.
+ *
+ * @param object $node
+ *   Approved node
+ *
+ * @return null|string
+ *   Access permission to the screen.
+ */
+function osha_workflow_node_approval_access($node) {
+  return OshaWorkflowPermissions::userCanAccessApprovalScreen($node);
+}
+
+/**
+ * Permission access to review local task.
+ *
+ * @param object $node
+ *   Reviewed node
+ *
+ * @return null|string
+ *   Access permission to the screen.
+ */
+function osha_workflow_node_review_access($node) {
+  if (OshaWorkflowPermissions::userCanAccessReviewScreen($node)) {
+    return NODE_ACCESS_ALLOW;
+  }
+  return NODE_ACCESS_IGNORE;
+}
+
+/**
+ * Implements hook_entity_info().
+ */
+function osha_workflow_entity_info() {
+  return array(
+    'node_project_managers' => array(
+      'label' => t('Node project manager'),
+      'module' => 'osha_workflow',
+      'controller class' => 'OshaWorkflowProjectManagerEntityController',
+      'base table' => 'osha_workflow_node_project_managers',
+      'entity keys' => array(
+        'id' => 'npmid',
+      ),
+    ),
+    'node_approval' => array(
+      'label' => t('Node approval'),
+      'module' => 'osha_workflow',
+      'controller class' => 'OshaWorkflowApprovalItemController',
+      'base table' => 'osha_workflow_node_approval',
+      'entity keys' => array(
+        'id' => 'apid',
+      ),
+      'views controller class' => 'EntityDefaultViewsController',
+    ),
+  );
+}
+
+function osha_workflow_entity_property_info() {
+  $info = array();
+
+  // Add meta-data for node_approval entity.
+  $properties = &$info['node_approval']['properties'];
+  $properties['user'] = array(
+    'label' => t("User"),
+    'type' => 'user',
+    'description' => t("The User that can review the node."),
+    'getter callback' => 'entity_metadata_node_get_properties',
+    'computed' => TRUE,
+    'entity views field' => TRUE,
+    'required' => TRUE,
+    'schema field' => 'uid',
+  );
+  $properties['node'] = array(
+    'label' => t("Node"),
+    'type' => 'node',
+    'description' => t("The Node that needs review."),
+    'getter callback' => 'entity_metadata_node_get_properties',
+    'computed' => TRUE,
+    'entity views field' => TRUE,
+    'required' => TRUE,
+    'schema field' => 'nid',
+  );
+  $properties['next'] = array(
+    'label' => t("Next"),
+    'type' => 'integer',
+    'description' => t("If the user is next who needs to approve"),
+    'getter callback' => 'entity_property_verbatim_get',
+    'schema field' => 'next',
+  );
+
+  // Add meta-data for node_project_managers entity.
+  $properties = &$info['node_project_managers']['properties'];
+  $properties['user'] = array(
+    'label' => t("User"),
+    'type' => 'user',
+    'description' => t("The User that is Project Manager for the node."),
+    'getter callback' => 'entity_metadata_node_get_properties',
+    'computed' => TRUE,
+    'entity views field' => TRUE,
+    'required' => TRUE,
+    'schema field' => 'uid',
+  );
+  $properties['node'] = array(
+    'label' => t("Node"),
+    'type' => 'node',
+    'description' => t("The Project Manager's node."),
+    'getter callback' => 'entity_metadata_node_get_properties',
+    'computed' => TRUE,
+    'entity views field' => TRUE,
+    'required' => TRUE,
+    'schema field' => 'nid',
+  );
+
+  return $info;
+}
+
+/**
+ * Implements hook_schema().
+ */
+function osha_workflow_schema() {
+  $schema = array();
+  $schema['osha_workflow_node_project_managers'] = array(
+    'description' => 'Base table for the content review workflow',
+    'fields' => array(
+      'npmid' => array(
+        'description' => 'Identifier',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => 'Node under review',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'Project manager account',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('npmid'),
+    'indexes' => array(
+      'osha_workflow_review_uid' => array('uid'),
+    ),
+    'foreign keys' => array(
+      'uid' => array(
+        'table' => 'users',
+        'columns' => array('uid' => 'uid'),
+      ),
+      'nid' => array(
+        'table' => 'node',
+        'columns' => array('nid' => 'nid'),
+      ),
+    ),
+  );
+
+  $schema['osha_workflow_node_approval'] = array(
+    'description' => 'Base table for node approval entity',
+    'fields' => array(
+      'apid' => array(
+        'description' => 'Identifier for the approved item',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => 'Moderated node ID (nid)',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'Account doing the moderation',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'approved' => array(
+        'description' => 'NULL not voted, approved or rejected',
+        'type' => 'varchar',
+        'length' => 64,
+        'default' => NULL,
+        'not null' => FALSE,
+      ),
+      'next' => array(
+        'description' => '0 - no, 1 - yes',
+        'type' => 'int',
+        'default' => 0,
+        'not null' => TRUE,
+      ),
+      'weight' => array(
+        'description' => 'Order of moderation, lowest first',
+        'type' => 'int',
+        'default' => 0,
+        'not null' => TRUE,
+      ),
+      'message' => array(
+        'description' => 'Message left by the moderator',
+        'type' => 'text',
+        'size' => 'medium',
+      ),
+    ),
+    'primary key' => array('apid'),
+    'indexes' => array(
+      'moderator_uid' => array('uid'),
+    ),
+    'unique keys' => array(
+      'moderation_unique' => array('nid', 'uid'),
+    ),
+    'foreign keys' => array(
+      'uid' => array(
+        'table' => 'users',
+        'columns' => array('uid' => 'uid'),
+      ),
+      'nid' => array(
+        'table' => 'node',
+        'columns' => array('nid' => 'nid'),
+      ),
+    ),
+  );
+
+  $schema['osha_workflow_access_pm'] = array(
+    'description' => 'Maps Project Managers access to sections',
+    'fields' => array(
+      'uid' => array(
+        'description' => 'The user identifier. Foreign key to {users}.',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'access_id' => array(
+        'description' => 'The section identifier. Foreign key to {workbench_access}.',
+        'type' => 'varchar',
+        'length' => '80',
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'access_scheme' => array(
+        'description' => 'The module responsbile for this access system.',
+        'type' => 'varchar',
+        'length' => '40',
+        'not null' => TRUE,
+        'default' => '',
+      ),
+    ),
+    'primary key' => array('uid', 'access_id', 'access_scheme'),
+    'foreign keys' => array(
+      'section_id' => array('workbench_access' => array('access_id', 'access_scheme')),
+      'uid' => array('users' => 'uid'),
+    ),
+  );
+
+  return $schema;
+}
+
+/**
+ * Implements hook_permission().
+ *
+ * We need this to define permissions granted to content moderators.
+ */
+function osha_workflow_permission() {
+  $permissions = array();
+  // Per state permissions. Used by workbench_moderation_node_access().
+  $states = workbench_moderation_states();
+  foreach ($states as $state) {
+    $permissions['edit any content in ' . $state->name] = array(
+      'title' => t('Edit any content in @state', array('@state' => $state->label)),
+    );
+  }
+
+  $permissions['view osh approver needs review tab'] = array('title' => t("View Approver's 'Needs Aproval' tab in My Workbench"));
+  $permissions['view osh review manager needs review tab'] = array('title' => t("View Review Manager's 'Needs RM Review' tab in My Workbench"));
+  $permissions['view osh project manager needs review tab'] = array('title' => t("View Project Manager's 'Needs PM Review' tab in My Workbench"));
+  $permissions['view osh content tab'] = array('title' => t("View 'Content' tab in My Workbench"));
+
+  return $permissions;
+}
+
+/**
+ * Implements hook_node_access().
+ *
+ * {@inheritdoc}
+ * @see http://openmonkey.blogspot.ro/2011/10/add-permissions-to-workbench-moderation.html
+ */
+function osha_workflow_node_access($node, $operation, $user) {
+  if (isset($node->workbench_moderation) && $operation == 'update') {
+    $state = $node->workbench_moderation['current']->state;
+    if (variable_get('workbench_moderation_per_node_type', FALSE)
+        && !user_access('edit any content in ' . $node->workbench_moderation['current']->state, $user)) {
+      return NODE_ACCESS_DENY;
+    }
+    // Do not allow edit for approvers that already reviewed.
+    if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
+      if (!osha_workflow_is_next_approver($node->nid)) {
+        return NODE_ACCESS_DENY;
+      }
+    }
+    // Do not allow edit for project managers that is not assigned for review.
+    if ($state == OSHA_WORKFLOW_STATE_TO_BE_REVIEWED) {
+      if (!osha_workflow_is_assigned_project_manager($node->nid) && !OshaWorkflowPermissions::userIsAdministrator($user)) {
+        return NODE_ACCESS_DENY;
+      }
+    }
+    if ($state == OSHA_WORKFLOW_STATE_DRAFT && !osha_workflow_user_has_access($node)) {
+      return NODE_ACCESS_DENY;
+    }
+
+    global $user;
+    if (OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_EDITOR, $user) &&
+      osha_workflow_get_node_owner($node->nid, $node->uid) != $user->uid
+      && $state != OSHA_WORKFLOW_STATE_PUBLISHED) {
+      return NODE_ACCESS_DENY;
+    }
+  }
+
+  return NODE_ACCESS_IGNORE;
+}
+
+function osha_workflow_get_node_owner($nid, $uid = NULL) {
+  $result = db_select('workbench_moderation_node_history', 'wmnh')
+    ->fields('wmnh');
+  $draft_to_draft = db_and()
+    ->condition('from_state', OSHA_WORKFLOW_STATE_DRAFT)
+    ->condition('state', OSHA_WORKFLOW_STATE_DRAFT);
+  $draft_to_final = db_and()
+    ->condition('from_state', OSHA_WORKFLOW_STATE_DRAFT)
+    ->condition('state', OSHA_WORKFLOW_STATE_FINAL_DRAFT);
+  $publ_to_draft = db_and()
+    ->condition('from_state', OSHA_WORKFLOW_STATE_PUBLISHED)
+    ->condition('state', OSHA_WORKFLOW_STATE_DRAFT);
+  $or = db_or()
+    ->condition($draft_to_draft)
+    ->condition($draft_to_final)
+    ->condition($publ_to_draft);
+  $result->condition($or);
+  $result->condition('wmnh.nid', $nid);
+  $result->orderBy('hid', 'DESC');
+  $result->range(0, 1);
+  $result = $result->execute();
+  $result = $result->fetchAllAssoc('uid');
+  if (!empty($result)) {
+    return current(array_keys($result));
+  }
+  else {
+    if (!$uid) {
+      $node = node_load($nid);
+      $uid = $node->uid;
+    }
+    return $uid;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function osha_workflow_theme() {
+  return array(
+    'osha_workflow_approval_form' => array(
+      'render element' => 'form',
+      'file' => 'osha_workflow.admin.inc',
+    ),
+    'osha_workflow_access_pm_form' => array(
+      'render element' => 'form',
+      'file' => 'osha_workflow.admin.inc',
+    ),
+  );
+}
+
+/**
+ * Implements hook_workbench_moderation_transition().
+ *
+ * {@inheritdoc}
+ */
+function osha_workflow_workbench_moderation_transition($node, $old, $new) {
+  // Review workflow.
+  if ($old == OSHA_WORKFLOW_STATE_DRAFT && $new == OSHA_WORKFLOW_STATE_FINAL_DRAFT) {
+    // Assign the default PM, if none assigned.
+    if (!osha_workflow_get_project_manager($node->nid)) {
+      reset($node->workbench_access);
+      $section = current($node->workbench_access);
+      $project_manager = osha_workflow_get_default_project_manager($section);
+      if ($project_manager) {
+        drupal_set_message('Assigned default project manager of this section to the review process');
+        osha_workflow_set_project_manager($node->nid, $project_manager->uid);
+      }
+    }
+    // Assign the default approver list, if none assigned.
+    if (!osha_workflow_get_node_approvers($node->nid, FALSE)) {
+      $approvers = osha_workflow_get_node_approvers($node->nid);
+      if ($approvers) {
+        drupal_set_message('Assigned the default list of approvers for the approval process');
+        osha_workflow_set_node_approvers($node->nid, array_keys($approvers));
+      }
+      else {
+        drupal_set_message('No default approvers defined. Ask administrator to define the default list of approvers.');
+      }
+    }
+    OshaWorkflowNotifications::notifyOnChangeFromDraftToFinalDraft($node);
+  }
+  if ($old != OSHA_WORKFLOW_STATE_DRAFT && $new == OSHA_WORKFLOW_STATE_DRAFT) {
+    OshaWorkflowNotifications::notifyOnChangeToDraft($node);
+  }
+  // We come from other states into TO_BE_APPROVED
+  // State TO_BE_APPROVED => TO_BE_APPROVED happens during approval process.
+  if ($old != OSHA_WORKFLOW_STATE_TO_BE_APPROVED && $new == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
+    osha_workflow_reset_node_approvers($node->nid);
+    OshaWorkflowNotifications::notifyFirstApprover($node);
+  }
+  if (($old == OSHA_WORKFLOW_STATE_DRAFT || $old == OSHA_WORKFLOW_STATE_FINAL_DRAFT) && $new == OSHA_WORKFLOW_STATE_TO_BE_REVIEWED) {
+    OshaWorkflowNotifications::notifyOnChangeFromDraftOrFinalDraftToBeReviewed($node);
+  }
+  if ($old == OSHA_WORKFLOW_STATE_TO_BE_APPROVED && ($new == OSHA_WORKFLOW_STATE_APPROVED || $new == OSHA_WORKFLOW_STATE_REJECTED)) {
+    if ($new == OSHA_WORKFLOW_STATE_APPROVED) {
+      osha_workflow_approve($node, OSHA_WORKFLOW_STATE_APPROVED);
+      OshaWorkflowNotifications::notifyOnNodeApproved($node);
+    }
+    else {
+      osha_workflow_approve($node, OSHA_WORKFLOW_STATE_REJECTED);
+      OshaWorkflowNotifications::notifyOnNodeRejected($node);
+    }
+  }
+  if ($old == OSHA_WORKFLOW_STATE_APPROVED && $new == OSHA_WORKFLOW_STATE_FINAL_DRAFT) {
+    OshaWorkflowNotifications::notifyNodeRejectedFromApprovedToFinalDraft($node);
+  }
+  if ($new == OSHA_WORKFLOW_STATE_READY_TO_PUBLISH) {
+    OshaWorkflowNotifications::notifyNodeIsReadyToPublish($node);
+  }
+}
+
+/**
+ * Implements hook_workbench_moderation_access_alter().
+ *
+ * {@inheritdoc}
+ */
+function osha_workflow_workbench_moderation_access_alter(&$access, $op, $node) {
+  global $user;
+  if ($op == 'update') {
+    $access = 1;
+    $state = $node->workbench_moderation['current']->state;
+    if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
+      $next_approver = osha_workflow_get_next_approver($node->nid);
+      $is_next_approver = isset($next_approver->uid) && $user->uid == $next_approver->uid;
+      // Check the user is next to take action. Otherwise deny change.
+      if (!$is_next_approver && OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_APPROVER, $user)) {
+        $access = 0;
+      }
+    }
+    // Do not allow edit for project managers that is not assigned for review.
+    if ($state == OSHA_WORKFLOW_STATE_TO_BE_REVIEWED) {
+      if (!osha_workflow_is_assigned_project_manager($node->nid) && !OshaWorkflowPermissions::userIsAdministrator($user)) {
+        return $access = 0;
+      }
+    }
+  }
+  if ($op == 'view history') {
+    if (OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_ADMINISTRATOR, $user)
+      || OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_EDITOR, $user)
+      || OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_APPROVER, $user)
+      || OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_PROJECT_MANAGER, $user)
+      || OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_REVIEW_MANAGER, $user)
+    ) {
+      $access = 1;
+    }
+  }
+  if ($op == 'view revisions' && user_access('view revisions')) {
+    $access = 1;
+  }
+}
+
+/**
+ * Implements hook_workbench_moderation_states_next_alter().
+ *
+ * {@inheritdoc}
+ */
+function osha_workflow_workbench_moderation_states_next_alter(&$access, $op, $node) {
+  $the_node = $node['node'];
+  $the_user = $node['account'];
+  if(isset($the_node->workbench_moderation['current']->state)) {
+    $state = $the_node->workbench_moderation['current']->state;
+    if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
+      if (osha_workflow_has_approved($the_node->nid, $the_user->uid)) {
+        $access = array();
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function osha_workflow_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'entity_collection_content_add_form') {
+    if ($collection = $form_state['entity_collection']) {
+      if ($collection->bundle == 'moderators_group') {
+        $options = osha_workflow_users_get_users_from_role_as_options(OSHA_WORKFLOW_ROLE_APPROVER);
+        $users = array();
+        foreach ($options as $uid => $account) {
+          $users['user:' . $uid] = $account;
+        }
+        $form['add_content']['#title'] = t('Add approvers into the list');
+        $form['add_content']['entity_type']['#access'] = FALSE;
+        $form['add_content']['content_select'] = array(
+          '#type' => 'select',
+          '#options' => $users,
+          '#description' => t('Select the person account from the list then press <b>Add content</b>'),
+        );
+      }
+    }
+  }
+  if ($form_id == 'entity_collection_content_form') {
+    if ($collection = $form_state['entity_collection']) {
+      if ($collection->bundle == 'moderators_group' && !empty($form['content'])) {
+        foreach ($form['content'] as &$row) {
+          hide($row['style']);
+        }
+      }
+    }
+  }
+  if ($form_id == 'workbench_moderation_moderate_form' && isset($form['node']['#value'])) {
+    $node = $form['node']['#value'];
+    $state = $node->workbench_moderation['current']->state;
+    $form['#validate'][] = 'osha_workflow_workbench_moderation_approval_form_validate';
+    if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
+      if (!osha_workflow_is_last_approver($node)) {
+        global $user;
+        if ($next = osha_workflow_get_next_approver($node->nid)) {
+          if ($user->uid == $next->uid) {
+            // Hijack the form & add Done button.
+            hide($form['state']);
+            $form['submit'] = array(
+              '#type' => 'submit',
+              '#value' => t('Done'),
+              '#submit' => array('osha_workflow_form_moderate_approve_submit'),
+            );
+          }
+        }
+      }
+    }
+  }
+  elseif ($form_id == 'views_exposed_form' && $form_state['view']->name == 'osh_workflow_admin'
+    && $form_state['view']->current_display == 'content') {
+//    $form['access_id']['#multiple'] = TRUE;
+//    $form['access_id']['#size'] = 1;
+  }
+}
+
+/**
+ * Implements hook_forms_views_exposed_form_alter().
+ *
+ * {@inheritdoc}
+ */
+function osha_workflow_form_views_exposed_form_alter(&$form, &$form_state) {
+  if ($form['#id'] == 'views-exposed-form-osh-workflow-admin-page-pm-review') {
+    if (empty($form_state['input']['state'])) {
+      $form_state['input']['state'][] = 'rejected';
+      $form_state['input']['state'][] = 'approved';
+      $form_state['input']['state'][] = 'needs_review';
+    }
+  }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function osha_workflow_form_node_form_alter(&$form, $form_state) {
+  // This must be a node form and a node that has moderation enabled.
+  // Extended to include moderation check on the individual node.
+  if (!workbench_moderation_node_moderated($form['#node'])) {
+    return;
+  }
+  if (isset($form['#node']->workbench_moderation['current']->state)) {
+    global $user;
+    $node = $form['#node'];
+    $state = $form['#node']->workbench_moderation['current']->state;
+    if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
+      if (osha_workflow_is_next_approver($node->nid) && OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_APPROVER, $user)) {
+        $form['revision_information']['workbench_moderation_state_new']['#access'] = FALSE;
+      }
+    }
+  }
+}
+
+/**
+ * Load a single node_approval entity.
+ *
+ * @param int $id
+ *   Primary key
+ * @param bool $reset
+ *   Whether to reset the internal cache for the requested entity type.
+ *
+ * @return mixed
+ *   An array of entity objects indexed by their ids. When no results are
+ *   found, an empty array is returned.
+ */
+function disabled_osha_workflow_node_approval_load($id, $reset = FALSE) {
+  $ret = entity_load('node_approval', array($id), array(), $reset);
+  return reset($ret);
+}
+
+/**
+ * Load node_approval entities from database.
+ *
+ * @param array $ids
+ *   An array of entity IDs, or FALSE to load all entities.
+ * @param array $conditions
+ *   (deprecated) An associative array of conditions on the base table, where
+ *   the keys are the database fields and the values are the values those
+ *   fields must have. Instead, it is preferable to use EntityFieldQuery to
+ *   retrieve a list of entity IDs loadable by this function.
+ * @param bool $reset
+ *   Whether to reset the internal cache for the requested entity type.
+ *
+ * @return mixed
+ *   An array of entity objects indexed by their ids. When no results are
+ *   found, an empty array is returned.
+ */
+function osha_workflow_node_approval_load_multiple($ids = array(), $conditions = array(), $reset = FALSE) {
+  return entity_load('node_approval', $ids, $conditions, $reset);
+}
+
+/**
+ * Form validator.
+ */
+function osha_workflow_workbench_moderation_approval_form_validate($form, $form_state) {
+  $node = $form_state['values']['node'];
+  $state = $form_state['values']['state'];
+  if ($state == OSHA_WORKFLOW_STATE_TO_BE_REVIEWED) {
+    $reviewer = osha_workflow_get_project_manager($node->nid);
+    if (empty($reviewer)) {
+      form_set_error('', t('Cannot change state because there is no Project Manager assigned to this node. Use the Review tab to assign one first.'));
+    }
+  }
+  if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
+    $approvers = osha_workflow_get_node_approvers($node->nid, FALSE);
+    if (empty($approvers)) {
+      form_set_error('', t('Cannot change state because the approval queue is empty. Use the approve tab to set the approver list'));
+    }
+  }
+}
+
+/**
+ * Submit form hook for vote - when approved.
+ */
+function osha_workflow_form_moderate_approve_submit($form, $form_state) {
+  $values = $form_state['values'];
+  $node = $values['node'];
+  $state = $node->workbench_moderation['current']->state;
+  if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
+    workbench_moderation_moderate($node, OSHA_WORKFLOW_STATE_TO_BE_APPROVED);
+    osha_workflow_approve($node, OSHA_WORKFLOW_STATE_APPROVED);
+    OshaWorkflowNotifications::notifyNextApproverToTakeAction($node);
+  }
+}
 
 
+/**
+ * Implements hook_mail().
+ *
+ * {@inheritdoc}
+ */
+function osha_workflow_mail($key, &$message, $params) {
+  $subject = variable_get('osha_mail_template_approval_subject', '[OSHA Website] CMW: ([node:nid]) [node:title-field]');
+  $body = variable_get('osha_mail_template_approval_body',
+    'Dear [user:name],
+      You have a content to be reviewed [node:url].
 
+      Thank you,'
+  );
+  $message['subject'] = token_replace($subject, $params);
+  $message['body'] = token_replace($body, $params);
 }

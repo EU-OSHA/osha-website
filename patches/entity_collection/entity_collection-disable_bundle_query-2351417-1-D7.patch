@@ -1,0 +1,24 @@
+diff --git a/entity_collection.admin.inc b/entity_collection.admin.inc
+index 5465b70..09eced7 100644
+--- a/entity_collection.admin.inc
++++ b/entity_collection.admin.inc
+@@ -696,11 +696,15 @@ function entity_collection_content_form_autocomplete(EntityCollection $entity_co
+     drupal_json_output(array());
+   }
+   $query = new EntityFieldQuery();
+-  $result = $query->entityCondition('entity_type', $entity_type)
+-    ->entityCondition('bundle', $allowed_bundles[$entity_type])
++  $query = $query->entityCondition('entity_type', $entity_type)
+     ->propertyCondition($label_property, db_like($string) . '%', 'LIKE')
+-    ->range(0, 10)
+-    ->execute();
++    ->range(0, 10);
++  if (isset($info['efq bundle conditions'])
++      && $info['efq bundle conditions'] === TRUE) {
++    $query = $query->entityCondition('bundle', $allowed_bundles[$entity_type]);
++  }
++
++  $result = $query->execute();
+   $content = EntityCollectionStorage::getBundleStorage($entity_collection->bundle)->retrieve($entity_collection, $loaded_contexts);
+   if (isset($result[$entity_type])) {
+     $entities = entity_load($entity_type, array_keys($result[$entity_type]));

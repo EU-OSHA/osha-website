@@ -84,6 +84,7 @@ class OshaMigrateArticles extends OSHADynamicMigration {
     $this->addFieldMapping('field_nace_codes', 'nace');
     $this->addFieldMapping('field_nace_codes:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_publication_date', 'publication_date');
+    $this->addFieldMapping('field_needs_retranslation')->defaultValue(0);
 
     $this->addFieldMapping('path', 'id');
     $this->addFieldMapping('created', 'creation_date');

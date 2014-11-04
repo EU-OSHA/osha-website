@@ -109,7 +109,7 @@ function osha_news_views_default_views() {
   $handler->display->display_options['fields']['field_publication_date']['label'] = '';
   $handler->display->display_options['fields']['field_publication_date']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_publication_date']['settings'] = array(
-    'format_type' => 'short',
+    'format_type' => 'osha_day_only',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',

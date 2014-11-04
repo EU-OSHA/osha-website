@@ -44,7 +44,7 @@ function osha_wiki_field_default_field_bases() {
   // Exported field_base: 'field_wiki_categories'
   $field_bases['field_wiki_categories'] = array(
     'active' => 1,
-    'cardinality' => -1,
+    'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_wiki_categories',

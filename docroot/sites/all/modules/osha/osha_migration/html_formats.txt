@@ -1,0 +1,40 @@
+/en/topics/stress/index_html
+
+
+content.articles.migrate.inc:        $entity->field_summary[$language][0]['format'] = 'full_html';
+
+
+content.calls.migrate.inc:    $node_options = MigrateDestinationNode::options('en', 'full_html');
+content.calls.migrate.inc:        $entity->field_summary[$language][0]['format'] = 'full_html';
+
+content.calls.migrate.inc:        $entity->field_calls_info[$language][0]['format'] = 'full_html';
+
+
+
+
+content.highlight.migrate.inc:        $entity->field_summary[$language][0]['format'] = 'full_html';
+
+
+content.job_vacancies.migrate.inc:        $entity->field_summary[$language][0]['format'] = 'full_html';
+
+content.legislation.migrate.inc:        $entity->field_summary[$language][0]['format'] = 'full_html';
+
+
+content.news.migrate.inc:        $entity->field_summary[$language][0]['format'] = 'full_html';
+
+
+content.note_to_editor.migrate.inc:        $entity->field_summary[$language][0]['format'] = 'full_html';
+
+
+content.press_release.migrate.inc:        $entity->field_summary[$language][0]['format'] = 'full_html';
+
+
+
+
+content.seminars.migrate.inc:        $entity->field_summary[$language][0]['format'] = 'full_html';
+content.seminars.migrate.inc:        $entity->field_seminar_location[$language][0]['format'] = 'full_html';
+content.seminars.migrate.inc:        $entity->field_seminar_attendees[$language][0]['format'] = 'full_html';
+content.seminars.migrate.inc:        $entity->field_seminar_conclusions[$language][0]['format'] = 'full_html';
+content.seminars.migrate.inc:        $entity->field_seminar_further_actions[$language][0]['format'] = 'full_html';
+
+content.wiki.migrate.inc:        $entity->field_summary[$language][0]['format'] = 'full_html';

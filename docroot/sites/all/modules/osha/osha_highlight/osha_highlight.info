@@ -26,6 +26,7 @@ features[field_instance][] = node-highlight-field_archived
 features[field_instance][] = node-highlight-field_character_count
 features[field_instance][] = node-highlight-field_expiration_date
 features[field_instance][] = node-highlight-field_image
+features[field_instance][] = node-highlight-field_needs_retranslation
 features[field_instance][] = node-highlight-field_page_count
 features[field_instance][] = node-highlight-field_publication_date
 features[field_instance][] = node-highlight-field_summary

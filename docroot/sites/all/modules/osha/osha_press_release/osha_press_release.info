@@ -40,6 +40,7 @@ features[field_instance][] = node-press_release-field_character_count
 features[field_instance][] = node-press_release-field_expiration_date
 features[field_instance][] = node-press_release-field_image
 features[field_instance][] = node-press_release-field_nace_codes
+features[field_instance][] = node-press_release-field_needs_retranslation
 features[field_instance][] = node-press_release-field_page_count
 features[field_instance][] = node-press_release-field_pr_embargo_date
 features[field_instance][] = node-press_release-field_pr_notes_to_editor

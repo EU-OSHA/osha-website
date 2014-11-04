@@ -1,0 +1,12 @@
+diff tmgmt/sources/field/tmgmt_field.module tmgmt/sources/field/tmgmt_field.module
+--- tmgmt/sources/field/tmgmt_field.module
++++ tmgmt/sources/field/tmgmt_field.module
+@@ -24,7 +24,7 @@ function text_tmgmt_source_translation_structure($entity_type, $entity, $field,
+       // Add format.
+       $structure[$delta]['format'] = array(
+         '#label' => '',
+-        '#text' => $value['format'],
++        '#text' => !empty($value['format']) ? $value['format'] : '',
+         '#translate' => FALSE,
+       );
+       if ($field['type'] == 'text_with_summary' && !empty($value['summary'])) {

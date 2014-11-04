@@ -62,6 +62,7 @@ class OshaMigrateGuidelines extends OSHADynamicMigration {
     $this->addFieldMapping('field_legislation_category', 'legislation_category');
     $this->addFieldMapping('field_legislation_category:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_publication_date', 'publication_date');
+    $this->addFieldMapping('field_needs_retranslation')->defaultValue(0);
 
     $this->addFieldMapping('created', 'creation_date');
     $this->addFieldMapping('changed', 'modification_date');

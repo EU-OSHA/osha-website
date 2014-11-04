@@ -1,29 +1,38 @@
-name = osha_tmgmt
-description = Alters tmgmt modules to enable multilingual jobs
+name = OSHA Translation Management
+description = Alters tmgmt modules to enable multilingual jobs and translation workflow
 core = 7.x
 package = OSHA
 version = 7.x-1.3
 project = osha_tmgmt
+dependencies[] = entity
+dependencies[] = entity_collection
 dependencies[] = rules
 dependencies[] = tmgmt
-dependencies[] = tmgmt_ui
 dependencies[] = tmgmt_entity
 dependencies[] = tmgmt_file
-
-; Views integration
+dependencies[] = tmgmt_ui
+dependencies[] = views
+features[ctools][] = entity_collection:entity_collection_bundles_default:1
+features[ctools][] = views:views_default:3.0
+features[entity_collection][] = translators_group_1
+features[entity_collection][] = translators_group_2
+features[entity_collection][] = translators_group_3
+features[entity_collection_bundles][] = translators_group
+features[features_api][] = api:2
+features[views_view][] = osha_translation_workbench
+features_exclude[dependencies][ctools] = ctools
 files[] = views/osha_tmgmt.views.inc
 files[] = views/handlers/osha_tmgmt_handler_fields_tmgmt_job_item.inc
 files[] = views/handlers/osha_tmgmt_handler_fields_tmgmt_job.inc
 files[] = views/handlers/tmgmt_i18n_string.plugin.inc
-
-; Plugin
 files[] = sources/entity/osha_tmgmt_entity.plugin.inc
+files[] = sources/entity/osha_tmgmt.entity.job.inc
 files[] = sources/entity/osha_tmgmt.entity.job_item.inc
 files[] = sources/i18n_string/tmgmt_i18n_string.plugin.inc
-
-; Translator integration
+files[] = osha_tmgmt.entity_collection_bundles_default.inc
 files[] = osha_tmgmt_node.plugin.inc
 files[] = osha_tmgmt_file.plugin.inc
 files[] = osha_tmgmt.format.cdt.inc
-
+files[] = osha_tmgmt.retranslate.inc
 files[] = osha_tmgmt.test
+files[] = osha_tmgmt.workflow.inc

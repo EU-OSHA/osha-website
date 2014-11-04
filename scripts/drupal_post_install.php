@@ -4,7 +4,8 @@ if (function_exists('drush_log')) {
   drush_log('Executing post-install tasks ...', 'ok');
 }
 
-//osha_configure_solr_entities();
+require_once 'utils.php';
+
 osha_change_field_size();
 osha_configure_file_translator();
 osha_newsletter_create_taxonomy();
@@ -12,13 +13,20 @@ osha_configure_search_autocomplete();
 osha_configure_addtoany_social_share();
 osha_disable_blocks();
 osha_configure_permissions();
+osha_config_development();
 osha_configure_recaptcha();
 osha_configure_on_the_web();
 osha_add_menu_position_rules();
-osha_add_agregator_rss_feeds();
+// osha_add_agregator_rss_feeds();
 
 variable_set('admin_theme', 'osha_admin');
 variable_set('theme_default', 'osha_frontend');
+
+// @todo: Workflow configuration - hook_enable throws errors.
+variable_set('workbench_moderation_per_node_type', 1);
+osha_workflow_create_roles();
+
+module_disable(array('overlay'));
 
 /**
  * Configure permissions.
@@ -53,55 +61,48 @@ function osha_configure_permissions() {
       }
     }
 
-    $permissions[] = 'translate taxonomy_term entities';
+    $permissions[] = 'access workbench access by role';
 
-    $permissions[] = 'moderate content from draft to final_draft';
-    $permissions[] = 'moderate content from final_draft to draft';
-    $permissions[] = 'moderate content from final_draft to needs_review';
-    $permissions[] = 'moderate content from needs_review to to_be_approved';
-    $permissions[] = 'moderate content from to_be_approved to rejected';
-    $permissions[] = 'moderate content from to_be_approved to approved';
+    $permissions[] = 'translate taxonomy_term entities';
+    $permissions[] = 'edit any content in rejected';
+    $permissions[] = 'edit any content in approved';
+    $permissions[] = 'edit any content in final_draft';
+    $permissions[] = 'edit any content in to_be_approved';
+
+    // Workbench access permissions.
+
+    $moderated_types = workbench_moderation_moderate_node_types();
+    $transitions = workbench_moderation_transitions();
+    foreach ($transitions as $transition) {
+      $permissions[] = "moderate content from {$transition->from_name} to {$transition->to_name}";
+      foreach ($moderated_types as $node_type) {
+        //@todo: $permissions[] = "moderate $node_type state from {$transition->from_name} to {$transition->to_name}";
+      }
+    }
+
+    $permissions[] = 'create moderators_group entity collections';
+    $permissions[] = 'edit moderators_group entity collections';
+    $permissions[] = 'view moderators_group entity collections';
+    $permissions[] = 'delete moderators_group entity collections';
+    $permissions[] = 'add content to moderators_group entity collections';
+    $permissions[] = 'manage content in moderators_group entity collections';
 
     user_role_grant_permissions($role->rid, $permissions);
+    user_role_revoke_permissions($role->rid, array('use workbench_moderation needs review tab'));
+  }
+
+  $roles = array(
+    OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER,
+    OSHA_WORKFLOW_ROLE_TRANSLATION_LIAISON,
+    OSHA_WORKFLOW_ROLE_LAYOUT_VALIDATOR,
+    OSHA_WORKFLOW_ROLE_CONTENT_VALIDATOR,
+  );
+  foreach ($roles as $role_name) {
+    if ($role = user_role_load_by_name($role_name)) {
+      user_role_grant_permissions($role->rid, array('access workbench'));
+    }
   }
 }
-
-module_disable(array('overlay'));
-
-/**
- * Configure the apachesolr and search_api_solr modules with proper settings.
- */
-function osha_configure_solr_entities() {
-  // Configure apachesolr: submit apachesolr_environment_edit_form
-  if (module_exists('apachesolr') && module_load_include('inc', 'apachesolr', 'apachesolr.admin')) {
-    drupal_set_message('Configuring apachesolr entities...');
-    // Mark all entities for search indexing - admin/config/search/apachesolr
-    $env_id = 'solr';
-    $form_state = array(
-      'values' => array(
-        'env_id' => $env_id,
-        'entities' => array(
-          'node' => array(
-            'article',
-            'page',
-            'blog',
-            'calls',
-            'highlight',
-            'job_vacancies',
-            'news',
-            'newsletter_article',
-            'press_release',
-            'publication',
-            'wiki_page',
-          ),
-        ),
-      ),
-    );
-    drupal_form_submit('apachesolr_index_config_form', $form_state, $env_id);
-  }
-}
-
-
 
 /**
  * Config file translator not available during osha_tmgmt installation.
@@ -139,12 +140,12 @@ function osha_newsletter_create_taxonomy() {
 
     $weight = 0;
 
-    foreach ($new_terms as $idx => $term_name) {
+    foreach ($new_terms as $term_name) {
       $term = new stdClass();
       $term->name = $term_name;
       $term->language = 'en';
       $term->vid = $voc->vid;
-      // weight must be an integer
+      // Weight must be an integer.
       $term->weight = $weight++;
       taxonomy_term_save($term);
       if ($term->name == 'Coming soon') {
@@ -222,6 +223,23 @@ function osha_configure_addtoany_social_share() {
 }
 
 /**
+ * Set specific configuration for development environment.
+ */
+function osha_config_development() {
+  $config = osha_get_config();
+  if (in_array($config['variables']['environment'], array('production'))) {
+    return;
+  }
+
+  // Enables email rerouting.
+  if (module_exists('reroute_email') && isset($config['variables']['site_mail'])) {
+    variable_set(REROUTE_EMAIL_ENABLE, 1);
+    variable_set(REROUTE_EMAIL_ADDRESS, $config['variables']['site_mail']);
+    variable_set(REROUTE_EMAIL_ENABLE_MESSAGE, 1);
+  }
+}
+
+/*
  * Add configuration for recaptcha contrib module.
  */
 function osha_configure_recaptcha() {
@@ -233,29 +251,30 @@ function osha_configure_recaptcha() {
 }
 
 /**
-  * Add menu position rules for publication content type
-  */
-function osha_add_menu_position_rules(){
+ * Add menu position rules for publication content type.
+ */
+function osha_add_menu_position_rules() {
   if (module_exists('menu_position') && module_load_include('inc', 'menu_position', 'menu_position.admin')) {
     drupal_set_message('Create menu position rules ...');
 
-    // config menu_position contrib module
-    variable_set('menu_position_active_link_display','parent');
+    // Config menu_position contrib module.
+    variable_set('menu_position_active_link_display', 'parent');
 
     $options = menu_parent_options(menu_get_menus(), array('mlid' => 0));
-    $publications_menu_entry = array_search('------ Publications', $options);
+    $publications_menu = array_search('------ Publications', $options);
 
     $form_state = array(
       'values' => array(
         'admin_title' => 'Publications Menu Rule',
-        'plid' => $publications_menu_entry !== NULL ? $publications_menu_entry : 'main-menu:0',
+        'plid' => $publications_menu !== NULL ? $publications_menu : 'main-menu:0',
         'content_type' => array('publication' => 'publication'),
-        'op' => 'Save'
-      )
+        'op' => 'Save',
+      ),
     );
 
     drupal_form_submit('menu_position_add_rule_form', $form_state);
 
+    /* disabled temporarily for release branch
     $press_menu_entry = array_search('------ Press room', $options);
 
     $form_state = array(
@@ -263,14 +282,15 @@ function osha_add_menu_position_rules(){
         'admin_title' => 'Press room Menu Rule',
         'plid' => $press_menu_entry !== NULL ? $press_menu_entry : 'main-menu:0',
         'content_type' => array('press_release' => 'press_release'),
-        'op' => 'Save'
-      )
+        'op' => 'Save',
+      ),
     );
+    */
 
     drupal_form_submit('menu_position_add_rule_form', $form_state);
 
     //menu position rule for Directive
-    $directive_menu_entry = array_search('------ European Directives', $options);
+    $directive_menu_entry = array_search('------ EU Directives', $options);
 
     $form_state = array(
       'values' => array(
@@ -283,7 +303,7 @@ function osha_add_menu_position_rules(){
     drupal_form_submit('menu_position_add_rule_form', $form_state);
 
     //menu position rule for Guideline
-    $guideline_menu_entry = array_search('------ European Guidelines', $options);
+    $guideline_menu_entry = array_search('------ EU Guidelines', $options);
 
     $form_state = array(
       'values' => array(
@@ -298,8 +318,8 @@ function osha_add_menu_position_rules(){
 }
 
 /**
-  * Add press releases rss feed
-  */
+ * Add press releases rss feed.
+ */
 function osha_add_agregator_rss_feeds(){
   if (module_exists('aggregator') && module_load_include('inc', 'aggregator', 'aggregator.admin')) {
     drupal_set_message('Add press releases rss feed ...');
@@ -310,8 +330,8 @@ function osha_add_agregator_rss_feeds(){
         'url' => 'http://portal.kantarmedia.de/rss/index/1002043/100000063/1024803/9a7b629357e748080ff47e4d0db7ec57cffff3fe',
         'refresh' => 900,
         'block' => 2,
-        'op' => 'Save'
-      )
+        'op' => 'Save',
+      ),
     );
 
     drupal_form_submit('aggregator_form_feed', $form_state);
@@ -356,6 +376,6 @@ function osha_disable_blocks(){
   // we could also use drush
   // block-configure --module=user --delta=login --region=-1 --theme=osha_frontend
 
-  // Flush cache
+  // Flush cache.
   cache_clear_all();
 }

@@ -179,7 +179,7 @@ function osha_breadcrumbs_path_breadcrumbs_settings_info() {
   $path_breadcrumb->path = 'node/%node';
   $path_breadcrumb->data = array(
     'titles' => array(
-      0 => 'News',
+      0 => 'Highlights',
       1 => '!page_title',
     ),
     'paths' => array(

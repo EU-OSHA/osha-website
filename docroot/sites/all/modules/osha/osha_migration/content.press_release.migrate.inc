@@ -77,6 +77,7 @@ class MigrateOshaPressRelease extends OSHADynamicMigration {
     $this->addFieldMapping('field_archived', 'archived');
     $this->addFieldMapping('field_expiration_date', 'expiration_date');
     $this->addFieldMapping('field_pr_notes_to_editor', 'notesToEditors');
+    $this->addFieldMapping('field_needs_retranslation')->defaultValue(0);
     $this->addFieldMapping('created', 'creation_date');
     $this->addFieldMapping('changed', 'modification_date');
     $this->addFieldMapping('uid')->defaultValue(1);

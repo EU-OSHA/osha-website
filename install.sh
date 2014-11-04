@@ -9,6 +9,7 @@ drush en -y search_api search_api_solr
 # Save configuration to database for later usage
 drush php-script ../scripts/drupal_pre_install.php
 
+#drush --debug-modules init
 drush init
 drush build
 

@@ -151,6 +151,8 @@ function _drush_enable_modules($modules) {
         foreach($modules as $module) {
             if(!module_enable(array($module))) {
                 drush_log(dt('Failed to enable @module', array('@module' => $module)), 'error');
+            } else {
+              drush_log("Enabling $module ...\n", 'ok');
             }
         }
     }

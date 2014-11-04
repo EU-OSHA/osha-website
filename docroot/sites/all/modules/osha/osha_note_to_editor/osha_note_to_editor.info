@@ -14,6 +14,7 @@ features[ctools][] = strongarm:strongarm:1
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
 features[field_instance][] = node-note_to_editor-body
+features[field_instance][] = node-note_to_editor-field_needs_retranslation
 features[field_instance][] = node-note_to_editor-title_field
 features[node][] = note_to_editor
 features[variable][] = comment_anonymous_note_to_editor

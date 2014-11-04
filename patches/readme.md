@@ -11,16 +11,31 @@ List of patches (most recent first)
   * Default options on/off for nodeblock
   * 2072427-default-on-off-6.patch
   * https://www.drupal.org/node/2072427
+
+* tmgmt
+  * Notice: Undefined index: format in text_tmgmt_source_translation_structure() (line 27 of /Users/cristiroma/Work/osha/project/docroot/sites/all/modules/contrib/tmgmt/sources/field/tmgmt_field.module). when creating nodes
+  * patches/tmgmt/undefined_index_format.patch
+
 * pdf_to_imagefield
   * Do not overwrite existing images
   * https://www.drupal.org/node/2049725
   * https://www.drupal.org/files/pdf_to_imagefield-allow-image-uploaded-2049725-4.patch
 
 * workbench_moderation
+  * Added patch for hard-coded label
+  * https://www.drupal.org/node/2360059
+  * https://www.drupal.org/files/issues/workbench_moderation_hardcoded_set_moderation_state-2360059-1.patch
+
+* workbench_moderation
   * Fix bug CW-438 when URL in original language is lost when adding a new translation
   * -workbench_moderation/workbench_moderation/cw_438_workbench_moderation_url_1_D7.patch.patch-
   * Bug report: https://www.drupal.org/node/1946392
   * Applied patch from here: https://www.drupal.org/files/et_language-1946392-1.patch
+
+* entity_collection
+  * Fixed bug when using autocomplete for entities
+  * https://www.drupal.org/node/2351417
+  * entity_collection/entity_collection-disable_bundle_query-2351417-1-D7.patch
 
 * features_extra
   * Fix tests error for nodequeue

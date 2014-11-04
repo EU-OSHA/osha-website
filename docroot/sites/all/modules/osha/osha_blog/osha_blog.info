@@ -25,6 +25,7 @@ features[field_instance][] = node-blog-field_character_count
 features[field_instance][] = node-blog-field_expiration_date
 features[field_instance][] = node-blog-field_image
 features[field_instance][] = node-blog-field_nace_codes
+features[field_instance][] = node-blog-field_needs_retranslation
 features[field_instance][] = node-blog-field_page_count
 features[field_instance][] = node-blog-field_publication_date
 features[field_instance][] = node-blog-field_summary

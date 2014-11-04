@@ -248,6 +248,8 @@
 
 // Read JSON configuration file from conf/ and pre-configure drush commands
 $json_path = dirname(__FILE__) . '/../conf/config.json';
+
+$cfg = (object) array('variables' => (object) array('environment' => 'production'));
 if(file_exists($json_path)) {
   $cfg = json_decode(file_get_contents($json_path));
   $db_url = sprintf('mysql://%s:%s@%s:%s/%s', $cfg->db->username, $cfg->db->password, $cfg->db->host, $cfg->db->port, $cfg->db->database);
@@ -257,6 +259,7 @@ if(file_exists($json_path)) {
     'db-su' => $cfg->db->root_username, 'db-su-pw' => $cfg->db->root_password
   );
 }
+$environment = $cfg->variables->environment;
 
 $options['init-modules'] = array(
   'ctools',
@@ -270,7 +273,7 @@ $options['init-modules'] = array(
   'i18n_taxonomy',
   'variable',
 
-  // contrib module that add email field
+  // contrib module that add email field.
   'email',
 
   'views',
@@ -303,6 +306,7 @@ $options['init-modules'] = array(
 
   'tmgmt',
   'tmgmt_local',
+  'tmgmt_locale',
   /* 'tmgmt_node', */
   'tmgmt_entity',
   'tmgmt_entity_ui',
@@ -360,23 +364,23 @@ $options['init-modules'] = array(
   'workbench_moderation',
 
   // print and generate pdf - per node action
-  'print',
-  'print_ui',
-  'print_pdf_tcpdf',
-  'print_pdf',
+  //'print',
+  //'print_ui',
+  //'print_pdf_tcpdf',
+  //'print_pdf',
 
   'osha_taxonomies',
-//  'osha_taxonomies_uuid',
   'osha',
   'osha_migration',
   'osha_news',
-  'osha_note_to_editor',
+//  'osha_note_to_editor',
   'osha_publication',
   'osha_calls',
   'osha_blog',
   'osha_tmgmt',
   'osha_highlight',
-  'osha_press_contact',
+  //'osha_press_contact',
+  'osha_press_release',
   'osha_homepage',
   'osha_menu',
   'osha_job_vacancies',
@@ -384,9 +388,8 @@ $options['init-modules'] = array(
   'osha_workflow',
   'osha_blocks',
   'osha_breadcrumbs',
-//  'osha_content',
   'osha_legislation',
-  'osha_short_messages',
+  //'osha_short_messages',
 
   'facetapi',
   'search_api_facetapi',
@@ -411,13 +414,18 @@ $options['init-modules'] = array(
 
   // Link content types with main menu items
   'menu_position',
-
   'r4032login',
 
   'devel',
+  'devel_node_access',
   'diff',
-  'simpletest'
 );
+
+if ($environment == 'development') {
+  $options['init-modules'][] = 'reroute_email';
+  $options['init-modules'][] = 'simpletest';
+  // Module installed during development
+}
 
 $options['init-themes'] = array(
   'osha_admin',

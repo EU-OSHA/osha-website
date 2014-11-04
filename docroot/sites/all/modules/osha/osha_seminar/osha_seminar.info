@@ -46,6 +46,7 @@ features[field_instance][] = node-seminar-field_archived
 features[field_instance][] = node-seminar-field_character_count
 features[field_instance][] = node-seminar-field_expiration_date
 features[field_instance][] = node-seminar-field_image
+features[field_instance][] = node-seminar-field_needs_retranslation
 features[field_instance][] = node-seminar-field_page_count
 features[field_instance][] = node-seminar-field_publication_date
 features[field_instance][] = node-seminar-field_related_resources

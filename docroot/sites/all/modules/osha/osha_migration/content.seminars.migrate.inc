@@ -87,6 +87,7 @@ class OshaMigrateSeminars extends OSHADynamicMigration {
     $this->addFieldMapping('created', 'creation_date');
     $this->addFieldMapping('changed', 'modification_date');
     $this->addFieldMapping('uid')->defaultValue(1);
+    $this->addFieldMapping('field_needs_retranslation')->defaultValue(0);
 
     // TODO add unmigrated sources!
 

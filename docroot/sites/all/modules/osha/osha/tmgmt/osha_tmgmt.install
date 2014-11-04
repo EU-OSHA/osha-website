@@ -1,5 +1,7 @@
 <?php
 
+include_once "osha_tmgmt.module";
+
 /**
  * Implements hook_uninstall().
  */
@@ -40,6 +42,7 @@ function osha_tmgmt_uninstall() {
  * Implements hook_install().
  */
 function osha_tmgmt_install() {
+  osha_tmgmt_workflow_create_roles();
   db_update('system')
     ->fields(array('weight' => 9))
     ->condition('name', 'osha_tmgmt', '=')
@@ -91,6 +94,17 @@ function osha_tmgmt_install() {
     db_add_field('tmgmt_job_item', 'page_count', $field);
   }
 
+  if (!db_field_exists('tmgmt_job_item', 'eid')) {
+    $field = array(
+      'description' => 'Translation Validators groups',
+      'type' => 'int',
+      'default' => NULL,
+      'not null' => FALSE,
+    );
+    db_add_field('tmgmt_job_item', 'eid', $field);
+  }
+
+
   // tmgmt_job alteration.
   if (!db_field_exists('tmgmt_job', 'character_count')) {
     $field = array(
@@ -139,9 +153,115 @@ function osha_tmgmt_install() {
 }
 
 /**
- * Fix tmgmt 'Add to cart' rule (entity instead of node), disable tmgmt_node.
+ * Implements hook_schema().
+ */
+function osha_tmgmt_schema() {
+  $schema = array();
+
+  $schema['osha_tmgmt_job_trans_validators'] = array(
+    'description' => 'Base table for the tmgmt job translation validators - translation workflow',
+    'fields' => array(
+      'tvid' => array(
+        'description' => 'Identifier',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => 'Node under translation',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'Translation Validator',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'tjiid' => array(
+        'description' => 'Translation Job Item',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'approved' => array(
+        'description' => 'NULL not voted, approved or rejected',
+        'type' => 'varchar',
+        'length' => 64,
+        'default' => NULL,
+        'not null' => FALSE,
+      ),
+      'next' => array(
+        'description' => '0 - no, 1 - yes',
+        'type' => 'int',
+        'default' => 0,
+        'not null' => TRUE,
+      ),
+      'weight' => array(
+        'description' => 'Order of moderation, lowest first',
+        'type' => 'int',
+        'default' => 0,
+        'not null' => TRUE,
+      ),
+      'message' => array(
+        'description' => 'Message left by the Validator',
+        'type' => 'text',
+        'size' => 'medium',
+      ),
+      'deleted' => array(
+        'description' => 'Deleted',
+        'type' => 'int',
+        'default' => 0,
+        'unsigned' => TRUE,
+      ),
+    ),
+    'primary key' => array('tvid'),
+    'indexes' => array(
+      'osha_tmgmt_tv_uid' => array('uid'),
+      'osha_tmgmt_tv_nid' => array('nid'),
+      'osha_tmgmt_tv_deleted' => array('deleted'),
+      'osha_tmgmt_tv_next' => array('next'),
+    ),
+    'foreign keys' => array(
+      'uid' => array(
+        'table' => 'users',
+        'columns' => array('uid' => 'uid'),
+      ),
+      'nid' => array(
+        'table' => 'node',
+        'columns' => array('nid' => 'nid'),
+      ),
+      'tjiid' => array(
+        'table' => 'tmgmt_job_item',
+        'columns' => array('tjiid' => 'tjiid'),
+      ),
+    ),
+  );
+
+  return $schema;
+}
+
+/**
+ * Add fields to job item, fix tmgmt 'Add to cart' rule, disable tmgmt_node.
  */
 function osha_tmgmt_update_7001() {
   module_load_include('module', 'osha_tmgmt');
-  module_disable('tmgmt_node');
+  module_load_include('module', 'osha_tmgmt', 'osha_tmgmt.workflow');
+  module_disable(array('tmgmt_node'));
+  osha_tmgmt_workflow_create_roles();
+  db_create_table(
+    'osha_tmgmt_job_trans_validators',
+    drupal_get_schema_unprocessed('osha_tmgmt', 'osha_tmgmt_job_trans_validators')
+  );
+  if (!db_field_exists('tmgmt_job_item', 'eid')) {
+    $field = array(
+      'description' => 'Translation Validators groups',
+      'type' => 'int',
+      'unsigned' => TRUE,
+      'default' => NULL,
+      'not null' => FALSE,
+    );
+    db_add_field('tmgmt_job_item', 'eid', $field);
+  }
 }

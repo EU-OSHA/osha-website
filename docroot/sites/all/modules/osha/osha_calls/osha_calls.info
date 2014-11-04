@@ -45,6 +45,7 @@ features[field_instance][] = node-calls-field_calls_info
 features[field_instance][] = node-calls-field_calls_technical_specs
 features[field_instance][] = node-calls-field_character_count
 features[field_instance][] = node-calls-field_expiration_date
+features[field_instance][] = node-calls-field_needs_retranslation
 features[field_instance][] = node-calls-field_page_count
 features[field_instance][] = node-calls-field_publication_date
 features[field_instance][] = node-calls-field_summary

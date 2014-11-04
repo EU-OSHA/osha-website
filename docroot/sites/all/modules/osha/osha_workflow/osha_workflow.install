@@ -32,7 +32,12 @@ function osha_workflow_install() {
   drupal_form_submit('workbench_access_settings_form', $form_state);
 
   // Assign administrator to main menu sections.
-  workbench_access_role_section_save(3, 'main-menu', 'menu');
+  if ($role = user_role_load_by_name('administrator')) {
+    workbench_access_role_section_save($role->rid, 'main-menu', 'menu');
+  }
+  else {
+    // @todo: Throw some error?
+  }
 
   // @todo Submit the form instead of using direct function.
   /*$form_state = array();
@@ -40,4 +45,132 @@ function osha_workflow_install() {
   drupal_build_form('workbench_access_role_form', $form_state);
   $form_state['values']['roles'] = array(3 => 3);
   drupal_form_submit('workbench_access_role_form', $form_state);*/
+
+  //@todo: Not tested
+  osha_workflow_add_user_fields();
+  // We want our hooks to execute *after* workbench!
+  db_update('system')
+    ->fields(array('weight' => 10))
+    ->condition('name', 'osha_workflow')
+    ->execute();
+
+  // Disable workbench default views.
+  $status = variable_get('views_defaults', array());
+  $status['workbench_moderation'] = TRUE;
+  variable_set('views_defaults', $status);
+}
+
+/**
+ * Implements hook_update_n().
+ */
+function osha_workflow_update_7001() {
+  module_load_include('module', 'osha_workflow');
+  osha_workflow_create_roles();
+
+  $schema = osha_workflow_schema();
+
+  db_create_table(
+    'osha_workflow_node_project_managers',
+    $schema['osha_workflow_node_project_managers']
+  );
+
+  db_create_table(
+    'osha_workflow_node_approval',
+    $schema['osha_workflow_node_approval']
+  );
+
+  db_create_table(
+    'osha_workflow_access_pm',
+    $schema['osha_workflow_access_pm']
+  );
+
+  // @see https://www.drupal.org/node/1681414#comment-6347524
+  drupal_static_reset('i18n_object_info');
+  osha_workflow_add_user_fields();
+
+  if ($role = user_role_load_by_name('administrator')) {
+    user_role_revoke_permissions($role->rid, array('use workbench_moderation needs review tab'));
+  }
+  // We want our hooks to execute *after* workbench!
+  db_update('system')
+    ->fields(array('weight' => 10))
+    ->condition('name', 'osha_workflow')
+    ->execute();
+
+  // Disable workbench default views.
+  $status = variable_get('views_defaults', array());
+  $status['workbench_moderation'] = TRUE;
+  variable_set('views_defaults', $status);
+}
+
+/**
+ * Add new checkbox to receive workflow_notifications in user profile.
+ */
+function osha_workflow_add_user_fields() {
+  if (!field_info_field('field_cmw_mail_notifications')) {
+    $field = array(
+      'active' => 1,
+      'cardinality' => 1,
+      'deleted' => 0,
+      'entity_types' => array(),
+      'field_name' => 'field_cmw_mail_notifications',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'locked' => 0,
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => '',
+          1 => '',
+        ),
+        'allowed_values_function' => '',
+        'entity_translation_sync' => FALSE,
+      ),
+      'translatable' => 0,
+      'type' => 'list_boolean',
+    );
+    field_create_field($field);
+  }
+  if (!field_info_instance('user', 'field_cmw_mail_notifications', 'user')) {
+    $instance = array(
+      'bundle' => 'user',
+      'default_value' => array(
+        0 => array(
+          'value' => 1,
+        ),
+      ),
+      'deleted' => 0,
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 5,
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_cmw_mail_notifications',
+      'label' => 'Receive Workflow notifications via e-mail?',
+      'required' => 0,
+      'settings' => array(
+        'entity_translation_sync' => FALSE,
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(
+          'display_label' => 1,
+        ),
+        'type' => 'options_onoff',
+        'weight' => 15,
+      ),
+    );
+    field_create_instance($instance);
+  }
 }

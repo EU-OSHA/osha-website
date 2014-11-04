@@ -159,7 +159,7 @@ header{
 
 
 .sidebars_second{
-	border-top: 5px solid #003399;
+	border-top: 0px solid #003399;
 	margin-top: 0em;
 	margin-left: 3em;
 	width: 22%;
@@ -502,6 +502,14 @@ span.date-display-single{
 	font-weight:bold;
 }
 
+.node-publication h1{
+	color: #003399;
+    font-family: Oswald;
+    font-size: 1.45em !important;
+    font-weight: 400;
+    padding-top: 0.5em;
+}
+
 .node-publication.node-teaser {
 	background: url("../images/back-tit-blue.png") repeat-x scroll 0 100% transparent;
     margin-bottom: 0.5em;
@@ -715,6 +723,32 @@ span.date-display-single{
 	border-bottom:0px!important
 }
 
+#block-views-publications-slidehow .node-publication  a{
+	font-family:arial!important;
+    font-weight: bold;
+	font-size:0.8em!important;
+	border-bottom:0px!important
+}
+
+
+#block-views-publications-slidehow .node-publication  a{
+	font-family:arial!important;
+    font-weight: bold;
+	font-size:0.8em!important;
+	border-bottom:0px!important
+}
+
+
+#block-views-publications-slidehow .node-publication  a{
+	font-family:arial!important;
+    font-weight: bold;
+	font-size:0.8em!important;
+	border-bottom:0px!important
+}
+
+#block-views-publications-slidehow .node-publication .img_no_opac{
+	opacity: 1!important;
+}
 
 /*PUBLICATIONS LIST*/
 
@@ -1405,7 +1439,8 @@ font-weight: normal;
 		padding-left: 2em;
 		padding-top: 0.5em;
 		padding-bottom:0px;
-		margin-bottom:0px;
+		margin-bottom:1em;
+		margin-top:0px;
 	}
 	
 	
@@ -1947,16 +1982,18 @@ font-weight: normal;
 	background: url("../images/background-banner-home.png") repeat-x scroll 0 110% rgba(0, 0, 0, 0);
     color: #ffffff;
     font-size: 2em;
-    height: 60px;
+    height: auto;
     margin-top: 2em;
     position: absolute;
     width: auto;
 	font-family: "Oswald",sans-serif;
+	max-width:56%;
 }
 
 .view-osha-home-banner-top .views-field-title span{ 
 	display: block;
     padding: 0.6em 0.5em 0.5em;
+	line-height:1.5em;
 }
 
 .view-osha-home-banner-top .views-field-field-banner-link{
@@ -2456,7 +2493,6 @@ font-weight: normal;
 }
 
 .node-news ul.links.inline a{
-	color:#a5b9da!important;
 	border-bottom:0px!important;;
 	
 }
@@ -2732,7 +2768,6 @@ font-weight: normal;
 }
 
 .node-highlight ul.links.inline a{
-	color:#a4b8d9!important;
 	border-bottom:0px!important
 	
 }
@@ -3180,7 +3215,6 @@ font-weight: normal;
 }
 
 .view-mode-osha_slideshow .field-name-field-file{
-	background: url("../images/separator.jpg") no-repeat scroll 23% 100% rgba(0, 0, 0, 0);
 	height: 33px;
 	padding-top: 1em;
 	width:88%;
@@ -3546,6 +3580,24 @@ article.node-press-release{
 	padding-top:0.5em;
 }
 
+article.node-press-release .field-name-title-field {
+	font-family: 'Oswald';
+	font-style: normal;
+	font-weight: 300;
+	font-size: 2.15em;
+	color: #003399;
+	letter-spacing: -0.75px;
+	margin-bottom: 4px;
+	padding: 0;
+	margin: 0;
+	line-height: 1.2em;
+}
+
+article.node-press-release .press-release-date {
+	font-weight:bold;
+	font-size:0.8em;
+}
+
 .view-press-releases .field-name-title-field {
 	font-family: 'Oswald',sans-serif;
 	font-size: 1.4em;
@@ -3618,6 +3670,56 @@ article.node-press-release{
 
 /*END LEGISLATION*/
 
+/*GUIDELINES*/
+
+.view-legislation-guidelines table tr{
+	padding:1em;
+	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);
+	border-bottom:0px;
+}
+
+.view-legislation-guidelines table tr td{
+	padding:0.5em 0.5em 1em 0.5em;
+	width:780px;
+
+}
+
+.view-legislation-guidelines table caption{
+	color: #003399;
+	font-family: Oswald;
+	font-weight: 400;
+	background-color: #FFFFFF;
+	padding-top: 0.2em;
+	padding-bottom: 0.2em;
+	padding-left: 0.5em;
+	margin: 0em;
+	text-align:left;
+	margin-bottom:0em;
+	 width: 98.8%;
+}
+
+.view-legislation-guidelines table caption a{
+	background: none repeat scroll 0 0 #FFFFFF;
+    color: #003399;
+    font-family: "Oswald"!important;
+    font-size: 1.35em;
+    font-weight: 400;
+    padding-bottom: 2px;
+	border-bottom:0px!important;
+}
+
+.view-legislation-guidelines table tr td a{
+	color: #003399!important;
+	font-family: 'Oswald',sans-serif!important;
+	border-bottom: 0px!important;
+	font-size: 1.4em;
+	font-weight: 300;
+	letter-spacing: -0.75px;
+	padding-bottom: 0.5em;
+}
+
+/*END GUIDELINES*/
+
 /* SEARCH DIRECTIVES*/
 
 .view-search-directives .field-name-title-field a{
@@ -3663,6 +3765,34 @@ article.node-press-release{
 
 /* END SEARCH DIRECTIVES*/
 
+/* PRESS REALESES */
+
+.node-note-to-editor h2 {
+	background: none repeat scroll 0 0 #FFFFFF;
+	padding-left: 0px;
+}
+
+
+.node-note-to-editor h2 a {
+	background: none repeat scroll 0 0 #FFFFFF;
+    color: #003399;
+    font-family: "Oswald";
+    font-size: 1.15em;
+    font-weight: 400;
+    padding-bottom: 2px;
+    padding-left: 0px;
+}
+
+.node-note-to-editor .field-type-text-with-summary p{
+	padding:0 0 1em 0 ;
+	margin:0;
+}
+
+/* END PRESS REALESES */
+
+
+
+
 
 
 .file-icon{
@@ -3692,3 +3822,11 @@ div.contextual-links-wrapper a{
 
 }
 
+.view-empty {
+	padding-top:1em;
+	font-weight:bold;
+}
+
+.recaptcha_only_if_image{
+	padding-top:1em;
+}

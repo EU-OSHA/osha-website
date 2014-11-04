@@ -1,0 +1,16 @@
+diff --git workbench_moderation.node.inc workbench_moderation.node.inc
+--- workbench_moderation.node.inc
++++ workbench_moderation.node.inc
+@@ -182,7 +182,11 @@ function workbench_moderation_node_history_view($node) {
+       $node_current = workbench_moderation_node_current_load($node);
+       $row['data']['moderation'] = '<div class="moderation-state"><strong>' . t('This is the current revision. The current state is %state.', array('%state' => workbench_moderation_state_label($node->workbench_moderation['current']->state))) . '</strong></div>';
+       $moderate_form = drupal_get_form('workbench_moderation_moderate_form', $node_current);
+-      $row['data']['moderation'] .= '<div class="moderation-actions">' . t('Set moderation state: !moderation-actions-form', array('!moderation-actions-form' => drupal_render($moderate_form))) . '</div>';
++      if (isset($moderate_form['state'])) {
++        $moderate_form['state']['#title'] = t('Set moderation state');
++        $moderate_form['state']['#title_display'] = 'before';
++        $row['data']['moderation'] .= '<div class="moderation-actions">' . t('!moderation-actions-form', array('!moderation-actions-form' => drupal_render($moderate_form))) . '</div>';
++      }
+     }
+ 
+     // Build a table of the moderation history.

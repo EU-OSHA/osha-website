@@ -329,6 +329,7 @@ $options['init-modules'] = array(
   'menu_block',
   'menuimage',
   'lang_dropdown',
+  'multiple_selects',
 
   'imce_wysiwyg',
   'wysiwyg_accordion',

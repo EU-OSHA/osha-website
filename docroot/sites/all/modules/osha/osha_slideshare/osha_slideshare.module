@@ -19,7 +19,7 @@ function osha_slideshare_field_info() {
  */
 function osha_slideshare_field_widget_info() {
   return array(
-    'slideshare' => array(
+    'slideshare_field' => array(
       'label' => t('Slideshare'),
       'field types' => array('slideshare'),
     ),
@@ -61,19 +61,36 @@ function osha_slideshare_field_instance_settings_form($field, $instance) {
  * Implements hook_field_widget_form().
  */
 function osha_slideshare_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
-  $element['slide_url'] = $element + array(
+  $element['slide_url'] = array(
     '#type' => 'textfield',
     '#title' => t('Slideshare URL'),
     '#default_value' => isset($items[$delta]['slide_url']) ? $items[$delta]['slide_url'] : '',
-    '#attributes' => array('maxlength' => 256),
+    '#maxlength' => 256,
+    '#required' => $element['#required'],
+    '#description' => t('Enter the Slideshare URL. Valid URL format like: http://www.slideshare.net/euosha/hwc-esener'),
   );
 
-  if($element['#description'] == '') {
-    $element['slide_url']['#description'] = t('Enter the Slideshare URL. Valid URL
-      format like: http://www.slideshare.net/euosha/hwc-esener');
-  }
+  $element['slide_id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Slideshare ID'),
+    '#default_value' => isset($items[$delta]['slide_id']) ? $items[$delta]['slide_id'] : '',
+    '#required' => $element['#required'],
+    '#description' => t('Enter the Slideshare ID'),
+  );
 
   return $element;
+}
+
+/**
+ * Implements hook_field_presave().
+ */
+function osha_slideshare_field_presave($entity_type, $entity, $field, $instance, $langcode, &$items) {
+  foreach ($items as $delta => $item) {
+    if (isset($item['slide_url'])) {
+      //save slide thumbnail on disk
+      saveThumbnail($field['settings']['api_key'], $field['settings']['secret_key'], $items[$delta]['slide_id']);
+    }
+  }
 }
 
 /**
@@ -87,6 +104,15 @@ function osha_slideshare_field_validate($entity_type, $entity, $field, $instance
         $errors[$field['field_name']][$langcode][$delta][] = array(
           'error' => 'slide_url_invalid',
           'message' => t('Invalid Slideshare URL.'),
+        );
+      }
+    }
+
+    if (isset($item['slide_id']) && $item['slide_id'] != '') {
+      if (!ctype_digit($item['slide_id'])) {
+        $errors[$field['field_name']][$langcode][$delta][] = array(
+          'error' => 'slide_id_invalid',
+          'message' => t('Invalid Slideshare ID.'),
         );
       }
     }
@@ -106,7 +132,10 @@ function valid_slide_url($url){
  * Implements hook_field_is_empty().
  */
 function osha_slideshare_field_is_empty($item, $field) {
-  return empty($item['slide_url']);
+  if(empty($item['slide_url']) || empty($item['slide_id'])){
+    return TRUE;
+  }
+  return FALSE;
 }
 
 /**
@@ -131,7 +160,7 @@ function osha_slideshare_field_formatter_view($entity_type, $entity, $field, $in
       foreach ($items as $delta => $item) {
         if (isset($item['slide_url'])) {
           $element[$delta]['#markup'] =
-            getSlideshareInfos($field['settings']['api_key'], $field['settings']['secret_key'], $item['slide_url']);
+            getSlideshareInfos($item['slide_url'], $item['slide_id']);
         }
       }
       break;
@@ -149,7 +178,8 @@ function osha_slideshare_theme(){
   $theme['slideshare_display'] = array(
     'template' => 'slideshare_display',
     'variables' => array(
-      'xml' => NULL
+      'path' => NULL,
+      'src' => NULL,
     ),
     'path' => $path . '/templates',
   );
@@ -158,19 +188,57 @@ function osha_slideshare_theme(){
 }
 
 /**
+ * Save Slide Thumbnail
+ */
+function saveThumbnail($api_key, $secret_key, $slideshow_id){
+  $files = variable_get('file_public_path', conf_path() . '/files');
+  $file_name = $slideshow_id . '.jpg';
+  $dest = $files . '/slideshare/' . $file_name;
+
+  if(!file_exists($dest)){
+    $url = 'https://www.slideshare.net/api/2/get_slideshow';
+    $ts = time();
+    $hash = sha1($secret_key.$ts);
+    $params = 'api_key='.$api_key.'&ts='.$ts.'&hash='.$hash.'&slideshow_id='.$slideshow_id;
+
+    $url = $url.'?'.$params;
+
+    $request = drupal_http_request($url);
+    $xml = simplexml_load_string($request->data);
+
+    //save image on disk
+    if(!empty($xml->URL)){
+      //remove first slashes (//cdn.slidesharecdn.com/ss_thumbnails/hwcesener-...)
+      $thumbnail = substr($xml->ThumbnailURL, 2);
+      $ch = curl_init($thumbnail);
+      if($ch){
+        $fp = fopen($dest, 'wb');
+        curl_setopt($ch, CURLOPT_FILE, $fp);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_exec($ch);
+        curl_close($ch);
+        fclose($fp);
+      }
+    }
+  }
+}
+
+/**
  * Connect to Slideshare and get information
  * about the URL provided
  */
-function getSlideshareInfos($api_key, $secret_key, $slideshow_url){
-  $url = 'https://www.slideshare.net/api/2/get_slideshow';
-  $ts = time();
-  $hash = sha1($secret_key.$ts);
-  $params = 'api_key='.$api_key.'&ts='.$ts.'&hash='.$hash.'&slideshow_url='.$slideshow_url;
+function getSlideshareInfos($slideshow_url, $slideshow_id){
+  $files = variable_get('file_public_path', conf_path() . '/files');
+  $file_name = $slideshow_id . '.jpg';
+  $dest = $files . '/slideshare/' . $file_name;
+  $image = '';
 
-  $url = $url.'?'.$params;
+  if(file_exists($dest))
+    $image = theme('image', array('path' => $dest));
 
-  $request = drupal_http_request($url);
-  $xml = simplexml_load_string($request->data);
-
-  return theme('slideshare_display',array('xml' => $xml));
+  return theme('slideshare_display',array(
+    'path' => $slideshow_url,
+    'image' => $image,
+  ));
 }

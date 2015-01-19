@@ -60,7 +60,7 @@ function osha_menu_default_fe_block_settings() {
     'i18n_mode' => 0,
     'module' => 'menu_block',
     'node_types' => array(),
-    'pages' => '',
+    'pages' => 'node/5445',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(

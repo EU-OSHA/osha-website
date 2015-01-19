@@ -374,7 +374,8 @@ function osha_breadcrumbs_path_breadcrumbs_settings_info() {
 sitemap
 accessibility-info
 privacy-policy-logged-users
-legal-notice',
+legal-notice
+tools-and-publications/blog',
           ),
           'context' => 'empty',
           'not' => TRUE,

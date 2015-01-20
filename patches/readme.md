@@ -183,6 +183,10 @@ List of patches (most recent first)
   * Display url - ":" is converted to "%3A" and "?" to "&"
   * link-character_conversion-1984398.patch
 
+* lang_dropdown
+  * Order the languages available in the select box by native language name
+  * order_by_native_language_name.patch
+
 Patch documentation should be in the following format:
 
 * module name

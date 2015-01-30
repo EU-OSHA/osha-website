@@ -1,5 +1,7 @@
 <?php
 
+module_load_include('inc', 'menu_position', 'menu_position.admin');
+
 function osha_infographics_install() {
   osha_infographics_add_menu_position_rules();
 }
@@ -61,9 +63,8 @@ function osha_infographics_add_menu_position_rules() {
  */
 function osha_infographics_change_menu_position_rules() {
   // Remove old rule
-  db_delete('menu_position_rules')
-    ->condition('admin_title', 'Infographics Menu Rule')
-    ->execute();
+  $rid = db_query("SELECT rid FROM {menu_position_rules} WHERE admin_title = :admin_title", array(':admin_title' => 'Infographics Menu Rule'))->fetchField();
+  menu_position_delete_rule($rid);
 
   // Add new rule
   if (module_exists('osha') && module_load_include('inc', 'osha', 'osha.utils')) {

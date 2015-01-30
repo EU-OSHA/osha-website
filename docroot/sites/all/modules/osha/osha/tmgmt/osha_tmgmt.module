@@ -391,7 +391,6 @@ function osha_tmgmt_menu_local_tasks_alter(&$items) {
     'admin/tmgmt/sources/i18n_string_path_breadcrumbs',
     'admin/tmgmt/sources/i18n_string_menu',
     'admin/tmgmt/sources/entity_node',
-    'admin/tmgmt/sources/i18n_string_block',
   );
 
   $weights = array(

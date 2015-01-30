@@ -16,7 +16,7 @@ function osha_newsletter_default_fe_block_settings() {
     'cache' => -1,
     'custom' => 0,
     'i18n_block_language' => array(),
-    'i18n_mode' => 0,
+    'i18n_mode' => 1,
     'machine_name' => 'join_oshmail_subscribers',
     'module' => 'block',
     'node_types' => array(),

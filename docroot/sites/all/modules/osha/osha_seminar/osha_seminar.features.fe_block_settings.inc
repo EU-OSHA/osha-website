@@ -17,7 +17,7 @@ function osha_seminar_default_fe_block_settings() {
     'custom' => 0,
     'delta' => '06b622c3c94cefbba3c76d3ae86207dd',
     'i18n_block_language' => array(),
-    'i18n_mode' => 0,
+    'i18n_mode' => 1,
     'module' => 'views',
     'node_types' => array(),
     'pages' => 'node/2427',

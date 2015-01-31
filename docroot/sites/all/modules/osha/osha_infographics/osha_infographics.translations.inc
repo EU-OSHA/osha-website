@@ -8,6 +8,10 @@ function osha_infographics_get_translatable_strings() {
     'Infographics',
     'Related Infographics',
     'Show Infographics for',
+    'Tags Filter',
+    'Related Infographics',
+    'more',
+    'Sort by',
     '<a href="/tools-and-publications/infographics">All topics</a>',
   );
 }

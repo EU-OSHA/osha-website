@@ -257,7 +257,7 @@ safety-and-health-legislation/european-directives',
         'weight' => 0,
       ),
     ),
-    'title' => '',
+    'title' => '<none>',
     'visibility' => 1,
   );
 

@@ -36,7 +36,7 @@ function osha_seminar_workbench_access_node_element_alter(&$element, $form_state
     // CW-865 default value for Section
     $element['#required'] = FALSE;
     foreach ($element['#options'] as $key=>$option) {
-      if (preg_match('/^[-\\s]*Our seminars/', $option)) {
+      if (preg_match('/^[-\\s]*Seminar reports/', $option)) {
         $element['#default_value'] = $key;
         break;
       }

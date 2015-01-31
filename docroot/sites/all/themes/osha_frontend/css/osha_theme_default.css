@@ -463,10 +463,6 @@ a{
 	margin:0;
 }
 
-#block-lang-dropdown-language-content h2{
-	display:none;
-}
-
 #lang-dropdown-select-language_content::-ms-expand {
     display: none;
 }

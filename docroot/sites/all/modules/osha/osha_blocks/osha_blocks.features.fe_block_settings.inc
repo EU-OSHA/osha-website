@@ -335,7 +335,7 @@ inside-eu-osha/careers',
         'weight' => 0,
       ),
     ),
-    'title' => '',
+    'title' => '<none>',
     'visibility' => 0,
   );
 

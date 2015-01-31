@@ -66,8 +66,17 @@ function osha_get_translatable_strings() {
     'Spaces are allowed; punctuation is not allowed except for periods, hyphens, apostrophes, and underscores.',
     'E-mail address',
     'A valid e-mail address. All e-mails from the system will be sent to this address. The e-mail address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by e-mail.',
+    'Go to page @number',
+    '« first',
+    'Go to first page',
+    '‹ previous',
+    'Go to previous page',
+    'next ›',
+    'Go to next page',
+    'last »',
+    'Go to last page',
 
-     // Other strings
+    // Other strings
     'Share this on:',
     'Share',
     'Recent Tweets',

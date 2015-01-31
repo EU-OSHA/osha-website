@@ -17,7 +17,7 @@ function osha_news_default_fe_block_settings() {
     'custom' => 0,
     'delta' => 'news-oshnews_latest',
     'i18n_block_language' => array(),
-    'i18n_mode' => 0,
+    'i18n_mode' => 1,
     'module' => 'views',
     'node_types' => array(),
     'pages' => '',
@@ -48,7 +48,7 @@ function osha_news_default_fe_block_settings() {
         'weight' => 0,
       ),
     ),
-    'title' => '',
+    'title' => 'OSH News',
     'visibility' => 0,
   );
 

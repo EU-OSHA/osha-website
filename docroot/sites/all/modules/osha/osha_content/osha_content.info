@@ -39,4 +39,4 @@ features[file_display][] = document__teaser__file_field_file_url_plain
 features[file_display][] = document__teaser__file_field_media_large_icon
 features[file_display][] = document__teaser__file_field_pdf_view
 features[views_view][] = related_content
-mtime = 1418804334
+mtime = 1422693974

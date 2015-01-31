@@ -57,7 +57,7 @@ function osha_content_default_fe_block_settings() {
     'custom' => 0,
     'delta' => 'related_content-block_1',
     'i18n_block_language' => array(),
-    'i18n_mode' => 0,
+    'i18n_mode' => 1,
     'module' => 'views',
     'node_types' => array(
       0 => 'article',
@@ -268,7 +268,7 @@ function osha_content_default_fe_block_settings() {
     'custom' => 0,
     'delta' => 'related_content-block_6',
     'i18n_block_language' => array(),
-    'i18n_mode' => 0,
+    'i18n_mode' => 1,
     'module' => 'views',
     'node_types' => array(),
     'pages' => '',

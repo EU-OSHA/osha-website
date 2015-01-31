@@ -17,7 +17,7 @@ function osha_search_default_fe_block_settings() {
     'custom' => 0,
     'delta' => '3I2yRvUb4ut1RBNTxP1zBVR6kihmGEsp',
     'i18n_block_language' => array(),
-    'i18n_mode' => 0,
+    'i18n_mode' => 1,
     'module' => 'facetapi',
     'node_types' => array(),
     'pages' => 'search/directives
@@ -51,7 +51,7 @@ legislation/directive/*',
         'weight' => 0,
       ),
     ),
-    'title' => '',
+    'title' => 'Filter by date of directive:',
     'visibility' => 1,
   );
 

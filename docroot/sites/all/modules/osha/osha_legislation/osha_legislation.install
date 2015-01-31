@@ -35,9 +35,8 @@ function osha_legislation_add_menu_position_rules() {
  */
 function osha_legislation_add_menu_position_search() {
   // Remove old rule
-  db_delete('menu_position_rules')
-    ->condition('admin_title', 'Directive Menu Rule')
-    ->execute();
+  $rid = db_query("SELECT rid FROM {menu_position_rules} WHERE admin_title = :admin_title", array(':admin_title' => 'Directive Menu Rule'))->fetchField();
+  menu_position_delete_rule($rid);
 
   // Add new rule
   if (module_exists('osha') && module_load_include('inc', 'osha', 'osha.utils')) {

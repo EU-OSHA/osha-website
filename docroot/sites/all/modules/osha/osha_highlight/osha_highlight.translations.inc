@@ -13,5 +13,6 @@ function osha_highlight_get_translatable_strings() {
     'See more',
     'Back to Highlights',
     'Show details',
+    'Latest Highlights',
   );
 }

@@ -129,7 +129,7 @@ node/5432',
         'weight' => -5,
       ),
     ),
-    'title' => '',
+    'title' => '<none>',
     'visibility' => 0,
   );
 
@@ -169,7 +169,7 @@ node/5432',
         'weight' => -5,
       ),
     ),
-    'title' => '',
+    'title' => '<none>',
     'visibility' => 1,
   );
 
@@ -209,7 +209,7 @@ node/5432',
         'weight' => -5,
       ),
     ),
-    'title' => '',
+    'title' => '<none>',
     'visibility' => 1,
   );
 
@@ -289,7 +289,7 @@ node/5432',
         'weight' => -5,
       ),
     ),
-    'title' => '',
+    'title' => '<none>',
     'visibility' => 1,
   );
 
@@ -370,7 +370,7 @@ highlights',
         'weight' => -5,
       ),
     ),
-    'title' => '',
+    'title' => '<none>',
     'visibility' => 1,
   );
 

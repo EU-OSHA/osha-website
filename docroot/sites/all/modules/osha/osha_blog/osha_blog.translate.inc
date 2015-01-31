@@ -34,5 +34,9 @@ function osha_blog_get_translatable_strings() {
     'Image CAPTCHA',
     'Read more',
     'Back to latest posts',
+    'Posts by date',
+    'Post by date',
+    'Monthly posts',
+    'Feed'
   );
 }

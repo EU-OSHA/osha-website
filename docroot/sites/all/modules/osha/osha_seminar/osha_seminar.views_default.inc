@@ -145,6 +145,20 @@ function osha_seminar_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'list';
+  $handler->display->display_options['style_options']['grouping'] = array(
+    0 => array(
+      'field' => 'field_seminar_start_date_1',
+      'rendered' => 1,
+      'rendered_strip' => 1,
+    ),
+  );
+  $handler->display->display_options['style_options']['wrapper_class'] = 'item-list wysiwyg_accordion';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['defaults']['footer'] = FALSE;
   /* Footer: Global: Result summary */
@@ -152,6 +166,89 @@ function osha_seminar_views_default_views() {
   $handler->display->display_options['footer']['result']['table'] = 'views';
   $handler->display->display_options['footer']['result']['field'] = 'result';
   $handler->display->display_options['footer']['result']['content'] = '<span class="result_summary">Displaying @start - @end of @total</span>';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Indexed Multilingual Node: Content type */
+  $handler->display->display_options['fields']['type']['id'] = 'type';
+  $handler->display->display_options['fields']['type']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['fields']['type']['field'] = 'type';
+  $handler->display->display_options['fields']['type']['label'] = '';
+  $handler->display->display_options['fields']['type']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['type']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['type']['link_to_entity'] = 0;
+  $handler->display->display_options['fields']['type']['format_name'] = 0;
+  /* Field: Indexed Multilingual Node: Start date */
+  $handler->display->display_options['fields']['field_seminar_start_date']['id'] = 'field_seminar_start_date';
+  $handler->display->display_options['fields']['field_seminar_start_date']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['fields']['field_seminar_start_date']['field'] = 'field_seminar_start_date';
+  $handler->display->display_options['fields']['field_seminar_start_date']['label'] = '';
+  $handler->display->display_options['fields']['field_seminar_start_date']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_seminar_start_date']['settings'] = array(
+    'format_type' => 'osha_day_only',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'osha_date_theme' => '',
+  );
+  /* Field: Indexed Multilingual Node: Location */
+  $handler->display->display_options['fields']['field_seminar_location']['id'] = 'field_seminar_location';
+  $handler->display->display_options['fields']['field_seminar_location']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['fields']['field_seminar_location']['field'] = 'field_seminar_location';
+  $handler->display->display_options['fields']['field_seminar_location']['label'] = '';
+  $handler->display->display_options['fields']['field_seminar_location']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_seminar_location']['type'] = 'title_linked';
+  $handler->display->display_options['fields']['field_seminar_location']['settings'] = array(
+    'title_style' => '_none',
+    'title_link' => '',
+    'title_class' => '',
+  );
+  /* Field: Indexed Multilingual Node: Title */
+  $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['fields']['title_field']['field'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['label'] = '';
+  $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title_field']['type'] = 'title_linked';
+  $handler->display->display_options['fields']['title_field']['settings'] = array(
+    'title_style' => 'h1',
+    'title_link' => 'content',
+    'title_class' => '',
+  );
+  /* Field: Indexed Multilingual Node: The main body text */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['alter']['max_length'] = '250';
+  $handler->display->display_options['fields']['body']['alter']['trim'] = TRUE;
+  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['body']['settings'] = array(
+    'trim_length' => '150',
+  );
+  /* Field: Indexed Multilingual Node: Start date */
+  $handler->display->display_options['fields']['field_seminar_start_date_1']['id'] = 'field_seminar_start_date_1';
+  $handler->display->display_options['fields']['field_seminar_start_date_1']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['fields']['field_seminar_start_date_1']['field'] = 'field_seminar_start_date';
+  $handler->display->display_options['fields']['field_seminar_start_date_1']['label'] = '';
+  $handler->display->display_options['fields']['field_seminar_start_date_1']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_seminar_start_date_1']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_seminar_start_date_1']['alter']['text'] = '[field_seminar_start_date_1] - Seminars';
+  $handler->display->display_options['fields']['field_seminar_start_date_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_seminar_start_date_1']['settings'] = array(
+    'format_type' => 'year',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'osha_date_theme' => '',
+  );
+  /* Field: Content: Link */
+  $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['label'] = '';
+  $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['view_node']['text'] = 'See details';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Indexed Multilingual Node: Status */
@@ -335,6 +432,8 @@ function osha_seminar_views_default_views() {
     t('Item language'),
     t('Page'),
     t('<span class="result_summary">Displaying @start - @end of @total</span>'),
+    t('[field_seminar_start_date_1] - Seminars'),
+    t('See details'),
     t('Start date'),
     t('End date'),
     t('Facets block'),

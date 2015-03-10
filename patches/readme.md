@@ -158,6 +158,7 @@ List of patches (most recent first)
   * [https://www.drupal.org/node/2330513](https://www.drupal.org/files/issues/entity_collection_undefined_variable.patch)
   * entity_collection/entity_collection_undefined_variable.patch
   * content_add_form_validation.patch
+  * entity_collection_undefined_variable.patch
 
 * menu_block
   * Add hooks for editing, saving, deleting menu block. Useful for modules that want to extend the menu block form.

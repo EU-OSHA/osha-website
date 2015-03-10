@@ -620,6 +620,16 @@ function osha_newsletter_add_to_newsletter_action($node, $context) {
     $collection = entity_collection_load($collection_name);
     if ($collection) {
       $item = new EntityCollectionTreeNode('node', $node->nid, $node);
+      $content = entity_collection_load_content($collection->bundle, $collection);
+      $last_child = $content->getLastChild();
+
+      if ($last_child) {
+        $item->parent = $last_child->parent;
+        $item->root = $last_child->root;
+        $item->position = $last_child->position + 1;
+        $item->style = $last_child->style;
+      }
+
       $contexts = _entity_collection_get_contexts($collection);
       entity_collection_append_item($collection, $item, $contexts);
     }
@@ -679,6 +689,7 @@ function osha_newsletter_form_alter(&$form, &$form_state, $form_id) {
       if(isset($form['#style']) && $form['#style']->entity_collection->bundle == 'newsletter_content_collection'){
         // add submit button to send newsletter and send test newsletter
         if (isset($form['content'])) {
+          uasort($form['content'], 'osha_newsletter_entity_collection_content_position_compare');
           foreach ($form['content'] as $k => &$v) {
             if (strpos($k, 'taxonomy_term:') !== FALSE) {
               hide($v['style']);
@@ -718,6 +729,15 @@ function osha_newsletter_form_alter(&$form, &$form_state, $form_id) {
   }
 }
 
+/**
+ * Compare position of the elememts.
+ */
+function osha_newsletter_entity_collection_content_position_compare($a,$b) {
+  if($a['position'] == $b['position']) {
+    return -1;
+  }
+  return ($a['position'] > $b['position']) ? 1 : -1;
+}
 
 function osha_newsletter_form_validate($form, &$form_state){
   // TODO : Check the submitted items

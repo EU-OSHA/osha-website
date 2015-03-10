@@ -654,6 +654,16 @@ function entity_collection_content_add_form_submit($form, &$form_state) {
     if (isset($entities[$value])) {
       $entity = $entities[$value];
       $item = new EntityCollectionTreeNode($type, $value, $entity);
+      $content = entity_collection_load_content($entity_collection->bundle, $entity_collection);
+      $last_child = $content->getLastChild();
+
+      if ($last_child) {
+        $item->parent = $last_child->parent;
+        $item->root = $last_child->root;
+        $item->position = $last_child->position + 1;
+        $item->style = $last_child->style;
+      }
+
       if (isset($_GET['contexts'])) {
         $form_state['redirect'] = array(current_path(), array('query' => array('contexts' => $_GET['contexts'])));
       }

@@ -16619,11 +16619,13 @@ class TCPDF {
 									}
 									$dom[$key]['line-height'] = $this->getHTMLUnitToUnits($lineheight, 1, '%', true);
 									if (substr($lineheight, -1) !== '%') {
-										if ($dom[$key]['fontsize'] <= 0) {
-											$dom[$key]['line-height'] = 1;
-										} else {
-											$dom[$key]['line-height'] = (($dom[$key]['line-height'] - $this->cell_padding['T'] - $this->cell_padding['B']) / $dom[$key]['fontsize']);
-										}
+//										if ($dom[$key]['fontsize'] <= 0) {
+//											$dom[$key]['line-height'] = 1;
+//										} else {
+//											$dom[$key]['line-height'] = (($dom[$key]['line-height'] - $this->cell_padding['T'] - $this->cell_padding['B']) / $dom[$key]['fontsize']);
+//										}
+										// ignore line-height from style attribute
+										$dom[$key]['line-height'] = 1;
 									}
 								}
 							}

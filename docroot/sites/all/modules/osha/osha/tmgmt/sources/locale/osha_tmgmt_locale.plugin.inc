@@ -5,7 +5,7 @@ class OSHATMGMTLocaleSourcePluginController extends TMGMTLocaleSourcePluginContr
 
   public function saveTranslation(TMGMTJobItem $job_item) {
     $data = $job_item->getData();
-    if (isset($data['singular'])) {
+    if (isset($data['singular']['#translation']['#text'])) {
       $translation = $data['singular']['#translation']['#text'];
       // Update the locale string in the system.
       // @todo: Send error message to user if update fails.

@@ -267,9 +267,19 @@ function osha_frontend_process_node(&$vars) {
   if (isset($vars['content']['links']['node']['#links']['node-readmore'])) {
     $vars['content']['links']['node']['#links']['node-readmore']['title'] = t('Show details');
   }
-
   /*insert views blocks - disabled for the moment
   add_blocks_inside_content($vars);*/
+}
+
+function osha_frontend_quicktabs_content_alter(&$renderable_qt) {
+  if (isset($renderable_qt['content']['content']['divs'])) {
+    foreach ($renderable_qt['content']['content']['divs'] as $index => $div) {
+      if (isset($div['content']['#bundle']) && $div['content']['#bundle'] == 'article') {
+        // hide "Show details" link for articles used in quicktabs
+        unset($renderable_qt['content']['content']['divs'][$index]['content']['links']['node']['#links']['node-readmore']);
+      }
+    }
+  }
 }
 
 /**

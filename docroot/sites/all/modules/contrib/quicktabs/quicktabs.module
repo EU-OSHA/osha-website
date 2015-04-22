@@ -243,6 +243,7 @@ function quicktabs_build_quicktabs($name, $settings = array(), $custom_tabs = ar
   }
   if ($qt = quickset_renderer_factory($name, $contents, $renderer, $settings)) {
     $renderable_qt = array('#title' => $qt->getTitle(), 'content' => $qt->render());
+    drupal_alter('quicktabs_content', $renderable_qt);
     return $renderable_qt;
   }
   return array();

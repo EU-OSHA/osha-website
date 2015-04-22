@@ -21,3 +21,11 @@ function hook_quicktabs_alter(&$quicktabs) {
 function hook_quicktabs_tabstyles() {
 }
 
+/**
+ * Alter the Quicktabs renderable content before it gets rendered.
+ *
+ * @param &$renderable_qt
+ *   A renderable array.
+ */
+function hook_quicktabs_content_alter(&$renderable_qt) {
+}

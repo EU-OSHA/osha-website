@@ -1,0 +1,28 @@
+diff --git a/docroot/sites/all/modules/contrib/quicktabs/quicktabs.api.php b/docroot/sites/all/modules/contrib/quicktabs/quicktabs.api.php
+index 1c7e616..d27bb6b 100644
+--- a/docroot/sites/all/modules/contrib/quicktabs/quicktabs.api.php
++++ b/docroot/sites/all/modules/contrib/quicktabs/quicktabs.api.php
+@@ -21,3 +21,11 @@ function hook_quicktabs_alter(&$quicktabs) {
+ function hook_quicktabs_tabstyles() {
+ }
+ 
++/**
++ * Alter the Quicktabs renderable content before it gets rendered.
++ *
++ * @param &$renderable_qt
++ *   A renderable array.
++ */
++function hook_quicktabs_content_alter(&$renderable_qt) {
++}
+diff --git a/docroot/sites/all/modules/contrib/quicktabs/quicktabs.module b/docroot/sites/all/modules/contrib/quicktabs/quicktabs.module
+index 182a89c..6c35042 100644
+--- a/docroot/sites/all/modules/contrib/quicktabs/quicktabs.module
++++ b/docroot/sites/all/modules/contrib/quicktabs/quicktabs.module
+@@ -243,6 +243,7 @@ function quicktabs_build_quicktabs($name, $settings = array(), $custom_tabs = ar
+   }
+   if ($qt = quickset_renderer_factory($name, $contents, $renderer, $settings)) {
+     $renderable_qt = array('#title' => $qt->getTitle(), 'content' => $qt->render());
++    drupal_alter('quicktabs_content', $renderable_qt);
+     return $renderable_qt;
+   }
+   return array();

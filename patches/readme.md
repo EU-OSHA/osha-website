@@ -7,6 +7,10 @@ When patching a contrib module, the following steps should be followed:
 
 List of patches (most recent first)
 
+* recaptcha
+  * Captcha is broken (always falls back and answers are incorrect)
+  * /patches/recaptcha/recaptcha_no_preprocess.patch
+
 * youtube
   * Always return HTTPS version
   * /patches/youtube/https-friendly.patch

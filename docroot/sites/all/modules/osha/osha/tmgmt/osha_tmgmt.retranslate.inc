@@ -11,39 +11,36 @@ class OshaTMGMTRetranslate {
     if (empty($text)) {
       return $text;
     }
-    $items = self::getDOMNodeList($text);
-    // Get all existing ID's and compute max.
+    // Remove invalid existing ID's and compute max.
     $max = 0;
-    for ($i = 0; $i < $items->length; $i++) {
+    $callback = function(&$item, &$max, $div_start, $div_end) {
+      if ($div_start || $div_end) return;
       // First pass, compute max(id)
-      if (get_class($items->item($i)) != 'DOMElement') {
-        // Ignore text between tags and comments, can happen during migration.
-        continue;
-      }
-      $id = $items->item($i)->getAttribute('id');
+      $id = $item->getAttribute('id');
       if (!empty($id) && !preg_match('/^' . ID_PREFIX . '/', $id)) {
         // Invalid id, remove it.
-        $items->item($i)->removeAttribute('id');
+        $item->removeAttribute('id');
         $id = NULL;
       }
       if (!empty($id)) {
         $max = max(substr($id, strlen(ID_PREFIX)), $max);
       }
-    }
+    };
+    $dom = self::getDOMDocument($text);
+    $body = $dom->getElementsByTagName('body')->item(0);
+
+    self::browseDOMRecursive($body->childNodes, $callback, $max);
     // Once again, and set id's where we have new tags.
-    $current_id = $max + 1;
-    for ($i = 0; $i < $items->length; $i++) {
-      $item = $items->item($i);
-      if (get_class($items->item($i)) != 'DOMElement') {
-        // Ignore text between tags and comments, can happen during migration.
-        continue;
-      }
+    $callback = function(&$item, &$current_id, $div_start, $div_end) {
+      if ($div_start || $div_end) return;
       $item_id = $item->getAttribute('id');
       if (empty($item_id)) {
         $item->setAttribute('id', ID_PREFIX . ($current_id++));
       }
-    }
-    return self::getHTML($items);
+    };
+    $current_id = $max + 1;
+    self::browseDOMRecursive($body->childNodes, $callback, $current_id);
+    return self::getHTML($body->childNodes);
   }
 
   public static function getDOMDocument($text) {
@@ -58,11 +55,36 @@ class OshaTMGMTRetranslate {
   public static function getDOMNodeList($text) {
     if (empty($text)) {
       // Return empty array for empty text to avoid warnings
-      return new DOMNodeList();
+      return array();
     }
     $dom = self::getDOMDocument($text);
     $body = $dom->getElementsByTagName('body')->item(0);
-    return $body->childNodes;
+
+    $result = array();
+    $callback = function(&$item, &$result, $div_start, $div_end) {
+      if ($div_start || $div_end) return;
+      $result[$item->getAttribute('id')] = $item;
+    };
+    self::browseDOMRecursive($body->childNodes, $callback, $result);
+    return $result;
+  }
+
+  public static function browseDOMRecursive(&$nodeList, &$callback, &$options) {
+    for ($i = 0; $i < $nodeList->length; $i++) {
+      $item = $nodeList->item($i);
+      if (get_class($item) != 'DOMElement') {
+        // Ignore text between tags and comments, can happen during migration.
+        continue;
+      }
+      if ($item->tagName == 'div') {
+        // $callback parameters: $item, $options, is begin div, is end div
+        $callback($item, $options, TRUE, FALSE);
+        self::browseDOMRecursive($item->childNodes, $callback, $options);
+        $callback($item, $options, FALSE, TRUE);
+      } else {
+        $callback($item, $options, FALSE, FALSE);
+      }
+    }
   }
 
   public static function getElementById($domNodeList, $id) {
@@ -91,39 +113,11 @@ class OshaTMGMTRetranslate {
   public static function getHTMLStructure($text) {
     $items = self::getDOMNodeList($text);
     $structure = array();
-    for ($i = 0; $i < $items->length; $i++) {
-      $item = $items->item($i);
-      if (get_class($item) == 'DOMElement') {
-        $structure[$item->getAttribute('id')] = $item->tagName;
-      }
+    foreach ($items as $id => $item) {
+      $structure[$id] = $item->tagName;
     }
     return $structure;
   }
-
-  /*
-   * Set checkbox if a revision has been translated and body has been changed
-   */
-  /*
-  public static function mark_dirty($node) {
-    $node_lang = $node->translations->original;
-    if (empty($node->body[$node_lang])) {
-      return;
-    }
-    $new_text = $node->body[$node_lang][0]['value'];
-    if (!isset($node->original->body[$node_lang])) {
-      // No body before.
-      $old_text = '';
-    }
-    else {
-      $old_text = $node->original->body[$node_lang][0]['value'];
-    }
-    $new_text_plain = preg_replace("/\s+/", "", strip_tags($new_text));
-    $old_text_plain = preg_replace("/\s+/", "", strip_tags($old_text));
-    if ($new_text_plain != $old_text_plain) {
-      $node->field_needs_retranslation[LANGUAGE_NONE][0]['value'] = 1;
-    }
-  }
-  */
 
   /*
    * Return latest revision where original language is synchronized with translations.
@@ -191,21 +185,16 @@ class OshaTMGMTRetranslate {
     $new_items = self::getDOMNodeList($new_text);
     // Array of element id's
     $changes = array();
-    for ($i = 0; $i < $new_items->length; $i++) {
-      $new_item = $new_items->item($i);
-      if (get_class($new_item) != 'DOMElement') {
-        continue;
-      }
-      $new_id = $new_item->getAttribute('id');
+    foreach ($new_items as $new_id => $new_item) {
       // Check if added or existing.
-      $old_item = self::getElementById($old_items, $new_id);
-      if (!$old_item) {
+      if (empty($old_items[$new_id])) {
         // Item is new.
         $changes[] = $new_id;
       } else {
         // Compare nodeValues without whitespace.
+
         $new_text_plain = preg_replace("/\s+/", "", $new_item->nodeValue);
-        $old_text_plain = preg_replace("/\s+/", "", $old_item->nodeValue);
+        $old_text_plain = preg_replace("/\s+/", "", $old_items[$new_id]->nodeValue);
         if ( $new_text_plain !== $old_text_plain ) {
           $changes[] = $new_id;
         }
@@ -247,6 +236,10 @@ class OshaTMGMTRetranslate {
       // but field has not been changed, so no re-translation is needed.
       return NULL;
     }
+    return self::get_text_to_retranslate_plain($clean_source_text, $source_text, $translated_text);
+  }
+
+  public static function get_text_to_retranslate_plain($clean_source_text, $source_text, $translated_text) {
     // For body, get the different paragraphs only.
     // Just a list of element id's (changed or added in the source language).
     $changed_ids = self::get_changed_ids($clean_source_text, $source_text);
@@ -255,18 +248,13 @@ class OshaTMGMTRetranslate {
     // Changed/added elements will be added here.
     $changes = new DOMDocument();
     $source_items = self::getDOMNodeList($source_text);
-    for ($i = 0; $i < $source_items->length; $i++) {
-      $source_item = $source_items->item($i);
-      if (get_class($source_item) != 'DOMElement') {
-        continue;
-      }
-      if (in_array($source_item->getAttribute('id'), $changed_ids)) {
-        // This element has been changed in source language,
-        // so it is added by default.
+    foreach ($source_items as $item_id => $source_item) {
+      if (in_array($item_id, $changed_ids)) {
+        // This element has been changed in source language, so it is added by default.
         $changes->appendChild($changes->importNode($source_item, TRUE));
       }
       else {
-        if (!self::getElementById($translated_items, $source_item->getAttribute('id'))) {
+        if (empty($translated_items[$item_id])) {
           // This item does not exist at all in the translated version.
           $changes->appendChild($changes->importNode($source_item, TRUE));
         }
@@ -275,12 +263,11 @@ class OshaTMGMTRetranslate {
     if ($changes->hasChildNodes()) {
       return html_entity_decode($changes->saveHTML());
     }
-    else {
-      return NULL;
-    }
+    return NULL;
   }
 
-  /**
+
+    /**
    * Input: $node->nid
    * The latest clean revision is returned in $vid
    * Status messages are returned in array $messages[key => severity_level][]
@@ -457,55 +444,72 @@ class OshaTMGMTRetranslate {
   public static function get_merged_translation($new_translation,
                                                 $old_translation,
                                                 $source_text) {
-    $orig_structure = self::getHTMLStructure($source_text);
+    $orig_structure = self::getDOMNodeList($source_text);
     $new_items = self::getDOMNodeList($new_translation);
     $old_items = self::getDOMNodeList($old_translation);
-    $result = new DOMDocument();
-    foreach ($orig_structure as $id => $tag) {
-      // Follow the structure of the source language.
-      // Follow the structure of the source language
-      $item = self::getElementById($new_items, $id);
-      if ($item) {
+    // Check for extra tags in the translated text
+    foreach ($new_items as $id => $item) {
+      // Should exist in $orig_structure
+      if (!isset($orig_structure[$id])) {
+        throw new TMGMTException('Unexpected element <@tag id="@id"> in translation.',
+          array('@id' => $id, '@tag' => $item->tagName));
+      }
+    }
+    $callback = function(&$item, &$options, $div_start, $div_end) {
+      $dom = $options['dom'];
+      $current_parent = end($options['parents']);
+      if ($div_start) {
+        $div = $dom->importNode($item, FALSE);
+        $current_parent->appendChild($div);
+        array_push($options['parents'], $div);
+        return;
+      } else if ($div_end) {
+        array_pop($options['parents']);
+        return;
+      }
+      $id = $item->getAttribute('id');
+      $new_items = $options['new_items'];
+      $old_items = $options['old_items'];
+      $orig_items = $options['orig_items'];
+      if (!empty($new_items[$id])) {
         // Found in new translation, now check if the same tag.
-        if ($item->tagName == $tag) {
-          $result->appendChild($result->importNode($item, TRUE));
-        }
-        else {
+        if ($new_items[$id]->tagName == $orig_items[$id]->tagName) {
+          $current_parent->appendChild($dom->importNode($new_items[$id], TRUE));
+        } else {
           // We have a different tag in the translation, raise error.
           throw new TMGMTException('Element @id is a <@tag_new> instead of <@tag_old>.',
             array(
               '@id' => $id,
-              '@tag_new' => $item->tagName,
-              '@tag_old' => $tag,
+              '@tag_new' => $new_items[$id]->tagName,
+              '@tag_old' => $orig_items[$id]->tagName,
             ));
         }
-      }
-      else {
+      } else {
         // Item not found in translation, re-use the old one.
-        $item = self::getElementById($old_items, $id);
-        if ($item) {
-          $result->appendChild($result->importNode($item, TRUE));
+        if (!empty($old_items[$id])) {
+          $current_parent->appendChild($dom->importNode($old_items[$id], TRUE));
         }
         else {
           // We don't have this tag at all, raise error.
           throw new TMGMTException('<@tag id="@id"> not included in translation.',
-            array('@id' => $id, '@tag' => $tag));
+            array('@id' => $id, '@tag' => $orig_items[$id]->tagName));
         }
       }
-    }
-    // Check for extra tags in the translated text
-    // not using getHTMLStructure to avoid the re-creation of a node.
-    for($i = 0; $i < $new_items->length; $i++) {
-      $item = $new_items->item($i);
-      if (get_class($item) == 'DOMElement') {
-        $id = $item->getAttribute('id');
-        // Should exist in $orig_structure
-        if (!isset($orig_structure[$id])) {
-          throw new TMGMTException('Unexpected element <@tag id="@id"> in translation.',
-            array('@id' => $id, '@tag' => $item->tagName));
-        }
-      }
-    }
+    };
+
+    $dom = self::getDOMDocument($source_text);
+    $body = $dom->getElementsByTagName('body')->item(0);
+    // Follow the structure of the source language.
+    $result = new DOMDocument();
+    $options = array(
+      'orig_items' => $orig_structure,
+      'new_items' => $new_items,
+      'old_items' => $old_items,
+      'dom' => $result,
+      'parents' => array($result)
+    );
+    self::browseDOMRecursive($body->childNodes, $callback, $options);
+    // Note: html_entity_decode will convert &nbsp; to 0xa0
     return html_entity_decode($result->saveHTML());
   }
 

@@ -41,6 +41,9 @@ function osha_tmgmt_drush_command()
       'locales_dir' => 'Directory of Plone translations (i.e $gitroot/src/osha/translations/locales)',
     ),
   );
+  $items['osha-tmgmt-test'] = array(
+    'description' => 'Runs tests for tmgmt',
+  );
   return $items;
 }
 
@@ -248,4 +251,8 @@ function drush_osha_tmgmt_clean_blacklist_literals() {
   else {
     drush_user_abort();
   }
+}
+
+function drush_osha_tmgmt_test() {
+  OshaTMGMTRetranslationTest::run_tests();
 }

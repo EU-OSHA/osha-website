@@ -1487,7 +1487,7 @@ function menu_tree_collect_node_links(&$tree, &$node_links) {
  *   menu_tree_collect_node_links().
  */
 function menu_tree_check_access(&$tree, $node_links = array()) {
-  if ($node_links) {
+  if ($node_links && (user_access('access content') || user_access('bypass node access'))) {
     $nids = array_keys($node_links);
     $select = db_select('node', 'n');
     $select->addField('n', 'nid');
@@ -1628,11 +1628,6 @@ function theme_menu_link(array $variables) {
   $element = $variables['element'];
   $sub_menu = '';
 
-  // Set the encode option to FALSE for query parameter so query parameters
-  // does not encode.
-  if (isset($element['#localized_options']['query'])) {
-    $element['#localized_options']['encode'] = FALSE;
-  }
   if ($element['#below']) {
     $sub_menu = drupal_render($element['#below']);
   }
@@ -1871,11 +1866,6 @@ function menu_navigation_links($menu_name, $level = 0) {
       if ($item['link']['in_active_trail']) {
         $class = ' active-trail';
         $l['attributes']['class'][] = 'active-trail';
-      }
-      // If query parameter available set the encode option to FALSE for query
-      // parameter so query parameters does not encode.
-      if (!empty($item['link']['options']) && isset($item['link']['options']['query'])) {
-        $l['encode'] = FALSE;
       }
       // Normally, l() compares the href of every link with $_GET['q'] and sets
       // the active class accordingly. But local tasks do not appear in menu

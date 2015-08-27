@@ -2,23 +2,38 @@
 
 class OshaTMGMTRetranslationTest {
 
-  public static function run_tests() {
-
-    self::testPrepareText();
-    self::testGetDOMNodeList();
-    self::test_get_changed_ids();
-    self::test_get_text_to_retranslate_plain();
-    self::test_get_merged_translation();
+  public static function log($function, $arguments) {
+    printf("\n**** Running %s", $function);
+    if (!empty($arguments)) {
+      print(" with parameters ");
+      print_r($arguments);
+    }
   }
 
-  public static function testPrepareText() {
-    $old_text = self::readDataFromFile('node1_en_noannotations.txt');
+  public static function run_tests() {
+
+    self::testPrepareText('node1_en_noannotations.txt', 'node1_en.txt');
+    self::testGetDOMNodeList();
+    self::test_get_changed_ids();
+    self::test_get_text_to_retranslate_plain('node1_en.txt', 'node1_en_changed.txt', 'node1_ro.txt', 'change1_en.txt');
+    self::test_get_merged_translation('change1_ro.txt', 'node1_ro.txt', 'node1_en_changed.txt', 'node1_ro_changed.txt');
+    self::test_get_merged_translation('change2_ro.txt', 'node2_ro.txt', 'node2_en_changed.txt', 'node2_ro_changed.txt');
+    self::test_get_text_to_retranslate_plain('node3_en.txt', 'node3_en_changed.txt', 'node3_ro.txt', 'change3_en.txt');
+    self::testPrepareText('node4_en_old.txt', 'node4_en_new.txt');
+    self::test_get_merged_translation('change5_ro.txt', 'node5_ro.txt', 'node5_en_changed.txt', 'node5_ro_changed.txt');
+    }
+
+  public static function testPrepareText($old, $new) {
+    self::log(__FUNCTION__, func_get_args());
+    $old_text = self::readDataFromFile($old);
     $new_text = OshaTMGMTRetranslate::prepare_text($old_text);
-    $expected = self::readDataFromFile('node1_en.txt');
+    $expected = self::readDataFromFile($new);
     assert(strcmp($expected, $new_text) == 0, 'prepare_text');
+    //file_put_contents("expected.txt", $new_text);
   }
 
   public static function testGetDOMNodeList() {
+    self::log(__FUNCTION__, func_get_args());
     $text = self::readDataFromFile('node1_en.txt');
     $list = OshaTMGMTRetranslate::getDOMNodeList($text);
     assert(count($list)==29);
@@ -44,28 +59,36 @@ class OshaTMGMTRetranslationTest {
   }
 
   public static function test_get_changed_ids() {
+    self::log(__FUNCTION__, func_get_args());
     $old_text = self::readDataFromFile('node1_en.txt');
-    $new_text = self::readDataFromFile('node1_en_change1.txt');
+    $new_text = self::readDataFromFile('node1_en_changed.txt');
     $structure = OshaTMGMTRetranslate::get_changed_ids($old_text, $new_text);
     assert(count($structure)==1);
     assert($structure[0] == 'tmgmt-3');
   }
 
-  public static function test_get_text_to_retranslate_plain() {
-    $clean_source_text = self::readDataFromFile('node1_en.txt');
-    $source_text = self::readDataFromFile('node1_en_change1.txt');
-    $translated_text = self::readDataFromFile('node1_ro.txt');
+  public static function test_get_text_to_retranslate_plain($src_original, $src_changed, $tgt_original, $src_expected) {
+    self::log(__FUNCTION__, func_get_args());
+    $clean_source_text = self::readDataFromFile($src_original);
+    $source_text = self::readDataFromFile($src_changed);
+    $translated_text = self::readDataFromFile($tgt_original);
     $text = OshaTMGMTRetranslate::get_text_to_retranslate_plain($clean_source_text, $source_text, $translated_text);
-    $expected = self::readDataFromFile('change1.txt');
+    var_dump(OshaTMGMTRetranslate::get_changed_ids($clean_source_text, $source_text));
+
+    $expected = self::readDataFromFile($src_expected);
+    file_put_contents("expected.txt", $text);
     assert(strcmp($expected, $text) == 0);
   }
 
-  public static function test_get_merged_translation() {
-    $new_translation = self::readDataFromFile('change1_ro.txt');
-    $old_translation = self::readDataFromFile('node1_ro.txt');
-    $source_text = self::readDataFromFile('node1_en_change1.txt');
+  public static function test_get_merged_translation($translation, $old_target_lang, $new_source_lang, $expected_target_lang) {
+    self::log(__FUNCTION__, func_get_args());
+    $new_translation = self::readDataFromFile($translation);
+    $old_translation = self::readDataFromFile($old_target_lang);
+    $source_text = self::readDataFromFile($new_source_lang);
     $text = OshaTMGMTRetranslate::get_merged_translation($new_translation, $old_translation, $source_text);
-    $expected = self::readDataFromFile('node1_ro_change1.txt');
+    $expected = self::readDataFromFile($expected_target_lang);
+
+    //file_put_contents("expected.txt", $text);
     assert(strcmp($expected, $text) == 0);
   }
 
@@ -76,4 +99,5 @@ class OshaTMGMTRetranslationTest {
     }
     return '';
   }
+
 }

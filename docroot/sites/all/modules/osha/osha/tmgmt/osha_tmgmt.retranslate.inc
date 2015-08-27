@@ -32,14 +32,19 @@ class OshaTMGMTRetranslate {
     self::browseDOMRecursive($body->childNodes, $callback, $max);
     // Once again, and set id's where we have new tags.
     $callback = function(&$item, &$current_id, $div_start, $div_end) {
-      if ($div_start || $div_end) return;
+      if ($div_start || $div_end) {
+        // backwards fix: remove old div id's
+        $item->removeAttribute('id');
+        return;
+      }
       $item_id = $item->getAttribute('id');
       if (empty($item_id)) {
         $item->setAttribute('id', ID_PREFIX . ($current_id++));
       }
     };
     $current_id = $max + 1;
-    self::browseDOMRecursive($body->childNodes, $callback, $current_id);
+    // invoke with $force_recurse_divs = TRUE
+    self::browseDOMRecursive($body->childNodes, $callback, $current_id, TRUE);
     return self::getHTML($body->childNodes);
   }
 
@@ -63,13 +68,16 @@ class OshaTMGMTRetranslate {
     $result = array();
     $callback = function(&$item, &$result, $div_start, $div_end) {
       if ($div_start || $div_end) return;
-      $result[$item->getAttribute('id')] = $item;
+      $id = $item->getAttribute('id');
+      if (!empty($id)) {
+        $result[$id] = $item;
+      }
     };
     self::browseDOMRecursive($body->childNodes, $callback, $result);
     return $result;
   }
 
-  public static function browseDOMRecursive(&$nodeList, &$callback, &$options) {
+  public static function browseDOMRecursive(&$nodeList, &$callback, &$options, $force_recurse_divs = FALSE) {
     for ($i = 0; $i < $nodeList->length; $i++) {
       $item = $nodeList->item($i);
       if (get_class($item) != 'DOMElement') {
@@ -77,31 +85,22 @@ class OshaTMGMTRetranslate {
         continue;
       }
       if ($item->tagName == 'div') {
-        // $callback parameters: $item, $options, is begin div, is end div
-        $callback($item, $options, TRUE, FALSE);
-        self::browseDOMRecursive($item->childNodes, $callback, $options);
-        $callback($item, $options, FALSE, TRUE);
+        // backwards compatibility check: if div has tmgmt-id, handle it the old way
+        $div_id = $item->getAttribute('id');
+        if (!$force_recurse_divs && !empty($div_id) && strpos($div_id, ID_PREFIX) === 0) {
+          $callback($item, $options, FALSE, FALSE);
+        } else {
+          // $callback parameters: $item, $options, is begin div, is end div
+          $callback($item, $options, TRUE, FALSE);
+          self::browseDOMRecursive($item->childNodes, $callback, $options);
+          $callback($item, $options, FALSE, TRUE);
+        }
       } else {
         $callback($item, $options, FALSE, FALSE);
       }
     }
   }
 
-  public static function getElementById($domNodeList, $id) {
-    // Use this function instead of doc->getElementById, which needs to validate the DOM.
-    // Validation requires HTTP access to http://www.w3.org/TR/REC-html40/loose.dtd
-    if (!$domNodeList) {
-      return NULL;
-    }
-    for($i = 0; $i < $domNodeList->length; $i++) {
-      $item = $domNodeList->item($i);
-      if (get_class($item) == 'DOMElement' && $item->getAttribute('id') == $id) {
-        return $item;
-      }
-    }
-    return NULL;
-  }
-  
   public static function getHTML($domNodeList) {
     $dom = new DOMDocument();
     for ($i = 0; $i < $domNodeList->length; $i++) {

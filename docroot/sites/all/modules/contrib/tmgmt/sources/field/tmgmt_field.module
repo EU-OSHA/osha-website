@@ -121,6 +121,11 @@ function tmgmt_field_populate_entity($entity_type, $entity, $langcode, $data, $u
               $columns[$column] = $data[$field_name][$delta][$column]['#text'];
             }
           }
+          // get rid of escaped html characters in plain text fields (e.g. &scaron;)
+          if ( isset($columns['format']) && !empty($columns['value']) &&
+            (empty($columns['format']) || $columns['format'] == 'plain_text')) {
+              $columns['value'] = html_entity_decode($columns['value']);
+          }
           // Make sure the array_merge() gets an array as a first parameter.
           if (!isset($entity->{$field_name}[$field_langcode][$delta])) {
             $entity->{$field_name}[$field_langcode][$delta] = array();

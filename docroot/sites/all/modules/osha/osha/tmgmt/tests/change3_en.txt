@@ -1,0 +1,1 @@
+<h3 id="tmgmt-18">New panel</h3><p id="tmgmt-19">xxx new text</p>

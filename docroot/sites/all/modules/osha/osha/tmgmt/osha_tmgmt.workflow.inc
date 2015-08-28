@@ -99,18 +99,26 @@ function osha_tmgmt_layout_validation_node_preview($nid, $job_item) {
   $new_job_data = OshaTMGMTRetranslate::apply_partial_translation(
     $node, $job_item->getData(), $source_language, $target_language);
   tmgmt_field_populate_entity($node->type, $node, $target_language, $new_job_data);
-  if (isset($node->body[$target_language][0])) {
-    $body = $node->body[$target_language][0];
-    if (empty($body['value'])) {
-      drupal_set_message(t('There is no translated text for Body'), 'warning');
-      $body['value'] = '';
+  foreach (element_children($new_job_data) as $field_name) {
+    // re-sanitize all fields otherwise the old translated safe_value is displayed on preview
+    if (isset($node->{$field_name}[$target_language][0])) {
+      $field = $node->{$field_name}[$target_language][0];
+      if (empty($field['value'])) {
+        drupal_set_message('There is no translated text for '.$field_name, 'warning');
+        $field['value'] = '';
+      }
+      if (empty($field['format'])) {
+        // empty string causes check_markup not to work properly
+        $field['format'] = NULL;
+      }
+      // Re-sanitize text after tmgmt_field_populate_entity
+      // ['safe_value'] is rendered instead if different than ['value']
+      // This can happen when node had a translation (re-translation)
+      $node->{$field_name}[$target_language][0]['safe_value'] =
+        check_markup($field['value'], $field['format'], $target_language);
     }
-    // Re-sanitize text after tmgmt_field_populate_entity
-    // ['safe_value'] is rendered instead if different than ['value']
-    // This can happen when node had a translation (re-translation)
-    $node->body[$target_language][0]['safe_value'] =
-      check_markup($body['value'], $body['format'], $target_language);
   }
+
   if (empty($node->title_field[$target_language][0]['value'])) {
     drupal_set_message(t('There is no translated text for Title'), 'warning');
     $node->title_field[$target_language][0]['value'] = '';

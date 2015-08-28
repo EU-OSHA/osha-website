@@ -729,6 +729,8 @@ class MigrationUtil {
    * @return mixed|string
    */
   public static function formatBody($text){
+    // no longer supported as of CW-1768
+    /*
     if ($dom = OshaTMGMTRetranslate::getDOMDocument($text)) {
       foreach ($dom->getElementsByTagName('img') as $img) {
         $imgSrc = $img->getAttribute('src');
@@ -741,6 +743,7 @@ class MigrationUtil {
       $html = OshaTMGMTRetranslate::getDOMNodeList($dom->saveHTML());
       $text = OshaTMGMTRetranslate::getHTML($html);
     }
+    */
 
     return $text;
   }

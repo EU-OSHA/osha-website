@@ -76,7 +76,7 @@ class OshaTMGMTRetranslationTest {
     var_dump(OshaTMGMTRetranslate::get_changed_ids($clean_source_text, $source_text));
 
     $expected = self::readDataFromFile($src_expected);
-    file_put_contents("expected.txt", $text);
+    //file_put_contents("expected.txt", $text);
     assert(strcmp($expected, $text) == 0);
   }
 

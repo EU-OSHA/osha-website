@@ -1,0 +1,1 @@
+<div class="wysiwyg_accordion"><h3>Header 1</h3><div class="wysiwyg_accordion_panel"><p>Panel 1</p></div><h3>Header 2</h3><div class="wysiwyg_accordion_panel">Panel 2</div></div>

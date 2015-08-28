@@ -21,6 +21,7 @@ class OshaTMGMTRetranslationTest {
     self::test_get_text_to_retranslate_plain('node3_en.txt', 'node3_en_changed.txt', 'node3_ro.txt', 'change3_en.txt');
     self::testPrepareText('node4_en_old.txt', 'node4_en_new.txt');
     self::test_get_merged_translation('change5_ro.txt', 'node5_ro.txt', 'node5_en_changed.txt', 'node5_ro_changed.txt');
+    self::testPrepareText('node6_en_noannotations.txt', 'node6_en.txt');
     }
 
   public static function testPrepareText($old, $new) {
@@ -73,7 +74,6 @@ class OshaTMGMTRetranslationTest {
     $source_text = self::readDataFromFile($src_changed);
     $translated_text = self::readDataFromFile($tgt_original);
     $text = OshaTMGMTRetranslate::get_text_to_retranslate_plain($clean_source_text, $source_text, $translated_text);
-    var_dump(OshaTMGMTRetranslate::get_changed_ids($clean_source_text, $source_text));
 
     $expected = self::readDataFromFile($src_expected);
     //file_put_contents("expected.txt", $text);

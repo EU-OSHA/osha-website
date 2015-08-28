@@ -32,10 +32,18 @@ class OshaTMGMTRetranslate {
     self::browseDOMRecursive($body->childNodes, $callback, $max);
     // Once again, and set id's where we have new tags.
     $callback = function(&$item, &$current_id, $div_start, $div_end) {
-      if ($div_start || $div_end) {
+      if ($div_end) {
+        return;
+      }
+      if ($div_start) {
         // backwards fix: remove old div id's
         $item->removeAttribute('id');
         return;
+      }
+      if (get_class($item) == 'DOMText') {
+        $span = $item->ownerDocument->createElement('span', $item->textContent);
+        $item->parentNode->replaceChild($span, $item);
+        $item = $span;
       }
       $item_id = $item->getAttribute('id');
       if (empty($item_id)) {
@@ -44,7 +52,7 @@ class OshaTMGMTRetranslate {
     };
     $current_id = $max + 1;
     // invoke with $force_recurse_divs = TRUE
-    self::browseDOMRecursive($body->childNodes, $callback, $current_id, TRUE);
+    self::browseDOMRecursive($body->childNodes, $callback, $current_id, TRUE, TRUE);
     return self::getHTML($body->childNodes);
   }
 
@@ -77,9 +85,13 @@ class OshaTMGMTRetranslate {
     return $result;
   }
 
-  public static function browseDOMRecursive(&$nodeList, &$callback, &$options, $force_recurse_divs = FALSE) {
+  public static function browseDOMRecursive(&$nodeList, &$callback, &$options, $force_recurse_divs = FALSE, $force_text_items = FALSE) {
     for ($i = 0; $i < $nodeList->length; $i++) {
       $item = $nodeList->item($i);
+      if (get_class($item) == 'DOMText' && $force_text_items) {
+        $callback($item, $options, FALSE, FALSE);
+        continue;
+      };
       if (get_class($item) != 'DOMElement') {
         // Ignore text between tags and comments, can happen during migration.
         continue;
@@ -92,7 +104,7 @@ class OshaTMGMTRetranslate {
         } else {
           // $callback parameters: $item, $options, is begin div, is end div
           $callback($item, $options, TRUE, FALSE);
-          self::browseDOMRecursive($item->childNodes, $callback, $options);
+          self::browseDOMRecursive($item->childNodes, $callback, $options, $force_recurse_divs, $force_text_items);
           $callback($item, $options, FALSE, TRUE);
         }
       } else {

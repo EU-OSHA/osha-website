@@ -22,6 +22,10 @@ function osha_tmgmt_uninstall() {
     watchdog('osha_tmgmt', 'Removing page_count field from tmgmt_job_item');
     db_drop_field('tmgmt_job_item', 'page_count');
   }
+  if (db_field_exists('tmgmt_job_item', 'is_full_translation')) {
+    watchdog('osha_tmgmt', 'Removing is_full_translation field from tmgmt_job_item');
+    db_drop_field('tmgmt_job_item', 'is_full_translation');
+  }
 
   if (db_field_exists('tmgmt_job', 'character_count')) {
     watchdog('osha_tmgmt', 'Removing character_count field from tmgmt_job');
@@ -584,4 +588,17 @@ function osha_tmgmt_update_7016() {
     ->condition('item_type', 'taxonomy_term')
     ->condition('source_language', 'und')
     ->execute();
+}
+
+function osha_tmgmt_update_7017() {
+  // CW-1822: Choose between full/re translation when adding into the cart
+  if (!db_field_exists('tmgmt_job_item', 'is_full_translation')) {
+    $field = array(
+      'type' => 'int',
+      'unsigned' => FALSE,
+      'default' => 1, 
+      'description' => 'FALSE if retranslation, TRUE if full-translation.',
+    );
+    db_add_field('tmgmt_job_item', 'is_full_translation', $field);
+  }
 }

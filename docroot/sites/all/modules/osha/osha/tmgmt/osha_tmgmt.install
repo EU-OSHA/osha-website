@@ -596,7 +596,7 @@ function osha_tmgmt_update_7017() {
     $field = array(
       'type' => 'int',
       'unsigned' => FALSE,
-      'default' => 1, 
+      'default' => 1,
       'description' => 'FALSE if retranslation, TRUE if full-translation.',
     );
     db_add_field('tmgmt_job_item', 'is_full_translation', $field);

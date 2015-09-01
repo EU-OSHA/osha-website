@@ -143,9 +143,22 @@ $handler->display->display_options['fields']['views_bulk_operations']['vbo_setti
 $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
 $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
 $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
+  'rules_component::osha_tmgmt_add_items_to_cart_retranslate' => array(
+    'selected' => 1,
+    'skip_confirmation' => 1,
+    'override_label' => 1,
+    'label' => 'Add to cart (retranslation)',
+  ),
   'rules_component::tmgmt_node_ui_tmgmt_nodes_add_items_to_cart' => array(
     'selected' => 1,
     'skip_confirmation' => 1,
+    'override_label' => 1,
+    'label' => 'Add to cart (full translation)',
+  ),
+  'action::osha_newsletter_add_to_newsletter_action' => array(
+    'selected' => 0,
+    'postpone_processing' => 0,
+    'skip_confirmation' => 0,
     'override_label' => 0,
     'label' => '',
   ),
@@ -157,13 +170,6 @@ $handler->display->display_options['fields']['views_bulk_operations']['vbo_opera
     'label' => '',
   ),
   'action::node_assign_owner_action' => array(
-    'selected' => 0,
-    'postpone_processing' => 0,
-    'skip_confirmation' => 0,
-    'override_label' => 0,
-    'label' => '',
-  ),
-  'action::scs_views_create_newsletter_action' => array(
     'selected' => 0,
     'postpone_processing' => 0,
     'skip_confirmation' => 0,
@@ -263,6 +269,13 @@ $handler->display->display_options['fields']['views_bulk_operations']['vbo_opera
     'label' => '',
   ),
   'action::system_send_email_action' => array(
+    'selected' => 0,
+    'postpone_processing' => 0,
+    'skip_confirmation' => 0,
+    'override_label' => 0,
+    'label' => '',
+  ),
+  'action::workbench_moderation_set_state_action' => array(
     'selected' => 0,
     'postpone_processing' => 0,
     'skip_confirmation' => 0,
@@ -748,6 +761,8 @@ $translatables['tmgmt_node_selection_view'] = array(
   t('author'),
   t('Translations'),
   t('- Choose an operation -'),
+  t('Add to cart (retranslation)'),
+  t('Add to cart (full translation)'),
   t('Title'),
   t('Type of content'),
   t('Workflow state'),

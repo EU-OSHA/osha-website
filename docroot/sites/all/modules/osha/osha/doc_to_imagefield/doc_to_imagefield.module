@@ -390,14 +390,8 @@ function doc_to_imagefield_entity_update($entity, $entity_type) {
     list($id, $vid, $bundle) = entity_extract_ids($entity_type, $entity);
     $pdf_fields = pdf_to_image_source_fields($entity_type, $bundle);
 
-    $update = FALSE;
     foreach ($pdf_fields as $field_id => $field_instance) {
       doc_to_image_generate_process($entity_type, $entity, $field_id, $field_instance);
-      $update = TRUE;
-    }
-    if ($update) {
-      entity_get_controller($entity_type)->resetCache(array($entity->uid));
-      field_attach_update($entity_type, $entity);
     }
   }
 }
@@ -451,7 +445,6 @@ function doc_to_image_generate_process($entity_type, &$entity, $field_id, $field
     else {
       // No target image field set or invalid count from the PDF.
     }
-
   }
 }
 

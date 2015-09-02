@@ -1097,6 +1097,21 @@ function osha_events_views_default_views() {
   $handler->display->display_options['fields']['field_unit_ref']['ui_name'] = 'Unit Ref';
   $handler->display->display_options['fields']['field_unit_ref']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_unit_ref']['delta_offset'] = '0';
+  /* Field: Activity */
+  $handler->display->display_options['fields']['field_activity']['id'] = 'field_activity';
+  $handler->display->display_options['fields']['field_activity']['table'] = 'field_data_field_activity';
+  $handler->display->display_options['fields']['field_activity']['field'] = 'field_activity';
+  $handler->display->display_options['fields']['field_activity']['ui_name'] = 'Activity';
+  $handler->display->display_options['fields']['field_activity']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_activity']['delta_offset'] = '0';
+  /* Field: Category */
+  $handler->display->display_options['fields']['field_tags']['id'] = 'field_tags';
+  $handler->display->display_options['fields']['field_tags']['table'] = 'field_data_field_tags';
+  $handler->display->display_options['fields']['field_tags']['field'] = 'field_tags';
+  $handler->display->display_options['fields']['field_tags']['ui_name'] = 'Category';
+  $handler->display->display_options['fields']['field_tags']['label'] = 'Category';
+  $handler->display->display_options['fields']['field_tags']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_tags']['delta_offset'] = '0';
   /* Field: Agency role */
   $handler->display->display_options['fields']['field_agency_role']['id'] = 'field_agency_role';
   $handler->display->display_options['fields']['field_agency_role']['table'] = 'field_data_field_agency_role';
@@ -1162,6 +1177,14 @@ function osha_events_views_default_views() {
     'thousand_separator' => ' ',
     'prefix_suffix' => 1,
   );
+  /* Field: Username */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'users';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['name']['ui_name'] = 'Username';
+  $handler->display->display_options['fields']['name']['label'] = 'Username';
+  $handler->display->display_options['fields']['name']['link_to_user'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Type */
@@ -1290,12 +1313,12 @@ function osha_events_views_default_views() {
 <li>[delete_node]</li>
 </ul>'),
     t('Name'),
-    t('Published'),
     t('Start date'),
     t('Block'),
     t('Location'),
     t('[field_start_date_1] - Events'),
     t('Data export'),
+    t('Username'),
     t('Color (field_color)'),
   );
   $export['events'] = $view;

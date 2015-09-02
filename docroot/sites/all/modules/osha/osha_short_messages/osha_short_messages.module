@@ -211,3 +211,17 @@ function alter_published_date($node) {
 
   return $output;
 }
+
+/**
+ * Implements hook_wysiwyg_editor_settings_alter().
+ */
+function osha_short_messages_wysiwyg_editor_settings_alter(&$settings, $context) {
+  global $base_url;
+
+  if ($context['profile']->editor == 'tinymce') {
+    $settings['document_base_url'] = $base_url;
+    $settings['convert_urls'] = TRUE;
+    $settings['relative_urls'] = FALSE;
+    $settings['remove_script_host'] = FALSE;
+  }
+}

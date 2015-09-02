@@ -2060,7 +2060,7 @@ class DrupalWebTestCase extends DrupalTestCase {
         $submit_matches = $this->handleForm($post, $edit, $upload, $ajax ? NULL : $submit, $form);
         $action = isset($form['action']) ? $this->getAbsoluteUrl((string) $form['action']) : $this->getUrl();
         if ($ajax) {
-          $action = $this->getAbsoluteUrl(!empty($submit['path']) ? $submit['path'] : url('system/ajax'));
+          $action = $this->getAbsoluteUrl(!empty($submit['path']) ? $submit['path'] : 'system/ajax');
           // Ajax callbacks verify the triggering element if necessary, so while
           // we may eventually want extra code that verifies it in the
           // handleForm() function, it's not currently a requirement.
@@ -2221,6 +2221,7 @@ class DrupalWebTestCase extends DrupalTestCase {
 
     // Submit the POST request.
     $return = drupal_json_decode($this->drupalPost(NULL, $edit, array('path' => $ajax_path, 'triggering_element' => $triggering_element), $options, $headers, $form_html_id, $extra_post));
+    $this->assertIdentical($this->drupalGetHeader('X-Drupal-Ajax-Token'), '1', 'Ajax response header found.');
 
     // Change the page content by applying the returned commands.
     if (!empty($ajax_settings) && !empty($return)) {
@@ -2741,8 +2742,7 @@ class DrupalWebTestCase extends DrupalTestCase {
    * @param $path
    *   A path from the internal browser content.
    * @return
-   *   The $path with the internal browser's base URL or $base_url prepended, if
-   *   necessary.
+   *   The $path with $base_url prepended, if necessary.
    */
   protected function getAbsoluteUrl($path) {
     global $base_url, $base_path;
@@ -2751,20 +2751,6 @@ class DrupalWebTestCase extends DrupalTestCase {
     if (empty($parts['host'])) {
       // Ensure that we have a string (and no xpath object).
       $path = (string) $path;
-      // Return an absolute URL based on the internal browser's current URL if
-      // it is not using the internal: scheme.
-      $parts = parse_url($this->getUrl());
-      if ($parts['scheme'] != 'internal') {
-        $port = isset($parts['port']) ? ':' . $parts['port'] : '';
-        $url = $parts['scheme'] . '://' . $parts['host'] . $port;
-        if ($path[0] === '/') {
-          $url .= $path;
-        }
-        else {
-          $url .= preg_replace('@(.*/)([^/]*)@', '$1' . $path, $parts['path']);
-        }
-        return $url;
-      }
       // Strip $base_path, if existent.
       $length = strlen($base_path);
       if (substr($path, 0, $length) === $base_path) {

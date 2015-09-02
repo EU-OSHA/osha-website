@@ -199,9 +199,6 @@ function osha_events_element_info_alter(&$type) {
   if (isset($type['link_field'])) {
     $type['link_field']['#process'][] = 'osha_events_link_field_process';
   }
-  if(isset($type['radios'])){
-    $type['radios']['#process'][] = 'osha_events_radios_process';
-  }
 }
 
 /**
@@ -212,20 +209,6 @@ function osha_events_link_field_process($element, $form_state, $complete_form) {
     case 'field_website_of_event':
       $element['title']['#title'] = t('Website name');
       $element['url']['#title'] = t('Website url');
-      break;
-  }
-
-  return $element;
-}
-
-/**
- * Unset N/A option
- */
-function osha_events_radios_process($element, $form_state, $complete_form) {
-  switch ($element['#field_name']) {
-    case 'field_for_the_web':
-      unset($element['#options']['_none']);
-      unset($element['_none']);
       break;
   }
 

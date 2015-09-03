@@ -27,6 +27,13 @@ function displayDialog(){
         '.views-field-field-press-contact-email a {color: #003399;font-size: 0.9em;font-weight: bold;text-decoration: none;}' +
         '.view-footer {margin-top:10px}' +
         '.view-footer a {color: #003399; text-decoration: none; font-weight: bold; margin-left:4px}' +
+        '.node {font-size: 14px}' +
+        '.node a {text-decoration: none; border-bottom: 1px solid #DC2F82}' +
+        'div {margin-top: 0.5em; margin-bottom: 0.5em;}' +
+        '.node h2 a {color: #039; font-size: 1.1em; line-height: 1.1em; font-weight: bold; text-decoration: none; border: 0}' +
+        '.field-name-field-pr-notes-to-editor .field-label {font-weight: bold; margin-top: 1.5em;}' +
+        'p {line-height: 1.5em; margin: 0em;}' +
+        '.node-note-to-editor h2 {margin: 0px}' +
         '</style>');
 
     //display dialog

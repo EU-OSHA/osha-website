@@ -1329,7 +1329,7 @@ function osha_events_field_default_field_instances() {
       'description_field' => 1,
       'entity_translation_sync' => FALSE,
       'file_directory' => '',
-      'file_extensions' => 'pdf doc docx odt rtf txt csv xsl ods xslx ppt pptx epub',
+      'file_extensions' => 'pdf doc docx odt rtf txt csv xls ods xlsx ppt pptx epub',
       'max_filesize' => '50 MB',
       'user_register_form' => FALSE,
     ),

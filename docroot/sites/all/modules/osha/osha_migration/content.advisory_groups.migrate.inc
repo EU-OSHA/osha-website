@@ -202,7 +202,7 @@ class MigrateOshaAdvisoryGroups extends OSHADynamicMigration {
       if (file_prepare_directory($files_dir, FILE_CREATE_DIRECTORY)) {
         $destination = 'public://contact_cv/' . $row->id . '_' . $row->field_press_contact_cv['filename'];
         $binary_data = base64_decode($row->field_press_contact_cv['content']);
-        if ($file = file_save_data($binary_data, $destination, FILE_EXISTS_OVERWRITE)) {
+        if ($file = file_save_data($binary_data, $destination, FILE_EXISTS_REPLACE)) {
           $file->display = 1;
           $entity->field_press_contact_cv[LANGUAGE_NONE][0] = (array)$file;
         }
@@ -215,7 +215,7 @@ class MigrateOshaAdvisoryGroups extends OSHADynamicMigration {
       if (file_prepare_directory($files_dir, FILE_CREATE_DIRECTORY)) {
         $destination = 'public://contacts_declarations/' . $row->id . '_' . $row->field_press_contact_declaration['filename'];
         $binary_data = base64_decode($row->field_press_contact_declaration['content']);
-        if ($file = file_save_data($binary_data, $destination, FILE_EXISTS_OVERWRITE)) {
+        if ($file = file_save_data($binary_data, $destination, FILE_EXISTS_REPLACE)) {
           $file->display = 1;
           $entity->field_press_contact_declaration[LANGUAGE_NONE][0] = (array) $file;
         }

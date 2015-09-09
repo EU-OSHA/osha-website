@@ -103,6 +103,7 @@ function osha_search_form_alter(&$form, &$form_state, $form_id) {
     // Unset the form elements - the search view needs just the search param.
     $form['#action'] = url('search/site');
     $form['#method'] = 'get';
+    unset($form['form_token']);
     unset($form['#submit']);
     unset($form['form_build_id']);
     unset($form['form_id']);

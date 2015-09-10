@@ -30,7 +30,10 @@ function osha_content_strongarm() {
 1503
 7690
 2424
-8131';
+8131
+9189
+7332
+9317';
   $export['no_translation_exceptions'] = $strongarm;
 
   $strongarm = new stdClass();

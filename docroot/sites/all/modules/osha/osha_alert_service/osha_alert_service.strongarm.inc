@@ -20,7 +20,7 @@ function osha_alert_service_strongarm() {
 [osha_alert_service:alert_content]
 <p><a href="[osha_alert_service:privacy_policy_url]">Privacy notice</a></p>
 <p  style="color:#A9A9A9; font-size:13px;">You can read our here our <strong><a href="[osha_alert_service:privacy_policy_url]"><span style="color:#A9A9A9">Privacy notice</span></a>.</p>
-<p><span style="font-size:11px"><span style="color:#A9A9A9">If you don&#39;t want to receive this alert, you can&nbsp;</span><strong><a href="[osha_alert_service:unsubscribe_link]"><span style="color:#A9A9A9">usubscribe</span></a><span style="color:#A9A9A9">.</span></strong></span></p>';
+<p><span style="font-size:11px"><span style="color:#A9A9A9">If you don&#39;t want to receive this alert, you can&nbsp;</span><strong><a href="[osha_alert_service:unsubscribe_link]"><span style="color:#A9A9A9">unsubscribe</span></a><span style="color:#A9A9A9">.</span></strong></span></p>';
   $export['osha_alert_service_alert_body'] = $strongarm;
 
   $strongarm = new stdClass();

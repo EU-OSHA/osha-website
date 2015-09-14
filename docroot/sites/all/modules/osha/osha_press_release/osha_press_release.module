@@ -68,7 +68,7 @@ function osha_press_release_node_view($node, $view_mode, $langcode) {
   if (!empty($node->content['field_pr_notes_to_editor'])) {
       count($node->content['field_pr_notes_to_editor']['#items']);
       foreach (element_children($node->content['field_pr_notes_to_editor']) as $key) {
-          $node->content['field_pr_notes_to_editor'][$key]['#prefix'] = '<br><span>['.($key+1).']</span>';
+          $node->content['field_pr_notes_to_editor'][$key]['#prefix'] = '<br><span>'.($key+1).'.</span>';
       }
   }
 }

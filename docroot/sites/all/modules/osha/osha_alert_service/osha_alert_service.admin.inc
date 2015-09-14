@@ -22,7 +22,7 @@ function osha_alert_service_admin_form($form, &$form_state) {
     '#type' => 'textarea',
     '#default_value' => variable_get('osha_alert_service_alert_body', <<<EOT
 [osha_alert_service:alert_content]
-<p><span style="font-size:11px"><span style="color:#A9A9A9">If you don&#39;t want to receive this alert, you can&nbsp;</span><strong><a href="[unsubscribe_link]"><span style="color:#A9A9A9">usubscribe</span></a><span style="color:#A9A9A9">.</span></strong></span></p>
+<p><span style="font-size:11px"><span style="color:#A9A9A9">If you don&#39;t want to receive this alert, you can&nbsp;</span><strong><a href="[unsubscribe_link]"><span style="color:#A9A9A9">unsubscribe</span></a><span style="color:#A9A9A9">.</span></strong></span></p>
 EOT
     )
   );

@@ -2697,8 +2697,9 @@ function osha_tmgmt_literal_get_translation($string) {
     return $string;
   }
   global $language;
+  $decoded_string = decode_entities($string);
   $q = db_query('SELECT lid FROM {locales_target} t WHERE translation=:string and language = :language',
-    array(':string' => $string, ':language' => $language->language));
+    array(':string' => $decoded_string, ':language' => $language->language));
   if ($q->fetchField()) {
     return $string;
   }

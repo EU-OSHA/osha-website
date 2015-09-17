@@ -162,3 +162,27 @@ ul.primary {
   margin-top: 3px;
 }
 
+/* Start CW-1873 - Events public fields icon*/
+#events-node-form #edit-title-field label,
+#events-node-form #edit-field-city label,
+#events-node-form #edit-field-country-code label,
+#events-node-form #edit-field-organization label,
+#events-node-form #edit-field-tags label,
+#events-node-form #edit-field-start-date .fieldset-legend,
+#events-node-form #edit-body label,
+#events-node-form #edit-field-website-of-event .field-label label,
+#events-node-form #edit-field-related-documents .fieldset-legend{
+    background-image: url('ic_visibility_black_24dp_1x.png');
+    background-repeat: no-repeat;
+    background-position: 0px -2px;
+    padding-left: 25px;
+}
+
+#events-node-form label,
+#events-node-form #edit-body label[for="edit-body-und-0-format--2"],
+#events-node-form #edit-body label[for="edit-body-en-0-format--2"]{
+    background-image: none;
+    padding-left: 0px;
+}
+/* END CW-1873 - Events public fields icon*/
+

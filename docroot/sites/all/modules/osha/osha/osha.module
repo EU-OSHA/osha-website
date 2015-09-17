@@ -674,6 +674,15 @@ function osha_date_field_formatter_settings_summary_alter(&$summary, $context) {
  * {@inheritdoc}
  */
 function osha_node_view($node, $view_mode, $langcode) {
+  $pos = strpos(request_uri(), '/rss-feeds');
+  // URL can be with or without language
+  if ( $pos === 0 || $pos === 3) { 
+    // CW-1849 Add tracking parameter to rss links
+    //$node->link = url('node/'.$node->nid, array('absolute' => TRUE, 'query' => array('pk_campaigns' => 'rss')));
+    $node->link = url($node->link, array('query' => array('pk_campaigns' => 'rss')));
+    $node->content['title_field'][0]['#markup'] = l('<h1>'.$node->title.'</h1>', $node->link, array('html' => TRUE));
+  }
+
   if ($node->type == 'article') {
     $node->article_type_code = FALSE;
     if (!empty($node->field_article_type[LANGUAGE_NONE][0]['tid'])) {

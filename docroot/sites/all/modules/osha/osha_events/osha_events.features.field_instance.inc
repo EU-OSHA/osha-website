@@ -617,7 +617,9 @@ function osha_events_field_default_field_instances() {
     'bundle' => 'events',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Red: TBD - TBC <br />
+Black - Confirmed <br />
+Grey - Only web or not attendance',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -679,6 +681,7 @@ function osha_events_field_default_field_instances() {
       'type' => 'options_select',
       'weight' => 26,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-events-field_comments_summary_after_eve'
@@ -1970,6 +1973,9 @@ function osha_events_field_default_field_instances() {
   t('Number of attendees');
   t('Organised by');
   t('Organization');
+  t('Red: TBD - TBC <br />
+Black - Confirmed <br />
+Grey - Only web or not attendance');
   t('Related documents');
   t('Satisfaction rate');
   t('Title');

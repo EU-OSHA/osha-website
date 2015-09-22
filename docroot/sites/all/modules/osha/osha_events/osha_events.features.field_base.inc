@@ -209,11 +209,8 @@ function osha_events_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         'Red' => 'Red',
-        'Grey' => 'Grey',
         'Black' => 'Black',
-        'Yellow' => 'Yellow',
-        'Green' => 'Green',
-        'Blue' => 'Blue',
+        'Grey' => 'Grey',
       ),
       'allowed_values_function' => '',
       'entity_translation_sync' => FALSE,

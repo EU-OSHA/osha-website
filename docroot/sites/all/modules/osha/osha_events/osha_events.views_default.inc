@@ -406,12 +406,9 @@ function osha_events_views_default_views() {
   $handler->display->display_options['header']['area_1']['label'] = 'Colours';
   $handler->display->display_options['header']['area_1']['empty'] = TRUE;
   $handler->display->display_options['header']['area_1']['content'] = '<div class="colours">
-<div class="red"></div><p">(...)<p>
-<div class="grey"></div><p>Attendance as speaker is refused<p>
-<div class="black"></div><p>Attendance as speaker has been agreed<p>
-<div class="blue"></div><p>Cancellations<p>
-<div class="yellow"></div><p>(...)<p>
-<div class="green"></div><p>(...)<p>
+<div class="red"></div><p">TBD - TBC<p>
+<div class="black"></div><p>Confirmed<p>
+<div class="grey"></div><p>Only web or not attendance<p>
 </div>';
   $handler->display->display_options['header']['area_1']['format'] = 'full_html';
   $handler->display->display_options['defaults']['footer'] = FALSE;
@@ -1294,12 +1291,9 @@ function osha_events_views_default_views() {
     t('Total: @total'),
     t('Colours'),
     t('<div class="colours">
-<div class="red"></div><p">(...)<p>
-<div class="grey"></div><p>Attendance as speaker is refused<p>
-<div class="black"></div><p>Attendance as speaker has been agreed<p>
-<div class="blue"></div><p>Cancellations<p>
-<div class="yellow"></div><p>(...)<p>
-<div class="green"></div><p>(...)<p>
+<div class="red"></div><p">TBD - TBC<p>
+<div class="black"></div><p>Confirmed<p>
+<div class="grey"></div><p>Only web or not attendance<p>
 </div>'),
     t('Color'),
     t('[field_color]'),

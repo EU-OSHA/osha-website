@@ -13,7 +13,16 @@ function osha_update_directive_thesaurus(){
   foreach($codes as $redirect => $code){
     $url_redirect = substr($redirect, 4);
 
-    $redirect_nid = db_query("SELECT redirect FROM redirect WHERE source = '".$url_redirect."'")->fetchField();
+    $redirect_nid = get_redirect_id($url_redirect);
+
+    // Find json code (last part) in redirect or url_alias
+    if(!$redirect_nid){
+      // Extract last term of url from json code
+      $position = strrpos($url_redirect, '/') + 1;
+      $url_redirect = substr($url_redirect, $position);
+      $redirect_nid = get_redirect_id($url_redirect);
+    }
+
     if(substr($redirect_nid, 0, 4) == 'node'){
       $node = node_load(substr($redirect_nid, 5));
 
@@ -29,6 +38,24 @@ function osha_update_directive_thesaurus(){
         }
         field_attach_update('node', $node);
       }
+    }else{
+      echo $url_redirect;
+      echo PHP_EOL;
     }
   }
+}
+
+/**
+ * Get node id from redirect or url_alias table
+ */
+function get_redirect_id($url_redirect){
+  // Find json code in redirect table
+  $redirect_nid = db_query("SELECT redirect FROM redirect WHERE source LIKE '%".$url_redirect."%'")->fetchField();
+
+  // Find json code in url_alias table
+  if(!$redirect_nid){
+    $redirect_nid = db_query("SELECT source FROM url_alias WHERE alias like '%".$url_redirect."%'")->fetchField();
+  }
+
+  return $redirect_nid;
 }

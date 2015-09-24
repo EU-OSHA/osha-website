@@ -5236,6 +5236,9 @@ a.tabs-primary__tab-link{
 
 #block-views-upcoming-events-block .views-row{
 	font-weight:bold;
+	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);
+    padding-bottom: 1em;
+    padding-top: 0em;
 }
 
 #block-views-upcoming-events-block .date-display-single{
@@ -6418,7 +6421,7 @@ article.comment p {
 
 .block-osha-alert-service {
 	background-color: #e9edf6;
-	padding: 0em 1em 0.5em 1em;
+	padding: 0em 1em 2.5em 1em;
 	margin-bottom: 1em;
 }
 
@@ -6428,6 +6431,18 @@ article.comment p {
     font-size: 1.3em;
     font-weight: lighter;
     padding-top: 0.5em;
+}
+
+#block-osha-alert-service-osha-alert-service-subscribe .alert-service-cancel{
+	display: block;
+    float:left;
+    margin-right:1em;
+    margin-left: 6px;
+}
+
+#block-osha-alert-service-osha-alert-service-subscribe .alert-service-unsubscribe{
+	display: block;
+    float:left;
 }
 
 .block-osha-alert-service .link a{
@@ -7332,7 +7347,7 @@ body.page-node-5429 #related-wiki {
 }
 
 
-.osha-archived-content{
+.osha-archived-content , #block-osha-blocks-osha-legislation-notification{
 	padding:1em;
 	background-color:#ECF1FB;
 	color:#003399;
@@ -8231,9 +8246,15 @@ body.page-entity-collection h1#page-title{
 
 /*NOTES TO EDITOR*/
 
+.field-name-field-pr-notes-to-editor{
+	padding-top: 2em;
+}
+
 .field-name-field-pr-notes-to-editor .field-items .field-item span{
 	color:#003399;
 	font-weight: bold;
+	float:left;
+	padding-right:0.3em;
 }
 
 /*CALLS el lanuage problem*/

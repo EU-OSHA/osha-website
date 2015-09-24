@@ -85,7 +85,7 @@ function osha_events_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 24,
+      'weight' => 25,
     ),
     'workbench_access_field' => 0,
   );
@@ -162,7 +162,7 @@ function osha_events_field_default_field_instances() {
         ),
       ),
       'type' => 'multiple_selects',
-      'weight' => 13,
+      'weight' => 14,
     ),
   );
 
@@ -237,7 +237,7 @@ function osha_events_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 11,
+      'weight' => 12,
     ),
   );
 
@@ -312,7 +312,7 @@ function osha_events_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 21,
+      'weight' => 22,
     ),
   );
 
@@ -387,7 +387,7 @@ function osha_events_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 16,
+      'weight' => 17,
     ),
   );
 
@@ -462,7 +462,7 @@ function osha_events_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 17,
+      'weight' => 18,
     ),
   );
 
@@ -529,7 +529,7 @@ function osha_events_field_default_field_instances() {
       'module' => 'multiple_selects',
       'settings' => array(),
       'type' => 'multiple_selects',
-      'weight' => 15,
+      'weight' => 16,
     ),
   );
 
@@ -607,7 +607,7 @@ function osha_events_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 7,
+      'weight' => 8,
     ),
     'workbench_access_field' => 0,
   );
@@ -679,7 +679,7 @@ Grey - Only web or not attendance',
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 26,
+      'weight' => 27,
     ),
     'workbench_access_field' => 0,
   );
@@ -755,7 +755,7 @@ Grey - Only web or not attendance',
         'size' => 120,
       ),
       'type' => 'text_textfield',
-      'weight' => 22,
+      'weight' => 23,
     ),
     'workbench_access_field' => 0,
   );
@@ -828,7 +828,7 @@ Grey - Only web or not attendance',
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 6,
+      'weight' => 7,
     ),
     'workbench_access_field' => 0,
   );
@@ -900,7 +900,7 @@ Grey - Only web or not attendance',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 20,
+      'weight' => 21,
     ),
   );
 
@@ -1045,7 +1045,7 @@ Grey - Only web or not attendance',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 9,
+      'weight' => 10,
     ),
     'workbench_access_field' => 0,
   );
@@ -1117,7 +1117,7 @@ Grey - Only web or not attendance',
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 23,
+      'weight' => 24,
     ),
   );
 
@@ -1193,7 +1193,7 @@ Grey - Only web or not attendance',
         ),
       ),
       'type' => 'multiple_selects',
-      'weight' => 18,
+      'weight' => 19,
     ),
   );
 
@@ -1270,6 +1270,81 @@ Grey - Only web or not attendance',
       ),
       'type' => 'text_textarea',
       'weight' => 5,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'node-events-field_organized_by_eu_osha'
+  $field_instances['node-events-field_organized_by_eu_osha'] = array(
+    'bundle' => 'events',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 24,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_organized_by_eu_osha',
+    'label' => 'Organized by EU-OSHA',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 6,
     ),
     'workbench_access_field' => 0,
   );
@@ -1358,7 +1433,7 @@ Grey - Only web or not attendance',
         ),
       ),
       'type' => 'media_generic',
-      'weight' => 25,
+      'weight' => 26,
     ),
   );
 
@@ -1429,7 +1504,7 @@ Grey - Only web or not attendance',
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 19,
+      'weight' => 20,
     ),
   );
 
@@ -1538,7 +1613,7 @@ Grey - Only web or not attendance',
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 8,
+      'weight' => 9,
     ),
     'workbench_access_field' => 0,
   );
@@ -1609,7 +1684,7 @@ Grey - Only web or not attendance',
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 14,
+      'weight' => 15,
     ),
     'workbench_access_field' => 0,
   );
@@ -1679,7 +1754,7 @@ Grey - Only web or not attendance',
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 12,
+      'weight' => 13,
     ),
     'workbench_access_field' => 0,
   );
@@ -1773,7 +1848,7 @@ Grey - Only web or not attendance',
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 10,
+      'weight' => 11,
     ),
     'workbench_access_field' => 0,
   );
@@ -1973,6 +2048,7 @@ Grey - Only web or not attendance',
   t('Number of attendees');
   t('Organised by');
   t('Organization');
+  t('Organized by EU-OSHA');
   t('Red: TBD - TBC <br />
 Black - Confirmed <br />
 Grey - Only web or not attendance');

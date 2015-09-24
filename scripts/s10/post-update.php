@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Run this queries if you want to reload the script
+ * DELETE FROM `field_data_field_thesaurus` WHERE bundle = 'directive'
+ * DELETE FROM `field_data_field_thesaurus` WHERE bundle = 'guideline'
+ */
+
 osha_update_directive_thesaurus();
 
 /**
@@ -50,11 +56,21 @@ function osha_update_directive_thesaurus(){
  */
 function get_redirect_id($url_redirect){
   // Find json code in redirect table
-  $redirect_nid = db_query("SELECT redirect FROM redirect WHERE source LIKE '%".$url_redirect."%'")->fetchField();
+  $redirect_nid = db_query("SELECT redirect FROM redirect WHERE source = '".$url_redirect."'")->fetchField();
 
   // Find json code in url_alias table
   if(!$redirect_nid){
-    $redirect_nid = db_query("SELECT source FROM url_alias WHERE alias like '%".$url_redirect."%'")->fetchField();
+    $redirect_nid = db_query("SELECT source FROM url_alias WHERE alias = '".$url_redirect."'")->fetchField();
+  }
+
+  // Find json code in redirect table (with LIKE)
+  if(!$redirect_nid){
+    $redirect_nid = db_query("SELECT redirect FROM redirect WHERE source LIKE '%".$url_redirect."%'")->fetchField();
+  }
+
+  // Find json code in url_alias table (with LIKE)
+  if(!$redirect_nid){
+    $redirect_nid = db_query("SELECT source FROM url_alias WHERE alias LIKE '%".$url_redirect."%'")->fetchField();
   }
 
   return $redirect_nid;

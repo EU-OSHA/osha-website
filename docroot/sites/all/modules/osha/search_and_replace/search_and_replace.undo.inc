@@ -21,8 +21,8 @@ function search_and_replace_undo_page($node = NULL) {
   while ($row = $results->fetchAssoc()) {
     $author = user_load($row['uid']);
     $table_rows[$row['id']] = array(
-      $row['search'],
-      $row['replaced'],
+      check_plain($row['search']),
+      check_plain($row['replaced']),
       _search_and_replace_settings_to_text((array) json_decode($row['options'])),
       $author->name,
       date('d-m-Y H:i', $row['created']),

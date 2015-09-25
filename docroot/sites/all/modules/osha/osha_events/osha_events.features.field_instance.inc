@@ -890,7 +890,7 @@ Grey - Only web or not attendance',
     'entity_type' => 'node',
     'field_name' => 'field_event_in_amp',
     'label' => 'Event in AMP',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
@@ -902,6 +902,7 @@ Grey - Only web or not attendance',
       'type' => 'options_buttons',
       'weight' => 21,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-events-field_event_type'
@@ -1118,82 +1119,6 @@ Grey - Only web or not attendance',
       'settings' => array(),
       'type' => 'number',
       'weight' => 24,
-    ),
-  );
-
-  // Exported field_instance: 'node-events-field_organised_by'
-  $field_instances['node-events-field_organised_by'] = array(
-    'bundle' => 'events',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 6,
-      ),
-      'highlights_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'newsletter_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 3,
-      ),
-      'osha_resources' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 3,
-      ),
-      'osha_slideshow' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_wiki' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 7,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_organised_by',
-    'label' => 'Organised by',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'multiple_selects',
-      'settings' => array(
-        'apply_chosen' => '',
-        'shs' => array(
-          'create_new_levels' => 0,
-          'create_new_terms' => 1,
-          'force_deepest' => 1,
-          'node_count' => 0,
-          'use_chosen' => 'chosen',
-        ),
-      ),
-      'type' => 'multiple_selects',
-      'weight' => 19,
     ),
   );
 
@@ -2046,7 +1971,6 @@ Grey - Only web or not attendance',
   t('Mandatory');
   t('Name');
   t('Number of attendees');
-  t('Organised by');
   t('Organization');
   t('Organized by EU-OSHA');
   t('Red: TBD - TBC <br />

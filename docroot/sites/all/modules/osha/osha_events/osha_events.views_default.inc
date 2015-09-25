@@ -110,11 +110,18 @@ function osha_events_views_default_views() {
   $handler->display->display_options['fields']['field_agency_rep_confirmed']['table'] = 'field_data_field_agency_rep_confirmed';
   $handler->display->display_options['fields']['field_agency_rep_confirmed']['field'] = 'field_agency_rep_confirmed';
   $handler->display->display_options['fields']['field_agency_rep_confirmed']['element_label_colon'] = FALSE;
-  /* Field: Content: Organised by */
-  $handler->display->display_options['fields']['field_organised_by']['id'] = 'field_organised_by';
-  $handler->display->display_options['fields']['field_organised_by']['table'] = 'field_data_field_organised_by';
-  $handler->display->display_options['fields']['field_organised_by']['field'] = 'field_organised_by';
-  $handler->display->display_options['fields']['field_organised_by']['element_label_colon'] = FALSE;
+  /* Field: Content: Organized by EU-OSHA */
+  $handler->display->display_options['fields']['field_organized_by_eu_osha']['id'] = 'field_organized_by_eu_osha';
+  $handler->display->display_options['fields']['field_organized_by_eu_osha']['table'] = 'field_data_field_organized_by_eu_osha';
+  $handler->display->display_options['fields']['field_organized_by_eu_osha']['field'] = 'field_organized_by_eu_osha';
+  $handler->display->display_options['fields']['field_organized_by_eu_osha']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_organized_by_eu_osha']['type'] = 'boolean_yes_no';
+  $handler->display->display_options['fields']['field_organized_by_eu_osha']['settings'] = array(
+    'format' => 'yes-no',
+    'custom_on' => '',
+    'custom_off' => '',
+    'reverse' => 0,
+  );
   /* Field: Content: Event in AMP */
   $handler->display->display_options['fields']['field_event_in_amp']['id'] = 'field_event_in_amp';
   $handler->display->display_options['fields']['field_event_in_amp']['table'] = 'field_data_field_event_in_amp';
@@ -526,12 +533,18 @@ function osha_events_views_default_views() {
   $handler->display->display_options['fields']['field_agency_rep_confirmed']['table'] = 'field_data_field_agency_rep_confirmed';
   $handler->display->display_options['fields']['field_agency_rep_confirmed']['field'] = 'field_agency_rep_confirmed';
   $handler->display->display_options['fields']['field_agency_rep_confirmed']['element_label_colon'] = FALSE;
-  /* Field: Content: Organised by */
-  $handler->display->display_options['fields']['field_organised_by']['id'] = 'field_organised_by';
-  $handler->display->display_options['fields']['field_organised_by']['table'] = 'field_data_field_organised_by';
-  $handler->display->display_options['fields']['field_organised_by']['field'] = 'field_organised_by';
-  $handler->display->display_options['fields']['field_organised_by']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_organised_by']['delta_offset'] = '0';
+  /* Field: Content: Organized by EU-OSHA */
+  $handler->display->display_options['fields']['field_organized_by_eu_osha']['id'] = 'field_organized_by_eu_osha';
+  $handler->display->display_options['fields']['field_organized_by_eu_osha']['table'] = 'field_data_field_organized_by_eu_osha';
+  $handler->display->display_options['fields']['field_organized_by_eu_osha']['field'] = 'field_organized_by_eu_osha';
+  $handler->display->display_options['fields']['field_organized_by_eu_osha']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_organized_by_eu_osha']['type'] = 'boolean_yes_no';
+  $handler->display->display_options['fields']['field_organized_by_eu_osha']['settings'] = array(
+    'format' => 'yes-no',
+    'custom_on' => '',
+    'custom_off' => '',
+    'reverse' => 0,
+  );
   /* Field: Content: Event in AMP */
   $handler->display->display_options['fields']['field_event_in_amp']['id'] = 'field_event_in_amp';
   $handler->display->display_options['fields']['field_event_in_amp']['table'] = 'field_data_field_event_in_amp';
@@ -830,19 +843,21 @@ function osha_events_views_default_views() {
   $handler->display->display_options['filters']['field_activity_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_activity_tid']['vocabulary'] = 'activity';
   $handler->display->display_options['filters']['field_activity_tid']['hierarchy'] = 1;
-  /* Filter criterion: Content: Organised by (field_organised_by) */
-  $handler->display->display_options['filters']['field_organised_by_tid']['id'] = 'field_organised_by_tid';
-  $handler->display->display_options['filters']['field_organised_by_tid']['table'] = 'field_data_field_organised_by';
-  $handler->display->display_options['filters']['field_organised_by_tid']['field'] = 'field_organised_by_tid';
-  $handler->display->display_options['filters']['field_organised_by_tid']['value'] = '';
-  $handler->display->display_options['filters']['field_organised_by_tid']['group'] = 1;
-  $handler->display->display_options['filters']['field_organised_by_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_organised_by_tid']['expose']['operator_id'] = 'field_organised_by_tid_op';
-  $handler->display->display_options['filters']['field_organised_by_tid']['expose']['label'] = 'Organised by';
-  $handler->display->display_options['filters']['field_organised_by_tid']['expose']['operator'] = 'field_organised_by_tid_op';
-  $handler->display->display_options['filters']['field_organised_by_tid']['expose']['identifier'] = 'field_organised_by_tid';
-  $handler->display->display_options['filters']['field_organised_by_tid']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['field_organised_by_tid']['expose']['remember_roles'] = array(
+  /* Filter criterion: Content: Organized by EU-OSHA (field_organized_by_eu_osha) */
+  $handler->display->display_options['filters']['field_organized_by_eu_osha_value']['id'] = 'field_organized_by_eu_osha_value';
+  $handler->display->display_options['filters']['field_organized_by_eu_osha_value']['table'] = 'field_data_field_organized_by_eu_osha';
+  $handler->display->display_options['filters']['field_organized_by_eu_osha_value']['field'] = 'field_organized_by_eu_osha_value';
+  $handler->display->display_options['filters']['field_organized_by_eu_osha_value']['value'] = array(
+    0 => '0',
+    1 => '1',
+  );
+  $handler->display->display_options['filters']['field_organized_by_eu_osha_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_organized_by_eu_osha_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_organized_by_eu_osha_value']['expose']['operator_id'] = 'field_organized_by_eu_osha_value_op';
+  $handler->display->display_options['filters']['field_organized_by_eu_osha_value']['expose']['label'] = 'Organized by EU-OSHA';
+  $handler->display->display_options['filters']['field_organized_by_eu_osha_value']['expose']['operator'] = 'field_organized_by_eu_osha_value_op';
+  $handler->display->display_options['filters']['field_organized_by_eu_osha_value']['expose']['identifier'] = 'field_organized_by_eu_osha_value';
+  $handler->display->display_options['filters']['field_organized_by_eu_osha_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
@@ -857,7 +872,6 @@ function osha_events_views_default_views() {
     12 => 0,
     13 => 0,
   );
-  $handler->display->display_options['filters']['field_organised_by_tid']['vocabulary'] = 'organised_by';
   /* Filter criterion: Content: Agency rep confirmed (field_agency_rep_confirmed) */
   $handler->display->display_options['filters']['field_agency_rep_confirmed_value']['id'] = 'field_agency_rep_confirmed_value';
   $handler->display->display_options['filters']['field_agency_rep_confirmed_value']['table'] = 'field_data_field_agency_rep_confirmed';
@@ -888,6 +902,7 @@ function osha_events_views_default_views() {
   $handler->display->display_options['filters']['field_city_value']['id'] = 'field_city_value';
   $handler->display->display_options['filters']['field_city_value']['table'] = 'field_data_field_city';
   $handler->display->display_options['filters']['field_city_value']['field'] = 'field_city_value';
+  $handler->display->display_options['filters']['field_city_value']['group'] = 1;
   $handler->display->display_options['filters']['field_city_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_city_value']['expose']['operator_id'] = 'field_city_value_op';
   $handler->display->display_options['filters']['field_city_value']['expose']['label'] = 'City';
@@ -1016,6 +1031,7 @@ function osha_events_views_default_views() {
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'views_data_export_xlsx';
   $handler->display->display_options['style_options']['provide_file'] = 1;
+  $handler->display->display_options['style_options']['filename'] = 'events.xls';
   $handler->display->display_options['style_options']['parent_sort'] = 1;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Color */
@@ -1128,14 +1144,20 @@ function osha_events_views_default_views() {
   $handler->display->display_options['fields']['field_agency_rep_confirmed']['field'] = 'field_agency_rep_confirmed';
   $handler->display->display_options['fields']['field_agency_rep_confirmed']['ui_name'] = 'Agency rep confirmed';
   $handler->display->display_options['fields']['field_agency_rep_confirmed']['element_label_colon'] = FALSE;
-  /* Field: Organised by */
-  $handler->display->display_options['fields']['field_organised_by']['id'] = 'field_organised_by';
-  $handler->display->display_options['fields']['field_organised_by']['table'] = 'field_data_field_organised_by';
-  $handler->display->display_options['fields']['field_organised_by']['field'] = 'field_organised_by';
-  $handler->display->display_options['fields']['field_organised_by']['ui_name'] = 'Organised by';
-  $handler->display->display_options['fields']['field_organised_by']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_organised_by']['type'] = 'taxonomy_term_reference_plain';
-  $handler->display->display_options['fields']['field_organised_by']['delta_offset'] = '0';
+  /* Field: Organized by EU-OSHA */
+  $handler->display->display_options['fields']['field_organized_by_eu_osha']['id'] = 'field_organized_by_eu_osha';
+  $handler->display->display_options['fields']['field_organized_by_eu_osha']['table'] = 'field_data_field_organized_by_eu_osha';
+  $handler->display->display_options['fields']['field_organized_by_eu_osha']['field'] = 'field_organized_by_eu_osha';
+  $handler->display->display_options['fields']['field_organized_by_eu_osha']['ui_name'] = 'Organized by EU-OSHA';
+  $handler->display->display_options['fields']['field_organized_by_eu_osha']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_organized_by_eu_osha']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_organized_by_eu_osha']['type'] = 'boolean_yes_no';
+  $handler->display->display_options['fields']['field_organized_by_eu_osha']['settings'] = array(
+    'format' => 'yes-no',
+    'custom_on' => '',
+    'custom_off' => '',
+    'reverse' => 0,
+  );
   /* Field: Event in AMP */
   $handler->display->display_options['fields']['field_event_in_amp']['id'] = 'field_event_in_amp';
   $handler->display->display_options['fields']['field_event_in_amp']['table'] = 'field_data_field_event_in_amp';
@@ -1203,7 +1225,6 @@ function osha_events_views_default_views() {
   $handler->display->display_options['filters']['status']['expose']['label'] = 'Published';
   $handler->display->display_options['filters']['status']['expose']['operator'] = 'status_op';
   $handler->display->display_options['filters']['status']['expose']['identifier'] = 'status';
-  $handler->display->display_options['filters']['status']['expose']['required'] = TRUE;
   $handler->display->display_options['filters']['status']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
@@ -1230,6 +1251,35 @@ function osha_events_views_default_views() {
   $handler->display->display_options['filters']['field_color_value']['expose']['operator'] = 'field_color_value_op';
   $handler->display->display_options['filters']['field_color_value']['expose']['identifier'] = 'field_color_value';
   $handler->display->display_options['filters']['field_color_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+  );
+  /* Filter criterion: Content: Organized by EU-OSHA (field_organized_by_eu_osha) */
+  $handler->display->display_options['filters']['field_organized_by_eu_osha_value']['id'] = 'field_organized_by_eu_osha_value';
+  $handler->display->display_options['filters']['field_organized_by_eu_osha_value']['table'] = 'field_data_field_organized_by_eu_osha';
+  $handler->display->display_options['filters']['field_organized_by_eu_osha_value']['field'] = 'field_organized_by_eu_osha_value';
+  $handler->display->display_options['filters']['field_organized_by_eu_osha_value']['value'] = array(
+    'all' => 'all',
+    0 => '0',
+    1 => '1',
+  );
+  $handler->display->display_options['filters']['field_organized_by_eu_osha_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_organized_by_eu_osha_value']['expose']['operator_id'] = 'field_organized_by_eu_osha_value_op';
+  $handler->display->display_options['filters']['field_organized_by_eu_osha_value']['expose']['label'] = 'Organized by EU-OSHA';
+  $handler->display->display_options['filters']['field_organized_by_eu_osha_value']['expose']['operator'] = 'field_organized_by_eu_osha_value_op';
+  $handler->display->display_options['filters']['field_organized_by_eu_osha_value']['expose']['identifier'] = 'field_organized_by_eu_osha_value';
+  $handler->display->display_options['filters']['field_organized_by_eu_osha_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
@@ -1278,7 +1328,7 @@ function osha_events_views_default_views() {
     t('Agency role'),
     t('Agency initial contact'),
     t('Agency rep confirmed'),
-    t('Organised by'),
+    t('Organized by EU-OSHA'),
     t('Event in AMP'),
     t('Agency contact / reply'),
     t('Comments'),

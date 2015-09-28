@@ -7,9 +7,6 @@ function search_and_replace_undo_page($node = NULL) {
   if (!empty($node)) {
     $query->condition('sr.nid', $node->nid);
   }
-  else {
-    $query->condition('sr.nid', NULL);
-  }
   $results = $query->extend('PagerDefault')
     ->limit(25)
     ->orderBy('sr.id', 'desc')

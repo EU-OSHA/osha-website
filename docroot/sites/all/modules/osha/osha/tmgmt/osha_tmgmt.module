@@ -1273,6 +1273,9 @@ function osha_tmgmt_form_tmgmt_ui_entity_translation_review_form_alter(&$form, &
       $form['#submit'] = array();
     }
 
+    // CW-1851 Remove previous comment saved in local storage (unless item state is 2)
+    $form_protect_js_file = drupal_get_path('module', 'osha_tmgmt').'/js/osha_tmgmt_form_protect_clean.js';
+
     // Alter form on different states.
     switch ($job_item->state) {
       case OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidationRequired:
@@ -1313,6 +1316,8 @@ function osha_tmgmt_form_tmgmt_ui_entity_translation_review_form_alter(&$form, &
           '#validate' => array('osha_tmgmt_require_content_validation_validate'),
           '#access' => user_access('set job item to require content validation state'),
         );
+        // CW-1851 Make sure comments are not lost
+        $form_protect_js_file = drupal_get_path('module', 'osha_tmgmt').'/js/osha_tmgmt_form_protect.js';
         break;
 
       case TMGMT_JOB_ITEM_STATE_ABORTED:
@@ -1330,6 +1335,8 @@ function osha_tmgmt_form_tmgmt_ui_entity_translation_review_form_alter(&$form, &
         $form['actions']['#access'] = FALSE;
         break;
     }
+    // CW-1851 Make sure comments are not lost or clean previous comment
+    $form['#attached']['js'][] = $form_protect_js_file;
   }
 }
 

@@ -3969,7 +3969,7 @@ and (max-width: 1237px) {
 }
 
 .view-highlight .links.inline{
-	background: url("../images/flecha.png") no-repeat scroll right 18% transparent!important;
+	background: url("../images/flecha.png") no-repeat scroll right 50% transparent!important;
 	color: #003399;
 	float: right;
 	font-family: "Open Sans Condensed",sans-serif;

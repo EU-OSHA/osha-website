@@ -16,8 +16,8 @@ if (module_exists('osha_newsletter') && isset($variables['element'])) {
     }
     $campaign_id = NULL;
     if (isset($source->field_campaign_id[LANGUAGE_NONE][0]['value'])) {
-      // disable campaign tracking from the web newsletter
-      // $campaign_id = $source->field_campaign_id[LANGUAGE_NONE][0]['value'];
+      // CW-1896 enable campaign tracking from the web newsletter
+      $campaign_id = $source->field_campaign_id[LANGUAGE_NONE][0]['value'];
     };
     $elements = array();
     $last_section = NULL;

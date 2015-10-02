@@ -5,7 +5,7 @@
  */
 ?>
 <?php if($page): ?>
-  <h1 id="page-title" class="page__title title"><?php print t('Publications');?></h1>
+  <div id="page-title" class="page__title title"><?php print t('Publications');?></div>
   <div class="view-header back"><?php print l(t('Back to publications and filter'), 'tools-and-publications/publications'); ?></div>
 <?php endif; ?>
 

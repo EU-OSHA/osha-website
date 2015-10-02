@@ -872,9 +872,9 @@ function osha_calls_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'title',
         'settings' => array(
-          'title_class' => '',
+          'title_class' => 'calls-teaser-title',
           'title_link' => 'content',
-          'title_style' => 'div',
+          'title_style' => 'h2',
         ),
         'type' => 'title_linked',
         'weight' => 1,
@@ -983,7 +983,6 @@ function osha_calls_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Activity');
-  t('Archived');
   t('Author');
   t('Automatically calculated when saving. The count of characters found in the default language text (English).');
   t('Automatically calculated when saving. The count of pages of text in the default language (English).');
@@ -993,6 +992,7 @@ function osha_calls_field_default_field_instances() {
   t('Description');
   t('Documents');
   t('Expiration date');
+  t('Marked as outdated');
   t('Name');
   t('Page count');
   t('Publication date');

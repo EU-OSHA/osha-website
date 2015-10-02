@@ -1,5 +1,5 @@
 <?php if($page): ?>
-  <h1 id="page-title" class="page__title title">&nbsp;</h1>
+  <div id="page-title" class="page__title title">&nbsp;</div>
   <div class="view-header back"><?php print l(t('Back to latest posts'), 'tools-and-publications/blog'); ?></div>
 <?php endif; ?>
 

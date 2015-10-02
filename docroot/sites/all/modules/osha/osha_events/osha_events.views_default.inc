@@ -1428,9 +1428,9 @@ function osha_events_views_default_views() {
   $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title_field']['type'] = 'title_linked';
   $handler->display->display_options['fields']['title_field']['settings'] = array(
-    'title_style' => '_none',
+    'title_style' => 'h2',
     'title_link' => 'content',
-    'title_class' => '',
+    'title_class' => 'events-teaser-title',
   );
   /* Field: Indexed Multilingual Content: Country */
   $handler->display->display_options['fields']['field_country_code']['id'] = 'field_country_code';
@@ -1709,9 +1709,9 @@ function osha_events_views_default_views() {
   $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title_field']['type'] = 'title_linked';
   $handler->display->display_options['fields']['title_field']['settings'] = array(
-    'title_style' => '_none',
+    'title_style' => 'h2',
     'title_link' => 'content',
-    'title_class' => 'title',
+    'title_class' => 'title events-teaser-title',
   );
   /* Field: Indexed Multilingual Content: The main body text */
   $handler->display->display_options['fields']['body']['id'] = 'body';

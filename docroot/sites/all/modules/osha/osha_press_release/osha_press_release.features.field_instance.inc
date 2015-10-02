@@ -1273,7 +1273,7 @@ function osha_press_release_field_default_field_instances() {
         'settings' => array(
           'title_class' => '',
           'title_link' => '',
-          'title_style' => 'div',
+          'title_style' => 'h1',
         ),
         'type' => 'title_linked',
         'weight' => 1,
@@ -1333,9 +1333,9 @@ function osha_press_release_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'title',
         'settings' => array(
-          'title_class' => '',
+          'title_class' => 'press-release-teaser-title',
           'title_link' => 'content',
-          'title_style' => 'div',
+          'title_style' => 'h2',
         ),
         'type' => 'title_linked',
         'weight' => 1,

@@ -9,7 +9,7 @@
 ?>
 
 <?php if($page): ?>
-  <h1 id="page-title" class="page__title title"><?php print t('Seminar reports');?></h1>
+  <div id="page-title" class="page__title title"><?php print t('Seminar reports');?></div>
   <div class="view-header back"><?php print l(t('Back to seminars'), 'node/2427'); ?></div>
 <?php endif; ?>
 

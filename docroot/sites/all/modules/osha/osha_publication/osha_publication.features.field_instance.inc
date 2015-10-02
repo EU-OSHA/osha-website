@@ -1816,9 +1816,9 @@ function osha_publication_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'osha_publication',
         'settings' => array(
-          'title_class' => '',
+          'title_class' => 'publication-teaser-title',
           'title_link' => 'content',
-          'title_style' => '_none',
+          'title_style' => 'h2',
         ),
         'type' => 'publication_title_linked',
         'weight' => 1,

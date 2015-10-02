@@ -3714,6 +3714,7 @@ a.button-submit {
 	padding-left: 0.8em;
 	height:1%;
 	overflow:hidden;
+	clear:both;
 }
 
 .view-calls.view-id-calls .views-field-title-field{
@@ -6055,7 +6056,7 @@ a.tabs-primary__tab-link{
 
 /* BLOG LIST */
 
-#block-views-blog-block-1 h2{
+#block-views-blog-block-1 h2.block__title.block-title{
 	font-family: 'Open Sans Condensed';
 	font-style: normal;
 	font-weight: bold;
@@ -8280,4 +8281,38 @@ body.page-entity-collection h1#page-title{
 .page-node-1436 p#tmgmt-20{
 	clear:both;
 }
+
+
+/*CW-1895*/
+
+.news-teaser-title, 
+.events-teaser-title, 
+.press-release-teaser-title, 
+.field-content.infographics-teaser-title,
+.field-content.blog-teaser-title,
+.vacancies-teaser-title,
+.calls-teaser-title{
+	background:none;
+	font-size: 1em;
+    padding: 0px;
+    margin: 0px;
+}
+
+.highlight-teaser-title{
+    background: none;
+    font-size: 2em;
+    padding: 0px;
+    margin: 0px;
+    line-height: 20px;
+    font-weight: bold;
+}
+
+.view-press-releases .highlight-teaser-title{
+	font-size: 1.4em;
+}
+
+.field-content.infographics-teaser-title{
+    line-height: 20px;
+}
+
 

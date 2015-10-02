@@ -1363,14 +1363,6 @@ body.page-search-publications aside.sidebars_first {
 	
 }
 /*Latest posts*/
-#block-views-blog-block-1 h2 {
-	background: url("");
-	background-color: #039;
-	border: none;
-	color: #FFF;
-	font-size: 1.6em;
-	padding: 0 0.6em 0 0.6em;
-}
 #block-views-blog-block-1 .views-field-field-image {
 	float: none;
 	margin-right: 0em;

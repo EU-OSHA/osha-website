@@ -79,7 +79,7 @@ function osha_authentication_get_role_and_section_from_dn($group_dn) {
   // LDAP group DN patterns:
   // * cn=SECTION_ROLE,ou=MainSite,ou=Sites,dc=osha,dc=europa,dc=eu
   // * cn=ROLE,ou=MainSite,ou=Sites,dc=osha,dc=europa,dc=eu
-  if (preg_match('/[A-Z\d\_]*/i', $group_dn, $ldap_group_cn, 0, 3) && count($ldap_group_cn) == 1) {
+  if (preg_match('/[A-Z\d\-\_]*/i', $group_dn, $ldap_group_cn, 0, 3) && count($ldap_group_cn) == 1) {
     $section_id = NULL;
     $role = NULL;
     if (strpos($ldap_group_cn[0], '_') > 0) {

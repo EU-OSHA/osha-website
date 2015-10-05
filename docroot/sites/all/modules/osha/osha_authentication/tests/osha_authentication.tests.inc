@@ -581,4 +581,14 @@ class OSHALDAPTests {
       throw new Exception('Section was not imported.');
     }
   }
+
+  function test_serbo_croatian_cv_group_name() {
+    $group = osha_authentication_get_role_and_section_from_dn('cn=SERBO-CROATIAN_CV,ou=MainSite,ou=Sites,dc=osha,dc=europa,dc=eu');
+    if ($group[0] != 'Content Validator') {
+      throw new Exception('Wrong group');
+    }
+    if ($group[2] != 'SERBO-CROATIAN') {
+      throw new Exception('Wrong language');
+    }
+  }
 }

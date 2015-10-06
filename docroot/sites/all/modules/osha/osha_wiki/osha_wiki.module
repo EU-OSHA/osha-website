@@ -113,7 +113,7 @@ function osha_wiki_notopic_content() {
 function osha_wiki_block_content_template($wiki_page_url, $find_more) {
   $wiki_name = t('OSHwiki');
   $goto_wiki = t('Go to OSHwiki');
-  $content = '<div class="OSHWiki"><div class="separatorOsHWiki">&nbsp;</div><div id="OSHWikiDivTit"><div class="imgOSHWiki"><img src="/sites/all/themes/osha_frontend/images/OSHwiki.png" alt="" width="26" height="26" /></div><div class="OSHWikiTitle">'
+  $content = '<div class="OSHWiki"><div class="separatorOsHWiki">&nbsp;</div><div id="OSHWikiDivTit"><div class="imgOSHWiki"><img src="/sites/all/themes/osha_frontend/images/OSHwiki.png" alt="OSHwiki" width="26" height="26" /></div><div class="OSHWikiTitle">'
     .$wiki_name
     .'</div></div><div class="p2">'
     .$find_more

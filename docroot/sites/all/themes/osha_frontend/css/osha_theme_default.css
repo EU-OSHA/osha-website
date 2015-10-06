@@ -5,11 +5,19 @@ body {
  overflow-y:scroll;
 }
 
-h1#page-title{
-	background: url("../images/separator_home.jpg") repeat-x scroll 100% 110% rgba(0, 0, 0, 0);
-	padding-top:0.1em;
+#page-title{
+	background: url("../images/separator_home.jpg") repeat-x scroll 100% 125% rgba(0, 0, 0, 0);
 	padding-bottom:0.3em;
 	font-weight:bold;
+	font-family: 'Open Sans Condensed';
+	font-style: normal;
+	font-size: 2.15em;
+	color: #003399;
+	letter-spacing: -0.75px;
+	margin-bottom: 4px;
+	padding-bottom: 0.2em;
+	line-height: 1.2em;
+	padding-top: 0.1em;
 }
 
 
@@ -725,6 +733,13 @@ span.date-display-single{
 .node-publication.node-teaser {
 	background: url("../images/back-tit-blue.png") repeat-x scroll 0 100% transparent;
     margin-bottom: 0.5em;
+}
+
+.node-publication.node-teaser .field-name-title-field h2{
+    background: none;
+    font-size: 1em;
+    padding: 0;
+    margin: 0;
 }
 
 .node-publication.node-teaser .field-name-title-field a{
@@ -2955,7 +2970,7 @@ font-weight: normal;
 	margin-top:1em;
 }
 
-.node-news.view-mode-full .field-name-title-field{
+.node-news.view-mode-full .field-name-title-field h1{
 	border-bottom: 0 none !important;
 	color: #003399;
 	font-family: Open Sans Condensed !important;
@@ -3452,8 +3467,15 @@ a.button-submit {
 	clear: both;
 }
 
-#block-views-seminars-block .view-seminars ul li  .views-field-title-field a{
-	font-size:1.5em;
+#block-views-seminars-block .view-seminars ul li h2{
+	background: none;
+    font-size: 1em;
+    padding: 0px;
+    margin:0px;
+}
+
+#block-views-seminars-block .view-seminars ul li .views-field-title-field a{
+	 font-size:1.5em;
 	 font-family: "Open Sans Condensed",sans-serif!important;
 	 border-bottom:0px!important;
 	 font-weight:bold;
@@ -4504,7 +4526,7 @@ article.node-press-release{
 	padding-left:0.8em;
 }
 
-article.node-press-release .field-name-title-field {
+article.node-press-release .field-name-title-field h1{
 	border-bottom: 0 none !important;
 	color: #003399;
 	font-family: Open Sans Condensed !important;
@@ -4546,7 +4568,6 @@ article.node-press-release .field-name-body.field-type-text-with-summary p{
 	border-bottom: 0 none !important;
 	color: #003399;
 	font-family: Open Sans Condensed !important;
-	font-size: 0.9em;
 	font-weight: normal;
 	line-height: 1.1em;
 	margin: 0 0 0em;
@@ -6240,7 +6261,7 @@ a.tabs-primary__tab-link{
 	padding-right:1em;
 }
 
-.node-blog .field-name-title-field{
+.node-blog .field-name-title-field h1{
 	color: #003399;
 	font-family: 'Open Sans Condensed',sans-serif;
 	font-size: 1.5em;
@@ -8296,6 +8317,7 @@ body.page-entity-collection h1#page-title{
 	font-size: 1em;
     padding: 0px;
     margin: 0px;
+    line-height: 25px;
 }
 
 .highlight-teaser-title{
@@ -8303,16 +8325,19 @@ body.page-entity-collection h1#page-title{
     font-size: 2em;
     padding: 0px;
     margin: 0px;
-    line-height: 20px;
+    line-height: 30px;
     font-weight: bold;
+    padding-bottom: 10px;
 }
 
 .view-press-releases .highlight-teaser-title{
-	font-size: 1.4em;
+	font-size: 1em;
 }
 
 .field-content.infographics-teaser-title{
     line-height: 20px;
 }
 
-
+.node-seminar .field-name-title-field h1{
+	font-size: 1.5em;
+}

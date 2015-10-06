@@ -2673,6 +2673,7 @@ function osha_views_default_views() {
   $handler->display->display_options['arguments']['field_tags_code_value']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_tags_code_value']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['field_tags_code_value']['limit'] = '0';
+  $handler->display->display_options['arguments']['field_tags_code_value']['break_phrase'] = TRUE;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -2762,6 +2763,7 @@ function osha_views_default_views() {
   $handler->display->display_options['arguments']['field_tags_code_value']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_tags_code_value']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['field_tags_code_value']['limit'] = '0';
+  $handler->display->display_options['arguments']['field_tags_code_value']['break_phrase'] = TRUE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Type */

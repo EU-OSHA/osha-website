@@ -61,6 +61,31 @@ function osha_tmgmt_menu() {
 }
 
 /**
+ * Implements hook_filter_info().
+ */
+function osha_tmgmt_filter_info() {
+  $filters['osha_tmgmt_filter_id'] = array(
+    'title' => t('Removes tmgmt id attribute to prevent duplicate id in same page'),
+    'process callback' => '_osha_tmgmt_filter_html_id',
+    'weight' => 11,
+  );
+  return $filters;
+}
+
+/**
+ * Implements callback_filter_process().
+ */
+function _osha_tmgmt_filter_html_id($text) {
+  $html_dom = filter_dom_load($text);
+  $xpath = new DOMXPath($html_dom);
+  $nodes = $xpath->query("//*[contains(@id, 'tmgmt')]");;
+  foreach ($nodes as $node) {
+    $node->removeAttribute('id');
+  }
+  return filter_dom_serialize($html_dom);
+}
+
+/**
  * Implements hook_menu_alter().
  */
 function osha_tmgmt_menu_alter(&$items) {

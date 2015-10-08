@@ -746,10 +746,18 @@ function osha_file_view($file, $view_mode, $langcode) {
  */
 function osha_url_outbound_alter(&$path, $original_path, $path_language) {
   // CW-1899: use the English url_alias when node is not translated
-  if (strpos($path, 'node/') == 0) {
+  if (strpos($path, 'node/') === 0) {
     $en_path_alias = drupal_lookup_path('alias', $path, 'en');
     if ($en_path_alias) {
       $path = $en_path_alias;
+    }
+  } else if (strpos($path, 'entity-collection/') === 0) {
+    $eid = substr($path, 18);
+    if ($eid && is_numeric($eid)) {
+      $entity_collection = entity_load_single('entity_collection', $eid);
+      if ($entity_collection) {
+        $path = 'entity-collection/'.$entity_collection->name;
+      }
     }
   }
   return;

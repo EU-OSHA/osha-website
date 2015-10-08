@@ -60,3 +60,12 @@ function osha_migration_update_7002() {
       redirect_save($redirect);
     }
 }
+
+/**
+ * CW-1908 Load redirects using sql
+ */
+function osha_migration_update_7003() {
+  $data_path = drupal_realpath(drupal_get_path('module', 'osha_migration') . '/data/match_redirect.sql');
+  drush_set_option('file', $data_path);
+  drush_invoke('sql-query');
+}

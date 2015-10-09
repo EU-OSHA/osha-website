@@ -70,10 +70,10 @@
                         $links = $doc->getElementsByTagName('a');
                         foreach ($links as $link) {
                           $url = $link->getAttribute('href');
-                          $link->setAttribute('href', $url . 
-                              (parse_url($url, PHP_URL_QUERY) ? '&' : '?') . 
-                              'pk_campaign=' . $variables['elements']['#campaign_id']
-                          );
+                          $url_comp = parse_url($url);
+                          if (preg_match('/(osha.europa.eu|napofilm.net|oshwiki.eu|oiraproject.eu|esener.eu|healthy-workplaces.eu|healthyworkplaces.eu|localhost|eu-osha.bilbomatica.es)/', $url_comp['host'])) {
+                            $link->setAttribute('href', $url.($url_comp['query']?'&':'?').'pk_campaign=' . $variables['elements']['#campaign_id']);
+                          }
                         }
                         if ($links->length>0) {
                           $body_text = $doc->saveHTML();

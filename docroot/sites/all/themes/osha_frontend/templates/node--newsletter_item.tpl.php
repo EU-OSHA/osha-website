@@ -65,11 +65,15 @@
             'external' => TRUE
           ));
         } else {
-          print l($node->title, url('node/' . $node->nid, array('absolute' => TRUE)), array(
-            'attributes' => array('style' => 'color: #003399; text-decoration: none; font-family:Arial, sans-serif; font-size: 12px; font-weight: bold;'),
-            'query' => $url_query,
-            'external' => TRUE
-          ));
+          if ($node->type == 'newsletter_article' && empty($node->body)) {
+            print $node->title;
+          } else {
+            print l($node->title, url('node/' . $node->nid, array('absolute' => TRUE)), array(
+              'attributes' => array('style' => 'color: #003399; text-decoration: none; font-family:Arial, sans-serif; font-size: 12px; font-weight: bold;'),
+              'query' => $url_query,
+              'external' => TRUE
+            ));
+          }
         }
         ?>
       </td>

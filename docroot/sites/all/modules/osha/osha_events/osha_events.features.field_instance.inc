@@ -15,7 +15,6 @@ function osha_events_field_default_field_instances() {
     'bundle' => 'events',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Mandatory',
     'display' => array(
       'default' => array(
         'label' => 'hidden',

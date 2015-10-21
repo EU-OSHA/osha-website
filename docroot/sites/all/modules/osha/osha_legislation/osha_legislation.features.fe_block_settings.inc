@@ -37,7 +37,7 @@ function osha_legislation_default_fe_block_settings() {
       ),
       'osha_frontend' => array(
         'region' => 'content',
-        'status' => 1,
+        'status' => 0,
         'theme' => 'osha_frontend',
         'weight' => 0,
       ),

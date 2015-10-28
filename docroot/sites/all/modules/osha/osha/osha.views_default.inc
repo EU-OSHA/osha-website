@@ -2702,6 +2702,11 @@ function osha_views_default_views() {
   $handler->display->display_options['arguments']['field_tags_code_value']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['field_tags_code_value']['limit'] = '0';
   $handler->display->display_options['arguments']['field_tags_code_value']['break_phrase'] = TRUE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -2722,6 +2727,11 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'note_to_editor' => 'note_to_editor',
   );
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['path'] = 'export/notetoeditor';
 
   /* Display: Press Contact */
@@ -2749,6 +2759,11 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['field_contact_type_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_contact_type_tid']['vocabulary'] = 'contact_type';
   $handler->display->display_options['filters']['field_contact_type_tid']['hierarchy'] = 1;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['path'] = 'export/presscontact';
 
   /* Display: Additional resources */
@@ -2805,6 +2820,11 @@ function osha_views_default_views() {
     'press_release' => 'press_release',
     'publication' => 'publication',
   );
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['path'] = 'export/list-additional-resources/%';
   $translatables['hcw_data_export'] = array(
     t('Master'),

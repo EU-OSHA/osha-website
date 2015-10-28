@@ -56,3 +56,11 @@ Disallow: /?q=user/password/
 Disallow: /?q=user/register/
 Disallow: /?q=user/login/
 Disallow: /?q=user/logout/
+# Extra languages (MC-18)
+Disallow: /sq/
+Disallow: /bs/
+Disallow: /mk/
+Disallow: /ru/
+Disallow: /sr/
+Disallow: /sh/
+Disallow: /tr/

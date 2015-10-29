@@ -643,6 +643,14 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['workbench_moderation_moderated_type']['field'] = 'workbench_moderation_moderated_type';
   $handler->display->display_options['filters']['workbench_moderation_moderated_type']['value'] = '0';
   $handler->display->display_options['filters']['workbench_moderation_moderated_type']['group'] = 2;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type_1']['id'] = 'type_1';
+  $handler->display->display_options['filters']['type_1']['table'] = 'node';
+  $handler->display->display_options['filters']['type_1']['field'] = 'type';
+  $handler->display->display_options['filters']['type_1']['operator'] = 'not in';
+  $handler->display->display_options['filters']['type_1']['value'] = array(
+    'dvs_survey' => 'dvs_survey',
+  );
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'main_page');

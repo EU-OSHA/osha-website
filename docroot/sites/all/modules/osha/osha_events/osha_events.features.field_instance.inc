@@ -1551,9 +1551,8 @@ Grey - Only web or not attendance',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'i18n_taxonomy',
         'settings' => array(),
-        'type' => 'i18n_taxonomy_term_reference_plain',
+        'type' => 'hidden',
         'weight' => 22,
       ),
       'highlights_item' => array(

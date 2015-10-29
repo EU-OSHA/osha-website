@@ -15,6 +15,7 @@ function osha_events_field_default_field_instances() {
     'bundle' => 'events',
     'default_value' => NULL,
     'deleted' => 0,
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -1211,9 +1212,8 @@ Grey - Only web or not attendance',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
+        'type' => 'hidden',
         'weight' => 24,
       ),
       'highlights_item' => array(

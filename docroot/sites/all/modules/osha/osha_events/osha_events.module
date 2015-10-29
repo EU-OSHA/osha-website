@@ -73,12 +73,14 @@ function osha_events_form_validate($form, &$form_state) {
     if (empty($values['field_start_date'][LANGUAGE_NONE][0]['value2'])) {
       form_set_error('field_start_date', 'You have to add an End Date .');
     }
+    /* Disabled since MC-9
     if (empty($values['field_website_of_event'][LANGUAGE_NONE][0]['title'])) {
       form_set_error('field_website_of_event', 'You have to add a Web site name.');
     }
     if (empty($values['field_website_of_event'][LANGUAGE_NONE][0]['url'])) {
       form_set_error('field_website_of_event', 'You have to add a Web site url.');
     }
+    */
     if (empty($values['field_organization'][LANGUAGE_NONE][0]['value'])) {
       form_set_error('field_organization', 'You have to add an Organization.');
     }

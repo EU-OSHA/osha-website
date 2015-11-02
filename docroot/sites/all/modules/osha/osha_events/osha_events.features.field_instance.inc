@@ -752,7 +752,7 @@ Grey - Only web or not attendance',
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'size' => 120,
+        'size' => 255,
       ),
       'type' => 'text_textfield',
       'weight' => 23,

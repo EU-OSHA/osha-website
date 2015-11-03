@@ -1047,6 +1047,7 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['filters']['field_publication_date_value']['field'] = 'field_publication_date_value';
   $handler->display->display_options['filters']['field_publication_date_value']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_publication_date_value']['granularity'] = 'second';
   $handler->display->display_options['filters']['field_publication_date_value']['default_date'] = 'now';
   $handler->display->display_options['path'] = 'services/hw/news';
 
@@ -1195,13 +1196,6 @@ function osha_views_default_views() {
   $handler->display->display_options['fields']['field_agency_rep_confirmed']['table'] = 'field_data_field_agency_rep_confirmed';
   $handler->display->display_options['fields']['field_agency_rep_confirmed']['field'] = 'field_agency_rep_confirmed';
   $handler->display->display_options['fields']['field_agency_rep_confirmed']['label'] = 'agency_rep_confirmed';
-  /* Field: Content: Organised by */
-  $handler->display->display_options['fields']['field_organised_by']['id'] = 'field_organised_by';
-  $handler->display->display_options['fields']['field_organised_by']['table'] = 'field_data_field_organised_by';
-  $handler->display->display_options['fields']['field_organised_by']['field'] = 'field_organised_by';
-  $handler->display->display_options['fields']['field_organised_by']['label'] = 'organised_by';
-  $handler->display->display_options['fields']['field_organised_by']['type'] = 'i18n_taxonomy_term_reference_plain';
-  $handler->display->display_options['fields']['field_organised_by']['delta_offset'] = '0';
   /* Field: Content: Satisfaction rate */
   $handler->display->display_options['fields']['field_satisfaction_rate']['id'] = 'field_satisfaction_rate';
   $handler->display->display_options['fields']['field_satisfaction_rate']['table'] = 'field_data_field_satisfaction_rate';
@@ -1316,6 +1310,7 @@ function osha_views_default_views() {
     11 => 0,
     12 => 0,
   );
+  $handler->display->display_options['filters']['field_start_date_value']['granularity'] = 'second';
   $handler->display->display_options['filters']['field_start_date_value']['form_type'] = 'date_text';
   $handler->display->display_options['filters']['field_start_date_value']['year_range'] = '1900:+3';
   /* Filter criterion: Content: Date - end date (field_start_date:value2) */
@@ -1343,6 +1338,7 @@ function osha_views_default_views() {
     12 => 0,
     13 => 0,
   );
+  $handler->display->display_options['filters']['field_start_date_value2']['granularity'] = 'second';
   $handler->display->display_options['filters']['field_start_date_value2']['form_type'] = 'date_text';
   $handler->display->display_options['path'] = 'services/hw/events';
 
@@ -1507,6 +1503,7 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['filters']['field_publication_date_value']['field'] = 'field_publication_date_value';
   $handler->display->display_options['filters']['field_publication_date_value']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_publication_date_value']['granularity'] = 'second';
   $handler->display->display_options['filters']['field_publication_date_value']['default_date'] = 'now';
   $handler->display->display_options['path'] = 'services/hw/pr';
 
@@ -1715,6 +1712,7 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['filters']['field_publication_date_value']['field'] = 'field_publication_date_value';
   $handler->display->display_options['filters']['field_publication_date_value']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_publication_date_value']['granularity'] = 'second';
   $handler->display->display_options['filters']['field_publication_date_value']['default_date'] = 'now';
   /* Filter criterion: Content: File (field_file:language) */
   $handler->display->display_options['filters']['language']['id'] = 'language';
@@ -1887,6 +1885,7 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['filters']['field_publication_date_value']['field'] = 'field_publication_date_value';
   $handler->display->display_options['filters']['field_publication_date_value']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_publication_date_value']['granularity'] = 'second';
   $handler->display->display_options['filters']['field_publication_date_value']['default_date'] = 'now';
   $handler->display->display_options['path'] = 'services/hw/news1';
 
@@ -2038,13 +2037,6 @@ function osha_views_default_views() {
   $handler->display->display_options['fields']['field_agency_rep_confirmed']['table'] = 'field_data_field_agency_rep_confirmed';
   $handler->display->display_options['fields']['field_agency_rep_confirmed']['field'] = 'field_agency_rep_confirmed';
   $handler->display->display_options['fields']['field_agency_rep_confirmed']['label'] = 'agency_rep_confirmed';
-  /* Field: Content: Organised by */
-  $handler->display->display_options['fields']['field_organised_by']['id'] = 'field_organised_by';
-  $handler->display->display_options['fields']['field_organised_by']['table'] = 'field_data_field_organised_by';
-  $handler->display->display_options['fields']['field_organised_by']['field'] = 'field_organised_by';
-  $handler->display->display_options['fields']['field_organised_by']['label'] = 'organised_by';
-  $handler->display->display_options['fields']['field_organised_by']['type'] = 'i18n_taxonomy_term_reference_plain';
-  $handler->display->display_options['fields']['field_organised_by']['delta_offset'] = '0';
   /* Field: Content: Satisfaction rate */
   $handler->display->display_options['fields']['field_satisfaction_rate']['id'] = 'field_satisfaction_rate';
   $handler->display->display_options['fields']['field_satisfaction_rate']['table'] = 'field_data_field_satisfaction_rate';
@@ -2152,6 +2144,7 @@ function osha_views_default_views() {
     11 => 0,
     12 => 0,
   );
+  $handler->display->display_options['filters']['field_start_date_value']['granularity'] = 'second';
   $handler->display->display_options['filters']['field_start_date_value']['form_type'] = 'date_text';
   $handler->display->display_options['filters']['field_start_date_value']['year_range'] = '1900:+3';
   $handler->display->display_options['path'] = 'services/hw/events1';
@@ -2336,6 +2329,7 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['filters']['field_publication_date_value']['field'] = 'field_publication_date_value';
   $handler->display->display_options['filters']['field_publication_date_value']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_publication_date_value']['granularity'] = 'second';
   $handler->display->display_options['filters']['field_publication_date_value']['default_date'] = 'now';
   $handler->display->display_options['path'] = 'services/hw/pr1';
 
@@ -2560,6 +2554,7 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['filters']['field_publication_date_value']['field'] = 'field_publication_date_value';
   $handler->display->display_options['filters']['field_publication_date_value']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_publication_date_value']['granularity'] = 'second';
   $handler->display->display_options['filters']['field_publication_date_value']['default_date'] = 'now';
   /* Filter criterion: Content: File (field_file:language) */
   $handler->display->display_options['filters']['language']['id'] = 'language';
@@ -2609,7 +2604,6 @@ function osha_views_default_views() {
     t('agency_role'),
     t('agency_initial_contact'),
     t('agency_rep_confirmed'),
-    t('organised_by'),
     t('satisfaction_rate'),
     t('event_in_amp'),
     t('agency_contact_reply'),

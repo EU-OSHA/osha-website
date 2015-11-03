@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * Delete nodes of old bureau migration.
+ * De register old migration.
+ * Register new migrations.
+ */
+function osha_eguide_update_7001() {
+//  $data_path = drupal_realpath(drupal_get_path('module', 'osha_migration') . '/data/node-export-5468.drupal');
+//  $data = file_get_contents($data_path);
+//  require_once drupal_get_path('module', 'node_export') . '/formats/drupal.inc';
+//  $nodes = node_export_drupal_import($data);
+//  $nid = $nodes[0]->nid;
+//  $node = workbench_moderation_node_current_load(node_load($nid));
+//
+//  foreach ($nodes[0]->body as $lang => $body) {
+//    $node->body[$lang][0]['value'] = $body[0]['value'];
+//    $node->body[$lang][0]['safe_value'] = $body[0]['safe_value'];
+//  }
+//  node_save($node);
+}

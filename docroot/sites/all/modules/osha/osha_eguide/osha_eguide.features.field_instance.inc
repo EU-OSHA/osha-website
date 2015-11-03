@@ -56,12 +56,9 @@ function osha_eguide_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'hidden',
-        'module' => 'text',
-        'settings' => array(
-          'trim_length' => 600,
-        ),
-        'type' => 'text_summary_or_trimmed',
-        'weight' => 0,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
       ),
     ),
     'entity_type' => 'node',
@@ -130,9 +127,10 @@ function osha_eguide_field_default_field_instances() {
         'weight' => 0,
       ),
       'teaser' => array(
-        'label' => 'above',
+        'label' => 'hidden',
+        'module' => 'i18n_field',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'i18n_list_default',
         'weight' => 0,
       ),
     ),
@@ -201,10 +199,11 @@ function osha_eguide_field_default_field_instances() {
         'weight' => 0,
       ),
       'teaser' => array(
-        'label' => 'above',
+        'label' => 'hidden',
+        'module' => 'link',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
+        'type' => 'link_default',
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'node',
@@ -218,7 +217,7 @@ function osha_eguide_field_default_field_instances() {
         'configurable_class' => 0,
         'configurable_title' => 0,
         'rel' => '',
-        'target' => 'default',
+        'target' => '_blank',
         'title' => '',
       ),
       'display' => array(
@@ -232,10 +231,10 @@ function osha_eguide_field_default_field_instances() {
         'profile' => '',
       ),
       'rel_remove' => 'default',
-      'title' => 'optional',
+      'title' => 'value',
       'title_label_use_field_label' => 0,
       'title_maxlength' => 128,
-      'title_value' => '',
+      'title_value' => 'Online version',
       'url' => 0,
       'user_register_form' => FALSE,
       'validate_url' => 1,
@@ -299,10 +298,17 @@ function osha_eguide_field_default_field_instances() {
         'weight' => 0,
       ),
       'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
+        'label' => 'hidden',
+        'module' => 'languagefield',
+        'settings' => array(
+          'format' => array(
+            'iso' => 'iso',
+            'name' => 0,
+            'name_native' => 0,
+          ),
+        ),
+        'type' => 'language_default',
+        'weight' => 1,
       ),
     ),
     'entity_type' => 'node',
@@ -370,10 +376,11 @@ function osha_eguide_field_default_field_instances() {
         'weight' => 0,
       ),
       'teaser' => array(
-        'label' => 'above',
+        'label' => 'hidden',
+        'module' => 'link',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
+        'type' => 'link_default',
+        'weight' => 3,
       ),
     ),
     'entity_type' => 'node',
@@ -401,10 +408,10 @@ function osha_eguide_field_default_field_instances() {
         'profile' => '',
       ),
       'rel_remove' => 'default',
-      'title' => 'optional',
+      'title' => 'value',
       'title_label_use_field_label' => 0,
       'title_maxlength' => 128,
-      'title_value' => '',
+      'title_value' => 'Download',
       'url' => 0,
       'user_register_form' => FALSE,
       'validate_url' => 1,
@@ -419,6 +426,79 @@ function osha_eguide_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-e_guide-title_field'
+  $field_instances['node-e_guide-title_field'] = array(
+    'bundle' => 'e_guide',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 5,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'title_field',
+    'label' => 'Title',
+    'required' => TRUE,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'hide_label' => array(
+        'entity' => FALSE,
+        'page' => FALSE,
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => -5,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Body');
@@ -426,6 +506,7 @@ function osha_eguide_field_default_field_instances() {
   t('Download link');
   t('Language');
   t('Online version');
+  t('Title');
 
   return $field_instances;
 }

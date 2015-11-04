@@ -27,4 +27,13 @@ function osha_eguide_install() {
     }
   }
   node_save($node);
+
+  // Render the teaser in nodeblock
+  db_update('nodeblock')
+    ->fields(array(
+      'enabled' => 1,
+      'view_mode' => 'teaser',
+    ))
+    ->condition('nid', $node->nid)
+    ->execute();
 }

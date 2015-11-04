@@ -25,8 +25,8 @@ function osha_eguide_install() {
         'source' => 'en',
       ));
     }
+    node_save($node);
   }
-  node_save($node);
 
   // Render the teaser in nodeblock
   db_update('nodeblock')
@@ -35,5 +35,17 @@ function osha_eguide_install() {
       'view_mode' => 'teaser',
     ))
     ->condition('nid', $node->nid)
+    ->execute();
+
+  // Assign block to region and page
+  db_update('block')
+    ->fields(array(
+      'status' => 1,
+      'weight' => 38,
+      'region' => 'content',
+      'visibility' => 1,
+      'pages' => 'tools-and-publications/e-guide-managing-stress-and-psychosocial-risks',
+    ))
+    ->condition('delta', $node->nid)
     ->execute();
 }

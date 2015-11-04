@@ -2728,6 +2728,17 @@ function osha_views_default_views() {
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'HCW Data Export - Press Contact';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Nodequeue: Queue */
+  $handler->display->display_options['relationships']['nodequeue_rel']['id'] = 'nodequeue_rel';
+  $handler->display->display_options['relationships']['nodequeue_rel']['table'] = 'node';
+  $handler->display->display_options['relationships']['nodequeue_rel']['field'] = 'nodequeue_rel';
+  $handler->display->display_options['relationships']['nodequeue_rel']['required'] = TRUE;
+  $handler->display->display_options['relationships']['nodequeue_rel']['limit'] = 1;
+  $handler->display->display_options['relationships']['nodequeue_rel']['names'] = array(
+    'press_contacts_queue' => 'press_contacts_queue',
+    'publication_queue' => 0,
+    'featured_press_release' => 0,
+  );
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -2820,6 +2831,7 @@ function osha_views_default_views() {
     t('HCW Data Export - Note to editor'),
     t('Press Contact'),
     t('HCW Data Export - Press Contact'),
+    t('queue'),
     t('Additional resources'),
     t('Content referencing Content from field_aditional_resources'),
   );

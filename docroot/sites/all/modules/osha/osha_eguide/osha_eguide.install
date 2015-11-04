@@ -25,6 +25,6 @@ function osha_eguide_install() {
         'source' => 'en',
       ));
     }
-    node_save($node);
   }
+  node_save($node);
 }

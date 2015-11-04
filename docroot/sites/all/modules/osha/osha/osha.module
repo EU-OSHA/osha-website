@@ -930,6 +930,13 @@ function osha_export_node($node) {
       $node->$field_name = $w->$field_name->value();
     }
   }
+  // For press contacts with tid 2969 (type press contact) - add the nodqueue order.
+  if ($node->type == 'press_contact'
+    && !empty($node->field_contact_type)
+    && $w->field_contact_type->value()[0]->tid == 2969) {
+    $order = nodequeue_queue_position(5, $node->nid);
+    $node->nodequeue_order = $order;
+  }
   $export = json_encode($node, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
   print $export;
   drupal_exit();

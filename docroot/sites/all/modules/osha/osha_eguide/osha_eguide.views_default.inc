@@ -86,6 +86,59 @@ function osha_eguide_views_default_views() {
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
+
+  /* Display: Attachment */
+  $handler = $view->new_display('attachment', 'Attachment', 'attachment_1');
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Country */
+  $handler->display->display_options['fields']['field_country_code']['id'] = 'field_country_code';
+  $handler->display->display_options['fields']['field_country_code']['table'] = 'field_data_field_country_code';
+  $handler->display->display_options['fields']['field_country_code']['field'] = 'field_country_code';
+  $handler->display->display_options['fields']['field_country_code']['label'] = '';
+  $handler->display->display_options['fields']['field_country_code']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_country_code']['element_label_colon'] = FALSE;
+  /* Field: Field: Language */
+  $handler->display->display_options['fields']['field_language']['id'] = 'field_language';
+  $handler->display->display_options['fields']['field_language']['table'] = 'field_data_field_language';
+  $handler->display->display_options['fields']['field_language']['field'] = 'field_language';
+  $handler->display->display_options['fields']['field_language']['label'] = '';
+  $handler->display->display_options['fields']['field_language']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_language']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_language']['settings'] = array(
+    'format' => array(
+      'iso' => 'iso',
+      'name' => 0,
+      'name_native' => 0,
+    ),
+  );
+  /* Field: Content: External URL */
+  $handler->display->display_options['fields']['field_external_url']['id'] = 'field_external_url';
+  $handler->display->display_options['fields']['field_external_url']['table'] = 'field_data_field_external_url';
+  $handler->display->display_options['fields']['field_external_url']['field'] = 'field_external_url';
+  $handler->display->display_options['fields']['field_external_url']['label'] = '';
+  $handler->display->display_options['fields']['field_external_url']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_external_url']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_external_url']['click_sort_column'] = 'url';
+  /* Field: Field: Link */
+  $handler->display->display_options['fields']['field_link']['id'] = 'field_link';
+  $handler->display->display_options['fields']['field_link']['table'] = 'field_data_field_link';
+  $handler->display->display_options['fields']['field_link']['field'] = 'field_link';
+  $handler->display->display_options['fields']['field_link']['label'] = '';
+  $handler->display->display_options['fields']['field_link']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_link']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_link']['click_sort_column'] = 'url';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = 'Find the e-guide version that is relevant for you by filtering by country and / or language';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  $handler->display->display_options['displays'] = array(
+    'block' => 'block',
+    'default' => 0,
+  );
   $translatables['e_guides'] = array(
     t('Master'),
     t('ACCESS TO THE NATIONAL VERSIONS OF THE E-GUIDE'),
@@ -96,6 +149,8 @@ function osha_eguide_views_default_views() {
     t('Asc'),
     t('Desc'),
     t('Block'),
+    t('Attachment'),
+    t('Find the e-guide version that is relevant for you by filtering by country and / or language'),
   );
   $export['e_guides'] = $view;
 

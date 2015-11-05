@@ -5,3 +5,12 @@
  */
 
 include_once 'osha_eguide.features.inc';
+
+/**
+ * Implements hook_form_alter().
+ */
+function osha_eguide_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-e-guides-block') {
+    $form['field_country_code_value']['#chosen'] = FALSE;
+  }
+}

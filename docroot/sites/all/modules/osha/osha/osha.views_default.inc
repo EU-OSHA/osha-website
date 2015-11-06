@@ -1310,7 +1310,6 @@ function osha_views_default_views() {
     11 => 0,
     12 => 0,
   );
-  $handler->display->display_options['filters']['field_start_date_value']['granularity'] = 'second';
   $handler->display->display_options['filters']['field_start_date_value']['form_type'] = 'date_text';
   $handler->display->display_options['filters']['field_start_date_value']['year_range'] = '1900:+3';
   /* Filter criterion: Content: Date - end date (field_start_date:value2) */
@@ -1338,7 +1337,6 @@ function osha_views_default_views() {
     12 => 0,
     13 => 0,
   );
-  $handler->display->display_options['filters']['field_start_date_value2']['granularity'] = 'second';
   $handler->display->display_options['filters']['field_start_date_value2']['form_type'] = 'date_text';
   $handler->display->display_options['path'] = 'services/hw/events';
 

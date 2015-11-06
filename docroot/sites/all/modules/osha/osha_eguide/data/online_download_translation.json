@@ -1,0 +1,127 @@
+[
+  {
+    "language": "en",
+    "online": "Online version",
+    "download": "Download"
+  },
+  {
+    "language": "bg",
+    "online": "Онлайн версия",
+    "download": "Изтегляне"
+  },
+  {
+    "language": "cs",
+    "online": "On-line verze",
+    "download": "Stáhnout"
+  },
+  {
+    "language": "da",
+    "online": "Onlineudgave",
+    "download": "Hent"
+  },
+  {
+    "language": "de",
+    "online": "Online-Version",
+    "download": "Herunterladen"
+  },
+  {
+    "language": "et",
+    "online": "Veebiversioon",
+    "download": "Laadi alla"
+  },
+  {
+    "language": "es",
+    "online": "Versión en línea",
+    "download": "Descargar"
+  },
+  {
+    "language": "fr",
+    "online": "Version en ligne",
+    "download": "Télécharger"
+  },
+  {
+    "language": "el",
+    "online": "Ηλεκτρονική έκδοση",
+    "download": "Μεταφορτώστε"
+  },
+  {
+    "language": "hr",
+    "online": "mrežne verzije",
+    "download": "Preuzimanje"
+  },
+  {
+    "language": "is",
+    "online": "Útgáfa á Netinu",
+    "download": "Sækja"
+  },
+  {
+    "language": "it",
+    "online": "Versione online",
+    "download": "Scarica"
+  },
+  {
+    "language": "lv",
+    "online": "Tiešsaistes versija",
+    "download": "Lejupielādēt"
+  },
+  {
+    "language": "lt",
+    "online": "Internetinė versija",
+    "download": "Atsisiųsti"
+  },
+  {
+    "language": "hu",
+    "online": "Online verzió",
+    "download": "Letöltés"
+  },
+  {
+    "language": "mt",
+    "online": "Verżjoni onlajn",
+    "download": "Niżżel"
+  },
+  {
+    "language": "nl",
+    "online": "onlineversie",
+    "download": "download"
+  },
+  {
+    "language": "no",
+    "online": "Nettutgave",
+    "download": "Last ned"
+  },
+  {
+    "language": "pl",
+    "online": "Wersja online",
+    "download": "Pobierz"
+  },
+  {
+    "language": "pt",
+    "online": "Versão em linha",
+    "download": "Descarregar"
+  },
+  {
+    "language": "ro",
+    "online": "Versiunea online",
+    "download": "Descărcare"
+  },
+  {
+    "language": "sk",
+    "online": "Online verzia",
+    "download": "Prevziať"
+  },
+  {
+    "language": "sl",
+    "online": "Spletna različica",
+    "download": "Prenesi"
+  },
+  {
+    "language": "fi",
+    "online": "Verkkoversio",
+    "download": "Lataa"
+  },
+  {
+    "language": "sv",
+    "online": "Onlineversion",
+    "download": "Ladda ner"
+  }
+]

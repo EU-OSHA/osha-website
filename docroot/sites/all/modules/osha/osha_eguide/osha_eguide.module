@@ -5,3 +5,22 @@
  */
 
 include_once 'osha_eguide.features.inc';
+
+/**
+ * Implements hook_form_alter().
+ */
+function osha_eguide_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-e-guides-block') {
+    $q = db_select('field_data_field_country', 'a')
+      ->fields('a', array('field_country_tid'))
+      ->condition('a.bundle', 'e_guide');
+    $results = $q->execute()->fetchCol();
+    $results = array_unique($results);
+
+    foreach ($form['field_country_tid']['#options'] as $key => $country) {
+      if (!in_array($key, $results) && $key != 'All') {
+        unset($form['field_country_tid']['#options'][$key]);
+      }
+    }
+  }
+}

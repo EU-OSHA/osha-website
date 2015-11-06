@@ -33,7 +33,9 @@ function displayDialog(){
         '.node h2 a {color: #039; font-size: 1.1em; line-height: 1.1em; font-weight: bold; text-decoration: none; border: 0}' +
         '.field-name-field-pr-notes-to-editor .field-label {font-weight: bold; margin-top: 1.5em;}' +
         'p {line-height: 1.5em; margin: 0em;}' +
-        '.node-note-to-editor h2 {margin: 0px}' +
+        '.node-note-to-editor h2, .node-infographic h2 {margin: 0px; display: none}' +
+        '.field-name-field-pr-notes-to-editor span {float: left; margin-top: 2px; padding-right: 0.3em}' +
+        '.node-infographic h1 {font-size: 14px; line-height: 1.5em}' +
         '</style>');
 
     //display dialog

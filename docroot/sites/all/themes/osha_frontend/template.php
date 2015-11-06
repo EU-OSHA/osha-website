@@ -15,7 +15,8 @@ function osha_frontend_links__system_main_menu() {
  * Implements theme_menu_tree__main_menu().
  */
 function osha_frontend_menu_tree__main_menu($variables) {
-  return '<ul id="main-menu-links" class="menu clearfix">'
+  $random = strlen($variables['tree']);
+  return '<ul id="main-menu-links-'.$random.'" class="menu clearfix">'
     . $variables['tree'] . '</ul>';
 }
 

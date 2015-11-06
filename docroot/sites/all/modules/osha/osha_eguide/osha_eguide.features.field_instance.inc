@@ -10,8 +10,8 @@
 function osha_eguide_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-e_guide-field_country_code'
-  $field_instances['node-e_guide-field_country_code'] = array(
+  // Exported field_instance: 'node-e_guide-field_country'
+  $field_instances['node-e_guide-field_country'] = array(
     'bundle' => 'e_guide',
     'default_value' => NULL,
     'deleted' => 0,
@@ -19,10 +19,10 @@ function osha_eguide_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
+        'module' => 'i18n_taxonomy',
         'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 1,
+        'type' => 'i18n_taxonomy_term_reference_link',
+        'weight' => 6,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -55,17 +55,16 @@ function osha_eguide_field_default_field_instances() {
         'weight' => 0,
       ),
       'teaser' => array(
-        'label' => 'hidden',
-        'module' => 'i18n_field',
+        'label' => 'above',
         'settings' => array(),
-        'type' => 'i18n_list_default',
+        'type' => 'hidden',
         'weight' => 0,
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_country_code',
+    'field_name' => 'field_country',
     'label' => 'Country',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
@@ -74,7 +73,7 @@ function osha_eguide_field_default_field_instances() {
       'active' => 1,
       'module' => 'options',
       'settings' => array(
-        'apply_chosen' => '',
+        'apply_chosen' => 1,
       ),
       'type' => 'options_select',
       'weight' => 1,
@@ -423,7 +422,7 @@ function osha_eguide_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => -5,
+      'weight' => 0,
     ),
   );
 

@@ -84,12 +84,17 @@ function osha_eguide_views_default_views() {
   $handler->display->display_options['header']['area']['empty'] = TRUE;
   $handler->display->display_options['header']['area']['content'] = 'Find the e-guide version that is relevant for you by filtering by country and / or language';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
+  /* Relationship: Content: Country (field_country) */
+  $handler->display->display_options['relationships']['field_country_tid']['id'] = 'field_country_tid';
+  $handler->display->display_options['relationships']['field_country_tid']['table'] = 'field_data_field_country';
+  $handler->display->display_options['relationships']['field_country_tid']['field'] = 'field_country_tid';
   /* Field: Content: Country */
-  $handler->display->display_options['fields']['field_country_code']['id'] = 'field_country_code';
-  $handler->display->display_options['fields']['field_country_code']['table'] = 'field_data_field_country_code';
-  $handler->display->display_options['fields']['field_country_code']['field'] = 'field_country_code';
-  $handler->display->display_options['fields']['field_country_code']['label'] = '';
-  $handler->display->display_options['fields']['field_country_code']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_country']['id'] = 'field_country';
+  $handler->display->display_options['fields']['field_country']['table'] = 'field_data_field_country';
+  $handler->display->display_options['fields']['field_country']['field'] = 'field_country';
+  $handler->display->display_options['fields']['field_country']['label'] = '';
+  $handler->display->display_options['fields']['field_country']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_country']['type'] = 'taxonomy_term_reference_plain';
   /* Field: Field: Language */
   $handler->display->display_options['fields']['field_language']['id'] = 'field_language';
   $handler->display->display_options['fields']['field_language']['table'] = 'field_data_field_language';
@@ -102,6 +107,18 @@ function osha_eguide_views_default_views() {
       'name' => 0,
       'name_native' => 0,
     ),
+  );
+  /* Field: Taxonomy term: Flag */
+  $handler->display->display_options['fields']['field_flag']['id'] = 'field_flag';
+  $handler->display->display_options['fields']['field_flag']['table'] = 'field_data_field_flag';
+  $handler->display->display_options['fields']['field_flag']['field'] = 'field_flag';
+  $handler->display->display_options['fields']['field_flag']['relationship'] = 'field_country_tid';
+  $handler->display->display_options['fields']['field_flag']['label'] = '';
+  $handler->display->display_options['fields']['field_flag']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_flag']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_flag']['settings'] = array(
+    'image_style' => 'thumbnail',
+    'image_link' => '',
   );
   /* Field: Content: External URL */
   $handler->display->display_options['fields']['field_external_url']['id'] = 'field_external_url';
@@ -135,16 +152,18 @@ function osha_eguide_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'e_guide' => 'e_guide',
   );
-  /* Filter criterion: Content: Country (field_country_code) */
-  $handler->display->display_options['filters']['field_country_code_value']['id'] = 'field_country_code_value';
-  $handler->display->display_options['filters']['field_country_code_value']['table'] = 'field_data_field_country_code';
-  $handler->display->display_options['filters']['field_country_code_value']['field'] = 'field_country_code_value';
-  $handler->display->display_options['filters']['field_country_code_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_country_code_value']['expose']['operator_id'] = 'field_country_code_value_op';
-  $handler->display->display_options['filters']['field_country_code_value']['expose']['label'] = 'Country';
-  $handler->display->display_options['filters']['field_country_code_value']['expose']['operator'] = 'field_country_code_value_op';
-  $handler->display->display_options['filters']['field_country_code_value']['expose']['identifier'] = 'field_country_code_value';
-  $handler->display->display_options['filters']['field_country_code_value']['expose']['remember_roles'] = array(
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Country (field_country) */
+  $handler->display->display_options['filters']['field_country_tid']['id'] = 'field_country_tid';
+  $handler->display->display_options['filters']['field_country_tid']['table'] = 'field_data_field_country';
+  $handler->display->display_options['filters']['field_country_tid']['field'] = 'field_country_tid';
+  $handler->display->display_options['filters']['field_country_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_country_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_country_tid']['expose']['operator_id'] = 'field_country_tid_op';
+  $handler->display->display_options['filters']['field_country_tid']['expose']['label'] = 'Country';
+  $handler->display->display_options['filters']['field_country_tid']['expose']['operator'] = 'field_country_tid_op';
+  $handler->display->display_options['filters']['field_country_tid']['expose']['identifier'] = 'field_country_tid';
+  $handler->display->display_options['filters']['field_country_tid']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
@@ -159,25 +178,8 @@ function osha_eguide_views_default_views() {
     12 => 0,
     13 => 0,
   );
-  $handler->display->display_options['filters']['field_country_code_value']['group_info']['label'] = 'Country (field_country_code)';
-  $handler->display->display_options['filters']['field_country_code_value']['group_info']['identifier'] = 'field_country_code_value';
-  $handler->display->display_options['filters']['field_country_code_value']['group_info']['group_items'] = array(
-    1 => array(
-      'title' => '',
-      'operator' => 'or',
-      'value' => array(),
-    ),
-    2 => array(
-      'title' => '',
-      'operator' => 'or',
-      'value' => array(),
-    ),
-    3 => array(
-      'title' => '',
-      'operator' => 'or',
-      'value' => array(),
-    ),
-  );
+  $handler->display->display_options['filters']['field_country_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_country_tid']['vocabulary'] = 'country';
   /* Filter criterion: Field: Language (field_language) */
   $handler->display->display_options['filters']['field_language_value']['id'] = 'field_language_value';
   $handler->display->display_options['filters']['field_language_value']['table'] = 'field_data_field_language';
@@ -216,6 +218,7 @@ function osha_eguide_views_default_views() {
     'sh' => 'sh',
     'tr' => 'tr',
   );
+  $handler->display->display_options['filters']['field_language_value']['group'] = 1;
   $handler->display->display_options['filters']['field_language_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_language_value']['expose']['operator_id'] = 'field_language_value_op';
   $handler->display->display_options['filters']['field_language_value']['expose']['label'] = 'Language';
@@ -259,8 +262,8 @@ function osha_eguide_views_default_views() {
     t('Desc'),
     t('Select any filter and click on Apply to see results'),
     t('Find the e-guide version that is relevant for you by filtering by country and / or language'),
+    t('term from field_country'),
     t('Country'),
-    t('Country (field_country_code)'),
     t('Language'),
     t('Language (field_language)'),
     t('Block'),

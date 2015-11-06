@@ -1,14 +1,23 @@
 <?php
 
 /**
- * Create E-Guide Instructions node programmatically
+ * Add e-guide instructions.
+ * Add e-guide nodes.
  */
 function osha_eguide_install() {
+  osha_eguide_add_intructions_node();
+  osha_eguide_add_eguide_nodes();
+}
+
+/**
+ * Create E-Guide Instructions node programmatically
+ */
+function osha_eguide_add_intructions_node() {
   $json_path = drupal_realpath(drupal_get_path('module', 'osha_eguide') . '/data/eguides_instructions.json');
   $data = file_get_contents($json_path);
   $data = json_decode($data);
   $new_node = (object) array(
-    'title' => 'E-Guide Instructions',
+    'title' => 'Instructions',
     'type' => 'article',
     'language' => 'en',
   );
@@ -18,6 +27,7 @@ function osha_eguide_install() {
     $translation_handler = entity_translation_get_handler('node', $node);
     $node->title_field[$row->language][0]['value'] = $row->title;
     $node->body[$row->language][0]['value'] = $row->body;
+    $node->body[$row->language][0]['format'] = 'full_html';
     if ($row->language != 'en') {
       $translation_handler->setTranslation(array(
         'translate' => 0, 'status' => 1, 'uid' => 1,
@@ -28,7 +38,7 @@ function osha_eguide_install() {
     node_save($node);
   }
 
-  // Render the teaser in nodeblock
+// Render the teaser in nodeblock
   db_update('nodeblock')
     ->fields(array(
       'enabled' => 1,
@@ -37,7 +47,7 @@ function osha_eguide_install() {
     ->condition('nid', $node->nid)
     ->execute();
 
-  // Assign block to region and page
+// Assign block to region and page
   db_update('block')
     ->fields(array(
       'status' => 1,
@@ -48,4 +58,29 @@ function osha_eguide_install() {
     ))
     ->condition('delta', $node->nid)
     ->execute();
+}
+
+/**
+ * Create all e-guide nodes programmatically
+ */
+function osha_eguide_add_eguide_nodes() {
+  $json_path = drupal_realpath(drupal_get_path('module', 'osha_eguide') . '/data/e-guide.json');
+  $data = file_get_contents($json_path);
+  $data = json_decode($data);
+  foreach ($data as $eguide) {
+    $title = $eguide->country . ' - ' . $eguide->language;
+    $country = reset(taxonomy_get_term_by_name($eguide->country, 'country'))->tid;
+    $new_node = array(
+      'title' => $title,
+      'type' => 'e_guide',
+      'language' => 'en',
+    );
+    $new_node['field_country'][LANGUAGE_NONE][0]['tid'] = $country;
+    $new_node['field_language'][LANGUAGE_NONE][0]['value'] = $eguide->language;
+    $new_node['field_external_url']['en'][0]['url'] = $eguide->online;
+    $new_node['field_link'][LANGUAGE_NONE][0]['url'] = $eguide->download;
+    $new_node['workbench_access']['3046'] = '3046'; // Section 'Pychosocial risks and stress'
+    $new_node = (object)$new_node;
+    node_save($new_node);
+  }
 }

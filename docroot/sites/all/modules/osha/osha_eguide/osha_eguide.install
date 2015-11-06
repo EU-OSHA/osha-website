@@ -3,10 +3,12 @@
 /**
  * Add e-guide instructions.
  * Add e-guide nodes.
+ * Remove last paragraph from node 1495
  */
 function osha_eguide_install() {
   osha_eguide_add_intructions_node();
   osha_eguide_add_eguide_nodes();
+  osha_eguide_remove_node_last_paragraph();
 }
 
 /**
@@ -83,4 +85,19 @@ function osha_eguide_add_eguide_nodes() {
     $new_node = (object)$new_node;
     node_save($new_node);
   }
+}
+
+/**
+ * Remove 'Access the e-guide to managing stress and psychosocial risks and
+ * select the national version of interest' from node
+ */
+function osha_eguide_remove_node_last_paragraph() {
+  $node = node_load(1495);
+  foreach ($node->body as $lang => $value) {
+    $body = $node->body[$lang][0]['value'];
+    $pos = strrpos($body, '<p');
+    $new_body = substr($body, 0, $pos);
+    $node->body[$lang][0]['value'] = $new_body;
+  }
+  node_save($node);
 }

@@ -2,13 +2,18 @@
 
 /**
  * Add e-guide instructions.
- * Add e-guide nodes.
  * Remove last paragraph from node 1495
  */
 function osha_eguide_install() {
   osha_eguide_add_intructions_node();
-  osha_eguide_add_eguide_nodes();
   osha_eguide_remove_node_last_paragraph();
+}
+
+/**
+ * Add e-guide nodes.
+ */
+function osha_eguide_update_7001() {
+  osha_eguide_add_eguide_nodes();
 }
 
 /**

@@ -62,6 +62,35 @@ function osha_eguide_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'exclude_node_title_content_type_modes_e_guide';
+  $strongarm->value = array(
+    'full' => 'full',
+    'teaser' => 'teaser',
+    'osha_resources' => 'osha_resources',
+    'rss' => 0,
+    'search_index' => 0,
+    'search_result' => 0,
+    'diff_standard' => 0,
+    'osha_slideshow' => 0,
+    'highlights_item' => 0,
+    'newsletter_item' => 0,
+    'osha_wiki' => 0,
+    'print' => 0,
+    'token' => 0,
+    'nodeform' => 0,
+  );
+  $export['exclude_node_title_content_type_modes_e_guide'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'exclude_node_title_content_type_value_e_guide';
+  $strongarm->value = 'all';
+  $export['exclude_node_title_content_type_value_e_guide'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_node__e_guide';
   $strongarm->value = array(
     'view_modes' => array(),

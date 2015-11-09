@@ -22,7 +22,7 @@ function osha_eguide_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'ACCESS TO THE NATIONAL VERSIONS OF THE E-GUIDE';
+  $handler->display->display_options['title'] = 'Access to the national versions of the e-guide';
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
@@ -253,7 +253,7 @@ function osha_eguide_views_default_views() {
   $handler = $view->new_display('block', 'Block', 'block');
   $translatables['e_guides'] = array(
     t('Master'),
-    t('ACCESS TO THE NATIONAL VERSIONS OF THE E-GUIDE'),
+    t('Access to the national versions of the e-guide'),
     t('more'),
     t('Apply'),
     t('Reset'),

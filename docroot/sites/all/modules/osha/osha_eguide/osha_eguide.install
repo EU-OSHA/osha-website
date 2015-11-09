@@ -113,6 +113,8 @@ function osha_eguide_remove_node_last_paragraph() {
 
 /**
  * Translate 'Online version' and 'Download' strings.
+ *
+ * Translate introductions.
  */
 function osha_eguide_translate_strings() {
   $json_path = drupal_realpath(drupal_get_path('module', 'osha_eguide') . '/data/online_download_translation.json');
@@ -122,8 +124,10 @@ function osha_eguide_translate_strings() {
   // Add strings to locale_sources then get the lid.
   $online_en = 'Online version';
   $download_en = 'Download';
+  $intro_en = 'Find the e-guide version that is relevant for you by filtering by country and / or language.';
   locale($online_en);
   locale($download_en);
+  locale($intro_en);
   $q = db_select('locales_source', 'a')
     ->fields('a', array('lid'))
     ->condition('a.textgroup', 'default')
@@ -138,6 +142,13 @@ function osha_eguide_translate_strings() {
     ->execute()
     ->fetchCol();
   $lid2 = reset($q);
+  $q = db_select('locales_source', 'a')
+    ->fields('a', array('lid'))
+    ->condition('a.textgroup', 'default')
+    ->condition('a.source', $intro_en)
+    ->execute()
+    ->fetchCol();
+  $lid3 = reset($q);
 
   foreach ($data as $translation) {
     if ($translation->language == 'en') {
@@ -169,6 +180,20 @@ function osha_eguide_translate_strings() {
         'language' => $translation->language,
         'plural' => 0,
         'translation' => $translation->download,
+      ))
+      ->execute();
+
+    // Translate introduction.
+    db_merge('locales_target')
+      ->key(array(
+        'lid' => $lid3,
+        'language' => $translation->language,
+      ))
+      ->fields(array(
+        'lid' => $lid3,
+        'language' => $translation->language,
+        'plural' => 0,
+        'translation' => $translation->text,
       ))
       ->execute();
   }

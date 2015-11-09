@@ -15,11 +15,21 @@ function osha_eguide_form_alter(&$form, &$form_state, $form_id) {
       ->fields('a', array('field_country_tid'))
       ->condition('a.bundle', 'e_guide');
     $results = $q->execute()->fetchCol();
-    $results = array_unique($results);
 
     foreach ($form['field_country_tid']['#options'] as $key => $country) {
       if (!in_array($key, $results) && $key != 'All') {
         unset($form['field_country_tid']['#options'][$key]);
+      }
+    }
+
+    $q = db_select('field_data_field_language', 'a')
+      ->fields('a', array('field_language_value'))
+      ->condition('a.bundle', 'e_guide');
+    $results = $q->execute()->fetchCol();
+
+    foreach ($form['field_language_value']['#options'] as $key => $country) {
+      if (!in_array($key, $results) && $key != 'All') {
+        unset($form['field_language_value']['#options'][$key]);
       }
     }
   }

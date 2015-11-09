@@ -1,5 +1,7 @@
 jQuery(document).ready(function() {
     jQuery('#edit-field-country-tid').change(filter_language_list);
+    jQuery('#edit-field-language-value').val(Drupal.settings.osha_eguide.lang);
+    jQuery('#edit-submit-e-guides').click();
 });
 
 jQuery(document).ajaxComplete(function(e, xhr, settings) {

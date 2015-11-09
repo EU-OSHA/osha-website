@@ -11,6 +11,8 @@ include_once 'osha_eguide.features.inc';
  */
 function osha_eguide_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-e-guides-block') {
+    global $language;
+
     $q = db_select('field_data_field_country', 'a')
       ->fields('a', array('field_country_tid'))
       ->condition('a.bundle', 'e_guide');
@@ -64,7 +66,10 @@ function osha_eguide_form_alter(&$form, &$form_state, $form_id) {
       );
     }
 
-    drupal_add_js(array('osha_eguide' => array('country_langs' => $country_langs)), 'setting');
+    drupal_add_js(array('osha_eguide' => array(
+      'country_langs' => $country_langs,
+      'lang' => $language->language,
+      )), 'setting');
     drupal_add_js(drupal_get_path('module', 'osha_eguide') . '/js/dropdown_filter.js');
   }
 }

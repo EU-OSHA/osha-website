@@ -4,6 +4,7 @@ OSHA
 Build scripts and source code for the Osha project
 
 [![Build Status](http://ci.edw.ro/buildStatus/icon?job=php-osha)](http://ci.edw.ro/job/php-osha/)
+[![Code Climate](https://codeclimate.com/github/EU-OSHA/osha-website/badges/gpa.svg)](https://codeclimate.com/github/EU-OSHA/osha-website)
 
 ##Pre-requisites
 

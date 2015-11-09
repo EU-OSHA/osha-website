@@ -82,7 +82,7 @@ function osha_eguide_views_default_views() {
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['empty'] = TRUE;
-  $handler->display->display_options['header']['area']['content'] = 'Find the e-guide version that is relevant for you by filtering by country and / or language';
+  $handler->display->display_options['header']['area']['content'] = 'Find the e-guide version that is relevant for you by filtering by country and / or language.';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   /* Relationship: Content: Country (field_country) */
   $handler->display->display_options['relationships']['field_country_tid']['id'] = 'field_country_tid';
@@ -261,7 +261,7 @@ function osha_eguide_views_default_views() {
     t('Asc'),
     t('Desc'),
     t('Select any filter and click on Apply to see results'),
-    t('Find the e-guide version that is relevant for you by filtering by country and / or language'),
+    t('Find the e-guide version that is relevant for you by filtering by country and / or language.'),
     t('term from field_country'),
     t('Country'),
     t('Language'),

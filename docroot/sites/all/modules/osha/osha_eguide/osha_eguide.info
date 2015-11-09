@@ -47,4 +47,4 @@ features[variable][] = node_options_e_guide
 features[variable][] = node_preview_e_guide
 features[variable][] = node_submitted_e_guide
 features[views_view][] = e_guides
-mtime = 1446804912
+mtime = 1446811128

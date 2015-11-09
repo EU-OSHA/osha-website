@@ -14,7 +14,7 @@ function osha_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'addtoany_additional_html';
-  $strongarm->value = '<a class="a2a_button_twitter"></a><a class="a2a_button_facebook"></a><a class="a2a_button_linkedin"></a><a class="a2a_dd" href="http://www.addtoany.com/share_save"></a><a class="a2a_button_print"></a>';
+  $strongarm->value = '<a class="a2a_button_twitter" title="Share on Twitter"></a><a class="a2a_button_facebook" title="Share on Facebook"></a><a class="a2a_button_linkedin" title="Share on LinkedIn"></a><a class="a2a_dd" href="http://www.addtoany.com/share_save" title="Share on others"></a><a class="a2a_button_print" title="Print"></a>';
   $export['addtoany_additional_html'] = $strongarm;
 
   $strongarm = new stdClass();

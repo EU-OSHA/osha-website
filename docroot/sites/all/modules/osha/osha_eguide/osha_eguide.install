@@ -2,18 +2,22 @@
 
 /**
  * Add e-guide instructions.
- * Remove last paragraph from node 1495
+ *
+ * Remove last paragraph from node 1495.
+ *
+ * Add e-guide nodes.
+ *
+ * Translate strings.
  */
 function osha_eguide_install() {
   osha_eguide_add_intructions_node();
   osha_eguide_remove_node_last_paragraph();
-}
 
-/**
- * Add e-guide nodes.
- */
-function osha_eguide_update_7001() {
+  // Revert the feature so that the content type gets created.
+  features_revert_module('osha_eguide');
   osha_eguide_add_eguide_nodes();
+
+  osha_eguide_translate_strings();
 }
 
 /**
@@ -45,7 +49,7 @@ function osha_eguide_add_intructions_node() {
     node_save($node);
   }
 
-// Render the teaser in nodeblock
+  // Render the teaser in nodeblock.
   db_update('nodeblock')
     ->fields(array(
       'enabled' => 1,
@@ -54,7 +58,7 @@ function osha_eguide_add_intructions_node() {
     ->condition('nid', $node->nid)
     ->execute();
 
-// Assign block to region and page
+  // Assign block to region and page.
   db_update('block')
     ->fields(array(
       'status' => 1,
@@ -105,4 +109,67 @@ function osha_eguide_remove_node_last_paragraph() {
     $node->body[$lang][0]['value'] = $new_body;
   }
   node_save($node);
+}
+
+/**
+ * Translate 'Online version' and 'Download' strings.
+ */
+function osha_eguide_translate_strings() {
+  $json_path = drupal_realpath(drupal_get_path('module', 'osha_eguide') . '/data/online_download_translation.json');
+  $data = file_get_contents($json_path);
+  $data = json_decode($data);
+
+  // Add strings to locale_sources then get the lid.
+  $online_en = 'Online version';
+  $download_en = 'Download';
+  locale($online_en);
+  locale($download_en);
+  $q = db_select('locales_source', 'a')
+    ->fields('a', array('lid'))
+    ->condition('a.textgroup', 'default')
+    ->condition('a.source', $online_en)
+    ->execute()
+    ->fetchCol();
+  $lid1 = reset($q);
+  $q = db_select('locales_source', 'a')
+    ->fields('a', array('lid'))
+    ->condition('a.textgroup', 'default')
+    ->condition('a.source', $download_en)
+    ->execute()
+    ->fetchCol();
+  $lid2 = reset($q);
+
+  foreach ($data as $translation) {
+    if ($translation->language == 'en') {
+      continue;
+    }
+
+    // Translate 'Online version'.
+    db_merge('locales_target')
+      ->key(array(
+        'lid' => $lid1,
+        'language' => $translation->language,
+      ))
+      ->fields(array(
+        'lid' => $lid1,
+        'language' => $translation->language,
+        'plural' => 0,
+        'translation' => $translation->online,
+      ))
+      ->execute();
+
+    // Translate 'Download'.
+    db_merge('locales_target')
+      ->key(array(
+        'lid' => $lid2,
+        'language' => $translation->language,
+      ))
+      ->fields(array(
+        'lid' => $lid2,
+        'language' => $translation->language,
+        'plural' => 0,
+        'translation' => $translation->download,
+      ))
+      ->execute();
+  }
 }

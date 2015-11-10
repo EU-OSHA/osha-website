@@ -337,7 +337,7 @@ function osha_resources_field_default_field_instances() {
       'description_field' => 0,
       'entity_translation_sync' => 0,
       'file_directory' => '',
-      'file_extensions' => 'txt pdf ppt',
+      'file_extensions' => 'txt pdf docx zip ppt pptx doc rar odt odp otp',
       'max_filesize' => '',
       'user_register_form' => FALSE,
     ),

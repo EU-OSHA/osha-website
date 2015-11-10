@@ -1,0 +1,248 @@
+<?php
+
+/**
+ * Add e-guide instructions.
+ *
+ * Remove last paragraph from node 1495.
+ *
+ * Add e-guide nodes.
+ *
+ * Translate strings.
+ */
+function osha_eguide_install() {
+  osha_eguide_add_intructions_node();
+  osha_eguide_remove_node_last_paragraph();
+
+  // Revert the feature so that the content type gets created.
+  features_revert_module('osha_eguide');
+  osha_eguide_add_eguide_nodes();
+
+  osha_eguide_translate_strings();
+}
+
+/**
+ * Create E-Guide Instructions node programmatically
+ */
+function osha_eguide_add_intructions_node() {
+  $json_path = drupal_realpath(drupal_get_path('module', 'osha_eguide') . '/data/eguides_instructions.json');
+  $data = file_get_contents($json_path);
+  $data = json_decode($data);
+  $new_node = (object) array(
+    'title' => 'Instructions',
+    'type' => 'article',
+    'language' => 'en',
+  );
+  node_save($new_node);
+  $node = node_load($new_node->nid);
+  foreach ($data as $row) {
+    $translation_handler = entity_translation_get_handler('node', $node);
+    $node->title_field[$row->language][0]['value'] = $row->title;
+    $node->body[$row->language][0]['value'] = $row->body;
+    $node->body[$row->language][0]['format'] = 'full_html';
+    if ($row->language != 'en') {
+      $translation_handler->setTranslation(array(
+        'translate' => 0, 'status' => 1, 'uid' => 1,
+        'language' => $row->language,
+        'source' => 'en',
+      ));
+    }
+    node_save($node);
+  }
+
+  // Render the teaser in nodeblock.
+  db_update('nodeblock')
+    ->fields(array(
+      'enabled' => 1,
+      'view_mode' => 'teaser',
+    ))
+    ->condition('nid', $node->nid)
+    ->execute();
+
+  // Assign block to region and page.
+  db_update('block')
+    ->fields(array(
+      'status' => 1,
+      'weight' => 38,
+      'region' => 'content',
+      'visibility' => 1,
+      'pages' => 'tools-and-publications/e-guide-managing-stress-and-psychosocial-risks',
+    ))
+    ->condition('delta', $node->nid)
+    ->execute();
+}
+
+/**
+ * Create all e-guide nodes programmatically
+ */
+function osha_eguide_add_eguide_nodes() {
+  $json_path = drupal_realpath(drupal_get_path('module', 'osha_eguide') . '/data/e-guide.json');
+  $data = file_get_contents($json_path);
+  $data = json_decode($data);
+  foreach ($data as $eguide) {
+    $title = $eguide->country . ' - ' . $eguide->language;
+    $country = reset(taxonomy_get_term_by_name($eguide->country, 'country'))->tid;
+    $new_node = array(
+      'title' => $title,
+      'type' => 'e_guide',
+      'language' => 'en',
+    );
+    $new_node['field_country'][LANGUAGE_NONE][0]['tid'] = $country;
+    $new_node['field_language'][LANGUAGE_NONE][0]['value'] = $eguide->language;
+    $new_node['field_external_url']['en'][0]['url'] = $eguide->online;
+    $new_node['field_link'][LANGUAGE_NONE][0]['url'] = $eguide->download;
+    $new_node['workbench_access']['3046'] = '3046'; // Section 'Pychosocial risks and stress'
+    $new_node = (object)$new_node;
+    node_save($new_node);
+  }
+}
+
+/**
+ * Remove 'Access the e-guide to managing stress and psychosocial risks and
+ * select the national version of interest' from node
+ */
+function osha_eguide_remove_node_last_paragraph() {
+  $node = node_load(1495);
+  foreach ($node->body as $lang => $value) {
+    $body = $node->body[$lang][0]['value'];
+    $pos = strrpos($body, '<p');
+    $new_body = substr($body, 0, $pos);
+    $node->body[$lang][0]['value'] = $new_body;
+  }
+  node_save($node);
+}
+
+/**
+ * Translate 'Online version' and 'Download' strings.
+ *
+ * Translate introductions.
+ */
+function osha_eguide_translate_strings() {
+  $json_path = drupal_realpath(drupal_get_path('module', 'osha_eguide') . '/data/online_download_translation.json');
+  $data = file_get_contents($json_path);
+  $data = json_decode($data);
+
+  // Add strings to locale_sources then get the lid.
+  $online_en = 'Online version';
+  $download_en = 'Download';
+  $intro_en = 'Find the e-guide version that is relevant for you by filtering by country and / or language.';
+  $intro2_en = 'Access to the national versions of the e-guide';
+  $instructions_en = 'Instructions';
+  locale($online_en);
+  locale($download_en);
+  locale($intro_en);
+  locale($intro2_en);
+  locale($instructions_en);
+  $q = db_select('locales_source', 'a')
+    ->fields('a', array('lid'))
+    ->condition('a.textgroup', 'field')
+    ->condition('a.location', 'field:field_external_url:e_guide:title_value')
+    ->condition('a.source', $online_en)
+    ->execute()
+    ->fetchCol();
+  $lid1 = reset($q);
+  $q = db_select('locales_source', 'a')
+    ->fields('a', array('lid'))
+    ->condition('a.textgroup', 'field')
+    ->condition('a.location', 'field:field_link:e_guide:title_value')
+    ->condition('a.source', $download_en)
+    ->execute()
+    ->fetchCol();
+  $lid2 = reset($q);
+  $q = db_select('locales_source', 'a')
+    ->fields('a', array('lid'))
+    ->condition('a.textgroup', 'default')
+    ->condition('a.source', $intro_en)
+    ->execute()
+    ->fetchCol();
+  $lid3 = reset($q);
+  $q = db_select('locales_source', 'a')
+    ->fields('a', array('lid'))
+    ->condition('a.textgroup', 'default')
+    ->condition('a.source', $intro2_en)
+    ->execute()
+    ->fetchCol();
+  $lid4 = reset($q);
+  $q = db_select('locales_source', 'a')
+    ->fields('a', array('lid'))
+    ->condition('a.textgroup', 'default')
+    ->condition('a.source', $instructions_en)
+    ->execute()
+    ->fetchCol();
+  $lid5 = reset($q);
+
+  foreach ($data as $translation) {
+    if ($translation->language == 'en') {
+      continue;
+    }
+
+    // Translate 'Online version'.
+    db_merge('locales_target')
+      ->key(array(
+        'lid' => $lid1,
+        'language' => $translation->language,
+      ))
+      ->fields(array(
+        'lid' => $lid1,
+        'language' => $translation->language,
+        'plural' => 0,
+        'translation' => $translation->online,
+      ))
+      ->execute();
+
+    // Translate 'Download'.
+    db_merge('locales_target')
+      ->key(array(
+        'lid' => $lid2,
+        'language' => $translation->language,
+      ))
+      ->fields(array(
+        'lid' => $lid2,
+        'language' => $translation->language,
+        'plural' => 0,
+        'translation' => $translation->download,
+      ))
+      ->execute();
+
+    // Translate introduction.
+    db_merge('locales_target')
+      ->key(array(
+        'lid' => $lid3,
+        'language' => $translation->language,
+      ))
+      ->fields(array(
+        'lid' => $lid3,
+        'language' => $translation->language,
+        'plural' => 0,
+        'translation' => $translation->text,
+      ))
+      ->execute();
+
+    // Translate text2.
+    db_merge('locales_target')
+      ->key(array(
+        'lid' => $lid4,
+        'language' => $translation->language,
+      ))
+      ->fields(array(
+        'lid' => $lid4,
+        'language' => $translation->language,
+        'plural' => 0,
+        'translation' => $translation->text2,
+      ))
+      ->execute();
+
+    // Translate 'Instructions'.
+    db_merge('locales_target')
+      ->key(array(
+        'lid' => $lid5,
+        'language' => $translation->language,
+      ))
+      ->fields(array(
+        'lid' => $lid5,
+        'language' => $translation->language,
+        'plural' => 0,
+        'translation' => $translation->instructions,
+      ))
+      ->execute();
+  }
+}

@@ -8366,6 +8366,32 @@ body.page-entity-collection h1#page-title{
 }
 
 .contact-us-ul li{
-   background: url("../images/li_arrow.png") no-repeat scroll 0 50% transparent;
-   padding-left: 1em;
- }
+	background: url("../images/li_arrow.png") no-repeat scroll 0 50% transparent;
+	padding-left: 1em;
+}
+
+#block-views-e-guides-block .view-content .views-row {
+	display: inline-block;
+	border: 1px solid #f1f1f1;
+	border-radius: 5px;
+	padding: 7px 10px;
+	margin: 10px 20px 10px 0;
+	width: 290px;
+	background-color: #f1f1f1;
+}
+
+#block-views-e-guides-block .view-content .views-row .views-field-field-external-url {
+	float: left;
+}
+
+#block-views-e-guides-block .view-content .views-row .views-field-field-link {
+	float: right;
+}
+
+#block-views-e-guides-block .view-display-id-attachment_1 .view-content .views-row {
+	display: block;
+	border: none;
+	border-radius: 0px;
+	width: 100%;
+	background-color: #ffffff;
+}

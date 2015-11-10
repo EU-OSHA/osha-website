@@ -525,7 +525,9 @@ $options['init-modules'] = array(
   'devel_node_access',
   'diff',
   'securepages',
-  'update'
+  'update',
+
+  'osha_eguide',
 );
 
 

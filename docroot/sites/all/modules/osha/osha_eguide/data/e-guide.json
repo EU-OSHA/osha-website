@@ -1,0 +1,206 @@
+[
+  {
+    "country": "Austria",
+    "language": "de",
+    "online": "http://eguides.osha.europa.eu/stress/AT-DE/",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-AT-DE.zip"
+  },
+  {
+    "country": "Belgium",
+    "language": "fr",
+    "online": "http://eguides.osha.europa.eu/stress/BE-FR",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-BE-FR.zip"
+  },
+  {
+    "country": "Belgium",
+    "language": "nl",
+    "online": "http://eguides.osha.europa.eu/stress/BE-NL",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-BE-NL.zip"
+  },
+  {
+    "country": "Bulgaria",
+    "language": "bg",
+    "online": "http://eguides.osha.europa.eu/stress/BG-BG",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-BG-BG.zip"
+  },
+  {
+    "country": "Croatia",
+    "language": "hr",
+    "online": "http://eguides.osha.europa.eu/stress/HR-HR",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-HR-HR.zip"
+  },
+  {
+    "country": "Cyprus",
+    "language": "el",
+    "online": "http://eguides.osha.europa.eu/stress/CY-EL",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-CY-EL.zip"
+  },
+  {
+    "country": "Czech Republic",
+    "language": "cs",
+    "online": "http://eguides.osha.europa.eu/stress/CZ-CS",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-CZ-CS.zip"
+  },
+  {
+    "country": "Denmark",
+    "language": "da",
+    "online": "http://eguides.osha.europa.eu/stress/DK-DA",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-DK-DA.zip"
+  },
+  {
+    "country": "Estonia",
+    "language": "et",
+    "online": "http://eguides.osha.europa.eu/stress/EE-ET",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-EE-ET.zip"
+  },
+  {
+    "country": "Finland",
+    "language": "fi",
+    "online": "http://eguides.osha.europa.eu/stress/FI-FI",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-FI-FI.zip"
+  },
+  {
+    "country": "Finland",
+    "language": "sv",
+    "online": "http://eguides.osha.europa.eu/stress/FI-SV",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-FI-SV.zip"
+  },
+  {
+    "country": "France",
+    "language": "fr",
+    "online": "http://eguides.osha.europa.eu/stress/FR-FR",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-FR-FR.zip"
+  },
+  {
+    "country": "Germany",
+    "language": "de",
+    "online": "http://eguides.osha.europa.eu/stress/DE-DE",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-DE-DE.zip"
+  },
+  {
+    "country": "Greece",
+    "language": "el",
+    "online": "http://eguides.osha.europa.eu/stress/GR-EL",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-GR-EL.zip"
+  },
+  {
+    "country": "Hungary",
+    "language": "hu",
+    "online": "http://eguides.osha.europa.eu/stress/HU-HU",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-HU-HU.zip"
+  },
+  {
+    "country": "Iceland",
+    "language": "is",
+    "online": "http://eguides.osha.europa.eu/stress/IS-IS",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-IS-IS.zip"
+  },
+  {
+    "country": "Ireland",
+    "language": "en",
+    "online": "http://eguides.osha.europa.eu/stress/IE-EN",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-IE-EN.zip"
+  },
+  {
+    "country": "Italy",
+    "language": "it",
+    "online": "http://eguides.osha.europa.eu/stress/IT-IT",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-IT-IT.zip"
+  },
+  {
+    "country": "Latvia",
+    "language": "lv",
+    "online": "http://eguides.osha.europa.eu/stress/LV-LV",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-LV-LV.zip"
+  },
+  {
+    "country": "Lithuania",
+    "language": "lt",
+    "online": "http://eguides.osha.europa.eu/stress/LT-LT",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-LT-LT.zip"
+  },
+  {
+    "country": "Luxembourg",
+    "language": "de",
+    "online": "http://eguides.osha.europa.eu/stress/LU-DE",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-LU-DE.zip"
+  },
+  {
+    "country": "Luxembourg",
+    "language": "fr",
+    "online": "http://eguides.osha.europa.eu/stress/LU-FR",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-LU-FR.zip"
+  },
+  {
+    "country": "Malta",
+    "language": "en",
+    "online": "http://eguides.osha.europa.eu/stress/MT-EN",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-MT-EN.zip"
+  },
+  {
+    "country": "Malta",
+    "language": "mt",
+    "online": "http://eguides.osha.europa.eu/stress/MT-MT",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-MT-MT.zip"
+  },
+  {
+    "country": "Netherlands",
+    "language": "nl",
+    "online": "http://eguides.osha.europa.eu/stress/NL-NL",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-NL-NL.zip"
+  },
+  {
+    "country": "Norway",
+    "language": "no",
+    "online": "http://eguides.osha.europa.eu/stress/NO-NO",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-NO-NO.zip"
+  },
+  {
+    "country": "Poland",
+    "language": "pl",
+    "online": "http://eguides.osha.europa.eu/stress/PO-PL",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-PO-PL.zip"
+  },
+  {
+    "country": "Portugal",
+    "language": "pt",
+    "online": "http://eguides.osha.europa.eu/stress/PT-PT",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-PT-PT.zip"
+  },
+  {
+    "country": "Romania",
+    "language": "ro",
+    "online": "http://eguides.osha.europa.eu/stress/RO-RO",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-RO-RO.zip"
+  },
+  {
+    "country": "Slovakia",
+    "language": "sk",
+    "online": "http://eguides.osha.europa.eu/stress/SK-SK",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-SK-SK.zip"
+  },
+  {
+    "country": "Slovenia",
+    "language": "sl",
+    "online": "http://eguides.osha.europa.eu/stress/SI-SL",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-SI-SL.zip"
+  },
+  {
+    "country": "Spain",
+    "language": "es",
+    "online": "http://eguides.osha.europa.eu/stress/ES-ES",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-ES-ES.zip"
+  },
+  {
+    "country": "Sweden",
+    "language": "sv",
+    "online": "http://eguides.osha.europa.eu/stress/SE-SV",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-SE-SV.zip"
+  },
+  {
+    "country": "United Kingdom",
+    "language": "en",
+    "online": "http://eguides.osha.europa.eu/stress/GB-EN",
+    "download": "http://eguides.osha.europa.eu/stress/eGuide-Stress-GB-EN.zip"
+  }
+]

@@ -126,10 +126,12 @@ function osha_eguide_translate_strings() {
   $download_en = 'Download';
   $intro_en = 'Find the e-guide version that is relevant for you by filtering by country and / or language.';
   $intro2_en = 'Access to the national versions of the e-guide';
+  $instructions_en = 'Instructions';
   locale($online_en);
   locale($download_en);
   locale($intro_en);
   locale($intro2_en);
+  locale($instructions_en);
   $q = db_select('locales_source', 'a')
     ->fields('a', array('lid'))
     ->condition('a.textgroup', 'field')
@@ -160,6 +162,13 @@ function osha_eguide_translate_strings() {
     ->execute()
     ->fetchCol();
   $lid4 = reset($q);
+  $q = db_select('locales_source', 'a')
+    ->fields('a', array('lid'))
+    ->condition('a.textgroup', 'default')
+    ->condition('a.source', $instructions_en)
+    ->execute()
+    ->fetchCol();
+  $lid5 = reset($q);
 
   foreach ($data as $translation) {
     if ($translation->language == 'en') {
@@ -207,6 +216,7 @@ function osha_eguide_translate_strings() {
         'translation' => $translation->text,
       ))
       ->execute();
+
     // Translate text2.
     db_merge('locales_target')
       ->key(array(
@@ -218,6 +228,20 @@ function osha_eguide_translate_strings() {
         'language' => $translation->language,
         'plural' => 0,
         'translation' => $translation->text2,
+      ))
+      ->execute();
+
+    // Translate 'Instructions'.
+    db_merge('locales_target')
+      ->key(array(
+        'lid' => $lid5,
+        'language' => $translation->language,
+      ))
+      ->fields(array(
+        'lid' => $lid5,
+        'language' => $translation->language,
+        'plural' => 0,
+        'translation' => $translation->instructions,
       ))
       ->execute();
   }

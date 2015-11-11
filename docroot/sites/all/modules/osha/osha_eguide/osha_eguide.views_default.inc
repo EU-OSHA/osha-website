@@ -91,6 +91,7 @@ function osha_eguide_views_default_views() {
   $handler->display->display_options['relationships']['field_country_tid']['id'] = 'field_country_tid';
   $handler->display->display_options['relationships']['field_country_tid']['table'] = 'field_data_field_country';
   $handler->display->display_options['relationships']['field_country_tid']['field'] = 'field_country_tid';
+  $handler->display->display_options['relationships']['field_country_tid']['required'] = TRUE;
   /* Field: Content: Country */
   $handler->display->display_options['fields']['field_country']['id'] = 'field_country';
   $handler->display->display_options['fields']['field_country']['table'] = 'field_data_field_country';
@@ -137,10 +138,6 @@ function osha_eguide_views_default_views() {
   $handler->display->display_options['fields']['field_link']['label'] = '';
   $handler->display->display_options['fields']['field_link']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_link']['click_sort_column'] = 'url';
-  /* Sort criterion: Content: Country (field_country_code) */
-  $handler->display->display_options['sorts']['field_country_code_value']['id'] = 'field_country_code_value';
-  $handler->display->display_options['sorts']['field_country_code_value']['table'] = 'field_data_field_country_code';
-  $handler->display->display_options['sorts']['field_country_code_value']['field'] = 'field_country_code_value';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';

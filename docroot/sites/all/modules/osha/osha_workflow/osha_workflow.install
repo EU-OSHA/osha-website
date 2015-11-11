@@ -86,6 +86,24 @@ function osha_workflow_schema() {
         'unsigned' => TRUE,
         'not null' => TRUE,
       ),
+      'approved' => array(
+        'description' => 'NULL not voted, approved or rejected',
+        'type' => 'varchar',
+        'length' => 64,
+        'default' => NULL,
+        'not null' => FALSE,
+      ),
+      'weight' => array(
+        'description' => 'Order of moderation, lowest first',
+        'type' => 'int',
+        'default' => 0,
+        'not null' => TRUE,
+      ),
+      'message' => array(
+        'description' => 'Message log',
+        'type' => 'text',
+        'size' => 'medium',
+      ),
     ),
     'primary key' => array('npmid'),
     'indexes' => array(
@@ -571,4 +589,20 @@ function osha_workflow_update_7008() {
   require_once 'osha_workflow.permissions.inc';
   $role = user_role_load_by_name(OSHA_WORKFLOW_ROLE_REVIEW_MANAGER);
   user_role_grant_permissions($role->rid, osha_workflow_permissions_role_review_manager());
+}
+
+/**
+ * Add approved, weight and message column to pm table.
+ */
+function osha_workflow_update_7009() {
+  $schema = osha_workflow_schema();
+  if (!db_field_exists('osha_workflow_node_project_managers', 'approved')) {
+    db_add_field('osha_workflow_node_project_managers', 'approved', $schema['osha_workflow_node_project_managers']['fields']['approved']);
+  }
+  if (!db_field_exists('osha_workflow_node_project_managers', 'weight')) {
+    db_add_field('osha_workflow_node_project_managers', 'weight', $schema['osha_workflow_node_project_managers']['fields']['weight']);
+  }
+  if (!db_field_exists('osha_workflow_node_project_managers', 'message')) {
+    db_add_field('osha_workflow_node_project_managers', 'message', $schema['osha_workflow_node_project_managers']['fields']['message']);
+  }
 }

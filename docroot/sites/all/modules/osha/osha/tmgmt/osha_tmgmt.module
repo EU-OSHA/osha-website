@@ -1013,6 +1013,8 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
         drupal_set_message('Value was saved');
       }
 
+      $form['actions']['accept']['#value'] = 'Publish';
+
       // For menu links, add a preview link.
       if (isset($form_state['item']) && $form_state['item']->item_type == 'menu_link'
         && user_access('preview layout validation')) {
@@ -1030,9 +1032,8 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
             'language' => language_list()[$form_state['item']->target_language],
           ),
         );
+        $form['actions']['accept']['#value'] = 'Approve layout and publish';
       }
-
-      $form['actions']['accept']['#value'] = 'Publish';
 
       $form['actions']['accept']['#access'] =
         $job_item->state != TMGMT_JOB_ITEM_STATE_ABORTED

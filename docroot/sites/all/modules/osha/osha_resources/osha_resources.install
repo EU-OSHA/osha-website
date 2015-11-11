@@ -3,9 +3,13 @@
 /**
 * MC-23 Create a File node
 */
-function osha_resources_update_7023() {
+function osha_resources_update_7001() {
   $alias = 'themes/dangerous-substances/ds.ppt';
   $title = 'PPT Dangerous substances and risk assessment';
+  $ds_files = 'public://ds';
+  if(!file_exists($ds_files)){
+    drupal_mkdir($ds_files);
+  }
 
   $node = new stdClass();
   $node->type = "file";
@@ -42,7 +46,7 @@ function osha_resources_update_7023() {
     }
 
     if(@fopen($file_path, 'r')){
-      $file = system_retrieve_file($file_path, 'public://ds', TRUE, FILE_EXISTS_REPLACE);
+      $file = system_retrieve_file($file_path, $ds_files, TRUE, FILE_EXISTS_REPLACE);
       if (is_object($file)) {
         $file->status = 1;
         $file->display = 1;

@@ -1,0 +1,66 @@
+<?php
+
+/**
+* MC-23 Create a File node
+*/
+function osha_resources_update_7023() {
+  $alias = 'themes/dangerous-substances/ds.ppt';
+  $title = 'PPT Dangerous substances and risk assessment';
+
+  $node = new stdClass();
+  $node->type = "file";
+  $node->language = 'en';
+  $node->title = $title;
+  $node->path = array('alias' => $alias);
+  $node->uid = 1;
+  $node->status = 1;
+
+  $languages = osha_language_list();
+
+  foreach ($languages as $lng_object) {
+    $language = $lng_object->language;
+
+    // Create title
+    $node->title_field[$language][0]['value'] = $title;
+    $node->title_field[$language][0]['safe_value'] = $title;
+
+    // Insert or update the alias.
+    db_merge('url_alias')
+        ->key(array(
+            'source' => 'node/' . $node->nid,
+            'language' => $language
+        ))
+        ->fields(array('alias' => $alias))
+        ->execute();
+
+    node_save($node);
+
+    // Insert file for each language
+    $file_path = 'https://archive.osha.europa.eu/en/topics/ds/materials/'.$language.'-ds.ppt/at_download/file/'.$language.'_ds.ppt';
+    if($language == 'en'){
+      $file_path = 'https://archive.osha.europa.eu/en/topics/ds/materials/'.$language.'_ds.ppt/at_download/file/'.$language.'_ds.ppt';
+    }
+
+    if(@fopen($file_path, 'r')){
+      $file = system_retrieve_file($file_path, 'public://ds', TRUE, FILE_EXISTS_REPLACE);
+      if (is_object($file)) {
+        $file->status = 1;
+        $file->display = 1;
+      }
+      $node->field_file[$language][0] = (array)$file;
+    }
+
+    $node->translations->data[$language]['entity_type'] = 'node';
+    $node->translations->data[$language]['entity_id'] = $node->nid;
+    $node->translations->data[$language]['language'] = $language;
+    $node->translations->data[$language]['path'] = array('alias' => $alias);
+    $node->translations->data[$language]['source'] = 'en';
+    $node->translations->data[$language]['uid'] = $node->uid;
+    $node->translations->data[$language]['status'] = $node->status;
+    $node->translations->data[$language]['translate'] = 0;
+    $node->translations->data[$language]['created'] = $node->created;
+    $node->translations->data[$language]['changed'] = $node->changed;
+
+    node_save($node);
+  }
+}

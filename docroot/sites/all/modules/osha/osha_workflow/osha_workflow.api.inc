@@ -115,7 +115,23 @@ function osha_workflow_set_project_manager($nid, $uid) {
 }
 
 /**
+ * Insert or update an osha_workflow_node_project_managers entry.
+ */
+function _osha_workflow_pm_save_row($row) {
+  if (is_object($row)) {
+    $row = (array) $row;
+  }
+  if (isset($row['npmid'])) {
+    return drupal_write_record('osha_workflow_node_project_managers', $row, array('npmid'));
+  }
+  else {
+    return drupal_write_record('osha_workflow_node_project_managers', $row);
+  }
+}
+
+/**
  * Get the current project manager of a node.
+ * @deprecated
  *
  * @param int $nid
  *   Node ID
@@ -131,6 +147,27 @@ function osha_workflow_get_project_manager($nid) {
     return $user;
   }
   return NULL;
+}
+
+/**
+ * Get the current project managers votes records of a node.
+ */
+function osha_workflow_get_pms_entries($nid) {
+  return db_select('osha_workflow_node_project_managers', 'npm')
+    ->fields('npm')
+    ->condition('nid', $nid)
+    ->orderBy('weight')
+    ->execute()
+    ->fetchAllAssoc('uid');
+}
+
+function osha_workflow_get_pms_users($nid) {
+  $users = array();
+  $entries = osha_workflow_get_pms_entries($nid);
+  if (!empty($entries)) {
+    $users = user_load_multiple(array_keys($entries));
+  }
+  return $users;
 }
 
 /**
@@ -529,8 +566,13 @@ class OshaWorkflowPermissions {
       if (self::userHasRole(OSHA_WORKFLOW_ROLE_REVIEW_MANAGER, $user)) {
         $node_in_rm_section = osha_workflow_node_in_rm_section($node, $user);
       }
+      $is_pm = FALSE;
+      module_load_include('inc', 'osha_workflow', 'osha_workflow.pm');
+      if (self::userHasRole(OSHA_WORKFLOW_ROLE_PROJECT_MANAGER, $user) && _osha_workflow_node_has_pm($node, $user)) {
+        $is_pm = TRUE;
+      }
       $is_admin = self::userHasRole(OSHA_WORKFLOW_ROLE_ADMINISTRATOR, $user);
-      return $is_admin || $node_in_rm_section;
+      return $is_pm || $is_admin || $node_in_rm_section;
     }
     return FALSE;
   }
@@ -674,6 +716,7 @@ class OshaWorkflowNotifications {
   public static function notifyOnChangeFromDraftToFinalDraft($node) {
     // Get RM of node's section.
     $users = osha_workflow_get_node_rm($node);
+    dpm($users);
     OshaWorkflowNotifications::sendEmail($users, array('node' => $node), 'osha_workflow');
   }
 
@@ -700,7 +743,8 @@ class OshaWorkflowNotifications {
    */
   public static function notifyOnChangeFromDraftOrFinalDraftToBeReviewed($node) {
     $users = osha_workflow_get_node_rm($node);
-    $users[] = osha_workflow_get_project_manager($node->nid);
+    module_load_include('inc', 'osha_workflow', 'osha_workflow.pm');
+    $users[] = _osha_workflow_get_current_pm_approver($node->nid);
 
     OshaWorkflowNotifications::sendEmail($users, array('node' => $node), 'osha_workflow');
   }

@@ -288,6 +288,8 @@ function osha_workflow_permission() {
   $permissions['view osh content tab'] = array('title' => t("View 'Content' tab in My Workbench"));
   $permissions['mark access section as reviewed'] = array('title' => t("Can mark as Reviewed Access section PM"));
 
+  $permissions['assign pm to node'] = array('title' => t("Can assign PM to node"));
+
   return $permissions;
 }
 
@@ -386,7 +388,7 @@ function osha_workflow_node_access($node, $operation, $user) {
 
     /* Project manager */
     // Is assigned as PM to node and node section matches one of PMs.
-    if ($node_in_pm_section && osha_workflow_is_assigned_project_manager($node->nid)) {
+    if ($node_in_pm_section) {
       return NODE_ACCESS_IGNORE;
     }
 

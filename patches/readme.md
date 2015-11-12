@@ -7,6 +7,10 @@ When patching a contrib module, the following steps should be followed:
 
 List of patches (most recent first)
 
+* match_redirect
+  * checks redirect module in match_redirect_url_exists
+  * /patches/match_redirect/match_redirect.patch
+
 * recaptcha
   * Captcha is broken (always falls back and answers are incorrect)
   * /patches/recaptcha/recaptcha_no_preprocess.patch

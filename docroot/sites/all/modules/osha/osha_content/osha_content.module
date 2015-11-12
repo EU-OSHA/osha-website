@@ -57,7 +57,10 @@ function osha_content_node_view($node, $view_mode, $langcode) {
     $value = trim($value);
   });
 
-  $no_exception = (!in_array($node->nid, $exceptions) && !in_array($node->type, $exceptions_types));
+  $no_exception = (
+    in_array($language->language, osha_enabled_language_list()) &&
+    !in_array($node->nid, $exceptions) &&
+    !in_array($node->type, $exceptions_types));
 
   if ($view_mode == 'full' && $no_exception && !isset($_GET['orig_lng'])) {
     // if current language does not match content node language

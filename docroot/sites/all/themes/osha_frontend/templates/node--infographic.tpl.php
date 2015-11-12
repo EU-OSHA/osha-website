@@ -5,7 +5,7 @@
  */
 ?>
 <?php if($page): ?>
-  <h1 id="page-title" class="page__title title">&nbsp;</h1>
+  <div id="page-title" class="page__title title">&nbsp;</div>
   <div class="view-header back"><?php print l(t('Back to Infographics'), 'tools-and-publications/infographics'); ?></div>
 <?php endif; ?>
 

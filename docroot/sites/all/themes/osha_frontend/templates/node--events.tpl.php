@@ -9,7 +9,7 @@
 ?>
 
 <?php if($page): ?>
-  <h1 id="page-title" class="page__title title"><?php print t('OSH events');?></h1>
+  <div id="page-title" class="page__title title"><?php print t('OSH events');?></div>
   <div class="view-header back"><?php print l(t('Back to events'), 'oshevents'); ?></div>
 <?php endif; ?>
 

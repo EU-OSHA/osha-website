@@ -62,9 +62,11 @@ function osha_seminar_field_default_field_instances() {
           'more_text' => 'Read more',
           'summary_handler' => 'full',
           'trim_length' => 250,
+          'trim_link' => FALSE,
           'trim_options' => array(
             'text' => 'text',
           ),
+          'trim_preserve_tags' => '',
           'trim_suffix' => '...',
           'trim_type' => 'chars',
         ),
@@ -1076,9 +1078,9 @@ function osha_seminar_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'title',
         'settings' => array(
-          'title_class' => '',
+          'title_class' => 'seminar-teaser-title',
           'title_link' => 'content',
-          'title_style' => 'h1',
+          'title_style' => 'h2',
         ),
         'type' => 'title_linked',
         'weight' => 1,
@@ -1116,7 +1118,6 @@ function osha_seminar_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Activity');
-  t('Archived');
   t('Automatically calculated when saving. The count of characters found in the default language text (English).');
   t('Automatically calculated when saving. The count of pages of text in the default language (English).');
   t('Body');
@@ -1124,6 +1125,7 @@ function osha_seminar_field_default_field_instances() {
   t('End date');
   t('Expiration date');
   t('Location');
+  t('Marked as outdated');
   t('Page count');
   t('Publication date');
   t('Related resources');

@@ -79,3 +79,28 @@ function osha_events_update_7005() {
     ))->execute();
 }
 
+/**
+ * CW-1893 Update field_organised_by_eu_esha with values form field_organised_by
+ */
+function osha_events_update_7006() {
+  features_revert_module('osha_events');
+  $entities = db_query("SELECT entity_id FROM field_data_field_organised_by");
+  foreach($entities as $entity) {
+    $node = node_load($entity->entity_id);
+    if($node) {
+      $node->field_organized_by_eu_osha[LANGUAGE_NONE][0]['value'] = 1;
+      field_attach_update('node', $node);
+    }
+  }
+  // set field_organized_by_eu_osha to false for the remaining events
+  $entities = db_query("select nid from node where type = 'events' and nid not in (select entity_id from field_data_field_organised_by)");
+  foreach($entities as $entity) {
+    $node = node_load($entity->nid);
+    if($node) {
+      $node->field_organized_by_eu_osha[LANGUAGE_NONE][0]['value'] = 0;
+      field_attach_update('node', $node);
+    }
+  }
+  field_delete_field('field_organised_by');
+}
+

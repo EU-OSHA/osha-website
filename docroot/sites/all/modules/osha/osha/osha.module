@@ -742,6 +742,28 @@ function osha_file_view($file, $view_mode, $langcode) {
 }
 
 /**
+ * Implements hook_url_outbound_alter().
+ */
+function osha_url_outbound_alter(&$path, $original_path, $path_language) {
+  // CW-1899: use the English url_alias when node is not translated
+  if (strpos($path, 'node/') === 0) {
+    $en_path_alias = drupal_lookup_path('alias', $path, 'en');
+    if ($en_path_alias) {
+      $path = $en_path_alias;
+    }
+  } else if (strpos($path, 'entity-collection/') === 0) {
+    $eid = substr($path, 18);
+    if ($eid && is_numeric($eid)) {
+      $entity_collection = entity_load_single('entity_collection', $eid);
+      if ($entity_collection) {
+        $path = 'entity-collection/'.$entity_collection->name;
+      }
+    }
+  }
+  return;
+}
+
+/**
  * Implements hook_url_inbound_alter().
  */
 function osha_url_inbound_alter(&$path, $original_path, $path_language) {
@@ -752,16 +774,13 @@ function osha_url_inbound_alter(&$path, $original_path, $path_language) {
   if (empty($orig_path_source) && empty($orig_path_alias)) {
     $source_en = drupal_lookup_path('source', $original_path, 'en');
     if (!empty($source_en)) {
-      // Pass the current query params to the redirect.
-      $query = drupal_get_query_parameters();
-      drupal_goto($source_en, array('query' => $query), 301);
+      $path = $source_en;
+      return;
     }
   }
   // For images, in migrated content there are images with alias appended
   // with /image_preview - for those, system should serve the image directly.
   $args = arg();
-  $orig_path_alias = drupal_lookup_path('alias', $original_path);
-  $orig_path_source = drupal_lookup_path('source', $original_path);
   if (end($args) == 'image_preview') {
     // If path exists, don't do anything.
     if (empty($orig_path_alias) && empty($orig_path_source)) {

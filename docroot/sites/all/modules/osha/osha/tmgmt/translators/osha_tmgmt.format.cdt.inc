@@ -306,7 +306,7 @@ class OSHATranslatorFileformatCDT extends XMLWriter {
     }
     $targets = $this->getImportedTargets($job);
     if (empty($targets)) {
-      drupal_set_message('No translations processed (missing <Translation> sections?)', 'error');
+      drupal_set_message('No translations processed (missing Translation or TranslationTargetLanguage elements?)', 'error');
       return FALSE;
     }
     return $job;

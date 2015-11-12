@@ -643,6 +643,14 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['workbench_moderation_moderated_type']['field'] = 'workbench_moderation_moderated_type';
   $handler->display->display_options['filters']['workbench_moderation_moderated_type']['value'] = '0';
   $handler->display->display_options['filters']['workbench_moderation_moderated_type']['group'] = 2;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type_1']['id'] = 'type_1';
+  $handler->display->display_options['filters']['type_1']['table'] = 'node';
+  $handler->display->display_options['filters']['type_1']['field'] = 'type';
+  $handler->display->display_options['filters']['type_1']['operator'] = 'not in';
+  $handler->display->display_options['filters']['type_1']['value'] = array(
+    'dvs_survey' => 'dvs_survey',
+  );
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'main_page');
@@ -1039,6 +1047,7 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['filters']['field_publication_date_value']['field'] = 'field_publication_date_value';
   $handler->display->display_options['filters']['field_publication_date_value']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_publication_date_value']['granularity'] = 'second';
   $handler->display->display_options['filters']['field_publication_date_value']['default_date'] = 'now';
   $handler->display->display_options['path'] = 'services/hw/news';
 
@@ -1187,13 +1196,6 @@ function osha_views_default_views() {
   $handler->display->display_options['fields']['field_agency_rep_confirmed']['table'] = 'field_data_field_agency_rep_confirmed';
   $handler->display->display_options['fields']['field_agency_rep_confirmed']['field'] = 'field_agency_rep_confirmed';
   $handler->display->display_options['fields']['field_agency_rep_confirmed']['label'] = 'agency_rep_confirmed';
-  /* Field: Content: Organised by */
-  $handler->display->display_options['fields']['field_organised_by']['id'] = 'field_organised_by';
-  $handler->display->display_options['fields']['field_organised_by']['table'] = 'field_data_field_organised_by';
-  $handler->display->display_options['fields']['field_organised_by']['field'] = 'field_organised_by';
-  $handler->display->display_options['fields']['field_organised_by']['label'] = 'organised_by';
-  $handler->display->display_options['fields']['field_organised_by']['type'] = 'i18n_taxonomy_term_reference_plain';
-  $handler->display->display_options['fields']['field_organised_by']['delta_offset'] = '0';
   /* Field: Content: Satisfaction rate */
   $handler->display->display_options['fields']['field_satisfaction_rate']['id'] = 'field_satisfaction_rate';
   $handler->display->display_options['fields']['field_satisfaction_rate']['table'] = 'field_data_field_satisfaction_rate';
@@ -1499,6 +1501,7 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['filters']['field_publication_date_value']['field'] = 'field_publication_date_value';
   $handler->display->display_options['filters']['field_publication_date_value']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_publication_date_value']['granularity'] = 'second';
   $handler->display->display_options['filters']['field_publication_date_value']['default_date'] = 'now';
   $handler->display->display_options['path'] = 'services/hw/pr';
 
@@ -1707,6 +1710,7 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['filters']['field_publication_date_value']['field'] = 'field_publication_date_value';
   $handler->display->display_options['filters']['field_publication_date_value']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_publication_date_value']['granularity'] = 'second';
   $handler->display->display_options['filters']['field_publication_date_value']['default_date'] = 'now';
   /* Filter criterion: Content: File (field_file:language) */
   $handler->display->display_options['filters']['language']['id'] = 'language';
@@ -1879,6 +1883,7 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['filters']['field_publication_date_value']['field'] = 'field_publication_date_value';
   $handler->display->display_options['filters']['field_publication_date_value']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_publication_date_value']['granularity'] = 'second';
   $handler->display->display_options['filters']['field_publication_date_value']['default_date'] = 'now';
   $handler->display->display_options['path'] = 'services/hw/news1';
 
@@ -2030,13 +2035,6 @@ function osha_views_default_views() {
   $handler->display->display_options['fields']['field_agency_rep_confirmed']['table'] = 'field_data_field_agency_rep_confirmed';
   $handler->display->display_options['fields']['field_agency_rep_confirmed']['field'] = 'field_agency_rep_confirmed';
   $handler->display->display_options['fields']['field_agency_rep_confirmed']['label'] = 'agency_rep_confirmed';
-  /* Field: Content: Organised by */
-  $handler->display->display_options['fields']['field_organised_by']['id'] = 'field_organised_by';
-  $handler->display->display_options['fields']['field_organised_by']['table'] = 'field_data_field_organised_by';
-  $handler->display->display_options['fields']['field_organised_by']['field'] = 'field_organised_by';
-  $handler->display->display_options['fields']['field_organised_by']['label'] = 'organised_by';
-  $handler->display->display_options['fields']['field_organised_by']['type'] = 'i18n_taxonomy_term_reference_plain';
-  $handler->display->display_options['fields']['field_organised_by']['delta_offset'] = '0';
   /* Field: Content: Satisfaction rate */
   $handler->display->display_options['fields']['field_satisfaction_rate']['id'] = 'field_satisfaction_rate';
   $handler->display->display_options['fields']['field_satisfaction_rate']['table'] = 'field_data_field_satisfaction_rate';
@@ -2144,6 +2142,7 @@ function osha_views_default_views() {
     11 => 0,
     12 => 0,
   );
+  $handler->display->display_options['filters']['field_start_date_value']['granularity'] = 'second';
   $handler->display->display_options['filters']['field_start_date_value']['form_type'] = 'date_text';
   $handler->display->display_options['filters']['field_start_date_value']['year_range'] = '1900:+3';
   $handler->display->display_options['path'] = 'services/hw/events1';
@@ -2328,6 +2327,7 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['filters']['field_publication_date_value']['field'] = 'field_publication_date_value';
   $handler->display->display_options['filters']['field_publication_date_value']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_publication_date_value']['granularity'] = 'second';
   $handler->display->display_options['filters']['field_publication_date_value']['default_date'] = 'now';
   $handler->display->display_options['path'] = 'services/hw/pr1';
 
@@ -2552,6 +2552,7 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['filters']['field_publication_date_value']['field'] = 'field_publication_date_value';
   $handler->display->display_options['filters']['field_publication_date_value']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_publication_date_value']['granularity'] = 'second';
   $handler->display->display_options['filters']['field_publication_date_value']['default_date'] = 'now';
   /* Filter criterion: Content: File (field_file:language) */
   $handler->display->display_options['filters']['language']['id'] = 'language';
@@ -2601,7 +2602,6 @@ function osha_views_default_views() {
     t('agency_role'),
     t('agency_initial_contact'),
     t('agency_rep_confirmed'),
-    t('organised_by'),
     t('satisfaction_rate'),
     t('event_in_amp'),
     t('agency_contact_reply'),
@@ -2701,6 +2701,33 @@ function osha_views_default_views() {
   $handler->display->display_options['arguments']['field_tags_code_value']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_tags_code_value']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['field_tags_code_value']['limit'] = '0';
+  $handler->display->display_options['arguments']['field_tags_code_value']['break_phrase'] = TRUE;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+  );
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  /* Filter criterion: Field: Publication date (field_publication_date) */
+  $handler->display->display_options['filters']['field_publication_date_value']['id'] = 'field_publication_date_value';
+  $handler->display->display_options['filters']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
+  $handler->display->display_options['filters']['field_publication_date_value']['field'] = 'field_publication_date_value';
+  $handler->display->display_options['filters']['field_publication_date_value']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_publication_date_value']['group'] = 2;
+  $handler->display->display_options['filters']['field_publication_date_value']['granularity'] = 'second';
+  $handler->display->display_options['filters']['field_publication_date_value']['default_date'] = 'now';
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'events' => 'events',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 2;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -2721,6 +2748,11 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'note_to_editor' => 'note_to_editor',
   );
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['path'] = 'export/notetoeditor';
 
   /* Display: Press Contact */
@@ -2759,6 +2791,11 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['field_contact_type_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_contact_type_tid']['vocabulary'] = 'contact_type';
   $handler->display->display_options['filters']['field_contact_type_tid']['hierarchy'] = 1;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['path'] = 'export/presscontact';
 
   /* Display: Additional resources */
@@ -2801,6 +2838,7 @@ function osha_views_default_views() {
   $handler->display->display_options['arguments']['field_tags_code_value']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_tags_code_value']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['field_tags_code_value']['limit'] = '0';
+  $handler->display->display_options['arguments']['field_tags_code_value']['break_phrase'] = TRUE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Type */
@@ -2814,6 +2852,11 @@ function osha_views_default_views() {
     'press_release' => 'press_release',
     'publication' => 'publication',
   );
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['path'] = 'export/list-additional-resources/%';
   $translatables['hcw_data_export'] = array(
     t('Master'),

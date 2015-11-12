@@ -102,7 +102,12 @@ function match_redirect_init() {
  *   Whether or not the menu item was found.
  */
 function match_redirect_url_exists() {
-  return (bool) menu_get_item();
+  if ((bool) menu_get_item()) return TRUE;
+  if (function_exists('redirect_load_by_source')) {
+    $redirect = redirect_load_by_source(current_path(), $GLOBALS['language']->language, drupal_get_query_parameters());
+    if ($redirect) return TRUE;
+  }
+  return FALSE;
 }
 
 /**

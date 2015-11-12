@@ -1,0 +1,53 @@
+# Save as .codeclimate.yml (note leading .) in project root directory
+languages:
+  Ruby: false
+  JavaScript: true
+  PHP: true
+  Python: false
+exclude_paths:
+- conf/**/*
+- content/**/*
+- drush/**/*
+- patches/**/*
+- results/**/*
+- scripts/**/*
+- scripts/*
+- tests/*
+- tests/**/*
+- docroot/includes/**/*
+- docroot/includes/*
+- docroot/misc/*
+- docroot/misc/**/*
+- docroot/modules/**/*
+- docroot/profiles/**/*
+- docroot/scripts/*
+- docroot/themes/**/*
+- docroot/sites/default/*
+- docroot/sites/all/libraries/**/*
+- docroot/sites/all/modules/contrib/**/*
+- docroot/sites/all/themes/zen/**/*
+- docroot/sites/all/modules/osha/**/*.features.inc
+#- docroot/sites/all/modules/osha/**/*.features.field_base.inc
+#- docroot/sites/all/modules/osha/**/*.features.field_instance.inc
+#- docroot/sites/all/modules/osha/**/*.features.taxonomy.inc
+#- docroot/sites/all/modules/osha/**/*.features.strongarm.inc
+- docroot/sites/all/modules/osha/**/*.features.*.inc
+- docroot/sites/all/modules/osha/**/*.views_default.inc
+- docroot/sites/all/modules/osha/**/*.translations.inc
+- docroot/sites/all/modules/osha/**/*.field_group.inc
+- docroot/sites/all/modules/osha/**/*.facetapi_defaults.inc
+- docroot/sites/all/modules/osha/**/*.strongarm.inc
+- docroot/sites/all/modules/osha/**/*.view.inc
+- docroot/sites/all/modules/osha/**/*.migrate.inc
+- docroot/sites/all/modules/osha/**/*.context.inc
+- docroot/sites/all/modules/osha/**/*.path_breadcrumbs.inc
+- docroot/sites/all/modules/osha/**/*.linkit_profiles.inc
+- docroot/sites/all/modules/osha/eu_captcha/captcha.js
+- docroot/authorize.php
+- docroot/cron.php
+- docroot/index.php
+- docroot/install.php
+- docroot/test.php
+- docroot/update.php
+- docroot/xmlrpc.php
+

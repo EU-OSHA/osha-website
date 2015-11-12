@@ -740,7 +740,7 @@ function search_and_replace_parse_search_results($results, $settings) {
           $start = $pos - $snippet_offset >= 0 ? $pos - $snippet_offset : 0;
           $length = $word_length + 2 * $snippet_offset;
           $snippet = htmlentities(substr($content, $start, $length), ENT_COMPAT, 'UTF-8');
-          $snippet = preg_replace($regexstr, '<strong>' . $match[0] . '</strong>', $snippet);
+          $snippet = preg_replace(htmlentities($regexstr, ENT_COMPAT, 'UTF-8'), '<strong>' . $match[0] . '</strong>', $snippet);
           $text[$field] .= '...' . $snippet . '...';
         }
       }

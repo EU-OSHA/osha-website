@@ -31,4 +31,4 @@
 </div>
 <div id="blogLogo"><img src="/sites/all/themes/osha_frontend/images/logo-blog.png" alt="Blog"></div>
 <div id="europeLogoBlog"><img src="/sites/all/themes/osha_frontend/images/europeLogo.png" alt="Europe Flag"></div>
-<div id="agencyLogoBlog"><a href="<?php echo url('<front>');?>"><img src="/sites/all/themes/osha_frontend/images/eu-osha-logo/EU-OSHA-<?php global $language; print $language->language;?>.png" alt="European Agency for Safety and Health at Work"></a></div>
+<div id="agencyLogoBlog"><a href="<?php echo url('<front>');?>"><img src="/sites/all/themes/osha_frontend/images/eu-osha-logo/EU-OSHA-<?php global $language;print (in_array($language->language, osha_enabled_language_list()))?$language->language:'en';?>.png" alt="European Agency for Safety and Health at Work"></a></div>

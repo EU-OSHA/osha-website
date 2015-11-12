@@ -70,7 +70,7 @@ function osha_publication_url_inbound_alter(&$path, $original_path, $path_langua
     }
     if (!empty($source)) {
       if ($node = menu_get_object('node', 1, $source)) {
-        if ($node->type == 'publication') {
+        if (in_array($node->type, array('publication', 'file'))) {
           global $language;
           $lang = $language->language;
           if (!empty($node->field_file[$lang][0])
@@ -92,7 +92,7 @@ function osha_publication_node_view($node, $view_mode, $langcode) {
   // For publications, the default url should serve the file.
   // if the path ends with /view than should serve the node.
   // see CW-1072
-  if ($node->type != 'publication') {
+  if (!in_array($node->type, array('publication', 'file'))) {
     return;
   }
   $args = arg();

@@ -542,6 +542,19 @@ function osha_tmgmt_node_access($node, $operation, $user) {
       if ($count > 0) {
         return NODE_ACCESS_DENY;
       }
+      if (!empty($node->workbench_moderation['current']->state) && $node->workbench_moderation['current']->state != 'published') {
+        // MC-30 - see if there are unmerged items
+        $query = db_select('tmgmt_job_item')
+          ->fields(NULL, array('tjiid'));
+        $query->condition('state', '4', '<>') // TMGMT_JOB_ITEM_STATE_ABORTED
+          ->condition('item_type', 'node')
+          ->condition('item_id', $node->nid)
+          ->condition('merged', NULL);
+        $count = $query->execute()->rowCount();
+        if ($count > 0) {
+          return NODE_ACCESS_DENY;
+        }
+      }
     }
   }
   return NODE_ACCESS_IGNORE;
@@ -1454,6 +1467,16 @@ function osha_tmgmt_workbench_moderation_transition($node, $old, $new) {
         }
       }
     }
+  } else if (!empty($node->old_vid)) {
+    // MC-30 Search for matching active translation jobs and increment tjitem->vid
+    db_update('tmgmt_job_item')
+      ->expression('vid', $node->vid)
+      ->condition('vid', $node->old_vid)
+      ->condition('item_type', 'node')
+      ->condition('item_id', $node->nid)
+      ->condition('state', TMGMT_JOB_ITEM_STATE_ABORTED, '<>')
+      ->condition('merged', NULL)
+      ->execute();
   }
 }
 

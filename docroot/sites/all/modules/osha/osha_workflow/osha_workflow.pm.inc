@@ -144,7 +144,7 @@ function osha_workflow_pm_reject_submit($form, &$form_submit) {
     $row->approved = 'rejected';
     $row->message = t('!user rejected on !date', array('!user' => $user->name, '!date' => date('d-m-Y H:i:s')));
     _osha_workflow_pm_save_row($row);
-    workbench_moderation_moderate($form['#node'], 'draft');
+    workbench_moderation_moderate($form['#node'], 'final_draft');
   }
   else {
     drupal_set_message('No current approver found.');
@@ -293,6 +293,44 @@ function _osha_workflow_can_edit_pm($node, $account = NULL) {
   }
   return user_access('assign pm to node' ,$account);
 }
+
+/**
+ * Insert or update an osha_workflow_node_project_managers entry.
+ */
+function _osha_workflow_pm_save_row($row) {
+  if (is_object($row)) {
+    $row = (array) $row;
+  }
+  if (isset($row['npmid'])) {
+    return drupal_write_record('osha_workflow_node_project_managers', $row, array('npmid'));
+  }
+  else {
+    return drupal_write_record('osha_workflow_node_project_managers', $row);
+  }
+}
+
+
+/**
+ * Get the current project managers votes records of a node.
+ */
+function osha_workflow_get_pms_entries($nid) {
+  return db_select('osha_workflow_node_project_managers', 'npm')
+    ->fields('npm')
+    ->condition('nid', $nid)
+    ->orderBy('weight')
+    ->execute()
+    ->fetchAllAssoc('uid');
+}
+
+function osha_workflow_get_pms_users($nid) {
+  $users = array();
+  $entries = osha_workflow_get_pms_entries($nid);
+  if (!empty($entries)) {
+    $users = user_load_multiple(array_keys($entries));
+  }
+  return $users;
+}
+
 
 function _osha_workflow_get_current_pm_approver($nid) {
   $entry = _osha_workflow_get_current_pm_approver_entry($nid);

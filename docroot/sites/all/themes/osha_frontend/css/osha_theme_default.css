@@ -1871,7 +1871,7 @@ font-weight: normal;
 
 /*RELATED WIKI IN SECTIONS*/
 
-#related-wiki{
+#related-wiki, .oshwiki-featured-articles{
 	background-color:#e8ecf5;
 	margin-top:0.5em;
 	margin-bottom:1em;
@@ -1883,7 +1883,7 @@ font-weight: normal;
 	background: url("../images/related_wiki_head_big.jpg") no-repeat scroll 0% 53% #003399;
 }
 
-#related-wiki div article{
+#related-wiki .oshwiki-featured-articles article{
 	padding-left:0em;
 	padding-bottom: 0.5em;
 }
@@ -1898,21 +1898,21 @@ font-weight: normal;
 	display: block;
 }
 
-#related-wiki .field-name-title-field{
+#related-wiki .oshwiki-featured-articles .field-name-title-field{
 	background-color:#325bad;
 	color:#FFFFFF;
 	padding-left:2.2em;
 	margin-left:0;
 }
 
-#related-wiki .field.field-name-field-summary.field-type-text-long.field-label-hidden p{
+#related-wiki .oshwiki-featured-articles .field.field-name-field-summary.field-type-text-long.field-label-hidden p{
 	color:#000000;
 	padding-left:3.2em;
 	padding-right:3.2em;
 	font-weight:normal;
 }
 
-#related-wiki .field-name-field-wiki-page-url a{
+#related-wiki .oshwiki-featured-articles .field-name-field-wiki-page-url a{
 	background: url("../images/flecha.png") no-repeat scroll 90% 25% transparent;
 	color: #003399;
 	float: right;
@@ -3178,13 +3178,13 @@ a.button-submit {
 
 /*RELATED WIKI IN SECTIONS*/
 
-#content #related-wiki-get-more{
+#content .oshwiki-featured-articles-get-more{
 	background: url("../images/related_wiki_head.png") no-repeat scroll 0 100% #003399;
     height: 43px;
     width: 100%;
 }
 
-#content #related-wiki-get-more span{
+#content .oshwiki-featured-articles-get-more span{
 	color: #ffffff;
     display: block;
     font-family: "Open Sans Condensed",sans-serif;
@@ -3194,7 +3194,7 @@ a.button-submit {
     padding-top: 0.5em;
 }
 
-#content #related-wiki-get-more  a{
+#content .oshwiki-featured-articles-get-more  a{
 	background: url("../images/flecha.png") no-repeat scroll 85% 30% transparent;
     color: #ffffff;
     float: right;
@@ -3577,51 +3577,6 @@ a.button-submit {
 }
 
 /*END HIGHLIGHS SECTION*/
-
-
-/*Publication tein detail OSHWiki featured articles*/
-
-
-
-#related-wiki-publications .related_wiki_head{
-	background-color: #e9edf6;
-    color: #003399;
-    font-family: Open Sans Condensed;
-    font-weight: bold;
-    margin: 0;
-    padding-bottom: 0.2em;
-    padding-left: 0.5em;
-    padding-top: 0.2em;
-}
-
-#related-wiki-publications .related_wiki_head span{
-	 color: #003399;
-    font-family: Open Sans Condensed;
-    font-size: 1.35em;
-    font-weight: bold;
-}
-
-#related-wiki-publications div article{
-	padding-left:0em;
-}
-
-#related-wiki-publications .field-name-title-field{
-	margin:0;
-	padding:0.5em 0 0 0.4em;
-}
-
-#related-wiki-publications .field-name-field-summary{
-	padding:0;
-	margin:0;
-}
-
-#related-wiki-publications .field-name-field-summary p{
-	padding:0 0 0.5em 0.8em;
-	margin:0;
-	color:#000000;
-	font-size:0.9em;
-	font-weight:normal;
-}
 
 #content .view-calls .view-footer a{
     text-decoration: underline;
@@ -6970,7 +6925,7 @@ div.contextual-links-wrapper{
 
 
 /* On the infographics section overview fix the block OSHWiki articles*/
-body.page-node-5429 #related-wiki {
+body.page-node-5429 .oshwiki-featured-articles {
     clear: both;
 }
 

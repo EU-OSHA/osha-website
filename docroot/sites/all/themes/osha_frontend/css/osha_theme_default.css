@@ -8370,14 +8370,87 @@ body.page-entity-collection h1#page-title{
 	padding-left: 1em;
 }
 
+
+/*e-Guide*/
+
+.view-e-guides.view-id-e_guides.view-display-id-block .view-header{
+	font-size: 1.4em;
+    float: left;
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #003399;
+    clear: both;
+    margin-top: 0em;
+}
+
+.view-e-guides.view-id-e_guides.view-display-id-block .views-exposed-widgets{
+	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% , url("../images/separator_home.jpg") repeat-x scroll 0% 0%;
+	margin-top: 17px;
+	padding-bottom: 2em;
+}
+
+.view-e-guides.view-id-e_guides.view-display-id-block .view-header p{
+	padding:0;
+	margin: 15px 0 10px 0;
+}
+
+.view-e-guides.view-id-e_guides.view-display-id-block .views-exposed-widget.views-submit-button{
+	width:49%;
+	height:0px;
+	background: none;
+	padding-top: 0em!important;
+}
+
+.view-e-guides.view-id-e_guides.view-display-id-block .views-exposed-form .views-exposed-widget .form-submit{
+	margin-top: 10px;
+	background: url("../images/flecha.png") no-repeat scroll 96% center #e8eef7;
+    border: 0 none;
+    color: #003399;
+    float: none;
+    font-family: "Open Sans Condensed",sans-serif;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding-bottom: 0.2em;
+    padding-right: 2.3em;
+    padding-top: 0.2em;
+    text-align: right;
+    width: auto;
+}
+
 #block-views-e-guides-block .view-content .views-row {
 	display: inline-block;
-	border: 1px solid #f1f1f1;
-	border-radius: 5px;
 	padding: 7px 10px;
-	margin: 10px 20px 10px 0;
-	width: 290px;
-	background-color: #f1f1f1;
+	margin: 10px 20px 10px 0!important;
+	width: 96%;
+	background-color: #fff;
+	border:1px solid #e9edf6;
+}
+
+#block-views-e-guides-block .view-content .views-row .views-field-field-country{
+	float:left;
+	padding-right:8px;
+	font-size: 14px;
+	font-weight: bold;
+	color:#003399;
+}
+
+#block-views-e-guides-block .view-content .views-row .views-field-field-language {
+    font-family: arial !important;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-transform: uppercase;
+    color:#003399;
+    padding-top: 1px;
+}
+
+#block-views-e-guides-block .view-content .views-row .views-field-field-language .field-content:before {
+    content:"/";
+    padding-right:8px;
+}
+
+#block-views-e-guides-block .view-content .views-row .views-field-field-flag img{
+	border:1px solid #CCCCCC;
+	width:100px;
+	height:66px;
 }
 
 #block-views-e-guides-block .view-content .views-row .views-field-field-external-url {
@@ -8385,7 +8458,13 @@ body.page-entity-collection h1#page-title{
 }
 
 #block-views-e-guides-block .view-content .views-row .views-field-field-link {
-	float: right;
+	float: left;
+	margin-left: 1em;
+}
+
+#block-views-e-guides-block .view-content .views-row .views-field-field-link a{
+	background: url("../images/download-eguide.png") no-repeat scroll 96% center #FFF;
+	padding-right: 27px;
 }
 
 #block-views-e-guides-block .view-display-id-attachment_1 .view-content .views-row {

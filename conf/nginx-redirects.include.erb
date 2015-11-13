@@ -26,7 +26,7 @@ rewrite ^/fop/czech-republic/cs/news/nabor-prac.php$   /fop/czech-republic/cs/  
 rewrite ^/fop/czech-republic/cs/publications/publikace/publikace_EW2004.php$   /fop/czech-republic/cs/publications/  permanent;
 rewrite ^/fop/czech-republic/en/ew2003/$   /fop/czech-republic/en permanent;
 rewrite ^/fop/czech-republic/en/ew2004/$   /fop/czech-republic/en permanent;
-rewrite ^/fop/greece/el/systems/\%C3\%F1\%E1\%F6\%E5\%DF\%EF\%20\%C3\%E5\%ED\%E9\%EA\%EF\%FD\%20\%C4/\%ED\%F4\%E7$   /fop/greece/el  permanent;
+rewrite ^/fop/greece/el/systems/\%C3\%F1\%E1\%F6\%E5\%DF\%EF\%20\%C3\%E5\%ED\%E9\%EA\%EF\%FD\%20\%C4/\%ED\%F4\%E7$   /fop/greece/el  permanent; #not working
 rewrite ^/fop/hungary/good_practice/ew2008-folder.2008-05-29.9020303216/ew08-nyiregyhaza/ew08nyir-Baranyainep.pdf$   /fop/hungary/  permanent;
 rewrite ^/fop/hungary/good_practice/ew2008-folder.2008-05-29.9020303216/ew08-nyiregyhaza/ew08nyir-Tomeczp.pdf$   /fop/hungary/  permanent;
 rewrite ^/fop/hungary/hu/home/index_hu.stm$   /fop/hungary/hu/  permanent;
@@ -47,8 +47,18 @@ rewrite ^/fop/spain/es/news/national_news/insht-11/image/image_view_fullscreen$ 
 rewrite ^/fop/spain/es/research(.*)$   /fop/spain/es/  permanent;
 rewrite ^/nl/fop/netherlands/nl/euweek/2008/(.*)$   /fop/netherlands/nl/  permanent;
 rewrite ^/VirtualHostBase/https/osha.europa.eu:443/osha/portal/VirtualHostRoot/(.*)$  /$1 permanent;
-rewrite ^/sub/napo/(.*)  http://napofilm.net/$1 permanent;
+rewrite ^/(../)?sub/napo/(.*)  http://napofilm.net/$1 permanent;
 
-
-
+# added 20151113
+rewrite ^/VirtualHostBase/(.*) /fop/romania/en permanent;
+rewrite ^/(../)?priority_groups/migrantworkers http://oshwiki.eu/wiki/Category:Migrant_workers permanent;
+rewrite ^/fop/romania/(.*) http://www.protectiamuncii.ro/$1 permanent ;
+rewrite ^/fop/slovenia/(.*)   /about-eu-osha/national-focal-points/slovenia  permanent;
+rewrite ^/fop/sweden/(.*)   /about-eu-osha/national-focal-points/sweden  permanent;
+rewrite ^/fop/germany/(.*)   /about-eu-osha/national-focal-points/germany  permanent;
+rewrite ^/fop/thueringen/(.*)   /about-eu-osha/national-focal-points/germany  permanent;
+rewrite ^/fop/rheinland-pfalz/(.*)   /about-eu-osha/national-focal-points/germany  permanent;
+rewrite ^/fop/slovenia/(.*)   /about-eu-osha/national-focal-points/slovenia  permanent;
+rewrite ^/osha/sub/fop/Bulgaria /about-eu-osha/national-focal-points/bulgaria permanent;
+rewrite ^/(../)?sector/healthcare/index_html   http://oshwiki.eu/wiki/Category:Health permanent;
 

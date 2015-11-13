@@ -19,4 +19,9 @@ function osha_pathauto_punctuation_chars_alter(array &$punctuation) {
   $punctuation['8250'] = array('value' => '›', 'name' => t('Single chevron close'));
   $punctuation['0171'] = array('value' => '«', 'name' => t('Double chevron open'));
   $punctuation['0187'] = array('value' => '»', 'name' => t('Double chevron close'));
+  $punctuation['en-dash'] = array('value' => '–', 'name' => t('En dash'));
+  $punctuation['em-dash'] = array('value' => '—', 'name' => t('Em dash'));
+  $punctuation['apostrophe'] = array('value' => '’', 'name' => t('Apostrophe'));
+  $punctuation['double-exclamation-mark'] = array('value' => '‼', 'name' => t('Double exclamation mark'));
+  $punctuation['overline'] = array('value' => '‾', 'name' => t('Overline'));
 }

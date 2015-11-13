@@ -86,7 +86,7 @@
 		margin: 0 !important;
 		padding: 0 !important;
 	}
-	#content h3, h1, h2, h3, h4, h5, article, #related-wiki .field.field-name-title-field.field-type-text , .contact_us_box, .view-search .views-row, .view-vacancies .view-content .views-row, #related-wiki .related_wiki_head {
+	#content h3, h1, h2, h3, h4, h5, article, .oshwiki-featured-articles .field.field-name-title-field.field-type-text , .contact_us_box, .view-search .views-row, .view-vacancies .view-content .views-row, #related-wiki .related_wiki_head {
 		color:#000000 !important;
 		height:auto !important;		
 		margin-top: 2em !important;
@@ -135,10 +135,10 @@
 		margin: 0 !important;
 	}
 	/*
-	#related-wiki .related_wiki_head {
+	.oshwiki-featured-articles .related_wiki_head {
 		margin-top: 3em !important;
 	}*/
-	#related-wiki .field.field-name-title-field {
+	.oshwiki-featured-articles .field.field-name-title-field {
 		margin-top: 1.2em !important;
 	}	
 	

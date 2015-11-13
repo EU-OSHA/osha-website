@@ -1871,7 +1871,7 @@ font-weight: normal;
 
 /*RELATED WIKI IN SECTIONS*/
 
-#related-wiki{
+#related-wiki, .oshwiki-featured-articles{
 	background-color:#e8ecf5;
 	margin-top:0.5em;
 	margin-bottom:1em;
@@ -1883,7 +1883,7 @@ font-weight: normal;
 	background: url("../images/related_wiki_head_big.jpg") no-repeat scroll 0% 53% #003399;
 }
 
-#related-wiki div article{
+#related-wiki .oshwiki-featured-articles article{
 	padding-left:0em;
 	padding-bottom: 0.5em;
 }
@@ -1898,21 +1898,21 @@ font-weight: normal;
 	display: block;
 }
 
-#related-wiki .field-name-title-field{
+#related-wiki .oshwiki-featured-articles .field-name-title-field{
 	background-color:#325bad;
 	color:#FFFFFF;
 	padding-left:2.2em;
 	margin-left:0;
 }
 
-#related-wiki .field.field-name-field-summary.field-type-text-long.field-label-hidden p{
+#related-wiki .oshwiki-featured-articles .field.field-name-field-summary.field-type-text-long.field-label-hidden p{
 	color:#000000;
 	padding-left:3.2em;
 	padding-right:3.2em;
 	font-weight:normal;
 }
 
-#related-wiki .field-name-field-wiki-page-url a{
+#related-wiki .oshwiki-featured-articles .field-name-field-wiki-page-url a{
 	background: url("../images/flecha.png") no-repeat scroll 90% 25% transparent;
 	color: #003399;
 	float: right;
@@ -3178,13 +3178,13 @@ a.button-submit {
 
 /*RELATED WIKI IN SECTIONS*/
 
-#content #related-wiki-get-more{
+#content .oshwiki-featured-articles-get-more{
 	background: url("../images/related_wiki_head.png") no-repeat scroll 0 100% #003399;
     height: 43px;
     width: 100%;
 }
 
-#content #related-wiki-get-more span{
+#content .oshwiki-featured-articles-get-more span{
 	color: #ffffff;
     display: block;
     font-family: "Open Sans Condensed",sans-serif;
@@ -3194,7 +3194,7 @@ a.button-submit {
     padding-top: 0.5em;
 }
 
-#content #related-wiki-get-more  a{
+#content .oshwiki-featured-articles-get-more  a{
 	background: url("../images/flecha.png") no-repeat scroll 85% 30% transparent;
     color: #ffffff;
     float: right;
@@ -3577,51 +3577,6 @@ a.button-submit {
 }
 
 /*END HIGHLIGHS SECTION*/
-
-
-/*Publication tein detail OSHWiki featured articles*/
-
-
-
-#related-wiki-publications .related_wiki_head{
-	background-color: #e9edf6;
-    color: #003399;
-    font-family: Open Sans Condensed;
-    font-weight: bold;
-    margin: 0;
-    padding-bottom: 0.2em;
-    padding-left: 0.5em;
-    padding-top: 0.2em;
-}
-
-#related-wiki-publications .related_wiki_head span{
-	 color: #003399;
-    font-family: Open Sans Condensed;
-    font-size: 1.35em;
-    font-weight: bold;
-}
-
-#related-wiki-publications div article{
-	padding-left:0em;
-}
-
-#related-wiki-publications .field-name-title-field{
-	margin:0;
-	padding:0.5em 0 0 0.4em;
-}
-
-#related-wiki-publications .field-name-field-summary{
-	padding:0;
-	margin:0;
-}
-
-#related-wiki-publications .field-name-field-summary p{
-	padding:0 0 0.5em 0.8em;
-	margin:0;
-	color:#000000;
-	font-size:0.9em;
-	font-weight:normal;
-}
 
 #content .view-calls .view-footer a{
     text-decoration: underline;
@@ -6970,7 +6925,7 @@ div.contextual-links-wrapper{
 
 
 /* On the infographics section overview fix the block OSHWiki articles*/
-body.page-node-5429 #related-wiki {
+body.page-node-5429 .oshwiki-featured-articles {
     clear: both;
 }
 
@@ -7512,7 +7467,7 @@ body.page-node-5429 #related-wiki {
 	font-size:0.8em;
 }
 
-#block-menu-block-2 ul#main-menu-links li.is-expanded span.expand_menu {
+#block-menu-block-2 ul.clearfix li.is-expanded span.expand_menu {
 	width: 10px;
 	display: inline-block;
 	background: url("../images/ico-plus.png") no-repeat right center;
@@ -7520,7 +7475,7 @@ body.page-node-5429 #related-wiki {
     cursor: pointer;
 }
 
-#block-menu-block-2 ul#main-menu-links li.is-expanded span.expanded {
+#block-menu-block-2 ul.clearfix li.is-expanded span.expanded {
 	background: url("../images/ico_minor.png") no-repeat right center;
 }
 
@@ -8366,6 +8321,111 @@ body.page-entity-collection h1#page-title{
 }
 
 .contact-us-ul li{
-   background: url("../images/li_arrow.png") no-repeat scroll 0 50% transparent;
-   padding-left: 1em;
- }
+	background: url("../images/li_arrow.png") no-repeat scroll 0 50% transparent;
+	padding-left: 1em;
+}
+
+
+/*e-Guide*/
+
+.view-e-guides.view-id-e_guides.view-display-id-block .view-header{
+	font-size: 1.4em;
+    float: left;
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #003399;
+    clear: both;
+    margin-top: 0em;
+}
+
+.view-e-guides.view-id-e_guides.view-display-id-block .views-exposed-widgets{
+	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% , url("../images/separator_home.jpg") repeat-x scroll 0% 0%;
+	margin-top: 17px;
+	padding-bottom: 2em;
+}
+
+.view-e-guides.view-id-e_guides.view-display-id-block .view-header p{
+	padding:0;
+	margin: 15px 0 10px 0;
+}
+
+.view-e-guides.view-id-e_guides.view-display-id-block .views-exposed-widget.views-submit-button{
+	width:49%;
+	height:0px;
+	background: none;
+	padding-top: 0em!important;
+}
+
+.view-e-guides.view-id-e_guides.view-display-id-block .views-exposed-form .views-exposed-widget .form-submit{
+	margin-top: 10px;
+	background: url("../images/flecha.png") no-repeat scroll 96% center #e8eef7;
+    border: 0 none;
+    color: #003399;
+    float: none;
+    font-family: "Open Sans Condensed",sans-serif;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding-bottom: 0.2em;
+    padding-right: 2.3em;
+    padding-top: 0.2em;
+    text-align: right;
+    width: auto;
+}
+
+#block-views-e-guides-block .view-content .views-row {
+	display: inline-block;
+	padding: 7px 10px;
+	margin: 10px 20px 10px 0!important;
+	width: 96%;
+	background-color: #fff;
+	border:1px solid #e9edf6;
+}
+
+#block-views-e-guides-block .view-content .views-row .views-field-field-country{
+	float:left;
+	padding-right:8px;
+	font-size: 14px;
+	font-weight: bold;
+	color:#003399;
+}
+
+#block-views-e-guides-block .view-content .views-row .views-field-field-language {
+    font-family: arial !important;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-transform: uppercase;
+    color:#003399;
+    padding-top: 1px;
+}
+
+#block-views-e-guides-block .view-content .views-row .views-field-field-language .field-content:before {
+    content:"/";
+    padding-right:8px;
+}
+
+#block-views-e-guides-block .view-content .views-row .views-field-field-flag img{
+	border:1px solid #CCCCCC;
+	width:100px;
+	height:66px;
+}
+
+#block-views-e-guides-block .view-content .views-row .views-field-field-external-url {
+	float: left;
+}
+
+#block-views-e-guides-block .view-content .views-row .views-field-field-link {
+	float: left;
+	margin-left: 1em;
+}
+
+#block-views-e-guides-block .view-content .views-row .views-field-field-link a{
+	background: url("../images/download-eguide.png") no-repeat scroll 96% center #FFF;
+	padding-right: 27px;
+}
+
+#block-views-e-guides-block .view-display-id-attachment_1 .view-content .views-row {
+	display: block;
+	border: none;
+	border-radius: 0px;
+	width: 100%;
+	background-color: #ffffff;
+}

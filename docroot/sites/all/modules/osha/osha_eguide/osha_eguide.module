@@ -1,0 +1,75 @@
+<?php
+/**
+ * @file
+ * Code for the OSHA eGuide feature.
+ */
+
+include_once 'osha_eguide.features.inc';
+
+/**
+ * Implements hook_form_alter().
+ */
+function osha_eguide_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-e-guides-block') {
+    global $language;
+
+    $q = db_select('field_data_field_country', 'a')
+      ->fields('a', array('field_country_tid'))
+      ->condition('a.bundle', 'e_guide');
+    $results = $q->execute()->fetchCol();
+
+    foreach ($form['field_country_tid']['#options'] as $key => $country) {
+      if (!in_array($key, $results) && $key != 'All') {
+        unset($form['field_country_tid']['#options'][$key]);
+      }
+    }
+
+    $q = db_select('field_data_field_language', 'a')
+      ->fields('a', array('field_language_value'))
+      ->condition('a.bundle', 'e_guide');
+    $results = $q->execute()->fetchCol();
+
+    $country_langs = array();
+    $country_langs['All'] = array();
+
+    foreach ($form['field_language_value']['#options'] as $key => $lang) {
+      if (!in_array($key, $results) && $key != 'All') {
+        unset($form['field_language_value']['#options'][$key]);
+      }
+      else {
+        $country_langs['All'][] = array(
+          'code' => $key,
+          'language' => $lang,
+        );
+      }
+    }
+
+    $q = db_select('field_data_field_language', 'a');
+    $q->innerJoin('field_data_field_country', 'b', 'a.entity_id = b.entity_id');
+    $q->fields('b', array('field_country_tid'));
+    $q->fields('a', array('field_language_value'));
+    $q->condition('a.bundle', 'e_guide');
+    $results = $q->execute()->fetchAll();
+
+    $language_list = language_list();
+
+    foreach ($results as $row) {
+      if (!array_key_exists($row->field_country_tid, $country_langs)) {
+        $country_langs[$row->field_country_tid] = array(array(
+          'code' => 'All',
+          'language' => t('- Any -'),
+        ));
+      }
+      $country_langs[$row->field_country_tid][] = array(
+        'code' => $row->field_language_value,
+        'language' => $language_list[$row->field_language_value]->name,
+      );
+    }
+
+    drupal_add_js(array('osha_eguide' => array(
+      'country_langs' => $country_langs,
+      'lang' => $language->language,
+      )), 'setting');
+    drupal_add_js(drupal_get_path('module', 'osha_eguide') . '/js/dropdown_filter.js');
+  }
+}

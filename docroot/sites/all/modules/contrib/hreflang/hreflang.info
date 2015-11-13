@@ -1,0 +1,12 @@
+name = Alternate hreflang
+core = 7.x
+description = Adds hreflang link elements to the header of each page.
+package = Multilingual
+files[] = hreflang.test
+
+; Information added by Drupal.org packaging script on 2014-11-27
+version = "7.x-1.2"
+core = "7.x"
+project = "hreflang"
+datestamp = "1417070881"
+

@@ -878,12 +878,12 @@ function osha_tmgmt_file_translation_upload_submit($form, &$form_state) {
           $job->has_file_uploaded = 1;
           $job->save();
 
-          // CW-1299 https://eu-osha.bilbomatica.es:5433/browse/CW-1299?focusedCommentId=12616&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-12616
-          // For non-nodes (literals, menu links and taxonomy terms) accept automatically the translations.
+          // CW-1299, MC-20
+          // Except nodes and menu_links, the others should be directly published.
           foreach($job->getItems() as $job_item) {
-            if ($job_item->item_type != 'node') {
+            if (!in_array($job_item->item_type, array('menu_link', 'node'))) {
               $job_item->acceptTranslationIntoEntity();
-            }
+          }
           }
         } catch (Exception $e) {
           $job->addMessage('File import failed with the following message: @message', array('@message' => $e->getMessage()), 'error');

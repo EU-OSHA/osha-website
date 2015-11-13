@@ -519,11 +519,15 @@ $options['init-modules'] = array(
   'menu_position',
   'r4032login',
 
+  'hreflang',
+
   'devel',
   'devel_node_access',
   'diff',
   'securepages',
-  'update'
+  'update',
+
+  'osha_eguide',
 );
 
 

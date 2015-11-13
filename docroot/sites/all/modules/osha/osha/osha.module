@@ -621,6 +621,10 @@ function osha_form_lang_dropdown_form_alter(&$form, &$form_state, $form_id){
   $options_lang = $form['lang_dropdown_select']['#options'];
   $form['lang_dropdown_select']['#options'] = array_intersect_key(
     osha_sort_language_list($options_lang), osha_language_list_options());
+  $form['lang_dropdown_select']['#prefix'] =
+    '<label for="'.$form['lang_dropdown_select']['#attributes']['id'].
+    '" style="position: absolute;left: -9999px">'.t('Language').'</label>';
+  $form['lang_dropdown_select']['#attributes']['title'] = t('Language');
 }
 
 /**

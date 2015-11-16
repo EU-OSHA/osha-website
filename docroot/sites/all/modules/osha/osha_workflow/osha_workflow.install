@@ -632,5 +632,10 @@ function osha_workflow_update_7011() {
     'edit any content in to_be_approved',
     'edit any content in ready_to_publish',
     'edit any content in published',
+    'moderate content from draft to final_draft',
+    'moderate content from final_draft to needs_review',
+    'moderate content from final_draft to to_be_approved',
+    'moderate content from final_draft to ready_to_publish',
+    'moderate content from ready_to_publish to published',
   ));
 }

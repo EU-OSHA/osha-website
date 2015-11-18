@@ -61,6 +61,24 @@ function osha_tmgmt_menu() {
 }
 
 /**
+ * hook_translated_menu_link_alter().
+ */
+function osha_tmgmt_translated_menu_link_alter(&$item, $map) {
+  // Menu link preview.
+  if (!empty($_GET['osha_tmgmt_ml_preview']) && user_access('preview layout validation')) {
+    $preview_comp = explode(':', $_GET['osha_tmgmt_ml_preview']);
+    if ($item['mlid'] == $preview_comp[1]) {
+      if ($job_item = tmgmt_job_item_load($preview_comp[0])) {
+        $data = current($job_item->getData());
+        if (!empty($data['#translation']['#text'])) {
+          $item['title'] = $data['#translation']['#text'];
+        }
+      }
+    }
+  }
+}
+
+/**
  * Implements hook_filter_info().
  */
 function osha_tmgmt_filter_info() {
@@ -524,6 +542,19 @@ function osha_tmgmt_node_access($node, $operation, $user) {
       if ($count > 0) {
         return NODE_ACCESS_DENY;
       }
+      if (!empty($node->workbench_moderation['current']->state) && $node->workbench_moderation['current']->state != 'published') {
+        // MC-30 - see if there are unmerged items
+        $query = db_select('tmgmt_job_item')
+          ->fields(NULL, array('tjiid'));
+        $query->condition('state', '4', '<>') // TMGMT_JOB_ITEM_STATE_ABORTED
+          ->condition('item_type', 'node')
+          ->condition('item_id', $node->nid)
+          ->condition('merged', NULL);
+        $count = $query->execute()->rowCount();
+        if ($count > 0) {
+          return NODE_ACCESS_DENY;
+        }
+      }
     }
   }
   return NODE_ACCESS_IGNORE;
@@ -786,6 +817,7 @@ function osha_tmgmt_tmgmt_source_translation_structure($job_item,
  * Implements hook_form_alter().
  */
 function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
   // Checks if the form is a source item form, and generates it's supposed id.
   $form_source_id = '';
   if (isset($form_state['plugin']) && isset($form_state['item_type'])) {
@@ -973,7 +1005,6 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
       osha_tmgmt_form_alter_add_source_target_info($form, $form_state);
       $form['actions']['accept']['#value'] = 'Publish';
       $job_item = $form_state['item'];
-      global $user;
       $form['actions']['accept']['#access'] =
         $job_item->state != TMGMT_JOB_ITEM_STATE_ABORTED
         && $job_item->state != TMGMT_JOB_ITEM_STATE_ACCEPTED
@@ -994,8 +1025,28 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
         // Happens when user clicks the Ajax checkmark button on review form.
         drupal_set_message('Value was saved');
       }
+
       $form['actions']['accept']['#value'] = 'Publish';
-      global $user;
+
+      // For menu links, add a preview link.
+      if (isset($form_state['item']) && $form_state['item']->item_type == 'menu_link'
+        && user_access('preview layout validation')) {
+        $menu_link_comp = explode(':', $form_state['item']->item_id) ;
+        $menu_link = menu_link_load($menu_link_comp[2]);
+        $form['preview'] = array(
+          '#theme' => 'link',
+          '#text' => 'Preview layout',
+          '#path' => $menu_link['link_path'],
+          '#weight' => -10,
+          '#options' => array(
+            'attributes' => array('target' => '_blank'),
+            'html' => FALSE,
+            'query' => array('osha_tmgmt_ml_preview' => $form_state['item']->tjiid . ':' . $menu_link['mlid']),
+            'language' => language_list()[$form_state['item']->target_language],
+          ),
+        );
+        $form['actions']['accept']['#value'] = 'Approve layout and publish';
+      }
 
       $form['actions']['accept']['#access'] =
         $job_item->state != TMGMT_JOB_ITEM_STATE_ABORTED
@@ -1416,6 +1467,16 @@ function osha_tmgmt_workbench_moderation_transition($node, $old, $new) {
         }
       }
     }
+  } else if (!empty($node->old_vid)) {
+    // MC-30 Search for matching active translation jobs and increment tjitem->vid
+    db_update('tmgmt_job_item')
+      ->expression('vid', $node->vid)
+      ->condition('vid', $node->old_vid)
+      ->condition('item_type', 'node')
+      ->condition('item_id', $node->nid)
+      ->condition('state', TMGMT_JOB_ITEM_STATE_ABORTED, '<>')
+      ->condition('merged', NULL)
+      ->execute();
   }
 }
 

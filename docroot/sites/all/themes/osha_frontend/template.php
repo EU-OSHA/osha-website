@@ -15,7 +15,10 @@ function osha_frontend_links__system_main_menu() {
  * Implements theme_menu_tree__main_menu().
  */
 function osha_frontend_menu_tree__main_menu($variables) {
-  return '<ul id="main-menu-links" class="menu clearfix">'
+  $random = strlen($variables['tree']);
+  global $osha_menu_counter;
+  $osha_menu_counter++;
+  return '<ul id="main-menu-links-'.$random.'-'.$osha_menu_counter.'" class="menu clearfix">'
     . $variables['tree'] . '</ul>';
 }
 
@@ -94,7 +97,9 @@ function osha_frontend_menu_link__menu_block($variables) {
   $output_image = "";
   if (!empty($element['#localized_options']['content']['image'])
       && $image_url = file_create_url($element['#localized_options']['content']['image'])) {
-    $image = '<img src="' . $image_url . '"/>';
+    // $image = '<img src="' . $image_url . '" alt=""/>';
+    // we should in fact use empty alt because the image is only decorative (the text is already present in the link)
+    $image = '<img src="' . $image_url . '" alt="' . $element['#title'] . '"/>';
     $output_image = l($image, $element['#href'], array('html' => TRUE));
   }
 

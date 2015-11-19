@@ -423,6 +423,11 @@ function osha_events_views_default_views() {
 </div>';
   $handler->display->display_options['header']['area_1']['format'] = 'full_html';
   $handler->display->display_options['defaults']['footer'] = FALSE;
+  /* Footer: Global: Result summary */
+  $handler->display->display_options['footer']['result']['id'] = 'result';
+  $handler->display->display_options['footer']['result']['table'] = 'views';
+  $handler->display->display_options['footer']['result']['field'] = 'result';
+  $handler->display->display_options['footer']['result']['content'] = '<span class="result_summary">Displaying @start - @end of @total</span>';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Content: Author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
@@ -1737,6 +1742,7 @@ function osha_events_views_default_views() {
 <div class="black"></div><p>Confirmed<p>
 <div class="grey"></div><p>Only web or not attendance<p>
 </div>'),
+    t('<span class="result_summary">Displaying @start - @end of @total</span>'),
     t('Color'),
     t('[field_color]'),
     t('Title'),
@@ -1830,6 +1836,12 @@ function osha_events_views_default_views() {
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['exposed_block'] = TRUE;
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  /* Footer: Global: Result summary */
+  $handler->display->display_options['footer']['result']['id'] = 'result';
+  $handler->display->display_options['footer']['result']['table'] = 'views';
+  $handler->display->display_options['footer']['result']['field'] = 'result';
+  $handler->display->display_options['footer']['result']['content'] = '<span class="result_summary">Displaying @start - @end of @total</span>';
   $handler->display->display_options['defaults']['empty'] = FALSE;
   /* No results behavior: Global: Unfiltered text */
   $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
@@ -2213,6 +2225,7 @@ function osha_events_views_default_views() {
     t('‹'),
     t('›'),
     t('»'),
+    t('<span class="result_summary">Displaying @start - @end of @total</span>'),
     t('No results'),
     t('[field_start_date_value] - '),
     t('LOCATION'),

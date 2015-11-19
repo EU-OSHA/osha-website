@@ -300,3 +300,21 @@ function osha_update_7013() {
   db_query("delete from locales_target where lid in (9243, 9244)");
   db_query("delete from locales_source where lid in (9243, 9244)");
 }
+
+
+/**
+ * Set replace with separator for some punctuation in aliases.
+ */
+function osha_update_7014() {
+  variable_set('pathauto_punctuation_hyphen', 1);
+  variable_set('pathauto_punctuation_plus', 1);
+  variable_set('pathauto_punctuation_underscore', 1);
+  variable_set('pathauto_punctuation_equal', 1);
+  variable_set('pathauto_punctuation_8249', 1);
+  variable_set('pathauto_punctuation_8250', 1);
+  variable_set('pathauto_punctuation_0171', 1);
+  variable_set('pathauto_punctuation_0187', 1);
+  variable_set('pathauto_punctuation_en-dash', 1);
+  variable_set('pathauto_punctuation_em-dash', 1);
+  variable_set('pathauto_punctuation_overline', 1);
+}

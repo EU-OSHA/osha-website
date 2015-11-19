@@ -1325,11 +1325,11 @@ Grey - Only web or not attendance',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_related_documents',
-    'label' => 'Related documents',
+    'label' => 'Related resources',
     'required' => 0,
     'settings' => array(
       'description_field' => 1,
-      'entity_translation_sync' => FALSE,
+      'entity_translation_sync' => 0,
       'file_directory' => '',
       'file_extensions' => 'pdf doc docx odt rtf txt csv xls ods xlsx ppt pptx epub',
       'max_filesize' => '50 MB',
@@ -1349,8 +1349,8 @@ Grey - Only web or not attendance',
           'video' => 0,
         ),
         'browser_plugins' => array(
-          'media_browser_osha--media_browser_2' => 'media_browser_osha--media_browser_2',
-          'media_browser_osha--media_browser_3' => 'media_browser_osha--media_browser_3',
+          'media_browser_osha--media_browser_osha' => 0,
+          'media_browser_osha--media_browser_osha_my_files' => 0,
           'media_default--media_browser_1' => 0,
           'media_default--media_browser_my_files' => 0,
           'upload' => 'upload',
@@ -1359,6 +1359,7 @@ Grey - Only web or not attendance',
       'type' => 'media_generic',
       'weight' => 26,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-events-field_satisfaction_rate'
@@ -1974,7 +1975,7 @@ Grey - Only web or not attendance',
   t('Red: TBD - TBC <br />
 Black - Confirmed <br />
 Grey - Only web or not attendance');
-  t('Related documents');
+  t('Related resources');
   t('Satisfaction rate');
   t('Title');
   t('Type');

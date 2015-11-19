@@ -216,3 +216,67 @@ function osha_events_link_field_process($element, $form_state, $complete_form) {
 
   return $element;
 }
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function osha_events_field_formatter_info() {
+  $info = array(
+    'translated_title_as_link' => array(
+      'label' => 'Translated title, as link',
+      'field types' => array('link_field'),
+      'description' => 't(title) as link.',
+    )
+  );
+  return $info;
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function osha_events_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+  switch ($display['type']) {
+    case 'translated_title_as_link':
+      foreach ($items as $delta => $item) {
+        $element[$delta] = array(
+          '#theme' => 'osha_events_translated_title_as_link_format',
+          '#entity' => $entity,
+          '#item' => $item,
+          '#delta' => $delta,
+        );
+      }
+      break;
+  }
+  return $element;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function osha_events_theme() {
+  return array(
+    'osha_events_translated_title_as_link_format' => array(
+      'variables' => array('entity' => NULL, 'item' => NULL, 'delta' => NULL),
+    )
+  );
+}
+
+/*
+* Formats link as translated title
+*/
+function theme_osha_events_translated_title_as_link_format($element) {
+  $item = $element['item'];
+  if (empty($item['title'])) {
+    $title = $item['display_url'];
+  } else {
+    $title = t($item['title']);
+  }
+  return l($title, $item['url'], array(
+    'attributes' => $item['attributes'],
+    'query' => $item['query'],
+    'fragment' => $item['fragment'],
+    'absolute' => $item['absolute'],
+    'html' => $item['html']
+  ));
+}

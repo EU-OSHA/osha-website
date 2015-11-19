@@ -1686,15 +1686,19 @@ Grey - Only web or not attendance',
   // Exported field_instance: 'node-events-field_website_of_event'
   $field_instances['node-events-field_website_of_event'] = array(
     'bundle' => 'events',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'title' => 'Website of event',
+      ),
+    ),
     'deleted' => 0,
     'description' => 'Mandatory',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'module' => 'link',
+        'module' => 'osha_events',
         'settings' => array(),
-        'type' => 'link_default',
+        'type' => 'translated_title_as_link',
         'weight' => 9,
       ),
       'highlights_item' => array(

@@ -706,6 +706,7 @@ function osha_events_views_default_views() {
   $handler->display->display_options['filters']['field_organization_value']['id'] = 'field_organization_value';
   $handler->display->display_options['filters']['field_organization_value']['table'] = 'field_data_field_organization';
   $handler->display->display_options['filters']['field_organization_value']['field'] = 'field_organization_value';
+  $handler->display->display_options['filters']['field_organization_value']['operator'] = 'contains';
   $handler->display->display_options['filters']['field_organization_value']['group'] = 1;
   $handler->display->display_options['filters']['field_organization_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_organization_value']['expose']['operator_id'] = 'field_organization_value_op';
@@ -1664,6 +1665,7 @@ function osha_events_views_default_views() {
   $handler->display->display_options['filters']['field_organization_value']['id'] = 'field_organization_value';
   $handler->display->display_options['filters']['field_organization_value']['table'] = 'field_data_field_organization';
   $handler->display->display_options['filters']['field_organization_value']['field'] = 'field_organization_value';
+  $handler->display->display_options['filters']['field_organization_value']['operator'] = 'contains';
   $handler->display->display_options['filters']['field_organization_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_organization_value']['expose']['operator_id'] = 'field_organization_value_op';
   $handler->display->display_options['filters']['field_organization_value']['expose']['label'] = 'Organization';

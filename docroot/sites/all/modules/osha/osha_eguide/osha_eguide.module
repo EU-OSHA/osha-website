@@ -66,6 +66,10 @@ function osha_eguide_form_alter(&$form, &$form_state, $form_id) {
       );
     }
 
+    foreach ($country_langs as &$group) {
+      usort($group, function($a,$b){ return strcmp($a['language'], $b['language']); });
+    }
+
     drupal_add_js(array('osha_eguide' => array(
       'country_langs' => $country_langs,
       'lang' => $language->language,

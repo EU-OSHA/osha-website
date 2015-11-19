@@ -38,11 +38,18 @@ function drush_osha_wiki_categories_sync() {
           drush_log("Created new term: '{$name}'", "ok");
         }
       }
+      $term = reset(taxonomy_get_term_by_name($name));
       $categorymembers_url = 'http://oshwiki.eu/api.php?action=query&list=categorymembers&format=json&cmtitle=Category:' . urlencode($name) . '&cmprop=title|type|ids';
       $content_2 = file_get_contents($categorymembers_url);
       $categorymembers = json_decode($content_2);
       foreach ($categorymembers->query->categorymembers as $child) {
         if ($child->type != 'subcat') {
+          continue;
+        }
+        if (!$term->tid) {
+          if (function_exists('drush_log')) {
+            drush_log("Could not get the tid of '{$name}'", "error");
+          }
           continue;
         }
         $child_name = str_replace('Category:', '', $child->title);

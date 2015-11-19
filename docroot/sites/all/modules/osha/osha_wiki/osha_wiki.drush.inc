@@ -35,7 +35,7 @@ function drush_osha_wiki_categories_sync() {
         );
         taxonomy_term_save((object)$term);
         if (function_exists('drush_log')) {
-          drush_log("Created new term: {$name}", "ok");
+          drush_log("Created new term: '{$name}'", "ok");
         }
       }
       $categorymembers_url = 'http://oshwiki.eu/api.php?action=query&list=categorymembers&format=json&cmtitle=Category:' . urlencode($name) . '&cmprop=title|type|ids';
@@ -56,7 +56,7 @@ function drush_osha_wiki_categories_sync() {
           );
           taxonomy_term_save((object)$child_term);
           if (function_exists('drush_log')) {
-            drush_log("Created new child term of {$name}: {$child_name}", "ok");
+            drush_log("Created new child term of '{$name}': '{$child_name}'", "ok");
           }
         }
       }

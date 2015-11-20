@@ -85,6 +85,12 @@ function osha_press_release_views_default_views() {
 
   /* Display: All press releases */
   $handler = $view->new_display('page', 'All press releases', 'page');
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  /* Footer: Global: Result summary */
+  $handler->display->display_options['footer']['result']['id'] = 'result';
+  $handler->display->display_options['footer']['result']['table'] = 'views';
+  $handler->display->display_options['footer']['result']['field'] = 'result';
+  $handler->display->display_options['footer']['result']['content'] = '<span class="result_summary">Displaying @start - @end of @total</span>';
   $handler->display->display_options['path'] = 'about-eu-osha/press-releases';
 
   /* Display: Press releases block */
@@ -110,6 +116,12 @@ function osha_press_release_views_default_views() {
   $handler->display->display_options['header']['area_text_custom']['table'] = 'views';
   $handler->display->display_options['header']['area_text_custom']['field'] = 'area_text_custom';
   $handler->display->display_options['header']['area_text_custom']['content'] = 'What\'s new';
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  /* Footer: Global: Result summary */
+  $handler->display->display_options['footer']['result']['id'] = 'result';
+  $handler->display->display_options['footer']['result']['table'] = 'views';
+  $handler->display->display_options['footer']['result']['field'] = 'result';
+  $handler->display->display_options['footer']['result']['content'] = '<span class="result_summary">Displaying @start - @end of @total</span>';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Content revision: Content */
   $handler->display->display_options['relationships']['nid']['id'] = 'nid';
@@ -166,6 +178,7 @@ function osha_press_release_views_default_views() {
     t('»'),
     t('Get the actual content from a content revision.'),
     t('All press releases'),
+    t('<span class="result_summary">Displaying @start - @end of @total</span>'),
     t('Press releases block'),
     t('See all'),
     t('Press room - featured'),

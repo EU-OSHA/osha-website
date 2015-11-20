@@ -89,6 +89,12 @@ function osha_news_views_default_views() {
 
   /* Display: OSH news list */
   $handler = $view->new_display('page', 'OSH news list', 'oshnews_list');
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  /* Footer: Global: Result summary */
+  $handler->display->display_options['footer']['result']['id'] = 'result';
+  $handler->display->display_options['footer']['result']['table'] = 'views';
+  $handler->display->display_options['footer']['result']['field'] = 'result';
+  $handler->display->display_options['footer']['result']['content'] = '<span class="result_summary">Displaying @start - @end of @total</span>';
   $handler->display->display_options['path'] = 'oshnews';
 
   /* Display: OSH news - latest */
@@ -165,6 +171,7 @@ function osha_news_views_default_views() {
     t('»'),
     t('Get the actual content from a content revision.'),
     t('OSH news list'),
+    t('<span class="result_summary">Displaying @start - @end of @total</span>'),
     t('OSH news - latest'),
     t('View all'),
   );

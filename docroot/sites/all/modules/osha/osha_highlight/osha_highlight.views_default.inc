@@ -88,6 +88,12 @@ function osha_highlight_views_default_views() {
   $handler->display->display_options['defaults']['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_always'] = TRUE;
   $handler->display->display_options['defaults']['use_more_text'] = FALSE;
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  /* Footer: Global: Result summary */
+  $handler->display->display_options['footer']['result']['id'] = 'result';
+  $handler->display->display_options['footer']['result']['table'] = 'views';
+  $handler->display->display_options['footer']['result']['field'] = 'result';
+  $handler->display->display_options['footer']['result']['content'] = '<span class="result_summary">Displaying @start - @end of @total</span>';
   $handler->display->display_options['path'] = 'highlights';
 
   /* Display: Latest Highlights */
@@ -193,6 +199,7 @@ function osha_highlight_views_default_views() {
     t('›'),
     t('»'),
     t('Highlights - all'),
+    t('<span class="result_summary">Displaying @start - @end of @total</span>'),
     t('Latest Highlights'),
     t('View all'),
     t('See more'),

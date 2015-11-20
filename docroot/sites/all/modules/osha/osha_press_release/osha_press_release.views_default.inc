@@ -121,7 +121,7 @@ function osha_press_release_views_default_views() {
   $handler->display->display_options['footer']['result']['id'] = 'result';
   $handler->display->display_options['footer']['result']['table'] = 'views';
   $handler->display->display_options['footer']['result']['field'] = 'result';
-  $handler->display->display_options['footer']['result']['content'] = '<span class="result_summary">Displaying @start - @end of @total</span>';
+  $handler->display->display_options['footer']['result']['content'] = '';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Content revision: Content */
   $handler->display->display_options['relationships']['nid']['id'] = 'nid';

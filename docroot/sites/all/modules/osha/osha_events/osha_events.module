@@ -32,6 +32,11 @@ function osha_events_form_alter(&$form, &$form_state, $form_id) {
 
       $form['field_activity'][LANGUAGE_NONE] = $field;
     }
+
+    // Create new event form
+    if(!isset($form['#node']->nid)){
+      drupal_add_js(drupal_get_path('module', 'osha_events') . '/js/events_form.js');
+    }
   }
 }
 

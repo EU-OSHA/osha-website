@@ -193,12 +193,14 @@ function osha_wiki_cron() {
 }
 
 /**
- * Migrate page from oshwiki by page title.
+ * Migrate pages from oshwiki by page title.
  *
- * @param $page_title
- * @return string
+ * @param $wikipages
  */
 function osha_wiki_migrate_wikipages_by_title($wikipages) {
+  if (empty($wikipages)) {
+    return;
+  }
   $migration = new OshaMigrateWikiByTitles(array('wikipages' => $wikipages));
   $migration->processImport();
 }

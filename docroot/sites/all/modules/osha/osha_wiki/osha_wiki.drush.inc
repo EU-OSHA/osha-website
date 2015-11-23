@@ -15,6 +15,7 @@ function osha_wiki_drush_command() {
 
 function drush_osha_wiki_categories_sync() {
   $voc = taxonomy_vocabulary_machine_name_load('wiki_categories');
+  $pages_to_migrate = array();
   $continue = TRUE;
   $accontinue = '';
   while ($continue) {
@@ -44,6 +45,9 @@ function drush_osha_wiki_categories_sync() {
       $categorymembers = json_decode($content_2);
       foreach ($categorymembers->query->categorymembers as $child) {
         if ($child->type != 'subcat') {
+          if ($child->type == 'page') {
+            $pages_to_migrate[] = $child->title;
+          }
           continue;
         }
         if (!$term->tid) {
@@ -75,4 +79,5 @@ function drush_osha_wiki_categories_sync() {
       $continue = FALSE;
     }
   }
+  osha_wiki_migrate_wikipages_by_title($pages_to_migrate);
 }

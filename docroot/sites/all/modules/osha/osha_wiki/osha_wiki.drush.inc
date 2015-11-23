@@ -79,5 +79,10 @@ function drush_osha_wiki_categories_sync() {
       $continue = FALSE;
     }
   }
-  osha_wiki_migrate_wikipages_by_title($pages_to_migrate);
+  if (!empty($pages_to_migrate)) {
+    if (function_exists('drush_log')) {
+      drush_log("Starting migration of pages.", "status");
+    }
+    osha_wiki_migrate_wikipages_by_title($pages_to_migrate);
+  }
 }

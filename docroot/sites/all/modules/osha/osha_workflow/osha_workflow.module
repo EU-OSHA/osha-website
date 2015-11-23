@@ -7,6 +7,7 @@
 include_once 'osha_workflow.features.inc';
 include_once 'osha_workflow.api.inc';
 include_once 'osha_workflow.review_manager.inc';
+include_once 'osha_workflow.pm.inc';
 
 /* Publishing workflow roles */
 define('OSHA_WORKFLOW_ROLE_EDITOR', 'Editor');
@@ -110,10 +111,10 @@ function osha_workflow_menu() {
     'description' => 'Review page for the OSHA reviewing workflow.',
     'type' => MENU_LOCAL_TASK,
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('osha_workflow_node_review_form', 1),
+    'page arguments' => array('osha_workflow_node_pm_assign_form', 1),
     'access callback' => 'osha_workflow_node_review_access',
     'access arguments' => array(1),
-    'file' => 'osha_workflow.admin.inc',
+    'file' => 'osha_workflow.pm.inc',
     'weight' => 9,
   );
   return $items;
@@ -288,6 +289,8 @@ function osha_workflow_permission() {
   $permissions['view osh content tab'] = array('title' => t("View 'Content' tab in My Workbench"));
   $permissions['mark access section as reviewed'] = array('title' => t("Can mark as Reviewed Access section PM"));
 
+  $permissions['assign pm to node'] = array('title' => t("Can assign PM to node"));
+
   return $permissions;
 }
 
@@ -386,7 +389,7 @@ function osha_workflow_node_access($node, $operation, $user) {
 
     /* Project manager */
     // Is assigned as PM to node and node section matches one of PMs.
-    if ($node_in_pm_section && osha_workflow_is_assigned_project_manager($node->nid)) {
+    if ($node_in_pm_section) {
       return NODE_ACCESS_IGNORE;
     }
 
@@ -638,6 +641,10 @@ function osha_workflow_theme() {
       'render element' => 'form',
       'file' => 'osha_workflow.review_manager.inc',
     ),
+    'osha_workflow_node_pm_assign_form' => array(
+      'render element' => 'form',
+      'file' => 'osha_workflow.pm.inc',
+    ),
   );
 }
 
@@ -764,19 +771,36 @@ function osha_workflow_workbench_moderation_transition($node, $old, $new) {
   $rm_notified = FALSE;
   if ($old == OSHA_WORKFLOW_STATE_DRAFT && $new == OSHA_WORKFLOW_STATE_FINAL_DRAFT) {
     // Assign the default PM, if none assigned.
-    if ($node->type != 'publication' && !osha_workflow_get_project_manager($node->nid)) {
-      reset($node->workbench_access);
-      $section = current($node->workbench_access);
-      $pms = osha_workflow_access_get_section_pm($section);
-      if (!empty($pms)) {
-        $pm = current($pms);
-        drupal_set_message(
-          strtr('Assigned default project manager of this section (!name) to the review process', array('!name' => $pm->name))
-        );
-        osha_workflow_set_project_manager($node->nid, $pm->uid);
-      }
-      else {
-        drupal_set_message('No default project manager was found. Please select one manually.');
+    if ($node->type != 'publication') {
+      $exiting_pms_entries = osha_workflow_get_pms_entries($node->nid);
+      if (empty($exiting_pms_entries)) {
+        reset($node->workbench_access);
+        $section = current($node->workbench_access);
+        $section_pms = osha_workflow_access_get_section_pm($section);
+        if (!empty($section_pms)) {
+          $pms = array();
+          // Order alphabetically the pms.
+          foreach ($section_pms as $pm) {
+            $pms[$pm->uid] = $pm->name;
+          }
+          asort($pms);
+          $weight = 0;
+          foreach ($pms as $uid => $name) {
+            $new_pm = array(
+              'uid' => $uid,
+              'nid' => $node->nid,
+              'weight' => $weight,
+            );
+            _osha_workflow_pm_save_row($new_pm);
+            $weight++;
+          }
+          drupal_set_message(
+            strtr('Assigned default project managers of this section (!names) to the review process', array('!names' => implode(', ', $pms)))
+          );
+        }
+        else {
+          drupal_set_message('No default project manager was found. Please select manually.');
+        }
       }
     }
     // Assign the default approver list, if none assigned.
@@ -806,6 +830,15 @@ function osha_workflow_workbench_moderation_transition($node, $old, $new) {
     $rm_notified = TRUE;
   }
   if (($old == OSHA_WORKFLOW_STATE_DRAFT || $old == OSHA_WORKFLOW_STATE_FINAL_DRAFT) && $new == OSHA_WORKFLOW_STATE_TO_BE_REVIEWED) {
+    // Reset existing votes.
+    $exiting_pms_entries = osha_workflow_get_pms_entries($node->nid);
+    if (!empty($exiting_pms_entries)) {
+      foreach ($exiting_pms_entries as $pm_entry) {
+        $pm_entry->approved = NULL;
+        $pm_entry->message = NULL;
+        _osha_workflow_pm_save_row($pm_entry);
+      }
+    }
     OshaWorkflowNotifications::notifyOnChangeFromDraftOrFinalDraftToBeReviewed($node);
     $rm_notified = TRUE;
   }
@@ -878,7 +911,7 @@ function osha_workflow_workbench_moderation_access_alter(&$access, $op, $node) {
 
     /* Project manager */
     // Allow moderation of nodes for PM assigned to a node.
-    if ($is_pm && osha_workflow_is_assigned_project_manager($node->nid)) {
+    if ($is_pm && osha_workflow_node_in_pm_section($node->nid, $user)) {
       $access = TRUE;
       return NULL;
     }
@@ -1105,8 +1138,8 @@ function osha_workflow_workbench_moderation_approval_form_validate($form, $form_
   $node = $form_state['values']['node'];
   $state = $form_state['values']['state'];
   if ($state == OSHA_WORKFLOW_STATE_TO_BE_REVIEWED) {
-    $reviewer = osha_workflow_get_project_manager($node->nid);
-    if (empty($reviewer)) {
+    $pms = osha_workflow_get_pms_users($node->nid);
+    if (empty($pms)) {
       form_set_error('', t('Cannot change state because there is no Project Manager assigned to this node. Use the Review tab to assign one first.'));
     }
   }

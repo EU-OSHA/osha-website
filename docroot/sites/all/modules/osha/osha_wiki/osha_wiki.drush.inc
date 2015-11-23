@@ -17,6 +17,7 @@ function drush_osha_wiki_categories_sync() {
   $voc = taxonomy_vocabulary_machine_name_load('wiki_categories');
   $continue = TRUE;
   $accontinue = '';
+  $pages_to_migrate = array();
   while ($continue) {
     $categories_url = 'http://oshwiki.eu/api.php?action=query&list=allcategories&format=json&aclimit=500&acprop=size&accontinue=' . $accontinue;
     $content = file_get_contents($categories_url);
@@ -45,12 +46,7 @@ function drush_osha_wiki_categories_sync() {
       foreach ($categorymembers->query->categorymembers as $child) {
         if ($child->type != 'subcat') {
           if ($child->type == 'page') {
-              if (function_exists('drush_log')) {
-                drush_log("Migrating page: '{$child->title}'", "status");
-              }
-              // Mediawiki won't work if too many titles are given at once so we need
-              // to run the migration for every page separately
-              osha_wiki_migrate_wikipages_by_title(array($child->title));
+            $pages_to_migrate[$child->title] = $child->title;
           }
           continue;
         }
@@ -81,6 +77,28 @@ function drush_osha_wiki_categories_sync() {
     }
     else {
       $continue = FALSE;
+    }
+  }
+
+  if(!empty($pages_to_migrate)) {
+    // Remove existing pages.
+    $query = db_select('field_data_title_field', 'a')
+      ->fields('a', array('title_field_value','entity_id'))
+      ->condition('a.bundle', 'wiki_page')
+      ->condition('a.title_field_value', $pages_to_migrate, 'IN');
+
+    $entities = $query->execute()->fetchAllKeyed();
+    foreach ($entities as $pagetitle => $nid) {
+      unset($pages_to_migrate[$pagetitle]);
+    }
+
+    foreach ($pages_to_migrate as $page) {
+      if (function_exists('drush_log')) {
+        drush_log("Migrating page: '{$page}'", "status");
+      }
+      // MediaWiki won't work if too many titles are given at once so we need
+      // to run the migration for every page separately
+      osha_wiki_migrate_wikipages_by_title(array($page));
     }
   }
 }

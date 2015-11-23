@@ -249,21 +249,4 @@ class OshaMigrateWikiByTitles extends OshaMigrateWiki {
     );
   }
 
-  public function prepareRow($row) {
-    parent::prepareRow($row);
-    $query = new EntityFieldQuery();
-
-    $entities = $query->entityCondition('entity_type', 'node')
-      ->propertyCondition('type', 'wiki_page')
-      ->propertyCondition('title', $row->title)
-      ->propertyCondition('status', 1)
-      ->range(0,1)
-      ->execute();
-
-    if (!empty($entities)) {
-      // Wiki page already migrated.
-      return FALSE;
-    }
-  }
-
 }

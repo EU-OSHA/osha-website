@@ -142,7 +142,6 @@ class OshaMigrateWiki extends DynamicMigration {
   }
 }
 
-
 class OshaMigrateSourceWiki extends MigrateSource {
 
   protected static $templateUrl = 'http://oshwiki.eu/index.php?title=Special%3AAsk&q=%5B%5B%3A%2B%5D%5D&po=%3FModification+date%0D%0A%3FCategory%0D%0A%3FMaster+page%0D%0A%3FModification+date%0D%0A%3FLanguage+code%0D%0A%3FNP%0D%0A%3FOP%0D%0A&eq=yes&p%5Bformat%5D=json&p%5Blimit%5D=5&p%5Boffset%5D=2&p%5Blink%5D=subject&p%5Bsort%5D=Modification+date&p%5Border%5D%5Bdesc%5D=1&p%5Bheaders%5D=show&p%5Bmainlabel%5D=&p%5Bintro%5D=&p%5Boutro%5D=&p%5Bsearchlabel%5D=&p%5Bdefault%5D=&p%5Bsyntax%5D=standard&p%5Bprettyprint%5D=1&eq=yes';
@@ -150,14 +149,16 @@ class OshaMigrateSourceWiki extends MigrateSource {
   protected $serviceQueried = FALSE;
   protected $data = array();
   protected $newestItemDate = NULL;
+  protected $skip_datecheck = FALSE;
 
   /**
    * {@inheritdoc}
    */
-  public function __construct($url, array $options = array()) {
+  public function __construct($url, array $options = array(), $skip_datecheck = FALSE) {
     parent::__construct($options);
     $this->url = $url;
     $this->newestItemDate = $this->getNewestItemDate();
+    $this->skip_datecheck = $skip_datecheck;
   }
 
   /**
@@ -305,13 +306,15 @@ class OshaMigrateSourceWiki extends MigrateSource {
           $ob->title = $key;
         }
 
-        $ob->updated = '';
-        if (!empty($data['printouts']['Modification date'][0])) {
-          $updated = $data['printouts']['Modification date'][0];
-          $ob->updated = $updated;
-          if ($updated <= $this->newestItemDate) {
-            // We hit the oldest updated item, end the migration.
-            return FALSE;
+        if ($this->skip_datecheck === FALSE) {
+          $ob->updated = '';
+          if (!empty($data['printouts']['Modification date'][0])) {
+            $updated = $data['printouts']['Modification date'][0];
+            $ob->updated = $updated;
+            if ($updated <= $this->newestItemDate) {
+              // We hit the oldest updated item, end the migration.
+              return FALSE;
+            }
           }
         }
         $body = $this->getWikiPageContent($page_id);

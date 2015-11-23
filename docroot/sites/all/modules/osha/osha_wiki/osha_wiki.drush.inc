@@ -15,7 +15,6 @@ function osha_wiki_drush_command() {
 
 function drush_osha_wiki_categories_sync() {
   $voc = taxonomy_vocabulary_machine_name_load('wiki_categories');
-  $pages_to_migrate = array();
   $continue = TRUE;
   $accontinue = '';
   while ($continue) {
@@ -46,7 +45,12 @@ function drush_osha_wiki_categories_sync() {
       foreach ($categorymembers->query->categorymembers as $child) {
         if ($child->type != 'subcat') {
           if ($child->type == 'page') {
-            $pages_to_migrate[] = $child->title;
+              if (function_exists('drush_log')) {
+                drush_log("Migrating page: '{$child->title}'", "status");
+              }
+              // Mediawiki won't work if too many titles are given at once so we need
+              // to run the migration for every page separately
+              osha_wiki_migrate_wikipages_by_title(array($child->title));
           }
           continue;
         }
@@ -78,11 +82,5 @@ function drush_osha_wiki_categories_sync() {
     else {
       $continue = FALSE;
     }
-  }
-  if (!empty($pages_to_migrate)) {
-    if (function_exists('drush_log')) {
-      drush_log("Starting migration of pages.", "status");
-    }
-    osha_wiki_migrate_wikipages_by_title($pages_to_migrate);
   }
 }

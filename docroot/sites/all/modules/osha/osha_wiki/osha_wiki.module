@@ -217,18 +217,19 @@ class OshaMigrateWikiByTitles extends OshaMigrateWiki {
     if (is_array($arguments['wikipages'])) {
       foreach ($arguments['wikipages'] as $pagetitle) {
         if (!$is_first) {
-          $url .= '+OR+';
+          $url .= '%7C%7C';
         }
         else {
+          $url .= '%5B%5B';
           $is_first = FALSE;
         }
-        $url .= '%5B%5B' . urlencode($pagetitle) . '%5D%5D';
+        $url .= urlencode($pagetitle);
       }
     }
     else {
       $url .= '%5B%5B' . urlencode($arguments['wikipages']) . '%5D%5D';
     }
-    $url .= '&po=%3FModification+date%0D%0A%3FCategory%0D%0A%3FMaster+page%0D%0A%3FModification+date%0D%0A%3FLanguage+code%0D%0A%3FNP%0D%0A%3FOP%0D%0A&eq=yes&p%5Bformat%5D=json&p%5Blink%5D=subject&p%5Bsort%5D=Modification+date&p%5Border%5D%5Bdesc%5D=1&p%5Bheaders%5D=show&p%5Bmainlabel%5D=&p%5Bintro%5D=&p%5Boutro%5D=&p%5Bsearchlabel%5D=&p%5Bdefault%5D=&p%5Bsyntax%5D=standard&eq=yes';
+    $url .= '%5D%5D&po=%3FModification+date%0D%0A%3FCategory%0D%0A%3FMaster+page%0D%0A%3FModification+date%0D%0A%3FLanguage+code%0D%0A%3FNP%0D%0A%3FOP%0D%0A&eq=yes&p%5Bformat%5D=json&p%5Blink%5D=subject&p%5Bsort%5D=Modification+date&p%5Border%5D%5Bdesc%5D=1&p%5Bheaders%5D=show&p%5Bmainlabel%5D=&p%5Bintro%5D=&p%5Boutro%5D=&p%5Bsearchlabel%5D=&p%5Bdefault%5D=&p%5Bsyntax%5D=standard&eq=yes';
     $this->source = new OshaMigrateSourceWiki($url, array(
         'skip_count' => TRUE,
       ),

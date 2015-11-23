@@ -191,6 +191,7 @@ function osha_wiki_cron() {
   $migration = new OshaMigrateWiki(array());
   $migration->processImport();
 
+  module_load_include('inc', 'osha_wiki', 'osha_wiki.drush');
   drush_osha_wiki_categories_sync();
 }
 

@@ -190,6 +190,8 @@ function osha_wiki_cron() {
   watchdog('osha_wiki', "Running Wiki synchronisation cron job", array(), WATCHDOG_INFO);
   $migration = new OshaMigrateWiki(array());
   $migration->processImport();
+
+  drush_osha_wiki_categories_sync();
 }
 
 /**

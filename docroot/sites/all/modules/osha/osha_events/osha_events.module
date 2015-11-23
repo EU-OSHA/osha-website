@@ -110,10 +110,12 @@ function osha_events_form_validate($form, &$form_state) {
   $query = new EntityFieldQuery;
   $query->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', 'events')
-      ->entityCondition('entity_id', $node->nid, '!=')
       ->fieldCondition('field_start_date', 'value', $start_date, '=')
       ->fieldCondition('field_start_date', 'value2', $end_date, '=')
       ->entityOrderBy('entity_id', 'DESC');
+  if ( isset($node->nid) ) {
+      $query->entityCondition('entity_id', $node->nid, '!=');
+  }
   $results = $query->execute();
 
   if (isset($results['node']) && count($results['node']) >= 1) {

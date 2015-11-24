@@ -23,21 +23,19 @@ function drush_osha_wiki_categories_sync() {
     $content = file_get_contents($categories_url);
     $categories = json_decode($content);
     foreach ($categories->query->allcategories as $category) {
-      $name = $category->{'*'};
-      if ($category->subcats) {
-        $term = reset(taxonomy_get_term_by_name($name, $voc->machine_name));
-        if (!$term) {
-          $term = array(
-            'name' => $name,
-            'vid' => $voc->vid,
-            'language' => 'en',
-          );
-          taxonomy_term_save((object)$term);
-          drupal_set_message("Created new term: '{$name}'", "ok");
-        }
-      }
-      elseif (!$category->pages) {
+      if (!$category->subcats) {
         continue;
+      }
+      $name = $category->{'*'};
+      $term = reset(taxonomy_get_term_by_name($name, $voc->machine_name));
+      if (!$term) {
+        $term = array(
+          'name' => $name,
+          'vid' => $voc->vid,
+          'language' => 'en',
+        );
+        taxonomy_term_save((object)$term);
+        drupal_set_message("Created new term: '{$name}'", "ok");
       }
       $term = reset(taxonomy_get_term_by_name($name, $voc->machine_name));
       $categorymembers_url = 'http://oshwiki.eu/api.php?action=query&list=categorymembers&format=json&cmtitle=Category:' . urlencode($name) . '&cmprop=title|type|ids&cmlimit=500';
@@ -63,8 +61,18 @@ function drush_osha_wiki_categories_sync() {
             'parent' => $term->tid,
             'language' => 'en',
           );
-          taxonomy_term_save((object)$child_term);
+          taxonomy_term_save((object) $child_term);
           drupal_set_message("Created new child term of '{$name}': '{$child_name}'", "ok");
+
+          // If creating new term, we search for pages tagged with it
+          $categorymembers_child_url = 'http://oshwiki.eu/api.php?action=query&list=categorymembers&format=json&cmtitle=Category:' . urlencode($child_name) . '&cmprop=title|type|ids&cmlimit=500';
+          $content_3 = file_get_contents($categorymembers_child_url);
+          $categorymembers_child = json_decode($content_3);
+          foreach ($categorymembers_child->query->categorymembers as $child_lvl2) {
+            if ($child_lvl2->type == 'page') {
+              $pages_to_migrate[$child_lvl2->title] = $child_lvl2->title;
+            }
+          }
         }
       }
     }

@@ -443,6 +443,7 @@ function youtube_field_formatter_view($entity_type, $entity, $field, $instance, 
           '#video_id' => $item['video_id'],
           '#image_style' => $display['settings']['image_style'],
           '#image_link' => isset($uri) ? $uri : '',
+          '#alt' => $entity->title_field[$langcode][0]['value'],
         );
       }
       break;
@@ -534,7 +535,8 @@ function youtube_theme($existing, $type, $theme, $path) {
       'variables' => array(
         'video_id' => NULL,
         'image_style' => NULL,
-        'image_link' => NULL
+        'image_link' => NULL,
+        'alt' => NULL,
       ),
       'file' => 'youtube.theme.inc',
     ),

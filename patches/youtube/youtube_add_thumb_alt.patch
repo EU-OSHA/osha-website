@@ -1,0 +1,39 @@
+@@ -443,6 +443,7 @@ function youtube_field_formatter_view($entity_type, $entity, $field, $instance,
+           '#video_id' => $item['video_id'],
+           '#image_style' => $display['settings']['image_style'],
+           '#image_link' => isset($uri) ? $uri : '',
++          '#alt' => $entity->title_field[$langcode][0]['value'],
+         );
+       }
+       break;
+@@ -534,7 +535,8 @@ function youtube_theme($existing, $type, $theme, $path) {
+       'variables' => array(
+         'video_id' => NULL,
+         'image_style' => NULL,
+-        'image_link' => NULL
++        'image_link' => NULL,
++        'alt' => NULL,
+       ),
+       'file' => 'youtube.theme.inc',
+     ),
+diff --git a/docroot/sites/all/modules/contrib/youtube/youtube.theme.inc b/docroot/sites/all/modules/contrib/youtube/youtube.theme.inc
+index 5c5730a..3531ae0 100644
+--- a/docroot/sites/all/modules/contrib/youtube/youtube.theme.inc
++++ b/docroot/sites/all/modules/contrib/youtube/youtube.theme.inc
+@@ -97,6 +97,7 @@ function theme_youtube_video($variables) {
+ function theme_youtube_thumbnail($variables) {
+   $id = $variables['video_id'];
+   $style = $variables['image_style'];
++  $alt = $variables['alt'];
+
+   // Get YouTube settings - TODO is this needed?
+   $size = variable_get('youtube_size', '420x315');
+@@ -118,7 +119,7 @@ function theme_youtube_thumbnail($variables) {
+
+   if ($style) {
+     $uri = 'public://' . $youtube . '/' . $id . '.png';
+-    $image = theme('image_style', array('style_name' => $style, 'path' => $uri));
++    $image = theme('image_style', array('style_name' => $style, 'path' => $uri, 'alt' => $alt, 'title' => $alt));
+   }
+   else {
+     $path = $files . '/' . $youtube . '/' . $id . '.png';

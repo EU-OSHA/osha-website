@@ -97,6 +97,7 @@ function theme_youtube_video($variables) {
 function theme_youtube_thumbnail($variables) {
   $id = $variables['video_id'];
   $style = $variables['image_style'];
+  $alt = $variables['alt'];
 
   // Get YouTube settings - TODO is this needed?
   $size = variable_get('youtube_size', '420x315');
@@ -118,7 +119,7 @@ function theme_youtube_thumbnail($variables) {
 
   if ($style) {
     $uri = 'public://' . $youtube . '/' . $id . '.png';
-    $image = theme('image_style', array('style_name' => $style, 'path' => $uri));
+    $image = theme('image_style', array('style_name' => $style, 'path' => $uri, 'alt' => $alt, 'title' => $alt));
   }
   else {
     $path = $files . '/' . $youtube . '/' . $id . '.png';

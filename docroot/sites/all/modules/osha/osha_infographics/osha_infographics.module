@@ -15,6 +15,17 @@ define('OSHA_INFOGRAPHIC_CONTENT_TYPE_INFOGRAPHIC', 'infographic');
 function osha_infographics_views_pre_render(&$view){
   if ($view->name == 'infographic' && $view->current_display == 'block_2') {
     $view->attachment_before = l(t('All topics'), current_path());
+  }elseif ($view->name == 'infographic' && $view->current_display == 'block_1'){
+    foreach ($view->result as $result){
+      if(isset($result->field_field_image[0]['rendered']['#item'])){
+        $result->field_field_image[0]['rendered']['#item']['alt'] = $result->field_title_field[0]['rendered']['#markup'];
+        $result->field_field_image[0]['rendered']['#item']['title'] = $result->field_title_field[0]['rendered']['#markup'];
+      }
+      if(isset($result->field_field_thumbnail[0]['rendered']['#item'])){
+        $result->field_field_thumbnail[0]['rendered']['#item']['alt'] = $result->field_title_field[0]['rendered']['#markup'];
+        $result->field_field_thumbnail[0]['rendered']['#item']['title'] = $result->field_title_field[0]['rendered']['#markup'];
+      }
+    }
   }
 }
 
@@ -142,3 +153,11 @@ function theme_osha_infographics_multilanguage_image_format($element) {
   $output = substr($output, 0, -3);
   return $output;
 }
+
+/**
+ * Implements hook_node_view
+ */
+function osha_infographics_node_view_alter(&$build){
+  osha_thumbnail_alt_title($build, 'infographic', 'field_thumbnail', 'image');
+}
+

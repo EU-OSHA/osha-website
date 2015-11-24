@@ -36,6 +36,9 @@ function drush_osha_wiki_categories_sync() {
         );
         taxonomy_term_save((object)$term);
         drupal_set_message("Created new term: '{$name}'", "ok");
+        if (function_exists('drush_log')) {
+          drush_log("Created new term: '{$name}'", "ok");
+        }
       }
       $term = reset(taxonomy_get_term_by_name($name, $voc->machine_name));
       $categorymembers_url = 'http://oshwiki.eu/api.php?action=query&list=categorymembers&format=json&cmtitle=Category:' . urlencode($name) . '&cmprop=title|type|ids&cmlimit=500';
@@ -50,6 +53,9 @@ function drush_osha_wiki_categories_sync() {
         }
         if (!$term->tid) {
           drupal_set_message("Could not get the tid of '{$name}'", "error");
+          if (function_exists('drush_log')) {
+            drush_log("Could not get the tid of '{$name}'", "error");
+          }
           continue;
         }
         $child_name = str_replace('Category:', '', $child->title);
@@ -63,6 +69,9 @@ function drush_osha_wiki_categories_sync() {
           );
           taxonomy_term_save((object) $child_term);
           drupal_set_message("Created new child term of '{$name}': '{$child_name}'", "ok");
+          if (function_exists('drush_log')) {
+            drush_log("Created new child term of '{$name}': '{$child_name}'", "ok");
+          }
 
           // If creating new term, we search for pages tagged with it
           $categorymembers_child_url = 'http://oshwiki.eu/api.php?action=query&list=categorymembers&format=json&cmtitle=Category:' . urlencode($child_name) . '&cmprop=title|type|ids&cmlimit=500';
@@ -98,6 +107,9 @@ function drush_osha_wiki_categories_sync() {
 
     foreach ($pages_to_migrate as $page) {
       drupal_set_message("Migrating page: '{$page}'", "status");
+      if (function_exists('drush_log')) {
+        drush_log("Migrating page: '{$page}'", "status");
+      }
       // MediaWiki won't work if too many titles are given at once so we need
       // to run the migration for every page separately
       osha_wiki_migrate_wikipages_by_title(array($page));

@@ -10,6 +10,11 @@ function osha_wiki_drush_command() {
     'aliases' => array('osha-wcs'),
   );
 
+  $items['osha_wiki_update_all_wikipages'] = array(
+    'description' => 'Run wikipages migration without checking the last creation date.',
+    'aliases' => array('osha-wuaw'),
+  );
+
   return $items;
 }
 
@@ -115,4 +120,9 @@ function drush_osha_wiki_categories_sync() {
       osha_wiki_migrate_wikipages_by_title(array($page));
     }
   }
+}
+
+function drush_osha_wiki_update_all_wikipages() {
+  $migration = new OshaMigrateWiki(array('skip_datecheck' => TRUE));
+  $migration->processImport();
 }

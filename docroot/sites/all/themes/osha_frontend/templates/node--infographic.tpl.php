@@ -51,6 +51,8 @@
         'path' => $content['field_image']['#items'][0]['uri'],
         'height' => NULL,
         'width' => 220,
+        'alt' => $content['title_field']['#items'][0]['value'],
+        'title' => $content['title_field']['#items'][0]['value'],
       ));
     }
 

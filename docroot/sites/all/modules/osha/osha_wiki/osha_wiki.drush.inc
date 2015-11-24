@@ -124,5 +124,6 @@ function drush_osha_wiki_categories_sync() {
 
 function drush_osha_wiki_update_all_wikipages() {
   $migration = new OshaMigrateWiki(array('skip_datecheck' => TRUE));
+  $migration->prepareUpdate();
   $migration->processImport();
 }

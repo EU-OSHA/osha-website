@@ -23,24 +23,24 @@ function drush_osha_wiki_categories_sync() {
     $content = file_get_contents($categories_url);
     $categories = json_decode($content);
     foreach ($categories->query->allcategories as $category) {
-      if (!$category->subcats) {
-        continue;
-      }
       $name = $category->{'*'};
-      $term = reset(taxonomy_get_term_by_name($name));
-      if (!$term) {
-        $term = array(
-          'name' => $name,
-          'vid' => $voc->vid,
-          'language' => 'en',
-        );
-        taxonomy_term_save((object)$term);
-        if (function_exists('drush_log')) {
-          drush_log("Created new term: '{$name}'", "ok");
+      if ($category->subcats) {
+        $term = reset(taxonomy_get_term_by_name($name, $voc->machine_name));
+        if (!$term) {
+          $term = array(
+            'name' => $name,
+            'vid' => $voc->vid,
+            'language' => 'en',
+          );
+          taxonomy_term_save((object)$term);
+          drupal_set_message("Created new term: '{$name}'", "ok");
         }
       }
-      $term = reset(taxonomy_get_term_by_name($name));
-      $categorymembers_url = 'http://oshwiki.eu/api.php?action=query&list=categorymembers&format=json&cmtitle=Category:' . urlencode($name) . '&cmprop=title|type|ids';
+      elseif (!$category->pages) {
+        continue;
+      }
+      $term = reset(taxonomy_get_term_by_name($name, $voc->machine_name));
+      $categorymembers_url = 'http://oshwiki.eu/api.php?action=query&list=categorymembers&format=json&cmtitle=Category:' . urlencode($name) . '&cmprop=title|type|ids&cmlimit=500';
       $content_2 = file_get_contents($categorymembers_url);
       $categorymembers = json_decode($content_2);
       foreach ($categorymembers->query->categorymembers as $child) {
@@ -51,13 +51,11 @@ function drush_osha_wiki_categories_sync() {
           continue;
         }
         if (!$term->tid) {
-          if (function_exists('drush_log')) {
-            drush_log("Could not get the tid of '{$name}'", "error");
-          }
+          drupal_set_message("Could not get the tid of '{$name}'", "error");
           continue;
         }
         $child_name = str_replace('Category:', '', $child->title);
-        $child_term = reset(taxonomy_get_term_by_name($child_name));
+        $child_term = reset(taxonomy_get_term_by_name($child_name, $voc->machine_name));
         if (!$child_term) {
           $child_term = array(
             'name' => $child_name,
@@ -66,9 +64,7 @@ function drush_osha_wiki_categories_sync() {
             'language' => 'en',
           );
           taxonomy_term_save((object)$child_term);
-          if (function_exists('drush_log')) {
-            drush_log("Created new child term of '{$name}': '{$child_name}'", "ok");
-          }
+          drupal_set_message("Created new child term of '{$name}': '{$child_name}'", "ok");
         }
       }
     }
@@ -93,9 +89,7 @@ function drush_osha_wiki_categories_sync() {
     }
 
     foreach ($pages_to_migrate as $page) {
-      if (function_exists('drush_log')) {
-        drush_log("Migrating page: '{$page}'", "status");
-      }
+      drupal_set_message("Migrating page: '{$page}'", "status");
       // MediaWiki won't work if too many titles are given at once so we need
       // to run the migration for every page separately
       osha_wiki_migrate_wikipages_by_title(array($page));

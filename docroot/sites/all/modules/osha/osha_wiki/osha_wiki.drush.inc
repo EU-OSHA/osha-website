@@ -34,18 +34,19 @@ function drush_osha_wiki_categories_sync() {
       $name = $category->{'*'};
       $term = reset(taxonomy_get_term_by_name($name, $voc->machine_name));
       if (!$term) {
-        $term = array(
-          'name' => $name,
-          'vid' => $voc->vid,
-          'language' => 'en',
-        );
-        taxonomy_term_save((object)$term);
-        drupal_set_message("Created new term: '{$name}'", "ok");
-        if (function_exists('drush_log')) {
-          drush_log("Created new term: '{$name}'", "ok");
-        }
+        continue;
+//        $term = array(
+//          'name' => $name,
+//          'vid' => $voc->vid,
+//          'language' => 'en',
+//        );
+//        taxonomy_term_save((object)$term);
+//        drupal_set_message("Created new term: '{$name}'", "ok");
+//        if (function_exists('drush_log')) {
+//          drush_log("Created new term: '{$name}'", "ok");
+//        }
+//        $term = reset(taxonomy_get_term_by_name($name, $voc->machine_name));
       }
-      $term = reset(taxonomy_get_term_by_name($name, $voc->machine_name));
       $categorymembers_url = 'http://oshwiki.eu/api.php?action=query&list=categorymembers&format=json&cmtitle=Category:' . urlencode($name) . '&cmprop=title|type|ids&cmlimit=500';
       $content_2 = file_get_contents($categorymembers_url);
       $categorymembers = json_decode($content_2);

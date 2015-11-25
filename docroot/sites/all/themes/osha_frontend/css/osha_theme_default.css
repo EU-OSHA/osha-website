@@ -7334,6 +7334,7 @@ body.page-node-5429 .oshwiki-featured-articles {
 
 .node.node-article.view-mode-full .field.field-name-field-image.field-type-image.field-label-hidden .field-items .field-item  img {
 	width:100%;
+	height:auto;
 }
 
 #edit-submit-publications-index{

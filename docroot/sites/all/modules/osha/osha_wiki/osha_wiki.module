@@ -205,7 +205,6 @@ function osha_wiki_migrate_wikipages_by_title($wikipages) {
     return;
   }
   $migration = new OshaMigrateWikiByTitles(array('wikipages' => $wikipages));
-  $migration->prepareUpdate();
   $migration->processImport();
 }
 

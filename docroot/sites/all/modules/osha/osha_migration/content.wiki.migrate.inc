@@ -305,15 +305,13 @@ class OshaMigrateSourceWiki extends MigrateSource {
           $ob->language = 'en';
         }
 
-        if ($this->skip_datecheck === FALSE) {
-          $ob->updated = '';
-          if (!empty($data['printouts']['Modification date'][0])) {
-            $updated = $data['printouts']['Modification date'][0];
-            $ob->updated = $updated;
-            if ($updated <= $this->newestItemDate) {
-              // We hit the oldest updated item, end the migration.
-              return FALSE;
-            }
+        $ob->updated = '';
+        if (!empty($data['printouts']['Modification date'][0])) {
+          $updated = $data['printouts']['Modification date'][0];
+          $ob->updated = $updated;
+          if ($updated <= $this->newestItemDate && $this->skip_datecheck === FALSE) {
+            // We hit the oldest updated item, end the migration.
+            return FALSE;
           }
         }
         $body = $this->getWikiPageContent($page_id);

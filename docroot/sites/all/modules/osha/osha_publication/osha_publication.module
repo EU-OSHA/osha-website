@@ -518,3 +518,10 @@ function osha_publication_osha_tmgmt_i18n_string_list() {
   module_load_include('inc', 'osha_publication', 'osha_publication.translations');
   return osha_publication_get_translatable_strings();
 }
+
+/**
+ * Implements hook_node_view
+ */
+function osha_publication_node_view_alter(&$build){
+  osha_thumbnail_alt_title($build, 'publication', 'field_cover_image', 'image');
+}

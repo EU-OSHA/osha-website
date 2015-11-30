@@ -52,9 +52,6 @@ if [ ${ecode} != 0 ]; then
   exit ${ecode};
 fi
 
-# temporary
-drush fr -y --force osha_events
-
 # Build the site
 drush osha_build -y
 if [ ${ecode} != 0 ]; then
@@ -78,7 +75,3 @@ if [ ! -z "$post_update" ]; then
   ../$post_update
   drush cc all
 fi
-
-# Post-install release 3
-# drush ne-import --file=../content/internal-doc-webform.drupal
-# drush php-script ../scripts/s9/post-update.php

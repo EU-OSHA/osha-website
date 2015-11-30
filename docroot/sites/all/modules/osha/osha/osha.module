@@ -1055,3 +1055,24 @@ function osha_pathologic_alter(&$url_params, $parts, $settings) {
     $url_params['options']['use_original'] = TRUE;
   }
 }
+
+/**
+ * Add alt and title attributes to images thumbnails
+ */
+function osha_thumbnail_alt_title(&$build, $content_type, $field, $formatter){
+  $current_language = 'en';
+
+  if($build['#bundle'] == $content_type){
+    if(isset($build[$field]) && $build[$field]['#formatter'] == $formatter){
+      foreach($build[$field] as $key => $image){
+        if(is_array($image) && isset($image['#item'])){
+          if(isset($build['#node']->title_field[$build['#language']][0]['value'])){
+            $current_language = $build['#language'];
+          }
+          $build[$field][$key]['#item']['alt'] = $build['#node']->title_field[$current_language][0]['value'];
+          $build[$field][$key]['#item']['title'] = $build['#node']->title_field[$current_language][0]['value'];
+        }
+      }
+    }
+  }
+}

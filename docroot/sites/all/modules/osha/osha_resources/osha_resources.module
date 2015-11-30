@@ -26,8 +26,9 @@ function osha_resources_node_view_alter(&$build){
   if($build['#bundle'] == 'youtube'){
     if(isset($build['field_youtube']) && $build['field_youtube']['#formatter'] == 'youtube_thumbnail'){
       foreach($build['field_youtube'] as $key => $youtube){
-        if(is_array($youtube) && isset($youtube['#image_link']['options']))
+        if(is_array($youtube) && isset($youtube['#image_link']['options'])){
           $build['field_youtube'][$key]['#image_link']['options']['attributes']['target'] = '_blank';
+        }
       }
     }
   }

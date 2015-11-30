@@ -11,6 +11,6 @@ call drush downsync_sql @osha.staging.sync @osha.local -y -v
 rem Devify - development settings
 call drush devify --yes
 call drush devify_solr
-
+call drush devify_ldap
 rem Build the site
 call drush osha_build -y

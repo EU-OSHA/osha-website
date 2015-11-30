@@ -14,7 +14,11 @@ body {
 	max-width: 100%;
 }
 
+/*Notes to editor*/
 
+.field-name-field-pr-notes-to-editor .field-items .field-item span{
+	padding-top:17px;
+}
 
 /* HEADER */
 #socialNetworksBlue{

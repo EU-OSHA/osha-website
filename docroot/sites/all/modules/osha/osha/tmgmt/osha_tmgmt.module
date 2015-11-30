@@ -1033,11 +1033,13 @@ function osha_tmgmt_form_alter(&$form, &$form_state, $form_id) {
         && user_access('preview layout validation')) {
         $menu_link_comp = explode(':', $form_state['item']->item_id) ;
         $menu_link = menu_link_load($menu_link_comp[2]);
-        $form['preview'] = array(
+        //$form['preview'] = array(
+        $menu_link_title = ($form_state['item']->item_id).':title';
+        $form['review'][$menu_link_title][$menu_link_title]['actions']['preview'] = array(
           '#theme' => 'link',
           '#text' => 'Preview layout',
           '#path' => $menu_link['link_path'],
-          '#weight' => -10,
+          '#weight' => 10,
           '#options' => array(
             'attributes' => array('target' => '_blank'),
             'html' => FALSE,

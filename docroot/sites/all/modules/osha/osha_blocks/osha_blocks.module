@@ -190,7 +190,8 @@ function osha_blocks_get_related_wiki($node) {
     }
 
     // Search for wikies by nace and thesaurus (see CW-916).
-    if ($count = count($tagged_wikis) < 2) {
+    // But only if the wiki category is set (see MC-75)
+    if (!empty($wiki_categories_tids) && $count = count($tagged_wikis) < 2) {
       $limit = 2 - $count;
       $taxon_fields = array('field_thesaurus', 'field_nace_codes');
       $solr_taxon_fields = array();

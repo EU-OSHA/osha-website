@@ -39,6 +39,7 @@ td{
                <td width="396" style="padding-top: 0px;vertical-align: top;padding-right:50px;" class="left-column">
                 <?php
                   $elements_no = sizeof($items);
+                  $category = 0;
                   foreach ($items as $idx => $item) {
                     if ($item['#entity_type'] == 'taxonomy_term' && ($idx+1 <= $elements_no)) {
                       if (($idx == $elements_no-1) && ($items[$idx]['#entity_type'] == 'taxonomy_term')) {
@@ -59,10 +60,11 @@ td{
                           </table>
                         <?php
                         }
+                        $category = 1;
                         print(render($item));
                       }
                     } else {
-                      if ($idx != 1 && $item["#view_mode"] == "highlights_item") {?>
+                      if ($category != 1 && $item["#view_mode"] == "highlights_item") {?>
                         <table border="0" cellpadding="0" cellspacing="0" width="100%">
                           <tbody>
                           <tr>
@@ -75,6 +77,7 @@ td{
                         </table>
                       <?php
                       }
+                      $category = 0;
                       print(render($item));
                     }
                   }

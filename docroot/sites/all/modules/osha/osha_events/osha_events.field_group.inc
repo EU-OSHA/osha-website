@@ -119,14 +119,14 @@ function osha_events_field_group_info() {
   $field_group->mode = 'default';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Related documents',
+    'label' => 'Related resources',
     'weight' => '4',
     'children' => array(
       0 => 'field_related_documents',
     ),
     'format_type' => 'div',
     'format_settings' => array(
-      'label' => 'Related documents',
+      'label' => 'Related resources',
       'instance_settings' => array(
         'id' => '',
         'classes' => 'group-events-related-documents field-group-div',

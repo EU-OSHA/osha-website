@@ -1686,11 +1686,7 @@ Grey - Only web or not attendance',
   // Exported field_instance: 'node-events-field_website_of_event'
   $field_instances['node-events-field_website_of_event'] = array(
     'bundle' => 'events',
-    'default_value' => array(
-      0 => array(
-        'title' => 'Website of event',
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => 'Mandatory',
     'display' => array(

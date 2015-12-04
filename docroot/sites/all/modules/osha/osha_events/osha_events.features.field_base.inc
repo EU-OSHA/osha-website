@@ -566,6 +566,7 @@ function osha_events_field_default_field_bases() {
       'allowed_values' => array(
         'Event' => 'Event',
         'Visit' => 'Visit',
+        'Webminar' => 'Webminar',
       ),
       'allowed_values_function' => '',
       'entity_translation_sync' => FALSE,

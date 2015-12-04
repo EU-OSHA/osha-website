@@ -1688,7 +1688,7 @@ Grey - Only web or not attendance',
     'bundle' => 'events',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Mandatory',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'hidden',

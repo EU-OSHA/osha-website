@@ -256,7 +256,8 @@ function osha_lingua_tools_create_translations($form, &$form_state) {
   $node = menu_get_object();
   $source_lang = $node->translations->original;
   $translation_handler = entity_translation_get_handler('node', $node);
-
+  $type = $node->type;
+  $fields = field_info_instances('node', $type);
   foreach ($languages as $lang_code => $value) {
     if ($value) {
       $translation_handler->setTranslation(
@@ -271,6 +272,32 @@ function osha_lingua_tools_create_translations($form, &$form_state) {
     }
   }
   $translation_handler->saveTranslations();
+
+  $node = workbench_moderation_node_current_load($node);
+  $new_node = new stdClass();
+  $new_node->id = $node->nid;
+  $new_node->nid = $node->nid;
+  $new_node->vid = $node->vid;
+  $new_node->type = $type;
+  $new_node->bundle = $type;
+  $new_node->translations = $node->translations;
+  foreach ($languages as $lang_code => $value) {
+    if ($value) {
+      foreach ($fields as $field) {
+        // MC-73 Copy values for translatable file fields
+        $fieldname = $field['field_name'];
+        $transfield = istranslatable($field['field_id']);
+        $info = field_info_field($fieldname);
+        if ($transfield == 1
+          && $field['widget']['module'] == 'file'
+          && ($info['cardinality'] > 1 || $info['cardinality'] == FIELD_CARDINALITY_UNLIMITED)) {
+            $new_node->{$fieldname}[$lang_code] = $node->{$fieldname}[$source_lang];
+        }
+      }
+    }
+  }
+  field_attach_update('node', $new_node);
+
   // clone url_aliases
   foreach ($languages as $lang_code => $value) {
     if ($value) {

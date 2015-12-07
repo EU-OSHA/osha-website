@@ -263,8 +263,7 @@ function osha_lingua_tools_create_translations($form, &$form_state) {
       foreach ($fields as $field) {
         // MC-73 Copy values for translatable file fields
         $fieldname = $field['field_name'];
-        $fieldid = $field['field_id'];
-        $transfield = istranslatable($fieldid);
+        $transfield = istranslatable($field['field_id']);
         $info = field_info_field($fieldname);
         if ($transfield == 1
           && $field['widget']['module'] == 'file'

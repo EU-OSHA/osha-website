@@ -257,7 +257,7 @@ function osha_lingua_tools_create_translations($form, &$form_state) {
   $source_lang = $node->translations->original;
   $translation_handler = entity_translation_get_handler('node', $node);
   $type = $node->type;
-  $fields = field_info_instances("node", $type);
+  $fields = field_info_instances('node', $type);
   foreach ($languages as $lang_code => $value) {
     if ($value) {
       $translation_handler->setTranslation(
@@ -279,7 +279,7 @@ function osha_lingua_tools_create_translations($form, &$form_state) {
   $new_node->nid = $node->nid;
   $new_node->vid = $node->vid;
   $new_node->type = $type;
-  $new_node->bundle = $node->type;
+  $new_node->bundle = $type;
   $new_node->translations = $node->translations;
   foreach ($languages as $lang_code => $value) {
     if ($value) {

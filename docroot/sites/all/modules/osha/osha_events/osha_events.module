@@ -37,6 +37,9 @@ function osha_events_form_alter(&$form, &$form_state, $form_id) {
     if(!isset($form['#node']->nid)){
       drupal_add_js(drupal_get_path('module', 'osha_events') . '/js/new_event_form.js');
     }
+
+    // MC-84 Hide country and city from the form when selected type is Webinar
+    drupal_add_js(drupal_get_path('module', 'osha_events') . '/js/event_form.js');
   }
 }
 

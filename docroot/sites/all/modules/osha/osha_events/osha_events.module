@@ -69,8 +69,8 @@ function osha_events_form_validate($form, &$form_state) {
   $values = $form_state['values'];
   $node = $form_state['node'];
   if ($values['status'] == 1) {
-    if (empty($values['field_event_type'][LANGUAGE_NONE][0]['value']) || $values['field_event_type'][LANGUAGE_NONE][0]['value'] != t('Event')) {
-      form_set_error('field_event_type', 'Only events of type <b>Event</b> may be published');
+    if (empty($values['field_event_type'][LANGUAGE_NONE][0]['value']) || $values['field_event_type'][LANGUAGE_NONE][0]['value'] == t('Visit')) {
+      form_set_error('field_event_type', 'Events of type <b>Visit</b> can not be published');
     }
     // if (empty($values['body'][$node->language][0]['value'])) {
     //   form_set_error('body', 'You have to add a Description.');

@@ -80,7 +80,7 @@ function osha_events_form_validate($form, &$form_state) {
   $node = $form_state['node'];
   if ($values['status'] == 1) {
     $type = $values['field_event_type'][LANGUAGE_NONE][0]['value'];
-    if (empty($type) || $type == t('Visit')) {
+    if (empty($type) || $type == 'Visit') {
       form_set_error('field_event_type', 'Events of type <b>Visit</b> can not be published');
     }
     // if (empty($values['body'][$node->language][0]['value'])) {
@@ -105,7 +105,7 @@ function osha_events_form_validate($form, &$form_state) {
     }
 
     // Country and city are not required for webminar events.
-    if ($type != t('Webminar')) {
+    if ($type != 'Webminar') {
       if (empty($values['field_country_code'][LANGUAGE_NONE][0]['value'])) {
         form_set_error('field_country_code', 'You have to add a Country Code.');
       }

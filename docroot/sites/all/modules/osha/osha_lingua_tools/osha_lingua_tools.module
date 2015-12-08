@@ -29,7 +29,6 @@ function osha_lingua_tools_node_submit($node, $form, &$form_state) {
   // from other languages too.
   $old_node = $form['#node'];
   $fields = _osha_lingua_tools_translatable_field_instances($node->type);
-  $needs_save = FALSE;
   foreach ($fields as $field) {
     $fieldname = $field['field_name'];
     $diff = _osha_lingua_tools_filefield_diff($old_node, $node, $fieldname, 'en');
@@ -37,7 +36,6 @@ function osha_lingua_tools_node_submit($node, $form, &$form_state) {
     $files_deleted = $diff['files_deleted'];
 
     if (!empty($files_deleted)) {
-      $needs_save = TRUE;
       foreach ($node->{$fieldname} as $lang => $items) {
         foreach ($items as $key => $item) {
           if (array_key_exists($item['fid'], $files_deleted)) {
@@ -47,7 +45,6 @@ function osha_lingua_tools_node_submit($node, $form, &$form_state) {
       }
     }
     if (!empty($files_added)) {
-      $needs_save = TRUE;
       foreach ($files_added as $file) {
         foreach ($node->{$fieldname} as $lang => &$items) {
           if ($lang == 'en') {
@@ -66,9 +63,6 @@ function osha_lingua_tools_node_submit($node, $form, &$form_state) {
         }
       }
     }
-  }
-  if ($needs_save) {
-    node_save($node);
   }
 }
 

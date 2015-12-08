@@ -21,6 +21,86 @@ function osha_lingua_tools_menu() {
 function osha_lingua_tools_form_alter(&$form, &$form_state, $form_id) {
 }
 
+/**
+ * Implements hook_node_submit().
+ */
+function osha_lingua_tools_node_submit($node, $form, &$form_state) {
+  // MC-73 When adding/deleting a file in english, it needs to be added/deleted
+  // from other languages too.
+  $old_node = $form['#node'];
+  $fields = field_info_instances('node', $node->type);
+  $needs_save = FALSE;
+  foreach ($fields as $field) {
+    $fieldname = $field['field_name'];
+    $transfield = istranslatable($field['field_id']);
+    $info = field_info_field($fieldname);
+    if ($transfield == 1
+      && $field['widget']['module'] == 'file'
+      && ($info['cardinality'] > 1 || $info['cardinality'] == FIELD_CARDINALITY_UNLIMITED)) {
+      $files_added = $files_deleted = array();
+      $old_node_elems = isset ($old_node->{$fieldname}['en']) && !empty($old_node->{$fieldname}['en']);
+      $node_elems = isset ($node->{$fieldname}['en']) && !empty($node->{$fieldname}['en']);
+      if ($old_node_elems && $node_elems) {
+        foreach ($old_node->{$fieldname}['en'] as $key => $old_file) {
+          $files_deleted[$old_file['fid']] = $old_node->{$fieldname}['en'][$key];
+        }
+        foreach ($node->{$fieldname}['en'] as $key => $file) {
+          if (array_key_exists($file['fid'], $files_deleted)) {
+            unset($files_deleted[$file['fid']]);
+          }
+          else {
+            $files_added[$file['fid']] = $node->{$fieldname}['en'][$key];
+          }
+        }
+      }
+      elseif ($old_node_elems) {
+        foreach ($old_node->{$fieldname}['en'] as $key => $old_file) {
+          $files_deleted[$old_file['fid']] = $old_node->{$fieldname}['en'][$key];
+        }
+      }
+      elseif ($node_elems) {
+        foreach ($node->{$fieldname}['en'] as $key => $file) {
+          $files_added[$file['fid']] = $old_node->{$fieldname}['en'][$key];
+        }
+      }
+
+      if (!empty($files_deleted)) {
+        $needs_save = TRUE;
+        foreach ($node->{$fieldname} as $lang => $items) {
+          foreach ($items as $key => $item) {
+            if (array_key_exists($item['fid'], $files_deleted)) {
+              unset($node->{$fieldname}[$lang][$key]);
+            }
+          }
+        }
+      }
+      if (!empty($files_added)) {
+        $needs_save = TRUE;
+        foreach ($files_added as $file) {
+          foreach ($node->{$fieldname} as $lang => &$items) {
+            if ($lang == 'en') {
+              continue;
+            }
+            $exists = FALSE;
+            foreach ($items as $item) {
+              if ($item['fid'] == $file['fid']) {
+                $exists = TRUE;
+                break;
+              }
+            }
+            if (!$exists) {
+              $items[] = $file;
+            }
+          }
+        }
+      }
+    }
+  }
+  if ($needs_save) {
+    node_save($node);
+  }
+}
+
 function form_lingua_form($form, &$form_state) {
   $node = menu_get_object();
   $numlen = count($node->translations->data);

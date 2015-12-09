@@ -21,6 +21,92 @@ function osha_lingua_tools_menu() {
 function osha_lingua_tools_form_alter(&$form, &$form_state, $form_id) {
 }
 
+/**
+ * Implements hook_node_submit().
+ */
+function osha_lingua_tools_node_submit($node, $form, &$form_state) {
+  // MC-73 When adding/deleting a file in english, it needs to be added/deleted
+  // from other languages too.
+  $old_node = $form['#node'];
+  $fields = _osha_lingua_tools_translatable_field_instances($node->type);
+  foreach ($fields as $field) {
+    $fieldname = $field['field_name'];
+    $diff = _osha_lingua_tools_filefield_diff($old_node, $node, $fieldname, 'en');
+    $files_added = $diff['files_added'];
+    $files_deleted = $diff['files_deleted'];
+
+    if (!empty($files_deleted)) {
+      foreach ($node->{$fieldname} as $lang => $items) {
+        foreach ($items as $key => $item) {
+          if (array_key_exists($item['fid'], $files_deleted)) {
+            unset($node->{$fieldname}[$lang][$key]);
+          }
+        }
+      }
+    }
+    if (!empty($files_added)) {
+      foreach ($files_added as $file) {
+        foreach ($node->{$fieldname} as $lang => &$items) {
+          if ($lang == 'en') {
+            continue;
+          }
+          $exists = FALSE;
+          foreach ($items as $item) {
+            if ($item['fid'] == $file['fid']) {
+              $exists = TRUE;
+              break;
+            }
+          }
+          if (!$exists) {
+            $items[] = $file;
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Helper function to get the files added/deleted in a certain field after a
+ * node save.
+ *
+ * @param $old_node
+ * @param $new_node
+ * @param $fieldname
+ * @param string $language
+ * @return array
+ *  Array with files added/deleted.
+ */
+function _osha_lingua_tools_filefield_diff($old_node, $new_node, $fieldname, $language = 'en') {
+  $files_added = $files_deleted = array();
+  $old_node_elems = isset ($old_node->{$fieldname}[$language]) && !empty($old_node->{$fieldname}[$language]);
+  $node_elems = isset ($new_node->{$fieldname}[$language]) && !empty($new_node->{$fieldname}[$language]);
+  if ($old_node_elems) {
+    foreach ($old_node->{$fieldname}[$language] as $key => $old_file) {
+      $files_deleted[$old_file['fid']] = $old_node->{$fieldname}[$language][$key];
+    }
+    if ($node_elems) {
+      foreach ($new_node->{$fieldname}[$language] as $key => $file) {
+        if (array_key_exists($file['fid'], $files_deleted)) {
+          unset($files_deleted[$file['fid']]);
+        }
+        else {
+          $files_added[$file['fid']] = $new_node->{$fieldname}[$language][$key];
+        }
+      }
+    }
+  }
+  elseif ($node_elems) {
+    foreach ($new_node->{$fieldname}[$language] as $key => $file) {
+      $files_added[$file['fid']] = $old_node->{$fieldname}[$language][$key];
+    }
+  }
+  return array(
+    'files_added' => $files_added,
+    'files_deleted' => $files_deleted,
+  );
+}
+
 function form_lingua_form($form, &$form_state) {
   $node = menu_get_object();
   $numlen = count($node->translations->data);
@@ -257,7 +343,7 @@ function osha_lingua_tools_create_translations($form, &$form_state) {
   $source_lang = $node->translations->original;
   $translation_handler = entity_translation_get_handler('node', $node);
   $type = $node->type;
-  $fields = field_info_instances('node', $type);
+  $fields = _osha_lingua_tools_translatable_field_instances($type);
   foreach ($languages as $lang_code => $value) {
     if ($value) {
       $translation_handler->setTranslation(
@@ -285,14 +371,7 @@ function osha_lingua_tools_create_translations($form, &$form_state) {
     if ($value) {
       foreach ($fields as $field) {
         // MC-73 Copy values for translatable file fields
-        $fieldname = $field['field_name'];
-        $transfield = istranslatable($field['field_id']);
-        $info = field_info_field($fieldname);
-        if ($transfield == 1
-          && $field['widget']['module'] == 'file'
-          && ($info['cardinality'] > 1 || $info['cardinality'] == FIELD_CARDINALITY_UNLIMITED)) {
-            $new_node->{$fieldname}[$lang_code] = $node->{$fieldname}[$source_lang];
-        }
+        $new_node->{$field['field_name']}[$lang_code] = $node->{$field['field_name']}[$source_lang];
       }
     }
   }
@@ -309,4 +388,28 @@ function osha_lingua_tools_create_translations($form, &$form_state) {
       path_save($args);
     }
   }
+}
+
+/**
+ * Helper function to get translatable fields with cardinality > 1.
+ *
+ * @param $bundle
+ *  The type of the node to call field_info_instances().
+ * @return array
+ *  Array of fields.
+ */
+function _osha_lingua_tools_translatable_field_instances($bundle) {
+  $translatable_fields = array();
+  $fields = field_info_instances('node', $bundle);
+  foreach ($fields as $field) {
+    $fieldname = $field['field_name'];
+    $transfield = istranslatable($field['field_id']);
+    $info = field_info_field($fieldname);
+    if ($transfield == 1
+      && $field['widget']['module'] == 'file'
+      && ($info['cardinality'] > 1 || $info['cardinality'] == FIELD_CARDINALITY_UNLIMITED)) {
+      $translatable_fields[] = $field;
+    }
+  }
+  return $translatable_fields;
 }

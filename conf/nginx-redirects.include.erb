@@ -62,3 +62,8 @@ rewrite ^/fop/slovenia/(.*)   /about-eu-osha/national-focal-points/slovenia  per
 rewrite ^/osha/sub/fop/Bulgaria /about-eu-osha/national-focal-points/bulgaria permanent;
 rewrite ^/(../)?sector/healthcare/index_html   http://oshwiki.eu/wiki/Category:Health permanent;
 
+
+# 20151210 - ASI773501
+rewrite ^/(../)?priority_groups/disability(.*)$  http://oshwiki.eu/wiki/Disability_Management permanent;
+rewrite ^/(../)?slc_cse_search_results(.*)$ /$1search/site/ permanent;
+rewrite ^/(../)?fop/netherlands(.*)$   /$1about-eu-osha/national-focal-points/netherlands permanent;

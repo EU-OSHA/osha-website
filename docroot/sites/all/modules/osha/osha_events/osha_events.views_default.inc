@@ -1989,6 +1989,13 @@ function osha_events_views_default_views() {
   $handler->display->display_options['footer']['result']['table'] = 'views';
   $handler->display->display_options['footer']['result']['field'] = 'result';
   $handler->display->display_options['footer']['result']['content'] = '<span class="result_summary">Displaying @start - @end of @total</span>';
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = '<div class="view-empty">No results</div>';
+  $handler->display->display_options['empty']['area']['format'] = 'full_html';
   /* Field: Start date excluded from display */
   $handler->display->display_options['fields']['field_start_date']['id'] = 'field_start_date';
   $handler->display->display_options['fields']['field_start_date']['table'] = 'field_data_field_start_date';
@@ -2251,6 +2258,7 @@ function osha_events_views_default_views() {
     t('›'),
     t('»'),
     t('<span class="result_summary">Displaying @start - @end of @total</span>'),
+    t('<div class="view-empty">No results</div>'),
     t('[field_start_date-value] - [field_start_date-value2]'),
     t('[field_start_date] - [field_start_date_1]'),
     t('LOCATION'),

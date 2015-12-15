@@ -92,10 +92,10 @@ function osha_homepage_default_fe_block_settings() {
     'visibility' => 1,
   );
 
-  $export['views-interactive_dashboard-slidehow'] = array(
+  $export['views-esener_carousel-slideshow'] = array(
     'cache' => -1,
     'custom' => 0,
-    'delta' => 'interactive_dashboard-slidehow',
+    'delta' => 'esener_carousel-slideshow',
     'i18n_block_language' => array(),
     'i18n_mode' => 0,
     'module' => 'views',
@@ -128,7 +128,7 @@ function osha_homepage_default_fe_block_settings() {
         'weight' => 0,
       ),
     ),
-    'title' => '',
+    'title' => '<none>',
     'visibility' => 1,
   );
 

@@ -22,8 +22,7 @@ function osha_homepage_init() {
  */
 function osha_homepage_views_pre_render(&$view) {
   $jssor_path = libraries_get_path('jquery-slider-master');
-
-  if ($view->name == 'interactive_dashboard') {
+  if ($view->name == 'esener_carousel') {
     drupal_add_js($jssor_path . '/jssor.slider.mini.js');
     drupal_add_css($jssor_path . '/jssor.css');
   }

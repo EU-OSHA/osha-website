@@ -26,10 +26,10 @@ function osha_homepage_views_api($module = NULL, $api = NULL) {
 function osha_homepage_fe_nodequeue_export_fields() {
   $nodequeues = array();
 
-  // Exported nodequeues: interactive_dashboard_guide
-  $nodequeues['interactive_dashboard_guide'] = array(
-    'name' => 'interactive_dashboard_guide',
-    'title' => 'Interactive dashboard guide',
+  // Exported nodequeues: esener_carousel
+  $nodequeues['esener_carousel'] = array(
+    'name' => 'esener_carousel',
+    'title' => 'Esener Carousel',
     'subqueue_title' => '',
     'size' => 0,
     'link' => '',

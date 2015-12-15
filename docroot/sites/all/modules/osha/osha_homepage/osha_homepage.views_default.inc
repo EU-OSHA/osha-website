@@ -11,11 +11,11 @@ function osha_homepage_views_default_views() {
   $export = array();
 
   $view = new view();
-  $view->name = 'interactive_dashboard';
+  $view->name = 'esener_carousel';
   $view->description = '';
   $view->tag = 'default';
   $view->base_table = 'node';
-  $view->human_name = 'Interactive dashboard';
+  $view->human_name = 'Esener carousel';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -110,7 +110,7 @@ function osha_homepage_views_default_views() {
   $handler->display->display_options['filters']['published']['value'] = '1';
 
   /* Display: Block */
-  $handler = $view->new_display('block', 'Block', 'slidehow');
+  $handler = $view->new_display('block', 'Block', 'slideshow');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
@@ -129,7 +129,7 @@ function osha_homepage_views_default_views() {
   $handler->display->display_options['relationships']['nodequeue_rel']['required'] = TRUE;
   $handler->display->display_options['relationships']['nodequeue_rel']['limit'] = 1;
   $handler->display->display_options['relationships']['nodequeue_rel']['names'] = array(
-    'interactive_dashboard_guide' => 'interactive_dashboard_guide',
+    'esener_carousel' => 'esener_carousel',
     'publication_queue' => 0,
     'featured_press_release' => 0,
     'press_contacts_queue' => 0,
@@ -180,7 +180,6 @@ function osha_homepage_views_default_views() {
   $handler->display->display_options['sorts']['position']['table'] = 'nodequeue_nodes';
   $handler->display->display_options['sorts']['position']['field'] = 'position';
   $handler->display->display_options['sorts']['position']['relationship'] = 'nodequeue_rel';
-  $handler->display->display_options['sorts']['position']['order'] = 'DESC';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -198,8 +197,8 @@ function osha_homepage_views_default_views() {
     'banner' => 'banner',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  $handler->display->display_options['block_description'] = 'Interactive Dashboard Slideshow';
-  $translatables['interactive_dashboard'] = array(
+  $handler->display->display_options['block_description'] = 'Esener carousel';
+  $translatables['esener_carousel'] = array(
     t('Master'),
     t('Publications'),
     t('more'),
@@ -218,9 +217,9 @@ function osha_homepage_views_default_views() {
     t('Body'),
     t('Block'),
     t('queue'),
-    t('Interactive Dashboard Slideshow'),
+    t('Esener carousel'),
   );
-  $export['interactive_dashboard'] = $view;
+  $export['esener_carousel'] = $view;
 
   $view = new view();
   $view->name = 'osha_home_banner_top';

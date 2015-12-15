@@ -16,3 +16,15 @@ function osha_homepage_init() {
       drupal_add_css($jssor_path . '/jssor.css');
     }
 }
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function osha_homepage_views_pre_render(&$view) {
+  $jssor_path = libraries_get_path('jquery-slider-master');
+
+  if ($view->name == 'interactive_dashboard') {
+    drupal_add_js($jssor_path . '/jssor.slider.mini.js');
+    drupal_add_css($jssor_path . '/jssor.css');
+  }
+}

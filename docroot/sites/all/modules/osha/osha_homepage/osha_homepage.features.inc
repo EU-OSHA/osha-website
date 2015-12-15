@@ -21,6 +21,38 @@ function osha_homepage_views_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_fe_nodequeue_export_fields().
+ */
+function osha_homepage_fe_nodequeue_export_fields() {
+  $nodequeues = array();
+
+  // Exported nodequeues: interactive_dashboard_guide
+  $nodequeues['interactive_dashboard_guide'] = array(
+    'name' => 'interactive_dashboard_guide',
+    'title' => 'Interactive dashboard guide',
+    'subqueue_title' => '',
+    'size' => 0,
+    'link' => '',
+    'link_remove' => '',
+    'owner' => 'nodequeue',
+    'show_in_ui' => 1,
+    'show_in_tab' => 1,
+    'show_in_links' => 0,
+    'reference' => 0,
+    'reverse' => 0,
+    'i18n' => 1,
+    'subqueues' => 1,
+    'types' => array(
+      0 => 'banner',
+    ),
+    'roles' => array(),
+    'count' => 0,
+  );
+
+  return $nodequeues;
+}
+
+/**
  * Implements hook_node_info().
  */
 function osha_homepage_node_info() {

@@ -12,10 +12,10 @@ function osha_events_default_fe_block_settings() {
 
   $export['version'] = '2.0';
 
-  $export['views--exp-events_index-page'] = array(
+  $export['views--exp-oshevents-page'] = array(
     'cache' => -1,
     'custom' => 0,
-    'delta' => '-exp-events_index-page',
+    'delta' => '-exp-oshevents-page',
     'i18n_block_language' => array(),
     'i18n_mode' => 0,
     'module' => 'views',
@@ -39,7 +39,7 @@ function osha_events_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 2,
+        'weight' => 4,
       ),
       'seven' => array(
         'region' => '',

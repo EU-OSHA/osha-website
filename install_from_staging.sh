@@ -67,7 +67,7 @@ fi
 
 if [ ! -z "$files" ]; then
 echo "Run drush rsync"
-drush rsync @osha.staging:%files @self:%files -y
+drush -y rsync @osha.staging:%files @self:%files
 fi
 
 if [ ! -z "$post_update" ]; then

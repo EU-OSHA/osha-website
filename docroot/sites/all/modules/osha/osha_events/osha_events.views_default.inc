@@ -2229,13 +2229,6 @@ function osha_events_views_default_views() {
   $handler->display->display_options['filters']['field_publication_date_value_1']['field'] = 'field_publication_date_value';
   $handler->display->display_options['filters']['field_publication_date_value_1']['operator'] = 'empty';
   $handler->display->display_options['filters']['field_publication_date_value_1']['group'] = 3;
-  /* Filter criterion: Content: Language */
-  $handler->display->display_options['filters']['language']['id'] = 'language';
-  $handler->display->display_options['filters']['language']['table'] = 'node';
-  $handler->display->display_options['filters']['language']['field'] = 'language';
-  $handler->display->display_options['filters']['language']['value'] = array(
-    '***CURRENT_LANGUAGE***' => '***CURRENT_LANGUAGE***',
-  );
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');

@@ -45,26 +45,34 @@ function osha_job_vacancies_quicktabs_default_quicktabs() {
     ),
     3 => array(
       'vid' => 'vacancies',
-      'display' => 'page_1',
+      'display' => 'page_3',
       'args' => '',
-      'title' => 'Closed vacancies',
-      'weight' => '-95',
+      'title' => 'Evaluation underway vacancies',
+      'weight' => '-97',
       'type' => 'view',
     ),
     4 => array(
+      'vid' => 'vacancies',
+      'display' => 'page_1',
+      'args' => '',
+      'title' => 'Closed vacancies',
+      'weight' => '-96',
+      'type' => 'view',
+    ),
+    5 => array(
       'nid' => '5332',
       'view_mode' => 'teaser',
       'hide_title' => 1,
       'title' => 'Spontaneous applications',
-      'weight' => '-94',
+      'weight' => '-95',
       'type' => 'node',
     ),
-    5 => array(
+    6 => array(
       'nid' => '5333',
       'view_mode' => 'teaser',
       'hide_title' => 1,
       'title' => 'Enquiries',
-      'weight' => '-93',
+      'weight' => '-94',
       'type' => 'node',
     ),
   );
@@ -83,6 +91,7 @@ function osha_job_vacancies_quicktabs_default_quicktabs() {
   t('Careers accordion');
   t('Closed vacancies');
   t('Enquiries');
+  t('Evaluation underway vacancies');
   t('Open vacancies');
   t('Reserve lists');
   t('Spontaneous applications');

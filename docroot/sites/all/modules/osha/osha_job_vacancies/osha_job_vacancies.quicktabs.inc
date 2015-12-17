@@ -55,7 +55,7 @@ function osha_job_vacancies_quicktabs_default_quicktabs() {
       'vid' => 'vacancies',
       'display' => 'page_1',
       'args' => '',
-      'title' => 'Closed vacancies',
+      'title' => 'Completed vacancies',
       'weight' => '-96',
       'type' => 'view',
     ),
@@ -89,7 +89,7 @@ function osha_job_vacancies_quicktabs_default_quicktabs() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Careers accordion');
-  t('Closed vacancies');
+  t('Completed vacancies');
   t('Enquiries');
   t('Evaluation underway vacancies');
   t('Open vacancies');

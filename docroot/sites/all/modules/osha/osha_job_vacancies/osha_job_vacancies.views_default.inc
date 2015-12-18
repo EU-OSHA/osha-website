@@ -22,7 +22,7 @@ function osha_job_vacancies_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Closed job vacancies';
+  $handler->display->display_options['title'] = 'Completed job vacancies';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -30,6 +30,7 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '30';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Relationship: Content revision: Content */
@@ -110,8 +111,8 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['default_date'] = 'now';
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['year_range'] = '-10:+10';
 
-  /* Display: Open job vacancies */
-  $handler = $view->new_display('page', 'Open job vacancies', 'page_2');
+  /* Display: Open job vacancies TAB */
+  $handler = $view->new_display('page', 'Open job vacancies TAB', 'page_2');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Open job vacancies';
   $handler->display->display_options['defaults']['empty'] = FALSE;
@@ -166,8 +167,8 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['default_date'] = 'now';
   $handler->display->display_options['path'] = 'open_job_vacancies';
 
-  /* Display: Closed job vacancies */
-  $handler = $view->new_display('page', 'Closed job vacancies', 'page_1');
+  /* Display: Closed job vacancies PAGE */
+  $handler = $view->new_display('page', 'Closed job vacancies PAGE', 'page_1');
   $handler->display->display_options['defaults']['header'] = FALSE;
   /* Header: Global: Unfiltered text */
   $handler->display->display_options['header']['area_text_custom']['id'] = 'area_text_custom';
@@ -228,8 +229,8 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['field_expiration_date_value']['default_date'] = 'now';
   $handler->display->display_options['path'] = 'jobs_archive';
 
-  /* Display: Evaluation underway job vacancies */
-  $handler = $view->new_display('page', 'Evaluation underway job vacancies', 'page_3');
+  /* Display: Evaluation underway job vacancies TAB */
+  $handler = $view->new_display('page', 'Evaluation underway job vacancies TAB', 'page_3');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Open job vacancies';
   $handler->display->display_options['defaults']['empty'] = FALSE;
@@ -290,9 +291,82 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['group'] = 1;
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['default_date'] = 'now';
   $handler->display->display_options['path'] = 'open_job_vacancies';
+
+  /* Display: Closed job vacancies TAB */
+  $handler = $view->new_display('page', 'Closed job vacancies TAB', 'page_4');
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '3';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Unfiltered text */
+  $handler->display->display_options['header']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['header']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['header']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['header']['area_text_custom']['content'] = '<a href="inside-eu-osha/careers">Careers</a>';
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  /* Footer: Global: Text area */
+  $handler->display->display_options['footer']['area']['id'] = 'area';
+  $handler->display->display_options['footer']['area']['table'] = 'views';
+  $handler->display->display_options['footer']['area']['field'] = 'area';
+  $handler->display->display_options['footer']['area']['content'] = '<a href="/jobs_archive">See more</a>';
+  $handler->display->display_options['footer']['area']['format'] = 'full_html';
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['label'] = 'No Results Messege';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'Currently, there are no vacancies available in this section.';
+  $handler->display->display_options['empty']['area']['format'] = 'full_html';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Content revision: Content */
+  $handler->display->display_options['relationships']['vid']['id'] = 'vid';
+  $handler->display->display_options['relationships']['vid']['table'] = 'node_revision';
+  $handler->display->display_options['relationships']['vid']['field'] = 'vid';
+  $handler->display->display_options['relationships']['vid']['required'] = TRUE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'job_vacancies' => 'job_vacancies',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Workbench Moderation: Published */
+  $handler->display->display_options['filters']['published']['id'] = 'published';
+  $handler->display->display_options['filters']['published']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['published']['field'] = 'published';
+  $handler->display->display_options['filters']['published']['relationship'] = 'vid';
+  $handler->display->display_options['filters']['published']['value'] = '1';
+  $handler->display->display_options['filters']['published']['group'] = 1;
+  $handler->display->display_options['filters']['published']['expose']['operator_id'] = '';
+  $handler->display->display_options['filters']['published']['expose']['label'] = 'Published';
+  $handler->display->display_options['filters']['published']['expose']['operator'] = 'published_op';
+  $handler->display->display_options['filters']['published']['expose']['identifier'] = 'published';
+  $handler->display->display_options['filters']['published']['expose']['required'] = TRUE;
+  /* Filter criterion: Content: Expiration date (field_expiration_date) */
+  $handler->display->display_options['filters']['field_expiration_date_value']['id'] = 'field_expiration_date_value';
+  $handler->display->display_options['filters']['field_expiration_date_value']['table'] = 'field_data_field_expiration_date';
+  $handler->display->display_options['filters']['field_expiration_date_value']['field'] = 'field_expiration_date_value';
+  $handler->display->display_options['filters']['field_expiration_date_value']['relationship'] = 'vid';
+  $handler->display->display_options['filters']['field_expiration_date_value']['operator'] = '<';
+  $handler->display->display_options['filters']['field_expiration_date_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_expiration_date_value']['default_date'] = 'now';
+  $handler->display->display_options['path'] = 'closed-jobs-preview';
   $translatables['vacancies'] = array(
     t('Master'),
-    t('Closed job vacancies'),
+    t('Completed job vacancies'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -301,13 +375,17 @@ function osha_job_vacancies_views_default_views() {
     t('Desc'),
     t('Get the actual content from a content revision.'),
     t('Show details'),
+    t('Open job vacancies TAB'),
     t('Open job vacancies'),
     t('No Results Message'),
     t('Currently, there are no vacancies available in this section.'),
+    t('Closed job vacancies PAGE'),
     t('<a href="inside-eu-osha/careers">Careers</a>'),
     t('No Results Messege'),
     t('Published'),
-    t('Evaluation underway job vacancies'),
+    t('Evaluation underway job vacancies TAB'),
+    t('Closed job vacancies TAB'),
+    t('<a href="/jobs_archive">See more</a>'),
   );
   $export['vacancies'] = $view;
 

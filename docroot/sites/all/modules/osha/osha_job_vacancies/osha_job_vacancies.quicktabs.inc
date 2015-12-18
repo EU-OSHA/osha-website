@@ -53,7 +53,7 @@ function osha_job_vacancies_quicktabs_default_quicktabs() {
     ),
     4 => array(
       'vid' => 'vacancies',
-      'display' => 'page_1',
+      'display' => 'page_4',
       'args' => '',
       'title' => 'Completed vacancies',
       'weight' => '-96',

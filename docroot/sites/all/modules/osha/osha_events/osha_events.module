@@ -32,25 +32,25 @@ function osha_events_form_alter(&$form, &$form_state, $form_id) {
 
       $form['field_activity'][LANGUAGE_NONE] = $field;
     }
+
+    // Create new event form
+    if(!isset($form['#node']->nid)){
+      drupal_add_js(drupal_get_path('module', 'osha_events') . '/js/new_event_form.js');
+    }
+
+    // MC-84 Hide country and city from the form when selected type is Webminar.
+    // Necessary to add the js in an after build callback because we need it
+    // after form_set_error occurs.
+    $form['#after_build'][] = 'osha_events_node_form_after_build';
   }
 }
 
 /**
- * Implements hook_form_views_exposed_form_alter().
+ * After build callback for events_node_form
  */
-function osha_events_form_views_exposed_form_alter(&$form, &$form_state) {
-  // CW-1085 Default date now for start date in views filter.
-  if ($form['#id'] == 'views-exposed-form-events-index-page') {
-    $form['field_start_date_value']['#date_format'] = 'd/m/Y';
-    $form['field_start_date_value2']['#date_format'] = 'd/m/Y';
-    if (empty($form_state['input'])) {
-      $date = new DateTime('now');
-      $form_state['input']['field_start_date_value']['date'] = $date->format('d/m/Y');
-      // Set the get value to prevent a bug in pager
-      // See ticket CW-1438 and Drupal bug: www.drupal.org/node/1415306
-      $_GET['field_start_date_value']['date'] = $date->format('d/m/Y');
-    }
-  }
+function osha_events_node_form_after_build($form, &$form_state) {
+  drupal_add_js(drupal_get_path('module', 'osha_events') . '/js/event_form.js');
+  return $form;
 }
 
 /**
@@ -61,8 +61,9 @@ function osha_events_form_validate($form, &$form_state) {
   $values = $form_state['values'];
   $node = $form_state['node'];
   if ($values['status'] == 1) {
-    if (empty($values['field_event_type'][LANGUAGE_NONE][0]['value']) || $values['field_event_type'][LANGUAGE_NONE][0]['value'] != t('Event')) {
-      form_set_error('field_event_type', 'Only events of type <b>Event</b> may be published');
+    $type = $values['field_event_type'][LANGUAGE_NONE][0]['value'];
+    if (empty($type) || $type == 'Visit') {
+      form_set_error('field_event_type', 'Events of type <b>Visit</b> can not be published');
     }
     // if (empty($values['body'][$node->language][0]['value'])) {
     //   form_set_error('body', 'You have to add a Description.');
@@ -84,18 +85,66 @@ function osha_events_form_validate($form, &$form_state) {
     if (empty($values['field_organization'][LANGUAGE_NONE][0]['value'])) {
       form_set_error('field_organization', 'You have to add an Organization.');
     }
-    if (empty($values['field_country_code'][LANGUAGE_NONE][0]['value'])) {
-      form_set_error('field_country_code', 'You have to add a Country Code.');
+
+    // Country and city are not required for webminar events.
+    if ($type != 'Webminar') {
+      if (empty($values['field_country_code'][LANGUAGE_NONE][0]['value'])) {
+        form_set_error('field_country_code', 'You have to add a Country Code.');
+      }
+      if (empty($values['field_city'][LANGUAGE_NONE][0]['value'])) {
+        form_set_error('field_city', 'You have to add a City.');
+      }
     }
-    if (empty($values['field_city'][LANGUAGE_NONE][0]['value'])) {
-      form_set_error('field_city', 'You have to add a City.');
+    else {
+      // Country and city fields need to be NULL for webminar events so that
+      // they will not show in frontend.
+      $form_state['values']['field_country_code'][LANGUAGE_NONE][0]['value'] = $form_state['values']['field_city'][LANGUAGE_NONE][0]['value'] = NULL;
     }
+
     if (empty($values['field_tags'][LANGUAGE_NONE][0]['tid'])) {
       form_set_error('field_tags', 'You have to add a Category.');
     }
     if ($values['field_for_the_web'][LANGUAGE_NONE][0]['value'] != 'Yes') {
       form_set_error('field_for_the_web', 'Event is not for web publishing. To override, set field "For the web" to "Yes".');
     }
+  }
+
+  // Check if the event is unique by Start and End Date field
+  $start_date = $form_state['values']['field_start_date']['und'][0]['value'];
+  $end_date = $form_state['values']['field_start_date']['und'][0]['value2'];
+
+  $query = new EntityFieldQuery;
+  $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'events')
+      ->fieldCondition('field_start_date', 'value', $start_date, '=')
+      ->fieldCondition('field_start_date', 'value2', $end_date, '=')
+      ->entityOrderBy('entity_id', 'DESC');
+  if ( isset($node->nid) ) {
+      $query->entityCondition('entity_id', $node->nid, '!=');
+  }
+  $results = $query->execute();
+
+  if (isset($results['node']) && count($results['node']) >= 1) {
+    drupal_set_message(t('One or more events have the same Start and End date.'), 'warning');
+    $events = '';
+    foreach($results['node'] as $nid => $node_obj){
+      $node = node_load($nid);
+      $events .= l($node->title, 'node/'.$nid);
+      $events .= '<br />';
+    }
+    drupal_set_message($events, 'warning');
+  }
+}
+
+function osha_events_query_alter($query) {
+  if ($query->hasTag('debug')) {
+    $sql = (string)$query;
+    $connection = Database::getConnection();
+    foreach ((array) $query->arguments() as $key => $val) {
+      $quoted[$key] = $connection->quote($val);
+    }
+    $sql = strtr($sql, $quoted);
+    dpm($sql);
   }
 }
 
@@ -215,4 +264,68 @@ function osha_events_link_field_process($element, $form_state, $complete_form) {
   }
 
   return $element;
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function osha_events_field_formatter_info() {
+  $info = array(
+    'translated_title_as_link' => array(
+      'label' => 'Translated title, as link',
+      'field types' => array('link_field'),
+      'description' => 't(title) as link.',
+    )
+  );
+  return $info;
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function osha_events_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+  switch ($display['type']) {
+    case 'translated_title_as_link':
+      foreach ($items as $delta => $item) {
+        $element[$delta] = array(
+          '#theme' => 'osha_events_translated_title_as_link_format',
+          '#entity' => $entity,
+          '#item' => $item,
+          '#delta' => $delta,
+        );
+      }
+      break;
+  }
+  return $element;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function osha_events_theme() {
+  return array(
+    'osha_events_translated_title_as_link_format' => array(
+      'variables' => array('entity' => NULL, 'item' => NULL, 'delta' => NULL),
+    )
+  );
+}
+
+/*
+* Formats link as translated title
+*/
+function theme_osha_events_translated_title_as_link_format($element) {
+  $item = $element['item'];
+  if (empty($item['title'])) {
+    $title = $item['display_url'];
+  } else {
+    $title = t($item['title']);
+  }
+  return l($title, $item['url'], array(
+    'attributes' => $item['attributes'],
+    'query' => $item['query'],
+    'fragment' => $item['fragment'],
+    'absolute' => $item['absolute'],
+    'html' => $item['html']
+  ));
 }

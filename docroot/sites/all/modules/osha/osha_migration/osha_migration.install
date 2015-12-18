@@ -87,3 +87,13 @@ function osha_migration_update_7004() {
   }
   node_save($node);
 }
+
+/**
+ * MC-34 Load again the redirects using sql
+ */
+function osha_migration_update_7005() {
+  $data_path = drupal_realpath(drupal_get_path('module', 'osha_migration') . '/data/match_redirect.sql');
+  drush_set_option('file', $data_path);
+  drush_invoke('sql-query');
+}
+

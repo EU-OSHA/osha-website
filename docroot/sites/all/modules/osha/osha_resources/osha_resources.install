@@ -73,7 +73,6 @@ function osha_resources_update_7001() {
  * MC-23 Change link destination in body of node/1409
  */
 function osha_resources_update_7002() {
-  $search = 'topics/ds/materials/en_ds.ppt';
   $replace = 'themes/dangerous-substances/ds.ppt';
   $node = workbench_moderation_node_current_load(node_load(1409));
 
@@ -81,7 +80,11 @@ function osha_resources_update_7002() {
 
   foreach ($languages as $lng_object) {
     $language = $lng_object->language;
-
+    if ($language == 'bg' || $language == 'et') {
+      $search = 'topics/ds/materials/'.$language.'_ds.ppt';
+    } else {
+      $search = 'topics/ds/materials/en_ds.ppt';
+    }
     $node->body[$language][0]['value'] = str_replace($search, $replace, $node->body[$language][0]['value']);
     $node->body[$language][0]['safe_value'] = str_replace($search, $replace, $node->body[$language][0]['safe_value']);
   }

@@ -5235,36 +5235,36 @@ a.tabs-primary__tab-link{
 	font-weight:bold;
 }
 
-.view-events-index ul {
+.view-oshevents ul {
 	list-style:none;
 	padding: 0;
 	margin: 0;
 }
 
-.view-events-index  .views-field-field-start-date .field-content{
+.view-oshevents  .views-field-field-start-date .field-content{
 	float:left;
 	padding-right: 0.2em;
 }
 
-.view-events-index .country{
+.view-oshevents .country{
 	float:left;
 	font-size: 0.8em;
 	font-weight: bold;
 	padding-right:0.3em;
 }
 
-.view-events-index .city{
+.view-oshevents .city{
 	float:left;
 	font-size: 0.8em;
 	font-weight: bold;
 	padding-right:0.3em;
 }
 
-.view-events-index .title{
+.view-oshevents .title{
 	clear:both;
 }
 
-.view-events-index.view-display-id-block_1 a {
+.view-oshevents.view-display-id-block_1 a {
 	color:#003399;
 	text-decoration:none;
 	background: url("../images/li_arrow.png") no-repeat scroll 0 50% transparent;
@@ -5323,14 +5323,14 @@ a.tabs-primary__tab-link{
 	clear:both;
 }
 
-.view-events-index p {
+.view-oshevents p {
 	padding:0em;
 	margin:0em;
 	font-size:0.8em;
 }
 
 
-.view-events-index .views-row {
+.view-oshevents .views-row {
 	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);
 	padding-bottom: 1em;
 }
@@ -5367,32 +5367,32 @@ a.tabs-primary__tab-link{
 	display:none;
 }
 
-#content .view-events-index {
+#content .view-oshevents {
 	clear:both;
 }
 
-#content .view-events-index .views-row {
+#content .view-oshevents .views-row {
 	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);
 	padding-bottom: 3em;
 	padding-left: 0.6em;
 }
 
-.view-events-index .views-exposed-form{
+.view-oshevents .views-exposed-form{
 	background-image: url("../images/separator_home.jpg"), url("../images/separator_home.jpg");
 	background-position: left top, left bottom;
 	background-repeat: repeat-x;
 	padding: 1em 0;
 }
 
-.view-events-index .views-exposed-form #edit-field-start-date{
+.view-oshevents .views-exposed-form #edit-field-start-date{
 	margin-top:0.6em;
 }
 
-.view-events-index .views-exposed-form #edit-submit-events-index{
+.view-oshevents .views-exposed-form #edit-submit-events-index{
 	margin-top:2em;
 }
 
-.view-events-index .views-exposed-form #edit-reset{
+.view-oshevents .views-exposed-form #edit-reset{
 	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
     border: 0 none;
     clear: both;
@@ -5407,7 +5407,7 @@ a.tabs-primary__tab-link{
 	position:relative;
 }
 
-#block-views-exp-events-index-page .views-exposed-form #edit-reset{
+#block-views-exp-oshevents-page .views-exposed-form #edit-reset{
 	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
     border: 0 none;
     clear: both;
@@ -5423,67 +5423,61 @@ a.tabs-primary__tab-link{
 	text-align: left;
 }
 
-.view-events-index #edit-search-api-views-fulltext-wrapper{
+.view-oshevents #edit-search-api-views-fulltext-wrapper{
 	background:none;
 }
 
 
-.view-events-index #edit-search-api-views-fulltext-wrapper label {
+.view-oshevents #edit-search-api-views-fulltext-wrapper label {
 	margin-top: 1.5em;
 	padding-bottom: 0.7em;
 }
 
-.view-events-index .form-item-search-api-views-fulltext input{
+.view-oshevents .form-item-search-api-views-fulltext input{
 	width:12em;
 }
 
-.view-events-index .views-field-field-start-date-value{
-	float:left;
+.view-oshevents .views-field-field-start-date-1{
 	padding-right:0.1em;
 	font-weight:bold;
 	font-size:0.8em;
 }
 
-.view-events-index  .views-field-field-start-date-value2{
-	font-size:0.8em;
-	font-weight:bold;
-}
-
-.view-events-index .form-item-field-start-date-date input{
+.view-oshevents .form-item-field-start-date-date input{
 	width:7em;
 }
 
-.view-events-index .form-item-field-start-date-date label{
+.view-oshevents .form-item-field-start-date-date label{
 	display:none;
 }
 
-.view-events-index .form-item-field-end-date{
+.view-oshevents .form-item-field-end-date{
 	margin-top:0.5em;
 }
 
-.view-events-index .form-item-field-end-date input{
+.view-oshevents .form-item-field-end-date input{
 	width:7em;
 }
 
-.view-events-index .form-item-field-end-date label{
+.view-oshevents .form-item-field-end-date label{
 	display:none;
 }
 
-.view-events-index #edit-search-api-views-fulltext{
+.view-oshevents #edit-search-api-views-fulltext{
 	margin-top:.4em;
 	padding-left:0.2em;
 }
 
-.view-events-index #edit-field-country-code{
+.view-oshevents #edit-field-country-code{
 	margin-top:1em;
 	width:12em;
 }
 
-.view-events-index  #edit-field-country-code-wrapper label{
+.view-oshevents  #edit-field-country-code-wrapper label{
 	padding-top:1em;
 }
 
-.view-events-index h3{
+.view-oshevents h3{
 	height: auto;
 	font-family: 'Open Sans Condensed';
 	font-size: 1.35em;
@@ -5498,7 +5492,7 @@ a.tabs-primary__tab-link{
 	padding-top: 0.3em;
 }
 
-.view-events-index .views-row .views-field-view-node .field-content a {
+.view-oshevents .views-row .views-field-view-node .field-content a {
 	background: url("../images/flecha.png") no-repeat scroll 85% 61% transparent;
 	color: #003399;
 	float: right;
@@ -5510,7 +5504,7 @@ a.tabs-primary__tab-link{
 	font-weight:bold;
 }
 
-#content .view-events-index .views-row  .views-field-title-field a{
+#content .view-oshevents .views-row  .views-field-title-field a{
 	clear:both;
 	border-bottom: 0 none !important;
     font-family: "Open Sans Condensed",sans-serif !important;
@@ -5521,23 +5515,23 @@ a.tabs-primary__tab-link{
 	font-weight:bold;
 }
 
-#content .view-events-index .views-row  .views-field-field-country-code span{
+#content .view-oshevents .views-row  .views-field-field-country-code span{
 	float:left;
 	padding-right:0.3em;
 }
 
-#content .view-events-index .views-row  .views-field-field-city span{
+#content .view-oshevents .views-row  .views-field-field-city span{
 	clear:both;
 }
 
-#content .view-events-index  .views-field-field-country-code .views-label-field-country-code{
+#content .view-oshevents  .views-field-field-country-code .views-label-field-country-code{
 	font-weight: lighter;
 	font-family: arial!important;
 	font-size: 1em;
 	text-transform: uppercase;
 }
 
-#content .view-events-index  .views-field-field-organization .iews-label-field-organization{
+#content .view-oshevents  .views-field-field-organization .iews-label-field-organization{
 	font-weight: lighter;
 	font-family: arial!important;
 	font-size: 1em;
@@ -7353,11 +7347,11 @@ body.page-node-5429 .oshwiki-featured-articles {
 	width: auto;
 }
 
-.view-events-index .views-exposed-widget.views-submit-button{
+.view-oshevents .views-exposed-widget.views-submit-button{
 	width: auto;
 }
 
-#edit-submit-events-index{
+#edit-submit-oshevents {
 	background: url("../images/flecha.png") no-repeat scroll 96% center #e8eef7;
 	border: 0 none;
 	color: #003399;

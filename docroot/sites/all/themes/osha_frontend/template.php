@@ -16,7 +16,9 @@ function osha_frontend_links__system_main_menu() {
  */
 function osha_frontend_menu_tree__main_menu($variables) {
   $random = strlen($variables['tree']);
-  return '<ul id="main-menu-links-'.$random.'" class="menu clearfix">'
+  global $osha_menu_counter;
+  $osha_menu_counter++;
+  return '<ul id="main-menu-links-'.$random.'-'.$osha_menu_counter.'" class="menu clearfix">'
     . $variables['tree'] . '</ul>';
 }
 

@@ -190,4 +190,66 @@ function osha_wiki_cron() {
   watchdog('osha_wiki', "Running Wiki synchronisation cron job", array(), WATCHDOG_INFO);
   $migration = new OshaMigrateWiki(array());
   $migration->processImport();
+
+  module_load_include('inc', 'osha_wiki', 'osha_wiki.drush');
+  drush_osha_wiki_categories_sync();
+}
+
+/**
+ * Migrate pages from oshwiki by page title.
+ *
+ * @param $wikipages
+ */
+function osha_wiki_migrate_wikipages_by_title($wikipages) {
+  if (empty($wikipages)) {
+    return;
+  }
+  $migration = new OshaMigrateWikiByTitles(array('wikipages' => $wikipages));
+  $migration->processImport();
+}
+
+class OshaMigrateWikiByTitles extends OshaMigrateWiki {
+
+  public function __construct($arguments) {
+    parent::__construct($arguments);
+    $this->arguments = $arguments;
+    $this->machineName = 'WikiByTitles';
+    $osha_wiki_hostname = variable_get('osha_wiki_hostname', 'oshwiki.eu');
+    $url = 'http://' . $osha_wiki_hostname . '/index.php?title=Special%3AAsk&q=';
+    $is_first = TRUE;
+    if (is_array($arguments['wikipages'])) {
+      foreach ($arguments['wikipages'] as $pagetitle) {
+        if (!$is_first) {
+          $url .= '%7C%7C';
+        }
+        else {
+          $url .= '%5B%5B';
+          $is_first = FALSE;
+        }
+        $url .= urlencode($pagetitle);
+      }
+    }
+    else {
+      $url .= '%5B%5B' . urlencode($arguments['wikipages']) . '%5D%5D';
+    }
+    $url .= '%5D%5D&po=%3FModification+date%0D%0A%3FCategory%0D%0A%3FMaster+page%0D%0A%3FModification+date%0D%0A%3FLanguage+code%0D%0A%3FNP%0D%0A%3FOP%0D%0A&eq=yes&p%5Bformat%5D=json&p%5Blink%5D=subject&p%5Bsort%5D=Modification+date&p%5Border%5D%5Bdesc%5D=1&p%5Bheaders%5D=show&p%5Bmainlabel%5D=&p%5Bintro%5D=&p%5Boutro%5D=&p%5Bsearchlabel%5D=&p%5Bdefault%5D=&p%5Bsyntax%5D=standard&eq=yes';
+    $this->source = new OshaMigrateSourceWiki($url, array(
+        'skip_count' => TRUE,
+      ),
+      $skip_datecheck = TRUE
+    );
+
+    $this->map = new MigrateSQLMap($this->machineName,
+      array(
+        'title' => array(
+          'type' => 'varchar',
+          'length' => 255,
+          'not null' => TRUE,
+          'description' => 'Wiki page title',
+        ),
+      ),
+      MigrateDestinationNode::getKeySchema()
+    );
+  }
+
 }

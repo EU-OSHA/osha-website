@@ -302,71 +302,6 @@ function theme_osha_workflow_access_pm_form($variables) {
   return $output;
 }
 
-
-
-/**
- * Form builder for workflow_moderation_form (review).
- *
- * @param array $form
- *   Form to modify
- * @param array $form_state
- *   Form state
- * @param object $node
- *   Current node
- *
- * @return array
- *   Form array
- */
-function osha_workflow_node_review_form($form, &$form_state, $node) {
-  $form =  array();
-  if (empty($node->workbench_access)) {
-    drupal_set_message('No section assigned to the node.');
-    return $form;
-  }
-  module_load_include('inc', 'osha_workflow', 'osha_workflow.api');
-  $form_state['node'] = $node;
-  $project_manager = osha_workflow_get_project_manager($node->nid);
-  $section = current($node->workbench_access);
-  $users = osha_workflow_access_get_section_pm($section);
-  $options = array('' => t('-- Please select --'));
-  foreach ($users as $uid => $user) {
-    $options[$uid] = $user->name;
-  }
-  $form['#attributes'] = array('class' => array('container-inline'));
-  if ($project_manager) {
-    $form['current'] = array(
-      '#markup' => t(
-        'Current project manager is set to <strong>!pm</strong>.',
-        array('!pm' => $project_manager->name)
-      ),
-    );
-    $form['project_manager'] = array(
-      '#type' => 'select',
-      '#title' => t('Change to'),
-      '#options' => $options,
-      '#default_value' => isset($project_manager->uid) ? $project_manager->uid : '',
-    );
-  }
-  else {
-    $form['current'] = array('#markup' => t('No project manager set.'));
-    $form['project_manager'] = array(
-      '#type' => 'select',
-      '#title' => t('Set to'),
-      '#options' => $options,
-      '#default_value' => isset($project_manager->uid) ? $project_manager->uid : '',
-    );
-  }
-  $form['actions'] = array(
-    '#type' => 'actions',
-    '#weight' => 20,
-    'submit' => array(
-      '#type' => 'submit',
-      '#value' => t('Change'),
-    ),
-  );
-  return $form;
-}
-
 /**
  * Form validation for osha_workflow_node_review_form.
  */
@@ -374,16 +309,6 @@ function osha_workflow_node_review_form_validate($form, $form_state) {
   if (empty($form_state['values']['project_manager'])) {
     form_set_error('', t('Please assign a project manager'));
   }
-}
-
-
-/**
- * Form submission for osha_workflow_node_review_form.
- */
-function osha_workflow_node_review_form_submit($form, $form_state) {
-  $node = $form_state['node'];
-  $uid = $form_state['values']['project_manager'];
-  osha_workflow_set_project_manager($node->nid, $uid);
 }
 
 /**

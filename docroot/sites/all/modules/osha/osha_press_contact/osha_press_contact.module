@@ -20,7 +20,7 @@ function osha_press_contact_osha_tmgmt_i18n_string_list() {
 function osha_press_contact_cronapi() {
   return array('osha_press_contact_cron' => array(
     'description' => 'Synchronize focal points from CRM XML file (if changed)',
-    'rule' => '0 0 * * *', // Daily at midnight.
+    'rule' => '30 0 * * *', // Daily at midnight + 15 min.
   ));
 }
 

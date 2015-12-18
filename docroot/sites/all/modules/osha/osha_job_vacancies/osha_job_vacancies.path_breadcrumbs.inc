@@ -32,7 +32,7 @@ function osha_job_vacancies_path_breadcrumbs_settings_info() {
     'access' => array(),
   );
   $path_breadcrumb->weight = 0;
-  $export['open_job_vacancies_view_clone'] = $path_breadcrumb;
+  $export['closed_job_vacancies_view'] = $path_breadcrumb;
 
   return $export;
 }

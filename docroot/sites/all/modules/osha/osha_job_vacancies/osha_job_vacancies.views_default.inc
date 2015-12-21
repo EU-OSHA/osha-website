@@ -23,7 +23,9 @@ function osha_job_vacancies_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Completed job vacancies';
+  $handler->display->display_options['use_more'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_text'] = 'View all';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -305,12 +307,6 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['header']['area_text_custom']['field'] = 'area_text_custom';
   $handler->display->display_options['header']['area_text_custom']['content'] = '<a href="inside-eu-osha/careers">Careers</a>';
   $handler->display->display_options['defaults']['footer'] = FALSE;
-  /* Footer: Global: Text area */
-  $handler->display->display_options['footer']['area']['id'] = 'area';
-  $handler->display->display_options['footer']['area']['table'] = 'views';
-  $handler->display->display_options['footer']['area']['field'] = 'area';
-  $handler->display->display_options['footer']['area']['content'] = '<a href="/jobs_archive">See more</a>';
-  $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['empty'] = FALSE;
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
@@ -367,7 +363,7 @@ function osha_job_vacancies_views_default_views() {
   $translatables['vacancies'] = array(
     t('Master'),
     t('Completed job vacancies'),
-    t('more'),
+    t('View all'),
     t('Apply'),
     t('Reset'),
     t('Sort by'),
@@ -377,6 +373,7 @@ function osha_job_vacancies_views_default_views() {
     t('Show details'),
     t('Open job vacancies TAB'),
     t('Open job vacancies'),
+    t('more'),
     t('No Results Message'),
     t('Currently, there are no vacancies available in this section.'),
     t('Closed job vacancies PAGE'),
@@ -385,7 +382,6 @@ function osha_job_vacancies_views_default_views() {
     t('Published'),
     t('Evaluation underway job vacancies TAB'),
     t('Closed job vacancies TAB'),
-    t('<a href="/jobs_archive">See more</a>'),
   );
   $export['vacancies'] = $view;
 

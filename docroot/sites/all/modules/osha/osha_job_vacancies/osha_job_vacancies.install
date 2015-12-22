@@ -6,3 +6,32 @@ function osha_job_vacancies_update_7001() {
     field_delete_instance($instance);
   }
 }
+
+// MC-102 add an intermediate state to the vacancies
+function osha_job_vacancies_update_7002() {
+  features_revert_module('osha_job_vacancies');
+  // create menu position rule for about-eu-osha/careers/jobs_archive
+  if (module_exists('osha') && module_load_include('inc', 'osha', 'osha.utils')) {
+    $parent_menu = array('------ Careers');
+    $condition = array('pages' => 'about-eu-osha/careers/jobs_archive');
+    osha_add_menu_position_rule('Job Archive Menu Rule', $parent_menu, $condition);
+  }
+
+  if (module_exists('i18n_string') && module_load_include('inc', 'i18n_string', 'i18n_string.admin')) {
+    drupal_set_message('Refreshing accordion strings...');
+    $form_state = array(
+      'values' => array(
+        'groups' => array('quicktabs' => 'quicktabs'),
+        'delete' => 0,
+        'op' => 'Refresh strings',
+      ),
+    );
+    drupal_form_submit('i18n_string_admin_refresh_form', $form_state);
+
+    // Fix translations for Careers accordion
+    db_query("insert into locales_target ( select ls.lid, lt.translation, lt.language, lt.plid, lt.plural, lt.i18n_status from locales_target lt, locales_source ls where lt.lid = 9681 and ls.location = 'quicktabs:tab:_careers_accordion-6:title')");
+    db_query("delete from locales_target where lid = 9681");
+    db_query("update locales_target set lid = 9681 where lid = 9680");
+    db_query("update locales_target set lid = 9680 where lid = 9245");
+  }
+}

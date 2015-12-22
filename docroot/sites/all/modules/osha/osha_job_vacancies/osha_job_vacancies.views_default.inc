@@ -23,7 +23,6 @@ function osha_job_vacancies_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Completed job vacancies';
-  $handler->display->display_options['use_more'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'View all';
   $handler->display->display_options['access']['type'] = 'perm';
@@ -176,7 +175,7 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['header']['area_text_custom']['id'] = 'area_text_custom';
   $handler->display->display_options['header']['area_text_custom']['table'] = 'views';
   $handler->display->display_options['header']['area_text_custom']['field'] = 'area_text_custom';
-  $handler->display->display_options['header']['area_text_custom']['content'] = '<a href="inside-eu-osha/careers">Careers</a>';
+  $handler->display->display_options['header']['area_text_custom']['content'] = '<a href="about-eu-osha/careers">Careers</a>';
   $handler->display->display_options['defaults']['empty'] = FALSE;
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
@@ -229,7 +228,7 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['field_expiration_date_value']['operator'] = '<';
   $handler->display->display_options['filters']['field_expiration_date_value']['group'] = 1;
   $handler->display->display_options['filters']['field_expiration_date_value']['default_date'] = 'now';
-  $handler->display->display_options['path'] = 'jobs_archive';
+  $handler->display->display_options['path'] = 'about-eu-osha/careers/jobs_archive';
 
   /* Display: Evaluation underway job vacancies TAB */
   $handler = $view->new_display('page', 'Evaluation underway job vacancies TAB', 'page_3');
@@ -377,11 +376,12 @@ function osha_job_vacancies_views_default_views() {
     t('No Results Message'),
     t('Currently, there are no vacancies available in this section.'),
     t('Closed job vacancies PAGE'),
-    t('<a href="inside-eu-osha/careers">Careers</a>'),
+    t('<a href="about-eu-osha/careers">Careers</a>'),
     t('No Results Messege'),
     t('Published'),
     t('Evaluation underway job vacancies TAB'),
     t('Closed job vacancies TAB'),
+    t('<a href="inside-eu-osha/careers">Careers</a>'),
   );
   $export['vacancies'] = $view;
 

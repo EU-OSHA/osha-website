@@ -14,7 +14,7 @@ function osha_job_vacancies_path_breadcrumbs_settings_info() {
   $path_breadcrumb->api_version = 1;
   $path_breadcrumb->machine_name = 'closed_job_vacancies_view';
   $path_breadcrumb->name = 'Closed job vacancies View';
-  $path_breadcrumb->path = 'jobs_archive';
+  $path_breadcrumb->path = 'about-eu-osha/careers/jobs_archive';
   $path_breadcrumb->data = array(
     'titles' => array(
       0 => 'About EU-OSHA',

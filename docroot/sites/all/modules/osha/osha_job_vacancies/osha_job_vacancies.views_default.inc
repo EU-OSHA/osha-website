@@ -171,11 +171,11 @@ function osha_job_vacancies_views_default_views() {
   /* Display: Closed job vacancies PAGE */
   $handler = $view->new_display('page', 'Closed job vacancies PAGE', 'page_1');
   $handler->display->display_options['defaults']['header'] = FALSE;
-  /* Header: Global: Unfiltered text */
-  $handler->display->display_options['header']['area_text_custom']['id'] = 'area_text_custom';
-  $handler->display->display_options['header']['area_text_custom']['table'] = 'views';
-  $handler->display->display_options['header']['area_text_custom']['field'] = 'area_text_custom';
-  $handler->display->display_options['header']['area_text_custom']['content'] = '<a href="about-eu-osha/careers">Careers</a>';
+  /* Header: Global: PHP */
+  $handler->display->display_options['header']['php']['id'] = 'php';
+  $handler->display->display_options['header']['php']['table'] = 'views';
+  $handler->display->display_options['header']['php']['field'] = 'php';
+  $handler->display->display_options['header']['php']['php_output'] = '<a href="<?php print url(\'about-eu-osha/careers\'); ?>">Careers</a>';
   $handler->display->display_options['defaults']['empty'] = FALSE;
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
@@ -376,7 +376,6 @@ function osha_job_vacancies_views_default_views() {
     t('No Results Message'),
     t('Currently, there are no vacancies available in this section.'),
     t('Closed job vacancies PAGE'),
-    t('<a href="about-eu-osha/careers">Careers</a>'),
     t('No Results Messege'),
     t('Published'),
     t('Evaluation underway job vacancies TAB'),

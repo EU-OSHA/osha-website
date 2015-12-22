@@ -47,7 +47,7 @@ function osha_job_vacancies_quicktabs_default_quicktabs() {
       'vid' => 'vacancies',
       'display' => 'page_3',
       'args' => '',
-      'title' => 'Evaluation underway vacancies',
+      'title' => 'Evaluation underway',
       'weight' => '-97',
       'type' => 'view',
     ),
@@ -91,7 +91,7 @@ function osha_job_vacancies_quicktabs_default_quicktabs() {
   t('Careers accordion');
   t('Completed vacancies');
   t('Enquiries');
-  t('Evaluation underway vacancies');
+  t('Evaluation underway');
   t('Open vacancies');
   t('Reserve lists');
   t('Spontaneous applications');

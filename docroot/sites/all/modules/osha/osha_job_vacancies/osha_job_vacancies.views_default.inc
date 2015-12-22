@@ -22,7 +22,7 @@ function osha_job_vacancies_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Completed job vacancies';
+  $handler->display->display_options['title'] = 'Job vacancies';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'View all';
   $handler->display->display_options['access']['type'] = 'perm';
@@ -171,6 +171,8 @@ function osha_job_vacancies_views_default_views() {
   /* Display: Closed job vacancies PAGE */
   $handler = $view->new_display('page', 'Closed job vacancies PAGE', 'page_1');
   $handler->display->display_options['defaults']['header'] = FALSE;
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Closed vacancies';
   /* Header: Global: PHP */
   $handler->display->display_options['header']['php']['id'] = 'php';
   $handler->display->display_options['header']['php']['table'] = 'views';
@@ -361,7 +363,7 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['path'] = 'closed-jobs-preview';
   $translatables['vacancies'] = array(
     t('Master'),
-    t('Completed job vacancies'),
+    t('Closed vacancies'),
     t('View all'),
     t('Apply'),
     t('Reset'),

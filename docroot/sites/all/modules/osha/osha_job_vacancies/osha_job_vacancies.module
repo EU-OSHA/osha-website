@@ -32,34 +32,6 @@ function osha_job_vacancies_post_features_enable_feature($component) {
 }
 
 function osha_job_vacancies_post_features_revert($component) {
-  // reset position of menu items
-  $parent = db_select('menu_links', 'm')
-    ->fields('m')
-    ->condition('link_title', 'Careers')
-    ->condition('menu_name', 'main-menu')
-    ->execute()
-    ->fetchAssoc();
-  if (!$parent['has_children']) {
-    db_update('menu_links')
-      ->fields(array('has_children' => 1, 'customized' => 1))
-      ->condition('link_title', 'Careers')
-      ->condition('menu_name', 'main-menu')
-      ->execute();
-    db_update('menu_links')
-      ->fields(array(
-        'plid' => $parent['mlid'],
-        'depth' => 4,
-        'customized' => 1,
-        'p1' => $parent['p1'],
-        'p2' => $parent['p2'],
-        'p3' => $parent['p3']
-      ))
-      ->expression('p4', 'mlid')
-      ->condition('link_path', array('about-eu-osha/careers/jobs_archive', 'open_job_vacancies', 'ongoing_job_vacancies', 'shortlisted_job_vacancies'), 'IN')
-      ->condition('depth', 1)
-      ->condition('menu_name', 'main-menu')
-      ->execute();
-  }
 }
 
 /**

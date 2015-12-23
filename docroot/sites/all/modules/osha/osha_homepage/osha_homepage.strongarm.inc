@@ -69,7 +69,7 @@ function osha_homepage_strongarm() {
         'custom_settings' => TRUE,
       ),
       'osha_slideshow' => array(
-        'custom_settings' => FALSE,
+        'custom_settings' => TRUE,
       ),
       'highlights_item' => array(
         'custom_settings' => FALSE,

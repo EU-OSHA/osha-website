@@ -68,3 +68,46 @@ function osha_homepage_update_7001() {
       field_attach_update('node', $node);
     }
 }
+
+/**
+ * MC-81: Refactor carousels from home page to use nodequeues
+ */
+function osha_homepage_update_7002() {
+  // create the nodequeues and replace the views
+  features_revert_module('osha_homepage');
+
+  // populate queue main carousel
+  $queue = nodequeue_load_queue_by_name('home_page_main_carousel');
+  $subqueue = reset(nodequeue_load_subqueues_by_queue($queue->qid));
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'banner')
+    ->fieldCondition('field_show_in_top_banner', 'value', '1');
+  $entities = $query->execute();
+  foreach (array_keys($entities['node']) as $nid) {
+    nodequeue_subqueue_add($queue, $subqueue, $nid);
+  }
+
+  // populate queue footer carousel
+  $queue = nodequeue_load_queue_by_name('home_page_recommended_resources');
+  $subqueue = reset(nodequeue_load_subqueues_by_queue($queue->qid));
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'banner')
+    ->fieldCondition('field_show_in_footer', 'value', '1');
+  $entities = $query->execute();
+  foreach (array_keys($entities['node']) as $nid) {
+    nodequeue_subqueue_add($queue, $subqueue, $nid);
+  }
+
+  // delete old fields
+  field_delete_field('field_show_in_top_banner');
+  field_delete_field('field_show_in_footer');
+}
+
+function osha_homepage_update_dependencies() {
+  $dependencies['osha_migration'][7006] = array(
+    'osha_homepage' => 7002,
+  );
+  return $dependencies;
+}

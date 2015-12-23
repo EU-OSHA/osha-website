@@ -309,6 +309,21 @@ function osha_homepage_views_default_views() {
   $handler->display->display_options['relationships']['field_banner_link_title_tid']['table'] = 'field_data_field_banner_link_title';
   $handler->display->display_options['relationships']['field_banner_link_title_tid']['field'] = 'field_banner_link_title_tid';
   $handler->display->display_options['relationships']['field_banner_link_title_tid']['required'] = TRUE;
+  /* Relationship: Nodequeue: Queue */
+  $handler->display->display_options['relationships']['nodequeue_rel']['id'] = 'nodequeue_rel';
+  $handler->display->display_options['relationships']['nodequeue_rel']['table'] = 'node';
+  $handler->display->display_options['relationships']['nodequeue_rel']['field'] = 'nodequeue_rel';
+  $handler->display->display_options['relationships']['nodequeue_rel']['label'] = 'home_page_main_carousel';
+  $handler->display->display_options['relationships']['nodequeue_rel']['required'] = TRUE;
+  $handler->display->display_options['relationships']['nodequeue_rel']['limit'] = 1;
+  $handler->display->display_options['relationships']['nodequeue_rel']['names'] = array(
+    'home_page_main_carousel' => 'home_page_main_carousel',
+    'publication_queue' => 0,
+    'featured_press_release' => 0,
+    'press_contacts_queue' => 0,
+    'esener_carousel' => 0,
+    'home_page_recommended_resources' => 0,
+  );
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
@@ -377,13 +392,12 @@ function osha_homepage_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'banner' => 'banner',
   );
-  /* Filter criterion: Content: Show in top banner (field_show_in_top_banner) */
-  $handler->display->display_options['filters']['field_show_in_top_banner_value']['id'] = 'field_show_in_top_banner_value';
-  $handler->display->display_options['filters']['field_show_in_top_banner_value']['table'] = 'field_data_field_show_in_top_banner';
-  $handler->display->display_options['filters']['field_show_in_top_banner_value']['field'] = 'field_show_in_top_banner_value';
-  $handler->display->display_options['filters']['field_show_in_top_banner_value']['value'] = array(
-    1 => '1',
-  );
+  /* Filter criterion: Nodequeue: In queue */
+  $handler->display->display_options['filters']['in_queue']['id'] = 'in_queue';
+  $handler->display->display_options['filters']['in_queue']['table'] = 'nodequeue_nodes';
+  $handler->display->display_options['filters']['in_queue']['field'] = 'in_queue';
+  $handler->display->display_options['filters']['in_queue']['relationship'] = 'nodequeue_rel';
+  $handler->display->display_options['filters']['in_queue']['value'] = '1';
   $handler->display->display_options['block_description'] = 'Home page banner top';
 
   /* Display: Home page banner footer */
@@ -400,6 +414,22 @@ function osha_homepage_views_default_views() {
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['row_options']['default_field_elements'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Nodequeue: Queue */
+  $handler->display->display_options['relationships']['nodequeue_rel']['id'] = 'nodequeue_rel';
+  $handler->display->display_options['relationships']['nodequeue_rel']['table'] = 'node';
+  $handler->display->display_options['relationships']['nodequeue_rel']['field'] = 'nodequeue_rel';
+  $handler->display->display_options['relationships']['nodequeue_rel']['label'] = 'home_page_recommended_resources';
+  $handler->display->display_options['relationships']['nodequeue_rel']['required'] = TRUE;
+  $handler->display->display_options['relationships']['nodequeue_rel']['limit'] = 1;
+  $handler->display->display_options['relationships']['nodequeue_rel']['names'] = array(
+    'home_page_recommended_resources' => 'home_page_recommended_resources',
+    'publication_queue' => 0,
+    'featured_press_release' => 0,
+    'press_contacts_queue' => 0,
+    'esener_carousel' => 0,
+    'home_page_main_carousel' => 0,
+  );
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: link_url */
   $handler->display->display_options['fields']['field_banner_link_1']['id'] = 'field_banner_link_1';
@@ -455,13 +485,12 @@ function osha_homepage_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'banner' => 'banner',
   );
-  /* Filter criterion: Content: Show in footer (field_show_in_footer) */
-  $handler->display->display_options['filters']['field_show_in_footer_value']['id'] = 'field_show_in_footer_value';
-  $handler->display->display_options['filters']['field_show_in_footer_value']['table'] = 'field_data_field_show_in_footer';
-  $handler->display->display_options['filters']['field_show_in_footer_value']['field'] = 'field_show_in_footer_value';
-  $handler->display->display_options['filters']['field_show_in_footer_value']['value'] = array(
-    1 => '1',
-  );
+  /* Filter criterion: Nodequeue: In queue */
+  $handler->display->display_options['filters']['in_queue']['id'] = 'in_queue';
+  $handler->display->display_options['filters']['in_queue']['table'] = 'nodequeue_nodes';
+  $handler->display->display_options['filters']['in_queue']['field'] = 'in_queue';
+  $handler->display->display_options['filters']['in_queue']['relationship'] = 'nodequeue_rel';
+  $handler->display->display_options['filters']['in_queue']['value'] = '1';
   $handler->display->display_options['block_description'] = 'Home page banner footer';
   $translatables['osha_home_banner_top'] = array(
     t('Master'),
@@ -473,8 +502,10 @@ function osha_homepage_views_default_views() {
     t('Desc'),
     t('Home page banner top'),
     t('term from field_banner_link_title'),
+    t('home_page_main_carousel'),
     t('<a href="[field_banner_link_1]"><div class="views-field-title"><h1>[field_summary]</h1></div>[field_image]<span class="views-field-field-banner-link">[name_field]</span></a>'),
     t('Home page banner footer'),
+    t('home_page_recommended_resources'),
     t('<a href="[field_banner_link_1]">
 <div class="views-field-title"><h2>[title_field]</h2></div>
 [field_image]

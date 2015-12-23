@@ -100,7 +100,7 @@ function osha_migration_update_7005() {
 /**
  * MC-81 carousel for ESENER
  */
-function osha_migration_update_7009() {
+function osha_migration_update_7006() {
   // create the blocks for ESENER carousel
   features_revert_module('osha_homepage');
   // TODO: refactor this code, it might be reusable
@@ -187,11 +187,16 @@ function osha_migration_update_7009() {
   ->execute();
   // enable the carousel
   db_merge('block')
-    ->key(array('module' => 'views', 'delta' => 'esener_carousel-slideshow'))
+    ->key(array('module' => 'views', 'delta' => 'esener_carousel-slideshow', 'theme' => 'osha_frontend'))
     ->fields(array(
         'status' => 1,
         'region' => 'content',
         'weight' => 1,
+    ))
+  ->execute();
+  db_merge('block')
+    ->key(array('module' => 'views', 'delta' => 'esener_carousel-slideshow'))
+    ->fields(array(
         'pages' => 'node/'.$nid1,
         'title' => '<none>',
         'visibility' => 1,
@@ -219,7 +224,7 @@ function osha_migration_update_7009() {
     'uri' => $file->uri,
     'status' => 1
   );
-  $node->field_show_in_top_banner[LANGUAGE_NONE][0]['value'] = '0';
+  //$node->field_show_in_top_banner[LANGUAGE_NONE][0]['value'] = '0';
   $node->language = 'en';
   $node->path = array('alias' => $alias);
   $node->uid = 1;
@@ -242,10 +247,17 @@ function osha_migration_update_7009() {
     'status' => 1
   );
   $node->language = 'en';
-  $node->field_show_in_top_banner[LANGUAGE_NONE][0]['value'] = '0';
+  //$node->field_show_in_top_banner[LANGUAGE_NONE][0]['value'] = '0';
   $node->path = array('alias' => $alias);
   $node->uid = 1;
   $node->status = 1;
   node_save($node);
   nodequeue_subqueue_add($queue, $subqueue, $node->nid);
+}
+
+function osha_migration_update_dependencies() {
+  $dependencies['osha_migration'][7006] = array(
+    'osha_homepage' => 7002,
+  );
+  return $dependencies;
 }

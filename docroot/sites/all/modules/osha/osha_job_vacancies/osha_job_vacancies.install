@@ -7,7 +7,9 @@ function osha_job_vacancies_update_7001() {
   }
 }
 
-// MC-102 add an intermediate state to the vacancies
+/**
+ * MC-102 add an intermediate state to the vacancies
+ */
 function osha_job_vacancies_update_7002() {
   features_revert_module('osha_job_vacancies');
   // create menu position rule for about-eu-osha/careers/jobs_archive

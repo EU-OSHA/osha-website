@@ -2050,17 +2050,20 @@ function osha_events_views_default_views() {
   $handler->display->display_options['fields']['field_country_code']['label'] = 'LOCATION';
   $handler->display->display_options['fields']['field_country_code']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_country_code']['alter']['text'] = '[field_country_code], ';
+  $handler->display->display_options['fields']['field_country_code']['hide_empty'] = TRUE;
   /* Field: Content: City */
   $handler->display->display_options['fields']['field_city']['id'] = 'field_city';
   $handler->display->display_options['fields']['field_city']['table'] = 'field_data_field_city';
   $handler->display->display_options['fields']['field_city']['field'] = 'field_city';
   $handler->display->display_options['fields']['field_city']['label'] = '';
   $handler->display->display_options['fields']['field_city']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_city']['hide_empty'] = TRUE;
   /* Field: Content: Organization */
   $handler->display->display_options['fields']['field_organization']['id'] = 'field_organization';
   $handler->display->display_options['fields']['field_organization']['table'] = 'field_data_field_organization';
   $handler->display->display_options['fields']['field_organization']['field'] = 'field_organization';
   $handler->display->display_options['fields']['field_organization']['label'] = 'ORGANIZER';
+  $handler->display->display_options['fields']['field_organization']['hide_empty'] = TRUE;
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';

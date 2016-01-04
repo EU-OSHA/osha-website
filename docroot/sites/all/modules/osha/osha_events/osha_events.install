@@ -104,3 +104,9 @@ function osha_events_update_7006() {
   field_delete_field('field_organised_by');
 }
 
+/**
+ * MC-84 Read only city and country for webminars
+ */
+function osha_events_update_7007() {
+  features_revert_module('osha_events');
+}

@@ -46,12 +46,13 @@ function osha_reminders_admin_form($form, &$form_state) {
     '#type' => 'textarea',
     '#title' => 'PM email body',
     '#default_value' => variable_get('osha_reminder_template_pm_body',
-      'Dear [user:name],
-
-This is a reminder for you to check your sections and mark them as reviewed <a href="[site:url]/admin/config/workbench/access/managers">in this screen</a>
-You can check the broken links in <a href="[site:url]/admin/content/linkchecker-broken-links">this page</a>
-
-Thank you,'
+        'Dear [user:name],<br/>
+<br/>
+You are kindly invited to review the content of your section <a href="[site:url]/admin/config/workbench/access/managers">[site:url]/admin/config/workbench/access/managers</a>.<br/>
+You can check the broken links in <a href="[site:url]/admin/content/linkchecker-broken-links">this page</a>.<br/>
+Please, remember that the content should be relevant and up to date, and the links should work properly.<br/>
+<br/>
+Thanks a lot for reviewing your contents.<br/>'
     ),
   );
 
@@ -70,12 +71,12 @@ Thank you,'
     '#type' => 'textarea',
     '#title' => 'Head of Units email body',
     '#default_value' => variable_get('osha_reminder_template_heads_body',
-      'Dear [user:name],
-This is a reminder for you to check content status <a href="[site:url]/admin/config/workbench/access/managers">in this screen</a>
-
-You can check the broken links in <a href="[site:url]/admin/content/linkchecker-broken-links">this page</a>
-
-Thank you,'
+        'Dear [user:name],<br/>
+<br/>
+This is a reminder for you to check content status <a href="[site:url]/admin/config/workbench/access/managers">in this screen</a>.<br/>
+You can check the broken links in <a href="[site:url]/admin/content/linkchecker-broken-links">this page</a>.<br/>
+<br/>
+Thank you,<br/>'
     ),
   );
 

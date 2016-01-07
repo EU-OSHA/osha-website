@@ -159,20 +159,22 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['field_publication_date_value']['field'] = 'field_publication_date_value';
   $handler->display->display_options['filters']['field_publication_date_value']['operator'] = '<=';
   $handler->display->display_options['filters']['field_publication_date_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_publication_date_value']['granularity'] = 'minute';
   $handler->display->display_options['filters']['field_publication_date_value']['default_date'] = 'now';
   /* Filter criterion: Content: Deadline (field_job_vacancies_deadline) */
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['id'] = 'field_job_vacancies_deadline_value';
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['table'] = 'field_data_field_job_vacancies_deadline';
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['field'] = 'field_job_vacancies_deadline_value';
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['operator'] = '>=';
+  $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['granularity'] = 'minute';
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['default_date'] = 'now';
   $handler->display->display_options['path'] = 'open_job_vacancies';
 
   /* Display: Closed job vacancies PAGE */
   $handler = $view->new_display('page', 'Closed job vacancies PAGE', 'page_1');
-  $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Completed vacancies';
+  $handler->display->display_options['defaults']['header'] = FALSE;
   /* Header: Global: PHP */
   $handler->display->display_options['header']['php']['id'] = 'php';
   $handler->display->display_options['header']['php']['table'] = 'views';
@@ -229,6 +231,7 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['field_expiration_date_value']['relationship'] = 'vid';
   $handler->display->display_options['filters']['field_expiration_date_value']['operator'] = '<';
   $handler->display->display_options['filters']['field_expiration_date_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_expiration_date_value']['granularity'] = 'minute';
   $handler->display->display_options['filters']['field_expiration_date_value']['default_date'] = 'now';
   $handler->display->display_options['path'] = 'about-eu-osha/careers/jobs_archive';
 
@@ -279,6 +282,7 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['field_expiration_date_value']['field'] = 'field_expiration_date_value';
   $handler->display->display_options['filters']['field_expiration_date_value']['operator'] = '>';
   $handler->display->display_options['filters']['field_expiration_date_value']['group'] = 2;
+  $handler->display->display_options['filters']['field_expiration_date_value']['granularity'] = 'minute';
   $handler->display->display_options['filters']['field_expiration_date_value']['default_date'] = 'now';
   /* Filter criterion: Content: Expiration date (field_expiration_date) */
   $handler->display->display_options['filters']['field_expiration_date_value_1']['id'] = 'field_expiration_date_value_1';
@@ -286,12 +290,14 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['field_expiration_date_value_1']['field'] = 'field_expiration_date_value';
   $handler->display->display_options['filters']['field_expiration_date_value_1']['operator'] = 'empty';
   $handler->display->display_options['filters']['field_expiration_date_value_1']['group'] = 2;
+  $handler->display->display_options['filters']['field_expiration_date_value_1']['granularity'] = 'minute';
   /* Filter criterion: Content: Deadline (field_job_vacancies_deadline) */
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['id'] = 'field_job_vacancies_deadline_value';
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['table'] = 'field_data_field_job_vacancies_deadline';
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['field'] = 'field_job_vacancies_deadline_value';
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['operator'] = '<=';
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['granularity'] = 'minute';
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['default_date'] = 'now';
   $handler->display->display_options['path'] = 'open_job_vacancies';
 
@@ -359,11 +365,12 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['field_expiration_date_value']['relationship'] = 'vid';
   $handler->display->display_options['filters']['field_expiration_date_value']['operator'] = '<';
   $handler->display->display_options['filters']['field_expiration_date_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_expiration_date_value']['granularity'] = 'minute';
   $handler->display->display_options['filters']['field_expiration_date_value']['default_date'] = 'now';
   $handler->display->display_options['path'] = 'closed-jobs-preview';
   $translatables['vacancies'] = array(
     t('Master'),
-    t('Completed vacancies'),
+    t('Job vacancies'),
     t('View all'),
     t('Apply'),
     t('Reset'),
@@ -378,6 +385,7 @@ function osha_job_vacancies_views_default_views() {
     t('No Results Message'),
     t('Currently, there are no vacancies available in this section.'),
     t('Closed job vacancies PAGE'),
+    t('Completed vacancies'),
     t('No Results Messege'),
     t('Published'),
     t('Evaluation underway job vacancies TAB'),

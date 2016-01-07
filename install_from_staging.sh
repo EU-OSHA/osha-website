@@ -53,9 +53,10 @@ if [ ${ecode} != 0 ]; then
 fi
 
 # Build the site
-drush osha_build -y
+# drush osha_build -y
+drush updatedb -y
 if [ ${ecode} != 0 ]; then
-  echo "osha_build has returned an error"
+  echo "updatedb has returned an error"
   exit ${ecode};
 fi
 

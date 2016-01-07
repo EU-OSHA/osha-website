@@ -8424,3 +8424,72 @@ body.page-entity-collection h1#page-title{
 	width: 100%;
 	background-color: #ffffff;
 }
+
+
+/*Essener carosuel*/
+
+#block-views-esener-carousel-slideshow{
+	margin-top:1em;
+}
+
+#block-views-esener-carousel-slideshow #num_slides {
+    height: 220px!important;
+    background-color: #E4EAF4!important;
+}
+
+#block-views-esener-carousel-slideshow .field-name-field-image .img_no_opac{
+	    opacity: 1!important;
+}
+
+#block-views-esener-carousel-slideshow .field-name-field-image {
+	float: left;
+    padding-right: 1em;
+    padding-top: 12px;
+}
+
+#block-views-esener-carousel-slideshow .field-name-field-image img{
+	max-height: 160px;
+}
+   
+
+#block-views-esener-carousel-slideshow .field-name-title-field {
+	color: #003399;
+    font-family: 'Open Sans Condensed',sans-serif!important;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0;
+    padding-top: 6px;
+    border: 0px!important;
+}
+
+#block-views-esener-carousel-slideshow .field-name-field-summary{
+	padding-top: 0em;
+}
+
+#block-views-esener-carousel-slideshow .field-name-field-summary .field-items {
+	color:#000;
+}
+
+
+.esener-explore-data-content{
+	text-align: center;
+	margin-top: 2em;
+	margin-bottom: 1em;
+}
+
+.ESENER-explore-data.ESENER-2014 , .ESENER-explore-data.ESENER-2009{
+	margin-right: 5em;
+	color:#FFF!important;
+	border:0px;
+	padding: 0.5em;
+	margin-top:1em;
+	margin-bottom: 1em;
+	background: url("../images/triangle-white.png") no-repeat scroll 96% center #dc2f82!important;
+	padding-right: 2.5em;
+	font-weight: bold;
+}
+
+.content-languages-esener{
+	margin-bottom: 1em!important;
+	margin-top: 2em!important;
+}

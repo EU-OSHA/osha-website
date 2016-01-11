@@ -10,9 +10,11 @@
                     active: $this.hasClass('accordion-init-inactive') ? false : 0,
                     activate: function (event, ui) {
                         //Scroll to panel when activating it
-                        $('html, body').animate({
-                            scrollTop: $(ui.newHeader).offset().top - 100
-                        }, 500);
+                        if ($(ui.newHeader).context !== undefined) {
+                            $('html, body').animate({
+                                scrollTop: $(ui.newHeader).offset().top - 100
+                            }, 500);
+                        }
                     }
                 });
             });

@@ -31,6 +31,15 @@ function osha_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  $items['node/%node/open_all_translations'] = array(
+    'title' => 'Open all translations',
+    'access arguments' => array('access content'),
+    'page callback' => 'osha_open_all_node_translations',
+    'page arguments' => array(1),
+    'weight' => 8,
+    'type' => MENU_LOCAL_TASK,
+  );
+
 //  $items['admin/config/regional/osha_language'] = array(
 //    'title' => 'EU-OSHA Languages',
 //    'page callback' => 'drupal_get_form',
@@ -678,6 +687,16 @@ function osha_date_field_formatter_settings_summary_alter(&$summary, $context) {
  * {@inheritdoc}
  */
 function osha_node_view($node, $view_mode, $langcode) {
+  // MC-123 Open all languages with one click
+  $current_node = menu_get_object();
+  if ($current_node && $current_node->nid == $node->nid) {
+    drupal_add_js(array('osha' => array(
+      'node_nid' => $node->nid,
+      'node_translations' => array_keys($node->translations->data)),
+    ), array('type' => 'setting'));
+    drupal_add_js(drupal_get_path('module', 'osha') . '/js/open_all_translations.js');
+  }
+
   $pos = strpos(request_uri(), '/rss-feeds');
   // URL can be with or without language
   if ( $pos === 0 || $pos === 3) {
@@ -1075,4 +1094,14 @@ function osha_thumbnail_alt_title(&$build, $content_type, $field, $formatter){
       }
     }
   }
+}
+
+/**
+ * Redirect the user to node edit form. We open other languages from javascript.
+ */
+function osha_open_all_node_translations($node) {
+  drupal_goto(
+    'node/' . $node->nid . '/edit',
+    array('language' => reset(array_keys($node->translations->data)))
+  );
 }

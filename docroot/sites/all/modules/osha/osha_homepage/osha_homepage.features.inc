@@ -21,6 +21,84 @@ function osha_homepage_views_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_fe_nodequeue_export_fields().
+ */
+function osha_homepage_fe_nodequeue_export_fields() {
+  $nodequeues = array();
+
+  // Exported nodequeues: esener_carousel
+  $nodequeues['esener_carousel'] = array(
+    'name' => 'esener_carousel',
+    'title' => 'Esener Carousel',
+    'subqueue_title' => '',
+    'size' => 0,
+    'link' => '',
+    'link_remove' => '',
+    'owner' => 'nodequeue',
+    'show_in_ui' => 1,
+    'show_in_tab' => 1,
+    'show_in_links' => 0,
+    'reference' => 0,
+    'reverse' => 0,
+    'i18n' => 1,
+    'subqueues' => 1,
+    'types' => array(
+      0 => 'banner',
+    ),
+    'roles' => array(),
+    'count' => 0,
+  );
+
+  // Exported nodequeues: home_page_main_carousel
+  $nodequeues['home_page_main_carousel'] = array(
+    'name' => 'home_page_main_carousel',
+    'title' => 'Home page main carousel',
+    'subqueue_title' => '',
+    'size' => 0,
+    'link' => '',
+    'link_remove' => '',
+    'owner' => 'nodequeue',
+    'show_in_ui' => 1,
+    'show_in_tab' => 1,
+    'show_in_links' => 0,
+    'reference' => 0,
+    'reverse' => 0,
+    'i18n' => 0,
+    'subqueues' => 1,
+    'types' => array(
+      0 => 'banner',
+    ),
+    'roles' => array(),
+    'count' => 0,
+  );
+
+  // Exported nodequeues: home_page_recommended_resources
+  $nodequeues['home_page_recommended_resources'] = array(
+    'name' => 'home_page_recommended_resources',
+    'title' => 'Home page recommended resources',
+    'subqueue_title' => '',
+    'size' => 0,
+    'link' => '',
+    'link_remove' => '',
+    'owner' => 'nodequeue',
+    'show_in_ui' => 1,
+    'show_in_tab' => 1,
+    'show_in_links' => 0,
+    'reference' => 0,
+    'reverse' => 0,
+    'i18n' => 0,
+    'subqueues' => 1,
+    'types' => array(
+      0 => 'banner',
+    ),
+    'roles' => array(),
+    'count' => 0,
+  );
+
+  return $nodequeues;
+}
+
+/**
  * Implements hook_node_info().
  */
 function osha_homepage_node_info() {

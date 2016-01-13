@@ -13,4 +13,4 @@ call drush devify --yes
 call drush devify_solr
 call drush devify_ldap
 rem Build the site
-call drush osha_build -y
+rem call drush osha_build -y

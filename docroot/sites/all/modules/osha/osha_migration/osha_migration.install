@@ -97,3 +97,167 @@ function osha_migration_update_7005() {
   drush_invoke('sql-query');
 }
 
+/**
+ * MC-81 carousel for ESENER
+ */
+function osha_migration_update_7006() {
+  // create the blocks for ESENER carousel
+  features_revert_module('osha_homepage');
+  // TODO: refactor this code, it might be reusable
+  // create first node
+  $alias = 'tools-and-publications/interactive-dashboard';
+  $node = new stdClass();
+  $node->type = 'article';
+  $node->title = 'How to use the interactive dashboard';
+  node_object_prepare($node);
+  $node->field_summary['en']['0']['value'] = 'Lorem ipsum, please change';
+  $node->language = 'en';
+  $node->path = array('alias' => $alias);
+  $node->uid = 1;
+  $node->status = 1;
+  $node->workbench_access = 3071;
+  $node->workbench_moderation_state_new = 'published';
+  $node->field_article_type[LANGUAGE_NONE][0]['tid'] = 63; // page
+  //$node->field_article_type[LANGUAGE_NONE][0]['tid'] = 84; // section
+  $node->field_activity[LANGUAGE_NONE][0]['tid'] = 40;
+  $node->field_publication_date[LANGUAGE_NONE][0] = array(
+    'value' => format_date(strtotime('now'), 'custom', 'Y-m-d H:i:s', 'Europe/Madrid'),
+    'timezone' => 'Europe/Madrid',  
+    'timezone_db' => 'Europe/Madrid',
+  );
+  $node->nodeblock = array('enabled' => 0);
+  node_save($node);
+
+  // add first node in the menu
+  $nid1 = $node->nid;
+  $item = array(
+    'link_path' => 'node/'.$nid1,
+    'link_title' => 'Interactive dashboard',
+    'menu_name' => 'main-menu',
+    'weight' => -30,
+    'expanded' => 0,
+    'plid' => 634,
+    'options' => array('content' => array('image' => 'public://menuimage/esener copia.png'))
+  );
+  menu_link_save($item);
+
+  // create second node
+  $alias = 'tools-and-publications/interactive-dashboard-2';
+  $node = new stdClass();
+  $node->type = 'article';
+  $node->title = 'How to use the interactive dashboard (2)';
+  $html = file_get_contents(drupal_realpath(drupal_get_path('module', 'osha_migration') . '/data/interactive_user_guide.html'));
+  $body = trim(preg_replace('/[\r\n]/', '', $html));
+  $node->body['en'][0]['value'] = $body;
+  $node->body['en'][0]['format'] = 'full_html';
+  node_object_prepare($node);
+  $node->language = 'en';
+  $node->path = array('alias' => $alias);
+  $node->uid = 1;
+  $node->status = 1;
+  $node->workbench_access = 3071;
+  $node->workbench_moderation_state_new = 'published';
+  $node->field_article_type[LANGUAGE_NONE][0]['tid'] = 63; // page
+  $node->field_activity[LANGUAGE_NONE][0]['tid'] = 40;
+  $node->field_publication_date[LANGUAGE_NONE][0] = array(
+    'value' => format_date(strtotime('now'), 'custom', 'Y-m-d H:i:s', 'Europe/Madrid'),
+    'timezone' => 'Europe/Madrid',  
+    'timezone_db' => 'Europe/Madrid',
+  );
+  $node->nodeblock = array('view_mode' => 'teaser');
+  node_save($node);
+
+  // enable the nodeblock for second node
+  db_merge('block')
+    ->key(array('module' => 'nodeblock', 'delta' => $node->nid, 'theme' => 'osha_frontend'))
+    ->fields(array(
+        'pages' => 'node/'.$nid1,
+        'status' => 1,
+        'region' => 'content',
+        'weight' => 2
+    ))
+  ->execute();
+  db_merge('block')
+    ->key(array('module' => 'nodeblock', 'delta' => $node->nid))
+    ->fields(array(
+        'pages' => 'node/'.$nid1,
+        'title' => '<none>',
+        'visibility' => 1,
+    ))
+  ->execute();
+  // enable the carousel
+  db_merge('block')
+    ->key(array('module' => 'views', 'delta' => 'esener_carousel-slideshow', 'theme' => 'osha_frontend'))
+    ->fields(array(
+        'status' => 1,
+        'region' => 'content',
+        'weight' => 1,
+    ))
+  ->execute();
+  db_merge('block')
+    ->key(array('module' => 'views', 'delta' => 'esener_carousel-slideshow'))
+    ->fields(array(
+        'pages' => 'node/'.$nid1,
+        'title' => '<none>',
+        'visibility' => 1,
+    ))
+  ->execute();
+
+  // prepare the nodequeue
+  $queue = nodequeue_load_queue_by_name('esener_carousel');
+  $subqueue = reset(nodequeue_load_subqueues_by_queue($queue->qid));
+
+  // create two sample banners
+  $file = file_load(72506);
+
+  $alias = 'tools-and-publications/interactive-dashboard/demo-banner-1';
+  $node = new stdClass();
+  $node->type = 'banner';
+  $node->title = 'Sample ESENER - Step 1';
+  node_object_prepare($node);
+  $node->field_summary['en']['0']['value'] = 'Lorem ipsum 1, please change';
+  $node->field_image['en'][] = array(
+    'fid' => $file->fid,
+    'filename' => $file->filename,
+    'filemime' => $file->filemime,
+    'uid' => 1,
+    'uri' => $file->uri,
+    'status' => 1
+  );
+  //$node->field_show_in_top_banner[LANGUAGE_NONE][0]['value'] = '0';
+  $node->language = 'en';
+  $node->path = array('alias' => $alias);
+  $node->uid = 1;
+  $node->status = 1;
+  node_save($node);
+  nodequeue_subqueue_add($queue, $subqueue, $node->nid);
+
+  $alias = 'tools-and-publications/interactive-dashboard/demo-banner-2';
+  $node = new stdClass();
+  $node->type = 'banner';
+  $node->title = 'Sample ESENER - step 2';
+  node_object_prepare($node);
+  $node->field_summary['en']['0']['value'] = 'Lorem ipsum 2, please change';
+  $node->field_image['en'][] = array(
+    'fid' => $file->fid,
+    'filename' => $file->filename,
+    'filemime' => $file->filemime,
+    'uid' => 1,
+    'uri' => $file->uri,
+    'status' => 1
+  );
+  $node->language = 'en';
+  //$node->field_show_in_top_banner[LANGUAGE_NONE][0]['value'] = '0';
+  $node->path = array('alias' => $alias);
+  $node->uid = 1;
+  $node->status = 1;
+  node_save($node);
+  nodequeue_subqueue_add($queue, $subqueue, $node->nid);
+}
+
+function osha_migration_update_dependencies() {
+  $dependencies['osha_migration'][7006] = array(
+    'osha_homepage' => 7002,
+  );
+  return $dependencies;
+}

@@ -185,3 +185,6 @@ ul.primary {
 }
 /* END CW-1873 - Events public fields icon*/
 
+.form-type-textfield input[disabled], .form-type-textfield input[disabled="disabled"] {
+  background-color: #f3f3f3;
+}

@@ -187,4 +187,5 @@ ul.primary {
 
 .form-type-textfield input[disabled], .form-type-textfield input[disabled="disabled"] {
   background-color: #f3f3f3;
+  color: #a0a0a0;
 }

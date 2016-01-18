@@ -18,7 +18,7 @@ function osha_publication_menu() {
     'title' => 'Publications',
     'description' => 'Config information for the module',
     'page callback' => 'osha_publication_listing_page',
-    'access arguments' => array('view published content'),
+    'access arguments' => array('access content'),
   );
 
   return $items;

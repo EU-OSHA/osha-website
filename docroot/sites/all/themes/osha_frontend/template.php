@@ -493,3 +493,12 @@ function _osha_frontend_get_field_value($row, $field1, $field2) {
     }
     return NULL;
 }
+
+function osha_frontend_menu_local_tasks_alter(&$data, $router_item, $root_path) {
+  foreach ($data['tabs'][0]['output'] as &$tab) {
+    if ($tab['#link']['path'] == 'node/%/open_all_translations') {
+      $tab['#link']['path'] = '#';
+      $tab['#link']['localized_options']['attributes']['id'][] = 'menu_local_task_open_all_translations';
+    }
+  }
+}

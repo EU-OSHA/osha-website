@@ -7,6 +7,26 @@
 include_once 'osha_publication.features.inc';
 
 define('OSHA_PUBLICATION_CONTENT_TYPE_PUBLICATION', 'publication');
+define('SOLR_SEARCH_INDEX', 'default_multilingual_node_index');
+
+/**
+ * Implements hook_menu().
+ */
+function osha_publication_menu() {
+  $items = array();
+  $items['tools-and-publications/publications'] = array(
+    'title' => 'Publications',
+    'description' => 'Config information for the module',
+    'page callback' => 'osha_publication_listing_page',
+    'access arguments' => array('view published content'),
+  );
+
+  return $items;
+}
+
+function osha_publication_listing_page() {
+  return '';
+}
 
 /**
  * Implements hook_url_inbound_alter().
@@ -84,6 +104,69 @@ function osha_publication_url_inbound_alter(&$path, $original_path, $path_langua
     }
   }
 }
+
+/**
+ * Implements hook_block_info().
+ */
+function osha_publication_block_info() {
+  $blocks = array();
+  $blocks['osha_publication_listing'] = array(
+    'info' => t('Publications listing'),
+    'status' => 1,
+    'region' => '-1',
+    'visibility' => BLOCK_VISIBILITY_NOTLISTED,
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function osha_publication_block_view($delta = '') {
+  $block = array();
+  if ($delta == 'osha_publication_listing') {
+    module_load_include('inc', 'osha_publication', 'osha_publication.pages');
+    $block['content'] = drupal_get_form('osha_publication_menu_publications_form');
+  }
+  return $block;
+}
+
+function osha_publication_req_param($form_state, $name, $default = NULL) {
+  if (!empty($form_state['values'][$name])) {
+    $ret = $form_state['values'][$name];
+    if (is_array($ret)) {
+      $ret = array_filter($ret);
+    }
+    return $ret;
+  }
+  if (!empty($_GET[$name])) {
+    if (is_array($_GET[$name])) {
+      $ret = array();
+      foreach($_GET[$name] as $v) {
+        $ret[] = check_plain($v);
+      }
+      return $ret;
+    }
+    else {
+      return check_plain($_GET[$name]);
+    }
+  }
+  return $default;
+}
+
+function osha_publication_options_list() {
+  $return = array('0' => t('All audience'));
+  $vocabulary = taxonomy_vocabulary_machine_name_load('segment');
+  if (!empty($vocabulary)) {
+    $terms = taxonomy_get_tree($vocabulary->vid);
+    foreach($terms as $key => $term) {
+      $return[$term->tid] = $term->name;
+    }
+  }
+  return $return;
+}
+
 
 /**
  * Implements hook_file_view().

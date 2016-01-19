@@ -6,7 +6,7 @@ function osha_publication_menu_publications_form($form, $form_state) {
   $text = osha_publication_req_param($form_state, 'text');
   $sort = osha_publication_req_param($form_state, 'sort_by', 'search_api_relevance');
   $direction = osha_publication_req_param($form_state, 'direction', 'desc');
-  $languages = osha_publication_req_param($form_state, 'languages', array($language->language));
+  $languages = osha_publication_req_param($form_state, 'languages', array());
   $form = array(
     '#action' => url('tools-and-publications/publications'),
     '#method' => 'post',
@@ -101,9 +101,7 @@ function osha_publication_menu_publications_form_submit($form, &$form_state) {
 
 function osha_publication_menu_publications_search_native($form_state) {
   global $language;
-  $languages = osha_publication_req_param($form_state, 'languages', array($language->language));
-  if(!$languages)
-    $languages = array($language->language);
+  $languages = osha_publication_req_param($form_state, 'languages', array());
   $text = osha_publication_req_param($form_state, 'text');
   $sort = osha_publication_req_param($form_state, 'sort_by', 'search_api_relevance');
   $direction = osha_publication_req_param($form_state, 'direction', 'desc');
@@ -178,7 +176,9 @@ function osha_publication_menu_publications_search_native($form_state) {
     $q->innerJoin('node', 'a', 'a.nid = b.entity_id AND a.vid = b.revision_id');
     $q->condition('b.bundle', 'publication');
     $q->condition('b.entity_id', $pnid);
-    $q->condition('b.language', $languages, 'IN');
+    if (!empty($languages)) {
+      $q->condition('b.language', $languages, 'IN');
+    }
     $c = $q->countQuery()->execute()->fetchField();
 
     if (!empty($relevant_for_ids)) {
@@ -231,7 +231,6 @@ function osha_publication_menu_publications_search_native($form_state) {
   }
   $ret = array(
     '#nids' => $nids,
-    '#prefix' => '<h2 class="h4-title">' . t('Publications available') . '</h2>',
     'results-native' => node_view_multiple($nodes, 'teaser', 0, $language->language),
     '#suffix' => theme('pager', array(
       'tags' => array('<', '<', '', '>', '>'),

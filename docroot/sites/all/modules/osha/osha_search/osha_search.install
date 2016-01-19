@@ -39,3 +39,17 @@ function osha_search_update_7002() {
     drupal_set_message('Failed to configure search_autocomplete form', 'error');
   }
 }
+
+/**
+ * Revert osha_search views and blocks and disable prev publ search view.
+ */
+function osha_search_update_7003() {
+  features_revert(array('osha_search' => array('views_view', 'fe_block_settings')));
+  $view_name = 'publications_index';
+  $views_status = variable_get('views_defaults', array());
+  $views_status[$view_name] = TRUE;
+  variable_set('views_defaults', $views_status);
+  if (function_exists('views_invalidate_cache')) {
+    views_invalidate_cache();
+  }
+}

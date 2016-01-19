@@ -20,7 +20,7 @@ function osha_publication_default_fe_block_settings() {
     'i18n_mode' => 0,
     'module' => 'osha_publication',
     'node_types' => array(),
-    'pages' => '',
+    'pages' => 'tools-and-publications/publications',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -49,7 +49,7 @@ function osha_publication_default_fe_block_settings() {
       ),
     ),
     'title' => '',
-    'visibility' => 0,
+    'visibility' => 1,
   );
 
   $export['views-publications-slidehow'] = array(

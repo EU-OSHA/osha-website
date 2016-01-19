@@ -305,6 +305,16 @@ function osha_frontend_preprocess_page(&$variables){
   if(preg_match('/(.)*(blog)(.)*/', $_SERVER['REQUEST_URI']) || $bundle == 'comment_node_blog'){
     $variables['blog'] = TRUE;
   }
+
+  // MC-123 Open all languages with one click
+  if (isset($variables['node'])) {
+    $node = $variables['node'];
+    drupal_add_js(array('osha' => array(
+      'node_nid' => $node->nid,
+      'node_translations' => array_keys($node->translations->data)),
+    ), array('type' => 'setting'));
+    drupal_add_js(drupal_get_path('module', 'osha') . '/js/open_all_translations.js');
+  }
 }
 
 /**

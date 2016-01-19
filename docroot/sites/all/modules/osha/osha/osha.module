@@ -687,16 +687,6 @@ function osha_date_field_formatter_settings_summary_alter(&$summary, $context) {
  * {@inheritdoc}
  */
 function osha_node_view($node, $view_mode, $langcode) {
-  // MC-123 Open all languages with one click
-  $current_node = menu_get_object();
-  if ($current_node && $current_node->nid == $node->nid) {
-    drupal_add_js(array('osha' => array(
-      'node_nid' => $node->nid,
-      'node_translations' => array_keys($node->translations->data)),
-    ), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'osha') . '/js/open_all_translations.js');
-  }
-
   $pos = strpos(request_uri(), '/rss-feeds');
   // URL can be with or without language
   if ( $pos === 0 || $pos === 3) {

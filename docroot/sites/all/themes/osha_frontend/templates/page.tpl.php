@@ -65,6 +65,12 @@
         <?php print $sidebar_second; ?>
       </aside>
     <?php endif; ?>
+
+    <?php if (isset($page['before_footer'])): ?>
+      <div class="before_footer">
+        <?php print render($page['before_footer']); ?>
+      </div>
+    <?php endif; ?>
 	
   </div>
 

@@ -48,3 +48,10 @@ function osha_publication_update_7003() {
       taxonomy_term_save($term);
     }
 }
+
+/**
+ * Revert osha_publication.
+ */
+function osha_publication_update_7004() {
+  features_revert(array('osha_publication' => array('fe_block_settings', 'views_view')));
+}

@@ -174,7 +174,7 @@ function osha_search_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['exposed_block'] = TRUE;
-  $handler->display->display_options['path'] = 'tools-and-publications/publications';
+  $handler->display->display_options['path'] = 'tools-and-publications/publications_';
   $translatables['publications_index'] = array(
     t('Master'),
     t('Publications'),

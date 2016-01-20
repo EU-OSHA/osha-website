@@ -106,17 +106,6 @@ function osha_publication_url_inbound_alter(&$path, $original_path, $path_langua
 }
 
 /**
- * Implements hook_search_api_solr_query_alter().
- */
-function osha_publication_search_api_solr_query_alter(array &$call_args, SearchApiQueryInterface $query) {
-  // if publication listing query, add the nid as field.
-  $query_id = $query->getOption('query_id');
-  if ($query_id == 'osha_publications_listing') {
-    $call_args['params']['fl'] = 'is_nid,score';
-  }
-}
-
-/**
  * Implements hook_block_info().
  */
 function osha_publication_block_info() {

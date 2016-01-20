@@ -2,11 +2,11 @@
 
 function osha_publication_menu_publications_form($form, $form_state) {
   drupal_set_title(t('Publications'));
-  global $language;
   $text = osha_publication_req_param($form_state, 'text');
   $sort = osha_publication_req_param($form_state, 'sort_by', 'search_api_relevance');
   $direction = osha_publication_req_param($form_state, 'direction', 'desc');
   $languages = osha_publication_req_param($form_state, 'languages', array());
+  $tags = osha_publication_req_param($form_state, 'tags', array());
   $form = array(
     '#action' => url('tools-and-publications/publications'),
     '#method' => 'post',
@@ -19,10 +19,6 @@ function osha_publication_menu_publications_form($form, $form_state) {
       '#attributes' => array('class' => array('two_column publications-search-list')),
     )
   );
-//  $form['content']['slideshow'] = array(
-//    '#type' => 'markup',
-//    '#markup' => views_embed_view('publications_slideshow', 'slidehow'),
-//  );
   $form['content']['text'] = array(
     '#type' => 'textfield',
     '#size' => 30,
@@ -61,7 +57,7 @@ function osha_publication_menu_publications_form($form, $form_state) {
   $form['left-column']['tags'] = array(
     '#type' => 'checkboxes',
     '#options' => _osha_publication_tags_options_list(),
-    '#default_value' => array('0'),
+    '#default_value' => $tags,
     '#title' => t('Topics'),
   );
   $form['left-column']['publication_type'] = array(
@@ -116,6 +112,7 @@ function osha_publication_menu_publications_search_native($form_state) {
     $query->condition('status', 1);
     $query->condition('type', 'publication');
     $query->condition('field_file:file', 0, '>');
+    $query->setOption('query_id', 'osha_publications_listing');
     $query->keys($text);
     $query->fields(array('title_field', 'body:value'));
     if (!empty($sort)) {
@@ -259,6 +256,7 @@ function osha_publication_menu_publications_search_related($form_state, $native_
   $query->condition('type', 'publication');
   $query->condition('language', 'en');
   $query->condition('field_file:file', 0, '>');
+  $query->setOption('query_id', 'osha_publications_listing');
 
   if ($is_search) {
     $query->keys($text);

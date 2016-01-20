@@ -525,7 +525,13 @@ function theme_osha_publication_file_publication_file_format($element) {
   $file_fid = isset($node->field_file[$node->language][0]['fid']) ? $node->field_file[$node->language][0]['fid'] : NULL;
 
   $restrict_lang = FALSE;
-  if (!empty($languages = $_GET['languages']) || !empty($languages = $_POST['languages'])) {
+  $languages = array();
+  if (!empty($_GET['languages'])) {
+    $languages = $_GET['languages'];
+    $restrict_lang = TRUE;
+  }
+  if (!empty($_POST['languages'])) {
+    $languages = $_POST['languages'];
     $restrict_lang = TRUE;
   }
 

@@ -14,3 +14,4 @@ call drush devify_solr
 call drush devify_ldap
 rem Build the site
 rem call drush osha_build -y
+call drush updatedb -y

@@ -31,6 +31,15 @@ function osha_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  $items['node/%node/open_all_translations'] = array(
+    'title' => 'Open all translations',
+    'access arguments' => array('access content'),
+    'page callback' => 'osha_open_all_node_translations',
+    'page arguments' => array(1),
+    'weight' => 8,
+    'type' => MENU_LOCAL_TASK,
+  );
+
 //  $items['admin/config/regional/osha_language'] = array(
 //    'title' => 'EU-OSHA Languages',
 //    'page callback' => 'drupal_get_form',
@@ -1075,4 +1084,14 @@ function osha_thumbnail_alt_title(&$build, $content_type, $field, $formatter){
       }
     }
   }
+}
+
+/**
+ * Redirect the user to node edit form. We open other languages from javascript.
+ */
+function osha_open_all_node_translations($node) {
+  drupal_goto(
+    'node/' . $node->nid . '/edit',
+    array('language' => reset(array_keys($node->translations->data)))
+  );
 }

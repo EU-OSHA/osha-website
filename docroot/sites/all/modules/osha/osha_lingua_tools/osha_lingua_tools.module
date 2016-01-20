@@ -109,6 +109,7 @@ function _osha_lingua_tools_filefield_diff($old_node, $new_node, $fieldname, $la
 
 function form_lingua_form($form, &$form_state) {
   $node = menu_get_object();
+  $translated_in = array();
   $numlen = count($node->translations->data);
 
   if ($numlen <= 1) {
@@ -169,8 +170,10 @@ function form_lingua_form($form, &$form_state) {
   $languages = tmgmt_available_languages();
   unset($languages[$node->translations->original]);
   foreach ($node->translations->data as $lang => $translation) {
+    $translated_in[$lang] = $languages[$lang];
     unset($languages[$lang]);
   }
+  unset($translated_in['en']);
   $selected_languages = array_intersect_key($languages, osha_language_list_options());
 
   $form['target_language'] = array(
@@ -188,9 +191,63 @@ function form_lingua_form($form, &$form_state) {
     '#weight' => array('#weight' => 7),
   );
 
+  $fields = _osha_lingua_tools_translatable_field_instances($node->type);
+  if (!empty($fields)) {
+    $form['propagate_files_header_text'] = array(
+      '#markup' => '<p class="linguaheader">Please, select the files to spread and the languages where to copy the files, then press the <strong>spread files</strong> button.</p>',
+      '#weight' => array('#weight' => 8),
+    );
+
+    $form['spread_files_fields'] = array(
+      '#weight' => array('#weight' => 9),
+    );
+
+    $form['spread_files_target_language'] = array(
+      '#type' => 'checkboxes',
+      '#title' => t('Copy files to'),
+      '#multiple' => TRUE,
+      '#options' => $translated_in,
+      '#default_value' => array_keys($translated_in),
+      '#weight' => array('#weight' => 10)
+    );
+
+    $form['propagate_files_submit_button'] = array(
+      '#type' => 'submit',
+      '#value' => t('Spread files'),
+      '#submit' => array('osha_lingua_tools_spread_files'),
+      '#weight' => array('#weight' => 11),
+    );
+  }
+  foreach ($fields as $field) {
+    $files_to_copy = array();
+    $selected_files = array();
+    foreach ($node->{$field['field_name']}['en'] as $item) {
+      $files_to_copy[$item['fid']] = $item['filename'];
+      foreach ($translated_in as $lang => $language) {
+        $found = FALSE;
+        foreach ($node->{$field['field_name']}[$lang] as $translated_item) {
+          if ($translated_item['fid'] == $item['fid']) {
+            $found = TRUE;
+            break;
+          }
+        }
+        if (!$found) {
+          $selected_files[$item['fid']] = [$item['fid']];
+          break;
+        }
+      }
+    }
+    $form['spread_files_fields'][$field['field_name']] = array(
+      '#type' => 'checkboxes',
+      '#title' => $field['label'],
+      '#multiple' => TRUE,
+      '#options' => $files_to_copy,
+      '#default_value' => array_keys($selected_files),
+    );
+  }
+
   return $form;
 }
-
 
 function linguatools_access() {
   global $user;
@@ -216,7 +273,7 @@ function istranslatable($idfield) {
 }
 
 function form_lingua_form_validate($form, &$form_state) {
-  if ($form_state['triggering_element']['#id'] == 'edit-create-translations-submit-button') {
+  if ($form_state['triggering_element']['#id'] != 'edit-submit-button') {
     return;
   }
 
@@ -412,4 +469,45 @@ function _osha_lingua_tools_translatable_field_instances($bundle) {
     }
   }
   return $translatable_fields;
+}
+
+/**
+ * Copy the selected files from english to all selected languages.
+ *
+ * @param $form
+ * @param $form_state
+ */
+function osha_lingua_tools_spread_files($form, &$form_state) {
+  $node = menu_get_object();
+  $fields = _osha_lingua_tools_translatable_field_instances($node->type);
+
+  foreach ($fields as $field) {
+    // Get files objects that needs to be copied.
+    $items_to_copy = array();
+    foreach ($node->{$field['field_name']}['en'] as $item) {
+      if (in_array($item['fid'], $form_state['values'][$field['field_name']])) {
+        $items_to_copy[] = $item;
+      }
+    }
+
+    // Copy the files to all selected languages.
+    foreach ($form_state['values']['spread_files_target_language'] as $lang_code => $value) {
+      if ($value) {
+        foreach ($items_to_copy as $item_to_copy) {
+          $exists = FALSE;
+          foreach ($node->{$field['field_name']}[$lang_code] as $item) {
+            if ($item_to_copy['fid'] == $item['fid']) {
+              $exists = TRUE;
+              break;
+            }
+          }
+          if (!$exists) {
+            $node->{$field['field_name']}[$lang_code][] = $item_to_copy;
+          }
+        }
+      }
+    }
+  }
+
+  node_save($node);
 }

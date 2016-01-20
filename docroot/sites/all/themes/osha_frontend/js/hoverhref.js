@@ -197,9 +197,23 @@ jQuery(document).ready(function() {
 		jQuery(this).closest('.block-facetapi').find("div.item-list").slideToggle();
 		jQuery(this).toggleClass("expand");
     });
+
+    // Toggle event for facetapi filters blocks.
+    jQuery(".publications-sidebar-first .form-checkboxes").each(function() {
+        // If no active filters, hide the filtering on init.
+        if (jQuery(this).find('[type=checkbox]:checked').length == 0) {
+            jQuery(this).hide();
+        }
+        else {
+            jQuery(this).closest('.form-type-checkboxes').children('label').addClass('expand');
+        }
+    }).closest('.form-type-checkboxes').children('label').click(function() {
+        jQuery(this).closest('.form-type-checkboxes').find("div.form-checkboxes").slideToggle();
+        jQuery(this).toggleClass("expand");
+    });
 });
 
-function showSearcher() {	
+function showSearcher() {
 	jQuery(".mean-container #block-lang-dropdown-language-content").css("display","block");
 	jQuery(".mean-container #block-search-form").css("display","block");
 	jQuery(".mean-container #languagesAndSearch").css("display","block");

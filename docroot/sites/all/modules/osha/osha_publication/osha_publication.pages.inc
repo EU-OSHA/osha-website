@@ -105,6 +105,8 @@ function osha_publication_menu_publications_search_native($form_state) {
   $text = osha_publication_req_param($form_state, 'text');
   $sort = osha_publication_req_param($form_state, 'sort_by', 'search_api_relevance');
   $direction = osha_publication_req_param($form_state, 'direction', 'desc');
+  $tags = osha_publication_req_param($form_state, 'tags', array());
+
   $is_search = !empty($text);
   $restrict = array();
   if ($is_search) {
@@ -133,12 +135,8 @@ function osha_publication_menu_publications_search_native($form_state) {
     }
   }
   $tags_ids = array();
-  $tags = array();
-  if (!empty($form_state['values']['tags'])) {
-    $tags = $form_state['values']['tags'];
-  }
-  foreach ($tags as $tag) {
-    if ($tag) {
+  if (!empty($tags)) {
+    foreach ($tags as $tag) {
       $tags_ids[] = $tag;
     }
   }
@@ -158,6 +156,9 @@ function osha_publication_menu_publications_search_native($form_state) {
   $q = db_select('node', 'a');
   $q->innerJoin('field_data_field_publication_type', 'b', 'a.nid = b.entity_id');
   $q->innerJoin('field_data_field_publication_date', 'c', 'a.nid = c.entity_id');
+  if (!empty($tags_ids)) {
+    $q->innerJoin('field_data_field_tags', 'd', 'a.nid = d.entity_id');
+  }
   $q->fields('a', array('nid', 'vid'));
   $q->condition('a.type', 'publication');
   $q->condition('a.status', 1);
@@ -167,6 +168,9 @@ function osha_publication_menu_publications_search_native($form_state) {
   }
   if (!empty($publication_type_ids)) {
     $q->condition('b.field_publication_type_tid', $publication_type_ids, 'IN');
+  }
+  if (!empty($tags_ids)) {
+    $q->condition('d.field_tags_tid', $tags_ids, 'IN');
   }
   $pnids = $q->execute()->fetchCol();
   $nids = array();
@@ -180,22 +184,7 @@ function osha_publication_menu_publications_search_native($form_state) {
       $q->condition('b.language', $languages, 'IN');
     }
     $c = $q->countQuery()->execute()->fetchField();
-
-    if (!empty($tags_ids)) {
-      // Check if the node is relevant for all selected topics checkboxes.
-      $q2 = db_select('field_data_field_tags', 'b');
-      $q2->fields('b', array('entity_id'));
-      $q2->innerJoin('node', 'a', 'a.nid = b.entity_id');
-      $q2->condition('b.entity_id', $pnid);
-      $q2->condition('b.entity_type', 'node');
-      $q2->condition('b.field_tags_tid', $tags_ids, 'IN');
-      $c2 = $q2->countQuery()->execute()->fetchField();
-    }
-    else {
-      // No 'topic' checkbox is selected, so let the node pass this check.
-      $c2 = 1;
-    }
-    if ($c >= count($languages) && $c2 >= count($tags_ids)) {
+    if ($c >= count($languages)) {
       $nids[] = $pnid;
     }
   }
@@ -214,7 +203,7 @@ function osha_publication_menu_publications_search_native($form_state) {
 //  $q->orderBy('field_publication_date_value', 'DESC');
 //  $nids = $q->execute()->fetchCol();
 
-  $per_page = 4;
+  $per_page = 6;
   $current_page = pager_default_initialize(count($nids), $per_page);
   $page = array_chunk($nids, $per_page, TRUE);
   $nodes = node_load_multiple($page[$current_page]);
@@ -228,6 +217,9 @@ function osha_publication_menu_publications_search_native($form_state) {
   if (!empty($sort)) {
     $pager_params['sort_by'] = $sort;
     $pager_params['direction'] = $direction;
+  }
+  if (!empty($tags)) {
+    $pager_params['tags'] = $tags;
   }
   $ret = array(
     '#nids' => $nids,
@@ -258,6 +250,7 @@ function osha_publication_menu_publications_search_related($form_state, $native_
   $text = osha_publication_req_param($form_state, 'text');
   $sort = osha_publication_req_param($form_state, 'sort_by', 'search_api_relevance');
   $direction = osha_publication_req_param($form_state, 'direction', 'desc');
+  $tags = osha_publication_req_param($form_state, 'tags', array());
   $is_search = !empty($text);
   /** @var SearchApiQuery $query */
   /** @var SearchApiSolrService $server */
@@ -304,6 +297,9 @@ function osha_publication_menu_publications_search_related($form_state, $native_
   if (!empty($sort)) {
     $pager_params['sort_by'] = $sort;
     $pager_params['direction'] = $direction;
+  }
+  if (!empty($tags)) {
+    $pager_params['tags'] = $tags;
   }
   $ret = array(
     '#prefix' => '<h4>' . t('Other relevant publications in English') . '</h4>',

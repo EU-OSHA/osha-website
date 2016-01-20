@@ -132,14 +132,14 @@ function osha_publication_menu_publications_search_native($form_state) {
       );
     }
   }
-  $relevant_for_ids = array();
-  $relevant_for = array();
-  if (!empty($form_state['values']['relevant_for'])) {
-    $relevant_for = $form_state['values']['relevant_for'];
+  $tags_ids = array();
+  $tags = array();
+  if (!empty($form_state['values']['tags'])) {
+    $tags = $form_state['values']['tags'];
   }
-  foreach ($relevant_for as $relf) {
-    if ($relf) {
-      $relevant_for_ids[] = $relf;
+  foreach ($tags as $tag) {
+    if ($tag) {
+      $tags_ids[] = $tag;
     }
   }
 
@@ -181,21 +181,21 @@ function osha_publication_menu_publications_search_native($form_state) {
     }
     $c = $q->countQuery()->execute()->fetchField();
 
-    if (!empty($relevant_for_ids)) {
-      // Check if the node is relevant for all selected 'relevant for' checkboxes.
-      $q2 = db_select('field_data_field_segment', 'b');
+    if (!empty($tags_ids)) {
+      // Check if the node is relevant for all selected topics checkboxes.
+      $q2 = db_select('field_data_field_tags', 'b');
       $q2->fields('b', array('entity_id'));
       $q2->innerJoin('node', 'a', 'a.nid = b.entity_id');
       $q2->condition('b.entity_id', $pnid);
       $q2->condition('b.entity_type', 'node');
-      $q2->condition('b.field_segment_tid', $relevant_for_ids, 'IN');
+      $q2->condition('b.field_tags_tid', $tags_ids, 'IN');
       $c2 = $q2->countQuery()->execute()->fetchField();
     }
     else {
-      // No 'relevant for' checkbox is selected, so let the node pass this check.
+      // No 'topic' checkbox is selected, so let the node pass this check.
       $c2 = 1;
     }
-    if ($c >= count($languages) && $c2 >= count($relevant_for_ids)) {
+    if ($c >= count($languages) && $c2 >= count($tags_ids)) {
       $nids[] = $pnid;
     }
   }

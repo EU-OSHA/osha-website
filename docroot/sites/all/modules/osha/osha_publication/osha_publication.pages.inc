@@ -212,10 +212,11 @@ function osha_publication_menu_publications_search_native($form_state) {
   }
   $ret = array(
     '#nids' => $nids,
+    '#prefix' => '<h2 class="h4-title">' . t('Publications available') . '</h2>',
     'results-native' => node_view_multiple($nodes, 'teaser', 0, $language->language),
     '#suffix' => theme('pager', array(
       'tags' => array('<', '<', '', '>', '>'),
-      'quantity' => count($nodes),
+      'quantity' => 9,
       'parameters' => $pager_params,
     ))
   );
@@ -313,7 +314,7 @@ function osha_publication_menu_publications_search_related($form_state, $native_
     'results-related' => node_view_multiple($nodes, 'teaser', 0, $language->language),
     '#suffix' => theme('pager', array(
       'tags' => array('<', '<', '', '>', '>'),
-      'quantity' => count($nodes),
+      'quantity' => 9,
       'parameters' => $pager_params,
       'element' => 1,
     ))

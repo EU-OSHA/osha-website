@@ -39,7 +39,7 @@ function osha_job_vacancies_quicktabs_default_quicktabs() {
       'vid' => 'vacancies',
       'display' => 'page_2',
       'args' => '',
-      'title' => 'Open vacancies',
+      'title' => 'Vacancies - Open',
       'weight' => '-98',
       'type' => 'view',
     ),
@@ -47,7 +47,7 @@ function osha_job_vacancies_quicktabs_default_quicktabs() {
       'vid' => 'vacancies',
       'display' => 'page_3',
       'args' => '',
-      'title' => 'Evaluation underway',
+      'title' => 'Vacancies - Evaluation underway',
       'weight' => '-97',
       'type' => 'view',
     ),
@@ -55,7 +55,7 @@ function osha_job_vacancies_quicktabs_default_quicktabs() {
       'vid' => 'vacancies',
       'display' => 'page_4',
       'args' => '',
-      'title' => 'Completed vacancies',
+      'title' => 'Vacancies - Completed',
       'weight' => '-96',
       'type' => 'view',
     ),
@@ -89,12 +89,12 @@ function osha_job_vacancies_quicktabs_default_quicktabs() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Careers accordion');
-  t('Completed vacancies');
   t('Enquiries');
-  t('Evaluation underway');
-  t('Open vacancies');
   t('Reserve lists');
   t('Spontaneous applications');
+  t('Vacancies - Completed');
+  t('Vacancies - Evaluation underway');
+  t('Vacancies - Open');
   t('Who we employ');
 
   $export['_careers_accordion'] = $quicktabs;

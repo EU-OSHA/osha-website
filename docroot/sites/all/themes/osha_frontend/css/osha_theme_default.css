@@ -89,13 +89,18 @@ header{
 	border-bottom:0px!important;
 }
 
-.sidebars_first{
+.sidebars_first,
+.publications-sidebar-first {
 	border-top: 5px solid #003399;
 	margin-top: 0em;
 	margin-right: 3em;
 	width: 19%;
 	margin-left: 1.8em;
 	float:left;
+}
+
+.publications-sidebar-first {
+    border-top: 0;
 }
 
 .sidebars_first .region-sidebar-first{
@@ -605,6 +610,10 @@ padding-left: 1em;
 
 }
 
+.before_footer {
+    clear: both;
+}
+
 footer {
 	background:#575958;
 	color:#FFF;
@@ -707,6 +716,10 @@ footer a{
 }
 
 /*PUBLICATIONS*/
+
+.publications-search-list {
+    float: left;
+}
 
 span.date-display-single{
 	font-weight:bold;

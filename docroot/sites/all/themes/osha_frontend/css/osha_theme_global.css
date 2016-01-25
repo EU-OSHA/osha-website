@@ -1860,7 +1860,7 @@ a {
 	padding-left:0px;
 }
 
-#block-nodeblock-9734{ /*CSS only for PROD*/
+#block-nodeblock-9734, #block-nodeblock-9692{ /*9734 for PROD, 9692 for TEST*/
 	display:block!important;
 }
 

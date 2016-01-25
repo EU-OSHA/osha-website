@@ -14,7 +14,7 @@ function osha_homepage_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_anonymous_banner';
-  $strongarm->value = 0;
+  $strongarm->value = '0';
   $export['comment_anonymous_banner'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -58,6 +58,13 @@ function osha_homepage_strongarm() {
   $strongarm->name = 'comment_subject_field_banner';
   $strongarm->value = 0;
   $export['comment_subject_field_banner'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'entity_translation_hide_translation_links_banner';
+  $strongarm->value = 1;
+  $export['entity_translation_hide_translation_links_banner'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

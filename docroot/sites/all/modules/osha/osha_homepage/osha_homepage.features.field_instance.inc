@@ -542,8 +542,6 @@ function osha_homepage_field_default_field_instances() {
   t('Link title');
   t('Name');
   t('Page count');
-  t('Show in footer');
-  t('Show in top banner');
   t('Summary');
   t('Title');
 

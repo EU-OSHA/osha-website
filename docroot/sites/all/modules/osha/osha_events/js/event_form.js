@@ -5,6 +5,7 @@ jQuery(document).ready(function() {
     if (type_input.val() == 'Webminar') {
         jQuery('.description', country_div).text('N/A');
         jQuery('.description', city_div).text('N/A');
+        jQuery('input', city_div).val('None');
         jQuery('#edit-field-city-und-0-value').attr('disabled','disabled').val('');
         jQuery('#edit-field-country-code-und').attr('disabled', true).val('').trigger("chosen:updated");
     }
@@ -14,6 +15,7 @@ jQuery(document).ready(function() {
             jQuery('.description', city_div).text('N/A');
             jQuery('#edit-field-city-und-0-value').attr('disabled','disabled').val('');
             jQuery('#edit-field-country-code-und').attr('disabled', true).val('').trigger("chosen:updated");
+            jQuery('input', city_div).val('None');
         }
         else {
             jQuery('.description', country_div).text(Drupal.t('Mandatory'));

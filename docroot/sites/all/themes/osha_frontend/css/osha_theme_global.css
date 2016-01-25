@@ -589,7 +589,6 @@ footer {
 	margin: 1em 0 1em 0;
 }*/
 .menu-block-3 ul li {
-	border-bottom: 1px dashed #039;
 	float: none;
 	padding: 0.7em 0em 0.7em 0em;
 }
@@ -609,13 +608,11 @@ footer {
 	bottom: inherit;
 }
 .introduction-title {
-	border-bottom: none!important;
-	background-color: #D2DCED;
+	border-bottom: 10px solid #d2dced;
 	display: block;
 	height: auto;
 	letter-spacing: normal;
 	margin-bottom: 0.18em;	
-	width: auto;
 	padding-left:0.2em;
 }
 
@@ -1761,7 +1758,7 @@ a {
 }	
 
 #sliding-popup.sliding-popup-top{
-	height:136px!important;	
+	height:auto!important;	
 }
 
 
@@ -1788,12 +1785,12 @@ a {
 
 @media screen and (max-width: 450px) {
 
-		.accesibility_table td {
-		font-size: 0.7em;
-	    padding: 0.5em;
-	    display: table-cell;
-		}
+	.accesibility_table td {
+	font-size: 0.7em;
+    padding: 0.5em;
+    display: table-cell;
 	}
+}
 
 
 .seminar_back-to-seminars.back-to-link{
@@ -1879,6 +1876,37 @@ a {
 .ESENER-explore-data.ESENER-2009{
 	display:block;
 }
+
+.two_column.publications-search-list.form-wrapper{
+	float:none;
+}
+
+.two_column.publications-search-list.form-wrapper #publication-search{
+	margin-top:0px;
+	padding-top:20px;
+}
+
+.two_column.publications-search-list.form-wrapper #publication-search .form-item-sort-by, .two_column.publications-search-list.form-wrapper #publication-search .form-item-direction{
+	margin-top:0px;
+}
+
+.two_column.publications-search-list.form-wrapper #publication-search div{
+	margin-top:0px;
+	float:none;
+}
+
+.two_column.publications-search-list.form-wrapper #publication-search label{
+	border:0px;
+}
+
+.two_column.publications-search-list.form-wrapper #publication-search .form-submit{
+	margin-top: -140px;
+}
+
+#block-osha-publication-osha-publication-listing .publications-sidebar-first{
+	margin-top:0px!important;
+}
+
 
 
 }

@@ -33,7 +33,7 @@ function osha_menu() {
 
   $items['node/%node/open_all_translations'] = array(
     'title' => 'Open all translations',
-    'access arguments' => array('access content'),
+    'access arguments' => array('view the administration theme'),
     'page callback' => 'osha_open_all_node_translations',
     'page arguments' => array(1),
     'weight' => 8,

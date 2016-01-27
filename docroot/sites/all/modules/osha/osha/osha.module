@@ -31,6 +31,24 @@ function osha_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  $items['node/%node/view_all_translations'] = array(
+    'title' => 'View all translations',
+    'access arguments' => array('view the administration theme'),
+    'page callback' => 'osha_view_all_node_translations',
+    'page arguments' => array(1),
+    'weight' => 8,
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  $items['node/%node/open_all_translations'] = array(
+    'title' => 'Edit all translations',
+    'access arguments' => array('view the administration theme'),
+    'page callback' => 'osha_open_all_node_translations',
+    'page arguments' => array(1),
+    'weight' => 9,
+    'type' => MENU_LOCAL_TASK,
+  );
+
 //  $items['admin/config/regional/osha_language'] = array(
 //    'title' => 'EU-OSHA Languages',
 //    'page callback' => 'drupal_get_form',
@@ -1075,4 +1093,25 @@ function osha_thumbnail_alt_title(&$build, $content_type, $field, $formatter){
       }
     }
   }
+}
+
+/**
+ * Redirect the user to node edit form. We open other languages from javascript.
+ */
+function osha_open_all_node_translations($node) {
+  drupal_goto(
+    'node/' . $node->nid . '/edit',
+    array('language' => reset(array_keys($node->translations->data)))
+  );
+}
+
+/**
+ * Redirect the user to first translation. We open other languages from javascript.
+ */
+function osha_view_all_node_translations($node) {
+  $url = $node->type == 'publication' ? drupal_get_path_alias('node/' . $node->nid) . '/view' : 'node/' . $node->nid;
+  drupal_goto(
+    $url,
+    array('language' => reset(array_keys($node->translations->data)))
+  );
 }

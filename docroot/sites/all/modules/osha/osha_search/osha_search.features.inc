@@ -182,6 +182,8 @@ function osha_search_default_search_api_index() {
         "field_author" : { "type" : "text" },
         "field_country_code" : { "type" : "string" },
         "field_date_of_directive" : { "type" : "date" },
+        "field_file:description" : { "type" : "text" },
+        "field_file:file" : { "type" : "integer", "entity_type" : "file" },
         "field_nace_codes" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_publication_date" : { "type" : "date" },
         "field_publication_type" : { "type" : "integer", "entity_type" : "taxonomy_term" },

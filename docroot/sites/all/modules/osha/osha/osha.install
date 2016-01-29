@@ -327,8 +327,7 @@ function osha_update_7015() {
   $blog_link['weight'] = 6;
   menu_link_save($blog_link);
 
-  //@TODO: insert correct Flickr image path here.
-  $image = file_get_contents('sites/all/themes/osha_frontend/images/flickr-32.png');
+  $image = file_get_contents('sites/all/themes/osha_frontend/images/footer-flickr.png');
   $file = file_save_data($image, 'public://menuimage/footer-flickr.png', FILE_EXISTS_REPLACE);
 
   $item = array(

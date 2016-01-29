@@ -4,6 +4,7 @@
 		<a href="https://www.facebook.com/EuropeanAgencyforSafetyandHealthatWork"><img src="/sites/all/themes/osha_frontend/images/facebookTop.png" alt="EU OSHA Facebook Page"></a>
 		<a href="http://www.linkedin.com/company/european-agency-for-safety-and-health-at-work"><img src="/sites/all/themes/osha_frontend/images/inTop.png" alt="Follow EU OSHA in LinkedIn"></a>
 		<a href="https://www.youtube.com/user/EUOSHA"><img src="/sites/all/themes/osha_frontend/images/youTubeTop.png" alt="EU OSHA channel in Youtube"></a>
+		<a href="https://www.flickr.com/photos/euosha/albums"><img src="/sites/all/themes/osha_frontend/images/flickrTop.png" alt="EU OSHA channel in Flickr"></a>
 		<a href="<?php echo url('tools-and-publications/blog', array('alias' => TRUE)); ?>"><img src="/sites/all/themes/osha_frontend/images/bloggerTop.png" alt="EU OSHA Blog with more information in workplace safety and health"></a>
 	</div>
 </div>

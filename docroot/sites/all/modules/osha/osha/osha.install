@@ -331,7 +331,7 @@ function osha_update_7015() {
   $file = file_save_data($image, 'public://menuimage/footer-flickr.png', FILE_EXISTS_REPLACE);
 
   $item = array(
-    'link_path' => 'https://www.flickr.com/photos/euosha/',
+    'link_path' => 'https://www.flickr.com/photos/euosha/albums',
     'link_title' => 'EU OSHA Flickr photos',
     'menu_name' => 'menu-footer-menu',
     'weight' => 5,

@@ -2,8 +2,7 @@ rewrite ^(.*)http/osha.europa.eu / permanent;
 rewrite ^/(..)/(..)/(.*)$   /$2/$3  permanent;
 rewrite ^/(../)?(.*)/at_download/file$ /$1$2 permanent;
 rewrite ^/(../)?ew20(.*)/(.*)$   /$1healthy-workplaces-campaigns/previous-healthy-workplaces-campaigns/$3  permanent;
-rewrite ^/(../)?fop/spain/es/good_practice(.*)$   /$1fop/spain/ permanent;
-rewrite ^/(../)?fop/spain/es/systems(.*)$   /$1fop/spain/ permanent;
+
 rewrite ^/(../)?newsite/(.*)$   /$1$2  permanent;
 rewrite ^/(../)?osha/portal/(.*)  /$1$2 permanent;
 rewrite ^/(../)?oshnetwork/focal-points/(.*)/index_html$ /$1about-eu-osha/national-focal-points/focal-points-index$2 permanent;
@@ -17,53 +16,23 @@ rewrite ^/(../)?seminars/(.*)/speakers(.*)$ /$1tools-and-publications/seminars/$
 rewrite ^/(../)?seminars/(.*)/speech-venues(.*)$ /$1tools-and-publications/seminars/$2 permanent;
 rewrite ^/data/case-studies/(.*)(\-..)$   /data/case-studies/$1  permanent;
 rewrite ^/data/case-studies/(.*)(\-../view)$   /data/case-studies/$1  permanent;
-rewrite ^/fop/croatia/hr/vijesti/obiljezavanje-europskog-tjedna-zastite-na-radu$   /fop/croatia/hr  permanent;
-rewrite ^/fop/czech-republic/cs/ew2003/$   /fop/czech-republic/cs permanent;
-rewrite ^/fop/czech-republic/cs/ew2003/index.stm/materialy_pdf/EW2003spravnapraxe.pdf$   /fop/czech-republic/cs/  permanent;
-rewrite ^/fop/czech-republic/cs/ew2004/$  /fop/czech-republic/cs  permanent;
-rewrite ^/fop/czech-republic/cs/ew2004/acrobat/ew_2004_poster_\(a3\)_-_en.pdf$   /fop/czech-republic/cs/  permanent;
-rewrite ^/fop/czech-republic/cs/news/nabor-prac.php$   /fop/czech-republic/cs/  permanent;
-rewrite ^/fop/czech-republic/cs/publications/publikace/publikace_EW2004.php$   /fop/czech-republic/cs/publications/  permanent;
-rewrite ^/fop/czech-republic/en/ew2003/$   /fop/czech-republic/en permanent;
-rewrite ^/fop/czech-republic/en/ew2004/$   /fop/czech-republic/en permanent;
-rewrite ^/fop/greece/el/systems/\%C3\%F1\%E1\%F6\%E5\%DF\%EF\%20\%C3\%E5\%ED\%E9\%EA\%EF\%FD\%20\%C4/\%ED\%F4\%E7$   /fop/greece/el  permanent; #not working
-rewrite ^/fop/hungary/good_practice/ew2008-folder.2008-05-29.9020303216/ew08-nyiregyhaza/ew08nyir-Baranyainep.pdf$   /fop/hungary/  permanent;
-rewrite ^/fop/hungary/good_practice/ew2008-folder.2008-05-29.9020303216/ew08-nyiregyhaza/ew08nyir-Tomeczp.pdf$   /fop/hungary/  permanent;
-rewrite ^/fop/hungary/hu/home/index_hu.stm$   /fop/hungary/hu/  permanent;
-rewrite ^/fop/latvia/en/index_lv.stm$   /fop/latvia/en/  permanent;
-rewrite ^/fop/latvia/en/legislation/lv/125.htm$   /fop/latvia/en/legislation/  permanent;
-rewrite ^/fop/latvia/en/legislation/lv/343.htm$   /fop/latvia/en/legislation/  permanent;
-rewrite ^/fop/latvia/en/news/(.*)$   /fop/latvia/en/  permanent;
-rewrite ^/fop/netherlands/en/euweek/2008/(.*)$   /fop/netherlands/en/  permanent;
-rewrite ^/fop/netherlands/nl/agenda/18-juni-de-ri-e-van-kostenpost-naar-investering$   /fop/netherlands/en/  permanent;
-rewrite ^/fop/romania/en/good_practice/preparate_substante_chimice_en.shtml$   /fop/romania/en/good_practice/  permanent;
-rewrite ^/fop/romania/en/legislation/hotarari_guvern.shtml$   /fop/romania/en/legislation  permanent;
-rewrite ^/fop/romania/en/publications/costul_accidentelor_de_munca_en.shtml$   /fop/romania/en/publications/  permanent;
-rewrite ^/fop/romania/en/publications/implementarea_mssm_en.shtml$   /fop/romania/en/publications  permanent;
-rewrite ^/fop/romania/en/topics/sectors/education/index.html/faq.html$   /fop/romania/en/topics/sectors/education/index.html/  permanent;
-rewrite ^/fop/romania/en/topics/sectors/education/index.html/studiidecaz.html$   /fop/romania/en/topics/sectors/education/index.html/  permanent;
-rewrite ^/fop/spain/en/good_practice/index.stm$   /fop/spain/es/  permanent;
-rewrite ^/fop/spain/es/news/national_news/insht-11/image/image_view_fullscreen$   /fop/spain/es/  permanent;
-rewrite ^/fop/spain/es/research(.*)$   /fop/spain/es/  permanent;
-rewrite ^/nl/fop/netherlands/nl/euweek/2008/(.*)$   /fop/netherlands/nl/  permanent;
+
+
 rewrite ^/VirtualHostBase/https/osha.europa.eu:443/osha/portal/VirtualHostRoot/(.*)$  /$1 permanent;
 rewrite ^/(../)?sub/napo/(.*)  http://napofilm.net/$1 permanent;
 
-# added 20151113
-rewrite ^/VirtualHostBase/(.*) /fop/romania/en permanent;
-rewrite ^/(../)?priority_groups/migrantworkers http://oshwiki.eu/wiki/Category:Migrant_workers permanent;
-rewrite ^/fop/romania/(.*) http://www.protectiamuncii.ro/$1 permanent ;
-rewrite ^/fop/slovenia/(.*)   /about-eu-osha/national-focal-points/slovenia  permanent;
-rewrite ^/fop/sweden/(.*)   /about-eu-osha/national-focal-points/sweden  permanent;
-rewrite ^/fop/germany/(.*)   /about-eu-osha/national-focal-points/germany  permanent;
-rewrite ^/fop/thueringen/(.*)   /about-eu-osha/national-focal-points/germany  permanent;
-rewrite ^/fop/rheinland-pfalz/(.*)   /about-eu-osha/national-focal-points/germany  permanent;
-rewrite ^/fop/slovenia/(.*)   /about-eu-osha/national-focal-points/slovenia  permanent;
-rewrite ^/osha/sub/fop/Bulgaria /about-eu-osha/national-focal-points/bulgaria permanent;
-rewrite ^/(../)?sector/healthcare/index_html   http://oshwiki.eu/wiki/Category:Health permanent;
-
-
-# 20151210 - ASI773501
+# ASI773501
 rewrite ^/(../)?priority_groups/disability(.*)$  http://oshwiki.eu/wiki/Disability_Management permanent;
 rewrite ^/(../)?slc_cse_search_results(.*)$ /$1search/site/ permanent;
-rewrite ^/(../)?fop/netherlands(.*)$   /$1about-eu-osha/national-focal-points/netherlands permanent;
+
+# added 20151113
+rewrite ^/(../)?priority_groups/migrantworkers http://oshwiki.eu/wiki/Category:Migrant_workers permanent;
+rewrite ^/(../)?sector/healthcare/index_html   http://oshwiki.eu/wiki/Category:Health permanent;
+
+rewrite ^/sub/esener/(.*) /surveys-and-statistics-osh/esener/2009 permanent;
+
+rewrite ^/(../)?sub/newoshera(.*)   /  permanent;
+
+
+#  20160201   REMOVE ALL FOP-RELATED LINKS
+

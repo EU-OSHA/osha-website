@@ -490,6 +490,10 @@ function osha_entity_info_alter(&$entity_info) {
     'label' => t('Osha Slideshow'),
     'custom settings' => TRUE,
   );
+  $entity_info['node']['view modes']['osha_search_teaser'] = array(
+    'label' => t('Search teaser'),
+    'custom settings' => FALSE,
+  );
 }
 
 function osha_enabled_language_list() {

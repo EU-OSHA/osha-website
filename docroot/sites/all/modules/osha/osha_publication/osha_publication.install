@@ -55,3 +55,10 @@ function osha_publication_update_7003() {
 function osha_publication_update_7004() {
   features_revert(array('osha_publication' => array('fe_block_settings', 'views_view')));
 }
+
+/**
+ * Revert osha_publication.
+ */
+function osha_publication_update_7005() {
+  features_revert_module('osha_publication');
+}

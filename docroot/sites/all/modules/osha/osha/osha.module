@@ -602,7 +602,11 @@ function osha_form_node_form_alter(&$form, &$form_state, $form_id) {
  * within node.module will not fail.
  */
 function osha_node_validate_prepare($form, &$form_state) {
-  $form_state['values']['changed'] = time();
+  $node = &$form_state['node'];
+  if (isset($node->nid) && (node_last_changed($node->nid) > $node->changed)) {
+    $node = node_load($node->nid);
+    $form_state['values']['changed'] = time();
+  }
 }
 
 /**

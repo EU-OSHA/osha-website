@@ -1076,6 +1076,9 @@ article.node-publication.view-mode-full .field-name-field-publication-date {
 	padding-right: 1em!important;
 	padding-top: .5em!important;
 }
+
+
+
 /* Pubs Searcher */
 #block-views-exp-search-site, #block-views-exp-search-wiki, .view-search.view-id-search {
 	padding: 1em;
@@ -1911,3 +1914,8 @@ a {
 
 }
 
+@media screen and (max-width: 1078px) {
+	.two_column.publications-search-list.form-wrapper #publication-search{
+		margin-top:0px;
+	}
+}

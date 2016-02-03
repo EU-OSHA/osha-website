@@ -604,8 +604,16 @@ function osha_form_node_form_alter(&$form, &$form_state, $form_id) {
 function osha_node_validate_prepare($form, &$form_state) {
   $node = &$form_state['node'];
   if (isset($node->nid) && (node_last_changed($node->nid) > $node->changed)) {
-    $node = node_load($node->nid);
-    $form_state['values']['changed'] = time();
+    global $user;
+    $revisions = node_revision_list($node);
+    ksort($revisions);
+    if (end($revisions)->uid == $user->uid) {
+      $node = node_load($node->nid);
+      $form_state['values']['changed'] = time();
+    }
+    else {
+      form_set_error('changed', t('The content on this page has been modified by another user. As a result, your changes cannot be saved. Please refresh the page.'));
+    }
   }
 }
 

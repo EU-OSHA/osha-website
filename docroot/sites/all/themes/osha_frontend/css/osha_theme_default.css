@@ -763,6 +763,12 @@ span.date-display-single{
 	padding-top: 8px;
 }
 
+.node-publication.view-mode-osha_search_teaser .field-name-field-cover-image img{
+	width:156px;
+	height:auto;
+
+}
+
 .node-publication .field-name-field-publication-date{
 	font-size:0.8em;
 }

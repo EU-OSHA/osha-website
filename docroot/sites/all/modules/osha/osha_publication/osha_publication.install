@@ -140,7 +140,7 @@ function osha_publication_update_7006() {
             curl_setopt($ch, CURLOPT_HEADER, 0);
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
             $data = curl_exec($ch);
-            if ($data !== FALSE) {
+            if ($data !== FALSE && imagecreatefromstring($data) !== FALSE) {
               $new_cover = file_save_data($data, $image_path, FILE_EXISTS_RENAME);
             }
             else {

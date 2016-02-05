@@ -62,3 +62,100 @@ function osha_publication_update_7004() {
 function osha_publication_update_7005() {
   features_revert_module('osha_publication');
 }
+
+/**
+ * Fix some publications thumbnails.
+ */
+function osha_publication_update_7006() {
+  global $base_url;
+  $aliases = array(
+    '/tools-and-publications/publications/reports/economic_incentives_TE3109255ENC',
+    '/tools-and-publications/publications/reports/105',
+    '/tools-and-publications/publications/reports/mainstreaming_osh_business',
+    '/tools-and-publications/publications/reports/TERO09009ENC',
+    '/tools-and-publications/publications/reports/mainstream_osh_university_education',
+    '/tools-and-publications/publications/reports/TE7809894ENC',
+    '/tools-and-publications/publications/reports/TEWE09006ENC',
+    '/tools-and-publications/publications/reports/TEWE09001ENC',
+    '/tools-and-publications/publications/reports/548OELs',
+    '/tools-and-publications/publications/reports/TE3008390ENC_chemical_risks',
+    '/tools-and-publications/publications/reports/8108322_vibration_exposure',
+    '/tools-and-publications/publications/reports/TE7007049ENC_skin_diseases',
+    '/tools-and-publications/publications/reports/en_TE8107132ENC.pdf',
+    '/tools-and-publications/publications/reports/7807118',
+    '/tools-and-publications/publications/corporate/2006',
+    '/tools-and-publications/publications/corporate/brochure_2007',
+    '/tools-and-publications/publications/magazine/9',
+    '/tools-and-publications/publications/corporate/2005',
+    '/tools-and-publications/publications/corporate/2005full',
+    '/tools-and-publications/publications/reports/6805648',
+    '/tools-and-publications/publications/reports/6805535',
+    '/tools-and-publications/publications/magazine/8',
+    '/tools-and-publications/publications/corporate/20050929',
+    '/tools-and-publications/publications/corporate/2004',
+    '/tools-and-publications/publications/corporate/2004full',
+    '/tools-and-publications/publications/reports/314',
+    '/tools-and-publications/publications/reports/210',
+    '/tools-and-publications/publications/magazine/7',
+    '/tools-and-publications/publications/reports/313',
+    '/tools-and-publications/publications/reports/107',
+    '/tools-and-publications/publications/corporate/2003full',
+    '/tools-and-publications/publications/corporate/2003',
+    '/tools-and-publications/publications/reports/312',
+    '/tools-and-publications/publications/reports/209',
+    '/tools-and-publications/publications/reports/406',
+    '/tools-and-publications/publications/corporate/2002',
+    '/tools-and-publications/publications/magazine/6',
+    '/tools-and-publications/publications/reports/105',
+    '/tools-and-publications/publications/corporate/2001',
+    '/tools-and-publications/publications/magazine/5',
+    '/tools-and-publications/publications/magazine/4',
+    '/tools-and-publications/publications/reports/103',
+    '/tools-and-publications/publications/reports/102',
+    '/tools-and-publications/publications/reports/304',
+    '/tools-and-publications/publications/magazine/3',
+  );
+
+  $images_dir = 'public://publications/cover_images';
+  if (!file_prepare_directory($images_dir)) {
+    throw new DrupalUpdateException('Could not prepare directory ' . $images_dir);
+  }
+
+  foreach ($aliases as $alias) {
+    $path = path_load(array('alias' => substr($alias, 1)));
+    if (!empty($path)) {
+      $nid = str_replace('node/', '', $path['source']);
+      $node = node_load($nid);
+      if (!empty($node->field_cover_image)) {
+        foreach ($node->field_cover_image as $lng => $cover) {
+          $file = $node->field_file[$lng][0];
+          $file_path = file_create_url($file['uri']);
+          $file_url = str_replace($base_url, 'https://osha.europa.eu', $file_path);
+
+          $convertor_url = 'http://osha.edw.ro/oshathumbnailgenerator?url=' . $file_url;
+          $ch = curl_init($convertor_url);
+          $image_path = $images_dir . '/' .$node->nid . '.jpg';
+          if($ch){
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_HEADER, 0);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+            $data = curl_exec($ch);
+            if ($data !== FALSE && imagecreatefromstring($data) !== FALSE) {
+              $new_cover = file_save_data($data, $image_path, FILE_EXISTS_RENAME);
+            }
+            else {
+              throw new DrupalUpdateException(strtr('File @path could not be converted with @convertor', array('@path' => $images_dir, '@convertor' => $convertor_url)));
+            }
+            curl_close($ch);
+          }
+          if (!empty($new_cover)) {
+            $new_cover->status = 1;
+            $new_cover->display = 1;
+            $node->field_cover_image[$lng][0] = (array) $new_cover;
+          }
+        }
+        node_save($node);
+      }
+    }
+  }
+}

@@ -114,6 +114,18 @@ function osha_publication_update_7006() {
     '/tools-and-publications/publications/reports/102',
     '/tools-and-publications/publications/reports/304',
     '/tools-and-publications/publications/magazine/3',
+    '/tools-and-publications/publications/corporate/2013full',
+    '/tools-and-publications/publications/corporate/2011full',
+    '/tools-and-publications/publications/corporate/ar_summary_2011',
+    '/tools-and-publications/publications/reports/transport-sector_TERO10001ENC',
+    '/tools-and-publications/publications/reports/safe-maintenance-TEWE10003ENC',
+    '/tools-and-publications/publications/reports/TE-81-08-478-EN-C_OSH_in_figures_stress_at_work',
+    '/tools-and-publications/publications/osh-figures-stress-work-facts-and-figures',
+    '/publications/reports/305',
+    '/publications/reports/401',
+    '/publications/magazine/2',
+    '/publications/reports/201',
+    '/tools-and-publications/publications/corporate/1998',
   );
 
   $images_dir = 'public://publications/cover_images';

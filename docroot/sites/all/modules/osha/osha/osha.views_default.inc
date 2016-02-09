@@ -1239,7 +1239,7 @@ function osha_views_default_views() {
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
   $handler->display->display_options['fields']['body']['label'] = 'body';
-  /* Field: Content: Related documents */
+  /* Field: Content: Related resources */
   $handler->display->display_options['fields']['field_related_documents']['id'] = 'field_related_documents';
   $handler->display->display_options['fields']['field_related_documents']['table'] = 'field_data_field_related_documents';
   $handler->display->display_options['fields']['field_related_documents']['field'] = 'field_related_documents';
@@ -2075,7 +2075,7 @@ function osha_views_default_views() {
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
   $handler->display->display_options['fields']['body']['label'] = 'body';
-  /* Field: Content: Related documents */
+  /* Field: Content: Related resources */
   $handler->display->display_options['fields']['field_related_documents']['id'] = 'field_related_documents';
   $handler->display->display_options['fields']['field_related_documents']['table'] = 'field_data_field_related_documents';
   $handler->display->display_options['fields']['field_related_documents']['field'] = 'field_related_documents';
@@ -2630,6 +2630,358 @@ function osha_views_default_views() {
     t('mime_type'),
   );
   $export['data_export'] = $view;
+
+  $view = new view();
+  $view->name = 'file_content_report';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'file_managed';
+  $view->human_name = 'Test';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Files report';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['perm'] = 'access content overview';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'filename' => 'filename',
+    'path' => 'path',
+    'count' => 'count',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'filename' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'path' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'count' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  /* Relationship: File Usage: Content */
+  $handler->display->display_options['relationships']['file_to_node']['id'] = 'file_to_node';
+  $handler->display->display_options['relationships']['file_to_node']['table'] = 'file_usage';
+  $handler->display->display_options['relationships']['file_to_node']['field'] = 'file_to_node';
+  $handler->display->display_options['relationships']['file_to_node']['required'] = TRUE;
+  /* Field: File ID */
+  $handler->display->display_options['fields']['fid']['id'] = 'fid';
+  $handler->display->display_options['fields']['fid']['table'] = 'file_managed';
+  $handler->display->display_options['fields']['fid']['field'] = 'fid';
+  $handler->display->display_options['fields']['fid']['ui_name'] = 'File ID';
+  /* Field: File Name */
+  $handler->display->display_options['fields']['filename']['id'] = 'filename';
+  $handler->display->display_options['fields']['filename']['table'] = 'file_managed';
+  $handler->display->display_options['fields']['filename']['field'] = 'filename';
+  $handler->display->display_options['fields']['filename']['ui_name'] = 'File Name';
+  $handler->display->display_options['fields']['filename']['label'] = 'File Name';
+  $handler->display->display_options['fields']['filename']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['filename']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['filename']['link_to_file'] = FALSE;
+  /* Field: Mime type */
+  $handler->display->display_options['fields']['filemime']['id'] = 'filemime';
+  $handler->display->display_options['fields']['filemime']['table'] = 'file_managed';
+  $handler->display->display_options['fields']['filemime']['field'] = 'filemime';
+  $handler->display->display_options['fields']['filemime']['ui_name'] = 'Mime type';
+  /* Field: Node ID */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['relationship'] = 'file_to_node';
+  $handler->display->display_options['fields']['nid']['ui_name'] = 'Node ID';
+  $handler->display->display_options['fields']['nid']['label'] = 'Node ID';
+  /* Field: Node Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['relationship'] = 'file_to_node';
+  $handler->display->display_options['fields']['title']['ui_name'] = 'Node Title';
+  $handler->display->display_options['fields']['title']['label'] = 'Node Title';
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content type */
+  $handler->display->display_options['fields']['type']['id'] = 'type';
+  $handler->display->display_options['fields']['type']['table'] = 'node';
+  $handler->display->display_options['fields']['type']['field'] = 'type';
+  $handler->display->display_options['fields']['type']['relationship'] = 'file_to_node';
+  $handler->display->display_options['fields']['type']['ui_name'] = 'Content type';
+  $handler->display->display_options['fields']['type']['label'] = 'Content Type';
+  /* Field: Publication date */
+  $handler->display->display_options['fields']['field_publication_date']['id'] = 'field_publication_date';
+  $handler->display->display_options['fields']['field_publication_date']['table'] = 'field_data_field_publication_date';
+  $handler->display->display_options['fields']['field_publication_date']['field'] = 'field_publication_date';
+  $handler->display->display_options['fields']['field_publication_date']['relationship'] = 'file_to_node';
+  $handler->display->display_options['fields']['field_publication_date']['ui_name'] = 'Publication date';
+  $handler->display->display_options['fields']['field_publication_date']['alter']['strip_tags'] = TRUE;
+  $handler->display->display_options['fields']['field_publication_date']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_publication_date']['settings'] = array(
+    'format_type' => 'short_date_eu',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'osha_date_theme' => '',
+  );
+  /* Field: Activity */
+  $handler->display->display_options['fields']['field_activity']['id'] = 'field_activity';
+  $handler->display->display_options['fields']['field_activity']['table'] = 'field_data_field_activity';
+  $handler->display->display_options['fields']['field_activity']['field'] = 'field_activity';
+  $handler->display->display_options['fields']['field_activity']['relationship'] = 'file_to_node';
+  $handler->display->display_options['fields']['field_activity']['ui_name'] = 'Activity';
+  $handler->display->display_options['fields']['field_activity']['type'] = 'i18n_taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_activity']['delta_offset'] = '0';
+  /* Field: Path */
+  $handler->display->display_options['fields']['path']['id'] = 'path';
+  $handler->display->display_options['fields']['path']['table'] = 'node';
+  $handler->display->display_options['fields']['path']['field'] = 'path';
+  $handler->display->display_options['fields']['path']['relationship'] = 'file_to_node';
+  $handler->display->display_options['fields']['path']['ui_name'] = 'Path';
+  $handler->display->display_options['fields']['path']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['path']['absolute'] = TRUE;
+  /* Field: File path */
+  $handler->display->display_options['fields']['uri']['id'] = 'uri';
+  $handler->display->display_options['fields']['uri']['table'] = 'file_managed';
+  $handler->display->display_options['fields']['uri']['field'] = 'uri';
+  $handler->display->display_options['fields']['uri']['ui_name'] = 'File path';
+  $handler->display->display_options['fields']['uri']['label'] = 'File path';
+  $handler->display->display_options['fields']['uri']['file_download_path'] = TRUE;
+  /* Sort criterion: Field: Publication date (field_publication_date) */
+  $handler->display->display_options['sorts']['field_publication_date_value']['id'] = 'field_publication_date_value';
+  $handler->display->display_options['sorts']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
+  $handler->display->display_options['sorts']['field_publication_date_value']['field'] = 'field_publication_date_value';
+  $handler->display->display_options['sorts']['field_publication_date_value']['relationship'] = 'file_to_node';
+  $handler->display->display_options['sorts']['field_publication_date_value']['order'] = 'DESC';
+  /* Filter criterion: File: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'file_managed';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'document' => 'document',
+  );
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type_1']['id'] = 'type_1';
+  $handler->display->display_options['filters']['type_1']['table'] = 'node';
+  $handler->display->display_options['filters']['type_1']['field'] = 'type';
+  $handler->display->display_options['filters']['type_1']['relationship'] = 'file_to_node';
+  $handler->display->display_options['filters']['type_1']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['type_1']['expose']['operator_id'] = 'type_1_op';
+  $handler->display->display_options['filters']['type_1']['expose']['label'] = 'Type';
+  $handler->display->display_options['filters']['type_1']['expose']['operator'] = 'type_1_op';
+  $handler->display->display_options['filters']['type_1']['expose']['identifier'] = 'type_1';
+  $handler->display->display_options['filters']['type_1']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+  );
+  /* Filter criterion: Field: Publication date (field_publication_date) */
+  $handler->display->display_options['filters']['field_publication_date_value']['id'] = 'field_publication_date_value';
+  $handler->display->display_options['filters']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
+  $handler->display->display_options['filters']['field_publication_date_value']['field'] = 'field_publication_date_value';
+  $handler->display->display_options['filters']['field_publication_date_value']['relationship'] = 'file_to_node';
+  $handler->display->display_options['filters']['field_publication_date_value']['operator'] = '>=';
+  $handler->display->display_options['filters']['field_publication_date_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_publication_date_value']['expose']['operator_id'] = 'field_publication_date_value_op';
+  $handler->display->display_options['filters']['field_publication_date_value']['expose']['label'] = 'Publication Date From';
+  $handler->display->display_options['filters']['field_publication_date_value']['expose']['operator'] = 'field_publication_date_value_op';
+  $handler->display->display_options['filters']['field_publication_date_value']['expose']['identifier'] = 'field_publication_date_value';
+  $handler->display->display_options['filters']['field_publication_date_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+  );
+  $handler->display->display_options['filters']['field_publication_date_value']['form_type'] = 'date_popup';
+  $handler->display->display_options['filters']['field_publication_date_value']['default_date'] = 'now -1 year';
+  $handler->display->display_options['filters']['field_publication_date_value']['year_range'] = '-10:+3';
+  /* Filter criterion: Field: Publication date (field_publication_date) */
+  $handler->display->display_options['filters']['field_publication_date_value_1']['id'] = 'field_publication_date_value_1';
+  $handler->display->display_options['filters']['field_publication_date_value_1']['table'] = 'field_data_field_publication_date';
+  $handler->display->display_options['filters']['field_publication_date_value_1']['field'] = 'field_publication_date_value';
+  $handler->display->display_options['filters']['field_publication_date_value_1']['relationship'] = 'file_to_node';
+  $handler->display->display_options['filters']['field_publication_date_value_1']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_publication_date_value_1']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_publication_date_value_1']['expose']['operator_id'] = 'field_publication_date_value_1_op';
+  $handler->display->display_options['filters']['field_publication_date_value_1']['expose']['label'] = 'Publication date TO';
+  $handler->display->display_options['filters']['field_publication_date_value_1']['expose']['operator'] = 'field_publication_date_value_1_op';
+  $handler->display->display_options['filters']['field_publication_date_value_1']['expose']['identifier'] = 'field_publication_date_value_1';
+  $handler->display->display_options['filters']['field_publication_date_value_1']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+  );
+  $handler->display->display_options['filters']['field_publication_date_value_1']['form_type'] = 'date_popup';
+  $handler->display->display_options['filters']['field_publication_date_value_1']['default_date'] = 'now';
+  $handler->display->display_options['filters']['field_publication_date_value_1']['year_range'] = '-10:+3';
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: File ID */
+  $handler->display->display_options['fields']['fid']['id'] = 'fid';
+  $handler->display->display_options['fields']['fid']['table'] = 'file_managed';
+  $handler->display->display_options['fields']['fid']['field'] = 'fid';
+  $handler->display->display_options['fields']['fid']['ui_name'] = 'File ID';
+  /* Field: File Name */
+  $handler->display->display_options['fields']['filename']['id'] = 'filename';
+  $handler->display->display_options['fields']['filename']['table'] = 'file_managed';
+  $handler->display->display_options['fields']['filename']['field'] = 'filename';
+  $handler->display->display_options['fields']['filename']['ui_name'] = 'File Name';
+  $handler->display->display_options['fields']['filename']['label'] = 'File Name';
+  $handler->display->display_options['fields']['filename']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['filename']['alter']['ellipsis'] = FALSE;
+  /* Field: Mime type */
+  $handler->display->display_options['fields']['filemime']['id'] = 'filemime';
+  $handler->display->display_options['fields']['filemime']['table'] = 'file_managed';
+  $handler->display->display_options['fields']['filemime']['field'] = 'filemime';
+  $handler->display->display_options['fields']['filemime']['ui_name'] = 'Mime type';
+  /* Field: Node ID */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['relationship'] = 'file_to_node';
+  $handler->display->display_options['fields']['nid']['ui_name'] = 'Node ID';
+  $handler->display->display_options['fields']['nid']['label'] = 'Node ID';
+  /* Field: Node Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['relationship'] = 'file_to_node';
+  $handler->display->display_options['fields']['title']['ui_name'] = 'Node Title';
+  $handler->display->display_options['fields']['title']['label'] = 'Node Title';
+  /* Field: Content type */
+  $handler->display->display_options['fields']['type']['id'] = 'type';
+  $handler->display->display_options['fields']['type']['table'] = 'node';
+  $handler->display->display_options['fields']['type']['field'] = 'type';
+  $handler->display->display_options['fields']['type']['relationship'] = 'file_to_node';
+  $handler->display->display_options['fields']['type']['ui_name'] = 'Content type';
+  $handler->display->display_options['fields']['type']['label'] = 'Content Type';
+  /* Field: Publication date */
+  $handler->display->display_options['fields']['field_publication_date']['id'] = 'field_publication_date';
+  $handler->display->display_options['fields']['field_publication_date']['table'] = 'field_data_field_publication_date';
+  $handler->display->display_options['fields']['field_publication_date']['field'] = 'field_publication_date';
+  $handler->display->display_options['fields']['field_publication_date']['relationship'] = 'file_to_node';
+  $handler->display->display_options['fields']['field_publication_date']['ui_name'] = 'Publication date';
+  $handler->display->display_options['fields']['field_publication_date']['alter']['strip_tags'] = TRUE;
+  $handler->display->display_options['fields']['field_publication_date']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_publication_date']['settings'] = array(
+    'format_type' => 'short_date_eu',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'osha_date_theme' => '',
+  );
+  /* Field: Activity */
+  $handler->display->display_options['fields']['field_activity']['id'] = 'field_activity';
+  $handler->display->display_options['fields']['field_activity']['table'] = 'field_data_field_activity';
+  $handler->display->display_options['fields']['field_activity']['field'] = 'field_activity';
+  $handler->display->display_options['fields']['field_activity']['relationship'] = 'file_to_node';
+  $handler->display->display_options['fields']['field_activity']['ui_name'] = 'Activity';
+  $handler->display->display_options['fields']['field_activity']['type'] = 'i18n_taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_activity']['delta_offset'] = '0';
+  $handler->display->display_options['path'] = 'admin/reports/files_content';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'Files report';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'management';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: Data export */
+  $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_xlsx';
+  $handler->display->display_options['style_options']['provide_file'] = 1;
+  $handler->display->display_options['style_options']['parent_sort'] = 0;
+  $handler->display->display_options['path'] = 'admin/reports/files_content_xls';
+  $handler->display->display_options['displays'] = array(
+    'page' => 'page',
+    'default' => 0,
+  );
+  $translatables['file_content_report'] = array(
+    t('Master'),
+    t('Files report'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('Content'),
+    t('File ID'),
+    t('File Name'),
+    t('Mime type'),
+    t('Node ID'),
+    t('Node Title'),
+    t('Content Type'),
+    t('Publication date'),
+    t('Activity'),
+    t('Path'),
+    t('File path'),
+    t('Type'),
+    t('Publication Date From'),
+    t('Publication date TO'),
+    t('Page'),
+    t('Data export'),
+  );
+  $export['file_content_report'] = $view;
 
   $view = new view();
   $view->name = 'hcw_data_export';

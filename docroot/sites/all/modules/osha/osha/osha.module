@@ -102,6 +102,62 @@ function osha_nodequeue_sort_alter(&$nodes, $sqid) {
 }
 
 /**
+ * Implements hook_query_TAG_alter().
+ *
+ * @see menu_view_unpublished_query_node_access_alter() in the module.
+ * @see menu_tree_check_access()
+ *   Contains the query being altered here. This is most likely the only query
+ *   with tag node_access where the first condition is for the node.status column.
+ */
+function osha_query_node_access_alter(QueryAlterableInterface $query) {
+  if (user_access('view all unpublished content')) {
+    $c = &$query->conditions();
+    // Remove the status condition if we suspect this query originates from
+    // menu_tree_check_access().
+    if (count($c) == 3 &&
+      is_string($c[0]['field']) && $c[0]['field'] == 'n.status' &&
+      is_string($c[1]['field']) && $c[1]['field'] == 'n.nid' && $c[1]['operator'] == 'IN') {
+      unset($c[0]);
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function osha_form_menu_overview_form_alter(&$form, &$form_state) {
+  // iterate over the form's children
+  foreach(element_children($form) as $form_child_key) {
+    // act upon children of the form that are menu items (have 'mlid' in the key name)
+    if(preg_match('/mlid/', $form_child_key)) {
+      if(preg_match('@^node/(\d+)$@', $form[$form_child_key]['#item']['link_path'], $matches)) {
+        $node = node_load((int) $matches[1]);
+        if($node && $node->status == NODE_NOT_PUBLISHED) {
+          $form[$form_child_key]['#attributes']['class'][] = 'menu-node-unpublished';
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements template_preprocess().
+ */
+function osha_preprocess_menu_link(&$variables) {
+  $element = &$variables['element'];
+  // Add a class to menu links that link to unpublished nodes.
+  if (preg_match('@^node/(\d+)$@', $element['#href'], $matches)) {
+    $node = node_load((int) $matches[1]);
+    if ($node && $node->status == NODE_NOT_PUBLISHED) {
+      if (empty($element['#attributes']['class'])){
+        $element['#attributes']['class'] = array();
+      }
+      $element['#attributes']['class'][] = 'menu-node-unpublished';
+    }
+  }
+}
+
+/**
  * Implements hook_js_alter().
  */
 function osha_js_alter(&$javascript) {

@@ -110,6 +110,10 @@ header{
 	margin-right: 0;
 }
 
+.menu-node-unpublished a{
+	color: red !important;
+}
+
 .sidebars_first  .region-sidebar-first #block-menu-block-2 .menu-block-2 ul{
 	padding:0;
 	margin:0;

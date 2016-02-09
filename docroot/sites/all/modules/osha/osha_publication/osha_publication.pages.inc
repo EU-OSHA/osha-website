@@ -10,7 +10,7 @@ function osha_publication_menu_publications_form($form, $form_state) {
   $tags = osha_publication_req_param($form_state, 'tags', array());
   $form = array(
     '#action' => url('tools-and-publications/publications'),
-    '#method' => 'post',
+    '#method' => 'GET',
     'left-column' => array(
       '#type' => 'container',
       '#attributes' => array('class' => array('publications-sidebar-first'))
@@ -18,7 +18,8 @@ function osha_publication_menu_publications_form($form, $form_state) {
     'content' => array(
       '#type' => 'container',
       '#attributes' => array('class' => array('two_column publications-search-list')),
-    )
+    ),
+    '#token' => FALSE,
   );
   $form['content']['text'] = array(
     '#type' => 'textfield',
@@ -84,6 +85,14 @@ function osha_publication_menu_publications_form($form, $form_state) {
   return $form;
 }
 
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function osha_publication_form_osha_publication_menu_publications_form_alter(&$form, $form_state) {
+  // Unset the form_id and build_id in order not to have nasty urls.
+  unset($form['form_id']);
+  unset($form['form_build_id']);
+}
 
 function osha_publication_menu_publications_form_submit($form, &$form_state) {
   $form_state['rebuild'] = TRUE;

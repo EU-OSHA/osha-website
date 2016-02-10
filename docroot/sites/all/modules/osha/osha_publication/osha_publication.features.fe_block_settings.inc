@@ -13,7 +13,7 @@ function osha_publication_default_fe_block_settings() {
   $export['version'] = '2.0';
 
   $export['osha_publication-osha_publication_listing'] = array(
-    'cache' => 8,
+    'cache' => -1,
     'custom' => 0,
     'delta' => 'osha_publication_listing',
     'i18n_block_language' => array(),

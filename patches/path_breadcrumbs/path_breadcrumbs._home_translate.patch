@@ -1,7 +1,7 @@
-diff --git a/docroot/sites/all/modules/contrib/path_breadcrumbs/path_breadcrumbs.module b/docroot/sites/all/modules/contrib/path_breadcrumbs/path_breadcrumbs.module
+diff --git a/path_breadcrumbs.module b/path_breadcrumbs.module
 index d3c4d56..b5c50bd 100644
---- a/docroot/sites/all/modules/contrib/path_breadcrumbs/path_breadcrumbs.module
-+++ b/docroot/sites/all/modules/contrib/path_breadcrumbs/path_breadcrumbs.module
+--- a/path_breadcrumbs.module
++++ b/path_breadcrumbs.module
 @@ -181,7 +181,7 @@ function _path_breadcrumbs_build_breadcrumbs($path_breadcrumb, $contexts = array
    // Prepend HOME link to breadcrumbs navigation.
    if ($path_breadcrumb->home == TRUE) {

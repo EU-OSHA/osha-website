@@ -490,6 +490,10 @@ function osha_entity_info_alter(&$entity_info) {
     'label' => t('Osha Slideshow'),
     'custom settings' => TRUE,
   );
+  $entity_info['node']['view modes']['osha_search_teaser'] = array(
+    'label' => t('Search teaser'),
+    'custom settings' => FALSE,
+  );
 }
 
 function osha_enabled_language_list() {
@@ -542,6 +546,8 @@ function osha_language_list_options() {
 function osha_form_node_form_alter(&$form, &$form_state, $form_id) {
   global $user;
 
+  array_unshift($form['#validate'], 'osha_node_validate_prepare');
+
   if (isset($form['#node'])) {
     $node = $form['#node'];
     if (isset($node->nid)) {
@@ -587,6 +593,20 @@ function osha_form_node_form_alter(&$form, &$form_state, $form_id) {
   }
   // Hide Delete button for all roles
   unset($form['actions']['delete']);
+}
+
+/**
+ * MC-151: cannot save the same node in different tabs.
+ *
+ * Set the "changed" value to current time so that (node_last_changed($node->nid) > $node->changed) validation
+ * within node.module will not fail.
+ */
+function osha_node_validate_prepare($form, &$form_state) {
+  $node = &$form_state['node'];
+  if (isset($node->nid) && (node_last_changed($node->nid) > $node->changed)) {
+    $node = node_load($node->nid);
+    $form_state['values']['changed'] = time();
+  }
 }
 
 /**

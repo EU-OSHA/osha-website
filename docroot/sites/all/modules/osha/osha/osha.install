@@ -318,3 +318,36 @@ function osha_update_7014() {
   variable_set('pathauto_punctuation_em-dash', 1);
   variable_set('pathauto_punctuation_overline', 1);
 }
+
+/**
+ * MC-150 Create link to Flickr in footer-menu.
+ */
+function osha_update_7015() {
+  $blog_link = menu_link_load(1719);
+  $blog_link['weight'] = 6;
+  menu_link_save($blog_link);
+
+  $image = file_get_contents('sites/all/themes/osha_frontend/images/footer-flickr.png');
+  $file = file_save_data($image, 'public://menuimage/footer-flickr.png', FILE_EXISTS_REPLACE);
+
+  $item = array(
+    'link_path' => 'https://www.flickr.com/photos/euosha/albums',
+    'link_title' => 'EU OSHA Flickr photos',
+    'menu_name' => 'menu-footer-menu',
+    'weight' => 5,
+    'expanded' => 0,
+    'plid' => 1701, // set parent - "Social"
+    'options' => array(
+      'attributes' => array(
+        'title' => 'EU OSHA Flickr photos',
+        'content' => array(
+          'image' => 'public://menuimage/footer-flickr.png',
+        ),
+      ),
+      'content' => array(
+        'image' => 'public://menuimage/footer-flickr.png',
+      ),
+    ),
+  );
+  menu_link_save($item);
+}

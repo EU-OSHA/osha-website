@@ -450,21 +450,16 @@ function drupal_get_query_parameters(array $query = NULL, array $exclude = array
  *
  * @param $query
  *   The query string to split.
- * @param $decode
- *   Defaults to TRUE. Boolean flag indicating that the return value should be
- *   URL-decoded.
  *
  * @return
  *   An array of URL decoded couples $param_name => $value.
  */
-function drupal_get_query_array($query, $decode = TRUE) {
+function drupal_get_query_array($query) {
   $result = array();
   if (!empty($query)) {
     foreach (explode('&', $query) as $param) {
       $param = explode('=', $param, 2);
-      $key = ($decode) ? rawurldecode($param[0]) : $param[0];
-      $value = isset($param[1]) ? ($decode) ? rawurldecode($param[1]) : $param[1] : ''; 
-      $result[$key] = $value;
+      $result[$param[0]] = isset($param[1]) ? rawurldecode($param[1]) : '';
     }
   }
   return $result;
@@ -478,9 +473,6 @@ function drupal_get_query_array($query, $decode = TRUE) {
  *
  * @param $query
  *   The query parameter array to be processed, e.g. $_GET.
- * @param $encode
- *   Defaults to TRUE. Boolean flag indicating that the return value should be
- *   URL-encoded.
  * @param $parent
  *   Internal use only. Used to build the $query array key for nested items.
  *
@@ -491,16 +483,15 @@ function drupal_get_query_array($query, $decode = TRUE) {
  * @see drupal_get_query_parameters()
  * @ingroup php_wrappers
  */
-function drupal_http_build_query(array $query, $encode = TRUE, $parent = '') {
+function drupal_http_build_query(array $query, $parent = '') {
   $params = array();
 
   foreach ($query as $key => $value) {
-    $raw_key = ($encode) ? rawurlencode($key) : $key;
-    $key = ($parent ? $parent . '[' . $raw_key . ']' : $raw_key);
+    $key = ($parent ? $parent . '[' . rawurlencode($key) . ']' : rawurlencode($key));
 
     // Recurse into children.
     if (is_array($value)) {
-      $params[] = drupal_http_build_query($value, $encode, $key);
+      $params[] = drupal_http_build_query($value, $key);
     }
     // If a query parameter value is NULL, only append its key.
     elseif (!isset($value)) {
@@ -508,8 +499,7 @@ function drupal_http_build_query(array $query, $encode = TRUE, $parent = '') {
     }
     else {
       // For better readability of paths in query strings, we decode slashes.
-      $raw_value = ($encode) ? rawurlencode($value) : $value;
-      $params[] = $key . '=' . str_replace('%2F', '/', $raw_value);
+      $params[] = $key . '=' . str_replace('%2F', '/', rawurlencode($value));
     }
   }
 
@@ -1067,6 +1057,12 @@ function drupal_http_request($url, array $options = array()) {
 
   switch ($code) {
     case 200: // OK
+    case 201: // Created
+    case 202: // Accepted
+    case 203: // Non-Authoritative Information
+    case 204: // No Content
+    case 205: // Reset Content
+    case 206: // Partial Content
     case 304: // Not modified
       break;
     case 301: // Moved permanently
@@ -2178,8 +2174,6 @@ function format_username($account) {
  *   elements:
  *   - 'query': An array of query key/value-pairs (without any URL-encoding) to
  *     append to the URL.
- *   - 'encode': Defaults to TRUE. Boolean flag indicating that the return value
- *     of query parameters should be URL-encoded.
  *   - 'fragment': A fragment identifier (named anchor) to append to the URL.
  *     Do not include the leading '#' character.
  *   - 'absolute': Defaults to FALSE. Whether to force the output to be an
@@ -2223,8 +2217,7 @@ function url($path = NULL, array $options = array()) {
     'query' => array(),
     'absolute' => FALSE,
     'alias' => FALSE,
-    'prefix' => '',
-    'encode' => TRUE,
+    'prefix' => ''
   );
 
   // A duplicate of the code from url_is_external() to avoid needing another
@@ -2264,7 +2257,7 @@ function url($path = NULL, array $options = array()) {
     }
     // Append the query.
     if ($options['query']) {
-      $path .= (strpos($path, '?') !== FALSE ? '&' : '?') . drupal_http_build_query($options['query'], $options['encode']);
+      $path .= (strpos($path, '?') !== FALSE ? '&' : '?') . drupal_http_build_query($options['query']);
     }
     if (isset($options['https']) && variable_get('https', FALSE)) {
       if ($options['https'] === TRUE) {
@@ -2321,7 +2314,7 @@ function url($path = NULL, array $options = array()) {
   if (!empty($GLOBALS['conf']['clean_url'])) {
     $path = drupal_encode_path($prefix . $path);
     if ($options['query']) {
-      return $base . $path . '?' . drupal_http_build_query($options['query'], $options['encode']) . $options['fragment'];
+      return $base . $path . '?' . drupal_http_build_query($options['query']) . $options['fragment'];
     }
     else {
       return $base . $path . $options['fragment'];
@@ -2825,11 +2818,11 @@ function drupal_map_assoc($array, $function = NULL) {
  * into script execution a call such as set_time_limit(20) is made, the
  * script will run for a total of 45 seconds before timing out.
  *
- * It also means that it is possible to decrease the total time limit if
- * the sum of the new time limit and the current time spent running the
- * script is inferior to the original time limit. It is inherent to the way
- * set_time_limit() works, it should rather be called with an appropriate
- * value every time you need to allocate a certain amount of time
+ * If the current time limit is not unlimited it is possible to decrease the
+ * total time limit if the sum of the new time limit and the current time spent
+ * running the script is inferior to the original time limit. It is inherent to
+ * the way set_time_limit() works, it should rather be called with an
+ * appropriate value every time you need to allocate a certain amount of time
  * to execute a task than only once at the beginning of the script.
  *
  * Before calling set_time_limit(), we check if this function is available
@@ -2846,7 +2839,11 @@ function drupal_map_assoc($array, $function = NULL) {
  */
 function drupal_set_time_limit($time_limit) {
   if (function_exists('set_time_limit')) {
-    @set_time_limit($time_limit);
+    $current = ini_get('max_execution_time');
+    // Do not set time limit if it is currently unlimited.
+    if ($current != 0) {
+      @set_time_limit($time_limit);
+    }
   }
 }
 
@@ -5175,14 +5172,7 @@ function drupal_get_private_key() {
  * @see drupal_get_hash_salt()
  */
 function drupal_get_token($value = '') {
-  // For mixed HTTP(S) sessions, use a constant identifier so that tokens can be shared between protocols.
-  if (variable_get('https', FALSE) && $GLOBALS['is_https'] && isset($_COOKIE[substr(session_name(), 1)])) {
-    $session_id = $_COOKIE[substr(session_name(), 1)];
-  }
-  else {
-    $session_id = session_id();
-  }
-  return drupal_hmac_base64($value, $session_id . drupal_get_private_key() . drupal_get_hash_salt());
+  return drupal_hmac_base64($value, session_id() . drupal_get_private_key() . drupal_get_hash_salt());
 }
 
 /**
@@ -5232,6 +5222,11 @@ function _drupal_bootstrap_full() {
   fix_gpc_magic();
   // Load all enabled modules
   module_load_all();
+  // Reset drupal_alter() and module_implements() static caches as these
+  // include implementations for vital modules only when called early on
+  // in the bootstrap.
+  drupal_static_reset('drupal_alter');
+  drupal_static_reset('module_implements');
   // Make sure all stream wrappers are registered.
   file_get_stream_wrappers();
   // Ensure mt_rand is reseeded, to prevent random values from one page load
@@ -5328,8 +5323,8 @@ function drupal_page_set_cache() {
  *
  * Do not call this function from a test. Use $this->cronRun() instead.
  *
- * @return
- *   TRUE if cron ran successfully.
+ * @return bool
+ *   TRUE if cron ran successfully and FALSE if cron is already running.
  */
 function drupal_cron_run() {
   // Allow execution to continue even if the request gets canceled.
@@ -5391,12 +5386,12 @@ function drupal_cron_run() {
       // Do not run if queue wants to skip.
       continue;
     }
-    $function = $info['worker callback'];
+    $callback = $info['worker callback'];
     $end = time() + (isset($info['time']) ? $info['time'] : 15);
     $queue = DrupalQueue::get($queue_name);
     while (time() < $end && ($item = $queue->claimItem())) {
       try {
-        $function($item->data);
+        call_user_func($callback, $item->data);
         $queue->deleteItem($item);
       }
       catch (Exception $e) {
@@ -7103,7 +7098,8 @@ function drupal_uninstall_schema($module) {
  * specification of a schema, as it was defined in a module's
  * hook_schema(). No additional default values will be set,
  * hook_schema_alter() is not invoked and these unprocessed
- * definitions won't be cached.
+ * definitions won't be cached. To retrieve the schema after
+ * hook_schema_alter() has been invoked use drupal_get_schema().
  *
  * This function can be used to retrieve a schema specification in
  * hook_schema(), so it allows you to derive your tables from existing
@@ -7176,6 +7172,7 @@ function _drupal_schema_initialize(&$schema, $module, $remove_descriptions = TRU
  */
 function drupal_schema_field_types($table) {
   $table_schema = drupal_get_schema($table);
+  $field_types = array();
   foreach ($table_schema['fields'] as $field_name => $field_info) {
     $field_types[$field_name] = isset($field_info['type']) ? $field_info['type'] : NULL;
   }
@@ -7383,7 +7380,16 @@ function drupal_write_record($table, &$record, $primary_keys = array()) {
  * Information stored in a module .info file:
  * - name: The real name of the module for display purposes.
  * - description: A brief description of the module.
- * - dependencies: An array of shortnames of other modules this module requires.
+ * - dependencies: An array of dependency strings. Each is in the form
+ *   'project:module (versions)'; with the following meanings:
+ *   - project: (optional) Project shortname, recommended to ensure uniqueness,
+ *     if the module is part of a project hosted on drupal.org. If omitted,
+ *     also omit the : that follows. The project name is currently ignored by
+ *     Drupal core but is used for automated testing.
+ *   - module: (required) Module shortname within the project.
+ *   - (versions): Optional version information, consisting of one or more
+ *     comma-separated operator/value pairs or simply version numbers, which
+ *     can contain "x" as a wildcard. Examples: (>=7.22, <7.28), (7.x-3.x).
  * - package: The name of the package of modules this module belongs to.
  *
  * See forum.info for an example of a module .info file.
@@ -7463,7 +7469,6 @@ function drupal_parse_info_file($filename) {
  */
 function drupal_parse_info_format($data) {
   $info = array();
-  $constants = get_defined_constants();
 
   if (preg_match_all('
     @^\s*                           # Start at the beginning of a line, ignoring leading whitespace
@@ -7503,8 +7508,8 @@ function drupal_parse_info_format($data) {
       }
 
       // Handle PHP constants.
-      if (isset($constants[$value])) {
-        $value = $constants[$value];
+      if (preg_match('/^\w+$/i', $value) && defined($value)) {
+        $value = constant($value);
       }
 
       // Insert actual value.
@@ -7668,7 +7673,12 @@ function debug($data, $label = NULL, $print_r = FALSE) {
  * Parses a dependency for comparison by drupal_check_incompatibility().
  *
  * @param $dependency
- *   A dependency string, for example 'foo (>=7.x-4.5-beta5, 3.x)'.
+ *   A dependency string, which specifies a module dependency, and optionally
+ *   the project it comes from and versions that are supported. Supported
+ *   formats include:
+ *   - 'module'
+ *   - 'project:module'
+ *   - 'project:module (>=version, version)'
  *
  * @return
  *   An associative array with three keys:
@@ -7683,6 +7693,12 @@ function debug($data, $label = NULL, $print_r = FALSE) {
  * @see drupal_check_incompatibility()
  */
 function drupal_parse_dependency($dependency) {
+  $value = array();
+  // Split out the optional project name.
+  if (strpos($dependency, ':')) {
+    list($project_name, $dependency) = explode(':', $dependency);
+    $value['project'] = $project_name;
+  }
   // We use named subpatterns and support every op that version_compare
   // supports. Also, op is optional and defaults to equals.
   $p_op = '(?P<operation>!=|==|=|<|<=|>|>=|<>)?';
@@ -7691,7 +7707,6 @@ function drupal_parse_dependency($dependency) {
   $p_major = '(?P<major>\d+)';
   // By setting the minor version to x, branches can be matched.
   $p_minor = '(?P<minor>(?:\d+|x)(?:-[A-Za-z]+\d+)?)';
-  $value = array();
   $parts = explode('(', $dependency, 2);
   $value['name'] = trim($parts[0]);
   if (isset($parts[1])) {

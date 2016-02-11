@@ -171,3 +171,119 @@ function osha_publication_update_7006() {
     }
   }
 }
+
+/**
+ * Fix some publications thumbnails (broken) that already exists.
+ */
+function osha_publication_update_7007() {
+  global $base_url;
+  $aliases = array(
+    '/tools-and-publications/publications/reports/201',
+    '/tools-and-publications/publications/reports/esener_workers-involvement',
+    '/tools-and-publications/publications/reports/TE7809894ENC',
+    '/tools-and-publications/publications/reports/305',
+    '/tools-and-publications/publications/reports/401',
+    '/tools-and-publications/publications/magazine/2',
+    '/tools-and-publications/publications/reports/303',
+  );
+
+  $images_dir = 'public://publications/cover_images';
+  if (!file_prepare_directory($images_dir)) {
+    throw new DrupalUpdateException('Could not prepare directory ' . $images_dir);
+  }
+
+  foreach ($aliases as $alias) {
+    $path = path_load(array('alias' => substr($alias, 1)));
+    if (!empty($path)) {
+      $nid = str_replace('node/', '', $path['source']);
+      $node = node_load($nid);
+      if (!empty($node->field_cover_image)) {
+        foreach ($node->field_cover_image as $lng => $cover) {
+          $file = $node->field_file[$lng][0];
+          $file_path = file_create_url($file['uri']);
+          $file_url = str_replace($base_url, 'https://osha.europa.eu', $file_path);
+
+          $convertor_url = 'http://osha.edw.ro/oshathumbnailgenerator?url=' . $file_url;
+          $ch = curl_init($convertor_url);
+          $image_path = $images_dir . '/' .$node->nid . '.jpg';
+          if ($ch){
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_HEADER, 0);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+            $data = curl_exec($ch);
+            if ($data !== FALSE && imagecreatefromstring($data) !== FALSE) {
+              $new_cover = file_save_data($data, $image_path, FILE_EXISTS_RENAME);
+            }
+            else {
+              throw new DrupalUpdateException(strtr('File @path could not be converted with @convertor', array('@path' => $images_dir, '@convertor' => $convertor_url)));
+            }
+            curl_close($ch);
+          }
+          if (!empty($new_cover)) {
+            $new_cover->status = 1;
+            $new_cover->display = 1;
+            $node->field_cover_image[$lng][0] = (array) $new_cover;
+          }
+        }
+        node_save($node);
+      }
+    }
+  }
+}
+
+/**
+ * Try to re-generate covers for publications that are missing covers.
+ */
+function osha_publication_update_7008() {
+  global $base_url;
+  $subquery = db_select('field_data_field_cover_image', 'ci')
+    ->fields('ci', array('entity_id'))
+    ->condition('bundle', 'publication')
+    ->distinct('entity_id');
+  $subquery2 = db_select('field_data_field_file', 'cf')
+    ->fields('cf', array('entity_id'))
+    ->condition('bundle', 'publication')
+    ->distinct('entity_id');
+  $query = db_select('node', 'n')
+    ->fields('n', array('nid'))
+    ->condition('type', 'publication')
+    ->condition('nid', $subquery, 'NOT IN')
+    ->condition('nid', $subquery2, 'IN');
+  $result =$query->execute()->fetchCol();
+
+  $images_dir = 'public://publications/cover_images';
+  if (!file_prepare_directory($images_dir)) {
+    throw new DrupalUpdateException('Could not prepare directory ' . $images_dir);
+  }
+
+  foreach ($result as $nid) {
+    $node = node_load($nid);
+    foreach (array_keys($node->field_file) as $lng) {
+      $file = $node->field_file[$lng][0];
+      $file_path = file_create_url($file['uri']);
+      $file_url = str_replace($base_url, 'https://osha.europa.eu', $file_path);
+      $convertor_url = 'http://osha.edw.ro/oshathumbnailgenerator?url=' . $file_url;
+      $ch = curl_init($convertor_url);
+      $image_path = $images_dir . '/' .$node->nid . '.jpg';
+      if($ch){
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        $data = curl_exec($ch);
+        if ($data !== FALSE && imagecreatefromstring($data) !== FALSE) {
+          $new_cover = file_save_data($data, $image_path, FILE_EXISTS_RENAME);
+        }
+        else {
+          drupal_set_message(strtr('File @path could not be converted with @convertor', array('@path' => $file_path, '@convertor' => $convertor_url)), 'warning');
+        }
+        curl_close($ch);
+      }
+      if (!empty($new_cover)) {
+        $new_cover->status = 1;
+        $new_cover->display = 1;
+        $node->field_cover_image[$lng][0] = (array) $new_cover;
+      }
+    }
+    node_save($node);
+  }
+}

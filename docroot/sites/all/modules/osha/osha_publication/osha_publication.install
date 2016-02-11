@@ -178,13 +178,13 @@ function osha_publication_update_7006() {
 function osha_publication_update_7007() {
   global $base_url;
   $aliases = array(
-    '/tools-and-publications/publications/reports/201/view',
-    '/tools-and-publications/publications/reports/esener_workers-involvement/view',
-    '/tools-and-publications/publications/reports/TE7809894ENC/view',
-    '/tools-and-publications/publications/reports/305/view',
-    '/tools-and-publications/publications/reports/401/view',
-    '/tools-and-publications/publications/magazine/2/view',
-    '/tools-and-publications/publications/reports/303/view',
+    '/tools-and-publications/publications/reports/201',
+    '/tools-and-publications/publications/reports/esener_workers-involvement',
+    '/tools-and-publications/publications/reports/TE7809894ENC',
+    '/tools-and-publications/publications/reports/305',
+    '/tools-and-publications/publications/reports/401',
+    '/tools-and-publications/publications/magazine/2',
+    '/tools-and-publications/publications/reports/303',
   );
 
   $images_dir = 'public://publications/cover_images';

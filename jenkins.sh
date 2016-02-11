@@ -19,24 +19,10 @@ if [ ${ecode} != 0 ]; then
   exit ${ecode};
 fi
 
-# Devify the installation
-drush -y devify
-ecode=$?
-if [ ${ecode} != 0 ]; then
-  echo "Devify has returned an error"
-  exit ${ecode};
-fi
+drush dis -y varnish
 
-# Devify the installation
-drush devify_solr
-ecode=$?
-if [ ${ecode} != 0 ]; then
-  echo "Devify Solr has returned an error"
-  exit ${ecode};
-fi
-
-# Build the site
-drush osha_build -y
+# Apply pending updates
+drush updatedb -y
 ecode=$?
 if [ ${ecode} != 0 ]; then
   echo "osha_build has returned an error"

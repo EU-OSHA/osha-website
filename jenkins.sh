@@ -19,6 +19,7 @@ if [ ${ecode} != 0 ]; then
   exit ${ecode};
 fi
 
+drush cc all
 drush dis -y varnish
 
 # Apply pending updates

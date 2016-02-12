@@ -43,7 +43,7 @@ function osha_tmgmt_cron_cronapi() {
 function osha_tmgmt_cron() {
   // Remove old job items in cart
   $time_limit = strtotime('-1 day');
-  _osha_tmgmt_remove_cart_jobs($time_limit);
+  _osha_tmgmt_remove_old_cart_jobs($time_limit);
 }
 
 function osha_tmgmt_menu() {

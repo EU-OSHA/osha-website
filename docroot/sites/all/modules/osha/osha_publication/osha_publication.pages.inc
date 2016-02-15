@@ -8,6 +8,7 @@ function osha_publication_menu_publications_form($form, $form_state) {
   $direction = osha_publication_req_param($form_state, 'direction', 'desc');
   $languages = osha_publication_req_param($form_state, 'languages', array($language->language));
   $tags = osha_publication_req_param($form_state, 'tags', array());
+  $publication_type = osha_publication_req_param($form_state, 'publication_type', array());
   $form = array(
     '#action' => url('tools-and-publications/publications'),
     '#method' => 'GET',
@@ -65,7 +66,7 @@ function osha_publication_menu_publications_form($form, $form_state) {
   $form['left-column']['publication_type'] = array(
     '#type' => 'checkboxes',
     '#options' => _publication_type_options_list(),
-    '#default_value' => array('0'),
+    '#default_value' => $publication_type,
     '#title' => t('Type'),
   );
   if (empty($form_state['input'])) {

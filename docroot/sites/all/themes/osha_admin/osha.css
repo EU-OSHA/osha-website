@@ -189,3 +189,10 @@ ul.primary {
   background-color: #f3f3f3;
   color: #a0a0a0;
 }
+
+.menu-node-unpublished td:first-child a[href^="/"]:after {
+  display: inline;
+  content: ' Unpublished';
+  color: red;
+  font-size: .6em;
+}

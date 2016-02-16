@@ -548,6 +548,7 @@ function osha_form_node_form_alter(&$form, &$form_state, $form_id) {
 
   array_unshift($form['#validate'], 'osha_node_validate_prepare');
 
+  $in_users_cart = FALSE;
   if (isset($form['#node'])) {
     $node = $form['#node'];
     if (isset($node->nid)) {
@@ -555,10 +556,24 @@ function osha_form_node_form_alter(&$form, &$form_state, $form_id) {
       foreach ($jobs as $job) {
         if ($job->plugin == 'entity' && $job->item_id == $node->nid) {
           drupal_set_message(t('This node is in the translation cart!'), 'warning');
+          $in_users_cart = TRUE;
           break;
         }
       }
+      if (!$in_users_cart) {
+        $in_a_cart = db_select('tmgmt_job_item','tji')
+          ->fields('tji', array('tjiid'))
+          ->condition('item_type', 'node')
+          ->condition('item_id', $form['#node']->nid)
+          ->condition('merged', NULL)
+          ->condition('tjid', 0)
+          ->execute()->rowCount();
+        if ($in_a_cart) {
+          drupal_set_message('This node is in another user\'s translation cart.', 'warning');
+        }
+      }
     }
+
   }
   if (isset($form['field_tags']['und']['#options'])) {
     // $form_id has the following template <machine_name>_node_form

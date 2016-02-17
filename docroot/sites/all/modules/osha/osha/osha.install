@@ -351,3 +351,10 @@ function osha_update_7015() {
   );
   menu_link_save($item);
 }
+
+/**
+ * Revert osha module.
+ */
+function osha_update_7016() {
+  features_revert_module('osha');
+}

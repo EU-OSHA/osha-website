@@ -41,6 +41,17 @@ class TMGMTJobItemUICart {
     if (!isset($_SESSION[$this->session_key])) {
       $_SESSION[$this->session_key] = array();
     }
+    // Check job items from session against database.
+    if (!empty($_SESSION[$this->session_key])) {
+      $cart = db_select('tmgmt_job_item', 'tji')
+        ->fields('tji', array('tjiid'))
+        ->condition('tjiid', $_SESSION[$this->session_key], 'IN')
+        ->execute()
+        ->fetchCol();
+      if (count($cart) != count ($_SESSION[$this->session_key])) {
+        $_SESSION[$this->session_key] = $cart;
+      }
+    }
     $this->cart = &$_SESSION[$this->session_key];
   }
 

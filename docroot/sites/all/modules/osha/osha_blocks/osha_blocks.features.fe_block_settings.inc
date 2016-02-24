@@ -12,48 +12,6 @@ function osha_blocks_default_fe_block_settings() {
 
   $export['version'] = '2.0';
 
-  $export['blockgroup-related'] = array(
-    'cache' => -1,
-    'custom' => 0,
-    'delta' => 'related',
-    'i18n_block_language' => array(),
-    'i18n_mode' => 0,
-    'module' => 'blockgroup',
-    'node_types' => array(
-      0 => 'article',
-    ),
-    'pages' => '',
-    'roles' => array(),
-    'themes' => array(
-      'bartik' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'bartik',
-        'weight' => 0,
-      ),
-      'osha_admin' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'osha_admin',
-        'weight' => 0,
-      ),
-      'osha_frontend' => array(
-        'region' => 'sidebar_second',
-        'status' => 1,
-        'theme' => 'osha_frontend',
-        'weight' => -1,
-      ),
-      'seven' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'seven',
-        'weight' => 0,
-      ),
-    ),
-    'title' => 'Related',
-    'visibility' => 0,
-  );
-
   $export['osha_blocks-osha_archived_content'] = array(
     'cache' => 4,
     'custom' => 0,

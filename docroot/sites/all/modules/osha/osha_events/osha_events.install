@@ -110,3 +110,16 @@ function osha_events_update_7006() {
 function osha_events_update_7007() {
   features_revert_module('osha_events');
 }
+
+/**
+ * Delete data form field unit ref with value DIR, revert module
+ */
+function osha_events_update_7008() {
+  db_delete('field_data_field_unit_ref')
+    ->condition('field_unit_ref_value', 'DIR')
+    ->execute();
+  db_delete('field_revision_field_unit_ref')
+    ->condition('field_unit_ref_value', 'DIR')
+    ->execute();
+  features_revert_module('osha_events');
+}

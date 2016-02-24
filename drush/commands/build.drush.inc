@@ -116,7 +116,8 @@ function _drush_devify() {
 
   // Sanitize database.
   // @see sql_drush_sql_sync_sanitize() to add your sanitize queries.
-  drush_sql_sanitize();
+  $new_password = drush_get_option('sanitize-password', 'password');
+  drush_invoke('sql-sanitize', array('sanitize-password' => $new_password));
 
   drush_log(dt('Devified!'), 'success');
 }

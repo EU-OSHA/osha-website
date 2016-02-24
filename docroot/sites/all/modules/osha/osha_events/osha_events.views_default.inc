@@ -569,6 +569,10 @@ function osha_events_views_default_views() {
   $handler->display->display_options['fields']['field_comments_summary_after_eve']['table'] = 'field_data_field_comments_summary_after_eve';
   $handler->display->display_options['fields']['field_comments_summary_after_eve']['field'] = 'field_comments_summary_after_eve';
   $handler->display->display_options['fields']['field_comments_summary_after_eve']['element_label_colon'] = FALSE;
+  /* Field: Content: Type */
+  $handler->display->display_options['fields']['field_event_type']['id'] = 'field_event_type';
+  $handler->display->display_options['fields']['field_event_type']['table'] = 'field_data_field_event_type';
+  $handler->display->display_options['fields']['field_event_type']['field'] = 'field_event_type';
   /* Field: Content: Number of attendees */
   $handler->display->display_options['fields']['field_number_of_attendees']['id'] = 'field_number_of_attendees';
   $handler->display->display_options['fields']['field_number_of_attendees']['table'] = 'field_data_field_number_of_attendees';
@@ -1019,6 +1023,30 @@ function osha_events_views_default_views() {
     12 => 0,
     13 => 0,
   );
+  /* Filter criterion: Content: Type (field_event_type) */
+  $handler->display->display_options['filters']['field_event_type_value']['id'] = 'field_event_type_value';
+  $handler->display->display_options['filters']['field_event_type_value']['table'] = 'field_data_field_event_type';
+  $handler->display->display_options['filters']['field_event_type_value']['field'] = 'field_event_type_value';
+  $handler->display->display_options['filters']['field_event_type_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_event_type_value']['expose']['operator_id'] = 'field_event_type_value_op';
+  $handler->display->display_options['filters']['field_event_type_value']['expose']['label'] = 'Type';
+  $handler->display->display_options['filters']['field_event_type_value']['expose']['operator'] = 'field_event_type_value_op';
+  $handler->display->display_options['filters']['field_event_type_value']['expose']['identifier'] = 'field_event_type_value';
+  $handler->display->display_options['filters']['field_event_type_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+  );
   $handler->display->display_options['path'] = 'admin/content/events';
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Events';
@@ -1306,6 +1334,10 @@ function osha_events_views_default_views() {
   $handler->display->display_options['fields']['status']['field'] = 'status';
   $handler->display->display_options['fields']['status']['ui_name'] = 'Published';
   $handler->display->display_options['fields']['status']['not'] = 0;
+  /* Field: Content: Type */
+  $handler->display->display_options['fields']['field_event_type']['id'] = 'field_event_type';
+  $handler->display->display_options['fields']['field_event_type']['table'] = 'field_data_field_event_type';
+  $handler->display->display_options['fields']['field_event_type']['field'] = 'field_event_type';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Type */
@@ -1693,6 +1725,30 @@ function osha_events_views_default_views() {
     12 => 0,
     13 => 0,
   );
+  /* Filter criterion: Content: Type (field_event_type) */
+  $handler->display->display_options['filters']['field_event_type_value']['id'] = 'field_event_type_value';
+  $handler->display->display_options['filters']['field_event_type_value']['table'] = 'field_data_field_event_type';
+  $handler->display->display_options['filters']['field_event_type_value']['field'] = 'field_event_type_value';
+  $handler->display->display_options['filters']['field_event_type_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_event_type_value']['expose']['operator_id'] = 'field_event_type_value_op';
+  $handler->display->display_options['filters']['field_event_type_value']['expose']['label'] = 'Type';
+  $handler->display->display_options['filters']['field_event_type_value']['expose']['operator'] = 'field_event_type_value_op';
+  $handler->display->display_options['filters']['field_event_type_value']['expose']['identifier'] = 'field_event_type_value';
+  $handler->display->display_options['filters']['field_event_type_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+  );
   $handler->display->display_options['path'] = 'admin/content/events-export';
   $handler->display->display_options['displays'] = array(
     'page' => 'page',
@@ -1751,6 +1807,7 @@ function osha_events_views_default_views() {
     t('End date'),
     t('Activity'),
     t('Category'),
+    t('Type'),
     t('Operations'),
     t('<ul class="links inline">
 <li>[edit_node]</li>

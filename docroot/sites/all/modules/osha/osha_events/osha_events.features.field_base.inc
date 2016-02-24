@@ -780,7 +780,6 @@ function osha_events_field_default_field_bases() {
         'CPU' => 'CPU',
         'NET' => 'NET',
         'RSC' => 'RSC',
-        'DIR' => 'DIR',
       ),
       'allowed_values_function' => '',
       'entity_translation_sync' => FALSE,

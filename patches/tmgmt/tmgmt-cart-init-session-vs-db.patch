@@ -1,0 +1,22 @@
+diff --git a/tmgmt_ui.cart.inc b/tmgmt_ui.cart.inc
+index bb4499a..30d0b8e 100644
+--- a/tmgmt_ui.cart.inc
++++ b/tmgmt_ui.cart.inc
+@@ -41,6 +41,17 @@ class TMGMTJobItemUICart {
+     if (!isset($_SESSION[$this->session_key])) {
+       $_SESSION[$this->session_key] = array();
+     }
++    // Check job items from session against database.
++    if (!empty($_SESSION[$this->session_key])) {
++      $cart = db_select('tmgmt_job_item', 'tji')
++        ->fields('tji', array('tjiid'))
++        ->condition('tjiid', $_SESSION[$this->session_key], 'IN')
++        ->execute()
++        ->fetchCol();
++      if (count($cart) != count ($_SESSION[$this->session_key])) {
++        $_SESSION[$this->session_key] = $cart;
++      }
++    }
+     $this->cart = &$_SESSION[$this->session_key];
+   }
+ 

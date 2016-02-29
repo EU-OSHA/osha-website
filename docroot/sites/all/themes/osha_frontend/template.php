@@ -461,6 +461,76 @@ function osha_frontend_pager($variables) {
   return theme_pager($variables);
 }
 
+/**
+ * Implements hook_pager_link().
+ *
+ * @see theme_pager_link().
+ */
+function osha_frontend_pager_link($variables) {
+  global $language;
+  $text = $variables['text'];
+  $page_new = $variables['page_new'];
+  $element = $variables['element'];
+  $parameters = $variables['parameters'];
+  $attributes = $variables['attributes'];
+
+  $page = isset($_GET['page']) ? $_GET['page'] : '';
+  if ($new_page = implode(',', pager_load_array($page_new[$element], $element, explode(',', $page)))) {
+    $parameters['page'] = $new_page;
+  }
+
+  // Set pagination url for publication search pretty path.
+  $req_uri = request_path();
+  $is_pretty_search = FALSE;
+  if (strpos($req_uri, 'tools-and-publications/publications') >= 0) {
+    $is_pretty_search = TRUE;
+    if (preg_match('/^' . $language->language . '\//', $req_uri)) {
+      $req_uri = str_replace($language->language . '/', '', $req_uri);
+    }
+  }
+
+  $query = array();
+  if (count($parameters)) {
+    $query = drupal_get_query_parameters($parameters, array());
+  }
+  if (!$is_pretty_search) {
+    if ($query_pager = pager_get_query_parameters()) {
+      $query = array_merge($query, $query_pager);
+    }
+  }
+
+  // Set each pager link title
+  if (!isset($attributes['title'])) {
+    static $titles = NULL;
+    if (!isset($titles)) {
+      $titles = array(
+        t('« first') => t('Go to first page'),
+        t('‹ previous') => t('Go to previous page'),
+        t('next ›') => t('Go to next page'),
+        t('last »') => t('Go to last page'),
+      );
+    }
+    if (isset($titles[$text])) {
+      $attributes['title'] = $titles[$text];
+    }
+    elseif (is_numeric($text)) {
+      $attributes['title'] = t('Go to page @number', array('@number' => $text));
+    }
+  }
+
+  // @todo l() cannot be used here, since it adds an 'active' class based on the
+  //   path only (which is always the current path for pager links). Apparently,
+  //   none of the pager links is active at any time - but it should still be
+  //   possible to use l() here.
+  // @see http://drupal.org/node/1410574
+  $url = $_GET['q'];
+  if ($is_pretty_search) {
+    $url = $req_uri;
+  }
+  $attributes['href'] = url($url, array('query' => $query));
+  return '<a' . drupal_attributes($attributes) . '>' . check_plain($text) . '</a>';
+}
+
 function osha_frontend_node_bundle($row) {
     if (!empty($row->_entity_properties['entity object']->type)) {
         return $row->_entity_properties['entity object']->type;

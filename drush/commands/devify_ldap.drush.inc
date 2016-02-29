@@ -24,34 +24,39 @@ function devify_ldap_drush_command() {
  * Executes the build commands.
  */
 function _drush_devify_ldap() {
-  print 'Devify Solr Server';
-  variable_set('ldap_servers_encryption' , LDAP_SERVERS_ENC_TYPE_CLEARTEXT);
+  drush_log('Devify Solr Server', 'success');
+
   $ldap_read = drush_get_option('ldap-read');
   $ldap_write = drush_get_option('ldap-write');
 
-  $ldap_read = array_merge($ldap_read, array('sid' => 'osha', 'name' => 'osha-ldap'));
-  $read_values = _devify_ldap_get_server_values($ldap_read);
-  $ldap_write = array_merge($ldap_write, array('sid' => 'osha-write', 'name' => 'osha-write'));
-  $write_values = _devify_ldap_get_server_values($ldap_write);
+  if (!empty($ldap_read)) {
+    $ldap_read = array_merge($ldap_read, array('sid' => 'osha', 'name' => 'osha-ldap'));
+    $read_values = _devify_ldap_get_server_values($ldap_read);
+    $ldap_write = array_merge($ldap_write, array('sid' => 'osha-write', 'name' => 'osha-write'));
+    $write_values = _devify_ldap_get_server_values($ldap_write);
 
-  db_delete('ldap_servers')->execute();
-  $result = drupal_write_record('ldap_servers', $read_values);
-  if (!empty($result)) {
-    drush_log(dt('Ldap read devified!'), 'success');
+    db_delete('ldap_servers')->execute();
+    variable_set('ldap_servers_encryption' , LDAP_SERVERS_ENC_TYPE_CLEARTEXT);
+    $result = drupal_write_record('ldap_servers', $read_values);
+    if (!empty($result)) {
+      drush_log(dt('Ldap read devified!'), 'success');
+    }
+    else {
+      drush_log(dt('Error saving ldap read server!'), 'error');
+    }
+    $result = drupal_write_record('ldap_servers', $write_values);
+    if (!empty($result)) {
+      drush_log(dt('Ldap write devified!'), 'success');
+    }
+    else {
+      drush_log(dt('Error saving ldap write server!'), 'error');
+    }
+
+    ldap_servers_cache_clear();
   }
   else {
-    drush_log(dt('Error saving ldap read server!'), 'error');
+    drush_log('No LDAP config found in config.json - Keeping existing configuration.', 'success');
   }
-
-  $result = drupal_write_record('ldap_servers', $write_values);
-  if (!empty($result)) {
-    drush_log(dt('Ldap write devified!'), 'success');
-  }
-  else {
-    drush_log(dt('Error saving ldap write server!'), 'error');
-  }
-
-  ldap_servers_cache_clear();
 }
 
 function _devify_ldap_get_server_values($ldap_read) {

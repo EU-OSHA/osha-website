@@ -30,7 +30,7 @@
                         types.push($(this).val());
                     });
                     if (types.length) {
-                        uri += '/' + 'tags_' + types.join('_');
+                        uri += '/' + 'type_' + types.join('_');
                     }
                     var url = Drupal.settings.basePath + Drupal.settings.pathPrefix;
                     url += 'tools-and-publications/publications';

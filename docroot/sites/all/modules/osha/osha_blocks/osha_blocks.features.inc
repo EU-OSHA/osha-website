@@ -5,15 +5,6 @@
  */
 
 /**
- * Implements hook_default_blockgroups().
- */
-function osha_blocks_default_blockgroups() {
-  return array(
-    'related' => 'Related',
-  );
-}
-
-/**
  * Implements hook_ctools_plugin_api().
  */
 function osha_blocks_ctools_plugin_api($module = NULL, $api = NULL) {

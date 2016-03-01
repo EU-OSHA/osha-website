@@ -1,8 +1,8 @@
 <?php
 
 function osha_publication_menu_publications_form($form, $form_state) {
-  drupal_set_title(t('Publications'));
   global $language;
+  drupal_set_title(t('Publications'));
   $text = osha_publication_req_param($form_state, 'text');
   $sort = osha_publication_req_param($form_state, 'sort_by', 'search_api_relevance');
   $direction = osha_publication_req_param($form_state, 'direction', 'desc');
@@ -82,6 +82,9 @@ function osha_publication_menu_publications_form($form, $form_state) {
   $form['#attached']['js'] = array(
     drupal_get_path('module', 'osha_publication') . '/js/search-auto-submit.js',
   );
+
+  $get_params = array('text', 'sort_by', 'direction');
+  drupal_add_js(array('osha_publication' => array('get_params' => $get_params)), 'setting');
 
   return $form;
 }
@@ -209,7 +212,7 @@ function osha_publication_menu_publications_search_native($form_state) {
   foreach($nodes as $node) {
     $node->filter_languages = $languages;
   }
-  $pager_params = array('languages' => $languages);
+  $pager_params = array();
   if ($is_search) {
     $pager_params['text'] = $text;
   }
@@ -217,9 +220,7 @@ function osha_publication_menu_publications_search_native($form_state) {
     $pager_params['sort_by'] = $sort;
     $pager_params['direction'] = $direction;
   }
-  if (!empty($tags)) {
-    $pager_params['tags'] = $tags;
-  }
+
   $ret = array(
     '#nids' => $nids,
     '#prefix' => '<h2 class="h4-title">' . t('Publications available') . '</h2>',
@@ -304,8 +305,7 @@ function osha_publication_menu_publications_search_related($form_state, $native_
   foreach($nodes as $node) {
     $node->filter_languages = $languages;
   }
-  $languages = osha_publication_req_param($form_state, 'languages', array());
-  $pager_params = array('languages' => $languages);
+  $pager_params = array();
   if ($is_search) {
     $pager_params['text'] = $text;
   }
@@ -313,12 +313,7 @@ function osha_publication_menu_publications_search_related($form_state, $native_
     $pager_params['sort_by'] = $sort;
     $pager_params['direction'] = $direction;
   }
-  if (!empty($tags_ids)) {
-    $pager_params['tags'] = $tags_ids;
-  }
-  if (!empty($publication_type_ids)) {
-    $pager_params['publication_type'] = $publication_type_ids;
-  }
+
   $ret = array(
     '#prefix' => '<h4>' . t('Other relevant publications in English') . '</h4>',
     'results-related' => node_view_multiple($nodes, 'osha_search_teaser', 0, $language->language),

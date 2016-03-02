@@ -1,0 +1,10 @@
+<?php
+
+/**
+ * Delete blockgroup related and revert osha_blocks.
+ */
+function osha_blocks_update_7001() {
+  $blockgroup = blockgroup_load('related');
+  blockgroup_delete($blockgroup);
+  features_revert_module('osha_blocks');
+}

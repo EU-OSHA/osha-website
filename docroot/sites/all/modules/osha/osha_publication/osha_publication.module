@@ -32,11 +32,44 @@ function osha_publication_listing_page() {
  * Implements hook_url_inbound_alter().
  */
 function osha_publication_url_inbound_alter(&$path, $original_path, $path_language) {
+  global $language_url;
+  $args = arg();
+
+  // MC-175 - publication search pretty path.
+  // break down in filters the publication search path.
+  if (strpos($path, 'tools-and-publications/publications') >= 0) {
+    $menu_item = menu_get_item();
+    if ($menu_item['page_callback'] == 'osha_publication_listing_page') {
+      $path = 'tools-and-publications/publications';
+      if (count($args) > 2) {
+        $search_args = $args;
+        array_shift($search_args);
+        array_shift($search_args);
+        foreach ($search_args as $search_filter) {
+          if (strpos($search_filter, 'l_') === 0) {
+            $lang_filter = explode('_', $search_filter);
+            array_shift($lang_filter);
+            $_GET['languages'] = drupal_map_assoc($lang_filter);
+          }
+          elseif (strpos($search_filter, 'tags_') === 0) {
+            $tags_filter = explode('_', $search_filter);
+            array_shift($tags_filter);
+            $_GET['tags'] = drupal_map_assoc($tags_filter);
+          }
+          elseif (strpos($search_filter, 'type_') === 0) {
+            $type_filter = explode('_', $search_filter);
+            array_shift($type_filter);
+            $_GET['publication_type'] = drupal_map_assoc($type_filter);
+          }
+        }
+      }
+    }
+  }
+
+
   // For publications, the default url should serve the file.
   // if the path ends with /view than should serve the node.
   // see CW-1072
-  $args = arg();
-  global $language_url;
   $orig_path_alias = drupal_lookup_path('alias', $original_path);
   $orig_path_source = drupal_lookup_path('source', $original_path);
   if (end($args) == 'view') {

@@ -28,6 +28,12 @@ function osha_blocks_block_info() {
     'info' => t('Translations extra links'),
     'cache' => DRUPAL_CACHE_PER_PAGE,
   );
+
+  $blocks['osha_block_group_related'] = array(
+    'info' => t('Related content'),
+    'cache' => DRUPAL_CACHE_PER_PAGE,
+  );
+
   return $blocks;
 }
 
@@ -57,6 +63,11 @@ function osha_blocks_block_view($delta='') {
       $block['subject'] = t('EU-OSHA Translation message');
       $block['content'] = osha_translation_alternatives_message_block_view();
       break;
+
+    case 'osha_block_group_related':
+      $block['subject'] = t('Related');
+      $block['content'] = osha_block_related_content_blocks_view();
+      break;
   }
 
   return $block;
@@ -72,6 +83,12 @@ function oshwiki_featured_articles_block_view() {
   return theme('oshwiki_featured_articles', array('tagged_wikis' => $tagged_wikis));
 }
 
+function osha_block_related_content_blocks_view() {
+  $block1 = block_load('views', 'related_content-block_2');
+  $block2 = block_load('views', 'related_content-block_1');
+  $block3 = block_load('views', 'related_events-block_6');
+  return render(_block_get_renderable_array(_block_render_blocks(array($block1, $block2, $block3))));
+}
 
 function osha_archived_content_block_view() {
   // CW-1109: Mark node as outdated

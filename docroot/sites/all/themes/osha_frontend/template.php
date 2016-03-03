@@ -484,9 +484,7 @@ function osha_frontend_pager_link($variables) {
   $is_pretty_search = FALSE;
   if (strpos($req_uri, 'tools-and-publications/publications') >= 0) {
     $is_pretty_search = TRUE;
-    if (preg_match('/^' . $language->language . '\//', $req_uri)) {
-      $req_uri = str_replace($language->language . '/', '', $req_uri);
-    }
+    $req_uri = preg_replace('/^' . $language->language . '\//', '', $req_uri);
   }
 
   $query = array();

@@ -114,10 +114,19 @@ function _drush_devify() {
     variable_set($name, $value);
   }
 
+  $env = 'development';
+  if (!empty($variables['environment'])) {
+    $env = $variables['environment'];
+  }
+
   // Sanitize database.
   // @see sql_drush_sql_sync_sanitize() to add your sanitize queries.
-  $new_password = drush_get_option('sanitize-password', 'password');
-  drush_invoke('sql-sanitize', array('sanitize-password' => $new_password));
+  // Do not sanitize staging.
+  if (!in_array($env, array('staging'))) {
+    $new_password = drush_get_option('sanitize-password', 'password');
+    drush_invoke('sql-sanitize', array('sanitize-password' => $new_password));
+  }
+
 
   drush_log(dt('Devified!'), 'success');
 }

@@ -131,8 +131,8 @@ function osha_form_menu_overview_form_alter(&$form, &$form_state) {
     // act upon children of the form that are menu items (have 'mlid' in the key name)
     if(preg_match('/mlid/', $form_child_key)) {
       if(preg_match('@^node/(\d+)$@', $form[$form_child_key]['#item']['link_path'], $matches)) {
-        $node = node_load((int) $matches[1]);
-        if($node && $node->status == NODE_NOT_PUBLISHED) {
+        $status = _osha_get_node_status($matches[1]);
+        if ($status == NODE_NOT_PUBLISHED) {
           $form[$form_child_key]['#attributes']['class'][] = 'menu-node-unpublished';
         }
       }
@@ -144,17 +144,34 @@ function osha_form_menu_overview_form_alter(&$form, &$form_state) {
  * Implements template_preprocess().
  */
 function osha_preprocess_menu_link(&$variables) {
-  $element = &$variables['element'];
-  // Add a class to menu links that link to unpublished nodes.
-  if (preg_match('@^node/(\d+)$@', $element['#href'], $matches)) {
-    $node = node_load((int) $matches[1]);
-    if ($node && $node->status == NODE_NOT_PUBLISHED) {
-      if (empty($element['#attributes']['class'])){
-        $element['#attributes']['class'] = array();
+  if (user_access('view all unpublished content')) {
+    $element = &$variables['element'];
+    // Add a class to menu links that link to unpublished nodes.
+    if (preg_match('@^node/(\d+)$@', $element['#href'], $matches)) {
+      $status = _osha_get_node_status($matches[1]);
+      if ($status == NODE_NOT_PUBLISHED) {
+        if (empty($element['#attributes']['class'])){
+          $element['#attributes']['class'] = array();
+        }
+        $element['#attributes']['class'][] = 'menu-node-unpublished';
       }
-      $element['#attributes']['class'][] = 'menu-node-unpublished';
     }
   }
+}
+
+/**
+ * Gets the node status based on nid.
+ */
+function _osha_get_node_status($nid) {
+  $statuses = &drupal_static(__FUNCTION__);
+  if (!isset($statuses[$nid])) {
+    $statuses[$nid] = db_select('node')
+      ->fields('node', array('status'))
+      ->condition('nid', $nid)
+      ->execute()
+      ->fetchField();
+  }
+  return $statuses[$nid];
 }
 
 /**

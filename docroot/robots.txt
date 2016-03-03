@@ -17,6 +17,8 @@ User-agent: *
 Crawl-delay: 10
 
 # Directories
+# Disallow on test/dev environments
+Disallow: /
 Disallow: /includes/
 Disallow: /misc/
 Disallow: /modules/

@@ -73,6 +73,15 @@ function osha_tmgmt_menu() {
     'file path' => drupal_get_path('module', 'i18n_string'),
   );
 
+  $items['node/%node/retranslate'] = array(
+    'title' => 'Retranslate',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('osha_tmgmt_retranslate_ui_form',1),
+    'access arguments' => array('translate interface'),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'osha_tmgmt.retranslate.inc',
+  );
+
 
   return $items;
 }
@@ -220,6 +229,13 @@ function osha_tmgmt_schema_alter(&$schema) {
       'unsigned' => FALSE,
       'default' => 1,
       'description' => 'FALSE if retranslation, TRUE if full-translation.',
+    );
+    $schema['tmgmt_job_item']['fields']['retranslation_data'] = array(
+      'description' => 'Store data for retranslation.',
+      'type' => 'text',
+      'not null' => TRUE,
+      'size' => 'big',
+      'serialize' => TRUE,
     );
   }
   if (isset($schema['tmgmt_job'])) {

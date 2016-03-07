@@ -1,0 +1,9 @@
+[name^="retranslation_elements"] {
+    float: left;
+    margin-right: 10px;
+}
+
+.form-item-retranslation-elements .form-item.form-type-checkbox {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}

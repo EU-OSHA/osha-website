@@ -2,6 +2,63 @@
 
 define("ID_PREFIX", "tmgmt-");
 
+
+function osha_tmgmt_retranslate_ui_form($form, &$form_state, $node) {
+  $form = array();
+  $wrapper = entity_metadata_wrapper('node', $node, array('langcode' => 'en'));
+  $body_en = $wrapper->body->value()['value'];
+  $elem_ids = OshaTMGMTRetranslate::getHTMLStructure($body_en);
+  $document = OshaTMGMTRetranslate::getDOMDocument($body_en);
+  $form['#node'] = $node;
+  $options = array();
+  foreach ($elem_ids as $elem_id => $element_tag) {
+    $options[$elem_id] = theme('html_tag', array('element' => array('#tag' => $element_tag, '#value' => $document->saveHTML($document->getElementById($elem_id)))));
+  }
+  $form['retranslation_elements'] = array(
+    '#type' => 'checkboxes',
+    '#title' => 'Retranslation elements',
+    '#options' => $options,
+  );
+  $form['#attached']['css'] = array(
+    drupal_get_path('module', 'osha_tmgmt') . '/css/retranslation.css',
+  );
+  $form['submit'] = array(
+    '#value' => 'Add to cart',
+    '#type' => 'submit',
+  );
+  return $form;
+}
+
+function osha_tmgmt_retranslate_ui_form_submit(&$form, &$form_state, $node) {
+  $plugin = 'plugin';
+  $item_type = 'node';
+  $item_id = $form['#node']->nid;
+
+//  $job_item = tmgmt_ui_cart_get()->addJobItem($plugin, $item_type, $item_id);
+//  if (empty($job_item)) {
+//    drupal_set_message('Content was not added to cart');
+//    return;
+//  }
+
+  // Add retranslation data.
+  $elements = $form_state['values']['retranslation_elements'];
+  $elements = array_filter($elements);
+
+//
+//  $wrapper = entity_metadata_wrapper('node', $node, array('langcode' => 'en'));
+//  $body_en = $wrapper->body->value()['value'];
+//  $elem_ids = OshaTMGMTRetranslate::getHTMLStructure($body_en);
+//  $document = OshaTMGMTRetranslate::getDOMDocument($body_en);
+//  $form['#node'] = $node;
+//  $options = array();
+//  foreach ($elem_ids as $elem_id => $element_tag) {
+//    $options[$elem_id] = theme('html_tag', array('element' => array('#tag' => $element_tag, '#value' => $document->saveHTML($document->getElementById($elem_id)))));
+//  }
+
+
+  drupal_set_message('Content source was added into the <a href="@url">cart</a>.', array('@url' => url('admin/tmgmt/cart')));
+}
+
 class OshaTMGMTRetranslate {
 
   /**

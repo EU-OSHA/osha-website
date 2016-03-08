@@ -149,7 +149,15 @@ function osha_publication_menu_publications_search_native($form_state) {
   $tags_ids = array();
   if (!empty($tags)) {
     foreach ($tags as $tag) {
-      $tags_ids[] = $tag;
+      if (is_int($tag)) {
+        $tags_ids[] = $tag;
+      }
+      else {
+        $tid = _osha_publication_get_tag_by_code($tag);
+        if (!empty($tid)) {
+          $tags_ids[] = $tid;
+        }
+      }
     }
   }
   $publication_type_ids = array();
@@ -258,7 +266,15 @@ function osha_publication_menu_publications_search_related($form_state, $native_
   $tags_ids = array();
   if (!empty($tags)) {
     foreach ($tags as $tag) {
-      $tags_ids[] = $tag;
+      if (is_int($tag)) {
+        $tags_ids[] = $tag;
+      }
+      else {
+        $tid = _osha_publication_get_tag_by_code($tag);
+        if (!empty($tid)) {
+          $tags_ids[] = $tid;
+        }
+      }
     }
   }
   $publication_type_ids = array();
@@ -367,8 +383,30 @@ function _osha_publication_tags_options_list() {
   $terms = taxonomy_term_load_multiple($tids);
   if (!empty($terms)) {
     foreach ($terms as $key => $term) {
-      $return[$term->tid] = $term->name;
+      if (!empty($term->field_tags_code[LANGUAGE_NONE][0]['value'])) {
+        $return[$term->field_tags_code[LANGUAGE_NONE][0]['value']] = $term->name;
+      }
+      else {
+        $return[$term->tid] = $term->name;
+      }
     }
   }
   return $return;
+}
+
+/**
+ * Get tag tid by tag code.
+ */
+function _osha_publication_get_tag_by_code($code) {
+  $tid = FALSE;
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'taxonomy_term')
+    ->fieldCondition('field_tags_code', 'value', $code, '=')
+    ->range(0, 1);
+  $result = $query->execute();
+
+  if (isset($result['taxonomy_term'])) {
+    $tid = current(array_keys($result['taxonomy_term']));
+  }
+  return $tid;
 }

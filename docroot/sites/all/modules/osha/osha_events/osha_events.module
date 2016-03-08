@@ -9,7 +9,6 @@ include_once 'osha_events.features.inc';
 /**
  * Implements hook_form_alter().
  */
-
 function osha_events_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'events_node_form') {
 

@@ -18,7 +18,7 @@
                         tags.push($(this).val());
                     });
                     if (tags.length) {
-                        uri += '/' + 'tags_' + tags.join('_');
+                        uri += '/' + 'tags,' + tags.join(',');
                     }
                     $form.find('[name^=languages]:checked').each(function(){
                         languages.push($(this).val());

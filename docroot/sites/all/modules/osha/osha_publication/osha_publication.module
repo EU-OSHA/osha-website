@@ -51,8 +51,8 @@ function osha_publication_url_inbound_alter(&$path, $original_path, $path_langua
             array_shift($lang_filter);
             $_GET['languages'] = drupal_map_assoc($lang_filter);
           }
-          elseif (strpos($search_filter, 'tags,') === 0) {
-            $tags_filter = explode(',', $search_filter);
+          elseif (strpos($search_filter, 'tags-') === 0) {
+            $tags_filter = explode('-', $search_filter);
             array_shift($tags_filter);
             $_GET['tags'] = drupal_map_assoc($tags_filter);
           }

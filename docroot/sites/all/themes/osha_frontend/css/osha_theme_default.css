@@ -877,20 +877,16 @@ span.date-display-single{
 }
 
 .node-publication .field-name-field-publication-bookshop-id{
-	float:right;
-	margin-top: -10px;
-	padding-right: 1em;
+	background-color: #e9edf6;
+	padding-top: 1em;
+	clear: both;
 }
 
 .node-publication .field-name-field-publication-bookshop-id span{
 	color: #003399;
     font-size: 0.8em;
     font-weight: 600;
-    margin-left: -13em;
-    margin-top: -1px;
-    padding-top: 18px;
-    position: relative;
-  	display: block;
+    padding-left: 7px;
 }
 
 
@@ -899,10 +895,8 @@ span.date-display-single{
 }
 
 .node-publication .field-name-field-publication-bookshop-id a{
-	  clear: both;
-	  float: none;
-	  position: absolute;
-	  top: 4em;
+	    position: absolute;
+    margin-top: -1em;
 }
 
 .node-publication .field-name-field-publication-bookshop-id a{
@@ -911,11 +905,11 @@ span.date-display-single{
 
 .node-publication .field-name-field-publication-bookshop-id span img{
 	background: url("../images/summary_arrow.png") no-repeat scroll 80% 27% rgba(0, 0, 0, 0);
-	margin-right: -3em;
-	margin-top: -5px;
-	right:0em;
-	padding-right: 7em;
-	position:absolute;
+	margin-right: 0em;
+    margin-top: 10px;
+    right: 0em;
+    padding-right: 7em;
+    padding-left: 1em;
 }
 
 .pager .pager-current{
@@ -1090,7 +1084,6 @@ span.date-display-single{
 	font-family:Arial;
 	color:#000000;
 	line-height: 1.5em;
-	min-height: 218px;
 }
 
 
@@ -1113,8 +1106,8 @@ span.date-display-single{
 	font-weight: bold;
 	height: auto;
 	padding: 0.5em;
-	width: 97.3%;
 	min-height: 47px;
+	clear: both;
 }
 
 .node-publication.view-mode-full #related-publications{
@@ -1130,11 +1123,6 @@ span.date-display-single{
 	padding-right:0.5em;
 }
 
-.node-publication.view-mode-full .field-name-field-file .field-items .field-item{
-	 width: 47%;
-}
-
-
 .node-publication .field-name-field-file a{
 	font-family:arial!important;
     font-weight: bold;
@@ -1146,7 +1134,6 @@ span.date-display-single{
 
 .node-publication.view-mode-full .field-name-field-related-publications{
 	margin-left: 0em;
-    width: 100%;
 	margin-top:0em;
 }
 
@@ -1318,9 +1305,9 @@ span.date-display-single{
 	font-weight: bold;
 	font-size: 0.8em;
 	border-bottom: 0px!important;
-	float: left;
 	padding:0.5em;
 	margin-top:0.4em;
+	display: block;
 }
 
 /*END PUBLICATIONS twin_publications*/

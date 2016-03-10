@@ -60,7 +60,7 @@ function osha_content_views_default_views() {
   $handler->display->display_options['fields']['title_field']['relationship'] = 'nid';
   $handler->display->display_options['fields']['title_field']['label'] = '';
   $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['title_field']['type'] = 'title_linked';
+  $handler->display->display_options['fields']['title_field']['type'] = 'publication_title_linked';
   $handler->display->display_options['fields']['title_field']['settings'] = array(
     'title_style' => 'div',
     'title_link' => 'content',
@@ -987,7 +987,7 @@ function osha_content_views_default_views() {
   $handler->display->display_options['relationships']['reverse_field_tags_node']['relationship'] = 'field_tags_tid';
   $handler->display->display_options['relationships']['reverse_field_tags_node']['required'] = TRUE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Start date */
+  /* Field: Content: Date */
   $handler->display->display_options['fields']['field_start_date']['id'] = 'field_start_date';
   $handler->display->display_options['fields']['field_start_date']['table'] = 'field_data_field_start_date';
   $handler->display->display_options['fields']['field_start_date']['field'] = 'field_start_date';
@@ -1023,7 +1023,7 @@ function osha_content_views_default_views() {
   $handler->display->display_options['fields']['type']['exclude'] = TRUE;
   $handler->display->display_options['fields']['type']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Content: Start date -  start date (field_start_date) */
+  /* Sort criterion: Content: Date -  start date (field_start_date) */
   $handler->display->display_options['sorts']['field_start_date_value']['id'] = 'field_start_date_value';
   $handler->display->display_options['sorts']['field_start_date_value']['table'] = 'field_data_field_start_date';
   $handler->display->display_options['sorts']['field_start_date_value']['field'] = 'field_start_date_value';
@@ -1082,7 +1082,7 @@ function osha_content_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'events' => 'events',
   );
-  /* Filter criterion: Content: Start date - end date (field_start_date:value2) */
+  /* Filter criterion: Content: Date - end date (field_start_date:value2) */
   $handler->display->display_options['filters']['field_start_date_value2']['id'] = 'field_start_date_value2';
   $handler->display->display_options['filters']['field_start_date_value2']['table'] = 'field_data_field_start_date';
   $handler->display->display_options['filters']['field_start_date_value2']['field'] = 'field_start_date_value2';

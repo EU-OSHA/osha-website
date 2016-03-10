@@ -1910,6 +1910,9 @@ a {
 	margin-top:0px!important;
 }
 
+.node-publication.view-mode-full .field-name-body p{
+	min-height: auto;
+}
 
 
 }

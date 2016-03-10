@@ -1085,12 +1085,12 @@ span.date-display-single{
     padding-right: 1em;
 }
 
-.node-publication.view-mode-full  .field-name-body p{
+.node-publication.view-mode-full .field-name-body p{
 	margin-top:0;
 	font-family:Arial;
 	color:#000000;
 	line-height: 1.5em;
-
+	min-height: 218px;
 }
 
 
@@ -1112,9 +1112,8 @@ span.date-display-single{
 	color: #7c7d81;
 	font-weight: bold;
 	height: auto;
-	margin-left: 11.8em;
 	padding: 0.5em;
-	width: 76.9%;
+	width: 97.3%;
 	min-height: 47px;
 }
 
@@ -1270,9 +1269,9 @@ span.date-display-single{
 }
 
 .node-publication .group-summary-resources{
-	margin-left: 12em !important;
-	width: 78% !important;
+	width: 100% !important;
 	margin-top: 1em;
+	margin-bottom: 1em;
 }
 
 

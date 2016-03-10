@@ -1,0 +1,5 @@
+<?php
+
+function osha_content_update_7001() {
+  features_revert_module('osha_content');
+}

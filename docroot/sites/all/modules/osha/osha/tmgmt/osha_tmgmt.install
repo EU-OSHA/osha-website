@@ -611,7 +611,7 @@ function osha_tmgmt_update_7018() {
     $field = array(
       'description' => 'Store data for retranslation.',
       'type' => 'text',
-      'not null' => TRUE,
+      'default' => NULL,
       'size' => 'big',
       'serialize' => TRUE,
     );

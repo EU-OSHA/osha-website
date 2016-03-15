@@ -1,9 +1,11 @@
-[name^="retranslation_elements"] {
+#osha-tmgmt-retranslate-ui-form [type=checkbox] {
     float: left;
     margin-right: 10px;
+    position: relative;
+    z-index: 999;
 }
 
-.form-item-retranslation-elements .form-item.form-type-checkbox {
+#osha-tmgmt-retranslate-ui-form .form-item.form-type-checkbox {
     border-bottom: 1px solid #ddd;
     padding-bottom: 10px;
 }

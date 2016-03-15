@@ -73,6 +73,15 @@ function osha_tmgmt_menu() {
     'file path' => drupal_get_path('module', 'i18n_string'),
   );
 
+  $items['node/%node/retranslate'] = array(
+    'title' => 'Retranslate',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('osha_tmgmt_retranslate_ui_form',1),
+    'access arguments' => array('translate interface'),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'osha_tmgmt.retranslate.inc',
+  );
+
 
   return $items;
 }
@@ -220,6 +229,13 @@ function osha_tmgmt_schema_alter(&$schema) {
       'unsigned' => FALSE,
       'default' => 1,
       'description' => 'FALSE if retranslation, TRUE if full-translation.',
+    );
+    $schema['tmgmt_job_item']['fields']['retranslation_data'] = array(
+      'description' => 'Store data for retranslation.',
+      'type' => 'text',
+      'default' => NULL,
+      'size' => 'big',
+      'serialize' => TRUE,
     );
   }
   if (isset($schema['tmgmt_job'])) {
@@ -746,6 +762,10 @@ function osha_tmgmt_tmgmt_source_translation_structure($job_item,
                                                        $field, $instance,
                                                        $items) {
   $structure = array();
+  $retranslation_data = array();
+  if (!empty($job_item->retranslation_data)) {
+    $retranslation_data = unserialize($job_item->retranslation_data);
+  }
   if (!empty($items)) {
     $field_name = $instance['field_name'];
     $structure['#label'] = check_plain($instance['label']);
@@ -798,12 +818,33 @@ function osha_tmgmt_tmgmt_source_translation_structure($job_item,
         case 'text_long':
         case 'text_with_summary':
           if ($job_item->item_type == 'node' && empty($job_item->is_full_translation)) {
-            // Retranslation.
-            $text = OshaTMGMTRetranslate::get_text_to_retranslate(
-              $job_item->item_id, $entity->type,
-              $job_item->source_language, $job_item->target_language,
-              $field_name
-            );
+            if (!empty($retranslation_data)) {
+              // Re-translation data was selected.
+              if (!empty($retranslation_data[$field_name])) {
+                $revision = workbench_moderation_node_current_load($entity);
+                if ($field['type'] == 'text_with_summary') {
+                  // Get the text from rev body, based on selected tmgmt ids.
+                  $source_text = OshaTMGMTRetranslate::get_field_value($entity->nid, $entity->type, $revision->vid, $job_item->source_language, $field_name);
+                  $text = OshaTMGMTRetranslate::getTextByIds($source_text, $retranslation_data[$field_name]);
+                }
+                else {
+                  // get the text as field value from curr rev.
+                  $text = OshaTMGMTRetranslate::get_field_value($entity->nid, $entity->type, $revision->vid, $job_item->source_language, $field_name);
+                }
+              }
+              else {
+                // This field was not selected for re-translation.
+                $text = NULL;
+              }
+            }
+            else {
+              // auto - retranslation
+              $text = OshaTMGMTRetranslate::get_text_to_retranslate(
+                $job_item->item_id, $entity->type,
+                $job_item->source_language, $job_item->target_language,
+                $field_name
+              );
+            }
           } else {
             // This could be a taxonomy term or full translation was requested.
             $text = $value['value'];
@@ -1174,10 +1215,6 @@ function osha_tmgmt_form_tmgmt_entity_ui_translate_form_alter(&$form, &$form_sta
       'operation' => 'retranslation'
     ),
   );
-  if (!empty($form['top_actions']['add_to_cart']['#disabled'])) {
-    // if already in cart
-    $form['top_actions']['add_to_cart_retranslate']['#disabled'] = $form['top_actions']['add_to_cart']['#disabled'];
-  }
 
   // add re-translate validation button
   $form['top_actions']['retranslate_validate'] = array(
@@ -1188,6 +1225,20 @@ function osha_tmgmt_form_tmgmt_entity_ui_translate_form_alter(&$form, &$form_sta
     '#prefix' => '<div>',
     '#suffix' => '</div>',
   );
+
+  if (!empty($form['top_actions']['add_to_cart']['#disabled'])) {
+    // if already in cart
+    $form['top_actions']['add_to_cart_retranslate']['#disabled'] = $form['top_actions']['add_to_cart']['#disabled'];
+    $form['top_actions']['retranslate_validate']['#disabled'] = $form['top_actions']['add_to_cart']['#disabled'];
+  }
+
+  // For nodes, re-translation interface.
+  if (!empty($form_state['entity']->nid)) {
+    $form['top_actions']['select_retranslation'] = array(
+      '#markup' => l('Select re-translation', 'node/' . $form_state['entity']->nid . '/retranslate', array('attributes' => array('class' => 'button'))),
+    );
+  }
+
 
   // Change from table select to table.
   $form['#validate'] = array();
@@ -2148,7 +2199,8 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
             // the cart. Note: addItem saves the job item in the database
             $new_job_item = $job->addItem(
               $job_item->plugin, $job_item->item_type, $job_item->item_id,
-              $source_language, $target_language, $job_item->is_full_translation
+              $source_language, $target_language, $job_item->is_full_translation,
+              $job_item->retranslation_data
             );
             if ($new_job_item->plugin == 'node') {
               $new_job_item->plugin = 'entity';

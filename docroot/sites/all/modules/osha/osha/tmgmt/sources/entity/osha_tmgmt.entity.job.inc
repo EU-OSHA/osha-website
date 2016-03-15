@@ -74,7 +74,8 @@ class OshaTMGMTJob extends TMGMTJob {
    */
   public function addItem($plugin, $item_type, $item_id,
                           $source_language = NULL, $target_language = NULL,
-                          $is_full_translation = FALSE) {
+                          $is_full_translation = FALSE,
+                          $retranslation_data = NULL) {
 
     $transaction = db_transaction();
     $is_new = FALSE;
@@ -89,6 +90,7 @@ class OshaTMGMTJob extends TMGMTJob {
       $node = node_load($item_id);
       $current_rev = workbench_moderation_node_current_load($node);
       $item->vid = $current_rev->vid;
+      $item->retranslation_data = $retranslation_data;
     }
     $item->source_language = $source_language;
     $item->target_language = $target_language;

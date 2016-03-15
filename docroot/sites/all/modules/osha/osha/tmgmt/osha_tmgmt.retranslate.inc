@@ -7,6 +7,7 @@ function osha_tmgmt_retranslate_ui_form($form, &$form_state, $node) {
   $form = array();
   $form['#node'] = $node;
   $form['title']['#markup'] = theme('html_tag', array('element' => array('#tag' => 'h1', '#value' => 'Re-translation for ' . $node->title)));
+  $form['desc']['#markup'] = 'Choose the fields and text that you want to re-translate';
 
   $trans_lang = array_keys($node->translations->data);
   unset($trans_lang['en']);
@@ -94,7 +95,7 @@ function osha_tmgmt_retranslate_ui_form($form, &$form_state, $node) {
             $document = OshaTMGMTRetranslate::getDOMDocument($value);
             $options = array();
             foreach ($elem_ids as $elem_id => $element_tag) {
-              $options[$elem_id] = theme('html_tag', array('element' => array('#tag' => $element_tag, '#value' => $document->saveHTML($document->getElementById($elem_id)))));
+              $options[$elem_id] = $document->saveHTML($document->getElementById($elem_id));
             }
             $form[$field_name] = array(
               '#type' => 'checkboxes',

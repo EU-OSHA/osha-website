@@ -1232,10 +1232,10 @@ function osha_tmgmt_form_tmgmt_entity_ui_translate_form_alter(&$form, &$form_sta
     $form['top_actions']['retranslate_validate']['#disabled'] = $form['top_actions']['add_to_cart']['#disabled'];
   }
 
-  if (empty($form['top_actions']['add_to_cart']['#disabled'])
-    && !empty($form_state['entity']->nid)) {
+  // For nodes, re-translation interface.
+  if (!empty($form_state['entity']->nid)) {
     $form['top_actions']['select_retranslation'] = array(
-      '#markup' => l('Select retranslation', 'node/' . $form_state['entity']->nid . '/retranslate', array('attributes' => array('class' => 'button'))),
+      '#markup' => l('Select re-translation', 'node/' . $form_state['entity']->nid . '/retranslate', array('attributes' => array('class' => 'button'))),
     );
   }
 

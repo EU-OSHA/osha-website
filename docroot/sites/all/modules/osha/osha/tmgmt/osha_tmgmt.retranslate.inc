@@ -94,8 +94,13 @@ function osha_tmgmt_retranslate_ui_form($form, &$form_state, $node) {
             $elem_ids = OshaTMGMTRetranslate::getHTMLStructure($value);
             $document = OshaTMGMTRetranslate::getDOMDocument($value);
             $options = array();
+            $xpath = new DOMXPath($document);
             foreach ($elem_ids as $elem_id => $element_tag) {
-              $options[$elem_id] = $document->saveHTML($document->getElementById($elem_id));
+              $dom_list = $xpath->query("//*[@id='" . $elem_id . "']");
+              foreach ($dom_list as $dom_elem) {
+                $options[$elem_id] = $document->saveHTML($dom_elem);
+                break;
+              }
             }
             $form[$field_name] = array(
               '#type' => 'checkboxes',

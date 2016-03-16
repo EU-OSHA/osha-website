@@ -16,15 +16,28 @@ function osha_tmgmt_retranslate_ui_form($form, &$form_state, $node) {
     drupal_goto('node/' . $node->nid . '/translate');
   }
 
+  // Validate retranslation.
   $messages = array();
   $valid_languages = array();
   $invalid_languages = array();
   OshaTMGMTRetranslate::validate_can_retranslate($node, $messages, $valid_languages, $invalid_languages);
-  if (!empty($invalid_languages)) {
-    foreach ($messages['error'] as $message) {
-      drupal_set_message($message, 'error');
-      drupal_goto('node/' . $node->nid . '/translate');
+  foreach ($messages as $severity => $message_list) {
+    foreach ($message_list as $message) {
+      drupal_set_message($message, $severity);
     }
+  }
+  if (!empty($invalid_languages)) {
+    $details = array();
+    foreach ($invalid_languages as $lang => $data) {
+      $details[$lang] = sprintf("Different HTML at id = '%s', <%s> in %s, <%s> in %s",
+        $data['id'],
+        $data[$data['source']], strtoupper($data['source']),
+        $data[$lang], strtoupper($lang));
+    }
+    if (!empty($details)) {
+      drupal_set_message('<pre>'.htmlspecialchars(print_r($details, TRUE)).'</pre>', 'warning');
+    }
+    drupal_goto('node/' . $node->nid . '/translate');
   }
 
   $plugin = 'entity';
@@ -710,9 +723,13 @@ class OshaTMGMTRetranslate {
             ));
         }
       } else {
-        // Item not found in translation, re-use the old one.
         if (!empty($old_items[$id])) {
+          // Item not found in translation, re-use the old one.
           $current_parent->appendChild($dom->importNode($old_items[$id], TRUE));
+        }
+        else if (!empty($orig_items[$id])) {
+          // if not found in old, add the english one.
+          $current_parent->appendChild($dom->importNode($orig_items[$id], TRUE));
         }
         else {
           // We don't have this tag at all, raise error.

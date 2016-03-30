@@ -2,6 +2,219 @@
 
 define("ID_PREFIX", "tmgmt-");
 
+
+function osha_tmgmt_retranslate_ui_form($form, &$form_state, $node) {
+  $form = array();
+  $form['#node'] = $node;
+  $form['title']['#markup'] = theme('html_tag', array('element' => array('#tag' => 'h1', '#value' => 'Re-translation for ' . $node->title)));
+  $form['desc']['#markup'] = 'Choose the fields and text that you want to re-translate';
+
+  $trans_lang = array_keys($node->translations->data);
+  unset($trans_lang['en']);
+  if (empty($trans_lang)) {
+    drupal_set_message('The node it is not translated so you cannot re-translate.', 'warning');
+    drupal_goto('node/' . $node->nid . '/translate');
+  }
+
+  // Validate retranslation.
+  $messages = array();
+  $valid_languages = array();
+  $invalid_languages = array();
+  OshaTMGMTRetranslate::validate_can_retranslate($node, $messages, $valid_languages, $invalid_languages);
+  foreach ($messages as $severity => $message_list) {
+    foreach ($message_list as $message) {
+      drupal_set_message($message, $severity);
+    }
+  }
+  if (!empty($invalid_languages)) {
+    $details = array();
+    foreach ($invalid_languages as $lang => $data) {
+      $details[$lang] = sprintf("Different HTML at id = '%s', <%s> in %s, <%s> in %s",
+        $data['id'],
+        $data[$data['source']], strtoupper($data['source']),
+        $data[$lang], strtoupper($lang));
+    }
+    if (!empty($details)) {
+      drupal_set_message('<pre>'.htmlspecialchars(print_r($details, TRUE)).'</pre>', 'warning');
+    }
+    drupal_goto('node/' . $node->nid . '/translate');
+  }
+
+  $plugin = 'entity';
+  $item_type = 'node';
+  $item_id = $node->nid;
+  $cart = tmgmt_ui_cart_get();
+  $in_cart = $cart->isSourceItemAdded($plugin, $item_type, $item_id);
+
+  $existing_job_items = $cart->getJobItemsFromCart();
+  $retranslation_data = array();
+  $is_retranslation = FALSE;
+  $is_full_translation = FALSE;
+  if ($in_cart) {
+    foreach ($existing_job_items as $job_item) {
+      if ($job_item->item_type == 'node'
+        && $job_item->item_id == $node->nid) {
+        $form['#job_item'] = $job_item;
+        if (!empty($job_item->retranslation_data)) {
+          $retranslation_data = unserialize($job_item->retranslation_data);
+          $is_retranslation = TRUE;
+        }
+        if (!empty($job_item->is_full_translation)) {
+          $is_full_translation = TRUE;
+        }
+      }
+    }
+    if ($is_full_translation) {
+      drupal_set_message(strtr('Content is already in <a href="@url">cart</a> as full translation.', array('@url' => url('admin/tmgmt/cart'))), 'warning');
+    }
+    else if ($is_retranslation) {
+      drupal_set_message(strtr('Content is already in <a href="@url">cart</a> as re-translation.', array('@url' => url('admin/tmgmt/cart'))), 'warning');
+    }
+  }
+
+  $current = workbench_moderation_node_current_load($node);
+  $wrapper_current = entity_metadata_wrapper('node', $current, array('langcode' => 'en'));
+  $clean_revision = OshaTMGMTRetranslate::get_latest_clean_revision($node->nid);
+
+  $fields = field_info_instances('node', $node->type);
+  $form['#fields'] = array();
+  foreach ($fields as $field_name => $field) {
+    $field_info = field_info_field($field_name);
+    if ($field_info['translatable'] && in_array($field_info['type'], array('text', 'text_with_summary', 'text_long'))) {
+      $form['#fields'][] = $field_name;
+      $value = $wrapper_current->{$field_name}->value();
+      if (!empty($value)) {
+        switch ($field_info['type']) {
+          case 'text':
+            $form[$field_name] = array(
+              '#type' => 'checkbox',
+              '#prefix' => '<label>' . $fields[$field_name]['label'] . '</label>',
+              '#title' => $value,
+            );
+            if (!empty($retranslation_data[$field_name])) {
+              $form[$field_name]['#default_value'] = TRUE;
+            }
+            else {
+              $clean_source_text = OshaTMGMTRetranslate::get_field_value($node->nid, $node->type, $clean_revision, 'en', $field_name);
+              if ($value != $clean_source_text) {
+                $form[$field_name]['#default_value'] = TRUE;
+              }
+            }
+            break;
+
+          case 'text_with_summary':
+            $value = $value['value'];
+            $elem_ids = OshaTMGMTRetranslate::getHTMLStructure($value);
+            $document = OshaTMGMTRetranslate::getDOMDocument($value);
+            $options = array();
+            $xpath = new DOMXPath($document);
+            foreach ($elem_ids as $elem_id => $element_tag) {
+              $dom_list = $xpath->query("//*[@id='" . $elem_id . "']");
+              foreach ($dom_list as $dom_elem) {
+                $options[$elem_id] = $document->saveHTML($dom_elem);
+                break;
+              }
+            }
+            $form[$field_name] = array(
+              '#type' => 'checkboxes',
+              '#title' => $fields[$field_name]['label'],
+              '#options' => $options,
+            );
+            if (!empty($retranslation_data[$field_name])) {
+              $form[$field_name]['#default_value'] = drupal_map_assoc($retranslation_data[$field_name]);
+            }
+            else {
+              $clean_source_text = OshaTMGMTRetranslate::get_field_value($node->nid, $node->type, $clean_revision, 'en', $field_name);
+              $changed_ids = OshaTMGMTRetranslate::get_changed_ids($clean_source_text, $value);
+              if (!empty($changed_ids)) {
+                $form[$field_name]['#default_value'] = array_values($changed_ids);
+              }
+            }
+            break;
+
+          case 'text_long':
+            $form[$field_name] = array(
+              '#type' => 'checkbox',
+              '#prefix' => '<label>' . $fields[$field_name]['label'] . '</label>',
+              '#title' => $value,
+            );
+
+            if (!empty($retranslation_data[$field_name])) {
+              $form[$field_name]['#default_value'] = TRUE;
+            }
+            else {
+              if ($value != $clean_source_text) {
+                $clean_source_text = OshaTMGMTRetranslate::get_field_value($node->nid, $node->type, $clean_revision, 'en', $field_name);
+                $form[$field_name]['#default_value'] = TRUE;
+              }
+            }
+            break;
+        }
+      }
+    }
+  }
+
+  $form['#attached']['css'] = array(
+    drupal_get_path('module', 'osha_tmgmt') . '/css/retranslation.css',
+  );
+  $form['submit'] = array(
+    '#value' => 'Add to cart',
+    '#type' => 'submit',
+  );
+  return $form;
+}
+
+function osha_tmgmt_retranslate_ui_form_submit(&$form, &$form_state) {
+  $plugin = 'entity';
+  $item_type = 'node';
+  $item_id = $form['#node']->nid;
+  $node = $form['#node'];
+
+  $messages = array();
+  $valid_languages = array();
+  $invalid_languages = array();
+  OshaTMGMTRetranslate::validate_can_retranslate($node, $messages, $valid_languages, $invalid_languages);
+  if (!empty($invalid_languages)) {
+    foreach ($messages['error'] as $message) {
+      drupal_set_message($message, 'error');
+      return;
+    }
+  }
+
+  $values = $form_state['values'];
+  $elements = array();
+  foreach ($form['#fields'] as $field) {
+    if (!empty($values[$field])) {
+      if (is_array($values[$field])) {
+        $elements[$field] = array_filter($values[$field]);
+      }
+      else {
+        $elements[$field] = TRUE;
+      }
+    }
+  }
+
+  if (empty($form['#job_item'])) {
+    $job_item = tmgmt_ui_cart_get()->addJobItem($plugin, $item_type, $item_id);
+    if (empty($job_item)) {
+      drupal_set_message('Content was not added to cart');
+      return;
+    }
+  }
+  else {
+    $job_item = $form['#job_item'];
+  }
+  // Add retranslation data.
+  $job_item->source_language = 'en';
+  $job_item->target_language = 'es';
+  $job_item->is_full_translation = 0;
+  $job_item->retranslation_data = serialize($elements);
+  $job_item->save();
+
+  drupal_set_message(strtr('Content source was added into the <a href="@url">cart</a>.', array('@url' => url('admin/tmgmt/cart'))));
+  $form_state['redirect'] = 'node/' . $node->nid . '/translate';
+}
+
 class OshaTMGMTRetranslate {
 
   /**
@@ -277,6 +490,20 @@ class OshaTMGMTRetranslate {
     return NULL;
   }
 
+  public static function getTextByIds($text, $ids) {
+    $source_items = self::getDOMNodeList($text);
+    $changes = new DOMDocument();
+    foreach ($source_items as $item_id => $source_item) {
+      if (in_array($item_id, $ids)) {
+        $changes->appendChild($changes->importNode($source_item, TRUE));
+      }
+    }
+    if ($changes->hasChildNodes()) {
+      return html_entity_decode($changes->saveHTML());
+    }
+    return NULL;
+  }
+
 
     /**
    * Input: $node->nid
@@ -496,9 +723,13 @@ class OshaTMGMTRetranslate {
             ));
         }
       } else {
-        // Item not found in translation, re-use the old one.
         if (!empty($old_items[$id])) {
+          // Item not found in translation, re-use the old one.
           $current_parent->appendChild($dom->importNode($old_items[$id], TRUE));
+        }
+        else if (!empty($orig_items[$id])) {
+          // if not found in old, add the english one.
+          $current_parent->appendChild($dom->importNode($orig_items[$id], TRUE));
         }
         else {
           // We don't have this tag at all, raise error.

@@ -290,6 +290,9 @@ function osha_publication_form_publication_node_form_alter(&$form, $form_state) 
       unset($field[$langcode][$field_state['items_count']]);
       $field[$langcode]['add_more']['#access'] = FALSE;
     }
+    if (isset($field[$langcode][$form['field_nace_codes'][$langcode]['#cardinality']-1])) {
+      $field[$langcode]['add_more']['#access'] = FALSE;
+    }
   }
 }
 

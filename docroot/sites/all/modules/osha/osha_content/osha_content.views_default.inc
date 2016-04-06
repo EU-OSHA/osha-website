@@ -60,7 +60,7 @@ function osha_content_views_default_views() {
   $handler->display->display_options['fields']['title_field']['relationship'] = 'nid';
   $handler->display->display_options['fields']['title_field']['label'] = '';
   $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['title_field']['type'] = 'title_linked';
+  $handler->display->display_options['fields']['title_field']['type'] = 'publication_title_linked';
   $handler->display->display_options['fields']['title_field']['settings'] = array(
     'title_style' => 'div',
     'title_link' => 'content',

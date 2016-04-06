@@ -136,7 +136,7 @@ function osha_newsletter_block_info() {
     'region' => 'sidebar_second',
     'visibility' => BLOCK_VISIBILITY_LISTED,
     'pages' => '<front>',
-    'cache' => DRUPAL_CACHE_GLOBAL,
+    'cache' => DRUPAL_NO_CACHE,
     'weight' => -30
   );
   $blocks['osha_newsletter_image'] = array(
@@ -146,7 +146,7 @@ function osha_newsletter_block_info() {
     'visibility' => BLOCK_VISIBILITY_LISTED,
     'pages' => 'oshmail-newsletter
 node/9',
-    'cache' => DRUPAL_CACHE_GLOBAL,
+    'cache' => DRUPAL_NO_CACHE,
   );
   $blocks['osha_newsletter_subscribe_extra'] = array(
     'info' => t('Subscribe to EU-OSHA Newsletter block - with extra link to unsubscribe page'),
@@ -154,7 +154,7 @@ node/9',
     'region' => 'content',
     'visibility' => BLOCK_VISIBILITY_LISTED,
     'pages' => OSHA_NEWSLETTER_PAGE_URL,
-    'cache' => DRUPAL_CACHE_GLOBAL,
+    'cache' => DRUPAL_NO_CACHE,
   );
   $blocks['osha_newsletter_latest'] = array(
     'info' => t('Display the latest newsletters'),
@@ -162,7 +162,7 @@ node/9',
     'region' => 'sidebar_second',
     'visibility' => BLOCK_VISIBILITY_LISTED,
     'pages' => OSHA_NEWSLETTER_PAGE_URL,
-    'cache' => DRUPAL_CACHE_GLOBAL,
+    'cache' => DRUPAL_NO_CACHE,
   );
 
   return $blocks;

@@ -275,6 +275,28 @@ function osha_publication_form_lang_dropdown_form_alter(&$form, &$form_state, $f
 }
 
 /**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function osha_publication_form_publication_node_form_alter(&$form, $form_state) {
+  // For publications set a cardinality (MC-223).
+  $langcode = LANGUAGE_NONE;
+  $form['field_tags'][$langcode]['#attributes']['data-cardinality'] = 3;
+  $form['field_thesaurus'][$langcode]['#cardinality'] = 6;
+  $form['field_nace_codes'][$langcode]['#cardinality'] = 6;
+  foreach (array('field_nace_codes', 'field_thesaurus') as $key) {
+    $field = &$form[$key];
+    $field_state = field_form_get_state($field[$langcode]['#field_parents'], $field[$langcode]['#field_name'], $langcode, $form_state);
+    if ($field_state['items_count'] >= $field[$langcode]['#cardinality']) {
+      unset($field[$langcode][$field_state['items_count']]);
+      $field[$langcode]['add_more']['#access'] = FALSE;
+    }
+    if (isset($field[$langcode][$form['field_nace_codes'][$langcode]['#cardinality']-1])) {
+      $field[$langcode]['add_more']['#access'] = FALSE;
+    }
+  }
+}
+
+/**
  * Implements hook_views_pre_render().
  */
 function osha_publication_views_pre_render(&$view) {

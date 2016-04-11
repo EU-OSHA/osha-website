@@ -1056,6 +1056,21 @@ function osha_export_node($node) {
       $node->$field_name = $w->$field_name->value();
     }
   }
+  // Change relative links to absolute.
+  if (function_exists('_pathologic_filter')) {
+    if (!empty($node->body)) {
+      foreach ($node->body as $lng => $body) {
+        $filter = filter_format_load('pathologic');
+        $node->body[$lng][0]['value'] = _pathologic_filter($node->body[$lng][0]['value'], $filter, 'full_html', $lng, NULL, NULL);
+      }
+    }
+    if (!empty($node->field_summary)) {
+      foreach ($node->field_summary as $lng => $body) {
+        $filter = filter_format_load('pathologic');
+        $node->field_summary[$lng][0]['value'] = _pathologic_filter($node->field_summary[$lng][0]['value'], $filter, 'full_html', $lng, NULL, NULL);
+      }
+    }
+  }
   // For press contacts with tid 2969 (type press contact) - add the nodqueue order.
   if ($node->type == 'press_contact'
     && !empty($node->field_contact_type)

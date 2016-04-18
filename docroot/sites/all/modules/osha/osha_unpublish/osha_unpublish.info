@@ -1,0 +1,8 @@
+name = OSHA Unpublish
+description = Module for unpublish old content
+core = 7.x
+package = OSHA
+version = 7.x-0.6
+project = osha_unpublish
+
+configure = admin/config/system/osha_unpublish

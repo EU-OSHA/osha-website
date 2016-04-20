@@ -358,3 +358,15 @@ function osha_update_7015() {
 function osha_update_7016() {
   features_revert_module('osha');
 }
+
+/**
+ * Enable osha_unpublish and set default intervals.
+ */
+function osha_update_7017() {
+  module_enable(array('osha_unpublish'));
+  // Set default variables for unpublishing content.
+  variable_set('osha_unpublish_news', 6);
+  variable_set('osha_unpublish_events', 6);
+  variable_set('osha_unpublish_highlight', 12);
+  variable_set('osha_unpublish_press_release', 24);
+}

@@ -40,14 +40,14 @@ function osha_unpublish_entity_view($entity, $type, $view_mode, $langcode) {
  */
 function osha_unpublish_cron() {
   $types = node_type_get_types();
-  $nids = array();
   foreach ($types as $type_name => $type) {
     $interval = variable_get('osha_unpublish_node_' . $type_name, 0);
     if (!empty($interval)) {
       $time = strtotime('-' . $interval . ' months');
       $date = date('Y-m-d H:i:s', $time);
       $query = new EntityFieldQuery();
-      if ($type != 'events') {
+      $nids = array();
+      if ($type_name != 'events') {
         $query->entityCondition('entity_type', 'node')
           ->entityCondition('bundle', $type_name)
           ->propertyCondition('status', NODE_PUBLISHED)
@@ -68,7 +68,7 @@ function osha_unpublish_cron() {
         }
       }
 
-      if ($type != 'events') {
+      if ($type_name != 'events') {
       // Get nodes without publication_date.
       $subquery = db_select('field_data_field_publication_date', 'pd')
         ->fields('pd', array('entity_id'))

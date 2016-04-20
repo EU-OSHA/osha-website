@@ -25,24 +25,50 @@ function osha_unpublish_cronapi() {
 }
 
 /**
+ * Implements hook_entity_view().
+ */
+function osha_unpublish_entity_view($entity, $type, $view_mode, $langcode) {
+  if ($type == 'entity_collection' && $entity->bundle == 'newsletter_content_collection') {
+    if ($entity->status == 0 && user_is_anonymous()) {
+      drupal_goto('oshmail-newsletter', array(), 301);
+    }
+  }
+}
+
+/**
  * Implements hook_cron().
  */
 function osha_unpublish_cron() {
   $types = node_type_get_types();
+  $nids = array();
   foreach ($types as $type_name => $type) {
-    $interval = variable_get('osha_unpublish_' . $type_name, 0);
+    $interval = variable_get('osha_unpublish_node_' . $type_name, 0);
     if (!empty($interval)) {
       $time = strtotime('-' . $interval . ' months');
       $date = date('Y-m-d H:i:s', $time);
       $query = new EntityFieldQuery();
-      $query->entityCondition('entity_type', 'node')
-        ->entityCondition('bundle', $type_name)
-        ->propertyCondition('status', NODE_PUBLISHED)
-        ->fieldCondition('field_publication_date', 'value', $date, '<');
-      $result = $query->execute();
-      if (isset($result['node'])) {
-        $nids = array_keys($result['node']);
+      if ($type != 'events') {
+        $query->entityCondition('entity_type', 'node')
+          ->entityCondition('bundle', $type_name)
+          ->propertyCondition('status', NODE_PUBLISHED)
+          ->fieldCondition('field_publication_date', 'value', $date, '<');
+        $result = $query->execute();
+        if (isset($result['node'])) {
+          $nids = array_keys($result['node']);
+        }
       }
+      else {
+        $query->entityCondition('entity_type', 'node')
+          ->entityCondition('bundle', $type_name)
+          ->propertyCondition('status', NODE_PUBLISHED)
+          ->fieldCondition('field_start_date', 'value', $date, '<');
+        $result = $query->execute();
+        if (isset($result['node'])) {
+          $nids = array_keys($result['node']);
+        }
+      }
+
+      if ($type != 'events') {
       // Get nodes without publication_date.
       $subquery = db_select('field_data_field_publication_date', 'pd')
         ->fields('pd', array('entity_id'))
@@ -55,7 +81,23 @@ function osha_unpublish_cron() {
         ->condition('n.nid', $subquery, 'NOT IN')
         ->execute()
         ->fetchCol();
-      $unpublishing_nids = array_merge($nids, $nids_created);
+        $unpublishing_nids = array_merge($nids, $nids_created);
+      }
+      else {
+        // Get nodes without field_start_date.
+        $subquery = db_select('field_data_field_start_date', 'pd')
+          ->fields('pd', array('entity_id'))
+          ->condition('pd.bundle', $type_name)
+          ->condition('pd.deleted', 0);
+        $nids_created = db_select('node', 'n')
+          ->fields('n', array('nid'))
+          ->condition('n.created', $time, '<')
+          ->condition('n.type', $type_name)
+          ->condition('n.nid', $subquery, 'NOT IN')
+          ->execute()
+          ->fetchCol();
+        $unpublishing_nids = array_merge($nids, $nids_created);
+      }
       if (!empty($unpublishing_nids)) {
         $nodes = node_load_multiple($unpublishing_nids);
         foreach ($nodes as $node) {
@@ -65,26 +107,53 @@ function osha_unpublish_cron() {
       }
     }
   }
+
+  $interval = variable_get('osha_unpublish_entity_collection_newsletter_content_collection', 0);
+  if (!empty($interval)) {
+    $time = strtotime('-' . $interval . ' months');
+    $date = date('Y-m-d H:i:s', $time);
+    $query = new EntityFieldQuery();
+    $query->entityCondition('entity_type', 'entity_collection')
+      ->entityCondition('bundle', 'newsletter_content_collection')
+      ->propertyCondition('status', 1)
+      ->fieldCondition('field_publication_date', 'value', $date, '<');
+    $result = $query->execute();
+    if (isset($result['entity_collection'])) {
+      $eids = array_keys($result['entity_collection']);
+      $entity_collections = entity_load('entity_collection', $eids);
+      foreach ($entity_collections as $collection) {
+        $collection->status = 0;
+        entity_save('entity_collection', $collection);
+      }
+    }
+  }
 }
 
 function osha_unpublish_settings_form($form, &$form_state) {
   $form = array();
-  $types = node_type_get_types();
   $info = field_info_field('field_publication_date');
   $form['desc'] = array(
     '#type' => 'markup',
     '#markup' => 'Auto unpublish content by months passed since field_publication_date',
   );
-  if (!empty($info['bundles']['node'])) {
-    $intervals = array(0, 1, 3, 6, 12, 18, 24);
-    foreach ($info['bundles']['node'] as $type_name) {
-      $form['osha_unpublish_' . $type_name] = array(
-        '#title' => $types[$type_name]->name,
-        '#type' => 'select',
-        '#options' => drupal_map_assoc($intervals),
-        '#default_value' => variable_get('osha_unpublish_' . $type_name, 0),
-      );
+  $intervals = array(0, 1, 3, 6, 12, 18, 24);
+  if (!empty($info['bundles'])) {
+    foreach ($info['bundles'] as $entity_type => $bundles) {
+      foreach ($bundles as $bundle) {
+        $form['osha_unpublish_' . $entity_type . '_' . $bundle] = array(
+          '#title' => entity_bundle_label($entity_type, $bundle),
+          '#type' => 'select',
+          '#options' => drupal_map_assoc($intervals),
+          '#default_value' => variable_get('osha_unpublish_' . $entity_type . '_' . $bundle, 0),
+        );
+      }
     }
+    $form['osha_unpublish_node_events'] = array(
+      '#title' => 'Events',
+      '#type' => 'select',
+      '#options' => drupal_map_assoc($intervals),
+      '#default_value' => variable_get('osha_unpublish_node_events', 0),
+    );
     $form = system_settings_form($form);
   }
 

@@ -429,53 +429,52 @@ function _osha_newsletter_latest_block_content(){
   $newsletters_no = variable_get('newsletters_no', 12);
   $newsletter_items_no = variable_get('newsletter_items_no', 0);
   $items = array();
-  $collections = array();
 
   $entity_collections = entity_load_multiple_by_name('entity_collection');
 
-  foreach ($entity_collections as $element) {
-    if ($element->bundle == 'newsletter_content_collection' && !empty($element->field_publication_date)) {
-      if(time() > strtotime($element->field_publication_date[LANGUAGE_NONE][0]['value'])){
-        $collections[] = $element;
-      }
-    }
+  $date = date('Y-m-d H:i:s', strtotime('-12 months'));
+  $curr_date = date('Y-m-d H:i:s', time());
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'entity_collection')
+    ->entityCondition('bundle', 'newsletter_content_collection')
+    ->propertyCondition('status', 1)
+    ->fieldCondition('field_publication_date', 'value', $date, '>')
+    ->fieldCondition('field_publication_date', 'value', $curr_date, '<')
+    ->fieldOrderBy('field_publication_date', 'value', 'DESC')
+    ->pager($newsletters_no);
+  $result = $query->execute();
+  if (isset($result['entity_collection'])) {
+    $eids = array_keys($result['entity_collection']);
+    $entity_collections = entity_load('entity_collection', $eids);
   }
 
-  usort($collections, function($a, $b){
-    $a_date = strtotime($a->field_publication_date[LANGUAGE_NONE][0]['value']);
-    $b_date = strtotime($b->field_publication_date[LANGUAGE_NONE][0]['value']);
-    return $a_date < $b_date;
-  });
-
-  if (sizeof($collections)>0) {
+  if (!empty($entity_collections)) {
     $count_newsletters = 0;
-    for($i=0; $i<sizeof($collections); $i++){
-      if ($newsletters_no - $count_newsletters > 0) {
-        $item = $collections[$i];
-        $items[$item->name]['title'] = $item->title;
-        $items[$item->name]['url'] = 'entity-collection/'.$item->eid;
-        $publication_date = $item->field_publication_date[LANGUAGE_NONE][0]['value'];
-        $items[$item->name]['publication_date'] = format_date(strtotime($publication_date), 'custom', 'F Y');
-        // retrive elements from collection if needed
-        if ($newsletter_items_no>0) {
-          $elements = entity_collection_load_content($item->bundle, $item)->children;
-          if (sizeof($elements)>0) {
-            $count_items = 0;
-            foreach($elements as $child) {
-              if ($newsletter_items_no - $count_items > 0) {
-                if ($child->type == 'node') {
-                  $node = node_view($child->content,'newsletter_item');
-                  $items[$item->name]['items'][] = $node;
-                  $count_items++;
-                }
-              } else {
-                break;
+    foreach ($entity_collections as $collection) {
+      $items[$collection->name]['title'] = $collection->title;
+      $items[$collection->name]['url'] = 'entity-collection/'.$collection->eid;
+      $publication_date = $collection->field_publication_date[LANGUAGE_NONE][0]['value'];
+      $items[$collection->name]['publication_date'] = format_date(strtotime($publication_date), 'custom', 'F Y');
+      // Retrive elements from collection if needed.
+      if ($newsletter_items_no > 0) {
+        $elements = entity_collection_load_content($collection->bundle, $collection)->children;
+        if (!empty($elements) > 0) {
+          $count_items = 0;
+          foreach($elements as $child) {
+            if ($newsletter_items_no - $count_items > 0) {
+              if ($child->type == 'node') {
+                $node = node_view($child->content,'newsletter_item');
+                $items[$collection->name]['items'][] = $node;
+                $count_items++;
               }
+            }
+            else {
+              break;
             }
           }
         }
-        $count_newsletters++;
       }
+      $count_newsletters++;
     }
   }
   return theme('latest_newsletters_block', array('items' => $items, 'newsletter_items_no' => $newsletter_items_no));

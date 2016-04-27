@@ -358,3 +358,27 @@ function osha_update_7015() {
 function osha_update_7016() {
   features_revert_module('osha');
 }
+
+/**
+ * Enable osha_unpublish.
+ */
+function osha_update_7017() {
+  module_enable(array('osha_unpublish'));
+  // Set default variables for unpublishing content.
+//  variable_set('osha_unpublish_news', 6);
+//  variable_set('osha_unpublish_events', 6);
+//  variable_set('osha_unpublish_highlight', 12);
+//  variable_set('osha_unpublish_press_release', 24);
+}
+
+/**
+ * Set default intervals for unpublish
+ */
+function osha_update_7018() {
+  // Set default variables for unpublishing content.
+  variable_set('osha_unpublish_node_news', 6);
+  variable_set('osha_unpublish_node_events', 6);
+  variable_set('osha_unpublish_node_highlight', 12);
+  variable_set('osha_unpublish_node_press_release', 24);
+  variable_set('osha_unpublish_entity_collection_newsletter_content_collection', 12);
+}

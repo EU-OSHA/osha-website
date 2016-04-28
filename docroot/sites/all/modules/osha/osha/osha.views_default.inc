@@ -3160,6 +3160,7 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'events' => 'events',
+    'wiki_page' => 'wiki_page',
   );
   $handler->display->display_options['filters']['type']['group'] = 2;
 

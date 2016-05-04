@@ -10,37 +10,51 @@ include_once 'osha_events.features.inc';
  * Implements hook_form_alter().
  */
 function osha_events_form_alter(&$form, &$form_state, $form_id) {
-  if ($form_id == 'events_node_form') {
+  switch ($form_id) {
+    case 'events_node_form':
+      $form['#validate'][] = 'osha_events_form_validate';
+      // Activity field changes
+      if (isset($form['field_activity'][LANGUAGE_NONE][0])) {
+        unset($form['field_activity'][LANGUAGE_NONE]['add_more']);
+        // Extract the field field tree to change cardinality
+        $field = $form['field_activity'][LANGUAGE_NONE][0]['tid'];
 
-    $form['#validate'][] = 'osha_events_form_validate';
+        // Show the label as usual
+        unset($field['#title_display']);
 
-    // Activity field changes
-    if (isset($form['field_activity'][LANGUAGE_NONE][0])) {
-      unset($form['field_activity'][LANGUAGE_NONE]['add_more']);
-      // Extract the field field tree to change cardinality
-      $field = $form['field_activity'][LANGUAGE_NONE][0]['tid'];
+        // Field is not required, so add also an empty option.
+        $field['#required'] = FALSE;
+        $field['#options'] = array('' => t('- None -')) + $field['#options'];
+        // Switch validator
+        $field['#element_validate'] = array('options_field_widget_validate');
 
-      // Show the label as usual
-      unset($field['#title_display']);
+        $form['field_activity'][LANGUAGE_NONE] = $field;
+      }
 
-      // Field is not required, so add also an empty option.
-      $field['#required'] = FALSE;
-      $field['#options'] = array('' => t('- None -')) + $field['#options'];
-      // Switch validator
-      $field['#element_validate'] = array('options_field_widget_validate');
+      // Create new event form
+      if(!isset($form['#node']->nid)){
+        drupal_add_js(drupal_get_path('module', 'osha_events') . '/js/new_event_form.js');
+      }
 
-      $form['field_activity'][LANGUAGE_NONE] = $field;
-    }
+      // MC-84 Disable country and city from the form when selected type is Webminar.
+      // Necessary to add the js in an after build callback because we need it
+      // after form_set_error occurs.
+      $form['#after_build'][] = 'osha_events_node_form_after_build';
+      break;
 
-    // Create new event form
-    if(!isset($form['#node']->nid)){
-      drupal_add_js(drupal_get_path('module', 'osha_events') . '/js/new_event_form.js');
-    }
-
-    // MC-84 Disable country and city from the form when selected type is Webminar.
-    // Necessary to add the js in an after build callback because we need it
-    // after form_set_error occurs.
-    $form['#after_build'][] = 'osha_events_node_form_after_build';
+    case 'views_exposed_form':
+      if ($form['#id'] == 'views-exposed-form-oshevents-page') {
+        // Set default date for popup on end date when start date is selected.
+        $form['field_start_date_value2']['value']['#attached']['js'] = array(
+          drupal_get_path('module', 'osha_events') . '/js/event_search_page.js' => array(
+            'type' => 'file',
+          ),
+        );
+        if (!empty($form_state['input']['field_start_date_value']['value']['date']) && empty($form_state['input']['field_start_date_value2']['value']['date'])) {
+          $form['field_start_date_value2']['value']['#datepicker_options']['defaultDate'] = $form_state['input']['field_start_date_value']['value']['date'];
+        }
+      }
+      break;
   }
 }
 

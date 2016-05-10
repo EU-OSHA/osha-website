@@ -63,6 +63,7 @@ function osha_publication_export() {
   if (!empty($_GET['limit'])) {
     $q->range(0, $_GET['limit']);
   }
+  $q->orderBy('n.changed', 'DESC');
   $publication_nids = $q->execute()->fetchAllKeyed();
   foreach ($publication_nids as $nid => $vid) {
     $q = db_select('field_data_title_field', 'tf')

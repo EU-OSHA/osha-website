@@ -20,12 +20,63 @@ function osha_publication_menu() {
     'page callback' => 'osha_publication_listing_page',
     'access arguments' => array('access content'),
   );
+  $items['export/tools-and-publications/publications'] = array(
+    'title' => 'Publications',
+    'description' => 'Export publications filtered by tags',
+    'page callback' => 'osha_publication_export',
+    'access arguments' => array('access content'),
+    'delivery callback' => 'drupal_json_output'
+  );
 
   return $items;
 }
 
 function osha_publication_listing_page() {
   return '';
+}
+
+function osha_publication_export() {
+  module_load_include('inc', 'osha_publication', 'osha_publication.pages');
+  $publications = array();
+  /** @var SelectQuery $q */
+  $q = db_select('node', 'n')
+    ->fields('n', ['nid', 'vid'])
+    ->condition('n.type', 'publication');
+  if (!empty($tags = $_GET['tags'])) {
+    $tags_ids = array();
+    if (!empty($tags)) {
+      foreach ($tags as $tag) {
+        if (is_int($tag)) {
+          $tags_ids[] = $tag;
+        }
+        else {
+          $tid = _osha_publication_get_tag_by_code($tag);
+          if (!empty($tid)) {
+            $tags_ids[] = $tid;
+          }
+        }
+      }
+    }
+    $q->innerJoin('field_data_field_tags', 't', 't.entity_id = n.nid');
+    $q->condition('t.field_tags_tid', $tags_ids, 'IN');
+  }
+  if (!empty($_GET['limit'])) {
+    $q->range(0, $_GET['limit']);
+  }
+  $publication_nids = $q->execute()->fetchAllKeyed();
+  foreach ($publication_nids as $nid => $vid) {
+    $q = db_select('field_data_title_field', 'tf')
+      ->fields('tf', ['language', 'title_field_value'])
+      ->condition('tf.entity_id', $nid)
+      ->condition('tf.revision_id', $vid);
+    $title_field = $q->execute()->fetchAllKeyed();
+    $publications[] = array(
+      'nid' => $nid,
+      'title' => $title_field,
+      'path_alias' => drupal_get_path_alias('node/' . $nid),
+    );
+  }
+  return $publications;
 }
 
 /**
@@ -39,8 +90,10 @@ function osha_publication_url_inbound_alter(&$path, $original_path, $path_langua
   // break down in filters the publication search path.
   if (strpos($path, 'tools-and-publications/publications') >= 0) {
     $menu_item = menu_get_item($path);
-    if ($menu_item['page_callback'] == 'osha_publication_listing_page') {
-      $path = 'tools-and-publications/publications';
+    if (in_array($menu_item['page_callback'], ['osha_publication_listing_page', 'osha_publication_export'])) {
+      if ($menu_item['page_callback'] == 'osha_publication_listing_page') {
+        $path = 'tools-and-publications/publications';
+      }
       if (count($args) > 2) {
         $search_args = $args;
         array_shift($search_args);

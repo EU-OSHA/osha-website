@@ -789,7 +789,7 @@ function osha_calls_field_default_field_instances() {
       'description_field' => 1,
       'entity_translation_sync' => 0,
       'file_directory' => 'calls/documents',
-      'file_extensions' => 'txt pdf docx zip ppt pptx doc rar odt odp otp',
+      'file_extensions' => 'txt pdf docx zip ppt pptx doc rar odt odp otp xls xlsx',
       'max_filesize' => '',
       'user_register_form' => FALSE,
     ),
@@ -802,6 +802,7 @@ function osha_calls_field_default_field_instances() {
       'type' => 'file_generic',
       'weight' => 8,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-calls-title_field'

@@ -1165,6 +1165,21 @@ function osha_workflow_form_moderate_approve_submit($form, $form_state) {
   }
 }
 
+/**
+ * Implements hook_mail_alter().
+ */
+function osha_workflow_mail_alter(&$message) {
+  if (strpos($message['key'], 'osha_workflow')) {
+    // Block mails that are send for hwc workflow if user's preference.
+    $user = user_load_by_mail($message['to']);
+    $send_notif = variable_get('osha_workflow_send_mail', FALSE);
+    // When using rereoute mail, the to address is not of an user.
+    $usr_receive_notif = empty($user) || !empty($user->field_cmw_mail_notifications[LANGUAGE_NONE][0]['value']);
+    if (!$send_notif || !$usr_receive_notif) {
+      $message['send'] = FALSE;
+    }
+  }
+}
 
 /**
  * Implements hook_mail().

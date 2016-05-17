@@ -44,7 +44,7 @@ function osha_publication_export() {
     ->condition('n.type', 'publication')
     ->condition('n.status', '1');
   $q->innerJoin('field_data_field_publication_date', 'fp', 'fp.entity_id = n.nid AND fp.revision_id = n.vid');
-  $q->condition('fp.field_publication_date_value', 'NOW()', '<=');
+  $q->where('fp.field_publication_date_value <= NOW()');
   $q->orderBy('fp.field_publication_date_value', 'DESC');
   if (!empty($tags = $_GET['tags'])) {
     $tags_ids = array();
@@ -69,21 +69,22 @@ function osha_publication_export() {
   }
   $nids = $q->execute()->fetchAllKeyed();
 
-  $q = db_select('field_data_title_field', 'tf')
-    ->fields('tf', ['entity_id', 'language', 'title_field_value'])
-    ->condition('tf.entity_id', array_keys($nids), 'IN')
-    ->condition('tf.revision_id', $nids, 'IN');
-  $data = $q->execute()->fetchAll();
-
-  foreach ($data as $item) {
-    if (empty($publications[$item->entity_id])) {
-      $publications[$item->entity_id] = array(
-        'nid' => $item->entity_id,
-        'title' => array(),
-        'path_alias' => drupal_get_path_alias('node/' . $item->entity_id),
-      );
+  if (!empty($nids)) {
+    $q = db_select('field_data_title_field', 'tf')
+      ->fields('tf', ['entity_id', 'language', 'title_field_value'])
+      ->condition('tf.entity_id', array_keys($nids), 'IN')
+      ->condition('tf.revision_id', $nids, 'IN');
+    $data = $q->execute()->fetchAll();
+    foreach ($data as $item) {
+      if (empty($publications[$item->entity_id])) {
+        $publications[$item->entity_id] = array(
+          'nid' => $item->entity_id,
+          'title' => array(),
+          'path_alias' => drupal_get_path_alias('node/' . $item->entity_id),
+        );
+      }
+      $publications[$item->entity_id]['title'][$item->language] = $item->title_field_value;
     }
-    $publications[$item->entity_id]['title'][$item->language] = $item->title_field_value;
   }
   return $publications;
 }
@@ -102,6 +103,9 @@ function osha_publication_url_inbound_alter(&$path, $original_path, $path_langua
     if (in_array($menu_item['page_callback'], ['osha_publication_listing_page', 'osha_publication_export'])) {
       if ($menu_item['page_callback'] == 'osha_publication_listing_page') {
         $path = 'tools-and-publications/publications';
+      }
+      else if ($menu_item['page_callback'] == 'osha_publication_export') {
+        $path = 'export/tools-and-publications/publications';
       }
       if (count($args) > 2) {
         $search_args = $args;

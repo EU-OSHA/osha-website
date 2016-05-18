@@ -43,3 +43,10 @@ function osha_blog_update_7003() {
     node_save($node);
   }
 }
+
+/**
+ * Revert osha_blog.
+ */
+function osha_blog_update_7004() {
+  features_revert_module('osha_blog');
+}

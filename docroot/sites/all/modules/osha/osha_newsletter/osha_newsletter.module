@@ -1017,17 +1017,45 @@ function osha_newsletter_entity_insert($entity_collection, $type) {
 
     // Select latest published content and attach it to the newsletter.
     if (!empty($entity_collection->field_newsletter_content_after[LANGUAGE_NONE][0]['value'])) {
-      $after = $entity_collection->field_newsletter_content_after[LANGUAGE_NONE][0]['value'];
-      $after = strtotime($after);
-      $query = new EntityFieldQuery();
-      $rows = $query->entityCondition('entity_type', 'node')
+      $after_date = $entity_collection->field_newsletter_content_after[LANGUAGE_NONE][0]['value'];
+      $after = strtotime($after_date);
+
+      $newsletter_publication_date = $entity_collection->field_publication_date[LANGUAGE_NONE][0]['value'];
+
+      $result = array();
+
+      $query_created_after = new EntityFieldQuery();
+      $rows_created_after = $query_created_after->entityCondition('entity_type', 'node')
         ->entityCondition('bundle', $allowed_bundles, 'IN')
-        ->entityCondition('bundle', array('article','newsletter_article'), 'NOT IN')
+        ->entityCondition('bundle', array('article','newsletter_article','events'), 'NOT IN')
         ->propertyCondition('created', $after, '>=')
         ->propertyCondition('status', NODE_PUBLISHED)
         ->execute();
-      if (isset($rows['node'])) {
-        $nodes = node_load_multiple(array_keys($rows['node']));
+      $result = isset($rows_created_after['node']) ? array_merge($result, array_keys($rows_created_after['node'])) : $result;
+
+      $query_published_after = new EntityFieldQuery();
+      $rows_published_after = $query_published_after->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', $allowed_bundles, 'IN')
+        ->entityCondition('bundle', array('article','newsletter_article','events'), 'NOT IN')
+        ->entityCondition('entity_id', array_keys($rows_created_after['node']), 'NOT IN')
+        ->propertyCondition('status', NODE_PUBLISHED)
+        ->fieldCondition('field_publication_date', 'value', $after_date, '>=')
+        ->execute();
+      $result = isset($rows_published_after['node']) ? array_merge($result, array_keys($rows_published_after['node'])) : $result;
+
+      if (in_array("events", $allowed_bundles)) {
+        $query_events = new EntityFieldQuery();
+        $events = $query_events->entityCondition('entity_type', 'node')
+          ->entityCondition('bundle', 'events')
+          ->propertyCondition('status', NODE_PUBLISHED)
+          ->fieldCondition('field_start_date', 'value', $newsletter_publication_date, '>=')
+          ->fieldOrderBy('field_start_date', 'value', 'ASC')
+          ->execute();
+        $result = isset($events['node']) ? array_merge($result, array_keys($events['node'])) : $result;
+      }
+
+      if (!empty($result)) {
+        $nodes = node_load_multiple($result);
         foreach ($nodes as $nid => $node) {
           // Don't add any more nodes if already max_nodes for section.
           if (isset($term_ct_map[$node->type]) && isset($weights[$term_ct_map[$node->type]]) &&

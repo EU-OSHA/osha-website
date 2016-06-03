@@ -1024,20 +1024,12 @@ function osha_newsletter_entity_insert($entity_collection, $type) {
 
       $result = array();
 
-      $query_created_after = new EntityFieldQuery();
-      $rows_created_after = $query_created_after->entityCondition('entity_type', 'node')
-        ->entityCondition('bundle', $allowed_bundles, 'IN')
-        ->entityCondition('bundle', array('article','newsletter_article','events'), 'NOT IN')
-        ->propertyCondition('created', $after, '>=')
-        ->propertyCondition('status', NODE_PUBLISHED)
-        ->execute();
-      $result = isset($rows_created_after['node']) ? array_merge($result, array_keys($rows_created_after['node'])) : $result;
+      $custom_order_bundles = array('article','newsletter_article','events');
+      $ordinary_order_bundles = array_diff($allowed_bundles, $custom_order_bundles);
 
       $query_published_after = new EntityFieldQuery();
       $rows_published_after = $query_published_after->entityCondition('entity_type', 'node')
-        ->entityCondition('bundle', $allowed_bundles, 'IN')
-        ->entityCondition('bundle', array('article','newsletter_article','events'), 'NOT IN')
-        ->entityCondition('entity_id', array_keys($rows_created_after['node']), 'NOT IN')
+        ->entityCondition('bundle', $ordinary_order_bundles, 'IN')
         ->propertyCondition('status', NODE_PUBLISHED)
         ->fieldCondition('field_publication_date', 'value', $after_date, '>=')
         ->fieldOrderBy('field_publication_date', 'value', 'DESC')

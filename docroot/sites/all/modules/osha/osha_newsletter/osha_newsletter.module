@@ -1040,6 +1040,7 @@ function osha_newsletter_entity_insert($entity_collection, $type) {
         ->entityCondition('entity_id', array_keys($rows_created_after['node']), 'NOT IN')
         ->propertyCondition('status', NODE_PUBLISHED)
         ->fieldCondition('field_publication_date', 'value', $after_date, '>=')
+        ->fieldOrderBy('field_publication_date', 'value', 'DESC')
         ->execute();
       $result = isset($rows_published_after['node']) ? array_merge($result, array_keys($rows_published_after['node'])) : $result;
 

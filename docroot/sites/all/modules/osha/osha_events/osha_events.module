@@ -6,6 +6,17 @@
 
 include_once 'osha_events.features.inc';
 
+
+/**
+ * Implements hook_node_access().
+ */
+function osha_events_node_access($node, $op, $account) {
+  if ($node->status == 0 && $op == 'view' && $node->type == 'events' && user_access('edit any events content')) {
+    return NODE_ACCESS_ALLOW;
+  }
+  return NODE_ACCESS_IGNORE;
+}
+
 /**
  * Implements hook_form_alter().
  */

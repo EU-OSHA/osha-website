@@ -54,7 +54,17 @@ function template_preprocess_views_data_export_xlsx(&$vars) {
   $vars['body'] = "";
   $vars['footer'] = $vars['rows']['footer'];
   $view = $vars['view'];
+  $headers = array('No data');
+  $data = array(array('No data'));
 
+  $excel_dir = file_directory_temp();
+  $excel_filename = 'views_data_export_' . time() . '_' . $user->uid . '.xls';
+  if (!file_prepare_directory($excel_dir, FILE_CREATE_DIRECTORY)) {
+    drupal_set_message(strtr('The @dir directory could not be created or it is not writable', array('@dir' => $excel_dir)), 'error');
+    drupal_goto();
+  }
+  $path = $excel_dir . '/' . $excel_filename;
+  module_load_include('inc', 'phpexcel', 'phpexcel');
   if (!empty($view->style_plugin->rendered_fields)) {
     $headers = array();
     $field_names = array_keys($view->style_plugin->rendered_fields[0]);
@@ -65,17 +75,11 @@ function template_preprocess_views_data_export_xlsx(&$vars) {
     foreach ($data as $key => $row) {
       $data[$key] = array_values($row);
     }
-
-    $excel_dir = file_directory_temp();
-    $excel_filename = 'views_data_export_' . time() . '_' . $user->uid . '.xls';
-    if (!file_prepare_directory($excel_dir, FILE_CREATE_DIRECTORY)) {
-      drupal_set_message(strtr('The @dir directory could not be created or it is not writable', array('@dir' => $excel_dir)), 'error');
-      drupal_goto();
-    }
-    $path = $excel_dir . '/' . $excel_filename;
-    module_load_include('inc', 'phpexcel', 'phpexcel');
     phpexcel_export($headers, $data, $path);
-    $vars['body'] = file_get_contents($path);
   }
+  else {
+    phpexcel_export($headers, $data, $path);
+  }
+  $vars['body'] = file_get_contents($path);
   return;
 }

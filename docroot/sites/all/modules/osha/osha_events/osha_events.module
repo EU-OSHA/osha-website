@@ -54,7 +54,6 @@ function osha_events_form_alter(&$form, &$form_state, $form_id) {
       break;
 
     case 'views_exposed_form':
-      // 'views-exposed-form-oshevents-page'
       if (in_array($form['#id'], array('views-exposed-form-events-page'))) {
         // Set default date for popup on end date when start date is selected.
         $form['field_start_date_value2']['value']['#attached']['js'] = array(
@@ -63,8 +62,6 @@ function osha_events_form_alter(&$form, &$form_state, $form_id) {
           ),
         );
 
-        $form['field_start_date_value']['value']['#date_format'] = 'm/d/Y';
-        $form['field_start_date_value2']['value']['#date_format'] = 'm/d/Y';
         if (!empty($form_state['input']['field_start_date_value']['value']['date']) && empty($form_state['input']['field_start_date_value2']['value']['date'])) {
           $form['field_start_date_value2']['value']['#datepicker_options']['defaultDate'] = $form_state['input']['field_start_date_value']['value']['date'];
         }

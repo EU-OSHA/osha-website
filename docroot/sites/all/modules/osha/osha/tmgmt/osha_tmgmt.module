@@ -64,6 +64,14 @@ function osha_tmgmt_menu() {
     'file' => 'osha_tmgmt.workflow.inc',
   );
 
+  $items['admin/tmgmt/jobs/%/preview'] = array(
+    'page callback' => 'osha_tmgmt_job_items_preview',
+    'page arguments' => array(3),
+    'access arguments' => array('preview layout validation'),
+    'type' => MENU_CALLBACK,
+    'file' => 'osha_tmgmt.preview.inc',
+  );
+
   $items['admin/config/regional/translate/edit/%/%'] = array(
     'title' => 'Edit string',
     'page callback' => 'drupal_get_form',
@@ -81,7 +89,6 @@ function osha_tmgmt_menu() {
     'type' => MENU_LOCAL_TASK,
     'file' => 'osha_tmgmt.retranslate.inc',
   );
-
 
   return $items;
 }
@@ -1636,6 +1643,20 @@ function osha_tmgmt_form_tmgmt_job_form_alter(&$form, &$form_state) {
     $form['actions']['submit']['#access'] = FALSE;
     $form['actions']['cancel']['#title'] = t('Back');
   }
+
+  $form['info']['preview_url'] = array(
+    '#type' => 'link',
+    '#prefix' => '<div id="tmgmt-ui-preview">',
+    '#suffix' => '</div>',
+    '#title' => t('Preview'),
+    '#href' => sprintf('admin/tmgmt/jobs/%s/preview', $form_state['tmgmt_job']->tjid),
+    '#weight' => -10,
+    '#options' => array(
+      'attributes' => array('target' => '_blank'),
+      'html' => FALSE,
+    ),
+    '#weight' => -1,
+  );
 
   $languages = tmgmt_available_languages();
 

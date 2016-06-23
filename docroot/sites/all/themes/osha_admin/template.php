@@ -23,14 +23,16 @@ function osha_admin_preprocess_views_view(&$vars) {
 }
 
 function osha_admin_menu_local_tasks_alter(&$data, $router_item, $root_path) {
-  foreach ($data['tabs'][0]['output'] as &$tab) {
-    if ($tab['#link']['path'] == 'node/%/open_all_translations') {
-      $tab['#link']['path'] = '#';
-      $tab['#link']['localized_options']['attributes']['id'][] = 'menu_local_task_open_all_translations';
-    }
-    elseif ($tab['#link']['path'] == 'node/%/view_all_translations') {
-      $tab['#link']['path'] = '#';
-      $tab['#link']['localized_options']['attributes']['id'][] = 'menu_local_task_view_all_translations';
+  if (!empty($data['tabs'][0]['output'])) {
+    foreach ($data['tabs'][0]['output'] as &$tab) {
+      if ($tab['#link']['path'] == 'node/%/open_all_translations') {
+        $tab['#link']['path'] = '#';
+        $tab['#link']['localized_options']['attributes']['id'][] = 'menu_local_task_open_all_translations';
+      }
+      elseif ($tab['#link']['path'] == 'node/%/view_all_translations') {
+        $tab['#link']['path'] = '#';
+        $tab['#link']['localized_options']['attributes']['id'][] = 'menu_local_task_view_all_translations';
+      }
     }
   }
 }

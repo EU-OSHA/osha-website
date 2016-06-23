@@ -95,11 +95,7 @@ function osha_tmgmt_views_query_alter(&$view, &$query) {
   // to allow showing job items that doesn't have items moderated.
   if ($view->name == 'osha_job_overview_job_items') {
     if ($view->current_display == 'job_preview') {
-//      $query->distinct = TRUE;
-//      $query->add_field('tmgmt_job_item', 'item_id', 'item_id_group', array('function' => 'groupby'));
-//      $query->add_groupby('tmgmt_job_item.item_id');
       $query->add_tag('group_by_job_item_id');
-      dpm($query);
     } else {
       if (isset($query->table_queue['node_tmgmt_job_item__workbench_moderation_node_history']['join']->type)) {
         $query->table_queue['node_tmgmt_job_item__workbench_moderation_node_history']['join']->type = 'LEFT';

@@ -1,0 +1,16 @@
+diff --git a/docroot/sites/all/modules/contrib/nodeblock/nodeblock.module b/docroot/sites/all/modules/contrib/nodeblock/nodeblock.module
+index 16a64f1..8acaa2c 100644
+--- a/docroot/sites/all/modules/contrib/nodeblock/nodeblock.module
++++ b/docroot/sites/all/modules/contrib/nodeblock/nodeblock.module
+@@ -605,9 +605,8 @@ function nodeblock_block_view($delta = '') {
+     $node_link = nodeblock_type_node_link($node->type);
+   }
+ 
+-  if(!$node_link && isset($block['content']['links']['node'])) {
+-    unset($block['content']['links']['node']);
+-    unset($block['content']['links']['translation']);
++  if(!$node_link && isset($block['content']['links'])) {
++    unset($block['content']['links']);
+   }
+ 
+   $comment_link = $node->nodeblock['comment_link'];

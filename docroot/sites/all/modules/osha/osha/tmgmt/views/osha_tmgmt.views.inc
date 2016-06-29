@@ -37,6 +37,13 @@ function osha_tmgmt_views_pre_render(&$view) {
 }
 
 /**
+ * Implements hook_query_TAG_alter().
+ */
+function osha_tmgmt_query_group_by_job_item_id_alter(QueryAlterableInterface $query){
+  $query->groupBy('tmgmt_job_item.item_id');
+}
+
+/**
  * Alter the view tmgmt_node_selection_view to show latest node state.
  *
  * Alter LEFT JOIN node_revision ON node.vid = node_revision.vid
@@ -87,8 +94,12 @@ function osha_tmgmt_views_query_alter(&$view, &$query) {
   // Switch from JOIN to LEFT JOIN with workbench_moderation_node_history
   // to allow showing job items that doesn't have items moderated.
   if ($view->name == 'osha_job_overview_job_items') {
-    if (isset($query->table_queue['node_tmgmt_job_item__workbench_moderation_node_history']['join']->type)) {
-      $query->table_queue['node_tmgmt_job_item__workbench_moderation_node_history']['join']->type = 'LEFT';
+    if ($view->current_display == 'job_preview') {
+      $query->add_tag('group_by_job_item_id');
+    } else {
+      if (isset($query->table_queue['node_tmgmt_job_item__workbench_moderation_node_history']['join']->type)) {
+        $query->table_queue['node_tmgmt_job_item__workbench_moderation_node_history']['join']->type = 'LEFT';
+      }
     }
   }
 }

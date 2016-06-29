@@ -22,6 +22,10 @@ form.node-external_url-form #edit-field-external-url div.form-type-link-field > 
   clear: both;
 }
 
+#tmgmt-ui-preview {
+  float: right;
+}
+
 tr.osha_newsletter_section_admin_content {
   background: #d3e7f4;
 }

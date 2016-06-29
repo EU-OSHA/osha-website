@@ -589,6 +589,7 @@ function osha_tmgmt_node_access($node, $operation, $user) {
         $query->condition('state', '4', '<>') // TMGMT_JOB_ITEM_STATE_ABORTED
           ->condition('item_type', 'node')
           ->condition('item_id', $node->nid)
+          ->condition('tjid', 0, '<>') // Not in translation cart (temporary)
           ->condition('merged', NULL);
         $count = $query->execute()->rowCount();
         if ($count > 0) {

@@ -799,6 +799,65 @@ function osha_date_field_formatter_settings_summary_alter(&$summary, $context) {
 }
 
 /**
+ * Implements hook_theme().
+ */
+function osha_theme() {
+  return array(
+    'osha_share_widget' => array(
+      'variables' => array(
+        'url' => '', // Page URL
+        'node' => array(), // Current node
+        'tweet_url' => '',
+        'language' => '', // Current language
+        'options' => array(), // Additional configuration options
+      ),
+      'template' => 'templates/share_widget',
+    ),
+  );
+}
+
+function osha_share_widget($node, $options = array()) {
+  global $language;
+  /** @var stdClass $wrapper */
+  $type = 'other';
+  if (!empty($options['page']) && $options['page'] === TRUE) {
+    $url = url(current_path(), array('absolute' => TRUE));
+    $title = drupal_get_title();
+  }
+  else {
+    $url = url('node/' . $node->nid, array('absolute' => TRUE));
+    $title = $node->title;
+    $type = $node->type;
+  }
+  // Add services javascript.
+  $site_name = variable_get('site_name', '');
+  // Construct the tweet.
+  $twitter_text = $title . ' | ' . $site_name;
+  $tweet_url = url('https://twitter.com/intent/tweet', array(
+    'query' => array(
+      'original_referer' => $url,
+      'text' => $twitter_text,
+      'url' => shorten_url($url),
+    ),
+  ));
+  $vars = array(
+    'url' => $url,
+    'tweet_url' => $tweet_url,
+    'node' => $node,
+    'language' => $language,
+    'options' => $options,
+    'label' => t('Share this on'),
+    'type' => $type,
+  );
+
+  // Merge default vars with ones from options.
+  $vars = $options + $vars;
+  $widget = theme('osha_share_widget', $vars);
+  return $widget;
+}
+
+
+/**
  * Implements hook_node_view().
  *
  * {@inheritdoc}
@@ -845,6 +904,12 @@ function osha_node_view($node, $view_mode, $langcode) {
         $node->content['title_field'][0]['#markup'] .= '<span class="title-archived">' . t('Archived') . '</span>';
       }
     }
+  }
+
+  // Load in node links the share buttons.
+  $share_links_bundles = array('article', 'blog', 'dvs_survey', 'events', 'highlight', 'news', 'press_release');
+  if ($view_mode == 'full' && in_array($node->type, $share_links_bundles)) {
+    $node->content['links']['osha_share']['#markup'] = osha_share_widget($node);
   }
 }
 

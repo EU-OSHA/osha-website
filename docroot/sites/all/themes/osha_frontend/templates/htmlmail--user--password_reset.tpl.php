@@ -54,9 +54,6 @@
 <?php echo $body; ?>
 <br/>
 <br/>
-<br/>
-<br/>
-<br/>
 <?php
   $directory = drupal_get_path('theme', 'osha_frontend');
   global $base_url; // TODO: should link to node

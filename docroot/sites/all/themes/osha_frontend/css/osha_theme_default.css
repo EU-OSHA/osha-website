@@ -3280,6 +3280,52 @@ a.button-submit {
 	font-weight:bold;
 }
 
+/* osha share */
+.osha-share-widget ul {
+	list-style: none;
+	padding: 0;
+}
+
+.osha-share-widget li.share-this-article:after {
+	content: ":";
+}
+.osha-share-widget li {
+	vertical-align: middle;
+	display: inline-block;
+	padding: 0 4px;
+}
+
+.osha-share-widget li.osha-share-widget-button {
+	width: 20px;
+	height: 20px;
+}
+.osha-share-widget li.osha-share-widget-button a {
+	display: inline-block;
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	width: 20px;
+	height: 20px;
+	background: #eee;
+	color: transparent !important;
+	border: 0 !important;
+}
+
+.osha-share-widget li.osha-share-widget-linkedin a {
+	background: url("../images/share_in.png") repeat-x scroll 0% 100% rgba(0, 0, 0, 0)!important;
+}
+.osha-share-widget li.osha-share-widget-twitter a {
+	background: url("../images/share_twitter.png") repeat-x scroll 0% 100% rgba(0, 0, 0, 0)!important;
+}
+.osha-share-widget li.osha-share-widget-facebook a {
+	background: url("../images/share_facebook.png") repeat-x scroll 0% 100% rgba(0, 0, 0, 0)!important;
+}
+.osha-share-widget li.osha-share-widget-print a {
+	width: 48px;
+	background: url("../images/share_print.png") repeat-x scroll 0% 100% rgba(0, 0, 0, 0)!important;
+}
+
+
 .a2a_menu a:link{
 	color:#003399!important;
 }

@@ -1,0 +1,17 @@
+name = Shorten URLs Custom Services
+description = "Allows administrators to specify custom URL shortening services. <strong>Advanced users only.</strong>"
+core = 7.x
+package = Shorten URLs
+configure = admin/config/services/shorten/custom
+dependencies[] = shorten
+
+files[] = shorten_cs.admin.inc
+files[] = shorten_cs.install
+files[] = shorten_cs.module
+
+; Information added by Drupal.org packaging script on 2014-09-01
+version = "7.x-1.4"
+core = "7.x"
+project = "shorten"
+datestamp = "1409537029"
+

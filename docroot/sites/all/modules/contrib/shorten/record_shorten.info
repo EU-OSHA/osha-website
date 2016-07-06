@@ -1,0 +1,20 @@
+name = Record Shorten
+description = "Records shortened URLs from the Shorten module."
+core = 7.x
+package = Shorten URLs
+configure = admin/reports/shorten
+dependencies[] = shorten
+
+files[] = record_shorten.install
+files[] = record_shorten.module
+files[] = record_shorten.views.inc
+files[] = record_shorten.views_default.inc
+files[] = record_shorten_views_handler_field_hostname.inc
+files[] = record_shorten_views_handler_filter_string_service.inc
+
+; Information added by Drupal.org packaging script on 2014-09-01
+version = "7.x-1.4"
+core = "7.x"
+project = "shorten"
+datestamp = "1409537029"
+

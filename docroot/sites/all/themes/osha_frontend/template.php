@@ -325,17 +325,17 @@ function osha_frontend_preprocess_page(&$variables){
  * Implements hook_page_alter().
  */
 function osha_frontend_page_alter(&$page) {
-  // Move addtoany links to bottom of the page.
+  // Move share links to bottom of the page.
   if (!empty($page['content']['system_main']['nodes'])
     && count(element_children($page['content']['system_main']['nodes']) == 1)) {
     $keys = element_children($page['content']['system_main']['nodes']);
     $node = &$page['content']['system_main']['nodes'][current($keys)];
-    if (!empty($node['links']['#links']['addtoany'])) {
-      $links = $node['links']['#links']['addtoany'];
-      unset($node['links']['#links']['addtoany']);
-      $page['content']['addtoany'] = array(
-        '#markup' => $links['title'],
-        '#prefix' => '<div id="addtoany_bottom_container">',
+    if (!empty($node['links']['osha_share'])) {
+      $links = $node['links']['osha_share'];
+      unset($node['links']['osha_share']);
+      $page['content']['osha_share'] = array(
+        '#markup' => $links['#markup'],
+        '#prefix' => '<div class="osha_share_bottom_container">',
         '#suffix' => '</div>',
       );
     }

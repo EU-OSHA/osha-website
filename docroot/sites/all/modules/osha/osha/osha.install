@@ -382,3 +382,11 @@ function osha_update_7018() {
   variable_set('osha_unpublish_node_press_release', 24);
   variable_set('osha_unpublish_entity_collection_newsletter_content_collection', 12);
 }
+
+/**
+ * Disable add to any and enable shorten url.
+ */
+function osha_update_7019() {
+  module_enable(array('shorten'));
+  module_disable(array('addtoany'));
+}

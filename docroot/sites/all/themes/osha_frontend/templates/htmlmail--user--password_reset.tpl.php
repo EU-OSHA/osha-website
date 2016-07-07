@@ -60,7 +60,7 @@
   print l(theme('image', array(
     'path' => $directory . '/images/signature-euosha.jpg',
     'width' => 808,
-    'height' => 154,
+    'height' => 96,
     'attributes' => array('style' => 'border: 0px;')
     )), $base_url, array(
     'html' => TRUE,

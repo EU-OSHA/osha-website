@@ -2247,7 +2247,12 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
             }
             if ($job_item->item_type == 'node') {
               // Check if we should create the translation with english values.
-              _osha_tmgmt_negociate_creation_english_translations($job_item->item_id, $target_language);
+              $node = node_load($job_item->item_id);
+              $has_published_version = !empty($node->workbench_moderation['published']->state);
+              $has_translation = !empty($node->translations->data[$target_language]);
+              if (!$has_translation && $has_published_version) {
+                _osha_tmgmt_create_english_translations($target_language, $node);
+              }
             }
             OshaTMGMTStatistics::computeJobItemStatistics($new_job_item);
             $new_job_item->save();
@@ -2315,18 +2320,6 @@ function osha_tmgmt_tmgmt_ui_cart_content_submit($form, &$form_state) {
   }
   else {
     //TODO: Delete the job ...?
-  }
-}
-
-function _osha_tmgmt_negociate_creation_english_translations($nid, $language) {
-  // If we have a draft and published version, and the node doesn't have translation in that language
-  // We copy yhe english version in the translation in order to keep the Draft version
-  // unpublished after we merge the translations coming from tmgmt.
-  $node = node_load($nid);
-  $has_published_version = !empty($node->workbench_moderation['published']->state);
-  $has_translation = !empty($node->translations->data[$language]);
-  if (!$has_translation && $has_published_version && $node->workbench_moderation['current']->state != 'published') {
-    _osha_tmgmt_create_english_translations($language, $node);
   }
 }
 

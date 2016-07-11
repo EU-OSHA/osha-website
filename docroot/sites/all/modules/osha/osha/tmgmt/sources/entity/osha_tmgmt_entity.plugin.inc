@@ -57,6 +57,9 @@ class OSHATMGMTEntitySourcePluginController extends TMGMTEntitySourcePluginContr
     if ( $job_item->item_type == 'node' && workbench_moderation_node_type_moderated($entity->type) ) {
       // Force the same state in order to avoid creation of new weird transitions.
       $entity->workbench_moderation_state_new = $entity->workbench_moderation['current']->state;
+      $entity->workbench_moderation_state_new = OSHA_WORKFLOW_STATE_READY_TO_PUBLISH;
+      // Create a new revision to prevent unpublishing the published version if we translate a draft.
+      $entity->revision = TRUE;
     }
     // Unset the pid so that the alias is created for current language.
     if (!empty($entity->path['pid'])) {

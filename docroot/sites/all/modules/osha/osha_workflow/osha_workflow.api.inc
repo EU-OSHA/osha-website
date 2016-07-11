@@ -878,6 +878,10 @@ class OshaWorkflowNotifications {
    *   (Optional) Identifier for email type  to allow choosing proper template.
    */
   public static function sendEmail($users, $params, $module, $key = 'osha_workflow_notification') {
+    global $osha_workflow_block_mail;
+    if (!empty($osha_workflow_block_mail)) {
+      return;
+    }
     if (empty($users)) {
       drupal_set_message('There are no users to notify about your action. Please report this to system administrator.', 'warning');
       return;
@@ -889,6 +893,7 @@ class OshaWorkflowNotifications {
     if (!is_array($users)) {
       $users = array($users);
     }
+
     foreach ($users as $user) {
       if (self::userAllowsEmailNotifications($user) && variable_get('osha_workflow_send_mail')) {
         $params['user'] = $user;

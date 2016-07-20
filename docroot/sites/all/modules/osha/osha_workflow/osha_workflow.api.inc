@@ -879,7 +879,7 @@ class OshaWorkflowNotifications {
    */
   public static function sendEmail($users, $params, $module, $key = 'osha_workflow_notification') {
     global $osha_workflow_block_mail;
-    if (!empty($osha_workflow_block_mail)) {
+    if ($osha_workflow_block_mail == TRUE) {
       return;
     }
     if (empty($users)) {

@@ -1527,9 +1527,9 @@ function osha_tmgtm_job_item_node_accept($job_item) {
       && $node->workbench_moderation['current']->state == 'published') {
       $node->workbench_moderation_state_new = OSHA_WORKFLOW_STATE_READY_TO_PUBLISH;
       $node->revision = TRUE;
-      $osha_workflow_block_mail = FALSE;
-      node_save($node);
       $osha_workflow_block_mail = TRUE;
+      node_save($node);
+      $osha_workflow_block_mail = FALSE;
     }
     // If the translation is for published revision, then save it.
     // If translation is for a draft, just mark the job item as accepted

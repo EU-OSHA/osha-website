@@ -568,42 +568,51 @@ function osha_tmgmt_job_access($op, $job = NULL, $account = NULL) {
  * {@inheritdoc}
  */
 function osha_tmgmt_node_access($node, $operation, $user) {
+  if (user_is_anonymous()) {
+    return NODE_ACCESS_IGNORE;
+  }
   if ($operation == 'update' || $operation == 'delete') {
   // Deny editing or deletion of nodes in translation workflow
-    if ($user->uid != 1) {
+    $query = db_select('tmgmt_job_item')
+      ->fields(NULL, array('tjiid', 'tjid'));
+    $query->condition('state', '3', '<>') // TMGMT_JOB_ITEM_STATE_ACCEPTED
+      ->condition('state', '4', '<>') // TMGMT_JOB_ITEM_STATE_ABORTED
+      ->condition('item_type', 'node')
+      ->condition('tjid', 0, '<>') // Not in translation cart (temporary)
+      ->condition('item_id', $node->nid);
+    $res = $query->execute();
+    $count = $res->rowCount();
+    if ($count > 0) {
+      $tjid = $res->fetchField(1);
+      $path = current_path();
+      // Show a warning message when in node path.
+      if (user_access('view translation job') && in_array($path, array('node/' . $node->nid, 'node/' . $node->nid . '/edit'))) {
+        $job = tmgmt_job_load($tjid);
+        drupal_set_message(t('This content is in an active translation job: !link', array('!link' => l($job->label, 'admin/tmgmt/jobs/' . $job->tjid))),  'warning');
+      }
+      return NODE_ACCESS_DENY;
+    }
+    /*if (!empty($node->workbench_moderation['current']->state) && $node->workbench_moderation['current']->state != 'published') {
+      // MC-30 - see if there are unmerged items
       $query = db_select('tmgmt_job_item')
         ->fields(NULL, array('tjiid'));
-      $query->condition('state', '3', '<>') // TMGMT_JOB_ITEM_STATE_ACCEPTED
-        ->condition('state', '4', '<>') // TMGMT_JOB_ITEM_STATE_ABORTED
+      $query->condition('state', '4', '<>') // TMGMT_JOB_ITEM_STATE_ABORTED
         ->condition('item_type', 'node')
+        ->condition('item_id', $node->nid)
         ->condition('tjid', 0, '<>') // Not in translation cart (temporary)
-        ->condition('item_id', $node->nid);
+        ->condition('merged', NULL);
+      // Allow to edit in EN when you have pending to me merge some accepted translations
+      // in the case when you have a published version, a Ready to publish version,
+      // some accepted translations for the ready to be published, waiting to be merged
+      // and you want to edit the en version. MC-288
+      if ($language->language == 'en') {
+        $query->condition('state', '3', '<>'); // TMGMT_JOB_ITEM_STATE_ACCEPTED
+      }
       $count = $query->execute()->rowCount();
       if ($count > 0) {
         return NODE_ACCESS_DENY;
       }
-      /*if (!empty($node->workbench_moderation['current']->state) && $node->workbench_moderation['current']->state != 'published') {
-        // MC-30 - see if there are unmerged items
-        $query = db_select('tmgmt_job_item')
-          ->fields(NULL, array('tjiid'));
-        $query->condition('state', '4', '<>') // TMGMT_JOB_ITEM_STATE_ABORTED
-          ->condition('item_type', 'node')
-          ->condition('item_id', $node->nid)
-          ->condition('tjid', 0, '<>') // Not in translation cart (temporary)
-          ->condition('merged', NULL);
-        // Allow to edit in EN when you have pending to me merge some accepted translations
-        // in the case when you have a published version, a Ready to publish version,
-        // some accepted translations for the ready to be published, waiting to be merged
-        // and you want to edit the en version. MC-288
-        if ($language->language == 'en') {
-          $query->condition('state', '3', '<>'); // TMGMT_JOB_ITEM_STATE_ACCEPTED
-        }
-        $count = $query->execute()->rowCount();
-        if ($count > 0) {
-          return NODE_ACCESS_DENY;
-        }
-      }*/
-    }
+    }*/
   }
   return NODE_ACCESS_IGNORE;
 }
@@ -1375,10 +1384,9 @@ function osha_tmgmt_form_tmgmt_ui_entity_translation_review_form_alter(&$form, &
 
   if ($user_can_edit) {
     // Set default access for buttons.
-    $show_ready_to_publish = user_access('set job item to ready to publish state')
-      && !in_array($job_item->state,
-        array(TMGMT_JOB_ITEM_STATE_ACCEPTED, TMGMT_JOB_ITEM_STATE_ABORTED,
-          OSHA_TMGMT_JOB_ITEM_STATE_TranslatedReadyToPublish));
+//    $show_ready_to_publish = user_access('set job item to ready to publish state')
+//      && !in_array($job_item->state,
+//        array(TMGMT_JOB_ITEM_STATE_ACCEPTED, TMGMT_JOB_ITEM_STATE_ABORTED));
 
     // Set WYSIWYG editor for body field.
     if (isset($form['review']['body']['body|0|value']['translation'])) {
@@ -1437,7 +1445,7 @@ function osha_tmgmt_form_tmgmt_ui_entity_translation_review_form_alter(&$form, &
 
     // Append the submit function for Publish button for nodes.
     if ($job_item->state != TMGMT_JOB_ITEM_STATE_ACCEPTED) {
-      $form['actions']['accept']['#value'] = 'Ready to publish';
+      $form['actions']['accept']['#value'] = 'Ready to Publish';
       $form['actions']['accept']['#submit'] = array('osha_tmgtm_job_item_node_accept_submit');
       $form['#submit'] = array();
     }
@@ -2079,8 +2087,9 @@ function osha_tmgmt_get_job_item_states() {
     OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidationRequired => t('Content Validation Required'),
     TMGMT_JOB_ITEM_STATE_ABORTED => t('Translation Rejected'),
     OSHA_TMGMT_JOB_ITEM_STATE_TranslationValidated => t('Translation Validated'),
-    OSHA_TMGMT_JOB_ITEM_STATE_TranslatedReadyToPublish => t('Translated Ready to Publish'),
-    TMGMT_JOB_ITEM_STATE_ACCEPTED => t('Published'),
+//    OSHA_TMGMT_JOB_ITEM_STATE_TranslatedReadyToPublish => t('Translated Ready to Publish'),
+    TMGMT_JOB_ITEM_STATE_ACCEPTED => t('Ready to Publish'),
+//    TMGMT_JOB_ITEM_STATE_ACCEPTED => t('Published'),
   );
 }
 

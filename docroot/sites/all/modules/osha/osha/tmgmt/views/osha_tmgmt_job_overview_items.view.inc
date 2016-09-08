@@ -143,12 +143,26 @@ $handler->display->display_options['relationships']['uid']['relationship'] = 'jo
 $handler->display->display_options['relationships']['job_item_to_node']['id'] = 'job_item_to_node';
 $handler->display->display_options['relationships']['job_item_to_node']['table'] = 'tmgmt_job_item';
 $handler->display->display_options['relationships']['job_item_to_node']['field'] = 'job_item_to_node';
+/* Field: Content: Title */
+$handler->display->display_options['fields']['title_field']['id'] = 'title_field';
+$handler->display->display_options['fields']['title_field']['table'] = 'field_data_title_field';
+$handler->display->display_options['fields']['title_field']['field'] = 'title_field';
+$handler->display->display_options['fields']['title_field']['relationship'] = 'job_item_to_node';
+$handler->display->display_options['fields']['title_field']['exclude'] = TRUE;
+$handler->display->display_options['fields']['title_field']['type'] = 'publication_title_linked';
+$handler->display->display_options['fields']['title_field']['settings'] = array(
+  'title_style' => '_none',
+  'title_link' => 'content',
+  'title_class' => '',
+);
+$handler->display->display_options['fields']['title_field']['link_to_entity'] = 1;
 /* Field: Content (historical data): Title */
 $handler->display->display_options['fields']['title_field-revision_id']['id'] = 'title_field-revision_id';
 $handler->display->display_options['fields']['title_field-revision_id']['table'] = 'field_revision_title_field';
 $handler->display->display_options['fields']['title_field-revision_id']['field'] = 'title_field-revision_id';
 $handler->display->display_options['fields']['title_field-revision_id']['relationship'] = 'job_item_to_node_revision';
 $handler->display->display_options['fields']['title_field-revision_id']['exclude'] = TRUE;
+$handler->display->display_options['fields']['title_field-revision_id']['empty'] = '[title_field]';
 $handler->display->display_options['fields']['title_field-revision_id']['type'] = 'title_linked';
 $handler->display->display_options['fields']['title_field-revision_id']['settings'] = array(
   'title_style' => '_none',
@@ -192,12 +206,13 @@ $handler->display->display_options['fields']['section']['id'] = 'section';
 $handler->display->display_options['fields']['section']['table'] = 'workbench_access';
 $handler->display->display_options['fields']['section']['field'] = 'section';
 $handler->display->display_options['fields']['section']['relationship'] = 'job_item_to_node';
-/* Field: Content (historical data): Activity */
-$handler->display->display_options['fields']['field_activity-revision_id']['id'] = 'field_activity-revision_id';
-$handler->display->display_options['fields']['field_activity-revision_id']['table'] = 'field_revision_field_activity';
-$handler->display->display_options['fields']['field_activity-revision_id']['field'] = 'field_activity-revision_id';
-$handler->display->display_options['fields']['field_activity-revision_id']['relationship'] = 'job_item_to_node_revision';
-$handler->display->display_options['fields']['field_activity-revision_id']['type'] = 'taxonomy_term_reference_plain';
+/* Field: Content: Activity */
+$handler->display->display_options['fields']['field_activity']['id'] = 'field_activity';
+$handler->display->display_options['fields']['field_activity']['table'] = 'field_data_field_activity';
+$handler->display->display_options['fields']['field_activity']['field'] = 'field_activity';
+$handler->display->display_options['fields']['field_activity']['relationship'] = 'job_item_to_node';
+$handler->display->display_options['fields']['field_activity']['type'] = 'taxonomy_term_reference_plain';
+$handler->display->display_options['fields']['field_activity']['delta_offset'] = '0';
 /* Field: Translation Management Job Item: State */
 $handler->display->display_options['fields']['state']['id'] = 'state';
 $handler->display->display_options['fields']['state']['table'] = 'tmgmt_job_item';
@@ -380,6 +395,7 @@ $translatables['osha_job_overview_job_items'] = array(
   t('revision user'),
   t('Content'),
   t('Title'),
+  t('[title_field]'),
   t('Label'),
   t('[title_field-revision_id]'),
   t('Source language'),

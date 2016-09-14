@@ -82,16 +82,6 @@ function osha_legislation_views_default_views() {
   $handler->display->display_options['relationships']['field_directive_type_tid']['table'] = 'field_data_field_directive_type';
   $handler->display->display_options['relationships']['field_directive_type_tid']['field'] = 'field_directive_type_tid';
   $handler->display->display_options['relationships']['field_directive_type_tid']['required'] = TRUE;
-  /* Relationship: Workbench Moderation: Node */
-  $handler->display->display_options['relationships']['nid']['id'] = 'nid';
-  $handler->display->display_options['relationships']['nid']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['relationships']['nid']['field'] = 'nid';
-  $handler->display->display_options['relationships']['nid']['required'] = TRUE;
-  /* Relationship: Content revision: Content */
-  $handler->display->display_options['relationships']['nid_1']['id'] = 'nid_1';
-  $handler->display->display_options['relationships']['nid_1']['table'] = 'node_revision';
-  $handler->display->display_options['relationships']['nid_1']['field'] = 'nid';
-  $handler->display->display_options['relationships']['nid_1']['required'] = TRUE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
   $handler->display->display_options['fields']['title_field']['table'] = 'field_data_title_field';
@@ -158,12 +148,6 @@ function osha_legislation_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Workbench Moderation: Current */
-  $handler->display->display_options['filters']['current']['id'] = 'current';
-  $handler->display->display_options['filters']['current']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['current']['field'] = 'current';
-  $handler->display->display_options['filters']['current']['relationship'] = 'nid';
-  $handler->display->display_options['filters']['current']['value'] = '1';
   /* Filter criterion: Field: Publication date (field_publication_date) */
   $handler->display->display_options['filters']['field_publication_date_value']['id'] = 'field_publication_date_value';
   $handler->display->display_options['filters']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
@@ -236,8 +220,6 @@ function osha_legislation_views_default_views() {
     t('No results'),
     t('term from field_legislation_category'),
     t('term from field_directive_type'),
-    t('Node'),
-    t('Get the actual content from a content revision.'),
     t('[title_field]
 [field_summary]'),
     t('All'),
@@ -458,7 +440,7 @@ function osha_legislation_views_default_views() {
   $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
   $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
   $handler->display->display_options['empty']['area_text_custom']['content'] = 'No results';
-  /* Field: Indexed Multilingual Node: Multilingual ID */
+  /* Field: Indexed Multilingual Content: Multilingual ID */
   $handler->display->display_options['fields']['search_api_et_id']['id'] = 'search_api_et_id';
   $handler->display->display_options['fields']['search_api_et_id']['table'] = 'search_api_index_default_multilingual_node_index';
   $handler->display->display_options['fields']['search_api_et_id']['field'] = 'search_api_et_id';
@@ -467,19 +449,19 @@ function osha_legislation_views_default_views() {
   $handler->display->display_options['sorts']['search_api_relevance']['table'] = 'search_api_index_default_multilingual_node_index';
   $handler->display->display_options['sorts']['search_api_relevance']['field'] = 'search_api_relevance';
   $handler->display->display_options['sorts']['search_api_relevance']['order'] = 'DESC';
-  /* Sort criterion: Indexed Multilingual Node: Date of directive */
+  /* Sort criterion: Indexed Multilingual Content: Date of directive */
   $handler->display->display_options['sorts']['field_date_of_directive']['id'] = 'field_date_of_directive';
   $handler->display->display_options['sorts']['field_date_of_directive']['table'] = 'search_api_index_default_multilingual_node_index';
   $handler->display->display_options['sorts']['field_date_of_directive']['field'] = 'field_date_of_directive';
   $handler->display->display_options['sorts']['field_date_of_directive']['order'] = 'DESC';
-  /* Filter criterion: Indexed Multilingual Node: Status */
+  /* Filter criterion: Indexed Multilingual Content: Status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'search_api_index_default_multilingual_node_index';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = array(
     1 => '1',
   );
-  /* Filter criterion: Indexed Multilingual Node: Content type */
+  /* Filter criterion: Indexed Multilingual Content: Content type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'search_api_index_default_multilingual_node_index';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -505,7 +487,7 @@ function osha_legislation_views_default_views() {
     'body:value' => 'body:value',
     'title_field' => 'title_field',
   );
-  /* Filter criterion: Indexed Multilingual Node: Publication date */
+  /* Filter criterion: Indexed Multilingual Content: Publication date */
   $handler->display->display_options['filters']['field_publication_date']['id'] = 'field_publication_date';
   $handler->display->display_options['filters']['field_publication_date']['table'] = 'search_api_index_default_multilingual_node_index';
   $handler->display->display_options['filters']['field_publication_date']['field'] = 'field_publication_date';
@@ -528,7 +510,7 @@ function osha_legislation_views_default_views() {
   $handler->display->display_options['filters']['search_api_views_fulltext_1']['fields'] = array(
     'title_field' => 'title_field',
   );
-  /* Filter criterion: Indexed Multilingual Node: Item language */
+  /* Filter criterion: Indexed Multilingual Content: Item language */
   $handler->display->display_options['filters']['search_api_language']['id'] = 'search_api_language';
   $handler->display->display_options['filters']['search_api_language']['table'] = 'search_api_index_default_multilingual_node_index';
   $handler->display->display_options['filters']['search_api_language']['field'] = 'search_api_language';
@@ -613,7 +595,7 @@ function osha_legislation_views_default_views() {
   $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
   $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
   $handler->display->display_options['empty']['area_text_custom']['content'] = 'No results';
-  /* Field: Indexed Multilingual Node: Multilingual ID */
+  /* Field: Indexed Multilingual Content: Multilingual ID */
   $handler->display->display_options['fields']['search_api_et_id']['id'] = 'search_api_et_id';
   $handler->display->display_options['fields']['search_api_et_id']['table'] = 'search_api_index_default_multilingual_node_index';
   $handler->display->display_options['fields']['search_api_et_id']['field'] = 'search_api_et_id';
@@ -622,12 +604,12 @@ function osha_legislation_views_default_views() {
   $handler->display->display_options['sorts']['search_api_relevance']['table'] = 'search_api_index_default_multilingual_node_index';
   $handler->display->display_options['sorts']['search_api_relevance']['field'] = 'search_api_relevance';
   $handler->display->display_options['sorts']['search_api_relevance']['order'] = 'DESC';
-  /* Sort criterion: Indexed Multilingual Node: Publication date */
+  /* Sort criterion: Indexed Multilingual Content: Publication date */
   $handler->display->display_options['sorts']['field_publication_date']['id'] = 'field_publication_date';
   $handler->display->display_options['sorts']['field_publication_date']['table'] = 'search_api_index_default_multilingual_node_index';
   $handler->display->display_options['sorts']['field_publication_date']['field'] = 'field_publication_date';
   $handler->display->display_options['sorts']['field_publication_date']['order'] = 'DESC';
-  /* Filter criterion: Indexed Multilingual Node: Status */
+  /* Filter criterion: Indexed Multilingual Content: Status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'search_api_index_default_multilingual_node_index';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -635,7 +617,7 @@ function osha_legislation_views_default_views() {
     1 => '1',
   );
   $handler->display->display_options['filters']['status']['group'] = 1;
-  /* Filter criterion: Indexed Multilingual Node: Content type */
+  /* Filter criterion: Indexed Multilingual Content: Content type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'search_api_index_default_multilingual_node_index';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -672,14 +654,14 @@ function osha_legislation_views_default_views() {
     'field_summary' => 'field_summary',
     'title_field' => 'title_field',
   );
-  /* Filter criterion: Indexed Multilingual Node: Publication date */
+  /* Filter criterion: Indexed Multilingual Content: Publication date */
   $handler->display->display_options['filters']['field_publication_date']['id'] = 'field_publication_date';
   $handler->display->display_options['filters']['field_publication_date']['table'] = 'search_api_index_default_multilingual_node_index';
   $handler->display->display_options['filters']['field_publication_date']['field'] = 'field_publication_date';
   $handler->display->display_options['filters']['field_publication_date']['operator'] = '<=';
   $handler->display->display_options['filters']['field_publication_date']['value'] = 'now';
   $handler->display->display_options['filters']['field_publication_date']['group'] = 1;
-  /* Filter criterion: Indexed Multilingual Node: Item language */
+  /* Filter criterion: Indexed Multilingual Content: Item language */
   $handler->display->display_options['filters']['search_api_language']['id'] = 'search_api_language';
   $handler->display->display_options['filters']['search_api_language']['table'] = 'search_api_index_default_multilingual_node_index';
   $handler->display->display_options['filters']['search_api_language']['field'] = 'search_api_language';

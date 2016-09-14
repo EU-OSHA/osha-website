@@ -31,7 +31,7 @@ function osha_blocks_block_info() {
 
   $blocks['osha_block_group_related'] = array(
     'info' => t('Related content'),
-    'cache' => DRUPAL_CACHE_PER_PAGE,
+    'cache' => DRUPAL_CACHE_PER_USER | DRUPAL_CACHE_PER_PAGE,
   );
 
   return $blocks;

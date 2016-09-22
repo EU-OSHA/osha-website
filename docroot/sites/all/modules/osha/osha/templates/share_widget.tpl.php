@@ -31,6 +31,10 @@
     <li id="linked-in-<?php print $node->nid; ?>" class="osha-share-widget-button osha-share-widget-linkedin">
       <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?php print $url; ?>">Linked in</a>
     </li>
+    <li id="google-plus-<?php print $node->nid; ?>" class="osha-share-widget-button osha-share-widget-google-plus">
+      <a onclick="window.open(this.href, 'hwc-share', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+         href="https://plus.google.com/share?url=<?php print $url; ?>">Google+</a>
+    </li>
     <li id="print-<?php print $node->nid; ?>" class="osha-share-widget-button osha-share-widget-print">
       <a href="javascript:print()">Print</a>
     </li>

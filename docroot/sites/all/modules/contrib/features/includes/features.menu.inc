@@ -103,7 +103,6 @@ function menu_custom_features_export_render($module, $data) {
     $code[] = features_translatables_export($translatables, '  ');
   }
 
-  $code[] = '';
   $code[] = '  return $menus;';
   $code = implode("\n", $code);
   return array('menu_default_menu_custom' => $code);
@@ -224,20 +223,6 @@ function menu_links_features_export_render($module, $data, $export = NULL) {
     if ($link = features_menu_link_load($identifier)) {
       $new_identifier = menu_links_features_identifier($link, empty($export));
 
-      // Export entity UUID.
-      if (isset($link['router_path'])) {
-        switch ($link['router_path']) {
-          case 'node/%':
-            $nid = str_replace('node/', '', $link['link_path']);
-            $item_uuid = db_select('node', 'n')
-              ->fields('n', array('uuid'))
-              ->condition('nid', $nid)
-              ->execute()
-              ->fetchField();
-            $link['item_uuid'] = $item_uuid;
-            break;
-        }
-      }
       // Replace plid with a parent path.
       if (!empty($link['plid']) && $parent = menu_link_load($link['plid'])) {
         // If the new identifier is different than the old, maintain
@@ -262,16 +247,16 @@ function menu_links_features_export_render($module, $data, $export = NULL) {
        unset($link['plid']);
        unset($link['mlid']);
 
-      $code[] = "  // Exported menu link: {$new_identifier}";
+      $code[] = "  // Exported menu link: {$new_identifier}.";
       $code[] = "  \$menu_links['{$new_identifier}'] = ". features_var_export($link, '  ') .";";
       $translatables[] = $link['link_title'];
     }
   }
+  $code[] = '';
   if (!empty($translatables)) {
     $code[] = features_translatables_export($translatables, '  ');
   }
 
-  $code[] = '';
   $code[] = '  return $menu_links;';
   $code = implode("\n", $code);
   return array('menu_default_menu_links' => $code);
@@ -330,6 +315,7 @@ function menu_links_features_rebuild_ordered($menu_links, $reset = FALSE) {
     foreach ($unordered as $link) {
       $identifier = menu_links_features_identifier($link);
       $ordered[$identifier] = 0;
+      $all_links[$identifier] = $link;
     }
     asort($ordered);
   }
@@ -354,25 +340,6 @@ function menu_links_features_rebuild_ordered($menu_links, $reset = FALSE) {
        }
       else {
         $link['plid'] = 0;
-      }
-
-      // Set the path to use entity id loaded with UUID.
-      if (!empty($link['item_uuid']) && !empty($link['router_path'])) {
-        switch ($link['router_path']) {
-          case 'node/%':
-            $entity_id = db_select('node', 'n')
-              ->fields('n', array('nid'))
-              ->condition('uuid', $link['item_uuid'])
-              ->execute()
-              ->fetchField();
-            if (!empty($entity_id)) {
-              $link['link_path'] = str_replace('%', $entity_id, $link['router_path']);
-            }
-            else {
-              $link['link_path'] = '<front>';
-            }
-            break;
-        }
       }
       menu_link_save($link);
     }

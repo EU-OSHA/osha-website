@@ -50,8 +50,7 @@ function eu_cookie_compliance_page_build(&$page) {
   }
 
   if (isset($popup_settings['eu_only']) && $popup_settings['eu_only']) {
-    //use the geoip function if exists
-    $country_code = function_exists('geoip_country_code_by_name') ? geoip_country_code_by_name(ip_address()) : '';
+    $country_code = '';
     if(module_exists('geoip')) {
       $country_code = geoip_country_code();
     } elseif(module_exists('smart_ip')) {
@@ -91,7 +90,6 @@ function eu_cookie_compliance_page_build(&$page) {
         }
       }
       // color overrides
-      $data['css'] = '';
       if ($popup_settings['popup_bg_hex'] != '' and $popup_settings['popup_text_hex'] != '') {
         $position = $popup_settings['popup_position'] ? 'top' : 'bottom';
         $data['css'] = '#sliding-popup.sliding-popup-' . $position . ' {background:#'. check_plain($popup_settings["popup_bg_hex"]) . ';}'
@@ -119,7 +117,6 @@ function eu_cookie_compliance_page_build(&$page) {
         'popup_position' => empty($popup_settings['popup_position']) ? NULL : $popup_settings['popup_position'],
         'popup_language' => $language->language,
         'domain' => variable_get('eu_cookie_compliance_domain', ''),
-        'cookie_lifetime' => variable_get('eu_cookie_compliance_cookie_lifetime', 100),
       );
       cache_set('eu_cookie_compliance_client_settings_' . $language->language, $data, 'cache', CACHE_TEMPORARY);
      }

@@ -3311,6 +3311,9 @@ a.button-submit {
 	border: 0 !important;
 }
 
+.osha-share-widget li.osha-share-widget-google-plus a {
+	background: url("../images/google-corporate.png") repeat-x scroll 0% 100% rgba(0, 0, 0, 0)!important;
+}
 .osha-share-widget li.osha-share-widget-linkedin a {
 	background: url("../images/share_in.png") repeat-x scroll 0% 100% rgba(0, 0, 0, 0)!important;
 }

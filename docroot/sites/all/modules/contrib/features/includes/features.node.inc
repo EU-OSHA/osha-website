@@ -76,7 +76,7 @@ function node_features_export_render($module, $data, $export = NULL) {
       foreach ($elements as $key => $t) {
         if ($t) {
           $text = str_replace("'", "\'", $info->$key);
-          $text = !empty($text) ? "t('{$text}')" : "''";
+          $text = !empty($text) ? "'{$text}'" : "''";
           $output[] = "      '{$key}' => {$text},";
         }
         else {

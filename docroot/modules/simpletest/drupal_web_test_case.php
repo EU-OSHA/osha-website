@@ -854,6 +854,13 @@ class DrupalWebTestCase extends DrupalTestCase {
   protected $cookieFile = NULL;
 
   /**
+   * The cookies of the page currently loaded in the internal browser.
+   *
+   * @var array
+   */
+  protected $cookies = array();
+
+  /**
    * Additional cURL options.
    *
    * DrupalWebTestCase itself never sets this but always obeys what is set.
@@ -942,7 +949,6 @@ class DrupalWebTestCase extends DrupalTestCase {
   protected function drupalCreateNode($settings = array()) {
     // Populate defaults array.
     $settings += array(
-      'body'      => array(LANGUAGE_NONE => array(array())),
       'title'     => $this->randomName(8),
       'comment'   => 2,
       'changed'   => REQUEST_TIME,
@@ -955,6 +961,12 @@ class DrupalWebTestCase extends DrupalTestCase {
       'type'      => 'page',
       'revisions' => NULL,
       'language'  => LANGUAGE_NONE,
+    );
+
+    // Add the body after the language is defined so that it may be set
+    // properly.
+    $settings += array(
+      'body' => array($settings['language'] => array(array())),
     );
 
     // Use the original node's created time for existing nodes.
@@ -1015,9 +1027,7 @@ class DrupalWebTestCase extends DrupalTestCase {
       'description' => '',
       'help' => '',
       'title_label' => 'Title',
-      'body_label' => 'Body',
       'has_title' => 1,
-      'has_body' => 1,
     );
     // Imposed values for a custom type.
     $forced = array(
@@ -1067,7 +1077,7 @@ class DrupalWebTestCase extends DrupalTestCase {
       $lines = array(16, 256, 1024, 2048, 20480);
       $count = 0;
       foreach ($lines as $line) {
-        simpletest_generate_file('text-' . $count++, 64, $line);
+        simpletest_generate_file('text-' . $count++, 64, $line, 'text');
       }
 
       // Copy other test files from simpletest.
@@ -1695,8 +1705,10 @@ class DrupalWebTestCase extends DrupalTestCase {
       $GLOBALS['conf']['language_default'] = $this->originalLanguageDefault;
     }
 
-    // Close the CURL handler.
+    // Close the CURL handler and reset the cookies array so test classes
+    // containing multiple tests are not polluted.
     $this->curlClose();
+    $this->cookies = array();
   }
 
   /**
@@ -2060,7 +2072,7 @@ class DrupalWebTestCase extends DrupalTestCase {
         $submit_matches = $this->handleForm($post, $edit, $upload, $ajax ? NULL : $submit, $form);
         $action = isset($form['action']) ? $this->getAbsoluteUrl((string) $form['action']) : $this->getUrl();
         if ($ajax) {
-          $action = $this->getAbsoluteUrl(!empty($submit['path']) ? $submit['path'] : 'system/ajax');
+          $action = $this->getAbsoluteUrl(!empty($submit['path']) ? $submit['path'] : url('system/ajax'));
           // Ajax callbacks verify the triggering element if necessary, so while
           // we may eventually want extra code that verifies it in the
           // handleForm() function, it's not currently a requirement.
@@ -2586,6 +2598,11 @@ class DrupalWebTestCase extends DrupalTestCase {
    *
    * @param $xpath
    *   The xpath string to use in the search.
+   * @param array $arguments
+   *   An array of arguments with keys in the form ':name' matching the
+   *   placeholders in the query. The values may be either strings or numeric
+   *   values.
+   *
    * @return
    *   The return value of the xpath search. For details on the xpath string
    *   format and return values see the SimpleXML documentation,
@@ -2742,7 +2759,8 @@ class DrupalWebTestCase extends DrupalTestCase {
    * @param $path
    *   A path from the internal browser content.
    * @return
-   *   The $path with $base_url prepended, if necessary.
+   *   The $path with the internal browser's base URL or $base_url prepended, if
+   *   necessary.
    */
   protected function getAbsoluteUrl($path) {
     global $base_url, $base_path;
@@ -2751,13 +2769,27 @@ class DrupalWebTestCase extends DrupalTestCase {
     if (empty($parts['host'])) {
       // Ensure that we have a string (and no xpath object).
       $path = (string) $path;
+      // Return an absolute URL based on the internal browser's current URL if
+      // it is not using the internal: scheme.
+      $parts = parse_url($this->getUrl());
+      if ($parts['scheme'] != 'internal') {
+        $port = isset($parts['port']) ? ':' . $parts['port'] : '';
+        $url = $parts['scheme'] . '://' . $parts['host'] . $port;
+        if ($path[0] === '/') {
+          $url .= $path;
+        }
+        else {
+          $url .= preg_replace('@(.*/)([^/]*)@', '$1' . $path, $parts['path']);
+        }
+        return $url;
+      }
       // Strip $base_path, if existent.
       $length = strlen($base_path);
       if (substr($path, 0, $length) === $base_path) {
         $path = substr($path, $length);
       }
       // Ensure that we have an absolute path.
-      if ($path[0] !== '/') {
+      if (empty($path) || $path[0] !== '/') {
         $path = '/' . $path;
       }
       // Finally, prepend the $base_url.

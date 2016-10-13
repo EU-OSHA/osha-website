@@ -48,6 +48,11 @@ List of patches (most recent first)
   * /patches/drupal/471970_0.patch
   * /patches/drupal/961508-20.patch
 
+* drupal (core)
+  * Menu links with query string params (from views exposed filters, solr facetAPI search, etc) get munged by url encoding
+  * https://www.drupal.org/node/1220410
+  * core/core-menu_links_with_query_param-1220410-coment-16.patch
+
 * varnish
   * req.http.host not correct when using custom port for varnish.
   * /patches/varnish/parse_url_fix.patch
@@ -135,11 +140,6 @@ List of patches (most recent first)
 * tmgmt
   * Menu link source search is not case sensitive
   * patches/tmgmt/i18n_string-search-case-insensitive.patch
-
-* drupal (core)
-  * Menu links with query string params (from views exposed filters, solr facetAPI search, etc) get munged by url encoding
-  * https://www.drupal.org/node/1220410
-  * core/core-menu_links_with_query_param-1220410-coment-16.patch
 
 * workbench_access
   * Preview error (Warning: array_keys() expects parameter 1 to be array, string given in workbench_access_node_form_element() (line 1467 of ...

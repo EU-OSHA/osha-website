@@ -142,7 +142,7 @@
 
   Drupal.eu_cookie_compliance.setStatus = function(status) {
     var date = new Date();
-    date.setDate(date.getDate() + parseInt(Drupal.settings.eu_cookie_compliance.cookie_lifetime));
+    date.setDate(date.getDate() + 100);
     var cookie = "cookie-agreed=" + status + ";expires=" + date.toUTCString() + ";path=" + Drupal.settings.basePath;
     if(Drupal.settings.eu_cookie_compliance.domain) {
       cookie += ";domain="+Drupal.settings.eu_cookie_compliance.domain;

@@ -1,0 +1,16 @@
+diff --git a/contrib/search_api_views/includes/query.inc b/contrib/search_api_views/includes/query.inc
+index bc9af4d..a2a2c61 100644
+--- a/contrib/search_api_views/includes/query.inc
++++ b/contrib/search_api_views/includes/query.inc
+@@ -560,7 +560,10 @@ class SearchApiViewsQuery extends views_plugin_query {
+     // If the results are entities, we pre-load them to make use of a multiple
+     // load. (Otherwise, each result would be loaded individually.)
+     if (!empty($load_items)) {
+-      $items = $this->index->loadItems(array_keys($load_items));
++//      $items = $this->index->loadItems(array_keys($load_items));
++      // Reverted this line as a temporary patch after update views to 7.x-1.20
++      // conflict with search_api_et loadItems() - returns no entities when no search word
++      $items = entity_load($type, array_keys($load_items));
+       foreach ($items as $id => $item) {
+         $wrappers[$load_items[$id]] = $this->index->entityWrapper($item);
+       }

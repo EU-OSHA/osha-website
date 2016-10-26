@@ -218,9 +218,29 @@ function osha_tmgmt_retranslate_ui_form_submit(&$form, &$form_state) {
 class OshaTMGMTRetranslate {
 
   /**
+  * Recursively remove all tmgmt-id attributes from markup
+  */
+  public static function cleanup_text($text) {
+    if (empty($text)) {
+        // Return empty array for empty text to avoid warnings
+        return array();
+      }
+      $dom = self::getDOMDocument($text);
+      $body = $dom->getElementsByTagName('body')->item(0);
+
+      $result = array();
+      $callback = function(&$item, &$result, $div_start, $div_end) {
+        $item->removeAttribute('id');
+      };
+      self::browseDOMRecursive($body->childNodes, $callback, $result, TRUE, TRUE);
+      return self::getHTML($body->childNodes);
+  }
+
+  /**
    * Add data-translation-id for level 1 HTML elements.
+   * original_text is optional and used for safer detection of max id
    */
-  public static function prepare_text($text) {
+  public static function prepare_text($text, $original_texts=[]) {
     if (empty($text)) {
       return $text;
     }
@@ -239,10 +259,17 @@ class OshaTMGMTRetranslate {
         $max = max(substr($id, strlen(ID_PREFIX)), $max);
       }
     };
+    // first pass, to ensure the original text did not contain id's higher than the new max
+    foreach ($original_texts as $original_text) {
+      $dom = self::getDOMDocument($original_text);
+      $body = $dom->getElementsByTagName('body')->item(0);
+      self::browseDOMRecursive($body->childNodes, $callback, $max);
+    }
+
     $dom = self::getDOMDocument($text);
     $body = $dom->getElementsByTagName('body')->item(0);
-
     self::browseDOMRecursive($body->childNodes, $callback, $max);
+
     // Once again, and set id's where we have new tags.
     $callback = function(&$item, &$current_id, $div_start, $div_end) {
       if ($div_end) {

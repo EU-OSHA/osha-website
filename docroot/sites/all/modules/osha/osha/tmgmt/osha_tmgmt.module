@@ -3049,3 +3049,15 @@ function osha_tmgmt_literal_get_translation($string) {
     return t($string); // Applies only to english untranslated strings
   }
 }
+
+/**
+ * Implements hook_wysiwyg_editor_settings_alter to remove tmgmt-id on paste
+ */
+function osha_tmgmt_wysiwyg_editor_settings_alter(&$settings, $context) {
+  if ($context['editor']['name'] == 'tinymce') {
+    drupal_add_js(drupal_get_path('module', 'osha_tmgmt') . '/js/osha_tmgmt_tinymce.js');
+    //$settings['setup'] = 'osha_tmgmt_tinymce_setup';
+    //$settings['paste_preprocess'] = 'osha_tmgmt_tinymce_paste_preprocess';
+    $settings['paste_postprocess'] = 'osha_tmgmt_tinymce_paste_postprocess';
+  }
+}

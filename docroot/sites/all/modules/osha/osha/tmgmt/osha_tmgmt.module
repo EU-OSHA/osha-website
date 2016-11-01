@@ -735,7 +735,7 @@ function osha_tmgmt_node_presave($node) {
       if (isset($node->body[$lang][0]['format']) && $node->body[$lang][0]['format'] == 'full_html') {
         // can be not set for a new node with empty body
         $previous_texts = [];
-        if (!empty($node->original)) {
+        if (!empty($node->original) && !!empty($node->osha_skip_original_text)) {
           // this is the published version.
           $previous_texts[] = $node->original->body[$lang][0]['value'];
           if (isset($node->workbench_moderation['current']->published) && $node->workbench_moderation['current']->published==0) {
@@ -1382,13 +1382,15 @@ function osha_tmgmt_retranslate_cleanup_ui($form, &$form_state) {
         // can be not set for a new node with empty body
         $new_text = OshaTMGMTRetranslate::cleanup_text($node->body[$lang][0]['value']);
         $node->body[$lang][0]['value'] = $new_text;
-        $new_text = OshaTMGMTRetranslate::prepare_text($node->body[$lang][0]['value']);
+        //$new_text = OshaTMGMTRetranslate::prepare_text($node->body[$lang][0]['value']);
       }
     }
 
     $state = $node->workbench_moderation['current']->state;
     $node->workbench_moderation_state_new = $state;
     $node->workbench_moderation_state_current = $state;
+    // flag the node for osha_tmgmt_node_presave
+    $node->osha_skip_original_text=true;
     node_save($node);
   }
 }

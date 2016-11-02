@@ -389,6 +389,8 @@ class OshaMigrateSourceWiki extends MigrateSource {
     $patterns[5] = "/''([^']*)''/";
     // Replace http links.
     $patterns[6] = "/\[([^\s\[]*)\s([^\[]*)\]/";
+    // Lists *
+    $patterns[7] = "/\*+(.*)?.(;)?$/";
 
     $replacements = array();
     $replacements[0] = '';
@@ -398,6 +400,7 @@ class OshaMigrateSourceWiki extends MigrateSource {
     $replacements[4] = '<b>${1}</b>';
     $replacements[5] = '<i>${1}</i>';
     $replacements[6] = '<a href="${1}">${2}</a>';
+    $replacements[7] = '<span>${1};</span>';
 
     $summary = '';
     $char_count = 0;

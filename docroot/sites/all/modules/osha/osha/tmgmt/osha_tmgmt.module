@@ -728,14 +728,15 @@ function osha_tmgmt_node_presave($node) {
       $node->field_page_count[LANGUAGE_NONE][0]['value'] = $node->page_count;
     }
   }
+  $dissalowed = array('wiki_page');
   // Prepare re-translation information
-  if (isset($node->body) && is_array($node->body)) {
+  if (!in_array($node->type, $dissalowed) && isset($node->body) && is_array($node->body)) {
     // reformat body text for all languages and enhance paragraphs with unique id's
     foreach(array_keys($node->body) as $lang) {
       if (isset($node->body[$lang][0]['format']) && $node->body[$lang][0]['format'] == 'full_html') {
         // can be not set for a new node with empty body
         $previous_texts = [];
-        if (!empty($node->original)) {
+        if (!empty($node->original) && !!empty($node->osha_skip_original_text)) {
           // this is the published version.
           $previous_texts[] = $node->original->body[$lang][0]['value'];
           if (isset($node->workbench_moderation['current']->published) && $node->workbench_moderation['current']->published==0) {
@@ -1382,13 +1383,15 @@ function osha_tmgmt_retranslate_cleanup_ui($form, &$form_state) {
         // can be not set for a new node with empty body
         $new_text = OshaTMGMTRetranslate::cleanup_text($node->body[$lang][0]['value']);
         $node->body[$lang][0]['value'] = $new_text;
-        $new_text = OshaTMGMTRetranslate::prepare_text($node->body[$lang][0]['value']);
+        //$new_text = OshaTMGMTRetranslate::prepare_text($node->body[$lang][0]['value']);
       }
     }
 
     $state = $node->workbench_moderation['current']->state;
     $node->workbench_moderation_state_new = $state;
     $node->workbench_moderation_state_current = $state;
+    // flag the node for osha_tmgmt_node_presave
+    $node->osha_skip_original_text=true;
     node_save($node);
   }
 }
@@ -3047,5 +3050,17 @@ function osha_tmgmt_literal_get_translation($string) {
   }
   else {
     return t($string); // Applies only to english untranslated strings
+  }
+}
+
+/**
+ * Implements hook_wysiwyg_editor_settings_alter to remove tmgmt-id on paste
+ */
+function osha_tmgmt_wysiwyg_editor_settings_alter(&$settings, $context) {
+  if ($context['editor']['name'] == 'tinymce') {
+    drupal_add_js(drupal_get_path('module', 'osha_tmgmt') . '/js/osha_tmgmt_tinymce.js');
+    //$settings['setup'] = 'osha_tmgmt_tinymce_setup';
+    //$settings['paste_preprocess'] = 'osha_tmgmt_tinymce_paste_preprocess';
+    $settings['paste_postprocess'] = 'osha_tmgmt_tinymce_paste_postprocess';
   }
 }

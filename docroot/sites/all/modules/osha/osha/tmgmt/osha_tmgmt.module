@@ -728,8 +728,9 @@ function osha_tmgmt_node_presave($node) {
       $node->field_page_count[LANGUAGE_NONE][0]['value'] = $node->page_count;
     }
   }
+  $dissalowed = array('wiki_page');
   // Prepare re-translation information
-  if (isset($node->body) && is_array($node->body)) {
+  if (!in_array($node->type, $dissalowed) && isset($node->body) && is_array($node->body)) {
     // reformat body text for all languages and enhance paragraphs with unique id's
     foreach(array_keys($node->body) as $lang) {
       if (isset($node->body[$lang][0]['format']) && $node->body[$lang][0]['format'] == 'full_html') {

@@ -382,8 +382,8 @@ class OshaMigrateSourceWiki extends MigrateSource {
     $patterns[0] = '/====\s*([^=]*)\s*====/';
     $patterns[1] = '/===\s*([^=]*)\s*===/';
     $patterns[2] = '/==\s*([^=]*)\s*==/';
-    // Internal [[Wiki Links]]
-    $patterns[3] = '/\[\[([^\]\|]*)\|*([^\]]*)\]\]/';
+    // Link to files [[File:*]]
+    $patterns[3] = '/\[\[File:([^\]\|]*)\|*([^\]]*)\]\]/';
     // '''''bold+italic''''', '''bold''', ''italic''
     $patterns[4] = "/'''([^']*)'''/";
     $patterns[5] = "/''([^']*)''/";
@@ -391,16 +391,22 @@ class OshaMigrateSourceWiki extends MigrateSource {
     $patterns[6] = "/\[([^\s\[]*)\s([^\[]*)\]/";
     // Lists *
     $patterns[7] = "/\*+(.*)?.(;)?$/";
+    // Internal {{Metadata}}
+    $patterns[8] = '/{{+(.*)}}/';
+    // Internal [[Wiki Links]]
+    $patterns[9] = '/\[\[([^\]\|]*)\|*([^\]]*)\]\]/';
 
     $replacements = array();
     $replacements[0] = '';
     $replacements[1] = '';
     $replacements[2] = '';
-    $replacements[3] = '<a href="' . $osh_wiki_prefix . '${1}">${2}</a>';
+    $replacements[3] = '';
     $replacements[4] = '<b>${1}</b>';
     $replacements[5] = '<i>${1}</i>';
     $replacements[6] = '<a href="${1}">${2}</a>';
     $replacements[7] = '<span>${1};</span>';
+    $replacements[8] = '';
+    $replacements[9] = '<a href="' . $osh_wiki_prefix . '${1}">${2}</a>';
 
     $summary = '';
     $char_count = 0;

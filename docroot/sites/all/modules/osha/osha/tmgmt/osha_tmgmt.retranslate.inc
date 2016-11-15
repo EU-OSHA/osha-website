@@ -230,7 +230,9 @@ class OshaTMGMTRetranslate {
 
       $result = array();
       $callback = function(&$item, &$result, $div_start, $div_end) {
-        $item->removeAttribute('id');
+        if (get_class($item) == 'DOMElement') {
+          $item->removeAttribute('id');
+        }
       };
       self::browseDOMRecursive($body->childNodes, $callback, $result, TRUE, TRUE);
       return self::getHTML($body->childNodes);

@@ -2424,10 +2424,15 @@ function _osha_tmgmt_create_english_translations($language, $node) {
     }
     $field_name = $field['field_name'];
     $field_info = field_info_field($field_name);
-    if ( $field_info['type'] == 'file') {
-      // Set for all existing languages also, otherwise it is removed by file_field_update
-      // see https://www.drupal.org/node/1483736 and https://jira.osha.europa.eu/browse/MDR-767
-      $new_node->{$field_name} = $node->{$field_name};
+    if ( $field_info['type'] == 'file' || $field_info['type'] == 'image' ) {
+      if ($field_info['cardinality'] == 1) {
+        // don't clone fields with cardinality 1
+        continue;
+      } else {
+        // Set for all existing languages also, otherwise it is removed by file_field_update
+        // see https://www.drupal.org/node/1483736 and https://jira.osha.europa.eu/browse/MDR-767
+        $new_node->{$field_name} = $node->{$field_name};
+      }
     }
     $new_node->{$field_name}[$language] = $node->{$field_name}[$source_lang];
   }

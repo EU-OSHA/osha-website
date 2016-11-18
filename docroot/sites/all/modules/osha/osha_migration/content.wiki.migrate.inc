@@ -247,9 +247,6 @@ class OshaMigrateSourceWiki extends MigrateSource {
       $page = 0;
       while (TRUE) {
         try {
-          if ($page == 1) {
-            break;
-          }
           $this->setMessage("Processing results page $page", MigrationBase::MESSAGE_INFORMATIONAL);
           $url = $base_url . '&p%5Boffset%5D=' . ($page * $page_size);
           $content = '';

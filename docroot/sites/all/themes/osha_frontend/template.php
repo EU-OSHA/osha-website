@@ -577,6 +577,9 @@ function _osha_frontend_get_field_value($row, $field1, $field2) {
 }
 
 function osha_frontend_menu_local_tasks_alter(&$data, $router_item, $root_path) {
+  if (empty($data['tabs'])) {
+    return;
+  }
   foreach ($data['tabs'][0]['output'] as &$tab) {
     if ($tab['#link']['path'] == 'node/%/open_all_translations') {
       $tab['#link']['path'] = '#';

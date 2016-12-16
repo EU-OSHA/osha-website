@@ -359,7 +359,7 @@ class OshaMigrateSourceWiki extends MigrateSource {
    * @return string
    *   Summary text to add into field_summary
    */
-  protected function getWikiSummaryFromBody($body) {
+  public static function getWikiSummaryFromBody($body) {
     $osha_wiki_hostname = variable_get('osha_wiki_hostname', 'https://oshwiki.eu');
     $osh_wiki_prefix = $osha_wiki_hostname . '/wiki/';
 
@@ -398,6 +398,7 @@ class OshaMigrateSourceWiki extends MigrateSource {
     $patterns[8] = '/{{+(.*)}}/';
     // Internal [[Wiki Links]]
     $patterns[9] = '/\[\[([^\]\|]*)\|*([^\]]*)\]\]/';
+    $patterns[10] = '/=\s*([^=]*)\s*=/';
 
     $replacements = array();
     $replacements[0] = '';
@@ -410,6 +411,7 @@ class OshaMigrateSourceWiki extends MigrateSource {
     $replacements[7] = '<span>${1};</span>';
     $replacements[8] = '';
     $replacements[9] = '<a href="' . $osh_wiki_prefix . '${1}">${2}</a>';
+    $replacements[10] = '';
 
     $summary = '';
     $char_count = 0;

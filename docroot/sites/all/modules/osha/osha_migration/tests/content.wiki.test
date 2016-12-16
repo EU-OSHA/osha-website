@@ -2,6 +2,8 @@
 
 /**
  * Class WikiParseTest tests parsing of the wiki articles
+ *
+ * php ./scripts/run-tests.sh --verbose --color --class WikiParseTest
  */
 class WikiParseTest extends DrupalUnitTestCase {
 
@@ -82,5 +84,16 @@ class WikiParseTest extends DrupalUnitTestCase {
     }
     // print $summary;
     // @todo: finish this test
+  }
+
+  public function testSummaryH1() {
+    $osh_wiki_prefix = 'http://oshwiki.eu/wiki/';
+
+    $source_file = drupal_get_path('module', 'osha_migration') . '/data/test/wiki6.json';
+    $json = json_decode(file_get_contents($source_file), TRUE);
+    $body = $json['parse']['wikitext']['*'];
+
+    $summary = OshaMigrateSourceWiki::getWikiSummaryFromBody($body);
+    $this->assertTrue(strpos($summary, '=Occupational safety and health legislative framework=') === FALSE, 'Looking for invalid =title= string');
   }
 }

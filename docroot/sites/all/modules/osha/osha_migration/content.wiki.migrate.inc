@@ -359,7 +359,7 @@ class OshaMigrateSourceWiki extends MigrateSource {
    * @return string
    *   Summary text to add into field_summary
    */
-  protected function getWikiSummaryFromBody($body) {
+  public static function getWikiSummaryFromBody($body) {
     $osha_wiki_hostname = variable_get('osha_wiki_hostname', 'https://oshwiki.eu');
     $osh_wiki_prefix = $osha_wiki_hostname . '/wiki/';
 
@@ -385,31 +385,35 @@ class OshaMigrateSourceWiki extends MigrateSource {
     $patterns[0] = '/====\s*([^=]*)\s*====/';
     $patterns[1] = '/===\s*([^=]*)\s*===/';
     $patterns[2] = '/==\s*([^=]*)\s*==/';
+    $patterns[3] = '/=\s*([^=]*)\s*=/';
     // Link to files [[File:*]]
-    $patterns[3] = '/\[\[File:([^\]\|]*)\|*([^\]]*)\]\]/';
+    $patterns[4] = '/\[\[File:([^\]\|]*)\|*([^\]]*)\]\]/';
     // '''''bold+italic''''', '''bold''', ''italic''
-    $patterns[4] = "/'''([^']*)'''/";
-    $patterns[5] = "/''([^']*)''/";
-    // Replace http links.
-    $patterns[6] = "/\[([^\s\[]*)\s([^\[]*)\]/";
+    $patterns[5] = "/'''([^']*)'''/";
+    $patterns[6] = "/''([^']*)''/";
+    // Replace [[Category:*]] with ''
+    $patterns[7] = '/\[\[Image:([\|a-zA-Z\s\:\-\.])*\]\]/';
+    $patterns[8] = '/\[\[Category:([\|a-zA-Z\s\:\-])*\]\]/';
+    // Replace [[Wiki page title|url]] with <a href='https://oshwiki.eu/Wiki page title'>Wiki page title</a>
+    $patterns[9] = '/\[\[([a-zA-Z\s\:\-]+)([\|a-zA-Z\s\:\-])*\]\]/';
     // Lists *
-    $patterns[7] = "/\*+(.*)?.(;)?$/";
+    $patterns[10] = "/\*+(.*)?.(;)?$/";
     // Internal {{Metadata}}
-    $patterns[8] = '/{{+(.*)}}/';
-    // Internal [[Wiki Links]]
-    $patterns[9] = '/\[\[([^\]\|]*)\|*([^\]]*)\]\]/';
+    $patterns[11] = '/{{+(.*)}}/';
 
     $replacements = array();
     $replacements[0] = '';
     $replacements[1] = '';
     $replacements[2] = '';
     $replacements[3] = '';
-    $replacements[4] = '<b>${1}</b>';
-    $replacements[5] = '<i>${1}</i>';
-    $replacements[6] = '<a href="${1}">${2}</a>';
-    $replacements[7] = '<span>${1};</span>';
+    $replacements[4] = '';
+    $replacements[5] = '<b>${1}</b>';
+    $replacements[6] = '<i>${1}</i>';
+    $replacements[7] = '';
     $replacements[8] = '';
-    $replacements[9] = '<a href="' . $osh_wiki_prefix . '${1}">${2}</a>';
+    $replacements[9] = sprintf('<a href="%s${1}">${1}</a>', $osh_wiki_prefix);
+    $replacements[10] = '<span>${1};</span>';
+    $replacements[11] = '';
 
     $summary = '';
     $char_count = 0;
@@ -417,7 +421,7 @@ class OshaMigrateSourceWiki extends MigrateSource {
       if ($length = strlen($line)) {
         $char_count += $length;
         $html_line = preg_replace($patterns, $replacements, $line);
-        if (!empty($html_line) && $html_line[0] != '<h') {
+        if (!empty($html_line) && strlen($html_line) >= 2 && "{$html_line[0]}{$html_line[1]}" != '<h') {
           $html_line = '<p>' . $html_line . '</p>';
         }
         $summary .= $html_line . "\n";

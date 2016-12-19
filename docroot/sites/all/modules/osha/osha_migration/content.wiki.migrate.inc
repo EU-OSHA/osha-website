@@ -412,7 +412,7 @@ class OshaMigrateSourceWiki extends MigrateSource {
     $replacements[7] = '';
     $replacements[8] = '';
     $replacements[9] = sprintf('<a href="%s${1}">${1}</a>', $osh_wiki_prefix);
-    $replacements[10] = '<span>${1};</span>';
+    $replacements[10] = '<span>- ${1};</span>';
     $replacements[11] = '';
 
     $summary = '';

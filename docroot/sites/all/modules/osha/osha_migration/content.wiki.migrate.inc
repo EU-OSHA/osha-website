@@ -391,12 +391,15 @@ class OshaMigrateSourceWiki extends MigrateSource {
     // '''''bold+italic''''', '''bold''', ''italic''
     $patterns[5] = "/'''([^']*)'''/";
     $patterns[6] = "/''([^']*)''/";
-    // Replace [[Category:OSH in general]], [[Category:E-Tools]], [[Category:OSH in general|general]]
-    $patterns[7] = '/\[\[([a-zA-Z\s\:\-]+)([\|a-zA-Z\s\:\-])*\]\]/';
+    // Replace [[Category:*]] with ''
+    $patterns[7] = '/\[\[Image:([\|a-zA-Z\s\:\-\.])*\]\]/';
+    $patterns[8] = '/\[\[Category:([\|a-zA-Z\s\:\-])*\]\]/';
+    // Replace [[Wiki page title|url]] with <a href='https://oshwiki.eu/Wiki page title'>Wiki page title</a>
+    $patterns[9] = '/\[\[([a-zA-Z\s\:\-]+)([\|a-zA-Z\s\:\-])*\]\]/';
     // Lists *
-    $patterns[8] = "/\*+(.*)?.(;)?$/";
+    $patterns[10] = "/\*+(.*)?.(;)?$/";
     // Internal {{Metadata}}
-    $patterns[9] = '/{{+(.*)}}/';
+    $patterns[11] = '/{{+(.*)}}/';
 
     $replacements = array();
     $replacements[0] = '';
@@ -406,9 +409,11 @@ class OshaMigrateSourceWiki extends MigrateSource {
     $replacements[4] = '';
     $replacements[5] = '<b>${1}</b>';
     $replacements[6] = '<i>${1}</i>';
-    $replacements[7] = sprintf('<a href="%s${1}">${1}</a>', $osh_wiki_prefix);
-    $replacements[8] = '<span>${1};</span>';
-    $replacements[9] = '';
+    $replacements[7] = '';
+    $replacements[8] = '';
+    $replacements[9] = sprintf('<a href="%s${1}">${1}</a>', $osh_wiki_prefix);
+    $replacements[10] = '<span>${1};</span>';
+    $replacements[11] = '';
 
     $summary = '';
     $char_count = 0;

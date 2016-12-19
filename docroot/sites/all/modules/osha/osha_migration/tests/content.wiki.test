@@ -107,7 +107,7 @@ class WikiParseTest extends DrupalUnitTestCase {
     $json = json_decode(file_get_contents($source_file), TRUE);
     $body = $json['parse']['wikitext']['*'];
     $summary = OshaMigrateSourceWiki::getWikiSummaryFromBody($body);
-    $this->assertTrue(strpos($summary, '<a href="https://oshwiki.eu/wiki/Category: OSH in general">Category: OSH in general</a>') !== FALSE, 'Looking for valid "OSH in general" link ');
+    $this->assertFalse(strpos($summary, 'Category: OSH in general'), 'Looking for valid "OSH in general" link ');
 
     $body = "{{LangTempl\n|lang=en\n}}\n{{Template:Translation\n|Page=EU Strategic Framework on safety and health at work  2014-2020\n|Lang=en\n}}\n{{Metadata\n|page_title=EU OSH Strategic framework\n}}\n{{Template:OSHA property\n|OSHA=(OSHA 00001A-02681B-04281C) Strategies\n}}\n{{Template:OSHA property\n|OSHA=(OSHA 00001A-06641B-06681C) European Commission\n}}\n{{Template:OSHA property\n|OSHA=(OSHA 00001A-06641B-07841C) European Union\n}}\n{{Template:OSHA property\n|OSHA=(OSHA 54161A-54201B-55921C-56361D) Policy makers\n}}\n<categorytree mode=pages style=\"float:right; clear:right; margin-left:1ex; border:1px solid gray; padding:0.7ex; background-color:white;\"> OSH in general</categorytree>\n";
     $body .= "[[Category: OSH in general]]\n[[Category: OSH in general]]";
@@ -115,8 +115,8 @@ class WikiParseTest extends DrupalUnitTestCase {
     $summary = OshaMigrateSourceWiki::getWikiSummaryFromBody($body);
     $items = array();
     preg_match_all('/Category\: OSH in general/', $summary, $items);
-    $count = substr_count($summary, '<a href="https://oshwiki.eu/wiki/Category: OSH in general">Category: OSH in general</a>');
-    $this->assertEqual(2, $count, 'Found two category links');
+    $count = substr_count($summary, 'OSH in general');
+    $this->assertEqual(0, $count, 'Make sure "Category OSH in general" was removed');
 
     // TEST [[Category:Risk assessment]][[Category:E-tools]]
     // https://oshwiki.eu/api.php?action=parse&format=json&prop=wikitext&page=Designing_a_prevention_approach_suitable_for_small_enterprises
@@ -124,16 +124,16 @@ class WikiParseTest extends DrupalUnitTestCase {
     $json = json_decode(file_get_contents($source_file), TRUE);
     $body = $json['parse']['wikitext']['*'];
     $summary = OshaMigrateSourceWiki::getWikiSummaryFromBody($body);
-    $this->assertTrue(strpos($summary, '<a href="https://oshwiki.eu/wiki/Category:Risk assessment">Category:Risk assessment</a>') !== FALSE, 'Looking for valid "Risk assessment" link');
-    $this->assertTrue(strpos($summary, '<a href="https://oshwiki.eu/wiki/Category:E-tools">Category:E-tools</a>') !== FALSE, 'Looking for valid "E-tools" link ');
+    $this->assertFalse(strpos($summary, 'Category:Risk assessment'), 'Check "Risk assessment" link was removed');
+    $this->assertFalse(strpos($summary, 'Category:E-tools'), 'Check "E-tools" link was removed');
 
     $body = "Suffix[[Category:E-tools]]";
     $summary = OshaMigrateSourceWiki::getWikiSummaryFromBody($body);
-    $this->assertTrue(strpos($summary, '<a href="https://oshwiki.eu/wiki/Category:E-tools">Category:E-tools</a>') !== FALSE, 'Looking for valid "E-tools" link ');
+    $this->assertEqual("<p>Suffix</p>\n", $summary, 'Check removal of Category:*');
 
     $body = "Suffix[[Category:Risk assessment]]";
     $summary = OshaMigrateSourceWiki::getWikiSummaryFromBody($body);
-    $this->assertTrue(strpos($summary, '<a href="https://oshwiki.eu/wiki/Category:Risk assessment">Category:Risk assessment</a>') !== FALSE, 'Looking for valid "E-tools" link ');
+    $this->assertFalse(strpos($summary, 'Category:Risk assessment'), 'Check "Risk assessment" link was removed');
 
     $body = "Suffix[[The economic dimension|considerable turnover]]";
     $summary = OshaMigrateSourceWiki::getWikiSummaryFromBody($body);
@@ -148,5 +148,10 @@ class WikiParseTest extends DrupalUnitTestCase {
     $summary = OshaMigrateSourceWiki::getWikiSummaryFromBody($body);
     $this->assertTrue(strpos($summary, '<a href="https://oshwiki.eu/wiki/Health ">Health </a>') !== FALSE, 'Looking for valid "Health " link');
     $this->assertTrue(strpos($summary, '<a href="https://oshwiki.eu/wiki/Prevention and control strategies ">Prevention and control strategies </a>') !== FALSE, 'Looking for valid "Prevention and control strategies " link');
+
+    // [[Image:OSH Infrastructure-Greece.JPG]]
+    $body = "prefix [[Image:OSH Infrastructure-Greece.JPG]] suffix";
+    $summary = OshaMigrateSourceWiki::getWikiSummaryFromBody($body);
+    $this->assertEqual("<p>prefix  suffix</p>\n", $summary);
   }
 }

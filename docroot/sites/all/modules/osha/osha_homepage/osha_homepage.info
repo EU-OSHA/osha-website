@@ -61,5 +61,4 @@ features_exclude[dependencies][list] = list
 features_exclude[dependencies][options] = options
 features_exclude[dependencies][strongarm] = strongarm
 features_exclude[field_base][field_image] = field_image
-mtime = 1450900431
 project path = sites/all/modules/osha

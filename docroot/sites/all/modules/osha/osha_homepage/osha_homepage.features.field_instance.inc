@@ -10,7 +10,7 @@
 function osha_homepage_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-banner-field_banner_link'
+  // Exported field_instance: 'node-banner-field_banner_link'.
   $field_instances['node-banner-field_banner_link'] = array(
     'bundle' => 'banner',
     'default_value' => NULL,
@@ -98,7 +98,7 @@ function osha_homepage_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-banner-field_banner_link_title'
+  // Exported field_instance: 'node-banner-field_banner_link_title'.
   $field_instances['node-banner-field_banner_link_title'] = array(
     'bundle' => 'banner',
     'default_value' => NULL,
@@ -145,7 +145,7 @@ function osha_homepage_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-banner-field_character_count'
+  // Exported field_instance: 'node-banner-field_character_count'.
   $field_instances['node-banner-field_character_count'] = array(
     'bundle' => 'banner',
     'default_value' => NULL,
@@ -210,7 +210,7 @@ function osha_homepage_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-banner-field_image'
+  // Exported field_instance: 'node-banner-field_image'.
   $field_instances['node-banner-field_image'] = array(
     'bundle' => 'banner',
     'deleted' => 0,
@@ -297,7 +297,7 @@ function osha_homepage_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-banner-field_page_count'
+  // Exported field_instance: 'node-banner-field_page_count'.
   $field_instances['node-banner-field_page_count'] = array(
     'bundle' => 'banner',
     'default_value' => NULL,
@@ -362,7 +362,7 @@ function osha_homepage_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-banner-field_summary'
+  // Exported field_instance: 'node-banner-field_summary'.
   $field_instances['node-banner-field_summary'] = array(
     'bundle' => 'banner',
     'default_value' => NULL,
@@ -415,7 +415,7 @@ function osha_homepage_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-banner-title_field'
+  // Exported field_instance: 'node-banner-title_field'.
   $field_instances['node-banner-title_field'] = array(
     'bundle' => 'banner',
     'default_value' => NULL,
@@ -494,7 +494,7 @@ function osha_homepage_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-banner_links-name_field'
+  // Exported field_instance: 'taxonomy_term-banner_links-name_field'.
   $field_instances['taxonomy_term-banner_links-name_field'] = array(
     'bundle' => 'banner_links',
     'default_value' => NULL,

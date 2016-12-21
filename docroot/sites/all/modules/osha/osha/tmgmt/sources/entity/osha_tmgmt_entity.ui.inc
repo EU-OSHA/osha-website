@@ -236,7 +236,9 @@ function osha_tmgmt_entity_get_translatable_entities($entity_type, $property_con
         }
       }
     }
-    $query->condition('e.' . $property_name, $untranslatable_voc, 'NOT IN');
+    if (!empty($untranslatable_voc)) {
+      $query->condition('e.' . $property_name, $untranslatable_voc, 'NOT IN');
+    }
 
     if (!empty($property_conditions['vocabulary_machine_name'])) {
       $vocabulary = taxonomy_vocabulary_machine_name_load($property_conditions['vocabulary_machine_name']);

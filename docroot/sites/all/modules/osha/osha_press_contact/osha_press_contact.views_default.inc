@@ -137,7 +137,7 @@ function osha_press_contact_views_default_views() {
   $handler->display->display_options['fields']['field_press_contact_cv']['alter']['text'] = ' | [field_press_contact_cv]';
   $handler->display->display_options['fields']['field_press_contact_cv']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_press_contact_cv']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_press_contact_cv']['type'] = 'file_download_link';
+  $handler->display->display_options['fields']['field_press_contact_cv']['type'] = 'contact_file_download_link';
   $handler->display->display_options['fields']['field_press_contact_cv']['settings'] = array(
     'text' => 'CV',
   );
@@ -149,7 +149,7 @@ function osha_press_contact_views_default_views() {
   $handler->display->display_options['fields']['field_press_contact_declaration']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_press_contact_declaration']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_press_contact_declaration']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_press_contact_declaration']['type'] = 'file_download_link';
+  $handler->display->display_options['fields']['field_press_contact_declaration']['type'] = 'contact_file_download_link';
   $handler->display->display_options['fields']['field_press_contact_declaration']['settings'] = array(
     'text' => 'Declaration of interests',
   );
@@ -412,7 +412,7 @@ function osha_press_contact_views_default_views() {
   $handler->display->display_options['fields']['field_press_contact_cv']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_press_contact_cv']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_press_contact_cv']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_press_contact_cv']['type'] = 'file_download_link';
+  $handler->display->display_options['fields']['field_press_contact_cv']['type'] = 'contact_file_download_link';
   $handler->display->display_options['fields']['field_press_contact_cv']['settings'] = array(
     'text' => 'CV',
   );
@@ -425,7 +425,7 @@ function osha_press_contact_views_default_views() {
   $handler->display->display_options['fields']['field_press_contact_declaration']['alter']['text'] = '[field_press_contact_declaration] |';
   $handler->display->display_options['fields']['field_press_contact_declaration']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_press_contact_declaration']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_press_contact_declaration']['type'] = 'file_download_link';
+  $handler->display->display_options['fields']['field_press_contact_declaration']['type'] = 'contact_file_download_link';
   $handler->display->display_options['fields']['field_press_contact_declaration']['settings'] = array(
     'text' => 'Declaration of interests',
   );

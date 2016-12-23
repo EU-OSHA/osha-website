@@ -267,7 +267,7 @@ function osha_fop_page_views_default_views() {
   $handler->display->display_options['relationships']['field_fop_link_value']['field'] = 'field_fop_link_value';
   $handler->display->display_options['relationships']['field_fop_link_value']['required'] = TRUE;
   $handler->display->display_options['relationships']['field_fop_link_value']['delta'] = '-1';
-  /* Field: Field collection item: Link */
+  /* Field: Field: Link */
   $handler->display->display_options['fields']['field_link']['id'] = 'field_link';
   $handler->display->display_options['fields']['field_link']['table'] = 'field_data_field_link';
   $handler->display->display_options['fields']['field_link']['field'] = 'field_link';

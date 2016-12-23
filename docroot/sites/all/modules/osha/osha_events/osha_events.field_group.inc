@@ -8,7 +8,7 @@
  * Implements hook_field_group_info().
  */
 function osha_events_field_group_info() {
-  $export = array();
+  $field_groups = array();
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -40,7 +40,7 @@ function osha_events_field_group_info() {
       'formatter' => 'open',
     ),
   );
-  $export['group_events_description|node|events|default'] = $field_group;
+  $field_groups['group_events_description|node|events|default'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -75,7 +75,7 @@ function osha_events_field_group_info() {
       'formatter' => 'open',
     ),
   );
-  $export['group_events_event_details|node|events|default'] = $field_group;
+  $field_groups['group_events_event_details|node|events|default'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -107,7 +107,7 @@ function osha_events_field_group_info() {
       'formatter' => 'open',
     ),
   );
-  $export['group_events_links|node|events|default'] = $field_group;
+  $field_groups['group_events_links|node|events|default'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -139,7 +139,14 @@ function osha_events_field_group_info() {
       'formatter' => 'open',
     ),
   );
-  $export['group_events_related_documents|node|events|default'] = $field_group;
+  $field_groups['group_events_related_documents|node|events|default'] = $field_group;
 
-  return $export;
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Description');
+  t('Event details');
+  t('Links');
+  t('Related resources');
+
+  return $field_groups;
 }

@@ -48,3 +48,10 @@ function osha_press_contact_update_7001() {
 function osha_press_contact_update_7002() {
   osha_press_contact_migrate(OSHA_MIGRATION_CONTENT_TYPE_BOARD);
 }
+
+/**
+ * MDR-812: Revert board and advisory views
+ */
+function osha_press_contact_update_7003() {
+  features_revert_module('osha_press_contact');
+}

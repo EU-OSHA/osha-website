@@ -10,7 +10,7 @@
 function osha_resources_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-external_url-field_character_count'
+  // Exported field_instance: 'node-external_url-field_character_count'.
   $field_instances['node-external_url-field_character_count'] = array(
     'bundle' => 'external_url',
     'default_value' => NULL,
@@ -57,7 +57,7 @@ function osha_resources_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-external_url-field_external_url'
+  // Exported field_instance: 'node-external_url-field_external_url'.
   $field_instances['node-external_url-field_external_url'] = array(
     'bundle' => 'external_url',
     'default_value' => NULL,
@@ -153,7 +153,7 @@ function osha_resources_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-external_url-field_page_count'
+  // Exported field_instance: 'node-external_url-field_page_count'.
   $field_instances['node-external_url-field_page_count'] = array(
     'bundle' => 'external_url',
     'default_value' => NULL,
@@ -200,7 +200,7 @@ function osha_resources_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-external_url-title_field'
+  // Exported field_instance: 'node-external_url-title_field'.
   $field_instances['node-external_url-title_field'] = array(
     'bundle' => 'external_url',
     'default_value' => NULL,
@@ -278,7 +278,7 @@ function osha_resources_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-file-field_file'
+  // Exported field_instance: 'node-file-field_file'.
   $field_instances['node-file-field_file'] = array(
     'bundle' => 'file',
     'deleted' => 0,
@@ -367,7 +367,7 @@ function osha_resources_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-file-title_field'
+  // Exported field_instance: 'node-file-title_field'.
   $field_instances['node-file-title_field'] = array(
     'bundle' => 'file',
     'default_value' => NULL,
@@ -450,7 +450,7 @@ function osha_resources_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-flickr-field_character_count'
+  // Exported field_instance: 'node-flickr-field_character_count'.
   $field_instances['node-flickr-field_character_count'] = array(
     'bundle' => 'flickr',
     'default_value' => NULL,
@@ -497,7 +497,7 @@ function osha_resources_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-flickr-field_flickr'
+  // Exported field_instance: 'node-flickr-field_flickr'.
   $field_instances['node-flickr-field_flickr'] = array(
     'bundle' => 'flickr',
     'default_value' => NULL,
@@ -567,7 +567,7 @@ function osha_resources_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-flickr-field_page_count'
+  // Exported field_instance: 'node-flickr-field_page_count'.
   $field_instances['node-flickr-field_page_count'] = array(
     'bundle' => 'flickr',
     'default_value' => NULL,
@@ -614,7 +614,7 @@ function osha_resources_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-flickr-title_field'
+  // Exported field_instance: 'node-flickr-title_field'.
   $field_instances['node-flickr-title_field'] = array(
     'bundle' => 'flickr',
     'default_value' => NULL,
@@ -692,7 +692,7 @@ function osha_resources_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-slideshare-field_character_count'
+  // Exported field_instance: 'node-slideshare-field_character_count'.
   $field_instances['node-slideshare-field_character_count'] = array(
     'bundle' => 'slideshare',
     'default_value' => NULL,
@@ -739,7 +739,7 @@ function osha_resources_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-slideshare-field_page_count'
+  // Exported field_instance: 'node-slideshare-field_page_count'.
   $field_instances['node-slideshare-field_page_count'] = array(
     'bundle' => 'slideshare',
     'default_value' => NULL,
@@ -786,7 +786,7 @@ function osha_resources_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-slideshare-field_slideshare'
+  // Exported field_instance: 'node-slideshare-field_slideshare'.
   $field_instances['node-slideshare-field_slideshare'] = array(
     'bundle' => 'slideshare',
     'default_value' => NULL,
@@ -856,7 +856,7 @@ function osha_resources_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-slideshare-title_field'
+  // Exported field_instance: 'node-slideshare-title_field'.
   $field_instances['node-slideshare-title_field'] = array(
     'bundle' => 'slideshare',
     'default_value' => NULL,
@@ -934,7 +934,7 @@ function osha_resources_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-youtube-field_character_count'
+  // Exported field_instance: 'node-youtube-field_character_count'.
   $field_instances['node-youtube-field_character_count'] = array(
     'bundle' => 'youtube',
     'default_value' => NULL,
@@ -981,7 +981,7 @@ function osha_resources_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-youtube-field_page_count'
+  // Exported field_instance: 'node-youtube-field_page_count'.
   $field_instances['node-youtube-field_page_count'] = array(
     'bundle' => 'youtube',
     'default_value' => NULL,
@@ -1028,7 +1028,7 @@ function osha_resources_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-youtube-field_youtube'
+  // Exported field_instance: 'node-youtube-field_youtube'.
   $field_instances['node-youtube-field_youtube'] = array(
     'bundle' => 'youtube',
     'default_value' => NULL,
@@ -1109,7 +1109,7 @@ function osha_resources_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-youtube-title_field'
+  // Exported field_instance: 'node-youtube-title_field'.
   $field_instances['node-youtube-title_field'] = array(
     'bundle' => 'youtube',
     'default_value' => NULL,

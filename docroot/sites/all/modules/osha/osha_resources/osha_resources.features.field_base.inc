@@ -10,14 +10,13 @@
 function osha_resources_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_flickr'
+  // Exported field_base: 'field_flickr'.
   $field_bases['field_flickr'] = array(
     'active' => 1,
     'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_flickr',
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'flickrfield',
@@ -28,21 +27,13 @@ function osha_resources_field_default_field_bases() {
     'type' => 'flickrfield',
   );
 
-  // Exported field_base: 'field_internal_contents'
+  // Exported field_base: 'field_internal_contents'.
   $field_bases['field_internal_contents'] = array(
     'active' => 1,
     'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_internal_contents',
-    'foreign keys' => array(
-      'node' => array(
-        'columns' => array(
-          'target_id' => 'nid',
-        ),
-        'table' => 'node',
-      ),
-    ),
     'indexes' => array(
       'target_id' => array(
         0 => 'target_id',
@@ -77,14 +68,13 @@ function osha_resources_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_slideshare'
+  // Exported field_base: 'field_slideshare'.
   $field_bases['field_slideshare'] = array(
     'active' => 1,
     'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_slideshare',
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'osha_slideshare',
@@ -97,14 +87,13 @@ function osha_resources_field_default_field_bases() {
     'type' => 'slideshare',
   );
 
-  // Exported field_base: 'field_youtube'
+  // Exported field_base: 'field_youtube'.
   $field_bases['field_youtube'] = array(
     'active' => 1,
     'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_youtube',
-    'foreign keys' => array(),
     'indexes' => array(
       'video_id' => array(
         0 => 'video_id',

@@ -10,7 +10,7 @@
 function osha_workflow_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'taxonomy_term-section-field_ldap_section_code'
+  // Exported field_instance: 'taxonomy_term-section-field_ldap_section_code'.
   $field_instances['taxonomy_term-section-field_ldap_section_code'] = array(
     'bundle' => 'section',
     'default_value' => NULL,

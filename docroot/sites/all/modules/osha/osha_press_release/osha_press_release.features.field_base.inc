@@ -10,14 +10,13 @@
 function osha_press_release_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_pr_embargo_date'
+  // Exported field_base: 'field_pr_embargo_date'.
   $field_bases['field_pr_embargo_date'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_pr_embargo_date',
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'date',
@@ -41,21 +40,13 @@ function osha_press_release_field_default_field_bases() {
     'type' => 'datetime',
   );
 
-  // Exported field_base: 'field_pr_notes_to_editor'
+  // Exported field_base: 'field_pr_notes_to_editor'.
   $field_bases['field_pr_notes_to_editor'] = array(
     'active' => 1,
     'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_pr_notes_to_editor',
-    'foreign keys' => array(
-      'node' => array(
-        'columns' => array(
-          'target_id' => 'nid',
-        ),
-        'table' => 'node',
-      ),
-    ),
     'indexes' => array(
       'target_id' => array(
         0 => 'target_id',
@@ -88,21 +79,13 @@ function osha_press_release_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_quote'
+  // Exported field_base: 'field_quote'.
   $field_bases['field_quote'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_quote',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',

@@ -10,7 +10,7 @@
 function osha_press_release_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-press_release-body'
+  // Exported field_instance: 'node-press_release-body'.
   $field_instances['node-press_release-body'] = array(
     'bundle' => 'press_release',
     'default_value' => NULL,
@@ -89,7 +89,7 @@ function osha_press_release_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_release-field_activity'
+  // Exported field_instance: 'node-press_release-field_activity'.
   $field_instances['node-press_release-field_activity'] = array(
     'bundle' => 'press_release',
     'default_value' => NULL,
@@ -164,7 +164,7 @@ function osha_press_release_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_release-field_aditional_resources'
+  // Exported field_instance: 'node-press_release-field_aditional_resources'.
   $field_instances['node-press_release-field_aditional_resources'] = array(
     'bundle' => 'press_release',
     'deleted' => 0,
@@ -243,7 +243,7 @@ function osha_press_release_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_release-field_archived'
+  // Exported field_instance: 'node-press_release-field_archived'.
   $field_instances['node-press_release-field_archived'] = array(
     'bundle' => 'press_release',
     'default_value' => array(
@@ -316,7 +316,7 @@ function osha_press_release_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_release-field_character_count'
+  // Exported field_instance: 'node-press_release-field_character_count'.
   $field_instances['node-press_release-field_character_count'] = array(
     'bundle' => 'press_release',
     'default_value' => NULL,
@@ -387,7 +387,7 @@ function osha_press_release_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_release-field_expiration_date'
+  // Exported field_instance: 'node-press_release-field_expiration_date'.
   $field_instances['node-press_release-field_expiration_date'] = array(
     'bundle' => 'press_release',
     'deleted' => 0,
@@ -464,7 +464,7 @@ function osha_press_release_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_release-field_image'
+  // Exported field_instance: 'node-press_release-field_image'.
   $field_instances['node-press_release-field_image'] = array(
     'bundle' => 'press_release',
     'deleted' => 0,
@@ -557,7 +557,7 @@ function osha_press_release_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_release-field_nace_codes'
+  // Exported field_instance: 'node-press_release-field_nace_codes'.
   $field_instances['node-press_release-field_nace_codes'] = array(
     'bundle' => 'press_release',
     'default_value' => NULL,
@@ -633,7 +633,7 @@ function osha_press_release_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_release-field_page_count'
+  // Exported field_instance: 'node-press_release-field_page_count'.
   $field_instances['node-press_release-field_page_count'] = array(
     'bundle' => 'press_release',
     'default_value' => NULL,
@@ -704,7 +704,7 @@ function osha_press_release_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_release-field_pr_embargo_date'
+  // Exported field_instance: 'node-press_release-field_pr_embargo_date'.
   $field_instances['node-press_release-field_pr_embargo_date'] = array(
     'bundle' => 'press_release',
     'deleted' => 0,
@@ -781,7 +781,7 @@ function osha_press_release_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_release-field_pr_notes_to_editor'
+  // Exported field_instance: 'node-press_release-field_pr_notes_to_editor'.
   $field_instances['node-press_release-field_pr_notes_to_editor'] = array(
     'bundle' => 'press_release',
     'default_value' => NULL,
@@ -857,7 +857,7 @@ function osha_press_release_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_release-field_publication_date'
+  // Exported field_instance: 'node-press_release-field_publication_date'.
   $field_instances['node-press_release-field_publication_date'] = array(
     'bundle' => 'press_release',
     'deleted' => 0,
@@ -873,6 +873,7 @@ function osha_press_release_field_default_field_instances() {
           'multiple_number' => '',
           'multiple_to' => '',
           'osha_date_theme' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 0,
@@ -893,6 +894,7 @@ function osha_press_release_field_default_field_instances() {
           'multiple_number' => '',
           'multiple_to' => '',
           'osha_date_theme' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 1,
@@ -931,6 +933,7 @@ function osha_press_release_field_default_field_instances() {
           'multiple_number' => '',
           'multiple_to' => '',
           'osha_date_theme' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 0,
@@ -964,7 +967,7 @@ function osha_press_release_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_release-field_quote'
+  // Exported field_instance: 'node-press_release-field_quote'.
   $field_instances['node-press_release-field_quote'] = array(
     'bundle' => 'press_release',
     'default_value' => NULL,
@@ -1028,7 +1031,7 @@ function osha_press_release_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_release-field_summary'
+  // Exported field_instance: 'node-press_release-field_summary'.
   $field_instances['node-press_release-field_summary'] = array(
     'bundle' => 'press_release',
     'default_value' => NULL,
@@ -1109,7 +1112,7 @@ function osha_press_release_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_release-field_tags'
+  // Exported field_instance: 'node-press_release-field_tags'.
   $field_instances['node-press_release-field_tags'] = array(
     'bundle' => 'press_release',
     'default_value' => NULL,
@@ -1184,7 +1187,7 @@ function osha_press_release_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_release-field_thesaurus'
+  // Exported field_instance: 'node-press_release-field_thesaurus'.
   $field_instances['node-press_release-field_thesaurus'] = array(
     'bundle' => 'press_release',
     'default_value' => NULL,
@@ -1260,7 +1263,7 @@ function osha_press_release_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_release-title_field'
+  // Exported field_instance: 'node-press_release-title_field'.
   $field_instances['node-press_release-title_field'] = array(
     'bundle' => 'press_release',
     'default_value' => NULL,

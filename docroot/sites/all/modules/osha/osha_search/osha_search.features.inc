@@ -35,7 +35,7 @@ function osha_search_default_search_api_index() {
     "server" : "solr_server",
     "item_type" : "search_api_et_node",
     "options" : {
-      "index_directly" : 1,
+      "index_directly" : 0,
       "cron_limit" : "50",
       "search_api_et" : { "include" : "incomplete", "fallback language" : "en" },
       "data_alter_callbacks" : {

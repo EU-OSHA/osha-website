@@ -10,21 +10,13 @@
 function osha_blog_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_project_manager'
+  // Exported field_base: 'field_project_manager'.
   $field_bases['field_project_manager'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_project_manager',
-    'foreign keys' => array(
-      'users' => array(
-        'columns' => array(
-          'target_id' => 'uid',
-        ),
-        'table' => 'users',
-      ),
-    ),
     'indexes' => array(
       'target_id' => array(
         0 => 'target_id',

@@ -351,12 +351,11 @@ function osha_homepage_views_default_views() {
   $handler->display->display_options['fields']['field_banner_link_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_banner_link_1']['click_sort_column'] = 'url';
   $handler->display->display_options['fields']['field_banner_link_1']['type'] = 'link_plain';
-  /* Field: action_name */
+  /* Field: Taxonomy term: Name */
   $handler->display->display_options['fields']['name_field']['id'] = 'name_field';
   $handler->display->display_options['fields']['name_field']['table'] = 'field_data_name_field';
   $handler->display->display_options['fields']['name_field']['field'] = 'name_field';
   $handler->display->display_options['fields']['name_field']['relationship'] = 'field_banner_link_title_tid';
-  $handler->display->display_options['fields']['name_field']['ui_name'] = 'action_name';
   $handler->display->display_options['fields']['name_field']['label'] = '';
   $handler->display->display_options['fields']['name_field']['exclude'] = TRUE;
   $handler->display->display_options['fields']['name_field']['alter']['alter_text'] = TRUE;

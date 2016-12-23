@@ -10,7 +10,7 @@
 function osha_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'body'
+  // Exported field_base: 'body'.
   $field_bases['body'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -41,7 +41,7 @@ function osha_field_default_field_bases() {
     'type' => 'text_with_summary',
   );
 
-  // Exported field_base: 'field_activity'
+  // Exported field_base: 'field_activity'.
   $field_bases['field_activity'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -77,7 +77,7 @@ function osha_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_aditional_resources'
+  // Exported field_base: 'field_aditional_resources'.
   $field_bases['field_aditional_resources'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -130,7 +130,7 @@ function osha_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_archived'
+  // Exported field_base: 'field_archived'.
   $field_bases['field_archived'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -157,7 +157,7 @@ function osha_field_default_field_bases() {
     'type' => 'list_boolean',
   );
 
-  // Exported field_base: 'field_article_type'
+  // Exported field_base: 'field_article_type'.
   $field_bases['field_article_type'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -193,7 +193,7 @@ function osha_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_author'
+  // Exported field_base: 'field_author'.
   $field_bases['field_author'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -223,7 +223,7 @@ function osha_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_character_count'
+  // Exported field_base: 'field_character_count'.
   $field_bases['field_character_count'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -241,7 +241,7 @@ function osha_field_default_field_bases() {
     'type' => 'number_integer',
   );
 
-  // Exported field_base: 'field_cover_image'
+  // Exported field_base: 'field_cover_image'.
   $field_bases['field_cover_image'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -274,7 +274,7 @@ function osha_field_default_field_bases() {
     'type' => 'image',
   );
 
-  // Exported field_base: 'field_dvs_code'
+  // Exported field_base: 'field_dvs_code'.
   $field_bases['field_dvs_code'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -304,7 +304,7 @@ function osha_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_expiration_date'
+  // Exported field_base: 'field_expiration_date'.
   $field_bases['field_expiration_date'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -335,7 +335,7 @@ function osha_field_default_field_bases() {
     'type' => 'datetime',
   );
 
-  // Exported field_base: 'field_file'
+  // Exported field_base: 'field_file'.
   $field_bases['field_file'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -369,7 +369,7 @@ function osha_field_default_field_bases() {
     'type' => 'file',
   );
 
-  // Exported field_base: 'field_file_description'
+  // Exported field_base: 'field_file_description'.
   $field_bases['field_file_description'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -398,7 +398,7 @@ function osha_field_default_field_bases() {
     'type' => 'text_long',
   );
 
-  // Exported field_base: 'field_language'
+  // Exported field_base: 'field_language'.
   $field_bases['field_language'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -429,7 +429,7 @@ function osha_field_default_field_bases() {
     'type' => 'language_field',
   );
 
-  // Exported field_base: 'field_nace_codes'
+  // Exported field_base: 'field_nace_codes'.
   $field_bases['field_nace_codes'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -465,7 +465,7 @@ function osha_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_page_count'
+  // Exported field_base: 'field_page_count'.
   $field_bases['field_page_count'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -486,7 +486,7 @@ function osha_field_default_field_bases() {
     'type' => 'number_decimal',
   );
 
-  // Exported field_base: 'field_page_introduction'
+  // Exported field_base: 'field_page_introduction'.
   $field_bases['field_page_introduction'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -515,7 +515,7 @@ function osha_field_default_field_bases() {
     'type' => 'text_long',
   );
 
-  // Exported field_base: 'field_publication_date'
+  // Exported field_base: 'field_publication_date'.
   $field_bases['field_publication_date'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -546,7 +546,7 @@ function osha_field_default_field_bases() {
     'type' => 'datetime',
   );
 
-  // Exported field_base: 'field_related_oshwiki_articles'
+  // Exported field_base: 'field_related_oshwiki_articles'.
   $field_bases['field_related_oshwiki_articles'] = array(
     'active' => 1,
     'cardinality' => 2,
@@ -590,7 +590,7 @@ function osha_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_related_resources'
+  // Exported field_base: 'field_related_resources'.
   $field_bases['field_related_resources'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -624,7 +624,7 @@ function osha_field_default_field_bases() {
     'type' => 'file',
   );
 
-  // Exported field_base: 'field_summary'
+  // Exported field_base: 'field_summary'.
   $field_bases['field_summary'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -653,7 +653,7 @@ function osha_field_default_field_bases() {
     'type' => 'text_long',
   );
 
-  // Exported field_base: 'field_thesaurus'
+  // Exported field_base: 'field_thesaurus'.
   $field_bases['field_thesaurus'] = array(
     'active' => 1,
     'cardinality' => -1,
@@ -689,7 +689,7 @@ function osha_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'title_field'
+  // Exported field_base: 'title_field'.
   $field_bases['title_field'] = array(
     'active' => 1,
     'cardinality' => 1,

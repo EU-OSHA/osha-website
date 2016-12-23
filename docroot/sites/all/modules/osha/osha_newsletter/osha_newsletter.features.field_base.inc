@@ -10,21 +10,13 @@
 function osha_newsletter_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_campaign_id'
+  // Exported field_base: 'field_campaign_id'.
   $field_bases['field_campaign_id'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_campaign_id',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -40,14 +32,13 @@ function osha_newsletter_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_created'
+  // Exported field_base: 'field_created'.
   $field_bases['field_created'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_created',
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'date',
@@ -71,21 +62,13 @@ function osha_newsletter_field_default_field_bases() {
     'type' => 'datetime',
   );
 
-  // Exported field_base: 'field_newsletter_author'
+  // Exported field_base: 'field_newsletter_author'.
   $field_bases['field_newsletter_author'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_newsletter_author',
-    'foreign keys' => array(
-      'users' => array(
-        'columns' => array(
-          'target_id' => 'uid',
-        ),
-        'table' => 'users',
-      ),
-    ),
     'indexes' => array(
       'target_id' => array(
         0 => 'target_id',
@@ -115,14 +98,13 @@ function osha_newsletter_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_newsletter_content_after'
+  // Exported field_base: 'field_newsletter_content_after'.
   $field_bases['field_newsletter_content_after'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_newsletter_content_after',
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'date',
@@ -146,14 +128,13 @@ function osha_newsletter_field_default_field_bases() {
     'type' => 'datetime',
   );
 
-  // Exported field_base: 'field_newsletter_sent'
+  // Exported field_base: 'field_newsletter_sent'.
   $field_bases['field_newsletter_sent'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_newsletter_sent',
-    'foreign keys' => array(),
     'indexes' => array(
       'value' => array(
         0 => 'value',

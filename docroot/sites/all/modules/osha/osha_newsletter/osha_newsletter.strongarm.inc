@@ -217,7 +217,7 @@ function osha_newsletter_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'osha_newsletter_after_max_nodes';
-  $strongarm->value = '19';
+  $strongarm->value = '1000';
   $export['osha_newsletter_after_max_nodes'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -236,17 +236,21 @@ function osha_newsletter_strongarm() {
     'banner' => 0,
     'page' => 0,
     'calls' => 0,
+    'press_contact' => 0,
+    'dvs_survey' => 0,
     'directive' => 0,
+    'e_guide' => 0,
     'external_url' => 0,
     'file' => 0,
     'flickr' => 0,
+    'fop_page' => 0,
     'guideline' => 0,
     'infographic' => 0,
     'job_vacancies' => 0,
     'note_to_editor' => 0,
-    'press_contact' => 0,
     'seminar' => 0,
     'slideshare' => 0,
+    'webform' => 0,
     'wiki_page' => 0,
     'youtube' => 0,
   );
@@ -316,8 +320,14 @@ function osha_newsletter_strongarm() {
     'view_mode_blog' => 'newsletter_item',
     'calls' => '',
     'view_mode_calls' => 'newsletter_item',
+    'press_contact' => '',
+    'view_mode_press_contact' => 'newsletter_item',
+    'dvs_survey' => '',
+    'view_mode_dvs_survey' => 'newsletter_item',
     'directive' => '',
     'view_mode_directive' => 'newsletter_item',
+    'e_guide' => '',
+    'view_mode_e_guide' => 'newsletter_item',
     'events' => '9bbceb37-cc1f-4bc1-99a0-0222105568a1',
     'view_mode_events' => 'newsletter_item',
     'external_url' => '',
@@ -326,6 +336,8 @@ function osha_newsletter_strongarm() {
     'view_mode_file' => 'newsletter_item',
     'flickr' => '',
     'view_mode_flickr' => 'newsletter_item',
+    'fop_page' => '',
+    'view_mode_fop_page' => 'newsletter_item',
     'guideline' => '',
     'view_mode_guideline' => 'newsletter_item',
     'highlight' => '4edd574b-8dbd-4af8-b82c-6e85eeb5be99',
@@ -340,9 +352,7 @@ function osha_newsletter_strongarm() {
     'view_mode_newsletter_article' => 'newsletter_item',
     'note_to_editor' => '',
     'view_mode_note_to_editor' => 'newsletter_item',
-    'press_contact' => '',
-    'view_mode_press_contact' => 'newsletter_item',
-    'press_release' => '',
+    'press_release' => '14072f3c-34d8-4987-a443-a75191a50ca7',
     'view_mode_press_release' => 'newsletter_item',
     'publication' => 'ad8da6ba-1101-4181-bba2-1b7094cabab3',
     'view_mode_publication' => 'newsletter_item',
@@ -350,6 +360,8 @@ function osha_newsletter_strongarm() {
     'view_mode_seminar' => 'newsletter_item',
     'slideshare' => '',
     'view_mode_slideshare' => 'newsletter_item',
+    'webform' => '',
+    'view_mode_webform' => 'newsletter_item',
     'wiki_page' => '',
     'view_mode_wiki_page' => 'newsletter_item',
     'youtube' => '',

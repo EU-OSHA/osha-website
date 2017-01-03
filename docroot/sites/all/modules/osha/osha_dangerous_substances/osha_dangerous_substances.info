@@ -158,6 +158,7 @@ features[variable][] = menu_parent_dangerous_substances
 features[variable][] = node_options_dangerous_substances
 features[variable][] = node_preview_dangerous_substances
 features[variable][] = node_submitted_dangerous_substances
+features[variable][] = workbench_access_node_type_dangerous_substances
 features[views_view][] = dangerous_substances
 features[wysiwyg][] = dangerous_substances
 features_exclude[dependencies][media_wysiwyg] = media_wysiwyg

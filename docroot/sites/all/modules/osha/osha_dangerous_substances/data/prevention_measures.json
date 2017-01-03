@@ -1,0 +1,44 @@
+[
+    {
+        "code": "elimination_hazards",
+        "name": "Elimination of hazards/Substitution",
+        "thesaurus_code": ["13841E", "15681F"],
+        "level": "1"
+    },
+    {
+        "code": "technical_measures",
+        "name": "Technical measures, e.g. local exhaust ventilation",
+        "thesaurus_code": [],
+        "level": "2"
+    },
+    {
+        "code": "organizational_measures",
+        "name": "Reducing/minimising the risk by organisational measures, e.g. reducing the number of workers exposed",
+        "thesaurus_code": [],
+        "level": "3"
+    },
+    {
+        "code": "personal_measures",
+        "name": "Reducing/minimising the risk by personal measures (PPE)",
+        "thesaurus_code": [],
+        "level": "4"
+    },
+    {
+        "code": "training_guidance",
+        "name": "Training/guidance",
+        "thesaurus_code": [],
+        "level": "0"
+    },
+    {
+        "code": "hygiene_measures",
+        "name": "Hygiene measures",
+        "thesaurus_code": [],
+        "level": "4"
+    },
+    {
+        "code": "other",
+        "name": "Other",
+        "thesaurus_code": [],
+        "level": "-1"
+    }
+]

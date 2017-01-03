@@ -1,0 +1,34 @@
+[
+    {
+        "code": "dusts",
+        "name": "Dusts"
+    },
+    {
+        "code": "vapours",
+        "name": "Vapours"
+    },
+    {
+        "code": "fibres",
+        "name": "Fibres"
+    },
+    {
+        "code": "gases",
+        "name": "Gases"
+    },
+    {
+        "code": "liquids",
+        "name": "Liquids"
+    },
+    {
+        "code": "solids",
+        "name": "Solids"
+    },
+    {
+        "code": "aerosols",
+        "name": "Aerosols"
+    },
+    {
+        "code": "nanoparticles",
+        "name": "Nanoparticles( airborne liquids\/solids including smoke or mist)"
+    }
+]

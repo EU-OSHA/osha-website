@@ -1,0 +1,5 @@
+<?php
+
+function osha_dangerous_substances_install() {
+  osha_dangerous_substances_add_taxonomy();
+}

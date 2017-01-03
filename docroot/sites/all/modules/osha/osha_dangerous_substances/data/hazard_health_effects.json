@@ -1,0 +1,58 @@
+[
+    {
+        "code": "allergens",
+        "name": "Allergens"
+    },
+    {
+        "code": "skin_sensitisers",
+        "name": "Skin sensitisers"
+    },
+    {
+        "code": "asthmagens",
+        "name": "Asthmagens"
+    },
+    {
+        "code": "asphyxiants",
+        "name": "Asphyxiants"
+    },
+    {
+        "code": "carcinogens",
+        "name": "Carcinogens"
+    },
+    {
+        "code": "mutagens",
+        "name": "Mutagens"
+    },
+    {
+        "code": "reprotoxic_substances",
+        "name": "Reprotoxic substances"
+    },
+    {
+        "code": "neurotoxic_substances",
+        "name": "Neurotoxic substances"
+    },
+    {
+        "code": "irritants",
+        "name": "Irritants"
+    },
+    {
+        "code": "toxic_substances",
+        "name": "Toxic substances"
+    },
+    {
+        "code": "fire_and_explosion",
+        "name": "Fire and explosion"
+    },
+    {
+        "code": "heat",
+        "name": "Heat"
+    },
+    {
+        "code": "cold",
+        "name": "Cold"
+    },
+    {
+        "code": "other",
+        "name": "Other"
+    }
+]

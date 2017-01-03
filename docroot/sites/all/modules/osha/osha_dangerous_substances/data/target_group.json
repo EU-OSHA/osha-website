@@ -1,0 +1,54 @@
+[
+    {
+        "code": "employers",
+        "name": "Employers"
+    },
+    {
+        "code": "managers",
+        "name": "Managers"
+    },
+    {
+        "code": "workers_representatives",
+        "name": "Workers representatives"
+    },
+    {
+        "code": "supervisor",
+        "name": "Supervisor"
+    },
+    {
+        "code": "safety_officers",
+        "name": "Safety officers"
+    },
+    {
+        "code": "occupational_health_physician",
+        "name": "Occupational health physician"
+    },
+    {
+        "code": "osh_consultant",
+        "name": "OSH consultant"
+    },
+    {
+        "code": "workers",
+        "name": "Workers"
+    },
+    {
+        "code": "pupils_and_trainees",
+        "name": "Pupils and trainees"
+    },
+    {
+        "code": "trainers",
+        "name": "Trainers"
+    },
+    {
+        "code": "researchers",
+        "name": "Researchers"
+    },
+    {
+        "code": "policy_makers",
+        "name": "Policy makers"
+    },
+    {
+        "code": "other",
+        "name": "Other"
+    }
+]

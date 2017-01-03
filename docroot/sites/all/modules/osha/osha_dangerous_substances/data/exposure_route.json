@@ -1,0 +1,30 @@
+[
+    {
+        "code": "skin_absorption",
+        "name": "Skin absorption"
+    },
+    {
+        "code": "dermal_contact",
+        "name": "Dermal contact"
+    },
+    {
+        "code": "inhalation",
+        "name": "Inhalation"
+    },
+    {
+        "code": "ingestion",
+        "name": "Ingestion"
+    },
+    {
+        "code": "ocular",
+        "name": "Ocular (through eyes)"
+    },
+    {
+        "code": "sharps_and_cuts",
+        "name": "Sharps and cuts"
+    },
+    {
+        "code": "bites_and_stings",
+        "name": "Bites and stings"
+    }
+]

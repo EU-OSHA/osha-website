@@ -1,0 +1,50 @@
+diff --git a/docroot/misc/states.js b/docroot/misc/states.js
+index 5aac65d..4c51a23 100644
+--- a/docroot/misc/states.js
++++ b/docroot/misc/states.js
+@@ -63,6 +63,36 @@ states.Dependent.comparisons = {
+   'RegExp': function (reference, value) {
+     return reference.test(value);
+   },
++  'Array': function (reference, value) {
++
++    //Make sure that value is an array, other wise we end up always evaling to true
++    if(!( typeof (value) == 'object' && ( value instanceof Array))) {
++        return false;
++    }
++    //We iterate through each of the values provided in the reference
++    //and check that they all exist in the value array.
++    //If even one doesn't then we return false. Otherwise return true.
++    var arrayComplies = true;
++    $.each(reference, function(key, val) {
++        if($.inArray(val, value) < 0) {
++            arrayComplies = false;
++        }
++    });
++    return arrayComplies;
++
++    //   // Make sure value is an array.
++    // if (!Array.isArray(value)) {
++    //   return false;
++    // }
++    // // We iterate through each value provided in the reference. If all of them
++    // // exist in value array, we return true. Otherwise return false.
++    // for (var key in reference) {
++    //   if (reference.hasOwnProperty(key) && value.indexOf(reference[key]) === -1) {
++    //     return false;
++    //   }
++    // }
++    // return true;
++  },
+   'Function': function (reference, value) {
+     // The "reference" variable is a comparison function.
+     return reference(value);
+@@ -103,7 +133,7 @@ states.Dependent.prototype = {
+         state = states.State.sanitize(state);
+ 
+         // Initialize the value of this state.
+-        this.values[selector][state.name] = null;
++        this.values[selector][state.name] = undefined;
+ 
+         // Monitor state changes of the specified state for this dependee.
+         $(selector).bind('state:' + state, $.proxy(function (e) {

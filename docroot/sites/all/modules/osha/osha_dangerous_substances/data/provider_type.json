@@ -1,0 +1,86 @@
+[
+    {
+        "code": "international_organisations",
+        "name": "International organisations (e.g. ILO, ISSA, WHO, ICOH)"
+    },
+    {
+        "code": "european_commission",
+        "name": "European Commission"
+    },
+    {
+        "code": "eu_commission_dg_empl",
+        "name": "EU Commission DG EMPL"
+    },
+    {
+        "code": "eu_advisory_committee_for_safety_and_health_at_work",
+        "name": "EU- Advisory Committee for Safety and Health at Work"
+    },
+    {
+        "code": "eu_senior_labour_inspectors_committee_slic",
+        "name": "EU - Senior Labour Inspectors Committee SLIC"
+    },
+    {
+        "code": "eu_sectoral_social_dialogue_committees",
+        "name": "EU - Sectoral Social Dialogue Committees"
+    },
+    {
+        "code": "european_agency_safety_health_work",
+        "name": "European Agency for Safety and Health at Work"
+    },
+    {
+        "code": "eu_agencies_echa",
+        "name": "EU Agencies: ECHA"
+    },
+    {
+        "code": "eu_agencies_other",
+        "name": "EU Agencies : Other"
+    },
+    {
+        "code": "social_partners_employers",
+        "name": "Social partners: Employers"
+    },
+    {
+        "code": "social_partners_trade_unions",
+        "name": "Social partners: Trade Unions"
+    },
+    {
+        "code": "labour_inspectorates",
+        "name": "Labour inspectorates"
+    },
+    {
+        "code": "national_authorities_ministries_etc",
+        "name": "National authorities, ministries, etc."
+    },
+    {
+        "code": "occupational_accident_insurance",
+        "name": "Occupational Accident insurance"
+    },
+    {
+        "code": "national_osh_institute",
+        "name": "National OSH Institute"
+    },
+    {
+        "code": "osh_services",
+        "name": "OSH services"
+    },
+    {
+        "code": "research_institutes",
+        "name": "Research institutes (Universities)"
+    },
+    {
+        "code": "training_organisations",
+        "name": "Training organisations"
+    },
+    {
+        "code": "professional_associations",
+        "name": "Professional associations"
+    },
+    {
+        "code": "ngos",
+        "name": "NGOs"
+    },
+    {
+        "code": "other",
+        "name": "Other"
+    }
+]

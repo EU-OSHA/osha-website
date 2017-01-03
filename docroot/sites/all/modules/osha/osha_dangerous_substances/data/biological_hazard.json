@@ -1,0 +1,42 @@
+[
+    {
+        "code": "biological_hazards",
+        "name": "Biological hazards"
+    },
+    {
+        "code": "microbiological_hazards",
+        "name": "Microbiological hazards (Microorganism)"
+    },
+    {
+        "code": "biochemical_hazards",
+        "name": "Biochemical hazards"
+    },
+    {
+        "code": "genetically_modified_organism",
+        "name": "Genetically modified organism"
+    },
+    {
+        "code": "fungi",
+        "name": "Fungi"
+    },
+    {
+        "code": "viruses",
+        "name": "Viruses"
+    },
+    {
+        "code": "bacteria",
+        "name": "Bacteria"
+    },
+    {
+        "code": "parasites",
+        "name": "Parasites"
+    },
+    {
+        "code": "zoonoses",
+        "name": "Zoonoses"
+    },
+    {
+        "code": "other",
+        "name": "Other"
+    }
+]

@@ -1,0 +1,58 @@
+[
+    {
+        "code": "all",
+        "name": "All (no specific target group)"
+    },
+    {
+        "code": "ageing_and_older_workers",
+        "name": "Ageing and older workers"
+    },
+    {
+        "code": "temporary_workers",
+        "name": "Temporary workers"
+    },
+    {
+        "code": "disabled_workers",
+        "name": "Disabled workers"
+    },
+    {
+        "code": "home_workers",
+        "name": "Home workers"
+    },
+    {
+        "code": "women",
+        "name": "Women"
+    },
+    {
+        "code": "pregnant_and_breastfeeding_workers",
+        "name": "Pregnant and breastfeeding workers"
+    },
+    {
+        "code": "part_time_workers",
+        "name": "Part-time workers"
+    },
+    {
+        "code": "self_employed",
+        "name": "Self-employed"
+    },
+    {
+        "code": "migrant_workers",
+        "name": "Migrant workers"
+    },
+    {
+        "code": "young_workers",
+        "name": "Young workers"
+    },
+    {
+        "code": "maintenance_workers",
+        "name": "Maintenance workers"
+    },
+    {
+        "code": "lone_workers",
+        "name": "Lone workers"
+    },
+    {
+        "code": "other",
+        "name": "Other"
+    }
+]

@@ -1,0 +1,38 @@
+[
+    {
+        "code": "training",
+        "name": "Training"
+    },
+    {
+        "code": "warning_message_alert",
+        "name": "Warning message \/ Alert"
+    },
+    {
+        "code": "measurement_assessment",
+        "name": "Measurement \/ Assessment"
+    },
+    {
+        "code": "general_information",
+        "name": "General information"
+    },
+    {
+        "code": "awareness_raising",
+        "name": "Awareness raising"
+    },
+    {
+        "code": "guidance",
+        "name": "Guidance"
+    },
+    {
+        "code": "risk_assessment",
+        "name": "Risk assessment"
+    },
+    {
+        "code": "report",
+        "name": "Report"
+    },
+    {
+        "code": "policy_paper",
+        "name": "Policy paper"
+    }
+]

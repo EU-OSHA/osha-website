@@ -1,9 +1,6 @@
 <?php
 
 function osha_dangerous_substances_install() {
-  osha_dangerous_substances_add_taxonomy();
-}
-
-function osha_dangerous_substances_update_7001() {
+  features_revert(array('osha_dangerous_substances' => array('taxonomy', 'field_base', 'field_instance')));
   osha_dangerous_substances_add_taxonomy();
 }

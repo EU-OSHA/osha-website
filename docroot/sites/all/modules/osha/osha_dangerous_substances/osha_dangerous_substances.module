@@ -54,8 +54,8 @@ function _osha_dangerous_substances_get_other_tid($element, $field, $other_name 
 function _osha_dangerous_substances_form_after_build($form, $form_state) {
 
   // country code
-  $country_other = _osha_dangerous_substances_get_other_tid($form, 'field_country');
-  $form['field_country_other']['#states'] = ['visible'=>[ '#edit-field-country-und' => ['value' => [$country_other]] ] ];
+  $country_other = _osha_dangerous_substances_get_other_tid($form, 'field_material_country');
+  $form['field_country_other']['#states'] = ['visible'=>[ '#edit-field-material-country-und' => ['value' => [$country_other]] ] ];
 
   // biological hazard
   $hazard_other = _osha_dangerous_substances_get_other_tid($form, 'field_biological_hazard');
@@ -81,7 +81,31 @@ function _osha_dangerous_substances_form_after_build($form, $form_state) {
   return $form;
 }
 
+function _osha_dangerous_substances_add_country_other() {
+
+  $name = 'Other';
+  $code = 'OT';
+
+  $voc = taxonomy_vocabulary_machine_name_load('country');
+  if (empty($voc)) {
+    return ;
+  }
+
+  $terms = taxonomy_get_term_by_name($name, 'country');
+  if (empty($terms)) {
+    $term = new stdClass();
+    $term->field_iso2[LANGUAGE_NONE][0]['value'] = $code;
+    $term->vid = $voc->vid;
+    $term->name_original = $name;
+    $term->name = $name;
+    taxonomy_term_save($term);
+  }
+}
+
 function osha_dangerous_substances_add_taxonomy() {
+
+  _osha_dangerous_substances_add_country_other();
+
   $map = [
     'hazmap_categories' => [
       'name' => 'Hazmap categories',
@@ -188,118 +212,3 @@ function osha_dangerous_substances_add_taxonomy() {
   }
   watchdog('osha_dangerous_substances', '!terms terms created ', array('!terms' => $terms_added));
 }
-
-
-//  $actions = drupal_static('_field_conditional_state_set_form_root_actions', array());
-
-//  krumo($form, $actions);
-//exit;
-//  $actions = [];
-
-//  $actions[] = [
-//    'set_pre_render' => '_osha_dangerous_substances_add_visibility_states',
-//    'field_name' => 'field_video_length',
-//    'path' => ['field_video_length'],
-//  ];
-
-//  foreach ($actions as $action) {
-//    $element = &drupal_array_get_nested_value($form, $action['path']);
-//    $action['set_pre_render'] = '_osha_dangerous_substances_add_visibility_states';
-//    if (isset($action['set_pre_render'])) {
-//      if (!isset($element['#pre_render'])) {
-//        $element['#pre_render'] = array();
-//      }
-//      $element['#pre_render'][] = $action['set_pre_render'];
-//      $path = $action['path'];
-//      // Remove the uppermost element so we can get the path to the parent.
-//      array_pop($path);
-//      $parent_path = $path;
-//      $parent_element = &drupal_array_get_nested_value($form, $parent_path);
-//      if ($parent_element['#entity_type'] == 'field_collection_item') {
-//        // Field collection items set a custom entity_type/bundle.
-//        // See also: https://www.drupal.org/node/2113993
-//        $entity_type = 'field_collection_item';
-//        $bundle = $parent_element['#bundle'];
-//      }
-//      else {
-//        $entity_type = $form['#entity_type'];
-//        $bundle = $form['#bundle'];
-//      }
-//      $element['#field_conditional_state'] = array(
-//        'entity_type' => $entity_type,
-//        'bundle' => $bundle,
-//        'field_name' => $action['field_name'],
-//      );
-//    }
-//  }
-
-//// hook_form_alter function
-//function CUSTOM_MODULE_form_alter(&$form, &$form_state, $form_id) {
-//  // We want this on a specific node type
-//  if ($form_id == 'NODE_TYPE_node_form') {
-//    $form['#after_build'][] = 'CUSTOM_MODULE_NODE_TYPE_node_form_after_build';
-//  }
-//}
-
-/**
- * Implements hook_field_widget_form_alter().
- */
-//function osha_dangerous_substances_field_widget_form_alter(&$element, &$form_state, $context) {
-//
-//  // The fields supported as control fields are a subset of the fields
-//  // supported as controled fields, so we only have to check
-//  // the controled field whitelist here.
-//  if ($element['#field_name'] == 'field_biological_hazard_other') {
-////    $element['#after_build'][] = 'osha_dangerous_substances_element_after_build';
-//  }
-//  if (field_conditional_state_controled_field_is_supported($context['instance']['widget']['type'])) {
-//      //    $element['#field_conditional_state_widget_type'] = $context['instance']['widget']['type'];
-//  }
-//}
-
-//function osha_dangerous_substances_element_after_build($element, &$form_state) {
-////  $element['#pre_render'][] = '_osha_dangerous_substances_add_visibility_states';
-//  return $element;
-//}
-
-//function _osha_dangerous_substances_add_visibility_states($element) {
-//  $element_ids = [
-//    '#edit-field-country-code-und',
-//    '#edit-field-biological-hazard-und',
-//    '#edit-field-material-objective-type-und',
-//    '#edit-field-prevention-measure-type-und',
-//    '#edit-field-tasks-covered-und'
-//  ];
-//
-//  //field_visualisation_material_typ
-//  krumo($element['#id']);
-//  if ($element['#id'] == 'edit-field-video-length') {
-//    $element['#states'] = ['visible'=>[ '#edit-field-item-type-und' => ['value' => 'Audiovisual'] ] ];
-//  }
-//  foreach($element_ids as $element_id) {
-//    if (isset($element['#states'])) {
-////      krumo($element);
-//      foreach($element['#states'] as $state_type => $state_ids) {
-//        foreach($state_ids as $state_id => $value) {
-//          if ($element_id == $state_id) {
-//            $state_keys = array_keys($value);
-//            $element['#states'][$state_type][$state_id][$state_keys[0]] = [$value[$state_keys[0]]];
-////            krumo($state_id . ' --- ' . $state_type, $element['#states']);
-//          }
-//        }
-//      }
-//    }
-//  }
-//  return $element;
-//}
-
-//function osha_dangerous_substances_module_implements_alter(&$implementations, $hook) { // make hook call after fcs
-//  // Name of the hook.
-//  if ($hook != 'form_alter') {
-//    return;
-//  }
-//  $module = 'osha_dangerous_substances';
-//  $group = $implementations[$module];
-//  unset($implementations[$module]);
-//  $implementations[$module] = $group;
-//}

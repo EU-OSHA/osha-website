@@ -21,7 +21,7 @@ function osha_dangerous_substances_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Access condition',
-    'weight' => '45',
+    'weight' => '44',
     'children' => array(
       0 => 'field_contact_address',
       1 => 'field_disclaimer',

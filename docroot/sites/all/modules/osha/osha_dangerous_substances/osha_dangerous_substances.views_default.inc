@@ -64,11 +64,11 @@ function osha_dangerous_substances_views_default_views() {
   );
   $handler->display->display_options['fields']['field_available_in_languages']['delta_offset'] = '0';
   /* Field: Content: Country */
-  $handler->display->display_options['fields']['field_country']['id'] = 'field_country';
-  $handler->display->display_options['fields']['field_country']['table'] = 'field_data_field_country';
-  $handler->display->display_options['fields']['field_country']['field'] = 'field_country';
-  $handler->display->display_options['fields']['field_country']['type'] = 'i18n_taxonomy_term_reference_plain';
-  $handler->display->display_options['fields']['field_country']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_material_country']['id'] = 'field_material_country';
+  $handler->display->display_options['fields']['field_material_country']['table'] = 'field_data_field_material_country';
+  $handler->display->display_options['fields']['field_material_country']['field'] = 'field_material_country';
+  $handler->display->display_options['fields']['field_material_country']['type'] = 'i18n_taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_material_country']['delta_offset'] = '0';
   /* Field: Content: Country other */
   $handler->display->display_options['fields']['field_country_other']['id'] = 'field_country_other';
   $handler->display->display_options['fields']['field_country_other']['table'] = 'field_data_field_country_other';
@@ -338,17 +338,16 @@ function osha_dangerous_substances_views_default_views() {
     13 => 0,
     14 => 0,
   );
-  /* Filter criterion: Content: Country (field_country) */
-  $handler->display->display_options['filters']['field_country_tid']['id'] = 'field_country_tid';
-  $handler->display->display_options['filters']['field_country_tid']['table'] = 'field_data_field_country';
-  $handler->display->display_options['filters']['field_country_tid']['field'] = 'field_country_tid';
-  $handler->display->display_options['filters']['field_country_tid']['value'] = '';
-  $handler->display->display_options['filters']['field_country_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_country_tid']['expose']['operator_id'] = 'field_country_tid_op';
-  $handler->display->display_options['filters']['field_country_tid']['expose']['label'] = 'Country';
-  $handler->display->display_options['filters']['field_country_tid']['expose']['operator'] = 'field_country_tid_op';
-  $handler->display->display_options['filters']['field_country_tid']['expose']['identifier'] = 'field_country_tid';
-  $handler->display->display_options['filters']['field_country_tid']['expose']['remember_roles'] = array(
+  /* Filter criterion: Content: Country (field_material_country) */
+  $handler->display->display_options['filters']['field_material_country_tid']['id'] = 'field_material_country_tid';
+  $handler->display->display_options['filters']['field_material_country_tid']['table'] = 'field_data_field_material_country';
+  $handler->display->display_options['filters']['field_material_country_tid']['field'] = 'field_material_country_tid';
+  $handler->display->display_options['filters']['field_material_country_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_material_country_tid']['expose']['operator_id'] = 'field_material_country_tid_op';
+  $handler->display->display_options['filters']['field_material_country_tid']['expose']['label'] = 'Country';
+  $handler->display->display_options['filters']['field_material_country_tid']['expose']['operator'] = 'field_material_country_tid_op';
+  $handler->display->display_options['filters']['field_material_country_tid']['expose']['identifier'] = 'field_material_country_tid';
+  $handler->display->display_options['filters']['field_material_country_tid']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
@@ -364,8 +363,8 @@ function osha_dangerous_substances_views_default_views() {
     13 => 0,
     14 => 0,
   );
-  $handler->display->display_options['filters']['field_country_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_country_tid']['vocabulary'] = 'country';
+  $handler->display->display_options['filters']['field_material_country_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_material_country_tid']['vocabulary'] = 'country';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');

@@ -940,6 +940,34 @@ function osha_dangerous_substances_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_sector_industry_covered'.
+  $field_bases['field_sector_industry_covered'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_sector_industry_covered',
+    'indexes' => array(
+      'tid' => array(
+        0 => 'tid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'taxonomy',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => array(
+          'vocabulary' => 'nace_codes',
+          'parent' => 0,
+        ),
+      ),
+      'entity_translation_sync' => FALSE,
+      'options_list_callback' => 'i18n_taxonomy_allowed_values',
+    ),
+    'translatable' => 0,
+    'type' => 'taxonomy_term_reference',
+  );
+
   // Exported field_base: 'field_target_group'.
   $field_bases['field_target_group'] = array(
     'active' => 1,

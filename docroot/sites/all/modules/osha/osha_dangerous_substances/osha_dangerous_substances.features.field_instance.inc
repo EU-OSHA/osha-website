@@ -15,7 +15,9 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please describe the material (max. 1500 characters)
+Please note: the first paragraph will be displayed as short description, 
+please take this into consideration when you are writing the first paragraph.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -101,7 +103,7 @@ function osha_dangerous_substances_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please add yes, if advertising is included in the material',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -173,7 +175,7 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please add a language code from the list',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -249,7 +251,7 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please select the type of hazard from the drop down list',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -398,7 +400,7 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please add a short description in original language (only if a description is available on the website or material – no extra drafting or translation)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -475,7 +477,7 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please add the CAS number of the substances covered, if possible',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -552,7 +554,8 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please add the contact address for the material
+',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -624,19 +627,19 @@ function osha_dangerous_substances_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-dangerous_substances-field_country_code'.
-  $field_instances['node-dangerous_substances-field_country_code'] = array(
+  // Exported field_instance: 'node-dangerous_substances-field_country'.
+  $field_instances['node-dangerous_substances-field_country'] = array(
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please add a country code from the list',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
+        'module' => 'i18n_taxonomy',
         'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 9,
+        'type' => 'i18n_taxonomy_term_reference_link',
+        'weight' => 45,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -676,7 +679,7 @@ function osha_dangerous_substances_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_country_code',
+    'field_name' => 'field_country',
     'label' => 'Country',
     'required' => 0,
     'settings' => array(
@@ -777,7 +780,8 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please add the disclaimer for the material
+',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -854,7 +858,7 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please add the EC numbers of the substances, if possible',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -931,7 +935,7 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please click on the quality criteria (several clicks possible)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1002,7 +1006,7 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please select the exposure route',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1073,7 +1077,7 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please fill in the URL to access the material if available',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1157,7 +1161,7 @@ function osha_dangerous_substances_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 8,
+      'weight' => 7,
     ),
     'workbench_access_field' => 0,
   );
@@ -1168,7 +1172,7 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please select the type of hazards related to health effect from the drop down list',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1240,7 +1244,7 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please select the type of hazards related to state and occurrence in the workplace from the drop down list',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1312,7 +1316,8 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please describe the contact address for the material. 
+',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1381,7 +1386,7 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please fill in the type of the material',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1442,7 +1447,7 @@ function osha_dangerous_substances_field_default_field_instances() {
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 5,
+      'weight' => 4,
     ),
     'workbench_access_field' => 0,
   );
@@ -1675,7 +1680,7 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please add the measurement method used',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1752,7 +1757,7 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please add format and quality of the material',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1824,90 +1829,13 @@ function osha_dangerous_substances_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-dangerous_substances-field_nace_code'.
-  $field_instances['node-dangerous_substances-field_nace_code'] = array(
-    'bundle' => 'dangerous_substances',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 11,
-      ),
-      'highlights_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'newsletter_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_resources' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_slideshow' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_wiki' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_nace_code',
-    'label' => 'Sector / Industry covered',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'linkit' => array(
-        'button_text' => 'Search',
-        'enable' => 0,
-        'profile' => '',
-      ),
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 17,
-    ),
-    'workbench_access_field' => 0,
-  );
-
   // Exported field_instance:
   // 'node-dangerous_substances-field_other_information'.
   $field_instances['node-dangerous_substances-field_other_information'] = array(
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please add the other information for the material',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1985,7 +1913,8 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please add the ownership information for the material
+',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2063,7 +1992,7 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please select the prevention measures used',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2212,7 +2141,7 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please fill in the provider of the material (English version of the name)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2279,7 +2208,7 @@ function osha_dangerous_substances_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 9,
+      'weight' => 8,
     ),
     'workbench_access_field' => 0,
   );
@@ -2290,7 +2219,7 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please fill in the provider of the material (Name in original language)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2357,7 +2286,7 @@ function osha_dangerous_substances_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 10,
+      'weight' => 9,
     ),
     'workbench_access_field' => 0,
   );
@@ -2367,7 +2296,7 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please select from the drop down list the type of provider',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2428,7 +2357,7 @@ function osha_dangerous_substances_field_default_field_instances() {
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 12,
+      'weight' => 11,
     ),
     'workbench_access_field' => 0,
   );
@@ -2438,7 +2367,7 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please fill in the URL of the provider',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2522,7 +2451,7 @@ function osha_dangerous_substances_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 11,
+      'weight' => 10,
     ),
     'workbench_access_field' => 0,
   );
@@ -2532,7 +2461,7 @@ function osha_dangerous_substances_field_default_field_instances() {
   $field_instances['node-dangerous_substances-field_publication_date'] = array(
     'bundle' => 'dangerous_substances',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please select a year of publication, if it is not possible to identify leave it empty',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2611,7 +2540,7 @@ function osha_dangerous_substances_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_select',
-      'weight' => 13,
+      'weight' => 12,
     ),
     'workbench_access_field' => 0,
   );
@@ -2622,7 +2551,8 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please describe the disclaimer for the material. 
+',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2694,12 +2624,84 @@ function osha_dangerous_substances_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance:
+  // 'node-dangerous_substances-field_sector_industry_covered'.
+  $field_instances['node-dangerous_substances-field_sector_industry_covered'] = array(
+    'bundle' => 'dangerous_substances',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please add the NACE code of the sector covered in the material',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'i18n_taxonomy',
+        'settings' => array(),
+        'type' => 'i18n_taxonomy_term_reference_link',
+        'weight' => 46,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_sector_industry_covered',
+    'label' => 'Sector / Industry covered',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => 1,
+      ),
+      'type' => 'options_select',
+      'weight' => 18,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-dangerous_substances-field_summary'.
   $field_instances['node-dangerous_substances-field_summary'] = array(
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please add the name of the substance or substance group',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2776,7 +2778,7 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please select a target group from the drop down list',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2847,7 +2849,7 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please select the HAZMAP categories from the drop down list',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2908,7 +2910,7 @@ function osha_dangerous_substances_field_default_field_instances() {
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 18,
+      'weight' => 19,
     ),
     'workbench_access_field' => 0,
   );
@@ -2995,7 +2997,7 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please fill in the original title of the material',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3062,7 +3064,7 @@ function osha_dangerous_substances_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 7,
+      'weight' => 6,
     ),
     'workbench_access_field' => 0,
   );
@@ -3072,7 +3074,7 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please add the time in minutes',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3142,7 +3144,7 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please select type of visualisation from the drop down list',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3214,7 +3216,7 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please select the type of workers covered in the material from the drop down list',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3285,7 +3287,7 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please fill in the English title of the material',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3355,7 +3357,7 @@ function osha_dangerous_substances_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 6,
+      'weight' => 5,
     ),
     'workbench_access_field' => 0,
   );
@@ -3891,6 +3893,50 @@ function osha_dangerous_substances_field_default_field_instances() {
   t('Objective of the material other');
   t('Other information');
   t('Ownership information');
+  t('Please add a country code from the list');
+  t('Please add a language code from the list');
+  t('Please add a short description in original language (only if a description is available on the website or material – no extra drafting or translation)');
+  t('Please add format and quality of the material');
+  t('Please add the CAS number of the substances covered, if possible');
+  t('Please add the EC numbers of the substances, if possible');
+  t('Please add the NACE code of the sector covered in the material');
+  t('Please add the contact address for the material
+');
+  t('Please add the disclaimer for the material
+');
+  t('Please add the measurement method used');
+  t('Please add the name of the substance or substance group');
+  t('Please add the other information for the material');
+  t('Please add the ownership information for the material
+');
+  t('Please add the time in minutes');
+  t('Please add yes, if advertising is included in the material');
+  t('Please click on the quality criteria (several clicks possible)');
+  t('Please describe the contact address for the material. 
+');
+  t('Please describe the disclaimer for the material. 
+');
+  t('Please describe the material (max. 1500 characters)
+Please note: the first paragraph will be displayed as short description, 
+please take this into consideration when you are writing the first paragraph.');
+  t('Please fill in the English title of the material');
+  t('Please fill in the URL of the provider');
+  t('Please fill in the URL to access the material if available');
+  t('Please fill in the original title of the material');
+  t('Please fill in the provider of the material (English version of the name)');
+  t('Please fill in the provider of the material (Name in original language)');
+  t('Please fill in the type of the material');
+  t('Please select a target group from the drop down list');
+  t('Please select a year of publication, if it is not possible to identify leave it empty');
+  t('Please select from the drop down list the type of provider');
+  t('Please select the HAZMAP categories from the drop down list');
+  t('Please select the exposure route');
+  t('Please select the prevention measures used');
+  t('Please select the type of hazard from the drop down list');
+  t('Please select the type of hazards related to health effect from the drop down list');
+  t('Please select the type of hazards related to state and occurrence in the workplace from the drop down list');
+  t('Please select the type of workers covered in the material from the drop down list');
+  t('Please select type of visualisation from the drop down list');
   t('Prevention measures');
   t('Prevention measures other');
   t('Provider (English)');

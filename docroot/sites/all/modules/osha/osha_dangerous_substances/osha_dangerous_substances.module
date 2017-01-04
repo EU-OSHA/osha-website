@@ -54,7 +54,8 @@ function _osha_dangerous_substances_get_other_tid($element, $field, $other_name 
 function _osha_dangerous_substances_form_after_build($form, $form_state) {
 
   // country code
-  $form['field_country_other']['#states'] = ['visible'=>[ '#edit-field-country-code-und' => ['value' => ['OTH']] ] ];
+  $country_other = _osha_dangerous_substances_get_other_tid($form, 'field_country');
+  $form['field_country_other']['#states'] = ['visible'=>[ '#edit-field-country-und' => ['value' => [$country_other]] ] ];
 
   // biological hazard
   $hazard_other = _osha_dangerous_substances_get_other_tid($form, 'field_biological_hazard');

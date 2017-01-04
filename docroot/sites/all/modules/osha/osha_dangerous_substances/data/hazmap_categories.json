@@ -1,970 +1,130 @@
 [
     {
-        "code": "add_sulfites_to_food_potatoes_lobster_wine_apricots",
-        "name": "Add Sulfites To Food (potatoes, Lobster, Wine, Apricots)"
+        "code": "applying_glues_or_sealants",
+        "name": "Applying Glues or Sealants"
     },
     {
-        "code": "agitate_or_pump_liquid_manure_or_enter_manure_pit",
-        "name": "Agitate Or Pump Liquid Manure Or Enter Manure Pit"
+        "code": "applying_pesticides",
+        "name": "Applying Pesticides"
     },
     {
-        "code": "apply_arsenic_preservatives_to_wood",
-        "name": "Apply Arsenic Preservatives To Wood"
+        "code": "applying_surface_coatings",
+        "name": "Applying Surface Coatings"
     },
     {
-        "code": "apply_coal_tar_pitch_to_cables_pipes_or_roofs",
-        "name": "Apply Coal Tar Pitch To Cables, Pipes, Or Roofs"
+        "code": "beauty_culture",
+        "name": "Beauty Culture"
     },
     {
-        "code": "apply_organochlorine_insecticides",
-        "name": "Apply Organochlorine Insecticides"
+        "code": "cleaning_or_disinfecting",
+        "name": "Cleaning or Disinfecting"
     },
     {
-        "code": "apply_polyester_paints_to_hot_metal",
-        "name": "Apply Polyester Paints To Hot Metal"
+        "code": "construction",
+        "name": "Construction"
     },
     {
-        "code": "arc_weld_aluminum",
-        "name": "Arc Weld Aluminum"
+        "code": "contact_with_humans_or_animals",
+        "name": "Contact with Humans or Animals"
     },
     {
-        "code": "arc_weld_stainless_steel",
-        "name": "Arc Weld Stainless Steel"
+        "code": "dyeing_or_tanning",
+        "name": "Dyeing or Tanning"
     },
     {
-        "code": "assemble_or_repair_automotive_brakes_or_clutches_containing_asbestos",
-        "name": "Assemble Or Repair Automotive Brakes Or Clutches Containing Asbestos"
+        "code": "electroplating",
+        "name": "Electroplating"
     },
     {
-        "code": "assemble_products_using_cyanoacrylate_glues",
-        "name": "Assemble Products Using Cyanoacrylate Glues"
+        "code": "food_processing",
+        "name": "Food Processing"
     },
     {
-        "code": "before_1975_mixed_sprayed_or_sanded_asbestos_containing_materials",
-        "name": "Before 1975, Mixed, Sprayed, Or Sanded Asbestos-containing Materials"
+        "code": "handling_animals",
+        "name": "Handling Animals"
     },
     {
-        "code": "blast_drill_remove_or_crush_rock",
-        "name": "Blast, Drill, Remove, Or Crush Rock"
+        "code": "handling_chemicals",
+        "name": "Handling Chemicals"
     },
     {
-        "code": "braze_using_cadmium_based_solder",
-        "name": "Braze Using Cadmium-based Solder"
+        "code": "handling_insects",
+        "name": "Handling Insects"
     },
     {
-        "code": "care_for_birds_zookeepers",
-        "name": "Care For Birds (zookeepers)"
+        "code": "handling_plants",
+        "name": "Handling Plants"
     },
     {
-        "code": "care_for_children_or_animals_infected_with_cryptosporidiosis",
-        "name": "Care For Children Or Animals Infected With Cryptosporidiosis"
+        "code": "heating_or_machining_plastics_rubber",
+        "name": "Heating or Machining Plastics\/Rubber"
     },
     {
-        "code": "care_for_children_or_primates_infected_with_hepatitis_a",
-        "name": "Care For Children Or Primates Infected With Hepatitis A"
+        "code": "heating_machining_or_welding_metal",
+        "name": "Heating, Machining, or Welding Metal"
     },
     {
-        "code": "care_for_sick_patients_bloodborne_pathogens",
-        "name": "Care For Sick Patients (bloodborne Pathogens)"
+        "code": "installing_or_removing_insulation",
+        "name": "Installing or Removing Insulation"
     },
     {
-        "code": "care_for_sick_patients_droplet_airborne_pathogens",
-        "name": "Care For Sick Patients (droplet\/airborne Pathogens)"
+        "code": "manufacturing",
+        "name": "Manufacturing"
     },
     {
-        "code": "care_for_sick_patients_fecal_oral_pathogens",
-        "name": "Care For Sick Patients (fecal-oral Pathogens)"
+        "code": "medical_and_dental_services",
+        "name": "Medical and Dental Services"
     },
     {
-        "code": "clean_pools_or_aquariums",
-        "name": "Clean Pools Or Aquariums"
+        "code": "medical_or_dental_services",
+        "name": "Medical or Dental Services"
     },
     {
-        "code": "clean_up_equipment_with_solvents",
-        "name": "Clean Up Equipment With Solvents"
+        "code": "mining_or_quarrying",
+        "name": "Mining or Quarrying"
     },
     {
-        "code": "clean_repair_or_dismantle_oil_fired_furnaces_or_boilers",
-        "name": "Clean, Repair, Or Dismantle Oil-fired Furnaces Or Boilers"
+        "code": "miscellaneous",
+        "name": "Miscellaneous"
     },
     {
-        "code": "compound_plastics_using_lead_stabilizers",
-        "name": "Compound Plastics Using Lead Stabilizers"
+        "code": "printing_or_photography",
+        "name": "Printing or Photography"
     },
     {
-        "code": "contaminate_skin_or_inhale_spray_while_using_pentachlorophenol",
-        "name": "Contaminate Skin Or Inhale Spray While Using Pentachlorophenol"
+        "code": "processing_materials",
+        "name": "Processing Materials"
     },
     {
-        "code": "cut_and_dry_rayon_filaments",
-        "name": "Cut And Dry Rayon Filaments"
+        "code": "processing_moldy_organic_materials",
+        "name": "Processing Moldy Organic Materials"
     },
     {
-        "code": "decompose_chlorinated_solvents_by_uv_light_or_heat_from_welding",
-        "name": "Decompose Chlorinated Solvents By UV Light Or Heat From Welding"
+        "code": "removing_coatings",
+        "name": "Removing Coatings"
     },
     {
-        "code": "decompose_fluoropolymers_by_welding_burning_brazing_or_soldering",
-        "name": "Decompose Fluoropolymers By Welding, Burning, Brazing, Or Soldering"
+        "code": "smelting_and_casting_metal",
+        "name": "Smelting and Casting Metal"
     },
     {
-        "code": "degrease_metal",
-        "name": "Degrease Metal"
+        "code": "smelting_or_casting_metal",
+        "name": "Smelting or Casting Metal"
     },
     {
-        "code": "develop_color_photographs_with_compounds_containing_amines",
-        "name": "Develop Color Photographs With Compounds Containing Amines"
+        "code": "spill_or_confined_space_accident",
+        "name": "Spill or Confined Space Accident"
     },
     {
-        "code": "disinfect_or_sterilize_medical_equipment",
-        "name": "Disinfect Or Sterilize Medical Equipment"
+        "code": "woodworking",
+        "name": "Woodworking"
     },
     {
-        "code": "dry_clean_with_organic_solvents",
-        "name": "Dry Clean With Organic Solvents"
+        "code": "working_indoors",
+        "name": "Working Indoors"
     },
     {
-        "code": "dye_fur_with_compounds_containing_amines",
-        "name": "Dye Fur With Compounds Containing Amines"
-    },
-    {
-        "code": "dye_or_bleach_hair",
-        "name": "Dye Or Bleach Hair"
-    },
-    {
-        "code": "electroplating_rhodium_and_palladium",
-        "name": "Electroplating (rhodium And Palladium)"
-    },
-    {
-        "code": "enter_silo_one_to_ten_days_after_filling_with_silage",
-        "name": "Enter Silo One To Ten Days After Filling With Silage"
-    },
-    {
-        "code": "exposed_to_tobacco_smoke_working_in_unregulated_bars_restaurants_or_casinos",
-        "name": "Exposed To Tobacco Smoke Working In Unregulated Bars, Restaurants, Or Casinos"
-    },
-    {
-        "code": "extract_coal",
-        "name": "Extract Coal"
-    },
-    {
-        "code": "extract_mercury_ore_cinnabar",
-        "name": "Extract Mercury Ore (cinnabar)"
-    },
-    {
-        "code": "fabricate_measuring_devices_containing_mercury",
-        "name": "Fabricate Measuring Devices Containing Mercury"
-    },
-    {
-        "code": "formulate_mold_or_cure_resins_to_produce_advanced_composite_materials",
-        "name": "Formulate, Mold, Or Cure Resins To Produce Advanced Composite Materials"
-    },
-    {
-        "code": "galvanize_metal",
-        "name": "Galvanize Metal"
-    },
-    {
-        "code": "gas_or_arc_weld_on_galvanized_metal",
-        "name": "Gas Or Arc Weld On Galvanized Metal"
-    },
-    {
-        "code": "gas_weld_or_cut_in_a_confined_space",
-        "name": "Gas Weld Or Cut In A Confined Space"
-    },
-    {
-        "code": "generate_bioaerosols_derived_from_milk_eggs_or_animal_serum",
-        "name": "Generate Bioaerosols Derived From Milk, Eggs, Or Animal Serum"
-    },
-    {
-        "code": "generate_bioaerosols_of_animal_derived_proteins",
-        "name": "Generate Bioaerosols Of Animal-derived Proteins"
-    },
-    {
-        "code": "generate_bioaerosols_of_aromatic_herbs_raw_beef_goat_dander_cow_bone_dust_or_pig_butcher",
-        "name": "Generate Bioaerosols Of Aromatic Herbs, Raw Beef, Goat Dander, Cow Bone Dust, Or Pig (butcher)"
-    },
-    {
-        "code": "generate_bioaerosols_of_biological_enzymes",
-        "name": "Generate Bioaerosols Of Biological Enzymes"
-    },
-    {
-        "code": "generate_bioaerosols_of_chinese_red_rice_food_colorant_derived_from_fungi",
-        "name": "Generate Bioaerosols Of Chinese Red Rice (food Colorant Derived From Fungi)"
-    },
-    {
-        "code": "generate_bioaerosols_of_vegetable_gums",
-        "name": "Generate Bioaerosols Of Vegetable Gums"
-    },
-    {
-        "code": "generate_bioaerosols_processing_seafood",
-        "name": "Generate Bioaerosols Processing Seafood"
-    },
-    {
-        "code": "generate_flour_dust",
-        "name": "Generate Flour Dust"
-    },
-    {
-        "code": "generate_grain_dust",
-        "name": "Generate Grain Dust"
-    },
-    {
-        "code": "generate_gutta_percha_dust_dental_hygienist",
-        "name": "Generate Gutta Percha Dust (dental Hygienist)"
-    },
-    {
-        "code": "generate_insect_derived_bioaerosols",
-        "name": "Generate Insect-derived Bioaerosols"
-    },
-    {
-        "code": "generate_latex_dust_in_manufacturing_latex_products",
-        "name": "Generate Latex Dust In Manufacturing Latex Products"
-    },
-    {
-        "code": "generate_latex_dust_using_latex_products",
-        "name": "Generate Latex Dust Using Latex Products"
-    },
-    {
-        "code": "generate_mists_of_metalworking_fluids_containing_ethanolamines",
-        "name": "Generate Mists Of Metalworking Fluids Containing Ethanolamines"
-    },
-    {
-        "code": "generate_plant_bioaerosols_processing_or_packing_food_products",
-        "name": "Generate Plant Bioaerosols Processing Or Packing Food Products"
-    },
-    {
-        "code": "generate_plant_derived_bioaerosols",
-        "name": "Generate Plant-derived Bioaerosols"
-    },
-    {
-        "code": "generate_plastic_dusts_or_powders_plexiglas_or_polyvinyl_chloride",
-        "name": "Generate Plastic Dusts Or Powders (Plexiglas Or Polyvinyl Chloride)"
-    },
-    {
-        "code": "generate_psyllium_dust",
-        "name": "Generate Psyllium Dust"
-    },
-    {
-        "code": "generate_tooth_enamel_dust",
-        "name": "Generate Tooth Enamel Dust"
-    },
-    {
-        "code": "grind_or_cut_tiles_stones_concrete_bricks_or_terrazzo",
-        "name": "Grind Or Cut Tiles, Stones, Concrete, Bricks, Or Terrazzo"
-    },
-    {
-        "code": "grind_mix_or_weigh_dyes_or_apply_dyes_to_textiles",
-        "name": "Grind, Mix, Or Weigh Dyes Or Apply Dyes To Textiles"
-    },
-    {
-        "code": "handle_agents_that_cause_allergic_contact_dermatitis_or_contact_urticaria",
-        "name": "Handle Agents That Cause Allergic Contact Dermatitis Or Contact Urticaria"
-    },
-    {
-        "code": "handle_flowers",
-        "name": "Handle Flowers"
-    },
-    {
-        "code": "handle_infected_animal_carcasses_or_placental_tissues",
-        "name": "Handle Infected Animal Carcasses Or Placental Tissues"
-    },
-    {
-        "code": "handle_infected_chickens_or_birds",
-        "name": "Handle Infected Chickens Or Birds"
-    },
-    {
-        "code": "handle_infected_dog_or_cat_bite_or_scratch",
-        "name": "Handle Infected Dog Or Cat (bite Or Scratch)"
-    },
-    {
-        "code": "handle_infected_domestic_animals_inhalation_or_percutaneous_exposure",
-        "name": "Handle Infected Domestic Animals (inhalation Or Percutaneous Exposure)"
-    },
-    {
-        "code": "handle_infected_laboratory_rats_or_mice",
-        "name": "Handle Infected Laboratory Rats Or Mice"
-    },
-    {
-        "code": "handle_infected_macaque_monkeys",
-        "name": "Handle Infected Macaque Monkeys"
-    },
-    {
-        "code": "handle_infected_rodents_bite",
-        "name": "Handle Infected Rodents (bite)"
-    },
-    {
-        "code": "handle_infected_rodents_inhalation_or_percutaneous_exposure",
-        "name": "Handle Infected Rodents (inhalation Or Percutaneous Exposure)"
-    },
-    {
-        "code": "handle_infected_skunk_raccoon_bat_fox_other_carnivore_or_woodchuck_bite",
-        "name": "Handle Infected Skunk, Raccoon, Bat, Fox, Other Carnivore, Or Woodchuck (bite)"
-    },
-    {
-        "code": "handle_laboratory_animals",
-        "name": "Handle Laboratory Animals"
-    },
-    {
-        "code": "handle_limes_celery_parsnips_or_figs",
-        "name": "Handle Limes, Celery, Parsnips, Or Figs"
-    },
-    {
-        "code": "handle_medical_needles_or_surgical_instruments",
-        "name": "Handle Medical Needles Or Surgical Instruments"
-    },
-    {
-        "code": "handle_raw_goat_hair_wool_or_hides_from_endemic_area",
-        "name": "Handle Raw Goat Hair, Wool, Or Hides From Endemic Area"
-    },
-    {
-        "code": "have_contact_with_dogs_or_cats_fecal_oral_exposure",
-        "name": "Have Contact With Dogs Or Cats (fecal-oral Exposure)"
-    },
-    {
-        "code": "heat_or_machine_chromium_alloys",
-        "name": "Heat Or Machine Chromium Alloys"
-    },
-    {
-        "code": "heat_or_machine_cobalt_alloys",
-        "name": "Heat Or Machine Cobalt Alloys"
-    },
-    {
-        "code": "heat_or_machine_manganese_alloys",
-        "name": "Heat Or Machine Manganese Alloys"
-    },
-    {
-        "code": "heat_plastics_polyvinyl_chloride_polyethylene_or_polypropylene",
-        "name": "Heat Plastics--polyvinyl Chloride, Polyethylene, Or Polypropylene"
-    },
-    {
-        "code": "heat_machine_or_spray_lead_products",
-        "name": "Heat, Machine, Or Spray Lead Products"
-    },
-    {
-        "code": "inhale_algae_in_algae_preparation_pharmacist_or_sea_water_thalassotherapist",
-        "name": "Inhale Algae In Algae Preparation (pharmacist) Or Sea Water (thalassotherapist)"
-    },
-    {
-        "code": "inhale_aspergillus_in_bakery_beet_sugar_refinery_or_biotechnology_plant",
-        "name": "Inhale Aspergillus In Bakery, Beet Sugar Refinery, Or Biotechnology Plant"
-    },
-    {
-        "code": "inhale_bioaerosols_in_the_home_school_or_office_environment",
-        "name": "Inhale Bioaerosols In The Home, School, Or Office Environment"
-    },
-    {
-        "code": "inhale_bioaerosols_of_moldy_compost",
-        "name": "Inhale Bioaerosols Of Moldy Compost"
-    },
-    {
-        "code": "inhale_bioaerosols_of_moldy_hay_silage_straw_or_grain",
-        "name": "Inhale Bioaerosols Of Moldy Hay, Silage, Straw, Or Grain"
-    },
-    {
-        "code": "inhale_dust_in_livestock_confinement_building",
-        "name": "Inhale Dust In Livestock Confinement Building"
-    },
-    {
-        "code": "inhale_insect_allergens_in_fish_food_or_fish_bait",
-        "name": "Inhale Insect Allergens In Fish Food Or Fish Bait"
-    },
-    {
-        "code": "inhale_insect_allergens_in_the_laboratory",
-        "name": "Inhale Insect Allergens In The Laboratory"
-    },
-    {
-        "code": "inhale_mists_of_contaminated_water_from_plastics_injection_molding",
-        "name": "Inhale Mists Of Contaminated Water From Plastics Injection Molding"
-    },
-    {
-        "code": "inhale_mists_of_microbially_contaminated_water_based_metalworking_fluids",
-        "name": "Inhale Mists Of Microbially Contaminated, Water-based Metalworking Fluids"
-    },
-    {
-        "code": "inhale_mite_allergens_while_farming_or_handling_flour_or_grain",
-        "name": "Inhale Mite Allergens While Farming Or Handling Flour Or Grain"
-    },
-    {
-        "code": "inhale_moldy_wood_dust",
-        "name": "Inhale Moldy Wood Dust"
-    },
-    {
-        "code": "inhale_or_handle_nitrogen_compounds_that_can_induce_methemoglobinemia",
-        "name": "Inhale Or Handle Nitrogen Compounds That Can Induce Methemoglobinemia"
-    },
-    {
-        "code": "inhale_petroleum_vapors_containing_benzene",
-        "name": "Inhale Petroleum Vapors Containing Benzene"
-    },
-    {
-        "code": "inhale_pollen_from_cauliflower_or_broccoli_plants_horticulturist",
-        "name": "Inhale Pollen From Cauliflower Or Broccoli Plants (horticulturist)"
-    },
-    {
-        "code": "inhale_rhizopus_nigricans_in_a_coal_mine",
-        "name": "Inhale Rhizopus Nigricans In A Coal Mine"
-    },
-    {
-        "code": "installed_insulation_before_1975",
-        "name": "Installed Insulation Before 1975"
-    },
-    {
-        "code": "lead_mining",
-        "name": "Lead Mining"
-    },
-    {
-        "code": "load_or_dump_dusty_rock_stone_or_sand",
-        "name": "Load Or Dump Dusty Rock, Stone, Or Sand"
-    },
-    {
-        "code": "machine_or_weld_on_cadmium_alloyed_or_cadmium_plated_steel",
-        "name": "Machine Or Weld On Cadmium-alloyed Or Cadmium-plated Steel"
-    },
-    {
-        "code": "machine_wood_and_inhale_dust",
-        "name": "Machine Wood And Inhale Dust"
-    },
-    {
-        "code": "make_asbestos_products",
-        "name": "Make Asbestos Products"
-    },
-    {
-        "code": "make_beryllium_containing_products",
-        "name": "Make Beryllium-containing Products"
-    },
-    {
-        "code": "make_brushes_from_tampico_fibers",
-        "name": "Make Brushes From Tampico Fibers"
-    },
-    {
-        "code": "make_cadmium_containing_products",
-        "name": "Make Cadmium-containing Products"
-    },
-    {
-        "code": "make_molds_in_foundry_using_mdi_furfuryl_alcohol_or_amine_curing_agents",
-        "name": "Make Molds In Foundry Using MDI, Furfuryl Alcohol, Or Amine Curing Agents"
-    },
-    {
-        "code": "make_products_from_silica_powder_stone_or_other_fibrogenic_minerals",
-        "name": "Make Products From Silica Powder\/stone Or Other Fibrogenic Minerals"
-    },
-    {
-        "code": "manually_lay_up_reinforced_polyester_resins_using_styrene",
-        "name": "Manually \"lay-up\" Reinforced Polyester Resins Using Styrene"
-    },
-    {
-        "code": "manufacture_and_repair_mercury_fluorescent_lights",
-        "name": "Manufacture And Repair Mercury Fluorescent Lights"
-    },
-    {
-        "code": "manufacture_arsenical_pesticides",
-        "name": "Manufacture Arsenical Pesticides"
-    },
-    {
-        "code": "manufacture_cemented_carbide_materials_or_tools",
-        "name": "Manufacture Cemented Carbide Materials Or Tools"
-    },
-    {
-        "code": "manufacture_chemicals",
-        "name": "Manufacture Chemicals"
-    },
-    {
-        "code": "manufacture_lead_products",
-        "name": "Manufacture Lead Products"
-    },
-    {
-        "code": "manufacture_or_use_mercury_dental_amalgams",
-        "name": "Manufacture Or Use Mercury Dental Amalgams"
-    },
-    {
-        "code": "manufacture_pesticides_containing_captafol",
-        "name": "Manufacture Pesticides Containing Captafol"
-    },
-    {
-        "code": "manufacture_rosin_core_solder_colophony_and_rubber_tires_tall_oil",
-        "name": "Manufacture Rosin Core Solder (colophony) And Rubber Tires (tall Oil)"
-    },
-    {
-        "code": "mine_asbestos",
-        "name": "Mine Asbestos"
-    },
-    {
-        "code": "mine_or_crush_chromium_ores",
-        "name": "Mine Or Crush Chromium Ores"
-    },
-    {
-        "code": "mine_or_crush_manganese_ores",
-        "name": "Mine Or Crush Manganese Ores"
-    },
-    {
-        "code": "mix_and_apply_bone_adhesives",
-        "name": "Mix And Apply Bone Adhesives"
-    },
-    {
-        "code": "mix_or_apply_organophosphates_or_work_in_fields_after_an_application",
-        "name": "Mix Or Apply Organophosphates Or Work In Fields After An Application"
-    },
-    {
-        "code": "mix_or_pack_pharmaceutical_products",
-        "name": "Mix Or Pack Pharmaceutical Products"
-    },
-    {
-        "code": "operate_internal_combustion_engine_with_inadequate_ventilation",
-        "name": "Operate Internal Combustion Engine With Inadequate Ventilation"
-    },
-    {
-        "code": "paint_or_varnish_oil_based",
-        "name": "Paint Or Varnish, Oil-based"
-    },
-    {
-        "code": "plate_metal_with_cadmium",
-        "name": "Plate Metal With Cadmium"
-    },
-    {
-        "code": "plate_metal_with_chromium",
-        "name": "Plate Metal With Chromium"
-    },
-    {
-        "code": "plate_metal_with_nickel",
-        "name": "Plate Metal With Nickel"
-    },
-    {
-        "code": "plow_dig_or_excavate_soil_in_endemic_area",
-        "name": "Plow, Dig, Or Excavate Soil In Endemic Area"
-    },
-    {
-        "code": "prepare_fruit_salad_using_a_solution_of_enzymes_pectinase_and_glucanase",
-        "name": "Prepare Fruit Salad Using A Solution Of Enzymes (pectinase And Glucanase)"
-    },
-    {
-        "code": "prepare_card_or_spin_natural_vegetable_fibers_a_heavy_exposure",
-        "name": "Prepare, Card, Or Spin Natural Vegetable Fibers (a Heavy Exposure)"
-    },
-    {
-        "code": "produce_chromium_alloys_or_chromate_pigments",
-        "name": "Produce Chromium Alloys Or Chromate Pigments"
-    },
-    {
-        "code": "produce_nacre_buttons_from_mollusc_shells",
-        "name": "Produce Nacre Buttons From Mollusc Shells"
-    },
-    {
-        "code": "produce_silk_sericulture",
-        "name": "Produce Silk (sericulture)"
-    },
-    {
-        "code": "produced_rubber_with_long_term_exposure_to_high_concentrations_of_curing_fumes",
-        "name": "Produced Rubber With Long-term Exposure To High Concentrations Of Curing Fumes"
-    },
-    {
-        "code": "raise_dust_from_bird_roosts_chicken_coops_or_bat_inhabited_caves_endemic_area",
-        "name": "Raise Dust From Bird Roosts, Chicken Coops, Or Bat-inhabited Caves Endemic Area"
-    },
-    {
-        "code": "raise_dust_of_excreta_from_rodents",
-        "name": "Raise Dust Of Excreta From Rodents"
-    },
-    {
-        "code": "raise_farm_dust_contaminated_with_francisella_tularensis_bacteria",
-        "name": "Raise Farm Dust Contaminated With Francisella Tularensis Bacteria"
-    },
-    {
-        "code": "reclaim_scrap_metal_containing_lead_cadmium_beryllium_or_mercury",
-        "name": "Reclaim Scrap Metal Containing Lead, Cadmium, Beryllium, Or Mercury"
-    },
-    {
-        "code": "refine_platinum",
-        "name": "Refine Platinum"
-    },
-    {
-        "code": "remove_cadmium_coatings",
-        "name": "Remove Cadmium Coatings"
-    },
-    {
-        "code": "remove_chromate_containing_paints_by_abrasive_blasting",
-        "name": "Remove Chromate-containing Paints By Abrasive Blasting"
-    },
-    {
-        "code": "remove_insulation_installed_before_1975",
-        "name": "Remove Insulation Installed Before 1975"
-    },
-    {
-        "code": "remove_lead_coatings",
-        "name": "Remove Lead Coatings"
-    },
-    {
-        "code": "remove_or_replace_pcb_contaminated_fluid_in_transformers",
-        "name": "Remove Or Replace PCB Contaminated Fluid In Transformers"
-    },
-    {
-        "code": "repair_or_maintain_gasoline_or_jet_fuel_tanks",
-        "name": "Repair Or Maintain Gasoline Or Jet Fuel Tanks"
-    },
-    {
-        "code": "repeatedly_debark_maple_trees_to_obtain_sap",
-        "name": "Repeatedly Debark Maple Trees To Obtain Sap"
-    },
-    {
-        "code": "repeatedly_inhale_bioaerosols_containing_mold_asthmogenic",
-        "name": "Repeatedly Inhale Bioaerosols Containing Mold (asthmogenic)"
-    },
-    {
-        "code": "repeatedly_inhale_bioaerosols_of_bird_droppings",
-        "name": "Repeatedly Inhale Bioaerosols Of Bird Droppings"
-    },
-    {
-        "code": "repeatedly_inhale_bioaerosols_of_cheese_containing_penicillum_species",
-        "name": "Repeatedly Inhale Bioaerosols Of Cheese Containing Penicillum Species"
-    },
-    {
-        "code": "repeatedly_inhale_bioaerosols_of_moldy_barley",
-        "name": "Repeatedly Inhale Bioaerosols Of Moldy Barley"
-    },
-    {
-        "code": "repeatedly_inhale_bioaerosols_of_moldy_sugarcane_bagasse",
-        "name": "Repeatedly Inhale Bioaerosols Of Moldy Sugarcane Bagasse"
-    },
-    {
-        "code": "repeatedly_inhale_bioaerosols_of_moldy_wood_pulp",
-        "name": "Repeatedly Inhale Bioaerosols Of Moldy Wood Pulp"
-    },
-    {
-        "code": "repeatedly_inhale_bioaerosols_of_slime_mold",
-        "name": "Repeatedly Inhale Bioaerosols Of Slime Mold"
-    },
-    {
-        "code": "repeatedly_inhale_bioaerosols_of_soy_sauce_fermentation_starter",
-        "name": "Repeatedly Inhale Bioaerosols Of Soy Sauce Fermentation Starter"
-    },
-    {
-        "code": "repeatedly_inhale_dust_harvesting_peat_moss",
-        "name": "Repeatedly Inhale Dust Harvesting Peat Moss"
-    },
-    {
-        "code": "repeatedly_inhale_dust_of_esparto_grass",
-        "name": "Repeatedly Inhale Dust Of Esparto Grass"
-    },
-    {
-        "code": "repeatedly_inhale_dust_of_moldy_greenhouse_soil",
-        "name": "Repeatedly Inhale Dust Of Moldy Greenhouse Soil"
-    },
-    {
-        "code": "repeatedly_inhale_dust_of_moldy_tobacco",
-        "name": "Repeatedly Inhale Dust Of Moldy Tobacco"
-    },
-    {
-        "code": "repeatedly_inhale_moldy_cork_dust",
-        "name": "Repeatedly Inhale Moldy Cork Dust"
-    },
-    {
-        "code": "repeatedly_prepare_card_or_spin_natural_vegetable_fibers",
-        "name": "Repeatedly Prepare, Card, Or Spin Natural Vegetable Fibers"
-    },
-    {
-        "code": "saw_or_sand_arsenic_treated_wood",
-        "name": "Saw Or Sand Arsenic-treated Wood"
-    },
-    {
-        "code": "saw_or_sand_wood_treated_with_coal_tar_creosote",
-        "name": "Saw Or Sand Wood Treated With Coal Tar Creosote"
-    },
-    {
-        "code": "smelt_or_cast_lead",
-        "name": "Smelt Or Cast Lead"
-    },
-    {
-        "code": "smelt_or_refine_zinc_or_copper",
-        "name": "Smelt Or Refine Zinc Or Copper"
-    },
-    {
-        "code": "spray_and_resand_chromate_containing_paints",
-        "name": "Spray And Resand Chromate-containing Paints"
-    },
-    {
-        "code": "spray_chlorothalonil_or_tetramethrin_pesticides",
-        "name": "Spray Chlorothalonil Or Tetramethrin (pesticides)"
-    },
-    {
-        "code": "spray_epoxy_or_polyurethane_paint_shellac_lacquer_or_varnish",
-        "name": "Spray Epoxy Or Polyurethane Paint, Shellac, Lacquer, Or Varnish"
-    },
-    {
-        "code": "spray_paints_or_glazes_containing_cadmium_pigments",
-        "name": "Spray Paints Or Glazes Containing Cadmium Pigments"
-    },
-    {
-        "code": "spray_polyurethane_foam_insulation",
-        "name": "Spray Polyurethane Foam Insulation"
-    },
-    {
-        "code": "sterilize_equipment_with_ethylene_oxide",
-        "name": "Sterilize Equipment With Ethylene Oxide"
-    },
-    {
-        "code": "swim_in_contaminated_water_ingestion_or_inhalation",
-        "name": "Swim In Contaminated Water (ingestion Or Inhalation)"
-    },
-    {
-        "code": "touch_e_g_barefooted_contaminated_soil_in_endemic_area",
-        "name": "Touch (e.g., Barefooted) Contaminated Soil In Endemic Area"
-    },
-    {
-        "code": "touch_infected_farm_animals",
-        "name": "Touch Infected Farm Animals"
-    },
-    {
-        "code": "touch_infected_fish_or_shellfish",
-        "name": "Touch Infected Fish Or Shellfish"
-    },
-    {
-        "code": "touch_infected_meat_or_poultry",
-        "name": "Touch Infected Meat Or Poultry"
-    },
-    {
-        "code": "touch_plants_containing_thorns_splinters_or_spaghum_moss",
-        "name": "Touch Plants Containing Thorns, Splinters, Or Spaghum Moss"
-    },
-    {
-        "code": "travel_to_endemic_area_with_inadequate_protection",
-        "name": "Travel To Endemic Area With Inadequate Protection"
-    },
-    {
-        "code": "use_abrasives_containing_silica_or_silicon_carbide",
-        "name": "Use Abrasives Containing Silica Or Silicon Carbide"
-    },
-    {
-        "code": "use_acrylamide_for_grouting_sewers_mining_and_tunnel_construction",
-        "name": "Use Acrylamide For Grouting (sewers, Mining, And Tunnel Construction)"
-    },
-    {
-        "code": "use_anhydride_compounds_to_manufacture_chemical_products",
-        "name": "Use Anhydride Compounds To Manufacture Chemical Products"
-    },
-    {
-        "code": "use_azodicarbonamide_as_additive_to_plastics_and_rubber",
-        "name": "Use Azodicarbonamide As Additive To Plastics And Rubber"
-    },
-    {
-        "code": "use_benzene_to_manufacture_products",
-        "name": "Use Benzene To Manufacture Products"
-    },
-    {
-        "code": "use_carbon_disulfide_as_fumigant",
-        "name": "Use Carbon Disulfide As Fumigant"
-    },
-    {
-        "code": "use_cemented_carbide_materials_or_tools",
-        "name": "Use Cemented Carbide Materials Or Tools"
-    },
-    {
-        "code": "use_chloramine_t_for_cleaning_or_disinfecting",
-        "name": "Use Chloramine-T For Cleaning Or Disinfecting"
-    },
-    {
-        "code": "use_chromates_or_dichromates_in_printing",
-        "name": "Use Chromates Or Dichromates In Printing"
-    },
-    {
-        "code": "use_chromates_or_dichromates_in_tanning",
-        "name": "Use Chromates Or Dichromates In Tanning"
-    },
-    {
-        "code": "use_dental_acrylate_compounds",
-        "name": "Use Dental Acrylate Compounds"
-    },
-    {
-        "code": "use_diazonium_salts_to_manufacture_photocopy_paper_or_polymers",
-        "name": "Use Diazonium Salts To Manufacture Photocopy Paper Or Polymers"
-    },
-    {
-        "code": "use_diisocyanates_to_manufacture_polyurethane_products",
-        "name": "Use Diisocyanates To Manufacture Polyurethane Products"
-    },
-    {
-        "code": "use_dioctyl_phthalate_to_make_polyvinyl_chloride_pvc",
-        "name": "Use Dioctyl Phthalate To Make Polyvinyl Chloride (PVC)"
-    },
-    {
-        "code": "use_epoxy_isocyanate_or_formaldehyde_resin_adhesives_finishes_or_sealants",
-        "name": "Use Epoxy, Isocyanate, Or Formaldehyde-resin Adhesives, Finishes, Or Sealants"
-    },
-    {
-        "code": "use_ethanolamines_in_cleaning_products",
-        "name": "Use Ethanolamines In Cleaning Products"
-    },
-    {
-        "code": "use_ethanolamines_henna_karaya_sericin_or_eugenol_as_a_hairdresser",
-        "name": "Use Ethanolamines, Henna, Karaya, Sericin, Or Eugenol As A Hairdresser"
-    },
-    {
-        "code": "use_ferromanganese_in_alloy_production",
-        "name": "Use Ferromanganese In Alloy Production"
-    },
-    {
-        "code": "use_formaldehyde_or_glutaraldehyde_to_develop_x_rays_in_darkroom",
-        "name": "Use Formaldehyde Or Glutaraldehyde To Develop X-rays In Darkroom"
-    },
-    {
-        "code": "use_hand_held_saw_or_grinder_to_remove_brick_mortar",
-        "name": "Use Hand-held Saw Or Grinder To Remove Brick Mortar"
-    },
-    {
-        "code": "use_hydroxylamine_for_de_inking_in_paper_recycling",
-        "name": "Use Hydroxylamine For De-inking In Paper Recycling"
-    },
-    {
-        "code": "use_manganese_containing_welding_rods",
-        "name": "Use Manganese-containing Welding Rods"
-    },
-    {
-        "code": "use_mercury_to_extract_gold",
-        "name": "Use Mercury To Extract Gold"
-    },
-    {
-        "code": "use_methacrylates_to_apply_artificial_fingernails",
-        "name": "Use Methacrylates To Apply Artificial Fingernails"
-    },
-    {
-        "code": "use_n_hexane_as_a_solvent_in_glues_inks_coatings_or_degreasers",
-        "name": "Use N-hexane As A Solvent In Glues, Inks, Coatings, Or Degreasers"
-    },
-    {
-        "code": "use_polyfunctional_aziridine_hardener_in_paints_varnishes_or_other_coatings",
-        "name": "Use Polyfunctional Aziridine Hardener In Paints, Varnishes, Or Other Coatings"
-    },
-    {
-        "code": "use_solder_containing_colophony_zinc_chloride_ethanolamine_or_ammonium_chloride_flux",
-        "name": "Use Solder Containing Colophony, Zinc Chloride, Ethanolamine, Or Ammonium Chloride Flux"
-    },
-    {
-        "code": "use_solvents_in_printing_platemaking_or_using_solvent_based_inks",
-        "name": "Use Solvents In Printing (platemaking Or Using Solvent-based Inks)"
-    },
-    {
-        "code": "use_tetrazene_to_manufacture_detonators",
-        "name": "Use Tetrazene To Manufacture Detonators"
-    },
-    {
-        "code": "use_urea_formaldehyde_to_manufacture_resins_or_foams",
-        "name": "Use Urea Formaldehyde To Manufacture Resins Or Foams"
-    },
-    {
-        "code": "weld_mild_steel",
-        "name": "Weld Mild Steel"
-    },
-    {
-        "code": "weld_on_metal_painted_with_chlorinated_polyester_paint",
-        "name": "Weld On Metal Painted With Chlorinated Polyester Paint"
-    },
-    {
-        "code": "weld_or_machine_on_beryllium_containing_alloys",
-        "name": "Weld Or Machine On Beryllium-containing Alloys"
-    },
-    {
-        "code": "work_as_a_dental_technician_with_long_term_exposure_to_cocrmo_dusts",
-        "name": "Work As A Dental Technician With Long-term Exposure To CoCrMo Dusts"
-    },
-    {
-        "code": "work_as_cement_floorer_with_exposure_to_chromate_salts",
-        "name": "Work As Cement Floorer With Exposure To Chromate Salts"
-    },
-    {
-        "code": "work_continuously_with_wet_hands",
-        "name": "Work Continuously With Wet Hands"
-    },
-    {
-        "code": "work_for_railroad_in_1960s_or_1970s_as_engineer_fireman_conductor_brakeman_or_hostler",
-        "name": "Work For Railroad In 1960s Or 1970s As Engineer, Fireman, Conductor, Brakeman, Or Hostler"
-    },
-    {
-        "code": "work_in_a_medical_or_research_laboratory_handling_pathogens",
-        "name": "Work In A Medical Or Research Laboratory Handling Pathogens"
-    },
-    {
-        "code": "work_in_building_infested_with_rodent_fleas_or_mites",
-        "name": "Work In Building Infested With Rodent Fleas Or Mites"
-    },
-    {
-        "code": "work_in_conditions_of_extreme_atmospheric_pressure",
-        "name": "Work In Conditions Of Extreme Atmospheric Pressure"
-    },
-    {
-        "code": "work_in_confined_space",
-        "name": "Work In Confined Space"
-    },
-    {
-        "code": "work_in_forest_in_endemic_areas_of_central_and_south_america",
-        "name": "Work In Forest In Endemic Areas Of Central And South America"
-    },
-    {
-        "code": "work_in_grease_oil_or_tar_soaked_clothing",
-        "name": "Work In Grease, Oil, Or Tar Soaked Clothing"
-    },
-    {
-        "code": "work_in_indoor_pool_as_lifeguard_or_swimming_instructor",
-        "name": "Work In Indoor Pool As Lifeguard Or Swimming Instructor"
-    },
-    {
-        "code": "work_in_microwave_popcorn_plant_that_uses_diacetyl_for_flavoring",
-        "name": "Work In Microwave Popcorn Plant That Uses Diacetyl For Flavoring"
-    },
-    {
-        "code": "work_in_mite_infested_area_of_central_eastern_or_southeast_asia",
-        "name": "Work In Mite Infested Area Of Central, Eastern, Or Southeast Asia"
-    },
-    {
-        "code": "work_in_mouths_of_patients",
-        "name": "Work In Mouths Of Patients"
-    },
-    {
-        "code": "work_in_potroom_at_aluminum_smelter",
-        "name": "Work In Potroom At Aluminum Smelter"
-    },
-    {
-        "code": "work_in_the_mercury_cell_room_in_a_chloralkali_plant",
-        "name": "Work In The Mercury Cell Room In A Chloralkali Plant"
-    },
-    {
-        "code": "work_in_tick_infested_area",
-        "name": "Work In Tick Infested Area"
-    },
-    {
-        "code": "work_in_tunnel_construction_for_years_with_heavy_exposure_to_no2_blasting_diesel_exhaust",
-        "name": "Work In Tunnel Construction For Years With Heavy Exposure To NO2 (blasting & Diesel Exhaust)"
-    },
-    {
-        "code": "work_or_swim_in_contaminated_water_percutaneous_exposure",
-        "name": "Work Or Swim In Contaminated Water (percutaneous Exposure)"
-    },
-    {
-        "code": "work_with_flock_dryers_and_baggers_cutters_or_clean_plant_with_compressed_air",
-        "name": "Work With Flock (dryers And Baggers\/cutters) Or Clean Plant With Compressed Air"
-    },
-    {
-        "code": "work_with_glue_solvents",
-        "name": "Work With Glue Solvents"
-    },
-    {
-        "code": "work_with_toxic_chemicals_that_could_be_spilled_or_released",
-        "name": "Work With Toxic Chemicals That Could Be Spilled Or Released"
-    },
-    {
-        "code": "work_with_vibrating_hand_tools",
-        "name": "Work With Vibrating Hand Tools"
-    },
-    {
-        "code": "worked_for_years_as_painter_or_varnisher_exposed_to_solvents",
-        "name": "Worked For Years As Painter Or Varnisher Exposed To Solvents"
-    },
-    {
-        "code": "worked_in_foundry_for_years_with_heavy_exposure_to_gases_fumes_and_mineral_dust",
-        "name": "Worked In Foundry For Years With Heavy Exposure To Gases\/fumes And Mineral Dust"
-    },
-    {
-        "code": "worked_in_pulp_and_paper_mill_for_years_with_repeated_heavy_exposures_to_irritating_gases",
-        "name": "Worked In Pulp And Paper Mill For Years With Repeated Heavy Exposures To Irritating Gases"
-    },
-    {
-        "code": "worked_in_smelter_for_years_with_heavy_exposures_to_sulfur_dioxide_and_metal_fumes",
-        "name": "Worked In Smelter For Years With Heavy Exposures To Sulfur Dioxide And Metal Fumes"
+        "code": "working_outdoors",
+        "name": "Working Outdoors"
     }
 ]

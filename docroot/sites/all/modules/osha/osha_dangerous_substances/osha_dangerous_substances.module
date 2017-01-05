@@ -6,6 +6,14 @@
 
 include_once 'osha_dangerous_substances.features.inc';
 
+function osha_dangerous_substances_custom_theme($theme = NULL) {
+  $item = menu_get_object();
+  if ((implode('_', arg()) == 'node_add_dangerous-substances') || ($item && $item->type == 'dangerous_substances')) {
+    $theme = 'osha_frontend';
+  }
+  return $theme;
+}
+
 function osha_dangerous_substances_element_info_alter(&$type) {
   if (isset($type['text_format']['#process'])) {
     foreach ($type['text_format']['#process'] as &$callback) {

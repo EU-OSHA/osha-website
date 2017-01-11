@@ -22,6 +22,5 @@ function osha_search_menu_default_menu_custom() {
   // Included for use with string extractors like potx.
   t('Search');
 
-
   return $menus;
 }

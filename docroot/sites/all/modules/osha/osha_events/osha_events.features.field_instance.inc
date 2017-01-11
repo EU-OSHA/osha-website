@@ -10,7 +10,7 @@
 function osha_events_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-events-body'
+  // Exported field_instance: 'node-events-body'.
   $field_instances['node-events-body'] = array(
     'bundle' => 'events',
     'default_value' => NULL,
@@ -90,7 +90,7 @@ function osha_events_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-events-field_activity'
+  // Exported field_instance: 'node-events-field_activity'.
   $field_instances['node-events-field_activity'] = array(
     'bundle' => 'events',
     'default_value' => NULL,
@@ -166,7 +166,7 @@ function osha_events_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-events-field_adonis'
+  // Exported field_instance: 'node-events-field_adonis'.
   $field_instances['node-events-field_adonis'] = array(
     'bundle' => 'events',
     'default_value' => NULL,
@@ -241,7 +241,7 @@ function osha_events_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-events-field_agency_contact_reply'
+  // Exported field_instance: 'node-events-field_agency_contact_reply'.
   $field_instances['node-events-field_agency_contact_reply'] = array(
     'bundle' => 'events',
     'default_value' => NULL,
@@ -316,7 +316,7 @@ function osha_events_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-events-field_agency_initial_contact'
+  // Exported field_instance: 'node-events-field_agency_initial_contact'.
   $field_instances['node-events-field_agency_initial_contact'] = array(
     'bundle' => 'events',
     'default_value' => NULL,
@@ -391,7 +391,7 @@ function osha_events_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-events-field_agency_rep_confirmed'
+  // Exported field_instance: 'node-events-field_agency_rep_confirmed'.
   $field_instances['node-events-field_agency_rep_confirmed'] = array(
     'bundle' => 'events',
     'default_value' => NULL,
@@ -466,7 +466,7 @@ function osha_events_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-events-field_agency_role'
+  // Exported field_instance: 'node-events-field_agency_role'.
   $field_instances['node-events-field_agency_role'] = array(
     'bundle' => 'events',
     'default_value' => NULL,
@@ -533,7 +533,7 @@ function osha_events_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-events-field_city'
+  // Exported field_instance: 'node-events-field_city'.
   $field_instances['node-events-field_city'] = array(
     'bundle' => 'events',
     'default_value' => NULL,
@@ -612,7 +612,7 @@ function osha_events_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-events-field_color'
+  // Exported field_instance: 'node-events-field_color'.
   $field_instances['node-events-field_color'] = array(
     'bundle' => 'events',
     'default_value' => NULL,
@@ -684,7 +684,7 @@ Grey - Only web or not attendance',
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-events-field_comments_summary_after_eve'
+  // Exported field_instance: 'node-events-field_comments_summary_after_eve'.
   $field_instances['node-events-field_comments_summary_after_eve'] = array(
     'bundle' => 'events',
     'default_value' => NULL,
@@ -760,7 +760,7 @@ Grey - Only web or not attendance',
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-events-field_country_code'
+  // Exported field_instance: 'node-events-field_country_code'.
   $field_instances['node-events-field_country_code'] = array(
     'bundle' => 'events',
     'default_value' => NULL,
@@ -833,7 +833,7 @@ Grey - Only web or not attendance',
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-events-field_event_in_amp'
+  // Exported field_instance: 'node-events-field_event_in_amp'.
   $field_instances['node-events-field_event_in_amp'] = array(
     'bundle' => 'events',
     'default_value' => array(
@@ -905,7 +905,7 @@ Grey - Only web or not attendance',
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-events-field_event_type'
+  // Exported field_instance: 'node-events-field_event_type'.
   $field_instances['node-events-field_event_type'] = array(
     'bundle' => 'events',
     'default_value' => array(
@@ -979,7 +979,7 @@ Grey - Only web or not attendance',
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-events-field_for_the_web'
+  // Exported field_instance: 'node-events-field_for_the_web'.
   $field_instances['node-events-field_for_the_web'] = array(
     'bundle' => 'events',
     'default_value' => array(
@@ -1051,7 +1051,7 @@ Grey - Only web or not attendance',
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-events-field_number_of_attendees'
+  // Exported field_instance: 'node-events-field_number_of_attendees'.
   $field_instances['node-events-field_number_of_attendees'] = array(
     'bundle' => 'events',
     'default_value' => NULL,
@@ -1122,7 +1122,7 @@ Grey - Only web or not attendance',
     ),
   );
 
-  // Exported field_instance: 'node-events-field_organization'
+  // Exported field_instance: 'node-events-field_organization'.
   $field_instances['node-events-field_organization'] = array(
     'bundle' => 'events',
     'default_value' => NULL,
@@ -1199,7 +1199,7 @@ Grey - Only web or not attendance',
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-events-field_organized_by_eu_osha'
+  // Exported field_instance: 'node-events-field_organized_by_eu_osha'.
   $field_instances['node-events-field_organized_by_eu_osha'] = array(
     'bundle' => 'events',
     'default_value' => array(
@@ -1273,7 +1273,7 @@ Grey - Only web or not attendance',
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-events-field_related_documents'
+  // Exported field_instance: 'node-events-field_related_documents'.
   $field_instances['node-events-field_related_documents'] = array(
     'bundle' => 'events',
     'deleted' => 0,
@@ -1362,7 +1362,7 @@ Grey - Only web or not attendance',
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-events-field_satisfaction_rate'
+  // Exported field_instance: 'node-events-field_satisfaction_rate'.
   $field_instances['node-events-field_satisfaction_rate'] = array(
     'bundle' => 'events',
     'default_value' => NULL,
@@ -1433,7 +1433,7 @@ Grey - Only web or not attendance',
     ),
   );
 
-  // Exported field_instance: 'node-events-field_start_date'
+  // Exported field_instance: 'node-events-field_start_date'.
   $field_instances['node-events-field_start_date'] = array(
     'bundle' => 'events',
     'deleted' => 0,
@@ -1449,6 +1449,7 @@ Grey - Only web or not attendance',
           'multiple_number' => '',
           'multiple_to' => '',
           'osha_date_theme' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 23,
@@ -1469,6 +1470,7 @@ Grey - Only web or not attendance',
           'multiple_number' => '',
           'multiple_to' => '',
           'osha_date_theme' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 6,
@@ -1483,6 +1485,7 @@ Grey - Only web or not attendance',
           'multiple_number' => '',
           'multiple_to' => '',
           'osha_date_theme' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 0,
@@ -1509,6 +1512,7 @@ Grey - Only web or not attendance',
           'multiple_number' => '',
           'multiple_to' => '',
           'osha_date_theme' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 1,
@@ -1543,7 +1547,7 @@ Grey - Only web or not attendance',
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-events-field_tags'
+  // Exported field_instance: 'node-events-field_tags'.
   $field_instances['node-events-field_tags'] = array(
     'bundle' => 'events',
     'default_value' => NULL,
@@ -1613,7 +1617,7 @@ Grey - Only web or not attendance',
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-events-field_unit_ref'
+  // Exported field_instance: 'node-events-field_unit_ref'.
   $field_instances['node-events-field_unit_ref'] = array(
     'bundle' => 'events',
     'default_value' => NULL,
@@ -1683,7 +1687,7 @@ Grey - Only web or not attendance',
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-events-field_website_of_event'
+  // Exported field_instance: 'node-events-field_website_of_event'.
   $field_instances['node-events-field_website_of_event'] = array(
     'bundle' => 'events',
     'default_value' => NULL,
@@ -1777,7 +1781,7 @@ Grey - Only web or not attendance',
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-events-title_field'
+  // Exported field_instance: 'node-events-title_field'.
   $field_instances['node-events-title_field'] = array(
     'bundle' => 'events',
     'default_value' => NULL,
@@ -1874,7 +1878,7 @@ Grey - Only web or not attendance',
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'taxonomy_term-organised_by-description_field'
+  // Exported field_instance: 'taxonomy_term-organised_by-description_field'.
   $field_instances['taxonomy_term-organised_by-description_field'] = array(
     'bundle' => 'organised_by',
     'default_value' => NULL,
@@ -1913,7 +1917,7 @@ Grey - Only web or not attendance',
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-organised_by-name_field'
+  // Exported field_instance: 'taxonomy_term-organised_by-name_field'.
   $field_instances['taxonomy_term-organised_by-name_field'] = array(
     'bundle' => 'organised_by',
     'default_value' => NULL,

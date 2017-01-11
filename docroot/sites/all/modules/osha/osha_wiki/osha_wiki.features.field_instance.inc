@@ -10,7 +10,7 @@
 function osha_wiki_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-wiki_page-body'
+  // Exported field_instance: 'node-wiki_page-body'.
   $field_instances['node-wiki_page-body'] = array(
     'bundle' => 'wiki_page',
     'default_value' => NULL,
@@ -85,7 +85,7 @@ function osha_wiki_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-wiki_page-field_nace_codes'
+  // Exported field_instance: 'node-wiki_page-field_nace_codes'.
   $field_instances['node-wiki_page-field_nace_codes'] = array(
     'bundle' => 'wiki_page',
     'default_value' => NULL,
@@ -150,7 +150,7 @@ function osha_wiki_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-wiki_page-field_summary'
+  // Exported field_instance: 'node-wiki_page-field_summary'.
   $field_instances['node-wiki_page-field_summary'] = array(
     'bundle' => 'wiki_page',
     'default_value' => NULL,
@@ -221,7 +221,7 @@ function osha_wiki_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-wiki_page-field_tags'
+  // Exported field_instance: 'node-wiki_page-field_tags'.
   $field_instances['node-wiki_page-field_tags'] = array(
     'bundle' => 'wiki_page',
     'default_value' => NULL,
@@ -293,7 +293,7 @@ function osha_wiki_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-wiki_page-field_thesaurus'
+  // Exported field_instance: 'node-wiki_page-field_thesaurus'.
   $field_instances['node-wiki_page-field_thesaurus'] = array(
     'bundle' => 'wiki_page',
     'default_value' => NULL,
@@ -358,7 +358,7 @@ function osha_wiki_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-wiki_page-field_updated'
+  // Exported field_instance: 'node-wiki_page-field_updated'.
   $field_instances['node-wiki_page-field_updated'] = array(
     'bundle' => 'wiki_page',
     'deleted' => 0,
@@ -429,7 +429,7 @@ function osha_wiki_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-wiki_page-field_wiki_categories'
+  // Exported field_instance: 'node-wiki_page-field_wiki_categories'.
   $field_instances['node-wiki_page-field_wiki_categories'] = array(
     'bundle' => 'wiki_page',
     'default_value' => NULL,
@@ -495,7 +495,7 @@ function osha_wiki_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-wiki_page-field_wiki_page_url'
+  // Exported field_instance: 'node-wiki_page-field_wiki_page_url'.
   $field_instances['node-wiki_page-field_wiki_page_url'] = array(
     'bundle' => 'wiki_page',
     'default_value' => NULL,
@@ -589,7 +589,7 @@ function osha_wiki_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-wiki_page-title_field'
+  // Exported field_instance: 'node-wiki_page-title_field'.
   $field_instances['node-wiki_page-title_field'] = array(
     'bundle' => 'wiki_page',
     'default_value' => NULL,

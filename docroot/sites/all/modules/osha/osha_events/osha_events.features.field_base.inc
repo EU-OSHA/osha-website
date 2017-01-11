@@ -10,21 +10,13 @@
 function osha_events_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_adonis'
+  // Exported field_base: 'field_adonis'.
   $field_bases['field_adonis'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_adonis',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -40,21 +32,13 @@ function osha_events_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_agency_contact_reply'
+  // Exported field_base: 'field_agency_contact_reply'.
   $field_bases['field_agency_contact_reply'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_agency_contact_reply',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -70,21 +54,13 @@ function osha_events_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_agency_initial_contact'
+  // Exported field_base: 'field_agency_initial_contact'.
   $field_bases['field_agency_initial_contact'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_agency_initial_contact',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -100,21 +76,13 @@ function osha_events_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_agency_rep_confirmed'
+  // Exported field_base: 'field_agency_rep_confirmed'.
   $field_bases['field_agency_rep_confirmed'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_agency_rep_confirmed',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -130,14 +98,13 @@ function osha_events_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_agency_role'
+  // Exported field_base: 'field_agency_role'.
   $field_bases['field_agency_role'] = array(
     'active' => 1,
     'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_agency_role',
-    'foreign keys' => array(),
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -161,21 +128,13 @@ function osha_events_field_default_field_bases() {
     'type' => 'list_text',
   );
 
-  // Exported field_base: 'field_city'
+  // Exported field_base: 'field_city'.
   $field_bases['field_city'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_city',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -191,14 +150,13 @@ function osha_events_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_color'
+  // Exported field_base: 'field_color'.
   $field_bases['field_color'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_color',
-    'foreign keys' => array(),
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -219,21 +177,13 @@ function osha_events_field_default_field_bases() {
     'type' => 'list_text',
   );
 
-  // Exported field_base: 'field_comments_summary_after_eve'
+  // Exported field_base: 'field_comments_summary_after_eve'.
   $field_bases['field_comments_summary_after_eve'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_comments_summary_after_eve',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -249,14 +199,13 @@ function osha_events_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_country_code'
+  // Exported field_base: 'field_country_code'.
   $field_bases['field_country_code'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_country_code',
-    'foreign keys' => array(),
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -520,14 +469,13 @@ function osha_events_field_default_field_bases() {
     'type' => 'list_text',
   );
 
-  // Exported field_base: 'field_event_in_amp'
+  // Exported field_base: 'field_event_in_amp'.
   $field_bases['field_event_in_amp'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_event_in_amp',
-    'foreign keys' => array(),
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -547,14 +495,13 @@ function osha_events_field_default_field_bases() {
     'type' => 'list_text',
   );
 
-  // Exported field_base: 'field_event_type'
+  // Exported field_base: 'field_event_type'.
   $field_bases['field_event_type'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_event_type',
-    'foreign keys' => array(),
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -575,14 +522,13 @@ function osha_events_field_default_field_bases() {
     'type' => 'list_text',
   );
 
-  // Exported field_base: 'field_for_the_web'
+  // Exported field_base: 'field_for_the_web'.
   $field_bases['field_for_the_web'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_for_the_web',
-    'foreign keys' => array(),
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -602,14 +548,13 @@ function osha_events_field_default_field_bases() {
     'type' => 'list_text',
   );
 
-  // Exported field_base: 'field_number_of_attendees'
+  // Exported field_base: 'field_number_of_attendees'.
   $field_bases['field_number_of_attendees'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_number_of_attendees',
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'number',
@@ -620,21 +565,13 @@ function osha_events_field_default_field_bases() {
     'type' => 'number_integer',
   );
 
-  // Exported field_base: 'field_organization'
+  // Exported field_base: 'field_organization'.
   $field_bases['field_organization'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_organization',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -649,14 +586,13 @@ function osha_events_field_default_field_bases() {
     'type' => 'text_long',
   );
 
-  // Exported field_base: 'field_organized_by_eu_osha'
+  // Exported field_base: 'field_organized_by_eu_osha'.
   $field_bases['field_organized_by_eu_osha'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_organized_by_eu_osha',
-    'foreign keys' => array(),
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -676,21 +612,13 @@ function osha_events_field_default_field_bases() {
     'type' => 'list_boolean',
   );
 
-  // Exported field_base: 'field_related_documents'
+  // Exported field_base: 'field_related_documents'.
   $field_bases['field_related_documents'] = array(
     'active' => 1,
     'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_related_documents',
-    'foreign keys' => array(
-      'fid' => array(
-        'columns' => array(
-          'fid' => 'fid',
-        ),
-        'table' => 'file_managed',
-      ),
-    ),
     'indexes' => array(
       'fid' => array(
         0 => 'fid',
@@ -710,14 +638,13 @@ function osha_events_field_default_field_bases() {
     'type' => 'file',
   );
 
-  // Exported field_base: 'field_satisfaction_rate'
+  // Exported field_base: 'field_satisfaction_rate'.
   $field_bases['field_satisfaction_rate'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_satisfaction_rate',
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'number',
@@ -728,14 +655,13 @@ function osha_events_field_default_field_bases() {
     'type' => 'number_integer',
   );
 
-  // Exported field_base: 'field_start_date'
+  // Exported field_base: 'field_start_date'.
   $field_bases['field_start_date'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_start_date',
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'date',
@@ -759,14 +685,13 @@ function osha_events_field_default_field_bases() {
     'type' => 'datetime',
   );
 
-  // Exported field_base: 'field_unit_ref'
+  // Exported field_base: 'field_unit_ref'.
   $field_bases['field_unit_ref'] = array(
     'active' => 1,
     'cardinality' => 4,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_unit_ref',
-    'foreign keys' => array(),
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -788,14 +713,13 @@ function osha_events_field_default_field_bases() {
     'type' => 'list_text',
   );
 
-  // Exported field_base: 'field_website_of_event'
+  // Exported field_base: 'field_website_of_event'.
   $field_bases['field_website_of_event'] = array(
     'active' => 1,
     'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_website_of_event',
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'link',

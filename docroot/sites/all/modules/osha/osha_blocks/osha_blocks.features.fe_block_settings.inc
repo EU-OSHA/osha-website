@@ -63,7 +63,7 @@ function osha_blocks_default_fe_block_settings() {
   );
 
   $export['osha_blocks-osha_block_group_related'] = array(
-    'cache' => 4,
+    'cache' => 6,
     'custom' => 0,
     'delta' => 'osha_block_group_related',
     'i18n_block_language' => array(),

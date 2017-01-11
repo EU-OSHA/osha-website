@@ -10,7 +10,7 @@
 function osha_press_contact_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-press_contact-field_city'
+  // Exported field_instance: 'node-press_contact-field_city'.
   $field_instances['node-press_contact-field_city'] = array(
     'bundle' => 'press_contact',
     'default_value' => NULL,
@@ -86,7 +86,7 @@ function osha_press_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_contact-field_contact_type'
+  // Exported field_instance: 'node-press_contact-field_contact_type'.
   $field_instances['node-press_contact-field_contact_type'] = array(
     'bundle' => 'press_contact',
     'default_value' => NULL,
@@ -156,7 +156,7 @@ function osha_press_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_contact-field_contact_uuid'
+  // Exported field_instance: 'node-press_contact-field_contact_uuid'.
   $field_instances['node-press_contact-field_contact_uuid'] = array(
     'bundle' => 'press_contact',
     'default_value' => NULL,
@@ -233,7 +233,7 @@ function osha_press_contact_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-press_contact-field_country'
+  // Exported field_instance: 'node-press_contact-field_country'.
   $field_instances['node-press_contact-field_country'] = array(
     'bundle' => 'press_contact',
     'default_value' => NULL,
@@ -303,7 +303,7 @@ function osha_press_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_contact-field_is_advisory'
+  // Exported field_instance: 'node-press_contact-field_is_advisory'.
   $field_instances['node-press_contact-field_is_advisory'] = array(
     'bundle' => 'press_contact',
     'default_value' => array(
@@ -378,7 +378,7 @@ function osha_press_contact_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-press_contact-field_is_observer'
+  // Exported field_instance: 'node-press_contact-field_is_observer'.
   $field_instances['node-press_contact-field_is_observer'] = array(
     'bundle' => 'press_contact',
     'default_value' => array(
@@ -453,7 +453,7 @@ function osha_press_contact_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-press_contact-field_personal_title'
+  // Exported field_instance: 'node-press_contact-field_personal_title'.
   $field_instances['node-press_contact-field_personal_title'] = array(
     'bundle' => 'press_contact',
     'default_value' => NULL,
@@ -529,7 +529,7 @@ function osha_press_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_contact-field_press_contact_cv'
+  // Exported field_instance: 'node-press_contact-field_press_contact_cv'.
   $field_instances['node-press_contact-field_press_contact_cv'] = array(
     'bundle' => 'press_contact',
     'deleted' => 0,
@@ -603,7 +603,8 @@ function osha_press_contact_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-press_contact-field_press_contact_declaration'
+  // Exported field_instance:
+  // 'node-press_contact-field_press_contact_declaration'.
   $field_instances['node-press_contact-field_press_contact_declaration'] = array(
     'bundle' => 'press_contact',
     'deleted' => 0,
@@ -677,7 +678,7 @@ function osha_press_contact_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-press_contact-field_press_contact_email'
+  // Exported field_instance: 'node-press_contact-field_press_contact_email'.
   $field_instances['node-press_contact-field_press_contact_email'] = array(
     'bundle' => 'press_contact',
     'default_value' => NULL,
@@ -748,7 +749,8 @@ function osha_press_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_contact-field_press_contact_job_title'
+  // Exported field_instance:
+  // 'node-press_contact-field_press_contact_job_title'.
   $field_instances['node-press_contact-field_press_contact_job_title'] = array(
     'bundle' => 'press_contact',
     'default_value' => NULL,
@@ -829,7 +831,7 @@ function osha_press_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_contact-field_press_contact_location'
+  // Exported field_instance: 'node-press_contact-field_press_contact_location'.
   $field_instances['node-press_contact-field_press_contact_location'] = array(
     'bundle' => 'press_contact',
     'default_value' => NULL,
@@ -905,7 +907,8 @@ function osha_press_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_contact-field_press_contact_organization'
+  // Exported field_instance:
+  // 'node-press_contact-field_press_contact_organization'.
   $field_instances['node-press_contact-field_press_contact_organization'] = array(
     'bundle' => 'press_contact',
     'default_value' => NULL,
@@ -981,7 +984,7 @@ function osha_press_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_contact-field_press_contact_phone'
+  // Exported field_instance: 'node-press_contact-field_press_contact_phone'.
   $field_instances['node-press_contact-field_press_contact_phone'] = array(
     'bundle' => 'press_contact',
     'default_value' => NULL,
@@ -1062,7 +1065,7 @@ function osha_press_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_contact-field_website'
+  // Exported field_instance: 'node-press_contact-field_website'.
   $field_instances['node-press_contact-field_website'] = array(
     'bundle' => 'press_contact',
     'default_value' => NULL,
@@ -1155,7 +1158,7 @@ function osha_press_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_contact-field_wg_category'
+  // Exported field_instance: 'node-press_contact-field_wg_category'.
   $field_instances['node-press_contact-field_wg_category'] = array(
     'bundle' => 'press_contact',
     'default_value' => NULL,
@@ -1225,7 +1228,7 @@ function osha_press_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_contact-field_wg_role_1'
+  // Exported field_instance: 'node-press_contact-field_wg_role_1'.
   $field_instances['node-press_contact-field_wg_role_1'] = array(
     'bundle' => 'press_contact',
     'default_value' => NULL,
@@ -1295,7 +1298,7 @@ function osha_press_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_contact-field_wg_role_2'
+  // Exported field_instance: 'node-press_contact-field_wg_role_2'.
   $field_instances['node-press_contact-field_wg_role_2'] = array(
     'bundle' => 'press_contact',
     'default_value' => NULL,
@@ -1365,7 +1368,7 @@ function osha_press_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_contact-field_zip_code'
+  // Exported field_instance: 'node-press_contact-field_zip_code'.
   $field_instances['node-press_contact-field_zip_code'] = array(
     'bundle' => 'press_contact',
     'default_value' => NULL,
@@ -1441,7 +1444,7 @@ function osha_press_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-press_contact-title_field'
+  // Exported field_instance: 'node-press_contact-title_field'.
   $field_instances['node-press_contact-title_field'] = array(
     'bundle' => 'press_contact',
     'default_value' => NULL,
@@ -1521,7 +1524,7 @@ function osha_press_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-country-description_field'
+  // Exported field_instance: 'taxonomy_term-country-description_field'.
   $field_instances['taxonomy_term-country-description_field'] = array(
     'bundle' => 'country',
     'default_value' => NULL,
@@ -1560,7 +1563,7 @@ function osha_press_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-country-field_country_status'
+  // Exported field_instance: 'taxonomy_term-country-field_country_status'.
   $field_instances['taxonomy_term-country-field_country_status'] = array(
     'bundle' => 'country',
     'default_value' => NULL,
@@ -1594,7 +1597,7 @@ function osha_press_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-country-field_flag'
+  // Exported field_instance: 'taxonomy_term-country-field_flag'.
   $field_instances['taxonomy_term-country-field_flag'] = array(
     'bundle' => 'country',
     'deleted' => 0,
@@ -1640,7 +1643,7 @@ function osha_press_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-country-field_iso2'
+  // Exported field_instance: 'taxonomy_term-country-field_iso2'.
   $field_instances['taxonomy_term-country-field_iso2'] = array(
     'bundle' => 'country',
     'default_value' => NULL,
@@ -1680,7 +1683,7 @@ function osha_press_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-country-name_field'
+  // Exported field_instance: 'taxonomy_term-country-name_field'.
   $field_instances['taxonomy_term-country-name_field'] = array(
     'bundle' => 'country',
     'default_value' => NULL,
@@ -1717,7 +1720,7 @@ function osha_press_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-country_status-description_field'
+  // Exported field_instance: 'taxonomy_term-country_status-description_field'.
   $field_instances['taxonomy_term-country_status-description_field'] = array(
     'bundle' => 'country_status',
     'default_value' => NULL,
@@ -1756,7 +1759,7 @@ function osha_press_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-country_status-name_field'
+  // Exported field_instance: 'taxonomy_term-country_status-name_field'.
   $field_instances['taxonomy_term-country_status-name_field'] = array(
     'bundle' => 'country_status',
     'default_value' => NULL,
@@ -1793,7 +1796,7 @@ function osha_press_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-wg_category-description_field'
+  // Exported field_instance: 'taxonomy_term-wg_category-description_field'.
   $field_instances['taxonomy_term-wg_category-description_field'] = array(
     'bundle' => 'wg_category',
     'default_value' => NULL,
@@ -1832,7 +1835,7 @@ function osha_press_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-wg_category-name_field'
+  // Exported field_instance: 'taxonomy_term-wg_category-name_field'.
   $field_instances['taxonomy_term-wg_category-name_field'] = array(
     'bundle' => 'wg_category',
     'default_value' => NULL,
@@ -1869,7 +1872,7 @@ function osha_press_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-wg_role_1-description_field'
+  // Exported field_instance: 'taxonomy_term-wg_role_1-description_field'.
   $field_instances['taxonomy_term-wg_role_1-description_field'] = array(
     'bundle' => 'wg_role_1',
     'default_value' => NULL,
@@ -1908,7 +1911,7 @@ function osha_press_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-wg_role_1-name_field'
+  // Exported field_instance: 'taxonomy_term-wg_role_1-name_field'.
   $field_instances['taxonomy_term-wg_role_1-name_field'] = array(
     'bundle' => 'wg_role_1',
     'default_value' => NULL,
@@ -1945,7 +1948,7 @@ function osha_press_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-wg_role_2-description_field'
+  // Exported field_instance: 'taxonomy_term-wg_role_2-description_field'.
   $field_instances['taxonomy_term-wg_role_2-description_field'] = array(
     'bundle' => 'wg_role_2',
     'default_value' => NULL,
@@ -1984,7 +1987,7 @@ function osha_press_contact_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-wg_role_2-name_field'
+  // Exported field_instance: 'taxonomy_term-wg_role_2-name_field'.
   $field_instances['taxonomy_term-wg_role_2-name_field'] = array(
     'bundle' => 'wg_role_2',
     'default_value' => NULL,

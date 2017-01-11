@@ -390,3 +390,11 @@ function osha_update_7019() {
   module_enable(array('shorten'));
   module_disable(array('addtoany'));
 }
+
+
+/**
+ * MDR-822: Publication date filter
+ */
+function osha_update_7020() {
+  features_revert_module('osha');
+}

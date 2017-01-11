@@ -10,21 +10,13 @@
 function osha_press_contact_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_contact_type'
+  // Exported field_base: 'field_contact_type'.
   $field_bases['field_contact_type'] = array(
     'active' => 1,
     'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_contact_type',
-    'foreign keys' => array(
-      'tid' => array(
-        'columns' => array(
-          'tid' => 'tid',
-        ),
-        'table' => 'taxonomy_term_data',
-      ),
-    ),
     'indexes' => array(
       'tid' => array(
         0 => 'tid',
@@ -46,21 +38,13 @@ function osha_press_contact_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_contact_uuid'
+  // Exported field_base: 'field_contact_uuid'.
   $field_bases['field_contact_uuid'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_contact_uuid',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -76,21 +60,13 @@ function osha_press_contact_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_country'
+  // Exported field_base: 'field_country'.
   $field_bases['field_country'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_country',
-    'foreign keys' => array(
-      'tid' => array(
-        'columns' => array(
-          'tid' => 'tid',
-        ),
-        'table' => 'taxonomy_term_data',
-      ),
-    ),
     'indexes' => array(
       'tid' => array(
         0 => 'tid',
@@ -112,21 +88,13 @@ function osha_press_contact_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_country_status'
+  // Exported field_base: 'field_country_status'.
   $field_bases['field_country_status'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_country_status',
-    'foreign keys' => array(
-      'tid' => array(
-        'columns' => array(
-          'tid' => 'tid',
-        ),
-        'table' => 'taxonomy_term_data',
-      ),
-    ),
     'indexes' => array(
       'tid' => array(
         0 => 'tid',
@@ -148,21 +116,13 @@ function osha_press_contact_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_flag'
+  // Exported field_base: 'field_flag'.
   $field_bases['field_flag'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_flag',
-    'foreign keys' => array(
-      'fid' => array(
-        'columns' => array(
-          'fid' => 'fid',
-        ),
-        'table' => 'file_managed',
-      ),
-    ),
     'indexes' => array(
       'fid' => array(
         0 => 'fid',
@@ -181,14 +141,13 @@ function osha_press_contact_field_default_field_bases() {
     'type' => 'image',
   );
 
-  // Exported field_base: 'field_is_advisory'
+  // Exported field_base: 'field_is_advisory'.
   $field_bases['field_is_advisory'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_is_advisory',
-    'foreign keys' => array(),
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -208,14 +167,13 @@ function osha_press_contact_field_default_field_bases() {
     'type' => 'list_boolean',
   );
 
-  // Exported field_base: 'field_is_observer'
+  // Exported field_base: 'field_is_observer'.
   $field_bases['field_is_observer'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_is_observer',
-    'foreign keys' => array(),
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -235,21 +193,13 @@ function osha_press_contact_field_default_field_bases() {
     'type' => 'list_boolean',
   );
 
-  // Exported field_base: 'field_iso2'
+  // Exported field_base: 'field_iso2'.
   $field_bases['field_iso2'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_iso2',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -265,21 +215,13 @@ function osha_press_contact_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_personal_title'
+  // Exported field_base: 'field_personal_title'.
   $field_bases['field_personal_title'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_personal_title',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -295,21 +237,13 @@ function osha_press_contact_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_press_contact_cv'
+  // Exported field_base: 'field_press_contact_cv'.
   $field_bases['field_press_contact_cv'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_press_contact_cv',
-    'foreign keys' => array(
-      'fid' => array(
-        'columns' => array(
-          'fid' => 'fid',
-        ),
-        'table' => 'file_managed',
-      ),
-    ),
     'indexes' => array(
       'fid' => array(
         0 => 'fid',
@@ -329,21 +263,13 @@ function osha_press_contact_field_default_field_bases() {
     'type' => 'file',
   );
 
-  // Exported field_base: 'field_press_contact_declaration'
+  // Exported field_base: 'field_press_contact_declaration'.
   $field_bases['field_press_contact_declaration'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_press_contact_declaration',
-    'foreign keys' => array(
-      'fid' => array(
-        'columns' => array(
-          'fid' => 'fid',
-        ),
-        'table' => 'file_managed',
-      ),
-    ),
     'indexes' => array(
       'fid' => array(
         0 => 'fid',
@@ -363,14 +289,13 @@ function osha_press_contact_field_default_field_bases() {
     'type' => 'file',
   );
 
-  // Exported field_base: 'field_press_contact_email'
+  // Exported field_base: 'field_press_contact_email'.
   $field_bases['field_press_contact_email'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_press_contact_email',
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'email',
@@ -381,21 +306,13 @@ function osha_press_contact_field_default_field_bases() {
     'type' => 'email',
   );
 
-  // Exported field_base: 'field_press_contact_job_title'
+  // Exported field_base: 'field_press_contact_job_title'.
   $field_bases['field_press_contact_job_title'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_press_contact_job_title',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -411,21 +328,13 @@ function osha_press_contact_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_press_contact_location'
+  // Exported field_base: 'field_press_contact_location'.
   $field_bases['field_press_contact_location'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_press_contact_location',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -440,21 +349,13 @@ function osha_press_contact_field_default_field_bases() {
     'type' => 'text_long',
   );
 
-  // Exported field_base: 'field_press_contact_organization'
+  // Exported field_base: 'field_press_contact_organization'.
   $field_bases['field_press_contact_organization'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_press_contact_organization',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -470,21 +371,13 @@ function osha_press_contact_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_press_contact_phone'
+  // Exported field_base: 'field_press_contact_phone'.
   $field_bases['field_press_contact_phone'] = array(
     'active' => 1,
     'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_press_contact_phone',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -500,14 +393,13 @@ function osha_press_contact_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_website'
+  // Exported field_base: 'field_website'.
   $field_bases['field_website'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_website',
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'link',
@@ -531,21 +423,13 @@ function osha_press_contact_field_default_field_bases() {
     'type' => 'link_field',
   );
 
-  // Exported field_base: 'field_wg_category'
+  // Exported field_base: 'field_wg_category'.
   $field_bases['field_wg_category'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_wg_category',
-    'foreign keys' => array(
-      'tid' => array(
-        'columns' => array(
-          'tid' => 'tid',
-        ),
-        'table' => 'taxonomy_term_data',
-      ),
-    ),
     'indexes' => array(
       'tid' => array(
         0 => 'tid',
@@ -567,21 +451,13 @@ function osha_press_contact_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_wg_role_1'
+  // Exported field_base: 'field_wg_role_1'.
   $field_bases['field_wg_role_1'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_wg_role_1',
-    'foreign keys' => array(
-      'tid' => array(
-        'columns' => array(
-          'tid' => 'tid',
-        ),
-        'table' => 'taxonomy_term_data',
-      ),
-    ),
     'indexes' => array(
       'tid' => array(
         0 => 'tid',
@@ -603,21 +479,13 @@ function osha_press_contact_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_wg_role_2'
+  // Exported field_base: 'field_wg_role_2'.
   $field_bases['field_wg_role_2'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_wg_role_2',
-    'foreign keys' => array(
-      'tid' => array(
-        'columns' => array(
-          'tid' => 'tid',
-        ),
-        'table' => 'taxonomy_term_data',
-      ),
-    ),
     'indexes' => array(
       'tid' => array(
         0 => 'tid',
@@ -639,21 +507,13 @@ function osha_press_contact_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_zip_code'
+  // Exported field_base: 'field_zip_code'.
   $field_bases['field_zip_code'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_zip_code',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',

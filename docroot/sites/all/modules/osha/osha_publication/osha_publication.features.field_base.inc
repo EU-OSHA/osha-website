@@ -10,21 +10,13 @@
 function osha_publication_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_publication_bookshop_id'
+  // Exported field_base: 'field_publication_bookshop_id'.
   $field_bases['field_publication_bookshop_id'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_publication_bookshop_id',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -40,21 +32,13 @@ function osha_publication_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_publication_related_res'
+  // Exported field_base: 'field_publication_related_res'.
   $field_bases['field_publication_related_res'] = array(
     'active' => 1,
     'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_publication_related_res',
-    'foreign keys' => array(
-      'fid' => array(
-        'columns' => array(
-          'fid' => 'fid',
-        ),
-        'table' => 'file_managed',
-      ),
-    ),
     'indexes' => array(
       'fid' => array(
         0 => 'fid',
@@ -74,21 +58,13 @@ function osha_publication_field_default_field_bases() {
     'type' => 'file',
   );
 
-  // Exported field_base: 'field_publication_type'
+  // Exported field_base: 'field_publication_type'.
   $field_bases['field_publication_type'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_publication_type',
-    'foreign keys' => array(
-      'tid' => array(
-        'columns' => array(
-          'tid' => 'tid',
-        ),
-        'table' => 'taxonomy_term_data',
-      ),
-    ),
     'indexes' => array(
       'tid' => array(
         0 => 'tid',
@@ -110,21 +86,13 @@ function osha_publication_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_related_publications'
+  // Exported field_base: 'field_related_publications'.
   $field_bases['field_related_publications'] = array(
     'active' => 1,
     'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_related_publications',
-    'foreign keys' => array(
-      'node' => array(
-        'columns' => array(
-          'target_id' => 'nid',
-        ),
-        'table' => 'node',
-      ),
-    ),
     'indexes' => array(
       'target_id' => array(
         0 => 'target_id',
@@ -156,21 +124,13 @@ function osha_publication_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_relevant_for'
+  // Exported field_base: 'field_relevant_for'.
   $field_bases['field_relevant_for'] = array(
     'active' => 1,
     'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_relevant_for',
-    'foreign keys' => array(
-      'tid' => array(
-        'columns' => array(
-          'tid' => 'tid',
-        ),
-        'table' => 'taxonomy_term_data',
-      ),
-    ),
     'indexes' => array(
       'tid' => array(
         0 => 'tid',

@@ -13,7 +13,7 @@ function osha_newsletter_default_fe_block_settings() {
   $export['version'] = '2.0';
 
   $export['osha_newsletter-osha_newsletter_image'] = array(
-    'cache' => 8,
+    'cache' => -1,
     'custom' => 0,
     'delta' => 'osha_newsletter_image',
     'i18n_block_language' => array(),
@@ -54,7 +54,7 @@ node/9',
   );
 
   $export['osha_newsletter-osha_newsletter_latest'] = array(
-    'cache' => 8,
+    'cache' => -1,
     'custom' => 0,
     'delta' => 'osha_newsletter_latest',
     'i18n_block_language' => array(),
@@ -95,7 +95,7 @@ node/9',
   );
 
   $export['osha_newsletter-osha_newsletter_subscribe'] = array(
-    'cache' => 8,
+    'cache' => -1,
     'custom' => 0,
     'delta' => 'osha_newsletter_subscribe',
     'i18n_block_language' => array(),
@@ -135,7 +135,7 @@ node/9',
   );
 
   $export['osha_newsletter-osha_newsletter_subscribe_extra'] = array(
-    'cache' => 8,
+    'cache' => -1,
     'custom' => 0,
     'delta' => 'osha_newsletter_subscribe_extra',
     'i18n_block_language' => array(),

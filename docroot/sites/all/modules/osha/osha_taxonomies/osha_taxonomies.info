@@ -99,5 +99,5 @@ features_exclude[field_instance][taxonomy_term-legislation_category-field_direct
 features_exclude[field_instance][taxonomy_term-legislation_category-field_guideline_category_code] = taxonomy_term-legislation_category-field_guideline_category_code
 features_exclude[taxonomy][newsletter_sections] = newsletter_sections
 features_exclude[taxonomy][tags] = tags
+features_exclude[dependencies][osha_workflow] = osha_workflow
 files[] = osha_taxonomies.test
-mtime = 1418381191

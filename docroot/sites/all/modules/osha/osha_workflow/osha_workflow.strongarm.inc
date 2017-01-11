@@ -50,10 +50,10 @@ function osha_workflow_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'workbench_access_menu';
   $strongarm->value = array(
-    'main-menu' => 0,
     'devel' => 0,
     'features' => 0,
     'menu-footer-menu' => 0,
+    'main-menu' => 0,
     'management' => 0,
     'navigation' => 0,
     'menu-search' => 0,
@@ -171,14 +171,15 @@ function osha_workflow_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'workbench_access_taxonomy';
   $strongarm->value = array(
+    'section' => 'section',
     'activity' => 0,
     'article_types' => 0,
     'directive_type' => 0,
     'legislation_category' => 0,
     'esener' => 0,
     'nace_codes' => 0,
-    'section' => 'section',
     'attachment_file_type' => 0,
+    'banner_links' => 0,
     'contact_topic' => 0,
     'contact_type' => 0,
     'contact_type_of_sender' => 0,
@@ -189,6 +190,7 @@ function osha_workflow_strongarm() {
     'newsletter_sections' => 0,
     'organised_by' => 0,
     'publication_types' => 0,
+    'relevant_for' => 0,
     'tags' => 0,
     'thesaurus' => 0,
     'wg_category' => 0,

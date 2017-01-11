@@ -10,7 +10,7 @@
 function osha_taxonomies_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'taxonomy_term-activity-description_field'
+  // Exported field_instance: 'taxonomy_term-activity-description_field'.
   $field_instances['taxonomy_term-activity-description_field'] = array(
     'bundle' => 'activity',
     'default_value' => NULL,
@@ -49,7 +49,7 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-activity-field_activity_code'
+  // Exported field_instance: 'taxonomy_term-activity-field_activity_code'.
   $field_instances['taxonomy_term-activity-field_activity_code'] = array(
     'bundle' => 'activity',
     'default_value' => NULL,
@@ -84,7 +84,7 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-activity-field_activity_level'
+  // Exported field_instance: 'taxonomy_term-activity-field_activity_level'.
   $field_instances['taxonomy_term-activity-field_activity_level'] = array(
     'bundle' => 'activity',
     'default_value' => NULL,
@@ -119,7 +119,7 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-activity-name_field'
+  // Exported field_instance: 'taxonomy_term-activity-name_field'.
   $field_instances['taxonomy_term-activity-name_field'] = array(
     'bundle' => 'activity',
     'default_value' => NULL,
@@ -157,7 +157,8 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-article_types-field_article_type_code'
+  // Exported field_instance:
+  // 'taxonomy_term-article_types-field_article_type_code'.
   $field_instances['taxonomy_term-article_types-field_article_type_code'] = array(
     'bundle' => 'article_types',
     'default_value' => NULL,
@@ -191,7 +192,7 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-contact_topic-name_field'
+  // Exported field_instance: 'taxonomy_term-contact_topic-name_field'.
   $field_instances['taxonomy_term-contact_topic-name_field'] = array(
     'bundle' => 'contact_topic',
     'default_value' => NULL,
@@ -228,7 +229,7 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-contact_type_of_sender-name_field'
+  // Exported field_instance: 'taxonomy_term-contact_type_of_sender-name_field'.
   $field_instances['taxonomy_term-contact_type_of_sender-name_field'] = array(
     'bundle' => 'contact_type_of_sender',
     'default_value' => NULL,
@@ -265,7 +266,7 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-esener-description_field'
+  // Exported field_instance: 'taxonomy_term-esener-description_field'.
   $field_instances['taxonomy_term-esener-description_field'] = array(
     'bundle' => 'esener',
     'default_value' => NULL,
@@ -304,7 +305,7 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-esener-field_esener_code'
+  // Exported field_instance: 'taxonomy_term-esener-field_esener_code'.
   $field_instances['taxonomy_term-esener-field_esener_code'] = array(
     'bundle' => 'esener',
     'default_value' => NULL,
@@ -339,7 +340,7 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-esener-name_field'
+  // Exported field_instance: 'taxonomy_term-esener-name_field'.
   $field_instances['taxonomy_term-esener-name_field'] = array(
     'bundle' => 'esener',
     'default_value' => NULL,
@@ -376,7 +377,7 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-legislation_category-name_field'
+  // Exported field_instance: 'taxonomy_term-legislation_category-name_field'.
   $field_instances['taxonomy_term-legislation_category-name_field'] = array(
     'bundle' => 'legislation_category',
     'default_value' => NULL,
@@ -413,7 +414,7 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-nace_codes-description_field'
+  // Exported field_instance: 'taxonomy_term-nace_codes-description_field'.
   $field_instances['taxonomy_term-nace_codes-description_field'] = array(
     'bundle' => 'nace_codes',
     'default_value' => NULL,
@@ -449,7 +450,7 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-nace_codes-field_nace_changes'
+  // Exported field_instance: 'taxonomy_term-nace_codes-field_nace_changes'.
   $field_instances['taxonomy_term-nace_codes-field_nace_changes'] = array(
     'bundle' => 'nace_codes',
     'default_value' => NULL,
@@ -484,7 +485,7 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-nace_codes-field_nace_code'
+  // Exported field_instance: 'taxonomy_term-nace_codes-field_nace_code'.
   $field_instances['taxonomy_term-nace_codes-field_nace_code'] = array(
     'bundle' => 'nace_codes',
     'default_value' => NULL,
@@ -519,7 +520,7 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-nace_codes-field_nace_excludes'
+  // Exported field_instance: 'taxonomy_term-nace_codes-field_nace_excludes'.
   $field_instances['taxonomy_term-nace_codes-field_nace_excludes'] = array(
     'bundle' => 'nace_codes',
     'default_value' => NULL,
@@ -554,7 +555,7 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-nace_codes-field_nace_includes'
+  // Exported field_instance: 'taxonomy_term-nace_codes-field_nace_includes'.
   $field_instances['taxonomy_term-nace_codes-field_nace_includes'] = array(
     'bundle' => 'nace_codes',
     'default_value' => NULL,
@@ -589,7 +590,8 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-nace_codes-field_nace_includes_also'
+  // Exported field_instance:
+  // 'taxonomy_term-nace_codes-field_nace_includes_also'.
   $field_instances['taxonomy_term-nace_codes-field_nace_includes_also'] = array(
     'bundle' => 'nace_codes',
     'default_value' => NULL,
@@ -624,7 +626,7 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-nace_codes-name_field'
+  // Exported field_instance: 'taxonomy_term-nace_codes-name_field'.
   $field_instances['taxonomy_term-nace_codes-name_field'] = array(
     'bundle' => 'nace_codes',
     'default_value' => NULL,
@@ -661,7 +663,8 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-publication_types-description_field'
+  // Exported field_instance:
+  // 'taxonomy_term-publication_types-description_field'.
   $field_instances['taxonomy_term-publication_types-description_field'] = array(
     'bundle' => 'publication_types',
     'default_value' => NULL,
@@ -700,7 +703,8 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-publication_types-field_publication_type_code'
+  // Exported field_instance:
+  // 'taxonomy_term-publication_types-field_publication_type_code'.
   $field_instances['taxonomy_term-publication_types-field_publication_type_code'] = array(
     'bundle' => 'publication_types',
     'default_value' => NULL,
@@ -734,7 +738,7 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-publication_types-name_field'
+  // Exported field_instance: 'taxonomy_term-publication_types-name_field'.
   $field_instances['taxonomy_term-publication_types-name_field'] = array(
     'bundle' => 'publication_types',
     'default_value' => NULL,
@@ -771,7 +775,7 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-tags-description_field'
+  // Exported field_instance: 'taxonomy_term-tags-description_field'.
   $field_instances['taxonomy_term-tags-description_field'] = array(
     'bundle' => 'tags',
     'default_value' => NULL,
@@ -810,7 +814,7 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-tags-field_excluded_from'
+  // Exported field_instance: 'taxonomy_term-tags-field_excluded_from'.
   $field_instances['taxonomy_term-tags-field_excluded_from'] = array(
     'bundle' => 'tags',
     'default_value' => NULL,
@@ -842,7 +846,7 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-tags-field_tags_code'
+  // Exported field_instance: 'taxonomy_term-tags-field_tags_code'.
   $field_instances['taxonomy_term-tags-field_tags_code'] = array(
     'bundle' => 'tags',
     'default_value' => NULL,
@@ -877,7 +881,7 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-tags-name_field'
+  // Exported field_instance: 'taxonomy_term-tags-name_field'.
   $field_instances['taxonomy_term-tags-name_field'] = array(
     'bundle' => 'tags',
     'default_value' => NULL,
@@ -914,7 +918,7 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-thesaurus-description_field'
+  // Exported field_instance: 'taxonomy_term-thesaurus-description_field'.
   $field_instances['taxonomy_term-thesaurus-description_field'] = array(
     'bundle' => 'thesaurus',
     'default_value' => NULL,
@@ -953,7 +957,7 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-thesaurus-field_thesaurus_code'
+  // Exported field_instance: 'taxonomy_term-thesaurus-field_thesaurus_code'.
   $field_instances['taxonomy_term-thesaurus-field_thesaurus_code'] = array(
     'bundle' => 'thesaurus',
     'default_value' => NULL,
@@ -988,7 +992,7 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-thesaurus-name_field'
+  // Exported field_instance: 'taxonomy_term-thesaurus-name_field'.
   $field_instances['taxonomy_term-thesaurus-name_field'] = array(
     'bundle' => 'thesaurus',
     'default_value' => NULL,
@@ -1026,7 +1030,7 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-wiki_categories-description_field'
+  // Exported field_instance: 'taxonomy_term-wiki_categories-description_field'.
   $field_instances['taxonomy_term-wiki_categories-description_field'] = array(
     'bundle' => 'wiki_categories',
     'default_value' => NULL,
@@ -1065,7 +1069,7 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-wiki_categories-field_tags'
+  // Exported field_instance: 'taxonomy_term-wiki_categories-field_tags'.
   $field_instances['taxonomy_term-wiki_categories-field_tags'] = array(
     'bundle' => 'wiki_categories',
     'default_value' => NULL,
@@ -1099,7 +1103,7 @@ function osha_taxonomies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-wiki_categories-name_field'
+  // Exported field_instance: 'taxonomy_term-wiki_categories-name_field'.
   $field_instances['taxonomy_term-wiki_categories-name_field'] = array(
     'bundle' => 'wiki_categories',
     'default_value' => NULL,

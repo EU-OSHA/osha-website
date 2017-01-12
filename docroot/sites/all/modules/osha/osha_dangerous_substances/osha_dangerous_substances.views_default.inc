@@ -294,6 +294,24 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_worker_groups_type']['field'] = 'field_worker_groups_type';
   $handler->display->display_options['fields']['field_worker_groups_type']['type'] = 'i18n_taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_worker_groups_type']['delta_offset'] = '0';
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  /* Field: Workbench Access: Edit link */
+  $handler->display->display_options['fields']['edit']['id'] = 'edit';
+  $handler->display->display_options['fields']['edit']['table'] = 'workbench_access';
+  $handler->display->display_options['fields']['edit']['field'] = 'edit';
+  /* Field: Content: Image */
+  $handler->display->display_options['fields']['field_image']['id'] = 'field_image';
+  $handler->display->display_options['fields']['field_image']['table'] = 'field_data_field_image';
+  $handler->display->display_options['fields']['field_image']['field'] = 'field_image';
+  $handler->display->display_options['fields']['field_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_image']['type'] = 'file_download_link';
+  $handler->display->display_options['fields']['field_image']['settings'] = array(
+    'text' => 'Download [file:name]',
+  );
+  $handler->display->display_options['fields']['field_image']['delta_offset'] = '0';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -365,6 +383,33 @@ function osha_dangerous_substances_views_default_views() {
   );
   $handler->display->display_options['filters']['field_material_country_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_material_country_tid']['vocabulary'] = 'country';
+  /* Filter criterion: Content: Sector / Industry covered (field_sector_industry_covered) */
+  $handler->display->display_options['filters']['field_sector_industry_covered_tid']['id'] = 'field_sector_industry_covered_tid';
+  $handler->display->display_options['filters']['field_sector_industry_covered_tid']['table'] = 'field_data_field_sector_industry_covered';
+  $handler->display->display_options['filters']['field_sector_industry_covered_tid']['field'] = 'field_sector_industry_covered_tid';
+  $handler->display->display_options['filters']['field_sector_industry_covered_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_sector_industry_covered_tid']['expose']['operator_id'] = 'field_sector_industry_covered_tid_op';
+  $handler->display->display_options['filters']['field_sector_industry_covered_tid']['expose']['label'] = 'Sector / Industry covered (field_sector_industry_covered)';
+  $handler->display->display_options['filters']['field_sector_industry_covered_tid']['expose']['operator'] = 'field_sector_industry_covered_tid_op';
+  $handler->display->display_options['filters']['field_sector_industry_covered_tid']['expose']['identifier'] = 'field_sector_industry_covered_tid';
+  $handler->display->display_options['filters']['field_sector_industry_covered_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    14 => 0,
+  );
+  $handler->display->display_options['filters']['field_sector_industry_covered_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_sector_industry_covered_tid']['vocabulary'] = 'nace_codes';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -440,6 +485,9 @@ function osha_dangerous_substances_views_default_views() {
     t('Target group'),
     t('Type of visualisation material'),
     t('Worker groups covered (vulnerable groups etc.)'),
+    t('Edit link'),
+    t('Image'),
+    t('Sector / Industry covered (field_sector_industry_covered)'),
     t('Page'),
     t('Data export'),
   );

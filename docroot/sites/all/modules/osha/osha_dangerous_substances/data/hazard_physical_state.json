@@ -1,34 +1,42 @@
 [
     {
         "code": "dusts",
-        "name": "Dusts"
+        "name": "Dusts",
+        "thesaurus_id": "35961D"
     },
     {
         "code": "vapours",
-        "name": "Vapours"
+        "name": "Vapours",
+        "thesaurus_id": "36161D"
     },
     {
         "code": "fibres",
-        "name": "Fibres"
+        "name": "Fibres",
+        "thesaurus_id": "36201D"
     },
     {
         "code": "gases",
-        "name": "Gases"
+        "name": "Gases",
+        "thesaurus_id": "34881D"
     },
     {
         "code": "liquids",
-        "name": "Liquids"
+        "name": "Liquids",
+        "thesaurus_id": "35601D"
     },
     {
         "code": "solids",
-        "name": "Solids"
+        "name": "Solids",
+        "thesaurus_id": "35801D"
     },
     {
         "code": "aerosols",
-        "name": "Aerosols"
+        "name": "Aerosols",
+        "thesaurus_id": "34561D"
     },
     {
         "code": "nanoparticles",
-        "name": "Nanoparticles( airborne liquids\/solids including smoke or mist)"
+        "name": "Nanoparticles (airborne liquids\/solids including smoke or mist)",
+        "thesaurus_id": "40256C"
     }
 ]

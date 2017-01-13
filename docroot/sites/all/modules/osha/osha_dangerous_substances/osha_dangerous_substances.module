@@ -166,13 +166,19 @@ function osha_dangerous_substances_filter_process_format($element) {
  * Implements hook_form_alter().
  */
 function osha_dangerous_substances_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+
   if ($form_id == 'dangerous_substances_node_form') {
+
+    if (in_array('administrator', array_values($user->roles))) {
+      $form['field_priority_area']['#access'] = FALSE;
+    }
+
     drupal_add_js(drupal_get_path('module', 'osha_dangerous_substances') . '/js/osha_dangerous_substances.js');
     if (!isset($form['#after_build'])) {
       $form['#after_build'] = array();
     }
     $form['#after_build'][] = '_osha_dangerous_substances_form_after_build';
-    //$form['field_image']['und'][0]['#process'][] = 'osha_dangerous_substances_image_field_caption_widget_process';
     $form['actions']['submit']['#submit'][] = 'osha_dangerous_substances_node_save_redirect_submit';
     if (isset($form['actions']['save_preview'])) {
       $form['actions']['save_preview']['#submit'][] = 'osha_dangerous_substances_node_save_redirect_submit';
@@ -310,7 +316,8 @@ function osha_dangerous_substances_add_taxonomy() {
   ];
 
   $migration_module_dir = drupal_get_path('module', 'osha_dangerous_substances');
-  $terms_added = 0;
+  $terms_created = 0;
+  $terms_updated = 0;
   foreach($map as $machine_name => $voc_info) {
     $code_name = $voc_info['code'];
     $voc = taxonomy_vocabulary_machine_name_load($machine_name);
@@ -331,14 +338,20 @@ function osha_dangerous_substances_add_taxonomy() {
           continue;
         }
         $terms = taxonomy_get_term_by_name($name, $machine_name);
+        $thesaurus_id = @$row['thesaurus_id'];
+        $level = @$row['level'];
+
         if (empty($terms)) {
           $term = [];
           $term[$code_name][LANGUAGE_NONE][0]['value'] = $row['code'];
+          $term['field_prevention_level'][LANGUAGE_NONE][0]['value'] = $level;
+          $term['field_thesaurus_id'][LANGUAGE_NONE][0]['value'] = $thesaurus_id;
+
           $term = (object)$term;
           $term->vid = $voc->vid;
           $term->name = $name;
           taxonomy_term_save($term);
-          $terms_added++;
+          $terms_created++;
         }
         else {
           $tids = array_keys($terms);
@@ -346,10 +359,25 @@ function osha_dangerous_substances_add_taxonomy() {
           if (!$term->{$code_name}) {
             $term->{$code_name}[LANGUAGE_NONE][0]['value'] = $row['code'];
             taxonomy_term_save($term);
+            $terms_updated++;
+          }
+          if ($thesaurus_id) {
+            if (!$term->{'field_thesaurus_id'}) {
+              $term->{'field_thesaurus_id'}[LANGUAGE_NONE][0]['value'] = $thesaurus_id;
+              taxonomy_term_save($term);
+              $terms_updated++;
+            }
+          }
+          if ($level) {
+            if (!$term->{'field_prevention_level'}) {
+              $term->{'field_prevention_level'}[LANGUAGE_NONE][0]['value'] = $level;
+              taxonomy_term_save($term);
+              $terms_updated++;
+            }
           }
         }
       }
     }
   }
-  watchdog('osha_dangerous_substances', '!terms terms created ', array('!terms' => $terms_added));
+  watchdog('osha_dangerous_substances', '!terms_created terms created, !terms_updated terms updated', array('!terms_created' => $terms_created, '!terms_updated' => $terms_updated) );
 }

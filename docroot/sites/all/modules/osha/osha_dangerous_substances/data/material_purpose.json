@@ -1,38 +1,47 @@
 [
     {
         "code": "training",
-        "name": "Training"
+        "name": "Training",
+        "thesaurus_id": ""
     },
     {
         "code": "warning_message_alert",
-        "name": "Warning message \/ Alert"
+        "name": "Warning message \/ Alert",
+        "thesaurus_id": ""
     },
     {
-        "code": "measurement_assessment",
-        "name": "Measurement \/ Assessment"
+        "code": "measurement_and_assessment",
+        "name": "Measurement and assessment",
+        "thesaurus_id": "12561D"
     },
     {
         "code": "general_information",
-        "name": "General information"
+        "name": "General information",
+        "thesaurus_id": ""
     },
     {
         "code": "awareness_raising",
-        "name": "Awareness raising"
+        "name": "Awareness raising",
+        "thesaurus_id": "10721D"
     },
     {
         "code": "guidance",
-        "name": "Guidance"
+        "name": "Guidance",
+        "thesaurus_id": ""
     },
     {
         "code": "risk_assessment",
-        "name": "Risk assessment"
+        "name": "Risk assessment",
+        "thesaurus_id": "19641D"
     },
     {
         "code": "report",
-        "name": "Report"
+        "name": "Report",
+        "thesaurus_id": ""
     },
     {
         "code": "policy_paper",
-        "name": "Policy paper"
+        "name": "Policy paper",
+        "thesaurus_id": ""
     }
 ]

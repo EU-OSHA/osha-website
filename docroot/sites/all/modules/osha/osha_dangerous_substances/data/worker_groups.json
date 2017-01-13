@@ -1,58 +1,77 @@
 [
     {
         "code": "all",
-        "name": "All (no specific target group)"
+        "name": "All (no specific group)",
+        "thesaurus_id": ""
     },
     {
         "code": "ageing_and_older_workers",
-        "name": "Ageing and older workers"
+        "name": "Ageing and older workers",
+        "thesaurus_id": "54281D"
     },
     {
         "code": "temporary_workers",
-        "name": "Temporary workers"
+        "name": "Temporary workers",
+        "thesaurus_id": "54361E"
     },
     {
         "code": "disabled_workers",
-        "name": "Disabled workers"
+        "name": "Disabled workers",
+        "thesaurus_id": "54521D"
     },
     {
         "code": "home_workers",
-        "name": "Home workers"
+        "name": "Home workers",
+        "thesaurus_id": "54721D"
     },
     {
         "code": "women",
-        "name": "Women"
+        "name": "Women",
+        "thesaurus_id": "55641D"
     },
     {
-        "code": "pregnant_and_breastfeeding_workers",
-        "name": "Pregnant and breastfeeding workers"
+        "code": "pregnant_workers",
+        "name": "Pregnant workers",
+        "thesaurus_id": "55681E"
+    },
+    {
+        "code": "breastfeeding_mothers",
+        "name": "Breastfeeding mothers",
+        "thesaurus_id": "55761F"
     },
     {
         "code": "part_time_workers",
-        "name": "Part-time workers"
+        "name": "Part-time workers",
+        "thesaurus_id": "55321D"
     },
     {
         "code": "self_employed",
-        "name": "Self-employed"
+        "name": "Self-employed",
+        "thesaurus_id": "01361E"
     },
     {
-        "code": "migrant_workers",
-        "name": "Migrant workers"
+        "code": "migrant_and_immigrant_workers",
+        "name": "Migrant and immigrant workers",
+        "thesaurus_id": "54961D"
     },
     {
         "code": "young_workers",
-        "name": "Young workers"
+        "name": "Young workers",
+        "thesaurus_id": "55841D"
     },
     {
         "code": "maintenance_workers",
-        "name": "Maintenance workers"
+        "name": "Maintenance workers",
+        "thesaurus_id": "55261D"
     },
     {
         "code": "lone_workers",
-        "name": "Lone workers"
+        "name": "Lone workers",
+        "thesaurus_id": "54801D"
     },
     {
         "code": "other",
-        "name": "Other"
+        "name": "Other",
+        "thesaurus_id": ""
     }
 ]

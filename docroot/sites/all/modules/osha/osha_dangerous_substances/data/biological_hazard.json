@@ -1,42 +1,47 @@
 [
     {
-        "code": "biological_hazards",
-        "name": "Biological hazards"
-    },
-    {
         "code": "microbiological_hazards",
-        "name": "Microbiological hazards (Microorganism)"
+        "name": "Microbiological hazards (Microorganism)",
+        "thesaurus_id": "28721C"
     },
     {
         "code": "biochemical_hazards",
-        "name": "Biochemical hazards"
+        "name": "Biochemical hazards",
+        "thesaurus_id": "28601C"
     },
     {
-        "code": "genetically_modified_organism",
-        "name": "Genetically modified organism"
+        "code": "genetically_modified_organisms",
+        "name": "Genetically modified organisms",
+        "thesaurus_id": "28641C"
     },
     {
         "code": "fungi",
-        "name": "Fungi"
+        "name": "Fungi",
+        "thesaurus_id": "28681C"
     },
     {
         "code": "viruses",
-        "name": "Viruses"
+        "name": "Viruses",
+        "thesaurus_id": "29081E"
     },
     {
         "code": "bacteria",
-        "name": "Bacteria"
+        "name": "Bacteria",
+        "thesaurus_id": "28801E"
     },
     {
         "code": "parasites",
-        "name": "Parasites"
+        "name": "Parasites",
+        "thesaurus_id": "28961E"
     },
     {
         "code": "zoonoses",
-        "name": "Zoonoses"
+        "name": "Zoonoses",
+        "thesaurus_id": "51281D"
     },
     {
         "code": "other",
-        "name": "Other"
+        "name": "Other",
+        "thesaurus_id": ""
     }
 ]

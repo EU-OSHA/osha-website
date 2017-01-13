@@ -1,54 +1,72 @@
 [
     {
         "code": "employers",
-        "name": "Employers"
+        "name": "Employers",
+        "thesaurus_id": "56641E"
     },
     {
         "code": "managers",
-        "name": "Managers"
+        "name": "Managers",
+        "thesaurus_id": "54841D"
     },
     {
         "code": "workers_representatives",
-        "name": "Workers representatives"
+        "name": "Workers representatives",
+        "thesaurus_id": "20721E"
     },
     {
         "code": "supervisor",
-        "name": "Supervisor"
+        "name": "Supervisor",
+        "thesaurus_id": "55121D"
     },
     {
         "code": "safety_officers",
-        "name": "Safety officers"
+        "name": "Safety officers",
+        "thesaurus_id": "19121D"
     },
     {
         "code": "occupational_health_physician",
-        "name": "Occupational health physician"
+        "name": "Occupational health physician",
+        "thesaurus_id": "10441D"
     },
     {
         "code": "osh_consultant",
-        "name": "OSH consultant"
+        "name": "OSH consultant",
+        "thesaurus_id": ""
     },
     {
         "code": "workers",
-        "name": "Workers"
+        "name": "Workers",
+        "thesaurus_id": "54561D"
     },
     {
-        "code": "pupils_and_trainees",
-        "name": "Pupils and trainees"
+        "code": "pupils",
+        "name": "Pupils",
+        "thesaurus_id": "56321D"
+    },
+    {
+        "code": "trainees",
+        "name": "Trainees",
+        "thesaurus_id": ""
     },
     {
         "code": "trainers",
-        "name": "Trainers"
+        "name": "Trainers",
+        "thesaurus_id": ""
     },
     {
         "code": "researchers",
-        "name": "Researchers"
+        "name": "Researchers",
+        "thesaurus_id": "56441D"
     },
     {
         "code": "policy_makers",
-        "name": "Policy makers"
+        "name": "Policy makers",
+        "thesaurus_id": "56361D"
     },
     {
         "code": "other",
-        "name": "Other"
+        "name": "Other",
+        "thesaurus_id": ""
     }
 ]

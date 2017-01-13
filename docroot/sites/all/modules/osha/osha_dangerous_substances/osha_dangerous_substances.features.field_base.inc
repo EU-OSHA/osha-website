@@ -847,7 +847,7 @@ function osha_dangerous_substances_field_default_field_bases() {
   // Exported field_base: 'field_priority_area'.
   $field_bases['field_priority_area'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_priority_area',

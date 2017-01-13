@@ -170,7 +170,7 @@ function osha_dangerous_substances_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'dangerous_substances_node_form') {
 
-    if (in_array('administrator', array_values($user->roles))) {
+    if (!in_array('administrator', array_values($user->roles))) {
       $form['field_priority_area']['#access'] = FALSE;
     }
 

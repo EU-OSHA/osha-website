@@ -2643,6 +2643,83 @@ please take this into consideration when you are writing the first paragraph.',
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-dangerous_substances-field_priority_area'.
+  $field_instances['node-dangerous_substances-field_priority_area'] = array(
+    'bundle' => 'dangerous_substances',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'i18n_taxonomy',
+        'settings' => array(),
+        'type' => 'i18n_taxonomy_term_reference_link',
+        'weight' => 49,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_search_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_priority_area',
+    'label' => 'Priority area',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => 1,
+      ),
+      'type' => 'options_select',
+      'weight' => 89,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-dangerous_substances-field_provider'.
   $field_instances['node-dangerous_substances-field_provider'] = array(
     'bundle' => 'dangerous_substances',
@@ -4158,6 +4235,48 @@ please take this into consideration when you are writing the first paragraph.',
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance:
+  // 'taxonomy_term-biological_hazard-field_thesaurus_id'.
+  $field_instances['taxonomy_term-biological_hazard-field_thesaurus_id'] = array(
+    'bundle' => 'biological_hazard',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_thesaurus_id',
+    'label' => 'Thesaurus code',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 42,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'taxonomy_term-evaluation-field_evaluation_code'.
   $field_instances['taxonomy_term-evaluation-field_evaluation_code'] = array(
     'bundle' => 'evaluation',
@@ -4241,6 +4360,47 @@ please take this into consideration when you are writing the first paragraph.',
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'taxonomy_term-exposure_route-field_thesaurus_id'.
+  $field_instances['taxonomy_term-exposure_route-field_thesaurus_id'] = array(
+    'bundle' => 'exposure_route',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_thesaurus_id',
+    'label' => 'Thesaurus code',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 43,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance:
   // 'taxonomy_term-hazard_health_effects-field_hazard_physical_state_code'.
   $field_instances['taxonomy_term-hazard_health_effects-field_hazard_physical_state_code'] = array(
@@ -4284,6 +4444,48 @@ please take this into consideration when you are writing the first paragraph.',
   );
 
   // Exported field_instance:
+  // 'taxonomy_term-hazard_health_effects-field_thesaurus_id'.
+  $field_instances['taxonomy_term-hazard_health_effects-field_thesaurus_id'] = array(
+    'bundle' => 'hazard_health_effects',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_thesaurus_id',
+    'label' => 'Thesaurus code',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 43,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance:
   // 'taxonomy_term-hazard_physical_state-field_hazard_health_effects_code'.
   $field_instances['taxonomy_term-hazard_physical_state-field_hazard_health_effects_code'] = array(
     'bundle' => 'hazard_physical_state',
@@ -4321,6 +4523,48 @@ please take this into consideration when you are writing the first paragraph.',
       ),
       'type' => 'text_textfield',
       'weight' => 41,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance:
+  // 'taxonomy_term-hazard_physical_state-field_thesaurus_id'.
+  $field_instances['taxonomy_term-hazard_physical_state-field_thesaurus_id'] = array(
+    'bundle' => 'hazard_physical_state',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_thesaurus_id',
+    'label' => 'Thesaurus code',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 43,
     ),
     'workbench_access_field' => 0,
   );
@@ -4452,6 +4696,90 @@ please take this into consideration when you are writing the first paragraph.',
   );
 
   // Exported field_instance:
+  // 'taxonomy_term-material_purpose-field_thesaurus_id'.
+  $field_instances['taxonomy_term-material_purpose-field_thesaurus_id'] = array(
+    'bundle' => 'material_purpose',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_thesaurus_id',
+    'label' => 'Thesaurus code',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 43,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance:
+  // 'taxonomy_term-prevention_measures-field_prevention_level'.
+  $field_instances['taxonomy_term-prevention_measures-field_prevention_level'] = array(
+    'bundle' => 'prevention_measures',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_prevention_level',
+    'label' => 'Level',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 44,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance:
   // 'taxonomy_term-prevention_measures-field_prevention_measures_code'.
   $field_instances['taxonomy_term-prevention_measures-field_prevention_measures_code'] = array(
     'bundle' => 'prevention_measures',
@@ -4489,6 +4817,48 @@ please take this into consideration when you are writing the first paragraph.',
       ),
       'type' => 'text_textfield',
       'weight' => 41,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance:
+  // 'taxonomy_term-prevention_measures-field_thesaurus_id'.
+  $field_instances['taxonomy_term-prevention_measures-field_thesaurus_id'] = array(
+    'bundle' => 'prevention_measures',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_thesaurus_id',
+    'label' => 'Thesaurus code',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 43,
     ),
     'workbench_access_field' => 0,
   );
@@ -4535,6 +4905,47 @@ please take this into consideration when you are writing the first paragraph.',
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'taxonomy_term-provider_type-field_thesaurus_id'.
+  $field_instances['taxonomy_term-provider_type-field_thesaurus_id'] = array(
+    'bundle' => 'provider_type',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_thesaurus_id',
+    'label' => 'Thesaurus code',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 43,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance:
   // 'taxonomy_term-target_group-field_target_group_code'.
   $field_instances['taxonomy_term-target_group-field_target_group_code'] = array(
@@ -4573,6 +4984,88 @@ please take this into consideration when you are writing the first paragraph.',
       ),
       'type' => 'text_textfield',
       'weight' => 41,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'taxonomy_term-target_group-field_thesaurus_id'.
+  $field_instances['taxonomy_term-target_group-field_thesaurus_id'] = array(
+    'bundle' => 'target_group',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_thesaurus_id',
+    'label' => 'Thesaurus code',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 43,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'taxonomy_term-worker_groups-field_thesaurus_id'.
+  $field_instances['taxonomy_term-worker_groups-field_thesaurus_id'] = array(
+    'bundle' => 'worker_groups',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_thesaurus_id',
+    'label' => 'Thesaurus code',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 43,
     ),
     'workbench_access_field' => 0,
   );
@@ -4643,6 +5136,7 @@ please take this into consideration when you are writing the first paragraph.',
   t('Image');
   t('Intellectual property rights');
   t('Length of the video');
+  t('Level');
   t('Measurement method');
   t('Objective of material');
   t('Objective of the material other');
@@ -4694,6 +5188,7 @@ please take this into consideration when you are writing the first paragraph.');
   t('Please select type of visualisation from the drop down list');
   t('Prevention measures');
   t('Prevention measures other');
+  t('Priority area');
   t('Provider (English)');
   t('Provider (Original)');
   t('Provider URL');
@@ -4704,6 +5199,7 @@ please take this into consideration when you are writing the first paragraph.');
   t('Target group');
   t('Tasks covered');
   t('Tasks other');
+  t('Thesaurus code');
   t('Title (English)');
   t('Title (original)');
   t('Type of item');

@@ -234,6 +234,31 @@ function osha_dangerous_substances_taxonomy_default_vocabularies() {
         ),
       ),
     ),
+    'priority_area' => array(
+      'name' => 'Priority area',
+      'machine_name' => 'priority_area',
+      'description' => '',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+      'language' => 'und',
+      'i18n_mode' => 0,
+      'rdf_mapping' => array(
+        'rdftype' => array(
+          0 => 'skos:ConceptScheme',
+        ),
+        'name' => array(
+          'predicates' => array(
+            0 => 'dc:title',
+          ),
+        ),
+        'description' => array(
+          'predicates' => array(
+            0 => 'rdfs:comment',
+          ),
+        ),
+      ),
+    ),
     'provider_type' => array(
       'name' => 'Type of provider',
       'machine_name' => 'provider_type',

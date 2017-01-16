@@ -8,7 +8,7 @@
 /**
  * Implements hook_drush_command().
  */
-function dangerous_substances_drush_command() {
+function osha_dangerous_substances_drush_command() {
   $items = array();
   $items['dangerous_substances'] = array(
     'description' => "Dangerous substances terms install",
@@ -24,7 +24,7 @@ function dangerous_substances_drush_command() {
 /**
  * Actual function run by the dangerous_substances command.
  */
-function drush_dangerous_substances($source = NULL, $destination = NULL) {
+function drush_osha_dangerous_substances_dangerous_substances($source = NULL, $destination = NULL) {
   print "Dangerous substances terms install\n";
   osha_dangerous_substances_add_taxonomy();
 }

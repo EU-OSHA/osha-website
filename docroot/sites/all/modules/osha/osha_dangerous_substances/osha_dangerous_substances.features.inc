@@ -47,7 +47,7 @@ function osha_dangerous_substances_node_info() {
 function osha_dangerous_substances_default_search_api_index() {
   $items = array();
   $items['default_content_index'] = entity_import('search_api_index', '{
-    "name" : "Default content index",
+    "name" : "Dangerous substances index",
     "machine_name" : "default_content_index",
     "description" : null,
     "server" : "solr_server",

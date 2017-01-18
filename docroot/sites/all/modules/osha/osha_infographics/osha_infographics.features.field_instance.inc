@@ -10,7 +10,7 @@
 function osha_infographics_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-infographic-body'
+  // Exported field_instance: 'node-infographic-body'.
   $field_instances['node-infographic-body'] = array(
     'bundle' => 'infographic',
     'default_value' => NULL,
@@ -85,7 +85,7 @@ function osha_infographics_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-infographic-field_activity'
+  // Exported field_instance: 'node-infographic-field_activity'.
   $field_instances['node-infographic-field_activity'] = array(
     'bundle' => 'infographic',
     'default_value' => NULL,
@@ -160,7 +160,7 @@ function osha_infographics_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-infographic-field_file'
+  // Exported field_instance: 'node-infographic-field_file'.
   $field_instances['node-infographic-field_file'] = array(
     'bundle' => 'infographic',
     'deleted' => 0,
@@ -233,7 +233,7 @@ function osha_infographics_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-infographic-field_image'
+  // Exported field_instance: 'node-infographic-field_image'.
   $field_instances['node-infographic-field_image'] = array(
     'bundle' => 'infographic',
     'deleted' => 0,
@@ -320,7 +320,7 @@ function osha_infographics_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-infographic-field_publication_date'
+  // Exported field_instance: 'node-infographic-field_publication_date'.
   $field_instances['node-infographic-field_publication_date'] = array(
     'bundle' => 'infographic',
     'deleted' => 0,
@@ -397,7 +397,7 @@ function osha_infographics_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-infographic-field_tags'
+  // Exported field_instance: 'node-infographic-field_tags'.
   $field_instances['node-infographic-field_tags'] = array(
     'bundle' => 'infographic',
     'default_value' => NULL,
@@ -466,7 +466,7 @@ function osha_infographics_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-infographic-field_thumbnail'
+  // Exported field_instance: 'node-infographic-field_thumbnail'.
   $field_instances['node-infographic-field_thumbnail'] = array(
     'bundle' => 'infographic',
     'deleted' => 0,
@@ -548,7 +548,7 @@ function osha_infographics_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-infographic-field_twin_infographics'
+  // Exported field_instance: 'node-infographic-field_twin_infographics'.
   $field_instances['node-infographic-field_twin_infographics'] = array(
     'bundle' => 'infographic',
     'default_value' => NULL,
@@ -622,7 +622,7 @@ function osha_infographics_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-infographic-title_field'
+  // Exported field_instance: 'node-infographic-title_field'.
   $field_instances['node-infographic-title_field'] = array(
     'bundle' => 'infographic',
     'default_value' => NULL,

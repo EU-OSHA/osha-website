@@ -10,14 +10,13 @@
 function osha_seminar_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_seminar_end_date'
+  // Exported field_base: 'field_seminar_end_date'.
   $field_bases['field_seminar_end_date'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_seminar_end_date',
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'date',
@@ -41,21 +40,13 @@ function osha_seminar_field_default_field_bases() {
     'type' => 'datetime',
   );
 
-  // Exported field_base: 'field_seminar_location'
+  // Exported field_base: 'field_seminar_location'.
   $field_bases['field_seminar_location'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_seminar_location',
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -71,14 +62,13 @@ function osha_seminar_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_seminar_start_date'
+  // Exported field_base: 'field_seminar_start_date'.
   $field_bases['field_seminar_start_date'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_seminar_start_date',
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'date',

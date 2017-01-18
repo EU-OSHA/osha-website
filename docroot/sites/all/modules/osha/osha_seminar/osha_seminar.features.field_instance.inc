@@ -10,7 +10,7 @@
 function osha_seminar_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-seminar-body'
+  // Exported field_instance: 'node-seminar-body'.
   $field_instances['node-seminar-body'] = array(
     'bundle' => 'seminar',
     'default_value' => NULL,
@@ -96,7 +96,7 @@ function osha_seminar_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-seminar-field_activity'
+  // Exported field_instance: 'node-seminar-field_activity'.
   $field_instances['node-seminar-field_activity'] = array(
     'bundle' => 'seminar',
     'default_value' => NULL,
@@ -171,7 +171,7 @@ function osha_seminar_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-seminar-field_archived'
+  // Exported field_instance: 'node-seminar-field_archived'.
   $field_instances['node-seminar-field_archived'] = array(
     'bundle' => 'seminar',
     'default_value' => array(
@@ -244,7 +244,7 @@ function osha_seminar_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-seminar-field_character_count'
+  // Exported field_instance: 'node-seminar-field_character_count'.
   $field_instances['node-seminar-field_character_count'] = array(
     'bundle' => 'seminar',
     'default_value' => NULL,
@@ -315,7 +315,7 @@ function osha_seminar_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-seminar-field_expiration_date'
+  // Exported field_instance: 'node-seminar-field_expiration_date'.
   $field_instances['node-seminar-field_expiration_date'] = array(
     'bundle' => 'seminar',
     'deleted' => 0,
@@ -392,7 +392,7 @@ function osha_seminar_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-seminar-field_page_count'
+  // Exported field_instance: 'node-seminar-field_page_count'.
   $field_instances['node-seminar-field_page_count'] = array(
     'bundle' => 'seminar',
     'default_value' => NULL,
@@ -463,7 +463,7 @@ function osha_seminar_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-seminar-field_publication_date'
+  // Exported field_instance: 'node-seminar-field_publication_date'.
   $field_instances['node-seminar-field_publication_date'] = array(
     'bundle' => 'seminar',
     'deleted' => 0,
@@ -540,7 +540,7 @@ function osha_seminar_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-seminar-field_related_resources'
+  // Exported field_instance: 'node-seminar-field_related_resources'.
   $field_instances['node-seminar-field_related_resources'] = array(
     'bundle' => 'seminar',
     'deleted' => 0,
@@ -613,7 +613,7 @@ function osha_seminar_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-seminar-field_seminar_end_date'
+  // Exported field_instance: 'node-seminar-field_seminar_end_date'.
   $field_instances['node-seminar-field_seminar_end_date'] = array(
     'bundle' => 'seminar',
     'deleted' => 0,
@@ -629,6 +629,7 @@ function osha_seminar_field_default_field_instances() {
           'multiple_number' => '',
           'multiple_to' => '',
           'osha_date_theme' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 3,
@@ -698,7 +699,7 @@ function osha_seminar_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-seminar-field_seminar_location'
+  // Exported field_instance: 'node-seminar-field_seminar_location'.
   $field_instances['node-seminar-field_seminar_location'] = array(
     'bundle' => 'seminar',
     'default_value' => NULL,
@@ -779,7 +780,7 @@ function osha_seminar_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-seminar-field_seminar_start_date'
+  // Exported field_instance: 'node-seminar-field_seminar_start_date'.
   $field_instances['node-seminar-field_seminar_start_date'] = array(
     'bundle' => 'seminar',
     'deleted' => 0,
@@ -795,6 +796,7 @@ function osha_seminar_field_default_field_instances() {
           'multiple_number' => '',
           'multiple_to' => '',
           'osha_date_theme' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 2,
@@ -839,6 +841,7 @@ function osha_seminar_field_default_field_instances() {
           'multiple_number' => '',
           'multiple_to' => '',
           'osha_date_theme' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 0,
@@ -872,7 +875,7 @@ function osha_seminar_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-seminar-field_tags'
+  // Exported field_instance: 'node-seminar-field_tags'.
   $field_instances['node-seminar-field_tags'] = array(
     'bundle' => 'seminar',
     'default_value' => NULL,
@@ -941,7 +944,7 @@ function osha_seminar_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-seminar-field_thesaurus'
+  // Exported field_instance: 'node-seminar-field_thesaurus'.
   $field_instances['node-seminar-field_thesaurus'] = array(
     'bundle' => 'seminar',
     'default_value' => NULL,
@@ -1011,7 +1014,7 @@ function osha_seminar_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-seminar-title_field'
+  // Exported field_instance: 'node-seminar-title_field'.
   $field_instances['node-seminar-title_field'] = array(
     'bundle' => 'seminar',
     'default_value' => NULL,

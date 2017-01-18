@@ -10,7 +10,7 @@
 function osha_note_to_editor_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-note_to_editor-body'
+  // Exported field_instance: 'node-note_to_editor-body'.
   $field_instances['node-note_to_editor-body'] = array(
     'bundle' => 'note_to_editor',
     'default_value' => NULL,
@@ -85,7 +85,7 @@ function osha_note_to_editor_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-note_to_editor-field_character_count'
+  // Exported field_instance: 'node-note_to_editor-field_character_count'.
   $field_instances['node-note_to_editor-field_character_count'] = array(
     'bundle' => 'note_to_editor',
     'default_value' => NULL,
@@ -126,7 +126,7 @@ function osha_note_to_editor_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-note_to_editor-field_page_count'
+  // Exported field_instance: 'node-note_to_editor-field_page_count'.
   $field_instances['node-note_to_editor-field_page_count'] = array(
     'bundle' => 'note_to_editor',
     'default_value' => NULL,
@@ -167,7 +167,7 @@ function osha_note_to_editor_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-note_to_editor-title_field'
+  // Exported field_instance: 'node-note_to_editor-title_field'.
   $field_instances['node-note_to_editor-title_field'] = array(
     'bundle' => 'note_to_editor',
     'default_value' => NULL,

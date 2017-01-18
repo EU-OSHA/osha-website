@@ -10,14 +10,13 @@
 function osha_legislation_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_available_in_languages'
+  // Exported field_base: 'field_available_in_languages'.
   $field_bases['field_available_in_languages'] = array(
     'active' => 1,
     'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_available_in_languages',
-    'foreign keys' => array(),
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -41,14 +40,13 @@ function osha_legislation_field_default_field_bases() {
     'type' => 'language_field',
   );
 
-  // Exported field_base: 'field_date_of_directive'
+  // Exported field_base: 'field_date_of_directive'.
   $field_bases['field_date_of_directive'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_date_of_directive',
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'date',
@@ -72,21 +70,13 @@ function osha_legislation_field_default_field_bases() {
     'type' => 'datetime',
   );
 
-  // Exported field_base: 'field_directive_type'
+  // Exported field_base: 'field_directive_type'.
   $field_bases['field_directive_type'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_directive_type',
-    'foreign keys' => array(
-      'tid' => array(
-        'columns' => array(
-          'tid' => 'tid',
-        ),
-        'table' => 'taxonomy_term_data',
-      ),
-    ),
     'indexes' => array(
       'tid' => array(
         0 => 'tid',
@@ -108,14 +98,13 @@ function osha_legislation_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_external_url'
+  // Exported field_base: 'field_external_url'.
   $field_bases['field_external_url'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_external_url',
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'link',
@@ -139,21 +128,13 @@ function osha_legislation_field_default_field_bases() {
     'type' => 'link_field',
   );
 
-  // Exported field_base: 'field_legislation_category'
+  // Exported field_base: 'field_legislation_category'.
   $field_bases['field_legislation_category'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_legislation_category',
-    'foreign keys' => array(
-      'tid' => array(
-        'columns' => array(
-          'tid' => 'tid',
-        ),
-        'table' => 'taxonomy_term_data',
-      ),
-    ),
     'indexes' => array(
       'tid' => array(
         0 => 'tid',
@@ -175,21 +156,13 @@ function osha_legislation_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
-  // Exported field_base: 'field_tags'
+  // Exported field_base: 'field_tags'.
   $field_bases['field_tags'] = array(
     'active' => 1,
     'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_tags',
-    'foreign keys' => array(
-      'tid' => array(
-        'columns' => array(
-          'tid' => 'tid',
-        ),
-        'table' => 'taxonomy_term_data',
-      ),
-    ),
     'indexes' => array(
       'tid' => array(
         0 => 'tid',

@@ -263,7 +263,7 @@ function osha_taxonomies_taxonomy_default_vocabularies() {
       'name' => 'Wiki Categories',
       'machine_name' => 'wiki_categories',
       'description' => '',
-      'hierarchy' => 1,
+      'hierarchy' => 0,
       'module' => 'taxonomy',
       'weight' => 1,
       'language' => 'und',

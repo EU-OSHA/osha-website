@@ -53,6 +53,14 @@ function osha_resources_field_formatter_info() {
       'description' => t('Link to file using node title as link title.'),
     ),
   );
+  $info['contact_file_download_link'] = array(
+    'label' => t('Download contact file link'),
+    'description' => t('Displays a contact file link that will force the browser to download the file.'),
+    'field types' => array('file', 'image'),
+    'settings' => array(
+      'text' => t('Download [file:name]'),
+    ),
+  );
   return $info;
 }
 
@@ -72,6 +80,22 @@ function osha_resources_field_formatter_view($entity_type, $entity, $field, $ins
         );
       }
       break;
+    case 'contact_file_download_link':
+      $settings = $display['settings'];
+      foreach ($items as $delta => $item) {
+        $file = (object) $item;
+        if (file_entity_access('download', $file)) {
+          $element[$delta] = array(
+            '#theme' => 'osha_resources_download_link',
+            '#entity' => $entity,
+            '#field' => $field,
+            '#file' => $file,
+            '#text' => $settings['text'],
+          );
+        }
+      }
+      break;
+
   }
   return $element;
 }
@@ -85,7 +109,142 @@ function osha_resources_theme() {
     'osha_resources_file_as_title_format' => array(
       'variables' => array('entity' => NULL, 'file' => NULL, 'delta' => NULL),
     ),
+    'osha_resources_download_link' => array(
+      'variables' => array('file' => NULL, 'entity'=> NULL, 'field' => NULL, 'icon_directory' => NULL, 'text' => NULL),
+    ),
   );
+}
+
+/**
+ * Implements hook_field_formatter_settings_form().
+ */
+function osha_resources_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+  $element = array();
+
+  if ($display['type'] == 'contact_file_download_link') {
+    $element['text'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Link text'),
+      '#description' => t('This field support tokens.'),
+      '#default_value' => $settings['text'],
+      '#required' => TRUE,
+    );
+  }
+
+  return $element;
+}
+
+/**
+ * Copy of theme_file_file_link() for linking to the file download URL.
+ *
+ * @see theme_file_file_link()
+ */
+function theme_osha_resources_download_link($variables) {
+  $key = str_replace('field_', '', $variables['field']['field_name']);
+  $path = '/contact/' . $variables['entity']->nid . '/' . $key;
+
+  $file = $variables['file'];
+  $icon_directory = $variables['icon_directory'];
+
+  $uri = file_entity_download_uri($file);
+  $icon = theme('file_icon', array('file' => $file, 'icon_directory' => $icon_directory));
+
+  // Set options as per anchor format described at
+  // http://microformats.org/wiki/file-format-examples
+  $uri['options']['attributes']['type'] = $file->filemime . '; length=' . $file->filesize;
+
+  // Provide the default link text.
+  if (!isset($variables['text'])) {
+    $variables['text'] = t('Download [file:name]');
+  }
+
+  // Peform unsanitized token replacement if $uri['options']['html'] is empty
+  // since then l() will escape the link text.
+  $variables['text'] = token_replace($variables['text'], array('file' => $file), array('clear' => TRUE, 'sanitize' => empty($uri['options']['html'])));
+
+  $output = '<span class="file">' . $icon . ' ' . l($variables['text'], $path, $uri['options']);
+  $output .= ' ' . '<span class="file-size">(' . format_size($file->filesize) . ')</span>';
+  $output .= '</span>';
+
+  return $output;
+}
+
+
+/**
+ * Menu callback; download a single file entity.
+ */
+function osha_resources_download_page($node, $field) {
+  $node = (array)$node;
+
+  if (!isset($node['field_' . $field])) {
+    return MENU_NOT_FOUND;
+  }
+
+  $lang = array_keys($node['field_' . $field]);
+  $file = (object)$node['field_' . $field][$lang[0]][0];
+
+  if (!file_entity_access('download', $file)) {
+    return MENU_ACCESS_DENIED;
+  }
+
+  // Ensure there is a valid token to download this file.
+  if (!variable_get('file_entity_allow_insecure_download', FALSE)) {
+    if (!isset($_GET['token']) || $_GET['token'] !== file_entity_get_download_token($file)) {
+      return MENU_ACCESS_DENIED;
+    }
+  }
+
+  // If the file does not exist it can cause problems with file_transfer().
+  if (!is_file($file->uri)) {
+    return MENU_NOT_FOUND;
+  }
+
+  $headers = array(
+    'Content-Type' => mime_header_encode($file->filemime),
+    'Content-Disposition' => 'attachment; filename="' . mime_header_encode(drupal_basename($file->uri)) . '"',
+    'Content-Length' => $file->filesize,
+    'Content-Transfer-Encoding' => 'binary',
+    'Pragma' => 'no-cache',
+    'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
+    'Expires' => '0',
+  );
+
+  // Let other modules alter the download headers.
+  drupal_alter('file_download_headers', $headers, $file);
+
+  // Let other modules know the file is being downloaded.
+  module_invoke_all('file_transfer', $file->uri, $headers);
+
+  if (file_entity_file_is_local($file)) {
+    // For local files, transfer the file and do not reveal the actual URL.
+    file_transfer($file->uri, $headers);
+  }
+  else {
+    // For remote files, just redirect the user to that file's actual URL.
+    $headers['Location'] = file_create_url($file->uri);
+    foreach ($headers as $name => $value) {
+      drupal_add_http_header($name, $value);
+    }
+    drupal_send_headers();
+    drupal_exit();
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function osha_resources_menu() {
+  $items['contact/%node/%'] = array(
+    'title' => 'Download',
+    'page callback' => 'osha_resources_download_page',
+    'page arguments' => array(1, 2),
+    'access callback' => 'node_access',
+    'access arguments' => array('view', 1),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
 }
 
 /*

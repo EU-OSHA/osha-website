@@ -10,7 +10,7 @@
 function osha_legislation_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-directive-body'
+  // Exported field_instance: 'node-directive-body'.
   $field_instances['node-directive-body'] = array(
     'bundle' => 'directive',
     'default_value' => NULL,
@@ -82,7 +82,7 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-directive-field_activity'
+  // Exported field_instance: 'node-directive-field_activity'.
   $field_instances['node-directive-field_activity'] = array(
     'bundle' => 'directive',
     'default_value' => NULL,
@@ -157,7 +157,7 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-directive-field_archived'
+  // Exported field_instance: 'node-directive-field_archived'.
   $field_instances['node-directive-field_archived'] = array(
     'bundle' => 'directive',
     'default_value' => array(
@@ -230,7 +230,7 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-directive-field_character_count'
+  // Exported field_instance: 'node-directive-field_character_count'.
   $field_instances['node-directive-field_character_count'] = array(
     'bundle' => 'directive',
     'default_value' => NULL,
@@ -301,7 +301,7 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-directive-field_date_of_directive'
+  // Exported field_instance: 'node-directive-field_date_of_directive'.
   $field_instances['node-directive-field_date_of_directive'] = array(
     'bundle' => 'directive',
     'deleted' => 0,
@@ -378,7 +378,7 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-directive-field_directive_type'
+  // Exported field_instance: 'node-directive-field_directive_type'.
   $field_instances['node-directive-field_directive_type'] = array(
     'bundle' => 'directive',
     'default_value' => NULL,
@@ -447,7 +447,7 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-directive-field_expiration_date'
+  // Exported field_instance: 'node-directive-field_expiration_date'.
   $field_instances['node-directive-field_expiration_date'] = array(
     'bundle' => 'directive',
     'deleted' => 0,
@@ -524,7 +524,7 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-directive-field_legislation_category'
+  // Exported field_instance: 'node-directive-field_legislation_category'.
   $field_instances['node-directive-field_legislation_category'] = array(
     'bundle' => 'directive',
     'default_value' => NULL,
@@ -593,7 +593,7 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-directive-field_nace_codes'
+  // Exported field_instance: 'node-directive-field_nace_codes'.
   $field_instances['node-directive-field_nace_codes'] = array(
     'bundle' => 'directive',
     'default_value' => NULL,
@@ -663,7 +663,7 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-directive-field_page_count'
+  // Exported field_instance: 'node-directive-field_page_count'.
   $field_instances['node-directive-field_page_count'] = array(
     'bundle' => 'directive',
     'default_value' => NULL,
@@ -734,7 +734,7 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-directive-field_publication_date'
+  // Exported field_instance: 'node-directive-field_publication_date'.
   $field_instances['node-directive-field_publication_date'] = array(
     'bundle' => 'directive',
     'deleted' => 0,
@@ -811,7 +811,7 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-directive-field_summary'
+  // Exported field_instance: 'node-directive-field_summary'.
   $field_instances['node-directive-field_summary'] = array(
     'bundle' => 'directive',
     'default_value' => NULL,
@@ -888,7 +888,7 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-directive-field_tags'
+  // Exported field_instance: 'node-directive-field_tags'.
   $field_instances['node-directive-field_tags'] = array(
     'bundle' => 'directive',
     'default_value' => NULL,
@@ -957,7 +957,7 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-directive-field_thesaurus'
+  // Exported field_instance: 'node-directive-field_thesaurus'.
   $field_instances['node-directive-field_thesaurus'] = array(
     'bundle' => 'directive',
     'default_value' => NULL,
@@ -1027,7 +1027,7 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-directive-title_field'
+  // Exported field_instance: 'node-directive-title_field'.
   $field_instances['node-directive-title_field'] = array(
     'bundle' => 'directive',
     'default_value' => NULL,
@@ -1115,7 +1115,7 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-guideline-body'
+  // Exported field_instance: 'node-guideline-body'.
   $field_instances['node-guideline-body'] = array(
     'bundle' => 'guideline',
     'default_value' => NULL,
@@ -1200,7 +1200,7 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-guideline-field_activity'
+  // Exported field_instance: 'node-guideline-field_activity'.
   $field_instances['node-guideline-field_activity'] = array(
     'bundle' => 'guideline',
     'default_value' => NULL,
@@ -1275,7 +1275,7 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-guideline-field_archived'
+  // Exported field_instance: 'node-guideline-field_archived'.
   $field_instances['node-guideline-field_archived'] = array(
     'bundle' => 'guideline',
     'default_value' => array(
@@ -1348,7 +1348,7 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-guideline-field_available_in_languages'
+  // Exported field_instance: 'node-guideline-field_available_in_languages'.
   $field_instances['node-guideline-field_available_in_languages'] = array(
     'bundle' => 'guideline',
     'default_value' => array(
@@ -1426,7 +1426,7 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-guideline-field_character_count'
+  // Exported field_instance: 'node-guideline-field_character_count'.
   $field_instances['node-guideline-field_character_count'] = array(
     'bundle' => 'guideline',
     'default_value' => NULL,
@@ -1497,7 +1497,7 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-guideline-field_expiration_date'
+  // Exported field_instance: 'node-guideline-field_expiration_date'.
   $field_instances['node-guideline-field_expiration_date'] = array(
     'bundle' => 'guideline',
     'deleted' => 0,
@@ -1574,7 +1574,7 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-guideline-field_external_url'
+  // Exported field_instance: 'node-guideline-field_external_url'.
   $field_instances['node-guideline-field_external_url'] = array(
     'bundle' => 'guideline',
     'default_value' => NULL,
@@ -1667,7 +1667,7 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-guideline-field_legislation_category'
+  // Exported field_instance: 'node-guideline-field_legislation_category'.
   $field_instances['node-guideline-field_legislation_category'] = array(
     'bundle' => 'guideline',
     'default_value' => NULL,
@@ -1736,7 +1736,7 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-guideline-field_nace_codes'
+  // Exported field_instance: 'node-guideline-field_nace_codes'.
   $field_instances['node-guideline-field_nace_codes'] = array(
     'bundle' => 'guideline',
     'default_value' => NULL,
@@ -1806,7 +1806,7 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-guideline-field_page_count'
+  // Exported field_instance: 'node-guideline-field_page_count'.
   $field_instances['node-guideline-field_page_count'] = array(
     'bundle' => 'guideline',
     'default_value' => NULL,
@@ -1877,7 +1877,7 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-guideline-field_publication_date'
+  // Exported field_instance: 'node-guideline-field_publication_date'.
   $field_instances['node-guideline-field_publication_date'] = array(
     'bundle' => 'guideline',
     'deleted' => 0,
@@ -1954,7 +1954,7 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-guideline-field_summary'
+  // Exported field_instance: 'node-guideline-field_summary'.
   $field_instances['node-guideline-field_summary'] = array(
     'bundle' => 'guideline',
     'default_value' => NULL,
@@ -2030,7 +2030,7 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-guideline-field_tags'
+  // Exported field_instance: 'node-guideline-field_tags'.
   $field_instances['node-guideline-field_tags'] = array(
     'bundle' => 'guideline',
     'default_value' => NULL,
@@ -2099,7 +2099,7 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-guideline-field_thesaurus'
+  // Exported field_instance: 'node-guideline-field_thesaurus'.
   $field_instances['node-guideline-field_thesaurus'] = array(
     'bundle' => 'guideline',
     'default_value' => NULL,
@@ -2169,7 +2169,7 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-guideline-title_field'
+  // Exported field_instance: 'node-guideline-title_field'.
   $field_instances['node-guideline-title_field'] = array(
     'bundle' => 'guideline',
     'default_value' => NULL,
@@ -2257,7 +2257,8 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-directive_type-field_directive_code'
+  // Exported field_instance:
+  // 'taxonomy_term-directive_type-field_directive_code'.
   $field_instances['taxonomy_term-directive_type-field_directive_code'] = array(
     'bundle' => 'directive_type',
     'default_value' => NULL,
@@ -2297,7 +2298,8 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-legislation_category-field_directive_category_code'
+  // Exported field_instance:
+  // 'taxonomy_term-legislation_category-field_directive_category_code'.
   $field_instances['taxonomy_term-legislation_category-field_directive_category_code'] = array(
     'bundle' => 'legislation_category',
     'default_value' => NULL,
@@ -2337,7 +2339,8 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'taxonomy_term-legislation_category-field_guideline_category_code'
+  // Exported field_instance:
+  // 'taxonomy_term-legislation_category-field_guideline_category_code'.
   $field_instances['taxonomy_term-legislation_category-field_guideline_category_code'] = array(
     'bundle' => 'legislation_category',
     'default_value' => NULL,

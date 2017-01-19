@@ -36,10 +36,10 @@ function osha_dangerous_substances_url_inbound_alter(&$path, $original_path, $pa
   global $language_url;
   $args = arg();
 
-  if (strpos($path, 'themes/dangerous-substances/search') >= 0) {
+  if (strpos($path, 'themes/dangerous-substances/search_old') >= 0) {
     $menu_item = menu_get_item($path);
     if ($menu_item['page_callback'] == 'osha_dangerous_substances_listing_page') {
-      $path = 'themes/dangerous-substances/search';
+      $path = 'themes/dangerous-substances/search_old';
 
       $map = [
         'languages' => 'languages',
@@ -104,7 +104,7 @@ function osha_dangerous_substances_block_view($delta = '') {
  */
 function osha_dangerous_substances_menu() {
   $items = array();
-  $items['themes/dangerous-substances/search'] = array(
+  $items['themes/dangerous-substances/search_old'] = array(
     'title' => 'Dangerous substances',
     'description' => 'Config information for the module',
     'page callback' => 'osha_dangerous_substances_listing_page',
@@ -127,7 +127,7 @@ function osha_dangerous_substances_preprocess_views_view(&$vars) {
 function osha_dangerous_substances_node_save_redirect_submit($form, &$form_state){
   if ($form_state['values']['type'] == 'dangerous_substances') {
     unset($_GET['destination']);
-    $form_state['redirect'] = 'themes/dangerous-substances/search';
+    $form_state['redirect'] = 'themes/dangerous-substances/search_old';
   }
 }
 
@@ -160,6 +160,32 @@ function osha_dangerous_substances_filter_process_format($element) {
     $element['#format'] = 'dangerous_substances';
   }
   return $element;
+}
+
+function _osha_dangerous_substances_available_in_languages_options_list() {
+  $list = osha_language_list_options();
+  $return = array();
+  $q = db_select('field_data_field_available_in_languages', 't')
+    ->distinct();
+  $q->fields('t', array('field_available_in_languages_value'));
+  $q->condition('entity_type', 'node');
+  $q->condition('bundle', 'dangerous_substances');
+  $q->orderBy('t.field_available_in_languages_value', 'ASC');
+  $item_types = $q->execute()->fetchCol();
+  foreach($item_types as $item_type) {
+    $return[$item_type] = $list[$item_type];
+  }
+  return $return;
+}
+
+
+function osha_dangerous_substances_facet_items_alter(&$build, &$settings) {
+  if ($settings->facet == "field_available_in_languages:value") {
+    $list = osha_language_list_options();
+    foreach ($build as $lang => $item) {
+        $build[$lang]['#markup'] = $list[$lang];
+    }
+  }
 }
 
 /**

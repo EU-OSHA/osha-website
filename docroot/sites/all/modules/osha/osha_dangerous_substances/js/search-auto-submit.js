@@ -73,7 +73,7 @@
                     }
 
                     var url = Drupal.settings.basePath + Drupal.settings.pathPrefix;
-                    url += 'themes/dangerous-substances/search';
+                    url += 'themes/dangerous-substances/search_old';
                     url += uri;
                     if (typeof Drupal.settings.osha_dangerous_substances.get_params != 'undefined' && Drupal.settings.osha_dangerous_substances.get_params != null) {
                         var params_uri = [];

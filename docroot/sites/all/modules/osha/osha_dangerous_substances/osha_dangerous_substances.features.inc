@@ -60,6 +60,8 @@ function osha_dangerous_substances_default_search_api_index() {
         "author" : { "type" : "integer", "entity_type" : "user" },
         "field_advertising" : { "type" : "boolean" },
         "field_available_in_languages:safe_value" : { "type" : "list\\u003Ctext\\u003E" },
+        "field_available_in_languages:safe_value_with_native" : { "type" : "list\\u003Ctext\\u003E" },
+        "field_available_in_languages:value" : { "type" : "list\\u003Cstring\\u003E" },
         "field_biological_hazard" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_biological_hazard_other" : { "type" : "text" },
         "field_body_original:value" : { "type" : "text" },

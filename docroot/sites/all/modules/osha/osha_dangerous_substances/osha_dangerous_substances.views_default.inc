@@ -766,5 +766,146 @@ function osha_dangerous_substances_views_default_views() {
   );
   $export['dangerous_substances'] = $view;
 
+  $view = new view();
+  $view->name = 'dangerous_substances_overview';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'search_api_index_default_content_index';
+  $view->human_name = 'dangerous substances overview';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Dangerous substances';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['search_api_bypass_access'] = 0;
+  $handler->display->display_options['query']['options']['parse_mode'] = 'direct';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '7';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹';
+  $handler->display->display_options['pager']['options']['tags']['next'] = '›';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'entity';
+  $handler->display->display_options['row_options']['view_mode'] = 'osha_search_teaser';
+  /* Header: Global: Unfiltered text */
+  $handler->display->display_options['header']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['header']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['header']['area_text_custom']['field'] = 'area_text_custom';
+  /* No results behavior: Global: Unfiltered text */
+  $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area_text_custom']['content'] = 'No results';
+  /* Field: Broken/missing handler */
+  $handler->display->display_options['fields']['search_api_et_id']['id'] = 'search_api_et_id';
+  $handler->display->display_options['fields']['search_api_et_id']['table'] = 'search_api_index_default_content_index';
+  $handler->display->display_options['fields']['search_api_et_id']['field'] = 'search_api_et_id';
+  /* Sort criterion: Search: Relevance */
+  $handler->display->display_options['sorts']['search_api_relevance']['id'] = 'search_api_relevance';
+  $handler->display->display_options['sorts']['search_api_relevance']['table'] = 'search_api_index_default_content_index';
+  $handler->display->display_options['sorts']['search_api_relevance']['field'] = 'search_api_relevance';
+  $handler->display->display_options['sorts']['search_api_relevance']['order'] = 'DESC';
+  $handler->display->display_options['sorts']['search_api_relevance']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['search_api_relevance']['expose']['label'] = 'Relevance';
+  /* Sort criterion: Indexed Content: Publication date */
+  $handler->display->display_options['sorts']['field_publication_date']['id'] = 'field_publication_date';
+  $handler->display->display_options['sorts']['field_publication_date']['table'] = 'search_api_index_default_content_index';
+  $handler->display->display_options['sorts']['field_publication_date']['field'] = 'field_publication_date';
+  $handler->display->display_options['sorts']['field_publication_date']['order'] = 'DESC';
+  $handler->display->display_options['sorts']['field_publication_date']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['field_publication_date']['expose']['label'] = 'Publication date';
+  /* Filter criterion: Indexed Content: Status */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'search_api_index_default_content_index';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = array(
+    1 => '1',
+  );
+  /* Filter criterion: Indexed Content: Content type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'search_api_index_default_content_index';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'dangerous_substances' => 'dangerous_substances',
+  );
+  /* Filter criterion: Search: Fulltext search */
+  $handler->display->display_options['filters']['search_api_views_fulltext']['id'] = 'search_api_views_fulltext';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['table'] = 'search_api_index_default_content_index';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['field'] = 'search_api_views_fulltext';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['operator_id'] = 'search_api_views_fulltext_op';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['label'] = 'Search';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['operator'] = 'search_api_views_fulltext_op';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['identifier'] = 'text';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    14 => 0,
+  );
+  $handler->display->display_options['filters']['search_api_views_fulltext']['fields'] = array(
+    'field_title_original' => 'field_title_original',
+    'title' => 'title',
+    'title_field' => 'title_field',
+  );
+  /* Filter criterion: Indexed Content: Type of item */
+  $handler->display->display_options['filters']['field_item_type']['id'] = 'field_item_type';
+  $handler->display->display_options['filters']['field_item_type']['table'] = 'search_api_index_default_content_index';
+  $handler->display->display_options['filters']['field_item_type']['field'] = 'field_item_type';
+  $handler->display->display_options['filters']['field_item_type']['value'] = array(
+    'MS material' => 'MS material',
+    'EU material' => 'EU material',
+    'Audiovisual' => 'Audiovisual',
+    'Case study' => 'Case study',
+  );
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['path'] = 'themes/dangerous-substances/search';
+  $translatables['dangerous_substances_overview'] = array(
+    t('Master'),
+    t('Dangerous substances'),
+    t('more'),
+    t('Search'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹'),
+    t('›'),
+    t('last »'),
+    t('No results'),
+    t('Broken handler search_api_index_default_content_index.search_api_et_id'),
+    t('Relevance'),
+    t('Publication date'),
+    t('Page'),
+  );
+  $export['dangerous_substances_overview'] = $view;
+
   return $export;
 }

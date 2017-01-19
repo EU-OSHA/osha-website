@@ -21,7 +21,7 @@ function osha_dangerous_substances_menu_dangerous_substances_form($form, $form_s
 
 
   $form = array(
-    '#action' => url('themes/dangerous-substances/search'),
+    '#action' => url('themes/dangerous-substances/search_old'),
     '#method' => 'GET',
     'left-column' => array(
       '#type' => 'container',
@@ -302,22 +302,6 @@ function osha_dangerous_substances_menu_dangerous_substances_get_query() {
   $query->fields(array()); // Avoid PHP notice
   $solr = new SearchApiSolrService($server);
   return array($solr, $query);
-}
-
-function _osha_dangerous_substances_available_in_languages_options_list() {
-  $list = osha_language_list_options();
-  $return = array();
-  $q = db_select('field_data_field_available_in_languages', 't')
-    ->distinct();
-  $q->fields('t', array('field_available_in_languages_value'));
-  $q->condition('entity_type', 'node');
-  $q->condition('bundle', 'dangerous_substances');
-  $q->orderBy('t.field_available_in_languages_value', 'ASC');
-  $item_types = $q->execute()->fetchCol();
-  foreach($item_types as $item_type) {
-    $return[$item_type] = $list[$item_type];
-  }
-  return $return;
 }
 
 function _osha_dangerous_substances_item_type_options_list() {

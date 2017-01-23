@@ -127,7 +127,7 @@ function osha_dangerous_substances_preprocess_views_view(&$vars) {
 function osha_dangerous_substances_node_save_redirect_submit($form, &$form_state){
   if ($form_state['values']['type'] == 'dangerous_substances') {
     unset($_GET['destination']);
-    $form_state['redirect'] = 'themes/dangerous-substances/search_old';
+    $form_state['redirect'] = 'themes/dangerous-substances/search';
   }
 }
 
@@ -196,9 +196,9 @@ function osha_dangerous_substances_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'dangerous_substances_node_form') {
 
-    if (!in_array('administrator', array_values($user->roles))) {
-      $form['field_priority_area']['#access'] = FALSE;
-    }
+    //    if (!in_array('administrator', array_values($user->roles))) {
+    //      $form['field_priority_area']['#access'] = FALSE;
+    //    }
 
     drupal_add_js(drupal_get_path('module', 'osha_dangerous_substances') . '/js/osha_dangerous_substances.js');
     if (!isset($form['#after_build'])) {

@@ -8939,8 +8939,8 @@ body.page-entity-collection h1#page-title{
 	width: 100%;
 }
 
+.node-form.node-dangerous_substances-form  #edit-body .filter-wrapper.form-wrapper,
 .node-form.node-dangerous_substances-form  .field-widget-text-textarea .filter-wrapper.form-wrapper {
 	visibility: hidden;
 	display: none;
 }
-

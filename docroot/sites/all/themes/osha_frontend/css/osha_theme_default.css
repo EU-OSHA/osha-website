@@ -8901,3 +8901,46 @@ body.page-entity-collection h1#page-title{
 	margin-left: 1.8em;
 	float: left;
 }
+
+.node-form.node-dangerous_substances-form #edit-field-measurement-method,
+.node-form.node-dangerous_substances-form #edit-field-ec-number,
+.node-form.node-dangerous_substances-form #edit-field-cas-number,
+.node-form.node-dangerous_substances-form #edit-field-provider-url,
+.node-form.node-dangerous_substances-form #edit-field-provider-original,
+.node-form.node-dangerous_substances-form #edit-field-provider,
+.node-form.node-dangerous_substances-form #edit-field-external-url,
+.node-form.node-dangerous_substances-form #edit-field-title-original,
+.node-form.node-dangerous_substances-form #edit-title-field {
+	margin-right: 6px;
+}
+
+.node-form.node-dangerous_substances-form #edit-field-measurement-method-und-0-value,
+.node-form.node-dangerous_substances-form #edit-field-ec-number-und-0-value,
+.node-form.node-dangerous_substances-form #edit-field-cas-number-und-0-value,
+.node-form.node-dangerous_substances-form #edit-field-provider-url-und-0-url,
+.node-form.node-dangerous_substances-form #edit-field-provider-original-und-0-value,
+.node-form.node-dangerous_substances-form #edit-field-provider-und-0-value,
+.node-form.node-dangerous_substances-form #edit-field-external-url-und-0-url,
+.node-form.node-dangerous_substances-form #edit-field-title-original-und-0-value,
+.node-form.node-dangerous_substances-form #edit-title-field-und-0-value {
+	width: 100%;
+}
+
+.node-form.node-dangerous_substances-form #edit-field-item-type .form-type-select {
+	margin-right: 6px;
+}
+
+.node-form.node-dangerous_substances-form #edit_field_item_type_und_chosen {
+	width: 100% !important;
+	width: 100%;
+}
+
+.node-form.node-dangerous_substances-form #edit_field_item_type_und_chosen .chosen-single {
+	width: 100%;
+}
+
+.node-form.node-dangerous_substances-form  .field-widget-text-textarea .filter-wrapper.form-wrapper {
+	visibility: hidden;
+	display: none;
+}
+

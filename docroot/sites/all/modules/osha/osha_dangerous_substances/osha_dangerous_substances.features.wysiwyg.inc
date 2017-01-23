@@ -27,6 +27,8 @@ function osha_dangerous_substances_wysiwyg_default_profiles() {
           'underline' => 1,
           'bullist' => 1,
           'numlist' => 1,
+          'link' => 1,
+          'unlink' => 1,
         ),
       ),
       'toolbar_loc' => 'top',

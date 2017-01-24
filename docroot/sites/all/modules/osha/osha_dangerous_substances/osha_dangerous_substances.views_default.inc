@@ -167,7 +167,7 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_tasks_covered']['field'] = 'field_tasks_covered';
   $handler->display->display_options['fields']['field_tasks_covered']['type'] = 'i18n_taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_tasks_covered']['delta_offset'] = '0';
-  /* Field: Content: Tasks other */
+  /* Field: Content: Tasks covered other */
   $handler->display->display_options['fields']['field_tasks_other']['id'] = 'field_tasks_other';
   $handler->display->display_options['fields']['field_tasks_other']['table'] = 'field_data_field_tasks_other';
   $handler->display->display_options['fields']['field_tasks_other']['field'] = 'field_tasks_other';
@@ -236,7 +236,7 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_material_objective_type']['field'] = 'field_material_objective_type';
   $handler->display->display_options['fields']['field_material_objective_type']['type'] = 'i18n_taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_material_objective_type']['delta_offset'] = '0';
-  /* Field: Content: Objective of the material other */
+  /* Field: Content: Objective of material other */
   $handler->display->display_options['fields']['field_material_objective_other']['id'] = 'field_material_objective_other';
   $handler->display->display_options['fields']['field_material_objective_other']['table'] = 'field_data_field_material_objective_other';
   $handler->display->display_options['fields']['field_material_objective_other']['field'] = 'field_material_objective_other';
@@ -535,7 +535,7 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_tasks_covered']['field'] = 'field_tasks_covered';
   $handler->display->display_options['fields']['field_tasks_covered']['type'] = 'i18n_taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_tasks_covered']['delta_offset'] = '0';
-  /* Field: Content: Tasks other */
+  /* Field: Content: Tasks covered other */
   $handler->display->display_options['fields']['field_tasks_other']['id'] = 'field_tasks_other';
   $handler->display->display_options['fields']['field_tasks_other']['table'] = 'field_data_field_tasks_other';
   $handler->display->display_options['fields']['field_tasks_other']['field'] = 'field_tasks_other';
@@ -604,7 +604,7 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_material_objective_type']['field'] = 'field_material_objective_type';
   $handler->display->display_options['fields']['field_material_objective_type']['type'] = 'i18n_taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_material_objective_type']['delta_offset'] = '0';
-  /* Field: Content: Objective of the material other */
+  /* Field: Content: Objective of material other */
   $handler->display->display_options['fields']['field_material_objective_other']['id'] = 'field_material_objective_other';
   $handler->display->display_options['fields']['field_material_objective_other']['table'] = 'field_data_field_material_objective_other';
   $handler->display->display_options['fields']['field_material_objective_other']['field'] = 'field_material_objective_other';
@@ -732,7 +732,7 @@ function osha_dangerous_substances_views_default_views() {
     t('Hazard - health effects'),
     t('Hazard - physical state'),
     t('Tasks covered'),
-    t('Tasks other'),
+    t('Tasks covered other'),
     t('Advertising'),
     t('Body'),
     t('CAS Number'),
@@ -782,6 +782,7 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
+    3 => '3',
     14 => '14',
   );
   $handler->display->display_options['cache']['type'] = 'none';
@@ -790,6 +791,8 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['query']['options']['parse_mode'] = 'direct';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
+  $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
+  $handler->display->display_options['exposed_form']['options']['autosubmit_hide'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '7';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -814,13 +817,6 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['search_api_et_id']['id'] = 'search_api_et_id';
   $handler->display->display_options['fields']['search_api_et_id']['table'] = 'search_api_index_default_content_index';
   $handler->display->display_options['fields']['search_api_et_id']['field'] = 'search_api_et_id';
-  /* Sort criterion: Search: Relevance */
-  $handler->display->display_options['sorts']['search_api_relevance']['id'] = 'search_api_relevance';
-  $handler->display->display_options['sorts']['search_api_relevance']['table'] = 'search_api_index_default_content_index';
-  $handler->display->display_options['sorts']['search_api_relevance']['field'] = 'search_api_relevance';
-  $handler->display->display_options['sorts']['search_api_relevance']['order'] = 'DESC';
-  $handler->display->display_options['sorts']['search_api_relevance']['exposed'] = TRUE;
-  $handler->display->display_options['sorts']['search_api_relevance']['expose']['label'] = 'Relevance';
   /* Sort criterion: Indexed Content: Publication date */
   $handler->display->display_options['sorts']['field_publication_date']['id'] = 'field_publication_date';
   $handler->display->display_options['sorts']['field_publication_date']['table'] = 'search_api_index_default_content_index';
@@ -828,6 +824,13 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['sorts']['field_publication_date']['order'] = 'DESC';
   $handler->display->display_options['sorts']['field_publication_date']['exposed'] = TRUE;
   $handler->display->display_options['sorts']['field_publication_date']['expose']['label'] = 'Publication date';
+  /* Sort criterion: Search: Relevance */
+  $handler->display->display_options['sorts']['search_api_relevance']['id'] = 'search_api_relevance';
+  $handler->display->display_options['sorts']['search_api_relevance']['table'] = 'search_api_index_default_content_index';
+  $handler->display->display_options['sorts']['search_api_relevance']['field'] = 'search_api_relevance';
+  $handler->display->display_options['sorts']['search_api_relevance']['order'] = 'DESC';
+  $handler->display->display_options['sorts']['search_api_relevance']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['search_api_relevance']['expose']['label'] = 'Relevance';
   /* Filter criterion: Indexed Content: Status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'search_api_index_default_content_index';
@@ -867,11 +870,6 @@ function osha_dangerous_substances_views_default_views() {
     13 => 0,
     14 => 0,
   );
-  $handler->display->display_options['filters']['search_api_views_fulltext']['fields'] = array(
-    'field_title_original' => 'field_title_original',
-    'title' => 'title',
-    'title_field' => 'title_field',
-  );
   /* Filter criterion: Indexed Content: Type of item */
   $handler->display->display_options['filters']['field_item_type']['id'] = 'field_item_type';
   $handler->display->display_options['filters']['field_item_type']['table'] = 'search_api_index_default_content_index';
@@ -904,8 +902,8 @@ function osha_dangerous_substances_views_default_views() {
     t('last »'),
     t('No results'),
     t('Broken handler search_api_index_default_content_index.search_api_et_id'),
-    t('Relevance'),
     t('Publication date'),
+    t('Relevance'),
     t('Page'),
   );
   $export['dangerous_substances_overview'] = $view;

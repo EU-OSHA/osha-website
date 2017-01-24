@@ -218,7 +218,7 @@ function osha_dangerous_substances_field_default_field_bases() {
   // Exported field_base: 'field_ec_number'.
   $field_bases['field_ec_number'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_ec_number',
@@ -287,6 +287,28 @@ function osha_dangerous_substances_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_evaluation_other'.
+  $field_bases['field_evaluation_other'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_evaluation_other',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_exposure_route'.
   $field_bases['field_exposure_route'] = array(
     'active' => 1,
@@ -337,6 +359,28 @@ function osha_dangerous_substances_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_exposure_route_other'.
+  $field_bases['field_exposure_route_other'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_exposure_route_other',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_hazard_health_effects'.
   $field_bases['field_hazard_health_effects'] = array(
     'active' => 1,
@@ -372,6 +416,50 @@ function osha_dangerous_substances_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_hazard_health_effects_code',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_hazard_health_other'.
+  $field_bases['field_hazard_health_other'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_hazard_health_other',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_hazard_physical_other'.
+  $field_bases['field_hazard_physical_other'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_hazard_physical_other',
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -514,6 +602,28 @@ function osha_dangerous_substances_field_default_field_bases() {
     'type' => 'list_text',
   );
 
+  // Exported field_base: 'field_languages_other'.
+  $field_bases['field_languages_other'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_languages_other',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_material_country'.
   $field_bases['field_material_country'] = array(
     'active' => 1,
@@ -621,6 +731,28 @@ function osha_dangerous_substances_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_material_purpose_code',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_material_purpose_other'.
+  $field_bases['field_material_purpose_other'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_material_purpose_other',
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -916,6 +1048,28 @@ function osha_dangerous_substances_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_provider_other'.
+  $field_bases['field_provider_other'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_provider_other',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_provider_type'.
   $field_bases['field_provider_type'] = array(
     'active' => 1,
@@ -1046,6 +1200,28 @@ function osha_dangerous_substances_field_default_field_bases() {
     'type' => 'taxonomy_term_reference',
   );
 
+  // Exported field_base: 'field_sector_industry_other'.
+  $field_bases['field_sector_industry_other'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_sector_industry_other',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_target_group'.
   $field_bases['field_target_group'] = array(
     'active' => 1,
@@ -1081,6 +1257,28 @@ function osha_dangerous_substances_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_target_group_code',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_target_group_other'.
+  $field_bases['field_target_group_other'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_target_group_other',
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -1209,6 +1407,28 @@ function osha_dangerous_substances_field_default_field_bases() {
     'type' => 'cck_time',
   );
 
+  // Exported field_base: 'field_visualisation_mat_other'.
+  $field_bases['field_visualisation_mat_other'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_visualisation_mat_other',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_visualisation_material_typ'.
   $field_bases['field_visualisation_material_typ'] = array(
     'active' => 1,
@@ -1244,6 +1464,28 @@ function osha_dangerous_substances_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_worker_groups_code',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_worker_groups_other'.
+  $field_bases['field_worker_groups_other'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_worker_groups_other',
     'indexes' => array(
       'format' => array(
         0 => 'format',

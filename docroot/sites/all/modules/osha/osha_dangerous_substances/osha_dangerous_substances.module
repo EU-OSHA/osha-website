@@ -221,30 +221,77 @@ function _osha_dangerous_substances_get_other_tid($element, $field, $other_name 
       return (string)$tid;
     }
   }
+  if (isset($_REQUEST['debug'])) {
+    watchdog('osha_dangerous_substances', '!field no other value found updated', array('!field' => $field) );
+  }
   return '-1'; // todo ...
 }
 
 function _osha_dangerous_substances_form_after_build($form, $form_state) {
 
-  // country code
-  $country_other = _osha_dangerous_substances_get_other_tid($form, 'field_material_country');
-  $form['field_country_other']['#states'] = ['visible'=>[ '#edit-field-material-country-und' => ['value' => [$country_other]] ] ];
+  // Provider other
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_provider_type');
+  $form['field_provider_other']['#states'] = ['visible'=>[ '#edit-field-provider-type-und' => ['value' => [$_other]] ] ];
 
-  // biological hazard
-  $hazard_other = _osha_dangerous_substances_get_other_tid($form, 'field_biological_hazard');
-  $form['field_biological_hazard_other']['#states'] = ['visible'=>[ '#edit-field-biological-hazard-und' => ['value' => [$hazard_other]] ] ];
+  // Country code
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_material_country');
+  $form['field_country_other']['#states'] = ['visible'=>[ '#edit-field-material-country-und' => ['value' => [$_other]] ] ];
 
-  // tasks covered
-  $tasks_other = _osha_dangerous_substances_get_other_tid($form, 'field_tasks_covered');
-  $form['field_tasks_other']['#states'] = ['visible'=>[ '#edit-field-tasks-covered-und' => ['value' => [$tasks_other]] ] ];
+  // Languages other
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_available_in_languages');
+  $form['field_languages_other']['#states'] = ['visible'=>[ '#edit-field-available-in-languages-und' => ['value' => [$_other]] ] ];
 
-  // prevention measure
-  $prevention_measures = _osha_dangerous_substances_get_other_tid($form, 'field_prevention_measure_type');
-  $form['field_prevention_measures_other']['#states'] = ['visible'=>[ '#edit-field-prevention-measure-type-und' => ['value' => [$prevention_measures]] ] ];
+  // Sector / Industry covered other todo not sure if needed
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_sector_industry_covered');
+  $form['field_sector_industry_other']['#states'] = ['visible'=>[ '#edit-field-sector-industry-covered-und' => ['value' => [$_other]] ] ];
 
-  // objective material
-  $material_objective = _osha_dangerous_substances_get_other_tid($form, 'field_material_objective_type');
-  $form['field_material_objective_other']['#states'] = ['visible'=>[ '#edit-field-material-objective-type-und' => ['value' => [$material_objective]] ] ];
+  // Tasks covered other
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_tasks_covered');
+  $form['field_tasks_other']['#states'] = ['visible'=>[ '#edit-field-tasks-covered-und' => ['value' => [$_other]] ] ];
+
+  // Biological hazard other
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_biological_hazard');
+  $form['field_biological_hazard_other']['#states'] = ['visible'=>[ '#edit-field-biological-hazard-und' => ['value' => [$_other]] ] ];
+
+  // Hazard - physical state other
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_hazard_physical_state');
+  $form['field_hazard_physical_other']['#states'] = ['visible'=>[ '#edit-field-hazard-physical-state-und' => ['value' => [$_other]] ] ];
+
+  // Hazard health effect other
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_hazard_health_effects');
+  $form['field_hazard_health_other']['#states'] = ['visible'=>[ '#edit-field-hazard-health-effects-und' => ['value' => [$_other]] ] ];
+
+  // Exposure route
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_exposure_route');
+  $form['field_exposure_route_other']['#states'] = ['visible'=>[ '#edit-field-exposure-route-und' => ['value' => [$_other]] ] ];
+
+  // Workers groups covered other
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_worker_groups_type');
+  $form['field_worker_groups_other']['#states'] = ['visible'=>[ '#edit-field-worker-groups-type-und' => ['value' => [$_other]] ] ];
+
+  // Prevention measure other
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_prevention_measure_type');
+  $form['field_prevention_measures_other']['#states'] = ['visible'=>[ '#edit-field-prevention-measure-type-und' => ['value' => [$_other]] ] ];
+
+  // Objective material other
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_material_objective_type');
+  $form['field_material_objective_other']['#states'] = ['visible'=>[ '#edit-field-material-objective-type-und' => ['value' => [$_other]] ] ];
+
+  // Purpose of the material other
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_material_purpose_type');
+  $form['field_material_purpose_other']['#states'] = ['visible'=>[ '#edit-field-material-purpose-type-und' => ['value' => [$_other]] ] ];
+
+  // Target group other
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_target_group');
+  $form['field_target_group_other']['#states'] = ['visible'=>[ '#edit-field-target-group-und' => ['value' => [$_other]] ] ];
+
+  // Evaluation other
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_evaluation');
+  $form['field_evaluation_other']['#states'] = ['visible'=>[ '#edit-field-evaluation-und' => ['value' => [$_other]] ] ];
+
+  // Type of visualisation material other
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_visualisation_material_typ');
+  $form['field_visualisation_mat_other']['#states'] = ['visible'=>[ '#edit-field-visualisation-material-typ-und' => ['value' => [$_other]] ] ];
 
   $form['field_rights_description']['#states'] = ['visible'=>[ '#edit-field-item-type-und' => ['value' => 'Audiovisual'] ] ];
   $form['field_intellectual_property_righ']['#states'] = ['visible'=>[ '#edit-field-item-type-und' => ['value' => 'Audiovisual'] ] ];
@@ -252,6 +299,27 @@ function _osha_dangerous_substances_form_after_build($form, $form_state) {
   $form['field_video_length']['#states'] = ['visible'=>[ '#edit-field-item-type-und' => ['value' => 'Audiovisual'] ] ];
 
   return $form;
+}
+
+/**
+ * Implements hook_search_api_solr_query_alter().
+ */
+function osha_dangerous_substances_search_api_solr_query_alter(array &$call_args, SearchApiQueryInterface $query) {
+  if (arg(1) == 'dangerous-substances') {
+    $sort_order = strtolower(@$_REQUEST['sort_order']);
+    $sort_by    = strtolower(@$_REQUEST['sort_by']);
+    if ($sort_by) {
+      $call_args['params']['sort'] = 'ds_field_publication_date ';
+      if ($sort_by == 'search_api_relevance') {
+        $call_args['params']['sort'] = 'ds_search_api_relevance ';
+      }
+
+      if (!in_array($sort_order, ['asc', 'desc'])) {
+        $sort_order = 'desc';
+      }
+      $call_args['params']['sort'] .= $sort_order;
+    }
+  }
 }
 
 function _osha_dangerous_substances_add_country_other() {

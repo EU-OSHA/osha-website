@@ -580,6 +580,19 @@ function osha_frontend_menu_local_tasks_alter(&$data, $router_item, $root_path) 
   if (empty($data['tabs'])) {
     return;
   }
+
+  $item = menu_get_object();
+  if ($item && $item->type == 'dangerous_substances') {
+    $new_tabs = [];
+    foreach($data['tabs'][0]['output'] as $k => $v) {
+      if (in_array($v['#link']['path'], ['node/%/open_all_translations', 'node/%/view_all_translations', 'node/%/short_message'])) {
+        continue;
+      }
+      $new_tabs[] = $v;
+    }
+    $data['tabs'][0]['output'] = $new_tabs;
+  }
+
   foreach ($data['tabs'][0]['output'] as &$tab) {
     if ($tab['#link']['path'] == 'node/%/open_all_translations') {
       $tab['#link']['path'] = '#';

@@ -1,0 +1,4 @@
+<?php
+
+function osha_dangerous_substances_install() {
+}

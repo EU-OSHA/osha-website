@@ -15,6 +15,7 @@ function osha_dangerous_substances_user_default_permissions() {
     'name' => 'create dangerous_substances content',
     'roles' => array(
       'Dangerous substances' => 'Dangerous substances',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -24,6 +25,7 @@ function osha_dangerous_substances_user_default_permissions() {
     'name' => 'delete own dangerous_substances content',
     'roles' => array(
       'Dangerous substances' => 'Dangerous substances',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -33,6 +35,7 @@ function osha_dangerous_substances_user_default_permissions() {
     'name' => 'edit own dangerous_substances content',
     'roles' => array(
       'Dangerous substances' => 'Dangerous substances',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -42,6 +45,7 @@ function osha_dangerous_substances_user_default_permissions() {
     'name' => 'use text format dangerous_substances',
     'roles' => array(
       'Dangerous substances' => 'Dangerous substances',
+      'administrator' => 'administrator',
     ),
     'module' => 'filter',
   );

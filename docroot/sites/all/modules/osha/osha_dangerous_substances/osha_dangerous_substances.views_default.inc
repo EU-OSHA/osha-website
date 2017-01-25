@@ -817,7 +817,7 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['search_api_et_id']['id'] = 'search_api_et_id';
   $handler->display->display_options['fields']['search_api_et_id']['table'] = 'search_api_index_default_content_index';
   $handler->display->display_options['fields']['search_api_et_id']['field'] = 'search_api_et_id';
-  /* Sort criterion: Indexed Content: Date of publication/ year */
+  /* Sort criterion: Indexed Content: Publication date */
   $handler->display->display_options['sorts']['field_publication_date']['id'] = 'field_publication_date';
   $handler->display->display_options['sorts']['field_publication_date']['table'] = 'search_api_index_default_content_index';
   $handler->display->display_options['sorts']['field_publication_date']['field'] = 'field_publication_date';

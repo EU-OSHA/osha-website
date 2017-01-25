@@ -132,7 +132,7 @@ function osha_dangerous_substances_field_default_field_bases() {
   // Exported field_base: 'field_cas_number'.
   $field_bases['field_cas_number'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_cas_number',

@@ -68,7 +68,7 @@ function osha_dangerous_substances_default_search_api_index() {
         "field_biological_hazard" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_biological_hazard_other" : { "type" : "text" },
         "field_body_original:value" : { "type" : "text" },
-        "field_cas_number" : { "type" : "text" },
+        "field_cas_number" : { "type" : "list\\u003Ctext\\u003E" },
         "field_contact_address:value" : { "type" : "text" },
         "field_country_other" : { "type" : "text" },
         "field_disclaimer:value" : { "type" : "text" },

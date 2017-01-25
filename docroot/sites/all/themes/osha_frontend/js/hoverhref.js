@@ -199,7 +199,7 @@ jQuery(document).ready(function() {
     });
 
     // Toggle event for facetapi filters blocks.
-    jQuery(".publications-sidebar-first .form-checkboxes").each(function() {
+    jQuery(".publications-sidebar-first .form-checkboxes, .dangerous-substances-sidebar-first .form-checkboxes").each(function() {
         // If no active filters, hide the filtering on init.
         if (jQuery(this).find('[type=checkbox]:checked').length == 0) {
             jQuery(this).hide();

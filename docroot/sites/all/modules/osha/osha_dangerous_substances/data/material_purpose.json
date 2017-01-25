@@ -1,0 +1,47 @@
+[
+    {
+        "code": "training",
+        "name": "Training",
+        "thesaurus_id": ""
+    },
+    {
+        "code": "warning_message_alert",
+        "name": "Warning message \/ Alert",
+        "thesaurus_id": ""
+    },
+    {
+        "code": "measurement_and_assessment",
+        "name": "Measurement and assessment",
+        "thesaurus_id": "12561D"
+    },
+    {
+        "code": "general_information",
+        "name": "General information",
+        "thesaurus_id": ""
+    },
+    {
+        "code": "awareness_raising",
+        "name": "Awareness raising",
+        "thesaurus_id": "10721D"
+    },
+    {
+        "code": "guidance",
+        "name": "Guidance",
+        "thesaurus_id": ""
+    },
+    {
+        "code": "risk_assessment",
+        "name": "Risk assessment",
+        "thesaurus_id": "19641D"
+    },
+    {
+        "code": "report",
+        "name": "Report",
+        "thesaurus_id": ""
+    },
+    {
+        "code": "policy_paper",
+        "name": "Policy paper",
+        "thesaurus_id": ""
+    }
+]

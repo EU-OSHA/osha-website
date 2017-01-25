@@ -1,0 +1,477 @@
+<?php
+/**
+ * @file
+ * Code for the OSHA Dangerous substances feature.
+ */
+
+include_once 'osha_dangerous_substances.features.inc';
+
+function osha_dangerous_substances_req_param($form_state, $name, $default = NULL) {
+  if (!empty($form_state['values'][$name])) {
+    $ret = $form_state['values'][$name];
+    if (is_array($ret)) {
+      $ret = array_filter($ret);
+    }
+    return $ret;
+  }
+  if (!empty($_GET[$name])) {
+    if (is_array($_GET[$name])) {
+      $ret = array();
+      foreach($_GET[$name] as $v) {
+        $ret[] = check_plain($v);
+      }
+      return $ret;
+    }
+    else {
+      return check_plain($_GET[$name]);
+    }
+  }
+  return $default;
+}
+
+/**
+ * Implements hook_url_inbound_alter().
+ */
+function osha_dangerous_substances_url_inbound_alter(&$path, $original_path, $path_language) {
+  global $language_url;
+  $args = arg();
+
+  if (strpos($path, 'themes/dangerous-substances/search_old') >= 0) {
+    $menu_item = menu_get_item($path);
+    if ($menu_item['page_callback'] == 'osha_dangerous_substances_listing_page') {
+      $path = 'themes/dangerous-substances/search_old';
+
+      $map = [
+        'languages' => 'languages',
+        'item_type' => 'item_type',
+
+        'provider_type' =>'provider_type',
+        'material_country' => 'material_country',
+        'tasks_covered' => 'tasks_covered',
+
+        'worker_groups_type' => 'worker_groups_type',
+        'material_purpose_type' => 'material_purpose_type',
+        'target_group' => 'target_group'
+      ];
+
+      if (count($args) > 3) {
+        $search_args = $args;
+        array_shift($search_args);
+        array_shift($search_args);
+        foreach ($search_args as $search_filter) {
+          foreach($map as $param => $name) {
+            if (strpos($search_filter, $param . '-') === 0) {
+              $_filter = explode('-', $search_filter);
+              array_shift($_filter);
+              $_GET[$name] = drupal_map_assoc($_filter);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function osha_dangerous_substances_block_info() {
+  $blocks = array();
+  $blocks['block_osha_dangerous_substances'] = array(
+    'info' => t('Dangerous substances listing'),
+    'status' => 1,
+    'region' => '-1',
+    'visibility' => BLOCK_VISIBILITY_NOTLISTED,
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function osha_dangerous_substances_block_view($delta = '') {
+  $block = array();
+  if ($delta == 'block_osha_dangerous_substances') {
+    module_load_include('inc', 'osha_dangerous_substances', 'osha_dangerous_substances.pages');
+    $block['content'] = drupal_get_form('osha_dangerous_substances_menu_dangerous_substances_form');
+  }
+  return $block;
+}
+
+/**
+ * Implements hook_menu().
+ */
+function osha_dangerous_substances_menu() {
+  $items = array();
+  $items['themes/dangerous-substances/search_old'] = array(
+    'title' => 'Dangerous substances',
+    'description' => 'Config information for the module',
+    'page callback' => 'osha_dangerous_substances_listing_page',
+    'access arguments' => array('access content'),
+  );
+  return $items;
+}
+
+function osha_dangerous_substances_listing_page() {
+  return '';
+}
+
+function osha_dangerous_substances_preprocess_views_view(&$vars) {
+  $view = $vars['view'];
+  if($view->name == 'dangerous_substances') {
+    drupal_add_css(drupal_get_path('module', 'osha_dangerous_substances') .'/css/osha_dangerous_substances.css');
+  }
+}
+
+function osha_dangerous_substances_node_save_redirect_submit($form, &$form_state){
+  if ($form_state['values']['type'] == 'dangerous_substances') {
+    unset($_GET['destination']);
+    $form_state['redirect'] = 'themes/dangerous-substances/search';
+  }
+}
+
+function osha_dangerous_substances_custom_theme($theme = NULL) {
+  $item = menu_get_object();
+  if ((implode('_', arg()) == 'node_add_dangerous-substances') || ($item && $item->type == 'dangerous_substances')) {
+    $theme = 'osha_frontend';
+  }
+  return $theme;
+}
+
+function osha_dangerous_substances_element_info_alter(&$type) {
+  if (isset($type['text_format']['#process'])) {
+    foreach ($type['text_format']['#process'] as &$callback) {
+      if ($callback === 'filter_process_format') {
+        $callback = 'osha_dangerous_substances_filter_process_format';
+      }
+    }
+  }
+}
+
+// remove guidelines and help text
+function osha_dangerous_substances_filter_process_format($element) {
+  $element = filter_process_format($element);
+  if ($element['#bundle'] == 'dangerous_substances') {
+    unset($element['format']['guidelines']);
+    unset($element['format']['help']);
+    $element['format']['format']['#options'] = [ 'dangerous_substances' => $element['format']['format']['#options']['dangerous_substances'] ];
+    unset($element['format']['format']['']);
+    $element['#format'] = 'dangerous_substances';
+  }
+  return $element;
+}
+
+function _osha_dangerous_substances_available_in_languages_options_list() {
+  $list = osha_language_list_options();
+  $return = array();
+  $q = db_select('field_data_field_available_in_languages', 't')
+    ->distinct();
+  $q->fields('t', array('field_available_in_languages_value'));
+  $q->condition('entity_type', 'node');
+  $q->condition('bundle', 'dangerous_substances');
+  $q->orderBy('t.field_available_in_languages_value', 'ASC');
+  $item_types = $q->execute()->fetchCol();
+  foreach($item_types as $item_type) {
+    $return[$item_type] = $list[$item_type];
+  }
+  return $return;
+}
+
+
+function osha_dangerous_substances_facet_items_alter(&$build, &$settings) {
+  if ($settings->facet == "field_available_in_languages:value") {
+    $list = osha_language_list_options();
+    foreach ($build as $lang => $item) {
+        $build[$lang]['#markup'] = $list[$lang];
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function osha_dangerous_substances_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+
+  if ($form_id == 'dangerous_substances_node_form') {
+
+    //    if (!in_array('administrator', array_values($user->roles))) {
+    //      $form['field_priority_area']['#access'] = FALSE;
+    //    }
+
+    drupal_add_js(drupal_get_path('module', 'osha_dangerous_substances') . '/js/osha_dangerous_substances.js');
+    if (!isset($form['#after_build'])) {
+      $form['#after_build'] = array();
+    }
+    $form['#after_build'][] = '_osha_dangerous_substances_form_after_build';
+    $form['actions']['submit']['#submit'][] = 'osha_dangerous_substances_node_save_redirect_submit';
+    if (isset($form['actions']['save_preview'])) {
+      $form['actions']['save_preview']['#submit'][] = 'osha_dangerous_substances_node_save_redirect_submit';
+    }
+    if (isset($form['actions']['send_for_approval'])) {
+      $form['actions']['send_for_approval']['#submit'][] = 'osha_dangerous_substances_node_save_redirect_submit';
+    }
+  }
+}
+
+function _osha_dangerous_substances_get_other_tid($element, $field, $other_name = 'other') {
+  foreach($element[$field]['und']['#options'] as $tid => $name) {
+    if (strtolower(trim($name)) == $other_name) {
+      return (string)$tid;
+    }
+  }
+  if (isset($_REQUEST['debug'])) {
+    watchdog('osha_dangerous_substances', '!field no other value found updated', array('!field' => $field) );
+  }
+  return '-1'; // todo ...
+}
+
+function _osha_dangerous_substances_form_after_build($form, $form_state) {
+
+  // Provider other
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_provider_type');
+  $form['field_provider_other']['#states'] = ['visible'=>[ '#edit-field-provider-type-und' => ['value' => [$_other]] ] ];
+
+  // Country code
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_material_country');
+  $form['field_country_other']['#states'] = ['visible'=>[ '#edit-field-material-country-und' => ['value' => [$_other]] ] ];
+
+  // Languages other
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_available_in_languages');
+  $form['field_languages_other']['#states'] = ['visible'=>[ '#edit-field-available-in-languages-und' => ['value' => [$_other]] ] ];
+
+  // Sector / Industry covered other todo not sure if needed
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_sector_industry_covered');
+  $form['field_sector_industry_other']['#states'] = ['visible'=>[ '#edit-field-sector-industry-covered-und' => ['value' => [$_other]] ] ];
+
+  // Tasks covered other
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_tasks_covered');
+  $form['field_tasks_other']['#states'] = ['visible'=>[ '#edit-field-tasks-covered-und' => ['value' => [$_other]] ] ];
+
+  // Biological hazard other
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_biological_hazard');
+  $form['field_biological_hazard_other']['#states'] = ['visible'=>[ '#edit-field-biological-hazard-und' => ['value' => [$_other]] ] ];
+
+  // Hazard - physical state other
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_hazard_physical_state');
+  $form['field_hazard_physical_other']['#states'] = ['visible'=>[ '#edit-field-hazard-physical-state-und' => ['value' => [$_other]] ] ];
+
+  // Hazard health effect other
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_hazard_health_effects');
+  $form['field_hazard_health_other']['#states'] = ['visible'=>[ '#edit-field-hazard-health-effects-und' => ['value' => [$_other]] ] ];
+
+  // Exposure route
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_exposure_route');
+  $form['field_exposure_route_other']['#states'] = ['visible'=>[ '#edit-field-exposure-route-und' => ['value' => [$_other]] ] ];
+
+  // Workers groups covered other
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_worker_groups_type');
+  $form['field_worker_groups_other']['#states'] = ['visible'=>[ '#edit-field-worker-groups-type-und' => ['value' => [$_other]] ] ];
+
+  // Prevention measure other
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_prevention_measure_type');
+  $form['field_prevention_measures_other']['#states'] = ['visible'=>[ '#edit-field-prevention-measure-type-und' => ['value' => [$_other]] ] ];
+
+  // Objective material other
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_material_objective_type');
+  $form['field_material_objective_other']['#states'] = ['visible'=>[ '#edit-field-material-objective-type-und' => ['value' => [$_other]] ] ];
+
+  // Purpose of the material other
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_material_purpose_type');
+  $form['field_material_purpose_other']['#states'] = ['visible'=>[ '#edit-field-material-purpose-type-und' => ['value' => [$_other]] ] ];
+
+  // Target group other
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_target_group');
+  $form['field_target_group_other']['#states'] = ['visible'=>[ '#edit-field-target-group-und' => ['value' => [$_other]] ] ];
+
+  // Evaluation other
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_evaluation');
+  $form['field_evaluation_other']['#states'] = ['visible'=>[ '#edit-field-evaluation-und' => ['value' => [$_other]] ] ];
+
+  // Type of visualisation material other
+  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_visualisation_material_typ');
+  $form['field_visualisation_mat_other']['#states'] = ['visible'=>[ '#edit-field-visualisation-material-typ-und' => ['value' => [$_other]] ] ];
+
+  $form['field_rights_description']['#states'] = ['visible'=>[ '#edit-field-item-type-und' => ['value' => 'Audiovisual'] ] ];
+  $form['field_intellectual_property_righ']['#states'] = ['visible'=>[ '#edit-field-item-type-und' => ['value' => 'Audiovisual'] ] ];
+  $form['field_media_format']['#states'] = ['visible'=>[ '#edit-field-item-type-und' => ['value' => 'Audiovisual'] ] ];
+  $form['field_video_length']['#states'] = ['visible'=>[ '#edit-field-item-type-und' => ['value' => 'Audiovisual'] ] ];
+
+  return $form;
+}
+
+/**
+ * Implements hook_search_api_solr_query_alter().
+ */
+function osha_dangerous_substances_search_api_solr_query_alter(array &$call_args, SearchApiQueryInterface $query) {
+  if (arg(1) == 'dangerous-substances') {
+    $sort_order = strtolower(@$_REQUEST['sort_order']);
+    $sort_by    = strtolower(@$_REQUEST['sort_by']);
+    if ($sort_by) {
+      $call_args['params']['sort'] = 'ds_field_publication_date ';
+      if ($sort_by == 'search_api_relevance') {
+        $call_args['params']['sort'] = 'ds_search_api_relevance ';
+      }
+
+      if (!in_array($sort_order, ['asc', 'desc'])) {
+        $sort_order = 'desc';
+      }
+      $call_args['params']['sort'] .= $sort_order;
+    }
+  }
+}
+
+function _osha_dangerous_substances_add_country_other() {
+
+  $name = 'Other';
+  $code = 'OT';
+
+  $voc = taxonomy_vocabulary_machine_name_load('country');
+  if (empty($voc)) {
+    return ;
+  }
+
+  $terms = taxonomy_get_term_by_name($name, 'country');
+  if (empty($terms)) {
+    $term = new stdClass();
+    $term->field_iso2[LANGUAGE_NONE][0]['value'] = $code;
+    $term->vid = $voc->vid;
+    $term->name_original = $name;
+    $term->name = $name;
+    taxonomy_term_save($term);
+  }
+}
+
+function osha_dangerous_substances_add_taxonomy() {
+
+  _osha_dangerous_substances_add_country_other();
+
+  $map = [
+    'hazmap_categories' => [
+      'name' => 'Hazmap categories',
+      'file' => 'hazmap_categories',
+      'code'=>'field_hazmap_categories_code'],
+
+    'provider_type' => [
+      'name' => 'Type of provider',
+      'file' => 'provider_type',
+      'code'=>'field_provider_type_code'],
+
+    'biological_hazard' => [
+      'name' => 'Biological hazard',
+      'file' => 'biological_hazard',
+      'code'=>'field_biological_hazard_code'],
+
+    'hazard_physical_state' => [
+      'name' => 'Chemical and biological hazards related to state and occurrence in the workplace',
+      'file' => 'hazard_physical_state',
+      'code'=>'field_hazard_health_effects_code'],
+
+    'hazard_health_effects' => [
+      'name' => 'Chemical hazards related to health effects',
+      'file' => 'hazard_health_effects',
+      'code'=>'field_hazard_physical_state_code'],
+
+    'exposure_route' => [
+      'name' => 'Exposure route',
+      'file' => 'exposure_route',
+      'code'=>'field_exposure_route_code'],
+
+    'worker_groups' => [
+      'name' => 'Type of workers',
+      'file' => 'worker_groups',
+      'code'=>'field_worker_groups_code'],
+
+    'prevention_measures' => [
+      'name' => 'Level of prevention',
+      'file' => 'prevention_measures',
+      'code'=>'field_prevention_measures_code'],
+
+    'material_objective' => [
+      'name' => 'Type of visualisation material',
+      'file' => 'material_objective',
+      'code'=>'field_material_objective_code'],
+
+    'material_purpose' => [
+      'name' => 'Type of information / purpose of the material',
+      'file' => 'material_purpose',
+      'code'=>'field_material_purpose_code'],
+
+    'target_group' => [
+      'name' => 'Proposal for target groups',
+      'file' => 'target_group',
+      'code'=>'field_target_group_code'],
+
+    'evaluation' => [
+      'name' => 'Quality / Assessment criteria',
+      'file' => 'evaluation',
+      'code'=>'field_evaluation_code'],
+  ];
+
+  $migration_module_dir = drupal_get_path('module', 'osha_dangerous_substances');
+  $terms_created = 0;
+  $terms_updated = 0;
+  foreach($map as $machine_name => $voc_info) {
+    $code_name = $voc_info['code'];
+    $voc = taxonomy_vocabulary_machine_name_load($machine_name);
+    if (empty($voc)) {
+      $voc = new stdClass();
+      $voc->name = $voc_info['name'];
+      $voc->machine_name = $machine_name;
+      taxonomy_vocabulary_save($voc);
+    }
+    $json_path = drupal_realpath($migration_module_dir . '/data/' . $voc_info['file'] . '.json');
+    if (is_readable($json_path)) {
+      $data = file_get_contents($json_path);
+      $data = json_decode($data, TRUE);
+
+      foreach ($data as $row) {
+        $name = $row['name'];
+        if (!$name) {
+          continue;
+        }
+        $terms = taxonomy_get_term_by_name($name, $machine_name);
+        $thesaurus_id = @$row['thesaurus_id'];
+        $level = @$row['level'];
+
+        if (empty($terms)) {
+          $term = [];
+          $term[$code_name][LANGUAGE_NONE][0]['value'] = $row['code'];
+          $term['field_prevention_level'][LANGUAGE_NONE][0]['value'] = $level;
+          $term['field_thesaurus_id'][LANGUAGE_NONE][0]['value'] = $thesaurus_id;
+
+          $term = (object)$term;
+          $term->vid = $voc->vid;
+          $term->name = $name;
+          taxonomy_term_save($term);
+          $terms_created++;
+        }
+        else {
+          $tids = array_keys($terms);
+          $term = $terms[$tids[0]];
+          if (!$term->{$code_name}) {
+            $term->{$code_name}[LANGUAGE_NONE][0]['value'] = $row['code'];
+            taxonomy_term_save($term);
+            $terms_updated++;
+          }
+          if ($thesaurus_id) {
+            if (!$term->{'field_thesaurus_id'}) {
+              $term->{'field_thesaurus_id'}[LANGUAGE_NONE][0]['value'] = $thesaurus_id;
+              taxonomy_term_save($term);
+              $terms_updated++;
+            }
+          }
+          if ($level) {
+            if (!$term->{'field_prevention_level'}) {
+              $term->{'field_prevention_level'}[LANGUAGE_NONE][0]['value'] = $level;
+              taxonomy_term_save($term);
+              $terms_updated++;
+            }
+          }
+        }
+      }
+    }
+  }
+  watchdog('osha_dangerous_substances', '!terms_created terms created, !terms_updated terms updated', array('!terms_created' => $terms_created, '!terms_updated' => $terms_updated) );
+}

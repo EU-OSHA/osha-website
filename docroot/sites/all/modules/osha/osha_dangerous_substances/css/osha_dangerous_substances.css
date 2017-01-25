@@ -1,0 +1,22 @@
+div#page {
+    overflow:visible;
+}
+
+.view-dangerous-substances table {
+    background-color: white;
+
+    width: 100%;
+    font-size: 0.923em;
+    margin: 0 0 10px;
+    border: 1px solid #bebfb9;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.view-dangerous-substances table th {
+    font-weight: normal;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #bebfb9;
+    padding: 3px 10px;
+}

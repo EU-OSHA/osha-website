@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Installation file for CCK Time module.
+ */
+
+/**
+ * Implementation of hook_field_schema().
+ */
+function cck_time_field_schema($field) {
+  $columns = array(
+    'value' => array(
+      'type' => 'varchar',
+      'length' => 10,
+      'not null' => FALSE,
+    ),
+  );
+  return array(
+    'columns' => $columns,
+      );
+}

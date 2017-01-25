@@ -53,6 +53,14 @@ function osha_resources_field_formatter_info() {
       'description' => t('Link to file using node title as link title.'),
     ),
   );
+  $info['plain_file_url'] = array(
+    'label' => t('Plain file url'),
+    'description' => t('Displays file as plain url'),
+    'field types' => array('file', 'image'),
+    'settings' => array(
+      'text' => t('View[file:name]'),
+    ),
+  );
   $info['contact_file_download_link'] = array(
     'label' => t('Download contact file link'),
     'description' => t('Displays a contact file link that will force the browser to download the file.'),
@@ -80,6 +88,23 @@ function osha_resources_field_formatter_view($entity_type, $entity, $field, $ins
         );
       }
       break;
+
+    case 'plain_file_url':
+      $settings = $display['settings'];
+      foreach ($items as $delta => $item) {
+        $file = (object) $item;
+        if (file_entity_access('download', $file)) {
+          $element[$delta] = array(
+            '#theme' => 'osha_resources_plain_file_url',
+            '#entity' => $entity,
+            '#field' => $field,
+            '#file' => $file,
+            '#text' => $settings['text'],
+          );
+        }
+      }
+      break;
+
     case 'contact_file_download_link':
       $settings = $display['settings'];
       foreach ($items as $delta => $item) {
@@ -112,6 +137,9 @@ function osha_resources_theme() {
     'osha_resources_download_link' => array(
       'variables' => array('file' => NULL, 'entity'=> NULL, 'field' => NULL, 'icon_directory' => NULL, 'text' => NULL),
     ),
+    'osha_resources_plain_file_url' => array(
+      'variables' => array('file' => NULL, 'entity'=> NULL, 'field' => NULL, 'icon_directory' => NULL, 'text' => NULL),
+    ),
   );
 }
 
@@ -134,6 +162,18 @@ function osha_resources_field_formatter_settings_form($field, $instance, $view_m
   }
 
   return $element;
+}
+
+/**
+ */
+function theme_osha_resources_plain_file_url($variables) {
+  $file = $variables['file'];
+  $uri = file_entity_download_uri($file);
+  $uri['options']['absolute'] = TRUE;
+
+  $output = check_plain(url($uri['path'], $uri['options']));
+
+  return $output;
 }
 
 /**

@@ -740,6 +740,7 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_languages_other']['id'] = 'field_languages_other';
   $handler->display->display_options['fields']['field_languages_other']['table'] = 'field_data_field_languages_other';
   $handler->display->display_options['fields']['field_languages_other']['field'] = 'field_languages_other';
+  $handler->display->display_options['fields']['field_languages_other']['ui_name'] = 'Available in languages (other)';
   /* Field: Country */
   $handler->display->display_options['fields']['field_material_country']['id'] = 'field_material_country';
   $handler->display->display_options['fields']['field_material_country']['table'] = 'field_data_field_material_country';

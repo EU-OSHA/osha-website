@@ -183,7 +183,7 @@ function osha_dangerous_substances_facet_items_alter(&$build, &$settings) {
   if ($settings->facet == "field_available_in_languages:value") {
     $list = osha_language_list_options();
     $list['other'] = 'Other';
-    $list['free'] = 'Language free';
+    $list['nol'] = 'Language free';
     foreach ($build as $lang => $item) {
         $build[$lang]['#markup'] = $list[$lang];
     }
@@ -200,8 +200,6 @@ function osha_dangerous_substances_form_alter(&$form, &$form_state, $form_id) {
     //    if (!in_array('administrator', array_values($user->roles))) {
     //      $form['field_priority_area']['#access'] = FALSE;
     //    }
-    $form['field_available_in_languages'][LANGUAGE_NONE]['#options']['other'] = 'Other';
-    $form['field_available_in_languages'][LANGUAGE_NONE]['#options']['free'] = 'Language free';
     drupal_add_js(drupal_get_path('module', 'osha_dangerous_substances') . '/js/osha_dangerous_substances.js');
     if (!isset($form['#after_build'])) {
       $form['#after_build'] = array();

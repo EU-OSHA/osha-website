@@ -87,7 +87,8 @@ function osha_block_related_content_blocks_view() {
   $block1 = block_load('views', 'related_content-block_2');
   $block2 = block_load('views', 'related_content-block_1');
   $block3 = block_load('views', 'related_events-block_6');
-  return render(_block_get_renderable_array(_block_render_blocks(array($block1, $block2, $block3))));
+  $array = _block_get_renderable_array(_block_render_blocks(array($block1, $block2, $block3)));
+  return render($array);
 }
 
 function osha_archived_content_block_view() {

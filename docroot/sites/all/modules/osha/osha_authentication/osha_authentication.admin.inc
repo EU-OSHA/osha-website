@@ -67,6 +67,7 @@ function osha_authentication_get_role_and_section_from_dn($group_dn) {
     'EVENTEDT' => 'Events Editor',
     'LAYVAL' => 'Layout Validator',
     'READ' => 'authenticated user',
+    'OSHCOLL' => 'Dangerous substances',
     'TRLMN' => 'Translation Manager',
     'TRLIAS' => 'Translation Liaison',
     // Per language

@@ -258,18 +258,6 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_measurement_method']['table'] = 'field_data_field_measurement_method';
   $handler->display->display_options['fields']['field_measurement_method']['field'] = 'field_measurement_method';
   $handler->display->display_options['fields']['field_measurement_method']['type'] = 'text_plain';
-  /* Field: Content: Objective of material */
-  $handler->display->display_options['fields']['field_material_objective_type']['id'] = 'field_material_objective_type';
-  $handler->display->display_options['fields']['field_material_objective_type']['table'] = 'field_data_field_material_objective_type';
-  $handler->display->display_options['fields']['field_material_objective_type']['field'] = 'field_material_objective_type';
-  $handler->display->display_options['fields']['field_material_objective_type']['type'] = 'i18n_taxonomy_term_reference_plain';
-  $handler->display->display_options['fields']['field_material_objective_type']['delta_offset'] = '0';
-  /* Field: Content: Objective of material other */
-  $handler->display->display_options['fields']['field_material_objective_other']['id'] = 'field_material_objective_other';
-  $handler->display->display_options['fields']['field_material_objective_other']['table'] = 'field_data_field_material_objective_other';
-  $handler->display->display_options['fields']['field_material_objective_other']['field'] = 'field_material_objective_other';
-  $handler->display->display_options['fields']['field_material_objective_other']['label'] = 'Other objective of the material';
-  $handler->display->display_options['fields']['field_material_objective_other']['type'] = 'text_plain';
   /* Field: Content: Other information */
   $handler->display->display_options['fields']['field_other_information']['id'] = 'field_other_information';
   $handler->display->display_options['fields']['field_other_information']['table'] = 'field_data_field_other_information';
@@ -642,18 +630,6 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_measurement_method']['table'] = 'field_data_field_measurement_method';
   $handler->display->display_options['fields']['field_measurement_method']['field'] = 'field_measurement_method';
   $handler->display->display_options['fields']['field_measurement_method']['type'] = 'text_plain';
-  /* Field: Content: Objective of material */
-  $handler->display->display_options['fields']['field_material_objective_type']['id'] = 'field_material_objective_type';
-  $handler->display->display_options['fields']['field_material_objective_type']['table'] = 'field_data_field_material_objective_type';
-  $handler->display->display_options['fields']['field_material_objective_type']['field'] = 'field_material_objective_type';
-  $handler->display->display_options['fields']['field_material_objective_type']['type'] = 'i18n_taxonomy_term_reference_plain';
-  $handler->display->display_options['fields']['field_material_objective_type']['delta_offset'] = '0';
-  /* Field: Content: Objective of material other */
-  $handler->display->display_options['fields']['field_material_objective_other']['id'] = 'field_material_objective_other';
-  $handler->display->display_options['fields']['field_material_objective_other']['table'] = 'field_data_field_material_objective_other';
-  $handler->display->display_options['fields']['field_material_objective_other']['field'] = 'field_material_objective_other';
-  $handler->display->display_options['fields']['field_material_objective_other']['label'] = 'Other objective of the material';
-  $handler->display->display_options['fields']['field_material_objective_other']['type'] = 'text_plain';
   /* Field: Content: Other information */
   $handler->display->display_options['fields']['field_other_information']['id'] = 'field_other_information';
   $handler->display->display_options['fields']['field_other_information']['table'] = 'field_data_field_other_information';
@@ -990,20 +966,6 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_measurement_method']['field'] = 'field_measurement_method';
   $handler->display->display_options['fields']['field_measurement_method']['ui_name'] = 'Measurement method';
   $handler->display->display_options['fields']['field_measurement_method']['type'] = 'text_plain';
-  /* Field: Objective of material */
-  $handler->display->display_options['fields']['field_material_objective_type']['id'] = 'field_material_objective_type';
-  $handler->display->display_options['fields']['field_material_objective_type']['table'] = 'field_data_field_material_objective_type';
-  $handler->display->display_options['fields']['field_material_objective_type']['field'] = 'field_material_objective_type';
-  $handler->display->display_options['fields']['field_material_objective_type']['ui_name'] = 'Objective of material';
-  $handler->display->display_options['fields']['field_material_objective_type']['type'] = 'i18n_taxonomy_term_reference_plain';
-  $handler->display->display_options['fields']['field_material_objective_type']['delta_offset'] = '0';
-  /* Field: Objective of material */
-  $handler->display->display_options['fields']['field_material_objective_other']['id'] = 'field_material_objective_other';
-  $handler->display->display_options['fields']['field_material_objective_other']['table'] = 'field_data_field_material_objective_other';
-  $handler->display->display_options['fields']['field_material_objective_other']['field'] = 'field_material_objective_other';
-  $handler->display->display_options['fields']['field_material_objective_other']['ui_name'] = 'Objective of material';
-  $handler->display->display_options['fields']['field_material_objective_other']['label'] = 'Other objective of the material';
-  $handler->display->display_options['fields']['field_material_objective_other']['type'] = 'text_plain';
   /* Field: Other information */
   $handler->display->display_options['fields']['field_other_information']['id'] = 'field_other_information';
   $handler->display->display_options['fields']['field_other_information']['table'] = 'field_data_field_other_information';
@@ -1166,8 +1128,6 @@ function osha_dangerous_substances_views_default_views() {
     t('Intellectual property rights'),
     t('Length of the video'),
     t('Measurement method'),
-    t('Objective of material'),
-    t('Other objective of the material'),
     t('Other information'),
     t('Ownership information'),
     t('Prevention measures'),

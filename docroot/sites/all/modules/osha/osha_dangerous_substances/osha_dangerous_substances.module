@@ -273,10 +273,6 @@ function _osha_dangerous_substances_form_after_build($form, $form_state) {
   $_other = _osha_dangerous_substances_get_other_tid($form, 'field_prevention_measure_type');
   $form['field_prevention_measures_other']['#states'] = ['visible'=>[ '#edit-field-prevention-measure-type-und' => ['value' => [$_other]] ] ];
 
-  // Objective material other
-  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_material_objective_type');
-  $form['field_material_objective_other']['#states'] = ['visible'=>[ '#edit-field-material-objective-type-und' => ['value' => [$_other]] ] ];
-
   // Purpose of the material other
   $_other = _osha_dangerous_substances_get_other_tid($form, 'field_material_purpose_type');
   $form['field_material_purpose_other']['#states'] = ['visible'=>[ '#edit-field-material-purpose-type-und' => ['value' => [$_other]] ] ];

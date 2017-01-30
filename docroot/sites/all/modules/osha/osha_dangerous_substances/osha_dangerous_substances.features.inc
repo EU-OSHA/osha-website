@@ -81,8 +81,6 @@ function osha_dangerous_substances_default_search_api_index() {
         "field_intellectual_property_righ" : { "type" : "string" },
         "field_item_type" : { "type" : "string" },
         "field_material_country" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
-        "field_material_objective_other" : { "type" : "text" },
-        "field_material_objective_type" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_material_purpose_type" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_measurement_method" : { "type" : "text" },
         "field_media_format" : { "type" : "text" },
@@ -155,7 +153,6 @@ function osha_dangerous_substances_default_search_api_index() {
               "field_ec_number" : true,
               "field_measurement_method" : true,
               "field_prevention_measures_other" : true,
-              "field_material_objective_other" : true,
               "field_media_format" : true,
               "field_rights_description" : true,
               "field_country_other" : true
@@ -179,7 +176,6 @@ function osha_dangerous_substances_default_search_api_index() {
               "field_ec_number" : true,
               "field_measurement_method" : true,
               "field_prevention_measures_other" : true,
-              "field_material_objective_other" : true,
               "field_media_format" : true,
               "field_rights_description" : true,
               "field_country_other" : true
@@ -206,7 +202,6 @@ function osha_dangerous_substances_default_search_api_index() {
               "field_ec_number" : true,
               "field_measurement_method" : true,
               "field_prevention_measures_other" : true,
-              "field_material_objective_other" : true,
               "field_media_format" : true,
               "field_rights_description" : true,
               "field_country_other" : true
@@ -232,7 +227,6 @@ function osha_dangerous_substances_default_search_api_index() {
               "field_ec_number" : true,
               "field_measurement_method" : true,
               "field_prevention_measures_other" : true,
-              "field_material_objective_other" : true,
               "field_media_format" : true,
               "field_rights_description" : true,
               "field_country_other" : true

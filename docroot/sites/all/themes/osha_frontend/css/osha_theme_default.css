@@ -1,6 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 body {
  margin:0 0;
- font-family:arial, verdana, sans-serif;
+ font-family:"Open Sans", verdana, sans-serif;
  background:#D2DCED;
  overflow-y:scroll;
 }
@@ -135,7 +136,7 @@ header{
 
 .sidebars_first  .region-sidebar-first #block-menu-block-2 .menu-block-2 ul li ul li a{
 	color: #57575a;
-    font-family: Arial;
+    font-family: "Open Sans", sans-serif;
     font-size: 0.8em;
 	font-weight: bold;
     text-decoration: none;
@@ -145,7 +146,7 @@ header{
 
 .sidebars_first  .region-sidebar-first #block-menu-block-2 .menu-block-2 ul li ul li a.active{
 	color: #003399;
-    font-family: Arial;
+    font-family: "Open Sans", sans-serif;
     font-size: 0.8em;
 	font-weight: bold;
     text-decoration: none;
@@ -156,7 +157,7 @@ header{
 
 .sidebars_first  .region-sidebar-first #block-menu-block-2 .menu-block-2 ul li ul li ul li a{
 	color: #57575a;
-    font-family: Arial;
+    font-family: "Open Sans", sans-serif;
     font-size: 0.8em;
 	font-weight: bold;
     text-decoration: none;
@@ -165,7 +166,7 @@ header{
 
 .sidebars_first  .region-sidebar-first #block-menu-block-2 .menu-block-2 ul li ul li ul li span{
 	color: #57575a;
-    font-family: Arial;
+    font-family: "Open Sans", sans-serif;
     font-size: 0.8em;
 	font-weight: bold;
     text-decoration: none;
@@ -174,7 +175,7 @@ header{
 
 .sidebars_first  .region-sidebar-first #block-menu-block-2 .menu-block-2 ul li ul li ul li a.active{
 	color: #003399;
-    font-family: Arial;
+    font-family: "Open Sans", sans-serif;
     font-size: 0.8em;
 	font-weight: bold;
     text-decoration: none;
@@ -291,7 +292,7 @@ header{
 
 #block-menu-block-1 .menu li .menu li .menu li  a{
 	margin: 0 0 0 0px !important;
-	font-family: Arial, sans-serif;
+	font-family: "Open Sans", sans-serif;
 	color: #56565a;
 	font-weight: bold;
 	width: 181px;
@@ -397,7 +398,7 @@ header{
 /*END MENU*/
 
 #content a{
-	font-family: Arial;
+	font-family: "Open Sans", sans-serif;
 	text-decoration: none;
 	color: #003399;
 	border-bottom:1px solid #dc2f82;
@@ -592,7 +593,7 @@ padding-left: 1em;
 
 .breadcrumb
 {
-	font-family : Arial!important;
+	font-family : "Open Sans"!important;
 	font-weight:lighter;
 	font-size : 0.875em;
 	color : #003399;
@@ -606,7 +607,7 @@ padding-left: 1em;
 
 .breadcrumb a
 {
-	font-family : Arial!important;
+	font-family : "Open Sans"!important;
 	color : #003399;
 	font-weight:bold;
 	text-decoration: none;
@@ -920,7 +921,7 @@ span.date-display-single{
 .pager li a{
 	font-weight:bold;
 	border-bottom:0px!important;
-	font-family: Arial;
+	font-family: "Open Sans", sans-serif;
     text-decoration: none;
     color: #003399;
 }
@@ -973,7 +974,7 @@ span.date-display-single{
 .view-publications  .view-content .views-row .views-field-field-publication-type{
 	float:left;
 	color: #02339a !important;
-    font-family: arial !important;
+    font-family: "Open Sans" !important;
     font-size: 0.8em;
     font-weight: bold;
     padding-bottom: 0.2em;
@@ -1004,7 +1005,7 @@ span.date-display-single{
 .node-publication.node-teaser .field-type-file a,
 .node-job-vacancies .field-type-file a{
     color: #02339a !important;
-    font-family: arial !important;
+    font-family: "Open Sans" !important;
     font-size: 0.8em;
     font-weight: bold;
     padding-bottom: 0.2em;
@@ -1032,7 +1033,7 @@ span.date-display-single{
 }
 
 #block-views-publications-slidehow .node-publication .field-name-field-file a{
-	font-family:arial!important;
+	font-family:"Open Sans"!important;
     font-weight: bold;
 	font-size:0.8em!important;
 	border-bottom:0px!important;
@@ -1081,7 +1082,7 @@ span.date-display-single{
 
 .node-publication.view-mode-full .field-name-body p{
 	margin-top:0;
-	font-family:Arial;
+	font-family:"Open Sans", sans-serif;
 	color:#000000;
 	line-height: 1.5em;
 }
@@ -1124,7 +1125,7 @@ span.date-display-single{
 }
 
 .node-publication .field-name-field-file a{
-	font-family:arial!important;
+	font-family:"Open Sans"!important;
     font-weight: bold;
 	font-size:0.8em;
 	border-bottom:0px!important;
@@ -1152,7 +1153,7 @@ span.date-display-single{
 .field-name-field-related-publications ul a{
 	background-color:#f3f3f3;
 	list-style:none;
-	font-family:arial!important;
+	font-family:"Open Sans"!important;
 	color:#003399!important;
 	font-weight:bold;
 	font-size:0.8em;
@@ -1236,7 +1237,7 @@ span.date-display-single{
 }
 
 .node-publication.view-mode-full .field-name-field-publication-related-res #publication_related_res li a{
-	font-family:arial;
+	font-family:"Open Sans", sans-serif;
 	font-weight:bold;
 	font-size:0.9em;
 	border-bottom:0px!important;
@@ -1300,7 +1301,7 @@ span.date-display-single{
 
 .node-publication  .field-name-field-related-publications article  .field-name-title-field a{
 	list-style: none;
-	font-family: arial!important;
+	font-family: "Open Sans"!important;
 	color: #003399!important;
 	font-weight: bold;
 	font-size: 0.8em;
@@ -1318,7 +1319,7 @@ span.date-display-single{
 	color: #003399;
 	font-size: 0.95em;
 	font-weight: normal;
-	font-family: Arial;
+	font-family: "Open Sans", sans-serif;
 	line-height:1.7em;
 }
 
@@ -1459,7 +1460,7 @@ span.date-display-single{
 }
 
 .ui-accordion-content{
-	font-family: Arial;
+	font-family: "Open Sans", sans-serif;
 	font-size: 0.9em;
 	color: #000;
 	line-height: 1.7em;
@@ -1546,7 +1547,7 @@ padding-top: 1em;
 
 .imgWikiZone
 {
-font-family : Arial;
+font-family : "Open Sans", sans-serif;
 	float:left;
 	font-weight:bold;
   font-size : 0.813em;
@@ -1567,7 +1568,7 @@ margin: 0.2em 0px 0.2em 0.3em;
 
 .textWikiZone
 {
-	font-family : Arial;
+	font-family : "Open Sans", sans-serif;
 	font-weight:lighter;
   font-size : 0.813em;
   color : #000000;
@@ -1620,7 +1621,7 @@ margin: 0.2em 0px 0.2em 0.3em;
 
 .OSHWiki .p2, .OSHWikiWhite .p2
 {
-	font-family : Arial,sans-serif;
+	font-family : "Open Sans",sans-serif;
  	font-size : 0.813em;
  	color : #57575A;
  	padding-top: 1em;
@@ -1661,7 +1662,7 @@ margin: 0.2em 0px 0.2em 0.3em;
 
 .OSHWikiWhite .p4
 {
- font-family : Arial;
+ font-family : "Open Sans", sans-serif;
  font-weight:lighter;
  font-size : 0.750em;
  color : #003399;
@@ -1724,7 +1725,7 @@ margin-bottom: 1.5em;
 
 .lblOSHWiki
 {
-font-family : Arial;
+font-family : "Open Sans", sans-serif;
   color : #003399;
 font-weight: bold;
 }
@@ -2024,7 +2025,7 @@ font-weight: normal;
 	color: #003399;
 	font-size: 0.8em;
 	font-weight: bold;
-	font-family: arial;
+	font-family: "Open Sans", sans-serif;
 	padding-bottom: 0.2em;
 
 }
@@ -2038,7 +2039,7 @@ font-weight: normal;
 	color: #003399;
 	font-size: 0.8em;
 	font-weight: bold;
-	font-family: arial;
+	font-family: "Open Sans", sans-serif;
 	padding-bottom: 0.2em;
 }
 
@@ -2057,7 +2058,7 @@ font-weight: normal;
 	color: #003399!important;
 	font-size: 0.9em!important;
 	font-weight: bold!important;
-	font-family: arial!important;
+	font-family: "Open Sans"!important;
 	padding-bottom: 0.2em;
 }
 
@@ -2085,7 +2086,7 @@ font-weight: normal;
 	color: #003399;
 	font-size: 0.8em;
 	font-weight: bold;
-	font-family: arial;
+	font-family: "Open Sans", sans-serif;
 	position: absolute;
 	top: 57.6em;
 	margin-left: 12em;
@@ -2097,7 +2098,7 @@ font-weight: normal;
 	color: #003399;
 	font-size: 0.8em;
 	font-weight: bold;
-	font-family: arial;
+	font-family: "Open Sans", sans-serif;
 	padding-bottom: 0.2em;
 	border-bottom:0px!important
 }
@@ -2281,7 +2282,7 @@ font-weight: normal;
 
 		#block-osha-newsletter-osha-newsletter-subscribe-extra div{
 			color: #000;
-			font-family: Arial,sans-serif;
+			font-family: "Open Sans",sans-serif;
 			font-size: 1em;
 			margin: 0 0 .5em 0;
 			line-height:1.5em;
@@ -2304,7 +2305,7 @@ font-weight: normal;
 			border-bottom: 1px solid #dc2f82;
 			color: #003399;
 			font-weight:bold;
-			font-family: arial;
+			font-family: "Open Sans", sans-serif;
 			font-size:0.8em;
 		}
 
@@ -2335,7 +2336,7 @@ font-weight: normal;
 			border: 0 none;
 			color: #003399;
 			float: none;
-			font-family: arial;
+			font-family: "Open Sans", sans-serif;
 			font-size: 1em;
 			font-weight: bold;
 			margin-top: 0.1em;
@@ -2415,7 +2416,7 @@ font-weight: normal;
 	color: #003399;
 	font-size: 0.8em;
 	font-weight: bold;
-	font-family: arial;
+	font-family: "Open Sans", sans-serif;
 	padding-bottom: 0.2em;
 }
 
@@ -2528,7 +2529,7 @@ font-weight: normal;
 }
 .two_column.publications-search-list.form-wrapper #publication-search label{
     color: #003399 !important;
-    font-family: arial !important;
+    font-family: "Open Sans" !important;
     font-size: 0.9em !important;
     font-weight: bold !important;
 }
@@ -2998,7 +2999,7 @@ font-weight: normal;
 }
 
 .date{
-	font-family: Arial;
+	font-family: "Open Sans", sans-serif;
 	color: #000;
 	font-size: 0.8em;
 	font-weight:bold;
@@ -3022,7 +3023,7 @@ font-weight: normal;
 .highlights_body{
 	color: #000;
 	font-size: 0.9em;
-	font-family: Arial;
+	font-family: "Open Sans", sans-serif;
 	font-weight:bold;
 	line-height: 1.7em;
 }
@@ -3089,7 +3090,7 @@ font-weight: normal;
 .node-news .field-name-field-summary p{
 	margin:0;
 	padding:0;
-	font-family: Arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 1em;
 	color:#000000;
 	font-weight:normal;
@@ -3099,7 +3100,7 @@ font-weight: normal;
 .node-news .field-type-text-with-summary p{
 	margin:0;
 	padding:0;
-	font-family: Arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 0.9em;
 	color:#000000;
 	font-weight:normal;
@@ -3110,7 +3111,7 @@ font-weight: normal;
 .node-news .field-name-field-publication-date{
 	margin:0;
 	padding:0;
-	font-family: Arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 1em;
 	color:#000000;
 	font-weight:normal;
@@ -3170,7 +3171,7 @@ font-weight: normal;
 
 #block-osha-newsletter-osha-newsletter-subscribe div {
 	color: #000;
-	font-family: Arial,sans-serif;
+	font-family: "Open Sans",sans-serif;
 	font-size: 0.9em;
 	margin: 0 0 .5em 0;
 	line-height:1.5em;
@@ -3208,7 +3209,7 @@ font-weight: normal;
 #block-osha-newsletter-osha-newsletter-subscribe a{
 	font-size: 110%;
 	font-weight: lighter;
-	font-family: arial;
+	font-family: "Open Sans", sans-serif;
 	color: #003399;
 	margin: 0;
 	text-decoration:none;
@@ -3426,7 +3427,7 @@ a.button-submit {
 /*OSHMail newsletter Section Block Down*/
 
 #block-block-4 div{
-	font-family: Arial,sans-serif;
+	font-family: "Open Sans",sans-serif;
 	padding: 1px;
 	width: 99.2%;
 	margin-bottom:2em;
@@ -3494,7 +3495,7 @@ a.button-submit {
 
 .node-seminar .field-name-field-seminar-location .field-label{
 	font-weight: lighter;
-	font-family: arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 1em;
 	text-transform:uppercase;
 }
@@ -3508,7 +3509,7 @@ a.button-submit {
 
 .node-seminar .field-name-field-seminar-start-date .field-label {
 	font-weight: lighter;
-	font-family: arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 1em;
 	text-transform:uppercase;
 }
@@ -3519,7 +3520,7 @@ a.button-submit {
 
 .node-seminar .field-name-field-seminar-end-date .field-label {
 	font-weight: lighter;
-	font-family: arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 1em;
 	text-transform:uppercase;
 }
@@ -3532,7 +3533,7 @@ a.button-submit {
 
 .node-seminar .field.field-name-field-file.field-type-file.field-label-above .field-items a{
 	color: #003399!important;
-    font-family: arial!important;
+    font-family: "Open Sans"!important;
     font-size: 0.8em;
 	font-weight:bold;
 	border-bottom:0px!important;
@@ -3541,7 +3542,7 @@ a.button-submit {
 
 .node-seminar .field.field-name-field-file.field-type-file.field-label-above .field-items span{
 	color: #003399!important;
-    font-family: arial!important;
+    font-family: "Open Sans"!important;
 	font-weight:normal;
 	padding-right:2em;
 	padding-top:0.2em;
@@ -3550,7 +3551,7 @@ a.button-submit {
 
 .node-calls .field-type-file a{
     color: #003399!important;
-    font-family: arial!important;
+    font-family: "Open Sans"!important;
     font-weight:normal;
     padding-right:2em;
     padding-top:0.2em;
@@ -3630,7 +3631,7 @@ a.button-submit {
 #block-views-06b622c3c94cefbba3c76d3ae86207dd h2{
 	background: none repeat scroll 0 0 transparent;
     color: #003399 !important;
-    font-family: arial !important;
+    font-family: "Open Sans" !important;
     font-size: 0.9em !important;
     font-weight: bold !important;
     padding-left: 0;
@@ -4230,7 +4231,7 @@ a.button-submit {
 
 .view-mode-osha_slideshow .field-name-body p{
 	margin:0;
-	font-family: Arial;
+	font-family: "Open Sans", sans-serif;
 	font-size: 0.8em;
 	width:97%;
 }
@@ -4243,7 +4244,7 @@ a.button-submit {
 
 .view-mode-osha_slideshow .field-name-field-file span{
 	color: #57585c!important;
-	font-family: Arial;
+	font-family: "Open Sans", sans-serif;
 	font-size: 0.8em;
 	font-weight: bold;
 
@@ -4392,7 +4393,7 @@ a.button-submit {
 
 .views-exposed-widgets .views-exposed-widget label{
 	color: #003399 !important;
-    font-family: arial !important;
+    font-family: "Open Sans" !important;
     font-size: 0.9em !important;
     font-weight: bold !important;
     padding-bottom: 0.1em;
@@ -4864,7 +4865,7 @@ article.node-press-release .field-name-body.field-type-text-with-summary p{
 }
 
 .view-legislation-guidelines table tr td a{
-	  font-family: Arial;
+	  font-family: "Open Sans", sans-serif;
 	  text-decoration: none;
 	  color: #003399;
 	  border-bottom: 1px solid #dc2f82!important;
@@ -5436,6 +5437,27 @@ a.tabs-primary__tab-link{
 	float:left;
 	padding-right: 0.2em;
 }
+.view-oshevents .views-field-field-country-code{
+	display: inline-block;
+}
+
+.view-oshevents .views-field-field-country-code .views-label-field-country-code{
+	display: inline-block;
+}
+
+.view-oshevents .views-field-field-country-code .field-content{
+	display: inline-block;
+}
+
+.view-oshevents .views-field-field-city{
+	display: inline-block;
+}
+
+.view-oshevents .views-field-field-organization .views-label-field-organization,
+.view-oshevents .views-field-field-organization .field-content
+{
+	display: inline;
+}
 
 .view-oshevents .country{
 	float:left;
@@ -5589,7 +5611,7 @@ a.tabs-primary__tab-link{
     clear: both;
     color: #003399;
     float: left;
-    font-family: arial;
+    font-family: "Open Sans", sans-serif;
     font-size: 0.8em;
     font-weight: bold;
     margin-left: 0em;
@@ -5604,7 +5626,7 @@ a.tabs-primary__tab-link{
     clear: both;
     color: #003399;
     float: left;
-    font-family: arial;
+    font-family: "Open Sans", sans-serif;
     font-size: 0.8em;
     font-weight: bold;
     margin-left: 0em;
@@ -5716,15 +5738,13 @@ a.tabs-primary__tab-link{
 }
 
 #content .view-oshevents  .views-field-field-country-code .views-label-field-country-code{
-	font-weight: lighter;
-	font-family: arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 1em;
 	text-transform: uppercase;
 }
 
 #content .view-oshevents  .views-field-field-organization .iews-label-field-organization{
-	font-weight: lighter;
-	font-family: arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 1em;
 	text-transform: uppercase;
 }
@@ -5780,21 +5800,21 @@ a.tabs-primary__tab-link{
 
 .node-events .field-name-field-organization .field-label {
 	font-weight: lighter;
-	font-family: arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 1em;
 	text-transform: uppercase;
 }
 
 .node-events .field-name-field-city  .field-label{
 	font-weight: lighter;
-	font-family: arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 1em;
 	text-transform: uppercase;
 }
 
 .node-events .field-name-field-country-code .field-label{
 	font-weight: lighter;
-	font-family: arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 1em;
 	text-transform: uppercase;
 }
@@ -5812,7 +5832,7 @@ a.tabs-primary__tab-link{
 
 .node-events .field-name-field-tags .field-label{
 	font-weight: lighter;
-	font-family: arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 1em;
 	text-transform: uppercase;
 }
@@ -5823,7 +5843,7 @@ a.tabs-primary__tab-link{
 
 .node-events .field-name-field-start-date .field-label{
 	font-weight: lighter;
-	font-family: arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 1em;
 	text-transform: uppercase;
 }
@@ -5840,7 +5860,7 @@ a.tabs-primary__tab-link{
 
 .node-events .field-name-field-end-date  .field-label{
 	font-weight: lighter;
-	font-family: arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 1em;
 	text-transform: uppercase;
 }
@@ -5851,7 +5871,7 @@ a.tabs-primary__tab-link{
 
 .node-events .field-name-field-theme .field-label{
 	font-weight: lighter;
-	font-family: arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 1em;
 	text-transform: uppercase;
 }
@@ -6050,7 +6070,7 @@ a.tabs-primary__tab-link{
 
 .additional_resource_group.news .field-name-title-field{
 	font-size: 0.8em;
-	font-family: arial;
+	font-family: "Open Sans", sans-serif;
 	background: url("../images/separator_home.jpg") repeat-x scroll 0 100% rgba(0, 0, 0, 0);
 	height: auto;
 	padding-bottom:1.5em;
@@ -6076,7 +6096,7 @@ a.tabs-primary__tab-link{
 
 .additional_resource_group.events .field-name-title-field{
 	font-size: 0.8em;
-	font-family: arial;
+	font-family: "Open Sans", sans-serif;
 	background: url("../images/separator_home.jpg") repeat-x scroll 0 100% rgba(0, 0, 0, 0);
 	height: auto;
 	padding-bottom:1.5em;
@@ -6089,7 +6109,7 @@ a.tabs-primary__tab-link{
 .additional_resource_group.events  span.date-display-single {
 	margin:0;
 	padding:0;
-	font-family: Arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 0.8em;
 	color:#000000;
 	font-weight:bold;
@@ -6122,7 +6142,7 @@ a.tabs-primary__tab-link{
 
 .additional_resource_group.publication .field-name-title-field{
 	font-size: 0.8em;
-	font-family: arial;
+	font-family: "Open Sans", sans-serif;
 	height: auto;
 	padding-bottom: 1.5em;
 	font-weight: bold;
@@ -6189,7 +6209,7 @@ a.tabs-primary__tab-link{
 	background: url("../images/external_link.png") no-repeat scroll 100% 0 transparent;
     border-bottom: 0 none !important;
     color: #003399;
-    font-family: Arial !important;
+    font-family: "Open Sans" !important;
     font-size: 0.8em;
     font-weight: bold;
     line-height: 1.1em;
@@ -6630,7 +6650,7 @@ article.comment p {
 .privacy-policy-oshmail{
 	font-size: 0.9em;
 	font-weight: lighter;
-	font-family: arial;
+	font-family: "Open Sans", sans-serif;
 	color: #003399;
 	margin: 0;
 	text-decoration: none;
@@ -6778,7 +6798,7 @@ article.comment p {
   padding-top: 1em;
   font-weight: bold;
   display: block;
-  font-family: Arial;
+  font-family: "Open Sans", sans-serif;
   text-decoration: none;
   color: #003399!important;
   font-size: 0.9em;
@@ -6850,7 +6870,7 @@ div.contextual-links-wrapper{
 	padding-top: 1em;
 	font-weight:bold;
 	display:block;
-	font-family: Arial;
+	font-family: "Open Sans", sans-serif;
 	text-decoration: none;
 	color: #003399!important;
 	font-size:0.9em;
@@ -6868,7 +6888,7 @@ div.contextual-links-wrapper{
 	padding-top: 1em;
 	font-weight:bold;
 	display:block;
-	font-family: Arial;
+	font-family: "Open Sans", sans-serif;
 	text-decoration: none;
 	color: #003399!important;
 	font-size:0.9em;
@@ -6886,7 +6906,7 @@ div.contextual-links-wrapper{
 	padding-top: 1em;
 	font-weight:bold;
 	display:block;
-	font-family: Arial;
+	font-family: "Open Sans", sans-serif;
 	text-decoration: none;
 	color: #003399!important;
 	font-size:0.9em;
@@ -6904,7 +6924,7 @@ div.contextual-links-wrapper{
 	padding-top: 1em;
 	font-weight:bold;
 	display:block;
-	font-family: Arial;
+	font-family: "Open Sans", sans-serif;
 	text-decoration: none;
 	color: #003399!important;
 	font-size:0.9em;
@@ -6923,7 +6943,7 @@ div.contextual-links-wrapper{
 	padding-top: 1em;
 	font-weight:bold;
 	display:block;
-	font-family: Arial;
+	font-family: "Open Sans", sans-serif;
 	text-decoration: none;
 	color: #003399!important;
 	font-size:0.9em;
@@ -6942,7 +6962,7 @@ div.contextual-links-wrapper{
 	padding-top: 1em;
 	font-weight:bold;
 	display:block;
-	font-family: Arial;
+	font-family: "Open Sans", sans-serif;
 	text-decoration: none;
 	color: #003399!important;
 	font-size:0.9em;
@@ -7010,7 +7030,7 @@ div.contextual-links-wrapper{
     border: 0 none !important;
     color: #003399 !important;
     display: block;
-    font-family: Arial;
+    font-family: "Open Sans", sans-serif;
     font-size: 0.9em;
     font-weight: bold;
     padding-left: 2em;
@@ -7023,7 +7043,7 @@ div.contextual-links-wrapper{
 #block-views-infographic-block-2 h2 {
 	background: none;
     color: #000000;
-    font-family: arial;
+    font-family: "Open Sans", sans-serif;
     font-size: 1em;
     font-weight: normal;
 	float:none;
@@ -7241,7 +7261,7 @@ body.page-node-5429 .oshwiki-featured-articles {
 
 .node-infographic .field-type-file .contextual-links-region{
 	border-bottom: 0 none !important;
-    font-family: arial !important;
+    font-family: "Open Sans" !important;
     font-size: 0.8em;
     font-weight: bold;
     padding-left: 0.3em;
@@ -8098,7 +8118,7 @@ a.contextual-links-trigger{
 	color: #039;
 	cursor: pointer;
 	display: block;
-	font-family: arial;
+	font-family: "Open Sans", sans-serif;
 	font-size: 0.9em;
 	font-weight: bold;
 	height: auto;
@@ -8575,7 +8595,7 @@ body.page-entity-collection h1#page-title{
 }
 
 #block-views-e-guides-block .view-content .views-row .views-field-field-language {
-    font-family: arial !important;
+    font-family: "Open Sans" !important;
     font-size: 0.8em;
     font-weight: bold;
     text-transform: uppercase;
@@ -8816,7 +8836,7 @@ body.page-entity-collection h1#page-title{
 .view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search label,
 .two_column.dangerous-substances-search-list.form-wrapper #dangerous-substances-search label{
 	color: #003399 !important;
-	font-family: arial !important;
+	font-family: "Open Sans" !important;
 	font-size: 0.9em !important;
 	font-weight: bold !important;
 }
@@ -9014,6 +9034,14 @@ body.page-entity-collection h1#page-title{
 
 .fixedHeader #block-search-form{
 	display: none;
+}
+
+#header a.printfriendly {
+    width: 23px;
+    height: 20px;
+    background: url(../images/share_print_blue.png) no-repeat scroll 0% 100% rgba(0, 0, 0, 0)!important;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 /*end sticky header*/

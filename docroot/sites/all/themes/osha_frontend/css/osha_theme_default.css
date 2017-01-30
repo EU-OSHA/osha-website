@@ -4699,7 +4699,7 @@ article.node-press-release .field-name-field-summary p {
 }
 
 article.node-press-release .field-name-body.field-type-text-with-summary p{
-	margin:0em
+	margin:0em 0em 1em;
 }
 
 .view-press-releases .field-name-title-field {

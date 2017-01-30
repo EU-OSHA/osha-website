@@ -1,13 +1,13 @@
 [
     {
+        "code": "aerosols",
+        "name": "Aerosols",
+        "thesaurus_id": "34561D"
+    },
+    {
         "code": "dusts",
         "name": "Dusts",
         "thesaurus_id": "35961D"
-    },
-    {
-        "code": "vapours",
-        "name": "Vapours",
-        "thesaurus_id": "36161D"
     },
     {
         "code": "fibres",
@@ -25,18 +25,23 @@
         "thesaurus_id": "35601D"
     },
     {
+        "code": "nanoparticles",
+        "name": "Nanoparticles (airborne liquids\/solids including smoke or mist)",
+        "thesaurus_id": "40256C"
+    },
+    {
         "code": "solids",
         "name": "Solids",
         "thesaurus_id": "35801D"
     },
     {
-        "code": "aerosols",
-        "name": "Aerosols",
-        "thesaurus_id": "34561D"
+        "code": "vapours",
+        "name": "Vapours",
+        "thesaurus_id": "36161D"
     },
     {
-        "code": "nanoparticles",
-        "name": "Nanoparticles (airborne liquids\/solids including smoke or mist)",
-        "thesaurus_id": "40256C"
+        "code": "other",
+        "name": "Other",
+        "thesaurus_id": ""
     }
 ]

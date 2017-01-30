@@ -3598,7 +3598,7 @@ please take this into consideration when you are writing the first paragraph.',
         'year_range' => '1990:+3',
       ),
       'type' => 'date_select',
-      'weight' => 88,
+      'weight' => 13,
     ),
     'workbench_access_field' => 0,
   );

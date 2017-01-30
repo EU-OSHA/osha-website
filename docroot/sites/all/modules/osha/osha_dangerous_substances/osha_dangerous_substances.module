@@ -52,30 +52,15 @@ function osha_dangerous_substances_filter_process_format($element) {
   return $element;
 }
 
-function _osha_dangerous_substances_available_in_languages_options_list() {
-  $list = osha_language_list_options();
-  $return = array();
-  $q = db_select('field_data_field_available_in_languages', 't')
-    ->distinct();
-  $q->fields('t', array('field_available_in_languages_value'));
-  $q->condition('entity_type', 'node');
-  $q->condition('bundle', 'dangerous_substances');
-  $q->orderBy('t.field_available_in_languages_value', 'ASC');
-  $item_types = $q->execute()->fetchCol();
-  foreach($item_types as $item_type) {
-    $return[$item_type] = $list[$item_type];
-  }
-  return $return;
-}
-
-
 function osha_dangerous_substances_facet_items_alter(&$build, &$settings) {
   if ($settings->facet == "field_available_in_languages:value") {
-    $list = osha_language_list_options();
-    $list['other'] = 'Other';
-    $list['nol'] = 'Language free';
+    $list = language_list();
     foreach ($build as $lang => $item) {
-        $build[$lang]['#markup'] = $list[$lang];
+      if (isset($list[$lang])) {
+        $build[$lang]['#markup'] = $list[$lang]->name;
+      } else {
+        $build[$lang]['#markup'] = $lang;
+      }
     }
   }
 }

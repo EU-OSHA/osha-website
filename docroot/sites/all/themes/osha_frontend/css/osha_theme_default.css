@@ -247,7 +247,7 @@ header{
 	clear: both;
 	border-bottom: 5px solid #002f9d;
 	font-size: medium;
-	margin-bottom: 13px;
+	margin-bottom: 0px;
 	background-color: #cfddee;
 	list-style-type: none;
 	padding-left:0px;
@@ -4081,28 +4081,7 @@ a.button-submit {
 /*END VACANCIES - CAREES*/
 
 
-/*STICKY MENU*/
-.fixed {
-	position: fixed;
-    top: -24px;
-    width: 1160px;
-    z-index: 99;
 
-}
-
-@media screen
-and (max-width: 1237px) {
-	.fixed {	
-		position: fixed;
-		top: -24px;
-		width: 100%;
-		z-index: 99;
-	}
-}
-.stickey{
-	margin-top:175px;
-}
-/*END STICKET MENU*/
 
 
 /*HIGHLIGHT LIST*/
@@ -8705,3 +8684,98 @@ body.page-entity-collection h1#page-title{
 	margin-bottom: 1em!important;
 	margin-top: 2em!important;
 }
+
+
+/*STICKY MENU*/
+.fixed {
+	position: fixed;
+    top: -24px;
+    width: 1160px;
+    z-index: 99;
+}
+
+@media screen and (max-width: 1237px) {
+	// .fixed {	
+	// 	position: fixed;
+	// 	top: -24px;
+	// 	width: 100%;
+	// 	z-index: 99;
+
+	// }
+}
+.stickey{
+	margin-top:175px;
+}
+/*END STICKET MENU*/
+
+/*Sticky header
+*********************************/
+#header{
+	background-color: white;
+}
+.fixedHeader{
+	position: fixed;
+	width: 1160px;
+	z-index: 9999;
+}
+.fixedHeader #socialNetworksBlue{
+	display: none;
+}
+.fixedHeader #agencyLogo a img{
+	margin-top: 10px;
+    width: 180px;
+}
+
+.fixedHeader #europeLogo{
+    margin: 2.5em 0em 0em 1.5em;
+}
+.fixedHeader #europeLogo img{
+    width: 50px;
+}
+
+
+.fixedHeader #block-menu-block-1{
+	margin-bottom: 0px;
+}
+
+.fixedHeader #block-menu-block-1 #main-menu-links-10488-16{
+	margin-bottom: 0px;
+}
+.fixedHeader #block-menu-block-1 #main-menu-links-10348-16{
+	margin-bottom: 0px;
+}
+
+.fixedHeader #languagesAndSearch #contact{
+	margin-top: 40px;
+    font-size: 1.25em;
+}
+.fixedHeader #languagesAndSearch #contact .a_small,
+.fixedHeader #languagesAndSearch #contact .a_medium,
+.fixedHeader #languagesAndSearch #contact .a_big{
+	display: none;
+}
+.fixedHeader img[alt*="Select language"]{
+	display: none;
+}
+.fixedHeader #block-lang-dropdown-language-content{
+	display: none;
+}
+
+//search header
+.fixedHeader #block-search-form{
+	display: none;
+}
+
+//second header login
+#secondary-menu {
+	float: none !important;
+    position: absolute !important;
+    right: 0% !important;
+    top: 10px !important;
+}
+
+.fixedHeader #block-search-form{
+	display: none;
+}
+
+/*end sticky header*/

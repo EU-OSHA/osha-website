@@ -1172,6 +1172,32 @@ function osha_dangerous_substances_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_selected_for_analysis'.
+  $field_bases['field_selected_for_analysis'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_selected_for_analysis',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => 'No',
+        1 => 'Yes',
+      ),
+      'allowed_values_function' => '',
+      'entity_translation_sync' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'list_boolean',
+  );
+
   // Exported field_base: 'field_target_group'.
   $field_bases['field_target_group'] = array(
     'active' => 1,

@@ -706,6 +706,10 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  /* Field: Content: Selected for analysis */
+  $handler->display->display_options['fields']['field_selected_for_analysis']['id'] = 'field_selected_for_analysis';
+  $handler->display->display_options['fields']['field_selected_for_analysis']['table'] = 'field_data_field_selected_for_analysis';
+  $handler->display->display_options['fields']['field_selected_for_analysis']['field'] = 'field_selected_for_analysis';
   $handler->display->display_options['path'] = 'dangerous-substances';
 
   /* Display: Data export */
@@ -736,7 +740,7 @@ function osha_dangerous_substances_views_default_views() {
     ),
   );
   $handler->display->display_options['fields']['field_available_in_languages']['delta_offset'] = '0';
-  /* Field: Content: Languages other */
+  /* Field: Available in languages (other) */
   $handler->display->display_options['fields']['field_languages_other']['id'] = 'field_languages_other';
   $handler->display->display_options['fields']['field_languages_other']['table'] = 'field_data_field_languages_other';
   $handler->display->display_options['fields']['field_languages_other']['field'] = 'field_languages_other';
@@ -1071,6 +1075,11 @@ function osha_dangerous_substances_views_default_views() {
     'text' => 'Download [file:name]',
   );
   $handler->display->display_options['fields']['field_image']['delta_offset'] = '0';
+  /* Field: Selected for analysis */
+  $handler->display->display_options['fields']['field_selected_for_analysis']['id'] = 'field_selected_for_analysis';
+  $handler->display->display_options['fields']['field_selected_for_analysis']['table'] = 'field_data_field_selected_for_analysis';
+  $handler->display->display_options['fields']['field_selected_for_analysis']['field'] = 'field_selected_for_analysis';
+  $handler->display->display_options['fields']['field_selected_for_analysis']['ui_name'] = 'Selected for analysis';
   $handler->display->display_options['path'] = 'dangerous-substances/xls';
   $handler->display->display_options['displays'] = array(
     'page' => 'page',
@@ -1149,6 +1158,7 @@ function osha_dangerous_substances_views_default_views() {
     t('Sector / Industry covered (field_sector_industry_covered)'),
     t('Page'),
     t('Edit link'),
+    t('Selected for analysis'),
     t('Data export'),
   );
   $export['dangerous_substances'] = $view;

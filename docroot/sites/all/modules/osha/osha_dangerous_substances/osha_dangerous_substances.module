@@ -195,7 +195,7 @@ function osha_dangerous_substances_search_api_solr_query_alter(array &$call_args
     $sort_order = strtolower(@$_REQUEST['sort_order']);
     $sort_by    = strtolower(@$_REQUEST['sort_by']);
     if ($sort_by) {
-      $call_args['params']['sort'] = 'ds_field_publication_date ';
+      $call_args['params']['sort'] = 'ds_field_publication_year ';
       if ($sort_by == 'search_api_relevance') {
         $call_args['params']['sort'] = 'ds_search_api_relevance ';
       }

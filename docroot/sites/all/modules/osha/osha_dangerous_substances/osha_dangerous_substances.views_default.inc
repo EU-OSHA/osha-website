@@ -128,11 +128,11 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_provider_other']['id'] = 'field_provider_other';
   $handler->display->display_options['fields']['field_provider_other']['table'] = 'field_data_field_provider_other';
   $handler->display->display_options['fields']['field_provider_other']['field'] = 'field_provider_other';
-  /* Field: Field: Publication date */
-  $handler->display->display_options['fields']['field_publication_date']['id'] = 'field_publication_date';
-  $handler->display->display_options['fields']['field_publication_date']['table'] = 'field_data_field_publication_date';
-  $handler->display->display_options['fields']['field_publication_date']['field'] = 'field_publication_date';
-  $handler->display->display_options['fields']['field_publication_date']['settings'] = array(
+  /* Field: Field: Publication year */
+  $handler->display->display_options['fields']['field_publication_year']['id'] = 'field_publication_year';
+  $handler->display->display_options['fields']['field_publication_year']['table'] = 'field_data_field_publication_year';
+  $handler->display->display_options['fields']['field_publication_year']['field'] = 'field_publication_year';
+  $handler->display->display_options['fields']['field_publication_year']['settings'] = array(
     'format_type' => 'long',
     'fromto' => 'both',
     'multiple_number' => '',
@@ -520,11 +520,11 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_provider_type']['field'] = 'field_provider_type';
   $handler->display->display_options['fields']['field_provider_type']['type'] = 'i18n_taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_provider_type']['delta_offset'] = '0';
-  /* Field: Field: Publication date */
-  $handler->display->display_options['fields']['field_publication_date']['id'] = 'field_publication_date';
-  $handler->display->display_options['fields']['field_publication_date']['table'] = 'field_data_field_publication_date';
-  $handler->display->display_options['fields']['field_publication_date']['field'] = 'field_publication_date';
-  $handler->display->display_options['fields']['field_publication_date']['settings'] = array(
+  /* Field: Field: Publication year */
+  $handler->display->display_options['fields']['field_publication_year']['id'] = 'field_publication_year';
+  $handler->display->display_options['fields']['field_publication_year']['table'] = 'field_data_field_publication_year';
+  $handler->display->display_options['fields']['field_publication_year']['field'] = 'field_publication_year';
+  $handler->display->display_options['fields']['field_publication_year']['settings'] = array(
     'format_type' => 'long',
     'fromto' => 'both',
     'multiple_number' => '',
@@ -813,13 +813,13 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_provider_other']['table'] = 'field_data_field_provider_other';
   $handler->display->display_options['fields']['field_provider_other']['field'] = 'field_provider_other';
   $handler->display->display_options['fields']['field_provider_other']['ui_name'] = 'Provider other';
-  /* Field: Publication date */
-  $handler->display->display_options['fields']['field_publication_date']['id'] = 'field_publication_date';
-  $handler->display->display_options['fields']['field_publication_date']['table'] = 'field_data_field_publication_date';
-  $handler->display->display_options['fields']['field_publication_date']['field'] = 'field_publication_date';
-  $handler->display->display_options['fields']['field_publication_date']['ui_name'] = 'Publication date';
-  $handler->display->display_options['fields']['field_publication_date']['alter']['strip_tags'] = TRUE;
-  $handler->display->display_options['fields']['field_publication_date']['settings'] = array(
+  /* Field: Publication year */
+  $handler->display->display_options['fields']['field_publication_year']['id'] = 'field_publication_year';
+  $handler->display->display_options['fields']['field_publication_year']['table'] = 'field_data_field_publication_year';
+  $handler->display->display_options['fields']['field_publication_year']['field'] = 'field_publication_year';
+  $handler->display->display_options['fields']['field_publication_year']['ui_name'] = 'Publication year';
+  $handler->display->display_options['fields']['field_publication_year']['alter']['strip_tags'] = TRUE;
+  $handler->display->display_options['fields']['field_publication_year']['settings'] = array(
     'format_type' => 'long',
     'fromto' => 'both',
     'multiple_number' => '',
@@ -1114,7 +1114,7 @@ function osha_dangerous_substances_views_default_views() {
     t('Type of item'),
     t('Type of provider'),
     t('Provider other'),
-    t('Publication date'),
+    t('Publication year'),
     t('Sector / Industry covered other'),
     t('Biological hazard'),
     t('Biological hazard other'),
@@ -1214,13 +1214,13 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['search_api_et_id']['id'] = 'search_api_et_id';
   $handler->display->display_options['fields']['search_api_et_id']['table'] = 'search_api_index_default_content_index';
   $handler->display->display_options['fields']['search_api_et_id']['field'] = 'search_api_et_id';
-  /* Sort criterion: Indexed Content: Publication date */
-  $handler->display->display_options['sorts']['field_publication_date']['id'] = 'field_publication_date';
-  $handler->display->display_options['sorts']['field_publication_date']['table'] = 'search_api_index_default_content_index';
-  $handler->display->display_options['sorts']['field_publication_date']['field'] = 'field_publication_date';
-  $handler->display->display_options['sorts']['field_publication_date']['order'] = 'DESC';
-  $handler->display->display_options['sorts']['field_publication_date']['exposed'] = TRUE;
-  $handler->display->display_options['sorts']['field_publication_date']['expose']['label'] = 'Publication date';
+  /* Sort criterion: Indexed Content: Publication year */
+  $handler->display->display_options['sorts']['field_publication_year']['id'] = 'field_publication_year';
+  $handler->display->display_options['sorts']['field_publication_year']['table'] = 'search_api_index_default_content_index';
+  $handler->display->display_options['sorts']['field_publication_year']['field'] = 'field_publication_year';
+  $handler->display->display_options['sorts']['field_publication_year']['order'] = 'DESC';
+  $handler->display->display_options['sorts']['field_publication_year']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['field_publication_year']['expose']['label'] = 'Publication year';
   /* Sort criterion: Search: Relevance */
   $handler->display->display_options['sorts']['search_api_relevance']['id'] = 'search_api_relevance';
   $handler->display->display_options['sorts']['search_api_relevance']['table'] = 'search_api_index_default_content_index';
@@ -1299,7 +1299,7 @@ function osha_dangerous_substances_views_default_views() {
     t('last »'),
     t('No results'),
     t('Broken handler search_api_index_default_content_index.search_api_et_id'),
-    t('Publication date'),
+    t('Publication year'),
     t('Relevance'),
     t('Page'),
   );

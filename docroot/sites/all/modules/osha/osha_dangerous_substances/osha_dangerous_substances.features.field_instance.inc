@@ -3509,11 +3509,11 @@ please take this into consideration when you are writing the first paragraph.',
   );
 
   // Exported field_instance:
-  // 'node-dangerous_substances-field_publication_date'.
-  $field_instances['node-dangerous_substances-field_publication_date'] = array(
+  // 'node-dangerous_substances-field_publication_year'.
+  $field_instances['node-dangerous_substances-field_publication_year'] = array(
     'bundle' => 'dangerous_substances',
     'deleted' => 0,
-    'description' => 'Please select a year of publication, if it is not possible to identify leave it empty',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3528,7 +3528,7 @@ please take this into consideration when you are writing the first paragraph.',
           'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
-        'weight' => 8,
+        'weight' => 58,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -3549,19 +3549,10 @@ please take this into consideration when you are writing the first paragraph.',
         'weight' => 0,
       ),
       'osha_search_teaser' => array(
-        'label' => 'hidden',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'osha_day_only',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'osha_date_theme' => '',
-          'show_remaining_days' => 0,
-        ),
-        'type' => 'date_default',
-        'weight' => 1,
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'osha_slideshow' => array(
         'label' => 'above',
@@ -3575,32 +3566,16 @@ please take this into consideration when you are writing the first paragraph.',
         'type' => 'hidden',
         'weight' => 0,
       ),
-      'search_index' => array(
-        'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'osha_date_theme' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
-        'weight' => 8,
-      ),
       'teaser' => array(
-        'label' => 'hidden',
-        'module' => 'date',
+        'label' => 'above',
         'settings' => array(),
-        'type' => 'date_plain',
-        'weight' => 3,
+        'type' => 'hidden',
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_publication_date',
-    'label' => 'Date of publication/ year',
+    'field_name' => 'field_publication_year',
+    'label' => 'Year of publication',
     'required' => 0,
     'settings' => array(
       'default_value' => 'now',
@@ -3620,10 +3595,10 @@ please take this into consideration when you are writing the first paragraph.',
         'label_position' => 'above',
         'no_fieldset' => 0,
         'text_parts' => array(),
-        'year_range' => '-3:+3',
+        'year_range' => '1990:+3',
       ),
-      'type' => 'date_popup',
-      'weight' => 14,
+      'type' => 'date_select',
+      'weight' => 88,
     ),
     'workbench_access_field' => 0,
   );
@@ -6051,6 +6026,7 @@ please take this into consideration when you are writing the first paragraph.');
   t('URL');
   t('Worker groups covered (vulnerable groups etc.)');
   t('Worker groups covered other');
+  t('Year of publication');
 
   return $field_instances;
 }

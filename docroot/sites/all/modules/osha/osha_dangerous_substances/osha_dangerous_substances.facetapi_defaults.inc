@@ -1465,10 +1465,10 @@ function osha_dangerous_substances_facetapi_default_facet_settings() {
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
   $facet->api_version = 1;
-  $facet->name = 'search_api@default_content_index:block:field_publication_date';
+  $facet->name = 'search_api@default_content_index:block:field_publication_year';
   $facet->searcher = 'search_api@default_content_index';
   $facet->realm = 'block';
-  $facet->facet = 'field_publication_date';
+  $facet->facet = 'field_publication_year';
   $facet->enabled = FALSE;
   $facet->settings = array(
     'weight' => 0,
@@ -1496,7 +1496,7 @@ function osha_dangerous_substances_facetapi_default_facet_settings() {
     'nofollow' => 1,
     'show_expanded' => 0,
   );
-  $export['search_api@default_content_index:block:field_publication_date'] = $facet;
+  $export['search_api@default_content_index:block:field_publication_year'] = $facet;
 
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */

@@ -341,7 +341,7 @@ function _osha_dangerous_substances_add_country_other() {
 
 function osha_dangerous_substances_add_taxonomy() {
 
-  _osha_dangerous_substances_add_country_other();
+  //_osha_dangerous_substances_add_country_other();
 
   $map = [
     'hazmap_categories' => [
@@ -422,7 +422,7 @@ function osha_dangerous_substances_add_taxonomy() {
       $data = file_get_contents($json_path);
       $data = json_decode($data, TRUE);
 
-      foreach ($data as $row) {
+      foreach ($data as $idx=>$row) {
         $name = $row['name'];
         if (!$name) {
           continue;
@@ -440,31 +440,29 @@ function osha_dangerous_substances_add_taxonomy() {
           $term = (object)$term;
           $term->vid = $voc->vid;
           $term->name = $name;
+          $term->weight = $idx;
           taxonomy_term_save($term);
           $terms_created++;
         }
         else {
           $tids = array_keys($terms);
           $term = $terms[$tids[0]];
+          $term->weight = $idx;
           if (!$term->{$code_name}) {
             $term->{$code_name}[LANGUAGE_NONE][0]['value'] = $row['code'];
-            taxonomy_term_save($term);
-            $terms_updated++;
           }
           if ($thesaurus_id) {
             if (!$term->{'field_thesaurus_id'}) {
               $term->{'field_thesaurus_id'}[LANGUAGE_NONE][0]['value'] = $thesaurus_id;
-              taxonomy_term_save($term);
-              $terms_updated++;
             }
           }
           if ($level) {
             if (!$term->{'field_prevention_level'}) {
               $term->{'field_prevention_level'}[LANGUAGE_NONE][0]['value'] = $level;
-              taxonomy_term_save($term);
-              $terms_updated++;
             }
           }
+          taxonomy_term_save($term);
+          $terms_updated++;
         }
       }
     }

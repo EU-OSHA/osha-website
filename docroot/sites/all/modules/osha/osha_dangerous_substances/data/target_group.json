@@ -1,5 +1,10 @@
 [
     {
+        "code": "all",
+        "name": "All (no specific target group)",
+        "thesaurus_id": ""
+    },
+    {
         "code": "employers",
         "name": "Employers",
         "thesaurus_id": "56641E"
@@ -8,21 +13,6 @@
         "code": "managers",
         "name": "Managers",
         "thesaurus_id": "54841D"
-    },
-    {
-        "code": "workers_representatives",
-        "name": "Workers representatives",
-        "thesaurus_id": "20721E"
-    },
-    {
-        "code": "supervisor",
-        "name": "Supervisor",
-        "thesaurus_id": "55121D"
-    },
-    {
-        "code": "safety_officers",
-        "name": "Safety officers",
-        "thesaurus_id": "19121D"
     },
     {
         "code": "occupational_health_physician",
@@ -35,14 +25,29 @@
         "thesaurus_id": ""
     },
     {
-        "code": "workers",
-        "name": "Workers",
-        "thesaurus_id": "54561D"
+        "code": "policy_makers",
+        "name": "Policy makers",
+        "thesaurus_id": "56361D"
     },
     {
         "code": "pupils",
         "name": "Pupils",
         "thesaurus_id": "56321D"
+    },
+    {
+        "code": "researchers",
+        "name": "Researchers",
+        "thesaurus_id": "56441D"
+    },
+    {
+        "code": "safety_officers",
+        "name": "Safety officers",
+        "thesaurus_id": "19121D"
+    },
+    {
+        "code": "supervisor",
+        "name": "Supervisor",
+        "thesaurus_id": "55121D"
     },
     {
         "code": "trainees",
@@ -55,14 +60,14 @@
         "thesaurus_id": ""
     },
     {
-        "code": "researchers",
-        "name": "Researchers",
-        "thesaurus_id": "56441D"
+        "code": "workers",
+        "name": "Workers",
+        "thesaurus_id": "54561D"
     },
     {
-        "code": "policy_makers",
-        "name": "Policy makers",
-        "thesaurus_id": "56361D"
+        "code": "workers_representatives",
+        "name": "Workers representatives",
+        "thesaurus_id": "20721E"
     },
     {
         "code": "other",

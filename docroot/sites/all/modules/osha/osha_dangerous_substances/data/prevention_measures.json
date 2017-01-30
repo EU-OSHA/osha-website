@@ -1,33 +1,33 @@
 [
     {
         "code": "elimination_hazards",
-        "name": "Elimination of hazards",
+        "name": "Level 1. Elimination of hazards",
         "thesaurus_id": "13841E",
         "level": "Level 1"
     },
     {
         "code": "substitution",
-        "name": "Substitution",
+        "name": "Level 1. Substitution",
         "thesaurus_id": "15681F",
         "level": "Level 1"
     },
     {
         "code": "technical_measures",
-        "name": "Technical measures, e.g. local exhaust ventilation",
+        "name": "Level 2. Technical measures, e.g. local exhaust ventilation",
         "thesaurus_id": "14001E",
         "level": "Level 2"
     },
     {
         "code": "organizational_measures",
-        "name": "Reducing \/ minimising the risk by organisational measures, e.g. reducing the number of workers exposed",
+        "name": "Level 2. Reducing \/ minimising the risk by organisational measures, e.g. reducing the number of workers exposed",
         "thesaurus_id": "",
-        "level": "Level 3"
+        "level": "Level 2"
     },
     {
         "code": "personal_measures",
-        "name": "Reducing \/ minimising the risk by personal measures (PPE)",
+        "name": "Level 3. Reducing \/ minimising the risk by personal measures (PPE)",
         "thesaurus_id": "",
-        "level": "Level 4"
+        "level": "Level 3"
     },
     {
         "code": "training_guidance",

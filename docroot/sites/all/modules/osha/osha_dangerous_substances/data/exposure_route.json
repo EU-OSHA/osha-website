@@ -1,8 +1,8 @@
 [
     {
-        "code": "skin_absorption",
-        "name": "Skin absorption",
-        "thesaurus_id": "26561E"
+        "code": "bites_and_stings",
+        "name": "Bites and stings",
+        "thesaurus_id": "48341D"
     },
     {
         "code": "dermal_contact",
@@ -10,14 +10,14 @@
         "thesaurus_id": ""
     },
     {
-        "code": "inhalation",
-        "name": "Inhalation",
-        "thesaurus_id": "26481E"
-    },
-    {
         "code": "ingestion",
         "name": "Ingestion",
         "thesaurus_id": ""
+    },
+    {
+        "code": "inhalation",
+        "name": "Inhalation",
+        "thesaurus_id": "26481E"
     },
     {
         "code": "ocular",
@@ -30,8 +30,13 @@
         "thesaurus_id": "29161C"
     },
     {
-        "code": "bites_and_stings",
-        "name": "Bites and stings",
-        "thesaurus_id": "48341D"
+        "code": "skin_absorption",
+        "name": "Skin absorption",
+        "thesaurus_id": "26561E"
+    },
+    {
+        "code": "other",
+        "name": "Other",
+        "thesaurus_id": ""
     }
 ]

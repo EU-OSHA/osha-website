@@ -10,9 +10,9 @@
         "thesaurus_id": "54281D"
     },
     {
-        "code": "temporary_workers",
-        "name": "Temporary workers",
-        "thesaurus_id": "54361E"
+        "code": "breastfeeding_mothers",
+        "name": "Breastfeeding mothers",
+        "thesaurus_id": "55761F"
     },
     {
         "code": "disabled_workers",
@@ -25,39 +25,9 @@
         "thesaurus_id": "54721D"
     },
     {
-        "code": "women",
-        "name": "Women",
-        "thesaurus_id": "55641D"
-    },
-    {
-        "code": "pregnant_workers",
-        "name": "Pregnant workers",
-        "thesaurus_id": "55681E"
-    },
-    {
-        "code": "breastfeeding_mothers",
-        "name": "Breastfeeding mothers",
-        "thesaurus_id": "55761F"
-    },
-    {
-        "code": "part_time_workers",
-        "name": "Part-time workers",
-        "thesaurus_id": "55321D"
-    },
-    {
-        "code": "self_employed",
-        "name": "Self-employed",
-        "thesaurus_id": "01361E"
-    },
-    {
-        "code": "migrant_and_immigrant_workers",
-        "name": "Migrant and immigrant workers",
-        "thesaurus_id": "54961D"
-    },
-    {
-        "code": "young_workers",
-        "name": "Young workers",
-        "thesaurus_id": "55841D"
+        "code": "lone_workers",
+        "name": "Lone workers",
+        "thesaurus_id": "54801D"
     },
     {
         "code": "maintenance_workers",
@@ -65,9 +35,39 @@
         "thesaurus_id": "55261D"
     },
     {
-        "code": "lone_workers",
-        "name": "Lone workers",
-        "thesaurus_id": "54801D"
+        "code": "migrant_and_immigrant_workers",
+        "name": "Migrant and immigrant workers",
+        "thesaurus_id": "54961D"
+    },
+    {
+        "code": "part_time_workers",
+        "name": "Part-time workers",
+        "thesaurus_id": "55321D"
+    },
+    {
+        "code": "pregnant_workers",
+        "name": "Pregnant workers",
+        "thesaurus_id": "55681E"
+    },
+    {
+        "code": "self_employed",
+        "name": "Self-employed",
+        "thesaurus_id": "01361E"
+    },
+    {
+        "code": "temporary_workers",
+        "name": "Temporary workers",
+        "thesaurus_id": "54361E"
+    },
+    {
+        "code": "women",
+        "name": "Women",
+        "thesaurus_id": "55641D"
+    },
+    {
+        "code": "young_workers",
+        "name": "Young workers",
+        "thesaurus_id": "55841D"
     },
     {
         "code": "other",

@@ -128,11 +128,11 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_provider_other']['id'] = 'field_provider_other';
   $handler->display->display_options['fields']['field_provider_other']['table'] = 'field_data_field_provider_other';
   $handler->display->display_options['fields']['field_provider_other']['field'] = 'field_provider_other';
-  /* Field: Field: Publication date */
-  $handler->display->display_options['fields']['field_publication_date']['id'] = 'field_publication_date';
-  $handler->display->display_options['fields']['field_publication_date']['table'] = 'field_data_field_publication_date';
-  $handler->display->display_options['fields']['field_publication_date']['field'] = 'field_publication_date';
-  $handler->display->display_options['fields']['field_publication_date']['settings'] = array(
+  /* Field: Field: Publication year */
+  $handler->display->display_options['fields']['field_publication_year']['id'] = 'field_publication_year';
+  $handler->display->display_options['fields']['field_publication_year']['table'] = 'field_data_field_publication_year';
+  $handler->display->display_options['fields']['field_publication_year']['field'] = 'field_publication_year';
+  $handler->display->display_options['fields']['field_publication_year']['settings'] = array(
     'format_type' => 'long',
     'fromto' => 'both',
     'multiple_number' => '',
@@ -259,18 +259,6 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_measurement_method']['table'] = 'field_data_field_measurement_method';
   $handler->display->display_options['fields']['field_measurement_method']['field'] = 'field_measurement_method';
   $handler->display->display_options['fields']['field_measurement_method']['type'] = 'text_plain';
-  /* Field: Content: Objective of material */
-  $handler->display->display_options['fields']['field_material_objective_type']['id'] = 'field_material_objective_type';
-  $handler->display->display_options['fields']['field_material_objective_type']['table'] = 'field_data_field_material_objective_type';
-  $handler->display->display_options['fields']['field_material_objective_type']['field'] = 'field_material_objective_type';
-  $handler->display->display_options['fields']['field_material_objective_type']['type'] = 'i18n_taxonomy_term_reference_plain';
-  $handler->display->display_options['fields']['field_material_objective_type']['delta_offset'] = '0';
-  /* Field: Content: Objective of material other */
-  $handler->display->display_options['fields']['field_material_objective_other']['id'] = 'field_material_objective_other';
-  $handler->display->display_options['fields']['field_material_objective_other']['table'] = 'field_data_field_material_objective_other';
-  $handler->display->display_options['fields']['field_material_objective_other']['field'] = 'field_material_objective_other';
-  $handler->display->display_options['fields']['field_material_objective_other']['label'] = 'Other objective of the material';
-  $handler->display->display_options['fields']['field_material_objective_other']['type'] = 'text_plain';
   /* Field: Content: Other information */
   $handler->display->display_options['fields']['field_other_information']['id'] = 'field_other_information';
   $handler->display->display_options['fields']['field_other_information']['table'] = 'field_data_field_other_information';
@@ -532,11 +520,11 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_provider_type']['field'] = 'field_provider_type';
   $handler->display->display_options['fields']['field_provider_type']['type'] = 'i18n_taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_provider_type']['delta_offset'] = '0';
-  /* Field: Field: Publication date */
-  $handler->display->display_options['fields']['field_publication_date']['id'] = 'field_publication_date';
-  $handler->display->display_options['fields']['field_publication_date']['table'] = 'field_data_field_publication_date';
-  $handler->display->display_options['fields']['field_publication_date']['field'] = 'field_publication_date';
-  $handler->display->display_options['fields']['field_publication_date']['settings'] = array(
+  /* Field: Field: Publication year */
+  $handler->display->display_options['fields']['field_publication_year']['id'] = 'field_publication_year';
+  $handler->display->display_options['fields']['field_publication_year']['table'] = 'field_data_field_publication_year';
+  $handler->display->display_options['fields']['field_publication_year']['field'] = 'field_publication_year';
+  $handler->display->display_options['fields']['field_publication_year']['settings'] = array(
     'format_type' => 'long',
     'fromto' => 'both',
     'multiple_number' => '',
@@ -643,18 +631,6 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_measurement_method']['table'] = 'field_data_field_measurement_method';
   $handler->display->display_options['fields']['field_measurement_method']['field'] = 'field_measurement_method';
   $handler->display->display_options['fields']['field_measurement_method']['type'] = 'text_plain';
-  /* Field: Content: Objective of material */
-  $handler->display->display_options['fields']['field_material_objective_type']['id'] = 'field_material_objective_type';
-  $handler->display->display_options['fields']['field_material_objective_type']['table'] = 'field_data_field_material_objective_type';
-  $handler->display->display_options['fields']['field_material_objective_type']['field'] = 'field_material_objective_type';
-  $handler->display->display_options['fields']['field_material_objective_type']['type'] = 'i18n_taxonomy_term_reference_plain';
-  $handler->display->display_options['fields']['field_material_objective_type']['delta_offset'] = '0';
-  /* Field: Content: Objective of material other */
-  $handler->display->display_options['fields']['field_material_objective_other']['id'] = 'field_material_objective_other';
-  $handler->display->display_options['fields']['field_material_objective_other']['table'] = 'field_data_field_material_objective_other';
-  $handler->display->display_options['fields']['field_material_objective_other']['field'] = 'field_material_objective_other';
-  $handler->display->display_options['fields']['field_material_objective_other']['label'] = 'Other objective of the material';
-  $handler->display->display_options['fields']['field_material_objective_other']['type'] = 'text_plain';
   /* Field: Content: Other information */
   $handler->display->display_options['fields']['field_other_information']['id'] = 'field_other_information';
   $handler->display->display_options['fields']['field_other_information']['table'] = 'field_data_field_other_information';
@@ -730,6 +706,10 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  /* Field: Content: Selected for analysis */
+  $handler->display->display_options['fields']['field_selected_for_analysis']['id'] = 'field_selected_for_analysis';
+  $handler->display->display_options['fields']['field_selected_for_analysis']['table'] = 'field_data_field_selected_for_analysis';
+  $handler->display->display_options['fields']['field_selected_for_analysis']['field'] = 'field_selected_for_analysis';
   $handler->display->display_options['path'] = 'dangerous-substances';
 
   /* Display: Data export */
@@ -760,7 +740,7 @@ function osha_dangerous_substances_views_default_views() {
     ),
   );
   $handler->display->display_options['fields']['field_available_in_languages']['delta_offset'] = '0';
-  /* Field: Content: Languages other */
+  /* Field: Available in languages (other) */
   $handler->display->display_options['fields']['field_languages_other']['id'] = 'field_languages_other';
   $handler->display->display_options['fields']['field_languages_other']['table'] = 'field_data_field_languages_other';
   $handler->display->display_options['fields']['field_languages_other']['field'] = 'field_languages_other';
@@ -833,13 +813,13 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_provider_other']['table'] = 'field_data_field_provider_other';
   $handler->display->display_options['fields']['field_provider_other']['field'] = 'field_provider_other';
   $handler->display->display_options['fields']['field_provider_other']['ui_name'] = 'Provider other';
-  /* Field: Publication date */
-  $handler->display->display_options['fields']['field_publication_date']['id'] = 'field_publication_date';
-  $handler->display->display_options['fields']['field_publication_date']['table'] = 'field_data_field_publication_date';
-  $handler->display->display_options['fields']['field_publication_date']['field'] = 'field_publication_date';
-  $handler->display->display_options['fields']['field_publication_date']['ui_name'] = 'Publication date';
-  $handler->display->display_options['fields']['field_publication_date']['alter']['strip_tags'] = TRUE;
-  $handler->display->display_options['fields']['field_publication_date']['settings'] = array(
+  /* Field: Publication year */
+  $handler->display->display_options['fields']['field_publication_year']['id'] = 'field_publication_year';
+  $handler->display->display_options['fields']['field_publication_year']['table'] = 'field_data_field_publication_year';
+  $handler->display->display_options['fields']['field_publication_year']['field'] = 'field_publication_year';
+  $handler->display->display_options['fields']['field_publication_year']['ui_name'] = 'Publication year';
+  $handler->display->display_options['fields']['field_publication_year']['alter']['strip_tags'] = TRUE;
+  $handler->display->display_options['fields']['field_publication_year']['settings'] = array(
     'format_type' => 'long',
     'fromto' => 'both',
     'multiple_number' => '',
@@ -992,20 +972,6 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_measurement_method']['field'] = 'field_measurement_method';
   $handler->display->display_options['fields']['field_measurement_method']['ui_name'] = 'Measurement method';
   $handler->display->display_options['fields']['field_measurement_method']['type'] = 'text_plain';
-  /* Field: Objective of material */
-  $handler->display->display_options['fields']['field_material_objective_type']['id'] = 'field_material_objective_type';
-  $handler->display->display_options['fields']['field_material_objective_type']['table'] = 'field_data_field_material_objective_type';
-  $handler->display->display_options['fields']['field_material_objective_type']['field'] = 'field_material_objective_type';
-  $handler->display->display_options['fields']['field_material_objective_type']['ui_name'] = 'Objective of material';
-  $handler->display->display_options['fields']['field_material_objective_type']['type'] = 'i18n_taxonomy_term_reference_plain';
-  $handler->display->display_options['fields']['field_material_objective_type']['delta_offset'] = '0';
-  /* Field: Objective of material */
-  $handler->display->display_options['fields']['field_material_objective_other']['id'] = 'field_material_objective_other';
-  $handler->display->display_options['fields']['field_material_objective_other']['table'] = 'field_data_field_material_objective_other';
-  $handler->display->display_options['fields']['field_material_objective_other']['field'] = 'field_material_objective_other';
-  $handler->display->display_options['fields']['field_material_objective_other']['ui_name'] = 'Objective of material';
-  $handler->display->display_options['fields']['field_material_objective_other']['label'] = 'Other objective of the material';
-  $handler->display->display_options['fields']['field_material_objective_other']['type'] = 'text_plain';
   /* Field: Other information */
   $handler->display->display_options['fields']['field_other_information']['id'] = 'field_other_information';
   $handler->display->display_options['fields']['field_other_information']['table'] = 'field_data_field_other_information';
@@ -1109,6 +1075,11 @@ function osha_dangerous_substances_views_default_views() {
     'text' => 'Download [file:name]',
   );
   $handler->display->display_options['fields']['field_image']['delta_offset'] = '0';
+  /* Field: Selected for analysis */
+  $handler->display->display_options['fields']['field_selected_for_analysis']['id'] = 'field_selected_for_analysis';
+  $handler->display->display_options['fields']['field_selected_for_analysis']['table'] = 'field_data_field_selected_for_analysis';
+  $handler->display->display_options['fields']['field_selected_for_analysis']['field'] = 'field_selected_for_analysis';
+  $handler->display->display_options['fields']['field_selected_for_analysis']['ui_name'] = 'Selected for analysis';
   $handler->display->display_options['path'] = 'dangerous-substances/xls';
   $handler->display->display_options['displays'] = array(
     'page' => 'page',
@@ -1143,7 +1114,7 @@ function osha_dangerous_substances_views_default_views() {
     t('Type of item'),
     t('Type of provider'),
     t('Provider other'),
-    t('Publication date'),
+    t('Publication year'),
     t('Sector / Industry covered other'),
     t('Biological hazard'),
     t('Biological hazard other'),
@@ -1168,8 +1139,6 @@ function osha_dangerous_substances_views_default_views() {
     t('Intellectual property rights'),
     t('Length of the video'),
     t('Measurement method'),
-    t('Objective of material'),
-    t('Other objective of the material'),
     t('Other information'),
     t('Ownership information'),
     t('Prevention measures'),
@@ -1189,6 +1158,7 @@ function osha_dangerous_substances_views_default_views() {
     t('Sector / Industry covered (field_sector_industry_covered)'),
     t('Page'),
     t('Edit link'),
+    t('Selected for analysis'),
     t('Data export'),
   );
   $export['dangerous_substances'] = $view;
@@ -1244,13 +1214,13 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['search_api_et_id']['id'] = 'search_api_et_id';
   $handler->display->display_options['fields']['search_api_et_id']['table'] = 'search_api_index_default_content_index';
   $handler->display->display_options['fields']['search_api_et_id']['field'] = 'search_api_et_id';
-  /* Sort criterion: Indexed Content: Publication date */
-  $handler->display->display_options['sorts']['field_publication_date']['id'] = 'field_publication_date';
-  $handler->display->display_options['sorts']['field_publication_date']['table'] = 'search_api_index_default_content_index';
-  $handler->display->display_options['sorts']['field_publication_date']['field'] = 'field_publication_date';
-  $handler->display->display_options['sorts']['field_publication_date']['order'] = 'DESC';
-  $handler->display->display_options['sorts']['field_publication_date']['exposed'] = TRUE;
-  $handler->display->display_options['sorts']['field_publication_date']['expose']['label'] = 'Publication date';
+  /* Sort criterion: Indexed Content: Publication year */
+  $handler->display->display_options['sorts']['field_publication_year']['id'] = 'field_publication_year';
+  $handler->display->display_options['sorts']['field_publication_year']['table'] = 'search_api_index_default_content_index';
+  $handler->display->display_options['sorts']['field_publication_year']['field'] = 'field_publication_year';
+  $handler->display->display_options['sorts']['field_publication_year']['order'] = 'DESC';
+  $handler->display->display_options['sorts']['field_publication_year']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['field_publication_year']['expose']['label'] = 'Publication year';
   /* Sort criterion: Search: Relevance */
   $handler->display->display_options['sorts']['search_api_relevance']['id'] = 'search_api_relevance';
   $handler->display->display_options['sorts']['search_api_relevance']['table'] = 'search_api_index_default_content_index';
@@ -1329,7 +1299,7 @@ function osha_dangerous_substances_views_default_views() {
     t('last »'),
     t('No results'),
     t('Broken handler search_api_index_default_content_index.search_api_et_id'),
-    t('Publication date'),
+    t('Publication year'),
     t('Relevance'),
     t('Page'),
   );

@@ -76,10 +76,6 @@
         "name": "Medical and Dental Services"
     },
     {
-        "code": "medical_or_dental_services",
-        "name": "Medical or Dental Services"
-    },
-    {
         "code": "mining_or_quarrying",
         "name": "Mining or Quarrying"
     },
@@ -108,10 +104,6 @@
         "name": "Smelting and Casting Metal"
     },
     {
-        "code": "smelting_or_casting_metal",
-        "name": "Smelting or Casting Metal"
-    },
-    {
         "code": "spill_or_confined_space_accident",
         "name": "Spill or Confined Space Accident"
     },
@@ -126,5 +118,9 @@
     {
         "code": "working_outdoors",
         "name": "Working Outdoors"
+    },
+    {
+        "code": "other",
+        "name": "Other"
     }
 ]

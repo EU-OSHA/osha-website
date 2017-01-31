@@ -1,31 +1,31 @@
 [
-    {
-        "code": "video",
-        "name": "Video"
-    },
-    {
-        "code": "video_measurement_combined",
-        "name": "Video \/ Measurement combined"
-    },
-    {
-        "code": "poster_photo",
-        "name": "Poster \/ Photo"
-    },
-    {
-        "code": "drawing",
-        "name": "Drawing?"
+   {
+        "code": "cartoon",
+        "name": "Cartoon"
     },
     {
         "code": "comic",
         "name": "Comic"
     },
     {
-        "code": "cartoon",
-        "name": "Cartoon"
+        "code": "drawing",
+        "name": "Drawing"
     },
     {
         "code": "measurement",
         "name": "Measurement"
+    },
+    {
+        "code": "poster_photo",
+        "name": "Poster \/ Photo"
+    },
+     {
+        "code": "video",
+        "name": "Video"
+    },
+    {
+        "code": "video_measurement_combined",
+        "name": "Video \/ Measurement combined"
     },
     {
         "code": "other",

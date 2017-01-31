@@ -2268,182 +2268,6 @@ please take this into consideration when you are writing the first paragraph.',
   );
 
   // Exported field_instance:
-  // 'node-dangerous_substances-field_material_objective_other'.
-  $field_instances['node-dangerous_substances-field_material_objective_other'] = array(
-    'bundle' => 'dangerous_substances',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 34,
-      ),
-      'highlights_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'newsletter_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_resources' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_search_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 25,
-      ),
-      'osha_slideshow' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_wiki' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'search_index' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 27,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 26,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_material_objective_other',
-    'label' => 'Objective of material other',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'linkit' => array(
-        'button_text' => 'Search',
-        'enable' => 0,
-        'profile' => '',
-      ),
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 40,
-    ),
-    'workbench_access_field' => 0,
-  );
-
-  // Exported field_instance:
-  // 'node-dangerous_substances-field_material_objective_type'.
-  $field_instances['node-dangerous_substances-field_material_objective_type'] = array(
-    'bundle' => 'dangerous_substances',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_plain',
-        'weight' => 33,
-      ),
-      'highlights_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'newsletter_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_resources' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_search_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 24,
-      ),
-      'osha_slideshow' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_wiki' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'search_index' => array(
-        'label' => 'above',
-        'module' => 'i18n_taxonomy',
-        'settings' => array(),
-        'type' => 'i18n_taxonomy_term_reference_link',
-        'weight' => 26,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 39,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_material_objective_type',
-    'label' => 'Objective of material',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(
-        'apply_chosen' => 1,
-      ),
-      'type' => 'options_select',
-      'weight' => 39,
-    ),
-    'workbench_access_field' => 0,
-  );
-
-  // Exported field_instance:
   // 'node-dangerous_substances-field_material_purpose_other'.
   $field_instances['node-dangerous_substances-field_material_purpose_other'] = array(
     'bundle' => 'dangerous_substances',
@@ -3685,11 +3509,11 @@ please take this into consideration when you are writing the first paragraph.',
   );
 
   // Exported field_instance:
-  // 'node-dangerous_substances-field_publication_date'.
-  $field_instances['node-dangerous_substances-field_publication_date'] = array(
+  // 'node-dangerous_substances-field_publication_year'.
+  $field_instances['node-dangerous_substances-field_publication_year'] = array(
     'bundle' => 'dangerous_substances',
     'deleted' => 0,
-    'description' => 'Please select a year of publication, if it is not possible to identify leave it empty',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -3704,7 +3528,7 @@ please take this into consideration when you are writing the first paragraph.',
           'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
-        'weight' => 8,
+        'weight' => 58,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -3725,19 +3549,10 @@ please take this into consideration when you are writing the first paragraph.',
         'weight' => 0,
       ),
       'osha_search_teaser' => array(
-        'label' => 'hidden',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'osha_day_only',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'osha_date_theme' => '',
-          'show_remaining_days' => 0,
-        ),
-        'type' => 'date_default',
-        'weight' => 1,
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'osha_slideshow' => array(
         'label' => 'above',
@@ -3751,32 +3566,16 @@ please take this into consideration when you are writing the first paragraph.',
         'type' => 'hidden',
         'weight' => 0,
       ),
-      'search_index' => array(
-        'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'osha_date_theme' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
-        'weight' => 8,
-      ),
       'teaser' => array(
-        'label' => 'hidden',
-        'module' => 'date',
+        'label' => 'above',
         'settings' => array(),
-        'type' => 'date_plain',
-        'weight' => 3,
+        'type' => 'hidden',
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_publication_date',
-    'label' => 'Date of publication/ year',
+    'field_name' => 'field_publication_year',
+    'label' => 'Year of publication',
     'required' => 0,
     'settings' => array(
       'default_value' => 'now',
@@ -3796,10 +3595,10 @@ please take this into consideration when you are writing the first paragraph.',
         'label_position' => 'above',
         'no_fieldset' => 0,
         'text_parts' => array(),
-        'year_range' => '-3:+3',
+        'year_range' => '1990:+3',
       ),
-      'type' => 'date_popup',
-      'weight' => 14,
+      'type' => 'date_select',
+      'weight' => 13,
     ),
     'workbench_access_field' => 0,
   );
@@ -4061,6 +3860,88 @@ please take this into consideration when you are writing the first paragraph.',
       ),
       'type' => 'text_textfield',
       'weight' => 20,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance:
+  // 'node-dangerous_substances-field_selected_for_analysis'.
+  $field_instances['node-dangerous_substances-field_selected_for_analysis'] = array(
+    'bundle' => 'dangerous_substances',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 57,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_search_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_selected_for_analysis',
+    'label' => 'Selected for analysis',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 87,
     ),
     'workbench_access_field' => 0,
   );
@@ -6071,8 +5952,6 @@ please take this into consideration when you are writing the first paragraph.',
   t('Length of the video');
   t('Level');
   t('Measurement method');
-  t('Objective of material');
-  t('Objective of material other');
   t('Other information');
   t('Ownership information');
   t('Please add a country code from the list');
@@ -6131,6 +6010,7 @@ please take this into consideration when you are writing the first paragraph.');
   t('Rights description');
   t('Sector / Industry covered');
   t('Sector / Industry covered other');
+  t('Selected for analysis');
   t('Substance Description');
   t('Target group');
   t('Target group other');
@@ -6146,6 +6026,7 @@ please take this into consideration when you are writing the first paragraph.');
   t('URL');
   t('Worker groups covered (vulnerable groups etc.)');
   t('Worker groups covered other');
+  t('Year of publication');
 
   return $field_instances;
 }

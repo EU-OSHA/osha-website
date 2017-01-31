@@ -25,8 +25,8 @@ function osha_dangerous_substances_field_group_info() {
     'children' => array(
       0 => 'field_contact_address',
       1 => 'field_disclaimer',
-      2 => 'field_ownership_information',
-      3 => 'field_other_information',
+      2 => 'field_other_information',
+      3 => 'field_ownership_information',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

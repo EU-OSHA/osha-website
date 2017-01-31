@@ -46,5 +46,9 @@
     {
         "code": "provides_a_contact_for_further_information",
         "name": "Provides a contact for further information"
+    },
+    {
+        "code": "other",
+        "name": "Other"
     }
 ]

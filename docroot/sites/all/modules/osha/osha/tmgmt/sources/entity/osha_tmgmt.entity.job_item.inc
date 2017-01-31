@@ -220,27 +220,16 @@ class OshaTMGMTJobItem extends TMGMTJobItem {
     if ($this->item_type == 'node') {
       global $user;
       $state = osha_tmgmt_get_job_item_state_label(TMGMT_JOB_ITEM_STATE_ACCEPTED);
-      if ($message) {
-        $this->addMessage('@name accepted the translation'.
-            ' for job item @tjiid, item @item_id (@bundle), language @lang. '.
-            'Status is now <strong>@state</strong>. Message: @message',
-          array('@name' => $user->name, '@state' => $state, '@message' => $message,
-                '@tjiid' => $this->tjiid, '@item_id' => $this->item_id,
-                '@bundle' => $this->item_type, '@lang' => strtoupper($this->target_language)
-          )
-        );
-      }
-      else {
-        $this->addMessage('@name accepted the translation'.
-            ' for job item @tjiid, item @item_id (@bundle), language @lang. '.
-            'Status is now <strong>@state</strong>.',
-          array('@name' => $user->name, '@state' => $state,
-                '@tjiid' => $this->tjiid, '@item_id' => $this->item_id,
-                '@bundle' => $this->item_type, '@lang' => strtoupper($this->target_language)
-          )
-        );
-      }
+      $this->addMessage('@name accepted the translation'.
+          ' for job item @tjiid, item @item_id (@bundle), language @lang. '.
+          'Status is now <strong>@state</strong>. @message',
+        array('@name' => $user->name, '@state' => $state, '@message' => 'Message: '.$message,
+              '@tjiid' => $this->tjiid, '@item_id' => $this->item_id,
+              '@bundle' => $this->item_type, '@lang' => strtoupper($this->target_language)
+        )
+      );
       $item_id = $this->target_language . '_' . $this->item_id;
+      OshaWorkflowNotifications::notifyTranslationAccepted($this);
       search_api_track_item_change('search_api_et_node', array($item_id));
     }
     $this->save();

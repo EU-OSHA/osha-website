@@ -728,13 +728,15 @@ class OshaWorkflowNotifications {
    * REV_RM_US_15 Notification sent to WebTeam when a node had status changed.
    */
   public static function notifyWebTeamStatusChanged($node, $from_state, $to_state) {
-    $params = array(
-      'node' => $node,
-      'from' => $from_state,
-      'to' => $to_state,
-    );
-    $users = osha_workflow_get_node_rm($node);
-    OshaWorkflowNotifications::sendEmail($users, $params, 'osha_workflow', 'osha_workflow_notification_admin');
+    if ($from_state != $to_state) {
+      $params = array(
+        'node' => $node,
+        'from' => $from_state,
+        'to' => $to_state,
+      );
+      $users = osha_workflow_get_node_rm($node);
+      OshaWorkflowNotifications::sendEmail($users, $params, 'osha_workflow', 'osha_workflow_notification_admin');
+    }
   }
 
   /**
@@ -847,6 +849,19 @@ class OshaWorkflowNotifications {
       drupal_set_message(t('The node does not have a PM assigned. Please contact an administrator!'), 'warning');
     }
     OshaWorkflowNotifications::sendEmail($project_manager, array('tmgmt_job_item' => $tmgmt_job_item), 'osha_tmgmt');
+  }
+
+  /**
+   * Notify Translation Manager and Review managers when a translation is published/merged/accepted.
+   *
+   * @param TMGMTJobItem|OshaTMGMTJobItem $tmgmt_job_item
+   *   Job created
+   */
+  public static function notifyTranslationAccepted($tmgmt_job_item) {
+    $tmanagers = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER);
+    $rmanagers = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_REVIEW_MANAGER);
+    $users = array_unique(array_merge($tmanagers, $rmanagers), SORT_REGULAR);
+    OshaWorkflowNotifications::sendEmail($users, array('tmgmt_job_item' => $tmgmt_job_item), 'osha_tmgmt');
   }
 
   /**

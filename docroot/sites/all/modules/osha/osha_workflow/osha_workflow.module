@@ -857,7 +857,7 @@ function osha_workflow_workbench_moderation_transition($node, $old, $new) {
     OshaWorkflowNotifications::notifyNodeRejectedFromApprovedToFinalDraft($node);
     $rm_notified = TRUE;
   }
-  if ($new == OSHA_WORKFLOW_STATE_READY_TO_PUBLISH) {
+  if ($new == OSHA_WORKFLOW_STATE_READY_TO_PUBLISH && $old != OSHA_WORKFLOW_STATE_READY_TO_PUBLISH) {
     OshaWorkflowNotifications::notifyNodeIsReadyToPublish($node);
     $rm_notified = TRUE;
   }

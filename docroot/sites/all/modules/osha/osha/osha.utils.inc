@@ -53,33 +53,10 @@ function osha_add_menu_position_rule($rule_name, $parent_menu, $condition) {
 
 function osha_sort_language_list($languages) {
   $lang_order = array(
-    'bg',
-    'cs',
-    'da',
-    'de',
-    'et',
-    'el',
-    'en',
-    'es',
-    'fr',
-    'hr',
-    'is',
-    'it',
-    'lv',
-    'lt',
-    'hu',
-    'mt',
-    'nl',
-    'no',
-    'pl',
-    'pt',
-    'ro',
-    'sk',
-    'sl',
-    'fi',
-    'sv',
-  );
-
+    '_none',
+    'bg', 'cs', 'da', 'de', 'et', 'el', 'en', 'es', 'fr', 'ga', 'hr', 'is', 'it', 'lv', 'lt', 'hu', 'mt', 'nl', 'no', 'pl', 'pt', 'ro', 'sk', 'sl', 'fi', 'sv',
+    'sq', 'bs', 'mk', 'ru', 'sr', 'sh', 'tr', 
+    'nol', 'other');
   $result = array();
 
   if (!empty($languages)) {

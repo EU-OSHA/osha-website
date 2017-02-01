@@ -8175,10 +8175,10 @@ display:block!important;
 
 	}
 
-	#page{
-		padding:1em;
+	// #page{
+	// 	padding:1em;
 
-	}
+	// }
 
 	img[alt*="link arrow"]{
 		display:none;

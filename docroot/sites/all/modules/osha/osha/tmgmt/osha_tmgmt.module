@@ -2718,14 +2718,14 @@ function osha_tmgmt_mail($key, &$message, $params) {
 
   if ($key == 'notifyNodeIsReadyToPublish') {
     $subject = variable_get('osha_mail_template_approval_subject', '[OSHA Website] CMW: ([node:nid]) [node:title-field]');
-    $body = variable_get('osha_mail_template_approval_body', 
+    $body = variable_get('osha_mail_template_approval_body',
       'There was new content published/ready to publish that can be translated [node:url].'
     );
   }
   elseif ($key == 'osha_tmgmt_content_validator_removed') {
     $subject = variable_get('osha_mail_template_content_validator_removed_subject', '[OSHA Website] CMW: [tmgmt_job_item:tjid:label]');
     $body = variable_get('osha_mail_template_content_validator_removed_body',
-      'The website administrator decided that your review of translation task <a href="[tmgmt_job_item:url]">[tmgmt_job_item:tjid:label] ([tmgmt_job_item:target-language])</a> is no longer needed.'
+      'The website administrator decided that your review of translation task <a href="[tmgmt_job_item:url]">[tmgmt_job_item:tjid:label] ([tmgmt_job_item:target-language])</a> in [site:url-brief] is no longer needed.'
     );
   }
   elseif (isset($params['tmgmt_job_item'])) {
@@ -2751,7 +2751,12 @@ function osha_tmgmt_mail($key, &$message, $params) {
       );
     } else if ( $job_item->state == TMGMT_JOB_ITEM_STATE_ACCEPTED ) {
       $body = variable_get('osha_mail_template_translation_job_item_publish',
-        'Note that <a href="[tmgmt_job_item:url]">[tmgmt_job_item:tjid:label]</a> in [site:url-brief] is READY TO PUBLISH in [tmgmt_job_item:target-language].'
+        'Note that <a href="[tmgmt_job_item:url]">[tmgmt_job_item:url]</a> from <a href="[tmgmt_job_item:url]">[tmgmt_job_item:tjid:label]</a> in [site:url-brief] is READY TO PUBLISH in [tmgmt_job_item:target-language].'
+      );
+    } else if ( $job_item->state == TMGMT_JOB_ITEM_STATE_ACTIVE ) {
+      // Translation job restarted
+      $body = variable_get('osha_mail_template_translation_job_item_publish',
+        'The [tmgmt_job_item:target-language] translation for <a href="[tmgmt_job_item:url]">[tmgmt_job_item:tjid:label]</a> in [site:url-brief] needs to be revised and uploaded again.'
       );
     } else {
       $body = variable_get('osha_mail_template_translation_job_item_body',

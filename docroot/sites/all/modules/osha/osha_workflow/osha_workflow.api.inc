@@ -720,8 +720,9 @@ class OshaWorkflowNotifications {
     $review_managers = osha_workflow_get_node_rm($node);
     OshaWorkflowNotifications::sendEmail($review_managers, array('node' => $node), 'osha_workflow');
 
-    $translation_managers = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER);
-    OshaWorkflowNotifications::sendEmail($translation_managers, array('node' => $node), 'osha_tmgmt', 'notifyNodeIsReadyToPublish');
+    // No longer needed, see MDR-351
+    //$translation_managers = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER);
+    //OshaWorkflowNotifications::sendEmail($translation_managers, array('node' => $node), 'osha_tmgmt', 'notifyNodeIsReadyToPublish');
   }
 
   /**
@@ -778,9 +779,9 @@ class OshaWorkflowNotifications {
   /**
    * Notify Layout Approvers.
    */
-  public static function notifyTranslationLayoutApprovers($tmgmt_job) {
+  public static function notifyTranslationLayoutApprovers($tmgmt_job_item) {
     $users = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_LAYOUT_VALIDATOR);
-    OshaWorkflowNotifications::sendEmail($users, array('tmgmt_job' => $tmgmt_job), 'osha_tmgmt');
+    OshaWorkflowNotifications::sendEmail($users, array('tmgmt_job_item' => $tmgmt_job_item), 'osha_tmgmt');
   }
 
   /**

@@ -135,7 +135,7 @@ class OshaTMGMTJobItem extends TMGMTJobItem {
         '@lang' => strtoupper($this->target_language),
       ));
     OshaWorkflowNotifications::notifyTranslationValidated($this);
-    drupal_set_message(t('You have Validated the translation!'));
+    drupal_set_message(t('All content validators have validated the translation!'));
   }
 
   /**

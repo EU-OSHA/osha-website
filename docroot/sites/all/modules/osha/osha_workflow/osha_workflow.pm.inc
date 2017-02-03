@@ -178,7 +178,7 @@ function osha_workflow_pm_approve_submit($form, &$form_submit) {
       reset($remaining_approvers);
       $next_approver = array_shift($remaining_approvers);
       // Send notifications
-      OshaWorkflowNotifications::sendEmail(array($next_approver), array('node' => $form['#node']), 'osha_workflow');
+      OshaWorkflowNotifications::sendEmail(array($next_approver), array('node' => $form['#node'], 'action' => 'approved', 'status:' => 'To be approved'), 'osha_workflow');
     }
   }
   else {

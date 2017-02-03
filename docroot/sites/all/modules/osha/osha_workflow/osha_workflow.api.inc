@@ -618,7 +618,7 @@ class OshaWorkflowNotifications {
   public static function notifyOnChangeFromDraftToFinalDraft($node) {
     // Get RM of node's section.
     $users = osha_workflow_get_node_rm($node);
-    OshaWorkflowNotifications::sendEmail($users, array('node' => $node), 'osha_workflow');
+    OshaWorkflowNotifications::sendEmail($users, array('node' => $node, 'action'=> 'reviewed', 'status'=> 'Final draft'), 'osha_workflow');
   }
 
   /**
@@ -631,7 +631,7 @@ class OshaWorkflowNotifications {
    */
   public static function notifyOnChangeToDraft($node) {
     $user = user_load($node->uid);
-    OshaWorkflowNotifications::sendEmail($user, array('node' => $node), 'osha_workflow');
+    OshaWorkflowNotifications::sendEmail($user, array('node' => $node, 'action'=> 'revised', 'status'=> 'Draft'), 'osha_workflow');
   }
 
   /**
@@ -645,7 +645,7 @@ class OshaWorkflowNotifications {
   public static function notifyOnChangeFromDraftOrFinalDraftToBeReviewed($node) {
     $users = osha_workflow_get_node_rm($node);
     $users[] = _osha_workflow_get_current_pm_approver($node->nid);
-    OshaWorkflowNotifications::sendEmail($users, array('node' => $node), 'osha_workflow');
+    OshaWorkflowNotifications::sendEmail($users, array('node' => $node, 'action'=> 'reviewed', 'status'=> 'To be reviewed'), 'osha_workflow');
   }
 
   /**
@@ -655,8 +655,9 @@ class OshaWorkflowNotifications {
    *   Affected node
    */
   public static function notifyNextApproverToTakeAction($node) {
+    // see also osha_workflow_pm_approve_submit
     $next_approval = osha_workflow_get_next_approver($node->nid);
-    OshaWorkflowNotifications::sendEmail($next_approval, array('node' => $node), 'osha_workflow');
+    OshaWorkflowNotifications::sendEmail($next_approval, array('node' => $node, 'action'=> 'approved', 'status'=> 'To be approved'), 'osha_workflow');
   }
 
   /**
@@ -674,7 +675,7 @@ class OshaWorkflowNotifications {
     if (!empty($pms)) {
       $users = array_merge($users, $pms);
     }
-    OshaWorkflowNotifications::sendEmail($users, array('node' => $node), 'osha_workflow');
+    OshaWorkflowNotifications::sendEmail($users, array('node' => $node, 'action' => 'reviewed', status => 'Approved'), 'osha_workflow');
   }
 
   /**
@@ -687,10 +688,11 @@ class OshaWorkflowNotifications {
    */
   public static function notifyOnNodeRejected($node) {
     $users = osha_workflow_get_node_rm($node);
+    $pms = osha_workflow_get_pms_users($node->nid);
     if (!empty($pms)) {
       $users = array_merge($users, $pms);
     }
-    OshaWorkflowNotifications::sendEmail($users, array('node' => $node), 'osha_workflow');
+    OshaWorkflowNotifications::sendEmail($users, array('node' => $node, 'action' => 'reviewed', status => 'Rejected'), 'osha_workflow');
   }
 
   /**
@@ -703,7 +705,7 @@ class OshaWorkflowNotifications {
    */
   public static function notifyNodeRejectedFromApprovedToFinalDraft($node) {
     $users = osha_workflow_get_node_rm($node);
-    OshaWorkflowNotifications::sendEmail($users, array('node' => $node), 'osha_workflow');
+    OshaWorkflowNotifications::sendEmail($users, array('node' => $node, 'action' => 'reviewed', status => 'Final draft'), 'osha_workflow');
   }
 
   /**
@@ -718,7 +720,7 @@ class OshaWorkflowNotifications {
    */
   public static function notifyNodeIsReadyToPublish($node) {
     $review_managers = osha_workflow_get_node_rm($node);
-    OshaWorkflowNotifications::sendEmail($review_managers, array('node' => $node), 'osha_workflow');
+    OshaWorkflowNotifications::sendEmail($review_managers, array('node' => $node, 'action' => 'reviewed', status => 'Ready to publish'), 'osha_workflow');
 
     // No longer needed, see MDR-351
     //$translation_managers = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER);
@@ -750,7 +752,7 @@ class OshaWorkflowNotifications {
    */
   public static function notifyFirstApprover($node) {
     $next_approval = osha_workflow_get_next_approver($node->nid);
-    OshaWorkflowNotifications::sendEmail($next_approval, array('node' => $node), 'osha_workflow');
+    OshaWorkflowNotifications::sendEmail($next_approval, array('node' => $node, 'action'=> 'approved', 'status'=> 'To be approved'), 'osha_workflow');
   }
 
   /**

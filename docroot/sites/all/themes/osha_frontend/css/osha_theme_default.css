@@ -73,7 +73,7 @@ header{
 }
 
 .a_small a{
-	padding-left:0.5em;
+	//padding-left:0.5em;
 	padding-right:0.2em;
 	border-bottom:0px!important;
 }
@@ -443,23 +443,26 @@ header{
 }
 
 #socialNetworksBlue {
-	border-top:5px solid #002f9d;
-	width:100%;
+	//border-top:5px solid #002f9d;
+	//width:43%;
 	margin-top: 0px;
+	position: absolute;
+    right: 54px;
+    margin-top: -5px;
 }
 
 #socialNetworksBlue #icons {
-	background: url("../images/socialBorderLeft.png") no-repeat scroll 0 0px, url("../images/socialBorderRight.png") no-repeat scroll 100% 0px, none repeat scroll 0 0 #002f9d;
-    height: 26px;
-    margin: -5px auto 0;
-    text-align: center;
-    width: 260px;
-	padding-top: 4px;
-	background-color: #002f9d;
+	//background: url("../images/socialBorderLeft.png") no-repeat scroll 0 0px, url("../images/socialBorderRight.png") no-repeat scroll 100% 0px, none repeat scroll 0 0 #002f9d;
+    //height: 26px;
+    //margin: -5px auto 0;
+    //text-align: center;
+    //width: 260px;
+	//padding-top: 4px;
+	//background-color: #002f9d;
 }
 
 #icons img {
- padding: 0px 9px 0;
+ padding: 0px 5px 0px 0px;
 }
 
 a{
@@ -468,26 +471,40 @@ a{
 
 #contact{
 	margin-bottom: 15px;
-	margin-right: 2.2em;
-	padding-bottom: px;
 	margin-top: -10px;
+}
+
+#header a.printfriendly {
+    width: 23px;
+    height: 20px;
+    background: url(../images/share_print_blue.png) no-repeat scroll 0% 100% rgba(0, 0, 0, 0)!important;
+    display: inline-block;
+    margin-left: 10px;
+	vertical-align: -4px;
 }
 
 #contact a{
 	color:#003399;
 	text-decoration:none;
-	border-bottom:0px!important
+	border-bottom:0px!important;
+	display: inline-block;
+}
+
+img[alt*="Select language"]{
+	position: absolute;
+	right: -172px;
+    top: 23px;
 }
 
 #languagesAndSearch
 {
- color : #003399;
- float:right;
- width:43%;
- text-align:right;
- margin-right:5.5em;
- font-size: 0.813em;
- font-weight: bold;
+    color: #003399;
+    //text-align: right;
+    font-size: 0.913em;
+    font-weight: bold;
+    position: absolute;
+    width: 100px;
+    right: 235px;
 }
 
 #languagesAndSearch input {
@@ -509,10 +526,10 @@ a{
     display: block;
     float: right;
     margin-left: 0;
-    margin-right: 6.2em;
+    margin-right: 90px;
     margin-top: -4.7em;
     padding-left: 0.6em;
-    width: 140px!important;
+    width: 139px!important;
 }
 
 .form-item{
@@ -536,11 +553,6 @@ a{
 	z-index:9999999999999;
 }
 
-#languagesAndSearch img{
-  vertical-align:middle;
-  right:1em;
-  margin-top:-2.5em;
-}
 #languagesAndSearch input[type="text"] {
  background:#002f9d;
  border:0;
@@ -2193,7 +2205,7 @@ font-weight: normal;
 	background:#002f9d;
 	border:0px;
 	color:#FFFFFF;
-	width:140px;
+	width:139px;
 	padding-left:1em;
 }
 
@@ -8988,6 +9000,10 @@ body.page-entity-collection h1#page-title{
 	*********************************/
 	#header{
 		background-color: white;
+		padding-top: 25px;
+	}
+	#header.fixedHeader{
+		padding-top: 0px;
 	}
 	.fixedHeader{
 		position: fixed;
@@ -9010,7 +9026,6 @@ body.page-entity-collection h1#page-title{
 	    width: 50px;
 	}
 
-
 	.fixedHeader #block-menu-block-1{
 		margin-bottom: 0px;
 	}
@@ -9021,11 +9036,27 @@ body.page-entity-collection h1#page-title{
 	.fixedHeader #block-menu-block-1 #main-menu-links-10348-16{
 		margin-bottom: 0px;
 	}
-
-	.fixedHeader #languagesAndSearch #contact{
-		margin-top: 40px;
-	    font-size: 1.25em;
+	.fixedHeader #languagesAndSearch{
+		width: initial;
+		right: 100px;
 	}
+	.fixedHeader #languagesAndSearch #contact{
+		margin-top: 35px;
+	    font-size: 1em;
+	}
+	.fixedHeader #languagesAndSearch #contact > a{
+		margin-right: 7px;
+	}
+	.fixedHeader #languagesAndSearch #contact > a::before{
+		content: "|";
+		margin-right: 7px;
+	}
+
+	.fixedHeader #languagesAndSearch #contact .printfriendly::before{
+		content: "";
+	}
+	
+	
 	.fixedHeader #languagesAndSearch #contact .a_small,
 	.fixedHeader #languagesAndSearch #contact .a_medium,
 	.fixedHeader #languagesAndSearch #contact .a_big{
@@ -9057,12 +9088,6 @@ body.page-entity-collection h1#page-title{
 
 }
 
-#header a.printfriendly {
-    width: 23px;
-    height: 20px;
-    background: url(../images/share_print_blue.png) no-repeat scroll 0% 100% rgba(0, 0, 0, 0)!important;
-    display: inline-block;
-    vertical-align: middle;
-}
+
 
 /*end sticky header*/

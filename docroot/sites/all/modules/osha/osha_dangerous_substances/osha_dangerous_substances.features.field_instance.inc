@@ -284,7 +284,7 @@ please take this into consideration when you are writing the first paragraph.',
     'entity_type' => 'node',
     'field_name' => 'field_available_in_languages',
     'label' => 'Available in languages',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
@@ -3513,7 +3513,7 @@ please take this into consideration when you are writing the first paragraph.',
   $field_instances['node-dangerous_substances-field_publication_year'] = array(
     'bundle' => 'dangerous_substances',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please select a year of publication, if it is not possible to identify leave it empty.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -5934,7 +5934,6 @@ please take this into consideration when you are writing the first paragraph.',
   t('Content (original language)');
   t('Country');
   t('Country other');
-  t('Date of publication/ year');
   t('Disclaimer');
   t('EC number');
   t('Evaluation');
@@ -5988,7 +5987,7 @@ please take this into consideration when you are writing the first paragraph.');
   t('Please fill in the provider of the material (Name in original language)');
   t('Please fill in the type of the material');
   t('Please select a target group from the drop down list');
-  t('Please select a year of publication, if it is not possible to identify leave it empty');
+  t('Please select a year of publication, if it is not possible to identify leave it empty.');
   t('Please select from the drop down list the type of provider');
   t('Please select the HAZMAP categories from the drop down list');
   t('Please select the exposure route');

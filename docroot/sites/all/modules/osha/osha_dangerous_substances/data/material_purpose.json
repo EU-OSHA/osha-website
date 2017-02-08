@@ -25,6 +25,11 @@
         "thesaurus_id": ""
     },
     {
+        "code" : "reach_clp",
+        "name" : "REACH or CLP related",
+        "thesaurus_id": ""
+    },
+    {
         "code": "report",
         "name": "Report",
         "thesaurus_id": ""

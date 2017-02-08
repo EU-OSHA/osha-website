@@ -631,7 +631,10 @@ class OshaWorkflowNotifications {
    */
   public static function notifyOnChangeToDraft($node) {
     $user = user_load($node->uid);
-    OshaWorkflowNotifications::sendEmail($user, array('node' => $node, 'action'=> 'revised', 'status'=> 'Draft'), 'osha_workflow');
+    OshaWorkflowNotifications::sendEmail($user, array(
+      'node' => $node, 'status'=> 'Draft',
+      'text' => 'A content created by you needs to be revised in order to be approved',
+    ), 'osha_workflow');
   }
 
   /**
@@ -643,8 +646,9 @@ class OshaWorkflowNotifications {
    *   Affected node
    */
   public static function notifyOnChangeFromDraftOrFinalDraftToBeReviewed($node) {
-    $users = osha_workflow_get_node_rm($node);
-    $users[] = _osha_workflow_get_current_pm_approver($node->nid);
+    # Don't notify RM, see MDR-351
+    # $users = osha_workflow_get_node_rm($node);
+    $users = _osha_workflow_get_current_pm_approver($node->nid);
     OshaWorkflowNotifications::sendEmail($users, array('node' => $node, 'action'=> 'reviewed', 'status'=> 'To be reviewed'), 'osha_workflow');
   }
 
@@ -675,7 +679,9 @@ class OshaWorkflowNotifications {
     if (!empty($pms)) {
       $users = array_merge($users, $pms);
     }
-    OshaWorkflowNotifications::sendEmail($users, array('node' => $node, 'action' => 'reviewed', status => 'Approved'), 'osha_workflow');
+    OshaWorkflowNotifications::sendEmail($users, array(
+      'node' => $node, 'text' => 'A content has been approved', status => 'Approved'
+    ), 'osha_workflow');
   }
 
   /**
@@ -692,7 +698,9 @@ class OshaWorkflowNotifications {
     if (!empty($pms)) {
       $users = array_merge($users, $pms);
     }
-    OshaWorkflowNotifications::sendEmail($users, array('node' => $node, 'action' => 'reviewed', status => 'Rejected'), 'osha_workflow');
+    OshaWorkflowNotifications::sendEmail($users, array(
+      'node' => $node, 'text' => 'A content has been rejected', status => 'Rejected'
+    ), 'osha_workflow');
   }
 
   /**
@@ -720,7 +728,10 @@ class OshaWorkflowNotifications {
    */
   public static function notifyNodeIsReadyToPublish($node) {
     $review_managers = osha_workflow_get_node_rm($node);
-    OshaWorkflowNotifications::sendEmail($review_managers, array('node' => $node, 'action' => 'reviewed', status => 'Ready to publish'), 'osha_workflow');
+    OshaWorkflowNotifications::sendEmail($review_managers, array(
+      'node' => $node, status => 'Ready to publish',
+      'text' => 'No action is required. This message is just to inform you that a content is ready to publish'
+    ), 'osha_workflow');
 
     // No longer needed, see MDR-351
     //$translation_managers = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER);

@@ -1190,13 +1190,14 @@ function osha_workflow_mail($key, &$message, $params) {
   $subject = variable_get('osha_mail_template_approval_subject', '[OSHA Website] CMW: ([node:nid]) [node:title-field]');
   $action = isset($params['action']) ? $params['action'] : 'reviewed';
   $status = isset($params['status']) ? $params['status'] : 'N/A';
+  $text = isset($params['text']) ? $params['text'] : ('There is new content to be '.$action.' by you');
 
   $body = variable_get('osha_mail_template_approval_body',
-    'Dear <b>[user:name]</b>,<br>
+    'Dear <b>[user:name]</b>,<br>'.
 
-    There is new content to be '.$action.' by you: <a href="[node:url]">[node:title-field]</a> (type: [node:type], status: <b>'.$status.'</b>).
+    $text.': <a href="[node:url]">[node:title-field]</a> (type: [node:type], status: <b>'.$status.'</b>).'.
 
-    <br>Thank you,'
+    '<br>Thank you,'
   );
 
   if ($key == 'osha_workflow_notification_admin') {

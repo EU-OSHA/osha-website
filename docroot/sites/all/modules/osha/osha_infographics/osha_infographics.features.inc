@@ -30,13 +30,17 @@ function osha_infographics_image_default_styles() {
   $styles['infographic_thumbnail'] = array(
     'label' => 'Infographic thumbnail (350 x 260)',
     'effects' => array(
-      6 => array(
-        'name' => 'image_scale_and_crop',
+      10 => array(
+        'name' => 'manualcrop_crop_and_scale',
         'data' => array(
           'width' => 350,
           'height' => 260,
+          'upscale' => 0,
+          'respectminimum' => 1,
+          'onlyscaleifcrop' => 0,
+          'style_name' => 'infographic_thumbnail',
         ),
-        'weight' => 1,
+        'weight' => 0,
       ),
     ),
   );

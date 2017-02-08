@@ -11,9 +11,11 @@
   }
 ?>
 <div id="page">
+  <div id="header">
   <?php if (isset($page['header'])) : ?>
     <?php print render($page['header']); ?>
   <?php endif; ?>
+  </div>
   <div class="page_front">
 		<?php print $messages; ?>
 	<div class="left_column">

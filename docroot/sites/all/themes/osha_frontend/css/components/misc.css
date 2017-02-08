@@ -122,7 +122,10 @@
 
 /* The secondary menu (login, etc.) */
 .header__secondary-menu {
-  float: right; /* LTR */
+  float: none; /* LTR */
+  position: absolute;
+  top: 10px;
+  right: 0px;
 }
 
 /* Wrapper for any blocks placed in the header region. */

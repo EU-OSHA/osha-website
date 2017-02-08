@@ -284,7 +284,7 @@ please take this into consideration when you are writing the first paragraph.',
     'entity_type' => 'node',
     'field_name' => 'field_available_in_languages',
     'label' => 'Available in languages',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
@@ -1813,7 +1813,7 @@ please take this into consideration when you are writing the first paragraph.',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => 'medium',
+          'image_style' => 'medium_crop_220',
         ),
         'type' => 'image',
         'weight' => 54,
@@ -1841,7 +1841,7 @@ please take this into consideration when you are writing the first paragraph.',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => 'medium',
+          'image_style' => 'medium_crop_220',
         ),
         'type' => 'image',
         'weight' => 0,
@@ -1900,22 +1900,20 @@ please take this into consideration when you are writing the first paragraph.',
       'active' => 1,
       'module' => 'image',
       'settings' => array(
-        'allowed_schemes' => array(
-          'public' => 'public',
+        'manualcrop_crop_info' => 1,
+        'manualcrop_default_crop_area' => 1,
+        'manualcrop_enable' => 1,
+        'manualcrop_inline_crop' => 0,
+        'manualcrop_instant_crop' => 0,
+        'manualcrop_instant_preview' => 1,
+        'manualcrop_keyboard' => 1,
+        'manualcrop_maximize_default_crop_area' => 0,
+        'manualcrop_require_cropping' => array(
+          'medium_crop_220' => 'medium_crop_220',
         ),
-        'allowed_types' => array(
-          'audio' => 0,
-          'document' => 0,
-          'image' => 'image',
-          'video' => 0,
-        ),
-        'browser_plugins' => array(
-          'media_browser_osha--media_browser_osha' => 0,
-          'media_browser_osha--media_browser_osha_my_files' => 0,
-          'media_default--media_browser_1' => 0,
-          'media_default--media_browser_my_files' => 0,
-          'upload' => 0,
-        ),
+        'manualcrop_styles_list' => array(),
+        'manualcrop_styles_mode' => 'include',
+        'manualcrop_thumblist' => 0,
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
       ),
@@ -3513,7 +3511,7 @@ please take this into consideration when you are writing the first paragraph.',
   $field_instances['node-dangerous_substances-field_publication_year'] = array(
     'bundle' => 'dangerous_substances',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please select a year of publication, if it is not possible to identify leave it empty.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -5934,7 +5932,6 @@ please take this into consideration when you are writing the first paragraph.',
   t('Content (original language)');
   t('Country');
   t('Country other');
-  t('Date of publication/ year');
   t('Disclaimer');
   t('EC number');
   t('Evaluation');
@@ -5988,7 +5985,7 @@ please take this into consideration when you are writing the first paragraph.');
   t('Please fill in the provider of the material (Name in original language)');
   t('Please fill in the type of the material');
   t('Please select a target group from the drop down list');
-  t('Please select a year of publication, if it is not possible to identify leave it empty');
+  t('Please select a year of publication, if it is not possible to identify leave it empty.');
   t('Please select from the drop down list the type of provider');
   t('Please select the HAZMAP categories from the drop down list');
   t('Please select the exposure route');

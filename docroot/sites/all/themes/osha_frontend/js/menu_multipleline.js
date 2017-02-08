@@ -2,7 +2,7 @@
 jQuery(document).ready(function () {
 	var maxSize = 0;
 	var simpleLine = 16;
-	var multiLine = 11;
+	var multiLine = 16;
 
 	function startTest (){
 		jQuery("a.f1Level").each(function() {

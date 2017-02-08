@@ -161,9 +161,15 @@ states.Dependent.prototype = {
    */
   compare: function (reference, selector, state) {
     var value = this.values[selector][state.name];
-    if (reference.constructor.name in states.Dependent.comparisons) {
+    var name = reference.constructor.name;
+    if (!name) {
+        name = $.type(reference);
+        // Capitalize to match the constructor name.
+        name = name.charAt(0).toUpperCase() + name.slice(1);
+    }
+    if (name in states.Dependent.comparisons) {
       // Use a custom compare function for certain reference value types.
-      return states.Dependent.comparisons[reference.constructor.name](reference, value);
+      return states.Dependent.comparisons[name](reference, value);
     }
     else {
       // Do a plain comparison otherwise.

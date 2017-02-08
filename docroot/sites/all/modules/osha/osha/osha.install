@@ -398,3 +398,10 @@ function osha_update_7019() {
 function osha_update_7020() {
   features_revert_module('osha');
 }
+
+function osha_update_7021() {
+  module_enable(['manualcrop']);
+  features_revert_module('osha');
+  features_revert_module('osha_homepage');
+  features_revert_module('osha_blog');
+}

@@ -2713,8 +2713,8 @@ function osha_tmgmt_views_default_views_alter(&$views) {
  * {@inheritdoc}
  */
 function osha_tmgmt_mail($key, &$message, $params) {
-  $body_salutation = 'Dear [user:name],'.PHP_EOL.PHP_EOL;
-  $body_ending = PHP_EOL.PHP_EOL.'Thank you.';
+  $body_salutation = 'Dear [user:name],<br>';
+  $body_ending = '<br>Thank you.';
 
   if ($key == 'notifyNodeIsReadyToPublish') {
     $subject = variable_get('osha_mail_template_approval_subject', '[OSHA Website] CMW: ([node:nid]) [node:title-field]');

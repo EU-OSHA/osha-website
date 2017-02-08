@@ -257,8 +257,10 @@ function osha_views_default_views() {
     'blog' => 'blog',
     'calls' => 'calls',
     'press_contact' => 'press_contact',
+    'dangerous_substances' => 'dangerous_substances',
     'directive' => 'directive',
     'e_guide' => 'e_guide',
+    'events' => 'events',
     'external_url' => 'external_url',
     'file' => 'file',
     'flickr' => 'flickr',
@@ -298,6 +300,7 @@ function osha_views_default_views() {
     11 => 0,
     12 => 0,
     13 => 0,
+    14 => 0,
   );
   $handler->display->display_options['filters']['type']['expose']['reduce'] = TRUE;
   /* Filter criterion: Field: Publication date (field_publication_date) */

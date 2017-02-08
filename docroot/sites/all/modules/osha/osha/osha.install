@@ -407,4 +407,6 @@ function osha_update_7021() {
   features_revert_module('osha_dangerous_substances');
   features_revert_module('osha_highlight');
   features_revert_module('osha_infographics');
+  features_revert_module('osha_news');
+  features_revert_module('osha_press_release');
 }

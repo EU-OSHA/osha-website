@@ -33,6 +33,93 @@ function osha_views_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_image_default_styles().
+ */
+function osha_image_default_styles() {
+  $styles = array();
+
+  // Exported image style: 1000x1000.
+  $styles['1000x1000'] = array(
+    'label' => '1000x1000',
+    'effects' => array(
+      3 => array(
+        'name' => 'manualcrop_crop',
+        'data' => array(
+          'width' => 500,
+          'height' => 150,
+          'keepproportions' => 0,
+          'reuse_crop_style' => '',
+          'style_name' => '1000x1000',
+        ),
+        'weight' => 0,
+      ),
+      1 => array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => 1000,
+          'height' => '',
+          'upscale' => 0,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  // Exported image style: medium_crop_220.
+  $styles['medium_crop_220'] = array(
+    'label' => 'Medium Crop 220',
+    'effects' => array(
+      6 => array(
+        'name' => 'manualcrop_crop',
+        'data' => array(
+          'width' => 220,
+          'height' => 120,
+          'keepproportions' => 0,
+          'reuse_crop_style' => '',
+          'style_name' => 'medium_crop_220',
+        ),
+        'weight' => 0,
+      ),
+      7 => array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => 220,
+          'height' => 220,
+          'upscale' => 1,
+        ),
+        'weight' => 2,
+      ),
+    ),
+  );
+
+  // Exported image style: thumbnail_crop_100.
+  $styles['thumbnail_crop_100'] = array(
+    'label' => 'Thumbnail 100 from Medium crop',
+    'effects' => array(
+      8 => array(
+        'name' => 'manualcrop_reuse',
+        'data' => array(
+          'reuse_crop_style' => 'medium_crop_220',
+          'apply_all_effects' => 1,
+        ),
+        'weight' => 0,
+      ),
+      9 => array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => 100,
+          'height' => 100,
+          'upscale' => 1,
+        ),
+        'weight' => 2,
+      ),
+    ),
+  );
+
+  return $styles;
+}
+
+/**
  * Implements hook_node_info().
  */
 function osha_node_info() {

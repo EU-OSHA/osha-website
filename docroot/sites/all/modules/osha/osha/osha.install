@@ -398,3 +398,15 @@ function osha_update_7019() {
 function osha_update_7020() {
   features_revert_module('osha');
 }
+
+function osha_update_7021() {
+  module_enable(['manualcrop']);
+  features_revert_module('osha');
+  features_revert_module('osha_homepage');
+  features_revert_module('osha_blog');
+  features_revert_module('osha_dangerous_substances');
+  features_revert_module('osha_highlight');
+  features_revert_module('osha_infographics');
+  features_revert_module('osha_news');
+  features_revert_module('osha_press_release');
+}

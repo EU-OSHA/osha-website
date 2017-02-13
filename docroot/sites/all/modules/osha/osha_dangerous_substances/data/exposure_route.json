@@ -35,6 +35,11 @@
         "thesaurus_id": "26561E"
     },
     {
+        "code": "not_applicable",
+        "name": "Not applicable",
+        "thesaurus_id": ""
+    },
+    {
         "code": "other",
         "name": "Other",
         "thesaurus_id": ""

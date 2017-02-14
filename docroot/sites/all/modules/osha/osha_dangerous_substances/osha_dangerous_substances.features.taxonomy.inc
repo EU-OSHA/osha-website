@@ -88,7 +88,7 @@ function osha_dangerous_substances_taxonomy_default_vocabularies() {
       'name' => 'Chemical hazards related to health effects',
       'machine_name' => 'hazard_health_effects',
       'description' => NULL,
-      'hierarchy' => 0,
+      'hierarchy' => 1,
       'module' => 'taxonomy',
       'weight' => 0,
       'language' => 'und',

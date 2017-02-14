@@ -120,6 +120,10 @@
         "name": "Working Outdoors"
     },
     {
+        "code": "not_applicable",
+        "name": "Not applicable"
+    },
+    {
         "code": "other",
         "name": "Other"
     }

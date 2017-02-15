@@ -1,7 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 body {
  margin:0 0;
- font-family:arial, verdana, sans-serif;
- background:#D2DCED;
+ font-family:"Open Sans", verdana, sans-serif;
+ //background:#D2DCED;
  overflow-y:scroll;
 }
 
@@ -72,7 +73,7 @@ header{
 }
 
 .a_small a{
-	padding-left:0.5em;
+	//padding-left:0.5em;
 	padding-right:0.2em;
 	border-bottom:0px!important;
 }
@@ -95,7 +96,7 @@ header{
 	margin-top: 0em;
 	margin-right: 3em;
 	width: 19%;
-	margin-left: 1.8em;
+	//margin-left: 1.8em;
 	float:left;
 }
 
@@ -135,7 +136,7 @@ header{
 
 .sidebars_first  .region-sidebar-first #block-menu-block-2 .menu-block-2 ul li ul li a{
 	color: #57575a;
-    font-family: Arial;
+    font-family: "Open Sans", sans-serif;
     font-size: 0.8em;
 	font-weight: bold;
     text-decoration: none;
@@ -145,7 +146,7 @@ header{
 
 .sidebars_first  .region-sidebar-first #block-menu-block-2 .menu-block-2 ul li ul li a.active{
 	color: #003399;
-    font-family: Arial;
+    font-family: "Open Sans", sans-serif;
     font-size: 0.8em;
 	font-weight: bold;
     text-decoration: none;
@@ -156,7 +157,7 @@ header{
 
 .sidebars_first  .region-sidebar-first #block-menu-block-2 .menu-block-2 ul li ul li ul li a{
 	color: #57575a;
-    font-family: Arial;
+    font-family: "Open Sans", sans-serif;
     font-size: 0.8em;
 	font-weight: bold;
     text-decoration: none;
@@ -165,7 +166,7 @@ header{
 
 .sidebars_first  .region-sidebar-first #block-menu-block-2 .menu-block-2 ul li ul li ul li span{
 	color: #57575a;
-    font-family: Arial;
+    font-family: "Open Sans", sans-serif;
     font-size: 0.8em;
 	font-weight: bold;
     text-decoration: none;
@@ -174,7 +175,7 @@ header{
 
 .sidebars_first  .region-sidebar-first #block-menu-block-2 .menu-block-2 ul li ul li ul li a.active{
 	color: #003399;
-    font-family: Arial;
+    font-family: "Open Sans", sans-serif;
     font-size: 0.8em;
 	font-weight: bold;
     text-decoration: none;
@@ -194,10 +195,15 @@ header{
 	 padding-left:1em;
 }
 
+.page_front{
+	max-width: 1160px;
+	margin: 0 auto;
+}
+
 #page{
 	margin-left: auto;
 	margin-right: auto;
-	max-width: 1160px;
+	max-width: 100%;
 	background-color:#FFFFFF;
 	height:1%;
 	overflow:hidden;
@@ -205,8 +211,13 @@ header{
 
 #main{
 	background-color:#FFFFFF;
-	padding:1em;
+	padding-top:1em;
+	padding-bottom: 1em;
+	padding-right: 15px;
+	padding-left: 15px;
 	clear:both;
+	max-width: 1160px;
+	margin: 0 auto;
 }
 
 #content{
@@ -247,7 +258,7 @@ header{
 	clear: both;
 	border-bottom: 5px solid #002f9d;
 	font-size: medium;
-	margin-bottom: 13px;
+	margin-bottom: 0px;
 	background-color: #cfddee;
 	list-style-type: none;
 	padding-left:0px;
@@ -291,7 +302,7 @@ header{
 
 #block-menu-block-1 .menu li .menu li .menu li  a{
 	margin: 0 0 0 0px !important;
-	font-family: Arial, sans-serif;
+	font-family: "Open Sans", sans-serif;
 	color: #56565a;
 	font-weight: bold;
 	width: 181px;
@@ -397,7 +408,7 @@ header{
 /*END MENU*/
 
 #content a{
-	font-family: Arial;
+	font-family: "Open Sans", sans-serif;
 	text-decoration: none;
 	color: #003399;
 	border-bottom:1px solid #dc2f82;
@@ -432,23 +443,26 @@ header{
 }
 
 #socialNetworksBlue {
-	border-top:5px solid #002f9d;
-	width:100%;
+	//border-top:5px solid #002f9d;
+	//width:43%;
 	margin-top: 0px;
+	position: absolute;
+    right: 54px;
+    margin-top: -5px;
 }
 
 #socialNetworksBlue #icons {
-	background: url("../images/socialBorderLeft.png") no-repeat scroll 0 0px, url("../images/socialBorderRight.png") no-repeat scroll 100% 0px, none repeat scroll 0 0 #002f9d;
-    height: 26px;
-    margin: -5px auto 0;
-    text-align: center;
-    width: 260px;
-	padding-top: 4px;
-	background-color: #002f9d;
+	//background: url("../images/socialBorderLeft.png") no-repeat scroll 0 0px, url("../images/socialBorderRight.png") no-repeat scroll 100% 0px, none repeat scroll 0 0 #002f9d;
+    //height: 26px;
+    //margin: -5px auto 0;
+    //text-align: center;
+    //width: 260px;
+	//padding-top: 4px;
+	//background-color: #002f9d;
 }
 
 #icons img {
- padding: 0px 9px 0;
+ padding: 0px 5px 0px 0px;
 }
 
 a{
@@ -457,26 +471,40 @@ a{
 
 #contact{
 	margin-bottom: 15px;
-	margin-right: 2.2em;
-	padding-bottom: px;
 	margin-top: -10px;
+}
+
+#header a.printfriendly {
+    width: 23px;
+    height: 20px;
+    background: url(../images/share_print_blue.png) no-repeat scroll 0% 100% rgba(0, 0, 0, 0)!important;
+    display: inline-block;
+    margin-left: 10px;
+	vertical-align: -4px;
 }
 
 #contact a{
 	color:#003399;
 	text-decoration:none;
-	border-bottom:0px!important
+	border-bottom:0px!important;
+	display: inline-block;
+}
+
+img[alt*="Select language"]{
+	position: absolute;
+	right: -172px;
+    top: 23px;
 }
 
 #languagesAndSearch
 {
- color : #003399;
- float:right;
- width:43%;
- text-align:right;
- margin-right:5.5em;
- font-size: 0.813em;
- font-weight: bold;
+    color: #003399;
+    //text-align: right;
+    font-size: 0.913em;
+    font-weight: bold;
+    position: absolute;
+    width: 100px;
+    right: 235px;
 }
 
 #languagesAndSearch input {
@@ -498,10 +526,10 @@ a{
     display: block;
     float: right;
     margin-left: 0;
-    margin-right: 6.2em;
+    margin-right: 90px;
     margin-top: -4.7em;
     padding-left: 0.6em;
-    width: 140px!important;
+    width: 139px!important;
 }
 
 .form-item{
@@ -525,11 +553,6 @@ a{
 	z-index:9999999999999;
 }
 
-#languagesAndSearch img{
-  vertical-align:middle;
-  right:1em;
-  margin-top:-2.5em;
-}
 #languagesAndSearch input[type="text"] {
  background:#002f9d;
  border:0;
@@ -592,7 +615,7 @@ padding-left: 1em;
 
 .breadcrumb
 {
-	font-family : Arial!important;
+	font-family : "Open Sans"!important;
 	font-weight:lighter;
 	font-size : 0.875em;
 	color : #003399;
@@ -600,13 +623,16 @@ padding-left: 1em;
 	background-color:#FFFFFF;
 	border:0px;
 	clear:both;
-	padding-right:2em;
+	padding-right:15px;
+	padding-left: 15px;
+	max-width: 1160px;
+	margin: 0 auto;
 
 }
 
 .breadcrumb a
 {
-	font-family : Arial!important;
+	font-family : "Open Sans"!important;
 	color : #003399;
 	font-weight:bold;
 	text-decoration: none;
@@ -624,8 +650,8 @@ footer {
 	margin:0 auto;
 	width:100%;
 	overflow:auto;
-	padding: 0 0 4px;
-	font-weight:bold;
+	padding: 0 0 15px;
+	//font-weight:bold;
 	margin-top: 1em;
 }
 
@@ -637,7 +663,7 @@ footer a{
 #footer-first-line{
 	margin-top: 1em;
 	padding-left: 2.5em;
-	font-size: 0.8em;
+	font-size: 1em;
 }
 
 #footerMenu {
@@ -645,7 +671,7 @@ footer a{
 	width: 65%;
 	margin: 1em 0 0 2em;
 	color: #FFFFFF;
-	font-size: 0.813em;
+	font-size: 1em;
 	font-weight: bold;
 }
 
@@ -672,7 +698,7 @@ footer a{
 #footer * li.menu__item {
     display: inline;
     list-style-type: none;
-    font-size: 0.813em;
+    font-size: 1em;
     margin: 5px 1.5em 0 0;
 }
 
@@ -710,7 +736,7 @@ footer a{
 #footer * li.menu__item {
     display: inline;
     list-style-type: none;
-    font-size: 0.813em;
+    font-size: 1em;
     margin: 5px 1.5em 0 0;
 }
 
@@ -920,7 +946,7 @@ span.date-display-single{
 .pager li a{
 	font-weight:bold;
 	border-bottom:0px!important;
-	font-family: Arial;
+	font-family: "Open Sans", sans-serif;
     text-decoration: none;
     color: #003399;
 }
@@ -973,7 +999,7 @@ span.date-display-single{
 .view-publications  .view-content .views-row .views-field-field-publication-type{
 	float:left;
 	color: #02339a !important;
-    font-family: arial !important;
+    font-family: "Open Sans" !important;
     font-size: 0.8em;
     font-weight: bold;
     padding-bottom: 0.2em;
@@ -1004,7 +1030,7 @@ span.date-display-single{
 .node-publication.node-teaser .field-type-file a,
 .node-job-vacancies .field-type-file a{
     color: #02339a !important;
-    font-family: arial !important;
+    font-family: "Open Sans" !important;
     font-size: 0.8em;
     font-weight: bold;
     padding-bottom: 0.2em;
@@ -1032,7 +1058,7 @@ span.date-display-single{
 }
 
 #block-views-publications-slidehow .node-publication .field-name-field-file a{
-	font-family:arial!important;
+	font-family:"Open Sans"!important;
     font-weight: bold;
 	font-size:0.8em!important;
 	border-bottom:0px!important;
@@ -1081,7 +1107,7 @@ span.date-display-single{
 
 .node-publication.view-mode-full .field-name-body p{
 	margin-top:0;
-	font-family:Arial;
+	font-family:"Open Sans", sans-serif;
 	color:#000000;
 	line-height: 1.5em;
 }
@@ -1124,7 +1150,7 @@ span.date-display-single{
 }
 
 .node-publication .field-name-field-file a{
-	font-family:arial!important;
+	font-family:"Open Sans"!important;
     font-weight: bold;
 	font-size:0.8em;
 	border-bottom:0px!important;
@@ -1152,7 +1178,7 @@ span.date-display-single{
 .field-name-field-related-publications ul a{
 	background-color:#f3f3f3;
 	list-style:none;
-	font-family:arial!important;
+	font-family:"Open Sans"!important;
 	color:#003399!important;
 	font-weight:bold;
 	font-size:0.8em;
@@ -1236,7 +1262,7 @@ span.date-display-single{
 }
 
 .node-publication.view-mode-full .field-name-field-publication-related-res #publication_related_res li a{
-	font-family:arial;
+	font-family:"Open Sans", sans-serif;
 	font-weight:bold;
 	font-size:0.9em;
 	border-bottom:0px!important;
@@ -1300,7 +1326,7 @@ span.date-display-single{
 
 .node-publication  .field-name-field-related-publications article  .field-name-title-field a{
 	list-style: none;
-	font-family: arial!important;
+	font-family: "Open Sans"!important;
 	color: #003399!important;
 	font-weight: bold;
 	font-size: 0.8em;
@@ -1318,7 +1344,7 @@ span.date-display-single{
 	color: #003399;
 	font-size: 0.95em;
 	font-weight: normal;
-	font-family: Arial;
+	font-family: "Open Sans", sans-serif;
 	line-height:1.7em;
 }
 
@@ -1459,7 +1485,7 @@ span.date-display-single{
 }
 
 .ui-accordion-content{
-	font-family: Arial;
+	font-family: "Open Sans", sans-serif;
 	font-size: 0.9em;
 	color: #000;
 	line-height: 1.7em;
@@ -1546,7 +1572,7 @@ padding-top: 1em;
 
 .imgWikiZone
 {
-font-family : Arial;
+font-family : "Open Sans", sans-serif;
 	float:left;
 	font-weight:bold;
   font-size : 0.813em;
@@ -1567,7 +1593,7 @@ margin: 0.2em 0px 0.2em 0.3em;
 
 .textWikiZone
 {
-	font-family : Arial;
+	font-family : "Open Sans", sans-serif;
 	font-weight:lighter;
   font-size : 0.813em;
   color : #000000;
@@ -1620,7 +1646,7 @@ margin: 0.2em 0px 0.2em 0.3em;
 
 .OSHWiki .p2, .OSHWikiWhite .p2
 {
-	font-family : Arial,sans-serif;
+	font-family : "Open Sans",sans-serif;
  	font-size : 0.813em;
  	color : #57575A;
  	padding-top: 1em;
@@ -1661,7 +1687,7 @@ margin: 0.2em 0px 0.2em 0.3em;
 
 .OSHWikiWhite .p4
 {
- font-family : Arial;
+ font-family : "Open Sans", sans-serif;
  font-weight:lighter;
  font-size : 0.750em;
  color : #003399;
@@ -1724,7 +1750,7 @@ margin-bottom: 1.5em;
 
 .lblOSHWiki
 {
-font-family : Arial;
+font-family : "Open Sans", sans-serif;
   color : #003399;
 font-weight: bold;
 }
@@ -2024,7 +2050,7 @@ font-weight: normal;
 	color: #003399;
 	font-size: 0.8em;
 	font-weight: bold;
-	font-family: arial;
+	font-family: "Open Sans", sans-serif;
 	padding-bottom: 0.2em;
 
 }
@@ -2038,7 +2064,7 @@ font-weight: normal;
 	color: #003399;
 	font-size: 0.8em;
 	font-weight: bold;
-	font-family: arial;
+	font-family: "Open Sans", sans-serif;
 	padding-bottom: 0.2em;
 }
 
@@ -2057,7 +2083,7 @@ font-weight: normal;
 	color: #003399!important;
 	font-size: 0.9em!important;
 	font-weight: bold!important;
-	font-family: arial!important;
+	font-family: "Open Sans"!important;
 	padding-bottom: 0.2em;
 }
 
@@ -2085,7 +2111,7 @@ font-weight: normal;
 	color: #003399;
 	font-size: 0.8em;
 	font-weight: bold;
-	font-family: arial;
+	font-family: "Open Sans", sans-serif;
 	position: absolute;
 	top: 57.6em;
 	margin-left: 12em;
@@ -2097,7 +2123,7 @@ font-weight: normal;
 	color: #003399;
 	font-size: 0.8em;
 	font-weight: bold;
-	font-family: arial;
+	font-family: "Open Sans", sans-serif;
 	padding-bottom: 0.2em;
 	border-bottom:0px!important
 }
@@ -2179,7 +2205,7 @@ font-weight: normal;
 	background:#002f9d;
 	border:0px;
 	color:#FFFFFF;
-	width:140px;
+	width:139px;
 	padding-left:1em;
 }
 
@@ -2281,7 +2307,7 @@ font-weight: normal;
 
 		#block-osha-newsletter-osha-newsletter-subscribe-extra div{
 			color: #000;
-			font-family: Arial,sans-serif;
+			font-family: "Open Sans",sans-serif;
 			font-size: 1em;
 			margin: 0 0 .5em 0;
 			line-height:1.5em;
@@ -2304,7 +2330,7 @@ font-weight: normal;
 			border-bottom: 1px solid #dc2f82;
 			color: #003399;
 			font-weight:bold;
-			font-family: arial;
+			font-family: "Open Sans", sans-serif;
 			font-size:0.8em;
 		}
 
@@ -2335,7 +2361,7 @@ font-weight: normal;
 			border: 0 none;
 			color: #003399;
 			float: none;
-			font-family: arial;
+			font-family: "Open Sans", sans-serif;
 			font-size: 1em;
 			font-weight: bold;
 			margin-top: 0.1em;
@@ -2415,7 +2441,7 @@ font-weight: normal;
 	color: #003399;
 	font-size: 0.8em;
 	font-weight: bold;
-	font-family: arial;
+	font-family: "Open Sans", sans-serif;
 	padding-bottom: 0.2em;
 }
 
@@ -2528,7 +2554,7 @@ font-weight: normal;
 }
 .two_column.publications-search-list.form-wrapper #publication-search label{
     color: #003399 !important;
-    font-family: arial !important;
+    font-family: "Open Sans" !important;
     font-size: 0.9em !important;
     font-weight: bold !important;
 }
@@ -2650,7 +2676,8 @@ font-weight: normal;
     font-size: 1.4em;
     font-weight: bold;
 	padding:0.5em 1em 1em 0em;
-	margin-right:1em;
+	margin-right:15px;
+	margin-left: 15px;
 }
 
 .banner_home{
@@ -2713,7 +2740,7 @@ font-weight: normal;
 }
 
 .region-triptych-first .block-views {
-    padding: 0 1em;
+    padding: 0 0em;
 }
 
 #recommended_resources {
@@ -2998,7 +3025,7 @@ font-weight: normal;
 }
 
 .date{
-	font-family: Arial;
+	font-family: "Open Sans", sans-serif;
 	color: #000;
 	font-size: 0.8em;
 	font-weight:bold;
@@ -3022,7 +3049,7 @@ font-weight: normal;
 .highlights_body{
 	color: #000;
 	font-size: 0.9em;
-	font-family: Arial;
+	font-family: "Open Sans", sans-serif;
 	font-weight:bold;
 	line-height: 1.7em;
 }
@@ -3089,7 +3116,7 @@ font-weight: normal;
 .node-news .field-name-field-summary p{
 	margin:0;
 	padding:0;
-	font-family: Arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 1em;
 	color:#000000;
 	font-weight:normal;
@@ -3099,7 +3126,7 @@ font-weight: normal;
 .node-news .field-type-text-with-summary p{
 	margin:0;
 	padding:0;
-	font-family: Arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 0.9em;
 	color:#000000;
 	font-weight:normal;
@@ -3110,7 +3137,7 @@ font-weight: normal;
 .node-news .field-name-field-publication-date{
 	margin:0;
 	padding:0;
-	font-family: Arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 1em;
 	color:#000000;
 	font-weight:normal;
@@ -3170,7 +3197,7 @@ font-weight: normal;
 
 #block-osha-newsletter-osha-newsletter-subscribe div {
 	color: #000;
-	font-family: Arial,sans-serif;
+	font-family: "Open Sans",sans-serif;
 	font-size: 0.9em;
 	margin: 0 0 .5em 0;
 	line-height:1.5em;
@@ -3208,7 +3235,7 @@ font-weight: normal;
 #block-osha-newsletter-osha-newsletter-subscribe a{
 	font-size: 110%;
 	font-weight: lighter;
-	font-family: arial;
+	font-family: "Open Sans", sans-serif;
 	color: #003399;
 	margin: 0;
 	text-decoration:none;
@@ -3426,7 +3453,7 @@ a.button-submit {
 /*OSHMail newsletter Section Block Down*/
 
 #block-block-4 div{
-	font-family: Arial,sans-serif;
+	font-family: "Open Sans",sans-serif;
 	padding: 1px;
 	width: 99.2%;
 	margin-bottom:2em;
@@ -3494,7 +3521,7 @@ a.button-submit {
 
 .node-seminar .field-name-field-seminar-location .field-label{
 	font-weight: lighter;
-	font-family: arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 1em;
 	text-transform:uppercase;
 }
@@ -3508,7 +3535,7 @@ a.button-submit {
 
 .node-seminar .field-name-field-seminar-start-date .field-label {
 	font-weight: lighter;
-	font-family: arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 1em;
 	text-transform:uppercase;
 }
@@ -3519,7 +3546,7 @@ a.button-submit {
 
 .node-seminar .field-name-field-seminar-end-date .field-label {
 	font-weight: lighter;
-	font-family: arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 1em;
 	text-transform:uppercase;
 }
@@ -3532,7 +3559,7 @@ a.button-submit {
 
 .node-seminar .field.field-name-field-file.field-type-file.field-label-above .field-items a{
 	color: #003399!important;
-    font-family: arial!important;
+    font-family: "Open Sans"!important;
     font-size: 0.8em;
 	font-weight:bold;
 	border-bottom:0px!important;
@@ -3541,7 +3568,7 @@ a.button-submit {
 
 .node-seminar .field.field-name-field-file.field-type-file.field-label-above .field-items span{
 	color: #003399!important;
-    font-family: arial!important;
+    font-family: "Open Sans"!important;
 	font-weight:normal;
 	padding-right:2em;
 	padding-top:0.2em;
@@ -3550,7 +3577,7 @@ a.button-submit {
 
 .node-calls .field-type-file a{
     color: #003399!important;
-    font-family: arial!important;
+    font-family: "Open Sans"!important;
     font-weight:normal;
     padding-right:2em;
     padding-top:0.2em;
@@ -3630,7 +3657,7 @@ a.button-submit {
 #block-views-06b622c3c94cefbba3c76d3ae86207dd h2{
 	background: none repeat scroll 0 0 transparent;
     color: #003399 !important;
-    font-family: arial !important;
+    font-family: "Open Sans" !important;
     font-size: 0.9em !important;
     font-weight: bold !important;
     padding-left: 0;
@@ -3656,6 +3683,8 @@ a.button-submit {
 #block-views-0070c12a2761cd76e16f8eb8fc4e1de6{
     clear:both;
     border-top:5px solid #003399;
+    max-width: 1160px;
+    margin: 0 auto;
 }
 
 #block-views-seminars-block .view-seminars ul li {
@@ -4081,28 +4110,7 @@ a.button-submit {
 /*END VACANCIES - CAREES*/
 
 
-/*STICKY MENU*/
-.fixed {
-	position: fixed;
-    top: -24px;
-    width: 1160px;
-    z-index: 99;
 
-}
-
-@media screen
-and (max-width: 1237px) {
-	.fixed {	
-		position: fixed;
-		top: -24px;
-		width: 100%;
-		z-index: 99;
-	}
-}
-.stickey{
-	margin-top:175px;
-}
-/*END STICKET MENU*/
 
 
 /*HIGHLIGHT LIST*/
@@ -4251,7 +4259,7 @@ and (max-width: 1237px) {
 
 .view-mode-osha_slideshow .field-name-body p{
 	margin:0;
-	font-family: Arial;
+	font-family: "Open Sans", sans-serif;
 	font-size: 0.8em;
 	width:97%;
 }
@@ -4264,7 +4272,7 @@ and (max-width: 1237px) {
 
 .view-mode-osha_slideshow .field-name-field-file span{
 	color: #57585c!important;
-	font-family: Arial;
+	font-family: "Open Sans", sans-serif;
 	font-size: 0.8em;
 	font-weight: bold;
 
@@ -4327,7 +4335,8 @@ and (max-width: 1237px) {
     color: #cbd9ec !important;
     display: block !important;
     height: 220px !important;
-    left: 0px !important;
+    left: 15px !important;
+    border-right: 8px solid white !important;
     position: absolute !important;
     top: 0 !important;
     width: 60px !important;
@@ -4413,7 +4422,7 @@ and (max-width: 1237px) {
 
 .views-exposed-widgets .views-exposed-widget label{
 	color: #003399 !important;
-    font-family: arial !important;
+    font-family: "Open Sans" !important;
     font-size: 0.9em !important;
     font-weight: bold !important;
     padding-bottom: 0.1em;
@@ -4720,7 +4729,7 @@ article.node-press-release .field-name-field-summary p {
 }
 
 article.node-press-release .field-name-body.field-type-text-with-summary p{
-	margin:0em
+	margin:0em 0em 1em;
 }
 
 .view-press-releases .field-name-title-field {
@@ -4885,7 +4894,7 @@ article.node-press-release .field-name-body.field-type-text-with-summary p{
 }
 
 .view-legislation-guidelines table tr td a{
-	  font-family: Arial;
+	  font-family: "Open Sans", sans-serif;
 	  text-decoration: none;
 	  color: #003399;
 	  border-bottom: 1px solid #dc2f82!important;
@@ -5457,6 +5466,27 @@ a.tabs-primary__tab-link{
 	float:left;
 	padding-right: 0.2em;
 }
+.view-oshevents .views-field-field-country-code{
+	display: inline-block;
+}
+
+.view-oshevents .views-field-field-country-code .views-label-field-country-code{
+	display: inline-block;
+}
+
+.view-oshevents .views-field-field-country-code .field-content{
+	display: inline-block;
+}
+
+.view-oshevents .views-field-field-city{
+	display: inline-block;
+}
+
+.view-oshevents .views-field-field-organization .views-label-field-organization,
+.view-oshevents .views-field-field-organization .field-content
+{
+	display: inline;
+}
 
 .view-oshevents .country{
 	float:left;
@@ -5610,7 +5640,7 @@ a.tabs-primary__tab-link{
     clear: both;
     color: #003399;
     float: left;
-    font-family: arial;
+    font-family: "Open Sans", sans-serif;
     font-size: 0.8em;
     font-weight: bold;
     margin-left: 0em;
@@ -5625,7 +5655,7 @@ a.tabs-primary__tab-link{
     clear: both;
     color: #003399;
     float: left;
-    font-family: arial;
+    font-family: "Open Sans", sans-serif;
     font-size: 0.8em;
     font-weight: bold;
     margin-left: 0em;
@@ -5737,15 +5767,13 @@ a.tabs-primary__tab-link{
 }
 
 #content .view-oshevents  .views-field-field-country-code .views-label-field-country-code{
-	font-weight: lighter;
-	font-family: arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 1em;
 	text-transform: uppercase;
 }
 
 #content .view-oshevents  .views-field-field-organization .iews-label-field-organization{
-	font-weight: lighter;
-	font-family: arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 1em;
 	text-transform: uppercase;
 }
@@ -5801,21 +5829,21 @@ a.tabs-primary__tab-link{
 
 .node-events .field-name-field-organization .field-label {
 	font-weight: lighter;
-	font-family: arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 1em;
 	text-transform: uppercase;
 }
 
 .node-events .field-name-field-city  .field-label{
 	font-weight: lighter;
-	font-family: arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 1em;
 	text-transform: uppercase;
 }
 
 .node-events .field-name-field-country-code .field-label{
 	font-weight: lighter;
-	font-family: arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 1em;
 	text-transform: uppercase;
 }
@@ -5833,7 +5861,7 @@ a.tabs-primary__tab-link{
 
 .node-events .field-name-field-tags .field-label{
 	font-weight: lighter;
-	font-family: arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 1em;
 	text-transform: uppercase;
 }
@@ -5844,7 +5872,7 @@ a.tabs-primary__tab-link{
 
 .node-events .field-name-field-start-date .field-label{
 	font-weight: lighter;
-	font-family: arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 1em;
 	text-transform: uppercase;
 }
@@ -5861,7 +5889,7 @@ a.tabs-primary__tab-link{
 
 .node-events .field-name-field-end-date  .field-label{
 	font-weight: lighter;
-	font-family: arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 1em;
 	text-transform: uppercase;
 }
@@ -5872,7 +5900,7 @@ a.tabs-primary__tab-link{
 
 .node-events .field-name-field-theme .field-label{
 	font-weight: lighter;
-	font-family: arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 1em;
 	text-transform: uppercase;
 }
@@ -6071,7 +6099,7 @@ a.tabs-primary__tab-link{
 
 .additional_resource_group.news .field-name-title-field{
 	font-size: 0.8em;
-	font-family: arial;
+	font-family: "Open Sans", sans-serif;
 	background: url("../images/separator_home.jpg") repeat-x scroll 0 100% rgba(0, 0, 0, 0);
 	height: auto;
 	padding-bottom:1.5em;
@@ -6097,7 +6125,7 @@ a.tabs-primary__tab-link{
 
 .additional_resource_group.events .field-name-title-field{
 	font-size: 0.8em;
-	font-family: arial;
+	font-family: "Open Sans", sans-serif;
 	background: url("../images/separator_home.jpg") repeat-x scroll 0 100% rgba(0, 0, 0, 0);
 	height: auto;
 	padding-bottom:1.5em;
@@ -6110,7 +6138,7 @@ a.tabs-primary__tab-link{
 .additional_resource_group.events  span.date-display-single {
 	margin:0;
 	padding:0;
-	font-family: Arial!important;
+	font-family: "Open Sans"!important;
 	font-size: 0.8em;
 	color:#000000;
 	font-weight:bold;
@@ -6143,7 +6171,7 @@ a.tabs-primary__tab-link{
 
 .additional_resource_group.publication .field-name-title-field{
 	font-size: 0.8em;
-	font-family: arial;
+	font-family: "Open Sans", sans-serif;
 	height: auto;
 	padding-bottom: 1.5em;
 	font-weight: bold;
@@ -6210,7 +6238,7 @@ a.tabs-primary__tab-link{
 	background: url("../images/external_link.png") no-repeat scroll 100% 0 transparent;
     border-bottom: 0 none !important;
     color: #003399;
-    font-family: Arial !important;
+    font-family: "Open Sans" !important;
     font-size: 0.8em;
     font-weight: bold;
     line-height: 1.1em;
@@ -6651,7 +6679,7 @@ article.comment p {
 .privacy-policy-oshmail{
 	font-size: 0.9em;
 	font-weight: lighter;
-	font-family: arial;
+	font-family: "Open Sans", sans-serif;
 	color: #003399;
 	margin: 0;
 	text-decoration: none;
@@ -6799,7 +6827,7 @@ article.comment p {
   padding-top: 1em;
   font-weight: bold;
   display: block;
-  font-family: Arial;
+  font-family: "Open Sans", sans-serif;
   text-decoration: none;
   color: #003399!important;
   font-size: 0.9em;
@@ -6871,7 +6899,7 @@ div.contextual-links-wrapper{
 	padding-top: 1em;
 	font-weight:bold;
 	display:block;
-	font-family: Arial;
+	font-family: "Open Sans", sans-serif;
 	text-decoration: none;
 	color: #003399!important;
 	font-size:0.9em;
@@ -6889,7 +6917,7 @@ div.contextual-links-wrapper{
 	padding-top: 1em;
 	font-weight:bold;
 	display:block;
-	font-family: Arial;
+	font-family: "Open Sans", sans-serif;
 	text-decoration: none;
 	color: #003399!important;
 	font-size:0.9em;
@@ -6907,7 +6935,7 @@ div.contextual-links-wrapper{
 	padding-top: 1em;
 	font-weight:bold;
 	display:block;
-	font-family: Arial;
+	font-family: "Open Sans", sans-serif;
 	text-decoration: none;
 	color: #003399!important;
 	font-size:0.9em;
@@ -6925,7 +6953,7 @@ div.contextual-links-wrapper{
 	padding-top: 1em;
 	font-weight:bold;
 	display:block;
-	font-family: Arial;
+	font-family: "Open Sans", sans-serif;
 	text-decoration: none;
 	color: #003399!important;
 	font-size:0.9em;
@@ -6944,7 +6972,7 @@ div.contextual-links-wrapper{
 	padding-top: 1em;
 	font-weight:bold;
 	display:block;
-	font-family: Arial;
+	font-family: "Open Sans", sans-serif;
 	text-decoration: none;
 	color: #003399!important;
 	font-size:0.9em;
@@ -6963,7 +6991,7 @@ div.contextual-links-wrapper{
 	padding-top: 1em;
 	font-weight:bold;
 	display:block;
-	font-family: Arial;
+	font-family: "Open Sans", sans-serif;
 	text-decoration: none;
 	color: #003399!important;
 	font-size:0.9em;
@@ -7031,7 +7059,7 @@ div.contextual-links-wrapper{
     border: 0 none !important;
     color: #003399 !important;
     display: block;
-    font-family: Arial;
+    font-family: "Open Sans", sans-serif;
     font-size: 0.9em;
     font-weight: bold;
     padding-left: 2em;
@@ -7044,7 +7072,7 @@ div.contextual-links-wrapper{
 #block-views-infographic-block-2 h2 {
 	background: none;
     color: #000000;
-    font-family: arial;
+    font-family: "Open Sans", sans-serif;
     font-size: 1em;
     font-weight: normal;
 	float:none;
@@ -7262,7 +7290,7 @@ body.page-node-5429 .oshwiki-featured-articles {
 
 .node-infographic .field-type-file .contextual-links-region{
 	border-bottom: 0 none !important;
-    font-family: arial !important;
+    font-family: "Open Sans" !important;
     font-size: 0.8em;
     font-weight: bold;
     padding-left: 0.3em;
@@ -8119,7 +8147,7 @@ a.contextual-links-trigger{
 	color: #039;
 	cursor: pointer;
 	display: block;
-	font-family: arial;
+	font-family: "Open Sans", sans-serif;
 	font-size: 0.9em;
 	font-weight: bold;
 	height: auto;
@@ -8159,10 +8187,10 @@ display:block!important;
 
 	}
 
-	#page{
-		padding:1em;
+	// #page{
+	// 	padding:1em;
 
-	}
+	// }
 
 	img[alt*="link arrow"]{
 		display:none;
@@ -8596,7 +8624,7 @@ body.page-entity-collection h1#page-title{
 }
 
 #block-views-e-guides-block .view-content .views-row .views-field-field-language {
-    font-family: arial !important;
+    font-family: "Open Sans" !important;
     font-size: 0.8em;
     font-weight: bold;
     text-transform: uppercase;
@@ -8705,3 +8733,361 @@ body.page-entity-collection h1#page-title{
 	margin-bottom: 1em!important;
 	margin-top: 2em!important;
 }
+
+#block-osha-dangerous-substances-block-osha-dangerous-substances .dangerous-substances-sidebar-first {
+	clear: both;
+	width: 216px;
+	float:left;
+	margin-top:-15px;
+	margin-right: 42px;
+}
+
+#block-osha-dangerous-substances-block-osha-dangerous-substances .two_column.dangerous-substances-sidebar-first .h4-title,
+#block-osha-dangerous-substances-block-osha-dangerous-substances .two_column.dangerous-substances-sidebar-first h4
+{
+	clear:both;
+	background: none repeat scroll 0 0 #e8eef7;
+	color: #003399;
+	font-family: "Open Sans Condensed";
+	font-size: 1.35em;
+	font-weight: bold;
+	padding-bottom: 2px;
+	padding-left: 10px;
+}
+
+/*.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper,*/
+.two_column.dangerous-substances-search-list.form-wrapper {
+	float: left;
+}
+
+/*#block-osha-dangerous-substances-osha-dangerous-substances-listing .two_column.dangerous-substances-search-list .h4-title,*/
+/*#block-osha-dangerous-substances-osha-dangerous-substances-listing .two_column.dangerous-substances-search-list h4,*/
+#block-osha-dangerous-substances-osha-dangerous-substances-listing .two_column.dangerous-substances-search-list .h4-title,
+#block-osha-dangerous-substances-osha-dangerous-substances-listing .two_column.dangerous-substances-search-list h4 {
+	clear: both;
+	background: none repeat scroll 0 0 #e8eef7;
+	color: #003399;
+	font-family: "Open Sans Condensed";
+	font-size: 1.35em;
+	font-weight: bold;
+	padding-bottom: 2px;
+	padding-left: 10px;
+}
+
+.node-dangerous-substances.view-mode-osha_search_teaser {
+	clear: both;
+	background: url(/sites/all/themes/osha_frontend/images/back-tit-blue.png) repeat-x scroll 0 100% transparent;
+	margin-bottom: 1em;
+	padding-bottom: 1em;
+}
+
+.node-dangerous-substances.view-mode-osha_search_teaser .field-name-field-image {
+	float: left;
+	margin-right: 1em;
+	padding-top: 8px;
+}
+
+.node-dangerous-substances.view-mode-osha_search_teaser .field-name-field-image img {
+	width: 156px;
+	height: auto;
+}
+
+.node-dangerous-substances .field-name-field-publication-date {
+	font-size: 0.8em;
+}
+
+.node-dangerous-substances.view-mode-osha_search_teaser h2 {
+	font-family: Open Sans Condensed!important;
+	font-size: 1.5em !important;
+	font-weight: bold;
+	background: none;
+	margin: 0;
+	line-height: 1.4em;
+	padding-bottom: 8px;
+}
+
+.node-dangerous-substances.view-mode-osha_search_teaser h2 a {
+	border: 0px!important;
+	font-family: Open Sans Condensed!important;
+	letter-spacing: 0px;
+	color: #003399;
+}
+
+.dangerous-substances-sidebar-first > div > .form-checkboxes,
+.dangerous-substances-sidebar-first #edit-material-country {
+	margin-left: 15px;
+}
+
+.dangerous-substances-sidebar-first .form-item.form-type-checkboxes > label.expand {
+	background: url(/sites/all/themes/osha_frontend/images/triangle-expanded.png) no-repeat scroll 96% center #e8eef7 !important;
+}
+
+.dangerous-substances-sidebar-first .form-item.form-type-checkboxes > label {
+	background: url(/sites/all/themes/osha_frontend/images/triangle-collapsed.png) no-repeat scroll 96% center #e8eef7 !important;
+	border: 0 none;
+	color: #039;
+	cursor: pointer;
+	display: block;
+	font-family: "Open Sans Condensed";
+	font-weight: bold;
+	height: auto;
+	margin-bottom: 0.5em;
+	margin-top: 0.5em;
+	padding-bottom: 2px;
+	padding-left: 10px;
+	padding-top: 2px;
+	padding-right: 33px;
+	width: auto;
+	font-size: 1.1em!important;
+}
+
+.dangerous-substances-sidebar-first {
+	border-top: 0;
+}
+
+#block-osha-dangerous-substances-osha-dangerous-substances-listing .dangerous-substances-sidebar-first {
+	clear: both;
+	width: 216px;
+	float: left;
+	margin-top: -15px;
+	margin-right: 42px;
+}
+.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search > div,
+.two_column.dangerous-substances-search-list.form-wrapper #dangerous-substances-search div {
+	float: left;
+	padding-right: 10px;
+	margin-top: -22px;
+	padding-bottom: 6px;
+	width: 186px;
+	padding-right: 33px;
+}
+
+.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search label,
+.two_column.dangerous-substances-search-list.form-wrapper #dangerous-substances-search label{
+	color: #003399 !important;
+	font-family: "Open Sans" !important;
+	font-size: 0.9em !important;
+	font-weight: bold !important;
+}
+
+.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search #edit-text-wrapper label {
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+}
+
+.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search,
+.two_column.dangerous-substances-search-list.form-wrapper #dangerous-substances-search {
+	float:left;
+	padding-right:10px;
+	background: url("../images/separator_home.jpg") 100% 100% repeat-x;
+	margin-top: 0;
+	width: 100%;
+	padding-bottom: 20px;
+	padding-top: 56px;
+}
+
+.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search .form-item-sort-by,
+.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search .form-item-sort-order,
+.two_column.dangerous-substances-search-list.form-wrapper #dangerous-substances-search .form-item-sort-by,
+.two_column.dangerous-substances-search-list.form-wrapper #dangerous-substances-search .form-item-direction{
+	margin-top: -47px;
+}
+
+.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search .form-submit,
+.two_column.dangerous-substances-search-list.form-wrapper #dangerous-substances-search .form-submit{
+	background: url("../images/searchico.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+	border: 0 none;
+	color: #003399;
+	font-family: "Open Sans Condensed",sans-serif;
+	font-size: 30px;
+	font-weight: bold;
+	padding-bottom: 0.2em;
+	padding-right: 2em;
+	padding-top: 0.2em;
+	text-align: right;
+	text-decoration: none;
+	display: block;
+	padding-left: 10px;
+	float: none;
+	clear: both;
+	position: absolute;
+	margin-top: -20px;
+	margin-left: 189px;
+	text-indent: -99999px;
+	color: #FFF;
+	font-size: 0px;
+	height: 20px;
+	width: 25px;
+}
+
+.dangerous-substances-sidebar-first {
+	margin-top: 0em;
+	margin-right: 3em;
+	width: 19%;
+	margin-left: 1.8em;
+	float: left;
+}
+
+.node-form.node-dangerous_substances-form #edit-field-measurement-method,
+.node-form.node-dangerous_substances-form #edit-field-ec-number,
+.node-form.node-dangerous_substances-form #edit-field-cas-number,
+.node-form.node-dangerous_substances-form #edit-field-provider-url,
+.node-form.node-dangerous_substances-form #edit-field-provider-original,
+.node-form.node-dangerous_substances-form #edit-field-provider,
+.node-form.node-dangerous_substances-form #edit-field-external-url,
+.node-form.node-dangerous_substances-form #edit-field-title-original,
+.node-form.node-dangerous_substances-form #edit-title-field {
+	margin-right: 6px;
+}
+
+.node-form.node-dangerous_substances-form #edit-field-measurement-method-und-0-value,
+.node-form.node-dangerous_substances-form #edit-field-ec-number-und-0-value,
+.node-form.node-dangerous_substances-form #edit-field-cas-number-und-0-value,
+.node-form.node-dangerous_substances-form #edit-field-provider-url-und-0-url,
+.node-form.node-dangerous_substances-form #edit-field-provider-original-und-0-value,
+.node-form.node-dangerous_substances-form #edit-field-provider-und-0-value,
+.node-form.node-dangerous_substances-form #edit-field-external-url-und-0-url,
+.node-form.node-dangerous_substances-form #edit-field-title-original-und-0-value,
+.node-form.node-dangerous_substances-form #edit-title-field-und-0-value {
+	width: 100%;
+}
+
+.node-form.node-dangerous_substances-form #edit-field-item-type .form-type-select {
+	margin-right: 6px;
+}
+
+.node-form.node-dangerous_substances-form #edit_field_item_type_und_chosen {
+	width: 100% !important;
+	width: 100%;
+}
+
+.node-form.node-dangerous_substances-form #edit_field_item_type_und_chosen .chosen-single {
+	width: 100%;
+}
+
+.node-form.node-dangerous_substances-form  #edit-body .filter-wrapper.form-wrapper,
+.node-form.node-dangerous_substances-form  .field-widget-text-textarea .filter-wrapper.form-wrapper {
+	visibility: hidden;
+	display: none;
+}
+
+/*STICKY MENU*/
+.fixed {
+	position: fixed;
+    top: -24px;
+    width: 1160px;
+    z-index: 99;
+}
+/*
+@media screen and (max-width: 1237px) {
+	// .fixed {	
+	// 	position: fixed;
+	// 	top: -24px;
+	// 	width: 100%;
+	// 	z-index: 99;
+
+	// }
+}*/
+.stickey{
+	margin-top:175px;
+}
+/*END STICKET MENU*/
+
+@media screen and (min-width: 1007px) {
+	/*Sticky header
+	*********************************/
+	#header{
+		background-color: white;
+		padding-top: 25px;
+	}
+	#header.fixedHeader{
+		padding-top: 0px;
+	}
+	.fixedHeader{
+		position: fixed;
+		//width: 1160px;
+		width: 100%;
+		z-index: 9999;
+	}
+	.fixedHeader #socialNetworksBlue{
+		display: none;
+	}
+	.fixedHeader #agencyLogo a img{
+		margin-top: 10px;
+	    width: 180px;
+	}
+
+	.fixedHeader #europeLogo{
+	    margin: 2.5em 0em 0em 1.5em;
+	}
+	.fixedHeader #europeLogo img{
+	    width: 50px;
+	}
+
+	.fixedHeader #block-menu-block-1{
+		margin-bottom: 0px;
+	}
+
+	.fixedHeader #block-menu-block-1 #main-menu-links-10488-16{
+		margin-bottom: 0px;
+	}
+	.fixedHeader #block-menu-block-1 #main-menu-links-10348-16{
+		margin-bottom: 0px;
+	}
+	.fixedHeader #languagesAndSearch{
+		width: initial;
+		right: 100px;
+	}
+	.fixedHeader #languagesAndSearch #contact{
+		margin-top: 35px;
+	    font-size: 1em;
+	}
+	.fixedHeader #languagesAndSearch #contact > a{
+		margin-right: 7px;
+	}
+	.fixedHeader #languagesAndSearch #contact > a::before{
+		content: "|";
+		margin-right: 7px;
+	}
+
+	.fixedHeader #languagesAndSearch #contact .printfriendly::before{
+		content: "";
+	}
+	
+	
+	.fixedHeader #languagesAndSearch #contact .a_small,
+	.fixedHeader #languagesAndSearch #contact .a_medium,
+	.fixedHeader #languagesAndSearch #contact .a_big{
+		display: none;
+	}
+	.fixedHeader img[alt*="Select language"]{
+		display: none;
+	}
+	.fixedHeader #block-lang-dropdown-language-content{
+		display: none;
+	}
+
+	/*search header*/
+	.fixedHeader #block-search-form{
+		display: none;
+	}
+
+	/*second header login*/
+	#secondary-menu {
+		float: none !important;
+	    position: absolute !important;
+	    right: 0% !important;
+	    top: 10px !important;
+	}
+
+	.fixedHeader #block-search-form{
+		display: none;
+	}
+
+}
+
+
+
+/*end sticky header*/

@@ -1,0 +1,47 @@
+[
+    {
+        "code": "bites_and_stings",
+        "name": "Bites and stings",
+        "thesaurus_id": "48341D"
+    },
+    {
+        "code": "dermal_contact",
+        "name": "Dermal contact",
+        "thesaurus_id": ""
+    },
+    {
+        "code": "ingestion",
+        "name": "Ingestion",
+        "thesaurus_id": ""
+    },
+    {
+        "code": "inhalation",
+        "name": "Inhalation",
+        "thesaurus_id": "26481E"
+    },
+    {
+        "code": "ocular",
+        "name": "Ocular (through eyes)",
+        "thesaurus_id": ""
+    },
+    {
+        "code": "sharps_and_cuts",
+        "name": "Sharps and cuts",
+        "thesaurus_id": "29161C"
+    },
+    {
+        "code": "skin_absorption",
+        "name": "Skin absorption",
+        "thesaurus_id": "26561E"
+    },
+    {
+        "code": "not_applicable",
+        "name": "Not applicable",
+        "thesaurus_id": ""
+    },
+    {
+        "code": "other",
+        "name": "Other",
+        "thesaurus_id": ""
+    }
+]

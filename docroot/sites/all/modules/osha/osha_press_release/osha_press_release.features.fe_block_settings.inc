@@ -39,7 +39,7 @@ function osha_press_release_default_fe_block_settings() {
         'region' => 'sidebar_second',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 5,
+        'weight' => 25,
       ),
       'seven' => array(
         'region' => '',
@@ -79,7 +79,7 @@ function osha_press_release_default_fe_block_settings() {
         'region' => 'sidebar_second',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 2,
+        'weight' => 20,
       ),
       'seven' => array(
         'region' => '',
@@ -119,7 +119,7 @@ function osha_press_release_default_fe_block_settings() {
         'region' => 'sidebar_second',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 4,
+        'weight' => 24,
       ),
       'seven' => array(
         'region' => '',
@@ -159,7 +159,7 @@ function osha_press_release_default_fe_block_settings() {
         'region' => 'sidebar_second',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 3,
+        'weight' => 22,
       ),
       'seven' => array(
         'region' => '',

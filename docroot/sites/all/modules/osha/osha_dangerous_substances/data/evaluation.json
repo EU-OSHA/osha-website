@@ -1,0 +1,54 @@
+[
+    {
+        "code": "applicable_for_prevention_policies_at_the_employer_s_company_s_level_with_focus_on_smes_and_very_small_enterprises",
+        "name": "Applicable for prevention policies at the employer\u2019s \/ company's level (with focus on SMEs and very small enterprises)"
+    },
+    {
+        "code": "transferable_to_other_companies_sectors_countries",
+        "name": "Transferable to other companies\/sectors\/countries"
+    },
+    {
+        "code": "easy_to_understand_for_the_user",
+        "name": "Easy to understand for the user"
+    },
+    {
+        "code": "focus_where_possible_on_preventing_the_risk_at_source",
+        "name": "Focus where possible on preventing the risk at source"
+    },
+    {
+        "code": "includes_all_relevant_parties_especially_those_who_will_be_affected_by_the_actions",
+        "name": "Includes all relevant parties, especially those who will be affected by the actions"
+    },
+    {
+        "code": "interactive_e_tool",
+        "name": "Interactive - e-tool"
+    },
+    {
+        "code": "comes_from_a_credible_source",
+        "name": "Comes from a credible source"
+    },
+    {
+        "code": "does_not_include_contain_advertising",
+        "name": "Does not include \/ contain advertising"
+    },
+    {
+        "code": "easy_to_use_or_easy_to_navigate_on_the_website",
+        "name": "Easy to use or easy to navigate on the website"
+    },
+    {
+        "code": "innovative_interesting",
+        "name": "Innovative\/interesting"
+    },
+    {
+        "code": "realistic_work_situation",
+        "name": "Realistic work situation"
+    },
+    {
+        "code": "provides_a_contact_for_further_information",
+        "name": "Provides a contact for further information"
+    },
+    {
+        "code": "other",
+        "name": "Other"
+    }
+]

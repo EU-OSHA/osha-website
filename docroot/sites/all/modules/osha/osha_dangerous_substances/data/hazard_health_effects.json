@@ -1,0 +1,82 @@
+[
+    {
+        "code": "allergens",
+        "name": "Allergens",
+        "thesaurus_id": "33801D"
+    },
+    {
+        "code": "skin_sensitisers",
+        "name": "Skin sensitisers",
+        "thesaurus_id": "33921E"
+    },
+    {
+        "code": "asthmagens",
+        "name": "Asthmagens",
+        "thesaurus_id": "33961D"
+    },
+    {
+        "code": "asphyxiants",
+        "name": "Asphyxiants",
+        "thesaurus_id": "34001D"
+    },
+    {
+        "code": "carcinogens",
+        "name": "Carcinogens",
+        "thesaurus_id": "34041D"
+    },
+    {
+        "code": "mutagens",
+        "name": "Mutagens",
+        "thesaurus_id": "34121D"
+    },
+    {
+        "code": "reprotoxic_substances",
+        "name": "Reprotoxic substances",
+        "thesaurus_id": "34161D"
+    },
+    {
+        "code": "neurotoxic_substances",
+        "name": "Neurotoxic substances",
+        "thesaurus_id": "26801D"
+    },
+    {
+        "code": "irritants",
+        "name": "Irritants",
+        "thesaurus_id": "34081D"
+    },
+    {
+        "code": "toxic_substances",
+        "name": "Toxic substances",
+        "thesaurus_id": "34401D"
+    },
+    {
+        "code": "fire_and_explosion",
+        "name": "Fire and explosion",
+        "thesaurus_id": ""
+    },
+    {
+        "code": "heat",
+        "name": "Heat",
+        "thesaurus_id": "41521D"
+    },
+    {
+        "code": "cold",
+        "name": "Cold",
+        "thesaurus_id": "41481D"
+    },
+    {
+        "code": "not_known",
+        "name": "Not known",
+        "thesaurus_id": ""
+    },
+    {
+        "code": "not_applicable",
+        "name": "Not applicable",
+        "thesaurus_id": ""
+    },
+    {
+        "code": "other",
+        "name": "Other",
+        "thesaurus_id": ""
+    }
+]

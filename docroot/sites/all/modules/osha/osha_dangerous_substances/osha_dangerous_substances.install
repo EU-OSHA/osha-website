@@ -1,0 +1,16 @@
+<?php
+
+function osha_dangerous_substances_install() {
+}
+
+/**
+ * MDR-814: Remove publication date and material objective
+ */
+function osha_dangerous_substances_update_7001() {
+  // delete old fields
+  field_delete_field('field_material_objective_other');
+  if ($instance = field_info_instance('node', 'field_publication_date', 'dangerous_substances')) {
+    field_delete_instance($instance);
+  }
+  features_revert_module('osha_dangerous_substances');
+}

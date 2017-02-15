@@ -231,7 +231,9 @@ tools-and-publications/seminars
 legislation/directives/*
 safety-and-health-legislation/european-directives
 node/2544
-legislation/guidelines/*',
+legislation/guidelines/*
+themes/dangerous-substances/search
+themes/dangerous-substances/search/*',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(

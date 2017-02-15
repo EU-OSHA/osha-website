@@ -1,0 +1,324 @@
+<?php
+
+/**
+ * @file
+ *  Creates a time widget for CCK text fields
+ *
+ * @author
+ *   steve@openconcept.ca
+ */
+ 
+/**
+ * Implements hook_field_info().
+ */
+function cck_time_field_info() {
+  return $info = array(
+    'cck_time' => array(
+      'label' => t('Time'),
+      'description' => t('Store a time of day.'),
+      'translatable' => 0,
+      'settings' => array('format' => 24, 'increment' => 1),
+      'instance_settings' => array(),
+      'default_widget' => 'cck_time_select',
+      'default_formatter' => 'cck_time_default',
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_settings_form().
+ */
+function cck_time_field_settings_form($field, $instance, $has_data) {
+  $settings = $field['settings'];
+  $form = array();
+  $form['format'] = array(
+    '#type' => 'select',
+    '#title' => t('Time format'),
+    '#default_value' => $settings['format'],
+    '#options' => array(24 => '24-hour (23:59)', 12 => '12-hour (12:59AM)'),
+    '#description' => t('Record times in 24-hour format or in 12-hour format (with AM/PM).'),
+    '#element_validate' => array('cck_time_settings_format_validate'),
+  );
+  $form['increment'] = array(
+    '#type' => 'select',
+    '#title' => t('Minute increment'),
+    '#default_value' => $settings['increment'],
+    '#options' => array(1 => 1, 5 => 5, 10 => 10, 15 => 15, 30 => 30),
+    '#description' => t('Increment the minute values by this amount.'),
+    '#element_validate' => array('cck_time_settings_increment_validate'),
+  );
+  return $form;
+}
+
+/**
+ * Implements hook_field_instance_settings_form().
+ */
+function cck_time_field_instance_settings_form($field, $instance) {
+  return $form = array();
+}
+
+/**
+ * Validate the field settings form format element.
+ */
+function cck_time_settings_format_validate($element, &$form_state) {
+  $format_ok = array('12', '24');
+  if (!in_array($element['#value'], $format_ok)) {
+    form_set_error('', 'There was a a problem with the time settings. Please check your values.');
+  }
+}
+
+/**
+ * Validate the field instance settings form increment element.
+ */
+function cck_time_settings_increment_validate($element, &$form_state) {
+  $increment_ok = array('1', '5', '10', '15', '30');
+  if (!in_array($element['#value'], $increment_ok)) {
+    form_set_error('', 'There was a a problem with the time settings. Please check your values.');
+  }
+}
+
+/**
+ * Implements hook_field_is_empty().
+ */
+function cck_time_field_is_empty($item, $field) {
+  if ($item['hour'] === '' || $item['minute'] === '') {
+      return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+ * Implements hook_field_presave().
+ */
+function cck_time_field_presave($entity_type, $entity, $field, $instance, $langcode, &$items) {
+  if (empty($items)) {
+    return;
+  }
+  if (($items[0]['hour'] === '') || ($items[0]['minute'] === '')) {
+    return;
+  }
+  //intentional lack of support for multiple values
+  $items[0]['value'] = $items[0]['hour'] . ':'. $items[0]['minute'];
+  if (isset($items[0]['meridiem'])) {
+    $items[0]['value'] .= $items[0]['meridiem'];
+  }
+}
+
+/**
+ * Implements hook_field_widget_info().
+ */
+function cck_time_field_widget_info() {
+  return $info = array(
+    'cck_time_select' => array(
+      'label' => t('Time'),
+      'field types' => array('cck_time'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_widget_form().
+ */
+function cck_time_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
+  $element += array(
+    '#type' => 'cck_time_select',
+    '#default_value' => ''
+  );
+  //deal with default values when editing a form
+  if (isset($items[0]['value'])) {
+    //value comes from a previously stored node with this cck field; 
+    //divide the single string value from the database into its drop-down boxes on the form
+    list($hour, $minute) = explode(':', $items[0]['value']);
+    if ($field['settings']['format'] == 12) {
+      $items[0]['minute'] = substr($minute, 0, 2);
+      $items[0]['meridiem'] = substr($minute, 2, 2);
+    } 
+    else {
+      $items[0]['minute'] = $minute;
+    }
+    $items[0]['hour'] = $hour;
+    $element['#default_value'] = $items[0];
+  }
+  elseif (isset($items[0]['hour'])) {
+    //brand-new node: assign the default values from the cck field setup form that
+    //happen to be stored in $items[0]
+    $element['#default_value'] = $items[0];
+  }
+  elseif (!$instance['required']) {
+    //CCK field not required, so could be empty intentionally
+    $element['#default_value'] = array('hour' => '', 'minute' => '');
+  }
+  elseif (isset($items[0])) {
+    //the CCK field was added later to the node; the field is empty -> get the default values
+    $element['#default_value'] = $instance['widget']['default_value'][0];
+  }
+    return $element;
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function cck_time_field_formatter_info() {
+  return $info = array(
+    'cck_time_default' => array(
+      'label' => t('Time'),
+      'field types' => array('cck_time'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_settings_form().
+ */
+function cck_time_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
+  return $form = array();
+}
+
+/**
+ * Implements hook_field_formatter_settings_summary().
+ */
+function cck_time_field_formatter_settings_summary($field, $instance, $view_mode) {
+  return $summary = t('No summary available.');
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function cck_time_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+  foreach ($items as $item) {
+    $element[]['#markup'] = theme('cck_time_formatter_default', array('item' => $item['value']));
+  }
+  return $element;
+}
+ 
+/**
+ * Implements hook_element_info().
+ */
+function cck_time_element_info() {
+  $elements = array();
+  $elements['cck_time_select'] =  array(
+    '#input' => TRUE,
+    '#columns' => array('value'), 
+    '#delta' => 0,  //new from text.module
+    '#process' => array('cck_time_select_process'),
+    '#theme_wrappers' => array('form_element'),
+  );
+  return $elements;
+}
+
+/**
+ * Process the element before displaying the field.
+ */
+function cck_time_select_process($element, &$form_state, $form) {
+  // to do: add CSS using #attach.
+  drupal_add_css(drupal_get_path('module', 'cck_time') . '/cck_time.css', 'module', 'screen', FALSE);
+  $field = field_widget_field($element, $form_state);
+  $instance = field_widget_instance($element, $form_state);
+  $delta = $element['#delta'];
+  $required = ($delta == 0 && $instance['required']) ? $element['#required'] : FALSE;
+  $format = $field['settings']['format'];
+  $increment = $field['settings']['increment'];
+  if ($increment < 1) {
+     $increment = 1; 
+  }
+  switch ($format) {
+    case 12 :
+      $h_min = 1;
+      $h_max = 12;
+      break;
+  
+    case 24 :
+    default;
+      $h_min = 0;
+      $h_max = 23;
+      break;
+  }
+  // hours
+  $hours = $required ? array() : array('' => '');
+  for ($i = $h_min; $i <= $h_max; $i++) {
+   if ($format == 24) {
+      $val = ($i < 10) ? "0$i" : $i;
+      $hours[$val] = $val;
+    }
+    else {
+      $hours[$i] = $i;
+    }
+  }
+  
+  // minutes
+  $minutes = $required ? array() : array('' => '');
+  for ($i = 0; $i <= 59; $i+=$increment) {
+    $val = ($i < 10) ? "0$i" : $i;
+    $minutes[$val] = $val;
+  }
+  
+  $element['#type'] = 'fieldset';
+  $element['#tree'] = TRUE;
+  $element['#attributes'] = array('class' => 'cck-time');
+  $element['#title'] = $instance['label'];
+  
+  $element['hour'] = array(
+      '#type' => 'select',
+      '#title' => t('Hour'),
+      '#title_display' => 'invisible',
+      '#options' => $hours,
+      '#required' => $required,
+      '#default_value' => isset($element['#value']['hour']) ? $element['#value']['hour'] : NULL,
+      '#prefix' => '<div class="cck-time-element">',
+      '#suffix' => '</div>',
+  );
+  $element['minute'] = array(
+      '#type' => 'select',
+      '#title' => t('Minute'),
+      '#title_display' => 'invisible',
+      '#options' => $minutes,
+      '#required' => $required,
+      '#default_value' => isset($element['#value']['minute']) ? $element['#value']['minute'] : NULL,
+      '#prefix' => '<div class="cck-time-element">',
+      '#suffix' => '</div>',
+  );
+  if ($format == 12) {
+    $element['meridiem'] = array(
+        '#type' => 'select',
+        '#title' => t('Meridiem'),
+      '#title_display' => 'invisible',
+        '#options' => array('AM' => 'AM', 'PM' => 'PM'),
+        '#required' => $required,
+        '#default_value' => isset($element['#value']['meridiem']) ? $element['#value']['meridiem'] : NULL,
+        '#prefix' => '<div class="cck-time-element">',
+        '#suffix' => '</div>',    
+    );
+  }
+  return $element;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function cck_time_theme() {
+  return array(
+    'cck_time_select' => array(
+      'render element' => 'element',
+    ),
+    'cck_time_formatter_default' => array(
+      'variables' => array('item' => 'foobar'),
+    ),
+  );
+}
+
+/**
+ * Theme function for 'default' text field formatter.
+ */
+function theme_cck_time_formatter_default($variables) {
+  return '<span>' . $variables['item'] . '</span>';
+}
+
+/**
+ * FAPI theme for an individual text element.
+ */
+function theme_cck_time_select($variables) {
+    //no idea what should go in here; the date module suggests
+    //that one moves the fieldset declaration in here
+    return $variables['element']['#children'];
+}

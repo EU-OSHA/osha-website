@@ -67,6 +67,7 @@ function osha_authentication_get_role_and_section_from_dn($group_dn) {
     'EVENTEDT' => 'Events Editor',
     'LAYVAL' => 'Layout Validator',
     'READ' => 'authenticated user',
+    'OSHCOLL' => 'Dangerous substances',
     'TRLMN' => 'Translation Manager',
     'TRLIAS' => 'Translation Liaison',
     // Per language
@@ -233,6 +234,10 @@ function osha_authentication_ldap_get_site_users($ldap_server) {
   $uids = array_unique($uids);
   foreach($uids as $uid) {
     if ($ldap_account = $ldap_server->search('ou=people,dc=osha,dc=europa,dc=eu', 'uid=' . $uid, array('dn', 'mail'))) {
+      if (empty($ldap_account[0]['dn'])) {
+        watchdog('osha_authentication', 'uid not found: !uid', array('!uid' => $uid), WATCHDOG_WARNING);
+        continue;
+      }
       if (empty($ldap_account[0]['mail'][0])) {
         $mail = $uid . '@fake-domain.com';
       }

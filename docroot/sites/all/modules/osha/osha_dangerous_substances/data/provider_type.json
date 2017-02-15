@@ -1,0 +1,107 @@
+[
+    {
+        "code": "employers_organisations",
+        "name": "Employers organisations",
+        "thesaurus_id": "06121C"
+    },
+    {
+        "code": "eu_advisory_committee_for_safety_and_health_at_work",
+        "name": "EU - Advisory Committee for Safety and Health at Work",
+        "thesaurus_id": "07361C"
+    },
+    {
+        "code": "eu_sectoral_social_dialogue_committees",
+        "name": "EU - Sectoral Social Dialogue Committees",
+        "thesaurus_id": "03331D"
+    },
+    {
+        "code": "eu_senior_labour_inspectors_committee_slic",
+        "name": "EU - Senior Labour Inspectors Committee SLIC",
+        "thesaurus_id": "07401C"
+    },
+    {
+        "code": "eu_agencies_other",
+        "name": "EU Agencies : Other",
+        "thesaurus_id": "07601C"
+    },
+    {
+        "code": "eu_agencies_echa",
+        "name": "EU Agencies: ECHA",
+        "thesaurus_id": ""
+    },
+    {
+        "code": "eu_commission_dg_empl",
+        "name": "EU Commission DG EMPL",
+        "thesaurus_id": "06721D"
+    },
+    {
+        "code": "european_agency_safety_health_work",
+        "name": "European Agency for Safety and Health at Work",
+        "thesaurus_id": "05961C"
+    },
+    {
+        "code": "european_commission",
+        "name": "European Commission",
+        "thesaurus_id": "06681C"
+    },
+    {
+        "code": "international_organisations",
+        "name": "International organisations (e.g. ILO, ISSA, WHO, ICOH)",
+        "thesaurus_id": "07881B"
+    },
+    {
+        "code": "labour_inspectorate",
+        "name": "Labour inspectorate",
+        "thesaurus_id": "22321C"
+    },
+    {
+        "code": "national_authorities_ministries_etc",
+        "name": "National authorities, ministries, etc.",
+        "thesaurus_id": "06001C"
+    },
+    {
+        "code": "national_osh_institute",
+        "name": "National OSH Institute",
+        "thesaurus_id": ""
+    },
+    {
+        "code": "ngos",
+        "name": "NGOs",
+        "thesaurus_id": "01441C"
+    },
+    {
+        "code": "occupational_accident_insurance",
+        "name": "Occupational Accident insurance",
+        "thesaurus_id": ""
+    },
+    {
+        "code": "osh_services",
+        "name": "OSH services",
+        "thesaurus_id": "22721B"
+    },
+    {
+        "code": "professional_associations",
+        "name": "Professional associations",
+        "thesaurus_id": ""
+    },
+    {
+        "code": "research_institutes",
+        "name": "Research institutes (Universities)",
+        "thesaurus_id": ""
+    },
+    {
+        "code": "trade_unions",
+        "name": "Trade Unions",
+        "thesaurus_id": "56681E"
+    },
+    {
+        "code": "training_organisations",
+        "name": "Training organisations",
+        "thesaurus_id": "11001C"
+    },
+    {
+        "code": "other",
+        "name": "Other",
+        "thesaurus_id": ""
+    }
+]

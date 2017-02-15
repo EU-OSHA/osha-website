@@ -31,6 +31,20 @@ body {
 	margin-right: 0;
 	text-align: center;
 	width: auto;
+	position: inherit;
+}
+
+img[alt*="Select language"]{
+	top: 122px !important;
+    left: 161px !important;
+}
+
+#languagesAndSearch #contact > a{
+	margin-right: 7px;
+}
+#languagesAndSearch #contact > a::before{
+	content: "|";
+	margin-right: 7px;
 }
 
 
@@ -79,7 +93,7 @@ body {
 }
 
 #languagesAndSearch img {
-    left: 14em;
+    //left: 14em;
     margin-top: 1em!important;
     position: absolute;
     vertical-align: middle;
@@ -87,7 +101,9 @@ body {
  }
 
 @media screen and (max-width: 809px) {
-	#languagesAndSearch img { padding-left: 13px;}
+	#languagesAndSearch img { 
+	//padding-left: 13px;
+	}
 }
 /* END HEADER */
 

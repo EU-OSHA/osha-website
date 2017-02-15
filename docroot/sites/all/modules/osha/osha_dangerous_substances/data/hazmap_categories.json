@@ -1,0 +1,130 @@
+[
+    {
+        "code": "applying_glues_or_sealants",
+        "name": "Applying Glues or Sealants"
+    },
+    {
+        "code": "applying_pesticides",
+        "name": "Applying Pesticides"
+    },
+    {
+        "code": "applying_surface_coatings",
+        "name": "Applying Surface Coatings"
+    },
+    {
+        "code": "beauty_culture",
+        "name": "Beauty Culture"
+    },
+    {
+        "code": "cleaning_or_disinfecting",
+        "name": "Cleaning or Disinfecting"
+    },
+    {
+        "code": "construction",
+        "name": "Construction"
+    },
+    {
+        "code": "contact_with_humans_or_animals",
+        "name": "Contact with Humans or Animals"
+    },
+    {
+        "code": "dyeing_or_tanning",
+        "name": "Dyeing or Tanning"
+    },
+    {
+        "code": "electroplating",
+        "name": "Electroplating"
+    },
+    {
+        "code": "food_processing",
+        "name": "Food Processing"
+    },
+    {
+        "code": "handling_animals",
+        "name": "Handling Animals"
+    },
+    {
+        "code": "handling_chemicals",
+        "name": "Handling Chemicals"
+    },
+    {
+        "code": "handling_insects",
+        "name": "Handling Insects"
+    },
+    {
+        "code": "handling_plants",
+        "name": "Handling Plants"
+    },
+    {
+        "code": "heating_or_machining_plastics_rubber",
+        "name": "Heating or Machining Plastics\/Rubber"
+    },
+    {
+        "code": "heating_machining_or_welding_metal",
+        "name": "Heating, Machining, or Welding Metal"
+    },
+    {
+        "code": "installing_or_removing_insulation",
+        "name": "Installing or Removing Insulation"
+    },
+    {
+        "code": "manufacturing",
+        "name": "Manufacturing"
+    },
+    {
+        "code": "medical_and_dental_services",
+        "name": "Medical and Dental Services"
+    },
+    {
+        "code": "mining_or_quarrying",
+        "name": "Mining or Quarrying"
+    },
+    {
+        "code": "miscellaneous",
+        "name": "Miscellaneous"
+    },
+    {
+        "code": "printing_or_photography",
+        "name": "Printing or Photography"
+    },
+    {
+        "code": "processing_materials",
+        "name": "Processing Materials"
+    },
+    {
+        "code": "processing_moldy_organic_materials",
+        "name": "Processing Moldy Organic Materials"
+    },
+    {
+        "code": "removing_coatings",
+        "name": "Removing Coatings"
+    },
+    {
+        "code": "smelting_and_casting_metal",
+        "name": "Smelting and Casting Metal"
+    },
+    {
+        "code": "spill_or_confined_space_accident",
+        "name": "Spill or Confined Space Accident"
+    },
+    {
+        "code": "woodworking",
+        "name": "Woodworking"
+    },
+    {
+        "code": "working_indoors",
+        "name": "Working Indoors"
+    },
+    {
+        "code": "working_outdoors",
+        "name": "Working Outdoors"
+    },
+    {
+        "code": "not_applicable",
+        "name": "Not applicable"
+    },
+    {
+        "code": "other",
+        "name": "Other"
+    }
+]

@@ -29,8 +29,25 @@ function osha_sites_migration_menu() {
 function osha_sites_migration_form_node_form_alter(&$form, &$form_state, $form_id) {
   // Hide migration source field.
   if (isset($form['field_migration_source'])) {
-//    $form['field_migration_source']['#access'] = FALSE;
+    $form['field_migration_source']['#access'] = FALSE;
   }
+  if (!empty($form['#entity']->field_migration_source)) {
+    drupal_set_message('You are not allowed to edit imported content', 'warning');
+    $form['#access'] = FALSE;
+  }
+}
+
+/**
+ * Implements hook_node_access().
+ */
+function osha_sites_migration_node_access($node, $op, $account) {
+  if ($op == 'update') {
+    // Don't allow edit on migrated nodes.
+    if (!empty($node->field_migration_source)) {
+      return NODE_ACCESS_DENY;
+    }
+  }
+  return NODE_ACCESS_IGNORE;
 }
 
 

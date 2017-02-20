@@ -413,4 +413,7 @@ function osha_update_7021() {
 
 function osha_update_7022() {
   module_enable(['osha_sites_migration']);
+  variable_set('hwc_migration_HWCEvents_url', '/ncw-export/events');
+  variable_set('hwc_migration_HWCNews_url', '/ncw-export/news');
+  variable_set('hwc_migration_root_url', 'https://healthy-workplaces.eu');
 }

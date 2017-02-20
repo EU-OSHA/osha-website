@@ -183,7 +183,6 @@ abstract class AbstractNCWNodeMigration extends Migration {
         '!klass' => get_class($this),
         '!id' => $row->nid
       ));
-      var_dump($this->site_source);
       $row->field_migration_source = $this->site_source;
       $row->path = !empty($row->path['alias']) ? $row->path['alias'] : NULL;
       // Normalize JSON structure, to match migrate expectations for field data
@@ -304,38 +303,28 @@ abstract class AbstractNCWNodeMigration extends Migration {
     $removed = $map->getRowsNeedingUpdate(10000);
     $to_be_removed = array();
     if (!empty($removed)) {
-      if (strpos($this->arguments['machine_name'], 'tax_') === 0) {
-        // TODO ?! Removing terms that don't exists anymore
-        // Similar as for nodes below.
+      // Check if the needs review nodes are indeed missing in source.
+      foreach ($removed as $to_remove) {
+        $url = $source->itemURL($to_remove->sourceid1);
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_NOBODY, true);
+        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 5);
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+        $result = curl_exec($curl);
+        $info = curl_getinfo($curl);
+        curl_close($curl);
+        if (!empty($info['http_code']) && $info['http_code'] == 404) {
+          $to_be_removed[] = $to_remove->destid1;
+
+          // Remove the mapping
+          $this->getMap()->delete(array($to_remove->sourceid1));
+        }
       }
-      else {
-        // Check if the needs review nodes are indeed missing in source.
-        foreach ($removed as $to_remove) {
-          $url = $source->itemURL($to_remove->sourceid1);
-          $curl = curl_init();
-          curl_setopt($curl, CURLOPT_URL, $url);
-          curl_setopt($curl, CURLOPT_NOBODY, true);
-          curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 5);
-          curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-          $result = curl_exec($curl);
-          $info = curl_getinfo($curl);
-          curl_close($curl);
-          // Don't remove the mapping because it might get published again on source.
-//          // Remove the mapping
-//          if (!empty($info['http_code']) && $info['http_code'] == 404) {
-//            $to_be_removed[] = $to_remove->destid1;
-//            $this->getMap()->delete(array($to_remove->sourceid1));
-//          }
-        }
-        if (!empty($to_be_removed)) {
-          $nodes = node_load_multiple($to_be_removed);
-          foreach ($nodes as $node) {
-            $node->status = 0;
-            node_save($node);
-          }
-          watchdog('ncw_migration', 'Unpublishing NODES that are not in the source anymore (@migration): !nids.',
-            array('!nids' => implode(', ', $to_be_removed), '@migration' => $this->arguments['machine_name']), WATCHDOG_INFO);
-        }
+      if (!empty($to_be_removed)) {
+        node_delete_multiple($to_be_removed);
+        watchdog('ncw_migration', 'Deleting NODES that are not in the source anymore (@migration): !nids.',
+          array('!nids' => implode(', ', $to_be_removed), '@migration' => $this->arguments['machine_name']), WATCHDOG_INFO);
       }
     }
   }

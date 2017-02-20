@@ -48,8 +48,6 @@ class HWCEventsMigration extends AbstractNCWNodeMigration {
       'field_tags',
       'field_activity',
       'field_event_type',
-      'field_event_in_amp',
-      'field_for_the_web',
       ), parent::getManuallyMigratedFields());
   }
 
@@ -58,8 +56,8 @@ class HWCEventsMigration extends AbstractNCWNodeMigration {
     $row->field_tags = osha_migration_normalize_code_term_reference($row->field_tags, 'field_tags_code', 'tags');
     $row->field_activity = osha_migration_normalize_code_term_reference($row->field_activity, 'field_activity_code', 'activity');
     $row->field_event_type = 'Event';
-    $row->field_for_the_web = 0;
-    $row->field_event_in_amp = 0;
+    $row->field_for_the_web = 'Yes';
+    $row->field_event_in_amp = 'No';
     // field_aditional_resources
 //    $fi = field_info_field('field_aditional_resources');
 //    osha_migration_normalize_field_entityreference($row, 'field_aditional_resources', $fi);
@@ -94,6 +92,8 @@ class HWCEventsSource extends AbstractNCWNodeSource {
       'field_archived',
       'field_tags',
       'field_related_documents',
+      'field_event_in_amp',
+      'field_for_the_web',
     );
     return array_combine($fields, $fields);
   }

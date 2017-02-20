@@ -31,9 +31,12 @@ function osha_sites_migration_form_node_form_alter(&$form, &$form_state, $form_i
   if (isset($form['field_migration_source'])) {
     $form['field_migration_source']['#access'] = FALSE;
   }
+  if (isset($form['field_source_url'])) {
+    $form['field_source_url']['#access'] = FALSE;
+  }
   if (!empty($form['#entity']->field_migration_source)) {
     drupal_set_message('You are not allowed to edit imported content', 'warning');
-    $form['#access'] = FALSE;
+//    $form['#access'] = FALSE;
   }
 }
 

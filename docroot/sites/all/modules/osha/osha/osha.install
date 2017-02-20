@@ -410,3 +410,7 @@ function osha_update_7021() {
   features_revert_module('osha_news');
   features_revert_module('osha_press_release');
 }
+
+function osha_update_7022() {
+  module_enable(['osha_sites_migration']);
+}

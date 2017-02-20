@@ -1,0 +1,5 @@
+<?php
+
+function osha_news_update_7001() {
+  features_revert_module('osha_news');
+}

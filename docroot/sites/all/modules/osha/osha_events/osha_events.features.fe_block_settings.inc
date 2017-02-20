@@ -160,7 +160,7 @@ node/5322',
         'region' => 'sidebar_second',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 3,
+        'weight' => 23,
       ),
       'seven' => array(
         'region' => '',

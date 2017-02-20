@@ -220,6 +220,10 @@ function osha_newsletter_views_default_views() {
   $handler->display->display_options['sorts']['type']['field'] = 'type';
   $handler->display->display_options['sorts']['type']['exposed'] = TRUE;
   $handler->display->display_options['sorts']['type']['expose']['label'] = 'Type';
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+  );
   /* Filter criterion: Content: Title (title_field) */
   $handler->display->display_options['filters']['title_field_value']['id'] = 'title_field_value';
   $handler->display->display_options['filters']['title_field_value']['table'] = 'field_data_title_field';
@@ -415,6 +419,13 @@ function osha_newsletter_views_default_views() {
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['filters']['status']['group'] = 2;
+  /* Filter criterion: Content: Migration Source (field_migration_source) */
+  $handler->display->display_options['filters']['field_migration_source_value']['id'] = 'field_migration_source_value';
+  $handler->display->display_options['filters']['field_migration_source_value']['table'] = 'field_data_field_migration_source';
+  $handler->display->display_options['filters']['field_migration_source_value']['field'] = 'field_migration_source_value';
+  $handler->display->display_options['filters']['field_migration_source_value']['operator'] = 'not empty';
+  $handler->display->display_options['filters']['field_migration_source_value']['group'] = 2;
 
   /* Display: Newsletter content selection */
   $handler = $view->new_display('page', 'Newsletter content selection', 'newsletter_selection_view_page');

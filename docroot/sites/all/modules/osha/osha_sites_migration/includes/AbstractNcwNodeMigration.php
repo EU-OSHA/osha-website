@@ -223,7 +223,7 @@ abstract class AbstractNCWNodeMigration extends Migration {
    */
   public function prepare($entity, stdClass $row) {
     $entity->workbench_moderation_state_new = OSHA_WORKFLOW_STATE_DRAFT;
-    if (!empty($row->field_show_in_ncw)) {
+    if (!empty($row->field_show_in_ncw[0])) {
       $entity->status = 1;
       $entity->workbench_moderation_state_new = OSHA_WORKFLOW_STATE_PUBLISHED;
     }

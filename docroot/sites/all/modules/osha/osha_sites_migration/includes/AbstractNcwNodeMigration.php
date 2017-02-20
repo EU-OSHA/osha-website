@@ -78,6 +78,7 @@ abstract class AbstractNCWNodeMigration extends Migration {
 
     $this->addFieldMapping('field_source_url', 'full_url');
     $this->addFieldMapping('field_migration_source', 'field_migration_source');
+    $this->addFieldMapping('field_show_in_ncw', 'field_show_in_ncw');
 //    $this->addFieldMapping('path', 'path');
     $this->addFieldMapping('workbench_access')->defaultValue('section'); // Assign default section
 
@@ -222,13 +223,9 @@ abstract class AbstractNCWNodeMigration extends Migration {
    */
   public function prepare($entity, stdClass $row) {
     $entity->workbench_moderation_state_new = OSHA_WORKFLOW_STATE_DRAFT;
-    if (!empty($row->field_content_migrate_to)) {
-      foreach ($row->field_content_migrate_to[LANGUAGE_NONE] as $val) {
-        if ($val['value'] == 'ncw') {
-          $entity->status = 1;
-          $entity->workbench_moderation_state_new = OSHA_WORKFLOW_STATE_PUBLISHED;
-        }
-      }
+    if (!empty($row->field_show_in_ncw)) {
+      $entity->status = 1;
+      $entity->workbench_moderation_state_new = OSHA_WORKFLOW_STATE_PUBLISHED;
     }
   }
 

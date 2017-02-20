@@ -34,9 +34,12 @@ function osha_sites_migration_form_node_form_alter(&$form, &$form_state, $form_i
   if (isset($form['field_source_url'])) {
     $form['field_source_url']['#access'] = FALSE;
   }
+  if (isset($form['field_show_in_ncw'])) {
+    $form['field_show_in_ncw']['#access'] = FALSE;
+  }
   if (!empty($form['#entity']->field_migration_source)) {
     drupal_set_message('You are not allowed to edit imported content', 'warning');
-//    $form['#access'] = FALSE;
+    $form['#access'] = FALSE;
   }
 }
 
@@ -51,6 +54,20 @@ function osha_sites_migration_node_access($node, $op, $account) {
     }
   }
   return NODE_ACCESS_IGNORE;
+}
+
+/**
+ * Implements hook_url_inbound_alter().
+ */
+function osha_sites_migration_url_inbound_alter(&$path, $original_path, $path_language) {
+  if ($node = menu_get_object('node', 1, $path)) {
+    if (!empty($node->field_migration_source)
+      && !empty($node->field_source_url)
+      && empty($node->field_show_in_ncw[LANGUAGE_NONE][0]['value'])
+    ) {
+      drupal_goto($node->field_source_url[LANGUAGE_NONE][0]['url'], [], 301);
+    }
+  }
 }
 
 

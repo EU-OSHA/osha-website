@@ -70,6 +70,7 @@ features[field_instance][] = node-events-field_organization
 features[field_instance][] = node-events-field_organized_by_eu_osha
 features[field_instance][] = node-events-field_related_documents
 features[field_instance][] = node-events-field_satisfaction_rate
+features[field_instance][] = node-events-field_show_in_ncw
 features[field_instance][] = node-events-field_source_url
 features[field_instance][] = node-events-field_start_date
 features[field_instance][] = node-events-field_tags

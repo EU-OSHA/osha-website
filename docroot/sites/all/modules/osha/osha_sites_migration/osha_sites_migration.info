@@ -8,4 +8,5 @@ dependencies[] = link
 dependencies[] = list
 features[features_api][] = api:2
 features[field_base][] = field_migration_source
+features[field_base][] = field_show_in_ncw
 features[field_base][] = field_source_url

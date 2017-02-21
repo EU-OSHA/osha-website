@@ -110,14 +110,14 @@ abstract class AbstractNCWNodeSource extends MigrateSource {
         }
         else {
           $msg = format_string('Failed to read data from !url', array('!url' => $node_url));
-          watchdog('ncw_migration', $msg, [], WATCHDOG_ERROR);
+          watchdog('osha_sites_migration', $msg, [], WATCHDOG_ERROR);
           $this->rows[$id] = NULL;
         }
       }
     }
     else {
       $msg = format_string('Failed to read data from !url', array('!url' => $this->endpoint_url));
-      watchdog('ncw_migration', $msg, [], WATCHDOG_ERROR);
+      watchdog('osha_sites_migration', $msg, [], WATCHDOG_ERROR);
       throw new MigrateException($msg, Migration::MESSAGE_ERROR);
     }
     osha_sites_migration_debug('!klass: Done reading items', array('!klass' => get_class($this)));

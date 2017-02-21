@@ -60,12 +60,22 @@ function osha_sites_migration_node_access($node, $op, $account) {
  * Implements hook_url_inbound_alter().
  */
 function osha_sites_migration_url_inbound_alter(&$path, $original_path, $path_language) {
+  global $language;
+  // Redirect migrated pages to source website, but with correct language.
+  if (empty($orig_path_source) && empty($orig_path_alias)) {
+    $source_en = drupal_lookup_path('source', $original_path, 'en');
+    if (!empty($source_en)) {
+      $path = $source_en;
+    }
+  }
   if ($node = menu_get_object('node', 1, $path)) {
+    $en_url = $node->field_source_url[LANGUAGE_NONE][0]['url'];
+    $url = preg_replace(['/\/en\//'], ["/$language->language/"], $en_url);
     if (!empty($node->field_migration_source)
       && !empty($node->field_source_url)
       && empty($node->field_show_in_ncw[LANGUAGE_NONE][0]['value'])
     ) {
-      drupal_goto($node->field_source_url[LANGUAGE_NONE][0]['url'], [], 301);
+      drupal_goto($url, [], 301);
     }
   }
 }
@@ -114,20 +124,20 @@ function osha_sites_migration_cronapi() {
  * Implements hook_cron().
  */
 function osha_sites_migration_cron() {
+  foreach (osha_sites_migration_migrate_api()['migrations'] as $key => $data) {
+    osha_sites_migration_run_single($key);
+  }
 //  include_once 'ncw_migration.drush.inc';
 //  drush_ncw_migration_hwc_migrate_all();
 }
 
 /**
- * List of bundles periodically updated from the corporate website
+ * List of bundles periodically updated from other websites website
  * @return array
  *   Array of bundles
  */
 function osha_sites_migration_get_migrated_bundles() {
-  return array(
-    'publication', 'events', 'news', 'note_to_editor', 'press_contact',
-    'press_release', 'infographics',
-  );
+  return ['events', 'news'];
 }
 
 /**
@@ -140,7 +150,6 @@ function osha_sites_migration_get_migrated_bundles() {
  * @throws \Exception
  */
 function osha_sites_migration_run_single($machine_name) {
-  migrate_static_registration(array($machine_name));
   /** @var Migration $migration */
   $migration = Migration::getInstance($machine_name);
 //  $migration->prepareUpdate();
@@ -150,8 +159,8 @@ function osha_sites_migration_run_single($machine_name) {
   }
   else {
     watchdog(
-      'ncw_migration',
-      '[CRON]Last CW import did not finished successfully (machine:!machine_name)',
+      'osha_sites_migration',
+      '[CRON]Last import did not finished successfully (machine:!machine_name)',
       array('!machine_name' => $machine_name)
     );
     return FALSE;

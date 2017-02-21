@@ -320,7 +320,7 @@ abstract class AbstractNCWNodeMigration extends Migration {
       }
       if (!empty($to_be_removed)) {
         node_delete_multiple($to_be_removed);
-        watchdog('ncw_migration', 'Deleting NODES that are not in the source anymore (@migration): !nids.',
+        watchdog('osha_sites_migration', 'Deleting NODES that are not in the source anymore (@migration): !nids.',
           array('!nids' => implode(', ', $to_be_removed), '@migration' => $this->arguments['machine_name']), WATCHDOG_INFO);
       }
     }

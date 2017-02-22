@@ -93,3 +93,9 @@ function osha_infographics_change_menu_position_rules() {
     osha_add_menu_position_rule('Infographics Menu Rule', $parent_menu, $condition);
   }
 }
+
+
+function osha_infographics_update_7005() {
+  // revert to create the new field
+  features_revert_module('osha_infographics');
+}

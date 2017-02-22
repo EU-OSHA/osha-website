@@ -1,0 +1,178 @@
+<?php
+
+include_once 'includes/AbstractNcwNodeMigration.php';
+include_once 'includes/AbstractNcwNodeSource.php';
+include_once 'includes/migrate_utils.php';
+include_once 'osha_sites_migration.migrate.news.inc';
+include_once 'osha_sites_migration.migrate.events.inc';
+
+
+/**
+ * Implements hook_menu().
+ */
+function osha_sites_migration_menu() {
+  $items['admin/config/system/osha_sites_migration'] = array(
+    'title' => 'OSHA sites migration configuration',
+    'description' => 'Configure parameters for the migrations',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('osha_sites_migration_admin_config_form'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'osha_sites_migration.admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function osha_sites_migration_form_node_form_alter(&$form, &$form_state, $form_id) {
+  // Hide migration source field.
+  if (isset($form['field_migration_source'])) {
+    $form['field_migration_source']['#access'] = FALSE;
+  }
+  if (isset($form['field_source_url'])) {
+    $form['field_source_url']['#access'] = FALSE;
+  }
+  if (isset($form['field_show_in_ncw'])) {
+    $form['field_show_in_ncw']['#access'] = FALSE;
+  }
+  if (!empty($form['#entity']->field_migration_source)) {
+    drupal_set_message('You are not allowed to edit imported content', 'warning');
+    $form['#access'] = FALSE;
+  }
+}
+
+/**
+ * Implements hook_node_access().
+ */
+function osha_sites_migration_node_access($node, $op, $account) {
+  if ($op == 'update') {
+    // Don't allow edit on migrated nodes.
+    if (!empty($node->field_migration_source)) {
+      return NODE_ACCESS_DENY;
+    }
+  }
+  return NODE_ACCESS_IGNORE;
+}
+
+/**
+ * Implements hook_url_inbound_alter().
+ */
+function osha_sites_migration_url_inbound_alter(&$path, $original_path, $path_language) {
+  global $language;
+  // Redirect migrated pages to source website, but with correct language.
+  if (empty($orig_path_source) && empty($orig_path_alias)) {
+    $source_en = drupal_lookup_path('source', $original_path, 'en');
+    if (!empty($source_en)) {
+      $path = $source_en;
+    }
+  }
+  if ($node = menu_get_object('node', 1, $path)) {
+    $en_url = $node->field_source_url[LANGUAGE_NONE][0]['url'];
+    $url = preg_replace(['/\/en\//'], ["/$language->language/"], $en_url);
+    if (!empty($node->field_migration_source)
+      && !empty($node->field_source_url)
+      && empty($node->field_show_in_ncw[LANGUAGE_NONE][0]['value'])
+    ) {
+      drupal_goto($url, [], 301);
+    }
+  }
+}
+
+
+/**
+ * Implements hook_migrate_api().
+ *
+ * Set the API level to 2, for migration classes to be recognized by Migrate.
+ */
+function osha_sites_migration_migrate_api() {
+  return array(
+    'api' => 2,
+    'groups' => array(
+      'hwc' => array(
+        'title' => 'Import data from HWC'
+      ),
+    ),
+    'migrations' => array(
+      'hwc_events' => array(
+        'group_name' => 'hwc',
+        'class_name' => 'HWCEventsMigration',
+        'site_source' => 'hwc',
+      ),
+      'hwc_news' => array(
+        'group_name' => 'hwc',
+        'class_name' => 'HWCNewsMigration',
+        'site_source' => 'hwc',
+      ),
+    ),
+  );
+}
+
+
+/**
+ * Implements Elysia hook_cronapi().
+ */
+function osha_sites_migration_cronapi() {
+  return array('osha_sites_migration_cron' => array(
+    'description' => 'Migrate NCW content',
+    'rule' => '0 3 * * *',
+  ));
+}
+
+/**
+ * Implements hook_cron().
+ */
+function osha_sites_migration_cron() {
+  foreach (osha_sites_migration_migrate_api()['migrations'] as $key => $data) {
+    osha_sites_migration_run_single($key);
+  }
+//  include_once 'ncw_migration.drush.inc';
+//  drush_ncw_migration_hwc_migrate_all();
+}
+
+/**
+ * List of bundles periodically updated from other websites website
+ * @return array
+ *   Array of bundles
+ */
+function osha_sites_migration_get_migrated_bundles() {
+  return ['events', 'news'];
+}
+
+/**
+ * @param string $machine_name
+ *   Migration machine name
+ *
+ * @return boolean
+ *   Returns TRUE if migration was successful
+ *
+ * @throws \Exception
+ */
+function osha_sites_migration_run_single($machine_name) {
+  /** @var Migration $migration */
+  $migration = Migration::getInstance($machine_name);
+//  $migration->prepareUpdate();
+  $result = $migration->processImport();
+  if ($result == MigrationBase::RESULT_COMPLETED) {
+    return TRUE;
+  }
+  else {
+    watchdog(
+      'osha_sites_migration',
+      '[CRON]Last import did not finished successfully (machine:!machine_name)',
+      array('!machine_name' => $machine_name)
+    );
+    return FALSE;
+  }
+}
+
+function osha_sites_migration_debug($message, $message_args = array(), $level = 'notice') {
+  if(function_exists('drush_get_option')) {
+    // Message appear when running 'drush -d migrate-import events'
+    if ($debug = drush_get_option('debug')) {
+      $str = format_string($message, $message_args);
+      drush_log($str, $level);
+    }
+  }
+}

@@ -2,6 +2,40 @@
 
 class OSHNewsletter {
 
+  public static function alterContentForm(&$form, &$form_state) {
+    // add submit button to send newsletter and send test newsletter
+    if (isset($form['content'])) {
+      foreach ($form['content'] as $k => &$v) {
+        if (strpos($k, 'taxonomy_term:') !== FALSE) {
+          hide($v['style']);
+        }
+        if (strpos($k, 'node:') === 0) {
+          $v['style']['#options'] = array(
+            'highlights_item' => 'Newsletter Highlights',
+            'newsletter_item' => 'Newsletter Item',
+          );
+        }
+      }
+
+      $form['actions']['send_test_newsletter'] = array(
+        '#type' => 'submit',
+        '#value' => t('Send test newsletter'),
+        '#submit' => array('osha_newsletter_send_test_email')
+      );
+      $form['actions']['send_newsletter'] = array(
+        '#type' => 'submit',
+        '#value' => t('Send newsletter to subscribers'),
+        '#submit' => array('osha_newsletter_send_email_to_subscribers')
+      );
+    }
+
+    // Attach js to add css class for taxonomy rows.
+    // #attributes on $v doesn't work.
+    if (isset($form_state['entity_collection']) && $form_state['entity_collection']->bundle == 'newsletter_content_collection') {
+      $form['#attached']['js'][] = drupal_get_path('module', 'osha_newsletter') . '/includes/js/collection_form.js';
+    }
+  }
+
   public static function render(EntityCollection $source) {
     $content = entity_collection_load_content($source->bundle, $source);
 

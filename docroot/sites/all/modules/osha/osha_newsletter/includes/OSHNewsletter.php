@@ -2,18 +2,27 @@
 
 class OSHNewsletter {
 
+  public static function getTemplatesList() {
+    // @todo: replace with a new vocabulary for newsletter templates
+    return [
+      'newsletter_full_width_details' => 'Full width: thumbnail + details',
+      'newsletter_full_width_list' => 'Full width: title + short description',
+      'newsletter_half_width_details' => '1/2 width: thumbnail + details',
+      'newsletter_half_width_list' => '1/2 width: title + short description',
+      'newsletter_half_image_left' => '1/2 width with background image on left side',
+      'newsletter_full_width_2_col_blocks' => 'Full width: blocks on 2 columns'
+    ];
+  }
+
   public static function alterContentForm(&$form, &$form_state) {
     // add submit button to send newsletter and send test newsletter
     if (isset($form['content'])) {
       foreach ($form['content'] as $k => &$v) {
         if (strpos($k, 'taxonomy_term:') !== FALSE) {
-          hide($v['style']);
+          $v['style']['#options'] = self::getTemplatesList();
         }
-        if (strpos($k, 'node:') === 0) {
-          $v['style']['#options'] = array(
-            'highlights_item' => 'Newsletter Highlights',
-            'newsletter_item' => 'Newsletter Item',
-          );
+        elseif (strpos($k, 'node:') === 0) {
+          hide($v['style']);
         }
       }
 
@@ -47,13 +56,35 @@ class OSHNewsletter {
 
     $items = $entityCollectionItems->children;
     $elements = array();
-    $last_section = NULL;
+    $last_section = null;
     $blogs = array();
     $news = array();
     $events = array();
 
     // @todo: replace hardcoded sections with taxonomy terms
     foreach ($items as $item) {
+      switch ($item->type) {
+        case 'taxonomy_term':
+          $current_section = $item->entity_id;
+          $content[$current_section] = [
+            '#style' => $item->style,
+            'section' => $item->content,
+            'nodes' => [],
+          ];
+          break;
+        case 'node':
+          if (empty($current_section)) {
+            // Found a node before all sections
+            // @todo: maybe we should display a warning?
+            continue;
+          }
+          $content[$current_section]['nodes'][] = [
+            '#style' => $item->style,
+            'node' => $item->content,
+          ];
+          break;
+      }
+
       if ($item->type == 'taxonomy_term') {
         // Section
         $term = taxonomy_term_view($item->content, 'token');
@@ -67,7 +98,7 @@ class OSHNewsletter {
         } else {
           $elements[] = $term;
         }
-      } else if ($item->type == 'node') {
+      } elseif ($item->type == 'node') {
         $style = $item->style;
         $node = node_view($item->content,$style);
         $node['#campaign_id'] = $campaign_id;

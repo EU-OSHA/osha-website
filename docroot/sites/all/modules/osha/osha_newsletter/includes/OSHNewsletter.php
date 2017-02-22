@@ -23,6 +23,7 @@ class OSHNewsletter {
     $news = array();
     $events = array();
 
+    // @todo: replace hardcoded sections with taxonomy terms
     foreach ($items as $item) {
       if ($item->type == 'taxonomy_term') {
         $term = taxonomy_term_view($item->content, 'token');
@@ -56,13 +57,19 @@ class OSHNewsletter {
     $languages = osha_language_list(TRUE);
 
     $body = theme('newsletter_body', array(
-      'items' => $elements, 'blogs' => $blogs, 'news' => $news, 'events' => $events, 'campaign_id' => $campaign_id
+      'items' => $elements,
+      'blogs' => $blogs,
+      'news' => $news,
+      'events' => $events,
+      'campaign_id' => $campaign_id
     ));
 
     return [
       'header' => theme('newsletter_header', array(
-        'languages' => $languages, 'newsletter_title' => $newsletter_title,
-        'newsletter_id' => $newsletter_id, 'newsletter_date' => $newsletter_date,
+        'languages' => $languages,
+        'newsletter_title' => $newsletter_title,
+        'newsletter_id' => $newsletter_id,
+        'newsletter_date' => $newsletter_date,
         'campaign_id' => $campaign_id
       )),
       'body' =>  osha_newsletter_format_body($body), //add css styles to href in body

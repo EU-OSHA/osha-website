@@ -62,18 +62,34 @@ class OSHNewsletter {
     ];
   }
 
+  public static function getCellContent($template, $node) {
+    $nodeContent = node_view($node['node'], $node['#style']);
+    return [
+      'data' => drupal_render($nodeContent),
+      'class' => ['item', drupal_clean_css_identifier("{$template}-item")],
+    ];
+  }
+
   public static function renderTemplate($template, $variables) {
     $content = [
       '#theme' => 'table',
       '#header' => [],
       '#rows' => [0 => []],
       '#attributes' => [
-        'class' => [drupal_clean_css_identifier($template)],
+        'class' => [
+          drupal_clean_css_identifier($template),
+          'newsletter-section',
+        ],
       ],
       '#printed' => false,
       '#sticky' => false,
       '#children' => [],
     ];
+    if (!empty($variables['section']->name)) {
+      $content['#header'] = ['data' => ['data' => $variables['section']->name]];
+      $cssClass = drupal_clean_css_identifier('section-' . strtolower($variables['section']->name));
+      $content['#attributes']['class'][] = $cssClass;
+    }
     switch ($template) {
       case 'newsletter_multiple_columns':
         $columnWidth = round((100 / count($variables)), 2);
@@ -87,18 +103,14 @@ class OSHNewsletter {
       case 'newsletter_full_width_list':
       case 'newsletter_half_width_list':
       case 'newsletter_full_width_details':
-        if (empty($variables['section']) || empty($variables['nodes'])) {
+        if (empty($variables['nodes'])) {
           return '';
         }
-        $cssClass = drupal_clean_css_identifier('section-' . strtolower($variables['section']->name));
-        $content['#header'] = [$variables['section']->name];
-        $content['#attributes']['class'][] = 'newsletter-section';
-        $content['#attributes']['class'][] = $cssClass;
         foreach ($variables['nodes'] as $node) {
-          $nodeContent = node_view($node['node'], $node['#style']);
+          $cellContent = self::getCellContent($template, $node);
           $content['#rows'][] = [
-            'data' => [drupal_render($nodeContent)],
-            'class' => [drupal_clean_css_identifier("{$template}-item")],
+            'data' => [$cellContent],
+            'class' => ['row', drupal_clean_css_identifier("{$template}-row")],
             'no_striping' => true,
           ];
         }
@@ -107,7 +119,25 @@ class OSHNewsletter {
         // @todo
         break;
       case 'newsletter_full_width_2_col_blocks':
-        // @todo
+        if (empty($variables['nodes'])) {
+          return '';
+        }
+        $content['#header']['data']['colspan'] = 2;
+        $currentRow = $currentCol = 0;
+        foreach ($variables['nodes'] as $node) {
+          $cellContent = self::getCellContent($template, $node);
+          if ($currentCol++ === 0) {
+            $content['#rows'][$currentRow] = [
+              'data' => [$cellContent],
+              'class' => ['row', drupal_clean_css_identifier("{$template}-row")],
+              'no_striping' => true,
+            ];
+          }
+          else {
+            $content['#rows'][$currentRow++]['data'][] = $cellContent;
+            $currentCol = 0;
+          }
+        }
         break;
       case 'newsletter_twitter':
         // @todo

@@ -63,18 +63,17 @@ class OSHNewsletter {
   public static function renderTemplate($template, $variables) {
     switch ($template) {
       case 'newsletter_multiple_columns':
+        $columnWidth = round((100 / count($variables)), 2);
         $content = [
           '#theme' => 'table',
           '#header' => [],
           '#rows' => [0 => []]
         ];
         foreach ($variables as $column) {
-          if (empty($column['#style'])) {
-            $content['#rows'][0]['data'] = [];
-          }
-          else {
-            $content['#rows'][0]['data'][] = self::renderTemplate($column['#style'], $column);
-          }
+          $content['#rows'][0]['data'][] = [
+            'data' => self::renderTemplate($column['#style'], $column),
+            'width' => "$columnWidth%",
+          ];
         }
         return drupal_render($content);
         break;
@@ -146,6 +145,7 @@ class OSHNewsletter {
     foreach ($content as $section) {
       if (preg_match('/.*(half_width).*/', $section['#style'])) {
         if (!empty($half_column)) {
+          // Found 2 half-width templates in a row
           $renderedContent .= self::renderTemplate('newsletter_multiple_columns', [$half_column, $section]);
           $half_column = null;
         }
@@ -155,7 +155,9 @@ class OSHNewsletter {
       }
       else {
         if (!empty($half_column)) {
-          $renderedContent .= self::renderTemplate('newsletter_multiple_columns', [$half_column, 'second_column' => []]);
+          // We couldn't find 2 half-width columns in a row, so we stick the only
+          // one to the entire width
+          $renderedContent .= self::renderTemplate($section['#style'], $half_column);
           $half_column = null;
         }
         $renderedContent .= self::renderTemplate($section['#style'], $section);

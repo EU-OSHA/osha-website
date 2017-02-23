@@ -34,6 +34,8 @@ class OSHNewsletter {
           $v['style']['#options'] = self::getTemplatesList();
         }
         elseif (strpos($k, 'node:') === 0) {
+          $node = $v['#content']->content;
+          $v['title']['#markup'] .= " <b>({$node->type})</b>";
           hide($v['style']);
         }
       }

@@ -53,7 +53,14 @@ class OSHNewsletter {
       );
     }
 
-    $form['#attached']['js'][] = drupal_get_path('module', 'osha_newsletter') . '/includes/js/collection_form.js';
+    $modulePath = drupal_get_path('module', 'osha_newsletter');
+    $form['#attached']['js'][] = "{$modulePath}/includes/js/collection_form.js";
+    $form['#attached']['js'][] = [
+      'data' => [
+        'osha_newsletter' => ['basepath' => $modulePath]
+      ],
+      'type' => 'setting',
+    ];
   }
 
   public static function renderTemplate($template, $variables) {

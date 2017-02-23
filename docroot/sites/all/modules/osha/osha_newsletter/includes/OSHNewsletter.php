@@ -66,7 +66,7 @@ class OSHNewsletter {
       '#header' => [],
       '#rows' => [0 => []],
       '#attributes' => [
-        'class' => [$template],
+        'class' => [drupal_clean_css_identifier($template)],
       ],
       '#printed' => false,
       '#sticky' => false,
@@ -81,7 +81,6 @@ class OSHNewsletter {
             'width' => "$columnWidth%",
           ];
         }
-        return drupal_render($content);
         break;
       case 'newsletter_full_width_list':
       case 'newsletter_half_width_details':
@@ -98,23 +97,24 @@ class OSHNewsletter {
           $nodeContent = node_view($node['node'], $node['#style']);
           $content['#rows'][] = [
             'data' => [drupal_render($nodeContent)],
-            'class' => ["{$template}_item"],
+            'class' => [drupal_clean_css_identifier("{$template}-item")],
             'no_striping' => true,
           ];
         }
-        return drupal_render($content);
+        break;
       case 'newsletter_half_image_left':
         // @todo
-        return '';
+        break;
       case 'newsletter_full_width_2_col_blocks':
         // @todo
-        return '';
+        break;
       case 'newsletter_twitter':
         // @todo
-        return '';
+        break;
       default:
         return theme($template, $variables);
     }
+    return drupal_render($content);
   }
 
   public static function render(EntityCollection $source) {

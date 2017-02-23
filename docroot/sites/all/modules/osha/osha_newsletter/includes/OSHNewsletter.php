@@ -104,8 +104,14 @@ class OSHNewsletter {
         }
         return drupal_render($content);
       case 'newsletter_half_image_left':
+        // @todo
+        return '';
       case 'newsletter_full_width_2_col_blocks':
+        // @todo
+        return '';
       case 'newsletter_twitter':
+        // @todo
+        return '';
       default:
         return theme($template, $variables);
     }
@@ -185,7 +191,7 @@ class OSHNewsletter {
           : $source->field_created[LANGUAGE_NONE][0]['value'],
         'campaign_id' => $campaign_id
       )),
-      'body' =>  $renderedContent, //add css styles to href in body
+      'body' => $renderedContent, //add css styles to href in body
       'footer' => theme('newsletter_footer', array('campaign_id' => $campaign_id)),
     ];
   }

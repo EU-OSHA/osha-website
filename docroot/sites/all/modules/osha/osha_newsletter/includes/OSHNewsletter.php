@@ -62,7 +62,28 @@ class OSHNewsletter {
 
   public static function renderTemplate($template, $variables) {
     switch ($template) {
-      case 'newsletter_full_width_details';
+      case 'newsletter_multiple_columns':
+        $content = [
+          '#theme' => 'table',
+          '#header' => [],
+          '#rows' => [0 => []]
+        ];
+        foreach ($variables as $column) {
+          if (empty($column['#style'])) {
+            $content['#rows'][0]['data'] = [];
+          }
+          else {
+            $content['#rows'][0]['data'][] = self::renderTemplate($column['#style'], $column);
+          }
+        }
+        return drupal_render($content);
+        break;
+      case 'newsletter_full_width_list':
+      case 'newsletter_half_width_details':
+      case 'newsletter_half_width_list':
+      case 'newsletter_half_image_left':
+      case 'newsletter_full_width_2_col_blocks':
+      case 'newsletter_full_width_details':
         if (empty($variables['nodes'])) {
           return '';
         }
@@ -91,11 +112,7 @@ class OSHNewsletter {
     };
 
     $items = $entityCollectionItems->children;
-    $elements = array();
     $last_section = null;
-    $blogs = array();
-    $news = array();
-    $events = array();
 
     // @todo: replace hardcoded sections with taxonomy terms
     $templatesList = self::getTemplatesList();
@@ -121,51 +138,29 @@ class OSHNewsletter {
           ];
           break;
       }
-
-//      if ($item->type == 'taxonomy_term') {
-//        // Section
-//        $term = taxonomy_term_view($item->content, 'token');
-//        $last_section = $item->content->name_original;
-//        if ($last_section == 'Blog') {
-//          $blogs[] = $term;
-//        } else if ($last_section == 'News') {
-//          $news[] = $term;
-//        } else if ($last_section == 'Events') {
-//          $events[] = $term;
-//        } else {
-//          $elements[] = $term;
-//        }
-//      } elseif ($item->type == 'node') {
-//        $style = $item->style;
-//        $node = node_view($item->content,$style);
-//        $node['#campaign_id'] = $campaign_id;
-//
-//        if ($last_section == 'Blog') {
-//          $blogs[] = $node;
-//        } else if ($last_section == 'News') {
-//          $news[] = $node;
-//        } else if ($last_section == 'Events') {
-//          $events[] = $node;
-//        } else {
-//          $elements[] = $node;
-//        }
-//      }
     }
 
     $languages = osha_language_list(TRUE);
 
     $renderedContent = '';
     foreach ($content as $section) {
-      $renderedContent .= self::renderTemplate($section['#style'], $section);
+      if (preg_match('/.*(half_width).*/', $section['#style'])) {
+        if (!empty($half_column)) {
+          $renderedContent .= self::renderTemplate('newsletter_multiple_columns', [$half_column, $section]);
+          $half_column = null;
+        }
+        else {
+          $half_column = $section;
+        }
+      }
+      else {
+        if (!empty($half_column)) {
+          $renderedContent .= self::renderTemplate('newsletter_multiple_columns', [$half_column, 'second_column' => []]);
+          $half_column = null;
+        }
+        $renderedContent .= self::renderTemplate($section['#style'], $section);
+      }
     }
-
-//    $body = theme('newsletter_body', array(
-//      'items' => $elements,
-//      'blogs' => $blogs,
-//      'news' => $news,
-//      'events' => $events,
-//      'campaign_id' => $campaign_id
-//    ));
 
     return [
       'header' => theme('newsletter_header', array(

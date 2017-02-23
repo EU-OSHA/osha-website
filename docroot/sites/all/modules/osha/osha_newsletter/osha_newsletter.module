@@ -22,6 +22,25 @@ function osha_newsletter_permission() {
 }
 
 /**
+ * Implements hook_libraries_info().
+ */
+function osha_newsletter_libraries_info() {
+  return array(
+    'CssToInlineStyles' => array(
+      'name' => 'CssToInlineStyles',
+      'download url' => 'https://github.com/tijsverkoyen/CssToInlineStyles',
+      'version' => '2.2.0',
+      'files' => array(
+        'php' => array(
+          'vendor/autoload.php',
+          'src/CssToInlineStyles.php',
+        ),
+      ),
+    ),
+  );
+}
+
+/**
  * Implements hook_post_features_enable_feature().
  *
  * {@inheritdoc}

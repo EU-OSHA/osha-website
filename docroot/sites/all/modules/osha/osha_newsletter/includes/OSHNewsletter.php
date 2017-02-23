@@ -3,7 +3,6 @@
 class OSHNewsletter {
 
   public static function getTemplatesList() {
-    // @todo: replace with a new vocabulary for newsletter templates
     return [
       'newsletter_full_width_details' => 'Full width: thumbnail + details',
       'newsletter_full_width_list' => 'Full width: title + short description',

@@ -10,7 +10,8 @@ class OSHNewsletter {
       'newsletter_half_width_details' => '1/2 width: thumbnail + details',
       'newsletter_half_width_list' => '1/2 width: title + short description',
       'newsletter_half_image_left' => '1/2 width with background image on left side',
-      'newsletter_full_width_2_col_blocks' => 'Full width: blocks on 2 columns'
+      'newsletter_full_width_2_col_blocks' => 'Full width: blocks on 2 columns',
+      'newsletter_twitter' => 'Twitter (latest 4 tweets)',
     ];
   }
 
@@ -21,7 +22,7 @@ class OSHNewsletter {
       'newsletter_half_width_details' => 'highlights_item',
       'newsletter_half_width_list' => 'newsletter_item',
       'newsletter_half_image_left' => 'newsletter_item',
-      'newsletter_full_width_2_col_blocks' => 'newsletter_item'
+      'newsletter_full_width_2_col_blocks' => 'newsletter_item',
     ];
     if (empty($styles[$parentTemaplate])) {
       return $default;
@@ -61,14 +62,20 @@ class OSHNewsletter {
   }
 
   public static function renderTemplate($template, $variables) {
+    $content = [
+      '#theme' => 'table',
+      '#header' => [],
+      '#rows' => [0 => []],
+      '#attributes' => [
+        'class' => [$template],
+      ],
+      '#printed' => false,
+      '#sticky' => false,
+      '#children' => [],
+    ];
     switch ($template) {
       case 'newsletter_multiple_columns':
         $columnWidth = round((100 / count($variables)), 2);
-        $content = [
-          '#theme' => 'table',
-          '#header' => [],
-          '#rows' => [0 => []]
-        ];
         foreach ($variables as $column) {
           $content['#rows'][0]['data'][] = [
             'data' => self::renderTemplate($column['#style'], $column),
@@ -80,22 +87,25 @@ class OSHNewsletter {
       case 'newsletter_full_width_list':
       case 'newsletter_half_width_details':
       case 'newsletter_half_width_list':
-      case 'newsletter_half_image_left':
-      case 'newsletter_full_width_2_col_blocks':
       case 'newsletter_full_width_details':
-        if (empty($variables['nodes'])) {
+        if (empty($variables['section']) || empty($variables['nodes'])) {
           return '';
         }
-        $content = [
-          'header' => ['data' => taxonomy_term_view($variables['section'], 'token')],
-          'rows' => [],
-        ];
+        $cssClass = drupal_clean_css_identifier('section-' . strtolower($variables['section']->name));
+        $content['#header'] = [$variables['section']->name];
+        $content['#attributes']['class'][] = $cssClass;
         foreach ($variables['nodes'] as $node) {
-          $content['rows'][] = [
-            'data' => [node_view($node['node'], $node['#style'])],
+          $nodeContent = node_view($node['node'], $node['#style']);
+          $content['#rows'][] = [
+            'data' => [drupal_render($nodeContent)],
+            'class' => ["{$template}_item"],
+            'no_striping' => true,
           ];
         }
-        return render($content);
+        return drupal_render($content);
+      case 'newsletter_half_image_left':
+      case 'newsletter_full_width_2_col_blocks':
+      case 'newsletter_twitter':
       default:
         return theme($template, $variables);
     }

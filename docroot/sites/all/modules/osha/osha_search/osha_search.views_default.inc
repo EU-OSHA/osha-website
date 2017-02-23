@@ -570,6 +570,7 @@ function osha_search_views_default_views() {
   $handler = $view->new_display('page', 'OSHwiki search', 'wiki');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'OSHwiki search';
+  $handler->display->display_options['enabled'] = FALSE;
   $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Indexed Multilingual Content: URL */

@@ -201,8 +201,8 @@ search/wiki',
         'weight' => 0,
       ),
       'osha_frontend' => array(
-        'region' => 'content',
-        'status' => 1,
+        'region' => '',
+        'status' => 0,
         'theme' => 'osha_frontend',
         'weight' => -34,
       ),
@@ -313,7 +313,8 @@ themes/dangerous-substances/search/*',
     'i18n_mode' => 0,
     'module' => 'views',
     'node_types' => array(),
-    'pages' => 'search/site',
+    'pages' => 'search/site
+search/site*',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(

@@ -39,6 +39,15 @@ function osha_search_block_info() {
     'visibility' => BLOCK_VISIBILITY_LISTED,
     'pages' => 'search/*',
     'cache' => DRUPAL_CACHE_GLOBAL,
+    'weight' => 1,
+  );
+  $blocks['osha_search_box'] = array(
+    'info' => t('Search Box'),
+    'status' => 1,
+    'region' => 'sidebar_first',
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => 'search/*',
+    'cache' => DRUPAL_NO_CACHE,
     'weight' => 0,
   );
   return $blocks;
@@ -48,27 +57,42 @@ function osha_search_block_info() {
  * Implements hook_block_view().
  */
 function osha_search_block_view($delta = '') {
-  if ($delta != 'osha_search_clear_filters') {
-    return;
+  switch ($delta) {
+    case 'osha_search_clear_filters':
+
+      // Add header as in template.
+      $content['header'] = array(
+        '#type' => 'markup',
+        '#markup' => '<h3>' . t('Filter results') . '</h3>',
+      );
+      $query_params = drupal_get_query_parameters();
+      if (!empty($query_params)) {
+        // Clear filter link
+        // it's really just a link to current url without params.
+        $content['link'] = array(
+          '#type' => 'markup',
+          '#markup' => l(t('Clear filter'), current_path()),
+        );
+      }
+      return array(
+        'subject' => '<none>',
+        'content' => drupal_render($content),
+      );
+      break;
+
+    case 'osha_search_box':
+      $form = drupal_get_form('osha_search_basic_input_form');
+      unset($form['form_id']);
+      unset($form['form_token']);
+      unset($form['form_build_id']);
+      return array(
+        'subject' => t('Search'),
+        'content' => drupal_render($form),
+      );
+      break;
+      break;
   }
-  // Add header as in template.
-  $content['header'] = array(
-    '#type' => 'markup',
-    '#markup' => '<h3>' . t('Filter results') . '</h3>',
-  );
-  $query_params = drupal_get_query_parameters();
-  if (!empty($query_params)) {
-    // Clear filter link
-    // it's really just a link to current url without params.
-    $content['link'] = array(
-      '#type' => 'markup',
-      '#markup' => l(t('Clear filter'), current_path()),
-    );
-  }
-  return array(
-    'subject' => '<none>',
-    'content' => drupal_render($content),
-  );
+
 }
 
 /**
@@ -92,6 +116,43 @@ function osha_search_search_api_solr_query_alter(array &$call_args, SearchApiQue
       break;
     }
   }
+}
+
+function osha_search_basic_input_form($form, &$form_state) {
+  $form['#method'] = 'GET';
+  $form['search_block_form'] = [
+    '#type' => 'textfield',
+    '#title' => t('Search'),
+    '#default_value' => !empty($_GET['search_block_form']) ? $_GET['search_block_form'] : '',
+  ];
+
+  // Set parameters as hidden inputs.
+  $query_parameters = drupal_get_query_parameters();
+  $allowed_keys = ['search_api_language', 'sort_by', 'sort_order', 'f'];
+  foreach ($allowed_keys as $name) {
+    if (!empty($query_parameters[$name])) {
+      if (is_array($query_parameters[$name])) {
+        foreach ($query_parameters[$name] as $key => $value) {
+          $form[$name . '[' . $key . ']'] = array(
+            '#type' => 'hidden',
+            '#value' => $value,
+            '#weight' => -1,
+          );
+        }
+      }
+      else {
+        $form[$name] = array(
+          '#type' => 'hidden',
+          '#value' => $query_parameters[$name],
+          '#weight' => -1,
+        );
+      }
+
+    }
+  }
+
+
+  return $form;
 }
 
 /**
@@ -119,6 +180,7 @@ function osha_search_form_alter(&$form, &$form_state, $form_id) {
   // Check if this form is a Search API form. This could be replaced with the
   // value of a custom Views setting like ie. "Include facets".
   if (isset($form_state['view']) && $form_state['view']->base_table === 'search_api_index_default_multilingual_node_index') {
+    hide($form['search_block_form']);
     // Get quary parameters.
     $query_parameters = drupal_get_query_parameters();
 

@@ -1,0 +1,47 @@
+SearchAPI ET 7.x-2.x, xxxx-xx-xx
+--------------------------------
+
+SearchAPI ET 7.x-2.0-alpha7, 2016-08-02
+---------------------------------------
+- Translations not properly indexed
+- Items are indexed also for Disabled languages
+
+SearchAPI ET 7.x-2.0-alpha5, 2016-07-11
+---------------------------------------
+- CHANGELOG cleanup
+- Old IndexID are left during FeatureRevert or Index deletion
+- Item ids not updated on search api index revert which triggers an insert
+- Followup for #2722459: updated update_N() function.
+- Migrate the old ItemID format to the newer one.
+- Simplify filterTrackableIds logic
+
+SearchAPI ET 7.x-2.0-alpha4, 2016-05-06
+---------------------------------------
+- Wrong "token" type returned from getIdFieldInfo().
+
+SearchAPI ET 7.x-2.0-alpha3, 2016-04-27
+---------------------------------------
+- Check property info before handling entity-update and -delete hooks.
+- Code and comments cleanup.
+- Code and comments cleanup.
+- Updated Batch messages.
+- Ensure SearchApiEtHelper class is loaded.
+- Fixed documentation for search_api_et_batch_queue_entities() function.
+- Removed debug code.
+- Using new refactored classes, bugfixing and code cleanup.
+- Preliminary refactoring of include classes.
+
+SearchAPI ET 7.x-2.0-alpha2, 2016-01-29
+---------------------------------------
+- Fatal error when updating an entities language.
+- Fixed merging of Item IDs from different Datasources.
+- Removing LANGUAGE_NONE translations when 'all' is selected as the include method.
+- First fix for language identification for partially translated entities.
+- Duplicate results of partially translated content types.
+- Fixed coder warning messages.
+- Fields that aren't translatable aren't updated in the index (on languages that aren't the current language).
+- Item tracking refactoring.
+- Fix coder messages and warnings.
+- Datasource options support.
+- Array_keys() expects parameter 1 to be array, null given search_api_et.module:285 (take 2).
+- Array_keys() expects parameter 1 to be array, null given search_api_et.module:285.

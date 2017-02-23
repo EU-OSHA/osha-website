@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * Contains SearchApiEtViewsQuery.
+ */
+
+/**
  * Views query class using a Search API index as the data source.
  */
 class SearchApiEtViewsQuery extends SearchApiViewsQuery {
@@ -24,8 +29,8 @@ class SearchApiEtViewsQuery extends SearchApiViewsQuery {
     $controller = search_api_get_datasource_controller($this->index->item_type);
     if ($controller instanceof SearchApiEtDatasourceController) {
       foreach ($view->result as $delta => $result) {
-        if (!is_object($result->entity) && is_scalar($result->entity) && strpos($result->entity, '_') !== FALSE) {
-          list($language, $entity_id) = explode('_', $result->entity);
+        if (SearchApiEtHelper::isValidItemId($result->entity)) {
+          $entity_id = SearchApiEtHelper::splitItemId($result->entity, SearchApiEtHelper::ITEM_ID_ENTITY_ID);
           $view->result[$delta]->entity = (int) $entity_id;
         }
       }

@@ -126,6 +126,7 @@ class OSHNewsletter {
         $currentRow = $currentCol = 0;
         foreach ($variables['nodes'] as $node) {
           $cellContent = self::getCellContent($template, $node);
+          $cellContent['width'] = '50%';
           if ($currentCol++ === 0) {
             $content['#rows'][$currentRow] = [
               'data' => [$cellContent],

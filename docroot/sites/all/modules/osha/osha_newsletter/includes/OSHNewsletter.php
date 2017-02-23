@@ -63,6 +63,9 @@ class OSHNewsletter {
   public static function renderTemplate($template, $variables) {
     switch ($template) {
       case 'newsletter_full_width_details';
+        if (empty($variables['nodes'])) {
+          return '';
+        }
         $content = [
           'header' => ['data' => taxonomy_term_view($variables['section'], 'token')],
           'rows' => [],

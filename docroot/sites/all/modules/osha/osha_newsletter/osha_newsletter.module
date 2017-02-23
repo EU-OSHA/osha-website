@@ -1231,7 +1231,7 @@ function osha_newsletter_build_mail(&$message, EntityCollection $source) {
   // Get message data from source.
   $message['subject'] = $source->title;
 
-  $message['body'] = OSHNewsletter::render($source);
+  $message['body'] = ['body' => OSHNewsletter::render($source)];
 
   // Optional params for HTML mails.
   $message['params']['plain'] = NULL;

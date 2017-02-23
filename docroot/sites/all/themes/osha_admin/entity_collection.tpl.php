@@ -8,10 +8,7 @@ if (module_exists('osha_newsletter') && isset($variables['element'])) {
     <div class="newsletter-wrapper" style="width: 800px;">
       <?php
         $source = $variables['element']['#entity_collection'];
-        $full_newsletter = OSHNewsletter::render($source);
-        print $full_newsletter['header'];
-        print $full_newsletter['body'];
-        print $full_newsletter['footer'];
+        print OSHNewsletter::render($source);
       ?>
     </div><?php
   }

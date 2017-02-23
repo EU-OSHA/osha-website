@@ -179,20 +179,20 @@ class OSHNewsletter {
       }
     }
 
-    $fullNewsletter = [
-      'header' => theme('newsletter_header', array(
-        'languages' => $languages,
-        'newsletter_title' => $source->title,
-        'newsletter_id' => $source->eid,
-        'newsletter_date' =>
-          !empty($source->field_publication_date)
+    $header = theme('newsletter_header', array(
+      'languages' => $languages,
+      'newsletter_title' => $source->title,
+      'newsletter_id' => $source->eid,
+      'newsletter_date' =>
+        !empty($source->field_publication_date)
           ? $source->field_publication_date[LANGUAGE_NONE][0]['value']
           : $source->field_created[LANGUAGE_NONE][0]['value'],
-        'campaign_id' => $campaign_id
-      )),
-      'body' => $renderedContent, //add css styles to href in body
-      'footer' => theme('newsletter_footer', array('campaign_id' => $campaign_id)),
-    ];
+      'campaign_id' => $campaign_id
+    ));
+
+    $footer = theme('newsletter_footer', array('campaign_id' => $campaign_id));
+
+    $fullNewsletter = $header . $renderedContent . $footer;
 
     $stylesheet_path = drupal_get_path('module', 'osha_newsletter') . '/includes/css/newsletter.css';
     self::cssToInlineStyles($fullNewsletter, $stylesheet_path);

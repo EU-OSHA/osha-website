@@ -53,11 +53,9 @@ class OSHNewsletter {
       );
     }
 
-    // Attach js to add css class for taxonomy rows.
-    // #attributes on $v doesn't work.
-    if (isset($form_state['entity_collection']) && $form_state['entity_collection']->bundle == 'newsletter_content_collection') {
-      $form['#attached']['js'][] = drupal_get_path('module', 'osha_newsletter') . '/includes/js/collection_form.js';
-    }
+    $form['#attached']['js'][] = libraries_get_path('ms-Dropdown') . '/js/msdropdown/jquery.dd.min.js';
+    $form['#attached']['js'][] = drupal_get_path('module', 'osha_newsletter') . '/includes/js/collection_form.js';
+    $form['#attached']['css'][] = libraries_get_path('ms-Dropdown') . '/css/msdropdown/dd.css';
   }
 
   public static function renderTemplate($template, $variables) {

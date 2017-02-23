@@ -92,6 +92,7 @@ class OSHNewsletter {
         }
         $cssClass = drupal_clean_css_identifier('section-' . strtolower($variables['section']->name));
         $content['#header'] = [$variables['section']->name];
+        $content['#attributes']['class'][] = 'newsletter-section';
         $content['#attributes']['class'][] = $cssClass;
         foreach ($variables['nodes'] as $node) {
           $nodeContent = node_view($node['node'], $node['#style']);
@@ -128,7 +129,6 @@ class OSHNewsletter {
     $items = $entityCollectionItems->children;
     $last_section = null;
 
-    // @todo: replace hardcoded sections with taxonomy terms
     $templatesList = self::getTemplatesList();
     foreach ($items as $item) {
       switch ($item->type) {
@@ -179,7 +179,7 @@ class OSHNewsletter {
       }
     }
 
-    return [
+    $fullNewsletter = [
       'header' => theme('newsletter_header', array(
         'languages' => $languages,
         'newsletter_title' => $source->title,
@@ -193,5 +193,28 @@ class OSHNewsletter {
       'body' => $renderedContent, //add css styles to href in body
       'footer' => theme('newsletter_footer', array('campaign_id' => $campaign_id)),
     ];
+
+    $stylesheet_path = drupal_get_path('module', 'osha_newsletter') . '/includes/css/newsletter.css';
+    self::cssToInlineStyles($fullNewsletter, $stylesheet_path);
+
+    return $fullNewsletter;
+  }
+
+  public static function applyCss(&$item, $styles) {
+    if (is_array($item)) {
+      foreach ($item as &$subItem) {
+        self::applyCss($subItem, $styles);
+      }
+      return;
+    }
+    $cssToInlineStyles = new \TijsVerkoyen\CssToInlineStyles\CssToInlineStyles();
+    $item = $cssToInlineStyles->convert($item, $styles);
+  }
+
+  public static function cssToInlineStyles(&$item, $stylesheet_path) {
+    if (($library = libraries_load('CssToInlineStyles')) && !empty($library['loaded'])) {
+      $styles = file_get_contents($stylesheet_path);
+      self::applyCss($item, $styles);
+    }
   }
 }

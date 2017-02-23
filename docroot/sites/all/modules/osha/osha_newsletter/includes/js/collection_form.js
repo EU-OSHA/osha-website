@@ -12,12 +12,16 @@
 
         function show_thumbnail_image(select) {
             var path = Drupal.settings.osha_newsletter.basepath;
-            var img = $('<img src="/' + path + '/images/' + $(select).val() + '.png" />');
-            if ($(select).siblings('img').length > 0) {
-                $(select).siblings('img').replaceWith(img);
+            var thumbnail = $(
+                '<p class="template-thumbnail" style="text-align: center">' +
+                    '<img src="/' + path + '/images/templates_thumbnails/' + $(select).val() + '.png" />' +
+                '</p>'
+            );
+            if ($(select).siblings('.template-thumbnail').length > 0) {
+                $(select).siblings('.template-thumbnail').replaceWith(thumbnail);
             }
             else {
-                img.insertAfter($(select));
+                thumbnail.insertAfter($(select));
             }
         }
     });

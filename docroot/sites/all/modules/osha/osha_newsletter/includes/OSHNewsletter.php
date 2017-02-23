@@ -6,11 +6,9 @@ class OSHNewsletter {
     return [
       'newsletter_full_width_details' => 'Full width: thumbnail + details',
       'newsletter_full_width_list' => 'Full width: title + short description',
-      'newsletter_half_width_details' => '1/2 width: thumbnail + details',
       'newsletter_half_width_list' => '1/2 width: title + short description',
       'newsletter_half_image_left' => '1/2 width with background image on left side',
       'newsletter_full_width_2_col_blocks' => 'Full width: blocks on 2 columns',
-      'newsletter_twitter' => 'Twitter (latest 4 tweets)',
     ];
   }
 
@@ -18,7 +16,6 @@ class OSHNewsletter {
     $styles = [
       'newsletter_full_width_details' => 'highlights_item',
       'newsletter_full_width_list' => 'newsletter_item',
-      'newsletter_half_width_details' => 'highlights_item',
       'newsletter_half_width_list' => 'newsletter_item',
       'newsletter_half_image_left' => 'newsletter_item',
       'newsletter_full_width_2_col_blocks' => 'newsletter_item',
@@ -86,7 +83,6 @@ class OSHNewsletter {
         }
         break;
       case 'newsletter_full_width_list':
-      case 'newsletter_half_width_details':
       case 'newsletter_half_width_list':
       case 'newsletter_full_width_details':
         if (empty($variables['section']) || empty($variables['nodes'])) {

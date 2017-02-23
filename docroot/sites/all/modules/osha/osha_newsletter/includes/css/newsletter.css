@@ -5,3 +5,7 @@
     border-bottom-color: #003399;
     font-size: 20px;
 }
+
+td {
+    vertical-align: top;
+}

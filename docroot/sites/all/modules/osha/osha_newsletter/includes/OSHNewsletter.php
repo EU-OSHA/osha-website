@@ -53,9 +53,7 @@ class OSHNewsletter {
       );
     }
 
-    $form['#attached']['js'][] = libraries_get_path('ms-Dropdown') . '/js/msdropdown/jquery.dd.min.js';
     $form['#attached']['js'][] = drupal_get_path('module', 'osha_newsletter') . '/includes/js/collection_form.js';
-    $form['#attached']['css'][] = libraries_get_path('ms-Dropdown') . '/css/msdropdown/dd.css';
   }
 
   public static function renderTemplate($template, $variables) {

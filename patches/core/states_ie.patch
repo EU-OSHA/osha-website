@@ -1,7 +1,7 @@
-diff --git a/docroot/misc/states.js b/docroot/misc/states.js
+diff --git a/misc/states.js b/misc/states.js
 index 4c51a23..267518a 100644
---- a/docroot/misc/states.js
-+++ b/docroot/misc/states.js
+--- a/misc/states.js
++++ b/misc/states.js
 @@ -161,9 +161,15 @@ states.Dependent.prototype = {
     */
    compare: function (reference, selector, state) {

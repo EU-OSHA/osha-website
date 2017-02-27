@@ -1,7 +1,7 @@
-diff --git a/docroot/misc/states.js b/docroot/misc/states.js
+diff --git a/misc/states.js b/misc/states.js
 index 5aac65d..4c51a23 100644
---- a/docroot/misc/states.js
-+++ b/docroot/misc/states.js
+--- a/misc/states.js
++++ b/misc/states.js
 @@ -63,6 +63,36 @@ states.Dependent.comparisons = {
    'RegExp': function (reference, value) {
      return reference.test(value);

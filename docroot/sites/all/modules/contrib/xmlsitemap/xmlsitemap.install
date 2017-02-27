@@ -239,7 +239,7 @@ function xmlsitemap_schema() {
         'default' => 0,
       ),
     ),
-    'primary key' => array('id', 'type', 'language'),
+    'primary key' => array('id', 'type'),
     'indexes' => array(
       'loc' => array('loc'),
       'access_status_loc' => array('access', 'status', 'loc'),
@@ -567,11 +567,4 @@ function _xmlsitemap_sitemap_rehash_all() {
       xmlsitemap_sitemap_save($sitemap);
     }
   }
-}
-
-function xmlsitemap_update_7204() {
-  // Drop all primary keys.
-  db_drop_primary_key('xmlsitemap');
-  // Add primary keys.
-  db_add_primary_key('xmlsitemap', array('id', 'type', 'language'));
 }

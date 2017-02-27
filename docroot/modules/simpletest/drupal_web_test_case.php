@@ -1374,10 +1374,11 @@ class DrupalWebTestCase extends DrupalTestCase {
    * @see DrupalWebTestCase::tearDown()
    */
   protected function prepareEnvironment() {
-    global $user, $language, $conf;
+    global $user, $language, $language_url, $conf;
 
     // Store necessary current values before switching to prefixed database.
     $this->originalLanguage = $language;
+    $this->originalLanguageUrl = $language_url;
     $this->originalLanguageDefault = variable_get('language_default');
     $this->originalFileDirectory = variable_get('file_public_path', conf_path() . '/files');
     $this->originalProfile = drupal_get_profile();
@@ -1387,7 +1388,7 @@ class DrupalWebTestCase extends DrupalTestCase {
     // Set to English to prevent exceptions from utf8_truncate() from t()
     // during install if the current language is not 'en'.
     // The following array/object conversion is copied from language_default().
-    $language = (object) array('language' => 'en', 'name' => 'English', 'native' => 'English', 'direction' => 0, 'enabled' => 1, 'plurals' => 0, 'formula' => '', 'domain' => '', 'prefix' => '', 'weight' => 0, 'javascript' => '');
+    $language_url = $language = (object) array('language' => 'en', 'name' => 'English', 'native' => 'English', 'direction' => 0, 'enabled' => 1, 'plurals' => 0, 'formula' => '', 'domain' => '', 'prefix' => '', 'weight' => 0, 'javascript' => '');
 
     // Save and clean the shutdown callbacks array because it is static cached
     // and will be changed by the test run. Otherwise it will contain callbacks
@@ -1445,7 +1446,7 @@ class DrupalWebTestCase extends DrupalTestCase {
    * @see DrupalWebTestCase::prepareEnvironment()
    */
   protected function setUp() {
-    global $user, $language, $conf;
+    global $user, $language, $language_url, $conf;
 
     // Create the database prefix for this test.
     $this->prepareDatabasePrefix();
@@ -1542,7 +1543,7 @@ class DrupalWebTestCase extends DrupalTestCase {
 
     // Set up English language.
     unset($conf['language_default']);
-    $language = language_default();
+    $language_url = $language = language_default();
 
     // Use the test mail class instead of the default mail handler class.
     variable_set('mail_system', array('default-system' => 'TestingMailSystem'));
@@ -1636,7 +1637,7 @@ class DrupalWebTestCase extends DrupalTestCase {
    * and reset the database prefix.
    */
   protected function tearDown() {
-    global $user, $language;
+    global $user, $language, $language_url;
 
     // In case a fatal error occurred that was not in the test process read the
     // log to pick up any fatal errors.
@@ -1701,6 +1702,7 @@ class DrupalWebTestCase extends DrupalTestCase {
 
     // Reset language.
     $language = $this->originalLanguage;
+    $language_url = $this->originalLanguageUrl;
     if ($this->originalLanguageDefault) {
       $GLOBALS['conf']['language_default'] = $this->originalLanguageDefault;
     }
@@ -2072,7 +2074,7 @@ class DrupalWebTestCase extends DrupalTestCase {
         $submit_matches = $this->handleForm($post, $edit, $upload, $ajax ? NULL : $submit, $form);
         $action = isset($form['action']) ? $this->getAbsoluteUrl((string) $form['action']) : $this->getUrl();
         if ($ajax) {
-          $action = $this->getAbsoluteUrl(!empty($submit['path']) ? $submit['path'] : url('system/ajax'));
+          $action = $this->getAbsoluteUrl(!empty($submit['path']) ? $submit['path'] : 'system/ajax');
           // Ajax callbacks verify the triggering element if necessary, so while
           // we may eventually want extra code that verifies it in the
           // handleForm() function, it's not currently a requirement.
@@ -2759,8 +2761,7 @@ class DrupalWebTestCase extends DrupalTestCase {
    * @param $path
    *   A path from the internal browser content.
    * @return
-   *   The $path with the internal browser's base URL or $base_url prepended, if
-   *   necessary.
+   *   The $path with $base_url prepended, if necessary.
    */
   protected function getAbsoluteUrl($path) {
     global $base_url, $base_path;
@@ -2769,20 +2770,6 @@ class DrupalWebTestCase extends DrupalTestCase {
     if (empty($parts['host'])) {
       // Ensure that we have a string (and no xpath object).
       $path = (string) $path;
-      // Return an absolute URL based on the internal browser's current URL if
-      // it is not using the internal: scheme.
-      $parts = parse_url($this->getUrl());
-      if ($parts['scheme'] != 'internal') {
-        $port = isset($parts['port']) ? ':' . $parts['port'] : '';
-        $url = $parts['scheme'] . '://' . $parts['host'] . $port;
-        if ($path[0] === '/') {
-          $url .= $path;
-        }
-        else {
-          $url .= preg_replace('@(.*/)([^/]*)@', '$1' . $path, $parts['path']);
-        }
-        return $url;
-      }
       // Strip $base_path, if existent.
       $length = strlen($base_path);
       if (substr($path, 0, $length) === $base_path) {

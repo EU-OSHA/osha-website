@@ -1606,6 +1606,7 @@ function _menu_tree_data(&$links, $parents, $depth) {
  * Implements template_preprocess_HOOK() for theme_menu_tree().
  */
 function template_preprocess_menu_tree(&$variables) {
+  $variables['#tree'] = $variables['tree'];
   $variables['tree'] = $variables['tree']['#children'];
 }
 
@@ -1635,12 +1636,6 @@ function theme_menu_tree($variables) {
 function theme_menu_link(array $variables) {
   $element = $variables['element'];
   $sub_menu = '';
-
-  // Set the encode option to FALSE for query parameter so query parameters
-  // does not encode.
-  if (isset($element['#localized_options']['query'])) {
-    $element['#localized_options']['encode'] = FALSE;
-  }
 
   if ($element['#below']) {
     $sub_menu = drupal_render($element['#below']);
@@ -1880,11 +1875,6 @@ function menu_navigation_links($menu_name, $level = 0) {
       if ($item['link']['in_active_trail']) {
         $class = ' active-trail';
         $l['attributes']['class'][] = 'active-trail';
-      }
-      // If query parameter available set the encode option to FALSE for query
-      // parameter so query parameters does not encode.
-      if (!empty($item['link']['options']) && isset($item['link']['options']['query'])) {
-        $l['encode'] = FALSE;
       }
       // Normally, l() compares the href of every link with $_GET['q'] and sets
       // the active class accordingly. But local tasks do not appear in menu
@@ -2693,7 +2683,7 @@ function menu_link_load($mlid) {
 }
 
 /**
- * Clears the cached cached data for a single named menu.
+ * Clears the cached data for a single named menu.
  */
 function menu_cache_clear($menu_name = 'navigation') {
   $cache_cleared = &drupal_static(__FUNCTION__, array());

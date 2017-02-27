@@ -1,7 +1,7 @@
-diff --git a/xmlsitemap/xmlsitemap.install b/xmlsitemap/xmlsitemap.install
+diff --git a/docroot/sites/all/modules/contrib/xmlsitemap/xmlsitemap.install b/docroot/sites/all/modules/contrib/xmlsitemap/xmlsitemap.install
 index 916ebec..1497e7e 100644
---- a/xmlsitemap/xmlsitemap.install
-+++ b/xmlsitemap/xmlsitemap.install
+--- a/docroot/sites/all/modules/contrib/xmlsitemap/xmlsitemap.install
++++ b/docroot/sites/all/modules/contrib/xmlsitemap/xmlsitemap.install
 @@ -239,7 +239,7 @@ function xmlsitemap_schema() {
          'default' => 0,
        ),
@@ -22,10 +22,10 @@ index 916ebec..1497e7e 100644
 +  // Add primary keys.
 +  db_add_primary_key('xmlsitemap', array('id', 'type', 'language'));
 +}
-diff --git a/xmlsitemap/xmlsitemap.module b/xmlsitemap/xmlsitemap.module
+diff --git a/docroot/sites/all/modules/contrib/xmlsitemap/xmlsitemap.module b/docroot/sites/all/modules/contrib/xmlsitemap/xmlsitemap.module
 index 09d02ea..4fbcf1f 100644
---- a/xmlsitemap/xmlsitemap.module
-+++ b/xmlsitemap/xmlsitemap.module
+--- a/docroot/sites/all/modules/contrib/xmlsitemap/xmlsitemap.module
++++ b/docroot/sites/all/modules/contrib/xmlsitemap/xmlsitemap.module
 @@ -539,8 +539,9 @@ function xmlsitemap_sitemap_uri(stdClass $sitemap) {
   * @return
   *   A sitemap link (array) or FALSE if the conditions were not found.
@@ -56,30 +56,29 @@ index 09d02ea..4fbcf1f 100644
      module_invoke_all('xmlsitemap_link_update', $link, $context);
    }
    else {
-diff --git a/xmlsitemap/xmlsitemap_node/xmlsitemap_node.module b/xmlsitemap/xmlsitemap_node/xmlsitemap_node.module
-index 3d0e534..e961930 100644
---- a/xmlsitemap/xmlsitemap_node/xmlsitemap_node.module
-+++ b/xmlsitemap/xmlsitemap_node/xmlsitemap_node.module
-@@ -39,8 +39,18 @@ function xmlsitemap_node_xmlsitemap_index_links($limit) {
+diff --git a/docroot/sites/all/modules/contrib/xmlsitemap/xmlsitemap_node/xmlsitemap_node.module b/docroot/sites/all/modules/contrib/xmlsitemap/xmlsitemap_node/xmlsitemap_node.module
+index 20f5f05..366e3c7 100644
+--- a/docroot/sites/all/modules/contrib/xmlsitemap/xmlsitemap_node/xmlsitemap_node.module
++++ b/docroot/sites/all/modules/contrib/xmlsitemap/xmlsitemap_node/xmlsitemap_node.module
+@@ -39,8 +39,16 @@ function xmlsitemap_node_xmlsitemap_index_links($limit) {
  function xmlsitemap_node_xmlsitemap_process_node_links(array $nids) {
    $nodes = node_load_multiple($nids);
    foreach ($nodes as $node) {
 -    $link = xmlsitemap_node_create_link($node);
--    xmlsitemap_link_save($link, array($link['type'] => $node));
 +    if (!empty($node->translations->data)) {
 +      foreach (array_keys($node->translations->data) as $lang) {
 +        $link = xmlsitemap_node_create_link($node, $lang);
 +        xmlsitemap_link_save($link, array($link['type'] => $node));
 +      }
 +    }
-+    else {
-+      $link = xmlsitemap_node_create_link($node, $node->language);
-+      xmlsitemap_link_save($link, array($link['type'] => $node));
++  else {
++    $link = xmlsitemap_node_create_link($node, $node->language);
+     xmlsitemap_link_save($link, array($link['type'] => $node));
 +    }
    }
  }
  
-@@ -48,14 +58,16 @@ function xmlsitemap_node_xmlsitemap_process_node_links(array $nids) {
+@@ -48,14 +56,16 @@ function xmlsitemap_node_xmlsitemap_process_node_links(array $nids) {
   * Implements hook_node_insert().
   */
  function xmlsitemap_node_node_insert(stdClass $node) {
@@ -98,7 +97,7 @@ index 3d0e534..e961930 100644
    xmlsitemap_link_save($link, array($link['type'] => $node));
  }
  
-@@ -167,10 +179,10 @@ function xmlsitemap_node_get_timestamps(stdClass $node) {
+@@ -167,10 +177,10 @@ function xmlsitemap_node_get_timestamps(stdClass $node) {
   * @param $node
   *   A node object.
   */
@@ -111,7 +110,7 @@ index 3d0e534..e961930 100644
        $node->xmlsitemap = $link;
      }
    }
-@@ -204,7 +216,7 @@ function xmlsitemap_node_create_link(stdClass $node) {
+@@ -204,7 +214,7 @@ function xmlsitemap_node_create_link(stdClass $node) {
    $node->xmlsitemap['loc'] = $uri['path'];
    $node->xmlsitemap['lastmod'] = count($timestamps) ? max($timestamps) : 0;
    $node->xmlsitemap['access'] = $node->nid ? xmlsitemap_node_view_access($node, drupal_anonymous_user()) : 1;

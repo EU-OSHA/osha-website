@@ -539,8 +539,9 @@ function xmlsitemap_sitemap_uri(stdClass $sitemap) {
  * @return
  *   A sitemap link (array) or FALSE if the conditions were not found.
  */
-function xmlsitemap_link_load($entity_type, $entity_id) {
-  $link = xmlsitemap_link_load_multiple(array('type' => $entity_type, 'id' => $entity_id));
+function xmlsitemap_link_load($entity_type, $entity_id, $conditions = array()) {
+  $conditions = array_merge(array('type' => $entity_type, 'id' => $entity_id), $conditions);
+  $link = xmlsitemap_link_load_multiple(array('type' => $entity_type, 'id' => $entity_id, $conditions));
   return $link ? reset($link) : FALSE;
 }
 
@@ -603,7 +604,7 @@ function xmlsitemap_link_save(array $link, array $context = array()) {
     $link['changecount'] = 0;
   }
 
-  $existing = db_query_range("SELECT loc, access, status, lastmod, priority, changefreq, changecount, language FROM {xmlsitemap} WHERE type = :type AND id = :id", 0, 1, array(':type' => $link['type'], ':id' => $link['id']))->fetchAssoc();
+  $existing = db_query_range("SELECT loc, access, status, lastmod, priority, changefreq, changecount, language FROM {xmlsitemap} WHERE type = :type AND id = :id AND language = :language", 0, 1, array(':type' => $link['type'], ':id' => $link['id'], ':language' => $link['language']))->fetchAssoc();
 
   // Check if this is a changed link and set the regenerate flag if necessary.
   if (!variable_get('xmlsitemap_regenerate_needed', FALSE)) {
@@ -612,7 +613,7 @@ function xmlsitemap_link_save(array $link, array $context = array()) {
 
   // Save the link and allow other modules to respond to the link being saved.
   if ($existing) {
-    drupal_write_record('xmlsitemap', $link, array('type', 'id'));
+    drupal_write_record('xmlsitemap', $link, array('type', 'id', 'language'));
     module_invoke_all('xmlsitemap_link_update', $link, $context);
   }
   else {

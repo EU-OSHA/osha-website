@@ -39,8 +39,16 @@ function xmlsitemap_node_xmlsitemap_index_links($limit) {
 function xmlsitemap_node_xmlsitemap_process_node_links(array $nids) {
   $nodes = node_load_multiple($nids);
   foreach ($nodes as $node) {
-    $link = xmlsitemap_node_create_link($node);
+    if (!empty($node->translations->data)) {
+      foreach (array_keys($node->translations->data) as $lang) {
+        $link = xmlsitemap_node_create_link($node, $lang);
+        xmlsitemap_link_save($link, array($link['type'] => $node));
+      }
+    }
+  else {
+    $link = xmlsitemap_node_create_link($node, $node->language);
     xmlsitemap_link_save($link, array($link['type'] => $node));
+    }
   }
 }
 
@@ -48,14 +56,16 @@ function xmlsitemap_node_xmlsitemap_process_node_links(array $nids) {
  * Implements hook_node_insert().
  */
 function xmlsitemap_node_node_insert(stdClass $node) {
-  xmlsitemap_node_node_update($node);
+  global $language;
+  xmlsitemap_node_node_update($node, $language->language);
 }
 
 /**
  * Implements hook_node_update().
  */
 function xmlsitemap_node_node_update(stdClass $node) {
-  $link = xmlsitemap_node_create_link($node);
+  global $language;
+  $link = xmlsitemap_node_create_link($node, $language->language);
   xmlsitemap_link_save($link, array($link['type'] => $node));
 }
 
@@ -167,10 +177,10 @@ function xmlsitemap_node_get_timestamps(stdClass $node) {
  * @param $node
  *   A node object.
  */
-function xmlsitemap_node_create_link(stdClass $node) {
+function xmlsitemap_node_create_link(stdClass $node, $lang = LANGUAGE_NONE) {
   if (!isset($node->xmlsitemap) || !is_array($node->xmlsitemap)) {
     $node->xmlsitemap = array();
-    if ($node->nid && $link = xmlsitemap_link_load('node', $node->nid)) {
+    if ($node->nid && $link = xmlsitemap_link_load('node', $node->nid, array('language' => $lang))) {
       $node->xmlsitemap = $link;
     }
   }
@@ -204,7 +214,7 @@ function xmlsitemap_node_create_link(stdClass $node) {
   $node->xmlsitemap['loc'] = $uri['path'];
   $node->xmlsitemap['lastmod'] = count($timestamps) ? max($timestamps) : 0;
   $node->xmlsitemap['access'] = $node->nid ? xmlsitemap_node_view_access($node, drupal_anonymous_user()) : 1;
-  $node->xmlsitemap['language'] = isset($node->language) ? $node->language : LANGUAGE_NONE;
+  $node->xmlsitemap['language'] = $lang;
 
   return $node->xmlsitemap;
 }

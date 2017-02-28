@@ -1,0 +1,23 @@
+<?php
+
+function osha_sites_migration_update_7001() {
+  // Remove default Handlers for Field and Image and let OSHA Handlers to take
+  // care of these fields.
+  $default_file_handler = 'MigrateFileFieldHandler';
+  $default_image_handler = 'MigrateImageFieldHandler';
+  $handlers = unserialize(variable_get('migrate_disabled_handlers', ''));
+  if (!is_array($handlers)) {
+    $handlers[] = $default_file_handler;
+    $handlers[] = $default_image_handler;
+
+  }
+  else {
+    if (!in_array($default_file_handler, $handlers)) {
+      $handlers[] = $default_file_handler;
+    }
+    if (!in_array($default_image_handler, $handlers)) {
+      $handlers[] = $default_image_handler;
+    }
+  }
+  variable_set('migrate_disabled_handlers', serialize($handlers));
+}

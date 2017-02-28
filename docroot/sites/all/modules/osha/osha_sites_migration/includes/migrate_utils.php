@@ -219,7 +219,7 @@ function osha_migration_normalize_field_file($row, $field_name, $field_info, $fi
         continue;
       }
       foreach($values as $f) {
-        $field[$language] = osha_migration_url_files($row->field_migration_source, str_replace('public://', '', $f['uri']));
+        $field[$language][] = osha_migration_url_files($row->field_migration_source, str_replace('public://', '', $f['uri']));
         $languages[] = $language;
       }
     }

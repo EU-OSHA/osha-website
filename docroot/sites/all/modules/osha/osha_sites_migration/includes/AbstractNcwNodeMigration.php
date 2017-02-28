@@ -86,6 +86,7 @@ abstract class AbstractNCWNodeMigration extends Migration {
     $fields = field_info_instances('node', $this->bundle);
     $exposed = $this->source->fields();
     foreach($fields as $field_name => $field_info) {
+      $field_base = field_info_field($field_name);
       if (array_key_exists($field_name, $exposed) && !in_array($field_name, $this->getManuallyMigratedFields())) {
         $this->addFieldMapping($field_name, $field_name);
 
@@ -121,8 +122,8 @@ abstract class AbstractNCWNodeMigration extends Migration {
           $this->addFieldmapping("$field_name:preserve_files")->defaultValue(TRUE);
           $this->addFieldMapping("$field_name:file_replace")->defaultValue(FILE_EXISTS_RENAME);
 //    $this->addFieldMapping('field_related_resources:source_dir')->defaultValue($data_path . '/export/');
-          $this->addFieldMapping("$field_name:destination_file", $field_settings['file_directory']);
-          $this->addFieldMapping("$field_name:multilingual")->defaultValue(!$field_settings['entity_translation_sync']);
+          $this->addFieldMapping("$field_name:destination_dir")->defaultValue('public://'. $field_settings['file_directory']);
+          $this->addFieldMapping("$field_name:multilingual")->defaultValue($field_base['translatable']);
         }
       }
     }

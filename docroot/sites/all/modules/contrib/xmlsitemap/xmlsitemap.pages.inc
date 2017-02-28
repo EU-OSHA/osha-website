@@ -62,7 +62,6 @@ function xmlsitemap_output_chunk() {
  * Output the contents of a file to the browser and check caching headers.
  */
 function xmlsitemap_output_file($file, array $headers = array()) {
-  dpm($file);
   if (!file_exists($file) || !is_readable($file)) {
     return MENU_NOT_FOUND;
   }

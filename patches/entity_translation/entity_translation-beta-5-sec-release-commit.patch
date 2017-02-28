@@ -1,0 +1,31 @@
+diff --git a/CHANGELOG.txt b/CHANGELOG.txt
+index 57b67f2..3afc7c5 100644
+--- a/CHANGELOG.txt
++++ b/CHANGELOG.txt
+@@ -1,6 +1,8 @@
+ 
+ Entity Translation 7.x-1.x, xxxx-xx-xx
+ --------------------------------------
++#S156840 by HelenaEksler, plach: Fixed XSS vulnerability in the translation
++  form page title.
+ #2444203 by Leksat, badrange, attiks: Show fallback information on the translation
+   overview.
+ #2458393 by catch, plach, douggreen: Fixed unindexed query in
+diff --git a/includes/translation.handler.inc b/includes/translation.handler.inc
+index c2d205a..0e24de4 100644
+--- a/includes/translation.handler.inc
++++ b/includes/translation.handler.inc
+@@ -1612,9 +1612,12 @@ class EntityTranslationDefaultHandler implements EntityTranslationHandlerInterfa
+ 
+   /**
+    * Returns the title to be used for the entity form page.
++   *
++   * This may contain HTML markup and thus needs to be sanitized, since it will
++   * be used as page title as-is.
+    */
+   protected function entityFormTitle() {
+-    return $this->getLabel();
++    return check_plain($this->getLabel());
+   }
+ 
+   /**

@@ -583,8 +583,15 @@ class LdapAuthorizationConsumerOG extends LdapAuthorizationConsumerAbstract {
       $this->og2Revokes($og_actions, $user, $user_auth_data); 
     }
 
+    $user_edit = array('data' => $user->data);
     $user_edit['data']['ldap_authorizations'][$this->consumerType] = $user_auth_data;
+    // Force a reload of the user object, since changes made through the grant-
+    // and revoke-functions above might have changed og-related field data.
+    // Those changes will not yet be reflected in $user, potentially causing
+    // data loss when user_save() is called with stale data.
+    $user = user_load($user->uid, TRUE);
     $user = user_save($user, $user_edit);
+
     $user_auth_data = $user->data['ldap_authorizations'][$this->consumerType];  // reset this variable because user save hooks can impact it.
 
     $this->flushRelatedCaches($consumers, $user);

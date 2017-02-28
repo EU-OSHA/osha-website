@@ -20,13 +20,13 @@ function ldap_servers_settings() {
 
   $form['#title'] = "Configure LDAP Preferences";
   $form['ssl'] = array('#type' => 'fieldset', '#title' => t('Require HTTPS on Credential Pages'));
-  $form['ssl']['ldap_servers_require_ssl_for_credentails'] = array(
+  $form['ssl']['ldap_servers_require_ssl_for_credentials'] = array(
     '#type' => 'checkbox',
     '#title' => t('If checked, modules using LDAP will not allow credentials to
       be entered on or submitted to HTTP pages, only HTTPS. This option should be used with an
       approach to get all logon forms to be https, such as:') .
       theme('item_list', array('items' => $https_approaches)),
-    '#default_value' => variable_get('ldap_servers_require_ssl_for_credentails', 0),
+    '#default_value' => variable_get('ldap_servers_require_ssl_for_credentials', 0),
   );
 
   $options = ldap_servers_encrypt_types('encrypt');
@@ -71,8 +71,13 @@ function ldap_servers_settings_submit($form, &$form_state) {
     if ($new_encyption != $old_encyption) {
       $servers = db_query("SELECT sid, bindpw FROM {ldap_servers} WHERE bindpw is not NULL AND bindpw <> ''")->fetchAllAssoc('sid');
       foreach ($servers as $sid => $server) {
-        $decrypted_bind_pwd = ldap_servers_decrypt($server->bindpw, $old_encyption);
-        $rencrypted = ldap_servers_encrypt($decrypted_bind_pwd, $new_encyption);
+        if ($server->bindpw != '') {
+          $decrypted_bind_pwd = ldap_servers_decrypt($server->bindpw, $old_encyption);
+          $rencrypted = ldap_servers_encrypt($decrypted_bind_pwd, $new_encyption);
+        }
+        else {
+          $rencrypted = '';
+        }
         db_query("UPDATE {ldap_servers} SET bindpw = :bindpw WHERE sid = :sid", array(':bindpw' => $rencrypted, ':sid' => $sid));
       }
     }

@@ -594,26 +594,23 @@ class LdapUserConf {
 
         // need to store <sid>|<dn> in ldap_user_prov_entries field, which may contain more than one
         $ldap_user_prov_entry = $ldap_server->sid . '|' . $proposed_ldap_entry['dn'];
-        if (!isset($user_entity->ldap_user_prov_entries['und'])) {
-          $user_entity->ldap_user_prov_entries = array('und' => array());
+        if (!isset($user_entity->ldap_user_prov_entries[LANGUAGE_NONE])) {
+          $user_entity->ldap_user_prov_entries = array(LANGUAGE_NONE => array());
         }
         $ldap_user_prov_entry_exists = FALSE;
-        foreach ($user_entity->ldap_user_prov_entries['und'] as $i => $field_value_instance) {
+        foreach ($user_entity->ldap_user_prov_entries[LANGUAGE_NONE] as $i => $field_value_instance) {
           if ($field_value_instance == $ldap_user_prov_entry) {
             $ldap_user_prov_entry_exists = TRUE;
           }
         }
         if (!$ldap_user_prov_entry_exists) {
-          $user_entity->ldap_user_prov_entries['und'][] = array(
+          $user_entity->ldap_user_prov_entries[LANGUAGE_NONE][] = array(
             'value' =>  $ldap_user_prov_entry,
-            'format' => NULL,
-            'save_value' => $ldap_user_prov_entry,
           );
-          $edit = array(
-            'ldap_user_prov_entries' => $user_entity->ldap_user_prov_entries,
-          );
-          $account = user_load($account->uid);
-          $account = user_save($account, $edit);
+
+          // Save the field without calling user_save()
+          field_attach_presave('user', $user_entity);
+          field_attach_update('user', $user_entity);
         }
 
       }
@@ -743,7 +740,7 @@ class LdapUserConf {
     );
 
     if ($result) {
-      // watchdog('ldap_user', 'LDAP entry on server %sid synched dn=%dn. username=%username, uid=%uid', $tokens, WATCHDOG_INFO);
+//      watchdog('ldap_user', 'LDAP entry on server %sid synched dn=%dn. username=%username, uid=%uid', $tokens, WATCHDOG_INFO);
     }
     else {
       watchdog('ldap_user', 'LDAP entry on server %sid not synched because error. username=%username, uid=%uid', $tokens, WATCHDOG_ERROR);
@@ -870,7 +867,7 @@ class LdapUserConf {
     // determine server that is associated with user
 
     $boolean_result = FALSE;
-    $language = ($account->language) ? $account->language : 'und';
+    $language = ($account->language) ? $account->language : LANGUAGE_NONE;
     if (isset($account->ldap_user_prov_entries[$language][0])) {
       foreach ($account->ldap_user_prov_entries[$language] as $i => $field_instance) {
         $parts = explode('|', $field_instance['value']);

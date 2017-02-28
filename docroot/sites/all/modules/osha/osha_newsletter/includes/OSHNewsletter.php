@@ -204,7 +204,7 @@ class OSHNewsletter {
         if (!empty($half_column)) {
           // We couldn't find 2 half-width columns in a row, so we stick the only
           // one to the entire width
-          $renderedContent .= self::renderTemplate($section['#style'], $half_column);
+          $renderedContent .= self::renderTemplate($half_column['#style'], $half_column);
           $half_column = null;
         }
         $renderedContent .= self::renderTemplate($section['#style'], $section);

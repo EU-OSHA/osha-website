@@ -3,6 +3,26 @@
  * @file
  * Returns the HTML for a publication node.
  */
+
+global $language;
+// Show image in thumbnail.
+$wrapper = entity_metadata_wrapper('node', $node);
+if (!isset($content['field_thumbnail']) && !empty($node->field_image)) {
+  $content['field_thumbnail'] = [
+    '#type' => 'item',
+    '#prefix' => '<div class="field-name-field-thumbnail">',
+    '#suffix' => '</div>',
+    '#markup' => theme('image_style', array(
+      'style_name' => 'medium_crop_220',
+      'path' => $wrapper->language($language->language)->field_image->value()['uri'],
+      'height' => NULL,
+      'width' => 220,
+      'alt' => $content['title_field']['#items'][0]['value'],
+      'title' => $content['title_field']['#items'][0]['value'],
+    )),
+  ];
+}
+
 ?>
 <?php if($page): ?>
   <div id="page-title" class="page__title title">&nbsp;</div>
@@ -39,28 +59,14 @@
 
   if($view_mode == 'full'){
     print render($content['title_field']);
-    
 
-    // Display thumbnail
-    if (isset($content['field_thumbnail'])) {
-      print render($content['field_thumbnail']);
-    }
-    elseif (isset($content['field_image'])) {
-      print theme_image_style(array(
-        'style_name' => 'medium',
-        'path' => $content['field_image']['#items'][0]['uri'],
-        'height' => NULL,
-        'width' => 220,
-        'alt' => $content['title_field']['#items'][0]['value'],
-        'title' => $content['title_field']['#items'][0]['value'],
-      ));
-    }
-
+    print render($content['field_thumbnail']);
     print render($content['body']);
     print render($content['field_image']);
     print render($content['field_file']);
     print render($content['field_twin_infographics']);
-  }elseif($view_mode == 'teaser' || $view_mode == 'osha_resources'){
+  }
+  else {
     print render($content);
   }
   ?>

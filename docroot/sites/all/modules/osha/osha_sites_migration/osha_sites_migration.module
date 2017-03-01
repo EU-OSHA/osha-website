@@ -106,6 +106,10 @@ function osha_sites_migration_migrate_api() {
         'site_source' => 'hwc',
       ),
     ),
+    'field handlers' => array(
+      'OSHAMigrateFileFieldHandler',
+      'OSHAMigrateImageFieldHandler',
+    ),
   );
 }
 

@@ -192,7 +192,7 @@ abstract class MigrateFile extends MigrateFileBase {
       if ($this->fileReplace == FILE_EXISTS_RENAME) {
         $basename = drupal_basename($destination);
         $directory = drupal_dirname($destination);
-        $file->filename = file_create_filename($basename, $directory);
+        $file->filename = drupal_basename(file_create_filename($basename, $directory));
       }
       else {
         $file->filename = drupal_basename($destination);

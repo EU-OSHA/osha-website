@@ -7,7 +7,7 @@
   global $base_url;
   global $language;
   ?>
-<link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
 <style>
 a{
 	text-decoration:none!important;

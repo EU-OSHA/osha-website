@@ -410,3 +410,14 @@ function osha_update_7021() {
   features_revert_module('osha_news');
   features_revert_module('osha_press_release');
 }
+
+function osha_update_7022() {
+  module_enable(['osha_sites_migration']);
+  features_revert_module('osha_sites_migration');
+  features_revert_module('osha_news');
+  features_revert_module('osha_events');
+  variable_set('hwc_migration_HWCEvents_url', '/ncw-export/events');
+  variable_set('hwc_migration_HWCNews_url', '/ncw-export/news');
+  variable_set('hwc_migration_root_url', 'https://healthy-workplaces.eu');
+  migrate_autoregister();
+}

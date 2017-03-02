@@ -9,14 +9,14 @@
  */
 ?>
 <?php if($node->title != NULL) {?>
-<table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%">
+<table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%" height="100%" class="newsletter-item" style="height:100%;">
   <tbody>
     <?php
     if (isset($node->field_publication_date[LANGUAGE_NONE][0]['value']) && $node->type != 'newsletter_article') {
       $date = strtotime($node->field_publication_date[LANGUAGE_NONE][0]['value']);
     ?>
       <tr>
-        <td colspan="2" style="font-family: Arial, sans-serif; font-size: 14px; padding-left: 14px;">
+        <td colspan="2" style="font-family: Arial, sans-serif; font-size: 14px;">
           <span class="item-date"><?php print format_date($date, 'custom', 'M d, Y');?></span>
         </td>
       </tr>
@@ -35,7 +35,7 @@
     }
     ?>
     <tr>
-      <td align="left" width="5%" style="padding-left: 0px; padding-right: 0px; vertical-align: top; padding-top: 5px;">
+      <td align="left" width="10" style=" padding-right: 0px; vertical-align: top; padding-top: 5px;">
         <?php
           $directory = drupal_get_path('module','osha_newsletter');
           global $base_url; // TODO: should link to node
@@ -44,14 +44,14 @@
           'width' => 7,
           'height' => 11,
           'alt' => 'link arrow',
-          'attributes' => array('style' => 'border: 0px;')
+          'attributes' => array('style' => 'border: 0px;height:11px!important;width:7px!important;')
           )), $base_url, array(
           'html' => TRUE,
           'external' => TRUE
         ));
         ?>
       </td>
-      <td align="right" width="95%" style="text-align: left; padding-top: 5px; padding-bottom: 10px;">
+      <td align="right" style="text-align: left; padding-top: 5px; padding-bottom: 10px;">
         <?php
         if (isset($variables['elements']['#campaign_id'])) {
           $url_query = array('pk_campaign' => $variables['elements']['#campaign_id']);
@@ -60,7 +60,7 @@
         }
         if ($node->type == 'publication') {
           print l($node->title, url('node/' . $node->nid . '/view', array('absolute' => TRUE)), array(
-            'attributes' => array('style' => 'color: #003399; text-decoration: none; font-family:Arial, sans-serif; font-size: 12px; font-weight: bold;'),
+            'attributes' => array('style' => 'text-decoration: none; font-family:Arial, sans-serif; font-size: 12px; font-weight: bold;'),
             'query' => $url_query,
             'external' => TRUE
           ));
@@ -69,7 +69,7 @@
             print $node->title;
           } else {
             print l($node->title, url('node/' . $node->nid, array('absolute' => TRUE)), array(
-              'attributes' => array('style' => 'color: #003399; text-decoration: none; font-family:Arial, sans-serif; font-size: 12px; font-weight: bold;'),
+              'attributes' => array('style' => 'text-decoration: none; font-family:Arial, sans-serif; font-size: 12px; font-weight: bold;'),
               'query' => $url_query,
               'external' => TRUE
             ));
@@ -78,12 +78,12 @@
         ?>
       </td>
     </tr>
-    <tr>
-      <td colspan="2" style="border-bottom:2px dotted #CFDDEE;padding-top:0px;"></td>
-    </tr>
-    <tr>
+    <!-- <tr>
+      <td colspan="2" style="border-bottom:1px dashed #CFDDEE;padding-top:0px;"></td>
+    </tr> -->
+    <!-- <tr>
       <td colspan="2" style="padding-bottom: 10px;" class="space-beyond-dotted-line"></td>
-    </tr>
+    </tr> -->
   </tbody>
 </table>
 <?php } ?>

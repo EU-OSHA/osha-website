@@ -16,7 +16,7 @@ class OSHNewsletter {
     ];
   }
 
-  public static function getChildStyle($parentTemaplate, $default = 'newsletter_item') {
+  public static function getChildStyle($parentTemplate, $default = 'newsletter_item') {
     $styles = [
       'newsletter_full_width_details' => 'highlights_item',
       'newsletter_full_width_list' => 'newsletter_item',
@@ -24,10 +24,10 @@ class OSHNewsletter {
       'newsletter_half_image_left' => 'newsletter_item',
       'newsletter_full_width_2_col_blocks' => 'newsletter_item',
     ];
-    if (empty($styles[$parentTemaplate])) {
+    if (empty($styles[$parentTemplate])) {
       return $default;
     }
-    return $styles[$parentTemaplate];
+    return $styles[$parentTemplate];
   }
 
   public static function alterContentForm(&$form, &$form_state) {
@@ -83,7 +83,11 @@ class OSHNewsletter {
         'class' => [
           drupal_clean_css_identifier($template),
           'newsletter-section',
+          'template-container',
         ],
+        'width' => '100%',
+        'cellpadding' => '0',
+        'cellspacing' => '0',
       ],
       '#printed' => false,
       '#sticky' => false,
@@ -96,11 +100,13 @@ class OSHNewsletter {
     }
     switch ($template) {
       case 'newsletter_multiple_columns':
-        $columnWidth = round((100 / count($variables)), 2);
+        $columnWidth = round((100 / count($variables)), 2) - 1;
         foreach ($variables as $column) {
           $content['#rows'][0]['data'][] = [
             'data' => self::renderTemplate($column['#style'], $column),
             'width' => "$columnWidth%",
+            'height' => '100%',
+            'class' => 'multiple-columns-cell template-column',
           ];
         }
         break;
@@ -109,6 +115,9 @@ class OSHNewsletter {
       case 'newsletter_full_width_details':
         if (empty($variables['nodes'])) {
           return '';
+        }
+        if($template === 'newsletter_half_width_list') {
+          $content['#attributes']['width'] = '100%';
         }
         foreach ($variables['nodes'] as $node) {
           $cellContent = self::getCellContent($template, $node);
@@ -130,7 +139,9 @@ class OSHNewsletter {
         $currentRow = $currentCol = 0;
         foreach ($variables['nodes'] as $node) {
           $cellContent = self::getCellContent($template, $node);
-          $cellContent['width'] = '50%';
+          $cellContent['width'] = '49%';
+          $cellContent['height'] = '100%';
+          array_push($cellContent['class'], 'template-column');
           if ($currentCol++ === 0) {
             $content['#rows'][$currentRow] = [
               'data' => [$cellContent],
@@ -235,17 +246,20 @@ class OSHNewsletter {
         'header' => [
           'data' => [$header],
           'no_striping' => true,
+          'class' => 'header-container',
         ],
         'content' => [
           'data' => [$renderedContent],
           'no_striping' => true,
+          'class' => 'content-container',
         ],
         'footer' => [
           'data' => [$footer],
           'no_striping' => true,
+          'class' => 'footer-container',
         ],
       ],
-      '#attributes' => ['class' => ['newsletter-wrapper']],
+      '#attributes' => ['class' => ['newsletter-container'], 'border' => '0', 'cellpadding' => '0', 'width' => '800'],
       '#printed' => false,
       '#sticky' => false,
       '#children' => [],

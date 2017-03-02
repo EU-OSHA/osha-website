@@ -1,6 +1,10 @@
 <?php
 
+use \TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
+
 class OSHNewsletter {
+
+  public static $fontUrl = 'https://fonts.googleapis.com/css?family=Oswald:200,300,400,500';
 
   public static function getTemplatesList() {
     return [
@@ -250,26 +254,66 @@ class OSHNewsletter {
     $fullNewsletter = drupal_render($fullNewsletter);
 
     $stylesheet_path = drupal_get_path('module', 'osha_newsletter') . '/includes/css/newsletter.css';
-    self::cssToInlineStyles($fullNewsletter, $stylesheet_path);
+    $fullNewsletter = self::cssToInlineStyles($fullNewsletter, $stylesheet_path);
+    $fullNewsletter = self::appendFontInHead($fullNewsletter);
 
     return $fullNewsletter;
   }
 
-  public static function applyCss(&$item, $styles) {
+  /**
+   * @param array|string $item
+   * @param string $styles
+   * @param CssToInlineStyles $cssToInlineStyles
+   */
+  public static function applyCss(&$item, $styles, CssToInlineStyles $cssToInlineStyles) {
     if (is_array($item)) {
       foreach ($item as &$subItem) {
-        self::applyCss($subItem, $styles);
+        self::applyCss($subItem, $styles, $cssToInlineStyles);
       }
-      return;
     }
-    $cssToInlineStyles = new \TijsVerkoyen\CssToInlineStyles\CssToInlineStyles();
-    $item = $cssToInlineStyles->convert($item, $styles);
+    else {
+      $item = $cssToInlineStyles->convert($item, $styles);
+    }
   }
 
-  public static function cssToInlineStyles(&$item, $stylesheet_path) {
+  /**
+   * Converts the css styles from stylesheet into inline styles and returns the
+   * full html
+   *
+   * @param $item
+   * @param $stylesheet_path
+   * @return mixed
+   */
+  public static function cssToInlineStyles($item, $stylesheet_path) {
     if (($library = libraries_load('CssToInlineStyles')) && !empty($library['loaded'])) {
+      $cssToInlineStyles = new CssToInlineStyles();
       $styles = file_get_contents($stylesheet_path);
-      self::applyCss($item, $styles);
+      self::applyCss($item, $styles, $cssToInlineStyles);
     }
+    return $item;
   }
+
+  public static function appendFontInHead($html) {
+    $domDocument = new DOMDocument();
+    $domDocument->loadHTML($html);
+
+    $font = $domDocument->createElement('link');
+    $font->setAttribute('rel', 'stylesheet');
+    $font->setAttribute('href', self::$fontUrl);
+
+    $head = $domDocument->getElementsByTagName('head');
+    if (empty($head->length)) {
+      $head = $domDocument->createElement('head');
+      $head->appendChild($font);
+      $body = $domDocument->getElementsByTagName('body')->item(0);
+      $body->parentNode->insertBefore($head, $body);
+    }
+    else {
+      $head = $head->item(0);
+      $head->appendChild($font);
+    }
+
+    return $domDocument->saveHTML();
+  }
+
 }

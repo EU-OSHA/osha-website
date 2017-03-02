@@ -76,7 +76,7 @@
             <tr>
               <td style="padding-top: 10px; padding-bottom: 10px; color: #333333; font-family: Arial, sans-serif; font-size: 13px; ">
                 <?php print t('Subscribe to our <a href="@url" style="@style">Alert service</a> for <br/> customised content delivery',
-                            array('@style' => 'color: #003399;', '@url' => url($base_url.'/'.$language->language.'/alertservice', array('query' => $url_query)))); ?>
+                            array('@style' => 'color: #003399;text-decoration:none;', '@url' => url($base_url.'/'.$language->language.'/alertservice', array('query' => $url_query)))); ?>
               </td>
             </tr>
           </tbody>

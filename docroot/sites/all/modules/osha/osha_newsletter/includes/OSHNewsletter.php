@@ -294,8 +294,9 @@ class OSHNewsletter {
   }
 
   public static function appendFontInHead($html) {
-    $domDocument = new DOMDocument();
-    $domDocument->loadHTML($html);
+    $domDocument = new \DOMDocument('1.0', 'UTF-8');
+    $domDocument->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
+    $domDocument->formatOutput = true;
 
     $font = $domDocument->createElement('link');
     $font->setAttribute('rel', 'stylesheet');

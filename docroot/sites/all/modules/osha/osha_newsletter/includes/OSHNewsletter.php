@@ -224,7 +224,30 @@ class OSHNewsletter {
 
     $footer = theme('newsletter_footer', array('campaign_id' => $campaign_id));
 
-    $fullNewsletter = $header . $renderedContent . $footer;
+    $fullNewsletter = [
+      '#theme' => 'table',
+      '#header' => [],
+      '#rows' => [
+        'header' => [
+          'data' => [$header],
+          'no_striping' => true,
+        ],
+        'content' => [
+          'data' => [$renderedContent],
+          'no_striping' => true,
+        ],
+        'footer' => [
+          'data' => [$footer],
+          'no_striping' => true,
+        ],
+      ],
+      '#attributes' => ['class' => ['newsletter-wrapper']],
+      '#printed' => false,
+      '#sticky' => false,
+      '#children' => [],
+    ];
+
+    $fullNewsletter = drupal_render($fullNewsletter);
 
     $stylesheet_path = drupal_get_path('module', 'osha_newsletter') . '/includes/css/newsletter.css';
     self::cssToInlineStyles($fullNewsletter, $stylesheet_path);

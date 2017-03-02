@@ -4,13 +4,8 @@ if (module_exists('osha_newsletter') && isset($variables['element'])) {
   $module_templates_path = drupal_get_path('module','osha_newsletter').'/templates';
   if ((isset($variables['element']['#entity_type']) && $variables['element']['#entity_type'] == 'entity_collection')
     && (isset($variables['element']['#bundle']) && $variables['element']['#bundle'] == 'newsletter_content_collection')) {
-    ?>
-    <div class="newsletter-wrapper" style="width: 800px;">
-      <?php
-        $source = $variables['element']['#entity_collection'];
-        print OSHNewsletter::render($source);
-      ?>
-    </div><?php
+      $source = $variables['element']['#entity_collection'];
+      print OSHNewsletter::render($source);
   }
 } else {
 ?>

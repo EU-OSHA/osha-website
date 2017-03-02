@@ -1,0 +1,83 @@
+/* might not be needed afterall */
+/* CLIENT-SPECIFIC STYLES */
+body, table, td, a{-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;} /* Prevent WebKit and Windows mobile changing default text sizes */
+table, td{mso-table-lspace: 0pt; mso-table-rspace: 0pt;} /* Remove spacing between tables in Outlook 2007 and up */
+img{-ms-interpolation-mode: bicubic;} /* Allow smoother rendering of resized image in Internet Explorer */
+
+/* RESET STYLES */
+img{border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none;}
+table{border-collapse: collapse !important;}
+body{height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important;}
+
+/* iOS BLUE LINKS */
+a[x-apple-data-detectors] {
+    color: inherit !important;
+    text-decoration: none !important;
+    font-size: inherit !important;
+    font-family: inherit !important;
+    font-weight: inherit !important;
+    line-height: inherit !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .template-container {
+    /* max-width: 400px; */
+  }
+  .newsletter-container {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  .template-image,
+  .template-container,
+  .template-column {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .template-column {
+    display: block !important;
+  }
+
+  .template-column td {
+    /* padding-left: 0 !important;
+    padding-right: 0 !important; */
+  }
+  .template-column img {
+    max-width: 100% !important;
+    width: auto !important;
+    height: auto !important;
+  }
+  .template-column > .newsletter-item {
+    background-color: transparent;
+    color: #003399;
+  }
+  .newsletter-full-width-2-col-blocks-item > .newsletter-item > tbody > tr > td {
+    padding: 5px 0px;
+  }
+
+  .newsletter-item {
+    border-bottom: 1px dashed #dddddd;
+  }
+
+  .newsletter-section > tbody > .row:last-child > .item:last-child > .newsletter-item {
+    border-bottom: none;
+  }
+
+  .newsletter-section .row:first-child > .item:last-child:not(:only-child) {
+    padding-top: 2px !important;
+  }
+  .newsletter-section .row:last-child > .item:first-child:not(:only-child) {
+    padding-bottom: 2px !important;
+  }
+  .osha-logos {
+    text-align: center;
+  }
+  td.social {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .preheader .social {
+    text-align: center !important;
+  }
+}

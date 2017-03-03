@@ -1,1 +1,1 @@
-/home/octavian/Work/OSHA/ncw/docroot/sites/all/themes/osha_frontend/templates/node--newsletter_item.tpl.php
+../osha_frontend/templates/node--newsletter_item.tpl.php

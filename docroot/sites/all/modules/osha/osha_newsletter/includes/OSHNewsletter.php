@@ -113,9 +113,6 @@ class OSHNewsletter {
       case 'newsletter_full_width_list':
       case 'newsletter_half_width_list':
       case 'newsletter_full_width_details':
-        if (empty($variables['nodes'])) {
-          return '';
-        }
         if($template === 'newsletter_half_width_list') {
           $content['#attributes']['width'] = '100%';
         }
@@ -131,9 +128,6 @@ class OSHNewsletter {
       case 'newsletter_half_image_left':
         // @todo: get the image from the taxonomy
         $image_url = 'https://healthy-workplaces.eu/sites/default/files/frontpage_slider/home_slide-2r-1.png';
-        if (empty($variables['nodes'])) {
-          return '';
-        }
         $content['#header']['data']['colspan'] = 2;
 
         // Avoid rendering the section title twice
@@ -154,9 +148,6 @@ class OSHNewsletter {
 
         return sprintf('<div class="newsletter-half-image-left-container" style="background-image: url(\'%s\')">%s</div>', $image_url, drupal_render($content));
       case 'newsletter_full_width_2_col_blocks':
-        if (empty($variables['nodes'])) {
-          return '';
-        }
         $content['#header']['data']['colspan'] = 2;
         $currentRow = $currentCol = 0;
         foreach ($variables['nodes'] as $node) {
@@ -227,6 +218,9 @@ class OSHNewsletter {
 
     $renderedContent = '';
     foreach ($content as $section) {
+      if (empty($section['nodes'])) {
+        continue;
+      }
       if (preg_match('/.*(half_width).*/', $section['#style'])) {
         if (!empty($half_column)) {
           // Found 2 half-width templates in a row

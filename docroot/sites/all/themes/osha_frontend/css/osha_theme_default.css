@@ -436,7 +436,9 @@ header{
 	padding-bottom: 0.2em;
 	font-weight: bold;
 }
-
+#header{
+	top: 0px;
+}
 #header, #content, #navigation, .region-sidebar-first, .region-sidebar-second, #footer{
 	padding-left:0px;
 	padding-right:0px;
@@ -7947,7 +7949,9 @@ a.contextual-links-trigger{
 	line-height: 1.3em;
 	padding: 0.5em 4em 0.3em 0.5em;
 }
-
+#sliding-popup{
+	overflow: hidden;
+}
 #sliding-popup.sliding-popup-top{
 	display: block;
 	z-index: 9999999!important;

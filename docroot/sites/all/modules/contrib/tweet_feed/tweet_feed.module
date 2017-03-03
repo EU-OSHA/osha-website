@@ -1,0 +1,1229 @@
+<?php
+
+/**
+ * @file tweet_feed.module
+ * Code for the Tweet Feed feature.
+ */
+
+include_once 'tweet_feed.field_info.inc';
+
+define('QUERY_SEARCH', 1);
+define('QUERY_TIMELINE', 2);
+define('QUERY_LIST', 3);
+
+/**
+ * Implements hook_views_api().
+ */
+function tweet_feed_views_api($module = NULL, $api = NULL) {
+  return array("api" => "3.0");
+}
+
+/**
+ * Implements hook_menu().
+ */
+function tweet_feed_menu() {
+  $items = array();
+  $items['admin/config/services/tweet_feed'] = array(
+    'title' => t('Tweet Feed'),
+    'description' => t('The settings for the Tweet Feed module.'),
+    'page callback' => 'tweet_feed_menu_page',
+    'access callback' => 'user_access',
+    'access arguments' => array('administer tweet feed settings'),
+    'file' => 'tweet_feed_admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['admin/config/services/tweet_feed/settings'] = array(
+    'title' => t('Settings'),
+    'description' => t('The settings for the Tweet Feed module.'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('tweet_feed_settings_form'),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer tweet feed settings'),
+    'file' => 'tweet_feed_admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['admin/config/services/tweet_feed/accounts'] = array(
+    'title' => t('Twitter API Accounts'),
+    'description' => t('List of available API accounts used to collect feeds.'),
+    'page callback' => 'tweet_feed_accounts_table',
+    'access callback' => 'user_access',
+    'access arguments' => array('administer tweet feed settings'),
+    'file' => 'tweet_feed_admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['admin/config/services/tweet_feed/feeds'] = array(
+    'title' => t('Twitter Feeds'),
+    'description' => t('List of configured feeds to aggregate.'),
+    'page callback' => 'tweet_feed_feeds_table',
+    'access callback' => 'user_access',
+    'access arguments' => array('administer tweet feed settings'),
+    'file' => 'tweet_feed_admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['admin/config/services/tweet_feed/feeds/run/%tweet_feed_id'] = array(
+    'title' => t('Import Feed'),
+    'description' => t('Import tweets from a specific feed.'),
+    'page callback' => 'tweet_feed_run_import',
+    'page arguments' => array(6),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer tweet feed settings'),
+    'file' => 'tweet_feed_admin.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['admin/config/services/tweet_feed/accounts/add'] = array(
+    'title' => t('Add Account'),
+    'description' => t('Add a new Twitter API account.'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('tweet_feed_account_form'),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer tweet feed settings'),
+    'file' => 'tweet_feed_admin.inc',
+    'type' => MENU_LOCAL_ACTION,
+  );
+  $items['admin/config/services/tweet_feed/accounts/edit/%tweet_feed_id'] = array(
+    'title' => t('Add Account'),
+    'description' => t('Add a new Twitter API account.'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('tweet_feed_account_form', 6),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer tweet feed settings'),
+    'file' => 'tweet_feed_admin.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['admin/config/services/tweet_feed/accounts/delete/%tweet_feed_id'] = array(
+    'title' => t('Add Account'),
+    'description' => t('Delete Twitter API account.'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('tweet_feed_delete_account_form', 6),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer tweet feed settings'),
+    'file' => 'tweet_feed_admin.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['admin/config/services/tweet_feed/feeds/add'] = array(
+    'title' => t('Add Feed'),
+    'description' => t('Add a new feed to the list of aggregated feeds.'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('tweet_feed_feeds_form'),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer tweet feed settings'),
+    'file' => 'tweet_feed_admin.inc',
+    'type' => MENU_LOCAL_ACTION,
+  );
+  $items['admin/config/services/tweet_feed/feeds/edit/%tweet_feed_id'] = array(
+    'title' => t('Edit Feed'),
+    'description' => t('Edit one of the listed feeds.'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('tweet_feed_feeds_form', 6),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer tweet feed settings'),
+    'file' => 'tweet_feed_admin.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['admin/config/services/tweet_feed/feeds/delete/%tweet_feed_id'] = array(
+    'title' => t('Delete Feed'),
+    'description' => t('Delete a feed from the list of aggregated feeds.'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('tweet_feed_delete_feed_form', 6),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer tweet feed settings'),
+    'file' => 'tweet_feed_admin.inc',
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Get the argument tweet_feed_id
+ */
+function tweet_feed_id_load($value) {
+  return (intval($value)) ? $value : FALSE;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function tweet_feed_permission() {
+  return array(
+    'administer tweet feed settings' => array(
+      'title' => t('Access Tweet Feed Settings'),
+      'description' => t('Allow the changing of OAuth tokens and search queries.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_cron().
+ *
+ * When running on a cron, we are going to update one feed per cron run and keep track
+ * of which one was run. These will be run in a round robin order in the order which
+ * they were created (in ascending order by ID).
+ */
+function tweet_feed_cron() {
+  // If we are not doing this as per administrative configuration, then we can skup
+  $tweet_feed_disable_cron = variable_get('tweet_feed_disable_cron', 0);
+  if (!empty($tweet_feed_disable_cron)) {
+    return TRUE;
+  }
+
+  // Get a list of all the available feeds
+  $feed = array();
+  $result = db_select('tweet_feeds', 'f')
+              ->fields('f', array('fid'))
+              ->orderBy('fid', 'ASC')
+              ->execute();
+  while ($fdata = $result->fetchObject()) {
+    $feed[] = $fdata->fid;
+  }
+  
+  // If there are no feeds created, then we cannot continue.
+  if (empty($feed)) {
+    return FALSE;
+  }
+    
+  // Determine the id of the last feed run
+  $last_fid = variable_get('tweet_feed_cron_last_fpos', NULL);
+  // If it is zero, or this is the first time being run, then start with the first one
+  if ($last_fid === NULL) {
+    $current_fid = 0;
+  }
+  else {
+    $current_fid = $last_fid + 1;
+    if ($current_fid > (count($feed)-1)) {
+      $current_fid = 0;
+    }
+  }
+  // Set the last fid used in our variable for future use
+  variable_set('tweet_feed_pull_data_from_feed', $current_fid);
+  variable_set('tweet_feed_cron_last_feed', $feed[$current_fid]);
+
+  // Get all of the tweets to be imported
+  $tweets = tweet_feed_pull_data_from_feed($feed[$current_fid], TRUE);
+
+  // If this returns false, we have a problem. Reset the counter by deleting the variable.
+  // And then not running this particular cron.
+  if ($tweets == FALSE) {
+    variable_del('tweet_feed_pull_data_from_feed');
+    variable_del('tweet_feed_cron_last_feed');
+    return FALSE;
+  }
+
+  // If we have no tweets, we can stop here.
+  if (!is_array($tweets) || count($tweets) < 1) {
+    return FALSE;
+  }
+
+  // Get our current tweet_feed_queue.
+  $queue = drupalQueue::get('tweet_feed_queue');
+
+  // If we have items left in it that were not processed, then do those first and
+  // bail. Could mean we had a time out issue on the last run or some other error.
+  $queue_size = $queue->numberOfItems();
+  if ($queue_size < 1) {
+    // Nothing is in the queue, so we can begin populating it with more stuff
+    foreach($tweets as $key => $tweet) {
+      // Initialize our update_node_id
+      $update_node_id = 0;
+      $hash = NULL;
+      // find out if we already have this tweet, if we do, add the update primary key (pk).
+      $result = db_select('tweet_hashes', 'h')
+                  ->fields('h', array('nid', 'tid', 'hash'))
+                  ->condition('h.tid', $tweet->id_str)
+                  ->execute();
+      if ($result->rowCount() > 0) {
+        $tdata = $result->fetchObject();
+        $hash = md5(serialize($tweet->text));
+        // If our hashes are equal, we have nothing to update and can move along.
+        if ($hash == $tdata->hash) {
+          continue;
+        }
+        else {
+          $update_node_id = $tdata->nid;
+        }
+      }
+      $queue->createItem(array('tweet' => $tweet, 'feed' => $feed, 'update_node_id' => $update_node_id, 'hash' => $hash));
+    }
+    // Get the total number of items we have addedd to our queue
+    $queue_size = $queue->numberOfItems();
+  }
+
+  // Run through items in the queue
+  for ($i = 0; $i < $queue_size; $i++) {
+    $item = $queue->claimItem($i);
+    $feed_object = tweet_feed_get_feed_object($item->data['feed'][0]);
+    if (!empty($feed_object)) {
+      tweet_feed_save_tweet($item->data['tweet'], $feed_object, $item->data['update_node_id'], $item->data['hash']);
+    }
+    $queue->releaseItem($item);
+    $queue->deleteItem($item);
+  }
+}
+
+/**
+ * Iterate through the feeds and import
+ *
+ * Used by our drush command to get all of the feed data and import the feeds accordingly.
+ *
+ * @param int fid
+ *   The feed id that we are going to process. If empty, then process them all.
+ */
+function tweet_feed_process_feed($fid = NULL) {
+  if ($fid == NULL) {
+    // If we're not being passed any argument, then process all the feeds.
+    // Load in the fid's for active feeds and then run them through
+    // tweet_feed_pull_data_from_feed
+    $result = db_select('tweet_feeds', 'f')
+                ->fields('f', array('feed_name', 'fid'))
+                ->orderBy('feed_name', 'ASC')
+                ->execute();
+  }
+  else {
+    // Otherwise, just load in the one specified
+    $result = db_select('tweet_feeds', 'f')
+                ->fields('f', array('feed_name', 'fid'))
+                ->condition('f.fid', $fid)
+                ->orderBy('f.feed_name', 'ASC')
+                ->execute();
+  }
+  while ($fdata = $result->fetchObject()) {
+    tweet_feed_set_message('Processing Feed: ' . $fdata->feed_name, 'ok', FALSE);
+    $tweets = tweet_feed_pull_data_from_feed($fdata->fid, FALSE);
+  }
+}
+
+/**
+ * Get data on specific feed
+ *
+ * Get the information from our feed and accounts table on a per-feed basis for the purposes
+ * of starting the import for that feed.
+ *
+ * @param int fid
+ *   The id of the feed for which we want to retrieve the data as an object
+ * @return object feed
+ *   The feed data object for the requested feed
+ */
+function tweet_feed_get_feed_object($fid) {
+  // If we are not passed an fid, then return false (sanity check)
+  if (empty($fid)) {
+    return FALSE;
+  }
+  // We should only ever have one of these since we're pulling by feed and a feed can only
+  // have only one API source.
+  $query = db_select('tweet_feeds', 'f');
+  $query->join('tweet_accounts', 'a', 'a.aid = f.aid');
+  $query->fields('f', array('fid', 'query_type', 'timeline_id', 'search_term', 'list_name', 'pull_count', 'clear_prior', 'new_window', 'hash_taxonomy'));
+  $query->fields('a', array('consumer_key', 'consumer_secret', 'oauth_token', 'oauth_token_secret'));
+  $query->condition('f.fid', $fid);
+  $result = $query->execute();
+  if ($result->rowCount() > 0) {
+    $feed = $result->fetchObject();
+    return $feed;
+  }
+  else {
+    return FALSE;
+  }
+}
+
+/**
+ * Get Twitter Data
+ *
+ * Pull data from the feed given our internal feed id. Our feed object also contains the
+ * information about the account associated with this feed (reference) so we have everything
+ * we need to connect via the Twitter API and retrieve the data.
+ *
+ * @param int fid
+ *   The feed is of the feed with which we wish to procure the data
+ * @param bool web_interface
+ *   Are we pulling the data from the web interface?
+ * @return array tweets
+ *   An array of all the tweets for this feed. FALSE if there are problems.
+ */
+function tweet_feed_pull_data_from_feed($fid, $web_interface = FALSE) {
+  // If the fid is empty then we do not have enough information by which to pull data.
+  // When this is the case, we need to bail.
+  if (empty($fid)) {
+    return FALSE;
+  }
+
+  // Get our feed object that contains everything we want to know about this feed.
+  // If there is an invalid feed, then return false
+  $feed = tweet_feed_get_feed_object($fid);
+  if (empty($feed)) {
+    return FALSE;
+  }
+  
+  // Load in our twitter oauth class
+  module_load_include('inc', 'tweet_feed', 'inc/twitter-oauth');
+  
+  // If we have selected to clear our prior tweets for this particular feed, then we need
+  // to do that here.
+  if (!empty($feed->clear_prior)) {
+    // All tweets are nodes, so we do an entity query to get the node id's for the tweets
+    // belonging to this feed and delete them. It's conceivable that this could take some
+    // time.
+    tweet_feed_set_message('Clearing Previous Tweets', 'ok', $web_interface);
+    $query = new EntityFieldQuery();
+    $result = $query->entityCondition('entity_type', 'node')
+                    ->entityCondition('bundle', 'twitter_tweet_feed')
+                    ->fieldCondition('field_tweet_feed_id', 'value', $fid, '=')
+                    ->execute();
+    if (isset($result['node'])) {
+      foreach ($result['node'] as $nid => $node) {
+        // Removing the message that tells us the node is deleted. Loading the node just to
+        // get the title is like using a nuclear weapon to light your cigarette. Will work on
+        // a better way in a future version.
+        // $n = node_load($nid);
+        node_delete($nid);
+        // tweet_feed_set_message($n->title . ': DELETED', 'ok', $web_interface);
+      }
+    }
+    tweet_feed_set_message('All previous tweets for this feed are deleted.', 'ok', $web_interface);
+  }
+
+  // Build TwitterOAuth object with client credentials
+  $con = new TwitterOAuth($feed->consumer_key, $feed->consumer_secret, $feed->oauth_token, $feed->oauth_token_secret);
+
+  // Get the number of tweets to pull from our list
+  $number_to_get = $feed->pull_count * 100;
+
+  $run_count = 0;
+  $lowest_id = -1;
+  $tweets = array();
+  $params = ($feed->query_type == QUERY_TIMELINE) ?
+    array('user_id' => $feed->timeline_id, 'count' => 100) :
+    array('q' => $feed->search_term, 'count' => 100);
+
+  while (count($tweets) < $number_to_get && $lowest_id != 0) {
+    tweet_feed_set_message('Tweets Imported: ' . count($tweets) . ', Total To Import: ' . $number_to_get, 'ok', $web_interface);
+    if (!empty($tdata->search_metadata->next_results)) {
+      $next = substr($tdata->search_metadata->next_results, 1);
+      $parts = explode('&', $next);
+      foreach($parts as $part) {
+        list($key, $value) = explode('=', $part);
+        if ($key == 'max_id') {
+          $lowest_id = $value;
+        }
+        $params[$key] = $value;
+      }
+    }
+    $data = new stdClass();
+    switch ($feed->query_type) {
+      case QUERY_TIMELINE:
+        // Only display this the first time. No need for each trip down the line.
+        if (count($tweets) < 1) {
+          tweet_feed_set_message('Retrieving Timeline Status Messages For ID: ' . $feed->timeline_id, 'ok', $web_interface);
+        }
+
+        // Set the max id to one lower than the lowest tweet we've imported so we do not
+        // get duplicates
+        if ($lowest_id > 0) {
+          $params['max_id'] = $lowest_id;
+        }
+
+        $tdata = json_decode(
+          $con->oAuthRequest(
+            'https://api.twitter.com/1.1/statuses/user_timeline.json',
+            'GET',
+            $params
+          )
+        );
+        break;
+
+      case QUERY_LIST:
+        // Only display this the first time. No need for each trip down the line.
+        if (count($tweets) < 1) {
+          tweet_feed_set_message('Retrieving List Status Messages For List Name: ' . $feed->list_name, 'ok', $web_interface);
+        }
+
+        $params = array(
+          'slug' => $feed->list_name,
+          'owner_id' => $feed->timeline_id,
+          'count' => 100,
+        );
+
+        if ($lowest_id > 0) {
+          $params['max_id'] = $lowest_id;
+        }
+
+        $tdata = json_decode(
+          $con->oAuthRequest(
+            'https://api.twitter.com/1.1/lists/statuses.json',
+            'GET',
+            $params
+          )
+        );
+        break;
+
+      case QUERY_SEARCH:
+      default:
+        // Only display this the first time. No need for each trip down the line.
+        if (count($tweets) < 1) {
+          tweet_feed_set_message('Retrieving Status Messages For Search Term: ' . $feed->search_term, 'ok', $web_interface);
+        }
+        $tdata = json_decode(
+          $con->oAuthRequest('https://api.twitter.com/1.1/search/tweets.json',
+            'GET',
+            $params
+          )
+        );
+        break;
+    }
+
+    if (!empty($tdata)) {
+      tweet_feed_set_message('Processing Tweets', 'ok', $web_interface);
+      // If we have errors, then we need to handle them accordingly
+      if (!empty($tdata->errors)) {
+        foreach($tdata->errors as $error) {
+          tweet_feed_set_message(t('Tweet Feed Fail: ') . $error->message . ': ' . $error->code,  'error', $web_interface);
+          $lowest_id = 0;
+          $tweets = array();
+          // If we're handling through the web interface and we're having an issue, then
+          // we need to spit the error to the screen
+          if ($web_interface == TRUE) {
+            drupal_set_message(t('Tweet Feed Fail: ') . $error->message . ': ' . $error->code,  'error');
+          }
+        }
+      }
+      else {
+        if ($feed->query_type == QUERY_TIMELINE || $feed->query_type == QUERY_LIST) {
+          // Get the lowest ID from the last element in the timeline
+          $end_of_the_line = array_pop($tdata);
+          array_push($tdata, $end_of_the_line);
+          $lowest_id = $end_of_the_line->id_str;
+
+          // Proceed with our processing
+          $tweet_data = $tdata;
+        }
+        else {
+          $tweet_data = $tdata->statuses;
+        }
+
+        // If this is FALSE, then we have hit an error and need to stop processing
+        if (isset($tweet_data['tweets']) && $tweet_data['tweets'] === FALSE) {
+          break;
+        }
+
+        // merge the total tweets so we know how many we have. If we have none, trigger
+        // the script to proceed on to the next feed.
+        $tweet_data = tweet_feed_process_tweets($tweet_data, $feed, $number_to_get, $run_count, $web_interface);
+        if (count($tweet_data) == 0) {
+          $lowest_id = 0;
+        }
+        else {
+          if (count($tweet_data) < 100 && count($tweet_data) > 0) {
+            $lowest_id = 0;
+            $tweets = array_merge($tweets, $tweet_data);
+          }
+          else {
+            $tweets = array_merge($tweets, $tweet_data);
+          }
+        }
+      }
+      $run_count++;
+    }
+    else {
+      tweet_feed_set_message('No tweets available for this criteria.', 'ok', $web_interface);
+      break;
+    }
+  }
+
+  // If we are processing through cron or the web interface, then hand back all of our
+  // tweets so that they may be processed.
+  if ($web_interface == TRUE) {
+    return $tweets;
+  }
+}
+
+/**
+ * Process each tweet
+ *
+ * Iterate through our array of tweets and process them one at a time. This is designed
+ * for use with our drush command
+ */
+function tweet_feed_process_tweets($tweet_data, $feed, $number_to_get = 0, $run_count = 0, $web_interface = FALSE) {
+  
+  $tweets = array();
+  $total_hashi = 0;
+  foreach($tweet_data as $key => $tweet) {
+    // Initialize our update_node_id
+    $update_node_id = 0;
+    // find out if we already have this tweet, if we do, add the update primary key (pk)
+    $result = db_select('tweet_hashes', 'h')
+                ->fields('h', array('nid', 'tid', 'hash'))
+                ->condition('h.tid', $tweet->id_str)
+                ->execute();
+    if ($result->rowCount() > 0) {
+      $tdata = $result->fetchObject();
+      $hash = md5(serialize($tweet->text));
+      // If our hashes are equal, we have nothing to update and can move along
+      $update = ($hash == $tdata->hash);
+      continue;
+    }
+    // If we're using the web iterface, our batch processing will take care of tweet
+    // saving as well as progress counting. This is purely for drushes entertainment
+    if ($web_interface == FALSE) {
+      tweet_feed_save_tweet($tweet, $feed, $update_node_id, $tdata->hash);
+      if (($key > 1 && (!($key % 20))) || (($key+1) == count($tweet_data))) {
+        tweet_feed_set_message('Loaded ' . ($key + ($run_count * 100)) . ' out of ' . $number_to_get . ' (' . number_format((($key + ($run_count * 100)) / $number_to_get) * 100) . '%)', 'ok', $web_interface);
+      }
+    }
+    $tweets[] = $tweet;
+  }
+  return $tweets;
+}
+
+/**
+ * Process hashtags and user mentions in tweets
+ *
+ * We need to store these in our taxonomy (do not save duplicates) and save a reference
+ * to them in our created tweet node
+ *
+ * @param array $entities
+ *   An array of entities to be saved to our taxonomy.
+ * @param string $taxonomy
+ *   The machine name of the taxonomy to be saved to.
+ * @param array $terms
+ *   An array of taxonomy objects to be saved to the node for this tweet.
+ */
+function tweet_feed_process_taxonomy($entities, $taxonomy) {
+  $terms = array();
+  foreach($entities as $entity) {
+    switch($taxonomy) {
+      case 'hashtag_terms':
+        $taxonomy_name = $entity->text;
+        break;
+      case 'user_mention_terms':
+        $taxonomy_name = $entity->screen_name;
+        break;
+      default:
+        break;
+    }
+    // Check to see if this entity is in our hashtag taxonomy
+    $vocabulary = taxonomy_vocabulary_machine_name_load($taxonomy);
+    // if the taxonomy doesn't exist for some reason, then we need to fataly error
+    if ($vocabulary == FALSE) {
+      tweet_feed_set_message('The ' . $taxonomy . ' taxonomy vocabulary could not be found. Please uninstall and re-install Tweet Feed', 'fatal', $web_interface);
+      return FALSE;
+    }
+    // Now that we have the vocabulary information, see if this term already
+    // exists and if it does, give us the tid
+    $result = db_select('taxonomy_term_data', 'td')
+                ->fields('td', array('tid'))
+                ->condition('td.vid', $vocabulary->vid)
+                ->condition('td.name', $taxonomy_name)
+                ->execute();
+    // If we have one, great! If we don't, we need to create one and then get the tid
+    // that way.
+    if ($result->rowCount() > 0) {
+      $tid = $result->fetchField();
+    }
+    else {
+      $term = new stdClass();
+      $term->vid = $vocabulary->vid;
+      $term->name = $taxonomy_name;
+      taxonomy_term_save($term);
+      $tid = $term->tid;
+    }
+    $terms[] = $tid;
+  }
+  return $terms;
+}
+
+/**
+ * Format Tweet Output to HTML
+ *
+ * Makes links, hash tags, and usernames clickable.
+ */
+function tweet_feed_format_output($tweet, $new_window = FALSE, $hash_taxonomy = FALSE, $hashtags = array()) {
+  /* based on our preference, assign all links to new windows or to the same window */
+  $target = ($new_window == 1) ? '_blank' : '_self';
+
+  // Look for links and make them clickable
+  $tweet = preg_replace('/(((f|ht){1}tp:\/\/)[-a-zA-Z0-9@:%_\+.~#?&\/\/=]+)/i',
+    '<a target="' . $target . '" href="\\1">\\1</a>', $tweet);
+  $tweet = preg_replace('/(((f|ht){1}tps:\/\/)[-a-zA-Z0-9@:%_\+.~#?&\/\/=]+)/i',
+    '<a target="' . $target . '" href="\\1">\\1</a>', $tweet);
+  $tweet = preg_replace('/([[:space:]()[{}])(www.[-a-zA-Z0-9@:%_\+.~#?&\/\/=]+)/i',
+    '\\1<a target="' . $target . '" href="http:\/\/\\2">\\2</a>', $tweet);
+  $tweet = preg_replace('/([_\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\.)+[a-z]{2,3})/i',
+    '<a href="mailto:\\1">\\1</a>', $tweet);
+
+  // Look for twitter handles and make them clickable
+  // Modified so that slashes in the twitter handle are counted
+  $pattern = '/@([A-Za-z0-9_]{1,15})(?![.A-Za-z])/';
+  $replace  = '<a target="' . $target . '" href="http://twitter.com/'.strtolower('\1').'">@\1</a>';
+  $tweet   = preg_replace($pattern, $replace, $tweet);
+
+  // Look for twitter hash tags and make them clickable
+  // Modified so that slashes in the twitter handle are counted
+  // Modified to link to taxonomy term if that checkbox is selected for this feed.
+  $tweet = preg_replace('/(^|\s)#(\w*+)/u', '\1<a target="' . $target . '" href="http://twitter.com/search?q=%23\2">#\2</a>', $tweet);
+  return $tweet;
+}
+
+/**
+ * Custom Set Message Function
+ *
+ * If drush exists, then we are running in drush and need to output our errors there.
+ * We do not want drush errors going ot the screen. Will also only send messages if
+ * the user uid is 1.
+ */
+function tweet_feed_set_message($message, $type = 'status', $web_interface = FALSE) {
+  // If we're coming from the web interface, then we do not want to do anything here
+  if ($web_interface != FALSE) {
+    return;
+  }
+  // Get our global user object to check for user id 1 on drupal set message
+  global $user;
+  if (function_exists('drush_print')) {
+    if ($type != 'error' && $type  != 'warning' && $type != 'fatal') {
+      drush_log($message, 'ok');
+    }
+    else {
+      if ($type == 'fatal') {
+        drush_set_error($message);
+      }
+      else {
+        drush_log($message, $type);
+      }
+    }
+  }
+  else {
+    if ($type != 'drush') {
+      $type = ($type == 'fatal') ? 'error' : $type;
+      $type = ($type == 'ok') ? 'status' : $type;
+      if ($user->uid == 1) {
+        drupal_set_message(check_plain($message), $type);
+      }
+    }
+  }
+}
+
+/**
+ * Save The Tweet (and profile)
+ *
+ * Save our tweet data and (optionally) profile if site is configured to do so.
+ */
+function tweet_feed_save_tweet($tweet, $feed, $update_node_id = 0, $hash = NULL, $cron = FALSE) {
+  // Get the creation time of the tweet and store it.
+  $creation_timestamp = strtotime($tweet->created_at);
+
+  // Add our hash tags to the hashtag taxonomy. If it already exists, then get the tid
+  // for that term. Returns an array of tid's for hashtags used.
+  $hashtags = tweet_feed_process_taxonomy($tweet->entities->hashtags, 'hashtag_terms');
+
+  // If hashtags comes back as false, then we have a problem and need to quit.
+  // Using our custom bail function since this could be a drush command or a web
+  // interface call and we need to be able to handle accordingly.
+  if ($hashtags === FALSE) {
+    tweet_feed_bail();
+  }
+  
+  // Add our user mentions to it's relative taxonomy. Handled just like hashtags
+  $user_mentions = tweet_feed_process_taxonomy($tweet->entities->user_mentions, 'user_mention_terms');
+
+  // If user_mentions comes back as false, then we have a problem and need to quit.
+  if ($user_mentions === FALSE) {
+    tweet_feed_bail();
+  }
+
+  // Process the tweet. This linkes our twitter names, hash tags and converts any
+  // URL's into HTML.
+  $tweet_html = tweet_feed_format_output($tweet->text, $feed->new_window, $feed->hash_taxonomy, $hashtags); 
+          
+  // Populate our node object with the data we will need to save
+  $node = new stdClass();
+  $node->created = $creation_timestamp;
+
+  // If we are being passed a node id for updating, then set it here so we update that
+  // node. (might be an edge case)
+  if ($update_node_id > 0) {
+    $node->nid = $update_node_id;
+    node_load($node->nid);
+  }
+
+  // Because we modify the tweet to get source images, we need to get the hash before
+  // we do any of our processing
+  $tweet_hash = md5(serialize($tweet->text));
+
+  // If we are being provided a hash, we compare against this hash and if they are equal
+  // then there is nothing to do
+  if ($tweet_hash == $hash) {
+    return NULL;
+  }
+
+  // Get started with our node data structure
+  $node->type = 'twitter_tweet_feed';
+  $node->uid = 1;
+  $node->status = 1;
+  $node->comment = 0;
+  $node->promote = 0;
+  $node->moderate = 0;
+  $node->sticky = 0;
+  $node->language = LANGUAGE_NONE;
+
+  // The tweet author goes into the title field
+  // Filter it cleanly since it is going into the title field. If we cannot use iconv,
+  // then use something more primitive, but effective
+  // @see https://www.drupal.org/node/1910376
+  // @see http://webcollab.sourceforge.net/unicode.html
+  // Reject overly long 2 byte sequences, as well as characters above U+10000
+  // and replace with --.
+  $title_tweet_text = preg_replace('/[\x00-\x08\x10\x0B\x0C\x0E-\x19\x7F]' .
+   '|[\x00-\x7F][\x80-\xBF]+' .
+   '|([\xC0\xC1]|[\xF0-\xFF])[\x80-\xBF]*' .
+   '|[\xC2-\xDF]((?![\x80-\xBF])|[\x80-\xBF]{2,})' .
+   '|[\xE0-\xEF](([\x80-\xBF](?![\x80-\xBF]))|(?![\x80-\xBF]{2})|[\x80-\xBF]{3,})/S',
+   '--', $tweet->text);
+  // Reject overly long 3 byte sequences and UTF-16 surrogates and replace
+  // with --.
+  $title_tweet_text = preg_replace('/\xE0[\x80-\x9F][\x80-\xBF]' . '|\xED[\xA0-\xBF][\x80-\xBF]/S', '--', $title_tweet_text);
+
+  $node->title = check_plain(substr($tweet->user->screen_name . ': ' . $title_tweet_text, 0, 255));
+
+  // The tweet itself goes into the tweet contents field
+  $node->field_tweet_contents[$node->language][0] = array(
+    'value' => utf8_encode(htmlspecialchars_decode($tweet_html)),
+    'format' => 'full_html',
+  );
+
+  // Save the name of the user to the tweet.
+  $node->field_tweet_author_name[$node->language][0]['value'] = $tweet->user->name;
+
+  // Set our verified field
+  $node->field_tweet_author_verified[$node->language][0]['value'] = (int) $tweet->user->verified;
+
+  // Save the feed ID for this tweet
+  $node->field_tweet_feed_id[$node->language][0]['value'] = $feed->fid;
+
+  // Geographic Information if it exist
+  if (!empty($tweet->place) && is_object($tweet->place)) {
+    $bb = json_encode($tweet->place->bounding_box->coordinates[0]);
+    $node->field_geographic_coordinates[$node->language][0] = array(
+      'value' => $bb,
+      'safe_value' => $bb,
+    );
+  }
+
+  // Handle user mentions (our custom field defined by the module). Also places them in
+  // the user mentions taxonomy.
+  if (!empty($tweet->entities->media) && is_array($tweet->entities->media) && variable_get('tweet_feed_fetch_images', 1)) {
+    foreach ($tweet->entities->media as $key => $media) {
+      if (is_object($media)) {
+        $image = file_get_contents($media->media_url . ':large');
+        if (!empty($image)) {
+          tweet_feed_check_path('public://tweet-feed-tweet-images');
+          $file_temp = file_save_data($image, 'public://tweet-feed-tweet-images/' . $tweet->id_str . '.jpg', FILE_EXISTS_REPLACE);
+          if (is_object($file_temp)) {
+            $file = array();
+            $file[$node->language][0] = array(
+              'fid' => $file_temp->fid,
+              'filename' => $file_temp->filename,
+              'filemime' => $file_temp->filemime,
+              'uid' => 1,
+              'uri' => $file_temp->uri,
+              'status' => 1,
+            );
+            $node->field_tweet_linked_images = $file;
+          }
+          unset($file);
+          unset($file_temp);
+          unset($image);
+        }
+      }
+    }
+  }
+    
+  // If we have a place, then assign it based on which components we have available
+  // to us.
+  if (!empty($tweet->place->full_name)) {
+    $node->field_geographic_place[$node->language][0] = array(
+      'value' => $tweet->place->full_name,
+      'safe_value' => $tweet->place->full_name,
+    );
+    if (!empty($tweet->place->country)) {
+      $node->field_geographic_place[$node->language][0]['value'] .= ', ' . $tweet->place->country;
+      $node->field_geographic_place[$node->language][0]['safe_value'] .= ', ' . $tweet->place->country;
+    }
+  }
+
+  // Handle the author name
+  $node->field_tweet_author[$node->language][0] = array(
+    'value' => $tweet->user->screen_name,
+    'safe_value' => $tweet->user->screen_name,
+  );
+
+  // Handle the author id
+  $node->field_tweet_author_id[$node->language][0] = array(
+    'value' => $tweet->user->id,
+    'safe_value' => $tweet->user->id,
+  );
+
+  // Handle the tweet creation date
+  $node->field_tweet_creation_date[$node->language][0] = array(
+    'value' => date('Y-m-d H:i:s', strtotime($tweet->created_at)),
+    'timezone' => 'UTC/GMT',
+    'timezone_db' => 'UTC/GMT',
+    'datatype' => 'datetime',
+  );
+
+  // Handle the tweet id
+  $node->field_tweet_id[$node->language][0] = array(
+    'value' => $tweet->id_str,
+    'safe_value' => $tweet->id_str,
+  );
+
+  // Handle the favorite count for this tweet
+  $node->field_twitter_favorite_count[$node->language][0]['value'] = $tweet->favorite_count;
+
+  // Handle the hashtags
+  foreach ($hashtags as $hashtag) {
+    $node->field_twitter_hashtags[$node->language][] = array(
+      'target_id' => $hashtag,
+    );
+  }
+
+  // Handle the re-tweet count
+  $node->field_twitter_retweet_count[$node->language][0]['value'] = $tweet->retweet_count;
+
+  // Handle the tweet source
+  $node->field_tweet_source[$node->language][0] = array(
+    'value' => $tweet->source,
+    'safe_value' => strip_tags($tweet->source),
+  );
+
+  // Create a direct link to this tweet
+  $node->field_link_to_tweet[$node->language][0]['value'] = 'https://twitter.com/' . $tweet->user->screen_name . '/status/' . $tweet->id_str;
+
+  // Handle user mentions (our custom field defined by the module). Also places them in
+  // the user mentions taxonomy.
+  if (!empty($tweet->entities->user_mentions) && is_array($tweet->entities->user_mentions)) {
+    foreach ($tweet->entities->user_mentions as $key => $mention) {
+      $node->field_tweet_user_mentions[$node->language][$key] = array(
+        'tweet_feed_mention_name' => $mention->name,
+        'tweet_feed_mention_screen_name' => $mention->screen_name,
+        'tweet_feed_mention_id' => $mention->id,
+      ); 
+    }
+    foreach ($user_mentions as $mention) {
+      $node->field_twitter_mentions_in_tweet[$node->language][] = array(
+        'target_id' => $mention,
+      );
+    }
+  }
+
+  // Not sure about this method of getting the big twitter profile image, but we're
+  // going to roll with it for now.
+  $tweet->user->profile_image_url = str_replace('_normal', '', $tweet->user->profile_image_url);
+
+  // Handle the profile image obtained from twitter.com
+  $file = tweet_feed_process_twitter_image($tweet->user->profile_image_url, 'tweet-feed-profile-image', $tweet->id_str);
+  if ($file !== NULL) {
+    $node->field_profile_image[$node->language][0] = (array)$file;
+  }
+
+  /// Allow other modules to alter the node about to be saved
+  drupal_alter('tweet_feed_tweet_save', $node, $tweet);
+
+  if (empty($node)) {
+    return;
+  }
+
+  // Save the node
+  node_save($node);
+  $nid = $node->nid;
+
+  // Make sure the hash in our tweet_hashes table is right by deleting what is there
+  // for this node and updating
+  db_delete('tweet_hashes')
+    ->condition('nid', $node->nid)
+    ->execute();
+  $hash_insert = array(
+    'tid' => $tweet->id_str,
+    'nid' => $node->nid,
+    'hash' => $tweet_hash,
+  );
+  db_insert('tweet_hashes')->fields($hash_insert)->execute();
+
+  // Unset the node variable so we can re-use it
+  unset($node);
+
+  // If we are creating a user profile for the person who made this tweet, then we need
+  // to either create it or update it here. To determine create/update we need to check
+  // the hash of the profile id and see if it matches our data.
+  if (variable_get('tweet_feed_get_tweeter_profiles', FALSE) == TRUE) {
+    $user_hash = md5(serialize($tweet->user));
+    // See if we have a profile for the author if this tweet. If we do not then we do not
+    // need to do the rest of the checks
+    $query = new EntityFieldQuery();
+    $result = $query->entityCondition('entity_type', 'node')
+                    ->entityCondition('bundle', 'twitter_user_profile')
+                    ->fieldCondition('field_twitter_user_id', 'value', $tweet->user->id, '=')
+                    ->execute();
+    // If we have a result, then we have a profile! Then we need to check to see if the hash
+    // of the profile is the same as the hash of the user data. If so, then update. If not,
+    // then skip and on to the next
+    if (isset($result['node'])) {
+      $result = db_select('tweet_user_hashes', 'h')
+                ->fields('h', array('nid', 'tuid', 'hash'))
+                ->condition('h.tuid', $tweet->user->id)
+                ->execute();
+      if ($result->rowCount() > 0) {
+        $tdata = $result->fetchObject();
+        // If our hashes are equal, we have nothing to update and can move along
+        if ($user_hash == $tdata->hash) {
+          return;
+        }
+        else {
+          $update_node_id = $tdata->nid;
+        }
+      }
+    }
+
+    // Populate our node object with the data we will need to save
+    $node = new stdClass();
+
+    // If we are being passed a node id for updating, then set it here so we update that
+    // node. (might be an edge case)
+    if ($update_node_id > 0) {
+      $node->nid = $update_node_id;
+    }
+
+    // Initialize the standard parts of our tweeting node.
+    $node->type = 'twitter_user_profile';
+    $node->uid = 1;
+    $node->created = $creation_timestamp;
+    $node->status = 1;
+    $node->comment = 0;
+    $node->promote = 0;
+    $node->moderate = 0;
+    $node->sticky = 0;
+    $node->language = LANGUAGE_NONE;
+
+    $node->field_twitter_user_id[$node->language][0]['value'] = $tweet->user->id_str;
+    $node->title = $tweet->user->name;
+    $node->body[$node->language][0]['value'] = $tweet->user->description;
+    $node->field_twitter_a_screen_name[$node->language][0]['value'] = $tweet->user->screen_name;
+    $node->field_twitter_location[$node->language][0]['value'] = $tweet->user->location;
+    $node->field_twitter_a_profile_url[$node->language][0]['value'] = $tweet->user->entities->url->urls[0]->url;
+    $node->field_twitter_profile_url[$node->language][0]['value'] = $tweet->user->entities->url->urls[0]->display_url;
+    $node->field_twitter_followers[$node->language][0]['value'] = $tweet->user->followers_count;
+    $node->field_twitter_following[$node->language][0]['value'] = $tweet->user->friends_count;
+    $node->field_twitter_favorites_count[$node->language][0]['value'] = $tweet->user->favourites_count;
+    $node->field_twitter_tweet_count[$node->language][0]['value'] = $tweet->user->statuses_count;
+    $node->field_tweet_author_verified[$node->language][0]['value'] = (int) $tweet->user->verified;
+
+    // Handle the profile background image obtained from twitter.com
+    $file = tweet_feed_process_twitter_image($tweet->user->profile_background_image_url, 'tweet-feed-profile-background-image', $tweet->user->id_str);
+    if ($file !== NULL) {
+      $node->field_background_image[$node->language][0] = (array)$file;
+    }
+
+    // Handle the user profile image obtained from twitter.com
+    $file = tweet_feed_process_twitter_image($tweet->user->profile_image_url, 'tweet-feed-profile-user-profile-image', $tweet->user->id_str);
+    if ($file !== NULL) {
+      $node->field_profile_image[$node->language][0] = (array)$file;
+    }
+
+    // Handle the user profile banner image obtained from twitter.com
+    $file = tweet_feed_process_twitter_image($tweet->user->profile_banner_url, 'tweet-feed-profile-banner-image', $tweet->user->id_str);
+    if ($file !== NULL) {
+      $node->field_banner_image[$node->language][0] = (array)$file;
+    }
+
+    $node->field_background_color[$node->language][0]['value'] = $tweet->user->profile_background_color;
+    $node->field_profile_text_color[$node->language][0]['value'] = $tweet->user->profile_text_color;
+    $node->field_link_color[$node->language][0]['value'] = $tweet->user->profile_link_color;
+    $node->field_sidebar_border_color[$node->language][0]['value'] = $tweet->user->profile_sidebar_border_color;
+    $node->field_sidebar_fill_color[$node->language][0]['value'] = $tweet->user->profile_sidebar_fill_color;
+
+    node_save($node);
+
+    // Make sure the hash in our tweet_hashes table is right by deleting what is there
+    // for this node and updating
+    db_delete('tweet_user_hashes')
+      ->condition('nid', $node->nid)
+      ->execute();
+    $hash_insert = array(
+      'tuid' => $tweet->user->id_str,
+      'nid' => $node->nid,
+      'hash' => $user_hash,
+    );
+    db_insert('tweet_user_hashes')->fields($hash_insert)->execute();
+  }
+}
+
+/**
+ * Implements hook_node_delete().
+ *
+ * Remove hashes when tweets or profiles deleted
+ */
+function tweet_feed_node_delete($node) {
+  switch($node->type) {
+    case 'twitter_tweet_feed':
+      db_delete('tweet_hashes')
+        ->condition('nid', $node->nid)
+        ->execute();
+      break;
+    case 'twitter_user_profile':
+      db_delete('tweet_user_hashes')
+        ->condition('nid', $node->nid)
+        ->execute();
+      break;
+    default:
+      break;
+  }
+}
+
+/**
+ * Implements hook_node_presave().
+ *
+ * Done to preserve our tweeted time as our last updated time. Note we're only doing
+ * this for the tweet feed content type
+ */
+function tweet_feed_node_presave($node) {
+  if ($node->type == 'twitter_tweet_feed') {
+    $node->changed = $node->created;
+  }
+}
+
+/**
+ * Process Images from URL
+ *
+ * Allows the passage of a URL and a saves the resulting image in that URL to a file
+ * that can be attached to our node. These are mostly used in user profiles and avatars
+ * associated with user tweets.
+ *
+ * @param string url
+ *   The twitte.com url of the image being retrieved
+ * @param string type
+ *   The node type (feed item or user profile item)
+ * @param int tid
+ *   The tweet id associated with this image
+ * @return object file
+ *   The file object for the retrieved image or NULL if unable to retrieve
+ */
+function tweet_feed_process_twitter_image($url, $type, $tid = NULL) {
+  // If there is no URL, then there is no image and we must skip.
+  if (!isset($url)) {
+    return NULL;
+  }
+
+  // Exit if the user doesn't need images.
+  if (variable_get('tweet_feed_fetch_images', 1) == 0) {
+    return NULL;
+  }
+
+  // If the folder for this type of file does not exist, then create it.
+  if (!file_exists('public://' . $type)) {
+    drupal_mkdir('public://' . $type);
+  }
+
+  // Get the contents of the file for processing. I hate this (@)
+  $contents = @file_get_contents($url);
+
+  // If there are no contents, then go back.
+  if (empty($contents)) {
+    return NULL;
+  }
+
+  // Check the path and create the directory if it does not exist.
+  tweet_feed_check_path('public://' . $type );
+
+  // Save the contents of the file to the file system and create the filename and uri
+  $file = file_save_data($contents, 'public://' . $type . '/' . md5($url) . '.jpg', FILE_EXISTS_REPLACE);
+
+  // Sanity check to make sure the file saved
+  if ($file === FALSE) {
+    watchdog('tweet_feed', 'The :type for :tid could not be properly saved.', array(':type' => $type, ':tid' => $tid), WATCHDOG_ERROR, NULL);
+    return NULL;
+  }
+
+  // Update our file object and re-save the file object to the database to make sure we
+  // have the right information
+  $file->uid = 1;
+  $file->status = 1;
+  file_save($file);
+
+  // Record the file's usgae so it is not deleted as a temporary file
+  file_usage_add($file, 'tweet_feed', 'file', $file->fid);
+
+  // Return the file object so we can save it to our node
+  return $file;
+}
+
+/**
+ * Custom error quit function
+ *
+ * If we have an error and we need to bail, this function handles that gracefully
+ * depending on whether or not we are being called by web or cli
+ *
+ * @param bool admin
+ *   Are we coming from the administrative pages?
+ */
+function tweet_feed_bail($admin = FALSE) {
+  // Drush command
+  if (function_exists('drush_print')) {
+    drush_set_error('Exiting.', 'fatal');
+  }
+  else {
+    // If we're using the web interface, then throw a message and go to the home page
+    // if this is user facing or the admin if an administrative function
+    if (!empty($admin)) {
+      drupal_goto('admin/config/services/tweet_feed');
+    }
+    else {
+      return;
+    }
+  }
+}
+
+/**
+ * Make sure the directory exists. If not, create it
+ *
+ * @param string $uri
+ *   The URI location of the path to be created.
+ */
+function tweet_feed_check_path($uri) {
+  $instance = file_stream_wrapper_get_instance_by_uri($uri);
+  $real_path = $instance->realpath();
+  if (!file_exists($real_path)) {
+    @mkdir($real_path, 0777, TRUE);
+  }
+  return file_exists($real_path);
+}
+
+/**
+ * Implements hook_help().
+ */
+function tweet_feed_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#tweet_feed':
+      module_load_include('inc', 'pathauto');
+      $output  = '<h4>' . t('Overview') . '</h4>';
+      $output .= '<p>'  . t('The Tweet Feed module is an advanced importing, displaying and data association module that allows you to pull in tweets by search, user, or list. The parameters of what is pulled in falls under the guidelines of ') . '<a href="https://dev.twitter.com/rest/public/rate-limiting">' . t('Twitter\'s REST API') . '.</a></p>';
+      $output .= '<p>'  . t('Tweets can be displayed as nodes or in views as well as displayed by hash tag or user mention. All hash tags and user mentions are stored as references im the tweet nodes to their corresponding taxonomy term. This gives you great power in terms of displaying tweets with specific content in specific places by leveraging the power of contextual filters and taxonomies.</p>');
+      $output .= '<p>'  . t('Additional documentation and example use cases can be found on the ') . '<a href="https://github.com/ElusiveMind/tweet_feed/wiki/Tweet-Feed-v2.0-Drupal-Module-Introduction">' . t('Tweet Feed WIKI Documentation Page') . '</a>. This help document will basically link you to places where you can get detailed information on the various help topics.</a></p>';
+      $output .= '<div style="border-top: 2px solid #f8981d; margin: 15px 0px; width: 100%"></div>';
+      $output .= '<h4>' . t('Twitter Settings') . '</h4>';
+      $output .= '<p><a href="https://github.com/ElusiveMind/tweet_feed/wiki/Twitter-Settings">' . t('Configuring account and feed settings.') . '</a></p>';
+      $output .= '<div style="border-top: 2px solid #f8981d; margin: 15px 0px; width: 100%"></div>';
+      $output .= '<h4>' . t('Views Integration') . '</h4>';
+      $output .= '<p>'  . t('Tweet Feed has full views integration. A basic view of tweets can be created at Administer -> Structure -> Views -> Add New View by selecting Twitter Tweet Feed as the content type to show in the view.') . '</p>';
+      $output .= '<p>'  . t('Further filtering can be accomplished using either the standard filters or the contextual filters available in the collapsed advanced fieldset. An example use case of when contextual features would be helpful is to add a block of dynamically filtered tweets based on matching a hashtag entered in a given field on any node.') . '</p>';
+      $output .= '<p>'  . t('Look on the Advanced Use Cases page for information on using the Tweet Feed module in powerful ways to display node specific Tweets, Tweets related to node content and some other more simplistic use cases.') . '</p>';
+      $output .= '<div style="border-top: 2px solid #f8981d; margin: 15px 0px; width: 100%"></div>';
+      $output .= '<h4>' . t('Ways to Run the Import.') . '</h4>';
+      $output .= '<ol><li>' . t('They can be periodically imported using Drupal\'s build in cron system. This requires the run cron option on the Tweet Feed Settings page be enabled. Also make sure PHP has enough memory allocated to it in order to run the process along with all of the other tasks it needs to run.') . '</li>';
+      $output .= '<li>' . t('They can be manually imported by clicking the **Import** link on the right hand side of each feed in the feed information table.') . '</li>';
+      $output .= '<li>' . t('They can be brought in by <a href="https://github.com/ElusiveMind/tweet_feed/wiki/Drush-Commands">Drush</a> commands.') . '</li></ol>';
+      $output .= '<div style="border-top: 2px solid #f8981d; margin: 15px 0px; width: 100%"></div>';
+      $output .= '<h4>' . t('Drush Commands') . '</h4>';
+      $output .= '<a href="https://github.com/ElusiveMind/tweet_feed/wiki/Drush-Commands">' . t('Learning how to use Tweet Feed drush commands.') . '</a>';
+      $output .= '<div style="border-top: 2px solid #f8981d; margin: 15px 0px; padding-top: 15px; width: 100%; font-size: 8pt; line-height: 1.3em;">';
+      $output .= '<img src="/' . drupal_get_path('module', 'tweet_feed') . '/images/flyingflip-logo.png" width="151" height="50" alt="FlyingFlip Studios" align="right" /><br />';
+      $output .= 'Released 2016 - v7.x-3.x - FlyingFlip Studios, LLC. - Released under GNU GENERAL PUBLIC LICENSE - Version 2, June 1991<br />http://www.flyingflip.com - @flyingflip - @mbagnall17<br clear="right">';
+      $output .= '<style>.item-list, hr { display: none; }</style></div>';
+      return $output;
+  }
+}

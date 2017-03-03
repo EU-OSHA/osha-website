@@ -64,3 +64,10 @@ function osha_newsletter_update_7002() {
   db_query("update entity_collection_collections set title='OSHmail 156', name='oshmail_156' where name = 'oshmail_155_june_2015'");
   db_query("update entity_collection_storage set name='oshmail_156' where name = 'oshmail_155_june_2015'");
 }
+
+/**
+ * Enable tweet_feed module
+ */
+function osha_newsletter_update_7004() {
+  module_enable(['tweet_feed']);
+}

@@ -100,11 +100,11 @@ class OSHNewsletter {
     }
     switch ($template) {
       case 'newsletter_multiple_columns':
-        $columnWidth = round((100 / count($variables)), 2) - 1;
+        $columnWidth = round((800 / count($variables)), 2) - 20;
         foreach ($variables as $column) {
           $content['#rows'][0]['data'][] = [
             'data' => self::renderTemplate($column['#style'], $column),
-            'width' => "$columnWidth%",
+            'width' => "$columnWidth",
             'height' => '100%',
             'class' => 'multiple-columns-cell template-column',
           ];
@@ -128,6 +128,10 @@ class OSHNewsletter {
       case 'newsletter_half_image_left':
         // @todo: get the image from the taxonomy
         $image_url = 'https://healthy-workplaces.eu/sites/default/files/frontpage_slider/home_slide-2r-1.png';
+        $image_fallback_bg = '#8DAA02';
+        if (empty($variables['nodes'])) {
+          return '';
+        }
         $content['#header']['data']['colspan'] = 2;
 
         // Avoid rendering the section title twice
@@ -138,22 +142,30 @@ class OSHNewsletter {
             [
               'data' => "",
               'width' => '50%',
+              'class' => 'template-column',
             ],
             [
               'data' => self::renderTemplate('newsletter_full_width_list', $variables),
               'width' => '50%',
+              'class' => 'template-column',
             ],
           ],
         ];
 
-        return sprintf('<div class="newsletter-half-image-left-container" style="background-image: url(\'%s\')">%s</div>', $image_url, drupal_render($content));
+        return sprintf('<table border="0" cellpadding="0" cellspacing="0" width="100%%" class="newsletter-half-image-left-container" style="background-color: %s;background-image: url(\'%s\');"><tbody><tr><td>%s</td></tr></tbody></table>', $image_fallback_bg, $image_url, drupal_render($content));
       case 'newsletter_full_width_2_col_blocks':
+        if (empty($variables['nodes'])) {
+          return '';
+        }
         $content['#header']['data']['colspan'] = 2;
         $currentRow = $currentCol = 0;
         foreach ($variables['nodes'] as $node) {
           $cellContent = self::getCellContent($template, $node);
-          $cellContent['width'] = '49%';
+          $cellContent['width'] = '397';
           $cellContent['height'] = '100%';
+          $cellContent['align'] = 'left';
+          $cellContent['valign'] = 'top';
+          $cellContent['style'] .= 'max-width:397px;';
           array_push($cellContent['class'], 'template-column');
           if ($currentCol++ === 0) {
             $content['#rows'][$currentRow] = [

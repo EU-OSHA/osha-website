@@ -18,8 +18,7 @@ a[x-apple-data-detectors] {
     font-weight: inherit !important;
     line-height: inherit !important;
 }
-
-@media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 600px) {
   .template-container {
     /* max-width: 400px; */
   }
@@ -70,14 +69,24 @@ a[x-apple-data-detectors] {
   .newsletter-section .row:last-child > .item:first-child:not(:only-child) {
     padding-bottom: 2px !important;
   }
-  .osha-logos {
-    text-align: center;
-  }
   td.social {
     padding-left: 0 !important;
     padding-right: 0 !important;
   }
-  .preheader .social {
+  /* .preheader .social {
     text-align: center !important;
+  } */
+}
+@media only screen and (max-width: 500px) {
+  .osha-logos {
+    text-align: center !important;
+  }
+  .osha-logos,
+  .osha-info {
+    display: block !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 }

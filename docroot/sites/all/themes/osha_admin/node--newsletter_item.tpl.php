@@ -9,7 +9,7 @@
  */
 ?>
 <?php if($node->title != NULL) {?>
-<table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%" height="100%" class="newsletter-item" style="height:100%;">
+<table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%" height="100%" class="newsletter-item" style="height:100%!important;">
   <tbody>
     <?php
     if (isset($node->field_publication_date[LANGUAGE_NONE][0]['value']) && $node->type != 'newsletter_article') {
@@ -34,7 +34,7 @@
     <?php
     }
     ?>
-    <tr>
+    <tr style="height: 100%;">
       <td align="left" width="10" style=" padding-right: 0px; vertical-align: top; padding-top: 5px;">
         <?php
           $directory = drupal_get_path('module','osha_newsletter');

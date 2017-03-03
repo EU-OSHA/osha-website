@@ -23,6 +23,8 @@ table {
   font-family: 'Oswald', Arial, sans-serif;
   border: 0;
   margin: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 td {
@@ -65,12 +67,21 @@ td {
 td.social {
   padding: 10px 20px 10px 20px;
 }
+.social td {
+  padding:  0 10px 0 10px;
+}
+.osha-logos {
+  text-align: left;
+}
 .footer {
   background-color: #EFEFEF;
 }
 .footer td {
   text-align: center;
   padding: 5px 10px;
+}
+.footer .social {
+  text-align: center;
 }
 
 .highlight-title {
@@ -112,9 +123,12 @@ td.social {
   padding-top: 5px;
   padding-bottom: 5px;
 }
+.newsletter-full-width-2-col-blocks {
+  /* table-layout: fixed; */
+}
 .item.newsletter-full-width-2-col-blocks-item {
-  padding-top: 2px;
-  padding-bottom: 2px;
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
 .newsletter-section .row:first-child > .item {
   padding-top: 20px;
@@ -131,11 +145,11 @@ td.social {
 .newsletter-full-width-details-row:last-child {
   border-bottom: none;
 }
-.newsletter-half-width-list-item,
-.newsletter-full-width-2-col-blocks-item {
+/* .newsletter-half-width-list-item, */
+/* .newsletter-full-width-2-col-blocks-item {
   background-color: #003399;
   color: #ffffff;
-}
+} */
 
 .newsletter-half-image-left-container {
   background-size: cover;
@@ -174,10 +188,10 @@ td.social {
   padding-left: 20px;
 }
 .newsletter-full-width-2-col-blocks-item:nth-child(odd) {
-  padding-right: 2px;
+  padding-right: 3px;
 }
 .newsletter-full-width-2-col-blocks-item:nth-child(even) {
-  padding-left: 2px;
+  padding-left: 3px;
 }
 .newsletter-multiple-columns tr {
   border: 0;

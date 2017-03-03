@@ -30,46 +30,53 @@
     </tr>
     <tr>
       <td class="social">
-        <?php
-          $social = array(
-            'twitter' => array(
-              'path' => 'https://twitter.com/eu_osha',
-              'alt' => t('Twitter')
-            ),
-            'linkedin' => array(
-              'path' => 'https://www.linkedin.com/company/european-agency-for-safety-and-health-at-work',
-              'alt' => t('LinkedIn')
-            ),
-            'face' => array(
-              'path' => 'https://www.facebook.com/EuropeanAgencyforSafetyandHealthatWork',
-              'alt' => t('Facebook')
-            ),
-            'blog' => array(
-              'path' => url('tools-and-publications/blog', array('alias' => TRUE, 'absolute' => TRUE, 'query' => $url_query)),
-              'alt' => t('blog')
-            ),
-            'youtube' => array(
-              'path' => 'https://www.youtube.com/user/EUOSHA',
-              'alt' => t('Youtube')
-            )
-          );
+        <table border="0" cellpadding="20" cellspacing="0" width="auto" align="Right" style="width:auto;">
+          <tbody><tr>
+            <?php
+              $social = array(
+                'twitter' => array(
+                  'path' => 'https://twitter.com/eu_osha',
+                  'alt' => t('Twitter')
+                ),
+                'linkedin' => array(
+                  'path' => 'https://www.linkedin.com/company/european-agency-for-safety-and-health-at-work',
+                  'alt' => t('LinkedIn')
+                ),
+                'face' => array(
+                  'path' => 'https://www.facebook.com/EuropeanAgencyforSafetyandHealthatWork',
+                  'alt' => t('Facebook')
+                ),
+                'blog' => array(
+                  'path' => url('tools-and-publications/blog', array('alias' => TRUE, 'absolute' => TRUE, 'query' => $url_query)),
+                  'alt' => t('blog')
+                ),
+                'youtube' => array(
+                  'path' => 'https://www.youtube.com/user/EUOSHA',
+                  'alt' => t('Youtube')
+                )
+              );
 
-          $directory = drupal_get_path('module','osha_newsletter');
-          foreach ($social as $name => $options) {
-            print l(theme('image', array(
-              'path' => $directory . '/images/' . $name . '-blue.png',
-              'width' => 'auto',
-              'height' => 20,
-              'alt' => $options['alt'],
-              'attributes' => array('style' => 'border:0px;')
-            )), $options['path'], array(
-              'attributes' => array('style' => 'color:#144989;text-decoration:none;'),
-              'html' => TRUE,
-              'external' => TRUE
-            ));
-  // print ('&nbsp;&nbsp;&nbsp;&nbsp;');
-          }
-        ?>
+              $directory = drupal_get_path('module','osha_newsletter');
+              foreach ($social as $name => $options):?>
+                <td align="Right">
+                <?php
+                  print l(theme('image', array(
+                    'path' => $directory . '/images/' . $name . '-blue.png',
+                    'width' => 'auto',
+                    'height' => 20,
+                    'alt' => $options['alt'],
+                    'attributes' => array('style' => 'border:0px;')
+                  )), $options['path'], array(
+                    'attributes' => array('style' => 'color:#144989;text-decoration:none;'),
+                    'html' => TRUE,
+                    'external' => TRUE
+                  ));
+                ?>
+                </td>
+              <?php endforeach; ?>
+          </tr>
+        </tbody>
+        </table>
       </td>
     </tr>
     <!-- <tr>
@@ -81,7 +88,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="font-family: Oswald, Arial,sans-serif;" class="header template-container">
   <tbody>
     <tr>
-      <td class=" osha-logos">
+      <td class="osha-logos">
         <?php
           if (isset($campaign_id)) {
             $url_query = array('pk_campaign' => $campaign_id);
@@ -104,7 +111,7 @@
         ));
         ?>
       </td>
-      <td class="">
+      <td class="osha-info">
         <?php $newsletter_ready_date = format_date(strtotime($newsletter_date), 'custom', 'F Y'); ?>
         <div class="newsletter-number" style="color: #003399; font-size: 20px; font-weight: 300; text-align: right;"><?php print $newsletter_title?></div>
         <div class="newsletter-month" style="color: #DC2F82; font-size: 26px; text-align: right;"><?php print $newsletter_ready_date?></div>

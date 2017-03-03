@@ -129,8 +129,30 @@ class OSHNewsletter {
         }
         break;
       case 'newsletter_half_image_left':
-        // @todo
-        break;
+        // @todo: get the image from the taxonomy
+        $image_url = 'https://healthy-workplaces.eu/sites/default/files/frontpage_slider/home_slide-2r-1.png';
+        if (empty($variables['nodes'])) {
+          return '';
+        }
+        $content['#header']['data']['colspan'] = 2;
+
+        // Avoid rendering the section title twice
+        unset($variables['section']);
+
+        $content['#rows'] = [
+          'data' => [
+            [
+              'data' => "",
+              'width' => '50%',
+            ],
+            [
+              'data' => self::renderTemplate('newsletter_full_width_list', $variables),
+              'width' => '50%',
+            ],
+          ],
+        ];
+
+        return sprintf('<div class="newsletter-half-image-left-container" style="background-image: url(\'%s\')">%s</div>', $image_url, drupal_render($content));
       case 'newsletter_full_width_2_col_blocks':
         if (empty($variables['nodes'])) {
           return '';

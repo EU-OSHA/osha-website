@@ -144,6 +144,10 @@ function osha_search_basic_input_form($form, &$form_state) {
     '#title' => t('Search'),
     '#default_value' => !empty($_GET['search_block_form']) ? $_GET['search_block_form'] : '',
   ];
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Search'),
+  );
 
   // Set parameters as hidden inputs.
   $query_parameters = drupal_get_query_parameters();
@@ -176,6 +180,9 @@ function osha_search_basic_input_form($form, &$form_state) {
 
 function osha_search_language_input_form($form, &$form_state) {
   global $language;
+  if (empty($_GET['search_api_language'])) {
+    $_GET['search_api_language'] = [$language->language => $language->language];
+  }
   $form['#method'] = 'GET';
   $form['#attached']['js'][] = ['type' => 'file', 'data' => drupal_get_path('module', 'osha_search') . '/js/checkboxes_autosubmit.js'];
   $form['#attached']['css'][] = ['type' => 'file', 'data' => drupal_get_path('module', 'osha_search') . '/css/style.css'];
@@ -184,7 +191,7 @@ function osha_search_language_input_form($form, &$form_state) {
     '#title' => t('Language'),
     '#title_display' => 'invisible',
     '#options' => osha_language_list_options(),
-    '#default_value' => !empty($_GET['search_api_language']) ? $_GET['search_api_language'] : $language->language,
+    '#default_value' => $_GET['search_api_language'],
     '#attributes' => ['class' => ['checkboxes-autosubmit']]
   ];
 
@@ -245,6 +252,9 @@ function osha_search_form_alter(&$form, &$form_state, $form_id) {
     hide($form['search_block_form']);
     hide($form['search_api_language']);
     hide($form['submit']);
+    $form['#attached']['js'][] = ['type' => 'file', 'data' => drupal_get_path('module', 'osha_search') . '/js/change_autosubmit.js'];
+    $form['sort_by']['#attributes']['class'][] = 'change-autosubmit';
+    $form['sort_order']['#attributes']['class'][] = 'change-autosubmit';
     // Get quary parameters.
     $query_parameters = drupal_get_query_parameters();
 

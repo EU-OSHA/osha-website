@@ -130,7 +130,7 @@ class OSHNewsletter {
       case 'newsletter_half_image_left':
         // @todo: get the image and the fallback bg color from the taxonomy
         $image_url = 'https://healthy-workplaces.eu/sites/default/files/frontpage_slider/home_slide-2r-1.png';
-        $image_fallback_bg = '#8DAA02';
+        $image_fallback_bg = '#ACC830';
         if (empty($variables['nodes'])) {
           return '';
         }
@@ -142,18 +142,20 @@ class OSHNewsletter {
         $content['#rows'] = [
           'data' => [
             [
-              'data' => sprintf("<div style=\"background-color: %s;\"><img src=\"%s\"></div>",
+              'data' => sprintf("<div style=\"height:100%%;background-color: %s;\"><img src=\"%s\" width=\"380\" style=\"width:380px;max-width:100%%;\"></div>",
                 $image_fallback_bg,
                 $image_url),
-              'width' => '50%',
+              'width' => '380',
+              'height' => '100%',
               'class' => 'template-column',
             ],
             [
               'data' => sprintf("<div style=\"background-color: %s;\">%s</div>",
                 $image_fallback_bg,
                 self::renderTemplate('newsletter_full_width_list', $variables)),
-              'width' => '50%',
+              'width' => '380',
               'class' => 'template-column',
+              'style' => 'max-width: 380px;'
             ],
           ],
         ];

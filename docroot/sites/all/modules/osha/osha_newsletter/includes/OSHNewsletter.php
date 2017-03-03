@@ -128,7 +128,7 @@ class OSHNewsletter {
         }
         break;
       case 'newsletter_half_image_left':
-        // @todo: get the image from the taxonomy
+        // @todo: get the image and the fallback bg color from the taxonomy
         $image_url = 'https://healthy-workplaces.eu/sites/default/files/frontpage_slider/home_slide-2r-1.png';
         $image_fallback_bg = '#8DAA02';
         if (empty($variables['nodes'])) {
@@ -142,19 +142,22 @@ class OSHNewsletter {
         $content['#rows'] = [
           'data' => [
             [
-              'data' => "",
+              'data' => sprintf("<div style=\"background-color: %s;\"><img src=\"%s\"></div>",
+                $image_fallback_bg,
+                $image_url),
               'width' => '50%',
               'class' => 'template-column',
             ],
             [
-              'data' => self::renderTemplate('newsletter_full_width_list', $variables),
+              'data' => sprintf("<div style=\"background-color: %s;\">%s</div>",
+                $image_fallback_bg,
+                self::renderTemplate('newsletter_full_width_list', $variables)),
               'width' => '50%',
               'class' => 'template-column',
             ],
           ],
         ];
-
-        return sprintf('<table border="0" cellpadding="0" cellspacing="0" width="100%%" class="newsletter-half-image-left-container" style="background-color: %s;background-image: url(\'%s\');"><tbody><tr><td>%s</td></tr></tbody></table>', $image_fallback_bg, $image_url, drupal_render($content));
+        break;
       case 'newsletter_full_width_2_col_blocks':
         if (empty($variables['nodes'])) {
           return '';

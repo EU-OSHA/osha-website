@@ -23,7 +23,7 @@
                     'path' => (isset($field_image) && !empty($field_image)) ? $field_image[0]['uri'] : '',
                     'width' => 220,
                     'alt' => (isset($field_image) && !empty($field_image)) ? $field_image[0]['alt'] : '',
-                    'attributes' => array('style' => 'border: 0px;')
+                    'attributes' => array('style' => 'border: 0px;width: 220px;')
                   )), url('node/' . $node->nid, array('absolute' => TRUE)), array(
                     'html' => TRUE,
                     'external' => TRUE
@@ -115,7 +115,7 @@
                         'alt' => $options['alt'],
                         'attributes' => array('style' => 'border:0px;')
                       )), $options['path'], array(
-                        'attributes' => array('style' => 'color:#144989;text-decoration:none;'),
+                        'attributes' => array('style' => 'color:#144989;text-decoration:none;width:19px!important;height:11px!important;'),
                         'html' => TRUE,
                         'external' => TRUE
                       ));

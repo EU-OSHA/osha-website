@@ -13,6 +13,7 @@ class OSHNewsletter {
       'newsletter_half_width_list' => '1/2 width: title + short description',
       'newsletter_half_image_left' => '1/2 width with background image on left side',
       'newsletter_full_width_2_col_blocks' => 'Full width: blocks on 2 columns',
+      'newsletter_half_width_twitter' => 'Twitter',
     ];
   }
 
@@ -23,6 +24,7 @@ class OSHNewsletter {
       'newsletter_half_width_list' => 'newsletter_item',
       'newsletter_half_image_left' => 'newsletter_item',
       'newsletter_full_width_2_col_blocks' => 'newsletter_item',
+      'newsletter_half_width_twitter' => 'newsletter_item',
     ];
     if (empty($styles[$parentTemplate])) {
       return $default;
@@ -168,8 +170,26 @@ class OSHNewsletter {
           }
         }
         break;
-      case 'newsletter_twitter':
-        // @todo
+      case 'newsletter_half_width_twitter':
+        $content['#header']['data']['colspan'] = 2;
+        $currentRow = $currentCol = 0;
+        foreach ($variables['nodes'] as $node) {
+          $cellContent = self::getCellContent($template, $node);
+          $cellContent['width'] = '49%';
+          $cellContent['height'] = '100%';
+          array_push($cellContent['class'], 'template-column');
+          if ($currentCol++ === 0) {
+            $content['#rows'][$currentRow] = [
+              'data' => [$cellContent],
+              'class' => ['row', drupal_clean_css_identifier("{$template}-row")],
+              'no_striping' => true,
+            ];
+          }
+          else {
+            $content['#rows'][$currentRow++]['data'][] = $cellContent;
+            $currentCol = 0;
+          }
+        }
         break;
       default:
         return theme($template, $variables);
@@ -199,6 +219,9 @@ class OSHNewsletter {
             'section' => $item->content,
             'nodes' => [],
           ];
+          if ($content[$current_section]['#style'] == 'newsletter_half_width_twitter') {
+            $content[$current_section]['nodes'] = self::getTwitterNodes($source);
+          }
           break;
         case 'node':
           if (empty($current_section)) {
@@ -288,6 +311,28 @@ class OSHNewsletter {
     $fullNewsletter = self::appendFontInHead($fullNewsletter);
 
     return $fullNewsletter;
+  }
+
+  public static function getTwitterNodes(EntityCollection $source) {
+    // @todo https://trello.com/c/9YyKgowC
+    $nodes = [];
+
+    $q = db_select('node', 'n');
+    $q->fields('n', ['nid']);
+    $q->condition('n.type', 'twitter_tweet_feed');
+    $q->range(0, 4);
+    $q->orderBy('n.created', 'DESC');
+    $nids = $q->execute()->fetchCol();
+    foreach ($nids as $nid) {
+      $node = node_load($nid);
+      if (!empty($node)) {
+        $nodes[] = [
+          '#style' => self::getChildStyle('newsletter_half_width_twitter'),
+          'node' => $node,
+        ];
+      }
+    }
+    return $nodes;
   }
 
   /**

@@ -89,7 +89,7 @@ function osha_blocks_default_fe_block_settings() {
         'region' => 'sidebar_second',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -1,
+        'weight' => 15,
       ),
       'seven' => array(
         'region' => '',
@@ -220,7 +220,7 @@ function osha_blocks_default_fe_block_settings() {
         'region' => 'sidebar_second',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -3,
+        'weight' => 11,
       ),
       'seven' => array(
         'region' => '',
@@ -262,7 +262,7 @@ function osha_blocks_default_fe_block_settings() {
         'region' => 'sidebar_second',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -3,
+        'weight' => 12,
       ),
       'seven' => array(
         'region' => '',

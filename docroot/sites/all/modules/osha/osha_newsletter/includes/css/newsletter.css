@@ -14,3 +14,13 @@ td {
     background-color: #003399;
     color: #ffffff;
 }
+
+.newsletter-half-image-left-container {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.newsletter-half-image-left tr {
+    background: transparent;
+}

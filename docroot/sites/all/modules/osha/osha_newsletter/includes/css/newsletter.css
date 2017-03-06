@@ -161,6 +161,11 @@ td.social {
   background: transparent;
   height: 100% !important;
 }
+
+.newsletter-half-image-left img {
+  max-width: 100%;
+}
+
 .newsletter-full-width-2-col-blocks-item > .newsletter-item {
   background-color: #003399;
   color: #ffffff;

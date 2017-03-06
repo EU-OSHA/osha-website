@@ -201,6 +201,48 @@ function osha_newsletter_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'entity_collection-newsletter_content_collection-field_newsletter_configuration'.
+  $field_instances['entity_collection-newsletter_content_collection-field_newsletter_configuration'] = array(
+    'bundle' => 'newsletter_content_collection',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 7,
+      ),
+    ),
+    'entity_type' => 'entity_collection',
+    'field_name' => 'field_newsletter_configuration',
+    'label' => 'Newsletter configuration',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 9,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance:
   // 'entity_collection-newsletter_content_collection-field_newsletter_content_after'.
   $field_instances['entity_collection-newsletter_content_collection-field_newsletter_content_after'] = array(
     'bundle' => 'newsletter_content_collection',
@@ -759,6 +801,7 @@ function osha_newsletter_field_default_field_instances() {
   t('Description');
   t('Images');
   t('Name');
+  t('Newsletter configuration');
   t('Newsletter sent?');
   t('Newsletter template');
   t('Publication date');

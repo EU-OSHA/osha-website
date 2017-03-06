@@ -78,6 +78,51 @@ class OSHNewsletter {
     ];
   }
 
+  public static function saveConfiguration(EntityCollection $entityCollection) {
+    $sections = taxonomy_get_tree('11', 0, null, true);
+
+    $configuration = [
+      'sections' => [],
+      'tweets' => [],
+      'fids' => [],
+    ];
+    foreach ($sections as $section) {
+      if ($section->tid != 12) {
+        continue;
+      }
+      $sectionConfig = [];
+      if (!empty($section->field_background_image[LANGUAGE_NONE][0]['fid'])) {
+        $configuration['fids'][] = $section->field_background_image[LANGUAGE_NONE][0]['fid'];
+        $sectionConfig['field_background_image'] = $section->field_background_image;
+      }
+      if (!empty($section->field_icon[LANGUAGE_NONE][0]['fid'])) {
+        $configuration['fids'][] = $section->field_icon[LANGUAGE_NONE][0]['fid'];
+        $sectionConfig['field_icon'] = $section->field_icon;
+      }
+      if (!empty($section->field_background_color[LANGUAGE_NONE][0]['value'])) {
+        $sectionConfig['field_background_color'] = $section->field_background_color;
+      }
+      if (!empty($section->field_newsletter_template[LANGUAGE_NONE][0]['value'])) {
+        $sectionConfig['field_newsletter_template'] = $section->field_newsletter_template;
+      }
+
+      if (!empty($sectionConfig)) {
+        $configuration['sections'][$section->tid] = (object) $sectionConfig;
+      }
+    }
+
+    foreach ($configuration['fids'] as $fid) {
+      // We are referencing the files so they won't be deleted by the garbage collector
+      $entityCollection->field_images[LANGUAGE_NONE][] = ['fid' => $fid];
+    }
+
+    $entityCollection->field_newsletter_configuration[LANGUAGE_NONE][0]['value'] = json_encode($configuration);
+    entity_save('entity_collection', $entityCollection);
+  }
+
+  public static function getConfiguration(EntityCollection $entityCollection, $configuration, array $args) {
+  }
+
   public static function getCellContent($template, $node) {
     if ($template == 'newsletter_full_width_2_col_blocks' && $node['#style'] == 'newsletter_item') {
       $node['node']->arrow_color = 'white';

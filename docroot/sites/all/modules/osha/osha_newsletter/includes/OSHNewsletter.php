@@ -138,10 +138,15 @@ class OSHNewsletter {
         }
         break;
       case 'newsletter_half_image_left':
-        // @todo: get the image and the fallback bg color from the taxonomy
-        $image_url = 'https://healthy-workplaces.eu/sites/default/files/frontpage_slider/home_slide-2r-1.png';
-        $image_fallback_bg = '#8DAA02';
         $content['#header']['data']['colspan'] = 2;
+
+        $image_url = $image_fallback_bg = '';
+        if (!empty($variables['section']->field_background_image[LANGUAGE_NONE][0]['uri'])) {
+          $image_url = file_create_url($variables['section']->field_background_image[LANGUAGE_NONE][0]['uri']);
+        }
+        if (!empty($variables['section']->field_background_color[LANGUAGE_NONE][0]['value'])) {
+          $image_fallback_bg = $variables['section']->field_background_color[LANGUAGE_NONE][0]['value'];
+        }
 
         // Avoid rendering the section title twice
         unset($variables['section']);

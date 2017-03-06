@@ -531,7 +531,7 @@ function osha_newsletter_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 9,
+      'weight' => 7,
     ),
     'workbench_access_field' => 0,
   );
@@ -597,7 +597,7 @@ function osha_newsletter_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 12,
+      'weight' => 6,
     ),
     'workbench_access_field' => 0,
   );
@@ -639,7 +639,7 @@ function osha_newsletter_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 10,
+      'weight' => 5,
     ),
     'workbench_access_field' => 0,
   );

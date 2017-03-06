@@ -39,8 +39,12 @@
         <?php
         $directory = drupal_get_path('module','osha_newsletter');
         global $base_url; // TODO: should link to node
+
+//        dpm($node->arrow_color);die;
+        $arrow_img = !empty($node->arrow_color) ? "link-arrow-{$node->arrow_color}.png" : "link-arrow.png";
+
         print l(theme('image', array(
-          'path' => $directory . '/images/link-arrow.png',
+          'path' => $directory . '/images/' . $arrow_img,
           'width' => 7,
           'height' => 11,
           'alt' => 'link arrow',

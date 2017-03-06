@@ -79,7 +79,12 @@ class OSHNewsletter {
   }
 
   public static function getCellContent($template, $node) {
+    if ($template == 'newsletter_full_width_2_col_blocks' && $node['#style'] == 'newsletter_item') {
+      $node['node']->arrow_color = 'white';
+    }
+
     $nodeContent = node_view($node['node'], $node['#style']);
+
     return [
       'data' => drupal_render($nodeContent),
       'class' => ['item', drupal_clean_css_identifier("{$template}-item")],

@@ -536,8 +536,9 @@ function osha_newsletter_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'taxonomy_term-newsletter_sections-field_image'.
-  $field_instances['taxonomy_term-newsletter_sections-field_image'] = array(
+  // Exported field_instance:
+  // 'taxonomy_term-newsletter_sections-field_background_image'.
+  $field_instances['taxonomy_term-newsletter_sections-field_background_image'] = array(
     'bundle' => 'newsletter_sections',
     'deleted' => 0,
     'description' => '',
@@ -550,7 +551,7 @@ function osha_newsletter_field_default_field_instances() {
           'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 2,
+        'weight' => 5,
       ),
       'token' => array(
         'label' => 'above',
@@ -560,13 +561,13 @@ function osha_newsletter_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'taxonomy_term',
-    'field_name' => 'field_image',
-    'label' => 'Background image',
+    'field_name' => 'field_background_image',
+    'label' => 'Background Image',
     'required' => 0,
     'settings' => array(
       'alt_field' => 0,
       'default_image' => 0,
-      'entity_translation_sync' => 0,
+      'entity_translation_sync' => FALSE,
       'file_directory' => 'newsletter_background',
       'file_extensions' => 'png gif jpg jpeg',
       'image_field_caption' => 0,
@@ -596,7 +597,7 @@ function osha_newsletter_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 7,
+      'weight' => 12,
     ),
     'workbench_access_field' => 0,
   );
@@ -690,8 +691,8 @@ function osha_newsletter_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Author');
+  t('Background Image');
   t('Background color');
-  t('Background image');
   t('Body');
   t('Campaign ID in Piwik');
   t('Created');

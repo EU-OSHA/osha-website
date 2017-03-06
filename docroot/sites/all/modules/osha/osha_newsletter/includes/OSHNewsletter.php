@@ -5,6 +5,7 @@ use \TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 class OSHNewsletter {
 
   public static $fontUrl = 'https://fonts.googleapis.com/css?family=Oswald:200,300,400,500';
+  public static $tweetsLimit = 4;
 
   public static function getTemplatesList() {
     return [
@@ -78,6 +79,16 @@ class OSHNewsletter {
     ];
   }
 
+  /**
+   * Saves the newsletter configuration within field_configuration.
+   * The following options are stored:
+   *  - sections: an array with newsletter sections and their field values (field_background_image,
+   * field_icon, field_background_color, field_newsletter_template)
+   *  - tweets: an array containing tweet_feed nodes ids
+   *  - fids: an array with the fids of used files
+   *
+   * @param \EntityCollection $entityCollection
+   */
   public static function saveConfiguration(EntityCollection $entityCollection) {
     $sections = taxonomy_get_tree('11', 0, null, true);
 
@@ -447,11 +458,10 @@ class OSHNewsletter {
   }
 
   public static function getTwitterNodes(EntityCollection $source) {
-    // @todo https://trello.com/c/9YyKgowC
     $q = db_select('node', 'n');
     $q->fields('n', ['nid']);
     $q->condition('n.type', 'twitter_tweet_feed');
-    $q->range(0, 4);
+    $q->range(0, self::$tweetsLimit);
     $q->orderBy('n.created', 'DESC');
     return $q->execute()->fetchCol();
   }

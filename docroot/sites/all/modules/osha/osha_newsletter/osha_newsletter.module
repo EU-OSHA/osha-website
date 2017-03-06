@@ -1395,3 +1395,7 @@ function osha_newsletter_osha_tmgmt_i18n_string_list() {
   module_load_include('inc', 'osha_newsletter', 'osha_newsletter.translations');
   return osha_newsletter_get_translatable_strings();
 }
+
+function osha_newsletter_get_templates_list() {
+  return OSHNewsletter::getTemplatesList();
+}

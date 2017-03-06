@@ -104,7 +104,7 @@ class OSHNewsletter {
       }
 
       if (!empty($sectionConfig)) {
-        $configuration['sections'][$section->tid] = (object) $sectionConfig;
+        $configuration['sections'][$section->tid] = $sectionConfig;
       }
     }
 
@@ -140,19 +140,23 @@ class OSHNewsletter {
         return !empty($configuration['tweets']) ? $configuration['tweets'] : self::getTwitterNodes($entityCollection);
       case 'field_background_image':
       case 'field_icon':
-        if (!empty($configuration[$section->tid]->{$config_name}[LANGUAGE_NONE][0]['uri'])) {
-          return file_create_url($configuration[$section->tid]->{$config_name}[LANGUAGE_NONE][0]['uri']);
+        if (!empty($configuration['sections'][$section->tid][$config_name][LANGUAGE_NONE][0]['uri'])) {
+          // Field value found in newsletter configuration
+          return file_create_url($configuration['sections'][$section->tid][$config_name][LANGUAGE_NONE][0]['uri']);
         }
         elseif (!empty($section->{$config_name}[LANGUAGE_NONE][0]['uri'])) {
+          // Field value not found - get the field value from the term
           return file_create_url($section->{$config_name}[LANGUAGE_NONE][0]['uri']);
         }
         break;
       case 'field_background_color':
       case 'field_newsletter_template':
-        if (!empty($configuration[$section->tid]->{$config_name}[LANGUAGE_NONE][0]['value'])) {
-          return $configuration[$section->tid]->{$config_name}[LANGUAGE_NONE][0]['value'];
+        if (!empty($configuration['sections'][$section->tid][$config_name][LANGUAGE_NONE][0]['value'])) {
+          // Field value found in newsletter configuration
+          return $configuration['sections'][$section->tid][$config_name][LANGUAGE_NONE][0]['value'];
         }
         elseif (!empty($section->{$config_name}[LANGUAGE_NONE][0]['value'])) {
+          // Field value not found - get the field value from the term
           return $section->{$config_name}[LANGUAGE_NONE][0]['value'];
         }
         break;

@@ -35,9 +35,19 @@ class OSHNewsletter {
   public static function alterContentForm(&$form, &$form_state) {
     // add submit button to send newsletter and send test newsletter
     if (isset($form['content'])) {
+      $q = db_select('field_data_field_newsletter_template', 'nt');
+      $q->fields('nt', ['entity_id', 'field_newsletter_template_value']);
+      $default_templates = $q->execute()->fetchAllKeyed();
+
       foreach ($form['content'] as $k => &$v) {
         if (strpos($k, 'taxonomy_term:') !== FALSE) {
           $v['style']['#options'] = self::getTemplatesList();
+          if (empty($v['style']['#default_value']) && !empty($v['entity_id']['#value'])) {
+            $tid = $v['entity_id']['#value'];
+            if (!empty($default_templates[$tid])) {
+              $v['style']['#default_value'] = $default_templates[$tid];
+            }
+          }
         }
         elseif (strpos($k, 'node:') === 0) {
           $node = $v['#content']->content;
@@ -131,9 +141,6 @@ class OSHNewsletter {
         // @todo: get the image and the fallback bg color from the taxonomy
         $image_url = 'https://healthy-workplaces.eu/sites/default/files/frontpage_slider/home_slide-2r-1.png';
         $image_fallback_bg = '#8DAA02';
-        if (empty($variables['nodes'])) {
-          return '';
-        }
         $content['#header']['data']['colspan'] = 2;
 
         // Avoid rendering the section title twice
@@ -159,9 +166,6 @@ class OSHNewsletter {
         ];
         break;
       case 'newsletter_full_width_2_col_blocks':
-        if (empty($variables['nodes'])) {
-          return '';
-        }
         $content['#header']['data']['colspan'] = 2;
         $currentRow = $currentCol = 0;
         foreach ($variables['nodes'] as $node) {

@@ -1163,6 +1163,8 @@ function osha_newsletter_send_test_email(&$form_state) {
 function osha_newsletter_send_email_to_subscribers(&$form_state) {
   global $user;
 
+  OSHNewsletter::saveConfiguration($form_state['#style']->entity_collection);
+
   $to = _get_listserv_subscription_email();
   $from = variable_get('osha_newsletter_listserv_from', $user->mail);
 

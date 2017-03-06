@@ -108,13 +108,16 @@
                           ));
                         }
                       $directory = drupal_get_path('module','osha_newsletter');
-                      print l(theme('image', array(
-                        'path' => $directory . '/images/' . 'pink-arrow.png',
-                        'width' => '19',
-                        'height' => '11',
-                        'alt' => $options['alt'],
-                        'attributes' => array('style' => 'border:0px;')
-                      )), $options['path'], array(
+                      print l(
+                        theme('image', array(
+                          'path' => $directory . '/images/' . 'pink-arrow.png',
+                          'width' => '19',
+                          'height' => '11',
+                          'alt' => !empty($options['alt']) ? $options['alt'] : '',
+                          'attributes' => array('style' => 'border:0px;')
+                        )),
+                        !empty($options['path']) ? $options['path'] : '',
+                        array(
                         'attributes' => array('style' => 'color:#144989;text-decoration:none;width:19px!important;height:11px!important;'),
                         'html' => TRUE,
                         'external' => TRUE

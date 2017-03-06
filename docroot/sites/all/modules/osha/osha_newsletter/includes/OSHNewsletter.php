@@ -83,19 +83,16 @@ class OSHNewsletter {
 
     $configuration = [
       'sections' => [],
-      'tweets' => [],
+      'tweets' => self::getTwitterNodes($entityCollection),
       'fids' => [],
     ];
     foreach ($sections as $section) {
-      if ($section->tid != 12) {
-        continue;
-      }
       $sectionConfig = [];
-      if (!empty($section->field_background_image[LANGUAGE_NONE][0]['fid'])) {
+      if (!empty($section->field_background_image[LANGUAGE_NONE][0]['uri'])) {
         $configuration['fids'][] = $section->field_background_image[LANGUAGE_NONE][0]['fid'];
         $sectionConfig['field_background_image'] = $section->field_background_image;
       }
-      if (!empty($section->field_icon[LANGUAGE_NONE][0]['fid'])) {
+      if (!empty($section->field_icon[LANGUAGE_NONE][0]['uri'])) {
         $configuration['fids'][] = $section->field_icon[LANGUAGE_NONE][0]['fid'];
         $sectionConfig['field_icon'] = $section->field_icon;
       }
@@ -120,7 +117,48 @@ class OSHNewsletter {
     entity_save('entity_collection', $entityCollection);
   }
 
-  public static function getConfiguration(EntityCollection $entityCollection, $configuration, array $args) {
+  /**
+   * @param \EntityCollection $entityCollection
+   * @param string $config_name
+   *  Available options:
+   *    - tweets
+   *    - field_background_image
+   *    - field_icon
+   *    - field_background_color
+   *    - field_newsletter_template
+   * @param $section
+   *
+   * @return array
+   */
+  public static function getConfiguration(EntityCollection $entityCollection, $config_name, $section = null, $default_value = null) {
+    $configuration = !empty($entityCollection->field_newsletter_configuration[LANGUAGE_NONE][0]['value'])
+      ? json_decode($entityCollection->field_newsletter_configuration[LANGUAGE_NONE][0]['value'], true)
+      : null;
+
+    switch ($config_name) {
+      case 'tweets':
+        return !empty($configuration['tweets']) ? $configuration['tweets'] : self::getTwitterNodes($entityCollection);
+      case 'field_background_image':
+      case 'field_icon':
+        if (!empty($configuration[$section->tid]->{$config_name}[LANGUAGE_NONE][0]['uri'])) {
+          return file_create_url($configuration[$section->tid]->{$config_name}[LANGUAGE_NONE][0]['uri']);
+        }
+        elseif (!empty($section->{$config_name}[LANGUAGE_NONE][0]['uri'])) {
+          return file_create_url($section->{$config_name}[LANGUAGE_NONE][0]['uri']);
+        }
+        break;
+      case 'field_background_color':
+      case 'field_newsletter_template':
+        if (!empty($configuration[$section->tid]->{$config_name}[LANGUAGE_NONE][0]['value'])) {
+          return $configuration[$section->tid]->{$config_name}[LANGUAGE_NONE][0]['value'];
+        }
+        elseif (!empty($section->{$config_name}[LANGUAGE_NONE][0]['value'])) {
+          return $section->{$config_name}[LANGUAGE_NONE][0]['value'];
+        }
+        break;
+    }
+
+    return $default_value;
   }
 
   public static function getCellContent($template, $node) {
@@ -136,7 +174,7 @@ class OSHNewsletter {
     ];
   }
 
-  public static function renderTemplate($template, $variables) {
+  public static function renderTemplate(EntityCollection $entityCollection, $template, $variables) {
     $content = [
       '#theme' => 'table',
       '#header' => [],
@@ -165,7 +203,7 @@ class OSHNewsletter {
         $columnWidth = round((800 / count($variables)), 2) - 20;
         foreach ($variables as $column) {
           $content['#rows'][0]['data'][] = [
-            'data' => self::renderTemplate($column['#style'], $column),
+            'data' => self::renderTemplate($entityCollection, $column['#style'], $column),
             'width' => "$columnWidth",
             'height' => '100%',
             'class' => 'multiple-columns-cell template-column',
@@ -190,13 +228,8 @@ class OSHNewsletter {
       case 'newsletter_half_image_left':
         $content['#header']['data']['colspan'] = 2;
 
-        $image_url = $image_fallback_bg = '';
-        if (!empty($variables['section']->field_background_image[LANGUAGE_NONE][0]['uri'])) {
-          $image_url = file_create_url($variables['section']->field_background_image[LANGUAGE_NONE][0]['uri']);
-        }
-        if (!empty($variables['section']->field_background_color[LANGUAGE_NONE][0]['value'])) {
-          $image_fallback_bg = $variables['section']->field_background_color[LANGUAGE_NONE][0]['value'];
-        }
+        $image_url = self::getConfiguration($entityCollection, 'field_background_image', $variables['section'], '');
+        $image_fallback_bg = self::getConfiguration($entityCollection, 'field_background_color', $variables['section'], '');
 
         // Avoid rendering the section title twice
         unset($variables['section']);
@@ -213,7 +246,7 @@ class OSHNewsletter {
             [
               'data' => sprintf("<div style=\"background-color: %s;\">%s</div>",
                 $image_fallback_bg,
-                self::renderTemplate('newsletter_full_width_list', $variables)),
+                self::renderTemplate($entityCollection, 'newsletter_full_width_list', $variables)),
               'width' => '50%',
               'class' => 'template-column',
             ],
@@ -229,7 +262,12 @@ class OSHNewsletter {
           $cellContent['height'] = '100%';
           $cellContent['align'] = 'left';
           $cellContent['valign'] = 'top';
-          $cellContent['style'] .= 'max-width:397px;';
+          if (empty($cellContent['style'])) {
+            $cellContent['style'] = 'max-width:397px;';
+          }
+          else {
+            $cellContent['style'] .= 'max-width:397px;';
+          }
           array_push($cellContent['class'], 'template-column');
           if ($currentCol++ === 0) {
             $content['#rows'][$currentRow] = [
@@ -294,7 +332,17 @@ class OSHNewsletter {
             'nodes' => [],
           ];
           if ($content[$current_section]['#style'] == 'newsletter_half_width_twitter') {
-            $content[$current_section]['nodes'] = self::getTwitterNodes($source);
+
+            $tweets_ids = self::getConfiguration($source, 'tweets');
+            foreach ($tweets_ids as $tweets_id) {
+              $tweet = node_load($tweets_id);
+              if (!empty($tweet)) {
+                $content[$current_section]['nodes'][] = [
+                  '#style' => self::getChildStyle('newsletter_half_width_twitter'),
+                  'node' => $tweet,
+                ];
+              }
+            }
           }
           break;
         case 'node':
@@ -321,7 +369,7 @@ class OSHNewsletter {
       if (preg_match('/.*(half_width).*/', $section['#style'])) {
         if (!empty($half_column)) {
           // Found 2 half-width templates in a row
-          $renderedContent .= self::renderTemplate('newsletter_multiple_columns', [$half_column, $section]);
+          $renderedContent .= self::renderTemplate($source, 'newsletter_multiple_columns', [$half_column, $section]);
           $half_column = null;
         }
         else {
@@ -332,10 +380,10 @@ class OSHNewsletter {
         if (!empty($half_column)) {
           // We couldn't find 2 half-width columns in a row, so we stick the only
           // one to the entire width
-          $renderedContent .= self::renderTemplate($half_column['#style'], $half_column);
+          $renderedContent .= self::renderTemplate($source, $half_column['#style'], $half_column);
           $half_column = null;
         }
-        $renderedContent .= self::renderTemplate($section['#style'], $section);
+        $renderedContent .= self::renderTemplate($source, $section['#style'], $section);
       }
     }
 
@@ -389,24 +437,12 @@ class OSHNewsletter {
 
   public static function getTwitterNodes(EntityCollection $source) {
     // @todo https://trello.com/c/9YyKgowC
-    $nodes = [];
-
     $q = db_select('node', 'n');
     $q->fields('n', ['nid']);
     $q->condition('n.type', 'twitter_tweet_feed');
     $q->range(0, 4);
     $q->orderBy('n.created', 'DESC');
-    $nids = $q->execute()->fetchCol();
-    foreach ($nids as $nid) {
-      $node = node_load($nid);
-      if (!empty($node)) {
-        $nodes[] = [
-          '#style' => self::getChildStyle('newsletter_half_width_twitter'),
-          'node' => $node,
-        ];
-      }
-    }
-    return $nodes;
+    return $q->execute()->fetchCol();
   }
 
   /**

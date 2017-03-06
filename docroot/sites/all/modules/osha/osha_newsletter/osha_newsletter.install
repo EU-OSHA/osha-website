@@ -70,4 +70,5 @@ function osha_newsletter_update_7002() {
  */
 function osha_newsletter_update_7004() {
   module_enable(['tweet_feed']);
+  features_revert_module('osha_newsletter');
 }

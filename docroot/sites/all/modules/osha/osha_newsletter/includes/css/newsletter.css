@@ -113,6 +113,11 @@ td.social {
   padding: 10px 0 10px 0;
 }
 
+.newsletter-section .section-icon {
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+
 .newsletter-section .item {
   padding-top: 15px;
   padding-bottom: 15px;

@@ -198,7 +198,14 @@ class OSHNewsletter {
       '#children' => [],
     ];
     if (!empty($variables['section']->name)) {
-      $content['#header'] = ['data' => ['data' => $variables['section']->name]];
+      $icon = self::getConfiguration($entityCollection, 'field_icon', $variables['section']);
+      if (!empty($icon)) {
+        $cellContent = sprintf("<img src=\"%s\" class=\"section-icon\"><div>%s</div>", $icon, $variables['section']->name);
+      }
+      else {
+        $cellContent = $variables['section']->name;
+      }
+      $content['#header'] = ['data' => ['data' => $cellContent]];
       $cssClass = drupal_clean_css_identifier('section-' . strtolower($variables['section']->name));
       $content['#attributes']['class'][] = $cssClass;
     }

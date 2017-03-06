@@ -5986,6 +5986,51 @@ a.tabs-primary__tab-link{
     padding-bottom: 1em;
     padding-top: 1em;
 }
+.additional_resource_group.infographic{
+	border: 1px dotted #cccccc;
+    clear: both;
+    height: 1%;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+    overflow: hidden;
+    padding: 1em;
+}
+
+.additional_resource_group.infographic span.additional_resource_title{
+	//background: url("../images/youtube-32.png") no-repeat 0 48% rgba(0, 0, 0, 0);
+	display: block;
+	height: 40px;
+	//padding-left: 2em;
+	margin-bottom: 0em;
+	font-family: "Open Sans Condensed",sans-serif;
+	font-size: 1.6em;
+	font-weight: lighter;
+	padding-top: 0.5em;
+}
+
+.additional_resource_group.infographic > .field-item{
+	width: 150px;
+	display: inline-block;
+	vertical-align: text-top;
+	margin-right: 10px;
+}
+
+.additional_resource_group.infographic > .field-item .field-name-field-image{
+	height: 120px;
+	overflow: hidden;
+	margin-top: 0px !important;
+}
+
+.additional_resource_group.infographic > .field-item .field-name-title-field h1{
+	font-size: 0.9em !important;
+	margin-left: 6px;
+    margin-top: 3px;
+    border-top: 7px solid rgb(210, 220, 237);
+}
+
+.additional_resource_group.infographic > .field-item:hover .field-name-title-field h1{
+    border-top: 7px solid rgb(220, 46, 129);
+}
 
 .additional_resource_group.youtube{
 	border: 1px dotted #cccccc;
@@ -6169,6 +6214,9 @@ a.tabs-primary__tab-link{
 .additional_resource_group.publication .field-item  article{
 	padding-bottom:2em;
 	background: url("../images/separator_home.jpg") repeat-x scroll 0 100% rgba(0, 0, 0, 0);
+}
+.additional_resource_group.publication .field-name-field-cover-image{
+	float: left;
 }
 
 .additional_resource_group.publication .field-name-title-field{

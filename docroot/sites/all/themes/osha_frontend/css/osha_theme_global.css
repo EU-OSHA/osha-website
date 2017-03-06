@@ -400,6 +400,11 @@ img[alt*="Select language"]{
 	margin-top: 0.5em;
 }
 
+.additional_resource_group.infographic > .field-item .field-name-title-field h1{
+	background: white !important;
+	padding-top: 10px !important;
+}
+
 .separator_recomended_resources_home, .title_recomended_resources_home , 
 #recommended_resources, #block-views-upcoming-events-block, #block-views-news-oshnews-latest,
 .oshwiki-featured-articles, #block-views-related-content-block-2, #block-views-related-content-block-1 , .region-sidebar-second h4 {

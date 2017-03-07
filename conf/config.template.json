@@ -54,6 +54,7 @@
         "environment": "production",
         "osha_newsletter_list_name": "OSHMail-Test",
         "osha_data_dir": "/var/local/osha/data",
+        "hwc_migration_root_url": "https://healthy-workplaces.eu",
         "site_name": "Safety and health at work - EU-OSHA",
         "site_mail": "account@example.com",
         "file_temporary_path": "/tmp",

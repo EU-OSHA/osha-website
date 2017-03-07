@@ -51,6 +51,7 @@ function osha_migration_migrate_api() {
     'class_name' => 'OshaMigrateWiki',
   );
 
+  /*
   if (is_readable($migration_module_dir . '/data/esener.json')) {
     $migrations[OSHA_MIGRATION_TAXONOMY_ESENER] = array(
       'class_name' => 'MigrateOshaTaxonomyEsener',
@@ -197,6 +198,7 @@ function osha_migration_migrate_api() {
       'file_name' => $external_data_dir . '/export-local/infographics.txt',
     );
   }
+  */
 
   $crm_data_dir = variable_get('osha_crm_data_dir');
   if (is_readable($crm_data_dir . '/FocalPoints.xml')) {
@@ -231,6 +233,7 @@ function osha_migration_migrate_api() {
     drupal_set_message('Failed to register migration BoardMembers, missing file ' . $filename);
   }
 
+  /*
   if (is_readable($external_data_dir . '/export/focalpoints.txt')) {
     $migrations[OSHA_MIGRATION_CONTENT_TYPE_FOP_PAGES] = array(
       'class_name' => 'MigrateOshaFOPPages',
@@ -238,6 +241,7 @@ function osha_migration_migrate_api() {
       'file_name_links' => $external_data_dir . '/export/focalpoints_linklist.txt',
     );
   }
+  */
 
   $api = array(
     'api' => 2,

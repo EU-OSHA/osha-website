@@ -54,7 +54,7 @@ function osha_homepage_fe_nodequeue_export_fields() {
     'name' => 'home_page_main_carousel',
     'title' => 'Home page main carousel',
     'subqueue_title' => '',
-    'size' => 0,
+    'size' => 1,
     'link' => '',
     'link_remove' => '',
     'owner' => 'nodequeue',
@@ -96,6 +96,53 @@ function osha_homepage_fe_nodequeue_export_fields() {
   );
 
   return $nodequeues;
+}
+
+/**
+ * Implements hook_image_default_styles().
+ */
+function osha_homepage_image_default_styles() {
+  $styles = array();
+
+  // Exported image style: banner_195_160.
+  $styles['banner_195_160'] = array(
+    'label' => 'Banner (195 X 160)',
+    'effects' => array(
+      5 => array(
+        'name' => 'manualcrop_crop_and_scale',
+        'data' => array(
+          'width' => 195,
+          'height' => 160,
+          'upscale' => 0,
+          'respectminimum' => 1,
+          'onlyscaleifcrop' => 0,
+          'style_name' => 'banner_195_160',
+        ),
+        'weight' => 0,
+      ),
+    ),
+  );
+
+  // Exported image style: banner_825_x_255.
+  $styles['banner_825_x_255'] = array(
+    'label' => 'Banner (825 X 255)',
+    'effects' => array(
+      4 => array(
+        'name' => 'manualcrop_crop_and_scale',
+        'data' => array(
+          'width' => 825,
+          'height' => 255,
+          'upscale' => 0,
+          'respectminimum' => 1,
+          'onlyscaleifcrop' => 0,
+          'style_name' => 'banner_825_x_255',
+        ),
+        'weight' => 0,
+      ),
+    ),
+  );
+
+  return $styles;
 }
 
 /**

@@ -65,6 +65,16 @@
         "thesaurus_id": "41481D"
     },
     {
+        "code": "not_known",
+        "name": "Not known",
+        "thesaurus_id": ""
+    },
+    {
+        "code": "not_applicable",
+        "name": "Not applicable",
+        "thesaurus_id": ""
+    },
+    {
         "code": "other",
         "name": "Other",
         "thesaurus_id": ""

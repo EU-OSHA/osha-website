@@ -75,7 +75,7 @@ function search_api_et_solr_search_api_solr_documents_alter(&$documents, $index,
 
           // For translatable fields, store the value in relevant multilingual
           // solr field instead of the default one.
-          if (search_api_et_solr_field_is_translatable($field_name, $entity_type, isset($server->options['clean_ids']) ? $server->options['clean_ids'] : FALSE)) {
+          if (search_api_et_solr_field_is_translatable($field_name, $entity_type, $index)) {
             $old_solr_field = $document->getField($solr_field_name);
             $multilingual_solr_field_name = implode('_', array($solr_prefix, $document_language, $field_name));
             $document->setField($multilingual_solr_field_name, $old_solr_field['value'], $old_solr_field['boost']);
@@ -99,7 +99,6 @@ function search_api_et_solr_search_api_solr_documents_alter(&$documents, $index,
  */
 function search_api_et_solr_search_api_solr_query_alter(array &$call_args, SearchApiQueryInterface $query) {
   $index = $query->getIndex();
-  $server = $index->server();
   $controller = search_api_get_datasource_controller($index->item_type);
   if ($controller instanceof SearchApiEtDatasourceController) {
     $entity_type = str_replace('search_api_et_', '', $index->item_type);
@@ -118,7 +117,7 @@ function search_api_et_solr_search_api_solr_query_alter(array &$call_args, Searc
 
       // Make sure the field is translatable, otherwise we don't want to add
       // anything.
-      if (search_api_et_solr_field_is_translatable($field_name, $entity_type, isset($server->options['clean_ids']) ? $server->options['clean_ids'] : FALSE)) {
+      if (search_api_et_solr_field_is_translatable($field_name, $entity_type, $index)) {
         // Add multilingual field variations for each language
         // enabled on the site.
         foreach (array_keys(search_api_et_languages(TRUE, TRUE)) as $langcode) {
@@ -160,6 +159,8 @@ function search_api_et_solr_search_api_solr_query_alter(array &$call_args, Searc
  * currently being processed document language is "fr") it will look for
  * "tm_fr_body:value" field in the solr document, and if it was found, replace
  * previously extracted default value with this multilingual one.
+ *
+ * @see search_api_et_solr_search_api_solr_search_results_alter_process_doc()
  */
 function search_api_et_solr_search_api_solr_search_results_alter(&$results, $query, $response) {
   // Run this only for multilingual indexes provided by search_api_et module.
@@ -170,24 +171,61 @@ function search_api_et_solr_search_api_solr_search_results_alter(&$results, $que
     $server = $index->server();
     $fields = $server->getFieldNames($index);
 
-    foreach ($response->response->docs as $document) {
-      // Do the processing only if language is available in the solr document.
-      if (!empty($document->ss_search_api_language)) {
-        $document_language = $document->ss_search_api_language;
-        // For all fields, check if they are translatable, and if solr returned
-        // relevant multilingual value.
-        foreach ($fields as $search_api_field_name => $solr_field_name) {
-          // No point in processing fields like 'score'.
-          if (strpos($solr_field_name, '_') !== FALSE) {
-            list($solr_prefix, $field_name) = explode('_', $solr_field_name, 2);
-            // For translatable fields, get the value from relevant multilingual
-            // solr field if available.
-            if (search_api_et_solr_field_is_translatable($field_name, $entity_type, isset($server->options['clean_ids']) ? $server->options['clean_ids'] : FALSE)) {
-              $multilingual_solr_field_name = implode('_', array($solr_prefix, $document_language, $field_name));
-              if (isset($document->{$multilingual_solr_field_name})) {
-                $results['results'][$document->item_id]['fields'][$search_api_field_name] = $document->{$multilingual_solr_field_name};
-              }
+    // If field collapsing has been enabled for this query, we need to process
+    // the results differently.
+    $grouping = $query->getOption('search_api_grouping');
+    if (!empty($grouping['use_grouping']) && !empty($response->grouped)) {
+      $results['result count'] = 0;
+      foreach ($grouping['fields'] as $field) {
+        if (!empty($response->grouped->{$fields[$field]})) {
+          $results['result count'] += $response->grouped->{$fields[$field]}->ngroups;
+          foreach ($response->grouped->{$fields[$field]}->groups as $group) {
+            foreach ($group->doclist->docs as $document) {
+              search_api_et_solr_search_api_solr_search_results_alter_process_doc($entity_type, $fields, $document, $results, !empty($server->options['clean_ids']));
             }
+          }
+        }
+      }
+    }
+    else {
+      if (!empty($response->response->docs)) {
+        foreach ($response->response->docs as $document) {
+          search_api_et_solr_search_api_solr_search_results_alter_process_doc($entity_type, $fields, $document, $results, !empty($server->options['clean_ids']));
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Processes a search result document and sets the proper result id.
+ *
+ * This is a separate function to make it reusable for normal and grouped
+ * results.
+ *
+ * @see search_api_et_solr_search_api_solr_search_results_alter()
+ */
+function search_api_et_solr_search_api_solr_search_results_alter_process_doc($entity_type, $fields, $document, &$results, $clean_ids = FALSE) {
+  // Do the processing only if language is available in the solr document.
+  if (!empty($document->ss_search_api_language)) {
+    $document_language = $document->ss_search_api_language;
+    $index = search_api_index_load($document->index_id);
+    // For all fields, check if they are translatable, and if solr returned
+    // relevant multilingual value.
+    foreach ($fields as $search_api_field_name => $solr_field_name) {
+      // No point in processing fields like 'score'.
+      if (strpos($solr_field_name, '_') !== FALSE) {
+        list($solr_prefix, $field_name) = explode('_', $solr_field_name, 2);
+        // For translatable fields, get the value from relevant multilingual
+        // solr field if available.
+        if (search_api_et_solr_field_is_translatable($field_name, $entity_type, $index)) {
+          $multilingual_solr_field_name = implode('_', array(
+            $solr_prefix,
+            $document_language,
+            $field_name
+          ));
+          if (isset($document->{$multilingual_solr_field_name})) {
+            $results['results'][$document->item_id]['fields'][$search_api_field_name] = $document->{$multilingual_solr_field_name};
           }
         }
       }
@@ -202,16 +240,19 @@ function search_api_et_solr_search_api_solr_search_results_alter(&$results, $que
  *   Name of the field.
  * @param string $entity_type
  *   Name of the entity type the field belongs to.
- * @param boolean $clean_ids
- *   Whether or not the field name uses clean ids.
+ * @param SearchApiIndex $index
+ *   Currently used Search api index
  *
  * @return bool
  *   A boolean indicating whether the field is translatable or not.
  */
-function search_api_et_solr_field_is_translatable($field_name, $entity_type, $clean_ids) {
-  $property_separator =  $clean_ids ? '$' : ':';
+function search_api_et_solr_field_is_translatable($field_name, $entity_type, SearchApiIndex $index) {
+  $server = $index->server();
+  $clean_ids = !empty($server->options['clean_ids']);
+
+  $property_separator = $clean_ids ? '$' : ':';
   if (strpos($field_name, $property_separator) !== FALSE) {
-    list($field_name) = explode($property_separator, $field_name);
+    list($field_name, $nested_field_name) = explode($property_separator, $field_name);
   }
 
   $field_is_translatable = &drupal_static(__FUNCTION__);
@@ -220,11 +261,53 @@ function search_api_et_solr_field_is_translatable($field_name, $entity_type, $cl
     || !isset($field_is_translatable[$entity_type])
     || !isset($field_is_translatable[$entity_type][$field_name])
   ) {
+    // First check if we are dealing with Search API aggregate field here,
+    // which requires different approach from standard fields.
+    if (
+      strpos($field_name, 'search_api_aggregation_') === 0
+      && !empty($index->options['data_alter_callbacks']['search_api_alter_add_aggregation']['settings']['fields'][$field_name]['fields'])
+    ) {
+      // Start with assumption that this aggregate field is not translatable...
+      $field_is_translatable[$entity_type][$field_name] = FALSE;
+      // ...but mark is as translatable if at least one of its source fields
+      // is translatable.
+      foreach ($index->options['data_alter_callbacks']['search_api_alter_add_aggregation']['settings']['fields'][$field_name]['fields'] as $source_field) {
+        if (search_api_et_solr_field_is_translatable($source_field, NULL, $index)) {
+          $field_is_translatable[$entity_type][$field_name] = TRUE;
+        }
+      }
+      // For aggregate fields there is no need to process the rest of this
+      // function, we can just return here.
+      return $field_is_translatable[$entity_type][$field_name];
+    }
+
     $field_info = field_info_field($field_name);
-    $field_is_translatable[$entity_type][$field_name] = field_is_translatable($entity_type, $field_info);
+    // For top-level fields we know entity type, so we can do the proper check.
+    if (!empty($entity_type)) {
+      $field_is_translatable[$entity_type][$field_name] = field_is_translatable($entity_type, $field_info);
+    }
+    // For nested fields we don't really know their entity type. It is going
+    // to be one of types stored in 'bundles' property, but we don't know which
+    // one. Is there an easy way to check it, considering that nesting could
+    // come from different types of entity reference fields? (entity_reference,
+    // commerce_product_reference, taxonomy_term_reference etc.)
+    else {
+      $field_is_translatable[$entity_type][$field_name] = $field_info['translatable'];
+    }
   }
 
-  return $field_is_translatable[$entity_type][$field_name];
+  // If field is translatable at its top level, there is no need to check
+  // for any nested sub-fields.
+  if ($field_is_translatable[$entity_type][$field_name]) {
+    return TRUE;
+  }
+
+  // If top-level field is not translatable, but there is a nested field (which
+  // means that top-level field is one of entity reference types), we need to
+  // check its translatability too.
+  if (!empty($nested_field_name)) {
+    return search_api_et_solr_field_is_translatable($nested_field_name, NULL, $index);
+  }
 }
 
 /**
@@ -321,7 +404,7 @@ function search_api_et_solr_extra_files_generate(SearchApiServer $server) {
 
           // Make sure the field is translatable, otherwise we don't need new
           // types or dynamic fields in solr.
-          if (search_api_et_solr_field_is_translatable($search_api_field_name, $entity_type, isset($server->options['clean_ids']) ? $server->options['clean_ids'] : FALSE)) {
+          if (search_api_et_solr_field_is_translatable($search_api_field_name, $entity_type, $index)) {
             list($solr_prefix, $field_name) = explode('_', $solr_field_name, 2);
 
             // We don't want to get field type from solr definitions, as it might

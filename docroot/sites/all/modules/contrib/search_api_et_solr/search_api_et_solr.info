@@ -6,9 +6,9 @@ core = "7.x"
 dependencies[] = search_api_et
 dependencies[] = search_api_solr (>= 7.x-1.2)
 
-; Information added by Drupal.org packaging script on 2014-06-30
+; Information added by Drupal.org packaging script on 2016-09-23
 version = "7.x-1.x-dev"
 core = "7.x"
 project = "search_api_et_solr"
-datestamp = "1404143028"
+datestamp = "1474621140"
 

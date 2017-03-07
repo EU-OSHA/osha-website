@@ -40,6 +40,11 @@
         "thesaurus_id": "36161D"
     },
     {
+        "code": "not_applicable",
+        "name": "Not applicable",
+        "thesaurus_id": ""
+    },
+    {
         "code": "other",
         "name": "Other",
         "thesaurus_id": ""

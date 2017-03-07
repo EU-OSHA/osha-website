@@ -1111,6 +1111,9 @@ function osha_node_activity_name($node) {
  * @param $node
  */
 function osha_export_node($node) {
+  if ($node->status == 0) {
+    drupal_access_denied();
+  }
   header('Content-type: application/javascript; charset=utf-8');
   $fields = field_info_instances('node', $node->type);
   $w = entity_metadata_wrapper('node', $node);

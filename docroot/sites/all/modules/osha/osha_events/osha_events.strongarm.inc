@@ -167,6 +167,9 @@ function osha_events_strongarm() {
       'osha_resources' => array(
         'custom_settings' => TRUE,
       ),
+      'osha_search_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -187,6 +190,9 @@ function osha_events_strongarm() {
         ),
         'language' => array(
           'weight' => '4',
+        ),
+        'xmlsitemap' => array(
+          'weight' => '30',
         ),
       ),
       'display' => array(),

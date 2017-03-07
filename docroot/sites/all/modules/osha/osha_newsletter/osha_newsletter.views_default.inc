@@ -151,13 +151,13 @@ function osha_newsletter_views_default_views() {
   $handler->display->display_options['fields']['views_bulk_operations']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '1';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['row_clickable'] = 1;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['skip_batching'] = 1;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
-    'action::osha_newsletter_add_to_newsletter_action' => array(
+    'rules_component::rules_add_to_newsletter' => array(
       'selected' => 1,
-      'postpone_processing' => 0,
       'skip_confirmation' => 1,
       'override_label' => 0,
       'label' => '',
@@ -188,6 +188,11 @@ function osha_newsletter_views_default_views() {
   $handler->display->display_options['fields']['changed']['label'] = 'Updated';
   $handler->display->display_options['fields']['changed']['date_format'] = 'short';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
+  /* Field: Content: Published */
+  $handler->display->display_options['fields']['status']['id'] = 'status';
+  $handler->display->display_options['fields']['status']['table'] = 'node';
+  $handler->display->display_options['fields']['status']['field'] = 'status';
+  $handler->display->display_options['fields']['status']['not'] = 0;
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
@@ -410,11 +415,6 @@ function osha_newsletter_views_default_views() {
     11 => 0,
     12 => 0,
   );
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = '1';
 
   /* Display: Newsletter content selection */
   $handler = $view->new_display('page', 'Newsletter content selection', 'newsletter_selection_view_page');
@@ -450,6 +450,7 @@ function osha_newsletter_views_default_views() {
     t('Type of content'),
     t('Author'),
     t('Updated'),
+    t('Published'),
     t('Edit'),
     t('Post date'),
     t('Updated date'),

@@ -42,6 +42,12 @@
         "level": "No level"
     },
     {
+        "code": "not_applicable",
+        "name": "Not applicable",
+        "thesaurus_id": "",
+        "level": "No level"
+    },
+    {
         "code": "other",
         "name": "Other",
         "thesaurus_id": "",

@@ -978,19 +978,20 @@ function osha_newsletter_entity_insert($entity_collection, $type) {
     $max_nodes = variable_get('osha_newsletter_after_max_nodes', 19);
 
     $active_sections = variable_get('osha_newsletter_active_sections', []);
-    foreach ($active_sections as $term_weight => $term_id) {
-      $term = taxonomy_term_load($term_id);
-      if (!empty($term)) {
-        $entity = entity_uuid_load('taxonomy_term', array($term->uuid));
-        $item = new EntityCollectionTreeNode('taxonomy_term', $term->tid, $entity);
-        // Set weights for sections and children.
-        $weights[$term->uuid]['parent'] = $weights[$term->uuid]['children'] = $term_weight * ($max_nodes + 1);
-        $item->position = $weights[$term->uuid]['parent'];
-        $item->style = !empty($term->field_newsletter_template[LANGUAGE_NONE][0]['value'])
-          ? $term->field_newsletter_template[LANGUAGE_NONE][0]['value']
-          : '';
-        entity_collection_append_item($entity_collection, $item, $contexts);
-      }
+    $terms = taxonomy_term_load_multiple($active_sections);
+    usort($terms, function($a, $b) {
+      return $a->weight > $b->weight;
+    });
+    foreach ($terms as $term_weight => $term) {
+      $entity = entity_uuid_load('taxonomy_term', array($term->uuid));
+      $item = new EntityCollectionTreeNode('taxonomy_term', $term->tid, $entity);
+      // Set weights for sections and children.
+      $weights[$term->uuid]['parent'] = $weights[$term->uuid]['children'] = $term_weight * ($max_nodes + 1);
+      $item->position = $weights[$term->uuid]['parent'];
+      $item->style = !empty($term->field_newsletter_template[LANGUAGE_NONE][0]['value'])
+        ? $term->field_newsletter_template[LANGUAGE_NONE][0]['value']
+        : '';
+      entity_collection_append_item($entity_collection, $item, $contexts);
     }
 
     // Mapping of term newsletter sections and content types.

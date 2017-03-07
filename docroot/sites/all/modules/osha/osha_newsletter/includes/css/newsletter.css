@@ -114,6 +114,12 @@ td.social {
   text-transform: none;
   padding: 10px 0 10px 0;
 }
+
+.newsletter-section .section-icon {
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+
 .newsletter-section .item {
   padding-top: 15px;
   padding-bottom: 15px;
@@ -154,7 +160,7 @@ td.social {
   color: #ffffff;
 } */
 .newsletter-half-content .newsletter-full-width-list {
-  max-width: 360px;
+  max-width: 380px;
 }
 .newsletter-half-image-left-container {
   background-size: cover;
@@ -165,10 +171,15 @@ td.social {
 .newsletter-half-image-left tr {
   height: 100% !important;
 }
+
 .newsletter-half-image td {
   padding-right: 10px;
   padding-bottom: 5px;
 }
+.newsletter-half-image-left img {
+  max-width: 100%;
+}
+
 .newsletter-full-width-2-col-blocks-item > .newsletter-item {
   background-color: #003399;
   color: #ffffff;

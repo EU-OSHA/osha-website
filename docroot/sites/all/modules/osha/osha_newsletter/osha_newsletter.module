@@ -744,6 +744,10 @@ function osha_newsletter_form_alter(&$form, &$form_state, $form_id) {
     case 'entity_collection_edit_form':
       if (isset($form['#bundle']) && $form['#bundle'] == 'newsletter_content_collection') {
         osha_newsletter_fix_entity_collection_edit_form($form, $form_state);
+
+        hide($form['field_images']);
+        hide($form['field_newsletter_configuration']);
+
         // Alter submit button label.
         $form['actions']['submit']['#value'] = t('Update newsletter');
       }
@@ -752,6 +756,10 @@ function osha_newsletter_form_alter(&$form, &$form_state, $form_id) {
     case 'entity_collection_add_form':
       if (isset($form['#bundle']) && $form['#bundle'] == 'newsletter_content_collection') {
         osha_newsletter_fix_entity_collection_add_form($form, $form_state);
+
+        hide($form['field_images']);
+        hide($form['field_newsletter_configuration']);
+
         // Alter submit button label.
         $form['actions']['submit']['#value'] = t('Create newsletter');
         // Add a submit handler.
@@ -1159,6 +1167,8 @@ function osha_newsletter_send_test_email(&$form_state) {
 function osha_newsletter_send_email_to_subscribers(&$form_state) {
   global $user;
 
+  OSHNewsletter::saveConfiguration($form_state['#style']->entity_collection);
+
   $to = _get_listserv_subscription_email();
   $from = variable_get('osha_newsletter_listserv_from', $user->mail);
 
@@ -1394,4 +1404,8 @@ function osha_newsletter_preprocess_node(&$vars) {
 function osha_newsletter_osha_tmgmt_i18n_string_list() {
   module_load_include('inc', 'osha_newsletter', 'osha_newsletter.translations');
   return osha_newsletter_get_translatable_strings();
+}
+
+function osha_newsletter_get_templates_list() {
+  return OSHNewsletter::getTemplatesList();
 }

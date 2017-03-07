@@ -249,14 +249,10 @@ class OSHNewsletter {
         }
         break;
       case 'newsletter_half_image_left':
-        // @todo: remove
-        $image_url = 'https://healthy-workplaces.eu/sites/default/files/frontpage_slider/home_slide-2r-1.png';
-        $image_fallback_bg = '#acc830';
-        // 
         $content['#header']['data']['colspan'] = 2;
 
-        // $image_url = self::getConfiguration($entityCollection, 'field_background_image', $variables['section'], '');
-        // $image_fallback_bg = self::getConfiguration($entityCollection, 'field_background_color', $variables['section'], '');
+        $image_url = self::getConfiguration($entityCollection, 'field_background_image', $variables['section'], '');
+        $image_fallback_bg = self::getConfiguration($entityCollection, 'field_background_color', $variables['section'], '');
 
         // Avoid rendering the section title twice
         unset($variables['section']);

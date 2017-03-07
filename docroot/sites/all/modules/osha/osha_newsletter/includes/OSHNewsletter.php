@@ -130,7 +130,7 @@ class OSHNewsletter {
       case 'newsletter_half_image_left':
         // @todo: get the image and the fallback bg color from the taxonomy
         $image_url = 'https://healthy-workplaces.eu/sites/default/files/frontpage_slider/home_slide-2r-1.png';
-        $image_fallback_bg = '#ACC830';
+        $image_fallback_bg = '#acc830';
         if (empty($variables['nodes'])) {
           return '';
         }
@@ -138,26 +138,31 @@ class OSHNewsletter {
 
         // Avoid rendering the section title twice
         unset($variables['section']);
-
-        $content['#rows'] = [
+        $content['#rows'][0]['data'][] = [
+          'data' => '',
+          'style' => 'padding: 10px 0px 10px 0px',
+        ];
+        $content['#rows'][1] = [
           'data' => [
             [
-              'data' => sprintf("<div style=\"height:100%%;background-color: %s;\"><img src=\"%s\" width=\"380\" style=\"width:380px;max-width:100%%;\"></div>",
-                $image_fallback_bg,
-                $image_url),
+              'data' => sprintf("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%%\" height=\"100%%\" style=\"height:100%%!important;background-color:%s;\" ><tbody><tr><td style=\"background-color:%s;\"><img src=\"%s\" width=\"380\" style=\"width:380px;max-width:100%%;background-color:%s; \"/></td></tr></tbody></table>", $image_fallback_bg, $image_fallback_bg, $image_url, $image_fallback_bg),
               'width' => '380',
               'height' => '100%',
-              'class' => 'template-column',
+              'class' => ['template-column', 'newsletter-half-image'],
+              'style' => sprintf("max-width: 380px;height:100%%!important;background-color: %s;",$image_fallback_bg),
             ],
             [
-              'data' => sprintf("<div style=\"background-color: %s;\">%s</div>",
-                $image_fallback_bg,
-                self::renderTemplate('newsletter_full_width_list', $variables)),
+              'data' => sprintf("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%%\" height=\"100%%\" style=\"height:100%%!important;background-color:%s;\" ><tbody><tr><td style=\"background-color:%s;\">%s</td></tr></tbody></table>",$image_fallback_bg, $image_fallback_bg, self::renderTemplate('newsletter_full_width_list', $variables)),
               'width' => '380',
-              'class' => 'template-column',
-              'style' => 'max-width: 380px;'
+              'height' => '100%',
+              'class' => ['template-column', 'newsletter-half-content'],
+              'style' => sprintf("max-width: 380px;height:100%%!important;background-color: %s;",$image_fallback_bg),
             ],
           ],
+        ];
+        $content['#rows'][2]['data'][] = [
+          'data' => '',
+          'style' => 'padding: 10px 0px 10px 0px',
         ];
         break;
       case 'newsletter_full_width_2_col_blocks':
@@ -168,11 +173,11 @@ class OSHNewsletter {
         $currentRow = $currentCol = 0;
         foreach ($variables['nodes'] as $node) {
           $cellContent = self::getCellContent($template, $node);
-          $cellContent['width'] = '397';
+          $cellContent['width'] = '377'; // half - 3px of margin
           $cellContent['height'] = '100%';
           $cellContent['align'] = 'left';
           $cellContent['valign'] = 'top';
-          $cellContent['style'] .= 'max-width:397px;';
+          $cellContent['style'] .= 'max-width:377px;';
           array_push($cellContent['class'], 'template-column');
           if ($currentCol++ === 0) {
             $content['#rows'][$currentRow] = [
@@ -192,8 +197,9 @@ class OSHNewsletter {
         $currentRow = $currentCol = 0;
         foreach ($variables['nodes'] as $node) {
           $cellContent = self::getCellContent($template, $node);
-          $cellContent['width'] = '49%';
+          $cellContent['width'] = '400';
           $cellContent['height'] = '100%';
+          $cellContent['style'] .= 'max-width:400px;';
           array_push($cellContent['class'], 'template-column');
           if ($currentCol++ === 0) {
             $content['#rows'][$currentRow] = [

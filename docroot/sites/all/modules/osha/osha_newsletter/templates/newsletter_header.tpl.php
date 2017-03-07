@@ -1,3 +1,93 @@
+<style>
+  @media only screen and (max-width: 600px) {
+    .template-container {
+      /* max-width: 400px; */
+    }
+    .newsletter-container {
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    table[width],
+    .template-image,
+    .template-container,
+    .template-column {
+      max-width: 100% !important;
+      width: 100% !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+    .template-column {
+      display: block !important;
+    }
+
+    .template-column td {
+      /* padding-left: 0 !important;
+      padding-right: 0 !important; */
+    }
+    .template-column img {
+      max-width: 100% !important;
+      width: auto !important;
+      height: auto !important;
+    }
+    .template-image {
+      text-align: center !important;
+    }
+    .template-column > .newsletter-item {
+      background-color: transparent;
+      color: #003399;
+    }
+    .newsletter-full-width-2-col-blocks-item > .newsletter-item > tbody > tr > td {
+      padding: 5px 0px;
+    }
+
+    .newsletter-item {
+      border-bottom: 1px dashed #dddddd;
+    }
+
+    .newsletter-section > tbody > .row:last-child > .item:last-child > .newsletter-item {
+      border-bottom: none;
+    }
+
+    .newsletter-section .row:first-child > .item:last-child:not(:only-child) {
+      padding-top: 3px !important;
+    }
+    .newsletter-section .row:last-child > .item:first-child:not(:only-child) {
+      padding-bottom: 3px !important;
+    }
+    td.social {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+    /* .preheader .social {
+      text-align: center !important;
+    } */
+    .newsletter-half-image-left-container {
+      background-image: none!important;
+    }
+    .newsletter-half-image {
+      padding-bottom: 0 !important;
+    }
+    .newsletter-half-image td {
+      padding-right: 0 !important;
+    }
+    .newsletter-half-content {
+      padding-top: 0 !important;
+    }
+  }
+  @media only screen and (max-width: 500px) {
+    .osha-logos {
+      text-align: center !important;
+    }
+    .osha-logos,
+    .osha-info {
+      display: block !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+  }
+</style>
 <table border="0" cellpadding="0" cellspacing="0" width="100%" class="preheader template-container">
   <tbody>
     <tr>
@@ -30,7 +120,7 @@
     </tr>
     <tr>
       <td class="social">
-        <table border="0" cellpadding="20" cellspacing="0" width="auto" align="Right" style="width:auto;">
+        <table border="0" cellpadding="20" cellspacing="0" width="auto" align="Right" style="width:auto!important;">
           <tbody><tr>
             <?php
               $social = array(
@@ -103,7 +193,7 @@
           'width' => 256,
           'height' => 60,
           'alt' => 'Osha logo',
-          'attributes' => array('style' => 'border: 0px;')
+          'attributes' => array('style' => 'border: 0px; width: 256px; max-width: 256px;')
           )), $base_url.'/'.$language->language, array(
           'html' => TRUE,
           'external' => TRUE,

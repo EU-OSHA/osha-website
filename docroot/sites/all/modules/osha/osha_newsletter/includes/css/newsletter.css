@@ -26,7 +26,9 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-
+tr {
+  border: 0;
+}
 td {
   vertical-align: top;
   padding: 0;
@@ -112,7 +114,6 @@ td.social {
   text-transform: none;
   padding: 10px 0 10px 0;
 }
-
 .newsletter-section .item {
   padding-top: 15px;
   padding-bottom: 15px;
@@ -130,9 +131,11 @@ td.social {
   padding-top: 3px;
   padding-bottom: 3px;
 }
+/* .newsletter-half-image-left .template-column, */
 .newsletter-section .row:first-child > .item {
   padding-top: 20px;
 }
+/* .newsletter-half-image-left .template-column, */
 .newsletter-section .row:last-child > .item {
   padding-bottom: 20px;
 }
@@ -150,7 +153,9 @@ td.social {
   background-color: #003399;
   color: #ffffff;
 } */
-
+.newsletter-half-content .newsletter-full-width-list {
+  max-width: 360px;
+}
 .newsletter-half-image-left-container {
   background-size: cover;
   background-repeat: no-repeat;
@@ -158,8 +163,11 @@ td.social {
 }
 
 .newsletter-half-image-left tr {
-  background: transparent;
   height: 100% !important;
+}
+.newsletter-half-image td {
+  padding-right: 10px;
+  padding-bottom: 5px;
 }
 .newsletter-full-width-2-col-blocks-item > .newsletter-item {
   background-color: #003399;
@@ -173,8 +181,9 @@ td.social {
 .newsletter-full-width-2-col-blocks-item > .newsletter-item a {
   color: #ffffff;
 }
+.newsletter-half-content > table > tbody > tr > td,
 .newsletter-full-width-2-col-blocks-item > .newsletter-item > tbody > tr > td {
-  padding: 5px 10px;
+  padding: 5px 10px 5px 10px;
 }
 
 .newsletter-full-width-list td {

@@ -230,6 +230,7 @@ class OSHNewsletter {
             'width' => "$columnWidth",
             'height' => '100%',
             'class' => 'multiple-columns-cell template-column',
+            'style' => sprintf('width:%spx;max-width:%spx;',$columnWidth, $columnWidth),
           ];
         }
         break;
@@ -258,7 +259,7 @@ class OSHNewsletter {
         unset($variables['section']);
         $content['#rows'][0]['data'][] = [
           'data' => '',
-          'style' => 'padding: 10px 0px 10px 0px',
+          'style' => 'padding-bottom: 20px;',
         ];
         $content['#rows'][1] = [
           'data' => [
@@ -290,12 +291,22 @@ class OSHNewsletter {
         ];
         $content['#rows'][2]['data'][] = [
           'data' => '',
-          'style' => 'padding: 10px 0px 10px 0px',
+          'style' => 'padding-bottom: 20px;',
         ];
         break;
       case 'newsletter_full_width_2_col_blocks':
         $content['#header']['data']['colspan'] = 2;
-        $currentRow = $currentCol = 0;
+        $currentRow = 0;
+        $currentCol = 0;
+
+        $content['#rows'][$currentRow]['no_striping'] = true;
+        $content['#rows'][$currentRow]['data'][] = [
+          'data' => '',
+          'style' => 'padding-bottom: 20px;',
+        ];
+
+        $currentRow++;
+
         foreach ($variables['nodes'] as $node) {
           $cellContent = self::getCellContent($template, $node);
           $cellContent['width'] = '377'; // half - 3px of margin
@@ -309,6 +320,7 @@ class OSHNewsletter {
             $cellContent['style'] .= 'max-width:377px;';
           }
           array_push($cellContent['class'], 'template-column');
+
           if ($currentCol++ === 0) {
             $content['#rows'][$currentRow] = [
               'data' => [$cellContent],
@@ -321,15 +333,29 @@ class OSHNewsletter {
             $currentCol = 0;
           }
         }
+        $content['#rows'][++$currentRow]['no_striping'] = true;
+        $content['#rows'][$currentRow]['data'][] = [
+          'data' => '',
+          'style' => 'padding-bottom: 20px;',
+        ];
         break;
       case 'newsletter_half_width_twitter':
         $content['#header']['data']['colspan'] = 2;
         $currentRow = $currentCol = 0;
+
+        $content['#rows'][$currentRow]['no_striping'] = true;
+        $content['#rows'][$currentRow]['data'][] = [
+          'data' => '',
+          'style' => 'padding-bottom: 20px;',
+        ];
+
+        $currentRow++;
+
         foreach ($variables['nodes'] as $node) {
           $cellContent = self::getCellContent($template, $node);
-          $cellContent['width'] = '400';
+          $cellContent['width'] = '380';
           $cellContent['height'] = '100%';
-          $cellContent['style'] .= 'max-width:400px;';
+          $cellContent['style'] .= 'max-width:380px;';
           array_push($cellContent['class'], 'template-column');
           if ($currentCol++ === 0) {
             $content['#rows'][$currentRow] = [
@@ -343,6 +369,11 @@ class OSHNewsletter {
             $currentCol = 0;
           }
         }
+        $content['#rows'][++$currentRow]['no_striping'] = true;
+        $content['#rows'][$currentRow]['data'][] = [
+          'data' => '',
+          'style' => 'padding-bottom: 20px;',
+        ];
         break;
       default:
         return theme($template, $variables);

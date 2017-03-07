@@ -6,6 +6,7 @@
   background-color: #ffffff;
   table-layout:fixed;
 }
+/* gutter */
 .content-container > td {
   padding: 0 20px 0 20px;
 }
@@ -21,6 +22,7 @@ p {
 }
 table {
   font-family: 'Oswald', Arial, sans-serif;
+  font-size: 14px;
   border: 0;
   margin: 0;
   border-collapse: collapse;
@@ -80,7 +82,7 @@ td.social {
 }
 .footer td {
   text-align: center;
-  padding: 5px 10px;
+  padding: 5px 10px 5px 10px;
 }
 .footer .social {
   text-align: center;
@@ -121,8 +123,8 @@ td.social {
 }
 
 .newsletter-section .item {
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .item.newsletter-half-width-list-item,
 .item.newsletter-half-image-left-item,
@@ -130,21 +132,27 @@ td.social {
   padding-top: 5px;
   padding-bottom: 5px;
 }
-.newsletter-full-width-2-col-blocks {
-  /* table-layout: fixed; */
-}
-.item.newsletter-full-width-2-col-blocks-item {
-  padding-top: 3px;
-  padding-bottom: 3px;
-}
-/* .newsletter-half-image-left .template-column, */
-.newsletter-section .row:first-child > .item {
+.item.newsletter-full-width-details-item {
   padding-top: 20px;
-}
-/* .newsletter-half-image-left .template-column, */
-.newsletter-section .row:last-child > .item {
   padding-bottom: 20px;
 }
+
+.newsletter-section .row:first-child > .item.newsletter-half-width-list-item,
+.newsletter-section .row:first-child > .item.newsletter-half-image-left-item,
+.newsletter-section .row:first-child > .item.newsletter-full-width-list-item {
+  padding-top: 20px;
+}
+.newsletter-section .row:last-child > .item.newsletter-half-width-list-item,
+.newsletter-section .row:last-child > .item.newsletter-half-image-left-item,
+.newsletter-section .row:last-child > .item.newsletter-full-width-list-item {
+  padding-bottom: 20px;
+}
+/* .newsletter-section .row:first-child > .item {
+  padding-top: 20px;
+}
+.newsletter-section .row:last-child > .item {
+  padding-bottom: 20px;
+} */
 .newsletter-item td {
   color: #003399;
 }
@@ -162,6 +170,9 @@ td.social {
 .newsletter-half-content .newsletter-full-width-list {
   max-width: 380px;
 }
+.newsletter-half-content .newsletter-full-width-list .newsletter-item {
+  max-width: 380px;
+}
 .newsletter-half-image-left-container {
   background-size: cover;
   background-repeat: no-repeat;
@@ -172,14 +183,23 @@ td.social {
   height: 100% !important;
 }
 
-.newsletter-half-image td {
-  padding-right: 10px;
-  padding-bottom: 5px;
-}
 .newsletter-half-image-left img {
   max-width: 100%;
 }
+.newsletter-half-width-twitter .newsletter-item p:first-child {
+  margin-top: 0;
+}
+.item.newsletter-half-width-twitter-item {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
 
+.newsletter-half-width-twitter a {
+  color: #38aadc !important;
+  max-width: 100%;
+  overflow: hidden;
+  word-break: break-word;
+}
 .newsletter-full-width-2-col-blocks-item > .newsletter-item {
   background-color: #003399;
   color: #ffffff;
@@ -192,6 +212,10 @@ td.social {
 .newsletter-full-width-2-col-blocks-item > .newsletter-item a {
   color: #ffffff;
 }
+
+/* Padding for newsletter-item content */
+
+/* .newsletter-half-width-twitter-item > .newsletter-item > tbody > tr > td, */
 .newsletter-half-content > table > tbody > tr > td,
 .newsletter-full-width-2-col-blocks-item > .newsletter-item > tbody > tr > td {
   padding: 5px 10px 5px 10px;
@@ -201,28 +225,41 @@ td.social {
   color: #003399;
 }
 
+.multiple-columns-cell > table {
+  max-width: 380px;
+}
+.multiple-columns-cell .newsletter-half-width-twitter-item > .newsletter-item {
+  max-width: 190px;
+}
+
+/* Larger left-right padding for multiple columns */
 .multiple-columns-cell:nth-child(odd) {
   padding-right: 20px;
 }
 .multiple-columns-cell:nth-child(even) {
   padding-left: 20px;
 }
+
+.item.newsletter-full-width-2-col-blocks-item {
+  padding-top: 0px;
+  padding-bottom: 4px;
+}
 .newsletter-full-width-2-col-blocks-item:nth-child(odd) {
-  padding-right: 3px;
+  padding-right: 2px;
 }
 .newsletter-full-width-2-col-blocks-item:nth-child(even) {
-  padding-left: 3px;
+  padding-left: 2px;
 }
 .newsletter-multiple-columns tr {
   border: 0;
 }
 .newsletter-full-width-2-col-blocks-row:first-child > td {
-  padding-top: 10px;
+  /* padding-top: 10px; */
 }
 
 .newsletter-full-width-2-col-blocks-row:last-child > td {
-  padding-bottom: 10px;
+  /* padding-bottom: 10px; */
 }
 .newsletter-full-width-2-col-blocks-row:first-child > td:only-child {
-  padding-right: 0;
+  /* padding-right: 0; */
 }

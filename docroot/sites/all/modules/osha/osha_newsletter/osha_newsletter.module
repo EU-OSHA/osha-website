@@ -756,6 +756,10 @@ function osha_newsletter_form_alter(&$form, &$form_state, $form_id) {
     case 'entity_collection_add_form':
       if (isset($form['#bundle']) && $form['#bundle'] == 'newsletter_content_collection') {
         osha_newsletter_fix_entity_collection_add_form($form, $form_state);
+
+        hide($form['field_images']);
+        hide($form['field_newsletter_configuration']);
+
         // Alter submit button label.
         $form['actions']['submit']['#value'] = t('Create newsletter');
         // Add a submit handler.

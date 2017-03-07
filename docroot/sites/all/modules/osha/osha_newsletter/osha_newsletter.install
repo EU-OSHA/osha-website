@@ -72,6 +72,29 @@ function osha_newsletter_update_7004() {
   module_enable(['tweet_feed']);
   features_revert_module('osha_newsletter');
 
+  $module_path = drupal_get_path('module', 'osha_newsletter');
+  $image_dest_dir = 'public://newsletter';
+
+  $files = [
+    'hwc' => "{$module_path}/images/HWC_background.png",
+    'oshwiki' => "{$module_path}/images/OSHWiki_logo.png",
+    'oira' => "{$module_path}/images/OiRA_logo.png",
+  ];
+  foreach ($files as $key => $filepath) {
+    $file = (object) array(
+      'uid' => 1,
+      'uri' => $filepath,
+      'filemime' => file_get_mimetype($filepath),
+      'status' => 1,
+    );
+    if ($file = file_copy($file, $image_dest_dir)) {
+      $files[$key] = (array) $file;
+    }
+    else {
+      unset($files[$key]);
+    }
+  }
+
   $newsletter_sections = [
     [
       // Highlights
@@ -99,22 +122,22 @@ function osha_newsletter_update_7004() {
       // Healthy workplaces campaign
       'tid' => '3036',
       'field_newsletter_template' => 'newsletter_half_image_left',
-      'field_background_color' => '#95b20a',
-      'field_background_image' => '', // @todo
+      'field_background_color' => '#aec70f',
+      'field_background_image' => $files['hwc'],
       'weight' => -5,
     ],
     [
       // OiRA - Online Interactive Risk Assessment
       'tid' => '3117',
       'field_newsletter_template' => 'newsletter_full_width_list',
-      'field_icon' => '', // @todo
+      'field_icon' => $files['oira'],
       'weight' => -4,
     ],
     [
       // OSHWiki
       'tid' => '3080',
       'field_newsletter_template' => 'newsletter_full_width_list',
-      'field_icon' => '', // @todo
+      'field_icon' => $files['oshwiki'],
       'weight' => -3,
     ],
     [
@@ -149,12 +172,12 @@ function osha_newsletter_update_7004() {
     $term->field_background_color = [LANGUAGE_NONE => [0 => [
       'value' => !empty($section['field_background_color']) ? $section['field_background_color'] : '',
     ]]];
-    $term->field_background_image = [LANGUAGE_NONE => [0 => [
-      'fid' => !empty($section['field_background_image']) ? $section['field_background_image'] : '',
-    ]]];
-    $term->field_icon = [LANGUAGE_NONE => [0 => [
-      'fid' => !empty($section['field_icon']) ? $section['field_icon'] : '',
-    ]]];
+    if (!empty($section['field_background_image'])) {
+      $term->field_background_image = [LANGUAGE_NONE => [0 => $section['field_background_image']]];
+    }
+    if (!empty($section['field_icon'])) {
+      $term->field_icon = [LANGUAGE_NONE => [0 => $section['field_icon']]];
+    }
     taxonomy_term_save($term);
     $active[] = $term->tid;
   }

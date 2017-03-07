@@ -16,7 +16,7 @@
         <table border="0" cellpadding="0" cellspacing="0" class="item-thumbnail-and-title" width="100%">
           <tbody>
             <tr>
-              <td rowspan="2" width="220" style="padding-bottom:10px;vertical-align: top;padding-top:0px; padding-right: 20px;">
+              <td rowspan="2" width="220" style="padding-bottom:10px;vertical-align: top;padding-top:0px; padding-right: 20px;" class="template-column template-image">
                 <?php
                   print l(theme('image_style', array(
                     'style_name' => 'medium',
@@ -30,7 +30,7 @@
                   ));
                 ?>
               </td>
-              <td valign="top" style="color: #003399; padding-bottom: 10px; padding-left: 0px; padding-right: 0px; font-family: Oswald, Arial, sans-serif; font-size: 18px; vertical-align: top;">
+              <td valign="top" style="color: #003399; padding-bottom: 10px; padding-left: 0px; padding-right: 0px; font-family: Oswald, Arial, sans-serif; font-size: 18px; vertical-align: top;" class="template-column">
                 <?php
                 if (isset($variables['elements']['#campaign_id'])) {
                   $url_query = array('pk_campaign' => $variables['elements']['#campaign_id']);

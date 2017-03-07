@@ -71,4 +71,93 @@ function osha_newsletter_update_7002() {
 function osha_newsletter_update_7004() {
   module_enable(['tweet_feed']);
   features_revert_module('osha_newsletter');
+
+  $newsletter_sections = [
+    [
+      // Highlights
+      'tid' => '12',
+      'field_newsletter_template' => 'newsletter_full_width_details',
+      'weight' => -9,
+    ],
+    [
+      'name' => 'Videos',
+      'field_newsletter_template' => 'newsletter_full_width_details',
+      'weight' => -8,
+    ],
+    [
+      // News
+      'tid' => '11',
+      'field_newsletter_template' => 'newsletter_half_width_list',
+      'weight' => -7,
+    ],
+    [
+      'name' => 'Tweets',
+      'field_newsletter_template' => 'newsletter_half_width_twitter',
+      'weight' => -6,
+    ],
+    [
+      // Healthy workplaces campaign
+      'tid' => '3036',
+      'field_newsletter_template' => 'newsletter_half_image_left',
+      'field_background_color' => '#95b20a',
+      'field_background_image' => '', // @todo
+      'weight' => -5,
+    ],
+    [
+      // OiRA - Online Interactive Risk Assessment
+      'tid' => '3117',
+      'field_newsletter_template' => 'newsletter_full_width_list',
+      'field_icon' => '', // @todo
+      'weight' => -4,
+    ],
+    [
+      // OSHWiki
+      'tid' => '3080',
+      'field_newsletter_template' => 'newsletter_full_width_list',
+      'field_icon' => '', // @todo
+      'weight' => -3,
+    ],
+    [
+      // Events
+      'tid' => '15',
+      'field_newsletter_template' => 'newsletter_full_width_2_col_blocks',
+      'weight' => -2,
+    ],
+    [
+      // Coming soon
+      'tid' => '13',
+      'field_newsletter_template' => 'newsletter_full_width_details',
+      'weight' => -1,
+    ],
+  ];
+
+  $active = [];
+  foreach ($newsletter_sections as $section) {
+    if (!empty($section['tid'])) {
+      $term = taxonomy_term_load($section['tid']);
+    }
+    else {
+      $term = (object) [
+        'vid' => '11', // Newsletter sections
+        'name' => $section['name'],
+      ];
+    }
+    $term->weight = $section['weight'];
+    $term->field_newsletter_template = [LANGUAGE_NONE => [0 => [
+      'value' => !empty($section['field_newsletter_template']) ? $section['field_newsletter_template'] : '',
+    ]]];
+    $term->field_background_color = [LANGUAGE_NONE => [0 => [
+      'value' => !empty($section['field_background_color']) ? $section['field_background_color'] : '',
+    ]]];
+    $term->field_background_image = [LANGUAGE_NONE => [0 => [
+      'fid' => !empty($section['field_background_image']) ? $section['field_background_image'] : '',
+    ]]];
+    $term->field_icon = [LANGUAGE_NONE => [0 => [
+      'fid' => !empty($section['field_icon']) ? $section['field_icon'] : '',
+    ]]];
+    taxonomy_term_save($term);
+    $active[] = $term->tid;
+  }
+
+  variable_set('osha_newsletter_active_sections', $active);
 }

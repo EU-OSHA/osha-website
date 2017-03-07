@@ -69,6 +69,19 @@ function osha_newsletter_admin_form() {
     '#required' => TRUE,
   );
 
+  $active_sections = variable_get('osha_newsletter_active_sections', []);
+  $options = array();
+  $term_tree = taxonomy_get_tree(11); // Newsletter sections
+  foreach ($term_tree as $term) {
+    $options[$term->tid] = $term->name . ' ' . l(t('(edit)'), "taxonomy/term/{$term->tid}/edit");
+  }
+  $form['osha_newsletter_active_sections'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Active newsletter sections'),
+    '#options' => $options,
+    '#default_value' => $active_sections,
+  );
+
   $allowed_bundles = variable_get(
     'osha_newsletter_allowed_bundles',
     array(

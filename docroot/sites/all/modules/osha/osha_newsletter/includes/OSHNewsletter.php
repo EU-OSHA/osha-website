@@ -14,7 +14,7 @@ class OSHNewsletter {
       'newsletter_half_width_list' => '1/2 width: summary',
       'newsletter_half_image_left' => 'Healthy Workplaces Campaigns',
       'newsletter_full_width_2_col_blocks' => 'Events',
-      'newsletter_half_width_twitter' => 'Twitter',
+      'newsletter_half_width_twitter' => 'Tweets',
     ];
   }
 

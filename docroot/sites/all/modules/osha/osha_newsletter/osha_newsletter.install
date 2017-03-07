@@ -85,7 +85,8 @@ function osha_newsletter_update_7004() {
       'weight' => -8,
     ],
     [
-      'name' => 'More news',
+      // News
+      'tid' => '11',
       'field_newsletter_template' => 'newsletter_half_width_list',
       'weight' => -7,
     ],

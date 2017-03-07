@@ -71,7 +71,9 @@ function osha_newsletter_admin_form() {
 
   $active_sections = variable_get('osha_newsletter_active_sections', []);
   $options = array();
-  $term_tree = taxonomy_get_tree(11); // Newsletter sections
+
+  $voc = taxonomy_vocabulary_machine_name_load('newsletter_sections');
+  $term_tree = taxonomy_get_tree($voc->vid);
   foreach ($term_tree as $term) {
     $options[$term->tid] = $term->name . ' ' . l(t('(edit)'), "taxonomy/term/{$term->tid}/edit");
   }
@@ -112,8 +114,6 @@ function osha_newsletter_admin_form() {
   );
 
   $term_ct_map = variable_get('osha_newsletter_term_ct_map', array());
-
-  $voc = taxonomy_vocabulary_machine_name_load('newsletter_sections');
   $tax = taxonomy_get_tree($voc->vid);
   $options_tax = array('' => '-- Please select --');
   foreach ($tax as $term) {

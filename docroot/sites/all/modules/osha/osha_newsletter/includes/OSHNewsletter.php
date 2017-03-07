@@ -90,7 +90,8 @@ class OSHNewsletter {
    * @param \EntityCollection $entityCollection
    */
   public static function saveConfiguration(EntityCollection $entityCollection) {
-    $sections = taxonomy_get_tree('11', 0, null, true);
+    $voc = taxonomy_vocabulary_machine_name_load('newsletter_sections');
+    $sections = taxonomy_get_tree($voc->vid, 0, null, true);
 
     $configuration = [
       'sections' => [],

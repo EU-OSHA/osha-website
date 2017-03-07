@@ -2007,7 +2007,7 @@ font-weight: normal;
 }
 
 
-.facetapi-facetapi-checkbox-links a{
+.facetapi-facetapi-checkbox-links a, #osha-search-language-input-form label.option{
 	color:#57565b!important;
 	text-decoration:none;
 	border-bottom:0px!important;
@@ -2081,7 +2081,7 @@ font-weight: normal;
 	margin-bottom:0em;
 	width: 10.2em;
 }
-.block-facetapi h2{
+.block-facetapi h2, #block-osha-search-osha-search-language h2{
 	color: #003399!important;
 	font-size: 0.9em!important;
 	font-weight: bold!important;
@@ -2447,11 +2447,11 @@ font-weight: normal;
 	padding-bottom: 0.2em;
 }
 
-.block-facetapi{
+.block-facetapi, #block-osha-search-osha-search-language{
 	margin-bottom:0.5em;
 }
 
-.block-facetapi h2{
+.block-facetapi h2, #block-osha-search-osha-search-language h2{
 	background: url("../images/triangle-collapsed.png") no-repeat scroll 96% center #e8eef7 !important;
     border: 0 none;
     color: #039;
@@ -2469,11 +2469,11 @@ font-weight: normal;
 }
 
 
-.block-facetapi h2.expand {
+.block-facetapi h2.expand, #block-osha-search-osha-search-language h2.expand {
     background: url("../images/triangle-expanded.png") no-repeat scroll 96% center #e8eef7 !important;
 }
 
-.block-facetapi div{
+.block-facetapi div, #block-osha-search-osha-search-language form{
     padding-left: 0.5em;
     padding-top: 0.5em;
 }
@@ -5306,7 +5306,7 @@ a.tabs-primary__tab-link{
 
 .view-search .views-row  .views-field-title-field a{
 	color:#003399;
-	float:left;
+	//float:left;
 	margin-right:1em;
 	border-bottom: 0 none !important;
     font-family: "Open Sans Condensed",sans-serif !important;
@@ -5350,9 +5350,16 @@ a.tabs-primary__tab-link{
 	background-color:#9ABBDB;
 	color:#FFFFFF;
 	padding: 0 1em;
-	float:left;
+	//float:left;
 	margin-right:1em;
 	margin-top:0.1em;
+	display: inline-block;
+	border-radius: 5px;
+}
+
+.view-search .views-row .views-field-field-image,
+.view-search .views-row .views-field-field-cover-image{
+	display: none;
 }
 
 .view-search .views-row .views-field-url{
@@ -9143,3 +9150,80 @@ body.page-entity-collection h1#page-title{
 
 
 /*end sticky header*/
+
+
+/*Search layout redesign*/
+.page-search-site #osha-search-basic-input-form{
+	padding: 0px 15px 15px 15px;
+    background-color: #e8eef7;
+    position: relative;
+}
+.page-search-site #osha-search-basic-input-form #edit-search-block-form{
+	padding-right: 30px;
+}
+.page-search-site #osha-search-basic-input-form #edit-submit{
+	height: 25px;
+    border: none;
+    overflow: hidden;
+    width: 20px;
+    background: rgba(0,0,0,0) url(../images/searchico.png) no-repeat 0px center;
+    cursor: pointer;
+    position: absolute;
+    top: 0px;
+    font-size: 0px;
+    right: 19px;
+}
+
+.page-search-site .two_column #page-title{
+	display: none;
+}
+.page-search-site .two_column #block-views-exp-search-site{
+	border-top: 5px solid #003399;
+	margin-top: -5px;
+	padding-left: 0px;
+	padding-top: 0px;
+}
+.page-search-site .two_column #block-views-exp-search-site:first-child > div{
+	background: inherit !important;
+
+}
+.page-search-site .two_column #block-views-exp-search-site > div{
+	color: #003399;
+	font-size: 1.2em;
+	font-weight: bold;
+	background: url(../images/separator_search.png) repeat-x scroll 0 100% rgba(0, 0, 0, 0);
+	padding-left: 30px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+.page-search-site .two_column .views-exposed-widgets{
+	background: url(../images/separator_search.png) repeat-x scroll 0 100% rgba(0, 0, 0, 0);
+	padding-bottom: 15px;
+}
+
+.page-search-site .two_column .views-exposed-widgets .views-submit-button{
+	display: none;
+}
+.page-search-site .two_column .views-exposed-widgets .views-widget-sort-by{
+	margin-left: 30px;
+	padding-top: 0px !important;
+	position: relative;
+	z-index: 2;
+}
+.page-search-site .two_column .views-exposed-widgets .views-widget-sort-order{
+	padding-top: 0px !important;
+	position: relative;
+	z-index: 2;
+}
+
+.page-search-site .two_column .view-id-search .view-header{
+	padding-right: 30px;
+    font-weight: bold;
+    width: 100%;
+    text-align: right;
+    padding-bottom: 5px;
+    border-bottom: 5px solid #003399;
+    margin-top: -3.5em;
+    padding-top: 17px;
+}
+/*end search layout redesign*/

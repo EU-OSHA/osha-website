@@ -986,6 +986,9 @@ function osha_newsletter_entity_insert($entity_collection, $type) {
         // Set weights for sections and children.
         $weights[$term->uuid]['parent'] = $weights[$term->uuid]['children'] = $term_weight * ($max_nodes + 1);
         $item->position = $weights[$term->uuid]['parent'];
+        $item->style = !empty($term->field_newsletter_template[LANGUAGE_NONE][0]['value'])
+          ? $term->field_newsletter_template[LANGUAGE_NONE][0]['value']
+          : '';
         entity_collection_append_item($entity_collection, $item, $contexts);
       }
     }

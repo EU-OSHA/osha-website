@@ -21,6 +21,7 @@ if (!isset($content['field_thumbnail']) && !empty($node->field_image)) {
       'title' => $content['title_field']['#items'][0]['value'],
     )),
   ];
+  // TODO WEIGHT of the field ?!
 }
 
 ?>

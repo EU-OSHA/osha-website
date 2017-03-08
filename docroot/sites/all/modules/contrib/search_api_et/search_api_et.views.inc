@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * Views hook implementations for the Search API ET module.
+ */
+
+/**
  * Implements hook_views_plugins_alter().
  *
  * Extend search_api_views module's SearchApiViewsQuery class to use our own

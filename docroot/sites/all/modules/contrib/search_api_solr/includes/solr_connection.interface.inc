@@ -158,8 +158,7 @@ interface SearchApiSolrConnectionInterface {
    * @param string $rawPost
    *   The XML document to send to the Solr server's update service.
    * @param int|false $timeout
-   *   (optional) Maximum expected duration (in seconds). Defaults to not timing
-   *   out.
+   *   (optional) Maximum expected duration (in seconds).
    *
    * @return object
    *   A response object.
@@ -167,7 +166,7 @@ interface SearchApiSolrConnectionInterface {
    * @throws SearchApiException
    *   If an error occurs during the service call
    */
-  public function update($rawPost, $timeout = FALSE);
+  public function update($rawPost, $timeout = 3600);
 
   /**
    * Adds an array of Solr Documents to the index all at once
@@ -229,7 +228,7 @@ interface SearchApiSolrConnectionInterface {
   /**
    * Sends a delete request for several documents, based on the document IDs.
    *
-   * @param array $id
+   * @param array $ids
    *   The IDs of the documents which should be deleted. Expected to be UTF-8
    *   encoded.
    * @param int|false $timeout
@@ -307,8 +306,8 @@ interface SearchApiSolrConnectionInterface {
    *
    * @param string $value
    *   The string to escape.
-   * @param string $version
-   *   An integer representing major solr version release.
+   * @param int $version
+   *   An integer representing the major solr version.
    *
    * @return string
    *   An escaped string suitable for passing to Solr.

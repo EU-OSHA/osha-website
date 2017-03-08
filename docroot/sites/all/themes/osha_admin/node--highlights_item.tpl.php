@@ -30,7 +30,7 @@
                   ));
                 ?>
               </td>
-              <td valign="top" style="color: #003399; padding-bottom: 10px; padding-left: 0px; padding-right: 0px; font-family: Oswald, Arial, sans-serif; font-size: 18px; vertical-align: top;" class="template-column">
+              <td valign="top" style="color: #003399; padding-bottom: 10px; padding-left: 0px; padding-right: 0px;" class="template-column">
                 <?php
                 if (isset($variables['elements']['#campaign_id'])) {
                   $url_query = array('pk_campaign' => $variables['elements']['#campaign_id']);

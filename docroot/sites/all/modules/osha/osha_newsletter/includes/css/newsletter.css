@@ -19,6 +19,7 @@ a {
 }
 p {
   margin: 10px 0 10px 0;
+  font-size: 13px;
 }
 table {
   font-family: 'Oswald', Arial, sans-serif;
@@ -90,7 +91,7 @@ td.social {
 
 .highlight-title {
   font-family: Oswald, Arial, sans-serif;
-  font-weight: bold;
+  font-size: 18px;
   color: #003399;
   text-decoration: none;
 }
@@ -98,7 +99,6 @@ td.social {
   color: #003399;
   text-decoration: none;
   font-size: 18px;
-  font-weight: bold;
 }
 .newsletter-container > tbody > tr > td > .newsletter-section > thead > tr > th,
 .newsletter-container > tbody > tr > td > .newsletter-section > tbody > tr > td {

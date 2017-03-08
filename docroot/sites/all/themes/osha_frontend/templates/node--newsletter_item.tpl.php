@@ -69,7 +69,7 @@
         switch ($node->type) {
           case 'publication':
             print l($node->title, url('node/' . $node->nid . '/view', array('absolute' => TRUE)), array(
-              'attributes' => array('style' => 'text-decoration: none; font-family:Arial, sans-serif; font-size: 12px; font-weight: bold;'),
+              'attributes' => array('style' => 'text-decoration: none; font-family:Arial, sans-serif; font-size: 13px; font-weight: bold;'),
               'query' => $url_query,
               'external' => TRUE
             ));
@@ -97,7 +97,7 @@
           default:
             defaultLabel:
             print l($node->title, url('node/' . $node->nid, array('absolute' => TRUE)), array(
-              'attributes' => array('style' => 'text-decoration: none; font-family:Arial, sans-serif; font-size: 12px; font-weight: bold;'),
+              'attributes' => array('style' => 'text-decoration: none; font-family:Arial, sans-serif; font-size: 13px; font-weight: bold;'),
               'query' => $url_query,
               'external' => TRUE
             ));

@@ -16,7 +16,7 @@
       $date = strtotime($node->field_publication_date[LANGUAGE_NONE][0]['value']);
       ?>
       <tr>
-        <td colspan="2" style="font-family: Arial, sans-serif; font-size: 14px;">
+        <td colspan="2" style="font-family: Arial, sans-serif; font-size: 14px; padding-bottom: 0;">
           <span class="item-date"><?php print format_date($date, 'custom', 'd/m/Y');?></span>
         </td>
       </tr>
@@ -27,7 +27,29 @@
       $city_location = (isset($field_city) && !empty($field_city)) ? $field_city[0]['safe_value'] : '';
       ?>
       <tr>
-        <td colspan="2" style="font-family: Arial, sans-serif; font-size: 14px; padding-left: 14px;">
+        <td rowspan="3" width="40" style="width:40px;">
+          <?php
+            $directory = drupal_get_path('module','osha_newsletter');
+
+            // @TODO:
+            // $calendar_img = 'calendar-' . date('d', $date) . '.png';
+            // end TODO
+
+            $calendar_img = 'calendar-15.png';
+
+            print l(theme('image', array(
+            'path' => $directory . '/images/' . $calendar_img,
+            'width' => 40,
+            'height' => 36,
+            'alt' => 'link arrow',
+            'attributes' => array('style' => 'border: 0px;height:35px!important;width:40px!important;')
+          )), $base_url, array(
+            'html' => TRUE,
+            'external' => TRUE
+          ));
+          ?>
+        </td>
+        <td colspan="2" style="font-family: Arial, sans-serif; font-size: 14px; padding-bottom: 0;">
           <span class="item-date"><?php if (trim($country_location) != '' && trim($city_location) != '') { echo $country_location . ' ' . $city_location . ', ';} if (trim($date) != '') { print format_date($date, 'custom', 'd/m/Y');}?></span>
         </td>
       </tr>
@@ -59,7 +81,7 @@
           ?>
         </td>
       <?php } ?>
-      <td align="right" style="text-align: left; padding-top: 5px; padding-bottom: 10px;">
+      <td align="right" style="text-align: left; padding-top: 5px; padding-bottom: 15px;">
         <?php
         if (isset($variables['elements']['#campaign_id'])) {
           $url_query = array('pk_campaign' => $variables['elements']['#campaign_id']);

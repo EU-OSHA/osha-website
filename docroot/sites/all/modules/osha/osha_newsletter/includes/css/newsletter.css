@@ -186,14 +186,24 @@ td.social {
 .newsletter-half-image-left img {
   max-width: 100%;
 }
-.newsletter-half-width-twitter .newsletter-item p:first-child {
-  margin-top: 0;
-}
 .item.newsletter-half-width-twitter-item {
   padding-top: 0px;
   padding-bottom: 0px;
 }
-
+.newsletter-half-width-twitter .newsletter-item p.tweet-author {
+  margin-top: 0;
+  /* font-weight: bold; */
+  font-family: Arial Black, sans-serif;
+}
+p.tweet-contents {
+  padding-left: 10px;
+}
+.newsletter-half-width-twitter .newsletter-item p {
+  color: #353535;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  line-height: 17px;
+}
 .newsletter-half-width-twitter a {
   color: #38aadc !important;
   max-width: 100%;

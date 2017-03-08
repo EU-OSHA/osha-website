@@ -77,7 +77,7 @@
           case 'twitter_tweet_feed':
             if (!empty($node->field_tweet_author[LANGUAGE_NONE][0]['value'])
               && !empty($node->field_tweet_contents[LANGUAGE_NONE][0]['value'])) {
-              printf("<p>@%s</p><p>%s</p>",
+              printf("<p class='tweet-author'>@%s</p><p class='tweet-contents'>%s</p>",
                 $node->field_tweet_author[LANGUAGE_NONE][0]['value'],
                 $node->field_tweet_contents[LANGUAGE_NONE][0]['value']);
 

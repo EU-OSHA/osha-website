@@ -203,6 +203,7 @@ p.tweet-contents {
   font-family: Arial, sans-serif;
   font-size: 13px;
   line-height: 17px;
+  margin: 0;
 }
 .newsletter-half-width-twitter a {
   color: #38aadc !important;

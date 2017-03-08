@@ -1935,6 +1935,16 @@ a {
 	min-height: auto;
 }
 
+/*search*/
+.page-search-site .two_column .view-id-search .view-header{
+	padding-right: 0px;
+    margin-top: -2.5em;
+}
+
+.page-search-site .two_column .views-exposed-widgets .views-widget-sort-order{
+	margin-left: 30px;
+}
+
 
 }
 

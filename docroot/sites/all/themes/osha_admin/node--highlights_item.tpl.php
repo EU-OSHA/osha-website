@@ -16,14 +16,14 @@
         <table border="0" cellpadding="0" cellspacing="0" class="item-thumbnail-and-title" width="100%">
           <tbody>
             <tr>
-              <td rowspan="2" width="220" style="padding-bottom:10px;vertical-align: top;padding-top:0px; padding-right: 20px;" class="template-column template-image">
+              <td rowspan="2" width="300" style="padding-bottom:10px;vertical-align: top;padding-top:0px; padding-right: 20px;max-width:300px;" class="template-column template-image">
                 <?php
                   print l(theme('image_style', array(
-                    'style_name' => 'medium',
+                    'style_name' => 'large',
                     'path' => (isset($field_image) && !empty($field_image)) ? $field_image[0]['uri'] : '',
-                    'width' => 220,
+                    // 'width' => 480,
                     'alt' => (isset($field_image) && !empty($field_image)) ? $field_image[0]['alt'] : '',
-                    'attributes' => array('style' => 'border: 0px;width: 220px;')
+                    'attributes' => array('style' => 'border: 0px;max-width: 100%;width:100%;')
                   )), url('node/' . $node->nid, array('absolute' => TRUE)), array(
                     'html' => TRUE,
                     'external' => TRUE

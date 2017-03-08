@@ -35,26 +35,30 @@
     }
     ?>
     <tr style="height: 100%;">
-      <td align="left" width="10" style=" padding-right: 0px; vertical-align: top; padding-top: 5px;">
-        <?php
-        $directory = drupal_get_path('module','osha_newsletter');
-        global $base_url; // TODO: should link to node
+      <?php
+        if ($node->type !== 'twitter_tweet_feed') {
+      ?>
+        <td align="left" width="10" style="padding-right: 0px; vertical-align: top; padding-top: 5px;">
+          <?php
+          $directory = drupal_get_path('module','osha_newsletter');
+          global $base_url; // TODO: should link to node
 
-//        dpm($node->arrow_color);die;
-        $arrow_img = !empty($node->arrow_color) ? "link-arrow-{$node->arrow_color}.png" : "link-arrow.png";
+  //        dpm($node->arrow_color);die;
+          $arrow_img = !empty($node->arrow_color) ? "link-arrow-{$node->arrow_color}.png" : "link-arrow.png";
 
-        print l(theme('image', array(
-          'path' => $directory . '/images/' . $arrow_img,
-          'width' => 7,
-          'height' => 11,
-          'alt' => 'link arrow',
-          'attributes' => array('style' => 'border: 0px;height:11px!important;width:7px!important;')
-        )), $base_url, array(
-          'html' => TRUE,
-          'external' => TRUE
-        ));
-        ?>
-      </td>
+          print l(theme('image', array(
+            'path' => $directory . '/images/' . $arrow_img,
+            'width' => 7,
+            'height' => 11,
+            'alt' => 'link arrow',
+            'attributes' => array('style' => 'border: 0px;height:11px!important;width:7px!important;')
+          )), $base_url, array(
+            'html' => TRUE,
+            'external' => TRUE
+          ));
+          ?>
+        </td>
+      <?php } ?>
       <td align="right" style="text-align: left; padding-top: 5px; padding-bottom: 10px;">
         <?php
         if (isset($variables['elements']['#campaign_id'])) {

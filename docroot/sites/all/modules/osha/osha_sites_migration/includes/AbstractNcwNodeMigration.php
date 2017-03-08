@@ -313,16 +313,11 @@ abstract class AbstractNCWNodeMigration extends Migration {
         $info = curl_getinfo($curl);
         curl_close($curl);
         if (!empty($info['http_code']) && $info['http_code'] == 404) {
-          $to_be_removed[] = $to_remove->destid1;
-
-          // Remove the mapping
+          node_delete($to_remove->destid1);
           $this->getMap()->delete(array($to_remove->sourceid1));
+          watchdog('osha_sites_migration', 'Deleting NODE that are not in the source anymore (@migration): !nids.',
+            array('!nids' => $to_remove->destid1, '@migration' => $this->arguments['machine_name']), WATCHDOG_INFO);
         }
-      }
-      if (!empty($to_be_removed)) {
-        node_delete_multiple($to_be_removed);
-        watchdog('osha_sites_migration', 'Deleting NODES that are not in the source anymore (@migration): !nids.',
-          array('!nids' => implode(', ', $to_be_removed), '@migration' => $this->arguments['machine_name']), WATCHDOG_INFO);
       }
     }
   }

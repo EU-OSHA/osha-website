@@ -17,7 +17,7 @@
       ?>
       <tr>
         <td colspan="2" style="font-family: Arial, sans-serif; font-size: 14px;">
-          <span class="item-date"><?php print format_date($date, 'custom', 'M d, Y');?></span>
+          <span class="item-date"><?php print format_date($date, 'custom', 'd/m/Y');?></span>
         </td>
       </tr>
       <?php
@@ -28,7 +28,7 @@
       ?>
       <tr>
         <td colspan="2" style="font-family: Arial, sans-serif; font-size: 14px; padding-left: 14px;">
-          <span class="item-date"><?php if (trim($country_location) != '' && trim($city_location) != '') { echo $country_location . ' ' . $city_location . ', ';} if (trim($date) != '') { print format_date($date, 'custom', 'M d, Y');}?></span>
+          <span class="item-date"><?php if (trim($country_location) != '' && trim($city_location) != '') { echo $country_location . ' ' . $city_location . ', ';} if (trim($date) != '') { print format_date($date, 'custom', 'd/m/Y');}?></span>
         </td>
       </tr>
       <?php

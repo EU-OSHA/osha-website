@@ -265,11 +265,11 @@ class OSHNewsletter {
           'data' => [
             [
               // 'data' => sprintf("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%%\" height=\"100%%\" style=\"height:100%%!important;background-color:%s;\" ><tbody><tr><td style=\"background-color:%s;\"><img src=\"%s\" width=\"370\" style=\"width:370px;max-width:100%%;background-color:%s; \"/></td></tr></tbody></table>", $image_fallback_bg, $image_fallback_bg, $image_url, $image_fallback_bg),
-              'data' => sprintf("<img src=\"%s\" width=\"380\" style=\"width:380px;max-width:100%%;background-color:%s; \"/>", $image_url, $image_fallback_bg),
+              'data' => sprintf("<img src=\"%s\" style=\"width:100%%;max-width:100%%;background-color:%s; \"/>", $image_url, $image_fallback_bg),
               'width' => '380',
-              'height' => '100%',
+              // 'height' => '100%',
               'class' => ['template-column', 'newsletter-half-image'],
-              'style' => sprintf("max-width: 380px;height:100%%!important;background-color: %s;",$image_fallback_bg),
+              'style' => sprintf("max-width: 380px;background-color: %s;",$image_fallback_bg),
             ],
             [
 
@@ -282,9 +282,9 @@ class OSHNewsletter {
 
               'data' => self::renderTemplate($entityCollection, 'newsletter_full_width_list', $variables),
               'width' => '380',
-              'height' => '100%',
+              // 'height' => '100%',
               'class' => ['template-column', 'newsletter-half-content'],
-              'style' => sprintf("max-width: 380px;height:100%%!important;background-color: %s;",$image_fallback_bg),
+              'style' => sprintf("max-width: 380px;background-color: %s;",$image_fallback_bg),
 
             ],
           ],

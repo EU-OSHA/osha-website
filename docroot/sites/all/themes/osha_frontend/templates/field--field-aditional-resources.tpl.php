@@ -31,7 +31,7 @@
       ?>
       <?php if (in_array($node_type, ['youtube', 'flickr', 'slideshare'])) { ?>
         <?php // Render without field list for each node, all items to be on same level. ?>
-        <?php dpm($node_type); print render($item['node'][current(element_children($item['node']))]['field_' . $node_type]); ?>
+        <?php print render($item['node'][current(element_children($item['node']))]['field_' . $node_type]); ?>
       <?php } else { ?>
         <div class="field-item <?php print $delta % 2 ? 'odd' : 'even'; ?>"<?php print $item_attributes[$delta]; ?>>
           <?php print render($item); ?>

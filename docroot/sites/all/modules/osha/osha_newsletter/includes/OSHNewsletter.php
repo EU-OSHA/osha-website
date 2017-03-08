@@ -217,7 +217,7 @@ class OSHNewsletter {
       else {
         $cellContent = $variables['section']->name;
       }
-      $content['#header'] = ['data' => ['data' => $cellContent]];
+      $content['#header'] = ['data' => ['data' => $cellContent, 'class' => 'fallback-text']];
       $cssClass = drupal_clean_css_identifier('section-' . strtolower($variables['section']->name));
       $content['#attributes']['class'][] = $cssClass;
     }
@@ -558,19 +558,33 @@ class OSHNewsletter {
     $font->setAttribute('rel', 'stylesheet');
     $font->setAttribute('href', self::$fontUrl);
 
+    // @TODO -> Octavian: check if correct please
+    // Force fallback font in Outlook to Arial instead of Times New Roman
+    $outlookCss =
+      "<!--[if mso]>
+        <style type='text/css'>
+          .fallback-text {
+            font-family: Arial, sans-serif !important;
+          }
+        </style>
+      <![endif]-->";
+    $fragment = $domDocument->createDocumentFragment();
+    $fragment->appendXML($outlookCss);
+
     $head = $domDocument->getElementsByTagName('head');
     if (empty($head->length)) {
       $head = $domDocument->createElement('head');
       $head->appendChild($font);
+      $head->appendChild($fragment);
       $body = $domDocument->getElementsByTagName('body')->item(0);
       $body->parentNode->insertBefore($head, $body);
     }
     else {
       $head = $head->item(0);
       $head->appendChild($font);
+      $head->appendChild($fragment);
     }
 
     return $domDocument->saveHTML();
   }
-
 }

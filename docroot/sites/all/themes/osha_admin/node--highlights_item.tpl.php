@@ -39,13 +39,13 @@
                 }
                 if ($node->type == 'publication') {
                   print l($title, url('node/' . $node->nid . '/view', array('absolute' => TRUE)), array(
-                    'attributes' => array('class' => 'highlight-title'),
+                    'attributes' => array('class' => ['highlight-title', 'fallback-text']),
                     'query' => $url_query,
                     'external' => TRUE
                   ));
                 } else {
                   print l($title, url('node/' . $node->nid, array('absolute' => TRUE)), array(
-                    'attributes' => array('class' => 'highlight-title'),
+                    'attributes' => array('class' => ['highlight-title', 'fallback-text']),
                     'query' => $url_query,
                     'external' => TRUE
                   ));
@@ -91,18 +91,17 @@
                   <tr>
                     <td>
                       <?php
-                        // @todo: move variable
                         $more_link = 'See more';
                         $more_link_class = 'see-more';
                         if ($node->type == 'publication') {
                           print l($more_link, url('node/' . $node->nid . '/view', array('absolute' => TRUE)), array(
-                            'attributes' => array('class' => $more_link_class),
+                            'attributes' => array('class' => [$more_link_class, 'fallback-text']),
                             'query' => $url_query,
                             'external' => TRUE
                           ));
                         } else {
                           print l($more_link, url('node/' . $node->nid, array('absolute' => TRUE)), array(
-                            'attributes' => array('class' => $more_link_class),
+                            'attributes' => array('class' => [$more_link_class, 'fallback-text']),
                             'query' => $url_query,
                             'external' => TRUE
                           ));

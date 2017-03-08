@@ -1,3 +1,4 @@
+<!-- @TODO: remove once newsletter-responsive.css is included -->
 <style>
   @media only screen and (max-width: 600px) {
     .template-container {
@@ -90,6 +91,7 @@
     }
   }
 </style>
+<!-- end @TODO -->
 <table border="0" cellpadding="0" cellspacing="0" width="100%" class="preheader template-container">
   <tbody>
     <tr>
@@ -177,7 +179,7 @@
   </tbody>
 </table>
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%" style="font-family: Oswald, Arial,sans-serif;" class="header template-container">
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="font-family: Oswald, Arial,sans-serif;" class="header template-container fallback-text">
   <tbody>
     <tr>
       <td class="osha-logos">
@@ -205,8 +207,8 @@
       </td>
       <td class="osha-info">
         <?php $newsletter_ready_date = format_date(strtotime($newsletter_date), 'custom', 'F Y'); ?>
-        <div class="newsletter-number" style="color: #003399; font-size: 20px; font-weight: 200; text-align: right;"><?php print $newsletter_title?></div>
-        <div class="newsletter-month" style="color: #DC2F82; font-size: 26px; text-align: right;"><?php print $newsletter_ready_date?></div>
+        <div class="newsletter-number fallback-text" style="color: #003399; font-size: 20px; font-weight: 200; text-align: right;"><?php print $newsletter_title?></div>
+        <div class="newsletter-month fallback-text" style="color: #DC2F82; font-size: 26px; text-align: right;"><?php print $newsletter_ready_date?></div>
       </td>
     </tr>
   </tbody>
@@ -219,7 +221,7 @@
         <table border="0" cellpadding="0" cellspacing="0" width="100%" class="header-title">
           <tbody>
             <tr>
-              <td style="background-color: #003399; width: 100%; text-align: left; font-size: 24px; font-weight: 200; color: #ffffff; font-family: Oswald, Arial,sans-serif;"><?php print t("Occupational Safety and Health News &ndash; Europe");?></td>
+              <td style="background-color: #003399; width: 100%; text-align: left; font-size: 24px; font-weight: 200; color: #ffffff; font-family: Oswald, Arial,sans-serif;" class="fallback-text"><?php print t("Occupational Safety and Health News &ndash; Europe");?></td>
             </tr>
           </tbody>
         </table>

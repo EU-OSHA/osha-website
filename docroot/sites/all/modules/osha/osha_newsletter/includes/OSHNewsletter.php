@@ -212,10 +212,10 @@ class OSHNewsletter {
     if (!empty($variables['section']->name)) {
       $icon = self::getConfiguration($entityCollection, 'field_icon', $variables['section']);
       if (!empty($icon)) {
-        $cellContent = sprintf("<img src=\"%s\" class=\"section-icon\"><div>%s</div>", $icon, $variables['section']->name);
+        $cellContent = sprintf("<img src=\"%s\" class=\"section-icon\"><div><span>%s</span></div>", $icon, $variables['section']->name);
       }
       else {
-        $cellContent = $variables['section']->name;
+        $cellContent = sprintf("<span>%s</span>", $variables['section']->name);
       }
       $content['#header'] = ['data' => ['data' => $cellContent, 'class' => 'fallback-text']];
       $cssClass = drupal_clean_css_identifier('section-' . strtolower($variables['section']->name));
@@ -341,6 +341,8 @@ class OSHNewsletter {
         break;
       case 'newsletter_half_width_twitter':
         $content['#header']['data']['colspan'] = 2;
+        // @TODO: set proper absolute url
+        $content['#header']['data']['data'] .= '&nbsp;<img height="20" width="auto" style="vertical-align:middle;height:20px!important;" src="/' . drupal_get_path('module', 'osha_newsletter') . '/images/twitter-gray.png' . '"/>';
         $currentRow = $currentCol = 0;
 
         $content['#rows'][$currentRow]['no_striping'] = true;

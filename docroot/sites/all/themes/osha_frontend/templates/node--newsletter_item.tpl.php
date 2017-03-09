@@ -27,7 +27,7 @@
       $city_location = (isset($field_city) && !empty($field_city)) ? $field_city[0]['safe_value'] : '';
       ?>
       <tr>
-        <td rowspan="3" width="40" style="width:40px;">
+        <td rowspan="3" width="40" style="width:40px; padding-right: 10px;">
           <?php
             $directory = drupal_get_path('module','osha_newsletter');
 
@@ -35,7 +35,7 @@
             // $calendar_img = 'calendar-' . date('d', $date) . '.png';
             // end TODO
 
-            $calendar_img = 'calendar-15.png';
+            $calendar_img = !empty($node->arrow_color) ? "calendar-15-{$node->arrow_color}.png" : "calendar-15.png";
 
             print l(theme('image', array(
             'path' => $directory . '/images/' . $calendar_img,

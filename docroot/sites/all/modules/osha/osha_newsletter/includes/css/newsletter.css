@@ -195,7 +195,7 @@ td.social {
 }
 .newsletter-half-width-twitter .newsletter-item p.tweet-author {
   margin-top: 0;
-  /* font-weight: bold; */
+  font-weight: bold;
   font-family: Arial Black, sans-serif;
 }
 p.tweet-contents {
@@ -205,7 +205,7 @@ p.tweet-contents {
   color: #353535;
   font-family: Arial, sans-serif;
   font-size: 13px;
-  line-height: 17px;
+  /* line-height: 17px; */
   margin: 0;
 }
 .newsletter-half-width-twitter a {

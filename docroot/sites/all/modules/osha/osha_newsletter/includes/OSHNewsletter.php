@@ -4,7 +4,7 @@ use \TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 
 class OSHNewsletter {
 
-  public static $fontUrl = 'https://fonts.googleapis.com/css?family=Oswald:200,300,400,500';
+  public static $fontUrl = 'https://fonts.googleapis.com/css?family=Oswald:200,400';
   public static $tweetsLimit = 4;
 
   public static function getTemplatesList() {

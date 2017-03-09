@@ -89,3 +89,7 @@ function osha_search_update_7005() {
   features_revert_module('osha_search');
   features_revert_module('osha_blocks');
 }
+
+function osha_search_update_7006() {
+  features_revert_module('osha_search');
+}

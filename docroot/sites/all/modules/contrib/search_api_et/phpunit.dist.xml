@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<phpunit bootstrap="./tests/Autoload.php" checkForUnintentionallyCoveredCode="false">
+
+    <testsuites>
+        <testsuite name="SearchApi ET - Test Suite">
+            <directory>./tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <logging>
+        <log type="coverage-clover" target="build/logs/clover.xml"/>
+    </logging>
+
+</phpunit>

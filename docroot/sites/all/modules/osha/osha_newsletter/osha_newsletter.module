@@ -125,26 +125,6 @@ function osha_newsletter_entity_collection_content_admin($entity_collection) {
   return $form;
 }
 
-function osha_newsletter_action_info() {
-  return array(
-    'osha_newsletter_add_to_newsletter_action' => array(
-      'label' => t('Add to newsletter'),
-      'configurable' => FALSE,
-      'group' => t('Newsletter'),
-      'type' => 'node',
-      'parameter' => array(
-        'newsletter' => array(
-          'type' => 'node',
-          'label' => 'Newsletter',
-          'description' => t('Newsletter to add this node to'),
-        ),
-      ),
-      // TODO: EDW
-      #'acces callback' => 'tmgmt_rules_job_submit_access',
-    ),
-  );
-}
-
 /**
  * Implements hook_block_info().
  */
@@ -717,23 +697,6 @@ function osha_newsletter_unsubscribe_form_submit($form, &$form_state) {
 
   osha_newsletter_send_email('unsubscribe_email', $to, $unsubscribe_email, $form_state,
     t('You have succesfully unsubscribed'));
-}
-
-/**
- * Actual VBO target action defined in hook_action_info above.
- */
-function osha_newsletter_add_to_newsletter_action($node, $context) {
-  if (isset($context['view_info']['arguments']['0'])) {
-    $collection_name = $context['view_info']['arguments']['0'];
-    /* @var EntityCollectionRow */
-    $collection = entity_collection_load($collection_name);
-    if ($collection) {
-      $item = new EntityCollectionTreeNode('node', $node->nid, $node);
-      $contexts = _entity_collection_get_contexts($collection);
-      // TODO: smart selection of $item->position based on $node->type
-      entity_collection_append_item($collection, $item, $contexts);
-    }
-  }
 }
 
 /**

@@ -2,12 +2,10 @@ Solr search
 -----------
 
 This module provides an implementation of the Search API which uses an Apache
-Solr search server for indexing and searching. Before enabling or using this
-module, you'll have to follow the instructions given in INSTALL.txt first.
+Solr search server for indexing and searching. You can find detailed
+instructions for setting up Solr in the module's handbook [1].
 
-For more detailed documentation, see the handbook [1].
-
-[1] https://drupal.org/node/1999280
+[1] https://www.drupal.org/node/1999280
 
 Supported optional features
 ---------------------------
@@ -139,6 +137,11 @@ Hidden variables
   what you are doing. Old indexed items will be lost when the hash is changed
   and all items will have to be reindexed. Can only contain alphanumeric
   characters.
+- search_api_solr_highlight_prefix (default: "tm_")
+  The prefix of Solr fields for which field-level highlighting will be enabled.
+  Since the prefix of fields is used to determine the field type (by default),
+  this lets you enable highlighting for other field types. By default,
+  highlighting will be possible for all fulltext fields.
 
 [8] http://wiki.apache.org/solr/UpdateXmlMessages#A.22commit.22_and_.22optimize.22
 

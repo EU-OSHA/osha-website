@@ -680,7 +680,7 @@ class OshaWorkflowNotifications {
       $users = array_merge($users, $pms);
     }
     OshaWorkflowNotifications::sendEmail($users, array(
-      'node' => $node, 'text' => 'A content has been approved', status => 'Approved'
+      'node' => $node, 'text' => 'A content has been approved', 'status' => 'Approved'
     ), 'osha_workflow');
   }
 
@@ -699,7 +699,7 @@ class OshaWorkflowNotifications {
       $users = array_merge($users, $pms);
     }
     OshaWorkflowNotifications::sendEmail($users, array(
-      'node' => $node, 'text' => 'A content has been rejected', status => 'Rejected'
+      'node' => $node, 'text' => 'A content has been rejected', 'status' => 'Rejected'
     ), 'osha_workflow');
   }
 
@@ -713,7 +713,7 @@ class OshaWorkflowNotifications {
    */
   public static function notifyNodeRejectedFromApprovedToFinalDraft($node) {
     $users = osha_workflow_get_node_rm($node);
-    OshaWorkflowNotifications::sendEmail($users, array('node' => $node, 'action' => 'reviewed', status => 'Final draft'), 'osha_workflow');
+    OshaWorkflowNotifications::sendEmail($users, array('node' => $node, 'action' => 'reviewed', 'status' => 'Final draft'), 'osha_workflow');
   }
 
   /**
@@ -729,7 +729,7 @@ class OshaWorkflowNotifications {
   public static function notifyNodeIsReadyToPublish($node) {
     $review_managers = osha_workflow_get_node_rm($node);
     OshaWorkflowNotifications::sendEmail($review_managers, array(
-      'node' => $node, status => 'Ready to publish',
+      'node' => $node, 'status' => 'Ready to publish',
       'text' => 'No action is required. This message is just to inform you that a content is ready to publish'
     ), 'osha_workflow');
 
@@ -872,8 +872,13 @@ class OshaWorkflowNotifications {
    *   Job created
    */
   public static function notifyTranslationAccepted($tmgmt_job_item) {
+    if ($tmgmt_job_item->item_type == 'node') {
+      $node = node_load($tmgmt_job_item->item_id);
+      $rmanagers = osha_workflow_get_node_rm($node);
+    } else {
+      $rmanagers = array();
+    }
     $tmanagers = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_TRANSLATION_MANAGER);
-    $rmanagers = OshaWorkflowPermissions::getUsersByRole(OSHA_WORKFLOW_ROLE_REVIEW_MANAGER);
     $users = array_unique(array_merge($tmanagers, $rmanagers), SORT_REGULAR);
     OshaWorkflowNotifications::sendEmail($users, array('tmgmt_job_item' => $tmgmt_job_item), 'osha_tmgmt');
   }

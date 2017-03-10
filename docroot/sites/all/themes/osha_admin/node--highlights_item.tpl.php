@@ -51,13 +51,15 @@
                   print l($title, url('node/' . $node->nid . '/view', array('absolute' => TRUE)), array(
                     'attributes' => array('class' => ['highlight-title', 'fallback-text']),
                     'query' => $url_query,
-                    'external' => TRUE
+                    'external' => TRUE,
+                    'html' => TRUE,
                   ));
                 } else {
                   print l($title, url('node/' . $node->nid, array('absolute' => TRUE)), array(
                     'attributes' => array('class' => ['highlight-title', 'fallback-text']),
                     'query' => $url_query,
-                    'external' => TRUE
+                    'external' => TRUE,
+                    'html' => TRUE,
                   ));
                 }
                 ?>

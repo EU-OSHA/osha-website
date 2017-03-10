@@ -255,6 +255,40 @@ function osha_migration_update_7006() {
   nodequeue_subqueue_add($queue, $subqueue, $node->nid);
 }
 
+function osha_migration_update_7007() {
+  module_load_include('inc', 'migrate', 'migrate.drush');
+  $migrations = [
+    OSHA_MIGRATION_TAXONOMY_ESENER,
+    OSHA_MIGRATION_TAXONOMY_LEGISLATION_CATEGORIES,
+    OSHA_MIGRATION_TAXONOMY_NACE_CODES,
+    OSHA_MIGRATION_TAXONOMY_THESAURUS,
+    OSHA_MIGRATION_CONTENT_TYPE_ARTICLE,
+    OSHA_MIGRATION_CONTENT_TYPE_BLOG,
+    OSHA_MIGRATION_COMMENTS_BLOG,
+    OSHA_MIGRATION_CONTENT_TYPE_CALLS,
+    OSHA_MIGRATION_CONTENT_TYPE_CASE_STUDY,
+    OSHA_MIGRATION_CONTENT_TYPE_DIRECTIVE,
+    OSHA_MIGRATION_CONTENT_TYPE_GUIDELINE,
+    OSHA_HIGHLIGHT_CONTENT_TYPE_HIGHLIGHT,
+    OSHA_MIGRATION_CONTENT_TYPE_JOB_VACANCIES,
+    OSHA_MIGRATION_CONTENT_TYPE_NEWS,
+    OSHA_MIGRATION_CONTENT_TYPE_PUBLICATION,
+    OSHA_MIGRATION_CONTENT_TYPE_SEMINAR,
+    OSHA_MIGRATION_FILES,
+    OSHA_MIGRATION_IMAGES,
+    OSHA_MIGRATION_CONTENT_TYPE_PRESS_RELEASE,
+    OSHA_MIGRATION_CONTENT_TYPE_NOTE_TO_EDITOR,
+    OSHA_MIGRATION_CONTENT_TYPE_INFOGRAPHICS,
+    OSHA_MIGRATION_CONTENT_TYPE_FOP_PAGES,
+  ];
+  foreach ($migrations as $migration) {
+    drush_migrate_deregister_migration($migration);
+  }
+
+  migrate_autoregister();
+
+}
+
 function osha_migration_update_dependencies() {
   $dependencies['osha_migration'][7006] = array(
     'osha_homepage' => 7002,

@@ -65,10 +65,18 @@ function osha_newsletter_update_7002() {
   db_query("update entity_collection_storage set name='oshmail_156' where name = 'oshmail_155_june_2015'");
 }
 
+function osha_newsletter_update_7003() {
+  features_revert_module('osha_newsletter');
+}
+
+function osha_newsletter_update_7004() {
+  features_revert_module('osha_newsletter');
+}
+
 /**
  * Enable tweet_feed module
  */
-function osha_newsletter_update_7004() {
+function osha_newsletter_update_7005() {
   module_enable(['tweet_feed']);
   features_revert_module('osha_newsletter');
 

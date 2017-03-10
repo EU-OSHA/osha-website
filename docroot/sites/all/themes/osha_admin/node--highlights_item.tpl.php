@@ -16,21 +16,25 @@
         <table border="0" cellpadding="0" cellspacing="0" class="item-thumbnail-and-title" width="100%">
           <tbody>
             <tr>
-              <td rowspan="2" width="300" style="padding-bottom:10px;vertical-align: top;padding-top:0px; padding-right: 20px;max-width:300px;" class="template-column template-image">
+              <td rowspan="2" width="300" style="padding-bottom:10px;vertical-align: top;padding-top:0px; padding-right: 20px;max-width:300px;text-align:center;" class="template-column template-image">
                 <?php
                   print l(theme('image_style', array(
-                    'style_name' => 'large',
+                    'style_name' => 'highlight_image',
                     'path' => (isset($field_image) && !empty($field_image)) ? $field_image[0]['uri'] : '',
-                    // 'width' => 480,
+                    // 'width' => '100%',
+                    // 'height' => 'auto',
                     'alt' => (isset($field_image) && !empty($field_image)) ? $field_image[0]['alt'] : '',
-                    'attributes' => array('style' => 'border: 0px;max-width: 100%;width:100%;')
+                    'attributes' => array('style' => 'border: 0px;max-width: 100%;height:auto;background-color: #ffffff;vertical-align:middle;')
                   )), url('node/' . $node->nid, array('absolute' => TRUE)), array(
                     'html' => TRUE,
-                    'external' => TRUE
+                    'external' => TRUE,
+                    'attributes' => array(
+                      'style' => 'display:block;background-color:#efefef;border:1px solid #efefef;',
+                    ),
                   ));
                 ?>
               </td>
-              <td valign="top" style="color: #003399; padding-bottom: 10px; padding-left: 0px; padding-right: 0px;" class="template-column">
+              <td valign="top" style="color: #003399; padding-bottom: 10px; padding-left: 0px; padding-right: 0px;font-family: Oswald, Arial, sans-serif;" class="template-column">
                 <?php
                 if (isset($variables['elements']['#campaign_id'])) {
                   $url_query = array('pk_campaign' => $variables['elements']['#campaign_id']);

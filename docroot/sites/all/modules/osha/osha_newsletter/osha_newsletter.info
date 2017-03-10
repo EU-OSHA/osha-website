@@ -58,6 +58,7 @@ features[field_instance][] = taxonomy_term-newsletter_sections-field_background_
 features[field_instance][] = taxonomy_term-newsletter_sections-field_icon
 features[field_instance][] = taxonomy_term-newsletter_sections-field_newsletter_template
 features[field_instance][] = taxonomy_term-newsletter_sections-name_field
+features[image][] = highlight_image
 features[node][] = newsletter_article
 features[taxonomy][] = newsletter_sections
 features[variable][] = comment_anonymous_newsletter_article

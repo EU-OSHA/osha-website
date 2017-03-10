@@ -341,8 +341,11 @@ class OSHNewsletter {
         break;
       case 'newsletter_half_width_twitter':
         $content['#header']['data']['colspan'] = 2;
-        // @TODO: set proper absolute url
-        $content['#header']['data']['data'] .= '&nbsp;<img height="20" width="auto" style="vertical-align:middle;height:20px!important;" src="/' . drupal_get_path('module', 'osha_newsletter') . '/images/twitter-gray.png' . '"/>';
+
+        global $base_url;
+        $image_path = "{$base_url}/sites/all/modules/osha/osha_newsletter/images/twitter-gray.png";
+
+        $content['#header']['data']['data'] .= '&nbsp;<img height="20" width="auto" style="vertical-align:middle;height:20px!important;" src="' . $image_path . '"/>';
         $currentRow = $currentCol = 0;
 
         $content['#rows'][$currentRow]['no_striping'] = true;

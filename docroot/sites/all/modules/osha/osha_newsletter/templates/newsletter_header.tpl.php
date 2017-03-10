@@ -93,7 +93,6 @@
 </style>
 <!-- end @TODO -->
 
-<!-- @TODO -> Octavian -->
 <span class="preview-text" style="font-size: 0;"> Insert preview text here</span>
 <table border="0" cellpadding="0" cellspacing="0" width="100%" class="preheader template-container">
   <tbody>

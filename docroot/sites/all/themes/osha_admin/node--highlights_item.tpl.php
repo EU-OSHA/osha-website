@@ -36,6 +36,12 @@
               </td>
               <td valign="top" style="color: #003399; padding-bottom: 10px; padding-left: 0px; padding-right: 0px;font-family: Oswald, Arial, sans-serif;" class="template-column">
                 <?php
+                if (isset($node->field_publication_date[LANGUAGE_NONE][0]['value'])) {
+                  $date = strtotime($node->field_publication_date[LANGUAGE_NONE][0]['value']);
+                }
+                ?>
+                <div class="item-date" style="font-family: Arial, sans-serif; font-size: 14px; line-height:25px;"><?php print format_date($date, 'custom', 'd/m/Y');?></div>
+                <?php
                 if (isset($variables['elements']['#campaign_id'])) {
                   $url_query = array('pk_campaign' => $variables['elements']['#campaign_id']);
                 } else {

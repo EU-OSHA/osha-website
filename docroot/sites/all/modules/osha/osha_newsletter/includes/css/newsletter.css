@@ -208,7 +208,7 @@ p.tweet-contents {
   /* line-height: 17px; */
   margin: 0;
 }
-.newsletter-half-width-twitter a {
+.tweet-contents a {
   color: #38aadc !important;
   max-width: 100%;
   overflow: hidden;

@@ -93,7 +93,13 @@
 </style>
 <!-- end @TODO -->
 
-<span class="preview-text" style="font-size: 0;"> Insert preview text here</span>
+<span class="preview-text" style="font-size: 0;">
+  <?php
+    $newsletter_ready_date = format_date(strtotime($newsletter_date), 'custom', 'F Y');
+    print t("Occupational Safety and Health News &ndash; Europe &ndash; ");
+    print $newsletter_ready_date;
+  ?>
+</span>
 <table border="0" cellpadding="0" cellspacing="0" width="100%" class="preheader template-container">
   <tbody>
     <tr>
@@ -208,7 +214,6 @@
         ?>
       </td>
       <td class="osha-info">
-        <?php $newsletter_ready_date = format_date(strtotime($newsletter_date), 'custom', 'F Y'); ?>
         <div class="newsletter-number fallback-text" style="color: #003399; font-size: 20px; font-weight: 200; text-align: right;"><?php print $newsletter_title?></div>
         <div class="newsletter-month fallback-text" style="color: #DC2F82; font-size: 26px; text-align: right;"><?php print $newsletter_ready_date?></div>
       </td>

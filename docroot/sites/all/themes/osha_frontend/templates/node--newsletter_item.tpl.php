@@ -67,7 +67,7 @@
           ?>
         </td>
       <?php } ?>
-      <td align="right" style="text-align: left; padding-top: 5px; padding-bottom: 15px; padding-left:0px;">
+      <td align="right" style="text-align: left; padding-top: 5px; padding-bottom: 10px; padding-left:0px;">
         <?php
         if (isset($variables['elements']['#campaign_id'])) {
           $url_query = array('pk_campaign' => $variables['elements']['#campaign_id']);

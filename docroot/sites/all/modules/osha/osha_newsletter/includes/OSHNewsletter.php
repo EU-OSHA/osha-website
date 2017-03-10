@@ -264,7 +264,6 @@ class OSHNewsletter {
         $content['#rows'][1] = [
           'data' => [
             [
-              // 'data' => sprintf("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%%\" height=\"100%%\" style=\"height:100%%!important;background-color:%s;\" ><tbody><tr><td style=\"background-color:%s;\"><img src=\"%s\" width=\"370\" style=\"width:370px;max-width:100%%;background-color:%s; \"/></td></tr></tbody></table>", $image_fallback_bg, $image_fallback_bg, $image_url, $image_fallback_bg),
               'data' => sprintf("<img src=\"%s\" style=\"width:100%%;max-width:100%%;background-color:%s; \"/>", $image_url, $image_fallback_bg),
               'width' => '380',
               // 'height' => '100%',
@@ -272,13 +271,6 @@ class OSHNewsletter {
               'style' => sprintf("max-width: 380px;background-color: %s;",$image_fallback_bg),
             ],
             [
-
-              // 'data' => sprintf("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%%\" height=\"100%%\" style=\"height:100%%!important;background-color:%s;\" ><tbody><tr><td style=\"background-color:%s;\">%s</td></tr></tbody></table>",
-              //   $image_fallback_bg,
-              //   $image_fallback_bg, 
-              //   self::renderTemplate($entityCollection, 'newsletter_full_width_list', $variables)),
-
-                // self::renderTemplate('newsletter_full_width_list', $variables)),
 
               'data' => self::renderTemplate($entityCollection, 'newsletter_full_width_list', $variables),
               'width' => '380',
@@ -358,9 +350,14 @@ class OSHNewsletter {
 
         foreach ($variables['nodes'] as $node) {
           $cellContent = self::getCellContent($template, $node);
-          $cellContent['width'] = '380';
+          $cellContent['width'] = '190';
           $cellContent['height'] = '100%';
-          $cellContent['style'] .= 'max-width:380px;';
+          if (empty($cellContent['style'])) {
+            $cellContent['style'] = 'max-width:190px;';
+          }
+          else {
+            $cellContent['style'] .= 'max-width:190px;';
+          }
           array_push($cellContent['class'], 'template-column');
           if ($currentCol++ === 0) {
             $content['#rows'][$currentRow] = [

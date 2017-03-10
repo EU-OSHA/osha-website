@@ -232,7 +232,7 @@ p.tweet-contents {
 /* .newsletter-half-width-twitter-item > .newsletter-item > tbody > tr > td, */
 .newsletter-half-content > table > tbody > tr > td,
 .newsletter-full-width-2-col-blocks-item > .newsletter-item > tbody > tr > td {
-  padding: 15px 10px 5px 10px;
+  padding: 10px 10px 5px 10px;
 }
 
 .newsletter-full-width-list td {

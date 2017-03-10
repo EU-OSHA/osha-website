@@ -93,7 +93,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td>
+                    <td class="fallback-text" style="font-family: Oswald, Arial, sans-serif;">
                       <?php
                         $more_link = 'See more';
                         $more_link_class = 'see-more';

@@ -8,7 +8,7 @@
 }
 /* gutter */
 .content-container > td {
-  padding: 0 20px 0 20px;
+  padding: 0 20px 20px 20px;
 }
 .template-container.newsletter-half-width-list {
   max-width: 100%;
@@ -138,6 +138,7 @@ td.social {
   width: 100%;
   text-align: right;
   padding-top: 10px;
+  padding-bottom: 10px;
 }
 .item.newsletter-half-width-list-item,
 .item.newsletter-half-image-left-item,

@@ -461,6 +461,11 @@ class OSHNewsletter {
       }
     }
 
+    if (!empty($half_column)) {
+      $renderedContent .= self::renderTemplate($source, $half_column['#style'], $half_column);
+      $half_column = null;
+    }
+
     $header = theme('newsletter_header', array(
       'languages' => $languages,
       'newsletter_title' => $source->title,

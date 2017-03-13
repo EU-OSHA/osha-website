@@ -56,16 +56,31 @@ class OSHNewsletter {
           hide($v['style']);
         }
       }
-
-      $form['actions']['send_test_newsletter'] = array(
-        '#type' => 'submit',
-        '#value' => t('Send test newsletter'),
-        '#submit' => array('osha_newsletter_send_test_email')
-      );
       $form['actions']['send_newsletter'] = array(
         '#type' => 'submit',
         '#value' => t('Send newsletter to subscribers'),
         '#submit' => array('osha_newsletter_send_email_to_subscribers')
+      );
+
+
+      $form['test_newsletter_content'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Send one test newsletter to the test address'),
+      );
+
+      $form['test_newsletter_content']['test_address'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Test email addresses'),
+        '#description' => t('A single email address or a comma-separated list of email addresses cam be used as test addresses.'),
+        '#default_value' => $user->mail,
+        '#size' => 60,
+        '#maxlength' => 128,
+      );
+
+      $form['test_newsletter_content']['send_test_newsletter'] = array(
+        '#type' => 'submit',
+        '#value' => t('Send test newsletter'),
+        '#submit' => array('osha_newsletter_send_test_email')
       );
     }
 

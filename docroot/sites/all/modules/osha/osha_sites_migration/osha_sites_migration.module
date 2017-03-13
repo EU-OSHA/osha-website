@@ -69,12 +69,12 @@ function osha_sites_migration_url_inbound_alter(&$path, $original_path, $path_la
     }
   }
   if ($node = menu_get_object('node', 1, $path)) {
-    $en_url = $node->field_source_url[LANGUAGE_NONE][0]['url'];
-    $url = preg_replace(['/\/en\//'], ["/$language->language/"], $en_url);
     if (!empty($node->field_migration_source)
       && !empty($node->field_source_url)
       && empty($node->field_show_in_ncw[LANGUAGE_NONE][0]['value'])
     ) {
+      $en_url = $node->field_source_url[LANGUAGE_NONE][0]['url'];
+      $url = preg_replace(['/\/en\//'], ["/$language->language/"], $en_url);
       drupal_goto($url, [], 301);
     }
   }
@@ -119,7 +119,7 @@ function osha_sites_migration_migrate_api() {
  */
 function osha_sites_migration_cronapi() {
   return array('osha_sites_migration_cron' => array(
-    'description' => 'Migrate NCW content',
+    'description' => 'Migrate content from other OSHA websites',
     'rule' => '0 3 * * *',
   ));
 }

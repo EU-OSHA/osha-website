@@ -221,6 +221,20 @@ class OSHNewsletter {
       $cssClass = drupal_clean_css_identifier('section-' . strtolower($variables['section']->name));
       $content['#attributes']['class'][] = $cssClass;
     }
+    if (!empty($variables['section']->field_link[LANGUAGE_NONE][0]['url'])) {
+      $url = $variables['section']->field_link[LANGUAGE_NONE][0]['url'];
+      $arrow = theme('image', array(
+        'path' => drupal_get_path('module','osha_newsletter') . '/images/' . 'pink-arrow.png',
+        'width' => '19',
+        'height' => '11',
+        'attributes' => array('style' => 'border:0px;')
+      ));
+      $content['#suffix'] = l(t('View all') . $arrow, $url, [
+        'html' => true,
+        'absolute' => true,
+        'attributes' => ['class' => ['view-all', 'see-more']]
+      ]);
+    }
     switch ($template) {
       case 'newsletter_multiple_columns':
         $columnWidth = round((800 / count($variables)), 2) - 20;

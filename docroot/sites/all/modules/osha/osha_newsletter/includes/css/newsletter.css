@@ -277,3 +277,7 @@ p.tweet-contents {
 .newsletter-full-width-2-col-blocks-row:first-child > td:only-child {
   /* padding-right: 0; */
 }
+
+.view-all {
+  float: right;
+}

@@ -73,11 +73,12 @@
                       <?php
                       $body_text = '';
                       if (isset($field_summary) && is_array($field_summary) && !empty($field_summary)) {
-                        $body_text = $field_summary[0]['safe_value'];
+                        $body_text = field_view_field('node', $node, 'field_summary', 'highlights_item');
                       }
                       elseif (isset($body) && is_array($body) && !empty($body)) {
-                        $body_text = $body[0]['safe_value'];
+                        $body_text = field_view_field('node', $node, 'body', 'highlights_item');
                       }
+                      $body_text = render($body_text);
                       if (!empty($body_text)) {
                         if (isset($variables['elements']['#campaign_id'])) {
                           // CW-1896 Add pk_campaign to links inside the body text

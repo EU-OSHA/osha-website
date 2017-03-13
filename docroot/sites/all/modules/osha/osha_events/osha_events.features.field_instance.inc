@@ -25,10 +25,12 @@ function osha_events_field_default_field_instances() {
         'weight' => 3,
       ),
       'highlights_item' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
+        'settings' => array(
+          'trim_length' => 400,
+        ),
+        'type' => 'text_summary_or_trimmed',
         'weight' => 0,
       ),
       'newsletter_item' => array(
@@ -2049,7 +2051,7 @@ Grey - Only web or not attendance',
         'weight' => 0,
       ),
       'highlights_item' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',

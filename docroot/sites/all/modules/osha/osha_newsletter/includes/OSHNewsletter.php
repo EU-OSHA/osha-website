@@ -227,7 +227,7 @@ class OSHNewsletter {
         'path' => drupal_get_path('module','osha_newsletter') . '/images/' . 'pink-arrow.png',
         'width' => '19',
         'height' => '11',
-        'attributes' => array('style' => 'border:0px;')
+        'attributes' => array('style' => 'border:0px;width:19px;height:11px;')
       ));
       $content['#suffix'] = l(t('View all') . $arrow, $url, [
         'html' => true,

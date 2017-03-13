@@ -133,6 +133,12 @@ td.social {
   padding-top: 10px;
   padding-bottom: 10px;
 }
+.newsletter-section + .view-all {
+  border-top: 1px dashed #dddddd;
+  width: 100%;
+  text-align: right;
+  padding-top: 10px;
+}
 .item.newsletter-half-width-list-item,
 .item.newsletter-half-image-left-item,
 .item.newsletter-full-width-list-item {

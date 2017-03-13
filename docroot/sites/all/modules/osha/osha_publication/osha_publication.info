@@ -25,7 +25,6 @@ dependencies[] = options
 dependencies[] = osha
 dependencies[] = osha_news
 dependencies[] = osha_nodequeue
-dependencies[] = osha_publication
 dependencies[] = osha_seminar
 dependencies[] = osha_taxonomies
 dependencies[] = osha_wiki

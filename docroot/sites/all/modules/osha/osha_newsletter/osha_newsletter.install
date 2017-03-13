@@ -76,10 +76,19 @@ function osha_newsletter_update_7004() {
 /**
  * Enable tweet_feed module
  * Update newsletter sections
+ * Update the Newsletter Highlights display for multiple content types
  */
 function osha_newsletter_update_7005() {
   module_enable(['tweet_feed']);
   features_revert_module('osha_newsletter');
+
+  // Modified the Newsletter Highlights display for multiple content types
+  features_revert_module('osha_blog');
+  features_revert_module('osha_events');
+  features_revert_module('osha_highlight');
+  features_revert_module('osha_news');
+  features_revert_module('osha_press_release');
+  features_revert_module('osha_publication');
 
   $module_path = drupal_get_path('module', 'osha_newsletter');
   $image_dest_dir = 'public://newsletter';

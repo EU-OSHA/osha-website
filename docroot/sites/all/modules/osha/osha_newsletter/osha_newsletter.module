@@ -1124,6 +1124,13 @@ function osha_newsletter_send_test_email(&$form_state) {
   global $user;
 
   $to = $user->mail;
+  if (isset($form_state['test_newsletter_content']['test_address']['#value'])) {
+    $emails = $form_state['test_newsletter_content']['test_address']['#value'];
+    if (!empty($emails)) {
+      $to = $emails;
+    }
+  }
+
   $from = variable_get('osha_newsletter_listserv_from', $user->mail);
 
   osha_newsletter_send_email('test_newsletter', $to, $from ,$form_state,

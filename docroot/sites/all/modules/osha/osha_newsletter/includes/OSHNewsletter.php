@@ -420,8 +420,8 @@ class OSHNewsletter {
           }
           break;
         case 'node':
-          if (empty($current_section)) {
-            // Found a node before all sections
+          if (empty($current_section) || $content[$current_section]['#style'] == 'newsletter_half_width_twitter') {
+            // Found a node before all sections or within twitter section
             // @todo: maybe we should display a warning?
             continue;
           }

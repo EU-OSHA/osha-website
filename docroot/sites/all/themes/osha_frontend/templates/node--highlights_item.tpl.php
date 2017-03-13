@@ -60,34 +60,34 @@
                 <tbody>
                   <tr>
                     <td style="width: 100%; font-size: 13px; font-family: Arial, sans-serif; color: #000000;">
-                      <?php if (isset($body) && is_array($body)) {
-                        if (!empty($body)) {
-                          if (isset($body[0]['safe_value'])) {
-                            $body_text = $body[0]['safe_value'];
-                            if (isset($variables['elements']['#campaign_id'])) {
-                              // CW-1896 Add pk_campaign to links inside the body text
-                              $doc = new DOMDocument();
-                              $doc->loadHTML(mb_convert_encoding($body_text, 'HTML-ENTITIES', "UTF-8"));
-                              $links = $doc->getElementsByTagName('a');
-                              foreach ($links as $link) {
-                                $url = $link->getAttribute('href');
-                                $url_comp = parse_url($url);
-                                if (preg_match('/(osha.europa.eu|napofilm.net|oshwiki.eu|oiraproject.eu|esener.eu|healthy-workplaces.eu|healthyworkplaces.eu|localhost|eu-osha.bilbomatica.es)/', $url_comp['host'])) {
-                                  $link->setAttribute('href', $url.($url_comp['query']?'&':'?').'pk_campaign=' . $variables['elements']['#campaign_id']);
-                                }
-                              }
-                              if ($links->length>0) {
-                                $body_text = $doc->saveHTML();
-                              }
+                      <?php
+                      $body_text = '';
+                      if (isset($field_summary) && is_array($field_summary) && !empty($field_summary)) {
+                        $body_text = $field_summary[0]['safe_value'];
+                      }
+                      elseif (isset($body) && is_array($body) && !empty($body)) {
+                        $body_text = $body[0]['safe_value'];
+                      }
+                      if (!empty($body_text)) {
+                        if (isset($variables['elements']['#campaign_id'])) {
+                          // CW-1896 Add pk_campaign to links inside the body text
+                          $doc = new DOMDocument();
+                          $doc->loadHTML(mb_convert_encoding($body_text, 'HTML-ENTITIES', "UTF-8"));
+                          $links = $doc->getElementsByTagName('a');
+                          foreach ($links as $link) {
+                            $url = $link->getAttribute('href');
+                            $url_comp = parse_url($url);
+                            if (preg_match('/(osha.europa.eu|napofilm.net|oshwiki.eu|oiraproject.eu|esener.eu|healthy-workplaces.eu|healthyworkplaces.eu|localhost|eu-osha.bilbomatica.es)/', $url_comp['host'])) {
+                              $link->setAttribute('href', $url.($url_comp['query']?'&':'?').'pk_campaign=' . $variables['elements']['#campaign_id']);
                             }
-                            print($body_text);
                           }
-                        } else if (isset($field_summary) && is_array($field_summary)) {
-                          if (!empty($field_summary)) {
-                            print($field_summary[0]['safe_value']);
+                          if ($links->length>0) {
+                            $body_text = $doc->saveHTML();
                           }
                         }
-                      }?>
+                        print($body_text);
+                      }
+                      ?>
                     </td>
                   </tr>
                   <tr>

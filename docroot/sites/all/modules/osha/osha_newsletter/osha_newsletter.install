@@ -75,6 +75,7 @@ function osha_newsletter_update_7004() {
 
 /**
  * Enable tweet_feed module
+ * Update newsletter sections
  */
 function osha_newsletter_update_7005() {
   module_enable(['tweet_feed']);

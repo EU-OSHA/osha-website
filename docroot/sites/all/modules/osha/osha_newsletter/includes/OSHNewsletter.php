@@ -185,7 +185,7 @@ class OSHNewsletter {
     $nodeContent = node_view($node['node'], $node['#style']);
 
     return [
-      'data' => drupal_render($nodeContent),
+      'data' => render($nodeContent),
       'class' => ['item', drupal_clean_css_identifier("{$template}-item")],
     ];
   }

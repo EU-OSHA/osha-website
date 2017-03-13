@@ -46,12 +46,15 @@ function osha_dangerous_substances_facetapi_default_facet_settings() {
   $facet->facet = 'field_item_type';
   $facet->enabled = FALSE;
   $facet->settings = array(
-    'operator' => 'and',
+    'operator' => 'or',
     'hard_limit' => '50',
     'dependencies' => array(
       'facets' => array(),
       'force_deactivation' => TRUE,
       'regex' => FALSE,
+      'roles' => array(),
+      'bundle' => 'none',
+      'bundle_selected' => array(),
     ),
     'facet_mincount' => '1',
     'facet_missing' => '0',
@@ -73,12 +76,15 @@ function osha_dangerous_substances_facetapi_default_facet_settings() {
   $facet->facet = 'field_material_country';
   $facet->enabled = FALSE;
   $facet->settings = array(
-    'operator' => 'and',
+    'operator' => 'or',
     'hard_limit' => '50',
     'dependencies' => array(
       'facets' => array(),
       'force_deactivation' => TRUE,
       'regex' => FALSE,
+      'roles' => array(),
+      'bundle' => 'none',
+      'bundle_selected' => array(),
     ),
     'facet_mincount' => '1',
     'facet_missing' => '0',
@@ -127,12 +133,15 @@ function osha_dangerous_substances_facetapi_default_facet_settings() {
   $facet->facet = 'field_provider_type';
   $facet->enabled = FALSE;
   $facet->settings = array(
-    'operator' => 'and',
+    'operator' => 'or',
     'hard_limit' => '50',
     'dependencies' => array(
       'facets' => array(),
       'force_deactivation' => TRUE,
       'regex' => FALSE,
+      'roles' => array(),
+      'bundle' => 'none',
+      'bundle_selected' => array(),
     ),
     'facet_mincount' => '1',
     'facet_missing' => '0',
@@ -208,7 +217,7 @@ function osha_dangerous_substances_facetapi_default_facet_settings() {
   $facet->facet = 'field_worker_groups_type';
   $facet->enabled = FALSE;
   $facet->settings = array(
-    'operator' => 'and',
+    'operator' => 'or',
     'hard_limit' => '50',
     'dependencies' => array(
       'facets' => array(),

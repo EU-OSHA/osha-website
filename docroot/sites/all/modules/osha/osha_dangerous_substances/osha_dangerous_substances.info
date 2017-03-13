@@ -20,6 +20,7 @@ dependencies[] = node
 dependencies[] = options
 dependencies[] = osha
 dependencies[] = osha_events
+dependencies[] = osha_infographics
 dependencies[] = osha_press_contact
 dependencies[] = osha_publication
 dependencies[] = search_api

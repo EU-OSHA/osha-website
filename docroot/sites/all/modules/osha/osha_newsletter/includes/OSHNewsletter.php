@@ -301,7 +301,7 @@ class OSHNewsletter {
         ];
         break;
       case 'newsletter_full_width_2_col_blocks':
-        $content['#header']['data']['colspan'] = 2;
+        $content['#header']['data']['colspan'] = 3;
         $currentRow = 0;
         $currentCol = 0;
 
@@ -315,15 +315,17 @@ class OSHNewsletter {
 
         foreach ($variables['nodes'] as $node) {
           $cellContent = self::getCellContent($template, $node);
-          $cellContent['width'] = '377'; // half - 3px of margin
+          $cellWidth = 378;
+          $cellContent['width'] = $cellWidth; // half - 2px of margin
           $cellContent['height'] = '100%';
           $cellContent['align'] = 'left';
           $cellContent['valign'] = 'top';
+          $cellStyle = sprintf('max-width:%spx;background-color: #003399;', $cellWidth);
           if (empty($cellContent['style'])) {
-            $cellContent['style'] = 'max-width:377px;';
+            $cellContent['style'] = $cellStyle;
           }
           else {
-            $cellContent['style'] .= 'max-width:377px;';
+            $cellContent['style'] .= $cellStyle;
           }
           array_push($cellContent['class'], 'template-column');
 
@@ -333,9 +335,11 @@ class OSHNewsletter {
               'class' => ['row', drupal_clean_css_identifier("{$template}-row")],
               'no_striping' => true,
             ];
+            $content['#rows'][$currentRow]['data'][] = ['data' => '', 'style' => 'padding-right: 4px; padding-bottom: 4px;', 'class' => 'template-column' ];
           }
           else {
             $content['#rows'][$currentRow++]['data'][] = $cellContent;
+            $content['#rows'][$currentRow++]['data'][] = ['data' => '', 'style' => 'padding-bottom: 4px;' ];
             $currentCol = 0;
           }
         }

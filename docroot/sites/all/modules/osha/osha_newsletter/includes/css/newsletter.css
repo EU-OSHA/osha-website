@@ -214,10 +214,7 @@ p.tweet-contents {
   overflow: hidden;
   word-break: break-word;
 }
-.newsletter-full-width-2-col-blocks-item > .newsletter-item {
-  background-color: #003399;
-  color: #ffffff;
-}
+
 .newsletter-item a {
   color: #003399;
 }
@@ -256,14 +253,8 @@ p.tweet-contents {
 
 .item.newsletter-full-width-2-col-blocks-item {
   padding-top: 0px;
-  padding-bottom: 4px;
 }
-.newsletter-full-width-2-col-blocks-item:nth-child(odd) {
-  padding-right: 2px;
-}
-.newsletter-full-width-2-col-blocks-item:nth-child(even) {
-  padding-left: 2px;
-}
+
 .newsletter-multiple-columns tr {
   border: 0;
 }

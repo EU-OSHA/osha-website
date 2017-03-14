@@ -322,23 +322,29 @@ function osha_legislation_strongarm() {
       'print' => array(
         'custom_settings' => FALSE,
       ),
+      'osha_search_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '17',
-        ),
-        'path' => array(
           'weight' => '16',
         ),
-        'redirect' => array(
+        'path' => array(
           'weight' => '15',
+        ),
+        'redirect' => array(
+          'weight' => '14',
         ),
         'workbench_access' => array(
           'weight' => '0',
         ),
         'language' => array(
           'weight' => '1',
+        ),
+        'xmlsitemap' => array(
+          'weight' => '20',
         ),
       ),
       'display' => array(),

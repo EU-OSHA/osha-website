@@ -1196,7 +1196,7 @@ function osha_legislation_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 6,
+      'weight' => 5,
     ),
   );
 
@@ -1271,8 +1271,85 @@ function osha_legislation_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 22,
+      'weight' => 19,
     ),
+  );
+
+  // Exported field_instance: 'node-guideline-field_additional_html'.
+  $field_instances['node-guideline-field_additional_html'] = array(
+    'bundle' => 'guideline',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Use it for script tags or other external HTML structure like iframe; this field it\'s not translated; it\'s displayed after body field.',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 5,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_additional_html',
+    'label' => 'Additional html',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 6,
+    ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-guideline-field_archived'.
@@ -1290,7 +1367,7 @@ function osha_legislation_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 6,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -1344,7 +1421,7 @@ function osha_legislation_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 14,
+      'weight' => 13,
     ),
   );
 
@@ -1437,7 +1514,7 @@ function osha_legislation_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 14,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -1493,7 +1570,7 @@ function osha_legislation_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 19,
+      'weight' => 17,
     ),
   );
 
@@ -1507,7 +1584,7 @@ function osha_legislation_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 12,
+        'weight' => 13,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -1570,7 +1647,7 @@ function osha_legislation_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_select',
-      'weight' => 13,
+      'weight' => 12,
     ),
   );
 
@@ -1678,7 +1755,7 @@ function osha_legislation_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 11,
+        'weight' => 12,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -1732,7 +1809,7 @@ function osha_legislation_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
@@ -1747,7 +1824,7 @@ function osha_legislation_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 8,
+        'weight' => 9,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -1802,7 +1879,7 @@ function osha_legislation_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'multiple_selects',
-      'weight' => 11,
+      'weight' => 10,
     ),
   );
 
@@ -1817,7 +1894,7 @@ function osha_legislation_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 15,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -1873,7 +1950,7 @@ function osha_legislation_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 21,
+      'weight' => 18,
     ),
   );
 
@@ -1887,7 +1964,7 @@ function osha_legislation_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 11,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -1950,7 +2027,7 @@ function osha_legislation_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_select',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 
@@ -2026,7 +2103,7 @@ function osha_legislation_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
@@ -2095,7 +2172,7 @@ function osha_legislation_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 10,
+      'weight' => 9,
     ),
   );
 
@@ -2110,7 +2187,7 @@ function osha_legislation_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 9,
+        'weight' => 10,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -2165,7 +2242,7 @@ function osha_legislation_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'multiple_selects',
-      'weight' => 12,
+      'weight' => 11,
     ),
   );
 
@@ -2253,7 +2330,7 @@ function osha_legislation_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 2,
+      'weight' => 1,
     ),
   );
 
@@ -2383,6 +2460,7 @@ function osha_legislation_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Activity');
+  t('Additional html');
   t('Available in languages');
   t('Body');
   t('Character count');
@@ -2402,6 +2480,7 @@ function osha_legislation_field_default_field_instances() {
   t('Tag (mapping)');
   t('Thesaurus');
   t('Title');
+  t('Use it for script tags or other external HTML structure like iframe; this field it\'s not translated; it\'s displayed after body field.');
 
   return $field_instances;
 }

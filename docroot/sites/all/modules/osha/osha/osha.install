@@ -421,9 +421,3 @@ function osha_update_7022() {
   variable_set('hwc_migration_root_url', 'https://healthy-workplaces.eu');
   migrate_autoregister();
 }
-
-function osha_update_7023() {
-  variable_set('oira_migration_OiraNews_url', '/ncw-export/news');
-  variable_set('oira_migration_root_url', 'https://oiraproject.eu/');
-  migrate_autoregister();
-}

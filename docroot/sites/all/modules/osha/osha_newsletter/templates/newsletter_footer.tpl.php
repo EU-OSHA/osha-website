@@ -1,11 +1,22 @@
+
 <?php
-  if (isset($campaign_id)) {
-    $url_query = array('pk_campaign' => $campaign_id);
-  } else {
-    $url_query = array();
+
+if (empty($campaign_id)) {
+  if (!empty($variables['elements']['#campaign_id'])) {
+    $campaign_id = $variables['elements']['#campaign_id'];
   }
-  global $language;
-  ?>
+  elseif (!empty($variables['campaign_id'])) {
+    $campaign_id = $variables['campaign_id'];
+  }
+}
+
+$url_query = array();
+if (!empty($campaign_id)) {
+  $url_query = array('pk_campaign' => $campaign_id);
+}
+
+global $language;
+?>
 
 <table border="0" cellpadding="28" cellspacing="0" width="100%" class="template-container footer">
   <tbody>

@@ -92,7 +92,23 @@
   }
 </style>
 <!-- end @TODO -->
+<?php
 
+if (empty($campaign_id)) {
+  if (!empty($variables['elements']['#campaign_id'])) {
+    $campaign_id = $variables['elements']['#campaign_id'];
+  }
+  elseif (!empty($variables['campaign_id'])) {
+    $campaign_id = $variables['campaign_id'];
+  }
+}
+
+$url_query = array();
+if (!empty($campaign_id)) {
+  $url_query = array('pk_campaign' => $campaign_id);
+}
+
+?>
 <span class="preview-text" style="font-size: 0;">
   <?php
     $newsletter_ready_date = format_date(strtotime($newsletter_date), 'custom', 'F Y');
@@ -192,11 +208,6 @@
     <tr>
       <td class="osha-logos">
         <?php
-          if (isset($campaign_id)) {
-            $url_query = array('pk_campaign' => $campaign_id);
-          } else {
-            $url_query = array();
-          }
           $directory = drupal_get_path('module','osha_newsletter');
           global $base_url;
           global $language;

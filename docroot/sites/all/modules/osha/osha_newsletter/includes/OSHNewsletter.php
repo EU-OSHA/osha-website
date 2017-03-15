@@ -206,6 +206,14 @@ class OSHNewsletter {
   }
 
   public static function renderTemplate(EntityCollection $entityCollection, $template, $variables) {
+    $campaign_id = '';
+    if (!empty($entityCollection->field_campaign_id[LANGUAGE_NONE][0]['value'])) {
+      $campaign_id = $entityCollection->field_campaign_id[LANGUAGE_NONE][0]['value'];
+    };
+    $url_query = array();
+    if (!empty($campaign_id)) {
+      $url_query = array('pk_campaign' => $campaign_id);
+    }
     $content = [
       '#theme' => 'table',
       '#header' => [],
@@ -247,6 +255,7 @@ class OSHNewsletter {
       $content['#suffix'] = l(t('View all') . $arrow, $url, [
         'html' => true,
         'absolute' => true,
+        'query' => $url_query,
         'attributes' => ['class' => ['view-all', 'see-more']]
       ]);
     }
@@ -433,9 +442,11 @@ class OSHNewsletter {
       switch ($item->type) {
         case 'taxonomy_term':
           $current_section = $item->entity_id;
+          $section = $item->content;
+          $section->campaign_id = $campaign_id;
           $content[$current_section] = [
             '#style' => !empty($item->style) ? $item->style : key($templatesList),
-            'section' => $item->content,
+            'section' => $section,
             'nodes' => [],
           ];
           if ($content[$current_section]['#style'] == 'newsletter_half_width_twitter') {
@@ -458,9 +469,11 @@ class OSHNewsletter {
             // @todo: maybe we should display a warning?
             continue;
           }
+          $node = $item->content;
+          $node->campaign_id = $campaign_id;
           $content[$current_section]['nodes'][] = [
             '#style' => self::getChildStyle($content[$current_section]['#style']),
-            'node' => $item->content,
+            'node' => $node,
           ];
           break;
       }

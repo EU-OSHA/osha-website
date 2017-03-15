@@ -7,6 +7,19 @@
  * @see template_preprocess_node()
  * @see template_process()
  */
+
+$campaign_id = '';
+if (!empty($variables['elements']['#campaign_id'])) {
+  $campaign_id = $variables['elements']['#campaign_id'];
+}
+elseif (!empty($variables['campaign_id'])) {
+  $campaign_id = $variables['campaign_id'];
+}
+
+$url_query = array();
+if (!empty($campaign_id)) {
+  $url_query = array('pk_campaign' => $campaign_id);
+}
 ?>
 <?php if($node->title != NULL) {?>
   <table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%" height="100%" class="newsletter-item" style="height:100%!important;">
@@ -29,23 +42,25 @@
       <tr>
         <td rowspan="3" width="40" style="width:40px; padding-right: 10px;">
           <?php
-            $directory = drupal_get_path('module','osha_newsletter');
+            global $base_url;
 
             // @TODO:
             // $calendar_img = 'calendar-' . date('d', $date) . '.png';
             // end TODO
 
             $calendar_img = !empty($node->arrow_color) ? "calendar-15-{$node->arrow_color}.png" : "calendar-15.png";
+            $calendar_img_path = "{$base_url}/sites/all/modules/osha/osha_newsletter/images/{$calendar_img}";
 
             print l(theme('image', array(
-            'path' => $directory . '/images/' . $calendar_img,
+            'path' => $calendar_img_path,
             'width' => 40,
             'height' => 36,
             'alt' => 'link arrow',
             'attributes' => array('style' => 'border: 0px;height:35px!important;width:40px!important;')
-          )), $base_url, array(
+          )), url('node/' . $node->nid, array('absolute' => TRUE)), array(
             'html' => TRUE,
-            'external' => TRUE
+            'external' => TRUE,
+            'query' => $url_query,
           ));
           ?>
         </td>
@@ -57,23 +72,13 @@
     }
     ?>
     <tr style="height: 100%;">
-      <?php
-        if ($node->type !== 'twitter_tweet_feed') {
-      ?>
-        <td align="left" width="10" style="padding-right: 0px; vertical-align: top; padding-top: 5px; font-family: Arial, sans-serif;"> >
-          <?php
-          $directory = drupal_get_path('module','osha_newsletter');
-          global $base_url; // TODO: should link to node
-          ?>
+      <?php if ($node->type !== 'twitter_tweet_feed') { ?>
+        <td align="left" width="10" style="padding-right: 0px; vertical-align: top; padding-top: 5px; font-family: Arial, sans-serif;">
+          <span> > </span>
         </td>
       <?php } ?>
       <td align="right" style="text-align: left; padding-top: 5px; padding-bottom: 10px; padding-left:0px;">
         <?php
-        if (isset($variables['elements']['#campaign_id'])) {
-          $url_query = array('pk_campaign' => $variables['elements']['#campaign_id']);
-        } else {
-          $url_query = array();
-        }
         switch ($node->type) {
           case 'publication':
             print l($node->title, url('node/' . $node->nid . '/view', array('absolute' => TRUE)), array(

@@ -8,6 +8,19 @@
  * @see template_preprocess_node()
  * @see template_process()
  */
+
+$campaign_id = '';
+if (!empty($variables['elements']['#campaign_id'])) {
+  $campaign_id = $variables['elements']['#campaign_id'];
+}
+elseif (!empty($variables['campaign_id'])) {
+  $campaign_id = $variables['campaign_id'];
+}
+
+$url_query = array();
+if (!empty($campaign_id)) {
+  $url_query = array('pk_campaign' => $campaign_id);
+}
 ?>
 <table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%">
   <tbody>
@@ -42,11 +55,6 @@
                 ?>
                 <div class="item-date" style="font-family: Arial, sans-serif; font-size: 14px; line-height:25px;"><?php print format_date($date, 'custom', 'd/m/Y');?></div>
                 <?php
-                if (isset($variables['elements']['#campaign_id'])) {
-                  $url_query = array('pk_campaign' => $variables['elements']['#campaign_id']);
-                } else {
-                  $url_query = array();
-                }
                 if ($node->type == 'publication') {
                   print l($title, url('node/' . $node->nid . '/view', array('absolute' => TRUE)), array(
                     'attributes' => array('class' => ['highlight-title', 'fallback-text']),
@@ -80,7 +88,7 @@
                       }
                       $body_text = render($body_text);
                       if (!empty($body_text)) {
-                        if (isset($variables['elements']['#campaign_id'])) {
+                        if (!empty($campaign_id)) {
                           // CW-1896 Add pk_campaign to links inside the body text
                           $doc = new DOMDocument();
                           $doc->loadHTML(mb_convert_encoding($body_text, 'HTML-ENTITIES', "UTF-8"));
@@ -89,7 +97,7 @@
                             $url = $link->getAttribute('href');
                             $url_comp = parse_url($url);
                             if (preg_match('/(osha.europa.eu|napofilm.net|oshwiki.eu|oiraproject.eu|esener.eu|healthy-workplaces.eu|healthyworkplaces.eu|localhost|eu-osha.bilbomatica.es)/', $url_comp['host'])) {
-                              $link->setAttribute('href', $url.($url_comp['query']?'&':'?').'pk_campaign=' . $variables['elements']['#campaign_id']);
+                              $link->setAttribute('href', $url.($url_comp['query']?'&':'?').'pk_campaign=' . $campaign_id);
                             }
                           }
                           if ($links->length>0) {

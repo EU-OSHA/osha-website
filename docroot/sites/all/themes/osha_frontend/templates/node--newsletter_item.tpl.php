@@ -84,14 +84,17 @@
             break;
           case 'twitter_tweet_feed':
             if (!empty($node->field_tweet_author[LANGUAGE_NONE][0]['value'])
-              && !empty($node->field_tweet_contents[LANGUAGE_NONE][0]['value'])) {
+                && !empty($node->field_tweet_contents[LANGUAGE_NONE][0]['value'])) {
               printf("<p class='tweet-author'>@%s</p><p class='tweet-contents'>%s</p>",
                 $node->field_tweet_author[LANGUAGE_NONE][0]['value'],
                 $node->field_tweet_contents[LANGUAGE_NONE][0]['value']);
-
             }
             else {
               goto defaultLabel;
+            }
+            if (!empty($node->field_link_to_tweet[LANGUAGE_NONE][0]['value'])) {
+              $link = $node->field_link_to_tweet[LANGUAGE_NONE][0]['value'];
+              printf("<p class='tweet-link'>%s</p>", l($link, $link));
             }
             break;
           case 'newsletter_article':

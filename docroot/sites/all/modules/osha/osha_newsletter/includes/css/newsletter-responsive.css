@@ -1,4 +1,3 @@
-/* might not be needed afterall */
 /* CLIENT-SPECIFIC STYLES */
 body, table, td, a{-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;} /* Prevent WebKit and Windows mobile changing default text sizes */
 table, td{mso-table-lspace: 0pt; mso-table-rspace: 0pt;} /* Remove spacing between tables in Outlook 2007 and up */
@@ -20,7 +19,6 @@ a[x-apple-data-detectors] {
 }
 @media only screen and (max-width: 600px) {
   .template-container {
-    /* max-width: 400px; */
   }
   .newsletter-container {
     max-width: 100% !important;
@@ -35,16 +33,14 @@ a[x-apple-data-detectors] {
     padding-left: 0 !important;
     padding-right: 0 !important;
   }
+  img {
+    max-width: 100% !important;
+  }
   .template-column {
     display: block !important;
   }
 
-  .template-column td {
-    /* padding-left: 0 !important;
-    padding-right: 0 !important; */
-  }
   .template-column img {
-    max-width: 100% !important;
     width: auto !important;
     height: auto !important;
   }
@@ -67,19 +63,9 @@ a[x-apple-data-detectors] {
     border-bottom: none;
   }
 
-  .newsletter-section .row:first-child > .item:last-child:not(:only-child) {
-    padding-top: 3px !important;
+  .newsletter-half-image-left-container {
+    background-image: none!important;
   }
-  .newsletter-section .row:last-child > .item:first-child:not(:only-child) {
-    padding-bottom: 3px !important;
-  }
-  td.social {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-  /* .preheader .social {
-    text-align: center !important;
-  } */
   .newsletter-half-image {
     padding-bottom: 0 !important;
   }
@@ -98,8 +84,5 @@ a[x-apple-data-detectors] {
   .osha-info {
     display: block !important;
     max-width: 100% !important;
-    width: 100% !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
   }
 }

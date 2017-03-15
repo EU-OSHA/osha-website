@@ -22,7 +22,7 @@ if (!empty($campaign_id)) {
 }
 ?>
 <?php if($node->title != NULL) {?>
-  <table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%" height="100%" class="newsletter-item" style="height:100%!important;">
+  <table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%" height="100%" class="newsletter-item" >
     <tbody>
     <?php
     if (isset($node->field_publication_date[LANGUAGE_NONE][0]['value']) && $node->type != 'newsletter_article') {
@@ -55,7 +55,7 @@ if (!empty($campaign_id)) {
             'path' => $calendar_img_path,
             'width' => 40,
             'height' => 36,
-            'alt' => 'link arrow',
+            'alt' => 'calendar',
             'attributes' => array('style' => 'border: 0px;height:35px!important;width:40px!important;')
           )), url('node/' . $node->nid, array('absolute' => TRUE)), array(
             'html' => TRUE,

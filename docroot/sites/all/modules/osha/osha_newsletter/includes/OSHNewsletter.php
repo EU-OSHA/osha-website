@@ -256,7 +256,7 @@ class OSHNewsletter {
         'html' => true,
         'absolute' => true,
         'query' => $url_query,
-        'attributes' => ['class' => ['view-all', 'see-more']]
+        'attributes' => ['class' => ['view-all', 'see-more', 'fallback-text']]
       ]);
     }
     switch ($template) {
@@ -267,7 +267,7 @@ class OSHNewsletter {
             'data' => self::renderTemplate($entityCollection, $column['#style'], $column),
             'width' => "$columnWidth",
             'height' => '100%',
-            'class' => 'multiple-columns-cell template-column',
+            'class' => ['multiple-columns-cell', 'template-column'],
             'style' => sprintf('width:%spx;max-width:%spx;',$columnWidth, $columnWidth),
           ];
         }
@@ -341,7 +341,7 @@ class OSHNewsletter {
           $cellContent = self::getCellContent($template, $node);
           $cellWidth = 378;
           $cellContent['width'] = $cellWidth; // half - 2px of margin
-          $cellContent['height'] = '100%';
+          // $cellContent['height'] = '100%';
           $cellContent['align'] = 'left';
           $cellContent['valign'] = 'top';
           $cellStyle = sprintf('max-width:%spx;background-color: #003399;', $cellWidth);
@@ -359,11 +359,11 @@ class OSHNewsletter {
               'class' => ['row', drupal_clean_css_identifier("{$template}-row")],
               'no_striping' => true,
             ];
-            $content['#rows'][$currentRow]['data'][] = ['data' => '', 'style' => 'padding-right: 4px; padding-bottom: 4px;', 'class' => 'template-column' ];
+            $content['#rows'][$currentRow]['data'][] = ['data' => '', 'style' => 'padding-bottom: 4px; min-width:4px; width: 4px; margin:0;', 'class' => 'template-column' ];
           }
           else {
             $content['#rows'][$currentRow++]['data'][] = $cellContent;
-            $content['#rows'][$currentRow++]['data'][] = ['data' => '', 'style' => 'padding-bottom: 4px;' ];
+            $content['#rows'][$currentRow++]['data'][] = ['data' => '', 'style' => 'padding: 0px; height:4px;',  'class' => ['template-column', 'template-separator'] ];
             $currentCol = 0;
           }
         }
@@ -383,6 +383,7 @@ class OSHNewsletter {
         $currentRow = $currentCol = 0;
 
         $content['#rows'][$currentRow]['no_striping'] = true;
+        $content['#rows'][$currentRow]['height'] = 0;
         $content['#rows'][$currentRow]['data'][] = [
           'data' => '',
           'style' => 'padding-bottom: 20px;',
@@ -393,14 +394,14 @@ class OSHNewsletter {
         foreach ($variables['nodes'] as $node) {
           $cellContent = self::getCellContent($template, $node);
           $cellContent['width'] = '190';
-          $cellContent['height'] = '100%';
+          $cellContent['height'] = '1%';
           if (empty($cellContent['style'])) {
             $cellContent['style'] = 'max-width:190px;';
           }
           else {
             $cellContent['style'] .= 'max-width:190px;';
           }
-          array_push($cellContent['class'], 'template-column');
+          // array_push($cellContent['class'], 'template-column');
           if ($currentCol++ === 0) {
             $content['#rows'][$currentRow] = [
               'data' => [$cellContent],
@@ -687,21 +688,50 @@ class OSHNewsletter {
     // @TODO -> Octavian: check if correct please
     // Force fallback font in Outlook to Arial instead of Times New Roman
     $outlookCss =
-      "<!--[if mso]>
-        <style type='text/css'>
-          .fallback-text {
-            font-family: Arial, sans-serif !important;
+    "<style type='text/css'>
+        @media yahoo {
+          .template-separator {
+            padding-bottom: 4px !important;
+            height:0px!important;
           }
-        </style>
+        }
+      </style>
+      <!--[if mso]>
+      <style type='text/css'>
+        span.MsoHyperlink {
+          mso-style-priority:99;
+          color:inherit;
+        }
+        span.MsoHyperlinkFollowed {
+          mso-style-priority:99;
+          color:inherit;
+        }
+        .fallback-text {
+          font-family: Arial, sans-serif !important;
+        }
+        .template-separator {
+          padding-bottom: 4px !important;
+          height:0px !important;
+        }
+      </style>
       <![endif]-->";
+
+    $responsive_stylesheet_path = drupal_get_path('module', 'osha_newsletter') . '/includes/css/newsletter-responsive.css';
+
+    $responsiveStylesheet =  '<style type="text/css">' . file_get_contents($responsive_stylesheet_path) . '</style>';
+
     $fragment = $domDocument->createDocumentFragment();
     $fragment->appendXML($outlookCss);
+
+    $responsiveStyle = $domDocument->createDocumentFragment();
+    $responsiveStyle->appendXML($responsiveStylesheet);
 
     $head = $domDocument->getElementsByTagName('head');
     if (empty($head->length)) {
       $head = $domDocument->createElement('head');
       $head->appendChild($font);
       $head->appendChild($fragment);
+      $head->appendChild($responsiveStyle);
       $body = $domDocument->getElementsByTagName('body')->item(0);
       $body->parentNode->insertBefore($head, $body);
     }

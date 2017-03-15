@@ -1,97 +1,3 @@
-<!-- @TODO: remove once newsletter-responsive.css is included -->
-<style>
-  @media only screen and (max-width: 600px) {
-    .template-container {
-      /* max-width: 400px; */
-    }
-    .newsletter-container {
-      max-width: 100% !important;
-      width: 100% !important;
-    }
-    table[width],
-    .template-image,
-    .template-container,
-    .template-column {
-      max-width: 100% !important;
-      width: 100% !important;
-      padding-left: 0 !important;
-      padding-right: 0 !important;
-    }
-    img {
-      max-width: 100% !important;
-    }
-    .template-column {
-      display: block !important;
-    }
-
-    .template-column td {
-      /* padding-left: 0 !important;
-      padding-right: 0 !important; */
-    }
-    .template-column img {
-      width: auto !important;
-      height: auto !important;
-    }
-    .template-image {
-      text-align: center !important;
-    }
-    .template-column > .newsletter-item {
-      background-color: transparent;
-      color: #003399;
-    }
-    .newsletter-full-width-2-col-blocks-item > .newsletter-item > tbody > tr > td {
-      padding: 5px 0px;
-    }
-
-    .newsletter-item {
-      border-bottom: 1px dashed #dddddd;
-    }
-
-    .newsletter-section > tbody > .row:last-child > .item:last-child > .newsletter-item {
-      border-bottom: none;
-    }
-
-    /* .newsletter-section .row:first-child > .item:last-child:not(:only-child) {
-      padding-top: 3px !important;
-    }
-    .newsletter-section .row:last-child > .item:first-child:not(:only-child) {
-      padding-bottom: 3px !important;
-    } */
-    td.social {
-      padding-left: 0 !important;
-      padding-right: 0 !important;
-    }
-    /* .preheader .social {
-      text-align: center !important;
-    } */
-    .newsletter-half-image-left-container {
-      background-image: none!important;
-    }
-    .newsletter-half-image {
-      padding-bottom: 0 !important;
-    }
-    .newsletter-half-image td {
-      padding-right: 0 !important;
-    }
-    .newsletter-half-content {
-      padding-top: 0 !important;
-    }
-  }
-  @media only screen and (max-width: 500px) {
-    .osha-logos {
-      text-align: center !important;
-    }
-    .osha-logos,
-    .osha-info {
-      display: block !important;
-      max-width: 100% !important;
-      width: 100% !important;
-      padding-left: 0 !important;
-      padding-right: 0 !important;
-    }
-  }
-</style>
-<!-- end @TODO -->
 <?php
 
 if (empty($campaign_id)) {
@@ -109,6 +15,7 @@ if (!empty($campaign_id)) {
 }
 
 ?>
+
 <span class="preview-text" style="font-size: 0;">
   <?php
     $newsletter_ready_date = format_date(strtotime($newsletter_date), 'custom', 'F Y');
@@ -166,7 +73,7 @@ if (!empty($campaign_id)) {
                 ),
                 'blog' => array(
                   'path' => url('tools-and-publications/blog', array('alias' => TRUE, 'absolute' => TRUE, 'query' => $url_query)),
-                  'alt' => t('blog')
+                  'alt' => t('Blog')
                 ),
                 'youtube' => array(
                   'path' => 'https://www.youtube.com/user/EUOSHA',
@@ -183,7 +90,7 @@ if (!empty($campaign_id)) {
                     'width' => 'auto',
                     'height' => 20,
                     'alt' => $options['alt'],
-                    'attributes' => array('style' => 'border:0px;')
+                    'attributes' => array('style' => 'border:0px;height:20px;max-height:20px;max-width:20px;')
                   )), $options['path'], array(
                     'attributes' => array('style' => 'color:#144989;text-decoration:none;'),
                     'html' => TRUE,
@@ -216,7 +123,7 @@ if (!empty($campaign_id)) {
           'width' => 256,
           'height' => 60,
           'alt' => 'Osha logo',
-          'attributes' => array('style' => 'border: 0px; width: 256px; max-width: 256px;')
+          'attributes' => array('style' => 'border: 0px; width: 256px; max-width: 256px;height:60px;max-height:60px;')
           )), $base_url.'/'.$language->language, array(
           'html' => TRUE,
           'external' => TRUE,

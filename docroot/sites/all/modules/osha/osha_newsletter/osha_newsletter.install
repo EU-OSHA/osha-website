@@ -77,8 +77,11 @@ function osha_newsletter_update_7004() {
  * Enable tweet_feed module
  * Update newsletter sections
  * Update the Newsletter Highlights display for multiple content types
+ * Setup osha_newsletter_version_2_deployment_time variable
  */
 function osha_newsletter_update_7005() {
+  variable_set('osha_newsletter_version_2_deployment_time', time());
+
   module_enable(['tweet_feed']);
   features_revert_module('osha_newsletter');
 

@@ -15,6 +15,7 @@ if (!empty($campaign_id)) {
 }
 
 ?>
+
 <span class="preview-text" style="font-size: 0;">
   <?php
     $newsletter_ready_date = format_date(strtotime($newsletter_date), 'custom', 'F Y');
@@ -72,7 +73,7 @@ if (!empty($campaign_id)) {
                 ),
                 'blog' => array(
                   'path' => url('tools-and-publications/blog', array('alias' => TRUE, 'absolute' => TRUE, 'query' => $url_query)),
-                  'alt' => t('blog')
+                  'alt' => t('Blog')
                 ),
                 'youtube' => array(
                   'path' => 'https://www.youtube.com/user/EUOSHA',
@@ -89,7 +90,7 @@ if (!empty($campaign_id)) {
                     'width' => 'auto',
                     'height' => 20,
                     'alt' => $options['alt'],
-                    'attributes' => array('style' => 'border:0px;')
+                    'attributes' => array('style' => 'border:0px;height:20px;max-height:20px;max-width:20px;')
                   )), $options['path'], array(
                     'attributes' => array('style' => 'color:#144989;text-decoration:none;'),
                     'html' => TRUE,
@@ -122,7 +123,7 @@ if (!empty($campaign_id)) {
           'width' => 256,
           'height' => 60,
           'alt' => 'Osha logo',
-          'attributes' => array('style' => 'border: 0px; width: 256px; max-width: 256px;')
+          'attributes' => array('style' => 'border: 0px; width: 256px; max-width: 256px;height:60px;max-height:60px;')
           )), $base_url.'/'.$language->language, array(
           'html' => TRUE,
           'external' => TRUE,

@@ -134,8 +134,10 @@ td.social {
   padding-bottom: 10px;
 }
 .newsletter-section + .view-all {
+  border: 0;
   border-top: 1px dashed #dddddd;
   width: 100%;
+  display: block;
   text-align: right;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -205,7 +207,8 @@ td.social {
   font-weight: bold;
   font-family: Arial Black, sans-serif;
 }
-p.tweet-contents {
+p.tweet-contents,
+p.tweet-link {
   padding-left: 10px;
 }
 .newsletter-half-width-twitter .newsletter-item p {
@@ -215,7 +218,8 @@ p.tweet-contents {
   /* line-height: 17px; */
   margin: 0;
 }
-.tweet-contents a {
+.tweet-contents a,
+.tweet-link a {
   color: #38aadc !important;
   max-width: 100%;
   overflow: hidden;
@@ -242,9 +246,12 @@ p.tweet-contents {
 .newsletter-full-width-list td {
   color: #003399;
 }
-
+.multiple-columns-cell {
+  padding-bottom: 45px;
+}
 .multiple-columns-cell > table {
   max-width: 380px;
+  height: 100%;
 }
 .multiple-columns-cell .newsletter-half-width-twitter-item > .newsletter-item {
   max-width: 190px;
@@ -274,8 +281,4 @@ p.tweet-contents {
 }
 .newsletter-full-width-2-col-blocks-row:first-child > td:only-child {
   /* padding-right: 0; */
-}
-
-.view-all {
-  float: right;
 }

@@ -58,7 +58,7 @@ global $language;
                     ),
                     'blog' => array(
                       'path' => url('tools-and-publications/blog', array('alias' => TRUE, 'absolute' => TRUE, 'query' => $url_query)),
-                      'alt' => t('blog')
+                      'alt' => t('Blog')
                     ),
                     'youtube' => array(
                       'path' => 'https://www.youtube.com/user/EUOSHA',
@@ -71,9 +71,9 @@ global $language;
                     print l(theme('image', array(
                       'path' => $directory . '/images/' . $name . '-blue.png',
                       'width' => 'auto',
-                      'height' => 26,
+                      'height' => 20,
                       'alt' => $options['alt'],
-                      'attributes' => array('style' => 'border:0px;')
+                      'attributes' => array('style' => 'border:0px;height:20px;max-width:20px;')
                     )), $options['path'], array(
                       'attributes' => array('style' => 'color:#144989;text-decoration:none;'),
                       'html' => TRUE,

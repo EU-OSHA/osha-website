@@ -623,21 +623,50 @@ class OSHNewsletter {
     // @TODO -> Octavian: check if correct please
     // Force fallback font in Outlook to Arial instead of Times New Roman
     $outlookCss =
-      "<!--[if mso]>
-        <style type='text/css'>
-          .fallback-text {
-            font-family: Arial, sans-serif !important;
+    "<style type='text/css'>
+        @media yahoo {
+          .template-separator {
+            padding-bottom: 4px !important;
+            height:0px!important;
           }
-        </style>
+        }
+      </style>
+      <!--[if mso]>
+      <style type='text/css'>
+        span.MsoHyperlink {
+          mso-style-priority:99;
+          color:inherit;
+        }
+        span.MsoHyperlinkFollowed {
+          mso-style-priority:99;
+          color:inherit;
+        }
+        .fallback-text {
+          font-family: Arial, sans-serif !important;
+        }
+        .template-separator {
+          padding-bottom: 4px !important;
+          height:0px !important;
+        }
+      </style>
       <![endif]-->";
+
+    $responsive_stylesheet_path = drupal_get_path('module', 'osha_newsletter') . '/includes/css/newsletter-responsive.css';
+
+    $responsiveStylesheet =  '<style type="text/css">' . file_get_contents($responsive_stylesheet_path) . '</style>';
+
     $fragment = $domDocument->createDocumentFragment();
     $fragment->appendXML($outlookCss);
+
+    $responsiveStyle = $domDocument->createDocumentFragment();
+    $responsiveStyle->appendXML($responsiveStylesheet);
 
     $head = $domDocument->getElementsByTagName('head');
     if (empty($head->length)) {
       $head = $domDocument->createElement('head');
       $head->appendChild($font);
       $head->appendChild($fragment);
+      $head->appendChild($responsiveStyle);
       $body = $domDocument->getElementsByTagName('body')->item(0);
       $body->parentNode->insertBefore($head, $body);
     }

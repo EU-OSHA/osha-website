@@ -35,9 +35,35 @@ function osha_search_default_search_api_index() {
     "server" : "solr_server",
     "item_type" : "search_api_et_node",
     "options" : {
+      "datasource" : { "bundles" : [
+          "article",
+          "page",
+          "blog",
+          "calls",
+          "press_contact",
+          "dangerous_substances",
+          "directive",
+          "e_guide",
+          "events",
+          "fop_page",
+          "guideline",
+          "highlight",
+          "infographic",
+          "job_vacancies",
+          "news",
+          "press_release",
+          "publication",
+          "seminar",
+          "wiki_page"
+        ]
+      },
       "index_directly" : 0,
       "cron_limit" : "50",
-      "search_api_et" : { "include" : "incomplete", "fallback language" : "en" },
+      "search_api_et" : {
+        "include" : "incomplete",
+        "restrict undefined" : 1,
+        "fallback language" : "en"
+      },
       "data_alter_callbacks" : {
         "search_api_alter_bundle_filter" : {
           "status" : 1,

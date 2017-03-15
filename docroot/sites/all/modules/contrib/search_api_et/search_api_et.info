@@ -7,14 +7,14 @@ dependencies[] = field
 dependencies[] = search_api (>= 7.x-1.6)
 dependencies[] = entity_translation
 
-files[] = includes/datasource_entity.inc
-files[] = includes/processor_remove_language.inc
-files[] = includes/property_info_alter.inc
-files[] = includes/views_query.inc
+files[] = includes/SearchApiEtDatasourceController.php
+files[] = includes/SearchApiEtHelper.php
+files[] = includes/SearchApiEtPropertyInfoAlter.php
+files[] = includes/SearchApiEtViewsQuery.php
 
-; Information added by Drupal.org packaging script on 2014-09-09
-version = "7.x-2.x-dev"
+; Information added by Drupal.org packaging script on 2016-08-02
+version = "7.x-2.0-alpha7"
 core = "7.x"
 project = "search_api_et"
-datestamp = "1410264700"
+datestamp = "1470157107"
 

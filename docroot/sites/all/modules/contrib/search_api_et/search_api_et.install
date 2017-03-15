@@ -52,12 +52,11 @@ function search_api_et_install() {
   if (batch_get()) {
     return;
   }
-
-  $name = t('Default multilingual node index');
+  $name = 'Default multilingual node index';
   $values = array(
-    'name' => $name,
+    'name' =>  st($name),
     'machine_name' => preg_replace('/[^a-z0-9]+/', '_', drupal_strtolower($name)),
-    'description' => t('An automatically created search index for indexing multilingual node data. Might be configured to specific needs.'),
+    'description' => st('An automatically created search index for indexing multilingual node data. Might be configured to specific needs.'),
     'server' => NULL,
     'item_type' => 'search_api_et_node',
     'options' => array(
@@ -139,5 +138,63 @@ function search_api_et_install() {
     ),
   );
   search_api_index_insert($values);
-  drupal_set_message('The Search API Entity Translation module was installed. A new default multilingual node index was created.');
+  drupal_set_message(st('The Search API Entity Translation module was installed. A new default multilingual node index was created.'));
+}
+
+/**
+ * Clean {search_api_et_item} table from outdated items.
+ */
+function search_api_et_update_7200(&$sandbox) {
+  $indexes = db_select('search_api_index', 'sai')
+    ->fields('sai', array('id'))
+    ->distinct('distinct index.id')
+    ->execute()
+    ->fetchAllAssoc('id');
+
+  $index_ids = array_keys($indexes);
+
+  $res = db_delete('search_api_et_item')
+    ->condition('index_id', $index_ids, 'NOT IN')
+    ->execute();
+}
+
+/**
+ * Migrate the old ItemID format to the newer one.
+ */
+function search_api_et_update_7201(&$sandbox) {
+  if (!isset($sandbox['progress'])) {
+    $sandbox['progress'] = 0;
+    $sandbox['max'] = db_query('SELECT COUNT(*) FROM {search_api_et_item}')->fetchField();
+  }
+
+  $items = db_select('search_api_et_item', 'item')
+    ->fields('item', array('item_id', 'index_id'))
+    ->range($sandbox['progress'], 500)
+    ->orderBy('item_id', 'ASC')
+    ->execute();
+
+  foreach ($items as $item) {
+    // Get the old item_id format: "{LANG}_{ENTITY-ID}".
+    $parts = explode('_', $item->item_id);
+
+    if (is_array($parts) && count($parts) == 2) {
+      // Build the new item_id format: "{ENTITY-ID}/{LANG}".
+      $new_item_id = $parts[1] . '/' . $parts[0];
+      db_update('search_api_et_item')
+        ->fields(array('item_id' => $new_item_id))
+        ->condition('item_id', $item->item_id)
+        ->execute();
+    }
+
+    $sandbox['progress']++;
+  }
+
+  // Inform on the progression.
+  $sandbox['#finished'] = empty($sandbox['max']) ? 1 : ($sandbox['progress'] / $sandbox['max']);
+  if ($sandbox['#finished'] != 1) {
+    return t('SearchAPI ET: Updated !items of !total total.', array('!items' => $sandbox['progress'], '!total' => $sandbox['max']));
+  } else {
+    return t('SearchAPI ET: Migrate the old ItemID format to the newer one completed. You will need to run a re-index on search_api_et indexes.');
+  }
+
 }

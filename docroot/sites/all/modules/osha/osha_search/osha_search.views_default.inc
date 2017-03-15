@@ -334,13 +334,26 @@ function osha_search_views_default_views() {
   $handler = $view->new_display('page', 'Site search', 'site');
   $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['defaults']['header'] = FALSE;
-  /* Header: Global: Text area */
-  $handler->display->display_options['header']['area']['id'] = 'area';
-  $handler->display->display_options['header']['area']['table'] = 'views';
-  $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = 'More results are available in OSHWiki';
-  $handler->display->display_options['header']['area']['format'] = 'full_html';
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  $handler->display->display_options['header']['result']['content'] = 'Showing @start - @end of @total';
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Indexed Multilingual Content: Publication date */
+  $handler->display->display_options['fields']['field_publication_date']['id'] = 'field_publication_date';
+  $handler->display->display_options['fields']['field_publication_date']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['fields']['field_publication_date']['field'] = 'field_publication_date';
+  $handler->display->display_options['fields']['field_publication_date']['label'] = '';
+  $handler->display->display_options['fields']['field_publication_date']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_publication_date']['settings'] = array(
+    'format_type' => 'osha_day_only',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'osha_date_theme' => '',
+  );
   /* Field: Indexed Multilingual Content: Title */
   $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
   $handler->display->display_options['fields']['title_field']['table'] = 'search_api_index_default_multilingual_node_index';
@@ -361,20 +374,6 @@ function osha_search_views_default_views() {
   $handler->display->display_options['fields']['type']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['type']['link_to_entity'] = 0;
   $handler->display->display_options['fields']['type']['format_name'] = 1;
-  /* Field: Indexed Multilingual Content: Publication date */
-  $handler->display->display_options['fields']['field_publication_date']['id'] = 'field_publication_date';
-  $handler->display->display_options['fields']['field_publication_date']['table'] = 'search_api_index_default_multilingual_node_index';
-  $handler->display->display_options['fields']['field_publication_date']['field'] = 'field_publication_date';
-  $handler->display->display_options['fields']['field_publication_date']['label'] = '';
-  $handler->display->display_options['fields']['field_publication_date']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_publication_date']['settings'] = array(
-    'format_type' => 'osha_day_only',
-    'fromto' => 'both',
-    'multiple_number' => '',
-    'multiple_from' => '',
-    'multiple_to' => '',
-    'osha_date_theme' => '',
-  );
   /* Field: Indexed Multilingual Content: Marked as outdated */
   $handler->display->display_options['fields']['field_archived']['id'] = 'field_archived';
   $handler->display->display_options['fields']['field_archived']['table'] = 'search_api_index_default_multilingual_node_index';
@@ -570,6 +569,7 @@ function osha_search_views_default_views() {
   $handler = $view->new_display('page', 'OSHwiki search', 'wiki');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'OSHwiki search';
+  $handler->display->display_options['enabled'] = FALSE;
   $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Indexed Multilingual Content: URL */
@@ -711,7 +711,7 @@ function osha_search_views_default_views() {
     t('No results'),
     t('Relevance'),
     t('Site search'),
-    t('More results are available in OSHWiki'),
+    t('Showing @start - @end of @total'),
     t('Publication date'),
     t('Language'),
     t('OSHwiki search'),

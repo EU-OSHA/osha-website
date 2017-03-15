@@ -99,3 +99,8 @@ function osha_infographics_update_7005() {
   // revert to create the new field
   features_revert_module('osha_infographics');
 }
+
+function osha_infographics_update_7006() {
+  // revert to create the new field
+  features_revert_module('osha_infographics');
+}

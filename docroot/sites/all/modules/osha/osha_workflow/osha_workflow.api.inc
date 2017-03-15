@@ -680,7 +680,7 @@ class OshaWorkflowNotifications {
       $users = array_merge($users, $pms);
     }
     OshaWorkflowNotifications::sendEmail($users, array(
-      'node' => $node, 'text' => 'A content has been approved', status => 'Approved'
+      'node' => $node, 'text' => 'A content has been approved', 'status' => 'Approved'
     ), 'osha_workflow');
   }
 
@@ -699,7 +699,7 @@ class OshaWorkflowNotifications {
       $users = array_merge($users, $pms);
     }
     OshaWorkflowNotifications::sendEmail($users, array(
-      'node' => $node, 'text' => 'A content has been rejected', status => 'Rejected'
+      'node' => $node, 'text' => 'A content has been rejected', 'status' => 'Rejected'
     ), 'osha_workflow');
   }
 
@@ -713,7 +713,7 @@ class OshaWorkflowNotifications {
    */
   public static function notifyNodeRejectedFromApprovedToFinalDraft($node) {
     $users = osha_workflow_get_node_rm($node);
-    OshaWorkflowNotifications::sendEmail($users, array('node' => $node, 'action' => 'reviewed', status => 'Final draft'), 'osha_workflow');
+    OshaWorkflowNotifications::sendEmail($users, array('node' => $node, 'action' => 'reviewed', 'status' => 'Final draft'), 'osha_workflow');
   }
 
   /**
@@ -729,7 +729,7 @@ class OshaWorkflowNotifications {
   public static function notifyNodeIsReadyToPublish($node) {
     $review_managers = osha_workflow_get_node_rm($node);
     OshaWorkflowNotifications::sendEmail($review_managers, array(
-      'node' => $node, status => 'Ready to publish',
+      'node' => $node, 'status' => 'Ready to publish',
       'text' => 'No action is required. This message is just to inform you that a content is ready to publish'
     ), 'osha_workflow');
 

@@ -282,3 +282,23 @@ p.tweet-link {
 .newsletter-full-width-2-col-blocks-row:first-child > td:only-child {
   /* padding-right: 0; */
 }
+
+
+// Old newsletter styles
+.old-newsletter {
+}
+.old-newsletter .category-name tr:first-child > td {
+  padding-top: 10px !important;
+  padding-bottom: 10px;
+}
+.old-newsletter .highlight-item > tbody > tr > td {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.old-newsletter .newsletter-item {
+  border-bottom: 2px dotted #cfddee;
+}
+.old-newsletter .pink-arrow td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

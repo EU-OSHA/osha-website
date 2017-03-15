@@ -24,6 +24,13 @@ if (!empty($campaign_id)) {
 <?php if($node->title != NULL) {?>
   <table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%" height="100%" class="newsletter-item" >
     <tbody>
+      <?php if($node->old_newsletter) { ?>
+        <tr>
+          <td colspan="3" style="padding-top: 15px;"></td>
+        </tr>
+      <?php
+        }
+      ?>
     <?php
     if (isset($node->field_publication_date[LANGUAGE_NONE][0]['value']) && $node->type != 'newsletter_article') {
       $date = strtotime($node->field_publication_date[LANGUAGE_NONE][0]['value']);
@@ -40,7 +47,7 @@ if (!empty($campaign_id)) {
       $city_location = (isset($field_city) && !empty($field_city)) ? $field_city[0]['safe_value'] : '';
       ?>
       <tr>
-        <td rowspan="3" width="40" style="width:40px; padding-right: 10px;">
+        <td rowspan="2" width="40" style="width:40px; padding-right: 10px;">
           <?php
             global $base_url;
 
@@ -122,6 +129,13 @@ if (!empty($campaign_id)) {
         ?>
       </td>
     </tr>
+    <?php if($node->old_newsletter) { ?>
+      <tr>
+        <td colspan="3" style="padding-top: 15px;"></td>
+      </tr>
+    <?php
+      }
+    ?>
     </tbody>
   </table>
 <?php } ?>

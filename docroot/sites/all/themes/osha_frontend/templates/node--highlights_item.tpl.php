@@ -22,20 +22,20 @@ if (!empty($campaign_id)) {
   $url_query = array('pk_campaign' => $campaign_id);
 }
 ?>
-<table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%">
+<table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%" class="highlight-item">
   <tbody>
     <tr>
       <td>
         <table border="0" cellpadding="0" cellspacing="0" class="item-thumbnail-and-title" width="100%">
           <tbody>
             <tr>
-              <td rowspan="2" width="300" style="padding-bottom:10px;vertical-align: top;padding-top:0px; padding-right: 20px;max-width:300px;text-align:center;" class="template-column template-image">
+              <td rowspan=<?php print($node->old_newsletter ? '1' : '2'); ?> width=<?php print($node->old_newsletter ? '100' : '300'); ?> style="padding-bottom:10px;vertical-align: top;padding-top:0px; padding-right: 20px;max-width:300px;text-align:center;" class=<?php print(!$node->old_newsletter ? 'template-column template-image' : ''); ?> >
                 <table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td style="background-color:#efefef;">
                   <?php
                     print l(theme('image_style', array(
-                      'style_name' => 'highlight_image',
+                      'style_name' => ($node->old_newsletter ? 'thumbnail' : 'highlight_image'),
                       'path' => (isset($field_image) && !empty($field_image)) ? $field_image[0]['uri'] : '',
-                      // 'width' => '100%',
+                      'width' => ($node->old_newsletter ? '100%' : ''),
                       // 'height' => 'auto',
                       'alt' => (isset($field_image) && !empty($field_image)) ? $field_image[0]['alt'] : '',
                       'attributes' => array('style' => 'border: 0px;max-width: 100%;height:auto;background-color: #ffffff;vertical-align:middle;')
@@ -75,7 +75,7 @@ if (!empty($campaign_id)) {
                 ?>
               </td>
             </tr>
-            <tr><td>
+            <tr><td <?php if($node->old_newsletter) { ?> colspan="2"<?php } ?> >
               <table border="0" cellpadding="0" cellspacing="0" class="item-summary" width="100%">
                 <tbody>
                   <tr>
@@ -114,16 +114,15 @@ if (!empty($campaign_id)) {
                   <tr>
                     <td class="fallback-text" style="font-family: Oswald, Arial, sans-serif;">
                       <?php
-                        $more_link = 'See more';
                         $more_link_class = 'see-more';
                         if ($node->type == 'publication') {
-                          print l(t($more_link), url('node/' . $node->nid . '/view', array('absolute' => TRUE)), array(
+                          print l(t('See more'), url('node/' . $node->nid . '/view', array('absolute' => TRUE)), array(
                             'attributes' => array('class' => [$more_link_class, 'fallback-text']),
                             'query' => $url_query,
                             'external' => TRUE
                           ));
                         } else {
-                          print l(t($more_link), url('node/' . $node->nid, array('absolute' => TRUE)), array(
+                          print l(t('See more'), url('node/' . $node->nid, array('absolute' => TRUE)), array(
                             'attributes' => array('class' => [$more_link_class, 'fallback-text']),
                             'query' => $url_query,
                             'external' => TRUE
@@ -135,9 +134,8 @@ if (!empty($campaign_id)) {
                         'width' => '19',
                         'height' => '11',
                         'alt' => $options['alt'],
-                        'attributes' => array('style' => 'border:0px;')
+                        'attributes' => array('style' => 'border:0px;width:19px;height:11px;')
                       )), $options['path'], array(
-                        'attributes' => array('style' => 'color:#144989;text-decoration:none;width:19px!important;height:11px!important;'),
                         'html' => TRUE,
                         'external' => TRUE
                       ));

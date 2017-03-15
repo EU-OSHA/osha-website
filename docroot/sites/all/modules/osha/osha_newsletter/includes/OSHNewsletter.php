@@ -717,20 +717,19 @@ class OSHNewsletter {
       <![endif]-->";
 
     $responsive_stylesheet_path = drupal_get_path('module', 'osha_newsletter') . '/includes/css/newsletter-responsive.css';
+    $responsiveStylesheet =  file_get_contents($responsive_stylesheet_path);
 
-    $responsiveStylesheet =  '<style type="text/css">' . file_get_contents($responsive_stylesheet_path) . '</style>';
+    $responsiveStyle = $domDocument->createElement('style', $responsiveStylesheet);
+    $responsiveStyle->setAttribute('type', 'text/css');
 
-    $fragment = $domDocument->createDocumentFragment();
-    $fragment->appendXML($outlookCss);
-
-    $responsiveStyle = $domDocument->createDocumentFragment();
-    $responsiveStyle->appendXML($responsiveStylesheet);
+    $outlookStyle = $domDocument->createDocumentFragment();
+    $outlookStyle->appendXML($outlookCss);
 
     $head = $domDocument->getElementsByTagName('head');
     if (empty($head->length)) {
       $head = $domDocument->createElement('head');
       $head->appendChild($font);
-      $head->appendChild($fragment);
+      $head->appendChild($outlookStyle);
       $head->appendChild($responsiveStyle);
       $body = $domDocument->getElementsByTagName('body')->item(0);
       $body->parentNode->insertBefore($head, $body);
@@ -738,7 +737,8 @@ class OSHNewsletter {
     else {
       $head = $head->item(0);
       $head->appendChild($font);
-      $head->appendChild($fragment);
+      $head->appendChild($outlookStyle);
+      $head->appendChild($responsiveStyle);
     }
 
     return $domDocument->saveHTML();

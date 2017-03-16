@@ -111,38 +111,40 @@ if (!empty($campaign_id)) {
                       ?>
                     </td>
                   </tr>
-                  <tr>
-                    <td class="fallback-text" style="font-family: Oswald, Arial, sans-serif;">
-                      <?php
-                        $more_link_class = 'see-more';
-                        if ($node->type == 'publication') {
-                          print l(t('See more'), url('node/' . $node->nid . '/view', array('absolute' => TRUE)), array(
-                            'attributes' => array('class' => [$more_link_class, 'fallback-text']),
-                            'query' => $url_query,
-                            'external' => TRUE
-                          ));
-                        } else {
-                          print l(t('See more'), url('node/' . $node->nid, array('absolute' => TRUE)), array(
-                            'attributes' => array('class' => [$more_link_class, 'fallback-text']),
-                            'query' => $url_query,
-                            'external' => TRUE
-                          ));
-                        }
-                      $directory = drupal_get_path('module','osha_newsletter');
-                      print l(theme('image', array(
-                        'path' => $directory . '/images/' . 'pink-arrow.png',
-                        'width' => '19',
-                        'height' => '11',
-                        'alt' => $options['alt'],
-                        'attributes' => array('style' => 'border:0px;width:19px;height:11px;')
-                      )), $options['path'], array(
-                        'html' => TRUE,
-                        'external' => TRUE
-                      ));
-                      ?>
+                  <?php if(!$node->old_newsletter) { ?>
+                    <tr>
+                      <td class="fallback-text" style="font-family: Oswald, Arial, sans-serif;">
+                        <?php
+                          $more_link_class = 'see-more';
+                          if ($node->type == 'publication') {
+                            print l(t('See more'), url('node/' . $node->nid . '/view', array('absolute' => TRUE)), array(
+                              'attributes' => array('class' => [$more_link_class, 'fallback-text']),
+                              'query' => $url_query,
+                              'external' => TRUE
+                            ));
+                          } else {
+                            print l(t('See more'), url('node/' . $node->nid, array('absolute' => TRUE)), array(
+                              'attributes' => array('class' => [$more_link_class, 'fallback-text']),
+                              'query' => $url_query,
+                              'external' => TRUE
+                            ));
+                          }
+                        $directory = drupal_get_path('module','osha_newsletter');
+                        print l(theme('image', array(
+                          'path' => $directory . '/images/' . 'pink-arrow.png',
+                          'width' => '19',
+                          'height' => '11',
+                          'alt' => $options['alt'],
+                          'attributes' => array('style' => 'border:0px;width:19px;height:11px;')
+                        )), $options['path'], array(
+                          'html' => TRUE,
+                          'external' => TRUE
+                        ));
+                        ?>
 
-                    </td>
-                  </tr>
+                      </td>
+                    </tr>
+                  <?php } ?>
                 </tbody>
               </table>
             </td></tr>

@@ -18,8 +18,8 @@ global $base_url;
 global $language;
 
 ?>
-<link href='https://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
-<style>
+<!-- <link href='https://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'> -->
+<!-- <style>
 a{
 	text-decoration:none!important;
 	color:#003399!important;
@@ -39,7 +39,7 @@ td{
 	border:0px;
 	border-color: #FFFFFF;
 }
-</style>
+</style> -->
 <table border="0" cellpadding="28" cellspacing="0" width="800">
   <tbody>
     <tr>

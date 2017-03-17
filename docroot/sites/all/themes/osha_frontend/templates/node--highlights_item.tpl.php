@@ -128,18 +128,16 @@ if (!empty($campaign_id)) {
                         <?php
                           $more_link_class = 'see-more';
                           if ($node->type == 'publication') {
-                            print l(t('See more'), url('node/' . $node->nid . '/view', array('absolute' => TRUE)), array(
-                              'attributes' => array('class' => [$more_link_class, 'fallback-text']),
-                              'query' => $url_query,
-                              'external' => TRUE
-                            ));
-                          } else {
-                            print l(t('See more'), url('node/' . $node->nid, array('absolute' => TRUE)), array(
-                              'attributes' => array('class' => [$more_link_class, 'fallback-text']),
-                              'query' => $url_query,
-                              'external' => TRUE
-                            ));
+                            $node_url = url('node/' . $node->nid . '/view', array('absolute' => TRUE));
                           }
+                          else {
+                            $node_url = url('node/' . $node->nid, array('absolute' => TRUE));
+                          }
+                          print l(t('See more'), $node_url, array(
+                            'attributes' => array('class' => [$more_link_class, 'fallback-text']),
+                            'query' => $url_query,
+                            'external' => TRUE
+                          ));
                         $directory = drupal_get_path('module','osha_newsletter');
                         print l(theme('image', array(
                           'path' => $directory . '/images/' . 'pink-arrow.png',
@@ -147,9 +145,10 @@ if (!empty($campaign_id)) {
                           'height' => '11',
                           'alt' => $options['alt'],
                           'attributes' => array('style' => 'border:0px;width:19px;height:11px;')
-                        )), $options['path'], array(
+                        )), $node_url, array(
                           'html' => TRUE,
-                          'external' => TRUE
+                          'external' => TRUE,
+                          'query' => $url_query
                         ));
                         ?>
 

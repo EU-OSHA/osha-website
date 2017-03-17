@@ -143,7 +143,6 @@ if (!empty($campaign_id)) {
                           'path' => $directory . '/images/' . 'pink-arrow.png',
                           'width' => '19',
                           'height' => '11',
-                          'alt' => $options['alt'],
                           'attributes' => array('style' => 'border:0px;width:19px;height:11px;')
                         )), $node_url, array(
                           'html' => TRUE,

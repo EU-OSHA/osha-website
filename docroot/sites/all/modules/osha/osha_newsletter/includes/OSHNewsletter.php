@@ -252,12 +252,28 @@ class OSHNewsletter {
         'height' => '11',
         'attributes' => array('style' => 'border:0px;width:19px;height:11px;')
       ));
-      $content['#suffix'] = l(t('View all') . $arrow, $url, [
-        'html' => true,
-        'absolute' => true,
-        'query' => $url_query,
-        'attributes' => ['class' => ['view-all', 'see-more', 'fallback-text']]
-      ]);
+      $view_all = [
+        '#theme' => 'table',
+        '#header' => [],
+        '#rows' => [0 => [
+          l(t('View all') . $arrow, $url, [
+            'html' => true,
+            'absolute' => true,
+            'query' => $url_query,
+            'attributes' => ['class' => ['view-all', 'see-more', 'fallback-text']]
+          ])
+        ]],
+        '#attributes' => [
+          'class' => ['view-all-table'],
+          'width' => '100%',
+          'cellpadding' => '0',
+          'cellspacing' => '0',
+        ],
+        '#printed' => false,
+        '#sticky' => false,
+        '#children' => [],
+      ];
+      $content['#suffix'] = render($view_all);
     }
     switch ($template) {
       case 'newsletter_multiple_columns':
@@ -456,6 +472,7 @@ class OSHNewsletter {
           $current_section = $item->entity_id;
           $section = $item->content;
           $section->campaign_id = $campaign_id;
+          $section->old_newsletter = false;
           $content[$current_section] = [
             '#style' => !empty($item->style) ? $item->style : key($templatesList),
             'section' => $section,
@@ -475,9 +492,8 @@ class OSHNewsletter {
           }
 
           if ($isOldNewsletter) {
-            $term = $item->content;
-            $term->old_newsletter = true;
-            $term = taxonomy_term_view($item->content, 'token');
+            $section->old_newsletter = true;
+            $term = taxonomy_term_view($section, 'token');
             switch($current_section) {
               case '11': // News
                 $oldNewsletter['news'][] = $term;
@@ -501,6 +517,7 @@ class OSHNewsletter {
           }
           $node = $item->content;
           $node->campaign_id = $campaign_id;
+          $node->old_newsletter = false;
           $content[$current_section]['nodes'][] = [
             '#style' => self::getChildStyle($content[$current_section]['#style']),
             'node' => $node,

@@ -21,6 +21,7 @@ $url_query = array();
 if (!empty($campaign_id)) {
   $url_query = array('pk_campaign' => $campaign_id);
 }
+
 ?>
 <table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%" class="highlight-item">
   <tbody>

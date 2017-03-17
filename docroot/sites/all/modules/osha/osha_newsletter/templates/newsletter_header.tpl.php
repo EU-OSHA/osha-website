@@ -27,7 +27,7 @@ if (!empty($campaign_id)) {
   <tbody>
     <tr>
       <td>
-        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="language-bar">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="language-bar" style="max-width:100%;">
           <tbody>
             <tr>
               <td style="font-size: 12px; padding-left: 30px; padding-right: 30px; font-family: Arial,sans-serif;">

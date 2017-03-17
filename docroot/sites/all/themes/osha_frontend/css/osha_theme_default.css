@@ -505,8 +505,11 @@ img[alt*="Select language"]{
     font-size: 0.913em;
     font-weight: bold;
     position: absolute;
-    width: 100px;
+    width: 106px;
     right: 235px;
+}
+.fixedHeader #languagesAndSearch{
+	min-width: 340px !important;
 }
 
 #languagesAndSearch input {
@@ -6919,6 +6922,7 @@ article.comment p {
 div.contextual-links-wrapper{
 	top:initial!important;
 	right:initial!important;
+	position: relative;
 }
 
 /*END STYLE TO CONFIGURE ADMIN*/

@@ -72,7 +72,7 @@ index 070391a..8c2e140 100644
    // The tweet itself goes into the tweet contents field
    $node->field_tweet_contents[$node->language][0] = array(
 -    'value' => utf8_encode(htmlspecialchars_decode($tweet_html)),
-+    'value' => htmlspecialchars_decode(tweet_feed_filter_smart_quotes($tweet_html)),
++    'value' => htmlspecialchars_decode(utf8_encode(tweet_feed_filter_smart_quotes($tweet_html))),
      'format' => 'full_html',
    );
  

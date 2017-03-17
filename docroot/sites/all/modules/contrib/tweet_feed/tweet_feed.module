@@ -232,7 +232,7 @@ function tweet_feed_cron() {
                   ->execute();
       if ($result->rowCount() > 0) {
         $tdata = $result->fetchObject();
-        $hash = md5(serialize($tweet->text));
+        $hash = md5(serialize($tweet->full_text));
         // If our hashes are equal, we have nothing to update and can move along.
         if ($hash == $tdata->hash) {
           continue;
@@ -767,7 +767,7 @@ function tweet_feed_save_tweet($tweet, $feed, $update_node_id = 0, $hash = NULL,
 
   // The tweet itself goes into the tweet contents field
   $node->field_tweet_contents[$node->language][0] = array(
-    'value' => htmlspecialchars_decode(tweet_feed_filter_smart_quotes($tweet_html)),
+    'value' => htmlspecialchars_decode(utf8_encode(tweet_feed_filter_smart_quotes($tweet_html))),
     'format' => 'full_html',
   );
 

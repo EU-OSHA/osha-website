@@ -22,7 +22,7 @@ if (!empty($campaign_id)) {
 }
 ?>
 <?php if($node->title != NULL) {?>
-  <table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%" height="100%" class="newsletter-item" style="font-family: Arial, sans-serif;" >
+  <table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%" height="100%" class="newsletter-item <?php print drupal_clean_css_identifier($node->type); ?>" style="font-family: Arial, sans-serif;" >
     <tbody>
       <?php if(!empty($node->old_newsletter)): ?>
         <tr>
@@ -81,7 +81,7 @@ if (!empty($campaign_id)) {
     }
     ?>
     <tr style="height: 100%;">
-      <?php if ($node->type !== 'twitter_tweet_feed') { ?>
+      <?php if (!in_array($node->type, ['twitter_tweet_feed', 'newsletter_article'])) { ?>
         <td align="left" width="10" style="padding-right: 0px; vertical-align: top; padding-top: 5px; font-family: Arial, sans-serif;">
           <span> > </span>
         </td>
@@ -110,11 +110,8 @@ if (!empty($campaign_id)) {
             }
             break;
           case 'newsletter_article':
-            if (empty($node->body)) {
-              print $node->title;
-            }
-            else {
-              goto defaultLabel;
+            if (!empty($node->body)) {
+              print render(field_view_field('node', $node, 'body', 'newsletter_item'));
             }
             break;
           default:

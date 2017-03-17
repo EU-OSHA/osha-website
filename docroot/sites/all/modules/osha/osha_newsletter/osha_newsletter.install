@@ -174,7 +174,7 @@ function osha_newsletter_update_7005() {
     [
       // Coming soon
       'tid' => '13',
-      'field_newsletter_template' => 'newsletter_full_width_details',
+      'field_newsletter_template' => 'newsletter_full_width_list',
       'weight' => -1,
     ],
   ];

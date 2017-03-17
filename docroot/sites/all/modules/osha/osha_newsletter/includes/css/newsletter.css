@@ -223,6 +223,10 @@ p.tweet-contents {
   /* line-height: 17px; */
   margin: 0;
 }
+.newsletter-item.newsletter-article p {
+  font-size: 15px;
+  font-weight: bold;
+}
 .tweet-contents a,
 .tweet-link a {
   color: #38aadc !important;
@@ -238,6 +242,7 @@ p.tweet-link a {
 .newsletter-item a {
   color: #003399;
 }
+
 
 .newsletter-full-width-2-col-blocks-item > table td,
 .newsletter-full-width-2-col-blocks-item > .newsletter-item a {

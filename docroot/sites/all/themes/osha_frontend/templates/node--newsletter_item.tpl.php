@@ -135,13 +135,11 @@ if (!empty($campaign_id)) {
         ?>
       </td>
     </tr>
-    <?php if($node->old_newsletter) { ?>
+    <?php if(!empty($node->old_newsletter)): ?>
       <tr>
         <td colspan="3" style="padding-top: 15px;"></td>
       </tr>
-    <?php
-      }
-    ?>
+    <?php endif; ?>
     </tbody>
   </table>
 <?php } ?>

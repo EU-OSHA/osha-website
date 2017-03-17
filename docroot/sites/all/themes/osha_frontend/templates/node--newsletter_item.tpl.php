@@ -22,7 +22,7 @@ if (!empty($campaign_id)) {
 }
 ?>
 <?php if($node->title != NULL) {?>
-  <table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%" height="100%" class="newsletter-item" >
+  <table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%" height="100%" class="newsletter-item" style="font-family: Arial, sans-serif;" >
     <tbody>
       <?php if($node->old_newsletter) { ?>
         <tr>
@@ -100,17 +100,15 @@ if (!empty($campaign_id)) {
             break;
           case 'twitter_tweet_feed':
             if (!empty($node->field_tweet_author[LANGUAGE_NONE][0]['value'])
-                && !empty($node->field_tweet_contents[LANGUAGE_NONE][0]['value'])) {
-              printf("<p class='tweet-author'>@%s</p><p class='tweet-contents'>%s</p>",
+                && !empty($node->field_tweet_contents[LANGUAGE_NONE][0]['value'])
+                && !empty($node->field_link_to_tweet[LANGUAGE_NONE][0]['value'])) {
+              printf("<p class='tweet-author'><a target='_blank' href='%s'>@%s</a></p><p class='tweet-contents'>%s</p>",
+                $node->field_link_to_tweet[LANGUAGE_NONE][0]['value'],
                 $node->field_tweet_author[LANGUAGE_NONE][0]['value'],
                 $node->field_tweet_contents[LANGUAGE_NONE][0]['value']);
             }
             else {
               goto defaultLabel;
-            }
-            if (!empty($node->field_link_to_tweet[LANGUAGE_NONE][0]['value'])) {
-              $link = $node->field_link_to_tweet[LANGUAGE_NONE][0]['value'];
-              printf("<p class='tweet-link'>%s</p>", l($link, $link));
             }
             break;
           case 'newsletter_article':

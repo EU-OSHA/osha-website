@@ -9,12 +9,12 @@ class OSHNewsletter {
 
   public static function getTemplatesList() {
     return [
-      'newsletter_full_width_details' => 'Full width: detail',
-      'newsletter_full_width_list' => 'Full width: summary',
-      'newsletter_half_width_list' => '1/2 width: summary',
-      'newsletter_half_image_left' => 'Healthy Workplaces Campaigns',
-      'newsletter_full_width_2_col_blocks' => 'Events',
-      'newsletter_half_width_twitter' => 'Tweets',
+      'newsletter_full_width_details' => 'Teaser (full width)',
+      'newsletter_full_width_list' => 'Summary (full width)',
+      'newsletter_half_width_list' => 'Summary (half width)',
+      'newsletter_half_image_left' => 'HWC (full width)',
+      'newsletter_full_width_2_col_blocks' => 'Events (2 columns)',
+      'newsletter_half_width_twitter' => 'Tweets (half width)',
     ];
   }
 

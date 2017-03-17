@@ -664,7 +664,7 @@ function osha_newsletter_field_default_field_instances() {
     ),
     'entity_type' => 'taxonomy_term',
     'field_name' => 'field_background_image',
-    'label' => 'Background Image',
+    'label' => 'Left column image',
     'required' => 0,
     'settings' => array(
       'alt_field' => 0,
@@ -729,7 +729,7 @@ function osha_newsletter_field_default_field_instances() {
     ),
     'entity_type' => 'taxonomy_term',
     'field_name' => 'field_icon',
-    'label' => 'Icon',
+    'label' => 'Section icon',
     'required' => 0,
     'settings' => array(
       'alt_field' => 0,
@@ -792,7 +792,7 @@ function osha_newsletter_field_default_field_instances() {
     ),
     'entity_type' => 'taxonomy_term',
     'field_name' => 'field_link',
-    'label' => 'Link',
+    'label' => '\'View all\' link',
     'required' => 0,
     'settings' => array(
       'absolute_url' => 0,
@@ -857,7 +857,7 @@ function osha_newsletter_field_default_field_instances() {
     ),
     'entity_type' => 'taxonomy_term',
     'field_name' => 'field_newsletter_template',
-    'label' => 'Newsletter template',
+    'label' => 'Default template',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -921,21 +921,21 @@ function osha_newsletter_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('\'View all\' link');
   t('Author');
-  t('Background Image');
   t('Background color');
   t('Body');
   t('Campaign ID in Piwik');
   t('Created');
+  t('Default template');
   t('Description');
-  t('Icon');
   t('Images');
-  t('Link');
+  t('Left column image');
   t('Name');
   t('Newsletter configuration');
   t('Newsletter sent?');
-  t('Newsletter template');
   t('Publication date');
+  t('Section icon');
   t('Select content added after');
   t('Title');
 

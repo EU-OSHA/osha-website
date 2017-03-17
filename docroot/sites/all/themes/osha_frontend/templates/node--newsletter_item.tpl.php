@@ -24,13 +24,11 @@ if (!empty($campaign_id)) {
 <?php if($node->title != NULL) {?>
   <table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%" height="100%" class="newsletter-item" >
     <tbody>
-      <?php if($node->old_newsletter) { ?>
+      <?php if(!empty($node->old_newsletter)): ?>
         <tr>
           <td colspan="3" style="padding-top: 15px;"></td>
         </tr>
-      <?php
-        }
-      ?>
+      <?php endif; ?>
     <?php
     if (isset($node->field_publication_date[LANGUAGE_NONE][0]['value']) && $node->type != 'newsletter_article') {
       $date = strtotime($node->field_publication_date[LANGUAGE_NONE][0]['value']);

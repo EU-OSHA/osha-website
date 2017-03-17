@@ -445,6 +445,13 @@ class OSHNewsletter {
       default:
         return theme($template, $variables);
     }
+    if (!empty($content['#rows'])) {
+      foreach ($content['#rows'] as $key => $row) {
+        if (!empty($row)) {
+          $content['#rows'][$key]['no_striping'] = true;
+        }
+      }
+    }
     return drupal_render($content);
   }
 

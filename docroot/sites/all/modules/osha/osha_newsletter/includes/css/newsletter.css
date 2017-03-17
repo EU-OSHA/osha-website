@@ -1,5 +1,6 @@
 .newsletter-container,
-.template-container {
+.template-container,
+.content-container > td > table {
   max-width: 800px;
 }
 .newsletter-container {
@@ -207,10 +208,14 @@ td.social {
   font-weight: bold;
   font-family: Arial Black, sans-serif;
 }
-p.tweet-contents,
-p.tweet-link {
-  padding-left: 10px;
+p.tweet-author a {
+  color: #003399 !important;
 }
+p.tweet-contents {
+  padding-left: 10px;
+  max-width: 100%;
+}
+
 .newsletter-half-width-twitter .newsletter-item p {
   color: #353535;
   font-family: Arial, sans-serif;
@@ -221,9 +226,13 @@ p.tweet-link {
 .tweet-contents a,
 .tweet-link a {
   color: #38aadc !important;
-  max-width: 100%;
-  overflow: hidden;
-  word-break: break-word;
+  max-width: 149px;
+  word-break: break-all;
+}
+p.tweet-link a {
+  color: #353535 !important;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 .newsletter-item a {
@@ -250,11 +259,13 @@ p.tweet-link {
   padding-bottom: 45px;
 }
 .multiple-columns-cell > table {
-  max-width: 380px;
+  max-width: 360px;
+}
+.multiple-columns-cell > .newsletter-section {
   height: 100%;
 }
 .multiple-columns-cell .newsletter-half-width-twitter-item > .newsletter-item {
-  max-width: 190px;
+  max-width: 180px;
 }
 
 /* Larger left-right padding for multiple columns */

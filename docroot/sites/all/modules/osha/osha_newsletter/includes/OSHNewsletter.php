@@ -256,16 +256,22 @@ class OSHNewsletter {
         '#theme' => 'table',
         '#header' => [],
         '#rows' => [0 => [
-          l(t('View all') . $arrow, $url, [
-            'html' => true,
-            'absolute' => true,
-            'query' => $url_query,
-            'attributes' => ['class' => ['view-all', 'see-more', 'fallback-text']]
-          ])
+          [
+            'data' => l(t('View all') . $arrow, $url, [
+              'html' => true,
+              'absolute' => true,
+              'query' => $url_query,
+              'attributes' => ['class' => ['view-all', 'see-more', 'fallback-text']]
+            ]),
+            'align' => 'Right',
+            'style' => 'padding-top: 10px; padding-bottom: 20px; border-top: 1px dashed #dddddd;',
+            'class' => ['fallback-text'],
+          ],
         ]],
         '#attributes' => [
           'class' => ['view-all-table'],
           'width' => '100%',
+          'height' => 'auto',
           'cellpadding' => '0',
           'cellspacing' => '0',
         ],
@@ -409,13 +415,13 @@ class OSHNewsletter {
 
         foreach ($variables['nodes'] as $node) {
           $cellContent = self::getCellContent($template, $node);
-          $cellContent['width'] = '190';
+          $cellContent['width'] = '180';
           $cellContent['height'] = '1%';
           if (empty($cellContent['style'])) {
-            $cellContent['style'] = 'max-width:190px;';
+            $cellContent['style'] = 'max-width:180px;';
           }
           else {
-            $cellContent['style'] .= 'max-width:190px;';
+            $cellContent['style'] .= 'max-width:180px;';
           }
           // array_push($cellContent['class'], 'template-column');
           if ($currentCol++ === 0) {

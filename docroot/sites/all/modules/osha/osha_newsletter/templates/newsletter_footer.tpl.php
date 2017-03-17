@@ -18,7 +18,7 @@ if (!empty($campaign_id)) {
 global $language;
 ?>
 
-<table border="0" cellpadding="28" cellspacing="0" width="100%" class="template-container footer">
+<table border="0" cellpadding="0" cellspacing="0" width="100%" class="template-container footer">
   <tbody>
     <tr>
       <td style="padding-top: 15px; padding-bottom: 15px; text-align: center; font-family: Arial,sans-serif; font-size: 12px; color: #333333;">

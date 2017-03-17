@@ -22,7 +22,7 @@ if (!empty($campaign_id)) {
 }
 ?>
 <?php if($node->title != NULL) {?>
-  <table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%" height="100%" class="newsletter-item" >
+  <table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%" height="100%" class="newsletter-item" style="font-family: Arial, sans-serif;" >
     <tbody>
       <?php if(!empty($node->old_newsletter)): ?>
         <tr>
@@ -50,12 +50,10 @@ if (!empty($campaign_id)) {
             <?php
               global $base_url;
 
-              // @TODO:
-              // $calendar_img = 'calendar-' . date('d', $date) . '.png';
-              // end TODO
+            $calendar_img = 'calendar-' . date('d', $date);
 
-              $calendar_img = !empty($node->arrow_color) ? "calendar-15-{$node->arrow_color}.png" : "calendar-15.png";
-              $calendar_img_path = "{$base_url}/sites/all/modules/osha/osha_newsletter/images/{$calendar_img}";
+            $calendar_img = !empty($node->arrow_color) ? "{$calendar_img}-{$node->arrow_color}.png" : "{$calendar_img}.png";
+            $calendar_img_path = "{$base_url}/sites/all/modules/osha/osha_newsletter/images/{$calendar_img}";
 
               print l(theme('image', array(
               'path' => $calendar_img_path,
@@ -100,17 +98,15 @@ if (!empty($campaign_id)) {
             break;
           case 'twitter_tweet_feed':
             if (!empty($node->field_tweet_author[LANGUAGE_NONE][0]['value'])
-                && !empty($node->field_tweet_contents[LANGUAGE_NONE][0]['value'])) {
-              printf("<p class='tweet-author'>@%s</p><p class='tweet-contents'>%s</p>",
+                && !empty($node->field_tweet_contents[LANGUAGE_NONE][0]['value'])
+                && !empty($node->field_link_to_tweet[LANGUAGE_NONE][0]['value'])) {
+              printf("<p class='tweet-author'><a target='_blank' href='%s'>@%s</a></p><p class='tweet-contents'>%s</p>",
+                $node->field_link_to_tweet[LANGUAGE_NONE][0]['value'],
                 $node->field_tweet_author[LANGUAGE_NONE][0]['value'],
                 $node->field_tweet_contents[LANGUAGE_NONE][0]['value']);
             }
             else {
               goto defaultLabel;
-            }
-            if (!empty($node->field_link_to_tweet[LANGUAGE_NONE][0]['value'])) {
-              $link = $node->field_link_to_tweet[LANGUAGE_NONE][0]['value'];
-              printf("<p class='tweet-link'>%s</p>", l($link, $link));
             }
             break;
           case 'newsletter_article':

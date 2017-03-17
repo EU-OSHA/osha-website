@@ -30,13 +30,23 @@ if (!empty($campaign_id)) {
         <table border="0" cellpadding="0" cellspacing="0" class="item-thumbnail-and-title" width="100%">
           <tbody>
             <tr>
-              <td rowspan=<?php print($node->old_newsletter ? '1' : '2'); ?> width=<?php print($node->old_newsletter ? '100' : '300'); ?> style="padding-bottom:10px;vertical-align: top;padding-top:0px; padding-right: 20px;max-width:300px;text-align:center;" class=<?php print(!$node->old_newsletter ? 'template-column template-image' : ''); ?> >
-                <table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td style="background-color:#efefef;">
+            <?php
+              $old_width = 100;
+              $new_width = 300;
+              $highlight_img_width = $node->old_newsletter ? $old_width : $new_width;
+            ?>
+              <td rowspan=<?php print($node->old_newsletter ? '1' : '2'); ?>
+                  width="<?php print($highlight_img_width);?>"
+                  style="padding-bottom:10px; vertical-align: top; padding-top:0px; padding-right: 20px; text-align:center; max-width:<?php print($highlight_img_width);?>px;"
+                  <?php if(!$node->old_newsletter) { ?>
+                    class="template-column template-image"
+                  <?php } ?> >
+                <table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="center" style="background-color:#efefef;">
                   <?php
                     print l(theme('image_style', array(
                       'style_name' => ($node->old_newsletter ? 'thumbnail' : 'highlight_image'),
                       'path' => (isset($field_image) && !empty($field_image)) ? $field_image[0]['uri'] : '',
-                      'width' => ($node->old_newsletter ? '100%' : ''),
+                      'width' => ($node->old_newsletter ? '100%' : 'auto'),
                       // 'height' => 'auto',
                       'alt' => (isset($field_image) && !empty($field_image)) ? $field_image[0]['alt'] : '',
                       'attributes' => array('style' => 'border: 0px;max-width: 100%;height:auto;background-color: #ffffff;vertical-align:middle;')
@@ -112,35 +122,39 @@ if (!empty($campaign_id)) {
                       ?>
                     </td>
                   </tr>
-                  <tr>
-                    <td class="fallback-text" style="font-family: Oswald, Arial, sans-serif;">
-                      <?php
-                        $more_link_class = 'see-more';
-                        if ($node->type == 'publication') {
-                          $node_url = url('node/' . $node->nid . '/view', array('absolute' => TRUE));
-                        }
-                        else {
-                          $node_url = url('node/' . $node->nid, array('absolute' => TRUE));
-                        }
-                        print l(t('See more'), $node_url, array(
-                          'attributes' => array('class' => [$more_link_class, 'fallback-text']),
-                          'query' => $url_query,
-                          'external' => TRUE
-                        ));
+                  <?php if(!$node->old_newsletter) { ?>
+                    <tr>
+                      <td class="fallback-text" style="font-family: Oswald, Arial, sans-serif;">
+                        <?php
+                          $more_link_class = 'see-more';
+                          if ($node->type == 'publication') {
+                            $node_url = url('node/' . $node->nid . '/view', array('absolute' => TRUE));
+                          }
+                          else {
+                            $node_url = url('node/' . $node->nid, array('absolute' => TRUE));
+                          }
+                          print l(t('See more'), $node_url, array(
+                            'attributes' => array('class' => [$more_link_class, 'fallback-text']),
+                            'query' => $url_query,
+                            'external' => TRUE
+                          ));
                         $directory = drupal_get_path('module','osha_newsletter');
                         print l(theme('image', array(
                           'path' => $directory . '/images/' . 'pink-arrow.png',
                           'width' => '19',
                           'height' => '11',
+                          'alt' => $options['alt'],
                           'attributes' => array('style' => 'border:0px;width:19px;height:11px;')
                         )), $node_url, array(
                           'html' => TRUE,
                           'external' => TRUE,
-                          'query' => $url_query,
+                          'query' => $url_query
                         ));
-                      ?>
-                    </td>
-                  </tr>
+                        ?>
+
+                      </td>
+                    </tr>
+                  <?php } ?>
                 </tbody>
               </table>
             </td></tr>

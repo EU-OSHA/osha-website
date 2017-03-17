@@ -1,0 +1,51 @@
+diff --git a/docroot/sites/all/modules/contrib/tweet_feed/tweet_feed.module b/docroot/sites/all/modules/contrib/tweet_feed/tweet_feed.module
+index 4935084bd..122265ddc 100644
+--- a/docroot/sites/all/modules/contrib/tweet_feed/tweet_feed.module
++++ b/docroot/sites/all/modules/contrib/tweet_feed/tweet_feed.module
+@@ -390,8 +390,8 @@ function tweet_feed_pull_data_from_feed($fid, $web_interface = FALSE) {
+   $lowest_id = -1;
+   $tweets = array();
+   $params = ($feed->query_type == QUERY_TIMELINE) ?
+-    array('user_id' => $feed->timeline_id, 'count' => 100) :
+-    array('q' => $feed->search_term, 'count' => 100);
++    array('user_id' => $feed->timeline_id, 'count' => 100, 'tweet_mode' => 'extended') :
++    array('q' => $feed->search_term, 'count' => 100, 'tweet_mode' => 'extended');
+ 
+   while (count($tweets) < $number_to_get && $lowest_id != 0) {
+     tweet_feed_set_message('Tweets Imported: ' . count($tweets) . ', Total To Import: ' . $number_to_get, 'ok', $web_interface);
+@@ -554,7 +554,7 @@ function tweet_feed_process_tweets($tweet_data, $feed, $number_to_get = 0, $run_
+                 ->execute();
+     if ($result->rowCount() > 0) {
+       $tdata = $result->fetchObject();
+-      $hash = md5(serialize($tweet->text));
++      $hash = md5(serialize($tweet->full_text));
+       // If our hashes are equal, we have nothing to update and can move along
+       $update = ($hash == $tdata->hash);
+       continue;
+@@ -729,7 +729,7 @@ function tweet_feed_save_tweet($tweet, $feed, $update_node_id = 0, $hash = NULL,
+ 
+   // Process the tweet. This linkes our twitter names, hash tags and converts any
+   // URL's into HTML.
+-  $tweet_html = tweet_feed_format_output($tweet->text, $feed->new_window, $feed->hash_taxonomy, $hashtags);
++  $tweet_html = tweet_feed_format_output($tweet->full_text, $feed->new_window, $feed->hash_taxonomy, $hashtags);
+ 
+   // Populate our node object with the data we will need to save
+   $node = new stdClass();
+@@ -744,7 +744,7 @@ function tweet_feed_save_tweet($tweet, $feed, $update_node_id = 0, $hash = NULL,
+ 
+   // Because we modify the tweet to get source images, we need to get the hash before
+   // we do any of our processing
+-  $tweet_hash = md5(serialize($tweet->text));
++  $tweet_hash = md5(serialize($tweet->full_text));
+ 
+   // If we are being provided a hash, we compare against this hash and if they are equal
+   // then there is nothing to do
+@@ -763,7 +763,7 @@ function tweet_feed_save_tweet($tweet, $feed, $update_node_id = 0, $hash = NULL,
+   $node->language = LANGUAGE_NONE;
+ 
+   // Filter it cleanly since it is going into the title field and remove iconv.
+-  $node->title = check_plain(substr(tweet_feed_filter_iconv_text(tweet_feed_filter_smart_quotes($tweet->user->screen_name)) . ': ' . tweet_feed_filter_iconv_text(tweet_feed_filter_smart_quotes($tweet->text)), 0, 255));
++  $node->title = check_plain(substr(tweet_feed_filter_iconv_text(tweet_feed_filter_smart_quotes($tweet->user->screen_name)) . ': ' . tweet_feed_filter_iconv_text(tweet_feed_filter_smart_quotes($tweet->full_text)), 0, 255));
+ 
+   // The tweet itself goes into the tweet contents field
+   $node->field_tweet_contents[$node->language][0] = array(

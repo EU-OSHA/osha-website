@@ -47,33 +47,39 @@ if (!empty($campaign_id)) {
       $city_location = (isset($field_city) && !empty($field_city)) ? $field_city[0]['safe_value'] : '';
       ?>
       <tr>
-        <td rowspan="2" width="40" style="width:40px; padding-right: 10px;">
-          <?php
-            global $base_url;
+        <?php if (empty($node->old_newsletter)): ?>
+          <td rowspan="2" width="40" style="width:40px; padding-right: 10px;">
+            <?php
+              global $base_url;
 
-            // @TODO:
-            // $calendar_img = 'calendar-' . date('d', $date) . '.png';
-            // end TODO
+              // @TODO:
+              // $calendar_img = 'calendar-' . date('d', $date) . '.png';
+              // end TODO
 
-            $calendar_img = !empty($node->arrow_color) ? "calendar-15-{$node->arrow_color}.png" : "calendar-15.png";
-            $calendar_img_path = "{$base_url}/sites/all/modules/osha/osha_newsletter/images/{$calendar_img}";
+              $calendar_img = !empty($node->arrow_color) ? "calendar-15-{$node->arrow_color}.png" : "calendar-15.png";
+              $calendar_img_path = "{$base_url}/sites/all/modules/osha/osha_newsletter/images/{$calendar_img}";
 
-            print l(theme('image', array(
-            'path' => $calendar_img_path,
-            'width' => 40,
-            'height' => 36,
-            'alt' => 'calendar',
-            'attributes' => array('style' => 'border: 0px;height:35px!important;width:40px!important;')
-          )), url('node/' . $node->nid, array('absolute' => TRUE)), array(
-            'html' => TRUE,
-            'external' => TRUE,
-            'query' => $url_query,
-          ));
-          ?>
-        </td>
-        <td colspan="2" style="font-family: Arial, sans-serif; font-size: 14px; padding-bottom: 0;">
-          <span class="item-date"><?php if (trim($country_location) != '' && trim($city_location) != '') { echo $country_location . ' ' . $city_location . ', ';} if (trim($date) != '') { print format_date($date, 'custom', 'd/m/Y');}?></span>
-        </td>
+              print l(theme('image', array(
+              'path' => $calendar_img_path,
+              'width' => 40,
+              'height' => 36,
+              'alt' => 'calendar',
+              'attributes' => array('style' => 'border: 0px;height:35px!important;width:40px!important;')
+            )), url('node/' . $node->nid, array('absolute' => TRUE)), array(
+              'html' => TRUE,
+              'external' => TRUE,
+              'query' => $url_query,
+            ));
+            ?>
+          </td>
+          <td colspan="2" style="font-family: Arial, sans-serif; font-size: 14px; padding-bottom: 0;">
+            <span class="item-date"><?php if (trim($country_location) != '' && trim($city_location) != '') { echo $country_location . ' ' . $city_location . ', ';} if (trim($date) != '') { print format_date($date, 'custom', 'd/m/Y');}?></span>
+          </td>
+        <?php else: ?>
+          <td colspan="2" style="font-family: Arial, sans-serif; font-size: 14px; padding-bottom: 0;">
+            <span class="item-date"><?php if (trim($country_location) != '' && trim($city_location) != '') { echo $country_location . ' ' . $city_location . ', ';} if (trim($date) != '') { print format_date($date, 'custom', 'd/m/Y');}?></span>
+          </td>
+        <?php endif; ?>
       </tr>
       <?php
     }

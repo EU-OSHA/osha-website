@@ -256,16 +256,22 @@ class OSHNewsletter {
         '#theme' => 'table',
         '#header' => [],
         '#rows' => [0 => [
-          l(t('View all') . $arrow, $url, [
-            'html' => true,
-            'absolute' => true,
-            'query' => $url_query,
-            'attributes' => ['class' => ['view-all', 'see-more', 'fallback-text']]
-          ])
+          [
+            'data' => l(t('View all') . $arrow, $url, [
+              'html' => true,
+              'absolute' => true,
+              'query' => $url_query,
+              'attributes' => ['class' => ['view-all', 'see-more', 'fallback-text']]
+            ]),
+            'align' => 'Right',
+            'style' => 'padding-top: 10px; padding-bottom: 20px; border-top: 1px dashed #dddddd;',
+            'class' => ['fallback-text'],
+          ],
         ]],
         '#attributes' => [
           'class' => ['view-all-table'],
           'width' => '100%',
+          'height' => 'auto',
           'cellpadding' => '0',
           'cellspacing' => '0',
         ],

@@ -530,6 +530,7 @@ class OSHNewsletter {
           }
           $node = $item->content;
           $node->campaign_id = $campaign_id;
+          $node->parent_section = $current_section;
           $node->old_newsletter = false;
           $content[$current_section]['nodes'][] = [
             '#style' => self::getChildStyle($content[$current_section]['#style']),
@@ -537,7 +538,6 @@ class OSHNewsletter {
           ];
 
           if ($isOldNewsletter) {
-            $node = $item->content;
             $node->old_newsletter = true;
             $node = node_view($node, $item->style);
             $node['#campaign_id'] = $campaign_id;

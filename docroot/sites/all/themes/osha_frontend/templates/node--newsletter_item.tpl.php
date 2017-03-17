@@ -81,7 +81,8 @@ if (!empty($campaign_id)) {
     }
     ?>
     <tr style="height: 100%;">
-      <?php if (!in_array($node->type, ['twitter_tweet_feed', 'newsletter_article'])) { ?>
+      <?php if (!in_array($node->type, ['twitter_tweet_feed'])
+                && (empty($node->parent_section) || $node->parent_section != 13)) { ?>
         <td align="left" width="10" style="padding-right: 0px; vertical-align: top; padding-top: 5px; font-family: Arial, sans-serif;">
           <span> > </span>
         </td>
@@ -110,8 +111,12 @@ if (!empty($campaign_id)) {
             }
             break;
           case 'newsletter_article':
-            if (!empty($node->body)) {
+            if (!empty($node->parent_section) && $node->parent_section == 13) {
+              // Coming soon section
               print render(field_view_field('node', $node, 'body', 'newsletter_item'));
+            }
+            else {
+              goto defaultLabel;
             }
             break;
           default:

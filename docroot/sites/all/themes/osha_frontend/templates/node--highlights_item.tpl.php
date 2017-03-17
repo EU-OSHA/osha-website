@@ -122,7 +122,7 @@ if (!empty($campaign_id)) {
                       ?>
                     </td>
                   </tr>
-                  <?php if(!$node->old_newsletter) { ?>
+                  <?php if(empty($node->old_newsletter)) { ?>
                     <tr>
                       <td class="fallback-text" style="font-family: Oswald, Arial, sans-serif;">
                         <?php
@@ -148,6 +148,21 @@ if (!empty($campaign_id)) {
                           'html' => TRUE,
                           'external' => TRUE,
                           'query' => $url_query
+                        ));
+                        ?>
+
+                      </td>
+                      <td class="fallback-text" align="right" valign="middle" style="font-family: Oswald, Arial, sans-serif;">
+                        <?php
+                        print l(theme('image', array(
+                          'path' => $directory . '/images/' . 'share-icon.png',
+                          'width' => '20',
+                          'height' => '20',
+                          'attributes' => array('style' => 'border:0px;width:20px;height:20px;')
+                        )), $node_url, array(
+                          'html' => TRUE,
+                          'external' => TRUE,
+                          'query' => $url_query + ['action' => 'share'],
                         ));
                         ?>
 

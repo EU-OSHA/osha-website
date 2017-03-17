@@ -30,13 +30,23 @@ if (!empty($campaign_id)) {
         <table border="0" cellpadding="0" cellspacing="0" class="item-thumbnail-and-title" width="100%">
           <tbody>
             <tr>
-              <td rowspan=<?php print($node->old_newsletter ? '1' : '2'); ?> width=<?php print($node->old_newsletter ? '100' : '300'); ?> style="padding-bottom:10px;vertical-align: top;padding-top:0px; padding-right: 20px;max-width:300px;text-align:center;" <?php if(!$node->old_newsletter) { ?> class="template-column template-image" <?php } ?> >
+            <?php
+              $old_width = 100;
+              $new_width = 300;
+              $highlight_img_width = $node->old_newsletter ? $old_width : $new_width;
+            ?>
+              <td rowspan=<?php print($node->old_newsletter ? '1' : '2'); ?>
+                  width="<?php print($highlight_img_width);?>"
+                  style="padding-bottom:10px; vertical-align: top; padding-top:0px; padding-right: 20px; text-align:center; max-width:<?php print($highlight_img_width);?>px;"
+                  <?php if(!$node->old_newsletter) { ?>
+                    class="template-column template-image"
+                  <?php } ?> >
                 <table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="center" style="background-color:#efefef;">
                   <?php
                     print l(theme('image_style', array(
                       'style_name' => ($node->old_newsletter ? 'thumbnail' : 'highlight_image'),
                       'path' => (isset($field_image) && !empty($field_image)) ? $field_image[0]['uri'] : '',
-                      'width' => ($node->old_newsletter ? '100%' : ''),
+                      'width' => ($node->old_newsletter ? '100%' : 'auto'),
                       // 'height' => 'auto',
                       'alt' => (isset($field_image) && !empty($field_image)) ? $field_image[0]['alt'] : '',
                       'attributes' => array('style' => 'border: 0px;max-width: 100%;height:auto;background-color: #ffffff;vertical-align:middle;')

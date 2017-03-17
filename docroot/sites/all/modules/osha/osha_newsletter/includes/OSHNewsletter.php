@@ -271,7 +271,6 @@ class OSHNewsletter {
         '#attributes' => [
           'class' => ['view-all-table'],
           'width' => '100%',
-          'height' => 'auto',
           'cellpadding' => '0',
           'cellspacing' => '0',
         ],
@@ -283,14 +282,14 @@ class OSHNewsletter {
     }
     switch ($template) {
       case 'newsletter_multiple_columns':
-        $columnWidth = round((800 / count($variables)), 2) - 20;
+        $columnWidth = round((760 / count($variables)), 2) - 20; // 20px padding for each column
         foreach ($variables as $column) {
           $content['#rows'][0]['data'][] = [
             'data' => self::renderTemplate($entityCollection, $column['#style'], $column),
             'width' => "$columnWidth",
             'height' => '100%',
             'class' => ['multiple-columns-cell', 'template-column'],
-            'style' => sprintf('width:%spx;max-width:%spx;',$columnWidth, $columnWidth),
+            'style' => sprintf('max-width:%spx;',$columnWidth, $columnWidth),
           ];
         }
         break;
@@ -401,7 +400,7 @@ class OSHNewsletter {
         global $base_url;
         $image_path = "{$base_url}/sites/all/modules/osha/osha_newsletter/images/twitter-gray.png";
 
-        $content['#header']['data']['data'] .= '&nbsp;<img height="20" width="auto" style="vertical-align:middle;height:20px!important;" src="' . $image_path . '"/>';
+        $content['#header']['data']['data'] .= '&nbsp;<img height="20" style="vertical-align:middle;height:20px!important;" src="' . $image_path . '"/>';
         $currentRow = $currentCol = 0;
 
         $content['#rows'][$currentRow]['no_striping'] = true;

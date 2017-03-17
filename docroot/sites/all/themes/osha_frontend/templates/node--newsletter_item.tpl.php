@@ -22,7 +22,7 @@ if (!empty($campaign_id)) {
 }
 ?>
 <?php if($node->title != NULL) {?>
-  <table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%" height="100%" class="newsletter-item <?php print drupal_clean_css_identifier($node->type); ?>" style="font-family: Arial, sans-serif;" >
+  <table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%" class="newsletter-item <?php print drupal_clean_css_identifier($node->type); ?>" style="font-family: Arial, sans-serif;" >
     <tbody>
       <?php if(!empty($node->old_newsletter)): ?>
         <tr>
@@ -83,7 +83,7 @@ if (!empty($campaign_id)) {
     <tr style="height: 100%;">
       <?php if (!in_array($node->type, ['twitter_tweet_feed'])
                 && (empty($node->parent_section) || $node->parent_section != 13)) { ?>
-        <td align="left" width="10" style="padding-right: 0px; vertical-align: top; padding-top: 5px; font-family: Arial, sans-serif;">
+        <td align="left" width="10" style="padding-right: 0px; vertical-align: top; padding-top: 5px; font-family: Arial, sans-serif;width:10px;">
           <span> > </span>
         </td>
       <?php } ?>

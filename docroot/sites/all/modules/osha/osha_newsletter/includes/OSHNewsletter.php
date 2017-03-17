@@ -252,12 +252,28 @@ class OSHNewsletter {
         'height' => '11',
         'attributes' => array('style' => 'border:0px;width:19px;height:11px;')
       ));
-      $content['#suffix'] = l(t('View all') . $arrow, $url, [
-        'html' => true,
-        'absolute' => true,
-        'query' => $url_query,
-        'attributes' => ['class' => ['view-all', 'see-more', 'fallback-text']]
-      ]);
+      $view_all = [
+        '#theme' => 'table',
+        '#header' => [],
+        '#rows' => [0 => [
+          l(t('View all') . $arrow, $url, [
+            'html' => true,
+            'absolute' => true,
+            'query' => $url_query,
+            'attributes' => ['class' => ['view-all', 'see-more', 'fallback-text']]
+          ])
+        ]],
+        '#attributes' => [
+          'class' => ['view-all-table'],
+          'width' => '100%',
+          'cellpadding' => '0',
+          'cellspacing' => '0',
+        ],
+        '#printed' => false,
+        '#sticky' => false,
+        '#children' => [],
+      ];
+      $content['#suffix'] = render($view_all);
     }
     switch ($template) {
       case 'newsletter_multiple_columns':

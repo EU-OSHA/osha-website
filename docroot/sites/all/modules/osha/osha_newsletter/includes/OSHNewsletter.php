@@ -456,6 +456,7 @@ class OSHNewsletter {
           $current_section = $item->entity_id;
           $section = $item->content;
           $section->campaign_id = $campaign_id;
+          $section->old_newsletter = false;
           $content[$current_section] = [
             '#style' => !empty($item->style) ? $item->style : key($templatesList),
             'section' => $section,
@@ -475,9 +476,8 @@ class OSHNewsletter {
           }
 
           if ($isOldNewsletter) {
-            $term = $item->content;
-            $term->old_newsletter = true;
-            $term = taxonomy_term_view($item->content, 'token');
+            $section->old_newsletter = true;
+            $term = taxonomy_term_view($section, 'token');
             switch($current_section) {
               case '11': // News
                 $oldNewsletter['news'][] = $term;
@@ -501,6 +501,7 @@ class OSHNewsletter {
           }
           $node = $item->content;
           $node->campaign_id = $campaign_id;
+          $node->old_newsletter = false;
           $content[$current_section]['nodes'][] = [
             '#style' => self::getChildStyle($content[$current_section]['#style']),
             'node' => $node,

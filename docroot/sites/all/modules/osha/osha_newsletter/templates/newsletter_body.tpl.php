@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * This template is only used for rendering old newsletters.
+ */
 if (empty($campaign_id)) {
   if (!empty($variables['elements']['#campaign_id'])) {
     $campaign_id = $variables['elements']['#campaign_id'];

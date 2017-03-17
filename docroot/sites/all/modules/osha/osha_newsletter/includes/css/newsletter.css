@@ -223,7 +223,7 @@ p.tweet-contents {
   /* line-height: 17px; */
   margin: 0;
 }
-.newsletter-item.newsletter-article p {
+.section-coming-soon .newsletter-item.newsletter-article p {
   font-size: 15px;
   font-weight: bold;
 }

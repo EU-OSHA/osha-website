@@ -10,6 +10,185 @@
 function osha_dangerous_substances_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance:
+  // 'field_collection_item-field_fc_provider-field_fc_provider_name'.
+  $field_instances['field_collection_item-field_fc_provider-field_fc_provider_name'] = array(
+    'bundle' => 'field_fc_provider',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_fc_provider_name',
+    'label' => 'Provider name (English)',
+    'required' => 1,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 31,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_fc_provider-field_fc_provider_name_o'.
+  $field_instances['field_collection_item-field_fc_provider-field_fc_provider_name_o'] = array(
+    'bundle' => 'field_fc_provider',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_fc_provider_name_o',
+    'label' => 'Provider name (Original)',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 32,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_fc_provider-field_fc_provider_url'.
+  $field_instances['field_collection_item-field_fc_provider-field_fc_provider_url'] = array(
+    'bundle' => 'field_fc_provider',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'link',
+        'settings' => array(),
+        'type' => 'link_default',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_fc_provider_url',
+    'label' => 'Provider url',
+    'required' => 1,
+    'settings' => array(
+      'absolute_url' => 1,
+      'attributes' => array(
+        'class' => '',
+        'configurable_class' => 0,
+        'configurable_title' => 0,
+        'rel' => '',
+        'target' => '_blank',
+        'title' => '',
+      ),
+      'display' => array(
+        'url_cutoff' => 80,
+      ),
+      'enable_tokens' => 1,
+      'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'rel_remove' => 'default',
+      'title' => 'optional',
+      'title_label_use_field_label' => 0,
+      'title_maxlength' => 128,
+      'title_value' => '',
+      'url' => 0,
+      'user_register_form' => FALSE,
+      'validate_url' => 1,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'link',
+      'settings' => array(),
+      'type' => 'link_field',
+      'weight' => 33,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_fc_provider-field_provider_type'.
+  $field_instances['field_collection_item-field_fc_provider-field_provider_type'] = array(
+    'bundle' => 'field_fc_provider',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'i18n_taxonomy',
+        'settings' => array(),
+        'type' => 'i18n_taxonomy_term_reference_link',
+        'weight' => 3,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_provider_type',
+    'label' => 'Type of provider',
+    'required' => 1,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
+      'type' => 'options_select',
+      'weight' => 35,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-dangerous_substances-body'.
   $field_instances['node-dangerous_substances-body'] = array(
     'bundle' => 'dangerous_substances',
@@ -115,7 +294,7 @@ please take this into consideration when you are writing the first paragraph.',
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 43,
+      'weight' => 42,
     ),
     'workbench_access_field' => 0,
   );
@@ -203,7 +382,7 @@ please take this into consideration when you are writing the first paragraph.',
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 56,
+      'weight' => 55,
     ),
     'workbench_access_field' => 0,
   );
@@ -296,7 +475,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 17,
+      'weight' => 18,
     ),
     'workbench_access_field' => 0,
   );
@@ -381,7 +560,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 23,
+      'weight' => 24,
     ),
     'workbench_access_field' => 0,
   );
@@ -472,7 +651,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 24,
+      'weight' => 25,
     ),
     'workbench_access_field' => 0,
   );
@@ -562,7 +741,7 @@ please take this into consideration when you are writing the first paragraph.',
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 44,
+      'weight' => 43,
     ),
     'workbench_access_field' => 0,
   );
@@ -652,7 +831,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 32,
+      'weight' => 33,
     ),
     'workbench_access_field' => 0,
   );
@@ -833,7 +1012,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 16,
+      'weight' => 17,
     ),
     'workbench_access_field' => 0,
   );
@@ -1014,7 +1193,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 33,
+      'weight' => 34,
     ),
     'workbench_access_field' => 0,
   );
@@ -1098,7 +1277,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 47,
+      'weight' => 46,
     ),
     'workbench_access_field' => 0,
   );
@@ -1182,7 +1361,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 48,
+      'weight' => 47,
     ),
     'workbench_access_field' => 0,
   );
@@ -1266,7 +1445,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 29,
+      'weight' => 30,
     ),
     'workbench_access_field' => 0,
   );
@@ -1350,7 +1529,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 30,
+      'weight' => 31,
     ),
     'workbench_access_field' => 0,
   );
@@ -1464,6 +1643,87 @@ please take this into consideration when you are writing the first paragraph.',
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-dangerous_substances-field_fc_provider'.
+  $field_instances['node-dangerous_substances-field_fc_provider'] = array(
+    'bundle' => 'dangerous_substances',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 59,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_search_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_fc_provider',
+    'label' => 'Provider',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 9,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance:
   // 'node-dangerous_substances-field_hazard_health_effects'.
   $field_instances['node-dangerous_substances-field_hazard_health_effects'] = array(
@@ -1544,7 +1804,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 27,
+      'weight' => 28,
     ),
     'workbench_access_field' => 0,
   );
@@ -1628,7 +1888,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 28,
+      'weight' => 29,
     ),
     'workbench_access_field' => 0,
   );
@@ -1712,7 +1972,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 26,
+      'weight' => 27,
     ),
     'workbench_access_field' => 0,
   );
@@ -1797,7 +2057,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 25,
+      'weight' => 26,
     ),
     'workbench_access_field' => 0,
   );
@@ -1918,7 +2178,7 @@ please take this into consideration when you are writing the first paragraph.',
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 57,
+      'weight' => 56,
     ),
     'workbench_access_field' => 0,
   );
@@ -2006,7 +2266,7 @@ please take this into consideration when you are writing the first paragraph.',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 53,
+      'weight' => 52,
     ),
     'workbench_access_field' => 0,
   );
@@ -2175,7 +2435,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 18,
+      'weight' => 19,
     ),
     'workbench_access_field' => 0,
   );
@@ -2260,7 +2520,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 15,
+      'weight' => 16,
     ),
     'workbench_access_field' => 0,
   );
@@ -2344,7 +2604,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 42,
+      'weight' => 41,
     ),
     'workbench_access_field' => 0,
   );
@@ -2429,7 +2689,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 41,
+      'weight' => 40,
     ),
     'workbench_access_field' => 0,
   );
@@ -2520,7 +2780,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 34,
+      'weight' => 35,
     ),
     'workbench_access_field' => 0,
   );
@@ -2610,7 +2870,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 52,
+      'weight' => 51,
     ),
     'workbench_access_field' => 0,
   );
@@ -2878,7 +3138,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 37,
+      'weight' => 38,
     ),
     'workbench_access_field' => 0,
   );
@@ -2969,7 +3229,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 38,
+      'weight' => 39,
     ),
     'workbench_access_field' => 0,
   );
@@ -3047,461 +3307,6 @@ please take this into consideration when you are writing the first paragraph.',
       ),
       'type' => 'options_select',
       'weight' => 5,
-    ),
-    'workbench_access_field' => 0,
-  );
-
-  // Exported field_instance: 'node-dangerous_substances-field_provider'.
-  $field_instances['node-dangerous_substances-field_provider'] = array(
-    'bundle' => 'dangerous_substances',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please fill in the provider of the material (English version of the name)',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 3,
-      ),
-      'highlights_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'newsletter_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_resources' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_search_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 8,
-      ),
-      'osha_slideshow' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_wiki' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'search_index' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 5,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 32,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_provider',
-    'label' => 'Provider (English)',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'linkit' => array(
-        'button_text' => 'Search',
-        'enable' => 0,
-        'profile' => '',
-      ),
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 9,
-    ),
-    'workbench_access_field' => 0,
-  );
-
-  // Exported field_instance:
-  // 'node-dangerous_substances-field_provider_original'.
-  $field_instances['node-dangerous_substances-field_provider_original'] = array(
-    'bundle' => 'dangerous_substances',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please fill in the provider of the material (Name in original language)',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 4,
-      ),
-      'highlights_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'newsletter_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_resources' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_search_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 9,
-      ),
-      'osha_slideshow' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_wiki' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'search_index' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 6,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 33,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_provider_original',
-    'label' => 'Provider (Original)',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'linkit' => array(
-        'button_text' => 'Search',
-        'enable' => 0,
-        'profile' => '',
-      ),
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 10,
-    ),
-    'workbench_access_field' => 0,
-  );
-
-  // Exported field_instance: 'node-dangerous_substances-field_provider_other'.
-  $field_instances['node-dangerous_substances-field_provider_other'] = array(
-    'bundle' => 'dangerous_substances',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 7,
-      ),
-      'highlights_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'newsletter_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_resources' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_search_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_slideshow' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_wiki' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_provider_other',
-    'label' => 'Provider other',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'linkit' => array(
-        'button_text' => 'Search',
-        'enable' => 0,
-        'profile' => '',
-      ),
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 13,
-    ),
-    'workbench_access_field' => 0,
-  );
-
-  // Exported field_instance: 'node-dangerous_substances-field_provider_type'.
-  $field_instances['node-dangerous_substances-field_provider_type'] = array(
-    'bundle' => 'dangerous_substances',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please select from the drop down list the type of provider',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_plain',
-        'weight' => 6,
-      ),
-      'highlights_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'newsletter_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_resources' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_search_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 41,
-      ),
-      'osha_slideshow' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_wiki' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'search_index' => array(
-        'label' => 'above',
-        'module' => 'i18n_taxonomy',
-        'settings' => array(),
-        'type' => 'i18n_taxonomy_term_reference_link',
-        'weight' => 43,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 20,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_provider_type',
-    'label' => 'Type of provider',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(
-        'apply_chosen' => 1,
-      ),
-      'type' => 'options_select',
-      'weight' => 12,
-    ),
-    'workbench_access_field' => 0,
-  );
-
-  // Exported field_instance: 'node-dangerous_substances-field_provider_url'.
-  $field_instances['node-dangerous_substances-field_provider_url'] = array(
-    'bundle' => 'dangerous_substances',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please fill in the URL of the provider. You should enter the full url, including http:// or https://',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'link',
-        'settings' => array(),
-        'type' => 'link_default',
-        'weight' => 5,
-      ),
-      'highlights_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'newsletter_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_resources' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_search_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 10,
-      ),
-      'osha_slideshow' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_wiki' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'search_index' => array(
-        'label' => 'above',
-        'module' => 'link',
-        'settings' => array(),
-        'type' => 'link_default',
-        'weight' => 7,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 34,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_provider_url',
-    'label' => 'Provider URL',
-    'required' => 0,
-    'settings' => array(
-      'absolute_url' => 1,
-      'attributes' => array(
-        'class' => '',
-        'configurable_class' => 0,
-        'configurable_title' => 0,
-        'rel' => '',
-        'target' => 'default',
-        'title' => '',
-      ),
-      'display' => array(
-        'url_cutoff' => 80,
-      ),
-      'enable_tokens' => 1,
-      'entity_translation_sync' => FALSE,
-      'linkit' => array(
-        'button_text' => 'Search',
-        'enable' => 0,
-        'profile' => '',
-      ),
-      'rel_remove' => 'default',
-      'title' => 'none',
-      'title_label_use_field_label' => 0,
-      'title_maxlength' => 128,
-      'title_value' => '',
-      'url' => 0,
-      'user_register_form' => FALSE,
-      'validate_url' => 1,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'link',
-      'settings' => array(),
-      'type' => 'link_field',
-      'weight' => 11,
     ),
     'workbench_access_field' => 0,
   );
@@ -3596,7 +3401,7 @@ please take this into consideration when you are writing the first paragraph.',
         'year_range' => '1990:+3',
       ),
       'type' => 'date_select',
-      'weight' => 13,
+      'weight' => 15,
     ),
     'workbench_access_field' => 0,
   );
@@ -3688,7 +3493,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 54,
+      'weight' => 53,
     ),
     'workbench_access_field' => 0,
   );
@@ -3773,7 +3578,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 19,
+      'weight' => 20,
     ),
     'workbench_access_field' => 0,
   );
@@ -3857,7 +3662,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 20,
+      'weight' => 21,
     ),
     'workbench_access_field' => 0,
   );
@@ -3939,7 +3744,7 @@ please take this into consideration when you are writing the first paragraph.',
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 87,
+      'weight' => 57,
     ),
     'workbench_access_field' => 0,
   );
@@ -4041,7 +3846,7 @@ please take this into consideration when you are writing the first paragraph.',
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 31,
+      'weight' => 32,
     ),
     'workbench_access_field' => 0,
   );
@@ -4125,7 +3930,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 45,
+      'weight' => 44,
     ),
     'workbench_access_field' => 0,
   );
@@ -4209,7 +4014,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 46,
+      'weight' => 45,
     ),
     'workbench_access_field' => 0,
   );
@@ -4293,7 +4098,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 21,
+      'weight' => 22,
     ),
     'workbench_access_field' => 0,
   );
@@ -4383,7 +4188,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 22,
+      'weight' => 23,
     ),
     'workbench_access_field' => 0,
   );
@@ -4560,7 +4365,7 @@ please take this into consideration when you are writing the first paragraph.',
       'module' => 'cck_time',
       'settings' => array(),
       'type' => 'cck_time_select',
-      'weight' => 51,
+      'weight' => 50,
     ),
     'workbench_access_field' => 0,
   );
@@ -4644,7 +4449,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 50,
+      'weight' => 49,
     ),
     'workbench_access_field' => 0,
   );
@@ -4729,7 +4534,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 49,
+      'weight' => 48,
     ),
     'workbench_access_field' => 0,
   );
@@ -4813,7 +4618,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 36,
+      'weight' => 37,
     ),
     'workbench_access_field' => 0,
   );
@@ -4898,7 +4703,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 35,
+      'weight' => 36,
     ),
     'workbench_access_field' => 0,
   );
@@ -5978,15 +5783,11 @@ please take this into consideration when you are writing the first paragraph.',
 Please note: the first paragraph will be displayed as short description, 
 please take this into consideration when you are writing the first paragraph.');
   t('Please fill in the English title of the material');
-  t('Please fill in the URL of the provider. You should enter the full url, including http:// or https://');
   t('Please fill in the URL to access the material if available. You should enter the full url, including http:// or https://');
   t('Please fill in the original title of the material');
-  t('Please fill in the provider of the material (English version of the name)');
-  t('Please fill in the provider of the material (Name in original language)');
   t('Please fill in the type of the material');
   t('Please select a target group from the drop down list');
   t('Please select a year of publication, if it is not possible to identify leave it empty.');
-  t('Please select from the drop down list the type of provider');
   t('Please select the HAZMAP categories from the drop down list');
   t('Please select the exposure route');
   t('Please select the prevention measures used');
@@ -5998,10 +5799,10 @@ please take this into consideration when you are writing the first paragraph.');
   t('Prevention measures');
   t('Prevention measures other');
   t('Priority area');
-  t('Provider (English)');
-  t('Provider (Original)');
-  t('Provider URL');
-  t('Provider other');
+  t('Provider');
+  t('Provider name (English)');
+  t('Provider name (Original)');
+  t('Provider url');
   t('Purpose of the material');
   t('Purpose of the material other');
   t('Rights description');

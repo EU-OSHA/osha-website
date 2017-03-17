@@ -12,47 +12,6 @@ function osha_dangerous_substances_default_fe_block_settings() {
 
   $export['version'] = '2.0';
 
-  $export['facetapi-4S7paT2fc0vb40WhDxH3UVrOr7tv3Fui'] = array(
-    'cache' => -1,
-    'custom' => 0,
-    'delta' => '4S7paT2fc0vb40WhDxH3UVrOr7tv3Fui',
-    'i18n_block_language' => array(),
-    'i18n_mode' => 0,
-    'module' => 'facetapi',
-    'node_types' => array(),
-    'pages' => 'themes/dangerous-substances/search
-themes/dangerous-substances/search/*',
-    'roles' => array(),
-    'themes' => array(
-      'bartik' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'bartik',
-        'weight' => 0,
-      ),
-      'osha_admin' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'osha_admin',
-        'weight' => 0,
-      ),
-      'osha_frontend' => array(
-        'region' => 'sidebar_first',
-        'status' => 1,
-        'theme' => 'osha_frontend',
-        'weight' => 14,
-      ),
-      'seven' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'seven',
-        'weight' => 0,
-      ),
-    ),
-    'title' => 'Type of provider',
-    'visibility' => 1,
-  );
-
   $export['facetapi-6UESvdgGlNWwNAW14Ox480cpaXPvX4bM'] = array(
     'cache' => -1,
     'custom' => 0,
@@ -81,7 +40,7 @@ themes/dangerous-substances/search/*',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 13,
+        'weight' => 14,
       ),
       'seven' => array(
         'region' => '',
@@ -122,7 +81,7 @@ themes/dangerous-substances/search/*',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 19,
+        'weight' => 20,
       ),
       'seven' => array(
         'region' => '',
@@ -163,7 +122,7 @@ themes/dangerous-substances/search/*',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 16,
+        'weight' => 17,
       ),
       'seven' => array(
         'region' => '',
@@ -174,6 +133,47 @@ themes/dangerous-substances/search/*',
     ),
     'title' => 'Tasks covered',
     'visibility' => 1,
+  );
+
+  $export['facetapi-IYa3MaKFlkyse14WFx7NJeh0UFyNO1ME'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => 'IYa3MaKFlkyse14WFx7NJeh0UFyNO1ME',
+    'i18n_block_language' => array(),
+    'i18n_mode' => 0,
+    'module' => 'facetapi',
+    'node_types' => array(),
+    'pages' => 'themes/dangerous-substances/search
+themes/dangerous-substances/search/*',
+    'roles' => array(),
+    'themes' => array(
+      'bartik' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'bartik',
+        'weight' => 0,
+      ),
+      'osha_admin' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'osha_admin',
+        'weight' => 0,
+      ),
+      'osha_frontend' => array(
+        'region' => 'sidebar_first',
+        'status' => 1,
+        'theme' => 'osha_frontend',
+        'weight' => 15,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 0,
   );
 
   $export['facetapi-JCAloFsFwfdccn5MMohljujWHi0XstK2'] = array(
@@ -204,7 +204,7 @@ themes/dangerous-substances/search/*',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 15,
+        'weight' => 16,
       ),
       'seven' => array(
         'region' => '',
@@ -245,7 +245,7 @@ themes/dangerous-substances/search/*',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 20,
+        'weight' => 21,
       ),
       'seven' => array(
         'region' => '',
@@ -286,7 +286,7 @@ themes/dangerous-substances/search/*',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 18,
+        'weight' => 19,
       ),
       'seven' => array(
         'region' => '',
@@ -327,7 +327,7 @@ themes/dangerous-substances/search/*',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 17,
+        'weight' => 18,
       ),
       'seven' => array(
         'region' => '',

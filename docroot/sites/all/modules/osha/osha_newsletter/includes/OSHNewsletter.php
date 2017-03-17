@@ -415,13 +415,13 @@ class OSHNewsletter {
 
         foreach ($variables['nodes'] as $node) {
           $cellContent = self::getCellContent($template, $node);
-          $cellContent['width'] = '190';
+          $cellContent['width'] = '180';
           $cellContent['height'] = '1%';
           if (empty($cellContent['style'])) {
-            $cellContent['style'] = 'max-width:190px;';
+            $cellContent['style'] = 'max-width:180px;';
           }
           else {
-            $cellContent['style'] .= 'max-width:190px;';
+            $cellContent['style'] .= 'max-width:180px;';
           }
           // array_push($cellContent['class'], 'template-column');
           if ($currentCol++ === 0) {

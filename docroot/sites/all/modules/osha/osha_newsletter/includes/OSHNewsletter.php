@@ -318,6 +318,7 @@ class OSHNewsletter {
         unset($variables['section']);
         $content['#rows'][0]['data'][] = [
           'data' => '',
+          'colspan' => 2,
           'style' => 'padding-bottom: 20px;',
         ];
         $content['#rows'][1] = [
@@ -342,6 +343,7 @@ class OSHNewsletter {
         ];
         $content['#rows'][2]['data'][] = [
           'data' => '',
+          'colspan' => 2,
           'style' => 'padding-bottom: 20px;',
         ];
         break;
@@ -353,6 +355,7 @@ class OSHNewsletter {
         $content['#rows'][$currentRow]['no_striping'] = true;
         $content['#rows'][$currentRow]['data'][] = [
           'data' => '',
+          'colspan' => '3',
           'style' => 'padding-bottom: 20px;',
         ];
 
@@ -384,13 +387,14 @@ class OSHNewsletter {
           }
           else {
             $content['#rows'][$currentRow++]['data'][] = $cellContent;
-            $content['#rows'][$currentRow++]['data'][] = ['data' => '', 'style' => 'padding: 0px; height:4px;',  'class' => ['template-column', 'template-separator'] ];
+            $content['#rows'][$currentRow++]['data'][] = ['data' => '', 'style' => 'padding: 0px; height:4px;', 'colspan' => '3', 'class' => ['template-column', 'template-separator'] ];
             $currentCol = 0;
           }
         }
         $content['#rows'][++$currentRow]['no_striping'] = true;
         $content['#rows'][$currentRow]['data'][] = [
           'data' => '',
+          'colspan' => '3',
           'style' => 'padding-bottom: 20px;',
         ];
         break;
@@ -407,6 +411,7 @@ class OSHNewsletter {
         $content['#rows'][$currentRow]['height'] = 0;
         $content['#rows'][$currentRow]['data'][] = [
           'data' => '',
+          'colspan' => 2,
           'style' => 'padding-bottom: 20px;',
         ];
 
@@ -438,6 +443,7 @@ class OSHNewsletter {
         $content['#rows'][++$currentRow]['no_striping'] = true;
         $content['#rows'][$currentRow]['data'][] = [
           'data' => '',
+          'colspan' => 2,
           'style' => 'padding-bottom: 20px;',
         ];
         break;

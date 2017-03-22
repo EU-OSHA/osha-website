@@ -33,6 +33,9 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+.newsletter-container table th a {
+  display: inline;
+}
 tr {
   border: 0;
 }
@@ -40,9 +43,6 @@ td {
   vertical-align: top;
   padding: 0;
   border: 0;
-}
-.fallback-text {
-  font-family: 'Oswald', Arial, sans-serif;
 }
 .language-bar {
   background-color: #eeeeee;
@@ -55,14 +55,14 @@ td {
   padding: 20px 20px 20px 8px;
 }
 
-.preheader .social > a {
+/* .preheader .social td > a {
   height: 20px;
   padding: 0 10px 0 10px;
 }
 
-.preheader .social > a:last-child {
+.preheader .social td:last-child > a {
   padding-right: 0px;
-}
+} */
 
 .header-title > tbody > tr > td {
   padding: 20px 20px 10px 20px;
@@ -80,6 +80,9 @@ td.social {
 }
 .social td {
   padding:  0 10px 0 10px;
+}
+.social td:last-child {
+  padding-right: 0px;
 }
 .osha-logos {
   text-align: left;
@@ -114,7 +117,17 @@ td.social {
 .section-icon {
   max-height: 50px;
 }
-.newsletter-section th {
+.newsletter-container th {
+  background-color: transparent;
+  border-style: none none solid none;
+  border-bottom-width: 0px;
+  border-bottom-color: transparent;
+  font-weight: normal;
+  text-align: left;
+  text-transform: none;
+  padding: 0px;
+}
+.newsletter-section > thead > tr >  th {
   background-color: transparent;
   color: #003399;
   border-style: none none solid none;
@@ -146,6 +159,7 @@ td.social {
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
 .item.newsletter-half-width-list-item,
 .item.newsletter-half-image-left-item,
 .item.newsletter-full-width-list-item {
@@ -187,6 +201,7 @@ td.social {
   background-color: #003399;
   color: #ffffff;
 } */
+
 .newsletter-half-content .newsletter-full-width-list {
   max-width: 380px;
 }
@@ -263,18 +278,16 @@ p.tweet-link a {
 .newsletter-full-width-list td {
   color: #003399;
 }
-.multiple-columns-cell {
-  padding-bottom: 45px;
-}
 .multiple-columns-cell > table {
-  max-width: 380px;
+  max-width: 360px;
 }
 .multiple-columns-cell > .newsletter-section {
-  height: 100%;
+  table-layout: fixed;
+  min-height: 500px;
 }
+
 .multiple-columns-cell .newsletter-half-width-twitter-item > .newsletter-item {
   max-width: 180px;
-  width: 180px;
 }
 
 /* Larger left-right padding for multiple columns */
@@ -304,7 +317,7 @@ p.tweet-link a {
 }
 
 
-// Old newsletter styles
+/* Old newsletter styles */
 .old-newsletter {
 }
 .old-newsletter .category-name tr:first-child > td {

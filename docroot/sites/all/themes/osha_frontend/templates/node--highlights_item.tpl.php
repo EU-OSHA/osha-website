@@ -28,14 +28,14 @@ if (!empty($campaign_id)) {
     <tr>
       <td>
         <table border="0" cellpadding="0" cellspacing="0" class="item-thumbnail-and-title" width="100%">
-          <tbody>
+          <thead>
             <tr>
             <?php
               $old_width = 100;
               $new_width = 300;
               $highlight_img_width = $node->old_newsletter ? $old_width : $new_width;
             ?>
-              <td rowspan=<?php print($node->old_newsletter ? '1' : '2'); ?>
+              <th rowspan=<?php print($node->old_newsletter ? '1' : '2'); ?>
                   width="<?php print($highlight_img_width);?>"
                   style="padding-bottom:10px; vertical-align: top; padding-top:0px; padding-right: 20px; text-align:center; max-width:<?php print($highlight_img_width);?>px;"
                   <?php if(!$node->old_newsletter) { ?>
@@ -46,7 +46,7 @@ if (!empty($campaign_id)) {
                     print l(theme('image_style', array(
                       'style_name' => ($node->old_newsletter ? 'thumbnail' : 'highlight_image'),
                       'path' => (isset($field_image) && !empty($field_image)) ? $field_image[0]['uri'] : '',
-                      'width' => ($node->old_newsletter ? '100%' : 'auto'),
+                      'width' => ($node->old_newsletter ? '100%' : ''),
                       // 'height' => 'auto',
                       'alt' => (isset($field_image) && !empty($field_image)) ? $field_image[0]['alt'] : '',
                       'attributes' => array('style' => 'border: 0px;max-width: 100%;height:auto;background-color: #ffffff;vertical-align:middle;')
@@ -58,9 +58,9 @@ if (!empty($campaign_id)) {
                       ),
                     ));
                   ?>
-                </td></tr></tbody></table>
-              </td>
-              <td valign="top" style="color: #003399; padding-bottom: 10px; padding-left: 0px; padding-right: 0px;font-family: Oswald, Arial, sans-serif;" class="template-column">
+                </th></tr></tbody></table>
+              </th>
+              <th valign="top" style="color: #003399; padding-bottom: 10px; padding-left: 0px; padding-right: 0px;font-family: Oswald, Arial, sans-serif;" class="template-column">
                 <?php
                 if (isset($node->field_publication_date[LANGUAGE_NONE][0]['value'])) {
                   $date = strtotime($node->field_publication_date[LANGUAGE_NONE][0]['value']);
@@ -84,13 +84,13 @@ if (!empty($campaign_id)) {
                   ));
                 }
                 ?>
-              </td>
+              </th>
             </tr>
-            <tr><td <?php if($node->old_newsletter) { ?> colspan="2"<?php } ?> >
+            <tr><th <?php if($node->old_newsletter) { ?> colspan="2"<?php } ?> >
               <table border="0" cellpadding="0" cellspacing="0" class="item-summary" width="100%">
                 <tbody>
                   <tr>
-                    <td style="width: 100%; font-size: 13px; font-family: Arial, sans-serif; color: #000000;">
+                    <td colspan="2" style="width: 100%; font-size: 13px; font-family: Arial, sans-serif; color: #000000;">
                       <?php
                       $body_text = '';
                       if (isset($field_summary) && is_array($field_summary) && !empty($field_summary)) {
@@ -171,7 +171,7 @@ if (!empty($campaign_id)) {
                   <?php } ?>
                 </tbody>
               </table>
-            </td></tr>
+            </th></tr>
           </tbody>
         </table>
       </td>

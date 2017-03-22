@@ -240,7 +240,13 @@ class OSHNewsletter {
       else {
         $cellContent = sprintf("<span>%s</span>", $variables['section']->name);
       }
-      $content['#header'] = ['data' => ['data' => $cellContent, 'class' => 'fallback-text']];
+      // $content['#header'] = ['data' => ['data' => $cellContent, 'class' => 'fallback-text']];
+
+      $content['#header'] = [0 => ['data' => $cellContent, 'class' => 'fallback-text'], 1 => ['data' => $cellContent, 'class' => 'fallback-text']];
+      // echo "<pre>";
+      // var_dump($content['#header']);
+      // echo "</pre>";
+
       $cssClass = drupal_clean_css_identifier('section-' . strtolower($variables['section']->name));
       $content['#attributes']['class'][] = $cssClass;
     }
@@ -348,7 +354,11 @@ class OSHNewsletter {
         ];
         break;
       case 'newsletter_full_width_2_col_blocks':
+        // echo "<pre>";
+        // var_dump($content);
+        // echo "</pre>";
         $content['#header']['data']['colspan'] = 3;
+        // $content['#header'][0]['data']['colspan'] = 3;
         $currentRow = 0;
         $currentCol = 0;
 
@@ -420,7 +430,7 @@ class OSHNewsletter {
         foreach ($variables['nodes'] as $node) {
           $cellContent = self::getCellContent($template, $node);
           $cellContent['width'] = '180';
-          $cellContent['height'] = '1%';
+          // $cellContent['height'] = '1%';
           if (empty($cellContent['style'])) {
             $cellContent['style'] = 'max-width:180px;';
           }
@@ -720,6 +730,10 @@ class OSHNewsletter {
     $font->setAttribute('rel', 'stylesheet');
     $font->setAttribute('href', self::$fontUrl);
 
+    $meta = $domDocument->createElement('meta');
+    $meta->setAttribute('name', 'viewport');
+    $meta->setAttribute('content', 'width=device-width, initial-scale=1.0');
+
     // @TODO -> Octavian: check if correct please
     // Force fallback font in Outlook to Arial instead of Times New Roman
     $outlookCss =
@@ -741,7 +755,7 @@ class OSHNewsletter {
           mso-style-priority:99;
           color:inherit;
         }
-        .fallback-text {
+        * {
           font-family: Arial, sans-serif !important;
         }
         .template-separator {
@@ -763,6 +777,7 @@ class OSHNewsletter {
     $head = $domDocument->getElementsByTagName('head');
     if (empty($head->length)) {
       $head = $domDocument->createElement('head');
+      $head->appendChild($meta);
       $head->appendChild($font);
       $head->appendChild($outlookStyle);
       $head->appendChild($responsiveStyle);
@@ -771,6 +786,7 @@ class OSHNewsletter {
     }
     else {
       $head = $head->item(0);
+      $head->appendChild($meta);
       $head->appendChild($font);
       $head->appendChild($outlookStyle);
       $head->appendChild($responsiveStyle);

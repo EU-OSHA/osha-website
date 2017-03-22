@@ -16,11 +16,11 @@ if (!empty($campaign_id)) {
 
 ?>
 
-<span class="preview-text" style="font-size: 0;">
+<span class="preview-text" style="color: transparent; display: none !important; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">
   <?php
     $newsletter_ready_date = format_date(strtotime($newsletter_date), 'custom', 'F Y');
     print t("Occupational Safety and Health News &ndash; Europe &ndash; ");
-    print $newsletter_ready_date;
+    print t($newsletter_ready_date);
   ?>
 </span>
 <table border="0" cellpadding="0" cellspacing="0" width="100%" class="preheader template-container">

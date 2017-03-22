@@ -47,9 +47,9 @@ td{
     <tr>
       <td width="100%" style="padding-top: 0px; padding-bottom: 0px;">
         <table border="0" cellpadding="20" cellspacing="0" width="100%">
-          <tbody>
+          <thead>
             <tr>
-               <td width="396" style="padding-top: 0px;vertical-align: top;padding-right:50px;" class="left-column template-column">
+               <th width="396" style="padding-top: 0px;vertical-align: top;padding-right:50px;" class="left-column template-column">
                 <?php
                   $elements_no = sizeof($items);
                   $category = 0;
@@ -95,9 +95,9 @@ td{
                     }
                   }
                 ?>
-              </td>
+              </th>
 
-              <td width="308" style="vertical-align: top; padding-top: 0px; padding-right: 0px;" class="right-column template-column">
+              <th width="308" style="vertical-align: top; padding-top: 0px; padding-right: 0px;" class="right-column template-column">
 
                 <?php
                   if (!empty($blogs) && sizeof($blogs) > 1) {
@@ -224,9 +224,9 @@ td{
                 <?php
                 }
                 ?>
-              </td>
+              </th>
             </tr>
-          </tbody>
+          </thead>
         </table>
       </td>
     </tr>

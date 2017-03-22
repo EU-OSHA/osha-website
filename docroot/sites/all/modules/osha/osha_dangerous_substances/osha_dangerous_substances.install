@@ -14,3 +14,53 @@ function osha_dangerous_substances_update_7001() {
   }
   features_revert_module('osha_dangerous_substances');
 }
+
+/**
+ * Facets with or.
+ */
+function osha_dangerous_substances_update_7002() {
+  features_revert_module('osha_dangerous_substances');
+}
+
+/**
+ * Move provider to field collection and reindex.
+ */
+function osha_dangerous_substances_update_7003() {
+  features_revert_module(['osha_dangerous_substances']);
+  $query = new EntityFieldQuery;
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'dangerous_substances');
+  $results = $query->execute();
+  if (!empty($results['node'])) {
+    foreach (array_keys($results['node']) as $nid) {
+      $node = node_load($nid);
+      if (empty($node->field_fc_provider)) {
+        $item = array(
+          'field_name' => 'field_fc_provider',
+        );
+        $item['field_fc_provider_name'] = $node->field_provider;
+        $item['field_fc_provider_name_o'] = $node->field_provider_original;
+        if (!empty($node->field_provider_url)) {
+          $item['field_fc_provider_url'][LANGUAGE_NONE] = $node->field_provider_url['en'];
+        }
+        $item['field_provider_type'] = $node->field_provider_type;
+        $item = entity_create('field_collection_item', $item);
+        $item->setHostEntity('node', $node);
+        node_save($node);
+      }
+    }
+    module_load_include('inc', 'features', 'features.field');
+    $instance = features_field_instance_load('node-dangerous_substances-field_provider');
+    field_delete_instance($instance);
+    $instance = features_field_instance_load('node-dangerous_substances-field_provider_original');
+    field_delete_instance($instance);
+    $instance = features_field_instance_load('node-dangerous_substances-field_provider_url');
+    field_delete_instance($instance);
+    $instance = features_field_instance_load('node-dangerous_substances-field_provider_type');
+    field_delete_instance($instance);
+    $instance = features_field_instance_load('node-dangerous_substances-field_provider_other');
+    field_delete_instance($instance);
+  }
+  search_api_index_reindex('default_content_index');
+  features_revert_module(['osha_dangerous_substances']);
+}

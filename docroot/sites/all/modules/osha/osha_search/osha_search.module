@@ -119,9 +119,15 @@ function osha_search_search_api_solr_query_alter(array &$call_args, SearchApiQue
   // Replace % with * to handle requested widlcard % (non-existing in solr).
   if (!empty($call_args['query'])) {
     $call_args['query'] = str_replace('%', '*', $call_args['query']);
-  }else{
+  } else {
     // Sort by publication date for empty query
-    $call_args['params']['sort'] = 'ds_field_publication_date desc';
+    if (empty($call_args['params']['sort'])) {
+      if ($query->getIndex()->machine_name == 'default_content_index') {
+        $call_args['params']['sort'] = 'ds_field_publication_year desc';
+      } else {
+        $call_args['params']['sort'] = 'ds_field_publication_date desc';
+      }
+    }
   }
   // Handle special chars query.
   $special_chars = variable_get('search_solr_custom_special_chars',
@@ -248,33 +254,38 @@ function osha_search_form_alter(&$form, &$form_state, $form_id) {
 
   // Check if this form is a Search API form. This could be replaced with the
   // value of a custom Views setting like ie. "Include facets".
-  if (isset($form_state['view']) && $form_state['view']->base_table === 'search_api_index_default_multilingual_node_index') {
-    hide($form['search_block_form']);
-    hide($form['search_api_language']);
-    hide($form['submit']);
-    $form['#attached']['js'][] = ['type' => 'file', 'data' => drupal_get_path('module', 'osha_search') . '/js/change_autosubmit.js'];
-    $form['sort_by']['#attributes']['class'][] = 'change-autosubmit';
-    $form['sort_order']['#attributes']['class'][] = 'change-autosubmit';
-    // Get quary parameters.
+  if ($form_id == 'views_exposed_form') {
     $query_parameters = drupal_get_query_parameters();
-
-    if (!empty($query_parameters['search_block_form'])) {
-      if (empty($form['#prefix'])) {
-        $form['#prefix'] = '';
+    if ($form['#id'] === ' views-exposed-form-search-site') {
+      hide($form['search_block_form']);
+      hide($form['search_api_language']);
+      hide($form['submit']);
+      $form['#attached']['js'][] = ['type' => 'file', 'data' => drupal_get_path('module', 'osha_search') . '/js/change_autosubmit.js'];
+      $form['sort_by']['#attributes']['class'][] = 'change-autosubmit';
+      $form['sort_order']['#attributes']['class'][] = 'change-autosubmit';
+      // Get query parameters.
+      if (!empty($query_parameters['search_block_form'])) {
+        if (empty($form['#prefix'])) {
+          $form['#prefix'] = '';
+        }
+        $form['#prefix'] .= '<div class="">' . t('Results for "@word"', ['@word' => $query_parameters['search_block_form']]) . '</div>';
       }
-      $form['#prefix'] .= '<div class="">' . t('Results for "@word"', ['@word' => $query_parameters['search_block_form']]) . '</div>';
     }
 
-    // If any facet query parameters are provided.
-    if (!empty($query_parameters['f'])) {
-      // Iterate through facet query parameters.
-      foreach ($query_parameters['f'] as $key => $value) {
-        // Add hidden form field for facet parameter.
-        $form['f[' . $key . ']'] = array(
-          '#type' => 'hidden',
-          '#value' => $value,
-          '#weight' => -1,
-        );
+    // Add facets parameters to views exposed filters search indexes (will be kept also on pager).
+    if (!empty($form_state['view']->base_table)
+      && in_array($form_state['view']->base_table, ['search_api_index_default_multilingual_node_index', 'search_api_index_default_content_index'])) {
+      // If any facet query parameters are provided.
+      if (!empty($query_parameters['f'])) {
+        // Iterate through facet query parameters.
+        foreach ($query_parameters['f'] as $key => $value) {
+          // Add hidden form field for facet parameter.
+          $form['f[' . $key . ']'] = array(
+            '#type' => 'hidden',
+            '#value' => $value,
+            '#weight' => -1,
+          );
+        }
       }
     }
   }

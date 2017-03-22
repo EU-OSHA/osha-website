@@ -143,8 +143,7 @@ themes/dangerous-substances/search/*',
     'i18n_mode' => 0,
     'module' => 'facetapi',
     'node_types' => array(),
-    'pages' => 'themes/dangerous-substances/search
-themes/dangerous-substances/search/*',
+    'pages' => '',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -160,10 +159,10 @@ themes/dangerous-substances/search/*',
         'weight' => 0,
       ),
       'osha_frontend' => array(
-        'region' => 'sidebar_first',
-        'status' => 1,
+        'region' => '',
+        'status' => 0,
         'theme' => 'osha_frontend',
-        'weight' => 15,
+        'weight' => 0,
       ),
       'seven' => array(
         'region' => '',

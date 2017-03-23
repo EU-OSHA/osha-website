@@ -119,9 +119,7 @@ td.social {
 }
 .newsletter-container th {
   background-color: transparent;
-  border-style: none none solid none;
-  border-bottom-width: 0px;
-  border-bottom-color: transparent;
+  border: 0;
   font-weight: normal;
   text-align: left;
   text-transform: none;

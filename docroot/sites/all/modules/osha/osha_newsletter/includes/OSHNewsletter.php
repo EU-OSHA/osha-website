@@ -240,12 +240,7 @@ class OSHNewsletter {
       else {
         $cellContent = sprintf("<span>%s</span>", $variables['section']->name);
       }
-      // $content['#header'] = ['data' => ['data' => $cellContent, 'class' => 'fallback-text']];
-
-      $content['#header'] = [0 => ['data' => $cellContent, 'class' => 'fallback-text'], 1 => ['data' => $cellContent, 'class' => 'fallback-text']];
-      // echo "<pre>";
-      // var_dump($content['#header']);
-      // echo "</pre>";
+      $content['#header'] = ['data' => ['data' => $cellContent, 'class' => 'fallback-text']];
 
       $cssClass = drupal_clean_css_identifier('section-' . strtolower($variables['section']->name));
       $content['#attributes']['class'][] = $cssClass;
@@ -354,9 +349,6 @@ class OSHNewsletter {
         ];
         break;
       case 'newsletter_full_width_2_col_blocks':
-        // echo "<pre>";
-        // var_dump($content);
-        // echo "</pre>";
         $content['#header']['data']['colspan'] = 3;
         // $content['#header'][0]['data']['colspan'] = 3;
         $currentRow = 0;
@@ -467,7 +459,8 @@ class OSHNewsletter {
         }
       }
     }
-    return drupal_render($content);
+
+    return theme('newsletter_base_table', array('content' => $content));
   }
 
   public static function render(EntityCollection $source) {

@@ -1333,6 +1333,13 @@ function osha_newsletter_theme() {
     ),
     'path' => $path . '/templates'
   );
+  $theme['newsletter_base_table'] = array(
+    'template' => 'newsletter_base_table',
+    'variables' => array(
+      'content' => NULL,
+    ),
+    'path' => $path . '/templates'
+  );
 
   return $theme;
 }

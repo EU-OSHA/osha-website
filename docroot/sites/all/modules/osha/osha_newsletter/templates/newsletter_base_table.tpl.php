@@ -1,0 +1,1 @@
+<div id="xxxxx"><?php print drupal_render($content);?></div>

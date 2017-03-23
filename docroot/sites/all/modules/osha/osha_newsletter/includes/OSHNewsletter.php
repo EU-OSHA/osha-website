@@ -216,7 +216,7 @@ class OSHNewsletter {
     }
     $content = [
       '#theme' => 'table',
-      '#header' => [],
+      '#header' => [0 => []],
       '#rows' => [0 => []],
       '#attributes' => [
         'class' => [
@@ -240,7 +240,9 @@ class OSHNewsletter {
       else {
         $cellContent = sprintf("<span>%s</span>", $variables['section']->name);
       }
-      $content['#header'] = ['data' => ['data' => $cellContent, 'class' => 'fallback-text']];
+      // $content['#header'] = ['data' => ['data' => $cellContent, 'class' => 'fallback-text']];
+
+      $content['#header'][0]['data'][] = ['data' => $cellContent, 'class' => ['fallback-text', 'section-title']];
 
       $cssClass = drupal_clean_css_identifier('section-' . strtolower($variables['section']->name));
       $content['#attributes']['class'][] = $cssClass;
@@ -310,7 +312,7 @@ class OSHNewsletter {
         }
         break;
       case 'newsletter_half_image_left':
-        $content['#header']['data']['colspan'] = 2;
+        $content['#header'][0]['data'][0]['colspan'] = '2';
 
         $image_url = self::getConfiguration($entityCollection, 'field_background_image', $variables['section'], '');
         $image_fallback_bg = self::getConfiguration($entityCollection, 'field_background_color', $variables['section'], '');
@@ -349,8 +351,8 @@ class OSHNewsletter {
         ];
         break;
       case 'newsletter_full_width_2_col_blocks':
-        $content['#header']['data']['colspan'] = 3;
-        // $content['#header'][0]['data']['colspan'] = 3;
+        $content['#header'][0]['data'][0]['colspan'] = '3';
+
         $currentRow = 0;
         $currentCol = 0;
 
@@ -401,7 +403,7 @@ class OSHNewsletter {
         ];
         break;
       case 'newsletter_half_width_twitter':
-        $content['#header']['data']['colspan'] = 2;
+        $content['#header'][0]['data'][0]['colspan'] = '2';
 
         global $base_url;
         $image_path = "{$base_url}/sites/all/modules/osha/osha_newsletter/images/twitter-gray.png";

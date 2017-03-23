@@ -20,6 +20,7 @@
 
 a {
   color: #0074BD;
+  text-decoration: none;
 }
 p {
   margin: 10px 0 10px 0;
@@ -39,7 +40,7 @@ table {
 tr {
   border: 0;
 }
-td {
+td, th {
   vertical-align: top;
   padding: 0;
   border: 0;
@@ -125,7 +126,7 @@ td.social {
   text-transform: none;
   padding: 0px;
 }
-.newsletter-section > thead > tr >  th {
+.newsletter-section .section-title {
   background-color: transparent;
   color: #003399;
   border-style: none none solid none;
@@ -137,6 +138,13 @@ td.social {
   text-align: left;
   text-transform: none;
   padding: 10px 0 10px 0;
+}
+
+.newsletter-section > thead > tr.row > th {
+  border: 0;
+  font-weight: normal;
+  text-align: left;
+  text-transform: none;
 }
 
 .newsletter-section .section-icon {
@@ -169,7 +177,7 @@ td.social {
   padding-bottom: 20px;
 }
 
-.newsletter-section .row:first-child > .item.newsletter-half-width-list-item,
+.newsletter-section .row:nth-child(2) > .item.newsletter-half-width-list-item,
 .newsletter-section .row:first-child > .item.newsletter-half-image-left-item,
 .newsletter-section .row:first-child > .item.newsletter-full-width-list-item {
   padding-top: 20px;
@@ -268,7 +276,7 @@ p.tweet-link a {
 /* Padding for newsletter-item content */
 
 /* .newsletter-half-width-twitter-item > .newsletter-item > tbody > tr > td, */
-.newsletter-half-content > table > tbody > tr > td,
+.newsletter-half-content > table > thead > tr > th,
 .newsletter-full-width-2-col-blocks-item > .newsletter-item > tbody > tr > td {
   padding: 10px 10px 5px 10px;
 }

@@ -95,6 +95,9 @@ td.social {
   text-align: center;
   padding: 5px 10px 5px 10px;
 }
+.footer p {
+  margin: 0;
+}
 .footer .social {
   text-align: center;
 }
@@ -289,7 +292,7 @@ p.tweet-link a {
 }
 .multiple-columns-cell > .newsletter-section {
   table-layout: fixed;
-  min-height: 500px;
+  /* min-height: 500px; */
 }
 
 .multiple-columns-cell .newsletter-half-width-twitter-item > .newsletter-item {

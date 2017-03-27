@@ -21,7 +21,11 @@ a[x-apple-data-detectors] {
 #content .old-newsletter .pink-arrow a {
   font-family: 'Oswald', Arial, sans-serif;
 }
-@media only screen and (max-width: 800px) {
+.gmailfix {
+  display:none;
+  display:none!important;
+}
+@media only screen and (max-width: 480px) {
   .newsletter-container {
     max-width: 100% !important;
     width: 100% !important;

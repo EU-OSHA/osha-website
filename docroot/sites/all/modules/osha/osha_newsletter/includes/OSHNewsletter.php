@@ -240,9 +240,8 @@ class OSHNewsletter {
       else {
         $cellContent = sprintf("<span>%s</span>", $variables['section']->name);
       }
-      // $content['#header'] = ['data' => ['data' => $cellContent, 'class' => 'fallback-text']];
 
-      $content['#header'][0]['data'][] = ['data' => $cellContent, 'class' => ['fallback-text', 'section-title']];
+      $content['#header'][0]['data'][] = ['data' => $cellContent, 'class' => ['section-title']];
 
       $cssClass = drupal_clean_css_identifier('section-' . strtolower($variables['section']->name));
       $content['#attributes']['class'][] = $cssClass;
@@ -264,11 +263,10 @@ class OSHNewsletter {
               'html' => true,
               'absolute' => true,
               'query' => $url_query,
-              'attributes' => ['class' => ['view-all', 'see-more', 'fallback-text']]
+              'attributes' => ['class' => ['view-all', 'see-more']]
             ]),
             'align' => 'Right',
             'style' => 'padding-top: 10px; padding-bottom: 20px; border-top: 1px dashed #dddddd;',
-            'class' => ['fallback-text'],
           ],
         ]],
         '#attributes' => [
@@ -328,7 +326,6 @@ class OSHNewsletter {
             [
               'data' => sprintf("<img src=\"%s\" style=\"width:100%%;max-width:100%%;background-color:%s; \"/>", $image_url, $image_fallback_bg),
               'width' => '380',
-              // 'height' => '100%',
               'class' => ['template-column', 'newsletter-half-image'],
               'style' => sprintf("max-width: 380px;background-color: %s;",$image_fallback_bg),
             ],
@@ -750,9 +747,7 @@ class OSHNewsletter {
           mso-style-priority:99;
           color:inherit;
         }
-        .fallback-text {
-          font-family: Arial, sans-serif !important;
-        }
+        body, table, td, p, a {font-family: Arial, Helvetica, sans-serif !important;}
         .template-separator {
           padding-bottom: 4px !important;
           height:0px !important;

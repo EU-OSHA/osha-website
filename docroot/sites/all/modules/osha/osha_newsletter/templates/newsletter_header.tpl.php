@@ -110,7 +110,7 @@ if (!empty($campaign_id)) {
   </tbody>
 </table>
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%" style="font-family: Oswald, Arial,sans-serif;" class="header template-container fallback-text">
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="font-family: Oswald, Arial,sans-serif;" class="header template-container">
   <tbody>
     <tr>
       <td class="osha-logos">
@@ -122,7 +122,7 @@ if (!empty($campaign_id)) {
           'path' => $directory . '/images/Osha-EU-logos.png',
           'width' => 256,
           'height' => 60,
-          'alt' => 'Osha logo',
+          'alt' => 'European Agency for Safety and Health at Work',
           'attributes' => array('style' => 'border: 0px; width: 256px; max-width: 256px;height:60px;max-height:60px;')
           )), $base_url.'/'.$language->language, array(
           'html' => TRUE,
@@ -132,8 +132,8 @@ if (!empty($campaign_id)) {
         ?>
       </td>
       <td class="osha-info">
-        <div class="newsletter-number fallback-text" style="color: #003399; font-size: 20px; font-weight: 200; text-align: right;"><?php print $newsletter_title?></div>
-        <div class="newsletter-month fallback-text" style="color: #DC2F82; font-size: 26px; text-align: right;"><?php print $newsletter_ready_date?></div>
+        <div class="newsletter-number" style="color: #003399; font-size: 20px; font-weight: 200; text-align: right;"><?php print $newsletter_title?></div>
+        <div class="newsletter-month" style="color: #DC2F82; font-size: 26px; text-align: right;"><?php print $newsletter_ready_date?></div>
       </td>
     </tr>
   </tbody>
@@ -146,7 +146,7 @@ if (!empty($campaign_id)) {
         <table border="0" cellpadding="0" cellspacing="0" width="100%" class="header-title">
           <tbody>
             <tr>
-              <td style="background-color: #003399; width: 100%; text-align: left; font-size: 24px; font-weight: 200; color: #ffffff; font-family: Oswald, Arial,sans-serif;" class="fallback-text"><?php print t("Occupational Safety and Health News &ndash; Europe");?></td>
+              <td style="background-color: #003399; width: 100%; text-align: left; font-size: 24px; font-weight: 200; color: #ffffff; font-family: Oswald, Arial,sans-serif;"><?php print t("Occupational Safety and Health News &ndash; Europe");?></td>
             </tr>
           </tbody>
         </table>

@@ -70,14 +70,14 @@ if (!empty($campaign_id)) {
                 <?php
                 if ($node->type == 'publication') {
                   print l($title, url('node/' . $node->nid . '/view', array('absolute' => TRUE)), array(
-                    'attributes' => array('class' => ['highlight-title', 'fallback-text']),
+                    'attributes' => array('class' => ['highlight-title']),
                     'query' => $url_query,
                     'external' => TRUE,
                     'html' => TRUE,
                   ));
                 } else {
                   print l($title, url('node/' . $node->nid, array('absolute' => TRUE)), array(
-                    'attributes' => array('class' => ['highlight-title', 'fallback-text']),
+                    'attributes' => array('class' => ['highlight-title']),
                     'query' => $url_query,
                     'external' => TRUE,
                     'html' => TRUE,
@@ -124,7 +124,7 @@ if (!empty($campaign_id)) {
                   </tr>
                   <?php if(empty($node->old_newsletter)) { ?>
                     <tr>
-                      <td class="fallback-text" style="font-family: Oswald, Arial, sans-serif;">
+                      <td style="font-family: Oswald, Arial, sans-serif;">
                         <?php
                           $more_link_class = 'see-more';
                           if ($node->type == 'publication') {
@@ -134,7 +134,7 @@ if (!empty($campaign_id)) {
                             $node_url = url('node/' . $node->nid, array('absolute' => TRUE));
                           }
                           print l(t('See more'), $node_url, array(
-                            'attributes' => array('class' => [$more_link_class, 'fallback-text']),
+                            'attributes' => array('class' => [$more_link_class]),
                             'query' => $url_query,
                             'external' => TRUE
                           ));
@@ -152,7 +152,7 @@ if (!empty($campaign_id)) {
                         ?>
 
                       </td>
-                      <td class="fallback-text" align="right" valign="middle" style="font-family: Oswald, Arial, sans-serif;">
+                      <td align="right" valign="middle" style="font-family: Oswald, Arial, sans-serif;">
                         <?php
                         print l(theme('image', array(
                           'path' => $directory . '/images/' . 'share-icon.png',

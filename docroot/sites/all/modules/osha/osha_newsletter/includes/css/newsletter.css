@@ -1,3 +1,8 @@
+/* Container */
+.newsletter-container {
+  background-color: #ffffff;
+  table-layout:fixed;
+}
 .newsletter-container,
 .template-container {
   max-width: 800px;
@@ -5,19 +10,16 @@
 .content-container > td > table {
   max-width: 760px;  
 }
-.newsletter-container {
-  background-color: #ffffff;
-  table-layout:fixed;
-}
-
-/* gutter */
+/* Gutter */
 .content-container > td {
   padding: 0 20px 20px 20px;
 }
+
 .template-container.newsletter-half-width-list {
   max-width: 100%;
 }
 
+/* General */
 a {
   color: #0074BD;
   text-decoration: none;
@@ -34,7 +36,7 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-.newsletter-container table th a {
+table th a {
   display: inline;
 }
 tr {
@@ -45,6 +47,16 @@ td, th {
   padding: 0;
   border: 0;
 }
+th {
+  background-color: transparent;
+  border: 0;
+  font-weight: normal;
+  text-align: left;
+  text-transform: none;
+  padding: 0px;
+}
+
+/* Header */
 .language-bar {
   background-color: #eeeeee;
   text-align: center;
@@ -55,15 +67,6 @@ td, th {
   text-align: right;
   padding: 20px 20px 20px 8px;
 }
-
-/* .preheader .social td > a {
-  height: 20px;
-  padding: 0 10px 0 10px;
-}
-
-.preheader .social td:last-child > a {
-  padding-right: 0px;
-} */
 
 .header-title > tbody > tr > td {
   padding: 20px 20px 10px 20px;
@@ -88,6 +91,8 @@ td.social {
 .osha-logos {
   text-align: left;
 }
+
+/* Footer */
 .footer {
   background-color: #EFEFEF;
 }
@@ -102,33 +107,31 @@ td.social {
   text-align: center;
 }
 
-.highlight-title {
-  font-family: Oswald, Arial, sans-serif;
-  font-size: 18px;
-  color: #003399;
-  text-decoration: none;
+/* Sections */
+.newsletter-section > thead > tr.row > th {
+  border: 0;
+  font-weight: normal;
+  text-align: left;
+  text-transform: none;
+}
+.section-icon {
+  max-height: 50px;
+  max-width: 100%;
+  padding-bottom: 20px;
 }
 .see-more {
   color: #003399;
   text-decoration: none;
   font-size: 18px;
 }
-.newsletter-container > tbody > tr > td > .newsletter-section > thead > tr > th,
-.newsletter-container > tbody > tr > td > .newsletter-section > tbody > tr > td {
-  /* padding-left: 20px !important;
-  padding-right: 20px !important; */
+
+.highlight-title {
+  font-family: Oswald, Arial, sans-serif;
+  font-size: 18px;
+  color: #003399;
+  text-decoration: none;
 }
-.section-icon {
-  max-height: 50px;
-}
-.newsletter-container th {
-  background-color: transparent;
-  border: 0;
-  font-weight: normal;
-  text-align: left;
-  text-transform: none;
-  padding: 0px;
-}
+
 .newsletter-section .section-title {
   background-color: transparent;
   color: #003399;
@@ -141,18 +144,6 @@ td.social {
   text-align: left;
   text-transform: none;
   padding: 10px 0 10px 0;
-}
-
-.newsletter-section > thead > tr.row > th {
-  border: 0;
-  font-weight: normal;
-  text-align: left;
-  text-transform: none;
-}
-
-.newsletter-section .section-icon {
-  max-width: 100%;
-  padding-bottom: 20px;
 }
 
 .newsletter-section .item {

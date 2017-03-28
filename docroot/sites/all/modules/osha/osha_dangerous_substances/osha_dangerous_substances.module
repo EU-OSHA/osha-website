@@ -14,12 +14,13 @@ function osha_dangerous_substances_preprocess_views_view(&$vars) {
   }
 }
 
-function osha_dangerous_substances_node_save_redirect_submit($form, &$form_state){
-  if ($form_state['values']['type'] == 'dangerous_substances') {
-    unset($_GET['destination']);
-    $form_state['redirect'] = 'themes/dangerous-substances/search';
-  }
-}
+// MDR-969: remove redirect on save
+//function osha_dangerous_substances_node_save_redirect_submit($form, &$form_state){
+//  if ($form_state['values']['type'] == 'dangerous_substances') {
+//    unset($_GET['destination']);
+//    $form_state['redirect'] = 'themes/dangerous-substances/search';
+//  }
+//}
 
 function osha_dangerous_substances_custom_theme($theme = NULL) {
   $item = menu_get_object();
@@ -81,13 +82,14 @@ function osha_dangerous_substances_form_alter(&$form, &$form_state, $form_id) {
       $form['#after_build'] = array();
     }
     $form['#after_build'][] = '_osha_dangerous_substances_form_after_build';
-    $form['actions']['submit']['#submit'][] = 'osha_dangerous_substances_node_save_redirect_submit';
-    if (isset($form['actions']['save_preview'])) {
-      $form['actions']['save_preview']['#submit'][] = 'osha_dangerous_substances_node_save_redirect_submit';
-    }
-    if (isset($form['actions']['send_for_approval'])) {
-      $form['actions']['send_for_approval']['#submit'][] = 'osha_dangerous_substances_node_save_redirect_submit';
-    }
+    // Removed, see MDR-969
+    //$form['actions']['submit']['#submit'][] = 'osha_dangerous_substances_node_save_redirect_submit';
+    //if (isset($form['actions']['save_preview'])) {
+    //  $form['actions']['save_preview']['#submit'][] = 'osha_dangerous_substances_node_save_redirect_submit';
+    //}
+    //if (isset($form['actions']['send_for_approval'])) {
+    //  $form['actions']['send_for_approval']['#submit'][] = 'osha_dangerous_substances_node_save_redirect_submit';
+    //}
   }
 }
 

@@ -421,3 +421,11 @@ function osha_update_7022() {
   variable_set('hwc_migration_root_url', 'https://healthy-workplaces.eu');
   migrate_autoregister();
 }
+
+/**
+ * VES-15: Taxonomy changed module, feature revert.
+ */
+function osha_update_7023() {
+  module_enable(['taxonomy_changed']);
+  features_revert_module('osha');
+}

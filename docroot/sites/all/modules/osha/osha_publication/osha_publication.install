@@ -287,3 +287,11 @@ function osha_publication_update_7008() {
     node_save($node);
   }
 }
+
+
+/**
+ * MDR-1012 - Features revert: Added Priority areas field to publications.
+ */
+function osha_publication_update_7009() {
+  features_revert_module('osha_publication');
+}

@@ -505,8 +505,11 @@ img[alt*="Select language"]{
     font-size: 0.913em;
     font-weight: bold;
     position: absolute;
-    width: 100px;
+    width: 106px;
     right: 235px;
+}
+.fixedHeader #languagesAndSearch{
+	min-width: 340px !important;
 }
 
 #languagesAndSearch input {
@@ -2476,6 +2479,9 @@ font-weight: normal;
 .block-facetapi div, #block-osha-search-osha-search-language form{
     padding-left: 0.5em;
     padding-top: 0.5em;
+}
+.block-facetapi div{
+	padding-top: 0em;
 }
 
 
@@ -6919,6 +6925,7 @@ article.comment p {
 div.contextual-links-wrapper{
 	top:initial!important;
 	right:initial!important;
+	position: relative;
 }
 
 /*END STYLE TO CONFIGURE ADMIN*/

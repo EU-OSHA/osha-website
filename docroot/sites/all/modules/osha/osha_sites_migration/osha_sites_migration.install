@@ -21,3 +21,12 @@ function osha_sites_migration_update_7001() {
   }
   variable_set('migrate_disabled_handlers', serialize($handlers));
 }
+
+function osha_sites_migration_update_7002() {
+  variable_set('oira_migration_OiraNews_url', '/ncw-export/news');
+  variable_set('oira_migration_root_url', 'https://oiraproject.eu');
+  drush_migrate_auto_register();
+  db_delete('migrate_status')
+    ->condition('machine_name', ['hwc_events', 'hwc_news'], 'IN')
+    ->execute();
+}

@@ -88,21 +88,18 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_external_url']['field'] = 'field_external_url';
   $handler->display->display_options['fields']['field_external_url']['click_sort_column'] = 'url';
   $handler->display->display_options['fields']['field_external_url']['type'] = 'link_title_plain';
-  /* Field: Content: Provider (English) */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_provider']['id'] = 'field_provider';
   $handler->display->display_options['fields']['field_provider']['table'] = 'field_data_field_provider';
   $handler->display->display_options['fields']['field_provider']['field'] = 'field_provider';
-  $handler->display->display_options['fields']['field_provider']['type'] = 'text_plain';
-  /* Field: Content: Provider (Original) */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_provider_original']['id'] = 'field_provider_original';
   $handler->display->display_options['fields']['field_provider_original']['table'] = 'field_data_field_provider_original';
   $handler->display->display_options['fields']['field_provider_original']['field'] = 'field_provider_original';
-  /* Field: Content: Provider URL */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_provider_url']['id'] = 'field_provider_url';
   $handler->display->display_options['fields']['field_provider_url']['table'] = 'field_data_field_provider_url';
   $handler->display->display_options['fields']['field_provider_url']['field'] = 'field_provider_url';
-  $handler->display->display_options['fields']['field_provider_url']['click_sort_column'] = 'url';
-  $handler->display->display_options['fields']['field_provider_url']['type'] = 'link_title_plain';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
   $handler->display->display_options['fields']['title_field']['table'] = 'field_data_title_field';
@@ -118,13 +115,13 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_item_type']['id'] = 'field_item_type';
   $handler->display->display_options['fields']['field_item_type']['table'] = 'field_data_field_item_type';
   $handler->display->display_options['fields']['field_item_type']['field'] = 'field_item_type';
-  /* Field: Content: Type of provider */
+  /* Field: Field collection item: Type of provider */
   $handler->display->display_options['fields']['field_provider_type']['id'] = 'field_provider_type';
   $handler->display->display_options['fields']['field_provider_type']['table'] = 'field_data_field_provider_type';
   $handler->display->display_options['fields']['field_provider_type']['field'] = 'field_provider_type';
   $handler->display->display_options['fields']['field_provider_type']['type'] = 'i18n_taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_provider_type']['delta_offset'] = '0';
-  /* Field: Content: Provider other */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_provider_other']['id'] = 'field_provider_other';
   $handler->display->display_options['fields']['field_provider_other']['table'] = 'field_data_field_provider_other';
   $handler->display->display_options['fields']['field_provider_other']['field'] = 'field_provider_other';
@@ -484,21 +481,18 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_external_url']['field'] = 'field_external_url';
   $handler->display->display_options['fields']['field_external_url']['click_sort_column'] = 'url';
   $handler->display->display_options['fields']['field_external_url']['type'] = 'link_title_plain';
-  /* Field: Content: Provider (English) */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_provider']['id'] = 'field_provider';
   $handler->display->display_options['fields']['field_provider']['table'] = 'field_data_field_provider';
   $handler->display->display_options['fields']['field_provider']['field'] = 'field_provider';
-  $handler->display->display_options['fields']['field_provider']['type'] = 'text_plain';
-  /* Field: Content: Provider (Original) */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_provider_original']['id'] = 'field_provider_original';
   $handler->display->display_options['fields']['field_provider_original']['table'] = 'field_data_field_provider_original';
   $handler->display->display_options['fields']['field_provider_original']['field'] = 'field_provider_original';
-  /* Field: Content: Provider URL */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_provider_url']['id'] = 'field_provider_url';
   $handler->display->display_options['fields']['field_provider_url']['table'] = 'field_data_field_provider_url';
   $handler->display->display_options['fields']['field_provider_url']['field'] = 'field_provider_url';
-  $handler->display->display_options['fields']['field_provider_url']['click_sort_column'] = 'url';
-  $handler->display->display_options['fields']['field_provider_url']['type'] = 'link_title_plain';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
   $handler->display->display_options['fields']['title_field']['table'] = 'field_data_title_field';
@@ -514,7 +508,7 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_item_type']['id'] = 'field_item_type';
   $handler->display->display_options['fields']['field_item_type']['table'] = 'field_data_field_item_type';
   $handler->display->display_options['fields']['field_item_type']['field'] = 'field_item_type';
-  /* Field: Content: Type of provider */
+  /* Field: Field collection item: Type of provider */
   $handler->display->display_options['fields']['field_provider_type']['id'] = 'field_provider_type';
   $handler->display->display_options['fields']['field_provider_type']['table'] = 'field_data_field_provider_type';
   $handler->display->display_options['fields']['field_provider_type']['field'] = 'field_provider_type';
@@ -765,24 +759,21 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_external_url']['ui_name'] = 'External URL';
   $handler->display->display_options['fields']['field_external_url']['click_sort_column'] = 'url';
   $handler->display->display_options['fields']['field_external_url']['type'] = 'link_title_plain';
-  /* Field: Provider (English) */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_provider']['id'] = 'field_provider';
   $handler->display->display_options['fields']['field_provider']['table'] = 'field_data_field_provider';
   $handler->display->display_options['fields']['field_provider']['field'] = 'field_provider';
   $handler->display->display_options['fields']['field_provider']['ui_name'] = 'Provider (English)';
-  $handler->display->display_options['fields']['field_provider']['type'] = 'text_plain';
-  /* Field: Provider (Original) */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_provider_original']['id'] = 'field_provider_original';
   $handler->display->display_options['fields']['field_provider_original']['table'] = 'field_data_field_provider_original';
   $handler->display->display_options['fields']['field_provider_original']['field'] = 'field_provider_original';
   $handler->display->display_options['fields']['field_provider_original']['ui_name'] = 'Provider (Original)';
-  /* Field: Provider URL */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_provider_url']['id'] = 'field_provider_url';
   $handler->display->display_options['fields']['field_provider_url']['table'] = 'field_data_field_provider_url';
   $handler->display->display_options['fields']['field_provider_url']['field'] = 'field_provider_url';
   $handler->display->display_options['fields']['field_provider_url']['ui_name'] = 'Provider URL';
-  $handler->display->display_options['fields']['field_provider_url']['click_sort_column'] = 'url';
-  $handler->display->display_options['fields']['field_provider_url']['type'] = 'link_title_plain';
   /* Field: Title */
   $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
   $handler->display->display_options['fields']['title_field']['table'] = 'field_data_title_field';
@@ -808,7 +799,7 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_provider_type']['ui_name'] = 'Type of provider';
   $handler->display->display_options['fields']['field_provider_type']['type'] = 'i18n_taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_provider_type']['delta_offset'] = '0';
-  /* Field: Provider other */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_provider_other']['id'] = 'field_provider_other';
   $handler->display->display_options['fields']['field_provider_other']['table'] = 'field_data_field_provider_other';
   $handler->display->display_options['fields']['field_provider_other']['field'] = 'field_provider_other';
@@ -1107,13 +1098,13 @@ function osha_dangerous_substances_views_default_views() {
     t('Country'),
     t('Country other'),
     t('External URL'),
-    t('Provider (English)'),
-    t('Provider (Original)'),
-    t('Provider URL'),
+    t('Broken handler field_data_field_provider.field_provider'),
+    t('Broken handler field_data_field_provider_original.field_provider_original'),
+    t('Broken handler field_data_field_provider_url.field_provider_url'),
     t('Title (original)'),
     t('Type of item'),
     t('Type of provider'),
-    t('Provider other'),
+    t('Broken handler field_data_field_provider_other.field_provider_other'),
     t('Year of publication'),
     t('Sector / Industry covered other'),
     t('Biological hazard'),

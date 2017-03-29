@@ -5,6 +5,7 @@ include_once 'includes/AbstractNcwNodeSource.php';
 include_once 'includes/migrate_utils.php';
 include_once 'osha_sites_migration.migrate.news.inc';
 include_once 'osha_sites_migration.migrate.events.inc';
+include_once 'osha_sites_migration.migrate.oira_news.inc';
 
 
 /**
@@ -93,17 +94,25 @@ function osha_sites_migration_migrate_api() {
       'hwc' => array(
         'title' => 'Import data from HWC'
       ),
+      'oira' => array(
+        'title' => 'Import data from Oira'
+      ),
     ),
     'migrations' => array(
-      'hwc_events' => array(
+      'HWCEvents' => array(
         'group_name' => 'hwc',
         'class_name' => 'HWCEventsMigration',
         'site_source' => 'hwc',
       ),
-      'hwc_news' => array(
+      'HWCNews' => array(
         'group_name' => 'hwc',
         'class_name' => 'HWCNewsMigration',
         'site_source' => 'hwc',
+      ),
+      'OiraNews' => array(
+        'group_name' => 'oira',
+        'class_name' => 'OiraNewsMigration',
+        'site_source' => 'oira',
       ),
     ),
     'field handlers' => array(

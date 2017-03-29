@@ -2480,6 +2480,9 @@ font-weight: normal;
     padding-left: 0.5em;
     padding-top: 0.5em;
 }
+.block-facetapi div{
+	padding-top: 0em;
+}
 
 
 #block-osha-publication-osha-publication-listing .publications-sidebar-first{

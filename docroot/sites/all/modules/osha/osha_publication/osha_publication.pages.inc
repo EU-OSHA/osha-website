@@ -136,7 +136,7 @@ function osha_publication_menu_publications_search_native($form_state) {
     $results = $server->search($query);
     if (!empty($results['results'])) {
       foreach ($results['results'] as $result) {
-        list($lng, $nid) = explode('_', $result['id'], 2);
+        list($nid, $lng) = explode('/', $result['id'], 2);
         $restrict[] = $nid;
       }
     }

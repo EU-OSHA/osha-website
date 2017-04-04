@@ -429,3 +429,10 @@ function osha_update_7023() {
   module_enable(['taxonomy_changed']);
   features_revert_module('osha');
 }
+
+/**
+ * Feature revert: NOW-449 - SEO: Links from the CW to the root URL.
+ */
+function osha_update_7024() {
+  features_revert_module('osha');
+}

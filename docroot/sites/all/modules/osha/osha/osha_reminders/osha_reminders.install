@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * Set the new message for pm update reminders.
+ */
+function osha_reminders_update_7001() {
+  variable_set('osha_reminder_template_pm_body', 'Dear [user:name],<br/>
+<br/>
+As project manager for [pm_sections], you are kindly invited to review the <a href="[sections_content_url]">content of your section</a>.<br/>
+You can check the broken links in <a href="[broken_links_url]">this page</a>.<br/>
+Please, remember that the content should be relevant and up to date, and the links should work properly.<br/>
+<br/>
+Thanks a lot for reviewing your contents.<br/>');
+}

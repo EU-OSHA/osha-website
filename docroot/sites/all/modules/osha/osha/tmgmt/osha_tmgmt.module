@@ -123,7 +123,6 @@ function osha_tmgmt_filter_info() {
   $filters['osha_tmgmt_filter_oiraurl'] = array(
     'title' => t('Overwrites the urls to oira to current match language'),
     'process callback' => '_osha_tmgmt_filter_html_oiraurl',
-//    'prepare callback'=> '_osha_tmgmt_filter_html_oiraurl_prepare',
     'weight' => 12,
   );
   return $filters;

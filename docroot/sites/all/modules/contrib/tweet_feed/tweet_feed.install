@@ -1,0 +1,224 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ */
+function tweet_feed_schema() {
+  $schema = array();
+  $schema['tweet_feeds'] = array(
+    'fields'=> array(
+      'fid' => array(
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE),
+      'aid' => array(
+        'type' => 'int',
+        'size' => 'small',
+        'not null' => TRUE),
+      'feed_name' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE),
+      'query_type' => array(
+        'type' => 'int',
+        'size' => 'small',
+        'not null' => TRUE),
+      'timeline_id' => array(
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE),
+      'search_term' => array(
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE),
+      'list_name' => array(
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE),
+      'pull_count' => array(
+        'type' => 'int',
+        'size' => 'medium',
+        'not null' => TRUE),
+      'clear_prior' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE),
+      'new_window' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE),
+      'hash_taxonomy' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('fid'),
+  );
+
+  $schema['tweet_accounts'] = array(
+    'fields'=> array(
+      'aid' => array(
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE),
+      'account_name' => array(
+        'type' => 'varchar',
+        'length' => 96,
+        'not null' => TRUE),
+      'consumer_key' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE),
+      'consumer_secret' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE),
+      'oauth_token' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE),
+      'oauth_token_secret' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE),
+    ),
+    'primary key' => array('aid'),
+  );
+  $schema['tweet_hashes'] = array(
+    'fields'=> array(
+      'nid' => array(
+      'type' => 'int',
+      'length' => 11,
+      'not null' => TRUE),
+    'tid' => array(
+      'type' => 'int',
+      'size' => 'big',
+      'not null' => TRUE),
+    'hash' => array(
+      'type' => 'varchar',
+      'length' => 64,
+      'not null' => TRUE),
+    ),
+    'primary key' => array('nid'),
+  );
+  $schema['tweet_user_hashes'] = array(
+    'fields'=> array(
+      'nid' => array(
+      'type' => 'int',
+      'length' => 11,
+      'not null' => TRUE),
+    'tuid' => array(
+      'type' => 'int',
+      'size' => 'big',
+      'not null' => TRUE),
+    'hash' => array(
+      'type' => 'varchar',
+      'length' => 64,
+      'not null' => TRUE),
+    ),
+    'primary key' => array('nid'),
+  );
+  return $schema;
+}
+
+/**
+ * Implements hook_field_schema().
+ */
+function tweet_feed_field_schema($field) {
+  if($field['type'] == 'tweet_feed_user_mention') {
+    $schema['columns']['tweet_feed_mention_name'] = array(
+      'description' => 'Name of user mentioned in tweet',
+      'type' => 'varchar',
+      'length' => 255,
+      'not null' => FALSE,
+      'sortable' => FALSE,
+      'views' => TRUE,
+    );
+    $schema['columns']['tweet_feed_mention_screen_name'] = array(
+      'description' => 'Screen Name of user mentioned in tweet',
+      'type' => 'varchar',
+      'length' => 255,
+      'not null' => FALSE,
+      'sortable' => FALSE,
+      'views' => TRUE,
+    );
+    $schema['columns']['tweet_feed_mention_id'] = array(
+      'description' => 'ID of user mentioned in tweet.',
+      'type' => 'varchar',
+      'length' => 255,
+      'not null' => FALSE,
+      'sortable' => FALSE,
+      'views' => TRUE,
+    );
+  }
+  return $schema;
+}
+
+/**
+ * Implements hook_install().
+ */
+function tweet_feed_install() {
+  module_load_include('inc', 'tweet_feed', 'tweet_feed_create_entities_and_bundles');
+  tweet_feed_create_entities_and_bundles();
+  // Make sure our directories are created
+  module_load_include('module', 'tweet_feed');
+  $a = tweet_feed_check_path('public://tweet-profile-user-profile-image');
+  $b = tweet_feed_check_path('public://tweet-feed-tweet-images');
+  $c = tweet_feed_check_path('public://tweet-feed-profile-image');
+  $d = tweet_feed_check_path('public://tweet-feed-profile-banner-image');
+  $e = tweet_feed_check_path('public://tweet-feed-profile-background-image');
+  if (empty($a) || empty($b) || empty($c) || empty($d) || empty($e)) {
+    drupal_set_message(t('Failed to create one or more file directories that Tweet Feed needs. It will attempt to create these as needed, but you need to fix the directory permissions issues on your "files" directory.'), 'error');
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function tweet_feed_uninstall() {
+  $content_types = array('twitter_tweet_feed', 'twitter_user_profile');
+  foreach ($content_types as $content_type) {
+    // Clear out the content type
+    $nids = array();
+    $result = db_select('node', 'n')
+      ->fields('n')
+      ->condition('type', $content_type, '=')
+      ->execute();
+    if ($result->rowCount() > 0) {
+      node_type_delete($content_type);
+    }
+  }
+  variable_del('tweet_feed_pull_data_from_feed');
+  variable_del('tweet_feed_cron_last_feed');
+}
+
+/**
+ * Add the author name and verified status to the profile and tweet content types.
+ */
+function tweet_feed_update_7301() {
+  // Add the verified flag.
+  if (field_info_field('field_tweet_author_verified') == FALSE) {
+    $field = array('translatable' => '0','entity_types' => array(),'settings' => array('allowed_values' => array('0' => '','1' => '',),'allowed_values_function' => '',),'field_name' => 'field_tweet_author_verified','type' => 'list_boolean','module' => 'list','active' => '1','locked' => '0','cardinality' => '1','deleted' => '0','bundles' => array('node' => array('0' => 'twitter_tweet_feed','1' => 'twitter_user_profile',),),);
+    $field = field_create_field($field);
+  }
+  if (field_info_instance('node', 'field_tweet_author_verified', 'twitter_tweet_feed') == NULL) {
+    $instance = array('label' => 'Tweet Author Verified','widget' => array('weight' => '5','type' => 'options_onoff','module' => 'options','active' => '1','settings' => array('display_label' => '1',),),'settings' => array('user_register_form' => '',),'display' => array('default' => array('label' => 'above','type' => 'list_default','settings' => array(),'module' => 'list','weight' => '18',),'teaser' => array('type' => 'hidden','label' => 'above','settings' => array(),'weight' => '0',),),'required' => '0','description' => '','default_value' => array('0' => array('value' => '0',),),'field_name' => 'field_tweet_author_verified','entity_type' => 'node','bundle' => 'twitter_tweet_feed','deleted' => '0',);
+    field_create_instance($instance);
+  }
+  if (field_info_instance('node', 'field_tweet_author_verified', 'twitter_user_profile') == NULL) {
+    $instance = array('label' => 'Tweet Author Verified','widget' => array('weight' => '3','type' => 'options_onoff','module' => 'options','active' => '1','settings' => array('display_label' => '1',),),'settings' => array('user_register_form' => '',),'display' => array('default' => array('label' => 'above','type' => 'list_default','settings' => array(),'module' => 'list','weight' => '18',),'teaser' => array('type' => 'hidden','label' => 'above','settings' => array(),'weight' => '0',),),'required' => '0','description' => '','default_value' => array('0' => array('value' => '0',),),'field_name' => 'field_tweet_author_verified','entity_type' => 'node','bundle' => 'twitter_user_profile','deleted' => '0',);
+    field_create_instance($instance);
+  }
+
+  // Add the author name field.
+  if (field_info_field('field_tweet_author_name') == FALSE) {
+    $field = array('translatable' => '0','entity_types' => array(),'settings' => array('max_length' => '255',),'field_name' => 'field_tweet_author_name','type' => 'text','module' => 'text','active' => '1','locked' => '0','cardinality' => '1','deleted' => '0','bundles' => array('node' => array('0' => 'twitter_tweet_feed',),),);
+    $field = field_create_field($field);
+  }
+  if (field_info_instance('node', 'field_tweet_author_name', 'twitter_tweet_feed') == NULL) {
+    $instance = array('label' => 'Tweet Author Name','widget' => array('weight' => '4','type' => 'text_textfield','module' => 'text','active' => '1','settings' => array('size' => '60',),),'settings' => array('text_processing' => '0','user_register_form' => '',),'display' => array('default' => array('label' => 'above','type' => 'text_default','settings' => array(),'module' => 'text','weight' => '17',),'teaser' => array('type' => 'hidden','label' => 'above','settings' => array(),'weight' => '0',),),'required' => '0','description' => '','default_value' => '','field_name' => 'field_tweet_author_name','entity_type' => 'node','bundle' => 'twitter_tweet_feed','deleted' => '0',);
+    field_create_instance($instance);
+  }
+}

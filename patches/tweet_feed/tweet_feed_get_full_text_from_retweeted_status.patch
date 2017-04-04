@@ -1,0 +1,14 @@
+diff --git a/docroot/sites/all/modules/contrib/tweet_feed/tweet_feed.module b/docroot/sites/all/modules/contrib/tweet_feed/tweet_feed.module
+index 801241180..d1074b1c6 100644
+--- a/docroot/sites/all/modules/contrib/tweet_feed/tweet_feed.module
++++ b/docroot/sites/all/modules/contrib/tweet_feed/tweet_feed.module
+@@ -729,7 +729,8 @@ function tweet_feed_save_tweet($tweet, $feed, $update_node_id = 0, $hash = NULL,
+ 
+   // Process the tweet. This linkes our twitter names, hash tags and converts any
+   // URL's into HTML.
+-  $tweet_html = tweet_feed_format_output($tweet->full_text, $feed->new_window, $feed->hash_taxonomy, $hashtags);
++  $tweet_text = !empty($tweet->retweeted_status->full_text) ? $tweet->retweeted_status->full_text : $tweet->full_text;
++  $tweet_html = tweet_feed_format_output($tweet_text, $feed->new_window, $feed->hash_taxonomy, $hashtags);
+ 
+   // Populate our node object with the data we will need to save
+   $node = new stdClass();

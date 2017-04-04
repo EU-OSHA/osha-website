@@ -72,3 +72,143 @@ function osha_newsletter_update_7003() {
 function osha_newsletter_update_7004() {
   features_revert_module('osha_newsletter');
 }
+
+/**
+ * Enable tweet_feed module
+ * Update newsletter sections
+ * Update the Newsletter Highlights display for multiple content types
+ * Setup osha_newsletter_version_2_deployment_time variable
+ */
+function osha_newsletter_update_7005() {
+  variable_set('osha_newsletter_version_2_deployment_time', time());
+
+  module_enable(['tweet_feed']);
+  features_revert_module('osha_newsletter');
+
+  // Modified the Newsletter Highlights display for multiple content types
+  features_revert_module('osha_blog');
+  features_revert_module('osha_events');
+  features_revert_module('osha_highlight');
+  features_revert_module('osha_news');
+  features_revert_module('osha_press_release');
+  features_revert_module('osha_publication');
+
+  $module_path = drupal_get_path('module', 'osha_newsletter');
+  $image_dest_dir = 'public://newsletter';
+
+  $files = [
+    'hwc' => "{$module_path}/images/HWC_background.png",
+    'oshwiki' => "{$module_path}/images/OSHWiki_logo.png",
+    'oira' => "{$module_path}/images/OiRA_logo.png",
+  ];
+  foreach ($files as $key => $filepath) {
+    $file = (object) array(
+      'uid' => 1,
+      'uri' => $filepath,
+      'filemime' => file_get_mimetype($filepath),
+      'status' => 1,
+    );
+    if ($file = file_copy($file, $image_dest_dir)) {
+      $files[$key] = (array) $file;
+    }
+    else {
+      unset($files[$key]);
+    }
+  }
+
+  $newsletter_sections = [
+    [
+      // Highlights
+      'tid' => '12',
+      'field_newsletter_template' => 'newsletter_full_width_details',
+      'field_link' => '/highlights',
+      'weight' => -9,
+    ],
+    [
+      'name' => 'Videos',
+      'field_newsletter_template' => 'newsletter_full_width_details',
+      'weight' => -8,
+    ],
+    [
+      // News
+      'tid' => '11',
+      'field_newsletter_template' => 'newsletter_half_width_list',
+      'field_link' => '/oshnews',
+      'weight' => -7,
+    ],
+    [
+      'name' => 'Tweets',
+      'field_newsletter_template' => 'newsletter_half_width_twitter',
+      'field_link' => 'https://twitter.com/EU_OSHA',
+      'weight' => -6,
+    ],
+    [
+      // Healthy workplaces campaign
+      'tid' => '3036',
+      'field_newsletter_template' => 'newsletter_half_image_left',
+      'field_background_color' => '#aec70f',
+      'field_background_image' => $files['hwc'],
+      'weight' => -5,
+    ],
+    [
+      // OiRA - Online Interactive Risk Assessment
+      'tid' => '3117',
+      'field_newsletter_template' => 'newsletter_full_width_list',
+      'field_icon' => $files['oira'],
+      'weight' => -4,
+    ],
+    [
+      // OSHWiki
+      'tid' => '3080',
+      'field_newsletter_template' => 'newsletter_full_width_list',
+      'field_icon' => $files['oshwiki'],
+      'weight' => -3,
+    ],
+    [
+      // Events
+      'tid' => '15',
+      'field_newsletter_template' => 'newsletter_full_width_2_col_blocks',
+      'field_link' => '/oshevents',
+      'weight' => -2,
+    ],
+    [
+      // Coming soon
+      'tid' => '13',
+      'field_newsletter_template' => 'newsletter_full_width_list',
+      'weight' => -1,
+    ],
+  ];
+
+  $active = [];
+  foreach ($newsletter_sections as $section) {
+    if (!empty($section['tid'])) {
+      $term = taxonomy_term_load($section['tid']);
+    }
+    else {
+      $term = (object) [
+        'vid' => '11', // Newsletter sections
+        'name' => $section['name'],
+      ];
+    }
+    $term->weight = $section['weight'];
+    $term->field_newsletter_template = [LANGUAGE_NONE => [0 => [
+      'value' => !empty($section['field_newsletter_template']) ? $section['field_newsletter_template'] : '',
+    ]]];
+    $term->field_background_color = [LANGUAGE_NONE => [0 => [
+      'value' => !empty($section['field_background_color']) ? $section['field_background_color'] : '',
+    ]]];
+    $term->field_link = [LANGUAGE_NONE => [0 => [
+      'url' => !empty($section['field_link']) ? $section['field_link'] : '',
+    ]]];
+    if (!empty($section['field_background_image'])) {
+      $term->field_background_image = [LANGUAGE_NONE => [0 => $section['field_background_image']]];
+    }
+    if (!empty($section['field_icon'])) {
+      $term->field_icon = [LANGUAGE_NONE => [0 => $section['field_icon']]];
+    }
+    taxonomy_term_save($term);
+    $active[] = $term->tid;
+  }
+
+  variable_set('osha_newsletter_active_sections', $active);
+}

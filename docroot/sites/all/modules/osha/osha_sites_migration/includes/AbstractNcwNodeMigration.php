@@ -254,7 +254,15 @@ abstract class AbstractNCWNodeMigration extends Migration {
     }
   }
 
+  /**
+   * Executes before Import.
+   */
+  public function preImport() {
+    MigrationUtil::activateOshaFilesHandler();
+  }
+
   public function postImport() {
+    MigrationUtil::deactivateOshaFilesHandler();
     $this->removeNeedsUpdateItems();
   }
 

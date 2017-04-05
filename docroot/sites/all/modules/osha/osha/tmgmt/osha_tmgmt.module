@@ -120,8 +120,15 @@ function osha_tmgmt_filter_info() {
     'process callback' => '_osha_tmgmt_filter_html_id',
     'weight' => 11,
   );
+  $filters['osha_tmgmt_filter_oiraurl'] = array(
+    'title' => t('Overwrites the urls to oira to current match language'),
+    'process callback' => '_osha_tmgmt_filter_html_oiraurl',
+    'weight' => 12,
+  );
   return $filters;
 }
+
+
 
 /**
  * Implements callback_filter_process().
@@ -129,9 +136,30 @@ function osha_tmgmt_filter_info() {
 function _osha_tmgmt_filter_html_id($text) {
   $html_dom = filter_dom_load($text);
   $xpath = new DOMXPath($html_dom);
-  $nodes = $xpath->query("//*[contains(@id, 'tmgmt')]");;
+  $nodes = $xpath->query("//*[contains(@id, 'tmgmt')]");
   foreach ($nodes as $node) {
     $node->removeAttribute('id');
+  }
+  return filter_dom_serialize($html_dom);
+}
+/**
+ * Implements callback_filter_process().
+ */
+function _osha_tmgmt_filter_html_oiraurl($text, $filter, $format, $langcode, $cache, $cache_id) {
+  global $language;
+  $html_dom = filter_dom_load($text);
+  $xpath = new DOMXPath($html_dom);
+  $nodes = $xpath->query("//*[contains(@href, 'http://www.oiraproject.eu')]");
+  foreach ($nodes as $node) {
+    $url = parse_url($node->getAttribute('href'));
+    $path = $url['scheme'] . '://'. $url['host'] . '/' . $langcode;
+    if (isset($url['path'])) {
+      $path .= $url['path'];
+    }
+    if (isset($url['query'])) {
+      $path .= $url['query'];
+    }
+    $node->setAttribute('href', $path);
   }
   return filter_dom_serialize($html_dom);
 }

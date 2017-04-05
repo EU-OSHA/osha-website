@@ -181,10 +181,52 @@ function osha_dangerous_substances_field_default_field_instances() {
       'active' => 1,
       'module' => 'options',
       'settings' => array(
-        'apply_chosen' => '',
+        'apply_chosen' => 1,
       ),
       'type' => 'options_select',
       'weight' => 35,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_fc_provider-field_type_provider_other'.
+  $field_instances['field_collection_item-field_fc_provider-field_type_provider_other'] = array(
+    'bundle' => 'field_fc_provider',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 4,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_type_provider_other',
+    'label' => 'Other type provider',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 36,
     ),
     'workbench_access_field' => 0,
   );
@@ -5830,7 +5872,9 @@ please take this into consideration when you are writing the first paragraph.',
   t('Length of the video');
   t('Level');
   t('Measurement method');
+  t('Notes');
   t('Other information');
+  t('Other type provider');
   t('Ownership information');
   t('Please add a country code from the list');
   t('Please add a language code from the list');
@@ -5901,7 +5945,6 @@ please take this into consideration when you are writing the first paragraph.');
   t('Worker groups covered (vulnerable groups etc.)');
   t('Worker groups covered other');
   t('Year of publication');
-  t('Notes');
 
   return $field_instances;
 }

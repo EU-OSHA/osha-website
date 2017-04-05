@@ -108,8 +108,12 @@ function _osha_dangerous_substances_get_other_tid($element, $field, $other_name 
 function _osha_dangerous_substances_form_after_build($form, $form_state) {
 
   // Provider other
-  $_other = _osha_dangerous_substances_get_other_tid($form, 'field_provider_type');
-  $form['field_provider_other']['#states'] = ['visible'=>[ '#edit-field-provider-type-und' => ['value' => [$_other]] ] ];
+  foreach (element_children($form['field_fc_provider'][LANGUAGE_NONE]) as $key) {
+    if (isset($form['field_fc_provider'][LANGUAGE_NONE][$key]['field_provider_type'])) {
+      $_other = _osha_dangerous_substances_get_other_tid($form['field_fc_provider'][LANGUAGE_NONE][$key], 'field_provider_type');
+      $form['field_fc_provider'][LANGUAGE_NONE][$key]['field_type_provider_other']['#states'] = ['visible' => [ '#edit-field-fc-provider-und-' . $key . '-field-provider-type-und' => ['value' => [$_other]]]];
+    }
+  }
 
   // Country code
   $_other = _osha_dangerous_substances_get_other_tid($form, 'field_material_country');

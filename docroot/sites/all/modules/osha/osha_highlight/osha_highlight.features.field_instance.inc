@@ -27,8 +27,10 @@ function osha_highlight_field_default_field_instances() {
       'highlights_item' => array(
         'label' => 'hidden',
         'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
+        'settings' => array(
+          'trim_length' => 500,
+        ),
+        'type' => 'text_summary_or_trimmed',
         'weight' => 3,
       ),
       'newsletter_item' => array(

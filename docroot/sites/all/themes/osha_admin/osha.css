@@ -200,3 +200,7 @@ ul.primary {
   color: red;
   font-size: .6em;
 }
+
+#entity-collection-content-form select {
+  width: 100%;
+}

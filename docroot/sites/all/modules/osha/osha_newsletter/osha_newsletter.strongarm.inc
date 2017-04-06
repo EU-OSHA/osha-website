@@ -138,13 +138,13 @@ function osha_newsletter_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '5',
-        ),
-        'path' => array(
           'weight' => '4',
         ),
-        'redirect' => array(
+        'path' => array(
           'weight' => '3',
+        ),
+        'redirect' => array(
+          'weight' => '2',
         ),
       ),
       'display' => array(

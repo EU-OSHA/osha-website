@@ -8266,8 +8266,11 @@ display:block!important;
 	table tr td{
 		display:table-header-group;
 		width:100%;
-
 	}
+  .newsletter-container td {
+    display: table-cell;
+    width:auto;
+  }
 
 	table{
 		width:100%;
@@ -9255,3 +9258,7 @@ body.page-entity-collection h1#page-title{
     padding-top: 17px;
 }
 /*end search layout redesign*/
+
+body.page-entity-collection .newsletter-container {
+  margin: 0 auto !important;
+}

@@ -24,6 +24,31 @@ function osha_newsletter_views_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_image_default_styles().
+ */
+function osha_newsletter_image_default_styles() {
+  $styles = array();
+
+  // Exported image style: highlight_image.
+  $styles['highlight_image'] = array(
+    'label' => 'Highlight image',
+    'effects' => array(
+      2 => array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => 300,
+          'height' => 200,
+          'upscale' => 0,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  return $styles;
+}
+
+/**
  * Implements hook_node_info().
  */
 function osha_newsletter_node_info() {

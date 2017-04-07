@@ -122,16 +122,23 @@ global $language;
           $directory = drupal_get_path('module','osha_newsletter');
           global $base_url;
           print l(theme('image', array(
-          'path' => $directory . '/images/Osha-EU-logos.png',
-          'width' => 256,
-          'height' => 60,
-          'alt' => 'European Agency for Safety and Health at Work',
-          'attributes' => array('style' => 'border: 0px; width: 256px; max-width: 256px;height:60px;max-height:60px;')
-          )), $base_url.'/'.$language->language, array(
-          'html' => TRUE,
-          'external' => TRUE,
-          'query' => $url_query
-        ));
+            'path' => $directory . '/images/EU-OSHA-en.png',
+            'width' => 247,
+            'height' => 84,
+            'alt' => 'European Agency for Safety and Health at Work',
+            'attributes' => array('style' => 'border: 0px; width: 247px; max-width: 247px; height: 87px; max-height: 87px;')
+            )), $base_url.'/'.$language->language, array(
+            'html' => TRUE,
+            'external' => TRUE,
+            'query' => $url_query
+          ));
+          print theme('image', array(
+            'path' => $directory . '/images/europeLogo.png',
+            'width' => 63,
+            'height' => 41,
+            'alt' => 'EU',
+            'attributes' => array('style' => 'border: 0px; margin-left: 20px; width: 63px; max-width: 63px; height: 41px; max-height: 41px;')
+          ));
         ?>
       </td>
       <td class="osha-info">

@@ -212,3 +212,24 @@ function osha_newsletter_update_7005() {
 
   variable_set('osha_newsletter_active_sections', $active);
 }
+
+/**
+ *  Allow youtube videos and wiki pages to be added to newsletters
+ */
+function osha_newsletter_update_7006() {
+  $allowed_bundles = variable_get('osha_newsletter_allowed_bundles',
+    [
+      "article" => "article",
+      "blog" => "blog",
+      "events" => "events",
+      "highlight" => "highlight",
+      "news" => "news",
+      "newsletter_article" => "newsletter_article",
+      "press_release" => "press_release",
+      "publication" => "publication",
+    ]
+  );
+  $allowed_bundles["wiki_page"] = "wiki_page";
+  $allowed_bundles["youtube"] = "youtube";
+  variable_set('osha_newsletter_allowed_bundles', $allowed_bundles);
+}

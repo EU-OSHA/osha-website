@@ -14,6 +14,7 @@ if (!empty($campaign_id)) {
   $url_query = array('pk_campaign' => $campaign_id);
 }
 
+global $language;
 ?>
 
 <span class="preview-text" style="color: transparent; display: none !important; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">
@@ -33,18 +34,17 @@ if (!empty($campaign_id)) {
               <td style="font-size: 12px; padding-left: 30px; padding-right: 30px; font-family: Arial,sans-serif;">
                 <?php
                  if ($languages) {
-                   $newsletter_languages = array();
+                   $languages_text = [];
                    foreach ($languages as $l) {
                      if ($l->language != "tr" && $l->language != "ru") {
-                       $newsletter_languages[] = $l;
+                       $languages_text[] = sprintf('<a href="%s" style="text-decoration: none; color: %s;">%s</a>',
+                         url('entity-collection/' . $newsletter_id, array('absolute' => TRUE, 'language' => $l, 'query' => $url_query)),
+                         ($l->language == $language->language) ? '#003399' : '#606060',
+                         $l->native);
                      }
                    }
-                   $last_lang = array_pop($newsletter_languages);
-                   foreach ($newsletter_languages as $l):?>
-                     <a href="<?php echo url('entity-collection/' . $newsletter_id, array('absolute' => TRUE, 'language' => $l, 'query' => $url_query));?>" style="text-decoration: none; color: #003399;"><?php print $l->native . ' | ';?></a>
-                   <?php endforeach; ?>
-                   <a href="<?php echo url('entity-collection/' . $newsletter_id, array('absolute' => TRUE, 'language' => $last_lang, 'query' => $url_query));?>" style="text-decoration: none; color: #003399;"><?php print $last_lang->native;?></a>
-                 <?php
+
+                   print implode('<span style="color: #606060;"> | </span>', $languages_text);
                  }
                 ?>
               </td>
@@ -121,7 +121,6 @@ if (!empty($campaign_id)) {
         <?php
           $directory = drupal_get_path('module','osha_newsletter');
           global $base_url;
-          global $language;
           print l(theme('image', array(
           'path' => $directory . '/images/Osha-EU-logos.png',
           'width' => 256,

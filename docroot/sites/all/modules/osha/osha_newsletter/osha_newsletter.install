@@ -217,6 +217,7 @@ function osha_newsletter_update_7005() {
  *  Allow youtube videos and wiki pages to be added to newsletters
  */
 function osha_newsletter_update_7006() {
+  features_revert_module('osha_newsletter');
   $allowed_bundles = variable_get('osha_newsletter_allowed_bundles',
     [
       "article" => "article",

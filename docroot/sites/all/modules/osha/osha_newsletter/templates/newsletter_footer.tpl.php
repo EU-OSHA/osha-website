@@ -49,22 +49,26 @@ global $language;
                       'path' => 'https://twitter.com/eu_osha',
                       'alt' => t('Twitter')
                     ),
+                    'face' => array(
+                      'path' => 'https://www.facebook.com/EuropeanAgencyforSafetyandHealthatWork',
+                      'alt' => t('Facebook')
+                    ),
                     'linkedin' => array(
                       'path' => 'https://www.linkedin.com/company/european-agency-for-safety-and-health-at-work',
                       'alt' => t('LinkedIn')
                     ),
-                    'face' => array(
-                      'path' => 'https://www.facebook.com/EuropeanAgencyforSafetyandHealthatWork',
-                      'alt' => t('Facebook')
+                    'youtube' => array(
+                      'path' => 'https://www.youtube.com/user/EUOSHA',
+                      'alt' => t('Youtube')
+                    ),
+                    'flickr' => array(
+                      'path' => 'https://www.flickr.com/photos/euosha/albums',
+                      'alt' => t('Flickr')
                     ),
                     'blog' => array(
                       'path' => url('tools-and-publications/blog', array('alias' => TRUE, 'absolute' => TRUE, 'query' => $url_query)),
                       'alt' => t('Blog')
                     ),
-                    'youtube' => array(
-                      'path' => 'https://www.youtube.com/user/EUOSHA',
-                      'alt' => t('Youtube')
-                    )
                   );
 
                   foreach ($social as $name => $options) {

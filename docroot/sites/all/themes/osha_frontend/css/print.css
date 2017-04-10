@@ -186,4 +186,8 @@
   .view-blog  .views-row{
 	padding-bottom:1em!important;
   }
+
+  #share-popup-container {
+    display: none;
+  }
 }

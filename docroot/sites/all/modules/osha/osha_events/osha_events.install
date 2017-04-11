@@ -137,3 +137,10 @@ function osha_events_update_7009() {
 function osha_events_update_7010() {
   features_revert_module('osha_events');
 }
+
+/**
+ * Revert osha_events.
+ */
+function osha_events_update_7011() {
+  features_revert_module('osha_events');
+}

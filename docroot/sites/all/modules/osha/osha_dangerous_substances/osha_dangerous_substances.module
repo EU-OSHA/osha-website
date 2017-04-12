@@ -77,7 +77,7 @@ function osha_dangerous_substances_form_alter(&$form, &$form_state, $form_id) {
     //    }
     $form['field_available_in_languages'][LANGUAGE_NONE]['#options'] = osha_sort_language_list($form['field_available_in_languages'][LANGUAGE_NONE]['#options']);
 
-    drupal_add_js(drupal_get_path('module', 'osha_dangerous_substances') . '/js/osha_dangerous_substances.js');
+    //drupal_add_js(drupal_get_path('module', 'osha_dangerous_substances') . '/js/osha_dangerous_substances.js');
     if (!isset($form['#after_build'])) {
       $form['#after_build'] = array();
     }

@@ -33,7 +33,6 @@ Disallow: /install.php
 Disallow: /INSTALL.txt
 Disallow: /LICENSE.txt
 Disallow: /MAINTAINERS.txt
-Disallow: /update.php
 Disallow: /UPGRADE.txt
 Disallow: /xmlrpc.php
 # Paths (clean URLs)

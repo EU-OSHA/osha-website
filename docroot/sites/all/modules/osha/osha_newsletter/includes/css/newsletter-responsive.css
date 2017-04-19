@@ -1,0 +1,116 @@
+/* CLIENT-SPECIFIC STYLES */
+html { min-width:100%; }
+body, table, td, a{-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;} /* Prevent WebKit and Windows mobile changing default text sizes */
+table, td{mso-table-lspace: 0pt; mso-table-rspace: 0pt;} /* Remove spacing between tables in Outlook 2007 and up */
+img{-ms-interpolation-mode: bicubic;} /* Allow smoother rendering of resized image in Internet Explorer */
+
+/* RESET STYLES */
+img{border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none;}
+table{border-collapse: collapse !important;}
+body{height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important;}
+
+/* iOS BLUE LINKS */
+a[x-apple-data-detectors] {
+  color: inherit !important;
+  text-decoration: none !important;
+  font-size: inherit !important;
+  font-family: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+}
+#content .old-newsletter .pink-arrow a {
+  font-family: 'Oswald', Arial, sans-serif;
+}
+.gmailfix {
+  display:none;
+  display:none!important;
+}
+@media only screen and (max-width: 480px) {
+  .newsletter-container {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  table[width],
+  .template-image,
+  .template-container,
+  .template-column {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  img {
+    max-width: 100% !important;
+    width: auto;
+  }
+  .newsletter-section {
+    min-height: 0 !important;
+  }
+/*
+  .newsletter-multiple-columns,
+  .newsletter-full-width-2-col-blocks,
+  .newsletter-multiple-columns > tbody,
+  .newsletter-full-width-2-col-blocks > tbody,
+  .newsletter-multiple-columns > tbody > tr,
+  .newsletter-full-width-2-col-blocks > tbody > tr,
+  .newsletter-multiple-columns > tbody > tr > td,
+  .newsletter-full-width-2-col-blocks > tbody > tr > td,
+  .item-thumbnail-and-title,
+  .item-thumbnail-and-title > tbody,
+  .item-thumbnail-and-title > tbody > tr,
+  .item-thumbnail-and-title > tbody > tr > td, */
+  .template-column {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .template-image {
+    text-align: center !important;
+  }
+  .template-column > .newsletter-item {
+    background-color: transparent;
+    color: #003399;
+  }
+  .newsletter-full-width-2-col-blocks-item > .newsletter-item > tbody > tr > td {
+    padding: 5px 0px;
+  }
+
+  .newsletter-item {
+    border-bottom: 1px dashed #dddddd;
+  }
+
+  .newsletter-section > tbody > .row:last-child > .item:last-child > .newsletter-item {
+    border-bottom: none;
+  }
+
+  .newsletter-half-image-left-container {
+    background-image: none!important;
+  }
+  .newsletter-half-image {
+    padding-bottom: 0 !important;
+  }
+  .newsletter-half-image td {
+    padding-right: 0 !important;
+  }
+  .newsletter-half-content {
+    padding-top: 0 !important;
+  }
+  .multiple-columns-cell {
+    padding-bottom: 0px !important;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .osha-logos {
+    text-align: center !important;
+  }
+  .osha-logos,
+  .osha-info {
+    display: block !important;
+    max-width: 100% !important;
+  }
+}
+/* @media screen and (-webkit-min-device-pixel-ratio:0) and (max-width: 800px) {
+  .htmlmail-body .template-column {
+    display: initial !important;
+  }
+} */

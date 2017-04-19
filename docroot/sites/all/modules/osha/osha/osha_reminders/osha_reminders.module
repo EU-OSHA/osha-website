@@ -123,17 +123,30 @@ function osha_reminders_mail($key, &$message, $params) {
           'absolute' => TRUE,
         )
       );
+      $sections_terms = taxonomy_term_load_multiple($sections);
+      $section_names = [];
+      foreach ($sections_terms as $term) {
+        $section_names[] = l($term->name, 'admin/config/workbench/access/managers/review/taxonomy/' . $term->tid, array('absolute' => TRUE));
+      }
+      $content_url = url('admin/content', array(
+        'query' => array('access_id' => $sections),
+        'absolute' => TRUE,
+      ));
+
       $subject = variable_get('osha_reminder_template_pm_subject', '[OSHA Website] Reminders: Review your Sections');
       $body = variable_get('osha_reminder_template_pm_body',
         'Dear [user:name],<br/>
 <br/>
-As project manager of  <a href="[site:url]/admin/config/workbench/access/managers">[site:url]/admin/config/workbench/access/managers</a>, you are kindly invited to review the content of your section twice a year.<br/> 
+As project manager of  <a href="[site:url]/admin/config/workbench/access/managers">[pm_section_names]</a>, you are kindly invited to review <a href="[sections_content_url]">the content of your section</a> twice a year.<br/> 
 Please, remember that you need to check that the content is still relevant and up to date, and that all the links work properly.<br/>
-You can check the broken links in <a href="[site:url]/admin/content/linkchecker-broken-links">this page</a>.<br/>
+You can check the broken links in <a href="[broken_links_url]">this page</a>.<br/>
 <br/>
 Thanks a lot for reviewing your contents.<br/>'
       );
 
+      $body = str_replace('[broken_links_url]', $url_broken_links, $body);
+      $body = str_replace('[pm_sections]', implode(', ', $section_names), $body);
+      $body = str_replace('[sections_content_url]', $content_url, $body);
       $message['subject'] = token_replace($subject, $params);
       $message['body'][] = token_replace($body, $params);
       break;

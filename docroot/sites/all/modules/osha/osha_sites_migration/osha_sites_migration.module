@@ -69,13 +69,17 @@ function osha_sites_migration_url_inbound_alter(&$path, $original_path, $path_la
       $path = $source_en;
     }
   }
-  if ($node = menu_get_object('node', 1, $path)) {
+  // using arg and node load instead of menu_get_object
+  // because it checks permissions and will not load draft nodes for anonymous.
+  if (arg(0) == 'node' && empty(arg(2))) {
+    $node = node_load(arg(1));
     if (!empty($node->field_migration_source)
       && !empty($node->field_source_url)
       && empty($node->field_show_in_ncw[LANGUAGE_NONE][0]['value'])
     ) {
       $en_url = $node->field_source_url[LANGUAGE_NONE][0]['url'];
       $url = preg_replace(['/\/en\//'], ["/$language->language/"], $en_url);
+      unset($_GET['destination']);
       drupal_goto($url, [], 301);
     }
   }

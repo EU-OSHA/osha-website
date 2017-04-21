@@ -436,3 +436,12 @@ function osha_update_7023() {
 function osha_update_7024() {
   features_revert_module('osha');
 }
+
+
+/**
+ * Install and configure no_autocomplete module: MDR-1001 - Password type input with auto-complete enabled.
+ */
+function osha_update_7025() {
+  module_enable(['no_autocomplete']);
+  variable_set('no_autocomplete_login_form', 1);
+}

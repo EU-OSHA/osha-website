@@ -54,7 +54,7 @@ function osha_homepage_fe_nodequeue_export_fields() {
     'name' => 'home_page_main_carousel',
     'title' => 'Home page main carousel',
     'subqueue_title' => '',
-    'size' => 1,
+    'size' => 10,
     'link' => '',
     'link_remove' => '',
     'owner' => 'nodequeue',

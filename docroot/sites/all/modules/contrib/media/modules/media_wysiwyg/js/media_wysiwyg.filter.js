@@ -173,9 +173,8 @@
      */
     replacePlaceholderWithToken: function(content) {
       Drupal.media.filter.ensure_tagmap();
-
       // Locate and process all the media placeholders in the WYSIWYG content.
-      var contentElements = $('<div/>').html(content);  // TODO: once baseline jQuery is 1.8+, switch to using $.parseHTML(content)
+      var contentElements = $('<div>' + content + '</div>');  // TODO: once baseline jQuery is 1.8+, switch to using $.parseHTML(content)
       var mediaElements = contentElements.find('.media-element');
       if (mediaElements) {
         $(mediaElements).each(function (i) {
@@ -197,6 +196,18 @@
             Drupal.settings.tagmap[macro] = markup;
             $(this).replaceWith(macro);
           }
+<<<<<<< HEAD
+=======
+        });
+        content = '';
+        contentElements.each(function(){
+          if ($(this)[0].localName == 'script') {
+            content += $(this)[0].outerHTML;
+          }
+          else {
+            content += $(this)[0].innerHTML;
+          }
+>>>>>>> develop
         });
         content = $(contentElements).html();
       }

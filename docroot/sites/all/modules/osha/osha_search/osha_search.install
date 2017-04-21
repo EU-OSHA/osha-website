@@ -53,3 +53,43 @@ function osha_search_update_7003() {
     views_invalidate_cache();
   }
 }
+
+
+function osha_search_update_7004() {
+  $index = search_api_index_load('default_multilingual_node_index');
+//  search_api_index_delete('default_multilingual_node_index');
+  $index->options['datasource']['bundles'] = [
+    'article' => 'article',
+    'page' => 'page',
+    'blog' => 'blog',
+    'calls' => 'calls',
+    'press_contact' => 'press_contact',
+    'dangerous_substances' => 'dangerous_substances',
+    'directive' => 'directive',
+    'e_guide' => 'e_guide',
+    'events' => 'events',
+    'fop_page' => 'fop_page',
+    'guideline' => 'guideline',
+    'highlight' => 'highlight',
+    'infographic' => 'infographic',
+    'job_vacancies' => 'job_vacancies',
+    'news' => 'news',
+    'press_release' => 'press_release',
+    'publication' => 'publication',
+    'seminar' => 'seminar',
+    'wiki_page' => 'wiki_page',
+  ];
+//  $index->is_new = TRUE;
+  $index->save();
+
+  features_revert_module('osha_search');
+}
+
+function osha_search_update_7005() {
+  features_revert_module('osha_search');
+  features_revert_module('osha_blocks');
+}
+
+function osha_search_update_7006() {
+  features_revert_module('osha_search');
+}

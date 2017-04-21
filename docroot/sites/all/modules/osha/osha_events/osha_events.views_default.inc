@@ -1052,6 +1052,37 @@ function osha_events_views_default_views() {
     12 => 0,
     13 => 0,
   );
+  /* Filter criterion: Content: Migration Source (field_migration_source) */
+  $handler->display->display_options['filters']['field_migration_source_value']['id'] = 'field_migration_source_value';
+  $handler->display->display_options['filters']['field_migration_source_value']['table'] = 'field_data_field_migration_source';
+  $handler->display->display_options['filters']['field_migration_source_value']['field'] = 'field_migration_source_value';
+  $handler->display->display_options['filters']['field_migration_source_value']['operator'] = 'not';
+  $handler->display->display_options['filters']['field_migration_source_value']['value'] = array(
+    'hwc' => 'hwc',
+  );
+  $handler->display->display_options['filters']['field_migration_source_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_migration_source_value']['expose']['operator_id'] = 'field_migration_source_value_op';
+  $handler->display->display_options['filters']['field_migration_source_value']['expose']['label'] = 'Not from';
+  $handler->display->display_options['filters']['field_migration_source_value']['expose']['operator'] = 'field_migration_source_value_op';
+  $handler->display->display_options['filters']['field_migration_source_value']['expose']['identifier'] = 'field_migration_source_value';
+  $handler->display->display_options['filters']['field_migration_source_value']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_migration_source_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    14 => 0,
+  );
+  $handler->display->display_options['filters']['field_migration_source_value']['expose']['reduce'] = TRUE;
   $handler->display->display_options['path'] = 'admin/content/events';
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Events';
@@ -1754,6 +1785,38 @@ function osha_events_views_default_views() {
     12 => 0,
     13 => 0,
   );
+  /* Filter criterion: Content: Migration Source (field_migration_source) */
+  $handler->display->display_options['filters']['field_migration_source_value']['id'] = 'field_migration_source_value';
+  $handler->display->display_options['filters']['field_migration_source_value']['table'] = 'field_data_field_migration_source';
+  $handler->display->display_options['filters']['field_migration_source_value']['field'] = 'field_migration_source_value';
+  $handler->display->display_options['filters']['field_migration_source_value']['operator'] = 'not';
+  $handler->display->display_options['filters']['field_migration_source_value']['value'] = array(
+    'hwc' => 'hwc',
+    'oira' => 'oira',
+    'napo' => 'napo',
+  );
+  $handler->display->display_options['filters']['field_migration_source_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_migration_source_value']['expose']['operator_id'] = 'field_migration_source_value_op';
+  $handler->display->display_options['filters']['field_migration_source_value']['expose']['label'] = 'Source not in';
+  $handler->display->display_options['filters']['field_migration_source_value']['expose']['operator'] = 'field_migration_source_value_op';
+  $handler->display->display_options['filters']['field_migration_source_value']['expose']['identifier'] = 'field_migration_source_value';
+  $handler->display->display_options['filters']['field_migration_source_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    14 => 0,
+  );
+  $handler->display->display_options['filters']['field_migration_source_value']['expose']['reduce'] = TRUE;
   $handler->display->display_options['path'] = 'admin/content/events-export';
   $handler->display->display_options['displays'] = array(
     'page' => 'page',
@@ -1821,6 +1884,7 @@ function osha_events_views_default_views() {
     t('Name'),
     t('Country'),
     t('Start date'),
+    t('Not from'),
     t('Block'),
     t('Location'),
     t('[field_start_date_1] - Events'),
@@ -1828,6 +1892,7 @@ function osha_events_views_default_views() {
     t('Username'),
     t('Color (field_color)'),
     t('Unit Ref (field_unit_ref)'),
+    t('Source not in'),
   );
   $export['events'] = $view;
 

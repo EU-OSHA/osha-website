@@ -506,7 +506,7 @@ function osha_infographics_field_default_field_instances() {
           'image_style' => 'medium_crop_220',
         ),
         'type' => 'image',
-        'weight' => 1,
+        'weight' => 0,
       ),
       'osha_slideshow' => array(
         'label' => 'above',
@@ -689,7 +689,7 @@ function osha_infographics_field_default_field_instances() {
           'title_style' => 'h3',
         ),
         'type' => 'title_linked',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'osha_slideshow' => array(
         'label' => 'above',

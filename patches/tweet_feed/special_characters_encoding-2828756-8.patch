@@ -1,0 +1,187 @@
+diff --git a/tweet_feed.module b/tweet_feed.module
+index 070391a..8c2e140 100644
+--- a/tweet_feed.module
++++ b/tweet_feed.module
+@@ -354,10 +354,10 @@ function tweet_feed_pull_data_from_feed($fid, $web_interface = FALSE) {
+   if (empty($feed)) {
+     return FALSE;
+   }
+-  
++
+   // Load in our twitter oauth class
+   module_load_include('inc', 'tweet_feed', 'inc/twitter-oauth');
+-  
++
+   // If we have selected to clear our prior tweets for this particular feed, then we need
+   // to do that here.
+   if (!empty($feed->clear_prior)) {
+@@ -544,7 +544,7 @@ function tweet_feed_pull_data_from_feed($fid, $web_interface = FALSE) {
+  * for use with our drush command
+  */
+ function tweet_feed_process_tweets($tweet_data, $feed, $number_to_get = 0, $run_count = 0, $web_interface = FALSE) {
+-  
++
+   $tweets = array();
+   $total_hashi = 0;
+   foreach($tweet_data as $key => $tweet) {
+@@ -721,7 +721,7 @@ function tweet_feed_save_tweet($tweet, $feed, $update_node_id = 0, $hash = NULL,
+   if ($hashtags === FALSE) {
+     tweet_feed_bail();
+   }
+-  
++
+   // Add our user mentions to it's relative taxonomy. Handled just like hashtags
+   $user_mentions = tweet_feed_process_taxonomy($tweet->entities->user_mentions, 'user_mention_terms');
+ 
+@@ -732,8 +732,8 @@ function tweet_feed_save_tweet($tweet, $feed, $update_node_id = 0, $hash = NULL,
+ 
+   // Process the tweet. This linkes our twitter names, hash tags and converts any
+   // URL's into HTML.
+-  $tweet_html = tweet_feed_format_output($tweet->text, $feed->new_window, $feed->hash_taxonomy, $hashtags); 
+-          
++  $tweet_html = tweet_feed_format_output($tweet->text, $feed->new_window, $feed->hash_taxonomy, $hashtags);
++
+   // Populate our node object with the data we will need to save
+   $node = new stdClass();
+   $node->created = $creation_timestamp;
+@@ -765,33 +765,17 @@ function tweet_feed_save_tweet($tweet, $feed, $update_node_id = 0, $hash = NULL,
+   $node->sticky = 0;
+   $node->language = LANGUAGE_NONE;
+ 
+-  // The tweet author goes into the title field
+-  // Filter it cleanly since it is going into the title field. If we cannot use iconv,
+-  // then use something more primitive, but effective
+-  // @see https://www.drupal.org/node/1910376
+-  // @see http://webcollab.sourceforge.net/unicode.html
+-  // Reject overly long 2 byte sequences, as well as characters above U+10000
+-  // and replace with --.
+-  $title_tweet_text = preg_replace('/[\x00-\x08\x10\x0B\x0C\x0E-\x19\x7F]' .
+-   '|[\x00-\x7F][\x80-\xBF]+' .
+-   '|([\xC0\xC1]|[\xF0-\xFF])[\x80-\xBF]*' .
+-   '|[\xC2-\xDF]((?![\x80-\xBF])|[\x80-\xBF]{2,})' .
+-   '|[\xE0-\xEF](([\x80-\xBF](?![\x80-\xBF]))|(?![\x80-\xBF]{2})|[\x80-\xBF]{3,})/S',
+-   '--', $tweet->text);
+-  // Reject overly long 3 byte sequences and UTF-16 surrogates and replace
+-  // with --.
+-  $title_tweet_text = preg_replace('/\xE0[\x80-\x9F][\x80-\xBF]' . '|\xED[\xA0-\xBF][\x80-\xBF]/S', '--', $title_tweet_text);
+-
+-  $node->title = check_plain(substr($tweet->user->screen_name . ': ' . $title_tweet_text, 0, 255));
++  // Filter it cleanly since it is going into the title field and remove iconv.
++  $node->title = check_plain(substr(tweet_feed_filter_iconv_text(tweet_feed_filter_smart_quotes($tweet->user->screen_name)) . ': ' . tweet_feed_filter_iconv_text(tweet_feed_filter_smart_quotes($tweet->text)), 0, 255));
+ 
+   // The tweet itself goes into the tweet contents field
+   $node->field_tweet_contents[$node->language][0] = array(
+-    'value' => utf8_encode(htmlspecialchars_decode($tweet_html)),
++    'value' => htmlspecialchars_decode(utf8_encode(tweet_feed_filter_smart_quotes($tweet_html))),
+     'format' => 'full_html',
+   );
+ 
+   // Save the name of the user to the tweet.
+-  $node->field_tweet_author_name[$node->language][0]['value'] = $tweet->user->name;
++  $node->field_tweet_author_name[$node->language][0]['value'] = tweet_feed_filter_iconv_text(tweet_feed_filter_smart_quotes($tweet->user->name));
+ 
+   // Set our verified field
+   $node->field_tweet_author_verified[$node->language][0]['value'] = (int) $tweet->user->verified;
+@@ -836,7 +820,7 @@ function tweet_feed_save_tweet($tweet, $feed, $update_node_id = 0, $hash = NULL,
+       }
+     }
+   }
+-    
++
+   // If we have a place, then assign it based on which components we have available
+   // to us.
+   if (!empty($tweet->place->full_name)) {
+@@ -852,8 +836,8 @@ function tweet_feed_save_tweet($tweet, $feed, $update_node_id = 0, $hash = NULL,
+ 
+   // Handle the author name
+   $node->field_tweet_author[$node->language][0] = array(
+-    'value' => $tweet->user->screen_name,
+-    'safe_value' => $tweet->user->screen_name,
++    'value' => tweet_feed_filter_iconv_text(tweet_feed_filter_smart_quotes($tweet->user->screen_name)),
++    'safe_value' => tweet_feed_filter_iconv_text(tweet_feed_filter_smart_quotes($tweet->user->screen_name)),
+   );
+ 
+   // Handle the author id
+@@ -904,10 +888,10 @@ function tweet_feed_save_tweet($tweet, $feed, $update_node_id = 0, $hash = NULL,
+   if (!empty($tweet->entities->user_mentions) && is_array($tweet->entities->user_mentions)) {
+     foreach ($tweet->entities->user_mentions as $key => $mention) {
+       $node->field_tweet_user_mentions[$node->language][$key] = array(
+-        'tweet_feed_mention_name' => $mention->name,
+-        'tweet_feed_mention_screen_name' => $mention->screen_name,
++        'tweet_feed_mention_name' => tweet_feed_filter_iconv_text(tweet_feed_filter_smart_quotes($mention->name)),
++        'tweet_feed_mention_screen_name' => tweet_feed_filter_iconv_text(tweet_feed_filter_smart_quotes($mention->screen_name)),
+         'tweet_feed_mention_id' => $mention->id,
+-      ); 
++      );
+     }
+     foreach ($user_mentions as $mention) {
+       $node->field_twitter_mentions_in_tweet[$node->language][] = array(
+@@ -1007,7 +991,7 @@ function tweet_feed_save_tweet($tweet, $feed, $update_node_id = 0, $hash = NULL,
+     $node->field_twitter_user_id[$node->language][0]['value'] = $tweet->user->id_str;
+     $node->title = $tweet->user->name;
+     $node->body[$node->language][0]['value'] = $tweet->user->description;
+-    $node->field_twitter_a_screen_name[$node->language][0]['value'] = $tweet->user->screen_name;
++    $node->field_twitter_a_screen_name[$node->language][0]['value'] = tweet_feed_filter_iconv_text(tweet_feed_filter_smart_quotes($tweet->user->screen_name));
+     $node->field_twitter_location[$node->language][0]['value'] = $tweet->user->location;
+     $node->field_twitter_a_profile_url[$node->language][0]['value'] = $tweet->user->entities->url->urls[0]->url;
+     $node->field_twitter_profile_url[$node->language][0]['value'] = $tweet->user->entities->url->urls[0]->display_url;
+@@ -1058,6 +1042,59 @@ function tweet_feed_save_tweet($tweet, $feed, $update_node_id = 0, $hash = NULL,
+ }
+ 
+ /**
++ * Filter iconv from text.
++ */
++function tweet_feed_filter_iconv_text($text, $replace = '--') {
++  // The tweet author goes into the title field
++  // Filter it cleanly since it is going into the title field. If we cannot use iconv,
++  // then use something more primitive, but effective
++  // @see https://www.drupal.org/node/1910376
++  // @see http://webcollab.sourceforge.net/unicode.html
++  // Reject overly long 2 byte sequences, as well as characters above U+10000
++  // and replace with --.
++  $altered = preg_replace('/[\x00-\x08\x10\x0B\x0C\x0E-\x19\x7F]' .
++   '|[\x00-\x7F][\x80-\xBF]+' .
++   '|([\xC0\xC1]|[\xF0-\xFF])[\x80-\xBF]*' .
++   '|[\xC2-\xDF]((?![\x80-\xBF])|[\x80-\xBF]{2,})' .
++   '|[\xE0-\xEF](([\x80-\xBF](?![\x80-\xBF]))|(?![\x80-\xBF]{2})|[\x80-\xBF]{3,})/S',
++   '--', $text);
++  // Reject overly long 3 byte sequences and UTF-16 surrogates and replace
++  // with --.
++  return preg_replace('/\xE0[\x80-\x9F][\x80-\xBF]' . '|\xED[\xA0-\xBF][\x80-\xBF]/S', $replace, $altered);
++}
++
++/**
++ * Filter smart quotes to ASCII equivalent.
++ *
++ * @param string $text
++ *   Input text to filter.
++ *
++ * @return string
++ */
++function tweet_feed_filter_smart_quotes($text) {
++  // Convert varieties of smart quotes to ACSII equivalent.
++  $search = array(
++    chr(0xe2) . chr(0x80) . chr(0x98),
++    chr(0xe2) . chr(0x80) . chr(0x99),
++    chr(0xe2) . chr(0x80) . chr(0x9c),
++    chr(0xe2) . chr(0x80) . chr(0x9d),
++    chr(0xe2) . chr(0x80) . chr(0x93),
++    chr(0xe2) . chr(0x80) . chr(0x94),
++  );
++
++  $ascii_replace = array(
++    "'",
++    "'",
++    '"',
++    '"',
++    '-',
++    '&mdash;',
++  );
++
++  return str_replace($search, $ascii_replace, $text);
++}
++
++/**
+  * Implements hook_node_delete().
+  *
+  * Remove hashes when tweets or profiles deleted

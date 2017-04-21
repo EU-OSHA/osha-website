@@ -226,7 +226,16 @@ Drupal.wysiwyg.editor.instance.tinymce = {
         });
       });
     });
-    return $content.html();
+    var html = '';
+    $content.each(function(){
+      if ($(this)[0].localName == 'script') {
+        html += $(this)[0].outerHTML;
+      }
+      else {
+        html += $(this)[0].innerHTML;
+      }
+    });
+    return html;
   },
 
   insert: function(content) {

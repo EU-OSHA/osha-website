@@ -206,11 +206,21 @@ jQuery(document).ready(function() {
         }
         else {
             jQuery(this).closest('.form-type-checkboxes').children('label').addClass('expand');
+            jQuery(this).closest('.block').find('h2.block-title').addClass('expand');
         }
     }).closest('.form-type-checkboxes').children('label').click(function() {
         jQuery(this).closest('.form-type-checkboxes').find("div.form-checkboxes").slideToggle();
         jQuery(this).toggleClass("expand");
     });
+
+    jQuery("#osha-search-language-input-form").hide();
+    // jQuery(".block-facetapi .item-list").hide();
+    // jQuery(".block-facetapi h2").removeClass("expand");
+    jQuery("#block-osha-search-osha-search-language h2").click(function(){
+    	jQuery(this).toggleClass("expand");
+    	jQuery("#osha-search-language-input-form").slideToggle();
+    });
+
 });
 
 function showSearcher() {

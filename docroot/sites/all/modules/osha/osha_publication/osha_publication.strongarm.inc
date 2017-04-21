@@ -163,7 +163,7 @@ function osha_publication_strongarm() {
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '20',
+          'weight' => '19',
         ),
         'workbench_access' => array(
           'weight' => '0',
@@ -172,13 +172,13 @@ function osha_publication_strongarm() {
           'weight' => '1',
         ),
         'redirect' => array(
-          'weight' => '21',
+          'weight' => '20',
         ),
         'metatags' => array(
-          'weight' => '22',
+          'weight' => '21',
         ),
         'xmlsitemap' => array(
-          'weight' => '30',
+          'weight' => '25',
         ),
       ),
       'display' => array(),

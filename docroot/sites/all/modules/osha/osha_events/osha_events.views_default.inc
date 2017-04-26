@@ -1083,6 +1083,25 @@ function osha_events_views_default_views() {
     14 => 0,
   );
   $handler->display->display_options['filters']['field_migration_source_value']['expose']['reduce'] = TRUE;
+  $handler->display->display_options['filters']['field_migration_source_value']['is_grouped'] = TRUE;
+  $handler->display->display_options['filters']['field_migration_source_value']['group_info']['label'] = 'Source';
+  $handler->display->display_options['filters']['field_migration_source_value']['group_info']['identifier'] = 'field_migration_source_value';
+  $handler->display->display_options['filters']['field_migration_source_value']['group_info']['group_items'] = array(
+    1 => array(
+      'title' => 'HWC',
+      'operator' => 'or',
+      'value' => array(
+        'hwc' => 'hwc',
+      ),
+    ),
+    2 => array(
+      'title' => 'Osha',
+      'operator' => 'empty',
+      'value' => array(
+        'hwc' => 'hwc',
+      ),
+    ),
+  );
   $handler->display->display_options['path'] = 'admin/content/events';
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Events';
@@ -1817,6 +1836,27 @@ function osha_events_views_default_views() {
     14 => 0,
   );
   $handler->display->display_options['filters']['field_migration_source_value']['expose']['reduce'] = TRUE;
+  $handler->display->display_options['filters']['field_migration_source_value']['is_grouped'] = TRUE;
+  $handler->display->display_options['filters']['field_migration_source_value']['group_info']['label'] = 'Source';
+  $handler->display->display_options['filters']['field_migration_source_value']['group_info']['identifier'] = 'field_migration_source_value';
+  $handler->display->display_options['filters']['field_migration_source_value']['group_info']['group_items'] = array(
+    1 => array(
+      'title' => 'HWC',
+      'operator' => 'or',
+      'value' => array(
+        'hwc' => 'hwc',
+      ),
+    ),
+    2 => array(
+      'title' => 'Osha',
+      'operator' => 'empty',
+      'value' => array(
+        'hwc' => 'hwc',
+        'oira' => 'oira',
+        'napo' => 'napo',
+      ),
+    ),
+  );
   $handler->display->display_options['path'] = 'admin/content/events-export';
   $handler->display->display_options['displays'] = array(
     'page' => 'page',
@@ -1885,6 +1925,7 @@ function osha_events_views_default_views() {
     t('Country'),
     t('Start date'),
     t('Not from'),
+    t('Source'),
     t('Block'),
     t('Location'),
     t('[field_start_date_1] - Events'),

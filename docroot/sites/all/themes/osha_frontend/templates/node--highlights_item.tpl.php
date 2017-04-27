@@ -43,6 +43,30 @@ if (!empty($campaign_id)) {
                   <?php } ?> >
                 <table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="center" style="background-color:#efefef;">
                   <?php
+                    if ($node->type == 'youtube') {
+                      if (!empty($node->field_youtube[LANGUAGE_NONE][0]['video_id'])) {
+                        $video_id = $node->field_youtube[LANGUAGE_NONE][0]['video_id'];
+                      }
+                      elseif (!empty($node->field_youtube['en'][0]['video_id'])) {
+                        $video_id = $node->field_youtube['en'][0]['video_id'];
+                      }
+                      if (!empty($video_id)) {
+                        print l(theme('image', array(
+                          'style_name' => ($node->old_newsletter ? 'thumbnail' : 'highlight_image'),
+                          'path' => sprintf("https://img.youtube.com/vi/%s/hqdefault.jpg", $video_id),
+                          'width' => ($node->old_newsletter ? '100%' : ''),
+                          'alt' => $title,
+                          'attributes' => array('style' => 'border: 0px;max-width: 100%;height:auto;background-color: #ffffff;vertical-align:middle;')
+                        )), url('node/' . $node->nid, array('absolute' => TRUE)), array(
+                          'html' => TRUE,
+                          'external' => TRUE,
+                          'attributes' => array(
+                            'style' => 'display:block;border:1px solid #efefef;',
+                          ),
+                        ));
+                      }
+                    }
+                  else {
                     print l(theme('image_style', array(
                       'style_name' => ($node->old_newsletter ? 'thumbnail' : 'highlight_image'),
                       'path' => (isset($field_image) && !empty($field_image)) ? $field_image[0]['uri'] : '',
@@ -57,6 +81,7 @@ if (!empty($campaign_id)) {
                         'style' => 'display:block;border:1px solid #efefef;',
                       ),
                     ));
+                  }
                   ?>
                 </th></tr></tbody></table>
               </th>

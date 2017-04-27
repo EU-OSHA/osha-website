@@ -813,6 +813,13 @@ function osha_theme() {
       ),
       'template' => 'templates/share_widget',
     ),
+    'osha_share_popup' => array(
+      'variables' => array(
+        'node' => array(), // Current node
+        'widget' => '',
+      ),
+      'template' => 'templates/share_popup',
+    ),
   );
 }
 
@@ -852,8 +859,16 @@ function osha_share_widget($node, $options = array()) {
 
   // Merge default vars with ones from options.
   $vars = $options + $vars;
-  $widget = theme('osha_share_widget', $vars);
-  return $widget;
+  return theme('osha_share_widget', $vars);
+}
+
+function osha_share_popup($node, $options = array()) {
+  $options['label'] = '';
+  $vars = [
+    'node' => $node,
+    'widget' => osha_share_widget($node, $options),
+  ];
+  return theme('osha_share_popup', $vars);
 }
 
 
@@ -910,6 +925,10 @@ function osha_node_view($node, $view_mode, $langcode) {
   $share_links_bundles = array('article', 'blog', 'dvs_survey', 'events', 'highlight', 'news', 'press_release');
   if ($view_mode == 'full' && in_array($node->type, $share_links_bundles)) {
     $node->content['links']['osha_share']['#markup'] = osha_share_widget($node);
+  }
+
+  if (!empty($_GET['action']) && $_GET['action'] == 'share') {
+    $node->content['node_share_popup'] = ['#markup' => osha_share_popup($node)];
   }
 }
 

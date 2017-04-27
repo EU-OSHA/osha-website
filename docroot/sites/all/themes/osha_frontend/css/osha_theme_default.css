@@ -9260,5 +9260,98 @@ body.page-entity-collection h1#page-title{
 /*end search layout redesign*/
 
 body.page-entity-collection .newsletter-container {
-  margin: 0 auto !important;
+	margin: 0 auto !important;
+}
+
+#share-popup-container {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	z-index: 1000000; /* > header */
+}
+
+#share-popup-container .close-share-popup-container {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+}
+
+#share-popup-container .close-share-popup-container button.close-share-popup {
+	background: #fff;
+	border-radius: 100%;
+	border: none;
+	padding: 0;
+}
+
+#share-popup-container .close-share-popup-container button.close-share-popup:hover {
+	background-color: #666;
+	color: #fff;
+	transition: all 0.2s ease;
+}
+
+#share-popup-container .close-share-popup-container .close-share-popup span {
+	display: block;
+	width: 30px;
+	height: 30px;
+	line-height: 25px;
+	font-size: 24px;
+}
+
+#share-popup-container .share-popup-title {
+	text-align: center;
+	margin-top: 20%;
+	color: #fff;
+}
+
+#share-popup-container .share-popup-title h3 {
+	font-size: 3em;
+	margin: 0;
+}
+#share-popup-container .share-popup-title h4 {
+	font-size: 2em;
+	margin-top: 1em;
+}
+
+#share-popup-container .share-widget-container {
+	width: 100%;
+	text-align: center;
+}
+
+#share-popup-container .share-widget-container .osha-share-widget .osha-share-widget-button {
+	width: 70px;
+	height: 70px;
+}
+
+#share-popup-container .share-widget-container .osha-share-widget .osha-share-widget-button a {
+	width: 60px;
+	height: 60px;
+	margin: 5px;
+	background-size: 100% 100%!important;
+	background-repeat: no-repeat!important;
+}
+
+#share-popup-container .share-widget-container .osha-share-widget .osha-share-widget-button a:hover {
+	width: 70px;
+	height: 70px;
+	margin: 0;
+	transition: all 0.2s ease;
+}
+
+#share-popup-container .share-widget-container .osha-share-widget .osha-share-widget-facebook a {
+	background-image: url("../images/share-popup/facebook.png")!important;
+}
+#share-popup-container .share-widget-container .osha-share-widget .osha-share-widget-twitter a {
+	background-image: url("../images/share-popup/twitter.png")!important;
+}
+#share-popup-container .share-widget-container .osha-share-widget .osha-share-widget-linkedin a {
+	background-image: url("../images/share-popup/linkedin.png")!important;
+}
+#share-popup-container .share-widget-container .osha-share-widget .osha-share-widget-google-plus a {
+	background-image: url("../images/share-popup/google-plus.png")!important;
+}
+#share-popup-container .share-widget-container .osha-share-widget .osha-share-widget-print a {
+	background-image: url("../images/share-popup/print_icon.png")!important;
 }

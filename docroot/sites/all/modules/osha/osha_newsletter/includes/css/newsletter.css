@@ -139,7 +139,7 @@ td.social {
   border-bottom-width: 4px;
   border-bottom-color: #003399;
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 500;
   height: 25px;
   text-align: left;
   text-transform: none;
@@ -223,7 +223,7 @@ td.social {
 }
 .newsletter-half-width-twitter .newsletter-item p.tweet-author {
   margin-top: 0;
-  font-weight: bold;
+  font-weight: 500;
   font-family: Arial Black, sans-serif;
 }
 p.tweet-author a {
@@ -243,7 +243,7 @@ p.tweet-contents {
 }
 .section-coming-soon .newsletter-item.newsletter-article p {
   font-size: 15px;
-  font-weight: bold;
+  font-weight: 500;
 }
 .tweet-contents a,
 .tweet-link a {
@@ -254,7 +254,7 @@ p.tweet-contents {
 p.tweet-link a {
   color: #353535 !important;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .newsletter-item a {

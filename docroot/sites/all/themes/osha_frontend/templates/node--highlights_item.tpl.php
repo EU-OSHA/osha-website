@@ -54,9 +54,10 @@ if (!empty($campaign_id)) {
                         print l(theme('image', array(
                           'style_name' => ($node->old_newsletter ? 'thumbnail' : 'highlight_image'),
                           'path' => sprintf("https://img.youtube.com/vi/%s/hqdefault.jpg", $video_id),
-                          'width' => ($node->old_newsletter ? '100%' : ''),
+                          // 'width' => ($node->old_newsletter ? '100%' : ''),
+                          'width' => '100%',
                           'alt' => $title,
-                          'attributes' => array('style' => 'border: 0px;max-width: 100%;height:auto;background-color: #ffffff;vertical-align:middle;')
+                          'attributes' => array('style' => 'border: 0px;width: 100%;max-width: 100%;height:auto;background-color: #ffffff;vertical-align:middle;')
                         )), url('node/' . $node->nid, array('absolute' => TRUE)), array(
                           'html' => TRUE,
                           'external' => TRUE,

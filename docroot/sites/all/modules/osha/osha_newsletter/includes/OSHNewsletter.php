@@ -299,12 +299,26 @@ class OSHNewsletter {
         if($template === 'newsletter_half_width_list') {
           $content['#attributes']['width'] = '100%';
         }
+        if($template !== 'newsletter_full_width_details') {
+          $content['#rows'][]['data'][] = [
+            'data' => '&nbsp;',
+            'colspan' => 1,
+            'style' => 'padding-top: 0; padding-bottom: 20px;font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;',
+          ];
+        }
         foreach ($variables['nodes'] as $node) {
           $cellContent = self::getCellContent($template, $node);
           $content['#rows'][] = [
             'data' => [$cellContent],
             'class' => ['row', drupal_clean_css_identifier("{$template}-row")],
             'no_striping' => true,
+          ];
+        }
+        if($template !== 'newsletter_full_width_details') {
+          $content['#rows'][]['data'][] = [
+            'data' => '&nbsp;',
+            'colspan' => 1,
+            'style' => 'padding-top: 0; padding-bottom: 20px;font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;',
           ];
         }
         break;
@@ -316,12 +330,12 @@ class OSHNewsletter {
 
         // Avoid rendering the section title twice
         unset($variables['section']);
-        $content['#rows'][0]['data'][] = [
+        $content['#rows'][]['data'][] = [
           'data' => '&nbsp;',
           'colspan' => 2,
           'style' => 'padding-bottom: 20px;font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;',
         ];
-        $content['#rows'][1] = [
+        $content['#rows'][] = [
           'data' => [
             [
               'data' => sprintf("<img src=\"%s\" style=\"width:100%%;max-width:100%%;background-color:%s; \"/>", $image_url, $image_fallback_bg),
@@ -340,7 +354,7 @@ class OSHNewsletter {
             ],
           ],
         ];
-        $content['#rows'][2]['data'][] = [
+        $content['#rows'][]['data'][] = [
           'data' => '&nbsp;',
           'colspan' => 2,
           'style' => 'padding-bottom: 20px;font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;',

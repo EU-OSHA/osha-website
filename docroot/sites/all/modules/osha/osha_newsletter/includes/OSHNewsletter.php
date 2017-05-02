@@ -235,13 +235,19 @@ class OSHNewsletter {
     if (!empty($variables['section']->name)) {
       $icon = self::getConfiguration($entityCollection, 'field_icon', $variables['section']);
       if (!empty($icon)) {
-        $cellContent = sprintf("<img src=\"%s\" class=\"section-icon\"><div><span>%s</span></div>", $icon, $variables['section']->name);
+
+        $cellContent = sprintf("<img src=\"%s\">", $icon);
+        $content['#header'][0]['data'][] = ['data' => $cellContent, 'class' => ['section-icon'] ];
+
+        $cellContent = sprintf("<span>%s</span>", $variables['section']->name);
+        $content['#header'][1]['data'][] = ['data' => $cellContent, 'class' => ['section-title']];
+
       }
       else {
         $cellContent = sprintf("<span>%s</span>", $variables['section']->name);
+        $content['#header'][0]['data'][] = ['data' => $cellContent, 'class' => ['section-title']];
       }
 
-      $content['#header'][0]['data'][] = ['data' => $cellContent, 'class' => ['section-title']];
 
       $cssClass = drupal_clean_css_identifier('section-' . strtolower($variables['section']->name));
       $content['#attributes']['class'][] = $cssClass;
@@ -333,7 +339,7 @@ class OSHNewsletter {
         $content['#rows'][]['data'][] = [
           'data' => '&nbsp;',
           'colspan' => 2,
-          'style' => 'padding-bottom: 20px;font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;',
+          'style' => 'padding-top: 0; padding-bottom: 20px;font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;',
         ];
         $content['#rows'][] = [
           'data' => [
@@ -357,7 +363,7 @@ class OSHNewsletter {
         $content['#rows'][]['data'][] = [
           'data' => '&nbsp;',
           'colspan' => 2,
-          'style' => 'padding-bottom: 20px;font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;',
+          'style' => 'padding-top: 0; padding-bottom: 20px;font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;',
         ];
         break;
       case 'newsletter_full_width_2_col_blocks':
@@ -370,7 +376,7 @@ class OSHNewsletter {
         $content['#rows'][$currentRow]['data'][] = [
           'data' => '&nbsp;',
           'colspan' => '3',
-          'style' => 'padding-bottom: 20px;font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;',
+          'style' => 'padding-top: 0; padding-bottom: 20px;font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;',
         ];
 
         $currentRow++;
@@ -397,11 +403,11 @@ class OSHNewsletter {
               'class' => ['row', drupal_clean_css_identifier("{$template}-row")],
               'no_striping' => true,
             ];
-            $content['#rows'][$currentRow]['data'][] = ['data' => '&nbsp;', 'style' => 'padding-bottom: 4px; min-width:4px; width: 4px; margin:0;font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;', 'class' => 'template-column' ];
+            $content['#rows'][$currentRow]['data'][] = ['data' => '&nbsp;', 'style' => 'padding-bottom: 4px; min-width:4px; padding-top: 0; width: 4px; margin:0;font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;', 'class' => 'template-column' ];
           }
           else {
             $content['#rows'][$currentRow++]['data'][] = $cellContent;
-            $content['#rows'][$currentRow++]['data'][] = ['data' => '&nbsp;', 'style' => 'padding: 0px; height:4px; font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;', 'colspan' => '3', 'class' => ['template-column', 'template-separator'] ];
+            $content['#rows'][$currentRow++]['data'][] = ['data' => '&nbsp;', 'style' => 'paddipadding-top: 0; ng: 0px; height:4px; font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;', 'colspan' => '3', 'class' => ['template-column', 'template-separator'] ];
             $currentCol = 0;
           }
         }
@@ -409,7 +415,7 @@ class OSHNewsletter {
         $content['#rows'][$currentRow]['data'][] = [
           'data' => '&nbsp;',
           'colspan' => '3',
-          'style' => 'padding-bottom: 20px;font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;',
+          'style' => 'padding-top: 0; padding-bottom: 20px;font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;',
         ];
         break;
       case 'newsletter_half_width_twitter':
@@ -426,7 +432,7 @@ class OSHNewsletter {
         $content['#rows'][$currentRow]['data'][] = [
           'data' => '&nbsp;',
           'colspan' => 2,
-          'style' => 'padding-bottom: 20px;font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;',
+          'style' => 'padding-top: 0; padding-bottom: 20px;font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;',
         ];
 
         $currentRow++;
@@ -459,7 +465,7 @@ class OSHNewsletter {
           'data' => '&nbsp;',
           'colspan' => 2,
           'height' => 20,
-          'style' => 'padding-bottom: 20px;font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;',
+          'style' => 'padding-top: 0; padding-bottom: 20px;font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;',
         ];
         break;
       default:

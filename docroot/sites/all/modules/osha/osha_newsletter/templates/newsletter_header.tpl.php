@@ -158,7 +158,9 @@ $directory = drupal_get_path('module','osha_newsletter');
               <td style="background-color: #003399; width: 70%; text-align: left; font-size: 24px; font-weight: 200; color: #ffffff; font-family: Oswald, Arial,sans-serif;">
                 <?php print t("Occupational Safety and Health News &ndash; Europe");?>
               </td>
-              <td style="background-color: #003399; width: 30%; text-align: right; font-size: 14px; font-weight: 200; color: #ffffff; font-family: Oswald, Arial,sans-serif;">
+              <td style="background-color: #003399; width: 30%; text-align: right; font-size: 14px; font-weight: 200; color: #ffffff; font-family: Oswald, Arial,sans-serif;"
+                  class="hidden-print"
+              >
                 <?php
                   $mailto_subject = 'OSH Newsletter: ' . $newsletter_title;
                   $newsletter_url = url('entity-collection/' . $newsletter_id, array('absolute' => TRUE, 'language' => $language));

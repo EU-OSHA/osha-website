@@ -746,51 +746,39 @@ class OSHNewsletter {
     $meta->setAttribute('name', 'viewport');
     $meta->setAttribute('content', 'width=device-width, initial-scale=1.0');
 
-    // @TODO -> Octavian: check if correct please
-    // Force fallback font in Outlook to Arial instead of Times New Roman
-    $outlookCss =
-    "<style type='text/css'>
-        @media yahoo {
-          .template-separator {
-            padding-bottom: 4px !important;
-            height:0px!important;
-          }
-        }
-      </style>
-      <!--[if mso]>
-      <style type='text/css'>
-        span.MsoHyperlink {
-          mso-style-priority:99;
-          color:inherit;
-        }
-        span.MsoHyperlinkFollowed {
-          mso-style-priority:99;
-          color:inherit;
-        }
-        body, table, td, p, a {font-family: Arial, Helvetica, sans-serif !important;}
-        .template-separator {
-          padding-bottom: 4px !important;
-          height:0px !important;
-        }
-      </style>
-      <![endif]-->";
+    $modulePath = drupal_get_path('module', 'osha_newsletter');
 
-    $responsive_stylesheet_path = drupal_get_path('module', 'osha_newsletter') . '/includes/css/newsletter-responsive.css';
+    $responsive_stylesheet_path =  $modulePath . '/includes/css/newsletter-responsive.css';
     $responsiveStylesheet =  file_get_contents($responsive_stylesheet_path);
 
     $responsiveStyle = $domDocument->createElement('style', $responsiveStylesheet);
     $responsiveStyle->setAttribute('type', 'text/css');
 
+
+    $print_stylesheet_path =  $modulePath . '/includes/css/newsletter-print.css';
+    $printStylesheet =  file_get_contents($print_stylesheet_path);
+
+    $printStyle = $domDocument->createElement('style', $printStylesheet);
+    $printStyle->setAttribute('type', 'text/css');
+    $printStyle->setAttribute('media', 'print');
+
+    $outlookCss = file_get_contents($modulePath . '/includes/css/conditionals/newsletter-outlook.html');
     $outlookStyle = $domDocument->createDocumentFragment();
     $outlookStyle->appendXML($outlookCss);
+
+    $yahooCss = file_get_contents($modulePath . '/includes/css/conditionals/newsletter-yahoo.html');
+    $yahooStyle = $domDocument->createDocumentFragment();
+    $yahooStyle->appendXML($yahooCss);
 
     $head = $domDocument->getElementsByTagName('head');
     if (empty($head->length)) {
       $head = $domDocument->createElement('head');
       $head->appendChild($meta);
       $head->appendChild($font);
+      $head->appendChild($yahooStyle);
       $head->appendChild($outlookStyle);
       $head->appendChild($responsiveStyle);
+      $head->appendChild($printStyle);
       $body = $domDocument->getElementsByTagName('body')->item(0);
       $body->parentNode->insertBefore($head, $body);
     }
@@ -798,8 +786,10 @@ class OSHNewsletter {
       $head = $head->item(0);
       $head->appendChild($meta);
       $head->appendChild($font);
+      $head->appendChild($yahooStyle);
       $head->appendChild($outlookStyle);
       $head->appendChild($responsiveStyle);
+      $head->appendChild($printStyle);
     }
 
     return $domDocument->saveHTML();

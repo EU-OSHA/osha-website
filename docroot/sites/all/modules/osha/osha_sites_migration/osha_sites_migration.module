@@ -71,8 +71,8 @@ function osha_sites_migration_url_inbound_alter(&$path, $original_path, $path_la
   }
   // using arg and node load instead of menu_get_object
   // because it checks permissions and will not load draft nodes for anonymous.
-  if (arg(0) == 'node' && empty(arg(2))) {
-    $node = node_load(arg(1));
+  if (arg(0, $path) == 'node' && empty(arg(2, $path))) {
+    $node = node_load(arg(1, $path));
     if (!empty($node->field_migration_source)
       && !empty($node->field_source_url)
       && empty($node->field_show_in_ncw[LANGUAGE_NONE][0]['value'])
@@ -80,7 +80,16 @@ function osha_sites_migration_url_inbound_alter(&$path, $original_path, $path_la
       $en_url = $node->field_source_url[LANGUAGE_NONE][0]['url'];
       $url = preg_replace(['/\/en\//'], ["/$language->language/"], $en_url);
       unset($_GET['destination']);
-      drupal_goto($url, [], 301);
+      $query = $_GET;
+      $allowed_keys = ['pk_campaign'];
+      $filtered = array_filter(
+        $query,
+        function ($key) use ($allowed_keys) {
+          return in_array($key, $allowed_keys);
+        },
+        ARRAY_FILTER_USE_KEY
+      );
+      drupal_goto($url, ['query' => $filtered], 301);
     }
   }
 }

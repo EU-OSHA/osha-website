@@ -45,6 +45,10 @@
 		width: auto !important;
 	}
 
+	#page {
+		overflow: visible !important;
+	}
+
 	/* Hide sidebars and nav elements. */
 	#block-lang-dropdown-language-content, #languagesAndSearch, #main-menu-links, img, .view-header.back, #socialNetworksBlue, #block-search-form , #block-menu-block-1, #block-views-3ff30a881f6eeac3176c8f1ddc871fd2, #block-views-0070c12a2761cd76e16f8eb8fc4e1de6, #skip-link, #toolbar, #navigation, .region-sidebar-first, .region-sidebar-second, #footer, .breadcrumb, .tabs, .action-links, .links, .book-navigation, .forum-topic-navigation, .pager, .feed-icons, .more-link, .views-field.views-field-view-node, aside, iframe, #block-views-legislation-guidelines-block-1, #block-osha-alert-service-osha-publication-rss, #block-views-infographic-block-1 .view-infographic .views-row, #block-osha-alert-service-osha-events-rss, .view-filters, #block-views-exp-search-site, #block-views-exp-search-wiki, .link_news_events, #publication_slideshow , .ui-accordion .ui-accordion-header .ui-accordion-header-icon, .field.field-name-field-wiki-page-url, #block-osha-alert-service-osha-seminar-rss {
 		display: none !important;

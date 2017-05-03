@@ -90,3 +90,10 @@ function osha_resources_update_7002() {
   }
   node_save($node);
 }
+
+/**
+ * Revert osha_resources.
+ */
+function osha_resources_update_7003() {
+  features_revert_module('osha_resources');
+}

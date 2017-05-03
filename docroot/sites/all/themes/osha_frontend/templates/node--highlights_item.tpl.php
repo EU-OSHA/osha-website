@@ -8,6 +8,7 @@
  * @see template_preprocess_node()
  * @see template_process()
  */
+global $osha_newsletter_send_mail;
 
 $campaign_id = '';
 if (!empty($variables['elements']['#campaign_id'])) {
@@ -51,19 +52,26 @@ if (!empty($campaign_id)) {
                         $video_id = $node->field_youtube['en'][0]['video_id'];
                       }
                       if (!empty($video_id)) {
-                        print l(theme('image', array(
-                          'style_name' => ($node->old_newsletter ? 'thumbnail' : 'highlight_image'),
-                          'path' => sprintf("https://img.youtube.com/vi/%s/hqdefault.jpg", $video_id),
-                          'width' => ($node->old_newsletter ? '100%' : ''),
-                          'alt' => $title,
-                          'attributes' => array('style' => 'border: 0px;max-width: 100%;height:auto;background-color: #ffffff;vertical-align:middle;')
-                        )), url('node/' . $node->nid, array('absolute' => TRUE)), array(
-                          'html' => TRUE,
-                          'external' => TRUE,
-                          'attributes' => array(
-                            'style' => 'display:block;border:1px solid #efefef;',
-                          ),
-                        ));
+                          if (!empty($osha_newsletter_send_mail)) {
+                            print l(theme('image', array(
+                              'style_name' => ($node->old_newsletter ? 'thumbnail' : 'highlight_image'),
+                              'path' => sprintf("https://img.youtube.com/vi/%s/hqdefault.jpg", $video_id),
+                              // 'width' => ($node->old_newsletter ? '100%' : ''),
+                              'width' => '100%',
+                              'alt' => $title,
+                              'attributes' => array('style' => 'border: 0px;width: 100%;max-width: 100%;height:auto;background-color: #ffffff;vertical-align:middle;')
+                            )), url('node/' . $node->nid, array('absolute' => TRUE)), array(
+                              'html' => TRUE,
+                              'external' => TRUE,
+                              'attributes' => array(
+                                'style' => 'display:block;border:1px solid #efefef;',
+                              ),
+                            ));
+                          }
+                          else {
+                            print '<iframe id="youtube-field-player" class="youtube-field-player" width="100%" height="225" src="//www.youtube.com/embed/' . $video_id . '?wmode=opaque" frameborder="0" allowfullscreen=""></iframe>';
+                          }
+
                       }
                     }
                   else {

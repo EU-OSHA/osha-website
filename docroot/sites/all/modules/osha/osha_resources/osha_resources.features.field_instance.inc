@@ -946,6 +946,80 @@ function osha_resources_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-youtube-body'.
+  $field_instances['node-youtube-body'] = array(
+    'bundle' => 'youtube',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'If the description is empty when saving the page, the system will fill it with the description of the video from youtube website.',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 4,
+      ),
+      'highlights_item' => array(
+        'label' => 'hidden',
+        'module' => 'smart_trim',
+        'settings' => array(
+          'more_link' => 0,
+          'more_text' => 'Read more',
+          'summary_handler' => 'trim',
+          'trim_length' => 550,
+          'trim_link' => 0,
+          'trim_options' => array(
+            'text' => 0,
+          ),
+          'trim_preserve_tags' => '',
+          'trim_suffix' => '...',
+          'trim_type' => 'chars',
+        ),
+        'type' => 'smart_trim_format',
+        'weight' => 4,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'body',
+    'label' => 'Description',
+    'required' => 0,
+    'settings' => array(
+      'display_summary' => 0,
+      'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 20,
+        'summary_rows' => 5,
+      ),
+      'type' => 'text_textarea_with_summary',
+      'weight' => 1,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-youtube-field_character_count'.
   $field_instances['node-youtube-field_character_count'] = array(
     'bundle' => 'youtube',
@@ -954,6 +1028,12 @@ function osha_resources_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
+      ),
+      'highlights_item' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -989,7 +1069,7 @@ function osha_resources_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 44,
+      'weight' => 7,
     ),
   );
 
@@ -1001,6 +1081,12 @@ function osha_resources_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
+      ),
+      'highlights_item' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -1036,7 +1122,7 @@ function osha_resources_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 46,
+      'weight' => 8,
     ),
   );
 
@@ -1117,7 +1203,7 @@ function osha_resources_field_default_field_instances() {
       'module' => 'youtube',
       'settings' => array(),
       'type' => 'youtube',
-      'weight' => 42,
+      'weight' => 6,
     ),
   );
 
@@ -1201,16 +1287,18 @@ function osha_resources_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => -5,
+      'weight' => 0,
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
   t('Character count');
+  t('Description');
   t('External URL');
   t('File');
   t('Flickr');
+  t('If the description is empty when saving the page, the system will fill it with the description of the video from youtube website.');
   t('Page count');
   t('Please make sure to add translations and change the title and URL in other languages, if needed.');
   t('Slideshare');

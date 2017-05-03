@@ -165,6 +165,39 @@ function osha_resources_field_formatter_settings_form($field, $instance, $view_m
 }
 
 /**
+ * Implements hook_node_presave().
+ */
+function osha_resources_node_presave($node) {
+  // Save description from youtube.
+  if (!empty($node->field_youtube)) {
+    $wrapper = entity_metadata_wrapper('node', $node);
+    if (!empty($wrapper->field_youtube->value()) && empty($wrapper->body->value())) {
+      $video_id = $wrapper->field_youtube[0]->video_id->value();
+      $key = variable_get('google_api_key', '');
+      if (empty($key)) {
+        drupal_set_message('Please set a Google api key in order to getch Youtube vide description');
+      }
+      else {
+        $api_query = [
+          'part' => 'snippet',
+          'id' => $video_id,
+          'key' => $key,
+        ];
+        $api_url = url('https://content.googleapis.com/youtube/v3/videos', ['query' => $api_query]);
+        $response = drupal_http_request($api_url);
+        if ($response->code == 200) {
+          $response_data = json_decode($response->data);
+          if (!empty($response_data->items[0]->snippet->description)) {
+            $desc = $response_data->items[0]->snippet->description;
+            $wrapper->body->set(['value' => $desc]);
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
  */
 function theme_osha_resources_plain_file_url($variables) {
   $file = $variables['file'];

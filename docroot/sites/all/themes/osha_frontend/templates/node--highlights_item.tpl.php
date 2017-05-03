@@ -42,7 +42,9 @@ if (!empty($campaign_id)) {
                   <?php if(!$node->old_newsletter) { ?>
                     class="template-column template-image"
                   <?php } ?> >
-                <table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="center" style="background-color:#efefef;">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="center"
+                  >
+                  <!-- style="background-color:#efefef;" -->
                   <?php
                     if ($node->type == 'youtube') {
                       if (!empty($node->field_youtube[LANGUAGE_NONE][0]['video_id'])) {

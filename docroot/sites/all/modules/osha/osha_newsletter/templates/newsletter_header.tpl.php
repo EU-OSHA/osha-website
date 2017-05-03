@@ -176,7 +176,6 @@ $directory = drupal_get_path('module','osha_newsletter');
                       'attributes' => array('style' => 'border:0px;height:13px;max-height:13px;max-width:13px;')
                     ));
                   ?>
-                  <span class="osha_target_external_link">&nbsp;</span>
                 </a>
               </td>
             </tr>

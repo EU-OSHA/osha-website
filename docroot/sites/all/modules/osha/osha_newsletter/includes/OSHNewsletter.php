@@ -5,7 +5,6 @@ use \TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 class OSHNewsletter {
 
   public static $fontUrl = 'https://fonts.googleapis.com/css?family=Oswald:200,400,500';
-  public static $tweetsLimit = 4;
 
   public static function getTemplatesList() {
     return [
@@ -686,6 +685,9 @@ class OSHNewsletter {
     $configuration = !empty($entityCollection->field_newsletter_configuration[LANGUAGE_NONE][0]['value'])
       ? json_decode($entityCollection->field_newsletter_configuration[LANGUAGE_NONE][0]['value'], true)
       : null;
+    $tweetsLimit = !empty($entityCollection->field_tweets_count[LANGUAGE_NONE][0]['value'])
+      ? $entityCollection->field_tweets_count[LANGUAGE_NONE][0]['value']
+      : 4;
 
     if (!empty($configuration['tweets'])) {
       return $configuration['tweets'];
@@ -695,7 +697,7 @@ class OSHNewsletter {
     $q->innerJoin('field_data_field_tweet_creation_date', 'd', 'n.nid = d.entity_id');
     $q->fields('n', ['nid']);
     $q->condition('n.type', 'twitter_tweet_feed');
-    $q->range(0, self::$tweetsLimit);
+    $q->range(0, $tweetsLimit);
     $q->orderBy('d.field_tweet_creation_date_value', 'DESC');
     return $q->execute()->fetchCol();
   }

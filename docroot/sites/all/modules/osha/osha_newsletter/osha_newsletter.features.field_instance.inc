@@ -47,7 +47,7 @@ function osha_newsletter_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 7,
+      'weight' => 6,
     ),
     'workbench_access_field' => 0,
   );
@@ -99,7 +99,7 @@ function osha_newsletter_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
@@ -158,7 +158,7 @@ function osha_newsletter_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 8,
+      'weight' => 7,
     ),
     'workbench_access_field' => 0,
   );
@@ -196,7 +196,7 @@ function osha_newsletter_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 2,
+      'weight' => 1,
     ),
   );
 
@@ -237,7 +237,7 @@ function osha_newsletter_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 9,
+      'weight' => 8,
     ),
     'workbench_access_field' => 0,
   );
@@ -289,7 +289,7 @@ function osha_newsletter_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 
@@ -328,7 +328,7 @@ function osha_newsletter_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 1,
+      'weight' => 0,
     ),
   );
 
@@ -379,8 +379,55 @@ function osha_newsletter_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_select',
-      'weight' => 6,
+      'weight' => 5,
     ),
+  );
+
+  // Exported field_instance:
+  // 'entity_collection-newsletter_content_collection-field_tweets_count'.
+  $field_instances['entity_collection-newsletter_content_collection-field_tweets_count'] = array(
+    'bundle' => 'newsletter_content_collection',
+    'default_value' => array(
+      0 => array(
+        'value' => 4,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'Enter the number of tweets that you want to display in your newsletter.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 8,
+      ),
+    ),
+    'entity_type' => 'entity_collection',
+    'field_name' => 'field_tweets_count',
+    'label' => 'Tweets count',
+    'required' => 1,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'max' => '',
+      'min' => 1,
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 4,
+    ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-newsletter_article-body'.
@@ -918,6 +965,7 @@ function osha_newsletter_field_default_field_instances() {
   t('Created');
   t('Default template');
   t('Description');
+  t('Enter the number of tweets that you want to display in your newsletter.');
   t('Images');
   t('Left column image');
   t('Name');
@@ -927,6 +975,7 @@ function osha_newsletter_field_default_field_instances() {
   t('Section icon');
   t('Select content added after');
   t('Title');
+  t('Tweets count');
 
   return $field_instances;
 }

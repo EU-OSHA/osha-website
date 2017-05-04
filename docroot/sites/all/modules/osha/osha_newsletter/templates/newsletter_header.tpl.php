@@ -168,6 +168,7 @@ $directory = drupal_get_path('module','osha_newsletter');
                 ?>
                 <a href="mailto:?subject=<?php print $mailto_subject; ?>&amp;body=<?php print $mailto_body; ?>"
                    title="Share by Email"
+                   class="forward-newsletter-link"
                    style="color: #ffffff;">
                   <?php print t("Forward this newsletter");?>
                   &nbsp;

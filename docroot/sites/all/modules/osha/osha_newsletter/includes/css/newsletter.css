@@ -244,9 +244,12 @@ p.tweet-contents {
   /* line-height: 17px; */
   margin: 0;
 }
+.section-coming-soon .newsletter-item.newsletter-article td {
+  font-family: Oswald, Arial, sans-serif;
+}
 .section-coming-soon .newsletter-item.newsletter-article p {
-  font-size: 15px;
-  font-weight: 500;
+  font-family: Oswald, Arial, sans-serif;
+  font-size: 18px;
 }
 .tweet-contents a,
 .tweet-link a {
@@ -340,9 +343,4 @@ p.tweet-link a {
 }
 .newsletter-container tr.odd {
   background-color: transparent;
-}
-
-.section-coming-soon .section-title {
-  font-size: 18px;
-  font-weight: 400;
 }

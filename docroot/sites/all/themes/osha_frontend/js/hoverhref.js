@@ -238,7 +238,7 @@ function hideSearcher() {
 /* Add image to External links - _target=blank */
 
 jQuery(document).ready(function() {
-	jQuery('#content a[target="_blank"]').append('<span class="osha_target_external_link">&nbsp;</span>');
+    jQuery('#content a[target="_blank"]').not('.forward-newsletter-link').append('<span class="osha_target_external_link">&nbsp;</span>');
 });
 
 

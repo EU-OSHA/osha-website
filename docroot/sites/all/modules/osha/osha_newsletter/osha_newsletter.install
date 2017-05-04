@@ -234,3 +234,10 @@ function osha_newsletter_update_7006() {
   $allowed_bundles["youtube"] = "youtube";
   variable_set('osha_newsletter_allowed_bundles', $allowed_bundles);
 }
+
+/**
+ *  MDR-1126 - select the number of tweets to appear.
+ */
+function osha_newsletter_update_7007() {
+  features_revert_module('osha_newsletter');
+}

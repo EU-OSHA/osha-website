@@ -1215,6 +1215,8 @@ function osha_newsletter_mail_alter(&$message) {
  * array $source - The EntityCollection instance.
  */
 function osha_newsletter_build_mail(&$message, EntityCollection $source) {
+  global $osha_newsletter_send_mail;
+  $osha_newsletter_send_mail = TRUE;
   // Get message data from source.
   $message['subject'] = $source->title;
 

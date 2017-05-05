@@ -31,9 +31,20 @@ function osha_newsletter_image_default_styles() {
 
   // Exported image style: highlight_image.
   $styles['highlight_image'] = array(
-    'label' => 'Highlight image',
+    'label' => 'Highlight image (crop)',
     'effects' => array(
-      2 => array(
+      4 => array(
+        'name' => 'manualcrop_crop',
+        'data' => array(
+          'width' => 300,
+          'height' => 200,
+          'keepproportions' => 1,
+          'reuse_crop_style' => '',
+          'style_name' => 'highlight_image',
+        ),
+        'weight' => 0,
+      ),
+      3 => array(
         'name' => 'image_scale',
         'data' => array(
           'width' => 300,

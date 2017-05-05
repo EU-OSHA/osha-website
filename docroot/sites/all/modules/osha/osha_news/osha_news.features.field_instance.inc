@@ -488,7 +488,7 @@ function osha_news_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => 'content',
-          'image_style' => 'thumbnail_crop_100',
+          'image_style' => 'highlight_image',
         ),
         'type' => 'image',
         'weight' => 1,
@@ -585,6 +585,7 @@ function osha_news_field_default_field_instances() {
         'manualcrop_maximize_default_crop_area' => 0,
         'manualcrop_require_cropping' => array(),
         'manualcrop_styles_list' => array(
+          'highlight_image' => 'highlight_image',
           'medium_crop_220' => 'medium_crop_220',
         ),
         'manualcrop_styles_mode' => 'include',

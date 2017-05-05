@@ -115,14 +115,16 @@ td.social {
   text-transform: none;
 }
 .section-icon {
+  padding-top: 10px;
+}
+.section-icon img {
   max-height: 50px;
   max-width: 100%;
-  padding-bottom: 20px;
 }
 .see-more {
   color: #003399;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .highlight-title {
@@ -139,7 +141,7 @@ td.social {
   border-bottom-width: 4px;
   border-bottom-color: #003399;
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 500;
   height: 25px;
   text-align: left;
   text-transform: none;
@@ -171,16 +173,16 @@ td.social {
   padding-bottom: 20px;
 }
 
-.newsletter-section .row:nth-child(2) > .item.newsletter-half-width-list-item,
+/* .newsletter-section .row:first-child > .item.newsletter-half-width-list-item,
 .newsletter-section .row:first-child > .item.newsletter-half-image-left-item,
 .newsletter-section .row:first-child > .item.newsletter-full-width-list-item {
   padding-top: 20px;
-}
-.newsletter-section .row:last-child > .item.newsletter-half-width-list-item,
+} */
+/* .newsletter-section .row:last-child > .item.newsletter-half-width-list-item,
 .newsletter-section .row:last-child > .item.newsletter-half-image-left-item,
 .newsletter-section .row:last-child > .item.newsletter-full-width-list-item {
   padding-bottom: 20px;
-}
+} */
 /* .newsletter-section .row:first-child > .item {
   padding-top: 20px;
 }
@@ -223,11 +225,12 @@ td.social {
 }
 .newsletter-half-width-twitter .newsletter-item p.tweet-author {
   margin-top: 0;
-  font-weight: bold;
+  font-weight: 500;
   font-family: Arial Black, sans-serif;
 }
 p.tweet-author a {
   color: #003399 !important;
+  font-family: Arial Black, sans-serif;
 }
 p.tweet-contents {
   padding-left: 10px;
@@ -241,9 +244,12 @@ p.tweet-contents {
   /* line-height: 17px; */
   margin: 0;
 }
+.section-coming-soon .newsletter-item.newsletter-article td {
+  font-family: Oswald, Arial, sans-serif;
+}
 .section-coming-soon .newsletter-item.newsletter-article p {
-  font-size: 15px;
-  font-weight: bold;
+  font-family: Oswald, Arial, sans-serif;
+  font-size: 18px;
 }
 .tweet-contents a,
 .tweet-link a {
@@ -254,7 +260,7 @@ p.tweet-contents {
 p.tweet-link a {
   color: #353535 !important;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .newsletter-item a {

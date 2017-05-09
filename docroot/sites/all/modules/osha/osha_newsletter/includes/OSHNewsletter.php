@@ -222,7 +222,7 @@ class OSHNewsletter {
         'class' => [
           drupal_clean_css_identifier($template),
           'newsletter-section',
-          'template-container',
+          'template-container'
         ],
         'width' => '100%',
         'cellpadding' => '0',

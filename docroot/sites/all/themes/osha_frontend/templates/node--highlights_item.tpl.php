@@ -57,7 +57,7 @@ if (!empty($campaign_id)) {
                             if (!empty($video_id)) {
                                 if (!empty($osha_newsletter_send_mail)) {
                                   print l(theme('image', array(
-                                    'style_name' => ($node->old_newsletter ? 'thumbnail' : 'highlight_image'),
+                                    'style_name' => ($node->old_newsletter ? 'thumbnail' : 'newsletter_highlight'),
                                     'path' => sprintf("https://img.youtube.com/vi/%s/hqdefault.jpg", $video_id),
                                     'width' => ($node->old_newsletter ? '100%' : $highlight_img_width),
                                     'alt' => $title,
@@ -78,7 +78,7 @@ if (!empty($campaign_id)) {
                           }
                           else {
                             print l(theme('image_style', array(
-                              'style_name' => ($node->old_newsletter ? 'thumbnail' : 'highlight_image'),
+                              'style_name' => ($node->old_newsletter ? 'thumbnail' : 'newsletter_highlight'),
                               'path' => (isset($field_image) && !empty($field_image)) ? $field_image[0]['uri'] : '',
                               'width' => ($node->old_newsletter ? '100%' : ''),
                               'alt' => (isset($field_image) && !empty($field_image)) ? $field_image[0]['alt'] : '',

@@ -42,26 +42,47 @@ if (!empty($campaign_id)) {
                   <?php if(!$node->old_newsletter) { ?>
                     class="template-column template-image"
                   <?php } ?> >
-                <table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="center"
-                  >
-                  <!-- style="background-color:#efefef;" -->
-                  <?php
-                    if ($node->type == 'youtube') {
-                      if (!empty($node->field_youtube[LANGUAGE_NONE][0]['video_id'])) {
-                        $video_id = $node->field_youtube[LANGUAGE_NONE][0]['video_id'];
-                      }
-                      elseif (!empty($node->field_youtube['en'][0]['video_id'])) {
-                        $video_id = $node->field_youtube['en'][0]['video_id'];
-                      }
-                      if (!empty($video_id)) {
-                          if (!empty($osha_newsletter_send_mail)) {
-                            print l(theme('image', array(
-                              'style_name' => ($node->old_newsletter ? 'thumbnail' : 'highlight_image'),
-                              'path' => sprintf("https://img.youtube.com/vi/%s/hqdefault.jpg", $video_id),
-                              // 'width' => ($node->old_newsletter ? '100%' : ''),
-                              'width' => '100%',
-                              'alt' => $title,
-                              'attributes' => array('style' => 'border: 0px;width: 100%;max-width: 100%;height:auto;background-color: #ffffff;vertical-align:middle;')
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                  <tbody>
+                    <tr>
+                      <td align="center" width="<?php print($highlight_img_width);?>" style="width: <?php print($highlight_img_width);?>px; max-width:<?php print($highlight_img_width);?>px;">
+                        <?php
+                          if ($node->type == 'youtube') {
+                            if (!empty($node->field_youtube[LANGUAGE_NONE][0]['video_id'])) {
+                              $video_id = $node->field_youtube[LANGUAGE_NONE][0]['video_id'];
+                            }
+                            elseif (!empty($node->field_youtube['en'][0]['video_id'])) {
+                              $video_id = $node->field_youtube['en'][0]['video_id'];
+                            }
+                            if (!empty($video_id)) {
+                                if (!empty($osha_newsletter_send_mail)) {
+                                  print l(theme('image', array(
+                                    'style_name' => ($node->old_newsletter ? 'thumbnail' : 'newsletter_highlight'),
+                                    'path' => sprintf("https://img.youtube.com/vi/%s/hqdefault.jpg", $video_id),
+                                    'width' => ($node->old_newsletter ? '100%' : $highlight_img_width),
+                                    'alt' => $title,
+                                    'attributes' => array('style' => 'border: 0px;width: 100%;max-width: 100%;height:auto;background-color: #ffffff;vertical-align:middle;')
+                                  )), url('node/' . $node->nid, array('absolute' => TRUE)), array(
+                                    'html' => TRUE,
+                                    'external' => TRUE,
+                                    'attributes' => array(
+                                      'style' => 'display:block;border:1px solid #efefef;',
+                                    ),
+                                  ));
+                                }
+                                else {
+                                  print '<iframe id="youtube-field-player" class="youtube-field-player" width="100%" height="225" src="//www.youtube.com/embed/' . $video_id . '?wmode=opaque" frameborder="0" allowfullscreen=""></iframe>';
+                                }
+
+                            }
+                          }
+                          else {
+                            print l(theme('image_style', array(
+                              'style_name' => ($node->old_newsletter ? 'thumbnail' : 'newsletter_highlight'),
+                              'path' => (isset($field_image) && !empty($field_image)) ? $field_image[0]['uri'] : '',
+                              'width' => ($node->old_newsletter ? '100%' : ''),
+                              'alt' => (isset($field_image) && !empty($field_image)) ? $field_image[0]['alt'] : '',
+                              'attributes' => array('style' => 'border: 0px;max-width: 100%;height:auto;background-color: #ffffff;vertical-align:middle;')
                             )), url('node/' . $node->nid, array('absolute' => TRUE)), array(
                               'html' => TRUE,
                               'external' => TRUE,
@@ -70,30 +91,11 @@ if (!empty($campaign_id)) {
                               ),
                             ));
                           }
-                          else {
-                            print '<iframe id="youtube-field-player" class="youtube-field-player" width="100%" height="225" src="//www.youtube.com/embed/' . $video_id . '?wmode=opaque" frameborder="0" allowfullscreen=""></iframe>';
-                          }
-
-                      }
-                    }
-                  else {
-                    print l(theme('image_style', array(
-                      'style_name' => ($node->old_newsletter ? 'thumbnail' : 'highlight_image'),
-                      'path' => (isset($field_image) && !empty($field_image)) ? $field_image[0]['uri'] : '',
-                      'width' => ($node->old_newsletter ? '100%' : ''),
-                      // 'height' => 'auto',
-                      'alt' => (isset($field_image) && !empty($field_image)) ? $field_image[0]['alt'] : '',
-                      'attributes' => array('style' => 'border: 0px;max-width: 100%;height:auto;background-color: #ffffff;vertical-align:middle;')
-                    )), url('node/' . $node->nid, array('absolute' => TRUE)), array(
-                      'html' => TRUE,
-                      'external' => TRUE,
-                      'attributes' => array(
-                        'style' => 'display:block;border:1px solid #efefef;',
-                      ),
-                    ));
-                  }
-                  ?>
-                </th></tr></tbody></table>
+                        ?>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </th>
               <th valign="top" style="color: #003399; padding-bottom: 10px; padding-left: 0px; padding-right: 0px;font-family: Oswald, Arial, sans-serif;" class="template-column">
                 <?php

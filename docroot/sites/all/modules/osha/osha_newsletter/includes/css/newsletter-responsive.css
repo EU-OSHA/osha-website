@@ -1,3 +1,4 @@
+
 /* CLIENT-SPECIFIC STYLES */
 html { min-width:100%; }
 body, table, td, a{-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;} /* Prevent WebKit and Windows mobile changing default text sizes */
@@ -114,8 +115,4 @@ a[x-apple-data-detectors] {
     max-width: 100% !important;
   }
 }
-/* @media screen and (-webkit-min-device-pixel-ratio:0) and (max-width: 800px) {
-  .htmlmail-body .template-column {
-    display: initial !important;
-  }
-} */
+

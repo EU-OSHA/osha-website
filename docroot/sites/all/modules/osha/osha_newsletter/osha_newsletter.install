@@ -241,3 +241,11 @@ function osha_newsletter_update_7006() {
 function osha_newsletter_update_7007() {
   features_revert_module('osha_newsletter');
 }
+
+/**
+ * MDR-910 - enable imagecache modules and revert newsletter
+ */
+function osha_newsletter_update_7008() {
+  module_enable(['imagecache_actions', 'imagecache_canvasactions']);
+  features_revert_module('osha_newsletter');
+}

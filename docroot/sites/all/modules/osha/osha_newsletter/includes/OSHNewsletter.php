@@ -221,7 +221,7 @@ class OSHNewsletter {
         'class' => [
           drupal_clean_css_identifier($template),
           'newsletter-section',
-          'template-container',
+          'template-container'
         ],
         'width' => '100%',
         'cellpadding' => '0',
@@ -756,6 +756,7 @@ class OSHNewsletter {
     $responsiveStyle = $domDocument->createElement('style', $responsiveStylesheet);
     $responsiveStyle->setAttribute('type', 'text/css');
 
+    global $osha_newsletter_send_mail;
 
     $print_stylesheet_path =  $modulePath . '/includes/css/newsletter-print.css';
     $printStylesheet =  file_get_contents($print_stylesheet_path);
@@ -780,7 +781,9 @@ class OSHNewsletter {
       $head->appendChild($yahooStyle);
       $head->appendChild($outlookStyle);
       $head->appendChild($responsiveStyle);
-      $head->appendChild($printStyle);
+      if (empty($osha_newsletter_send_mail)) {
+        $head->appendChild($printStyle);
+      }
       $body = $domDocument->getElementsByTagName('body')->item(0);
       $body->parentNode->insertBefore($head, $body);
     }
@@ -791,7 +794,9 @@ class OSHNewsletter {
       $head->appendChild($yahooStyle);
       $head->appendChild($outlookStyle);
       $head->appendChild($responsiveStyle);
-      $head->appendChild($printStyle);
+      if (empty($osha_newsletter_send_mail)) {
+        $head->appendChild($printStyle);
+      }
     }
 
     return $domDocument->saveHTML();

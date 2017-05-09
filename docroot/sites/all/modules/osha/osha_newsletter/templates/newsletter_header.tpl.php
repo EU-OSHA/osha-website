@@ -38,16 +38,22 @@ $directory = drupal_get_path('module','osha_newsletter');
                    $languages_text = [];
                    foreach ($languages as $l) {
                      if ($l->language != "tr" && $l->language != "ru") {
-                       $languages_text[] = sprintf('<a href="%s" style="text-decoration: none; color: %s;">%s</a>',
-                         url('entity-collection/' . $newsletter_id, array('absolute' => TRUE, 'language' => $l, 'query' => $url_query)),
-                         ($l->language == $language->language) ? '#003399' : '#606060',
-                         $l->native);
-                     }
-                   }
-
-                   print implode('<span style="color: #606060;"> | </span>', $languages_text);
+                       $languages_text[] = strtr('<a href="!link" style="text-decoration: none; color: !color; ">!text</a>',
+                          [
+                            '!link' => url('entity-collection/' . $newsletter_id, array('absolute' => TRUE, 'language' => $l, 'query' => $url_query)),
+                            '!color' => ($l->language == $language->language) ? '#003399' : '#606060',
+                            '!text' => $l->native
+                          ]);
+                    }
+                  }
                  }
                 ?>
+                <?php foreach ($languages_text as $lidx =>  $lang_text) { ?>
+                  <?php if ($lidx > 0): ?>
+                    <span style="color: #606060;"> | </span>
+                  <?php endif; ?>
+                  <?php print $lang_text;?>
+                <?php } ?>
               </td>
             </tr>
           </tbody>
@@ -158,9 +164,7 @@ $directory = drupal_get_path('module','osha_newsletter');
               <td style="background-color: #003399; width: 70%; text-align: left; font-size: 24px; font-weight: 200; color: #ffffff; font-family: Oswald, Arial,sans-serif;">
                 <?php print t("Occupational Safety and Health News &ndash; Europe");?>
               </td>
-              <td style="background-color: #003399; width: 30%; text-align: right; font-size: 14px; font-weight: 200; color: #ffffff; font-family: Oswald, Arial,sans-serif;"
-                  class="hidden-print"
-              >
+              <td style="background-color: #003399; width: 30%; text-align: right; font-size: 14px; font-weight: 200; color: #ffffff; font-family: Oswald, Arial,sans-serif;" class="hidden-print">
                 <?php
                   $mailto_subject = 'OSH Newsletter: ' . $newsletter_title;
                   $newsletter_url = url('entity-collection/' . $newsletter_id, array('absolute' => TRUE, 'language' => $language));

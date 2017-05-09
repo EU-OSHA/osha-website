@@ -1,58 +1,58 @@
-.hidden-print,
-.template-image,
-.newsletter-half-image,
-.newsletter-item.events > tbody > tr > td[rowspan="2"],
-.osha_target_external_link,
-#header,
-.preheader {
-  display: none !important;
-}
-table,
-.template-column.newsletter-half-content,
-.newsletter-container {
-  width: 100% !important;
-  max-width: 100% !important;
-}
-tr, th, td, div {
-  background-color: transparent !important;
-  // text-align: left !important;
-}
-#content .newsletter-container a {
-  border: none !important;
-  color: #000000 !important;
-}
-.osha-logos img {
-  display: inline !important;
-}
-.header-title td {
-  color: #000000 !important;
-  font-weight: 500 !important;
-}
-.section-title,
-.osha-info,
-.see-more {
-  font-family: 'Oswald', Arial, sans-serif !important;
-}
-.section-title {
-  font-weight: 400 !important;
-}
-thead {
-  display: table-row-group !important;
-}
-// td {
-//   page-break-inside:avoid; page-break-after:auto;
-// }
-.section-title,
-.item {
-  page-break-before: always !important;
-}
-.item,
-.newsletter-item,
-.newsletter-section {
-  page-break-inside: avoid !important;
-}
-.newsletter-half-content,
-.newsletter-half-content .newsletter-full-width-list,
-.newsletter-half-content .newsletter-full-width-list .newsletter-item {
-  max-width: 100% !important;
+
+@media print {
+  .hidden-print,
+  .template-image,
+  .newsletter-half-image,
+  .newsletter-item.events > tbody > tr > td[rowspan="2"],
+  .osha_target_external_link,
+  #header,
+  .preheader {
+    display: none !important;
+  }
+  table,
+  .template-column.newsletter-half-content,
+  .newsletter-container {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  tr, th, td, div {
+    background-color: transparent !important;
+  }
+  #content .newsletter-container a {
+    border: none !important;
+    color: #000000 !important;
+  }
+  .osha-logos img {
+    display: inline !important;
+  }
+  .header-title td {
+    color: #000000 !important;
+    font-weight: 500 !important;
+  }
+  .section-title,
+  .osha-info,
+  .see-more {
+    font-family: 'Oswald', Arial, sans-serif !important;
+  }
+  .section-title {
+    font-weight: 400 !important;
+  }
+  thead {
+    display: table-row-group !important;
+  }
+
+  .section-title,
+  .item {
+    page-break-before: always !important;
+  }
+  .item,
+  .newsletter-item,
+  .newsletter-section {
+    page-break-inside: avoid !important;
+  }
+  .newsletter-half-content,
+  .newsletter-half-content .newsletter-full-width-list,
+  .newsletter-half-content .newsletter-full-width-list .newsletter-item {
+    max-width: 100% !important;
+  }
 }

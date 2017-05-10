@@ -1,0 +1,54 @@
+<?php
+/**
+* @file
+* Improve security of the website against CSRF (Cross-Site Request Forgery) Attacks
+*/
+
+/**
+ * Implements hook_init().
+ */
+function csrf_checks_init() {
+  global $base_url;
+  $method = $_SERVER['REQUEST_METHOD'];
+
+
+  // Apply checks only for POST requests.
+  if (in_array($method, array('POST'), TRUE)) {
+
+    // Prepare $base for checks.
+    $base = str_replace(array(':','/','.'),array('\:','\/','\.'),$base_url);
+
+    // Check the origin header.
+    if (array_key_exists('HTTP_ORIGIN', $_SERVER)) {
+      $origin = $_SERVER['HTTP_ORIGIN'];
+      if(preg_match("/^$base/", $origin) != 1){
+        // Possible CSRF attack. Block the request.
+        csrf_checks_deny("Origin: $origin");
+      }
+    }
+
+    // Check the referer header.
+    if (array_key_exists('HTTP_REFERER', $_SERVER)) {
+      $referer = $_SERVER['HTTP_REFERER'];
+      if(preg_match("/^$base/", $referer) != 1){
+        // Possible CSRF attack. Block the request.
+        csrf_checks_deny("Referer: $referer");
+      }
+    }else{
+      // Possible CSRF attack. Block the request.
+      csrf_checks_deny("Referer: empty");
+    }
+  }
+}
+
+function csrf_checks_deny($details = '') {
+  // Clean the POST data first.
+  $_POST = array();
+  drupal_access_denied(); // send 403 response and show Access Denied page
+  $args = array(
+    '@ip'     => ip_address(),
+    '@details' => $details,
+  );
+  watchdog('csrf_checks', 'Possible CSRF attack was blocked. IP address: @ip, @details.', $args, WATCHDOG_WARNING);
+  drupal_exit(); // abort request
+}

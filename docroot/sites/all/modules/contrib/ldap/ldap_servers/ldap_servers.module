@@ -32,7 +32,7 @@ define('LDAP_SERVERS_ENC_TYPE_SHA', 8);
 define('LDAP_SERVERS_ENC_TYPE_SALTED_SHA', 9);
 define('LDAP_SERVERS_ENC_TYPE_CLEARTEXT', 10);
 
-define('LDAP_SERVERS_CYPHER_MODE', 'cfb', 12);
+define('LDAP_SERVERS_CYPHER_MODE', 'cfb');
 
 define('LDAP_SERVERS_BIND_METHOD_SERVICE_ACCT', 1);
 define('LDAP_SERVERS_BIND_METHOD_USER', 2);
@@ -93,6 +93,8 @@ define('LDAP_INVALID_DN_SYNTAX', 0x22);
 
 define('LDAP_IS_LEAF', 0x23);
 define('LDAP_ALIAS_DEREF_PROBLEM', 0x24);
+if ( ! defined('LDAP_DEREF_NEVER') )
+  define('LDAP_DEREF_NEVER', 0x25);
 
 define('LDAP_INAPPROPRIATE_AUTH', 0x30);
 define('LDAP_INVALID_CREDENTIALS', 0x31);
@@ -696,9 +698,9 @@ function ldap_servers_get_user_ldap_data($drupal_user, $sid = NULL, $ldap_contex
   // if no explicit $sid, find most appropriate one
   if (module_exists('ldap_user') && (!$sid || $sid == LDAP_USER_AUTH_SERVER_SID)) {
     if (property_exists($drupal_user, 'ldap_user_puid_sid') &&
-        !empty($drupal_user->ldap_user_puid_sid['und'][0]['value'])
+        !empty($drupal_user->ldap_user_puid_sid[LANGUAGE_NONE][0]['value'])
       ) {
-      $sid = $drupal_user->ldap_user_puid_sid['und'][0]['value'];
+      $sid = $drupal_user->ldap_user_puid_sid[LANGUAGE_NONE][0]['value'];
     }
     else {
       $ldap_user_conf = ldap_user_conf();
@@ -809,7 +811,7 @@ function ldap_servers_convert_attribute($value, $conversion = NULL) {
  */
 function ldap_servers_disable_http_check(&$form) {
 
-  if (variable_get('ldap_servers_require_ssl_for_credentails', 0) == 1 && @$_SERVER['HTTPS'] != 'on') {
+  if (variable_get('ldap_servers_require_ssl_for_credentials', 0) == 1 && @$_SERVER['HTTPS'] != 'on') {
 
     $tokens = array(
       'site_name' => variable_get('site_name', 'this site'),

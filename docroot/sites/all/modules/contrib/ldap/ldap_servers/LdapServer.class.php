@@ -234,7 +234,7 @@ class LdapServer {
     }
 
     if ($bindpw) {
-      $this->bindpw = ldap_servers_decrypt($bindpw);
+      $this->bindpw = ($bindpw == '') ? '' : ldap_servers_decrypt($bindpw);
     }
 
     $this->paginationEnabled = (boolean)(ldap_servers_php_supports_pagination() && $this->searchPagination);
@@ -450,8 +450,6 @@ class LdapServer {
    */
 
   public function createLdapEntry($attributes, $dn = NULL) {
-    //@todo: EauDeWeb (for EU-OSHA, we do not want LDAP to try to create entries)
-    return TRUE;
 
     if (!$this->connection) {
       $this->connect();
@@ -491,6 +489,7 @@ class LdapServer {
 
     foreach ($new_entry as $key => $new_val) {
       $old_value = FALSE;
+      $old_value_is_scalar = FALSE;
       $key_lcase = drupal_strtolower($key);
       if (isset($old_entry[$key_lcase])) {
         if ($old_entry[$key_lcase]['count'] == 1) {
@@ -1121,7 +1120,7 @@ class LdapServer {
 			}
       else {
 				foreach ($errors as $err => $err_val){
-					watchdog('ldap_server', "Error storing picture: %$err", "%$err_val", WATCHDOG_ERROR );
+					watchdog('ldap_server', "Error storing picture: %$err", array("%$err" => $err_val), WATCHDOG_ERROR);
 				}
 				return FALSE;
 			}

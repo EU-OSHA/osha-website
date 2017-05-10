@@ -45,9 +45,9 @@ function xmlsitemap_node_xmlsitemap_process_node_links(array $nids) {
         xmlsitemap_link_save($link, array($link['type'] => $node));
       }
     }
-    else {
-      $link = xmlsitemap_node_create_link($node, $node->language);
-      xmlsitemap_link_save($link, array($link['type'] => $node));
+  else {
+    $link = xmlsitemap_node_create_link($node, $node->language);
+    xmlsitemap_link_save($link, array($link['type'] => $node));
     }
   }
 }
@@ -340,4 +340,17 @@ function xmlsitemap_node_view_access($node, $account = NULL) {
   }
 
   return FALSE;
+}
+
+/**
+ * Implements hook_features_pipe_COMPONENT_alter().
+ *
+ * Add variables to exported node types.
+ */
+function xmlsitemap_node_features_pipe_node_alter(&$pipe, $data, $export) {
+  if (!empty($data)) {
+    foreach ($data as $node_type) {
+      $pipe['variable'][] = "xmlsitemap_settings_node_{$node_type}";
+    }
+  }
 }

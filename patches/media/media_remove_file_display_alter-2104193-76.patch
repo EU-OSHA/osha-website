@@ -1,8 +1,8 @@
 diff --git a/media.file_default_displays.inc b/media.file_default_displays.inc
-index ec7a378..013bf15 100644
+index 3e3e2c1..013bf15 100644
 --- a/media.file_default_displays.inc
 +++ b/media.file_default_displays.inc
-@@ -6,51 +6,6 @@
+@@ -6,59 +6,6 @@
   */
  
  /**
@@ -15,36 +15,44 @@ index ec7a378..013bf15 100644
 -  $file_display = new stdClass();
 -  $file_display->api_version = 1;
 -  $file_display->name = 'audio__preview__file_field_media_large_icon';
--  $file_display->weight = 50;
+-  $file_display->weight = 49;
 -  $file_display->status = TRUE;
--  $file_display->settings = '';
+-  $file_display->settings = array(
+-    'image_style' => 'media_thumbnail',
+-  );
 -  $file_displays['audio__preview__file_field_media_large_icon'] = $file_display;
 -
 -  // Document previews should be displayed using a large filetype icon.
 -  $file_display = new stdClass();
 -  $file_display->api_version = 1;
 -  $file_display->name = 'document__preview__file_field_media_large_icon';
--  $file_display->weight = 50;
+-  $file_display->weight = 49;
 -  $file_display->status = TRUE;
--  $file_display->settings = '';
+-  $file_display->settings = array(
+-    'image_style' => 'media_thumbnail',
+-  );
 -  $file_displays['document__preview__file_field_media_large_icon'] = $file_display;
 -
 -  // Image previews should be displayed using a large filetype icon.
 -  $file_display = new stdClass();
 -  $file_display->api_version = 1;
 -  $file_display->name = 'image__preview__file_field_media_large_icon';
--  $file_display->weight = 50;
+-  $file_display->weight = 49;
 -  $file_display->status = TRUE;
--  $file_display->settings = '';
+-  $file_display->settings = array(
+-    'image_style' => 'media_thumbnail',
+-  );
 -  $file_displays['image__preview__file_field_media_large_icon'] = $file_display;
 -
 -  // Video previews should be displayed using a large filetype icon.
 -  $file_display = new stdClass();
 -  $file_display->api_version = 1;
 -  $file_display->name = 'video__preview__file_field_media_large_icon';
--  $file_display->weight = 50;
+-  $file_display->weight = 49;
 -  $file_display->status = TRUE;
--  $file_display->settings = '';
+-  $file_display->settings = array(
+-    'image_style' => 'media_thumbnail',
+-  );
 -  $file_displays['video__preview__file_field_media_large_icon'] = $file_display;
 -
 -  return $file_displays;
@@ -54,10 +62,10 @@ index ec7a378..013bf15 100644
   * Implements hook_file_default_displays_alter().
   */
  function media_file_default_displays_alter(&$file_displays) {
-diff --git a/media.install b/media.install
-index e909bda..d734a3e 100644
---- a/media.install
-+++ b/media.install
+diff --git a/docroot/sites/all/modules/contrib/media/media.install b/docroot/sites/all/modules/contrib/media/media.install
+index b6efdd4..469a16a 100644
+--- a/docroot/sites/all/modules/contrib/media/media.install
++++ b/docroot/sites/all/modules/contrib/media/media.install
 @@ -22,6 +22,9 @@ function media_install() {
    catch (Exception $e) {
      watchdog_exception('media', $e);
@@ -68,7 +76,7 @@ index e909bda..d734a3e 100644
  }
  
  /**
-@@ -1148,3 +1151,43 @@ function media_update_7226() {
+@@ -1187,3 +1190,43 @@ function media_update_7226() {
      user_role_grant_permissions($rid, array('access media browser'));
    }
  }

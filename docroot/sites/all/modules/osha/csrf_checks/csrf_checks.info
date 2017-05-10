@@ -1,0 +1,5 @@
+name = csrf_checks
+core = 7.x
+package = OSHA
+version = 7.x-0.1
+project = osha

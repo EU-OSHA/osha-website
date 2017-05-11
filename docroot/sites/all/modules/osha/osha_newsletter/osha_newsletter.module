@@ -925,8 +925,6 @@ function osha_newsletter_entity_insert($entity_collection, $type) {
       && isset($entity_collection->bundle)
       && $entity_collection->bundle == 'newsletter_content_collection') {
 
-    $contexts = _entity_collection_get_contexts($entity_collection);
-
     // Assign all taxonomies to the newly created entity.
     // Highlights
     // OSH matters
@@ -954,7 +952,7 @@ function osha_newsletter_entity_insert($entity_collection, $type) {
       $item->style = !empty($term->field_newsletter_template[LANGUAGE_NONE][0]['value'])
         ? $term->field_newsletter_template[LANGUAGE_NONE][0]['value']
         : '';
-      entity_collection_append_item($entity_collection, $item, $contexts);
+      entity_collection_append_item($entity_collection, $item);
     }
 
     // Mapping of term newsletter sections and content types.
@@ -967,7 +965,7 @@ function osha_newsletter_entity_insert($entity_collection, $type) {
       $weights[$term_ct_map['newsletter_article']]['children']++;
       $item->position = $weights[$term_ct_map['newsletter_article']]['children'];
       $item->style = (isset($term_ct_map['view_mode_newsletter_article'])) ? $term_ct_map['view_mode_newsletter_article'] : variable_get('osha_newsletter_node_view_mode', 'newsletter_item');
-      entity_collection_append_item($entity_collection, $item, $contexts);
+      entity_collection_append_item($entity_collection, $item);
     }
 
     // Get allowed bundles for nodes.
@@ -1027,7 +1025,7 @@ function osha_newsletter_entity_insert($entity_collection, $type) {
             $item = new EntityCollectionTreeNode('node', $nid, $node);
             $item->position = $weights[$term_ct_map[$node->type]]['children'];
             $item->style = (isset($term_ct_map['view_mode_'.$node->type])) ? $term_ct_map['view_mode_'.$node->type] : _init_node_view_mode($node->type);
-            entity_collection_append_item($entity_collection, $item, $contexts);
+            entity_collection_append_item($entity_collection, $item);
           }
         }
       }

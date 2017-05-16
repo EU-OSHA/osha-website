@@ -27,9 +27,13 @@ function osha_events_views_default_views() {
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
+    7 => '7',
+    11 => '11',
+    4 => '4',
     12 => '12',
     13 => '13',
     6 => '6',
+    5 => '5',
   );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';

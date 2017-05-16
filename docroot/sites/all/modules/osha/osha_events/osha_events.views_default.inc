@@ -2307,6 +2307,32 @@ function osha_events_views_default_views() {
     'events' => 'events',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: For the web (field_for_the_web) */
+  $handler->display->display_options['filters']['field_for_the_web_value']['id'] = 'field_for_the_web_value';
+  $handler->display->display_options['filters']['field_for_the_web_value']['table'] = 'field_data_field_for_the_web';
+  $handler->display->display_options['filters']['field_for_the_web_value']['field'] = 'field_for_the_web_value';
+  $handler->display->display_options['filters']['field_for_the_web_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_for_the_web_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_for_the_web_value']['expose']['operator_id'] = 'field_for_the_web_value_op';
+  $handler->display->display_options['filters']['field_for_the_web_value']['expose']['label'] = 'For the web';
+  $handler->display->display_options['filters']['field_for_the_web_value']['expose']['operator'] = 'field_for_the_web_value_op';
+  $handler->display->display_options['filters']['field_for_the_web_value']['expose']['identifier'] = 'field_for_the_web_value';
+  $handler->display->display_options['filters']['field_for_the_web_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    14 => 0,
+  );
   /* Filter criterion: Content: Country (field_country_code) */
   $handler->display->display_options['filters']['field_country_code_value']['id'] = 'field_country_code_value';
   $handler->display->display_options['filters']['field_country_code_value']['table'] = 'field_data_field_country_code';
@@ -2430,6 +2456,7 @@ function osha_events_views_default_views() {
     t('ORGANIZER'),
     t('See details'),
     t('[field_start_date_2] - Events'),
+    t('For the web'),
     t('Search by country'),
     t('From date'),
     t('To date'),

@@ -196,8 +196,6 @@
             Drupal.settings.tagmap[macro] = markup;
             $(this).replaceWith(macro);
           }
-<<<<<<< HEAD
-=======
         });
         content = '';
         contentElements.each(function(){
@@ -207,7 +205,6 @@
           else {
             content += $(this)[0].innerHTML;
           }
->>>>>>> develop
         });
         content = $(contentElements).html();
       }

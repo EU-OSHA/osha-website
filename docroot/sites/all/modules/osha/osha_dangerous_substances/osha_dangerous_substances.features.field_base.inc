@@ -908,6 +908,43 @@ function osha_dangerous_substances_field_default_field_bases() {
     'type' => 'text_long',
   );
 
+  // Exported field_base: 'field_original_desc_language'.
+  $field_bases['field_original_desc_language'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_original_desc_language',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'languagefield',
+    'settings' => array(
+      'enabled' => array(
+        1 => 0,
+        2 => 2,
+        3 => 0,
+        'authors_default' => 0,
+        'current_interface' => 0,
+        'site_default' => 0,
+      ),
+      'entity_translation_sync' => FALSE,
+      'excluded_languages' => array(),
+      'format' => array(
+        'iso' => 0,
+        'name' => 'name',
+        'name_native' => 0,
+      ),
+      'groups' => '',
+      'languages' => array(),
+    ),
+    'translatable' => 0,
+    'type' => 'language_field',
+  );
+
   // Exported field_base: 'field_other_information'.
   $field_bases['field_other_information'] = array(
     'active' => 1,

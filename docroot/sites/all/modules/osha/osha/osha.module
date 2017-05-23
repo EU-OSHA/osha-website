@@ -705,6 +705,10 @@ function osha_node_validate_prepare($form, &$form_state) {
 function osha_form_alter(&$form, &$form_state, $form_id){
   global $user;
 
+  if ($form_id == 'node_delete_confirm') {
+    drupal_set_title(t('Are you sure you want to delete the record?', array()), PASS_THROUGH);
+  }
+
   if($form_id == 'views_form_administration_content_main_page' &&
     !in_array('administrator', $user->roles)){
     $form_state['build_info']['args'][0]->field = array();

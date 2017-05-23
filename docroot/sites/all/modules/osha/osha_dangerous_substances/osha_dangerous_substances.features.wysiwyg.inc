@@ -30,6 +30,9 @@ function osha_dangerous_substances_wysiwyg_default_profiles() {
           'link' => 1,
           'unlink' => 1,
         ),
+        'paste' => array(
+          'pasteword' => 1,
+        ),
       ),
       'toolbar_loc' => 'top',
       'toolbar_align' => 'left',

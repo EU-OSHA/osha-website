@@ -3072,6 +3072,7 @@ please take this into consideration when you are writing the first paragraph.',
       'type' => 'options_select',
       'weight' => 15,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance:

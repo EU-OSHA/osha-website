@@ -73,6 +73,13 @@ img[alt*="Select language"]{
 	height: 29px;
 }
 
+#multi-lingual-award{
+	position: absolute;
+	right: 15px;
+}
+#multi-lingual-award img{
+	max-width: 200px;
+}
 #lang-dropdown-select-language_content {
     float: left !important;
     margin-bottom: 1em;
@@ -638,6 +645,15 @@ footer {
 }
 
 @media screen and (max-width: 450px) {
+
+#multi-lingual-award{
+	position: absolute;
+	right: 0px;
+	margin-top: 9px;
+}
+#multi-lingual-award img{
+	max-width: 123px;
+}
 
 .news_and_events .introduction-image{
 	margin-left: -1em;

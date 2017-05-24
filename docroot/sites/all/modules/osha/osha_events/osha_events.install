@@ -144,3 +144,17 @@ function osha_events_update_7010() {
 function osha_events_update_7011() {
   features_revert_module('osha_events');
 }
+
+/**
+ * Revert osha_events - MDR-1165 and MDR-1096.
+ */
+function osha_events_update_7012() {
+  features_revert_module('osha_events');
+}
+
+/**
+ * Revert osha_events - MDR-1165
+ */
+function osha_events_update_7013() {
+  features_revert_module('osha_events');
+}

@@ -616,6 +616,10 @@ padding-left: 1em;
 	 z-index:999999;
 	 position:relative;
 }
+#multi-lingual-award{
+	float: left;
+	margin-top: -11px;
+}
 
 .contextual-links-region{
 	position:initial;
@@ -9117,6 +9121,13 @@ body.page-entity-collection h1#page-title{
 	}
 	.fixedHeader #europeLogo img{
 	    width: 50px;
+	}
+	.fixedHeader #multi-lingual-award{
+		margin-top: 8px;
+		margin-left: 10px;
+	}
+	.fixedHeader #multi-lingual-award img{
+		max-width: 140px;
 	}
 
 	.fixedHeader #block-menu-block-1{

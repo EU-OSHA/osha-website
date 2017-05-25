@@ -336,6 +336,7 @@ features[views_view][] = data_export
 features[views_view][] = file_content_report
 features[views_view][] = hcw_data_export
 features[views_view][] = hcw_taxonomy_export
+features[views_view][] = hwc_audio_visual_export
 features[wysiwyg][] = filtered_html
 features[wysiwyg][] = full_html
 features[wysiwyg][] = plain_text

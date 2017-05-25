@@ -1143,6 +1143,22 @@ function osha_export_node($node) {
   $node->path = path_load('node/' . $node->nid);
   foreach(array_keys($fields) as $field_name) {
     $info = field_info_field($field_name);
+
+    if ($info['type'] == 'field_collection') {
+      $node->$field_name = $w->$field_name->value();
+
+      $collection_fields = field_info_instances('field_collection_item', $info['field_name']);
+      foreach($node->$field_name as &$field_collection_item) {
+        $cw = entity_metadata_wrapper('field_collection_item', $field_collection_item);
+        foreach(array_keys($collection_fields) as $collection_field_name) {
+          $collection_info = field_info_field($collection_field_name);
+          if ($collection_info['type'] == 'taxonomy_term_reference') {
+            $field_collection_item->$collection_field_name = $cw->$collection_field_name->value();
+          }
+        }
+      }
+    }
+
     if ($info['type'] == 'taxonomy_term_reference') {
       $node->$field_name = $w->$field_name->value();
     }

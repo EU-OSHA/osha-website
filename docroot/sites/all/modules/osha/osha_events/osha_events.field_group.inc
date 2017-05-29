@@ -59,6 +59,7 @@ function osha_events_field_group_info() {
       1 => 'field_country_code',
       2 => 'field_organization',
       3 => 'field_start_date',
+      4 => 'field_location',
     ),
     'format_type' => 'div',
     'format_settings' => array(

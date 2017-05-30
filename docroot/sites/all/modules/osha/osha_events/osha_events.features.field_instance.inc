@@ -591,7 +591,7 @@ function osha_events_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_city',
     'label' => 'City',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'linkit' => array(
@@ -818,7 +818,7 @@ Grey - Only web or not attendance',
     'entity_type' => 'node',
     'field_name' => 'field_country_code',
     'label' => 'Country',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,

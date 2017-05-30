@@ -131,6 +131,10 @@ function _osha_dangerous_substances_form_after_build($form, $form_state) {
   $_other = _osha_dangerous_substances_get_other_tid($form, 'field_available_in_languages');
   $form['field_languages_other']['#states'] = ['visible'=>[ '#edit-field-available-in-languages-und' => ['value' => [$_other]] ] ];
 
+  // Original languages other
+  $_orig_other = _osha_dangerous_substances_get_other_tid($form, 'field_original_desc_language');
+  $form['field_original_desc_lang_other']['#states'] = ['visible'=>[ '#edit-field-original-desc-language-und' => ['value' => [$_orig_other]] ] ];
+
   // Sector / Industry covered other todo not sure if needed
   $_other = _osha_dangerous_substances_get_other_tid($form, 'field_sector_industry_covered');
   $form['field_sector_industry_other']['#states'] = ['visible'=>[ '#edit-field-sector-industry-covered-und' => ['value' => [$_other]] ] ];

@@ -84,3 +84,12 @@ function osha_dangerous_substances_update_7004() {
   search_api_index_reindex('default_content_index');
   features_revert_module(['osha_dangerous_substances']);
 }
+
+/**
+ * New DS facets
+ */
+function osha_dangerous_substances_update_7005() {
+  features_revert_module('osha_dangerous_substances');
+  search_api_index_reindex('default_content_index');
+  features_revert_module(['osha_dangerous_substances']);
+}

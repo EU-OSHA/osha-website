@@ -54,6 +54,14 @@ function osha_dangerous_substances_filter_process_format($element) {
 }
 
 function osha_dangerous_substances_facet_items_alter(&$build, &$settings) {
+  if ($settings->facet == "field_summary") {
+    if (isset($build[1])) {
+      unset($build[1]);
+    }
+    if (isset($build['!'])) {
+      $build['!']['#markup'] = t('Empty description');
+    }
+  }
   if ($settings->facet == "field_available_in_languages:value") {
     $list = language_list();
     foreach ($build as $lang => $item) {

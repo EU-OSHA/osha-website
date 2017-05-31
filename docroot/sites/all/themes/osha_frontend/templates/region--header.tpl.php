@@ -16,4 +16,5 @@
 </div>
 <div id="agencyLogo"><a href="<?php echo url('<front>');?>"><img src="/sites/all/themes/osha_frontend/images/eu-osha-logo/EU-OSHA-<?php global $language;print (in_array($language->language, osha_enabled_language_list()))?$language->language:'en';?>.png" alt="<?php echo t('European Agency for Safety and Health at Work');?>"></a></div>
 <div id="europeLogo"><img src="/sites/all/themes/osha_frontend/images/europeLogo.png" alt="Europe Flag"></div>
+<div id="multi-lingual-award"><a href="/blog/managing-multilingual-websites-example-good-practic"><img src="/sites/all/themes/osha_frontend/images/multi-lingual-award.jpg" alt="multi lingual award"></a></div>
 <?php print render($content); ?>

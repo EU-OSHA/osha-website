@@ -27,9 +27,13 @@ function osha_events_views_default_views() {
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
+    7 => '7',
+    11 => '11',
+    4 => '4',
     12 => '12',
     13 => '13',
     6 => '6',
+    5 => '5',
   );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -1102,6 +1106,32 @@ function osha_events_views_default_views() {
       ),
     ),
   );
+  /* Filter criterion: Content: For the web (field_for_the_web) */
+  $handler->display->display_options['filters']['field_for_the_web_value']['id'] = 'field_for_the_web_value';
+  $handler->display->display_options['filters']['field_for_the_web_value']['table'] = 'field_data_field_for_the_web';
+  $handler->display->display_options['filters']['field_for_the_web_value']['field'] = 'field_for_the_web_value';
+  $handler->display->display_options['filters']['field_for_the_web_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_for_the_web_value']['expose']['operator_id'] = 'field_for_the_web_value_op';
+  $handler->display->display_options['filters']['field_for_the_web_value']['expose']['label'] = 'For the web';
+  $handler->display->display_options['filters']['field_for_the_web_value']['expose']['operator'] = 'field_for_the_web_value_op';
+  $handler->display->display_options['filters']['field_for_the_web_value']['expose']['identifier'] = 'field_for_the_web_value';
+  $handler->display->display_options['filters']['field_for_the_web_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    14 => 0,
+  );
+  $handler->display->display_options['filters']['field_for_the_web_value']['reduce_duplicates'] = TRUE;
   $handler->display->display_options['path'] = 'admin/content/events';
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Events';

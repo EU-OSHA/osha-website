@@ -957,8 +957,8 @@ function osha_dangerous_substances_field_default_field_bases() {
       'excluded_languages' => array(),
       'format' => array(
         'iso' => 0,
-        'name' => 'name',
-        'name_native' => 0,
+        'name' => 0,
+        'name_native' => 'name_native',
       ),
       'groups' => '',
       'languages' => array(),

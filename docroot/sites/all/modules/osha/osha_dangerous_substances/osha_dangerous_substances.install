@@ -113,3 +113,10 @@ function osha_dangerous_substances_update_7006() {
     }
   }
 }
+
+/**
+ * Original description language format changes
+ */
+function osha_dangerous_substances_update_7007() {
+  features_revert_module(['osha_dangerous_substances']);
+}

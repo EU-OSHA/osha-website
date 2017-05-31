@@ -3142,7 +3142,7 @@ please take this into consideration when you are writing the first paragraph.',
     'entity_type' => 'node',
     'field_name' => 'field_original_desc_language',
     'label' => 'Original description language',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,

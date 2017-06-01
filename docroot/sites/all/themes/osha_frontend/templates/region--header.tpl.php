@@ -15,7 +15,7 @@
 	</div>
 </div>
 <?php
-$url = url(drupal_get_path_alias('node/11000',$language->language;));
+$url = url(drupal_get_path_alias('node/11000',$language->language));
 ?>
 
 <div id="agencyLogo"><a href="<?php echo url('<front>');?>"><img src="/sites/all/themes/osha_frontend/images/eu-osha-logo/EU-OSHA-<?php global $language;print (in_array($language->language, osha_enabled_language_list()))?$language->language:'en';?>.png" alt="<?php echo t('European Agency for Safety and Health at Work');?>"></a></div>

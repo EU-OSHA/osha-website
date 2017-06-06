@@ -104,7 +104,6 @@ features[fe_block_settings][] = facetapi-IYa3MaKFlkyse14WFx7NJeh0UFyNO1ME
 features[fe_block_settings][] = facetapi-JCAloFsFwfdccn5MMohljujWHi0XstK2
 features[fe_block_settings][] = facetapi-MPqoXuOuz0fmroAKqjXzkquyaSJkOgDa
 features[fe_block_settings][] = facetapi-SP2vjV6LCqa4JeUtyONVT0T5rb6s6UHK
-features[fe_block_settings][] = facetapi-kWygBO5I2WrzvhDcJpzFtfGjkGuBoB3L
 features[fe_block_settings][] = facetapi-kpQcK2o2khSmGT6LYyukJc5NO1t2anJ0
 features[fe_block_settings][] = facetapi-p10ryKQWozY46EFH6tpu31b5W8YN9C4N
 features[features_api][] = api:2

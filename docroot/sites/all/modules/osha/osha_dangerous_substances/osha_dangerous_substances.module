@@ -78,7 +78,12 @@ function osha_dangerous_substances_facet_items_alter(&$build, &$settings) {
  * Implements hook_form_alter().
  */
 function osha_dangerous_substances_form_alter(&$form, &$form_state, $form_id) {
-  global $user;
+  if ($form_id == 'views_exposed_form') {
+    $form['description']['#title'] = t('Empty description');
+    $form['description']['#type'] = 'checkbox';
+    $form['description']['#return_value'] = 1;
+  }
+
   if ($form_id == 'dangerous_substances_node_form') {
     //    if (!in_array('administrator', array_values($user->roles))) {
     //      $form['field_priority_area']['#access'] = FALSE;
@@ -199,6 +204,12 @@ function osha_dangerous_substances_search_api_solr_query_alter(array &$call_args
   if (arg(1) == 'dangerous-substances') {
     $sort_order = strtolower(@$_REQUEST['sort_order']);
     $sort_by    = strtolower(@$_REQUEST['sort_by']);
+
+  foreach($call_args['params']['fq'] as $k => $v) {
+    if (strpos('.' . $v, 'bs_status:') && $k) {
+      $call_args['params']['fq'][$k] = '{!tag=facet:field_summary}*:* AND -bs_field_summary:[* TO *]';
+    }
+  }
     if ($sort_by) {
       $call_args['params']['sort'] = 'ds_field_publication_year ';
       if ($sort_by == 'search_api_relevance') {

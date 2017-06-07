@@ -106,6 +106,7 @@ features[fe_block_settings][] = facetapi-MPqoXuOuz0fmroAKqjXzkquyaSJkOgDa
 features[fe_block_settings][] = facetapi-SP2vjV6LCqa4JeUtyONVT0T5rb6s6UHK
 features[fe_block_settings][] = facetapi-kpQcK2o2khSmGT6LYyukJc5NO1t2anJ0
 features[fe_block_settings][] = facetapi-p10ryKQWozY46EFH6tpu31b5W8YN9C4N
+features[fe_block_settings][] = facetapi-vGpv1bladQLEbkSGbciP14maVpKEW8z6
 features[features_api][] = api:2
 features[field_base][] = field_advertising
 features[field_base][] = field_biological_hazard

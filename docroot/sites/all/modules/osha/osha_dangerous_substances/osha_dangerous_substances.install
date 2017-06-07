@@ -127,3 +127,10 @@ function osha_dangerous_substances_update_7007() {
 function osha_dangerous_substances_update_7008() {
   features_revert_module(['osha_dangerous_substances']);
 }
+
+/**
+ * Author filter
+ */
+function osha_dangerous_substances_update_7009() {
+  features_revert_module(['osha_dangerous_substances']);
+}

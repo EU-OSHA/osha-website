@@ -84,3 +84,53 @@ function osha_dangerous_substances_update_7004() {
   search_api_index_reindex('default_content_index');
   features_revert_module(['osha_dangerous_substances']);
 }
+
+/**
+ * New DS facets
+ */
+function osha_dangerous_substances_update_7005() {
+  features_revert_module('osha_dangerous_substances');
+  search_api_index_reindex('default_content_index');
+  features_revert_module(['osha_dangerous_substances']);
+}
+
+/**
+ * Add Original description language other field with Available in languages values other.
+ */
+function osha_dangerous_substances_update_7006() {
+  features_revert_module(['osha_dangerous_substances']);
+  $query = new EntityFieldQuery;
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'dangerous_substances');
+  $results = $query->execute();
+  if (!empty($results['node'])) {
+    foreach (array_keys($results['node']) as $nid) {
+      $node = node_load($nid);
+      if ($node->field_languages_other) {
+        $node->field_original_desc_lang_other = $node->field_languages_other;
+        node_save($node);
+      }
+    }
+  }
+}
+
+/**
+ * Original description language format changes
+ */
+function osha_dangerous_substances_update_7007() {
+  features_revert_module(['osha_dangerous_substances']);
+}
+
+/**
+ * Original description language format changes
+ */
+function osha_dangerous_substances_update_7008() {
+  features_revert_module(['osha_dangerous_substances']);
+}
+
+/**
+ * Author filter
+ */
+function osha_dangerous_substances_update_7009() {
+  features_revert_module(['osha_dangerous_substances']);
+}

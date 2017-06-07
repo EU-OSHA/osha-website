@@ -2,8 +2,7 @@
  * Use 3 grid columns for smaller screens.
  */
 
-@media screen
-and (max-width: 1006px) {
+@media screen and (max-width: 1006px) {
 
 body {
     background: none repeat scroll 0 0 #FFFFFF!important;	
@@ -1959,6 +1958,38 @@ a {
 
 .page-search-site .two_column .views-exposed-widgets .views-widget-sort-order{
 	margin-left: 30px;
+}
+
+#dangerous-substances-search{
+	padding-right: 15px;
+	padding-left: 15px;
+	padding-top: 20px !important;
+}
+
+#dangerous-substances-search > div{
+	float: none !important;
+	display: inline !important;
+	padding: 0px !important;
+	width: inherit !important;
+
+}
+#dangerous-substances-search > div #edit-text,
+#dangerous-substances-search > div > select{
+	max-width: 280px;
+	width: 90% !important;
+
+}
+#dangerous-substances-search #checkboxes-wrapper{
+	position: relative !important;
+	bottom: 0px !important;
+}
+#dangerous-substances-search #edit-submit-dangerous-substances-overview{
+	position: absolute;
+	top: 45px;
+	left: 80px;
+}
+#dangerous-substances-search #checkboxes-wrapper select.form-item-sort-by label{
+	margin-top: 10px !important;
 }
 
 

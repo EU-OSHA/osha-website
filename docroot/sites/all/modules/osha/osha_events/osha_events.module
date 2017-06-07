@@ -85,20 +85,22 @@ function osha_events_form_validate($form, &$form_state) {
   // When publishing an event, some fields are required.
   $values = $form_state['values'];
   $node = $form_state['node'];
+  $type = $values['field_event_type'][LANGUAGE_NONE][0]['value'];
   if ($values['status'] == 1) {
-    $type = $values['field_event_type'][LANGUAGE_NONE][0]['value'];
     if (empty($type) || $type == 'Visit') {
       form_set_error('field_event_type', 'Events of type <b>Visit</b> can not be published');
     }
     // if (empty($values['body'][$node->language][0]['value'])) {
     //   form_set_error('body', 'You have to add a Description.');
     // }
+    /* MDR-1142
     if (empty($values['field_start_date'][LANGUAGE_NONE][0]['value'])) {
       form_set_error('field_start_date', 'You have to add a Start Date.');
     }
     if (empty($values['field_start_date'][LANGUAGE_NONE][0]['value2'])) {
       form_set_error('field_start_date', 'You have to add an End Date .');
     }
+    */
     /* Disabled since MC-9
     if (empty($values['field_website_of_event'][LANGUAGE_NONE][0]['title'])) {
       form_set_error('field_website_of_event', 'You have to add a Web site name.');
@@ -111,26 +113,29 @@ function osha_events_form_validate($form, &$form_state) {
       form_set_error('field_organization', 'You have to add an Organization.');
     }
 
-    // Country and city are not required for webminar events.
-    if ($type != 'Webminar') {
-      if (empty($values['field_country_code'][LANGUAGE_NONE][0]['value'])) {
-        form_set_error('field_country_code', 'You have to add a Country Code.');
-      }
-      if (empty($values['field_city'][LANGUAGE_NONE][0]['value'])) {
-        form_set_error('field_city', 'You have to add a City.');
-      }
-    }
-    else {
-      // Country and city fields need to be NULL for webminar events so that
-      // they will not show in frontend.
-      $form_state['values']['field_country_code'][LANGUAGE_NONE][0]['value'] = $form_state['values']['field_city'][LANGUAGE_NONE][0]['value'] = NULL;
+    if (empty($values['field_tags'][LANGUAGE_NONE][0]['tid'])) {
+      form_set_error('field_tags', 'You have to add a Category / Tag.');
     }
 
-    if (empty($values['field_tags'][LANGUAGE_NONE][0]['tid'])) {
-      form_set_error('field_tags', 'You have to add a Category.');
-    }
     if ($values['field_for_the_web'][LANGUAGE_NONE][0]['value'] != 'Yes') {
-      form_set_error('field_for_the_web', 'Event is not for web publishing. To override, set field "For the web" to "Yes".');
+      form_set_error('field_for_the_web', 'Event is not for web publishing. To override, set field "For the web / Public" to "Yes".');
+    }
+  }
+
+  // Country and city are not required for webminar events.
+  if ($type == 'Webminar') {
+    // Country and city fields need to be NULL for webminar events so that
+    // they will not show in frontend.
+    form_set_error('field_city', '', array());
+    form_set_error('field_country_code', '', array());
+    $form_state['values']['field_country_code'][LANGUAGE_NONE][0]['value'] = $form_state['values']['field_city'][LANGUAGE_NONE][0]['value'] = NULL;
+  }
+  else {
+    if (empty($values['field_country_code'][LANGUAGE_NONE][0]['value'])) {
+      form_set_error('field_country_code', 'Country field is required.');
+    }
+    if (empty($values['field_city'][LANGUAGE_NONE][0]['value'])) {
+      form_set_error('field_city', 'City field is required.');
     }
   }
 

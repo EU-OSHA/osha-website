@@ -452,3 +452,10 @@ function osha_update_7025() {
 function osha_update_7026() {
   module_enable(['csrf_checks']);
 }
+
+/**
+ * Enable export dangerous_substances nodes view
+ */
+function osha_update_7027() {
+  features_revert_module('osha');
+}

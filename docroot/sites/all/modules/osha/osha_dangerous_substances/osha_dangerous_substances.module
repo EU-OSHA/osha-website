@@ -54,6 +54,14 @@ function osha_dangerous_substances_filter_process_format($element) {
 }
 
 function osha_dangerous_substances_facet_items_alter(&$build, &$settings) {
+  if ($settings->facet == "field_summary") {
+    if (isset($build[1])) {
+      unset($build[1]);
+    }
+    if (isset($build['!'])) {
+      $build['!']['#markup'] = t('Empty description');
+    }
+  }
   if ($settings->facet == "field_available_in_languages:value") {
     $list = language_list();
     foreach ($build as $lang => $item) {
@@ -70,12 +78,18 @@ function osha_dangerous_substances_facet_items_alter(&$build, &$settings) {
  * Implements hook_form_alter().
  */
 function osha_dangerous_substances_form_alter(&$form, &$form_state, $form_id) {
-  global $user;
+  if ($form_id == 'views_exposed_form') {
+    $form['description']['#title'] = t('Empty description');
+    $form['description']['#type'] = 'checkbox';
+    $form['description']['#return_value'] = 1;
+  }
+
   if ($form_id == 'dangerous_substances_node_form') {
     //    if (!in_array('administrator', array_values($user->roles))) {
     //      $form['field_priority_area']['#access'] = FALSE;
     //    }
     $form['field_available_in_languages'][LANGUAGE_NONE]['#options'] = osha_sort_language_list($form['field_available_in_languages'][LANGUAGE_NONE]['#options']);
+    $form['field_original_desc_language'][LANGUAGE_NONE]['#options'] = osha_sort_language_list($form['field_original_desc_language'][LANGUAGE_NONE]['#options']);
 
     //drupal_add_js(drupal_get_path('module', 'osha_dangerous_substances') . '/js/osha_dangerous_substances.js');
     if (!isset($form['#after_build'])) {
@@ -122,6 +136,10 @@ function _osha_dangerous_substances_form_after_build($form, $form_state) {
   // Languages other
   $_other = _osha_dangerous_substances_get_other_tid($form, 'field_available_in_languages');
   $form['field_languages_other']['#states'] = ['visible'=>[ '#edit-field-available-in-languages-und' => ['value' => [$_other]] ] ];
+
+  // Original languages other
+  $_orig_other = _osha_dangerous_substances_get_other_tid($form, 'field_original_desc_language');
+  $form['field_original_desc_lang_other']['#states'] = ['visible'=>[ '#edit-field-original-desc-language-und' => ['value' => [$_orig_other]] ] ];
 
   // Sector / Industry covered other todo not sure if needed
   $_other = _osha_dangerous_substances_get_other_tid($form, 'field_sector_industry_covered');
@@ -186,6 +204,12 @@ function osha_dangerous_substances_search_api_solr_query_alter(array &$call_args
   if (arg(1) == 'dangerous-substances') {
     $sort_order = strtolower(@$_REQUEST['sort_order']);
     $sort_by    = strtolower(@$_REQUEST['sort_by']);
+
+  foreach($call_args['params']['fq'] as $k => $v) {
+    if (strpos('.' . $v, 'bs_status:') && $k) {
+      $call_args['params']['fq'][$k] = '{!tag=facet:field_summary}*:* AND -bs_field_summary:[* TO *]';
+    }
+  }
     if ($sort_by) {
       $call_args['params']['sort'] = 'ds_field_publication_year ';
       if ($sort_by == 'search_api_relevance') {

@@ -1178,9 +1178,7 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['query']['options']['search_api_bypass_access'] = 0;
   $handler->display->display_options['query']['options']['parse_mode'] = 'direct';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
   $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
-  $handler->display->display_options['exposed_form']['options']['autosubmit_hide'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '7';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -1268,6 +1266,36 @@ function osha_dangerous_substances_views_default_views() {
     'Audiovisual' => 'Audiovisual',
     'Case study' => 'Case study',
   );
+  /* Filter criterion: Indexed Content: Status */
+  $handler->display->display_options['filters']['status_1']['id'] = 'status_1';
+  $handler->display->display_options['filters']['status_1']['table'] = 'search_api_index_default_content_index';
+  $handler->display->display_options['filters']['status_1']['field'] = 'status';
+  $handler->display->display_options['filters']['status_1']['value'] = array(
+    1 => '1',
+    0 => '0',
+  );
+  $handler->display->display_options['filters']['status_1']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['status_1']['expose']['operator_id'] = 'status_1_op';
+  $handler->display->display_options['filters']['status_1']['expose']['label'] = 'Status';
+  $handler->display->display_options['filters']['status_1']['expose']['operator'] = 'status_1_op';
+  $handler->display->display_options['filters']['status_1']['expose']['identifier'] = 'description';
+  $handler->display->display_options['filters']['status_1']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    14 => 0,
+  );
+  $handler->display->display_options['filters']['status_1']['expose']['reduce'] = 0;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -1276,7 +1304,7 @@ function osha_dangerous_substances_views_default_views() {
     t('Master'),
     t('Dangerous substances'),
     t('more'),
-    t('Search'),
+    t('Apply'),
     t('Reset'),
     t('Sort by'),
     t('Asc'),
@@ -1292,6 +1320,8 @@ function osha_dangerous_substances_views_default_views() {
     t('Broken handler search_api_index_default_content_index.search_api_et_id'),
     t('Publication year'),
     t('Relevance'),
+    t('Search'),
+    t('Status'),
     t('Page'),
   );
   $export['dangerous_substances_overview'] = $view;

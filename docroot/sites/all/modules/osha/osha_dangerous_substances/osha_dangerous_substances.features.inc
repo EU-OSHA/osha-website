@@ -98,6 +98,7 @@ function osha_dangerous_substances_default_search_api_index() {
         "field_publication_year" : { "type" : "date" },
         "field_rights_description" : { "type" : "text" },
         "field_sector_industry_covered" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_summary" : { "type" : "boolean" },
         "field_target_group" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_tasks_covered" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_tasks_other" : { "type" : "text" },

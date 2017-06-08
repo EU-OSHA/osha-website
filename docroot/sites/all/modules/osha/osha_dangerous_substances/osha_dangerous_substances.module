@@ -78,7 +78,7 @@ function osha_dangerous_substances_facet_items_alter(&$build, &$settings) {
  * Implements hook_form_alter().
  */
 function osha_dangerous_substances_form_alter(&$form, &$form_state, $form_id) {
-  if ($form_id == 'views_exposed_form') {
+  if ($form_id == 'views_exposed_form' && $form['#id']=='views-exposed-form-dangerous-substances-overview-page') {
     $form['description']['#title'] = t('Empty description');
     $form['description']['#type'] = 'checkbox';
     $form['description']['#return_value'] = 1;

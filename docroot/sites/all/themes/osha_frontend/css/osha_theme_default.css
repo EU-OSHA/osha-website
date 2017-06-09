@@ -9373,3 +9373,9 @@ body.page-entity-collection .newsletter-container {
 #share-popup-container .share-widget-container .osha-share-widget .osha-share-widget-print a {
 	background-image: url("../images/share-popup/print_icon.png")!important;
 }
+
+/*osha events type*/
+.section-oshevents .node-events .group-events-event-details .field-label{
+	font-weight: normal !important;
+	text-transform: uppercase !important;
+}

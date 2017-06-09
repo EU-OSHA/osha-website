@@ -2246,16 +2246,15 @@ function osha_events_views_default_views() {
   $handler->display->display_options['fields']['field_country_code']['id'] = 'field_country_code';
   $handler->display->display_options['fields']['field_country_code']['table'] = 'field_data_field_country_code';
   $handler->display->display_options['fields']['field_country_code']['field'] = 'field_country_code';
-  $handler->display->display_options['fields']['field_country_code']['label'] = 'LOCATION';
+  $handler->display->display_options['fields']['field_country_code']['label'] = 'COUNTRY';
   $handler->display->display_options['fields']['field_country_code']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_country_code']['alter']['text'] = '[field_country_code], ';
+  $handler->display->display_options['fields']['field_country_code']['alter']['text'] = '[field_country_code]';
   $handler->display->display_options['fields']['field_country_code']['hide_empty'] = TRUE;
   /* Field: Content: City */
   $handler->display->display_options['fields']['field_city']['id'] = 'field_city';
   $handler->display->display_options['fields']['field_city']['table'] = 'field_data_field_city';
   $handler->display->display_options['fields']['field_city']['field'] = 'field_city';
-  $handler->display->display_options['fields']['field_city']['label'] = '';
-  $handler->display->display_options['fields']['field_city']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_city']['label'] = 'CITY';
   $handler->display->display_options['fields']['field_city']['hide_empty'] = TRUE;
   /* Field: Content: Organization */
   $handler->display->display_options['fields']['field_organization']['id'] = 'field_organization';
@@ -2363,32 +2362,6 @@ function osha_events_views_default_views() {
     12 => 0,
     13 => 0,
   );
-  /* Filter criterion: Content: City (field_city) */
-  $handler->display->display_options['filters']['field_city_value']['id'] = 'field_city_value';
-  $handler->display->display_options['filters']['field_city_value']['table'] = 'field_data_field_city';
-  $handler->display->display_options['filters']['field_city_value']['field'] = 'field_city_value';
-  $handler->display->display_options['filters']['field_city_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_city_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_city_value']['expose']['operator_id'] = 'field_city_value_op';
-  $handler->display->display_options['filters']['field_city_value']['expose']['label'] = 'Search by city';
-  $handler->display->display_options['filters']['field_city_value']['expose']['operator'] = 'field_city_value_op';
-  $handler->display->display_options['filters']['field_city_value']['expose']['identifier'] = 'field_city_value';
-  $handler->display->display_options['filters']['field_city_value']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-    4 => 0,
-    5 => 0,
-    6 => 0,
-    7 => 0,
-    8 => 0,
-    9 => 0,
-    10 => 0,
-    11 => 0,
-    12 => 0,
-    13 => 0,
-    14 => 0,
-  );
   /* Filter criterion: Content: Date -  start date (field_start_date) */
   $handler->display->display_options['filters']['field_start_date_value']['id'] = 'field_start_date_value';
   $handler->display->display_options['filters']['field_start_date_value']['table'] = 'field_data_field_start_date';
@@ -2482,13 +2455,13 @@ function osha_events_views_default_views() {
     t('<div class="view-empty">No results</div>'),
     t('[field_start_date-value] - [field_start_date-value2]'),
     t('[field_start_date] - [field_start_date_1]'),
-    t('LOCATION'),
-    t('[field_country_code], '),
+    t('COUNTRY'),
+    t('[field_country_code]'),
+    t('CITY'),
     t('ORGANIZER'),
     t('See details'),
     t('[field_start_date_2] - Events'),
     t('Search by country'),
-    t('Search by city'),
     t('From date'),
     t('To date'),
     t('Page'),

@@ -179,3 +179,10 @@ function osha_events_update_7015() {
 function osha_events_update_7016() {
   features_revert_module('osha_events');
 }
+
+/**
+ * Revert osha_events - MDR-1231 - city and country field
+ */
+function osha_events_update_7017() {
+  features_revert_module('osha_events');
+}

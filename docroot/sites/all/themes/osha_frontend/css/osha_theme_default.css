@@ -5500,7 +5500,7 @@ a.tabs-primary__tab-link{
 	display: inline-block;
 }
 
-.view-oshevents .views-field-field-city{
+.view-oshevents .views-field-field-city .field-content{
 	display: inline-block;
 }
 

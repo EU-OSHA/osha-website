@@ -2363,6 +2363,32 @@ function osha_events_views_default_views() {
     12 => 0,
     13 => 0,
   );
+  /* Filter criterion: Content: City (field_city) */
+  $handler->display->display_options['filters']['field_city_value']['id'] = 'field_city_value';
+  $handler->display->display_options['filters']['field_city_value']['table'] = 'field_data_field_city';
+  $handler->display->display_options['filters']['field_city_value']['field'] = 'field_city_value';
+  $handler->display->display_options['filters']['field_city_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_city_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_city_value']['expose']['operator_id'] = 'field_city_value_op';
+  $handler->display->display_options['filters']['field_city_value']['expose']['label'] = 'Search by city';
+  $handler->display->display_options['filters']['field_city_value']['expose']['operator'] = 'field_city_value_op';
+  $handler->display->display_options['filters']['field_city_value']['expose']['identifier'] = 'field_city_value';
+  $handler->display->display_options['filters']['field_city_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    14 => 0,
+  );
   /* Filter criterion: Content: Date -  start date (field_start_date) */
   $handler->display->display_options['filters']['field_start_date_value']['id'] = 'field_start_date_value';
   $handler->display->display_options['filters']['field_start_date_value']['table'] = 'field_data_field_start_date';
@@ -2462,6 +2488,7 @@ function osha_events_views_default_views() {
     t('See details'),
     t('[field_start_date_2] - Events'),
     t('Search by country'),
+    t('Search by city'),
     t('From date'),
     t('To date'),
     t('Page'),

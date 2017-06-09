@@ -1,7 +1,7 @@
 name = OSHA Events
 core = 7.x
 package = OSHA
-version = 7.x-1.8
+version = 7.x-1.9
 project = osha_events
 dependencies[] = entity
 dependencies[] = field_group

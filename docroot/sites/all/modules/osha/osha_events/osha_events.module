@@ -54,6 +54,34 @@ function osha_events_form_alter(&$form, &$form_state, $form_id) {
       break;
 
     case 'views_exposed_form':
+      if (in_array($form['#id'], array('views-exposed-form-oshevents-page'))) {
+
+        $query = db_select('field_data_field_city', 'c');
+        $query->fields('c', array('field_city_value'));
+
+        $query->join('node', 'n', 'n.nid = c.entity_id');
+        $query->join('field_data_field_start_date', 'sd', 'n.nid = sd.entity_id');
+        $query->leftJoin('field_data_field_publication_date', 'pd', 'n.nid = pd.entity_id');
+
+        $query->condition('n.status', 1);
+        $query->condition('n.type', 'events');
+        $query->condition('sd.field_start_date_value', date('Y-m-d'), '>=');
+        $or = db_or();
+        $or->condition('pd.field_publication_date_value', date('Y-m-d'), '<=');
+        $or->condition('pd.field_publication_date_value', NULL, 'IS NULL');
+        $query->condition($or);
+
+        $cities = $query->execute()->fetchAllKeyed(0, 0);
+        if ($cities) {
+          $cities[''] = t('- Any -');
+          ksort($cities);
+        }
+        $form['field_city_value']['#type'] = 'select';
+        $form['field_city_value']['#multiple'] = FALSE;
+        $form['field_city_value']['#options'] = $cities;
+        $form['field_city_value']['#attributes'] = array('class' => array('chosen', 'chosen-widget'));
+      }
+
       if (in_array($form['#id'], array('views-exposed-form-events-page'))) {
         // Set default date for popup on end date when start date is selected.
         $form['field_start_date_value2']['value']['#attached']['js'] = array(

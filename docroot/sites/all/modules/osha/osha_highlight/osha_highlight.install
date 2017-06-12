@@ -43,3 +43,10 @@ function osha_highlight_update_7002() {
     }
   }
 }
+
+/**
+ * Revert highlight module.
+ */
+function osha_highlight_update_7003() {
+  features_revert_module('osha_highlight');
+}

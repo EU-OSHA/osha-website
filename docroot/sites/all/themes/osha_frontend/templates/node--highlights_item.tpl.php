@@ -161,7 +161,7 @@ if (!empty($campaign_id)) {
                   </tr>
                   <?php if(empty($node->old_newsletter)) { ?>
                     <tr>
-                      <td style="font-family: Oswald, Arial, sans-serif;">
+                      <td style="font-family: Oswald, Arial, sans-serif; padding-top: 10px;">
                         <?php
                           $more_link_class = 'see-more';
                           if ($node->type == 'publication') {
@@ -189,7 +189,7 @@ if (!empty($campaign_id)) {
                         ?>
 
                       </td>
-                      <td align="right" valign="middle" style="font-family: Oswald, Arial, sans-serif;">
+                      <td align="right" valign="middle" style="font-family: Oswald, Arial, sans-serif; padding-top: 10px;">
                         <?php
                         print l(theme('image', array(
                           'path' => $directory . '/images/' . 'share-icon.png',

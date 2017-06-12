@@ -1,0 +1,12 @@
+diff --git a/tweet_feed.module b/tweet_feed.module
+index d1074b1c6..b45c2d9bf 100644
+--- a/tweet_feed.module
++++ b/tweet_feed.module
+@@ -420,6 +420,7 @@ function tweet_feed_pull_data_from_feed($fid, $web_interface = FALSE) {
+           $params['max_id'] = $lowest_id;
+         }
+ 
++        $params['include_rts'] = FALSE;
+         $tdata = json_decode(
+           $con->oAuthRequest(
+             'https://api.twitter.com/1.1/statuses/user_timeline.json',

@@ -186,3 +186,10 @@ function osha_events_update_7016() {
 function osha_events_update_7017() {
   features_revert_module('osha_events');
 }
+
+/**
+ * Revert osha_events - MDR-1142 - update oshevents view - add location field
+ */
+function osha_events_update_7018() {
+  features_revert_module('osha_events');
+}

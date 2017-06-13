@@ -75,6 +75,11 @@ function osha_events_form_alter(&$form, &$form_state, $form_id) {
  */
 function osha_events_node_form_after_build($form, &$form_state) {
   drupal_add_js(drupal_get_path('module', 'osha_events') . '/js/event_form.js');
+
+  if ($form_state['values']['status'] == 1) {
+    drupal_add_js(drupal_get_path('module', 'osha_events') . '/js/published_event_form.js');
+  }
+
   return $form;
 }
 

@@ -206,6 +206,12 @@ function osha_dangerous_substances_search_api_solr_query_alter(array &$call_args
     $sort_by    = strtolower(@$_REQUEST['sort_by']);
 
   foreach($call_args['params']['fq'] as $k => $v) {
+      if (strpos('.' . $v, 'sm_search_api_access_node:') && $k) {
+        continue;
+      }
+      if (strpos('.' . $v, 'bs_status:"true") OR (is_author') && $k) {
+        continue;
+      }
     if (strpos('.' . $v, 'bs_status:') && $k) {
       $call_args['params']['fq'][$k] = '{!tag=facet:field_summary}*:* AND -bs_field_summary:[* TO *]';
     }

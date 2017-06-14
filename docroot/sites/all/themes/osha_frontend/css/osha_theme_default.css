@@ -5500,7 +5500,7 @@ a.tabs-primary__tab-link{
 	display: inline-block;
 }
 
-.view-oshevents .views-field-field-city{
+.view-oshevents .views-field-field-city .field-content{
 	display: inline-block;
 }
 
@@ -8953,12 +8953,15 @@ body.page-entity-collection h1#page-title{
 .two_column.dangerous-substances-search-list.form-wrapper #dangerous-substances-search div {
 	float: left;
 	padding-right: 10px;
-	margin-top: -22px;
+	margin-top: -24px;
 	padding-bottom: 6px;
 	width: 186px;
 	padding-right: 33px;
 }
-
+.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search #checkboxes-wrapper{
+	position: absolute;
+	bottom: 6px;
+}
 .view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search label,
 .two_column.dangerous-substances-search-list.form-wrapper #dangerous-substances-search label{
 	color: #003399 !important;
@@ -8981,8 +8984,9 @@ body.page-entity-collection h1#page-title{
 	background: url("../images/separator_home.jpg") 100% 100% repeat-x;
 	margin-top: 0;
 	width: 100%;
-	padding-bottom: 20px;
-	padding-top: 56px;
+	padding-bottom: 33px;
+	padding-top: 50px;
+	position: relative;
 }
 
 .view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search .form-item-sort-by,
@@ -9368,4 +9372,10 @@ body.page-entity-collection .newsletter-container {
 }
 #share-popup-container .share-widget-container .osha-share-widget .osha-share-widget-print a {
 	background-image: url("../images/share-popup/print_icon.png")!important;
+}
+
+/*osha events type*/
+.section-oshevents .node-events .group-events-event-details .field-label{
+	font-weight: normal !important;
+	text-transform: uppercase !important;
 }

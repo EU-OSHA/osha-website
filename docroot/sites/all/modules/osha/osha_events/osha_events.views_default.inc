@@ -54,7 +54,7 @@ function osha_events_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Content: For the web */
+  /* Field: Content: For the web / Public */
   $handler->display->display_options['fields']['field_for_the_web']['id'] = 'field_for_the_web';
   $handler->display->display_options['fields']['field_for_the_web']['table'] = 'field_data_field_for_the_web';
   $handler->display->display_options['fields']['field_for_the_web']['field'] = 'field_for_the_web';
@@ -462,7 +462,7 @@ function osha_events_views_default_views() {
     'title_class' => '',
   );
   $handler->display->display_options['fields']['title_field']['link_to_entity'] = 0;
-  /* Field: Content: For the web */
+  /* Field: Content: For the web / Public */
   $handler->display->display_options['fields']['field_for_the_web']['id'] = 'field_for_the_web';
   $handler->display->display_options['fields']['field_for_the_web']['table'] = 'field_data_field_for_the_web';
   $handler->display->display_options['fields']['field_for_the_web']['field'] = 'field_for_the_web';
@@ -1106,7 +1106,7 @@ function osha_events_views_default_views() {
       ),
     ),
   );
-  /* Filter criterion: Content: For the web (field_for_the_web) */
+  /* Filter criterion: Content: For the web / Public (field_for_the_web) */
   $handler->display->display_options['filters']['field_for_the_web_value']['id'] = 'field_for_the_web_value';
   $handler->display->display_options['filters']['field_for_the_web_value']['table'] = 'field_data_field_for_the_web';
   $handler->display->display_options['filters']['field_for_the_web_value']['field'] = 'field_for_the_web_value';
@@ -1910,7 +1910,7 @@ function osha_events_views_default_views() {
     t('next ›'),
     t('last »'),
     t('author'),
-    t('For the web'),
+    t('For the web / Public'),
     t('Organization'),
     t('Country code'),
     t('City'),
@@ -1956,6 +1956,7 @@ function osha_events_views_default_views() {
     t('Start date'),
     t('Not from'),
     t('Source'),
+    t('For the web'),
     t('Block'),
     t('Location'),
     t('[field_start_date_1] - Events'),
@@ -2245,16 +2246,15 @@ function osha_events_views_default_views() {
   $handler->display->display_options['fields']['field_country_code']['id'] = 'field_country_code';
   $handler->display->display_options['fields']['field_country_code']['table'] = 'field_data_field_country_code';
   $handler->display->display_options['fields']['field_country_code']['field'] = 'field_country_code';
-  $handler->display->display_options['fields']['field_country_code']['label'] = 'LOCATION';
+  $handler->display->display_options['fields']['field_country_code']['label'] = 'COUNTRY';
   $handler->display->display_options['fields']['field_country_code']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_country_code']['alter']['text'] = '[field_country_code], ';
+  $handler->display->display_options['fields']['field_country_code']['alter']['text'] = '[field_country_code]';
   $handler->display->display_options['fields']['field_country_code']['hide_empty'] = TRUE;
   /* Field: Content: City */
   $handler->display->display_options['fields']['field_city']['id'] = 'field_city';
   $handler->display->display_options['fields']['field_city']['table'] = 'field_data_field_city';
   $handler->display->display_options['fields']['field_city']['field'] = 'field_city';
-  $handler->display->display_options['fields']['field_city']['label'] = '';
-  $handler->display->display_options['fields']['field_city']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_city']['label'] = 'CITY';
   $handler->display->display_options['fields']['field_city']['hide_empty'] = TRUE;
   /* Field: Content: Organization */
   $handler->display->display_options['fields']['field_organization']['id'] = 'field_organization';
@@ -2455,8 +2455,9 @@ function osha_events_views_default_views() {
     t('<div class="view-empty">No results</div>'),
     t('[field_start_date-value] - [field_start_date-value2]'),
     t('[field_start_date] - [field_start_date_1]'),
-    t('LOCATION'),
-    t('[field_country_code], '),
+    t('COUNTRY'),
+    t('[field_country_code]'),
+    t('CITY'),
     t('ORGANIZER'),
     t('See details'),
     t('[field_start_date_2] - Events'),

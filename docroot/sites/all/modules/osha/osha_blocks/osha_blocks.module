@@ -13,20 +13,20 @@ function osha_blocks_block_info() {
   $blocks = array();
   $blocks['oshwiki_featured_articles'] = array(
     'info' => t('OSHwiki featured articles custom block'),
-    'cache' => DRUPAL_CACHE_PER_PAGE,
+    'cache' => DRUPAL_CACHE_PER_USER | DRUPAL_CACHE_PER_PAGE,
   );
   $blocks['osha_archived_content'] = array(
     'info' => t('Node archived info block'),
-    'cache' => DRUPAL_CACHE_PER_PAGE,
+    'cache' => DRUPAL_CACHE_PER_USER | DRUPAL_CACHE_PER_PAGE,
   );
   $blocks['osha_legislation_notification'] = array(
     'info' => t('Legislation info block (temporary)'),
-    'cache' => DRUPAL_CACHE_PER_PAGE,
+    'cache' => DRUPAL_CACHE_PER_USER | DRUPAL_CACHE_PER_PAGE,
   );
   // Test URL: /inside-eu-osha/national-focal-points/turkey
   $blocks['osha_transl_extra_links'] = array(
     'info' => t('Translations extra links'),
-    'cache' => DRUPAL_CACHE_PER_PAGE,
+    'cache' => DRUPAL_CACHE_PER_USER | DRUPAL_CACHE_PER_PAGE,
   );
 
   $blocks['osha_block_group_related'] = array(

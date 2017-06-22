@@ -193,3 +193,10 @@ function osha_events_update_7017() {
 function osha_events_update_7018() {
   features_revert_module('osha_events');
 }
+
+/**
+ * Revert osha_events - MDR-1277 - add hepl text for required fields
+ */
+function osha_events_update_7019() {
+  features_revert_module('osha_events');
+}

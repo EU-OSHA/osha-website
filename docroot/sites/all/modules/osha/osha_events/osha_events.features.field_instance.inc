@@ -844,7 +844,7 @@ Grey - Only web or not attendance',
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Mandatory',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -916,7 +916,7 @@ Grey - Only web or not attendance',
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Mandatory',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -990,7 +990,7 @@ Grey - Only web or not attendance',
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Mandatory',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1766,7 +1766,7 @@ Grey - Only web or not attendance',
   $field_instances['node-events-field_start_date'] = array(
     'bundle' => 'events',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Mandatory',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -2116,7 +2116,7 @@ Grey - Only web or not attendance',
     'bundle' => 'events',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Mandatory',
     'display' => array(
       'default' => array(
         'label' => 'hidden',

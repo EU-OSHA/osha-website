@@ -220,7 +220,7 @@ function osha_dangerous_substances_search_api_solr_query_alter(array &$call_args
           continue;
         }
       if (strpos('.' . $v, 'bs_status:') && $k && @$_REQUEST['description']) {
-        $call_args['params']['fq'][$k] = '{!tag=facet:field_summary}*:* AND -bs_field_summary:[* TO *]';
+        $call_args['params']['fq'][$k] = '{!tag=facet:body:value}*:* AND -bs_body\:value:[* TO *]';
       }
     }
     if ($sort_by) {

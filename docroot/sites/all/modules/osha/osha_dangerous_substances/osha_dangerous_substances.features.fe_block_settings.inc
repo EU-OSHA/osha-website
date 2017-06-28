@@ -12,6 +12,46 @@ function osha_dangerous_substances_default_fe_block_settings() {
 
   $export['version'] = '2.0';
 
+  $export['facetapi-69UQsHdU8pF6p66KO1pza7cUsoClQw8F'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => '69UQsHdU8pF6p66KO1pza7cUsoClQw8F',
+    'i18n_block_language' => array(),
+    'i18n_mode' => 0,
+    'module' => 'facetapi',
+    'node_types' => array(),
+    'pages' => '',
+    'roles' => array(),
+    'themes' => array(
+      'bartik' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'bartik',
+        'weight' => 0,
+      ),
+      'osha_admin' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'osha_admin',
+        'weight' => 0,
+      ),
+      'osha_frontend' => array(
+        'region' => 'sidebar_first',
+        'status' => 1,
+        'theme' => 'osha_frontend',
+        'weight' => 34,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => 'Intellectual property rights',
+    'visibility' => 0,
+  );
+
   $export['facetapi-6UESvdgGlNWwNAW14Ox480cpaXPvX4bM'] = array(
     'cache' => -1,
     'custom' => 0,
@@ -50,6 +90,46 @@ function osha_dangerous_substances_default_fe_block_settings() {
     ),
     'title' => 'Type of item',
     'visibility' => 1,
+  );
+
+  $export['facetapi-6zCAxbGTMCgQ4J8YATj98pFg1HarFz10'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => '6zCAxbGTMCgQ4J8YATj98pFg1HarFz10',
+    'i18n_block_language' => array(),
+    'i18n_mode' => 0,
+    'module' => 'facetapi',
+    'node_types' => array(),
+    'pages' => '',
+    'roles' => array(),
+    'themes' => array(
+      'bartik' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'bartik',
+        'weight' => 0,
+      ),
+      'osha_admin' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'osha_admin',
+        'weight' => 0,
+      ),
+      'osha_frontend' => array(
+        'region' => 'sidebar_first',
+        'status' => 1,
+        'theme' => 'osha_frontend',
+        'weight' => 31,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => 'Priority area',
+    'visibility' => 0,
   );
 
   $export['facetapi-B1cfEiKXrUTyhYrqYoLIrjq10w0P0DSW'] = array(

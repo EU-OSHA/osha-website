@@ -724,7 +724,7 @@ function osha_dangerous_substances_facetapi_default_facet_settings() {
   $facet->searcher = 'search_api@default_content_index';
   $facet->realm = 'block';
   $facet->facet = 'body:value';
-  $facet->enabled = FALSE;
+  $facet->enabled = TRUE;
   $facet->settings = array(
     'weight' => 0,
     'widget' => 'facetapi_links',

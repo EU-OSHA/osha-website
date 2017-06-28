@@ -143,3 +143,12 @@ function osha_dangerous_substances_update_7010() {
   search_api_index_reindex('default_content_index');
   features_revert_module(['osha_dangerous_substances']);
 }
+
+/**
+ * New DS filters
+ */
+function osha_dangerous_substances_update_7011() {
+  features_revert_module('osha_dangerous_substances');
+  search_api_index_reindex('default_content_index');
+  features_revert_module(['osha_dangerous_substances']);
+}

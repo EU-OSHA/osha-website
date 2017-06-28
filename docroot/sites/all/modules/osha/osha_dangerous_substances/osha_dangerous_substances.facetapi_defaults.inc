@@ -13,6 +13,60 @@ function osha_dangerous_substances_facetapi_default_facet_settings() {
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
   $facet->api_version = 1;
+  $facet->name = 'search_api@default_content_index::author';
+  $facet->searcher = 'search_api@default_content_index';
+  $facet->realm = '';
+  $facet->facet = 'author';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'operator' => 'and',
+    'hard_limit' => '50',
+    'dependencies' => array(
+      'facets' => array(),
+      'force_deactivation' => TRUE,
+      'regex' => FALSE,
+    ),
+    'facet_mincount' => '1',
+    'facet_missing' => '0',
+    'flatten' => 0,
+    'query_type' => 'term',
+    'limit_active_items' => 0,
+    'default_true' => TRUE,
+    'facet_search_ids' => array(),
+    'exclude' => 0,
+  );
+  $export['search_api@default_content_index::author'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@default_content_index::field_advertising';
+  $facet->searcher = 'search_api@default_content_index';
+  $facet->realm = '';
+  $facet->facet = 'field_advertising';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'operator' => 'or',
+    'hard_limit' => '50',
+    'dependencies' => array(
+      'facets' => array(),
+      'force_deactivation' => TRUE,
+      'regex' => FALSE,
+    ),
+    'facet_mincount' => '1',
+    'facet_missing' => '0',
+    'flatten' => 0,
+    'query_type' => 'term',
+    'limit_active_items' => 0,
+    'default_true' => TRUE,
+    'facet_search_ids' => array(),
+    'exclude' => 0,
+  );
+  $export['search_api@default_content_index::field_advertising'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
   $facet->name = 'search_api@default_content_index::field_available_in_languages:value';
   $facet->searcher = 'search_api@default_content_index';
   $facet->realm = '';
@@ -40,6 +94,117 @@ function osha_dangerous_substances_facetapi_default_facet_settings() {
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
   $facet->api_version = 1;
+  $facet->name = 'search_api@default_content_index::field_biological_hazard';
+  $facet->searcher = 'search_api@default_content_index';
+  $facet->realm = '';
+  $facet->facet = 'field_biological_hazard';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'operator' => 'or',
+    'hard_limit' => '50',
+    'dependencies' => array(
+      'facets' => array(),
+      'force_deactivation' => TRUE,
+      'regex' => FALSE,
+      'roles' => array(),
+      'bundle' => 'none',
+      'bundle_selected' => array(),
+    ),
+    'facet_mincount' => '1',
+    'facet_missing' => '0',
+    'flatten' => '0',
+    'query_type' => 'term',
+    'limit_active_items' => 0,
+    'default_true' => TRUE,
+    'facet_search_ids' => array(),
+    'exclude' => 0,
+  );
+  $export['search_api@default_content_index::field_biological_hazard'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@default_content_index::field_evaluation';
+  $facet->searcher = 'search_api@default_content_index';
+  $facet->realm = '';
+  $facet->facet = 'field_evaluation';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'operator' => 'or',
+    'hard_limit' => '50',
+    'dependencies' => array(
+      'facets' => array(),
+      'force_deactivation' => TRUE,
+      'regex' => FALSE,
+    ),
+    'facet_mincount' => '1',
+    'facet_missing' => '0',
+    'flatten' => '0',
+    'query_type' => 'term',
+    'limit_active_items' => 0,
+    'default_true' => TRUE,
+    'facet_search_ids' => array(),
+    'exclude' => 0,
+  );
+  $export['search_api@default_content_index::field_evaluation'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@default_content_index::field_exposure_route';
+  $facet->searcher = 'search_api@default_content_index';
+  $facet->realm = '';
+  $facet->facet = 'field_exposure_route';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'operator' => 'or',
+    'hard_limit' => '50',
+    'dependencies' => array(
+      'facets' => array(),
+      'force_deactivation' => TRUE,
+      'regex' => FALSE,
+    ),
+    'facet_mincount' => '1',
+    'facet_missing' => '0',
+    'flatten' => '0',
+    'query_type' => 'term',
+    'limit_active_items' => 0,
+    'default_true' => TRUE,
+    'facet_search_ids' => array(),
+    'exclude' => 0,
+  );
+  $export['search_api@default_content_index::field_exposure_route'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@default_content_index::field_fc_provider:field_fc_provider_name_o';
+  $facet->searcher = 'search_api@default_content_index';
+  $facet->realm = '';
+  $facet->facet = 'field_fc_provider:field_fc_provider_name_o';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'operator' => 'or',
+    'hard_limit' => '50',
+    'dependencies' => array(
+      'facets' => array(),
+      'force_deactivation' => TRUE,
+      'regex' => FALSE,
+    ),
+    'facet_mincount' => '1',
+    'facet_missing' => '0',
+    'flatten' => 0,
+    'query_type' => 'term',
+    'limit_active_items' => 0,
+    'default_true' => TRUE,
+    'facet_search_ids' => array(),
+    'exclude' => 0,
+  );
+  $export['search_api@default_content_index::field_fc_provider:field_fc_provider_name_o'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
   $facet->name = 'search_api@default_content_index::field_fc_provider:field_provider_type';
   $facet->searcher = 'search_api@default_content_index';
   $facet->realm = '';
@@ -63,6 +228,87 @@ function osha_dangerous_substances_facetapi_default_facet_settings() {
     'exclude' => 0,
   );
   $export['search_api@default_content_index::field_fc_provider:field_provider_type'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@default_content_index::field_hazard_health_effects';
+  $facet->searcher = 'search_api@default_content_index';
+  $facet->realm = '';
+  $facet->facet = 'field_hazard_health_effects';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'operator' => 'or',
+    'hard_limit' => '50',
+    'dependencies' => array(
+      'facets' => array(),
+      'force_deactivation' => TRUE,
+      'regex' => FALSE,
+    ),
+    'facet_mincount' => '1',
+    'facet_missing' => '0',
+    'flatten' => '0',
+    'query_type' => 'term',
+    'limit_active_items' => 0,
+    'default_true' => TRUE,
+    'facet_search_ids' => array(),
+    'exclude' => 0,
+  );
+  $export['search_api@default_content_index::field_hazard_health_effects'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@default_content_index::field_hazard_physical_state';
+  $facet->searcher = 'search_api@default_content_index';
+  $facet->realm = '';
+  $facet->facet = 'field_hazard_physical_state';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'operator' => 'or',
+    'hard_limit' => '50',
+    'dependencies' => array(
+      'facets' => array(),
+      'force_deactivation' => TRUE,
+      'regex' => FALSE,
+    ),
+    'facet_mincount' => '1',
+    'facet_missing' => '0',
+    'flatten' => '0',
+    'query_type' => 'term',
+    'limit_active_items' => 0,
+    'default_true' => TRUE,
+    'facet_search_ids' => array(),
+    'exclude' => 0,
+  );
+  $export['search_api@default_content_index::field_hazard_physical_state'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@default_content_index::field_intellectual_property_righ';
+  $facet->searcher = 'search_api@default_content_index';
+  $facet->realm = '';
+  $facet->facet = 'field_intellectual_property_righ';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'operator' => 'or',
+    'hard_limit' => '50',
+    'dependencies' => array(
+      'facets' => array(),
+      'force_deactivation' => TRUE,
+      'regex' => FALSE,
+    ),
+    'facet_mincount' => '1',
+    'facet_missing' => '0',
+    'flatten' => 0,
+    'query_type' => 'term',
+    'limit_active_items' => 0,
+    'default_true' => TRUE,
+    'facet_search_ids' => array(),
+    'exclude' => 0,
+  );
+  $export['search_api@default_content_index::field_intellectual_property_righ'] = $facet;
 
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
@@ -154,6 +400,60 @@ function osha_dangerous_substances_facetapi_default_facet_settings() {
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
   $facet->api_version = 1;
+  $facet->name = 'search_api@default_content_index::field_prevention_measure_type';
+  $facet->searcher = 'search_api@default_content_index';
+  $facet->realm = '';
+  $facet->facet = 'field_prevention_measure_type';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'operator' => 'or',
+    'hard_limit' => '50',
+    'dependencies' => array(
+      'facets' => array(),
+      'force_deactivation' => TRUE,
+      'regex' => FALSE,
+    ),
+    'facet_mincount' => '1',
+    'facet_missing' => '0',
+    'flatten' => '0',
+    'query_type' => 'term',
+    'limit_active_items' => 0,
+    'default_true' => TRUE,
+    'facet_search_ids' => array(),
+    'exclude' => 0,
+  );
+  $export['search_api@default_content_index::field_prevention_measure_type'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@default_content_index::field_priority_area';
+  $facet->searcher = 'search_api@default_content_index';
+  $facet->realm = '';
+  $facet->facet = 'field_priority_area';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'operator' => 'or',
+    'hard_limit' => '50',
+    'dependencies' => array(
+      'facets' => array(),
+      'force_deactivation' => TRUE,
+      'regex' => FALSE,
+    ),
+    'facet_mincount' => '1',
+    'facet_missing' => '0',
+    'flatten' => '0',
+    'query_type' => 'term',
+    'limit_active_items' => 0,
+    'default_true' => TRUE,
+    'facet_search_ids' => array(),
+    'exclude' => 0,
+  );
+  $export['search_api@default_content_index::field_priority_area'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
   $facet->name = 'search_api@default_content_index::field_provider_type';
   $facet->searcher = 'search_api@default_content_index';
   $facet->realm = '';
@@ -180,6 +480,114 @@ function osha_dangerous_substances_facetapi_default_facet_settings() {
     'exclude' => 0,
   );
   $export['search_api@default_content_index::field_provider_type'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@default_content_index::field_publication_year';
+  $facet->searcher = 'search_api@default_content_index';
+  $facet->realm = '';
+  $facet->facet = 'field_publication_year';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'operator' => 'and',
+    'hard_limit' => '50',
+    'dependencies' => array(
+      'facets' => array(),
+      'force_deactivation' => TRUE,
+      'regex' => FALSE,
+    ),
+    'facet_mincount' => '1',
+    'facet_missing' => '0',
+    'flatten' => 0,
+    'query_type' => 'date',
+    'limit_active_items' => 0,
+    'default_true' => TRUE,
+    'facet_search_ids' => array(),
+    'date_granularity' => 'MINUTE',
+  );
+  $export['search_api@default_content_index::field_publication_year'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@default_content_index::field_sector_industry_covered';
+  $facet->searcher = 'search_api@default_content_index';
+  $facet->realm = '';
+  $facet->facet = 'field_sector_industry_covered';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'operator' => 'or',
+    'hard_limit' => '50',
+    'dependencies' => array(
+      'facets' => array(),
+      'force_deactivation' => TRUE,
+      'regex' => FALSE,
+    ),
+    'facet_mincount' => '1',
+    'facet_missing' => '0',
+    'flatten' => '0',
+    'query_type' => 'term',
+    'limit_active_items' => 0,
+    'default_true' => TRUE,
+    'facet_search_ids' => array(),
+    'exclude' => 0,
+  );
+  $export['search_api@default_content_index::field_sector_industry_covered'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@default_content_index::field_selected_for_analysis';
+  $facet->searcher = 'search_api@default_content_index';
+  $facet->realm = '';
+  $facet->facet = 'field_selected_for_analysis';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'operator' => 'or',
+    'hard_limit' => '50',
+    'dependencies' => array(
+      'facets' => array(),
+      'force_deactivation' => TRUE,
+      'regex' => FALSE,
+    ),
+    'facet_mincount' => '1',
+    'facet_missing' => '0',
+    'flatten' => 0,
+    'query_type' => 'term',
+    'limit_active_items' => 0,
+    'default_true' => TRUE,
+    'facet_search_ids' => array(),
+    'exclude' => 0,
+  );
+  $export['search_api@default_content_index::field_selected_for_analysis'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@default_content_index::field_summary';
+  $facet->searcher = 'search_api@default_content_index';
+  $facet->realm = '';
+  $facet->facet = 'field_summary';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'operator' => 'and',
+    'hard_limit' => '50',
+    'dependencies' => array(
+      'facets' => array(),
+      'force_deactivation' => TRUE,
+      'regex' => FALSE,
+    ),
+    'facet_mincount' => '1',
+    'facet_missing' => '1',
+    'flatten' => 0,
+    'query_type' => 'term',
+    'limit_active_items' => 0,
+    'default_true' => TRUE,
+    'facet_search_ids' => array(),
+    'exclude' => 0,
+  );
+  $export['search_api@default_content_index::field_summary'] = $facet;
 
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
@@ -312,10 +720,10 @@ function osha_dangerous_substances_facetapi_default_facet_settings() {
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
   $facet->api_version = 1;
-  $facet->name = 'search_api@default_content_index:block:field_advertising';
+  $facet->name = 'search_api@default_content_index:block:body:value';
   $facet->searcher = 'search_api@default_content_index';
   $facet->realm = 'block';
-  $facet->facet = 'field_advertising';
+  $facet->facet = 'body:value';
   $facet->enabled = FALSE;
   $facet->settings = array(
     'weight' => 0,
@@ -342,6 +750,89 @@ function osha_dangerous_substances_facetapi_default_facet_settings() {
     'soft_limit' => 20,
     'nofollow' => 1,
     'show_expanded' => 0,
+  );
+  $export['search_api@default_content_index:block:body:value'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@default_content_index:block:field_aditional_resources:field_original_desc_language:value';
+  $facet->searcher = 'search_api@default_content_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_aditional_resources:field_original_desc_language:value';
+  $facet->enabled = TRUE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@default_content_index:block:field_aditional_resources:field_original_desc_language:value'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@default_content_index:block:field_advertising';
+  $facet->searcher = 'search_api@default_content_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_advertising';
+  $facet->enabled = TRUE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_checkbox_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+      'natural' => 0,
+      'indexed' => 0,
+    ),
+    'sort_weight' => array(
+      'active' => '-50',
+      'count' => '-49',
+      'display' => '-48',
+      'natural' => '0',
+      'indexed' => '0',
+    ),
+    'sort_order' => array(
+      'active' => '3',
+      'count' => '3',
+      'display' => '4',
+      'natural' => '4',
+      'indexed' => '4',
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => '20',
+    'nofollow' => 1,
+    'show_expanded' => 0,
+    'empty_text' => array(
+      'value' => '',
+      'format' => 'full_html',
+    ),
+    'submit_realm' => 'Save and go back to realm settings',
   );
   $export['search_api@default_content_index:block:field_advertising'] = $facet;
 
@@ -500,32 +991,43 @@ function osha_dangerous_substances_facetapi_default_facet_settings() {
   $facet->searcher = 'search_api@default_content_index';
   $facet->realm = 'block';
   $facet->facet = 'field_biological_hazard';
-  $facet->enabled = FALSE;
+  $facet->enabled = TRUE;
   $facet->settings = array(
     'weight' => 0,
-    'widget' => 'facetapi_links',
+    'widget' => 'facetapi_checkbox_links',
     'filters' => array(),
     'active_sorts' => array(
       'active' => 'active',
       'count' => 'count',
       'display' => 'display',
+      'natural' => 0,
+      'indexed' => 0,
     ),
     'sort_weight' => array(
-      'active' => -50,
-      'count' => -49,
-      'display' => -48,
+      'active' => '-50',
+      'count' => '-49',
+      'display' => '-48',
+      'natural' => '0',
+      'indexed' => '0',
     ),
     'sort_order' => array(
-      'active' => 3,
-      'count' => 3,
-      'display' => 4,
+      'active' => '3',
+      'count' => '3',
+      'display' => '4',
+      'natural' => '4',
+      'indexed' => '4',
     ),
     'empty_behavior' => 'none',
     'facet_more_text' => 'Show more',
     'facet_fewer_text' => 'Show fewer',
-    'soft_limit' => 20,
+    'soft_limit' => '20',
     'nofollow' => 1,
     'show_expanded' => 0,
+    'empty_text' => array(
+      'value' => '',
+      'format' => 'full_html',
+    ),
+    'submit_realm' => 'Save and go back to realm settings',
   );
   $export['search_api@default_content_index:block:field_biological_hazard'] = $facet;
 
@@ -788,32 +1290,43 @@ function osha_dangerous_substances_facetapi_default_facet_settings() {
   $facet->searcher = 'search_api@default_content_index';
   $facet->realm = 'block';
   $facet->facet = 'field_evaluation';
-  $facet->enabled = FALSE;
+  $facet->enabled = TRUE;
   $facet->settings = array(
     'weight' => 0,
-    'widget' => 'facetapi_links',
+    'widget' => 'facetapi_checkbox_links',
     'filters' => array(),
     'active_sorts' => array(
       'active' => 'active',
       'count' => 'count',
       'display' => 'display',
+      'natural' => 0,
+      'indexed' => 0,
     ),
     'sort_weight' => array(
-      'active' => -50,
-      'count' => -49,
-      'display' => -48,
+      'active' => '-50',
+      'count' => '-49',
+      'display' => '-48',
+      'natural' => '0',
+      'indexed' => '0',
     ),
     'sort_order' => array(
-      'active' => 3,
-      'count' => 3,
-      'display' => 4,
+      'active' => '3',
+      'count' => '3',
+      'display' => '4',
+      'natural' => '4',
+      'indexed' => '4',
     ),
     'empty_behavior' => 'none',
     'facet_more_text' => 'Show more',
     'facet_fewer_text' => 'Show fewer',
-    'soft_limit' => 20,
+    'soft_limit' => '20',
     'nofollow' => 1,
     'show_expanded' => 0,
+    'empty_text' => array(
+      'value' => '',
+      'format' => 'full_html',
+    ),
+    'submit_realm' => 'Save and go back to realm settings',
   );
   $export['search_api@default_content_index:block:field_evaluation'] = $facet;
 
@@ -824,32 +1337,43 @@ function osha_dangerous_substances_facetapi_default_facet_settings() {
   $facet->searcher = 'search_api@default_content_index';
   $facet->realm = 'block';
   $facet->facet = 'field_exposure_route';
-  $facet->enabled = FALSE;
+  $facet->enabled = TRUE;
   $facet->settings = array(
     'weight' => 0,
-    'widget' => 'facetapi_links',
+    'widget' => 'facetapi_checkbox_links',
     'filters' => array(),
     'active_sorts' => array(
       'active' => 'active',
       'count' => 'count',
       'display' => 'display',
+      'natural' => 0,
+      'indexed' => 0,
     ),
     'sort_weight' => array(
-      'active' => -50,
-      'count' => -49,
-      'display' => -48,
+      'active' => '-50',
+      'count' => '-49',
+      'display' => '-48',
+      'natural' => '0',
+      'indexed' => '0',
     ),
     'sort_order' => array(
-      'active' => 3,
-      'count' => 3,
-      'display' => 4,
+      'active' => '3',
+      'count' => '3',
+      'display' => '4',
+      'natural' => '4',
+      'indexed' => '4',
     ),
     'empty_behavior' => 'none',
     'facet_more_text' => 'Show more',
     'facet_fewer_text' => 'Show fewer',
-    'soft_limit' => 20,
+    'soft_limit' => '20',
     'nofollow' => 1,
     'show_expanded' => 0,
+    'empty_text' => array(
+      'value' => '',
+      'format' => 'full_html',
+    ),
+    'submit_realm' => 'Save and go back to realm settings',
   );
   $export['search_api@default_content_index:block:field_exposure_route'] = $facet;
 
@@ -888,6 +1412,89 @@ function osha_dangerous_substances_facetapi_default_facet_settings() {
     'show_expanded' => 0,
   );
   $export['search_api@default_content_index:block:field_external_url:url'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@default_content_index:block:field_fc_provider:field_fc_provider_name';
+  $facet->searcher = 'search_api@default_content_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_fc_provider:field_fc_provider_name';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@default_content_index:block:field_fc_provider:field_fc_provider_name'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@default_content_index:block:field_fc_provider:field_fc_provider_name_o';
+  $facet->searcher = 'search_api@default_content_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_fc_provider:field_fc_provider_name_o';
+  $facet->enabled = TRUE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_checkbox_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+      'natural' => 0,
+      'indexed' => 0,
+    ),
+    'sort_weight' => array(
+      'active' => '-50',
+      'count' => '-49',
+      'display' => '-48',
+      'natural' => '0',
+      'indexed' => '0',
+    ),
+    'sort_order' => array(
+      'active' => '3',
+      'count' => '3',
+      'display' => '4',
+      'natural' => '4',
+      'indexed' => '4',
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => '20',
+    'nofollow' => 1,
+    'show_expanded' => 0,
+    'empty_text' => array(
+      'value' => '',
+      'format' => 'full_html',
+    ),
+    'submit_realm' => 'Save and go back to realm settings',
+  );
+  $export['search_api@default_content_index:block:field_fc_provider:field_fc_provider_name_o'] = $facet;
 
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
@@ -939,10 +1546,10 @@ function osha_dangerous_substances_facetapi_default_facet_settings() {
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
   $facet->api_version = 1;
-  $facet->name = 'search_api@default_content_index:block:field_hazard_health_effects';
+  $facet->name = 'search_api@default_content_index:block:field_fc_provider:url';
   $facet->searcher = 'search_api@default_content_index';
   $facet->realm = 'block';
-  $facet->facet = 'field_hazard_health_effects';
+  $facet->facet = 'field_fc_provider:url';
   $facet->enabled = FALSE;
   $facet->settings = array(
     'weight' => 0,
@@ -969,6 +1576,53 @@ function osha_dangerous_substances_facetapi_default_facet_settings() {
     'soft_limit' => 20,
     'nofollow' => 1,
     'show_expanded' => 0,
+  );
+  $export['search_api@default_content_index:block:field_fc_provider:url'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@default_content_index:block:field_hazard_health_effects';
+  $facet->searcher = 'search_api@default_content_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_hazard_health_effects';
+  $facet->enabled = TRUE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_checkbox_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+      'natural' => 0,
+      'indexed' => 0,
+    ),
+    'sort_weight' => array(
+      'active' => '-50',
+      'count' => '-49',
+      'display' => '-48',
+      'natural' => '0',
+      'indexed' => '0',
+    ),
+    'sort_order' => array(
+      'active' => '3',
+      'count' => '3',
+      'display' => '4',
+      'natural' => '4',
+      'indexed' => '4',
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => '20',
+    'nofollow' => 1,
+    'show_expanded' => 0,
+    'empty_text' => array(
+      'value' => '',
+      'format' => 'full_html',
+    ),
+    'submit_realm' => 'Save and go back to realm settings',
   );
   $export['search_api@default_content_index:block:field_hazard_health_effects'] = $facet;
 
@@ -979,32 +1633,43 @@ function osha_dangerous_substances_facetapi_default_facet_settings() {
   $facet->searcher = 'search_api@default_content_index';
   $facet->realm = 'block';
   $facet->facet = 'field_hazard_physical_state';
-  $facet->enabled = FALSE;
+  $facet->enabled = TRUE;
   $facet->settings = array(
     'weight' => 0,
-    'widget' => 'facetapi_links',
+    'widget' => 'facetapi_checkbox_links',
     'filters' => array(),
     'active_sorts' => array(
       'active' => 'active',
       'count' => 'count',
       'display' => 'display',
+      'natural' => 0,
+      'indexed' => 0,
     ),
     'sort_weight' => array(
-      'active' => -50,
-      'count' => -49,
-      'display' => -48,
+      'active' => '-50',
+      'count' => '-49',
+      'display' => '-48',
+      'natural' => '0',
+      'indexed' => '0',
     ),
     'sort_order' => array(
-      'active' => 3,
-      'count' => 3,
-      'display' => 4,
+      'active' => '3',
+      'count' => '3',
+      'display' => '4',
+      'natural' => '4',
+      'indexed' => '4',
     ),
     'empty_behavior' => 'none',
     'facet_more_text' => 'Show more',
     'facet_fewer_text' => 'Show fewer',
-    'soft_limit' => 20,
+    'soft_limit' => '20',
     'nofollow' => 1,
     'show_expanded' => 0,
+    'empty_text' => array(
+      'value' => '',
+      'format' => 'full_html',
+    ),
+    'submit_realm' => 'Save and go back to realm settings',
   );
   $export['search_api@default_content_index:block:field_hazard_physical_state'] = $facet;
 
@@ -1015,32 +1680,43 @@ function osha_dangerous_substances_facetapi_default_facet_settings() {
   $facet->searcher = 'search_api@default_content_index';
   $facet->realm = 'block';
   $facet->facet = 'field_intellectual_property_righ';
-  $facet->enabled = FALSE;
+  $facet->enabled = TRUE;
   $facet->settings = array(
     'weight' => 0,
-    'widget' => 'facetapi_links',
+    'widget' => 'facetapi_checkbox_links',
     'filters' => array(),
     'active_sorts' => array(
       'active' => 'active',
       'count' => 'count',
       'display' => 'display',
+      'natural' => 0,
+      'indexed' => 0,
     ),
     'sort_weight' => array(
-      'active' => -50,
-      'count' => -49,
-      'display' => -48,
+      'active' => '-50',
+      'count' => '-49',
+      'display' => '-48',
+      'natural' => '0',
+      'indexed' => '0',
     ),
     'sort_order' => array(
-      'active' => 3,
-      'count' => 3,
-      'display' => 4,
+      'active' => '3',
+      'count' => '3',
+      'display' => '4',
+      'natural' => '4',
+      'indexed' => '4',
     ),
     'empty_behavior' => 'none',
     'facet_more_text' => 'Show more',
     'facet_fewer_text' => 'Show fewer',
-    'soft_limit' => 20,
+    'soft_limit' => '20',
     'nofollow' => 1,
     'show_expanded' => 0,
+    'empty_text' => array(
+      'value' => '',
+      'format' => 'full_html',
+    ),
+    'submit_realm' => 'Save and go back to realm settings',
   );
   $export['search_api@default_content_index:block:field_intellectual_property_righ'] = $facet;
 
@@ -1260,6 +1936,42 @@ function osha_dangerous_substances_facetapi_default_facet_settings() {
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
   $facet->api_version = 1;
+  $facet->name = 'search_api@default_content_index:block:field_original_desc_lang_other';
+  $facet->searcher = 'search_api@default_content_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_original_desc_lang_other';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@default_content_index:block:field_original_desc_lang_other'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
   $facet->name = 'search_api@default_content_index:block:field_other_information:value';
   $facet->searcher = 'search_api@default_content_index';
   $facet->realm = 'block';
@@ -1336,32 +2048,43 @@ function osha_dangerous_substances_facetapi_default_facet_settings() {
   $facet->searcher = 'search_api@default_content_index';
   $facet->realm = 'block';
   $facet->facet = 'field_prevention_measure_type';
-  $facet->enabled = FALSE;
+  $facet->enabled = TRUE;
   $facet->settings = array(
     'weight' => 0,
-    'widget' => 'facetapi_links',
+    'widget' => 'facetapi_checkbox_links',
     'filters' => array(),
     'active_sorts' => array(
       'active' => 'active',
       'count' => 'count',
       'display' => 'display',
+      'natural' => 0,
+      'indexed' => 0,
     ),
     'sort_weight' => array(
-      'active' => -50,
-      'count' => -49,
-      'display' => -48,
+      'active' => '-50',
+      'count' => '-49',
+      'display' => '-48',
+      'natural' => '0',
+      'indexed' => '0',
     ),
     'sort_order' => array(
-      'active' => 3,
-      'count' => 3,
-      'display' => 4,
+      'active' => '3',
+      'count' => '3',
+      'display' => '4',
+      'natural' => '4',
+      'indexed' => '4',
     ),
     'empty_behavior' => 'none',
     'facet_more_text' => 'Show more',
     'facet_fewer_text' => 'Show fewer',
-    'soft_limit' => 20,
+    'soft_limit' => '20',
     'nofollow' => 1,
     'show_expanded' => 0,
+    'empty_text' => array(
+      'value' => '',
+      'format' => 'full_html',
+    ),
+    'submit_realm' => 'Save and go back to realm settings',
   );
   $export['search_api@default_content_index:block:field_prevention_measure_type'] = $facet;
 
@@ -1400,6 +2123,53 @@ function osha_dangerous_substances_facetapi_default_facet_settings() {
     'show_expanded' => 0,
   );
   $export['search_api@default_content_index:block:field_prevention_measures_other'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@default_content_index:block:field_priority_area';
+  $facet->searcher = 'search_api@default_content_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_priority_area';
+  $facet->enabled = TRUE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_checkbox_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+      'natural' => 0,
+      'indexed' => 0,
+    ),
+    'sort_weight' => array(
+      'active' => '-50',
+      'count' => '-49',
+      'display' => '-48',
+      'natural' => '0',
+      'indexed' => '0',
+    ),
+    'sort_order' => array(
+      'active' => '3',
+      'count' => '3',
+      'display' => '4',
+      'natural' => '4',
+      'indexed' => '4',
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => '20',
+    'nofollow' => 1,
+    'show_expanded' => 0,
+    'empty_text' => array(
+      'value' => '',
+      'format' => 'full_html',
+    ),
+    'submit_realm' => 'Save and go back to realm settings',
+  );
+  $export['search_api@default_content_index:block:field_priority_area'] = $facet;
 
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
@@ -1563,32 +2333,43 @@ function osha_dangerous_substances_facetapi_default_facet_settings() {
   $facet->searcher = 'search_api@default_content_index';
   $facet->realm = 'block';
   $facet->facet = 'field_publication_year';
-  $facet->enabled = FALSE;
+  $facet->enabled = TRUE;
   $facet->settings = array(
     'weight' => 0,
-    'widget' => 'facetapi_links',
+    'widget' => 'facetapi_checkbox_links',
     'filters' => array(),
     'active_sorts' => array(
       'active' => 'active',
       'count' => 'count',
       'display' => 'display',
+      'natural' => 0,
+      'indexed' => 0,
     ),
     'sort_weight' => array(
-      'active' => -50,
-      'count' => -49,
-      'display' => -48,
+      'active' => '-50',
+      'count' => '-49',
+      'display' => '-48',
+      'natural' => '0',
+      'indexed' => '0',
     ),
     'sort_order' => array(
-      'active' => 3,
-      'count' => 3,
-      'display' => 4,
+      'active' => '3',
+      'count' => '3',
+      'display' => '4',
+      'natural' => '4',
+      'indexed' => '4',
     ),
     'empty_behavior' => 'none',
     'facet_more_text' => 'Show more',
     'facet_fewer_text' => 'Show fewer',
-    'soft_limit' => 20,
+    'soft_limit' => '20',
     'nofollow' => 1,
     'show_expanded' => 0,
+    'empty_text' => array(
+      'value' => '',
+      'format' => 'full_html',
+    ),
+    'submit_realm' => 'Save and go back to realm settings',
   );
   $export['search_api@default_content_index:block:field_publication_year'] = $facet;
 
@@ -1635,34 +2416,92 @@ function osha_dangerous_substances_facetapi_default_facet_settings() {
   $facet->searcher = 'search_api@default_content_index';
   $facet->realm = 'block';
   $facet->facet = 'field_sector_industry_covered';
-  $facet->enabled = FALSE;
+  $facet->enabled = TRUE;
   $facet->settings = array(
     'weight' => 0,
-    'widget' => 'facetapi_links',
+    'widget' => 'facetapi_checkbox_links',
     'filters' => array(),
     'active_sorts' => array(
       'active' => 'active',
       'count' => 'count',
       'display' => 'display',
+      'natural' => 0,
+      'indexed' => 0,
     ),
     'sort_weight' => array(
-      'active' => -50,
-      'count' => -49,
-      'display' => -48,
+      'active' => '-50',
+      'count' => '-49',
+      'display' => '-48',
+      'natural' => '0',
+      'indexed' => '0',
     ),
     'sort_order' => array(
-      'active' => 3,
-      'count' => 3,
-      'display' => 4,
+      'active' => '3',
+      'count' => '3',
+      'display' => '4',
+      'natural' => '4',
+      'indexed' => '4',
     ),
     'empty_behavior' => 'none',
     'facet_more_text' => 'Show more',
     'facet_fewer_text' => 'Show fewer',
-    'soft_limit' => 20,
+    'soft_limit' => '20',
     'nofollow' => 1,
     'show_expanded' => 0,
+    'empty_text' => array(
+      'value' => '',
+      'format' => 'full_html',
+    ),
+    'submit_realm' => 'Save and go back to realm settings',
   );
   $export['search_api@default_content_index:block:field_sector_industry_covered'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@default_content_index:block:field_selected_for_analysis';
+  $facet->searcher = 'search_api@default_content_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_selected_for_analysis';
+  $facet->enabled = TRUE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_checkbox_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+      'natural' => 0,
+      'indexed' => 0,
+    ),
+    'sort_weight' => array(
+      'active' => '-50',
+      'count' => '-49',
+      'display' => '-48',
+      'natural' => '0',
+      'indexed' => '0',
+    ),
+    'sort_order' => array(
+      'active' => '3',
+      'count' => '3',
+      'display' => '4',
+      'natural' => '4',
+      'indexed' => '4',
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => '20',
+    'nofollow' => 1,
+    'show_expanded' => 0,
+    'empty_text' => array(
+      'value' => '',
+      'format' => 'full_html',
+    ),
+    'submit_realm' => 'Save and go back to realm settings',
+  );
+  $export['search_api@default_content_index:block:field_selected_for_analysis'] = $facet;
 
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */

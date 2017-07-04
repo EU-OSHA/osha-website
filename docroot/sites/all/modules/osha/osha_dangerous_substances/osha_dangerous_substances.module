@@ -6,12 +6,119 @@
 
 include_once 'osha_dangerous_substances.features.inc';
 
+function template_preprocess_osha_dangerous_substances_doc(&$vars) {
+  $vars['header'] = $vars['rows']['header'];
+  $vars['body'] = $vars['rows']['body'];
+  $vars['footer'] = $vars['rows']['footer'];
+}
+
+/**
+ * Implements hook_preprocess_views_data_export_doc_body().
+ */
+function template_preprocess_osha_dangerous_substances_doc_body(&$vars) {
+  // Pass through the generic MS Office process.
+  template_preprocess_views_data_export_msoffice_body($vars);
+  $output = '';
+
+  $flip = array(
+    'even' => 'odd',
+    'odd' => 'even',
+  );
+  $class = 'even';
+  foreach ($vars['themed_rows'] as $number => $cells) {
+    // Add odd/even class
+    $class = $flip[$class];
+    if (isset($attributes['class'])) {
+      $attributes['class'] .= ' ' . $class;
+    }
+    else {
+      $attributes['class'] = $class;
+    }
+
+    $output .= '<table class="tableBorder" cellpadding="0" cellspacing="0" border="0" width="100%">';
+    // Build row
+    foreach ($cells as $alias => $cell) {
+      $output .= ' <tr' . drupal_attributes($attributes) . '>';
+      $output .= _theme_table_cell(['width'=>"30%", 'data' => '<b>' . $vars['header'][$alias] . '</b>']);
+      $output .= _theme_table_cell(['width'=>"70%", 'data' => $cell]);
+      $output .= " </tr>\n";
+    }
+    $output .= "</table>";
+    $output .= "<br /><br style='page-break-before:always;'/>";
+  }
+
+  $vars['body'] = $output;
+}
+
+/**
+ * Implements hook_views_plugins().
+ */
+function osha_dangerous_substances_views_plugins() {
+  $module_path = drupal_get_path('module', 'osha_dangerous_substances');
+
+  return array(
+    'style' => array(
+      'osha_dangerous_substances_doc' => array(
+        'title' => t('Doc card file'),
+        'help' => t('Display the view as an Doc card file.'),
+        'handler' => 'views_data_export_plugin_style_export',
+        'export headers' => array('Content-Type' => 'application/vnd.ms-word'),
+        'export feed type' => 'doc',
+        'export feed text' => 'doc',
+        'export feed file' => '%view.doc',
+        'export feed icon' => drupal_get_path('module', 'views_data_export') . '/images/doc.png',
+        'additional themes base' => 'osha_dangerous_substances_doc',
+        'path' => $module_path . '/plugins',
+        'parent' => 'views_data_export_doc',
+        'theme' => 'osha_dangerous_substances_doc',
+        'uses row plugin' => FALSE,
+        'uses fields' => TRUE,
+        'uses options' => TRUE,
+        'type' => 'data_export',
+      ),
+    ),
+  );
+}
 
 function osha_dangerous_substances_preprocess_views_view(&$vars) {
   $view = $vars['view'];
   if($view->name == 'dangerous_substances') {
     drupal_add_css(drupal_get_path('module', 'osha_dangerous_substances') .'/css/osha_dangerous_substances.css');
   }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function osha_dangerous_substances_theme() {
+
+  $theme = array();
+  $path = drupal_get_path('module', 'osha_dangerous_substances');
+
+  $theme['osha_dangerous_substances_doc'] = array(
+    'path' => $path . '/templates',
+    'template' => 'osha_dangerous_substances_doc',
+    'variables' =>  array('view' => NULL, 'options' => NULL, 'rows' => NULL, 'title' => NULL),
+  );
+
+  $theme['osha_dangerous_substances_doc_header'] = array(
+    'path' => $path . '/templates',
+    'template' => 'osha_dangerous_substances_doc_header',
+    'variables' =>  array('view' => NULL, 'options' => NULL, 'rows' => NULL, 'title' => NULL),
+  );
+
+  $theme['osha_dangerous_substances_doc_body'] = array(
+    'path' => $path . '/templates',
+    'template' => 'osha_dangerous_substances_doc_body',
+    'variables' =>  array('view' => NULL, 'options' => NULL, 'rows' => NULL, 'title' => NULL),
+  );
+
+  $theme['osha_dangerous_substances_doc_footer'] = array(
+    'path' => $path . '/templates',
+    'template' => 'osha_dangerous_substances_doc_footer',
+    'variables' =>  array('view' => NULL, 'options' => NULL, 'rows' => NULL, 'title' => NULL),
+  );
+  return $theme;
 }
 
 // MDR-969: remove redirect on save

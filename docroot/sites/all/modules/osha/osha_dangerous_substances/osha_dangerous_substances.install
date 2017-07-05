@@ -134,3 +134,29 @@ function osha_dangerous_substances_update_7008() {
 function osha_dangerous_substances_update_7009() {
   features_revert_module(['osha_dangerous_substances']);
 }
+
+/**
+ * Empty Content (English) description checkbox
+ */
+function osha_dangerous_substances_update_7010() {
+  features_revert_module('osha_dangerous_substances');
+  search_api_index_reindex('default_content_index');
+  features_revert_module(['osha_dangerous_substances']);
+}
+
+/**
+ * New DS filters
+ */
+function osha_dangerous_substances_update_7011() {
+  features_revert_module('osha_dangerous_substances');
+  search_api_index_reindex('default_content_index');
+  features_revert_module(['osha_dangerous_substances']);
+}
+
+/**
+ * Export doc card format
+ */
+function osha_dangerous_substances_update_7012() {
+  cache_clear_all();
+  features_revert_module('osha_dangerous_substances');
+}

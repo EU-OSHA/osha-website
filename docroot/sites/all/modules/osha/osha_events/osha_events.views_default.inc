@@ -2242,12 +2242,6 @@ function osha_events_views_default_views() {
     'title_class' => 'events-teaser-title',
   );
   $handler->display->display_options['fields']['title_field']['link_to_entity'] = 0;
-  /* Field: Content: Location */
-  $handler->display->display_options['fields']['field_location']['id'] = 'field_location';
-  $handler->display->display_options['fields']['field_location']['table'] = 'field_data_field_location';
-  $handler->display->display_options['fields']['field_location']['field'] = 'field_location';
-  $handler->display->display_options['fields']['field_location']['label'] = 'LOCATION';
-  $handler->display->display_options['fields']['field_location']['hide_empty'] = TRUE;
   /* Field: Content: Country */
   $handler->display->display_options['fields']['field_country_code']['id'] = 'field_country_code';
   $handler->display->display_options['fields']['field_country_code']['table'] = 'field_data_field_country_code';
@@ -2461,7 +2455,6 @@ function osha_events_views_default_views() {
     t('<div class="view-empty">No results</div>'),
     t('[field_start_date-value] - [field_start_date-value2]'),
     t('[field_start_date] - [field_start_date_1]'),
-    t('LOCATION'),
     t('COUNTRY'),
     t('[field_country_code]'),
     t('CITY'),

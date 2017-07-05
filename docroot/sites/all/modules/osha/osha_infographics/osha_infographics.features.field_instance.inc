@@ -160,6 +160,81 @@ function osha_infographics_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-infographic-field_archived'.
+  $field_instances['node-infographic-field_archived'] = array(
+    'bundle' => 'infographic',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 9,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_archived',
+    'label' => 'Marked as outdated',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 50,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-infographic-field_file'.
   $field_instances['node-infographic-field_file'] = array(
     'bundle' => 'infographic',
@@ -744,6 +819,7 @@ function osha_infographics_field_default_field_instances() {
   t('Body');
   t('File');
   t('Image');
+  t('Marked as outdated');
   t('Please adapt the thumbnail width to  350px and height to 260px (a ratio of 1.35).');
   t('Publication date');
   t('Tag');

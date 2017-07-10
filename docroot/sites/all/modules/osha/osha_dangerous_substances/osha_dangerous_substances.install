@@ -152,3 +152,11 @@ function osha_dangerous_substances_update_7011() {
   search_api_index_reindex('default_content_index');
   features_revert_module(['osha_dangerous_substances']);
 }
+
+/**
+ * Export doc card format
+ */
+function osha_dangerous_substances_update_7012() {
+  cache_clear_all();
+  features_revert_module('osha_dangerous_substances');
+}

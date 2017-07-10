@@ -52,6 +52,11 @@ function osha_infographics_field_formatter_info() {
       'field types' => array('image'),
       'description' => t('Download image in EN, BG ...'),
     ),
+    'infographics_title' => array(
+      'label' => t('Infographics Title'),
+      'field types' => array('text'),
+      'settings' => array('title_style' => '', 'title_link' => '', 'title_class' => ''),
+    ),
   );
   return $info;
 }
@@ -79,6 +84,58 @@ function osha_infographics_field_formatter_view($entity_type, $entity, $field, $
           '#entity' => $entity,
           '#file' => $item,
           '#delta' => $delta,
+        );
+      }
+      break;
+    case 'infographics_title':
+      $settings = $display['settings'];
+      $output = '';
+      if (isset($items[0]['safe_value'])) {
+        $output = $items[0]['safe_value'];
+      }
+      elseif (isset($items[0]['value'])) {
+        $output = _text_sanitize($instance, $langcode, $items[0], 'value');
+      }
+      $element = array();
+
+      if (!empty($output)) {
+        if ($settings['title_link'] == 'content') {
+          $uri = entity_uri($entity_type, $entity);
+          $options = array('html' => TRUE);
+          if (!empty($uri['options'])) {
+            $options = array_merge($options, $uri['options']);
+          }
+          $output = l($output, $uri['path'], $options);
+        }
+
+        $wrap_tag = empty($settings['title_style']) ? '_none' : $settings['title_style'];
+
+        if ($wrap_tag != '_none') {
+          $variables = array(
+            'element' => array(
+              '#tag' => $wrap_tag,
+              '#value' => $output,
+            ),
+          );
+
+          if (!empty($settings['title_class'])) {
+            $variables['element']['#attributes'] = array('class' => $settings['title_class']);
+          }
+
+          $output = theme('html_tag', $variables);
+        }
+
+        // If the content is archived, add a label for it.
+        if (!empty($output)) {
+          if (!empty($entity->field_archived[LANGUAGE_NONE][0]['value'])) {
+            $output .= '<span class="title-archived">' . t('Archived') . '</span>';
+          }
+        }
+
+        $element = array(
+          array(
+            '#markup' => $output,
+          ),
         );
       }
       break;

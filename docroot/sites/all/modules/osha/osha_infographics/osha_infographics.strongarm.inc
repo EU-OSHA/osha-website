@@ -154,6 +154,9 @@ function osha_infographics_strongarm() {
         'language' => array(
           'weight' => '5',
         ),
+        'xmlsitemap' => array(
+          'weight' => '30',
+        ),
       ),
       'display' => array(),
     ),
@@ -206,6 +209,16 @@ function osha_infographics_strongarm() {
   $strongarm->name = 'node_submitted_infographic';
   $strongarm->value = 0;
   $export['node_submitted_infographic'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'xmlsitemap_settings_node_infographic';
+  $strongarm->value = array(
+    'status' => '1',
+    'priority' => '0.5',
+  );
+  $export['xmlsitemap_settings_node_infographic'] = $strongarm;
 
   return $export;
 }

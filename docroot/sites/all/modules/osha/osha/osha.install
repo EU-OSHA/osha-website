@@ -467,3 +467,11 @@ function osha_update_7028() {
   features_revert_module('osha_blocks');
   features_revert_module('osha');
 }
+
+/**
+ * enable module: MDR-1229 Could Flickr albums
+ */
+function osha_update_7029() {
+  module_enable(['osha_flickr']);
+}
+

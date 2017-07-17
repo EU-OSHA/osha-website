@@ -1,0 +1,20 @@
+/**
+ * The CSS values that are wrapped in '/*variable' comments are intended for use
+ * by https://www.drupal.org/project/style_settings. Enable that module to
+ * have those CSS variables exposed in the settings UI.
+ */
+
+.flickr-photo-img,
+img.flickr-photoset-img {
+  padding: /*variable:flickrstyle_spacing*/2px/*variable*/;
+  border-style: solid;
+  border-width: /*variable:flickrstyle_border_thickness*/2px/*variable*/ !important;
+  border-color: /*variable:flickrstyle_border_color*/LightGrey/*variable*/ !important;
+  background-color: /*variable:flickrstyle_bgcolor*/White/*variable*/ !important;
+}
+
+/*Make the caption as wide as the image */
+span.flickr-credit,
+.flickr-citation {
+  padding: 0 /*variable:flickrstyle_border_thickness_doubled*/4px/*variable*/;
+}

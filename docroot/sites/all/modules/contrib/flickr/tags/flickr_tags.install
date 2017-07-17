@@ -1,0 +1,13 @@
+<?php
+/**
+ * @file
+ * Uninstall hook.
+ */
+
+/**
+ * Cleanup variables.
+ */
+function flickr_tags_uninstall() {
+  // Delete variables.
+  variable_del('flickr_tags_in_cloud');
+}

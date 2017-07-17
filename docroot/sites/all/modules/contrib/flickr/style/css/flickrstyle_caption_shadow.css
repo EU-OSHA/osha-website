@@ -1,0 +1,18 @@
+/**
+ * The CSS values that are wrapped in '/*variable' comments are intended for use
+ * by https://www.drupal.org/project/style_settings. Enable that module to
+ * have those CSS variables exposed in the settings UI.
+ */
+
+span.flickr-credit {
+  /*Use the dedicated field at admin/config/media/flickr for a horizontal inside spacing value (padding/border).*/
+  padding: 3px 7px;
+  background: /*variable:flickrstyle_bgcolor*/White/*variable*/;
+  -webkit-box-shadow: 2px 2px 7px 3px /*variable:flickrstyle_shadow_color*/#a5a5a5/*variable*/;
+     -moz-box-shadow: 2px 2px 7px 3px /*variable:flickrstyle_shadow_color*/#a5a5a5/*variable*/;
+          box-shadow: 2px 2px 7px 3px /*variable:flickrstyle_shadow_color*/#a5a5a5/*variable*/;
+}
+
+.flickr-wrap {
+  padding: 2px 7px 9px 2px;
+}

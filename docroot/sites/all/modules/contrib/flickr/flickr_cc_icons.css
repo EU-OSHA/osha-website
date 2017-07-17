@@ -1,0 +1,69 @@
+@font-face {
+  font-family: "CC-ICONS";
+  font-weight: normal;
+  font-style: normal;
+  /*See https://css-tricks.com/snippets/css/using-font-face/*/
+
+  src: url("//cdn.jsdelivr.net/cc-icons/1.2.0/fonts/cc-icons.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+  url("//cdn.jsdelivr.net/cc-icons/1.2.0/fonts/cc-icons.woff") format("woff"), /* Modern Browsers */
+  url("//cdn.jsdelivr.net/cc-icons/1.2.0/fonts/cc-icons.ttf") format("truetype"), /* Safari, Android, iOS */
+  url("//cdn.jsdelivr.net/cc-icons/1.2.0/fonts/cc-icons.svg#cc-icons") format("svg"); /* Legacy iOS */
+}
+span.flickr-cc,
+span.flickr-copyright {
+  /*An equivalent to baseline shift to space icons from the line above*/
+  position: relative;
+  top: 0.2em;
+  float: right;
+  margin: 1px 0 6px 0;
+  /*The normal size is not well recognizable*/
+  font-size: large;
+}
+#flickr-admin-settings .form-item-flickr-license span.flickr-cc,
+#flickr-admin-settings .form-item-flickr-license span.flickr-copyright {
+  float: none;
+  margin-right: 8px;
+}
+span.flickr-cc a,
+span.flickr-copyright a {
+  text-decoration: none;
+}
+span.flickr-cc {
+  /*Creative commons icon font*/
+  font-family: "CC-ICONS";
+}
+/* Necessary to make the copyright symbol most similar to the cc-icons.*/
+span.flickr-copyright {
+  font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+  font-size: x-large; /*Change to make the size similar to the CC icons.*/
+  font-weight: bold;
+}
+
+.flickr-image span.flickr-cc,
+.flickr-image span.flickr-copyright {
+  position: absolute;
+  top: 4px;
+  left: 7px;
+}
+
+.flickr-image span.flickr-cc a,
+.flickr-image span.flickr-copyright a {
+  letter-spacing: 2px;
+  color: white;
+  text-shadow: -1px -1px 0 black,
+  1px -1px 0 black,
+  -1px 1px 0 black,
+  1px 1px 0 black;
+}
+
+.flickr-image span.flickr-cc {
+  top: 4px;
+  left: 7px;
+  font-size: 100%;
+}
+
+.flickr-image span.flickr-copyright {
+  top: 3px;
+  left: 7px;
+  font-size: large;
+}

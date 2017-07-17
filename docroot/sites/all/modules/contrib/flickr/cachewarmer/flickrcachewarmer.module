@@ -1,0 +1,124 @@
+<?php
+/**
+ * @file
+ * The Flickr Cache Warmer module.
+ */
+
+  // Load flickrstyle.admin.inc from the flickrstyle module.
+  module_load_include('inc', 'flickrcachewarmer', 'flickrcachewarmer.admin');
+
+/**
+ * Implements hook_help().
+ */
+function flickrcachewarmer_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#flickrcachewarmer':
+      // Return a line-break version of the README.txt.
+      return _filter_autop(file_get_contents(dirname(__FILE__) . '/README.txt'));
+  }
+}
+
+/**
+ * Implements hook_cron().
+ *
+ * Called every time the Drupal cron runs.
+ */
+function flickrcachewarmer_cron() {
+  $content_types = array_filter(variable_get('flickrcachewarmer_nodetypes', array()));
+  // If no content types are selected in the settings, use all.
+  if (empty($content_types)) {
+    $names = node_type_get_names();
+    $content_types = array_flip(array_map('check_plain', $names));
+  }
+  // Returns an array of nid's for selected content types.
+  $nids = db_select('node', 'n')
+    ->fields('n', array('nid'))
+    ->fields('n', array('type'))
+    ->condition('n.type', array_filter($content_types), 'IN')
+    ->execute()
+    ->fetchCol();
+  // If the cache lifetime is substantially greater than the set cron
+  // interval, cut the above array in chunks to batch process them.
+  // Note it should currently not be used as we recommend to leave the cache
+  // lifetime set to 'none'.
+  $batchnumber = variable_get('cache_lifetime', 0) > (2 * variable_get('cron_safe_threshold', DRUPAL_CRON_DEFAULT_THRESHOLD)) ? ceil(variable_get('cache_lifetime', 0) / variable_get('cron_safe_threshold', DRUPAL_CRON_DEFAULT_THRESHOLD)) : 1;
+  // Interrupt if no nodes are found.
+  if (count($nids) == 0) {
+    return;
+  }
+  $batchnumber = $batchnumber > count($nids) ? count($nids) : $batchnumber;
+  $batchsize = ceil(count($nids) / $batchnumber);
+  $nids = array_chunk($nids, $batchsize, FALSE);
+  // If the batch 'ID' is an undefined index (offset), reset it to zero.
+  $batch = variable_get('flickrcachewarmer_batch', 0) > $batchnumber - 1 ? 0 : variable_get('flickrcachewarmer_batch', 0);
+  // Go ahead to warm the cache for a batch of nodes.
+  flickrcachewarmer_run($nids[$batch]);
+  // Next time we should do the next batch.
+  variable_set('flickrcachewarmer_batch', $batch + 1);
+  $nidslist = implode(', ', $nids[$batch]);
+  $batchplusone = $batch + 1;
+  $nextcw = format_interval(variable_get('cron_safe_threshold', DRUPAL_CRON_DEFAULT_THRESHOLD), 2);
+  $ctlist = implode(', ', $content_types);
+  $message = t("Cache of nodes successfully rebuilt for the selected content types. Node ID's: %nidslist. This was batch # %batchplusone out of a total of %batchnumber", array(
+    '%nidslist' => $nidslist,
+    '%batchplusone' => $batchplusone,
+    '%batchnumber' => $batchnumber,
+    )) . '.<br />' . t('The next cache warming will take place in %nextcw (every cron run) on the following content types: %ctlist.', array(
+    '%nextcw' => $nextcw,
+    '%ctlist' => $ctlist,
+    ));
+  drupal_set_message($message, 'status', FALSE);
+  watchdog('flickrcachewarmer', $message);
+}
+
+/**
+ * Virtually visits all nodes of selected content types to ensure the cache of
+ * these pages is rebuild to avoid long page loads for a real visitor.
+ * Note that with the HEAD method the server MUST NOT return a message-body in
+ * the response. It turns out Drupal will rebuild the full page's cache anyway.
+ */
+function flickrcachewarmer_run($nids) {
+  // Visit each node.
+  foreach ($nids as $nid) {
+    if ((variable_get('flickr_curl2', 0) || !function_exists('stream_socket_client')) && function_exists('curl_version')) {
+      $result = flickr_curl_http_request($GLOBALS['base_url'] . '/node/' . $nid, array(
+        'method' => 'HEAD',
+      ));
+      $cmethod = 'cURL';
+    }
+    elseif (function_exists('stream_socket_client')) {
+      $result = drupal_http_request($GLOBALS['base_url'] . '/node/' . $nid, array(
+        'method' => 'HEAD',
+      ));
+      $cmethod = 'stream_socket_client';
+    }
+    if (isset($result)) {
+      if ($result->code != 200 && ($cmethod == 'stream_socket_client' || $cmethod == 'none') && function_exists('curl_version')) {
+        // Try to use cURL when drupal_http_request returns a different code
+        // than 200 (valid request, no errors). Most likely are 403 (forbidden)
+        // or 408 (Request Timeout).
+        $result = flickr_curl_http_request($GLOBALS['base_url'] . '/node/' . $nid, array(
+          'method' => 'HEAD',
+        ));
+        $cmethod = 'cURL';
+        $message = t('Automatic fallback to the cURL connection method kicked in on nid %nid to handle the request. Result code from the failing request', array('%nid' => $nid)) . ': ' . $result->code;
+        drupal_set_message($message, 'warning', FALSE);
+        watchdog('flickr', $message, array(), WATCHDOG_WARNING);
+        // Even the cURL method returns an error.
+        if ($result->code != 200) {
+          // Debug info.
+          if (variable_get('flickr_debug', 0) == 2 && function_exists('dpm')) {
+            dpm(t("Value of 'result' on nid %nid with error in 'function flickr_request()' with connection method '%cmethod' in 'flickr.inc'", array('%nid' => $nid, '%cmethod' => $cmethod)) . ':');
+            dpm($result);
+          }
+          flickr_set_error(t("Could not connect to Flickr, Error: %error", array('%error' => $result->error)));
+        }
+      }
+    }
+    else {
+      $message = t("There seems to be no connection method available on your server. Neither 'stream_socket_client' nor 'cURL'.");
+      drupal_set_message($message, 'error', FALSE);
+      watchdog('flickr', $message, array(), WATCHDOG_ERROR);
+    }
+  }
+}

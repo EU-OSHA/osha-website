@@ -1,0 +1,38 @@
+.flickr-photo-box {
+  float: right;
+}
+
+.flickr-photoset-box {
+  float: right;
+}
+
+span.flickr-wrap,
+span.flickr-photoset-single {
+  margin: 0 0 5px 5px;
+}
+
+.flickr-slideshow object {
+  right: 0;
+}
+span.floatleft {
+  float: right;
+  margin: 5px 0 0 10px;
+}
+span.floatright {
+  float: left;
+  margin: 5px 5px 0 0;
+}
+
+.flickr-form-align {
+  text-align: left;
+}
+
+.form-item.form-type-textfield.form-item-flickr-sswratio {
+  float: right;
+}
+
+/*Puts a preview template next to the preview itself.*/
+.flickr-preview {
+  float: right;
+  margin: 0 0 15px 12px;
+}

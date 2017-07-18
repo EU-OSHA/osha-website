@@ -7,6 +7,11 @@ When patching a contrib module, the following steps should be followed:
 
 List of patches (most recent first)
 
+* smart_trim
+  * White space added after each removed tag
+  * https://www.drupal.org/node/2147955
+  * /patches/smart_trim/extra_white_space-2147955-custom-D7.patch
+
 * match_redirect
   * checks redirect module in match_redirect_url_exists
   * /patches/match_redirect/match_redirect.patch

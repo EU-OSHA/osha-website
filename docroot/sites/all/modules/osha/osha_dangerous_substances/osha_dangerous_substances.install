@@ -169,3 +169,10 @@ function osha_dangerous_substances_update_7013() {
   search_api_index_reindex('default_content_index');
   features_revert_module('osha_dangerous_substances');
 }
+
+/**
+ * DS permissions
+ */
+function osha_dangerous_substances_update_7014() {
+  features_revert_module('osha_dangerous_substances');
+}

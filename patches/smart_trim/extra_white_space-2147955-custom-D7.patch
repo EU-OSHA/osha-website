@@ -1,0 +1,14 @@
+diff --git a/docroot/sites/all/modules/contrib/smart_trim/smart_trim.module b/docroot/sites/all/modules/contrib/smart_trim/smart_trim.module
+index 0b34ceb..f2e637d 100644
+--- a/docroot/sites/all/modules/contrib/smart_trim/smart_trim.module
++++ b/docroot/sites/all/modules/contrib/smart_trim/smart_trim.module
+@@ -57,7 +57,8 @@ function smart_trim_field_formatter_view($entity_type, $entity, $field, $instanc
+           if (!empty($settings['trim_options']['text'])) {
+             // Strip tags
+             $preserve_tags = !empty($settings['trim_preserve_tags']) ? $settings['trim_preserve_tags'] : '';
+-            $output = strip_tags(str_replace('<', ' <', $output), $preserve_tags);
++            // White space added after each removed tag - see: https://www.drupal.org/node/2147955
++            $output = str_replace(' <', '<', strip_tags(str_replace('<', ' <', $output), $preserve_tags));
+ 
+             // Strip out line breaks
+             $output = preg_replace('/\n|\r|\t/m', ' ', $output);

@@ -78,6 +78,10 @@ function osha_dangerous_substances_default_search_api_index() {
         "field_evaluation" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_exposure_route" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_external_url:url" : { "type" : "uri" },
+        "field_fc_provider" : {
+          "type" : "list\\u003Cinteger\\u003E",
+          "entity_type" : "field_collection_item"
+        },
         "field_fc_provider:field_fc_provider_name" : { "type" : "list\\u003Ctext\\u003E", "boost" : "2.0" },
         "field_fc_provider:field_fc_provider_name_o" : { "type" : "list\\u003Ctext\\u003E", "boost" : "2.0" },
         "field_fc_provider:field_provider_type" : {
@@ -89,6 +93,7 @@ function osha_dangerous_substances_default_search_api_index() {
         "field_hazard_physical_state" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_intellectual_property_righ" : { "type" : "string" },
         "field_item_type" : { "type" : "string" },
+        "field_languages_other" : { "type" : "text" },
         "field_material_country" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_material_purpose_type" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_measurement_method" : { "type" : "text" },

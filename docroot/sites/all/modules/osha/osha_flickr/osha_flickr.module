@@ -1,0 +1,686 @@
+<?php
+/**
+ * @file
+ * Code for the osha_flickr feature.
+ */
+
+include_once 'osha_flickr.features.inc';
+
+function osha_flickr_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'flickr_gallery_node_form') {
+    drupal_add_css(drupal_get_path('module', 'osha_flickr') .'/css/osha_flickr.css');
+  }
+}
+
+function osha_flickr_preprocess_views_view(&$vars) {
+  $view = $vars['view'];
+  if($view->name == 'flickr_albums') {
+    drupal_add_css(drupal_get_path('module', 'osha_flickr') .'/css/osha_flickr.css');
+  }
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function osha_flickr_album_sizes() {
+  return array(
+    'album_list' => array(
+      'label' => 'Album list',
+      'description' => t('album: Album list format'),
+    ),
+    'album_detail' => array(
+      'label' => 'Album detail',
+      'description' => t('album: Album detail format'),
+    ),
+    'album_cover' => array(
+      'label' => 'Album cover',
+      'description' => t('album: Album cover format'),
+    ),
+  );
+}
+
+function osha_flickr_field_formatter_info() {
+  // Formatters for general Flickr field.
+  $sizes = osha_flickr_album_sizes();
+  foreach ($sizes as $size => $info) {
+    $formatters[$size] = array(
+      'label' => $info['label'],
+      'field types' => array('flickrfield'),
+    );
+  }
+  return $formatters;
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function osha_flickr_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+  foreach ($items as $delta => $item) {
+    $variables = array(
+      '#node' => $entity,
+      '#item' => $item,
+      '#formatter' => $display['type'],
+      '#field_name' => $field['field_name'],
+      '#settings' => $display['settings'],
+    );
+    if ($display['type'] == 'album_detail') {
+      drupal_add_css(drupal_get_path('module', 'osha_flickr') .'/css/osha_flickr.css');
+    }
+    $element[$delta]['#markup'] = theme('osha_flickr_formatter_' . $display['type'], $variables);
+  }
+  return $element;
+}
+
+function osha_flickr_album_primary($id = NULL) {
+  static $primary;
+  if ($id) {
+    $primary = $id;
+  }
+  return $primary;
+}
+
+function theme_osha_flickr_field_formatter($element) {
+  $item = $element['#item'];
+  if (empty($item['id'])) {
+    return;
+  }
+  $formatter = $element['#formatter'];
+  switch ($item['type']) {
+    case 'photo_id':
+       $photo_data = flickr_photos_getinfo($item['id']);
+      $formatter = 'h';
+      return theme('osha_flickr_photo', array(
+        'format' => NULL,
+        'attribs' => NULL,
+        'size' => $formatter,
+        'photo' => $photo_data,
+        'settings' => $element['#settings'],
+        'wrapper_class' => !empty($element['#settings']['image_class']) ? $element['#settings']['image_class'] : '',
+      ));
+    case 'id':
+       $photo_data = flickr_photosets_getinfo($item['id']);
+      return theme('osha_flickr_photoset', array(
+        'owner' => $photo_data['owner'],
+        'attribs' => NULL,
+        'size' => $formatter,
+        'photoset' => $photo_data,
+        'per_page' => variable_get('flickr_sets_photos_per_set', 6),
+        'settings' => $element['#settings'],
+        'node' => $element['#node'],
+      ));
+  }
+}
+
+function theme_osha_flickr_photoset($variables) {
+
+  $photoset = $variables['photoset'];
+  $owner = $variables['owner'];
+  //  $size = $variables['size'];
+  //  $size = '-';// ???
+  $size = 'n';
+  $media = isset($variables['media']) ? $variables['media'] : 'photos';
+  $attribs = $variables['attribs'];
+  $per_page = (isset($variables['per_page'])) ? $variables['per_page'] : variable_get('flickr_photos_per_page', 6);
+
+  $formatter = $variables['size'];
+  if (module_exists('flickr_sets') && ($formatter == 'album_detail')) {
+    $output = "<div class='flickr-photoset'>\n";
+    $page = intval(@$_REQUEST['page'])+1;
+    $photos = flickr_photosets_getphotos($photoset['id'], array(
+      'per_page' => $per_page,
+      'media' => $media,
+    ), $page);
+
+    if ($photoset['primary']) {
+      osha_flickr_album_primary($photoset['primary']);
+    }
+
+    if ($photos['photoset']['total']) {
+      $output .= '<div class="photo-gallery container">';
+      foreach ((array) $photos['photoset']['photo'] as $photo) {
+        // Insert owner into $photo because theme_flickr_photo needs it.
+        $photo['owner'] = $owner;
+        $output .= '<div class="col-md-4 col-sm-6 col-xs-12 gallery-row">';
+        $output .= theme('osha_flickr_photo', array(
+          'photo' => $photo,
+          'size' => $size,
+          'format' => NULL,
+          'attribs' => $attribs,
+          'min_title' => $variables['min_title'],
+          'min_metadata' => $variables['min_metadata'],
+          'per_page' => $per_page,
+        ));
+        $output .= '</div>';
+      }
+      $output .= '</div>';
+      pager_default_initialize($photos['photoset']['total'], $per_page);
+      $output .= theme('pager', array(
+        'tags' => array('<', '<', '', '>', '>'),
+        'quantity' => 9,
+        'parameters' => [],
+      ));
+    }
+    else {
+      $output .= t('No media in this set.');
+    }
+    $output .= '</div>';
+    return $output;
+  }
+  else {
+    $primary = @$variables['node']->field_cover_flickr['und'][0]['id'];
+    if ($primary) {
+      $photoset['primary'] = $primary;
+    } else {
+      osha_flickr_album_primary($photoset['primary']);
+    }
+    $img = flickr_img($photoset, $size, $attribs);
+    $photo_url = 'node/' . $variables['node']->nid; //flickr_photoset_page_url($owner, $photoset['id']);
+    $title = is_array($photoset['title']) ? $photoset['title']['_content'] : $photoset['title'];
+    return l($img, $photo_url, array(
+      'attributes' => array(
+        'title' => $title
+      ),
+      'absolute' => TRUE,
+      'html' => TRUE,
+    ));
+  }
+}
+
+/**
+ * Theme Flickr photo.
+ */
+function theme_osha_flickr_photo($variables) {
+  $class = variable_get('flickr_class');
+  $rel = variable_get('flickr_rel');
+  $photo = $variables['photo'];
+  $size = $variables['size'];
+  $format = $variables['format'];
+  $attribs = $variables['attribs'];
+  $wrapper_class = (isset($variables['wrapper_class'])) ? $variables['wrapper_class'] : '';
+  $min_title = $variables['min_title'];
+  $min_metadata = $variables['min_metadata'];
+  // If we have a class or style containing the term 'float', prepare it to be
+  // added to the 'flickr-wrapper' span element later on that includes also the
+  // caption.
+  if (isset($attribs['class'])) {
+    $class_float = (stripos($attribs['class'], 'float') !== FALSE) ? ' ' . $attribs['class'] : '';
+  }
+  else {
+    $class_float = '';
+  }
+  if (isset($attribs['style'])) {
+    $style_float = (stripos($attribs['style'], 'float') !== FALSE) ? ' "' . $attribs['style'] . '";' : '';
+  }
+  else {
+    $style_float = '';
+  }
+  $url = flickr_photo_img($photo, variable_get('flickr_opening_size', ''), $format);
+  $img_url = flickr_photo_img($photo, $size);
+
+  // If the image is a square we know the width (avoids to make a request).
+  switch ($size) {
+    case 's':
+      $width = '75';
+      $height = '75';
+      break;
+
+    case 'q':
+      $width = '150';
+      $height = '150';
+      break;
+  }
+  $sise = $size;
+  if (module_exists('flickrstyle')) {
+    if ((variable_get('flickrstyle_emphasize', 2) >= 1 && variable_get('flickrstyle_emphasize', 2) <= 3) && $size == 'q') {
+      $size = flickr_one_size_bigger($size);
+      $img_url = flickr_photo_img($photo, $size);
+    }
+  }
+  // If it is not a square.
+  if (!isset($width) || $sise == 'q') {
+    // Get the real width of the image.
+    // Reset the variable to use cURL if not available. In case it has been
+    // removed. Unlikely but possible.
+    if (!function_exists('curl_version')) {
+      variable_set('flickr_curl', 0);
+    }
+    // 'getimagesize' needs 'allow_url_fopen' to be enabled.
+    if (ini_get("allow_url_fopen") && variable_get('flickr_curl', 0) == 0) {
+      list($width) = getimagesize($img_url);
+    }
+    // Fallback to cURL if fopen cannot be used or cURL is set to be used.
+    elseif (function_exists('curl_version')) {
+      $width = ranger($img_url);
+    }
+    // Our server settings don't allow us to determine the image width.
+    // Use the known longest side of the image for the width. Leads to
+    // horizontal white space on portrait orientated images.
+    if (!isset($width) || $width == 0) {
+      switch ($size) {
+        case 't':
+          $width = '100';
+          break;
+
+        case 'm':
+          $width = '240';
+          break;
+
+        case 'n':
+          $width = '320';
+          break;
+
+        case 'z':
+          $width = '640';
+          break;
+
+        case 'c':
+          $width = '800';
+          break;
+
+        case 'b':
+          $width = '1024';
+          break;
+
+        case 'h':
+          $width = '1600';
+          break;
+
+        case 'k':
+          $width = '2048';
+          break;
+
+        default:
+          $width = '500';
+      }
+    }
+    switch ($size) {
+      case 't':
+        $height = '100';
+        break;
+
+      case 'm':
+        $height = '240';
+        break;
+
+      case 'n':
+        $height = '320';
+        break;
+
+      case 'z':
+        $height = '640';
+        break;
+
+      case 'c':
+        $height = '800';
+        break;
+
+      case 'b':
+        $height = '1024';
+        break;
+
+      case 'h':
+        $height = '1600';
+        break;
+
+      case 'k':
+        $height = '2048';
+        break;
+
+      default:
+        $height = '500';
+    }
+  }
+  // If we zoom or enlarge an image, we should use the bigger size to retain
+  // an acceptable resolution.
+  if (module_exists('flickrstyle')) {
+    if (variable_get('flickrstyle_emphasize', 2) >= 1 && variable_get('flickrstyle_emphasize', 2) <= 3) {
+      if ($width < $height && $sise == 'q') {
+        $width = round(150 * $width / $height);
+      }
+      elseif ($sise == 'q') {
+        $width = '150';
+      }
+      if ($sise != 'q') {
+        $size = flickr_one_size_bigger($size);
+      }
+    }
+  }
+  $img = flickr_img($photo, $size, $attribs);
+  $photo_url = flickr_photo_page_url($photo['owner'], $photo['id']);
+  $info = flickr_photos_getinfo($photo['id']);
+  $people = flickr_get_user_info($info['owner']['nsid']);
+  switch ($info['license']) {
+    case '0':
+      $license = ' <span class="flickr-copyright">' . l('©', 'https://en.wikipedia.org/wiki/Copyright', array(
+          'attributes' => array(
+            'title' => t('All Rights Reserved'),
+            'target' => '_blank',
+          ),
+          'html' => TRUE,
+        )) . '</span>';
+      $licenselong = '&copy; ' . t('All Rights Reserved') . '</span>';
+      break;
+
+    case '1':
+      $license = ' <span class="flickr-cc">' . l('cna', 'https://creativecommons.org/licenses/by-nc-sa/2.0/', array(
+          'attributes' => array(
+            'title' => t('Creative Commons — Attribution-NonCommercial-ShareAlike 2.0 Generic — CC BY-NC-SA 2.0'),
+            'target' => '_blank',
+          ),
+        )) . '</span>';
+      $licenselong = t('Creative Commons, Attribution, Non Commercial, ShareAlike');
+      break;
+
+    case '2':
+      $license = ' <span class="flickr-cc">' . l('cn', 'https://creativecommons.org/licenses/by-nc/2.0/', array(
+          'attributes' => array(
+            'title' => t('Creative Commons — Attribution-NonCommercial 2.0 Generic — CC BY-NC 2.0'),
+            'target' => '_blank',
+          ),
+        )) . '</span>';
+      $licenselong = t('Creative Commons, Attribution, Non Commercial');
+      break;
+
+    case '3':
+      $license = ' <span class="flickr-cc">' . l('cnd', 'https://creativecommons.org/licenses/by-nc-nd/2.0/', array(
+          'attributes' => array(
+            'title' => t('Creative Commons — Attribution-NonCommercial-NoDerivs 2.0 Generic — CC BY-NC-ND 2.0'),
+            'target' => '_blank',
+          ),
+        )) . '</span>';
+      $licenselong = t('Creative Commons, Attribution, Non Commercial, No Derivs');
+      break;
+
+    case '4':
+      $license = ' <span class="flickr-cc">' . l('c', 'https://creativecommons.org/licenses/by/2.0/', array(
+          'attributes' => array(
+            'title' => t('Creative Commons — Attribution 2.0 Generic — CC BY 2.0'),
+            'target' => '_blank',
+          ),
+        )) . '</span>';
+      $licenselong = t('Creative Commons, Attribution');
+      break;
+
+    case '5':
+      $license = ' <span class="flickr-cc">' . l('cs', 'https://creativecommons.org/licenses/by-sa/2.0/', array(
+          'attributes' => array(
+            'title' => t('Creative Commons — Attribution-ShareAlike 2.0 Generic — CC BY-SA 2.0'),
+            'target' => '_blank',
+          ),
+        )) . '</span>';
+      $licenselong = t('Creative Commons, Attribution, Share Alike');
+      break;
+
+    case '6':
+      $license = ' <span class="flickr-cc">' . l('cd', 'https://creativecommons.org/licenses/by-nd/2.0/', array(
+          'attributes' => array(
+            'title' => t('Creative Commons — Attribution-NoDerivs 2.0 Generic — CC BY-ND 2.0'),
+            'target' => '_blank',
+          ),
+        )) . '</span>';
+      $licenselong = t('Creative Commons, Attribution, No Derivs');
+      break;
+
+    case '7':
+      $license = ' <span class="flickr-cc">' . l('p', 'https://flickr.com/commons/usage/', array(
+          'attributes' => array(
+            'title' => t('Public Domain - No known copyright restrictions'),
+            'target' => '_blank',
+          ),
+        )) . '</span>';
+      $licenselong = t('Public Domain, no known copyright restrictions');
+      break;
+
+    case '8':
+      $license = '<br />' . l(t('United States Government Work'), 'http://www.usa.gov/copyright.shtml', array(
+          'attributes' => array(
+            'title' => t('Copyright and Other Rights Pertaining to U.S. Government Works | USA.gov'),
+            'target' => '_blank',
+          ),
+        ));
+      $licenselong = t('Copyright and Other Rights Pertaining to U.S. Government Works | USA.gov');
+      break;
+
+    default:
+      // Some deleted Flickr photos can still result within a query but lack
+      // license info in that case.
+      $license = '';
+      $licenselong = '';
+      break;
+  }
+  // Disable license icon overlay if not set or with the Flickr Style 'Enlarge'.
+  // See https://www.drupal.org/node/2424119.
+  if (module_exists('flickrstyle')) {
+    $emphasize = variable_get('flickrstyle_emphasize', 2);
+  }
+  else {
+    $emphasize = -1;
+  }
+  $license_overlay = variable_get('flickr_license', 1) > 0 && variable_get('flickr_license', 1) < 3 && !(($emphasize == 2 || $emphasize != -1) && variable_get('flickr_license', 1) == 1) ? $license : '';
+  $license = variable_get('flickr_license', 1) > 2 ? $license : '';
+  // Get the Flickr image title for set data or the photo itself. Sanitize.
+  $title = is_array($photo['title']) ? str_replace('"', "'", strip_tags($photo['title']['_content'])) : $photo['title'];
+  // Replace titles like e.g. 'IMG_4259' with 'View on Flickr'.
+  $regex = variable_get('flickr_regex', '^[a-zA-Z]+[^\s][0-9]+$');
+  $title = (preg_match('/' . $regex . '/', $title) && !empty($regex)) || empty($title) ? 'View on Flickr' : $title;
+  // For videos add the '(VIDEO)' to the title if it not already contains it.
+  $title .= (($info['media'] !== 'video') || (stripos($title, 'video') !== FALSE)) ? '' : ' ' . t('(VIDEO)');
+  // Use title if description does not exist, else sanitize the description.
+  $description = !empty($info['description']['_content']) ? str_replace('"', "'", htmlspecialchars_decode(strip_tags($info['description']['_content']))) : $title;
+  // Real name if it exists else the username. Link to Flickr profile page.
+  // Replace with $people['photostream'] if you want to link to the photostream.
+  $username = $people['name'];
+  // The date an image was taken.
+  $taken = '';
+  if (isset($info['dates']['taken'])) {
+    // Format the date displayed in the image caption.
+    $format_taken = variable_get('flickr_date_format_image_caption', 'interval');
+    switch ($format_taken) {
+      case 'interval':
+        $taken = format_interval(time() - strtotime($info['dates']['taken']), 1) . ' ' . t('ago');
+        break;
+
+      case 'none':
+        $taken = '';
+        break;
+
+      default:
+        $taken = format_date(strtotime($info['dates']['taken']), $format_taken, '', NULL);
+    }
+    // Format the date displayed when hovering the date on image caption.
+    $format_hover = variable_get('flickr_date_format_image_caption_hover', 'long');
+    switch ($format_hover) {
+      case 'interval':
+        $taken_hover = format_interval(time() - strtotime($info['dates']['taken']), 1) . ' ' . t('ago');
+        break;
+
+      case 'none':
+        $taken_hover = '';
+        break;
+
+      default:
+        $taken_hover = format_date(strtotime($info['dates']['taken']), $format_hover, '', NULL);
+    }
+    // Finalize the formatting.
+    $taken = (empty($taken_hover)) ? $taken : '<a title="' . $taken_hover . '">' . $taken . '</a>';
+    $taken .= ($format_taken == 'interval') ? ' ' . t('ago') : '';
+  }
+  // A bunch of geo data.
+  $neighbourhood = isset($info['location']['neighbourhood']['_content']) ? strip_tags($info['location']['neighbourhood']['_content']) . ', ' : '';
+  $locality = isset($info['location']['locality']['_content']) ? strip_tags($info['location']['locality']['_content']) . ', ' : '';
+  $region = isset($info['location']['region']['_content']) ? strip_tags($info['location']['region']['_content']) . ', ' : '';
+  $country = isset($info['location']['country']['_content']) ? strip_tags($info['location']['country']['_content']) : '';
+  $geophp = variable_get('flickr_geophp', array(
+    'title' => 'title',
+    'caption' => 0,
+  ));
+  if (gettype($geophp['caption']) != 'integer' && isset($info['location']['latitude']) && isset($info['location']['longitude'])) {
+    $google = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' . $info['location']['latitude'] . ',' . $info['location']['longitude'];
+    if ((variable_get('flickr_curl2', 0) || !function_exists('stream_socket_client')) && function_exists('curl_version')) {
+      $result = flickr_curl_http_request($google);
+    }
+    elseif (function_exists('stream_socket_client')) {
+      $result = drupal_http_request($google);
+    }
+    $json = json_decode($result->data);
+    $loc = $json->results[0]->formatted_address;
+    // Remove the postal code from the string.
+    // Usually the last component of the returned address by Google.
+    $location_components = $json->results[0]->address_components;
+    $location_pc = end($location_components);
+    if (isset($location_pc->types[0])) {
+      if (strpos($location_pc->types[0], 'postal_code') !== FALSE) {
+        $loc = str_replace($location_pc->long_name, '', $loc);
+      }
+    }
+    else {
+      $loc = $neighbourhood . $locality . $region . $country;
+    }
+  }
+  else {
+    $loc = $neighbourhood . $locality . $region . $country;
+  }
+  $location = !empty($country) ? ' ' . t('at') . ' ' . l($loc, 'https://www.flickr.com/photos/' . $info['owner']['nsid'] . '/map?&location=' . $neighbourhood . $locality . $region . $country, array(
+      'attributes' => array(
+        'title' => t('View photo on Flickr map.'),
+        'target' => '_blank',
+        'class' => array('flickr-location'),
+      ),
+    )) : '';
+  // Compose extra Flickr info as HTML to render.
+  $metadata = $taken . $location . ' ' . t('by') . ' ' . $username . '.';
+  // Image width < 150 px is too small for extra info. Can be set differently.
+  $metadatacaption = $width < $min_metadata ? '' : '<span class="flickr-metadata">' . $metadata . $license . '</span>';
+  // Image width < 100 px is too small for most titles. Can be set differently.
+  if (variable_get('flickr_class') == NULL && variable_get('flickr_rel') == NULL) {
+    $notitle = '';
+  }
+  else {
+    // To give best possible attribution given the small space, display license
+    // icon if set to show.
+    $notitle = '<span class="flickr-no-title">' . t('Flickr') . '</span> ';
+    $metadatacaption = $width < $min_metadata ? $license : $metadatacaption;
+  }
+  $class_notitle = $width < $min_title && $width < $min_metadata ? ' flickr-no-title' : '';
+  $credit = $width < $min_title ? $notitle : '<span class="flickr-title">' . $title . '</span><br />';
+  // Determine what info goes with the enlarged version of the image.
+  $overlay = variable_get('flickr_info_overlay', array(
+    'title' => 'title',
+    'metadata' => 'metadata',
+    'description' => 'description',
+    'license' => 0,
+  ));
+  $overlaytitle = (gettype($overlay['title']) == 'integer') ? '' : $title . ' - ';
+  $metadata = (gettype($overlay['metadata']) == 'integer') ? '' : $metadata . ' - ';
+  $description = (gettype($overlay['description']) == 'integer' || $overlaytitle == $description . ' - ') ? '' : $description . ' - ';
+  $licenselong = (gettype($overlay['license']) == 'integer') ? '' : $licenselong;
+  $overlayhtml = $overlaytitle . $metadata . $description . $licenselong;
+  // Optionally use the GPL licensed magnifier image supplied with the module or
+  // user specified.
+  if (module_exists('flickrstyle')) {
+    $uri = module_exists('style_settings') ? variable_get('flickrstyle_magnifier_image', '') : '';
+    $magnifierurl = empty($uri) ? '/' . drupal_get_path('module', 'flickr') . '/style/img/magnifier.png' : $uri;
+    $iconsize = module_exists('style_settings') ? variable_get('flickrstyle_magnifier_size', '50px') : '50px';
+    $magnifier = variable_get('flickrstyle_emphasize', 2) == 4 && module_exists('flickrstyle') ? '<span class="hover-icon"><img src="' . $magnifierurl . '" style="width:' . $iconsize . ';height:' . $iconsize . ';"></span>' : '';
+  }
+  else {
+    $magnifier = '';
+  }
+  // Final step when NO overlay browser is used that generates the image that
+  // links to the Flickr page to comply with the TOS of Flickr.
+  if (variable_get('flickr_class') == NULL && variable_get('flickr_rel') == NULL && $width < $min_title && $width < $min_metadata) {
+    return '<span class="flickr-wrapper' . $class_notitle . $class_float . '"' . ' style="width:' . $width . 'px;"' . $style_float . '><span class="flickr-image">' . l($img . $magnifier, $photo_url, array(
+        'attributes' => array(
+          'title' => $title,
+          'target' => '_blank',
+          'class' => 'flickr-img-wrap',
+        ),
+        'absolute' => TRUE,
+        'html' => TRUE,
+      )) . $license_overlay . '</span></span>';
+  }
+  else {
+    // If 'class' or 'rel' attribute are defined (overlay browser), use a
+    // caption.
+    // Final step that generates the image with a link to the bigger version and
+    // a link to the Flickr page under it to comply with the TOS of Flickr.
+    if (variable_get('flickr_class') == NULL && variable_get('flickr_rel') == NULL) {
+      $url = $photo_url;
+    }
+    if (!isset($photo['media'])) {
+       $photo = flickr_photos_getinfo($photo['id']);
+    }
+    if ($photo['media'] == 'video' && module_exists('colorbox') && variable_get('colorbox_inline', 0) == 1) {
+      return '<div style="display: none;">
+      <div id="' . $photo['id'] . '">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" data="https://www.flickr.com/apps/video/stewart.swf" type="application/x-shockwave-flash" height="270" width="480">
+          <param name="flashvars" value="intl_lang=en-US&amp;photo_secret=' . $photo['secret'] . '&amp;photo_id=' . $photo['id'] . '&amp;hd_default=false">
+          <param name="movie" value="https://www.flickr.com/apps/video/stewart.swf"><param name="bgcolor" value="#000000">
+          <param name="allowFullScreen" value="true"><embed allowfullscreen="true" bgcolor="#000000" flashvars="intl_lang=en-US&amp;photo_secret=' . $photo['secret'] . '&amp;photo_id=' . $photo['id'] . '&amp;hd_default=false" src="https://www.flickr.com/apps/video/stewart.swf" type="application/x-shockwave-flash" height="270" width="480">
+        </object>
+      </div>
+      </div><span class="flickr-wrapper' . $class_notitle . $class_float . '"' . ' style="width:' . $width . 'px;"' . $style_float . '><span class="flickr-image">' . l($img . $magnifier, $photo_url . '/?width=480&height=280&inline=true#' . $photo['id'], array(
+          'attributes' => array(
+            'title' => $overlayhtml,
+            'class' => 'colorbox-inline flickr-img-wrap',
+            'rel' => $rel,
+            'target' => '_blank',
+          ),
+          'absolute' => TRUE,
+          'html' => TRUE,
+        )) . $license_overlay . '</span><span class="flickr-credit' . $class_notitle . '">' . l($credit, $photo_url, array(
+          'attributes' => array(
+            'title' => t('View on Flickr. To enlarge click image.'),
+            'target' => '_blank',
+          ),
+          'html' => TRUE,
+        )) . $metadatacaption . '</span></span>';
+    }
+    else {
+        $rs = '<span class="flickr-wrapper ' . $wrapper_class . ' ' . $class_notitle . $class_float . '"' . $style_float .
+        '><span class="flickr-image">' . l($img . $magnifier, $url, array(
+          'attributes' => array(
+            'title' => $overlayhtml,
+            'class' => array($class . ' flickr-img-wrap'),
+            'rel' => $rel,
+            'target' => '_blank',
+          ),
+          'absolute' => TRUE,
+          'html' => TRUE,
+        )) . $license_overlay . '</span></span>';
+      return $rs;
+    }
+  }
+}
+
+function osha_flickr_theme() {
+  $themes = array();
+  foreach (osha_flickr_album_sizes() as $size => $info) {
+    $themes['osha_flickr_formatter_' . $size] = array(
+      'variables' => array('element'),
+      'function' => 'theme_osha_flickr_field_formatter',
+    );
+    // Theme function for the primary photo formatters of a Flickr photo set.
+  }
+  return $themes + array(
+      'osha_flickr_photo' => array(
+        'variables' => array(
+          'img',
+          'photo_url',
+          'formatter',
+          'photo_data',
+          'node',
+        ),
+      ),
+      'osha_flickr_photoset' => array(
+        'variables' => array(
+          'img',
+          'photo_url',
+          'formatter',
+          'photo_data',
+          'node',
+        ),
+      ),
+  );
+}

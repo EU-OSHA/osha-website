@@ -5,14 +5,32 @@
  */
 
 /**
+ * Implements hook_install().
+ */
+function flickr_install() {
+  if (module_exists('colorbox')) {
+    variable_set('flickr_class', 'colorbox');
+    variable_set('flickr_rel', 'gallery-all');
+    variable_set('colorbox_inline', 1);
+  }
+  elseif (module_exists('lightbox2')) {
+    variable_set('flickr_rel', 'lightbox[gallery]');
+  }
+}
+
+/**
  * Implements hook_uninstall().
  */
 function flickr_uninstall() {
   variable_del('flickr_api_key');
   variable_del('flickr_api_secret');
   variable_del('flickr_cache_duration');
+  variable_del('flickr_cc');
   variable_del('flickr_class');
   variable_del('flickr_css');
+  variable_del('flickr_curl');
+  variable_del('flickr_curl2');
+  variable_del('flickr_debug');
   variable_del('flickr_default_size_album');
   variable_del('flickr_default_userid');
   variable_del('flickr_opening_size');
@@ -22,10 +40,27 @@ function flickr_uninstall() {
   variable_del('flickr_title_suppress_on_small');
   variable_del('flickr_metadata_suppress_on_small');
   variable_del('flickr_info_overlay');
-  variable_del('flickr_caption_padding');
   variable_del('flickr_license');
+  variable_del('flickr_restrict');
+  variable_del('flickr_extend');
   variable_del('flickr_counter');
   variable_del('flickr_maps');
+  variable_del('flickr_geophp');
+  variable_del('flickr_smart');
+  variable_del('flickr_date_format_image_title');
+  variable_del('flickr_date_format_image_caption');
+  variable_del('flickr_date_format_image_caption_hover');
+  variable_del('flickr_date_format_album_title');
+  variable_del('flickr_capsize');
+  variable_del('flickr_sswidth_value');
+  variable_del('flickr_sswidth_unit');
+  variable_del('flickr_sswidth');
+  variable_del('flickr_sswratio');
+  variable_del('flickr_sshratio');
+  variable_del('flickr_ssratio');
+  variable_del('flickr_caption_fontsize');
+  variable_del('flickr_preview_html');
+  variable_del('flickr_preview_collapsed');
 }
 
 /**
@@ -59,6 +94,22 @@ function flickr_schema() {
 }
 
 /**
+ * Implements hook_requirements().
+ */
+function flickr_requirements($phase) {
+  if ($phase == 'runtime') {
+    $requirements = array();
+    $t = get_t();
+    $requirements['flickr_requirements'] = array(
+      'title' => $t('Flickr'),
+      'value' => variable_get('flickr_api_key', NULL) ? $t('A Flickr API key has been set.') : $t("No Flickr API key has been set at !link.", array('!link' => l('admin/config/media/flickr', 'admin/config/media/flickr'))),
+      'severity' => variable_get('flickr_api_key', NULL) ? REQUIREMENT_OK : REQUIREMENT_ERROR,
+    );
+    return $requirements;
+  }
+}
+
+/**
  * Create new index 'license' on the variable 'flickr_info_overlay'.
  */
 function flickr_update_7001() {
@@ -83,4 +134,25 @@ function flickr_update_7001() {
  */
 function flickr_update_7101() {
   variable_del("flickr_default_size");
+}
+
+/**
+ * Enable 'Colorbox inline' to allow playing videos inside Colorbox.
+ */
+function flickr_update_7102() {
+  if (module_exists('colorbox')) {
+    variable_set('flickr_class', 'colorbox');
+    variable_set('flickr_rel', 'gallery-all');
+    variable_set('colorbox_inline', 1);
+  }
+  elseif (module_exists('lightbox2')) {
+    variable_set('flickr_rel', 'lightbox[gallery]');
+  }
+}
+
+/**
+ * Delete unused variables.
+ */
+function flickr_update_7103() {
+  variable_del('flickr_caption_padding');
 }

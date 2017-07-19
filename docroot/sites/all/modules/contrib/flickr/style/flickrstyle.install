@@ -1,0 +1,33 @@
+<?php
+/**
+ * @file
+ * The Flickr Style uninstall hook
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function flickrstyle_uninstall() {
+  variable_del('flickrstyle_styles');
+  variable_del('flickrstyle_caption');
+  variable_del('flickrstyle_emphasize');
+  variable_del('flickrstyle_nostyle');
+  variable_del('flickrstyle_rounded');
+  variable_del('flickrstyle_radius');
+  variable_del('flickrstyle_magnifier_size');
+  variable_del('flickrstyle_bgcolor');
+  variable_del('flickrstyle_border_color');
+  variable_del('flickrstyle_border_thickness');
+  variable_del('flickrstyle_border_thickness_doubled');
+  variable_del('flickrstyle_magnifier_image');
+  variable_del('flickrstyle_magnifier_halfsize');
+  variable_del('flickrstyle_magnifier_imgupload');
+  variable_del('flickrstyle_magnifier_imgupload_url');
+  variable_del('flickrstyle_magnifier_opacity');
+  variable_del('flickrstyle_radius_unit');
+  variable_del('flickrstyle_radius_value');
+  variable_del('flickrstyle_scale');
+  variable_del('flickrstyle_shadow_color');
+  variable_del('flickrstyle_spacing');
+  _drupal_flush_css_js();
+}

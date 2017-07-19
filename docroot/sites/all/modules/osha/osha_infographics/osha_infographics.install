@@ -104,3 +104,8 @@ function osha_infographics_update_7006() {
   // revert to create the new field
   features_revert_module('osha_infographics');
 }
+
+//MDR-1289: Features revert.
+function osha_infographics_update_7007() {
+  features_revert_module('osha_infographics');
+}

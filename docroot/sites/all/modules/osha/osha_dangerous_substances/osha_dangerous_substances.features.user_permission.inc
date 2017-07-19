@@ -20,9 +20,28 @@ function osha_dangerous_substances_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete any dangerous_substances content'.
+  $permissions['delete any dangerous_substances content'] = array(
+    'name' => 'delete any dangerous_substances content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete own dangerous_substances content'.
   $permissions['delete own dangerous_substances content'] = array(
     'name' => 'delete own dangerous_substances content',
+    'roles' => array(
+      'Dangerous substances' => 'Dangerous substances',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit any dangerous_substances content'.
+  $permissions['edit any dangerous_substances content'] = array(
+    'name' => 'edit any dangerous_substances content',
     'roles' => array(
       'Dangerous substances' => 'Dangerous substances',
       'administrator' => 'administrator',

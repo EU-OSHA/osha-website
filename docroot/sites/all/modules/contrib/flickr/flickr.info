@@ -4,9 +4,16 @@ core = 7.x
 package = Flickr
 configure = admin/config/media/flickr
 
-; Information added by Drupal.org packaging script on 2014-06-26
-version = "7.x-1.6"
+simplytest_dependencies[] = style_settings
+simplytest_dependencies[] = colorbox
+simplytest_dependencies[] = flickr_simplytest
+simplytest_dependencies[] = libraries (>=2.x)
+simplytest_dependencies[] = colorbox
+soft_dependencies[] = style_settings
+
+; Information added by Drupal.org packaging script on 2015-08-06
+version = "7.x-1.8"
 core = "7.x"
 project = "flickr"
-datestamp = "1403814832"
+datestamp = "1438860137"
 

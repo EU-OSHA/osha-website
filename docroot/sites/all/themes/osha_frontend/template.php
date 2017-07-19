@@ -294,15 +294,15 @@ function osha_frontend_block_view_alter(&$data, $block) {
 /**
  * Implements hook_preprocess_page
  */
-function osha_frontend_preprocess_page(&$variables){
+function osha_frontend_preprocess_page(&$variables) {
   $variables['blog'] = FALSE;
   $bundle = '';
 
-  if(isset($variables['page']['content']['system_main']['comment_form']['#bundle'])) {
+  if (isset($variables['page']['content']['system_main']['comment_form']['#bundle'])) {
     $bundle = $variables['page']['content']['system_main']['comment_form']['#bundle'];
   }
 
-  if(preg_match('/(.)*(blog)(.)*/', $_SERVER['REQUEST_URI']) || $bundle == 'comment_node_blog'){
+  if (preg_match('/(.)*(blog)(.)*/', $_SERVER['REQUEST_URI']) || $bundle == 'comment_node_blog') {
     $variables['blog'] = TRUE;
   }
 
@@ -318,6 +318,58 @@ function osha_frontend_preprocess_page(&$variables){
       ),
     ), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'osha') . '/js/open_all_translations.js');
+  }
+
+  // add back to links (e.g. Back to news)
+  if (isset($variables['node'])) {
+    $node = $variables['node'];
+    $tag_vars = array(
+      'element' => array(
+        '#tag' => 'h1',
+        '#attributes' => array(
+          'class' => array('page-header'),
+        ),
+      ),
+    );
+
+    if ($node->type == 'flickr_gallery') {
+      if (!@$variables['page']['content']['system_main']['nodes'][$variables['node']->nid]['field_cover_flickr']) {
+        $primary = osha_flickr_album_primary();
+        $formatter = 'h';
+        $markup = theme('osha_flickr_photo', array(
+          'format' => NULL,
+          'attribs' => NULL,
+          'size' => $formatter,
+          'photo' => flickr_photos_getinfo($primary),
+          'settings' => [],
+          'wrapper_class' => !empty($element['#settings']['image_class']) ? $element['#settings']['image_class'] : '',
+        ));
+        $cover_flickr = [
+          '#theme' => 'field',
+          '#weight' => 2,
+          '#field_name' => 'field_cover_flickr',
+          '#formatter' => 'album_cover',
+          '#field_type' => 'flickrfield',
+          '#label_display' => 'hidden',
+          '#object' => $variables['node'],
+          '#items' => [
+            [
+              'id' => $primary,
+            ]
+          ],
+          ['#markup' => $markup],
+        ];
+        $variables['page']['content']['system_main']['nodes'][$variables['node']->nid]['field_cover_flickr'] = $cover_flickr;
+      }
+
+      drupal_set_title(t('Photo gallery'));
+      $link_title = t('Back to gallery');
+      $link_href = 'photo-gallery';
+      $variables['page']['above_title']['back-to-link'] = array(
+        '#type' => 'item',
+        '#markup' => l($link_title, $link_href, array('attributes' => array('class' => array('back-to-link pull-right')))),
+      );
+    }
   }
 }
 

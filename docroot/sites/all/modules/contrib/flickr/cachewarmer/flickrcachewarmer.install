@@ -1,0 +1,14 @@
+<?php
+/**
+ * @file
+ * The Flickr Cache Warmer uninstall hook.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function flickrcachewarmer_uninstall() {
+  variable_del('flickrcachewarmer_nodetypes');
+  variable_del('flickrcachewarmer_run');
+  variable_del('flickrcachewarmer_batch');
+}

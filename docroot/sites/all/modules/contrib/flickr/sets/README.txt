@@ -8,6 +8,13 @@ images, besides photosets, tags can be used, in combination with a specific user
 from the taxonomy terms attached to a node, to create dynamic, context sensitive
 albums.
 
+To use Flickr Sets in user profiles, configure a Flickr identifier specified on
+the user account at user/[uid]/edit. Of course some albums must be present on
+the correspondent Flickr account. If you want other users to see those sets,
+give them the permission "View Flickr photos on user profiles" at
+admin/people/permissions#module-flickr. After that, browse to
+www.yoursite.com/flickr/[uid]/sets.
+
 A photo (or video) can make part of more than one set, without the need of
 duplicating it. Just go to https://www.flickr.com/photos/organize, click 'Add to
 album' and drag your images into it.
@@ -17,14 +24,6 @@ in:
 - the node body using Flickr Filter
 - a block using Flickr Block
 - a field using Flickr Field.
-
-Video support
-=============
-To 'play' the videos embedded on a site, instead of just showing a still image
-of it:
-- Put the videos (one or more) you want to display together in a set.
-- Show the set in the node body, a block or a Flickr field using the size x for
-  a Flash slideshow or y for the non-Flash version.
 
 Disabling the Flickr Sets submodule: What happens?
 ==================================================

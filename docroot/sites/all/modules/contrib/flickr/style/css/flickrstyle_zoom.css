@@ -1,0 +1,40 @@
+/**
+ * The CSS values that are wrapped in '/*variable' comments are intended for use
+ * by https://www.drupal.org/project/style_settings. Enable that module to
+ * have those CSS variables exposed in the settings UI.
+ */
+
+.flickr-wrap .flickr-photo-img:hover,
+img.flickr-photoset-img:hover {
+  position: relative;
+  z-index: 1;
+  top: 1.4em;
+  margin: 0;
+  padding: 0;
+  -webkit-transform: scale(/*variable:flickrstyle_scale*/1.85/*variable*/);
+     -moz-transform: scale(/*variable:flickrstyle_scale*/1.85/*variable*/);
+      -ms-transform: scale(/*variable:flickrstyle_scale*/1.85/*variable*/);
+       -o-transform: scale(/*variable:flickrstyle_scale*/1.85/*variable*/);
+          transform: scale(/*variable:flickrstyle_scale*/1.85/*variable*/);
+  border: none;
+  -webkit-box-shadow: none;
+     -moz-box-shadow: none;
+          box-shadow: none;
+}
+
+.flickr-wrap {
+  overflow: hidden;
+}
+
+.flickr-photo-img,
+img.flickr-photoset-img {
+  overflow: hidden;
+  -webkit-transition: all 0.2s ease;
+     -moz-transition: all 0.2s ease;
+      -ms-transition: all 0.2s ease;
+       -o-transition: all 0.2s ease;
+          transition: all 0.2s ease;
+
+  -o-object-fit: cover;
+     object-fit: cover;
+}

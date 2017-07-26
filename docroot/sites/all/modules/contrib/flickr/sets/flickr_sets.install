@@ -8,6 +8,7 @@
  * Implements hook_uninstall().
  */
 function flickr_sets_uninstall() {
+  variable_del('flickr_sets_thumb_default_size');
   variable_del('flickr_sets_per_page');
-  variable_del('flickr_photos_per_set');
+  variable_del('flickr_sets_photos_per_set');
 }

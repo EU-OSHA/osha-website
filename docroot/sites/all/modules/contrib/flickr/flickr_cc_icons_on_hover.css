@@ -1,0 +1,12 @@
+.flickr-image span.flickr-cc,
+.flickr-image span.flickr-copyright {
+  display: none;
+}
+
+.flickr-image:hover .flickr-image span.flickr-cc,
+.flickr-wrap:hover .flickr-image span.flickr-cc,
+.flickr-image:hover .flickr-image span.flickr-copyright,
+.flickr-wrap:hover .flickr-image span.flickr-copyright {
+  z-index: 100;
+  display: inline;
+}

@@ -26,7 +26,7 @@ function osha_dangerous_substances_update_7002() {
  * Move provider to field collection and reindex.
  */
 function osha_dangerous_substances_update_7003() {
-  features_revert_module(['osha_dangerous_substances']);
+  features_revert_module('osha_dangerous_substances');
   $query = new EntityFieldQuery;
   $query->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'dangerous_substances');
@@ -62,14 +62,14 @@ function osha_dangerous_substances_update_7003() {
     field_delete_instance($instance);
   }
   search_api_index_reindex('default_content_index');
-  features_revert_module(['osha_dangerous_substances']);
+  features_revert_module('osha_dangerous_substances');
 }
 
 /**
  * Add Original description language field with Available in languages values.
  */
 function osha_dangerous_substances_update_7004() {
-  features_revert_module(['osha_dangerous_substances']);
+  features_revert_module('osha_dangerous_substances');
   $query = new EntityFieldQuery;
   $query->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'dangerous_substances');
@@ -82,7 +82,7 @@ function osha_dangerous_substances_update_7004() {
     }
   }
   search_api_index_reindex('default_content_index');
-  features_revert_module(['osha_dangerous_substances']);
+  features_revert_module('osha_dangerous_substances');
 }
 
 /**
@@ -91,14 +91,14 @@ function osha_dangerous_substances_update_7004() {
 function osha_dangerous_substances_update_7005() {
   features_revert_module('osha_dangerous_substances');
   search_api_index_reindex('default_content_index');
-  features_revert_module(['osha_dangerous_substances']);
+  features_revert_module('osha_dangerous_substances');
 }
 
 /**
  * Add Original description language other field with Available in languages values other.
  */
 function osha_dangerous_substances_update_7006() {
-  features_revert_module(['osha_dangerous_substances']);
+  features_revert_module('osha_dangerous_substances');
   $query = new EntityFieldQuery;
   $query->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'dangerous_substances');
@@ -118,21 +118,21 @@ function osha_dangerous_substances_update_7006() {
  * Original description language format changes
  */
 function osha_dangerous_substances_update_7007() {
-  features_revert_module(['osha_dangerous_substances']);
+  features_revert_module('osha_dangerous_substances');
 }
 
 /**
  * Original description language format changes
  */
 function osha_dangerous_substances_update_7008() {
-  features_revert_module(['osha_dangerous_substances']);
+  features_revert_module('osha_dangerous_substances');
 }
 
 /**
  * Author filter
  */
 function osha_dangerous_substances_update_7009() {
-  features_revert_module(['osha_dangerous_substances']);
+  features_revert_module('osha_dangerous_substances');
 }
 
 /**
@@ -141,7 +141,7 @@ function osha_dangerous_substances_update_7009() {
 function osha_dangerous_substances_update_7010() {
   features_revert_module('osha_dangerous_substances');
   search_api_index_reindex('default_content_index');
-  features_revert_module(['osha_dangerous_substances']);
+  features_revert_module('osha_dangerous_substances');
 }
 
 /**
@@ -150,7 +150,7 @@ function osha_dangerous_substances_update_7010() {
 function osha_dangerous_substances_update_7011() {
   features_revert_module('osha_dangerous_substances');
   search_api_index_reindex('default_content_index');
-  features_revert_module(['osha_dangerous_substances']);
+  features_revert_module('osha_dangerous_substances');
 }
 
 /**
@@ -158,5 +158,21 @@ function osha_dangerous_substances_update_7011() {
  */
 function osha_dangerous_substances_update_7012() {
   cache_clear_all();
+  features_revert_module('osha_dangerous_substances');
+}
+
+/**
+ * New DS filters
+ */
+function osha_dangerous_substances_update_7013() {
+  features_revert_module('osha_dangerous_substances');
+  search_api_index_reindex('default_content_index');
+  features_revert_module('osha_dangerous_substances');
+}
+
+/**
+ * DS permissions
+ */
+function osha_dangerous_substances_update_7014() {
   features_revert_module('osha_dangerous_substances');
 }

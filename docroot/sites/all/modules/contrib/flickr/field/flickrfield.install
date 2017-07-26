@@ -1,0 +1,48 @@
+<?php
+/**
+ * @file
+ * The Flickr Field install file.
+ */
+
+/**
+ * Implements hook_field_schema().
+ */
+function flickrfield_field_schema($field) {
+  $columns = array();
+  switch ($field['type']) {
+    case 'flickrfield':
+      $columns += array(
+        'id' => array(
+          'type' => 'varchar',
+          'length' => 64,
+          'not null' => FALSE,
+          'sortable' => TRUE,
+        ),
+        'type' => array(
+          'type' => 'varchar',
+          'length' => 10,
+          'not null' => FALSE,
+          'sortable' => TRUE,
+        ),
+        'nsid' => array(
+          'type' => 'varchar',
+          'length' => 64,
+          'not null' => FALSE,
+          'sortable' => TRUE,
+        ),
+      );
+      break;
+
+    case 'flickrfield_photoset':
+      $columns = array(
+        'flickrid' => array(
+          'type' => 'varchar',
+          'length' => 64,
+          'not null' => FALSE,
+          'sortable' => TRUE,
+        ),
+      );
+      break;
+  }
+  return array('columns' => $columns);
+}

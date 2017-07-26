@@ -679,8 +679,12 @@ function osha_form_node_form_alter(&$form, &$form_state, $form_id) {
   if (!in_array('administrator', $user->roles)) {
     $form['field_archived']['#access'] = FALSE;
   }
-  // Hide Delete button for all roles
-  unset($form['actions']['delete']);
+
+  if (isset($form['type']) && ($form['type']['#value']=='dangerous_substances')) {
+  } else {
+    // Hide Delete button for all roles
+    unset($form['actions']['delete']);
+  }
 }
 
 /**

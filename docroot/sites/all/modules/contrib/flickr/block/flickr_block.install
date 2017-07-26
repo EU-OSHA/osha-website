@@ -9,11 +9,11 @@
  */
 function flickr_block_install() {
   $t = get_t();
-  if (module_exists('taxonomy')) {
+  if (function_exists('taxonomy_vocabulary_machine_name_load') && variable_get('flickr_smart', 0)) {
     $vocab = (object) array(
       'name' => 'Flickr tags',
       'machine_name' => 'flickr_tags',
-      'description' => $t('Grab Flickr photos with these tags only. Comma separated.'),
+      'description' => $t('Grab Flickr photos with these tags only. Comma separated. You can exclude results that match a term by prepending it with a - character.'),
     );
     taxonomy_vocabulary_save($vocab);
 
@@ -70,7 +70,7 @@ function flickr_block_install() {
         'entity_type' => 'user',
         'label' => $vocabulary->name,
         'bundle' => $bundle,
-        'description' => $t("Limited the photos used from your Flickr account in Flickr blocks to those having a Flickr tag as indicated here (e.g. 'website' or 'blog'). Those have to be added to individual photos on Flickr as well. This is not necessary if the Flickr blocks themselves make use of the Flickr tags attached to a post, as the grabbed photos are filtered by those already."),
+        'description' => $t("Limited the photos used from your Flickr account in Flickr blocks to those having a Flickr tag as indicated here (e.g. 'website' or 'blog'). Those have to be added to individual photos on Flickr as well. This is not necessary if the Flickr blocks themselves make use of the Flickr tags attached to a post, as the grabbed photos are filtered by those already. To do the opposite, exclude results that match a term by prepending it with a - character.<br />NOTA BENE: Does NOT have any impact on the photos displayed in a user profile."),
         // Use the taxonomy autocomplete widget.
         'widget' => array(
           'type' => 'taxonomy_autocomplete',
@@ -86,8 +86,178 @@ function flickr_block_install() {
       );
       field_create_instance($instance);
     }
-
+    foreach (range(0, 16) as $delta) {
+      variable_set('flickr_block_' . $delta, array(
+        'vocab' => $vocabulary->vid,
+      ));
+    }
   }
+
+  if (module_exists('date') && module_exists('date_popup') && variable_get('flickr_smart', 0)) {
+    $field = array(
+      'field_name' => 'field_flickr_date',
+      'type' => 'datetime',
+      'cardinality' => 1,
+      'settings' => array(
+        'repeat' => 0,
+        'todate' => 'optional',
+        'granularity' => array(
+          'year' => 'year',
+          'month' => 'month',
+          'day' => 'day',
+        ),
+        'tz_handling' => 'none',
+        'timezone_db' => '',
+        'cache_enabled' => 1,
+        'cache_count' => 2,
+      ),
+    );
+    field_create_field($field);
+
+    $bundles = field_info_bundles($entity_type = 'node');
+    foreach ($bundles as $bundle => $value) {
+      $instance = array(
+        'field_name' => 'field_flickr_date',
+        'entity_type' => 'node',
+        'label' => $t('Flickr date taken'),
+        'bundle' => $bundle,
+        'description' => $t('Grab Flickr photos taken on or between these dates only.'),
+        'widget' => array(
+          'type' => 'date_popup',
+          'weight' => 5,
+          'settings' => array(
+            'input_format' => 'Y-m-d H:i:s',
+            'year_range' => '-100:+1',
+            'increment' => 1,
+          ),
+        ),
+        // Define how the terms will be displayed in full node and teaser mode.
+        'display' => array(
+          'default' => array(
+            'type' => 'date_default',
+            'format_type' => 'long',
+            'settings' => array(
+              'format_type' => 'long',
+              'show_repeat_rule' => 'show',
+              'multiple_number' => '',
+              'multiple_from' => '',
+              'multiple_to'  => '',
+              'fromto' => 'both',
+            ),
+          ),
+          'teaser' => array(
+            'type' => 'hidden',
+            'weight' => 10,
+          ),
+        ),
+        'settings' => array(
+          'default_value' => 'blank',
+          'default_value2' => 'blank',
+        ),
+      );
+      field_create_instance($instance);
+    }
+
+    if (isset($vocabulary)) {
+      foreach (range(0, 16) as $delta) {
+        variable_set('flickr_block_' . $delta, array(
+          'vocab' => $vocabulary->vid,
+          'date' => 'field_flickr_date',
+        ));
+      }
+    }
+    else {
+      foreach (range(0, 16) as $delta) {
+        variable_set('flickr_block_' . $delta, array(
+          'date' => 'field_flickr_date',
+        ));
+      }
+    }
+  }
+
+  if (module_exists('geofield') && variable_get('flickr_smart', 0)) {
+    $field = array(
+      'translatable' => '0',
+      'settings' => array(
+        'backend' => 'default',
+        'srid' => '4326',
+      ),
+      'field_name' => 'field_flickr_geo',
+      'type' => 'geofield',
+      'active' => '1',
+      'locked' => '0',
+      'cardinality' => '1',
+    );
+    field_create_field($field);
+
+    $bundles = field_info_bundles($entity_type = 'node');
+    foreach ($bundles as $bundle => $value) {
+      $instance = array(
+        'field_name' => 'field_flickr_geo',
+        'entity_type' => 'node',
+        'label' => $t('Flickr location'),
+        'bundle' => $bundle,
+        'description' => $t('Grab Flickr photos near this location only.'),
+        'required' => 0,
+        'default_value' => NULL,
+        'widget' => array(
+          'weight' => '6',
+          'type' => 'geofield_latlon',
+          'active' => 1,
+          'settings' => array(
+            'html5_geolocation' => 0,
+          ),
+        ),
+        // Define how the terms will be displayed in full node and teaser mode.
+        'display' => array(
+          'default' => array(
+            'label' => 'above',
+            'type' => 'geofield_description',
+            'weight' => '13',
+            'settings' => array(
+              'data' => 'centroid',
+              'address' => 1,
+            ),
+          ),
+          'teaser' => array(
+            'type' => 'hidden',
+            'label' => 'above',
+            'settings' => array(),
+            'weight' => 0,
+          ),
+        ),
+      );
+      field_create_instance($instance);
+    }
+
+    if (isset($vocabulary) && module_exists('date') && module_exists('date_popup')) {
+      foreach (range(0, 16) as $delta) {
+        variable_set('flickr_block_' . $delta, array(
+          'vocab' => $vocabulary->vid,
+          'date' => 'field_flickr_date',
+          'geo' => 'field_flickr_geo',
+        ));
+      }
+    }
+    elseif (module_exists('date') && module_exists('date_popup')) {
+      foreach (range(0, 16) as $delta) {
+        variable_set('flickr_block_' . $delta, array(
+          'date' => 'field_flickr_date',
+          'geo' => 'field_flickr_geo',
+        ));
+      }
+    }
+    else {
+      foreach (range(0, 16) as $delta) {
+        variable_set('flickr_block_' . $delta, array(
+          'geo' => 'field_flickr_geo',
+        ));
+      }
+    }
+  }
+  // We create the variable used to detect if the module has not been
+  // uninstalled elsewhere. This variable should exist right away.
+  variable_set('flickr_block_photos_per_set', 6);
 }
 
 /**
@@ -95,7 +265,7 @@ function flickr_block_install() {
  */
 function flickr_block_update_7101() {
   $t = get_t();
-  if (module_exists('taxonomy')) {
+  if (function_exists('taxonomy_vocabulary_machine_name_load')) {
     $vocab = (object) array(
       'name' => 'Flickr tags',
       'machine_name' => 'flickr_tags',
@@ -156,7 +326,7 @@ function flickr_block_update_7101() {
         'entity_type' => 'user',
         'label' => $vocabulary->name,
         'bundle' => $bundle,
-        'description' => $t("Limited the photos used from your Flickr account in Flickr blocks to those having a Flickr tag as indicated here (e.g. 'website' or 'blog'). Those have to be added to individual photos on Flickr as well. This is not necessary if the Flickr blocks themselves make use of the Flickr tags attached to a post, as the grabbed photos are filtered by those already."),
+        'description' => $t("Limited the photos used from your Flickr account in Flickr blocks to those having a Flickr tag as indicated here (e.g. 'website' or 'blog'). Those have to be added to individual photos on Flickr as well. This is not necessary if the Flickr blocks themselves make use of the Flickr tags attached to a post, as the grabbed photos are filtered by those already.<br />NOTA BENE: Does NOT have any impact on the photos displayed in a user profile."),
         // Use the taxonomy autocomplete widget.
         'widget' => array(
           'type' => 'taxonomy_autocomplete',
@@ -227,6 +397,233 @@ function flickr_block_update_7101() {
 }
 
 /**
+ * Create Flickr node fields if the Date (Popup) or Geofield module is enabled.
+ */
+function flickr_block_update_7102() {
+  $t = get_t();
+  if (module_exists('date') && module_exists('date_popup')) {
+    $field = array(
+      'field_name' => 'field_flickr_date',
+      'type' => 'datetime',
+      'cardinality' => 1,
+      'settings' => array(
+        'repeat' => 0,
+        'todate' => 'optional',
+        'granularity' => array(
+          'year' => 'year',
+          'month' => 'month',
+          'day' => 'day',
+        ),
+        'tz_handling' => 'none',
+        'timezone_db' => '',
+        'cache_enabled' => 1,
+        'cache_count' => 2,
+      ),
+    );
+    field_create_field($field);
+
+    $bundles = field_info_bundles($entity_type = 'node');
+    foreach ($bundles as $bundle => $value) {
+      $instance = array(
+        'field_name' => 'field_flickr_date',
+        'entity_type' => 'node',
+        'label' => $t('Flickr date taken'),
+        'bundle' => $bundle,
+        'description' => $t('Grab Flickr photos taken on or between these dates only.'),
+        'widget' => array(
+          'type' => 'date_popup',
+          'weight' => 5,
+          'settings' => array(
+            'input_format' => 'Y-m-d H:i:s',
+            'year_range' => '-100:+1',
+            'increment' => 1,
+          ),
+        ),
+        // Define how the terms will be displayed in full node and teaser mode.
+        'display' => array(
+          'default' => array(
+            'type' => 'date_default',
+            'format_type' => 'long',
+            'settings' => array(
+              'format_type' => 'long',
+              'show_repeat_rule' => 'show',
+              'multiple_number' => '',
+              'multiple_from' => '',
+              'multiple_to'  => '',
+              'fromto' => 'both',
+            ),
+          ),
+          'teaser' => array(
+            'type' => 'hidden',
+            'weight' => 10,
+          ),
+        ),
+        'settings' => array(
+          'default_value' => 'blank',
+          'default_value2' => 'blank',
+        ),
+      );
+      field_create_instance($instance);
+    }
+
+    if (isset($vocabulary)) {
+      foreach (range(0, 16) as $delta) {
+        variable_set('flickr_block_' . $delta, array(
+          'vocab' => $vocabulary->vid,
+          'date' => 'field_flickr_date',
+        ));
+      }
+    }
+    else {
+      foreach (range(0, 16) as $delta) {
+        variable_set('flickr_block_' . $delta, array(
+          'date' => 'field_flickr_date',
+        ));
+      }
+    }
+  }
+
+  if (module_exists('geofield')) {
+    $field = array(
+      'translatable' => '0',
+      'settings' => array(
+        'backend' => 'default',
+        'srid' => '4326',
+      ),
+      'field_name' => 'field_flickr_geo',
+      'type' => 'geofield',
+      'active' => '1',
+      'locked' => '0',
+      'cardinality' => '1',
+    );
+    field_create_field($field);
+
+    $bundles = field_info_bundles($entity_type = 'node');
+    foreach ($bundles as $bundle => $value) {
+      $instance = array(
+        'field_name' => 'field_flickr_geo',
+        'entity_type' => 'node',
+        'label' => $t('Flickr location'),
+        'bundle' => $bundle,
+        'description' => $t('Grab Flickr photos near this location only.'),
+        'required' => 0,
+        'default_value' => NULL,
+        'widget' => array(
+          'weight' => '6',
+          'type' => 'geofield_latlon',
+          'active' => 1,
+          'settings' => array(
+            'html5_geolocation' => 0,
+          ),
+        ),
+        // Define how the terms will be displayed in full node and teaser mode.
+        'display' => array(
+          'default' => array(
+            'label' => 'above',
+            'type' => 'geofield_description',
+            'weight' => '13',
+            'settings' => array(
+              'data' => 'centroid',
+              'address' => 1,
+            ),
+          ),
+          'teaser' => array(
+            'type' => 'hidden',
+            'label' => 'above',
+            'settings' => array(),
+            'weight' => 0,
+          ),
+        ),
+      );
+      field_create_instance($instance);
+    }
+
+    if (isset($vocabulary) && module_exists('date') && module_exists('date_popup')) {
+      foreach (range(0, 16) as $delta) {
+        variable_set('flickr_block_' . $delta, array(
+          'vocab' => $vocabulary->vid,
+          'date' => 'field_flickr_date',
+          'geo' => 'field_flickr_geo',
+        ));
+      }
+    }
+    elseif (module_exists('date') && module_exists('date_popup')) {
+      foreach (range(0, 16) as $delta) {
+        variable_set('flickr_block_' . $delta, array(
+          'date' => 'field_flickr_date',
+          'geo' => 'field_flickr_geo',
+        ));
+      }
+    }
+    else {
+      foreach (range(0, 16) as $delta) {
+        variable_set('flickr_block_' . $delta, array(
+          'geo' => 'field_flickr_geo',
+        ));
+      }
+    }
+  }
+  foreach (range(0, 16) as $delta) {
+    $block_vars = variable_get("flickr_block_{$delta}", array(
+      'user_id' => '',
+      'group_id' => '',
+      'photoset_id' => '',
+      'show_n' => variable_get('flickr_photos_per_page', 6),
+      'size' => variable_get('flickr_default_size_album', 's'),
+      'tag' => '',
+      'tag_mode' => 'context',
+      'extend' => variable_get('flickr_extend', 1),
+      'geo' => '',
+      'date' => '',
+      'media' => 'photos',
+      'vocab' => '',
+      'min_title' => variable_get('flickr_title_suppress_on_small', '100'),
+      'min_metadata' => variable_get('flickr_metadata_suppress_on_small', '150'),
+    ));
+    $block_vars['user_id'] = isset($block_vars['user_id']) ? $block_vars['user_id'] : '';
+    $block_vars['show_n'] = isset($block_vars['show_n']) ? $block_vars['show_n'] : variable_get('flickr_photos_per_page', 6);
+    $block_vars['size'] = isset($block_vars['size']) ? $block_vars['size'] : variable_get('flickr_default_size_album', 's');
+    $block_vars['tag'] = isset($block_vars['tag']) ? $block_vars['tag'] : '';
+    $block_vars['tag_mode'] = isset($block_vars['tag_mode']) ? $block_vars['tag_mode'] : 'context';
+    $block_vars['extend'] = isset($block_vars['extend']) ? $block_vars['extend'] : variable_get('flickr_extend', 1);
+    $block_vars['geo'] = isset($block_vars['geo']) ? $block_vars['geo'] : '';
+    $block_vars['date'] = isset($block_vars['date']) ? $block_vars['date'] : '';
+    if (!isset($block_vars['group_id']) && !isset($block_vars['user_id'])) {
+      $block_vars['group_id'] = '';
+    }
+    else {
+      // In older versions user_id was used to hold the group_id.
+      $block_vars['group_id'] = (!isset($block_vars['group_id']) && isset($block_vars['user_id'])) ? $block_vars['user_id'] : $block_vars['group_id'];
+    }
+    $block_vars['photoset_id'] = isset($block_vars['photoset_id']) ? $block_vars['photoset_id'] : '';
+    $block_vars['sort'] = isset($block_vars['sort']) ? $block_vars['sort'] : 'unsorted';
+    $block_vars['filter'] = isset($block_vars['filter']) ? $block_vars['filter'] : '';
+    $block_vars['media'] = isset($block_vars['media']) ? $block_vars['media'] : 'photos';
+    $block_vars['vocab'] = isset($block_vars['vocab']) ? $block_vars['vocab'] : '';
+    $block_vars['min_title'] = isset($block_vars['min_title']) ? $block_vars['min_title'] : variable_get('flickr_title_suppress_on_small', '100');
+    $block_vars['min_metadata'] = isset($block_vars['min_metadata']) ? $block_vars['min_metadata'] : variable_get('flickr_metadata_suppress_on_small', '150');
+    variable_set('flickr_block_' . $delta, array(
+      'user_id' => $block_vars['user_id'],
+      'show_n' => $block_vars['show_n'],
+      'size' => $block_vars['size'],
+      'tag' => $block_vars['tag'],
+      'tag_mode' => $block_vars['tag_mode'],
+      'extend' => $block_vars['extend'],
+      'geo' => $block_vars['geo'],
+      'date' => $block_vars['date'],
+      'group_id' => $block_vars['group_id'],
+      'photoset_id' => $block_vars['photoset_id'],
+      'sort' => $block_vars['sort'],
+      'filter' => $block_vars['filter'],
+      'media' => $block_vars['media'],
+      'vocab' => $block_vars['vocab'],
+      'min_title' => $block_vars['min_title'],
+      'min_metadata' => $block_vars['min_metadata'],
+    ));
+    unset($block_vars);
+  }
+}
+/**
  * Implements hook_uninstall().
  */
 function flickr_block_uninstall() {
@@ -235,13 +632,32 @@ function flickr_block_uninstall() {
   variable_del('flickr_block_heading');
   variable_del('flickr_block_hide_empty');
   variable_del('flickr_block_photos_per_set');
+  db_delete('block')
+    ->condition('module', 'flickr')
+    ->execute();
+  db_delete('block_node_type')
+    ->condition('module', 'flickr')
+    ->execute();
+  db_delete('block_role')
+    ->condition('module', 'flickr')
+    ->execute();
   foreach (range(0, 16) as $delta) {
     variable_del("flickr_block_{$delta}");
   }
-  if (module_exists('taxonomy')) {
+  if (function_exists('taxonomy_vocabulary_machine_name_load')) {
     $vocabulary = taxonomy_vocabulary_machine_name_load('flickr_tags');
     if ($vocabulary) {
+      field_delete_field('field_' . $vocabulary->machine_name);
       taxonomy_vocabulary_delete($vocabulary->vid);
     }
   }
+  $field = field_info_field('field_flickr_date');
+  if ($field) {
+    field_delete_field('field_flickr_date');
+  }
+  $field = field_info_field('field_flickr_geo');
+  if ($field) {
+    field_delete_field('field_flickr_geo');
+  }
+  field_purge_batch(500);
 }

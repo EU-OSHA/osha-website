@@ -436,6 +436,19 @@ class OSHNewsletter {
 
         $currentRow++;
 
+        if (empty($variables['nodes'])) {
+          $tweets_ids = self::getConfiguration($entityCollection, 'tweets');
+          foreach ($tweets_ids as $tweets_id) {
+            $tweet = node_load($tweets_id);
+            if (!empty($tweet)) {
+              $variables['nodes'][] = [
+                '#style' => self::getChildStyle('newsletter_half_width_twitter'),
+                'node' => $tweet,
+              ];
+            }
+          }
+        }
+
         foreach ($variables['nodes'] as $node) {
           $cellContent = self::getCellContent($template, $node);
           $cellContent['width'] = '180';
@@ -517,18 +530,6 @@ class OSHNewsletter {
             'section' => $section,
             'nodes' => [],
           ];
-          if ($content[$current_section]['#style'] == 'newsletter_half_width_twitter') {
-            $tweets_ids = self::getConfiguration($source, 'tweets');
-            foreach ($tweets_ids as $tweets_id) {
-              $tweet = node_load($tweets_id);
-              if (!empty($tweet)) {
-                $content[$current_section]['nodes'][] = [
-                  '#style' => self::getChildStyle('newsletter_half_width_twitter'),
-                  'node' => $tweet,
-                ];
-              }
-            }
-          }
 
           if ($isOldNewsletter) {
             $section->old_newsletter = true;
@@ -549,8 +550,8 @@ class OSHNewsletter {
           }
           break;
         case 'node':
-          if (empty($current_section) || $content[$current_section]['#style'] == 'newsletter_half_width_twitter') {
-            // Found a node before all sections or within twitter section
+          if (empty($current_section)) {
+            // Found a node before all sections
             // @todo: maybe we should display a warning?
             continue;
           }

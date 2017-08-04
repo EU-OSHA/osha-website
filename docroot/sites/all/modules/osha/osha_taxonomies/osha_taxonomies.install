@@ -57,3 +57,11 @@ function osha_taxonomies_update_7001() {
     }
   }
 }
+
+/**
+ * disable taxonomies terms list page.
+ */
+function osha_taxonomies_update_7002() {
+  module_enable('disable_term_node_listings');
+  features_revert_module('osha_taxonomies');
+}

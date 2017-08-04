@@ -13,6 +13,97 @@ function osha_taxonomies_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'disable_term_node_listings_biological_hazard';
+  $strongarm->value = '403';
+  $export['disable_term_node_listings_biological_hazard'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'disable_term_node_listings_country';
+  $strongarm->value = '403';
+  $export['disable_term_node_listings_country'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'disable_term_node_listings_evaluation';
+  $strongarm->value = '403';
+  $export['disable_term_node_listings_evaluation'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'disable_term_node_listings_exposure_route';
+  $strongarm->value = '403';
+  $export['disable_term_node_listings_exposure_route'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'disable_term_node_listings_hazard_health_effects';
+  $strongarm->value = '403';
+  $export['disable_term_node_listings_hazard_health_effects'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'disable_term_node_listings_hazard_physical_state';
+  $strongarm->value = '403';
+  $export['disable_term_node_listings_hazard_physical_state'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'disable_term_node_listings_hazmap_categories';
+  $strongarm->value = '403';
+  $export['disable_term_node_listings_hazmap_categories'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'disable_term_node_listings_material_objective';
+  $strongarm->value = '403';
+  $export['disable_term_node_listings_material_objective'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'disable_term_node_listings_material_purpose';
+  $strongarm->value = '403';
+  $export['disable_term_node_listings_material_purpose'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'disable_term_node_listings_prevention_measures';
+  $strongarm->value = '403';
+  $export['disable_term_node_listings_prevention_measures'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'disable_term_node_listings_provider_type';
+  $strongarm->value = '403';
+  $export['disable_term_node_listings_provider_type'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'disable_term_node_listings_target_group';
+  $strongarm->value = '403';
+  $export['disable_term_node_listings_target_group'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'disable_term_node_listings_worker_groups';
+  $strongarm->value = '403';
+  $export['disable_term_node_listings_worker_groups'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'entity_translation_settings_taxonomy_term__activity';
   $strongarm->value = array(
     'default_language' => 'xx-et-default',

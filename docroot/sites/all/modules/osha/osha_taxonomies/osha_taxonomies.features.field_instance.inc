@@ -864,9 +864,14 @@ function osha_taxonomies_field_default_field_instances() {
     'entity_type' => 'taxonomy_term',
     'field_name' => 'field_tags_code',
     'label' => 'Code',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -879,6 +884,7 @@ function osha_taxonomies_field_default_field_instances() {
       'type' => 'text_textfield',
       'weight' => 31,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'taxonomy_term-tags-name_field'.

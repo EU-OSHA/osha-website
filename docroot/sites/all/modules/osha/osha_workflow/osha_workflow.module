@@ -125,6 +125,14 @@ function osha_workflow_menu() {
  * @codeCoverageIgnore
  */
 function osha_workflow_menu_alter(&$items) {
+  // our custom hook should be called after i18n_taxonomy
+  if (variable_get('page_manager_term_view_disabled', TRUE) && !module_exists('taxonomy_display')) {
+    // Taxonomy term page. Localize terms.
+    $items['taxonomy/term/%taxonomy_term']['page callback'] = 'osha_dangerous_substances_term_page';
+    $items['taxonomy/term/%taxonomy_term']['title callback'] = 'i18n_taxonomy_term_name';
+    $items['taxonomy/term/%taxonomy_term']['file'] = 'i18n_taxonomy.pages.inc';
+    $items['taxonomy/term/%taxonomy_term']['file path'] = drupal_get_path('module', 'i18n_taxonomy');
+  }
 
   // Let Administrators to see the editors screen - they don;t have permission
   // to edit them, so we overwrite this.

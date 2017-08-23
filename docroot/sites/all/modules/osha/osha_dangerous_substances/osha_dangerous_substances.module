@@ -6,6 +6,22 @@
 
 include_once 'osha_dangerous_substances.features.inc';
 
+function osha_dangerous_substances_term_page($term) {
+  return disable_term_node_listings_term_page($term);
+}
+
+/**
+ * Implements hook_node_access().
+ */
+function osha_dangerous_substances_node_access($node, $op, $account) {
+  if ($op == 'view' && $node->type == 'dangerous_substances') {
+    if (user_is_anonymous()) {
+      return NODE_ACCESS_DENY;
+    }
+  }
+  return NODE_ACCESS_IGNORE;
+}
+
 function template_preprocess_osha_dangerous_substances_doc(&$vars) {
   $vars['header'] = $vars['rows']['header'];
   $vars['body'] = $vars['rows']['body'];

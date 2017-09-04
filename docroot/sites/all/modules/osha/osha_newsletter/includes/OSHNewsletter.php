@@ -591,6 +591,18 @@ class OSHNewsletter {
     $renderedContent = '';
     if (!$isOldNewsletter) {
       foreach ($content as $section) {
+        if (empty($section['nodes']) && $section['#style'] == 'newsletter_half_width_twitter') {
+          $tweets_ids = self::getConfiguration($source, 'tweets');
+          foreach ($tweets_ids as $tweets_id) {
+            $tweet = node_load($tweets_id);
+            if (!empty($tweet)) {
+              $section['nodes'][] = [
+                '#style' => self::getChildStyle('newsletter_half_width_twitter'),
+                'node' => $tweet,
+              ];
+            }
+          }
+        }
         if (empty($section['nodes'])) {
           continue;
         }

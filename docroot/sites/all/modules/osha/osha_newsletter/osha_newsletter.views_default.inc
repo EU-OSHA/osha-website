@@ -254,6 +254,7 @@ function osha_newsletter_views_default_views() {
     'newsletter_article' => 'newsletter_article',
     'press_release' => 'press_release',
     'publication' => 'publication',
+    'twitter_tweet_feed' => 'twitter_tweet_feed',
     'wiki_page' => 'wiki_page',
     'youtube' => 'youtube',
   );

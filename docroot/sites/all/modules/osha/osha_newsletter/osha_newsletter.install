@@ -249,3 +249,10 @@ function osha_newsletter_update_7008() {
   module_enable(['imagecache_actions', 'imagecache_canvasactions']);
   features_revert_module('osha_newsletter');
 }
+
+/**
+ * MDR-1302 - Option to add tweets in the HWC newsletter
+ */
+function osha_newsletter_update_7009() {
+  features_revert_module('osha_newsletter');
+}

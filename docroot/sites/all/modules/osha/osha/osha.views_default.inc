@@ -3338,7 +3338,7 @@ function osha_views_default_views() {
     'wiki_page' => 'wiki_page',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Content: Wiki categories (field_wiki_categories) */
+  /* Filter criterion: Content: OSHwiki categories (field_wiki_categories) */
   $handler->display->display_options['filters']['field_wiki_categories_tid']['id'] = 'field_wiki_categories_tid';
   $handler->display->display_options['filters']['field_wiki_categories_tid']['table'] = 'field_data_field_wiki_categories';
   $handler->display->display_options['filters']['field_wiki_categories_tid']['field'] = 'field_wiki_categories_tid';
@@ -3578,6 +3578,8 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['field_item_type_value']['table'] = 'field_data_field_item_type';
   $handler->display->display_options['filters']['field_item_type_value']['field'] = 'field_item_type_value';
   $handler->display->display_options['filters']['field_item_type_value']['value'] = array(
+    'MS material' => 'MS material',
+    'EU material' => 'EU material',
     'Audiovisual' => 'Audiovisual',
   );
 

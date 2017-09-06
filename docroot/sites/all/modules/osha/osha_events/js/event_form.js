@@ -2,9 +2,8 @@ jQuery(document).ready(function() {
     var type_input = jQuery('#edit-field-event-type-und');
     var country_div = jQuery('#edit-field-country-code');
     var city_div = jQuery('#edit-field-city');
-    var tags_div = jQuery('#edit-field-tags');
     var organization_div = jQuery('.form-item-field-organization-und-0-value');
-    jQuery('.description', tags_div).text('');
+
     jQuery('.description', organization_div).text('');
 
     if (type_input.val() == 'Webminar') {

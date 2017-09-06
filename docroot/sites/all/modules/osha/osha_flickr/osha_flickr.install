@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * Gallery admin permissions
+ */
+function osha_flickr_update_7001() {
+  features_revert_module('osha_flickr');
+}

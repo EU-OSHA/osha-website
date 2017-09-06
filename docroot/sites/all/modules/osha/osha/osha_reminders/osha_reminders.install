@@ -12,3 +12,10 @@ Please, remember that the content should be relevant and up to date, and the lin
 <br/>
 Thanks a lot for reviewing your contents.<br/>');
 }
+
+/**
+ * MDR-1350 - Set reminders for 3 months
+ */
+function osha_reminders_update_7002() {
+  variable_set('osha_reminders_cron_notification_interval_months', 3);
+}

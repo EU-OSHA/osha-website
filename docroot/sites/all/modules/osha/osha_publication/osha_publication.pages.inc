@@ -179,7 +179,11 @@ function osha_publication_menu_publications_search_native($form_state) {
   $q->fields('a', array('nid', 'vid'));
   $q->condition('a.type', 'publication');
   $q->condition('a.status', 1);
-  $q->orderBy('field_publication_date_value', 'DESC');
+  if (!empty($sort)) {
+    $q->orderBy('field_publication_date_value', $direction);
+  } else {
+    $q->orderBy('field_publication_date_value', 'DESC');
+  }
   if (!empty($restrict)) {
     $q->condition('a.nid', $restrict, 'IN');
   }
@@ -295,7 +299,12 @@ function osha_publication_menu_publications_search_related($form_state, $native_
   $q->fields('a', array('nid', 'vid'));
   $q->condition('a.type', 'publication');
   $q->condition('a.status', 1);
-  $q->orderBy('field_publication_date_value', 'DESC');
+  if (!empty($sort)) {
+    $q->orderBy('field_publication_date_value', $direction);
+  } else {
+    $q->orderBy('field_publication_date_value', 'DESC');
+  }
+
   if (!empty($restrict)) {
     $q->condition('a.nid', $restrict, 'IN');
   }

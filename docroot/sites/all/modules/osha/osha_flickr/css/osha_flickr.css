@@ -53,14 +53,6 @@
     display: none;
 }
 
-.form-item-field-flickr-en-0-type,
-.form-item-field-flickr-en-0-nsid,
-.form-item-field-cover-flickr-und-0-nsid,
-.form-item-field-cover-flickr-und-0-type {
-    visibility: hidden;
-    display: none;
-}
-
 .node-type-flickr-gallery .gallery-row[class*="col-"] {
     margin-bottom: 1em;
 }

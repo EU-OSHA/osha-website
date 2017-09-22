@@ -185,3 +185,10 @@ function osha_dangerous_substances_update_7015() {
   cache_clear_all();
   search_api_index_reindex('default_content_index');
 }
+
+/**
+ * Removed form autosubmit.
+ */
+function osha_dangerous_substances_update_7016() {
+  features_revert_module('osha_dangerous_substances');
+}

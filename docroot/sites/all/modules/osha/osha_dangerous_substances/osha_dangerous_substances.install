@@ -176,3 +176,12 @@ function osha_dangerous_substances_update_7013() {
 function osha_dangerous_substances_update_7014() {
   features_revert_module('osha_dangerous_substances');
 }
+
+/**
+ * New Empty description implementations.
+ */
+function osha_dangerous_substances_update_7015() {
+  features_revert_module('osha_dangerous_substances');
+  cache_clear_all();
+  search_api_index_reindex('default_content_index');
+}

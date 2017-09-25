@@ -26,8 +26,7 @@ function osha_newsletter_rules_add_to_newsletter_action($node) {
   $collection = menu_get_object('entity_collection');
   if ($collection) {
     $item = new EntityCollectionTreeNode('node', $node->nid, $node);
-    $contexts = _entity_collection_get_contexts($collection);
     // TODO: smart selection of $item->position based on $node->type
-    entity_collection_append_item($collection, $item, $contexts);
+    entity_collection_append_item($collection, $item);
   }
 }

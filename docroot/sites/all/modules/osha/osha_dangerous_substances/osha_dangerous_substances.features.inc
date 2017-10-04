@@ -61,7 +61,8 @@ function osha_dangerous_substances_default_search_api_index() {
       "cron_limit" : "50",
       "fields" : {
         "author" : { "type" : "integer", "entity_type" : "user" },
-        "body:value" : { "type" : "boolean" },
+        "body:value" : { "type" : "text" },
+        "empty_description" : { "type" : "boolean" },
         "field_aditional_resources:field_original_desc_language:value" : { "type" : "list\\u003Clist\\u003Cstring\\u003E\\u003E" },
         "field_advertising" : { "type" : "boolean" },
         "field_available_in_languages:safe_value" : { "type" : "list\\u003Ctext\\u003E" },
@@ -108,7 +109,7 @@ function osha_dangerous_substances_default_search_api_index() {
         "field_rights_description" : { "type" : "text" },
         "field_sector_industry_covered" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_selected_for_analysis" : { "type" : "boolean" },
-        "field_summary" : { "type" : "boolean" },
+        "field_summary" : { "type" : "text" },
         "field_target_group" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_tasks_covered" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_tasks_other" : { "type" : "text" },

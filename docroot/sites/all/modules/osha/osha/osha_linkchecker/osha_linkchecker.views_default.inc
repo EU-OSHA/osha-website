@@ -104,6 +104,11 @@ function osha_linkchecker_views_default_views() {
     'title_class' => '',
   );
   $handler->display->display_options['fields']['title_field']['link_to_entity'] = 0;
+  /* Field: Content: Type */
+  $handler->display->display_options['fields']['type']['id'] = 'type';
+  $handler->display->display_options['fields']['type']['table'] = 'node';
+  $handler->display->display_options['fields']['type']['field'] = 'type';
+  $handler->display->display_options['fields']['type']['relationship'] = 'nid';
   /* Filter criterion: Linkchecker Links: Code */
   $handler->display->display_options['filters']['code']['id'] = 'code';
   $handler->display->display_options['filters']['code']['table'] = 'linkchecker_link';
@@ -173,10 +178,11 @@ function osha_linkchecker_views_default_views() {
     t('next ›'),
     t('last »'),
     t('Linkchecker Node Links'),
-    t('Node'),
+    t('Content'),
     t('Code'),
     t('URL'),
     t('Title'),
+    t('Type'),
     t('Section'),
     t('Page'),
   );

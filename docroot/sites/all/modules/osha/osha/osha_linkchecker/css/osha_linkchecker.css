@@ -1,0 +1,8 @@
+th, td {
+    width:40%
+}
+
+th:last-child, td:last-child,
+th:first-child, td:first-child {
+    width: 10%;
+}

@@ -22,3 +22,11 @@ function osha_linkchecker_enable() {
     osha_linkchecker_scan_for_links();
   }
 }
+
+/**
+ * Add dangerous_substances to linkchecker.
+ */
+function osha_linkchecker_update_7001() {
+  features_revert_module('osha_linkchecker');
+}
+

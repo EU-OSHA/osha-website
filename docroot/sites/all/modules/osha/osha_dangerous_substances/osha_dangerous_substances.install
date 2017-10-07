@@ -192,3 +192,44 @@ function osha_dangerous_substances_update_7015() {
 function osha_dangerous_substances_update_7016() {
   features_revert_module('osha_dangerous_substances');
 }
+
+/**
+ * Add workbench_access for node type dangerous substances.
+ */
+function osha_dangerous_substances_update_7017() {
+  features_revert_module('osha_dangerous_substances');
+}
+
+/**
+ * Add DS node default workbench section.
+ */
+function osha_dangerous_substances_update_7018() {
+  $type = 'dangerous_substances';
+  $bundle_section_map = osha_workflow_bundle_section_map();
+  $existing_nids = db_select('workbench_access_node', 'w')
+    ->fields('w', array('nid'))
+    ->execute()
+    ->fetchCol();
+  foreach ($bundle_section_map as $bundle => $section) {
+    if ($type != $bundle) {
+      continue;
+    }
+    $updating_nids = db_select('node', 'n')
+      ->fields('n', array('nid'))
+      ->condition('nid', $existing_nids, 'NOT IN')
+      ->condition('type', $bundle)
+      ->execute()
+      ->fetchCol();
+    if ($term = osha_workflow_get_section_term_by_ldap_id($section)) {
+      foreach ($updating_nids as $nid) {
+        db_insert('workbench_access_node');
+        $record = array(
+          'nid' => $nid,
+          'access_id' => $term->tid,
+          'access_scheme' => 'taxonomy',
+        );
+        drupal_write_record('workbench_access_node', $record);
+      }
+    }
+  }
+}

@@ -259,3 +259,37 @@ jQuery(document).ready(function() {
 });
 
 
+//Flickr Gallery - Scale and Crop images
+
+jQuery(document).ready(function() {
+
+if (jQuery(".node-type-flickr-gallery")[0]){
+	
+  // assign HTMLCollection with parents of images with objectFit to variable
+  var container = document.getElementsByClassName('flickr-img-wrap');
+  
+  jQuery(".flickr-photoset .flickr-img-wrap").addClass("fix-ie-a");
+  // Loop through HTMLCollection
+  for(var i = 0; i < container.length; i++) {
+    
+    // Asign image source to variable
+    var imageSource = container[i].querySelector('img').src;
+
+    // Hide image
+    container[i].querySelector('img').style.display = 'none';
+    
+    // Add background-size: cover
+    container[i].style.backgroundSize = 'contain';
+    
+    // Add background-image: and put image source here
+    container[i].style.backgroundImage = 'url(' + imageSource + ')';
+
+    // Add background-image: and put image source here
+    container[i].style.backgroundRepeat = 'no-repeat';
+
+    // Add background-position: center center
+    container[i].style.backgroundPosition = 'center center';
+  }
+}
+
+});

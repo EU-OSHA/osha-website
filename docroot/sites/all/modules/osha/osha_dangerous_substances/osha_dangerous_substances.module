@@ -197,6 +197,27 @@ function osha_dangerous_substances_facet_items_alter(&$build, &$settings) {
   }
 }
 
+function osha_dangerous_substances_empty_description($item) {
+  if ($item->type == 'dangerous_substances') {
+    if (!$item->body) {
+      return TRUE;
+    }
+  }
+  return FALSE;
+}
+
+/**
+ * Implements hook_entity_property_info_alter().
+ */
+function osha_dangerous_substances_entity_property_info_alter(&$info) {
+  $info['node']['properties']['empty_description'] = array(
+    'type' => 'boolean',
+    'label' => t('Empty description'),
+    'sanitized' => TRUE,
+    'getter callback' => 'osha_dangerous_substances_empty_description',
+  );
+}
+
 /**
  * Implements hook_form_alter().
  */
@@ -343,7 +364,7 @@ function osha_dangerous_substances_search_api_solr_query_alter(array &$call_args
           continue;
         }
       if (strpos('.' . $v, 'bs_status:') && $k && @$_REQUEST['description']) {
-        $call_args['params']['fq'][$k] = '{!tag=facet:body:value}*:* AND -bs_body\:value:[* TO *]';
+        $call_args['params']['fq'][$k] = 'bs_empty_description:"true"';
       }
     }
     if ($sort_by) {

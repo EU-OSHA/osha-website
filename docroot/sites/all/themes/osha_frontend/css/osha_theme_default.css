@@ -9380,3 +9380,19 @@ body.page-entity-collection .newsletter-container {
 	font-weight: normal !important;
 	text-transform: uppercase !important;
 }
+
+/* Flickr Gallery */
+div.flickr-photoset{
+	margin-top: 1em;
+}
+
+.field-name-field-cover-flickr .flickr-photo-img{
+	display: block!important
+}
+
+.fix-ie-a{
+  	width: 365px!important;
+  	height: 243px!important;
+  	display: block;
+  	background: #f0f2f5;
+}

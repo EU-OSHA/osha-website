@@ -72,6 +72,7 @@ scripts[] = js/menu_fixed.js
 scripts[] = js/menu_multipleline.js
 scripts[] = js/menu_expand.js
 scripts[] = js/back_button.js
+scripts[] = js/stikcy_issues.js
 
 
 

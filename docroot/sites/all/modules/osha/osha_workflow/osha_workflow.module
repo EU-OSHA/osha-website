@@ -1050,6 +1050,13 @@ function osha_workflow_form_views_exposed_form_alter(&$form, &$form_state) {
  */
 function osha_workflow_form_node_form_alter(&$form, $form_state) {
   global $user;
+
+  if (!empty($form['actions'])) {
+    $form['actions_top'] = $form['actions'];
+    $form['actions_top']['#weight'] = -999;
+    $form['actions_top']['#attributes']['style'] = 'text-align: right';
+  }
+
   // This must be a node form and a node that has moderation enabled.
   // Extended to include moderation check on the individual node.
   if (!workbench_moderation_node_moderated($form['#node'])) {

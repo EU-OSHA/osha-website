@@ -20,5 +20,15 @@ function osha_dangerous_substances_filter_default_formats() {
     'filters' => array(),
   );
 
+  // Exported format: Dangerous Substances Minimal.
+  $formats['dangerous_substances_minimal'] = array(
+    'format' => 'dangerous_substances_minimal',
+    'name' => 'Dangerous Substances Minimal',
+    'cache' => 1,
+    'status' => 1,
+    'weight' => 0,
+    'filters' => array(),
+  );
+
   return $formats;
 }

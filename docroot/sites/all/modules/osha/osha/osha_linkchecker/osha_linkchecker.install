@@ -30,3 +30,9 @@ function osha_linkchecker_update_7001() {
   features_revert_module('osha_linkchecker');
 }
 
+/**
+ * MDR-1456 - Always use the same width for CODE, URL and TITLE columns.
+ */
+function osha_linkchecker_update_7002() {
+  features_revert_module('osha_linkchecker');
+}

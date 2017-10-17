@@ -1414,12 +1414,22 @@ function osha_workflow_mail($key, &$message, $params) {
   $subject = variable_get('osha_mail_template_approval_subject', '[OSHA Website] CMW: ([node:nid]) [node:title-field]');
   $action = isset($params['action']) ? $params['action'] : 'reviewed';
   $status = isset($params['status']) ? $params['status'] : 'N/A';
-  $text = isset($params['text']) ? $params['text'] : ('There is new content to be '.$action.' by you');
+  $text = isset($params['text']) ? $params['text'] : ('There is new content to be ' . $action . ' by you');
+
+  $text_2 = '';
+  $count = isset($params['count']) ? $params['count'] : NULL;
+  $link = isset($params['link']) ? $params['link'] : NULL;
+  if ($count && $link) {
+    $text_2 = 'There are <strong>' . $count . '</strong> items that you can review from <a href="' . url($link, ['absolute' => TRUE]) . '">here.</a>';
+  }
+
 
   $body = variable_get('osha_mail_template_approval_body',
     'Dear <b>[user:name]</b>,<br>'.
 
     $text.': <a href="[node:url]">[node:title-field]</a> (type: [node:type], status: <b>'.$status.'</b>).'.
+
+    $text_2 .
 
     '<br>Thank you,'
   );

@@ -616,9 +616,29 @@ class OshaWorkflowNotifications {
    *   Affected node
    */
   public static function notifyOnChangeFromDraftToFinalDraft($node) {
+    global $workflow_notification_user;
     // Get RM of node's section.
     $users = osha_workflow_get_node_rm($node);
-    OshaWorkflowNotifications::sendEmail($users, array('node' => $node, 'action'=> 'reviewed', 'status'=> 'Final draft'), 'osha_workflow');
+    if (!empty($users)) {
+      $workflow_notification_user = current($users);
+    }
+
+    $view = views_get_view('osh_workflow_admin');
+    $view->set_display('page_3');
+//    $view->set_arguments(array($approver->uid));
+    $view->pre_execute();
+    $view->set_items_per_page(0);
+    $view->execute();
+    $ret = $view->total_rows;
+
+    $params = array(
+      'node' => $node,
+      'action'=> 'reviewed',
+      'status'=> 'Final draft',
+      'count' => $ret,
+      'link' => 'admin/workbench/review-manager',
+    );
+    OshaWorkflowNotifications::sendEmail($users, $params, 'osha_workflow');
   }
 
   /**

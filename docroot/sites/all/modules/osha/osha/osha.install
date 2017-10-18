@@ -475,3 +475,9 @@ function osha_update_7029() {
   module_enable(['osha_flickr']);
 }
 
+/**
+ * MDR-1451 I3-Remove the multiple options for formatting the text
+ */
+function osha_update_7030() {
+  features_revert_module('osha');
+}

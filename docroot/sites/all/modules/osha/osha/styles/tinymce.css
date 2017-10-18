@@ -1,0 +1,27 @@
+.defaultSkin .mceButton.mce_osha_advanced{
+    width:auto !important;
+}
+.defaultSkin span.mceIcon.mce_osha_advanced,
+.defaultSkin img.mceIcon.mce_osha_advanced{
+    width:auto !important;
+    margin-top:1px !important;
+    padding:0px 10px;
+}
+.mceIcon.mce_osha_advanced:before{
+    content: "Switch to advanced";
+    color: #0074bd;
+}
+
+.defaultSkin .mceButton.mce_osha_minimal{
+    width:auto !important;
+}
+.defaultSkin span.mceIcon.mce_osha_minimal,
+.defaultSkin img.mceIcon.mce_osha_minimal{
+    width:auto !important;
+    margin-top:1px !important;
+    padding:0px 10px;
+}
+.mceIcon.mce_osha_minimal:before{
+    content: "Switch to minimal" !important;
+    color: #0074bd;
+}

@@ -99,7 +99,13 @@ class osha_workflow_handler_filter_section_in_rm_section extends views_handler_f
    */
   function query() {
     global $user;
-    $sections = osha_workflow_access_get_rm_sections($user->uid);
+    global $workflow_notification_user;
+    if (!empty($workflow_notification_user)) {
+      $sections = osha_workflow_access_get_rm_sections($workflow_notification_user->uid);
+    }
+    else {
+      $sections = osha_workflow_access_get_rm_sections($user->uid);
+    }
     $group = $this->query->set_where_group('AND');
     $subquery = db_select('workbench_access_node', 'workbench_access_node');
     $subquery->addField('workbench_access_node', 'nid');

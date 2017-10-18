@@ -639,3 +639,10 @@ function osha_workflow_update_7011() {
     'moderate content from ready_to_publish to published',
   ));
 }
+
+/**
+ * Set new moderation block.
+ */
+function osha_workflow_update_7012() {
+  features_revert_module('osha_workflow');
+}

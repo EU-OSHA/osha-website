@@ -181,7 +181,7 @@ function osha_dangerous_substances_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'workbench_access_node_type_dangerous_substances';
-  $strongarm->value = 0;
+  $strongarm->value = 1;
   $export['workbench_access_node_type_dangerous_substances'] = $strongarm;
 
   $strongarm = new stdClass();

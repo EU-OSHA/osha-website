@@ -35,17 +35,11 @@ function osha_linkchecker_views_default_views() {
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['style_plugin'] = 'table';
-  $handler->display->display_options['style_options']['grouping'] = array(
-    0 => array(
-      'field' => 'title_field',
-      'rendered' => 1,
-      'rendered_strip' => 0,
-    ),
-  );
   $handler->display->display_options['style_options']['columns'] = array(
     'code' => 'code',
     'url' => 'url',
     'title_field' => 'title_field',
+    'type' => 'type',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -64,6 +58,13 @@ function osha_linkchecker_views_default_views() {
       'empty_column' => 0,
     ),
     'title_field' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'type' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -104,6 +105,12 @@ function osha_linkchecker_views_default_views() {
     'title_class' => '',
   );
   $handler->display->display_options['fields']['title_field']['link_to_entity'] = 0;
+  /* Field: Content: Type */
+  $handler->display->display_options['fields']['type']['id'] = 'type';
+  $handler->display->display_options['fields']['type']['table'] = 'node';
+  $handler->display->display_options['fields']['type']['field'] = 'type';
+  $handler->display->display_options['fields']['type']['relationship'] = 'nid';
+  $handler->display->display_options['fields']['type']['exclude'] = TRUE;
   /* Filter criterion: Linkchecker Links: Code */
   $handler->display->display_options['filters']['code']['id'] = 'code';
   $handler->display->display_options['filters']['code']['table'] = 'linkchecker_link';
@@ -173,10 +180,11 @@ function osha_linkchecker_views_default_views() {
     t('next ›'),
     t('last »'),
     t('Linkchecker Node Links'),
-    t('Node'),
+    t('Content'),
     t('Code'),
     t('URL'),
     t('Title'),
+    t('Type'),
     t('Section'),
     t('Page'),
   );

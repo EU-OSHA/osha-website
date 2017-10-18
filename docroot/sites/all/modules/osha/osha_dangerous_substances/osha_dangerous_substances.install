@@ -240,3 +240,10 @@ function osha_dangerous_substances_update_7018() {
 function osha_dangerous_substances_update_7019() {
   features_revert_module('osha_dangerous_substances');
 }
+
+/**
+ * Add DS node default workbench section.
+ */
+function osha_dangerous_substances_update_7020() {
+  osha_dangerous_substances_update_7018();
+}

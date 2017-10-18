@@ -625,7 +625,6 @@ class OshaWorkflowNotifications {
 
     $view = views_get_view('osh_workflow_admin');
     $view->set_display('page_3');
-//    $view->set_arguments(array($approver->uid));
     $view->pre_execute();
     $view->set_items_per_page(0);
     $view->execute();
@@ -669,7 +668,27 @@ class OshaWorkflowNotifications {
     # Don't notify RM, see MDR-351
     # $users = osha_workflow_get_node_rm($node);
     $users = _osha_workflow_get_current_pm_approver($node->nid);
-    OshaWorkflowNotifications::sendEmail($users, array('node' => $node, 'action'=> 'reviewed', 'status'=> 'To be reviewed'), 'osha_workflow');
+    $params = array(
+      'node' => $node,
+      'action'=> 'reviewed',
+      'status'=> 'To be reviewed',
+      'link' => 'admin/workbench/manager',
+    );
+
+    if (!empty($users)) {
+      foreach ($users as $user) {
+        $view = views_get_view('osh_workflow_admin');
+        $view->set_display('page_pm_review');
+        $view->set_arguments(array($user->uid));
+        $view->pre_execute();
+        $view->set_items_per_page(0);
+        $view->execute();
+        $ret = $view->total_rows;
+        $params['count'] = $ret;
+        OshaWorkflowNotifications::sendEmail([$user], $params, 'osha_workflow');
+      }
+    }
+
   }
 
   /**
@@ -681,7 +700,25 @@ class OshaWorkflowNotifications {
   public static function notifyNextApproverToTakeAction($node) {
     // see also osha_workflow_pm_approve_submit
     $next_approval = osha_workflow_get_next_approver($node->nid);
-    OshaWorkflowNotifications::sendEmail($next_approval, array('node' => $node, 'action'=> 'approved', 'status'=> 'To be approved'), 'osha_workflow');
+    $params = array(
+      'node' => $node,
+      'action'=> 'approved',
+      'status'=> 'To be approved',
+      'link' => 'admin/workbench/approve',
+    );
+
+    if (!empty($next_approval)) {
+      $view = views_get_view('osh_workflow_admin');
+      $view->set_display('page_1');
+      $view->set_arguments(array($next_approval->uid));
+      $view->pre_execute();
+      $view->set_items_per_page(0);
+      $view->execute();
+      $ret = $view->total_rows;
+      $params['count'] = $ret;
+    }
+
+    OshaWorkflowNotifications::sendEmail($next_approval, $params, 'osha_workflow');
   }
 
   /**
@@ -694,14 +731,45 @@ class OshaWorkflowNotifications {
    *   Affected node
    */
   public static function notifyOnNodeApproved($node) {
+    global $workflow_notification_user;
+
+    $params = array(
+      'node' => $node,
+      'action'=> 'approved',
+      'text' => 'A content has been approved',
+      'status'=> 'Approved',
+    );
+
+    // Get RM of node's section.
     $users = osha_workflow_get_node_rm($node);
+    if (!empty($users)) {
+      $workflow_notification_user = current($users);
+      $view = views_get_view('osh_workflow_admin');
+      $view->set_display('page_3');
+      $view->pre_execute();
+      $view->set_items_per_page(0);
+      $view->execute();
+      $ret = $view->total_rows;
+      $params['count'] = $ret;
+      $params['link'] = 'admin/workbench/review-manager';
+    }
+    OshaWorkflowNotifications::sendEmail($users, $params, 'osha_workflow');
+
     $pms = osha_workflow_get_pms_users($node->nid);
     if (!empty($pms)) {
-      $users = array_merge($users, $pms);
+      foreach ($pms as $user) {
+        $view = views_get_view('osh_workflow_admin');
+        $view->set_display('page_pm_review');
+        $view->set_arguments(array($user->uid));
+        $view->pre_execute();
+        $view->set_items_per_page(0);
+        $view->execute();
+        $ret = $view->total_rows;
+        $params['count'] = $ret;
+        $params['link'] = 'admin/workbench/manager';
+        OshaWorkflowNotifications::sendEmail([$user], $params, 'osha_workflow');
+      }
     }
-    OshaWorkflowNotifications::sendEmail($users, array(
-      'node' => $node, 'text' => 'A content has been approved', 'status' => 'Approved'
-    ), 'osha_workflow');
   }
 
   /**
@@ -783,7 +851,24 @@ class OshaWorkflowNotifications {
    */
   public static function notifyFirstApprover($node) {
     $next_approval = osha_workflow_get_next_approver($node->nid);
-    OshaWorkflowNotifications::sendEmail($next_approval, array('node' => $node, 'action'=> 'approved', 'status'=> 'To be approved'), 'osha_workflow');
+    $params = array(
+      'node' => $node,
+      'action'=> 'approved',
+      'status'=> 'To be approved',
+      'link' => 'admin/workbench/approve',
+    );
+
+    if (!empty($next_approval)) {
+      $view = views_get_view('osh_workflow_admin');
+      $view->set_display('page_1');
+      $view->set_arguments(array($next_approval->uid));
+      $view->pre_execute();
+      $view->set_items_per_page(0);
+      $view->execute();
+      $ret = $view->total_rows;
+      $params['count'] = $ret;
+    }
+    OshaWorkflowNotifications::sendEmail($next_approval, $params, 'osha_workflow');
   }
 
   /**

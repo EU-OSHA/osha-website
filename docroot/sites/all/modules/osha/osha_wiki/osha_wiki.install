@@ -5,3 +5,10 @@
  */
 function osha_wiki_install() {
 }
+
+/**
+ * MDR-1450 I2-Introduce hint text inside the input fields
+ */
+function osha_wiki_update_7001() {
+  features_revert(array('osha_wiki' => array('field_base', 'field_instance')));
+}

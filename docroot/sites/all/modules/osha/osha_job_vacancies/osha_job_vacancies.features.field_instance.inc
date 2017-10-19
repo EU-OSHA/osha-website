@@ -10,12 +10,12 @@
 function osha_job_vacancies_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-job_vacancies-body'
+  // Exported field_instance: 'node-job_vacancies-body'.
   $field_instances['node-job_vacancies-body'] = array(
     'bundle' => 'job_vacancies',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please introduce in this box the text of this section.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -73,14 +73,20 @@ function osha_job_vacancies_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'body',
     'label' => 'Body',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
+      'display_summary' => 1,
       'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
@@ -89,14 +95,15 @@ function osha_job_vacancies_field_default_field_instances() {
       'type' => 'text_textarea_with_summary',
       'weight' => 7,
     ),
+    'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-job_vacancies-field_activity'
+  // Exported field_instance: 'node-job_vacancies-field_activity'.
   $field_instances['node-job_vacancies-field_activity'] = array(
     'bundle' => 'job_vacancies',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Activity for this content.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -164,9 +171,10 @@ function osha_job_vacancies_field_default_field_instances() {
       'type' => 'options_select',
       'weight' => 14,
     ),
+    'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-job_vacancies-field_archived'
+  // Exported field_instance: 'node-job_vacancies-field_archived'.
   $field_instances['node-job_vacancies-field_archived'] = array(
     'bundle' => 'job_vacancies',
     'default_value' => array(
@@ -239,7 +247,7 @@ function osha_job_vacancies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-job_vacancies-field_author'
+  // Exported field_instance: 'node-job_vacancies-field_author'.
   $field_instances['node-job_vacancies-field_author'] = array(
     'bundle' => 'job_vacancies',
     'default_value' => NULL,
@@ -315,7 +323,7 @@ function osha_job_vacancies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-job_vacancies-field_character_count'
+  // Exported field_instance: 'node-job_vacancies-field_character_count'.
   $field_instances['node-job_vacancies-field_character_count'] = array(
     'bundle' => 'job_vacancies',
     'default_value' => NULL,
@@ -386,7 +394,7 @@ function osha_job_vacancies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-job_vacancies-field_expiration_date'
+  // Exported field_instance: 'node-job_vacancies-field_expiration_date'.
   $field_instances['node-job_vacancies-field_expiration_date'] = array(
     'bundle' => 'job_vacancies',
     'deleted' => 0,
@@ -463,7 +471,82 @@ function osha_job_vacancies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-job_vacancies-field_job_vacancies_deadline'
+  // Exported field_instance: 'node-job_vacancies-field_flickr_date'.
+  $field_instances['node-job_vacancies-field_flickr_date'] = array(
+    'bundle' => 'job_vacancies',
+    'deleted' => 0,
+    'description' => 'Grab Flickr photos taken on or between these dates only.',
+    'display' => array(
+      'default' => array(
+        'format_type' => 'long',
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'osha_date_theme' => '',
+          'show_remaining_days' => FALSE,
+          'show_repeat_rule' => 'show',
+        ),
+        'type' => 'date_default',
+        'weight' => 16,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_flickr_date',
+    'label' => 'Flickr date taken',
+    'required' => FALSE,
+    'settings' => array(
+      'default_value' => 'blank',
+      'default_value2' => 'blank',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 1,
+        'input_format' => 'Y-m-d H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'text_parts' => array(),
+        'year_range' => '-100:+1',
+      ),
+      'type' => 'date_popup',
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'node-job_vacancies-field_job_vacancies_deadline'.
   $field_instances['node-job_vacancies-field_job_vacancies_deadline'] = array(
     'bundle' => 'job_vacancies',
     'deleted' => 0,
@@ -479,6 +562,7 @@ function osha_job_vacancies_field_default_field_instances() {
           'multiple_number' => '',
           'multiple_to' => '',
           'osha_date_theme' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 2,
@@ -554,7 +638,8 @@ function osha_job_vacancies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-job_vacancies-field_job_vacancies_shortlisted'
+  // Exported field_instance:
+  // 'node-job_vacancies-field_job_vacancies_shortlisted'.
   $field_instances['node-job_vacancies-field_job_vacancies_shortlisted'] = array(
     'bundle' => 'job_vacancies',
     'default_value' => array(
@@ -633,12 +718,12 @@ function osha_job_vacancies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-job_vacancies-field_nace_codes'
+  // Exported field_instance: 'node-job_vacancies-field_nace_codes'.
   $field_instances['node-job_vacancies-field_nace_codes'] = array(
     'bundle' => 'job_vacancies',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Nace code for this content.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -700,16 +785,14 @@ function osha_job_vacancies_field_default_field_instances() {
     'widget' => array(
       'active' => 0,
       'module' => 'multiple_selects',
-      'settings' => array(
-        'autocomplete_path' => 'taxonomy/autocomplete',
-        'size' => 60,
-      ),
+      'settings' => array(),
       'type' => 'multiple_selects',
       'weight' => 10,
     ),
+    'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-job_vacancies-field_page_count'
+  // Exported field_instance: 'node-job_vacancies-field_page_count'.
   $field_instances['node-job_vacancies-field_page_count'] = array(
     'bundle' => 'job_vacancies',
     'default_value' => NULL,
@@ -780,11 +863,11 @@ function osha_job_vacancies_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-job_vacancies-field_publication_date'
+  // Exported field_instance: 'node-job_vacancies-field_publication_date'.
   $field_instances['node-job_vacancies-field_publication_date'] = array(
     'bundle' => 'job_vacancies',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please select the date of publication, if it is not possible to identify leave it empty.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -808,6 +891,7 @@ function osha_job_vacancies_field_default_field_instances() {
           'multiple_number' => '',
           'multiple_to' => '',
           'osha_date_theme' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 1,
@@ -863,19 +947,21 @@ function osha_job_vacancies_field_default_field_instances() {
         'input_format' => 'm/d/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
+        'no_fieldset' => 0,
         'text_parts' => array(),
         'year_range' => '-3:+3',
       ),
       'type' => 'date_select',
       'weight' => 4,
     ),
+    'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-job_vacancies-field_related_resources'
+  // Exported field_instance: 'node-job_vacancies-field_related_resources'.
   $field_instances['node-job_vacancies-field_related_resources'] = array(
     'bundle' => 'job_vacancies',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Job vacancies Related resources files.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -942,14 +1028,15 @@ function osha_job_vacancies_field_default_field_instances() {
       'type' => 'file_generic',
       'weight' => 8,
     ),
+    'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-job_vacancies-field_summary'
+  // Exported field_instance: 'node-job_vacancies-field_summary'.
   $field_instances['node-job_vacancies-field_summary'] = array(
     'bundle' => 'job_vacancies',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please introduce in this box the text of this section.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1007,6 +1094,11 @@ function osha_job_vacancies_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -1019,14 +1111,15 @@ function osha_job_vacancies_field_default_field_instances() {
       'type' => 'text_textarea',
       'weight' => 3,
     ),
+    'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-job_vacancies-field_tags'
+  // Exported field_instance: 'node-job_vacancies-field_tags'.
   $field_instances['node-job_vacancies-field_tags'] = array(
     'bundle' => 'job_vacancies',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Tags for this content.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1094,14 +1187,15 @@ function osha_job_vacancies_field_default_field_instances() {
       'type' => 'options_select',
       'weight' => 9,
     ),
+    'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-job_vacancies-field_thesaurus'
+  // Exported field_instance: 'node-job_vacancies-field_thesaurus'.
   $field_instances['node-job_vacancies-field_thesaurus'] = array(
     'bundle' => 'job_vacancies',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Thesaurus for this content.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1163,16 +1257,14 @@ function osha_job_vacancies_field_default_field_instances() {
     'widget' => array(
       'active' => 0,
       'module' => 'multiple_selects',
-      'settings' => array(
-        'autocomplete_path' => 'taxonomy/autocomplete',
-        'size' => 60,
-      ),
+      'settings' => array(),
       'type' => 'multiple_selects',
       'weight' => 11,
     ),
+    'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-job_vacancies-title_field'
+  // Exported field_instance: 'node-job_vacancies-title_field'.
   $field_instances['node-job_vacancies-title_field'] = array(
     'bundle' => 'job_vacancies',
     'default_value' => NULL,
@@ -1286,11 +1378,20 @@ function osha_job_vacancies_field_default_field_instances() {
   t('Character count');
   t('Deadline');
   t('Expiration date');
+  t('Flickr date taken');
+  t('Grab Flickr photos taken on or between these dates only.');
+  t('Job vacancies Related resources files.');
   t('Marked as outdated');
   t('Nace');
   t('Page count');
+  t('Please introduce in this box the text of this section.');
+  t('Please select the date of publication, if it is not possible to identify leave it empty.');
   t('Publication date');
   t('Related resources');
+  t('Select Activity for this content.');
+  t('Select Nace code for this content.');
+  t('Select Tags for this content.');
+  t('Select Thesaurus for this content.');
   t('Shortlisted');
   t('Summary');
   t('Tags');

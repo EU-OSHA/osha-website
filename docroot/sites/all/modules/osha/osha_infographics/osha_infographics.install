@@ -109,3 +109,10 @@ function osha_infographics_update_7006() {
 function osha_infographics_update_7007() {
   features_revert_module('osha_infographics');
 }
+
+/**
+ * MDR-1450 I2-Introduce hint text inside the input fields
+ */
+function osha_infographics_update_7008() {
+  features_revert(array('osha_infographics' => array('field_base', 'field_instance')));
+}

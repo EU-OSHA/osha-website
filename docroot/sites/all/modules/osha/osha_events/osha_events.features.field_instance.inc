@@ -15,7 +15,7 @@ function osha_events_field_default_field_instances() {
     'bundle' => 'events',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please introduce in this box the text of this section.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -981,6 +981,93 @@ Grey - Only web or not attendance',
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-events-field_flickr_date'.
+  $field_instances['node-events-field_flickr_date'] = array(
+    'bundle' => 'events',
+    'deleted' => 0,
+    'description' => 'Grab Flickr photos taken on or between these dates only.',
+    'display' => array(
+      'default' => array(
+        'format_type' => 'long',
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'osha_date_theme' => '',
+          'show_remaining_days' => FALSE,
+          'show_repeat_rule' => 'show',
+        ),
+        'type' => 'date_default',
+        'weight' => 29,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_flickr_date',
+    'label' => 'Flickr date taken',
+    'required' => FALSE,
+    'settings' => array(
+      'default_value' => 'blank',
+      'default_value2' => 'blank',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 1,
+        'input_format' => 'Y-m-d H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'text_parts' => array(),
+        'year_range' => '-100:+1',
+      ),
+      'type' => 'date_popup',
+      'weight' => 5,
+    ),
+  );
+
   // Exported field_instance: 'node-events-field_for_the_web'.
   $field_instances['node-events-field_for_the_web'] = array(
     'bundle' => 'events',
@@ -1426,7 +1513,7 @@ Grey - Only web or not attendance',
   $field_instances['node-events-field_related_documents'] = array(
     'bundle' => 'events',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Events Related resources file.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -1504,18 +1591,18 @@ Grey - Only web or not attendance',
           'media_default--media_browser_my_files' => 0,
           'upload' => 'upload',
         ),
-        'manualcrop_crop_info' => TRUE,
-        'manualcrop_default_crop_area' => TRUE,
-        'manualcrop_enable' => FALSE,
-        'manualcrop_inline_crop' => FALSE,
+        'manualcrop_crop_info' => 1,
+        'manualcrop_default_crop_area' => 1,
+        'manualcrop_enable' => 0,
+        'manualcrop_inline_crop' => 0,
         'manualcrop_instant_crop' => FALSE,
-        'manualcrop_instant_preview' => TRUE,
-        'manualcrop_keyboard' => TRUE,
-        'manualcrop_maximize_default_crop_area' => FALSE,
+        'manualcrop_instant_preview' => 1,
+        'manualcrop_keyboard' => 1,
+        'manualcrop_maximize_default_crop_area' => 0,
         'manualcrop_require_cropping' => array(),
         'manualcrop_styles_list' => array(),
         'manualcrop_styles_mode' => 'include',
-        'manualcrop_thumblist' => FALSE,
+        'manualcrop_thumblist' => 0,
       ),
       'type' => 'media_generic',
       'weight' => 26,
@@ -2299,7 +2386,10 @@ Grey - Only web or not attendance',
   t('Date');
   t('Description');
   t('Event in AMP');
+  t('Events Related resources file.');
+  t('Flickr date taken');
   t('For the web / Public');
+  t('Grab Flickr photos taken on or between these dates only.');
   t('Location');
   t('Mandatory');
   t('Migration Source');
@@ -2307,6 +2397,7 @@ Grey - Only web or not attendance',
   t('Number of attendees');
   t('Organization');
   t('Organized by EU-OSHA');
+  t('Please introduce in this box the text of this section.');
   t('Red: TBD - TBC <br />
 Black - Confirmed <br />
 Grey - Only web or not attendance');

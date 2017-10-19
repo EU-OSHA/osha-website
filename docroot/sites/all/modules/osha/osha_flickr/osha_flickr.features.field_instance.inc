@@ -152,7 +152,7 @@ function osha_flickr_field_default_field_instances() {
   $field_instances['node-flickr_gallery-field_publication_date'] = array(
     'bundle' => 'flickr_gallery',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please select the date of publication, if it is not possible to identify leave it empty.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -318,6 +318,7 @@ function osha_flickr_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Cover photo');
   t('Flickr');
+  t('Please select the date of publication, if it is not possible to identify leave it empty.');
   t('Publication date');
   t('Title');
 

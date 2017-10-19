@@ -675,7 +675,7 @@ function osha_field_default_field_instances() {
     'bundle' => 'article',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please introduce in this box the text of this section.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -732,14 +732,20 @@ function osha_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'body',
     'label' => 'Body',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
+      'display_summary' => 1,
       'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
@@ -748,6 +754,7 @@ function osha_field_default_field_instances() {
       'type' => 'text_textarea_with_summary',
       'weight' => 8,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-article-field_activity'.
@@ -755,7 +762,7 @@ function osha_field_default_field_instances() {
     'bundle' => 'article',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Activity for this content.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -823,6 +830,7 @@ function osha_field_default_field_instances() {
       'type' => 'options_select',
       'weight' => 14,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-article-field_aditional_resources'.
@@ -982,7 +990,7 @@ function osha_field_default_field_instances() {
     'bundle' => 'article',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Article type for this content.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -1044,6 +1052,7 @@ function osha_field_default_field_instances() {
       'type' => 'options_select',
       'weight' => 0,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-article-field_character_count'.
@@ -1289,7 +1298,7 @@ function osha_field_default_field_instances() {
   $field_instances['node-article-field_image'] = array(
     'bundle' => 'article',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'The header image that will be displayed on page.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -1415,7 +1424,7 @@ function osha_field_default_field_instances() {
     'bundle' => 'article',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Nace code for this content.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -1484,6 +1493,7 @@ function osha_field_default_field_instances() {
       'type' => 'multiple_selects',
       'weight' => 10,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-article-field_page_count'.
@@ -1565,7 +1575,7 @@ function osha_field_default_field_instances() {
   $field_instances['node-article-field_publication_date'] = array(
     'bundle' => 'article',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please select the date of publication, if it is not possible to identify leave it empty.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -1645,12 +1655,14 @@ function osha_field_default_field_instances() {
         'input_format' => 'm/d/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
+        'no_fieldset' => 0,
         'text_parts' => array(),
         'year_range' => '1970:+3',
       ),
       'type' => 'date_select',
       'weight' => 6,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-article-field_related_oshwiki_articles'.
@@ -1729,7 +1741,7 @@ function osha_field_default_field_instances() {
     'bundle' => 'article',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please introduce in this box the text of this section.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -1788,6 +1800,11 @@ function osha_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -1800,6 +1817,7 @@ function osha_field_default_field_instances() {
       'type' => 'text_textarea',
       'weight' => 4,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-article-field_tags'.
@@ -1807,7 +1825,7 @@ function osha_field_default_field_instances() {
     'bundle' => 'article',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Tags for this content.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -1875,6 +1893,7 @@ function osha_field_default_field_instances() {
       'type' => 'options_select',
       'weight' => 9,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-article-field_thesaurus'.
@@ -1882,7 +1901,7 @@ function osha_field_default_field_instances() {
     'bundle' => 'article',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Thesaurus for this content.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -1951,6 +1970,7 @@ function osha_field_default_field_instances() {
       'type' => 'multiple_selects',
       'weight' => 11,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-article-field_wiki_categories'.
@@ -1958,7 +1978,7 @@ function osha_field_default_field_instances() {
     'bundle' => 'article',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select OSHwiki category for this content.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -2020,6 +2040,7 @@ function osha_field_default_field_instances() {
       'type' => 'options_select',
       'weight' => 12,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-article-title_field'.
@@ -2294,7 +2315,7 @@ function osha_field_default_field_instances() {
     'bundle' => 'page',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please introduce in this box the text of this section.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -2355,14 +2376,20 @@ function osha_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'body',
     'label' => 'Body',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
+      'display_summary' => 1,
       'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
@@ -2371,6 +2398,7 @@ function osha_field_default_field_instances() {
       'type' => 'text_textarea_with_summary',
       'weight' => 2,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-page-field_activity'.
@@ -3026,9 +3054,18 @@ function osha_field_default_field_instances() {
   t('OSHwiki featured articles');
   t('Page Introduction');
   t('Page count');
+  t('Please introduce in this box the text of this section.');
+  t('Please select the date of publication, if it is not possible to identify leave it empty.');
   t('Publication date');
+  t('Select Activity for this content.');
+  t('Select Article type for this content.');
+  t('Select Nace code for this content.');
+  t('Select OSHwiki category for this content.');
+  t('Select Tags for this content.');
+  t('Select Thesaurus for this content.');
   t('Summary');
   t('Tags');
+  t('The header image that will be displayed on page.');
   t('Thesaurus');
   t('Title');
   t('Title text');

@@ -15,7 +15,7 @@ function osha_highlight_field_default_field_instances() {
     'bundle' => 'highlight',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please introduce in this box the text of this section.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -86,14 +86,20 @@ function osha_highlight_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'body',
     'label' => 'Body',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
+      'display_summary' => 1,
       'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
@@ -102,6 +108,7 @@ function osha_highlight_field_default_field_instances() {
       'type' => 'text_textarea_with_summary',
       'weight' => 4,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-highlight-field_activity'.
@@ -558,7 +565,7 @@ function osha_highlight_field_default_field_instances() {
   $field_instances['node-highlight-field_image'] = array(
     'bundle' => 'highlight',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'The header image that will be displayed on page.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -755,7 +762,7 @@ function osha_highlight_field_default_field_instances() {
   $field_instances['node-highlight-field_publication_date'] = array(
     'bundle' => 'highlight',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please select the date of publication, if it is not possible to identify leave it empty.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -862,12 +869,14 @@ function osha_highlight_field_default_field_instances() {
         'input_format' => 'm/d/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
+        'no_fieldset' => 0,
         'text_parts' => array(),
         'year_range' => '-3:+3',
       ),
       'type' => 'date_select',
       'weight' => 5,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-highlight-field_tags'.
@@ -1139,8 +1148,11 @@ function osha_highlight_field_default_field_instances() {
   t('Image');
   t('Marked as outdated');
   t('Page count');
+  t('Please introduce in this box the text of this section.');
+  t('Please select the date of publication, if it is not possible to identify leave it empty.');
   t('Publication date');
   t('Tags');
+  t('The header image that will be displayed on page.');
   t('Thesaurus');
   t('Title');
 

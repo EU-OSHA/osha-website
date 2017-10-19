@@ -10,14 +10,13 @@
 function osha_calls_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_calls_deadline'
+  // Exported field_base: 'field_calls_deadline'.
   $field_bases['field_calls_deadline'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_calls_deadline',
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'date',

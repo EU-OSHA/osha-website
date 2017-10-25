@@ -169,7 +169,10 @@ function osha_dangerous_substances_filter_process_format($element) {
   if ($element['#bundle'] == 'dangerous_substances') {
     unset($element['format']['guidelines']);
     unset($element['format']['help']);
-    $element['format']['format']['#options'] = [ 'dangerous_substances' => $element['format']['format']['#options']['dangerous_substances'] ];
+    $element['format']['format']['#options'] = [
+      'dangerous_substances' => $element['format']['format']['#options']['dangerous_substances'],
+      'dangerous_substances_minimal' => $element['format']['format']['#options']['dangerous_substances_minimal'],
+    ];
     unset($element['format']['format']['']);
     $element['#format'] = 'dangerous_substances';
   }

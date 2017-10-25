@@ -690,6 +690,7 @@ function osha_workflow_bundle_section_map() {
     'guideline' => 'ONETKA',
     'calls' => 'PROCUR',
     'infographic' => 'CORPCM',
+    'dangerous_substances' => 'DANGSUDB_PM',
   );
 }
 
@@ -1002,43 +1003,7 @@ function osha_workflow_form_alter(&$form, &$form_state, $form_id) {
       }
     }
   }
-  if ($form_id == 'workbench_moderation_moderate_form' && isset($form['node']['#value'])) {
-    $node = $form['node']['#value'];
-    $state = $node->workbench_moderation['current']->state;
-    $form['#validate'][] = 'osha_workflow_workbench_moderation_approval_form_validate';
-    if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
-      $is_workflow_admin = user_access('moderate content from approved to ready_to_publish');
-      $next = osha_workflow_get_next_approver($node->nid);
-      global $user;
-      if (!osha_workflow_needs_last_approver($node)) {
-        // If next approver or administrator.
-        if ($next || $is_workflow_admin) {
-          if ($user->uid == $next->uid
-            || $is_workflow_admin) {
-            // Hijack the form & add Done button.
-            $form['submit'] = array(
-              '#type' => 'submit',
-              '#value' => t('Done'),
-              '#submit' => array('osha_workflow_form_moderate_approve_submit'),
-            );
-            if ($is_workflow_admin && $next->uid != $user->uid) {
-              $form['submit']['#prefix'] = t('Approve instead of @user',
-                array('@user' => $next->name));
-            }
-            hide($form['state']);
-          }
-        }
-      }
-      else {
-        // If last approver.
-        if ($is_workflow_admin && $next->uid != $user->uid) {
-          $form['state']['#prefix'] = t('Approve instead of @user',
-            array('@user' => $next->name));
-        }
-      }
-    }
-  }
-  elseif ($form_id == 'views_exposed_form' && $form_state['view']->name == 'osh_workflow_admin'
+  if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'osh_workflow_admin'
     && $form_state['view']->current_display == 'content') {
 //    $form['access_id']['#multiple'] = TRUE;
 //    $form['access_id']['#size'] = 1;
@@ -1085,6 +1050,13 @@ function osha_workflow_form_views_exposed_form_alter(&$form, &$form_state) {
  */
 function osha_workflow_form_node_form_alter(&$form, $form_state) {
   global $user;
+
+  if (!empty($form['actions'])) {
+    $form['actions_top'] = $form['actions'];
+    $form['actions_top']['#weight'] = -999;
+    $form['actions_top']['#attributes']['style'] = 'text-align: right';
+  }
+
   // This must be a node form and a node that has moderation enabled.
   // Extended to include moderation check on the individual node.
   if (!workbench_moderation_node_moderated($form['#node'])) {
@@ -1099,7 +1071,251 @@ function osha_workflow_form_node_form_alter(&$form, $form_state) {
       }
     }
   }
+  else {
+    $state = 'draft';
+  }
+
+  $form['options']['vesafe_workflow_list'] = _osha_workflow_get_states_list($state);
+
 }
+
+
+/**
+ * Implements hook_block_info().
+ */
+function osha_workflow_block_info() {
+  $blocks['osha_workflow_info'] = array(
+    'info' => 'Osha workflow summary',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function osha_workflow_block_view($delta = '') {
+  if (!user_access('view all unpublished content')) {
+    return NULL;
+  }
+  if ($delta == 'osha_workflow_info') {
+    $node = menu_get_object();
+    $is_node = !empty($node);
+    $is_moderated = $is_node && workbench_moderation_node_type_moderated($node->type);
+    if (!$is_node || !$is_moderated) {
+      return NULL;
+    }
+
+    $arg_2 = arg(2);
+    $view_draft = !empty($arg_2) && $arg_2 == 'draft';
+    if (!empty($arg_2) && !$view_draft) {
+      return NULL;
+    }
+
+    //  workbench_moderation_node_current_load
+    $content['form'] = drupal_get_form('osha_workflow_moderation_moderate_form', $node);
+
+    $block = array(
+      'subject' => '',
+      'content' => $content,
+    );
+    return $block;
+  }
+  return NULL;
+}
+
+/**
+ * @see workbench_moderation_moderate_form.
+ */
+function osha_workflow_moderation_moderate_form($form, &$form_state, $node, $destination = NULL) {
+  global $user;
+  $form = array();
+
+  if (!_workbench_moderation_access('update', $node)) {
+    $form['#access'] = FALSE;
+    return $form;
+  }
+
+  $arg_2 = arg(2);
+  $view_draft = !empty($arg_2) && $arg_2 == 'draft';
+
+//  $form['#attributes']['class'][] = 'workbench-moderation-moderate-form';
+//  $form['#attached']['css'][] = drupal_get_path('module', 'workbench_moderation') . '/css/workbench_moderation.css';
+  $form['node'] = array(
+    '#type' => 'value',
+    '#value' => $node,
+  );
+
+  if (!$view_draft && $node->status == 1){
+    $link = workbench_moderation_access_link(t('Unpublish this revision'), "node/{$node->nid}/moderation/{$node->vid}/unpublish", ['attributes' => ['class' => 'btn']]);
+    $form['states'] = _osha_workflow_get_states_list('published');
+    $form['unpublish'] = [
+      '#markup' => $link,
+    ];
+  }
+  elseif (empty($arg_2) && $next_states = workbench_moderation_states_next($node->workbench_moderation['current'], $user, $node)) {
+    $state = $node->workbench_moderation['current']->state;
+    $form['node']['#value'] = workbench_moderation_node_current_load($form['node']['#value']);
+    $form['states'] = _osha_workflow_get_states_list($state);
+    $form['states']['#weight'] = -99;
+    $form['#destination'] = $destination;
+
+    $transitions = workbench_moderation_transitions();
+    $to = [];
+
+    foreach ($transitions as $transition) {
+      if ($transition->from_name == $state && in_array($transition->to_name, array_keys($next_states))) {
+        $to[$transition->to_name] = $transition;
+      }
+    }
+
+    $states = _osha_workflow_get_states();
+
+    $form['next_state'] = array(
+      '#type' => 'container',
+//      '#prefix' => '<div>' . t('Moderation state') . '</div>',
+    );
+    foreach ($to as $trans) {
+      $form['next_state'][$trans->to_name] = [
+        '#type' => 'submit',
+        '#value' => 'Send to "' . $states[$trans->to_name] . '"',
+        '#attributes' => ['class' => ['btn',  'btn-primary']],
+        '#weight' => osha_workflow_moderation_status_weight($trans->to_name),
+      ];
+    }
+
+    if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
+      $is_workflow_admin = user_access('moderate content from approved to ready_to_publish');
+      $next = osha_workflow_get_next_approver($node->nid);
+      global $user;
+      if (!osha_workflow_needs_last_approver($node)) {
+        // If next approver or administrator.
+        if ($next || $is_workflow_admin) {
+          if ($user->uid == $next->uid
+            || $is_workflow_admin) {
+            // Hijack the form & add Done button.
+            $form['submit'] = array(
+              '#type' => 'submit',
+              '#value' => t('Done'),
+              '#submit' => array('osha_workflow_form_moderate_approve_submit'),
+            );
+            if ($is_workflow_admin && $next->uid != $user->uid) {
+              $form['submit']['#prefix'] = t('Approve instead of @user',
+                array('@user' => $next->name));
+            }
+            hide($form['next_state']);
+          }
+        }
+      }
+      else {
+        // If last approver.
+        if ($is_workflow_admin && $next->uid != $user->uid) {
+          $form['state']['#prefix'] = t('Approve instead of @user',
+            array('@user' => $next->name));
+        }
+      }
+    }
+
+    $form['#validate'] = ['workbench_moderation_moderate_form_validate'];
+
+    // Cache the form on first load to preserve the node for validation.
+    // Otherwise, the node would be reloaded on submit, and there would be no
+    // way to detect if the current revision has been changed.
+    $form_state['cache'] = TRUE;
+  }
+  else {
+    $form['#access'] = FALSE;
+  }
+
+  return $form;
+}
+
+/**
+ * @see workbench_moderation_moderate_form_submit.
+ */
+function osha_workflow_moderation_moderate_form_submit($form, &$form_state) {
+
+  $values = $form_state['values'];
+  // OP has the same value as button, so prevent overwrite on flip.
+  unset($values['op']);
+  $op = $form_state['values']['op'];
+  $next_state = array_flip($values)[$op];
+
+  if (_workbench_moderation_moderate_access($form_state['values']['node'], $next_state)) {
+    workbench_moderation_moderate(node_load($form_state['values']['node']->nid, $form_state['values']['node']->vid), $next_state);
+  }
+
+  // This is not ideal, but if the form is invoked from a node's draft tab and
+  // used to publish the node, the draft tab will not be available after
+  // publishing, and Drupal's will throw an access denied error before it is
+  // able to redirect to the published revision.
+  if (!empty($form['#destination'])) {
+    if ($next_state == workbench_moderation_state_published()) {
+      if ($uri = entity_uri('node', $form['node']['#value'])) {
+        // Disable lookup of the path alias, since the path alias might get
+        // changed by modules such as Pathauto.
+        $uri['options']['alias'] = TRUE;
+        $form_state['redirect'] = array($uri['path'], $uri['options']);
+      }
+    }
+    else {
+      $form_state['redirect'] = $form['#destination'];
+    }
+    drupal_redirect_form($form_state);
+  }
+}
+
+function _osha_workflow_get_states() {
+  return [
+    'rejected' => 'Rejected',
+    'draft' => 'Draft',
+    'final_draft' => 'Final Draft',
+    'needs_review' => 'To be reviewed',
+    'to_be_approved' => 'To be approved',
+    'approved' => 'Approved',
+    'ready_to_publish' => 'Ready to publish',
+    'published' => 'Published',
+  ];
+}
+
+function _osha_workflow_get_states_list($active_state) {
+  $states = _osha_workflow_get_states();
+
+  $items = [];
+  foreach ($states as $state_key => $state_label) {
+    $items[] = [
+      'data' => $state_label,
+      'class' => [$state_key == $active_state ? 'active' : ''],
+    ];
+  }
+  return [
+    '#theme' => 'item_list',
+    '#items' => $items,
+    '#attached' => [
+      'css' => [
+        drupal_get_path('module', 'osha_workflow') . '/css/workflow_states.css'
+      ]
+    ],
+    '#attributes' => ['class' => ['vesafe-workflow-list-widget']],
+  ];
+}
+
+function osha_workflow_moderation_status_weight($status){
+  switch($status){
+    case 'ready_to_publish':
+      return 9;
+      break;
+    case 'published':
+      return 10;
+      break;
+
+    default:
+      return 0;
+      break;
+  }
+}
+
+
 
 /**
  * Load a single node_approval entity.
@@ -1198,12 +1414,22 @@ function osha_workflow_mail($key, &$message, $params) {
   $subject = variable_get('osha_mail_template_approval_subject', '[OSHA Website] CMW: ([node:nid]) [node:title-field]');
   $action = isset($params['action']) ? $params['action'] : 'reviewed';
   $status = isset($params['status']) ? $params['status'] : 'N/A';
-  $text = isset($params['text']) ? $params['text'] : ('There is new content to be '.$action.' by you');
+  $text = isset($params['text']) ? $params['text'] : ('There is new content to be ' . $action . ' by you');
+
+  $text_2 = '';
+  $count = isset($params['count']) ? $params['count'] : NULL;
+  $link = isset($params['link']) ? $params['link'] : NULL;
+  if ($count && $link) {
+    $text_2 = 'There are <strong>' . $count . '</strong> items that you can review from <a href="' . url($link, ['absolute' => TRUE]) . '">here.</a>';
+  }
+
 
   $body = variable_get('osha_mail_template_approval_body',
     'Dear <b>[user:name]</b>,<br>'.
 
     $text.': <a href="[node:url]">[node:title-field]</a> (type: [node:type], status: <b>'.$status.'</b>).'.
+
+    $text_2 .
 
     '<br>Thank you,'
   );

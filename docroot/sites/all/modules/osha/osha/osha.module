@@ -701,13 +701,37 @@ function osha_node_validate_prepare($form, &$form_state) {
   }
 }
 
+function osha_wysiwyg_editor_settings_alter(&$settings, $context){
+  $settings['theme_advanced_buttons1'] .= ',osha_advanced,osha_minimal';
+}
+
+function osha_wysiwyg_plugin($editor, $version=0) {
+  switch ($editor) {
+  case 'tinymce':
+    return array(
+      'osha_advanced' => array(
+        'extensions' => array(
+          'osha_advanced' => t('Osha advanced selector'),
+          'osha_minimal' => t('Osha minimal selector'),
+        ),
+        'load' => TRUE,
+        'internal' => FALSE,
+      ),
+    );
+  break;
+  }
+}
+
 /**
  * Implements hook_form_FORM_ID_alter().
  *
  * Hide Delete button for non-admin users
  */
-function osha_form_alter(&$form, &$form_state, $form_id){
+function osha_form_alter(&$form, &$form_state, $form_id) {
   global $user;
+
+  osha_form_text_fields_placeholders($form, $form_id);
+  drupal_add_css(drupal_get_path('module', 'osha') . '/styles/tinymce.css');
 
   if ($form_id == 'field_collection_item_delete_confirm') {
     drupal_set_title(t('Are you sure you want to delete the record?', array()), PASS_THROUGH);
@@ -1309,6 +1333,15 @@ function osha_pathologic_alter(&$url_params, $parts, $settings) {
 }
 
 /**
+ * Implements hook_page_build().
+ */
+function osha_page_build(&$page) {
+  if (path_is_admin(current_path())) {
+    drupal_add_css(drupal_get_path('module', 'osha') . '/styles/osha_admin.css', array('group' => CSS_THEME));
+  }
+}
+
+/**
  * Add alt and title attributes to images thumbnails
  */
 function osha_thumbnail_alt_title(&$build, $content_type, $field, $formatter){
@@ -1348,4 +1381,16 @@ function osha_view_all_node_translations($node) {
     $url,
     array('language' => reset(array_keys($node->translations->data)))
   );
+}
+
+function osha_form_text_fields_placeholders(&$form, $form_id) {
+  if (strpos($form_id, '_node_form') && isset($form['title'])) {
+    $form['#after_build'][] = 'osha_form_text_fields_placeholders_after_build';
+  }
+}
+
+function osha_form_text_fields_placeholders_after_build($form, &$form_state) {
+  drupal_add_js(drupal_get_path('module', 'osha') . '/js/jquery.charactersRemaining.js');
+  drupal_add_js(drupal_get_path('module', 'osha') . '/js/charactersRemaining.js', array('scope' => 'footer'));
+  return $form;
 }

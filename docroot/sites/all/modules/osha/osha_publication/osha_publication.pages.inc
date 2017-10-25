@@ -51,9 +51,19 @@ function osha_publication_menu_publications_form($form, $form_state) {
     '#value' => t('Search'),
     '#suffix' => '</div>',
   );
+
+  $enabled_lang = language_list();
+  $enabled_lang = osha_sort_language_list($enabled_lang);
+  $lang_options = [];
+  foreach ($enabled_lang as $lang => $lang_obj) {
+    if ($lang_obj->enabled) {
+      $lang_options[$lang] = $lang_obj->name;
+    }
+  }
+
   $form['left-column']['languages'] = array(
     '#type' => 'checkboxes',
-    '#options' => osha_language_list_options(),
+    '#options' => $lang_options,
     '#default_value' => $languages,
     '#title' => t('Available in languages'),
   );
@@ -233,10 +243,15 @@ function osha_publication_menu_publications_search_native($form_state) {
     $pager_params['direction'] = $direction;
   }
 
+  $showing_lang = $language->language;
+  if (count($languages) == 1) {
+    $showing_lang = current($languages);
+  }
+
   $ret = array(
     '#nids' => $nids,
     '#prefix' => '<h2 class="h4-title">' . t('Publications available') . '</h2>',
-    'results-native' => node_view_multiple($nodes, 'osha_search_teaser', 0, $language->language),
+    'results-native' => node_view_multiple($nodes, 'osha_search_teaser', 0, $showing_lang),
     '#suffix' => theme('pager', array(
       'tags' => array('<', '<', '', '>', '>'),
       'quantity' => 9,

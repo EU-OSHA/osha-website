@@ -116,6 +116,19 @@ function osha_linkchecker_views_query_alter(&$view, &$query) {
 }
 
 /**
+ * Implements hook_form_alter().
+ */
+function osha_linkchecker_form_alter(&$form, &$form_state, $form_id) {
+  switch ($form_id) {
+    case 'views_exposed_form':
+      if (in_array($form['#id'], array('views-exposed-form-broken-links-page'))) {
+        drupal_add_css(drupal_get_path('module', 'osha_linkchecker') .'/css/osha_linkchecker.css');
+      }
+      break;
+  }
+}
+
+/**
  * Implements hook_views_pre_render().
  */
 function osha_linkchecker_views_pre_render(&$view) {

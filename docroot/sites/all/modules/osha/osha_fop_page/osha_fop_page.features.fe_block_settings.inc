@@ -82,7 +82,7 @@ node/7116',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 7,
+        'weight' => 9,
       ),
       'seven' => array(
         'region' => '',

@@ -91,7 +91,7 @@ function osha_press_contact_field_default_field_instances() {
     'bundle' => 'press_contact',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Type for this content.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -154,6 +154,7 @@ function osha_press_contact_field_default_field_instances() {
       'type' => 'options_select',
       'weight' => 1,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-press_contact-field_contact_uuid'.
@@ -238,7 +239,7 @@ function osha_press_contact_field_default_field_instances() {
     'bundle' => 'press_contact',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Country for this content.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -300,6 +301,94 @@ function osha_press_contact_field_default_field_instances() {
       ),
       'type' => 'options_select',
       'weight' => 7,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'node-press_contact-field_flickr_date'.
+  $field_instances['node-press_contact-field_flickr_date'] = array(
+    'bundle' => 'press_contact',
+    'deleted' => 0,
+    'description' => 'Grab Flickr photos taken on or between these dates only.',
+    'display' => array(
+      'default' => array(
+        'format_type' => 'long',
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'osha_date_theme' => '',
+          'show_remaining_days' => FALSE,
+          'show_repeat_rule' => 'show',
+        ),
+        'type' => 'date_default',
+        'weight' => 22,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_flickr_date',
+    'label' => 'Flickr date taken',
+    'required' => FALSE,
+    'settings' => array(
+      'default_value' => 'blank',
+      'default_value2' => 'blank',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 1,
+        'input_format' => 'Y-m-d H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'text_parts' => array(),
+        'year_range' => '-100:+1',
+      ),
+      'type' => 'date_popup',
+      'weight' => 5,
     ),
   );
 
@@ -533,7 +622,7 @@ function osha_press_contact_field_default_field_instances() {
   $field_instances['node-press_contact-field_press_contact_cv'] = array(
     'bundle' => 'press_contact',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Contact CV file.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -608,7 +697,7 @@ function osha_press_contact_field_default_field_instances() {
   $field_instances['node-press_contact-field_press_contact_declaration'] = array(
     'bundle' => 'press_contact',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Contact Declaration of Interests file.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1163,7 +1252,7 @@ function osha_press_contact_field_default_field_instances() {
     'bundle' => 'press_contact',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Category for this content.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -1226,6 +1315,7 @@ function osha_press_contact_field_default_field_instances() {
       'type' => 'options_select',
       'weight' => 17,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-press_contact-field_wg_role_1'.
@@ -1233,7 +1323,7 @@ function osha_press_contact_field_default_field_instances() {
     'bundle' => 'press_contact',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select WG Role 1 for this content.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1281,7 +1371,7 @@ function osha_press_contact_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_wg_role_1',
-    'label' => 'WG Role1',
+    'label' => 'WG Role 1',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -1296,6 +1386,7 @@ function osha_press_contact_field_default_field_instances() {
       'type' => 'options_select',
       'weight' => 15,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-press_contact-field_wg_role_2'.
@@ -1303,7 +1394,7 @@ function osha_press_contact_field_default_field_instances() {
     'bundle' => 'press_contact',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select WG Role 2 for this content.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1366,6 +1457,7 @@ function osha_press_contact_field_default_field_instances() {
       'type' => 'options_select',
       'weight' => 16,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-press_contact-field_zip_code'.
@@ -1601,7 +1693,7 @@ function osha_press_contact_field_default_field_instances() {
   $field_instances['taxonomy_term-country-field_flag'] = array(
     'bundle' => 'country',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'The flag image that will be displayed on page.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1635,24 +1727,25 @@ function osha_press_contact_field_default_field_instances() {
       'active' => 1,
       'module' => 'image',
       'settings' => array(
-        'manualcrop_crop_info' => TRUE,
-        'manualcrop_default_crop_area' => TRUE,
-        'manualcrop_enable' => FALSE,
-        'manualcrop_inline_crop' => FALSE,
-        'manualcrop_instant_crop' => FALSE,
-        'manualcrop_instant_preview' => TRUE,
-        'manualcrop_keyboard' => TRUE,
-        'manualcrop_maximize_default_crop_area' => FALSE,
+        'manualcrop_crop_info' => 1,
+        'manualcrop_default_crop_area' => 1,
+        'manualcrop_enable' => 0,
+        'manualcrop_inline_crop' => 0,
+        'manualcrop_instant_crop' => 0,
+        'manualcrop_instant_preview' => 1,
+        'manualcrop_keyboard' => 1,
+        'manualcrop_maximize_default_crop_area' => 0,
         'manualcrop_require_cropping' => array(),
         'manualcrop_styles_list' => array(),
         'manualcrop_styles_mode' => 'include',
-        'manualcrop_thumblist' => FALSE,
+        'manualcrop_thumblist' => 0,
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
       'weight' => 7,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'taxonomy_term-country-field_iso2'.
@@ -2042,12 +2135,16 @@ function osha_press_contact_field_default_field_instances() {
   t('CV');
   t('Category');
   t('City');
+  t('Contact CV file.');
+  t('Contact Declaration of Interests file.');
   t('Country');
   t('Country Status');
   t('Declaration of Interests');
   t('Description');
   t('Email');
   t('Flag');
+  t('Flickr date taken');
+  t('Grab Flickr photos taken on or between these dates only.');
   t('ISO2');
   t('Is Observer');
   t('Is advisory');
@@ -2057,9 +2154,15 @@ function osha_press_contact_field_default_field_instances() {
   t('Organization');
   t('Personal Title');
   t('Phone');
+  t('Select Category for this content.');
+  t('Select Country for this content.');
+  t('Select Type for this content.');
+  t('Select WG Role 1 for this content.');
+  t('Select WG Role 2 for this content.');
+  t('The flag image that will be displayed on page.');
   t('Type');
+  t('WG Role 1');
   t('WG Role 2');
-  t('WG Role1');
   t('Web Site');
   t('Zip Code');
 

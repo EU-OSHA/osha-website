@@ -64,7 +64,7 @@ function osha_content_node_view($node, $view_mode, $langcode) {
 
   if ($view_mode == 'full' && $no_exception && !isset($_GET['orig_lng'])) {
     // if current language does not match content node language
-    if (!empty($node->language) && $node->language != $language->language && $node->nid != $redirectId) {
+    if (!empty($node->language) && $node->nid && $node->language != $language->language && $node->nid != $redirectId) {
       // lookup translations for current node
       if(!osha_content_has_translation($node->nid, $language)) {
         // redirect to a static page if there's not a translation in the currently active language

@@ -20,3 +20,10 @@ function osha_seminar_add_menu_position_rules() {
     osha_add_menu_position_rule('Seminar Search', '------ Seminar reports', $condition);
   }
 }
+
+/**
+ * MDR-1450 I2-Introduce hint text inside the input fields
+ */
+function osha_seminar_update_7001() {
+  features_revert(array('osha_seminar' => array('field_base', 'field_instance')));
+}

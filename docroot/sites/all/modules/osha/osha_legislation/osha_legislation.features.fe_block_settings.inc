@@ -13,7 +13,7 @@ function osha_legislation_default_fe_block_settings() {
   $export['version'] = '2.0';
 
   $export['osha_blocks-osha_legislation_notification'] = array(
-    'cache' => 4,
+    'cache' => 6,
     'custom' => 0,
     'delta' => 'osha_legislation_notification',
     'i18n_block_language' => array(),

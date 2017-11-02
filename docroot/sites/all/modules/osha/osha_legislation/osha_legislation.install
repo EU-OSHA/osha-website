@@ -135,3 +135,10 @@ function osha_legislation_update_7004() {
     }
   }
 }
+
+/**
+ * MDR-1450 I2-Introduce hint text inside the input fields
+ */
+function osha_legislation_update_7005() {
+  features_revert(array('osha_legislation' => array('field_base', 'field_instance')));
+}

@@ -176,6 +176,10 @@ function osha_dangerous_substances_filter_process_format($element) {
     unset($element['format']['format']['']);
     $element['#format'] = 'dangerous_substances';
   }
+  if ($element['format']['format']['#default_value'] == 'full_html') {
+    $element['format']['format']['#default_value'] = 'full_html_minimal';
+  }
+
   return $element;
 }
 

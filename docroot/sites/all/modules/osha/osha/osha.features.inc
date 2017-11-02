@@ -65,6 +65,22 @@ function osha_image_default_styles() {
     ),
   );
 
+  // Exported image style: media_thumbnail_preview.
+  $styles['media_thumbnail_preview'] = array(
+    'label' => 'Media thumbnail preview',
+    'effects' => array(
+      8 => array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => 400,
+          'height' => '',
+          'upscale' => 0,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   // Exported image style: medium_crop_220.
   $styles['medium_crop_220'] = array(
     'label' => 'Medium Crop 220',

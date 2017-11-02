@@ -218,6 +218,7 @@ features[filter][] = full_html
 features[filter][] = full_html_minimal
 features[filter][] = plain_text
 features[image][] = 1000x1000
+features[image][] = media_thumbnail_preview
 features[image][] = medium_crop_220
 features[image][] = thumbnail_crop_100
 features[linkit_profiles][] = osha_linkit_profile

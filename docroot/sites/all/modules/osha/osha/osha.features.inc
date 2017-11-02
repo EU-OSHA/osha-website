@@ -148,6 +148,22 @@ function osha_node_info() {
       'title_label' => 'Title',
       'help' => '',
     ),
+    'twitter_tweet_feed' => array(
+      'name' => 'Twitter Tweet Feed',
+      'base' => 'node_content',
+      'description' => 'These are the Tweets collected by the Tweet Feed module.',
+      'has_title' => '1',
+      'title_label' => 'Tweet Title',
+      'help' => '',
+    ),
+    'twitter_user_profile' => array(
+      'name' => 'Twitter User Profile',
+      'base' => 'node_content',
+      'description' => 'The profile of a person who has made a tweet that has been index by your configuration of Tweet Feed. Includes relevant images and Tweet data.',
+      'has_title' => '1',
+      'title_label' => 'Name',
+      'help' => '',
+    ),
     'webform' => array(
       'name' => 'Webform',
       'base' => 'node_content',

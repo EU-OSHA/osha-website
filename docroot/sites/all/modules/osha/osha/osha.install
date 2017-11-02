@@ -497,3 +497,10 @@ function osha_update_7032() {
   features_revert_module('osha_dangerous_substances');
   features_revert_module('osha_infographics');
 }
+
+/**
+ * MDR-1452 I4-Provide to the user a preview of the image - UPDATE
+ */
+function osha_update_7033() {
+  features_revert_module('osha');
+}

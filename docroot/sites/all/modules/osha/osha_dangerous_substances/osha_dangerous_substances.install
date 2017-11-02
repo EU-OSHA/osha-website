@@ -266,3 +266,10 @@ function osha_dangerous_substances_update_7021() {
   }
   osha_dangerous_substances_update_7018();
 }
+
+/**
+ * MDR-1451 I3-Remove the multiple options for formatting the text.
+ */
+function osha_dangerous_substances_update_7022() {
+  features_revert_module('osha_dangerous_substances');
+}

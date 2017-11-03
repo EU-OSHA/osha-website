@@ -1130,7 +1130,6 @@ function osha_workflow_block_view($delta = '') {
 function osha_workflow_moderation_moderate_form($form, &$form_state, $node, $destination = NULL) {
   global $user;
   $form = array();
-
   if (!_workbench_moderation_access('update', $node)) {
     $form['#access'] = FALSE;
     return $form;
@@ -1146,6 +1145,7 @@ function osha_workflow_moderation_moderate_form($form, &$form_state, $node, $des
     '#value' => $node,
   );
 
+
   if (!$view_draft && $node->status == 1){
     $link = workbench_moderation_access_link(t('Unpublish this revision'), "node/{$node->nid}/moderation/{$node->vid}/unpublish", ['attributes' => ['class' => 'btn']]);
     $form['states'] = _osha_workflow_get_states_list('published');
@@ -1153,8 +1153,10 @@ function osha_workflow_moderation_moderate_form($form, &$form_state, $node, $des
       '#markup' => $link,
     ];
   }
-  elseif (empty($arg_2) && $next_states = workbench_moderation_states_next($node->workbench_moderation['current'], $user, $node)) {
+  elseif (empty($arg_2) && $next_states = workbench_moderation_states_next($node->workbench_moderation['current']->state, $user, $node)) {
+
     $state = $node->workbench_moderation['current']->state;
+
     $form['node']['#value'] = workbench_moderation_node_current_load($form['node']['#value']);
     $form['states'] = _osha_workflow_get_states_list($state);
     $form['states']['#weight'] = -99;
@@ -1176,12 +1178,14 @@ function osha_workflow_moderation_moderate_form($form, &$form_state, $node, $des
 //      '#prefix' => '<div>' . t('Moderation state') . '</div>',
     );
     foreach ($to as $trans) {
-      $form['next_state'][$trans->to_name] = [
-        '#type' => 'submit',
-        '#value' => 'Send to "' . $states[$trans->to_name] . '"',
-        '#attributes' => ['class' => ['btn',  'btn-primary']],
-        '#weight' => osha_workflow_moderation_status_weight($trans->to_name),
-      ];
+      if(_workbench_moderation_moderate_access($node, $trans->to_name)){
+        $form['next_state'][$trans->to_name] = [
+          '#type' => 'submit',
+          '#value' => 'Send to "' . $states[$trans->to_name] . '"',
+          '#attributes' => ['class' => ['btn',  'btn-primary']],
+          '#weight' => osha_workflow_moderation_status_weight($trans->to_name),
+        ];
+      }
     }
 
     if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED) {
@@ -1238,7 +1242,9 @@ function osha_workflow_moderation_moderate_form_submit($form, &$form_state) {
   $values = $form_state['values'];
   // OP has the same value as button, so prevent overwrite on flip.
   unset($values['op']);
+  unset($values['node']);
   $op = $form_state['values']['op'];
+
   $next_state = array_flip($values)[$op];
 
   if (_workbench_moderation_moderate_access($form_state['values']['node'], $next_state)) {

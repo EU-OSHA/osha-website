@@ -1076,6 +1076,7 @@ function osha_workflow_form_node_form_alter(&$form, $form_state) {
   }
 
   $form['options']['vesafe_workflow_list'] = _osha_workflow_get_states_list($state);
+  $form['revision_information']['vesafe_workflow_list'] = _osha_workflow_get_states_list($state);
 
 }
 

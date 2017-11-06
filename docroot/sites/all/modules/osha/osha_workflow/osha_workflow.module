@@ -1228,7 +1228,8 @@ function osha_workflow_moderation_moderate_form($form, &$form_state, $node, $des
     $form_state['cache'] = TRUE;
   }
   else {
-    $form['#access'] = FALSE;
+    $state = $node->workbench_moderation['current']->state;
+    $form['states'] = _osha_workflow_get_states_list($state);
   }
 
   return $form;

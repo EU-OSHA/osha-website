@@ -107,7 +107,7 @@ function osha_fop_page_field_default_field_instances() {
     'bundle' => 'fop_page',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please introduce in this box the text of this section.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -159,14 +159,20 @@ function osha_fop_page_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'body',
     'label' => 'Body',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
+      'display_summary' => 1,
       'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
@@ -175,6 +181,7 @@ function osha_fop_page_field_default_field_instances() {
       'type' => 'text_textarea_with_summary',
       'weight' => 4,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-fop_page-field_archived'.
@@ -255,7 +262,7 @@ function osha_fop_page_field_default_field_instances() {
     'bundle' => 'fop_page',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Country for this content.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -316,6 +323,94 @@ function osha_fop_page_field_default_field_instances() {
       ),
       'type' => 'options_select',
       'weight' => 2,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'node-fop_page-field_flickr_date'.
+  $field_instances['node-fop_page-field_flickr_date'] = array(
+    'bundle' => 'fop_page',
+    'deleted' => 0,
+    'description' => 'Grab Flickr photos taken on or between these dates only.',
+    'display' => array(
+      'default' => array(
+        'format_type' => 'long',
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'osha_date_theme' => '',
+          'show_remaining_days' => FALSE,
+          'show_repeat_rule' => 'show',
+        ),
+        'type' => 'date_default',
+        'weight' => 7,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_flickr_date',
+    'label' => 'Flickr date taken',
+    'required' => FALSE,
+    'settings' => array(
+      'default_value' => 'blank',
+      'default_value2' => 'blank',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 1,
+        'input_format' => 'Y-m-d H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'text_parts' => array(),
+        'year_range' => '-100:+1',
+      ),
+      'type' => 'date_popup',
+      'weight' => 5,
     ),
   );
 
@@ -390,7 +485,7 @@ function osha_fop_page_field_default_field_instances() {
   $field_instances['node-fop_page-field_image'] = array(
     'bundle' => 'fop_page',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'The header image that will be displayed on page.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -472,22 +567,23 @@ function osha_fop_page_field_default_field_instances() {
           'media_default--media_browser_my_files' => 0,
           'upload' => 0,
         ),
-        'manualcrop_crop_info' => TRUE,
-        'manualcrop_default_crop_area' => TRUE,
-        'manualcrop_enable' => FALSE,
-        'manualcrop_inline_crop' => FALSE,
+        'manualcrop_crop_info' => 1,
+        'manualcrop_default_crop_area' => 1,
+        'manualcrop_enable' => 0,
+        'manualcrop_inline_crop' => 0,
         'manualcrop_instant_crop' => FALSE,
-        'manualcrop_instant_preview' => TRUE,
-        'manualcrop_keyboard' => TRUE,
-        'manualcrop_maximize_default_crop_area' => FALSE,
+        'manualcrop_instant_preview' => 1,
+        'manualcrop_keyboard' => 1,
+        'manualcrop_maximize_default_crop_area' => 0,
         'manualcrop_require_cropping' => array(),
         'manualcrop_styles_list' => array(),
         'manualcrop_styles_mode' => 'include',
-        'manualcrop_thumblist' => FALSE,
+        'manualcrop_thumblist' => 0,
       ),
       'type' => 'media_generic',
       'weight' => 3,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-fop_page-field_main_fop_url'.
@@ -743,12 +839,17 @@ function osha_fop_page_field_default_field_instances() {
   t('Body');
   t('Country');
   t('Description');
+  t('Flickr date taken');
   t('Focal Point website');
+  t('Grab Flickr photos taken on or between these dates only.');
   t('Image');
   t('Link');
   t('Marked as outdated');
   t('Name');
+  t('Please introduce in this box the text of this section.');
   t('Section');
+  t('Select Country for this content.');
+  t('The header image that will be displayed on page.');
   t('Title');
 
   return $field_instances;

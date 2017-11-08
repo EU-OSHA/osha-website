@@ -10,14 +10,13 @@
 function osha_job_vacancies_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_job_vacancies_deadline'
+  // Exported field_base: 'field_job_vacancies_deadline'.
   $field_bases['field_job_vacancies_deadline'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_job_vacancies_deadline',
-    'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
     'module' => 'date',
@@ -41,14 +40,13 @@ function osha_job_vacancies_field_default_field_bases() {
     'type' => 'datetime',
   );
 
-  // Exported field_base: 'field_job_vacancies_shortlisted'
+  // Exported field_base: 'field_job_vacancies_shortlisted'.
   $field_bases['field_job_vacancies_shortlisted'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_job_vacancies_shortlisted',
-    'foreign keys' => array(),
     'indexes' => array(
       'value' => array(
         0 => 'value',

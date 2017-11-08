@@ -481,3 +481,33 @@ function osha_update_7029() {
 function osha_update_7030() {
   features_revert_module('osha');
 }
+
+/**
+ * MDR-1450 I2-Introduce hint text inside the input fields
+ */
+function osha_update_7031() {
+  features_revert(array('osha' => array('field_base', 'field_instance')));
+}
+
+/**
+ * MDR-1452 I4-Provide to the user a preview of the image
+ */
+function osha_update_7032() {
+  features_revert_module('osha');
+  features_revert_module('osha_dangerous_substances');
+  features_revert_module('osha_infographics');
+}
+
+/**
+ * MDR-1452 I4-Provide to the user a preview of the image - UPDATE
+ */
+function osha_update_7033() {
+  features_revert_module('osha');
+}
+
+/**
+ * MDR-1452 I4-Provide to the user a preview of the image - UPDATE
+ */
+function osha_update_7034() {
+  features_revert(array('osha' => array('field_base', 'field_instance')));
+}

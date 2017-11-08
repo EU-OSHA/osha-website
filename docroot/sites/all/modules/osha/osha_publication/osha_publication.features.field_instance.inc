@@ -15,7 +15,7 @@ function osha_publication_field_default_field_instances() {
     'bundle' => 'publication',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please introduce in this box the text of this section.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -105,14 +105,20 @@ function osha_publication_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'body',
     'label' => 'Body',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
+      'display_summary' => 1,
       'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
@@ -128,7 +134,7 @@ function osha_publication_field_default_field_instances() {
     'bundle' => 'publication',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Activity for this content.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -202,6 +208,7 @@ function osha_publication_field_default_field_instances() {
       'type' => 'options_select',
       'weight' => 17,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-publication-field_aditional_resources'.
@@ -531,7 +538,7 @@ function osha_publication_field_default_field_instances() {
   $field_instances['node-publication-field_cover_image'] = array(
     'bundle' => 'publication',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'The cover image that will be displayed on page.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -655,6 +662,7 @@ function osha_publication_field_default_field_instances() {
       'type' => 'media_generic',
       'weight' => 3,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-publication-field_expiration_date'.
@@ -744,7 +752,7 @@ function osha_publication_field_default_field_instances() {
   $field_instances['node-publication-field_file'] = array(
     'bundle' => 'publication',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Publication file.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -833,6 +841,100 @@ function osha_publication_field_default_field_instances() {
       'type' => 'pdf_to_image',
       'weight' => 13,
     ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'node-publication-field_flickr_date'.
+  $field_instances['node-publication-field_flickr_date'] = array(
+    'bundle' => 'publication',
+    'deleted' => 0,
+    'description' => 'Grab Flickr photos taken on or between these dates only.',
+    'display' => array(
+      'default' => array(
+        'format_type' => 'long',
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'osha_date_theme' => '',
+          'show_remaining_days' => FALSE,
+          'show_repeat_rule' => 'show',
+        ),
+        'type' => 'date_default',
+        'weight' => 26,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_search_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_flickr_date',
+    'label' => 'Flickr date taken',
+    'required' => FALSE,
+    'settings' => array(
+      'default_value' => 'blank',
+      'default_value2' => 'blank',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 1,
+        'input_format' => 'Y-m-d H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'text_parts' => array(),
+        'year_range' => '-100:+1',
+      ),
+      'type' => 'date_popup',
+      'weight' => 5,
+    ),
   );
 
   // Exported field_instance: 'node-publication-field_nace_codes'.
@@ -840,7 +942,7 @@ function osha_publication_field_default_field_instances() {
     'bundle' => 'publication',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Nace code for this content.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1009,7 +1111,7 @@ function osha_publication_field_default_field_instances() {
     'bundle' => 'publication',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Priority area for this content.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1168,7 +1270,7 @@ function osha_publication_field_default_field_instances() {
   $field_instances['node-publication-field_publication_date'] = array(
     'bundle' => 'publication',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please select the date of publication, if it is not possible to identify leave it empty.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -1299,6 +1401,7 @@ function osha_publication_field_default_field_instances() {
         'input_format' => 'm/d/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
+        'no_fieldset' => 0,
         'text_parts' => array(),
         'year_range' => '2006:+3',
       ),
@@ -1312,7 +1415,7 @@ function osha_publication_field_default_field_instances() {
   $field_instances['node-publication-field_publication_related_res'] = array(
     'bundle' => 'publication',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Publication Resources files.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -1426,7 +1529,7 @@ function osha_publication_field_default_field_instances() {
     'bundle' => 'publication',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Publication Type for this content.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -1673,7 +1776,7 @@ function osha_publication_field_default_field_instances() {
     'bundle' => 'publication',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Relevant for this content.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -1747,7 +1850,7 @@ function osha_publication_field_default_field_instances() {
     'bundle' => 'publication',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Tags for this content.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1829,7 +1932,7 @@ function osha_publication_field_default_field_instances() {
     'bundle' => 'publication',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Thesaurus for this content.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1921,7 +2024,7 @@ function osha_publication_field_default_field_instances() {
     'bundle' => 'publication',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select OSHwiki category for this content.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -1989,6 +2092,7 @@ function osha_publication_field_default_field_instances() {
       'type' => 'options_select',
       'weight' => 16,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-publication-title_field'.
@@ -2129,17 +2233,32 @@ function osha_publication_field_default_field_instances() {
   t('Cover image');
   t('Expiration date');
   t('File');
+  t('Flickr date taken');
+  t('Grab Flickr photos taken on or between these dates only.');
   t('Marked as outdated');
   t('Nace');
   t('OSHwiki categories');
   t('OSHwiki featured articles');
   t('Page count');
+  t('Please introduce in this box the text of this section.');
+  t('Please select the date of publication, if it is not possible to identify leave it empty.');
   t('Priority area');
+  t('Publication Resources files.');
   t('Publication Type');
   t('Publication date');
+  t('Publication file.');
   t('Relevant_for');
   t('Resources (files)');
+  t('Select Activity for this content.');
+  t('Select Nace code for this content.');
+  t('Select OSHwiki category for this content.');
+  t('Select Priority area for this content.');
+  t('Select Publication Type for this content.');
+  t('Select Relevant for this content.');
+  t('Select Tags for this content.');
+  t('Select Thesaurus for this content.');
   t('Tags');
+  t('The cover image that will be displayed on page.');
   t('Thesaurus');
   t('Title');
   t('Twin publications');

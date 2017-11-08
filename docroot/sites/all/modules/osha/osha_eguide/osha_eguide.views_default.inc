@@ -73,9 +73,6 @@ function osha_eguide_views_default_views() {
       ),
     ),
   );
-  $handler->display->display_options['exposed_form']['options']['input_required'] = 1;
-  $handler->display->display_options['exposed_form']['options']['text_input_required'] = '';
-  $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'full_html';
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'default';
@@ -260,6 +257,7 @@ function osha_eguide_views_default_views() {
     t('Sort by'),
     t('Asc'),
     t('Desc'),
+    t('Advanced options'),
     t('Find the e-guide version that is relevant for you by filtering by country and / or language.'),
     t('term from field_country'),
     t('Country'),

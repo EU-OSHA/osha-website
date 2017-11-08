@@ -47,3 +47,10 @@ function osha_calls_update_7002() {
 function osha_calls_update_7003() {
   features_revert_module('osha_calls');
 }
+
+/**
+ * MDR-1450 I2-Introduce hint text inside the input fields
+ */
+function osha_calls_update_7004() {
+  features_revert(array('osha_calls' => array('field_base', 'field_instance')));
+}

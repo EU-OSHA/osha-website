@@ -111,3 +111,10 @@ function osha_homepage_update_dependencies() {
   );
   return $dependencies;
 }
+
+/**
+ * MDR-1450 I2-Introduce hint text inside the input fields
+ */
+function osha_homepage_update_7003() {
+  features_revert(array('osha_homepage' => array('field_base', 'field_instance')));
+}

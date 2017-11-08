@@ -153,6 +153,69 @@ function osha_resources_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-external_url-field_flickr_date'.
+  $field_instances['node-external_url-field_flickr_date'] = array(
+    'bundle' => 'external_url',
+    'deleted' => 0,
+    'description' => 'Grab Flickr photos taken on or between these dates only.',
+    'display' => array(
+      'default' => array(
+        'format_type' => 'long',
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'osha_date_theme' => '',
+          'show_remaining_days' => FALSE,
+          'show_repeat_rule' => 'show',
+        ),
+        'type' => 'date_default',
+        'weight' => 4,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_flickr_date',
+    'label' => 'Flickr date taken',
+    'required' => FALSE,
+    'settings' => array(
+      'default_value' => 'blank',
+      'default_value2' => 'blank',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 1,
+        'input_format' => 'Y-m-d H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'text_parts' => array(),
+        'year_range' => '-100:+1',
+      ),
+      'type' => 'date_popup',
+      'weight' => 5,
+    ),
+  );
+
   // Exported field_instance: 'node-external_url-field_page_count'.
   $field_instances['node-external_url-field_page_count'] = array(
     'bundle' => 'external_url',
@@ -282,7 +345,7 @@ function osha_resources_field_default_field_instances() {
   $field_instances['node-file-field_file'] = array(
     'bundle' => 'file',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Content file.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -361,21 +424,85 @@ function osha_resources_field_default_field_instances() {
           'media_default--media_browser_my_files' => 0,
           'upload' => 0,
         ),
-        'manualcrop_crop_info' => TRUE,
-        'manualcrop_default_crop_area' => TRUE,
-        'manualcrop_enable' => FALSE,
-        'manualcrop_inline_crop' => FALSE,
+        'manualcrop_crop_info' => 1,
+        'manualcrop_default_crop_area' => 1,
+        'manualcrop_enable' => 0,
+        'manualcrop_inline_crop' => 0,
         'manualcrop_instant_crop' => FALSE,
-        'manualcrop_instant_preview' => TRUE,
-        'manualcrop_keyboard' => TRUE,
-        'manualcrop_maximize_default_crop_area' => FALSE,
+        'manualcrop_instant_preview' => 1,
+        'manualcrop_keyboard' => 1,
+        'manualcrop_maximize_default_crop_area' => 0,
         'manualcrop_require_cropping' => array(),
         'manualcrop_styles_list' => array(),
         'manualcrop_styles_mode' => 'include',
-        'manualcrop_thumblist' => FALSE,
+        'manualcrop_thumblist' => 0,
       ),
       'type' => 'media_generic',
       'weight' => 42,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'node-file-field_flickr_date'.
+  $field_instances['node-file-field_flickr_date'] = array(
+    'bundle' => 'file',
+    'deleted' => 0,
+    'description' => 'Grab Flickr photos taken on or between these dates only.',
+    'display' => array(
+      'default' => array(
+        'format_type' => 'long',
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'osha_date_theme' => '',
+          'show_remaining_days' => FALSE,
+          'show_repeat_rule' => 'show',
+        ),
+        'type' => 'date_default',
+        'weight' => 2,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_flickr_date',
+    'label' => 'Flickr date taken',
+    'required' => FALSE,
+    'settings' => array(
+      'default_value' => 'blank',
+      'default_value2' => 'blank',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 1,
+        'input_format' => 'Y-m-d H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'text_parts' => array(),
+        'year_range' => '-100:+1',
+      ),
+      'type' => 'date_popup',
+      'weight' => 5,
     ),
   );
 
@@ -579,6 +706,69 @@ function osha_resources_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-flickr-field_flickr_date'.
+  $field_instances['node-flickr-field_flickr_date'] = array(
+    'bundle' => 'flickr',
+    'deleted' => 0,
+    'description' => 'Grab Flickr photos taken on or between these dates only.',
+    'display' => array(
+      'default' => array(
+        'format_type' => 'long',
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'osha_date_theme' => '',
+          'show_remaining_days' => FALSE,
+          'show_repeat_rule' => 'show',
+        ),
+        'type' => 'date_default',
+        'weight' => 4,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_flickr_date',
+    'label' => 'Flickr date taken',
+    'required' => FALSE,
+    'settings' => array(
+      'default_value' => 'blank',
+      'default_value2' => 'blank',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 1,
+        'input_format' => 'Y-m-d H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'text_parts' => array(),
+        'year_range' => '-100:+1',
+      ),
+      'type' => 'date_popup',
+      'weight' => 5,
+    ),
+  );
+
   // Exported field_instance: 'node-flickr-field_page_count'.
   $field_instances['node-flickr-field_page_count'] = array(
     'bundle' => 'flickr',
@@ -748,6 +938,69 @@ function osha_resources_field_default_field_instances() {
       'settings' => array(),
       'type' => 'number',
       'weight' => 44,
+    ),
+  );
+
+  // Exported field_instance: 'node-slideshare-field_flickr_date'.
+  $field_instances['node-slideshare-field_flickr_date'] = array(
+    'bundle' => 'slideshare',
+    'deleted' => 0,
+    'description' => 'Grab Flickr photos taken on or between these dates only.',
+    'display' => array(
+      'default' => array(
+        'format_type' => 'long',
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'osha_date_theme' => '',
+          'show_remaining_days' => FALSE,
+          'show_repeat_rule' => 'show',
+        ),
+        'type' => 'date_default',
+        'weight' => 4,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_flickr_date',
+    'label' => 'Flickr date taken',
+    'required' => FALSE,
+    'settings' => array(
+      'default_value' => 'blank',
+      'default_value2' => 'blank',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 1,
+        'input_format' => 'Y-m-d H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'text_parts' => array(),
+        'year_range' => '-100:+1',
+      ),
+      'type' => 'date_popup',
+      'weight' => 5,
     ),
   );
 
@@ -1073,6 +1326,75 @@ function osha_resources_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-youtube-field_flickr_date'.
+  $field_instances['node-youtube-field_flickr_date'] = array(
+    'bundle' => 'youtube',
+    'deleted' => 0,
+    'description' => 'Grab Flickr photos taken on or between these dates only.',
+    'display' => array(
+      'default' => array(
+        'format_type' => 'long',
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'osha_date_theme' => '',
+          'show_remaining_days' => FALSE,
+          'show_repeat_rule' => 'show',
+        ),
+        'type' => 'date_default',
+        'weight' => 5,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_flickr_date',
+    'label' => 'Flickr date taken',
+    'required' => FALSE,
+    'settings' => array(
+      'default_value' => 'blank',
+      'default_value2' => 'blank',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 1,
+        'input_format' => 'Y-m-d H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'text_parts' => array(),
+        'year_range' => '-100:+1',
+      ),
+      'type' => 'date_popup',
+      'weight' => 5,
+    ),
+  );
+
   // Exported field_instance: 'node-youtube-field_page_count'.
   $field_instances['node-youtube-field_page_count'] = array(
     'bundle' => 'youtube',
@@ -1294,10 +1616,13 @@ function osha_resources_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Character count');
+  t('Content file.');
   t('Description');
   t('External URL');
   t('File');
   t('Flickr');
+  t('Flickr date taken');
+  t('Grab Flickr photos taken on or between these dates only.');
   t('If the description is empty when saving the page, the system will fill it with the description of the video from youtube website.');
   t('Page count');
   t('Please make sure to add translations and change the title and URL in other languages, if needed.');

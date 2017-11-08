@@ -15,7 +15,7 @@ function osha_legislation_field_default_field_instances() {
     'bundle' => 'directive',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please introduce in this box the text of this section.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -64,14 +64,20 @@ function osha_legislation_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'body',
     'label' => 'Body',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
+      'display_summary' => 1,
       'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
@@ -80,6 +86,7 @@ function osha_legislation_field_default_field_instances() {
       'type' => 'text_textarea_with_summary',
       'weight' => 8,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-directive-field_activity'.
@@ -87,7 +94,7 @@ function osha_legislation_field_default_field_instances() {
     'bundle' => 'directive',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Activity for this content.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -155,6 +162,7 @@ function osha_legislation_field_default_field_instances() {
       'type' => 'options_select',
       'weight' => 22,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-directive-field_archived'.
@@ -383,7 +391,7 @@ function osha_legislation_field_default_field_instances() {
     'bundle' => 'directive',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Directive Type for this content.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -445,6 +453,7 @@ function osha_legislation_field_default_field_instances() {
       'type' => 'options_select',
       'weight' => 3,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-directive-field_expiration_date'.
@@ -524,6 +533,93 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-directive-field_flickr_date'.
+  $field_instances['node-directive-field_flickr_date'] = array(
+    'bundle' => 'directive',
+    'deleted' => 0,
+    'description' => 'Grab Flickr photos taken on or between these dates only.',
+    'display' => array(
+      'default' => array(
+        'format_type' => 'long',
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'osha_date_theme' => '',
+          'show_remaining_days' => FALSE,
+          'show_repeat_rule' => 'show',
+        ),
+        'type' => 'date_default',
+        'weight' => 15,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_flickr_date',
+    'label' => 'Flickr date taken',
+    'required' => FALSE,
+    'settings' => array(
+      'default_value' => 'blank',
+      'default_value2' => 'blank',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 1,
+        'input_format' => 'Y-m-d H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'text_parts' => array(),
+        'year_range' => '-100:+1',
+      ),
+      'type' => 'date_popup',
+      'weight' => 5,
+    ),
+  );
+
   // Exported field_instance: 'node-directive-field_legislation_category'.
   $field_instances['node-directive-field_legislation_category'] = array(
     'bundle' => 'directive',
@@ -598,7 +694,7 @@ function osha_legislation_field_default_field_instances() {
     'bundle' => 'directive',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Nace code for this content.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -654,13 +750,11 @@ function osha_legislation_field_default_field_instances() {
     'widget' => array(
       'active' => 0,
       'module' => 'multiple_selects',
-      'settings' => array(
-        'autocomplete_path' => 'taxonomy/autocomplete',
-        'size' => 60,
-      ),
+      'settings' => array(),
       'type' => 'multiple_selects',
       'weight' => 11,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-directive-field_page_count'.
@@ -738,7 +832,7 @@ function osha_legislation_field_default_field_instances() {
   $field_instances['node-directive-field_publication_date'] = array(
     'bundle' => 'directive',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please select the date of publication, if it is not possible to identify leave it empty.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -803,12 +897,14 @@ function osha_legislation_field_default_field_instances() {
         'input_format' => 'm/d/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
+        'no_fieldset' => 0,
         'text_parts' => array(),
         'year_range' => '-3:+3',
       ),
       'type' => 'date_select',
       'weight' => 5,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-directive-field_summary'.
@@ -816,7 +912,7 @@ function osha_legislation_field_default_field_instances() {
     'bundle' => 'directive',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please introduce in this box the text of this section.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -886,6 +982,7 @@ function osha_legislation_field_default_field_instances() {
       'type' => 'text_textarea',
       'weight' => 7,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-directive-field_tags'.
@@ -893,7 +990,7 @@ function osha_legislation_field_default_field_instances() {
     'bundle' => 'directive',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Tag (mapping) for this content.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -955,6 +1052,7 @@ function osha_legislation_field_default_field_instances() {
       'type' => 'options_select',
       'weight' => 10,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-directive-field_thesaurus'.
@@ -962,7 +1060,7 @@ function osha_legislation_field_default_field_instances() {
     'bundle' => 'directive',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Thesaurus for this content.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -1018,13 +1116,11 @@ function osha_legislation_field_default_field_instances() {
     'widget' => array(
       'active' => 0,
       'module' => 'multiple_selects',
-      'settings' => array(
-        'autocomplete_path' => 'taxonomy/autocomplete',
-        'size' => 60,
-      ),
+      'settings' => array(),
       'type' => 'multiple_selects',
       'weight' => 12,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-directive-title_field'.
@@ -1120,7 +1216,7 @@ function osha_legislation_field_default_field_instances() {
     'bundle' => 'guideline',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please introduce in this box the text of this section.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -1182,14 +1278,20 @@ function osha_legislation_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'body',
     'label' => 'Body',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
+      'display_summary' => 1,
       'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
@@ -1198,6 +1300,7 @@ function osha_legislation_field_default_field_instances() {
       'type' => 'text_textarea_with_summary',
       'weight' => 5,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-guideline-field_activity'.
@@ -1205,7 +1308,7 @@ function osha_legislation_field_default_field_instances() {
     'bundle' => 'guideline',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Activity for this content.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1273,6 +1376,7 @@ function osha_legislation_field_default_field_instances() {
       'type' => 'options_select',
       'weight' => 19,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-guideline-field_additional_html'.
@@ -1744,12 +1848,99 @@ function osha_legislation_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-guideline-field_flickr_date'.
+  $field_instances['node-guideline-field_flickr_date'] = array(
+    'bundle' => 'guideline',
+    'deleted' => 0,
+    'description' => 'Grab Flickr photos taken on or between these dates only.',
+    'display' => array(
+      'default' => array(
+        'format_type' => 'long',
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'osha_date_theme' => '',
+          'show_remaining_days' => FALSE,
+          'show_repeat_rule' => 'show',
+        ),
+        'type' => 'date_default',
+        'weight' => 16,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_flickr_date',
+    'label' => 'Flickr date taken',
+    'required' => FALSE,
+    'settings' => array(
+      'default_value' => 'blank',
+      'default_value2' => 'blank',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 1,
+        'input_format' => 'Y-m-d H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'text_parts' => array(),
+        'year_range' => '-100:+1',
+      ),
+      'type' => 'date_popup',
+      'weight' => 5,
+    ),
+  );
+
   // Exported field_instance: 'node-guideline-field_legislation_category'.
   $field_instances['node-guideline-field_legislation_category'] = array(
     'bundle' => 'guideline',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Legislation category for this content.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -1811,6 +2002,7 @@ function osha_legislation_field_default_field_instances() {
       'type' => 'options_select',
       'weight' => 2,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-guideline-field_nace_codes'.
@@ -1818,7 +2010,7 @@ function osha_legislation_field_default_field_instances() {
     'bundle' => 'guideline',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Nace code for this content.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -1874,13 +2066,11 @@ function osha_legislation_field_default_field_instances() {
     'widget' => array(
       'active' => 0,
       'module' => 'multiple_selects',
-      'settings' => array(
-        'autocomplete_path' => 'taxonomy/autocomplete',
-        'size' => 60,
-      ),
+      'settings' => array(),
       'type' => 'multiple_selects',
       'weight' => 10,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-guideline-field_page_count'.
@@ -1958,7 +2148,7 @@ function osha_legislation_field_default_field_instances() {
   $field_instances['node-guideline-field_publication_date'] = array(
     'bundle' => 'guideline',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please select the date of publication, if it is not possible to identify leave it empty.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -2023,12 +2213,14 @@ function osha_legislation_field_default_field_instances() {
         'input_format' => 'm/d/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
+        'no_fieldset' => 0,
         'text_parts' => array(),
         'year_range' => '-3:+3',
       ),
       'type' => 'date_select',
       'weight' => 3,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-guideline-field_summary'.
@@ -2036,7 +2228,7 @@ function osha_legislation_field_default_field_instances() {
     'bundle' => 'guideline',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please introduce in this box the text of this section.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -2105,6 +2297,7 @@ function osha_legislation_field_default_field_instances() {
       'type' => 'text_textarea',
       'weight' => 4,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-guideline-field_tags'.
@@ -2112,7 +2305,7 @@ function osha_legislation_field_default_field_instances() {
     'bundle' => 'guideline',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Tags for this content.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -2174,6 +2367,7 @@ function osha_legislation_field_default_field_instances() {
       'type' => 'options_select',
       'weight' => 9,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-guideline-field_thesaurus'.
@@ -2181,7 +2375,7 @@ function osha_legislation_field_default_field_instances() {
     'bundle' => 'guideline',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select Thesaurus for this content.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -2237,13 +2431,11 @@ function osha_legislation_field_default_field_instances() {
     'widget' => array(
       'active' => 0,
       'module' => 'multiple_selects',
-      'settings' => array(
-        'autocomplete_path' => 'taxonomy/autocomplete',
-        'size' => 60,
-      ),
+      'settings' => array(),
       'type' => 'multiple_selects',
       'weight' => 11,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-guideline-title_field'.
@@ -2470,12 +2662,23 @@ function osha_legislation_field_default_field_instances() {
   t('Directive_code');
   t('Expiration date');
   t('External URL');
+  t('Flickr date taken');
+  t('Grab Flickr photos taken on or between these dates only.');
   t('Guideline Category Code');
   t('Legislation category');
   t('Marked as outdated');
   t('Nace');
   t('Page count');
+  t('Please introduce in this box the text of this section.');
+  t('Please select the date of publication, if it is not possible to identify leave it empty.');
   t('Publication date');
+  t('Select Activity for this content.');
+  t('Select Directive Type for this content.');
+  t('Select Legislation category for this content.');
+  t('Select Nace code for this content.');
+  t('Select Tag (mapping) for this content.');
+  t('Select Tags for this content.');
+  t('Select Thesaurus for this content.');
   t('Summary');
   t('Tag (mapping)');
   t('Thesaurus');

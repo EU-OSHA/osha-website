@@ -59,38 +59,41 @@
 
 /*frontend
 ***************************/
-#block-vesafe-workflow-vesafe-workflow-info{
+#block-osha-workflow-osha-workflow-info{
   background-color: #fffbd9;
   padding-top: 10px;
   padding-bottom: 20px;
   margin-bottom: 20px;
 }
-#block-vesafe-workflow-vesafe-workflow-info .vesafe-workflow-list-widget li{
+#block-osha-workflow-osha-workflow-info .vesafe-workflow-list-widget li{
   padding: 10px 15px !important;
   padding-left: 40px !important;
 }
-#block-vesafe-workflow-vesafe-workflow-info .vesafe-workflow-list-widget li:before{
+#block-osha-workflow-osha-workflow-info .vesafe-workflow-list-widget li:before{
   border-left: 30px solid #fffbd9;
 }
-#block-vesafe-workflow-vesafe-workflow-info .vesafe-workflow-list-widget li.first{
+#block-osha-workflow-osha-workflow-info .vesafe-workflow-list-widget li.first{
   padding-left: 10px !important;
 }
-#block-vesafe-workflow-vesafe-workflow-info .vesafe-workflow-list-widget li.last{
+#block-osha-workflow-osha-workflow-info .vesafe-workflow-list-widget li.last{
   padding-right: 10px !important;
 }
 
-#vesafe-workflow-quick-moderation-form{
+#osha-workflow-moderation-moderate-form{
   text-align: center;
 }
-#vesafe-workflow-quick-moderation-form button{
+#osha-workflow-moderation-moderate-form input{
   background-color: #f1f1f1;
   color: #363636;
   boorder: none !important;
   border-color: transparent !important;
   min-width: 120px;
   margin-bottom: 10px;
+  margin: 0px 5px 10px 5px;
+  border-radius: 3px;
+  height: 40px;
 }
-#vesafe-workflow-quick-moderation-form button:hover{
+#osha-workflow-moderation-moderate-form input:hover{
   background-color: grey;
   color: white;
 }

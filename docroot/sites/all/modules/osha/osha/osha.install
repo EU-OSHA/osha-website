@@ -511,3 +511,10 @@ function osha_update_7033() {
 function osha_update_7034() {
   features_revert(array('osha' => array('field_base', 'field_instance')));
 }
+
+/**
+ * Gallery in type filter.
+ */
+function osha_update_7035() {
+  features_revert(array('osha' => array('views_view')));
+}

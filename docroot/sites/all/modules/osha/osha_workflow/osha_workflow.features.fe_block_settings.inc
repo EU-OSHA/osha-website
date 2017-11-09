@@ -78,8 +78,8 @@ function osha_workflow_default_fe_block_settings() {
         'weight' => -99,
       ),
       'osha_frontend' => array(
-        'region' => '',
-        'status' => 0,
+        'region' => 'content',
+        'status' => 1,
         'theme' => 'osha_frontend',
         'weight' => -63,
       ),

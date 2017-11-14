@@ -1110,7 +1110,7 @@ function osha_workflow_block_view($delta = '') {
     $arg_2 = arg(2);
     $view_draft = !empty($arg_2) && $arg_2 == 'draft';
     if (!empty($arg_2) && !$view_draft) {
-      return NULL;
+      //return NULL; // enable views draft buttons
     }
 
     //  workbench_moderation_node_current_load
@@ -1154,7 +1154,7 @@ function osha_workflow_moderation_moderate_form($form, &$form_state, $node, $des
       '#markup' => $link,
     ];
   }
-  elseif (empty($arg_2) && $next_states = workbench_moderation_states_next($node->workbench_moderation['current']->state, $user, $node)) {
+  elseif ($next_states = workbench_moderation_states_next($node->workbench_moderation['current']->state, $user, $node)) {
 
     $state = $node->workbench_moderation['current']->state;
 

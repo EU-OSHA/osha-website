@@ -1,7 +1,7 @@
 name = Osha Workflow
 core = 7.x
 package = OSHA
-version = 7.x-1.7
+version = 7.x-1.8
 project = osha_workflow
 dependencies[] = ctools
 dependencies[] = entity

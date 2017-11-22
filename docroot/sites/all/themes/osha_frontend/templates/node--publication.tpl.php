@@ -54,6 +54,7 @@
       foreach ($tagged_related_publications as $related_pub) {
         print render($related_pub);
       }
+      echo '<div class="more-link">' . $view_all . '</div>';
     }
     if (isset($content['field_aditional_resources'])) {
       print render($content['field_aditional_resources']);

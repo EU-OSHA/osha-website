@@ -682,6 +682,7 @@ function osha_workflow_bundle_section_map() {
     'guideline' => 'ONETKA',
     'calls' => 'PROCUR',
     'infographic' => 'CORPCM',
+    'dangerous_substances' => 'DANGSUDB',
   );
 }
 

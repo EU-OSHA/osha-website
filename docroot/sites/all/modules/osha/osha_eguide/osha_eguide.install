@@ -246,3 +246,10 @@ function osha_eguide_translate_strings() {
       ->execute();
   }
 }
+
+/**
+ * MDR-1450 I2-Introduce hint text inside the input fields
+ */
+function osha_eguide_update_7001() {
+  features_revert(array('osha_eguide' => array('field_base', 'field_instance')));
+}

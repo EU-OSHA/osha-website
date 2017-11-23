@@ -186,3 +186,31 @@ function osha_events_update_7016() {
 function osha_events_update_7017() {
   features_revert_module('osha_events');
 }
+
+/**
+ * Revert osha_events - MDR-1142 - update oshevents view - add location field
+ */
+function osha_events_update_7018() {
+  features_revert_module('osha_events');
+}
+
+/**
+ * Revert osha_events - MDR-1277, MDR-1299
+ */
+function osha_events_update_7019() {
+  features_revert_module('osha_events');
+}
+
+/**
+ * Revert osha_events - MDR-1349
+ */
+function osha_events_update_7020() {
+  features_revert_module('osha_events');
+}
+
+/**
+ * MDR-1450 I2-Introduce hint text inside the input fields
+ */
+function osha_events_update_7021() {
+  features_revert(array('osha_events' => array('field_base', 'field_instance')));
+}

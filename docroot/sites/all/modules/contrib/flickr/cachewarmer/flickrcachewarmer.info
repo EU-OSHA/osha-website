@@ -1,0 +1,13 @@
+name = Flickr Cache Warmer
+description = Enhances the performance by rebuilding the page cache after cron runs for selected content types.
+core = 7.x
+package = Flickr
+configure = admin/config/media/flickr
+dependencies[] = flickr
+
+; Information added by Drupal.org packaging script on 2015-08-06
+version = "7.x-1.8"
+core = "7.x"
+project = "flickr"
+datestamp = "1438860137"
+

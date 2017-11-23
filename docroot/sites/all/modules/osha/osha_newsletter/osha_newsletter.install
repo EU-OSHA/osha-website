@@ -249,3 +249,19 @@ function osha_newsletter_update_7008() {
   module_enable(['imagecache_actions', 'imagecache_canvasactions']);
   features_revert_module('osha_newsletter');
 }
+
+/**
+ * MDR-1302 - Option to add tweets in the HWC newsletter
+ */
+function osha_newsletter_update_7009() {
+  features_revert_module('osha_newsletter');
+}
+
+/**
+ * MDR-1450 I2-Introduce hint text inside the input fields
+ */
+function osha_newsletter_update_7010() {
+  features_revert(array('osha_newsletter' => array('field_base', 'field_instance')));
+  features_revert(array('osha_note_to_editor' => array('field_base', 'field_instance')));
+
+}

@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * Gallery admin permissions
+ */
+function osha_flickr_update_7001() {
+  features_revert_module('osha_flickr');
+}
+
+/**
+ * MDR-1450 I2-Introduce hint text inside the input fields
+ */
+function osha_flickr_update_7002() {
+  features_revert(array('osha_flickr' => array('field_base', 'field_instance')));
+}

@@ -1,0 +1,127 @@
+<?php
+/**
+ * @file
+ * The Flickr Style module.
+ */
+
+  // Load flickrstyle.admin.inc from the flickrstyle module.
+  module_load_include('inc', 'flickrstyle', 'flickrstyle.admin');
+
+/**
+ * Implements hook_help().
+ */
+function flickrstyle_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#flickrstyle':
+      // Return a line-break version of the README.txt.
+      return _filter_autop(file_get_contents(dirname(__FILE__) . '/README.txt'));
+  }
+}
+
+/**
+ * Implements hook_page_build().
+ */
+function flickrstyle_page_build(&$page) {
+  // Determine the settings which CSS files to use.
+  if (variable_get('flickr_css', 1)) {
+    drupal_add_css(drupal_get_path('module', 'flickrstyle') . '/css/flickrstyle.css', array(
+      'group' => CSS_DEFAULT,
+      'every_page' => TRUE,
+    ));
+    $styles = variable_get('flickrstyle_styles', array(
+      'rounded' => 'rounded',
+      'shadow' => 'shadow',
+      'border' => 0,
+    ));
+    if (gettype($styles['rounded']) != 'integer') {
+      drupal_add_css(drupal_get_path('module', 'flickrstyle') . '/css/flickrstyle_rounded.css', array(
+        'group' => CSS_DEFAULT,
+        'every_page' => TRUE,
+      ));
+    }
+    if (gettype($styles['shadow']) != 'integer') {
+      drupal_add_css(drupal_get_path('module', 'flickrstyle') . '/css/flickrstyle_shadow.css', array(
+        'group' => CSS_DEFAULT,
+        'every_page' => TRUE,
+      ));
+    }
+    if (gettype($styles['border']) != 'integer' && gettype($styles['shadow']) != 'integer') {
+      drupal_add_css(drupal_get_path('module', 'flickrstyle') . '/css/flickrstyle_border.css', array(
+        'group' => CSS_DEFAULT,
+        'every_page' => TRUE,
+      ));
+    }
+    elseif (gettype($styles['border']) != 'integer') {
+      drupal_add_css(drupal_get_path('module', 'flickrstyle') . '/css/flickrstyle_bordernoshadow.css', array(
+        'group' => CSS_DEFAULT,
+        'every_page' => TRUE,
+      ));
+    }
+    switch (variable_get('flickrstyle_caption', 1)) {
+      case 1:
+        if (gettype($styles['shadow']) != 'integer') {
+          drupal_add_css(drupal_get_path('module', 'flickrstyle') . '/css/flickrstyle_caption_shadow.css', array(
+            'group' => CSS_DEFAULT,
+            'every_page' => TRUE,
+          ));
+        }
+        else {
+          drupal_add_css(drupal_get_path('module', 'flickrstyle') . '/css/flickrstyle_caption_border.css', array(
+            'group' => CSS_DEFAULT,
+            'every_page' => TRUE,
+          ));
+        }
+        break;
+
+      case 2:
+        if (gettype($styles['shadow']) != 'integer') {
+          drupal_add_css(drupal_get_path('module', 'flickrstyle') . '/css/flickrstyle_wrapcaption_shadow.css', array(
+            'group' => CSS_DEFAULT,
+            'every_page' => TRUE,
+          ));
+        }
+        else {
+          drupal_add_css(drupal_get_path('module', 'flickrstyle') . '/css/flickrstyle_wrapcaption_border.css', array(
+            'group' => CSS_DEFAULT,
+            'every_page' => TRUE,
+          ));
+        }
+        break;
+    }
+    if (variable_get('flickrstyle_nostyle', 1)) {
+      drupal_add_css(drupal_get_path('module', 'flickrstyle') . '/css/flickrstyle_nostyle.css', array(
+        'group' => CSS_DEFAULT,
+        'every_page' => TRUE,
+      ));
+    }
+    switch (variable_get('flickrstyle_emphasize', 2)) {
+      case 1:
+        drupal_add_css(drupal_get_path('module', 'flickrstyle') . '/css/flickrstyle_enlarge.css', array(
+          'group' => CSS_DEFAULT,
+          'every_page' => TRUE,
+        ));
+        break;
+
+      case 2:
+        drupal_add_css(drupal_get_path('module', 'flickrstyle') . '/css/flickrstyle_big.css', array(
+          'group' => CSS_DEFAULT,
+          'every_page' => TRUE,
+        ));
+        break;
+
+      case 3:
+        drupal_add_css(drupal_get_path('module', 'flickrstyle') . '/css/flickrstyle_zoom.css', array(
+          'group' => CSS_DEFAULT,
+          'every_page' => TRUE,
+        ));
+        break;
+
+      case 4:
+        drupal_add_css(drupal_get_path('module', 'flickrstyle') . '/css/flickrstyle_magnifier.css', array(
+          'group' => CSS_DEFAULT,
+          'every_page' => TRUE,
+        ));
+        break;
+    }
+  }
+}

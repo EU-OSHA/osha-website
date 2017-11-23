@@ -1,0 +1,107 @@
+
+.vesafe-workflow-list-widget {
+  list-style: none !important;
+  margin: 20px auto !important;
+  text-align: center;
+}
+.vesafe-workflow-list-widget li {
+  display: inline-block;
+  background: #fff498;
+  padding: 11px 15px !important;
+  margin-right: 25px !important;
+  position: relative !important;
+  padding-left: 40px !important;
+  margin-bottom: 10px !important;
+}
+
+.vesafe-workflow-list-widget li:after{
+  content: "";
+  border-top: 21px solid transparent;
+  border-bottom: 21px solid transparent;
+  border-left: 30px solid #fff498;
+  position: absolute;
+  right: -30px;
+  top: 0;
+}
+.vesafe-workflow-list-widget li:before{
+  content: "";
+  border-top: 21px solid transparent;
+  border-bottom: 21px solid transparent;
+  border-left: 30px solid white;
+  position: absolute;
+  left: 0px;
+  top: 0;
+}
+.vesafe-workflow-list-widget li.active:after{
+  border-left: 30px solid #8d8c81;
+}
+.vesafe-workflow-list-widget li.active:before{
+  border-left: 30px solid #8d8c81;
+}
+
+.vesafe-workflow-list-widget li.first:before{
+  content: "";
+  border: none !important;
+}
+
+.vesafe-workflow-list-widget li.last:after{
+  content: "";
+  border: none !important;
+}
+
+.vesafe-workflow-list-widget li.active {
+  background: #8d8c81;
+  color: white !important;
+  font-weight: bolder;
+}
+
+
+
+/*frontend
+***************************/
+#block-osha-workflow-osha-workflow-info{
+  background-color: #fffbd9;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+#block-osha-workflow-osha-workflow-info .vesafe-workflow-list-widget li{
+  padding: 10px 15px !important;
+  padding-left: 40px !important;
+}
+#block-osha-workflow-osha-workflow-info .vesafe-workflow-list-widget li:before{
+  border-left: 30px solid #fffbd9;
+}
+#block-osha-workflow-osha-workflow-info .vesafe-workflow-list-widget li.first{
+  padding-left: 10px !important;
+}
+#block-osha-workflow-osha-workflow-info .vesafe-workflow-list-widget li.last{
+  padding-right: 10px !important;
+}
+
+#osha-workflow-moderation-moderate-form{
+  text-align: center;
+}
+#osha-workflow-moderation-moderate-form input{
+  background-color: #f1f1f1;
+  color: #363636;
+  boorder: none !important;
+  border-color: transparent !important;
+  min-width: 120px;
+  margin-bottom: 10px;
+  margin: 0px 5px 10px 5px;
+  border-radius: 3px;
+  height: 40px;
+}
+#osha-workflow-moderation-moderate-form input:hover{
+  background-color: grey;
+  color: white;
+}
+/***********/
+
+.vesafe-workflow-list-widget li.first {
+  padding-left: 10px !important;
+}
+.vesafe-workflow-list-widget li.last {
+  padding-right: 10px !important;
+}

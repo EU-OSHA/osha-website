@@ -1,0 +1,237 @@
+<?php
+/**
+ * @file
+ * Create a menu link and frontpage node.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * Perform actions to set up a Simplytest.me demo site for this module.
+ * We can count on all usual content types and text formats being available.
+ */
+function flickr_simplytest_install() {
+  $t = get_t();
+
+  // Create a link to the settings page in the main menu.
+  $item = array(
+    'link_title' => $t('Flickr settings'),
+    'link_path' => 'admin/config/media/flickr',
+    'menu_name' => 'main-menu',
+    'weight' => 1,
+  );
+  menu_link_save($item);
+
+  // Add the flickr filter to the Full HTML text format.
+  $full_html_format = array(
+    'format' => 'full_html',
+    'name' => 'Full HTML',
+    'weight' => 1,
+    'filters' => array(
+      // URL filter.
+      'filter_url' => array(
+        'weight' => 0,
+        'status' => 1,
+      ),
+      // Line break filter.
+      'filter_autop' => array(
+        'weight' => 1,
+        'status' => 1,
+      ),
+      // Flickr filter.
+      'flickr_filter' => array(
+        'weight' => 2,
+        'status' => 1,
+      ),
+      // AutoFloat filter.
+      'filter_autofloat' => array(
+        'weight' => 3,
+        'status' => 1,
+      ),
+      // HTML corrector filter.
+      'filter_htmlcorrector' => array(
+        'weight' => 10,
+        'status' => 1,
+      ),
+    ),
+  );
+  $full_html_format = (object) $full_html_format;
+  filter_format_save($full_html_format);
+
+  // Enable some blocks.
+  $blocks = array(
+    array(
+      'module' => 'flickr',
+      'delta' => '5',
+      'theme' => 'bartik',
+      'status' => 1,
+      'weight' => 10,
+      'region' => 'sidebar_first',
+      'pages' => '',
+      'cache' => -1,
+    ),
+  );
+  $query = db_insert('block')->fields(array(
+    'module',
+    'delta',
+    'theme',
+    'status',
+    'weight',
+    'region',
+    'pages',
+    'cache',
+  ));
+  foreach ($blocks as $block) {
+    $query->values($block);
+  }
+  $query->execute();
+
+  // More settings.
+  variable_set('site_slogan', 'Media management for Drupal made easy.');
+
+  // Flickr settings.
+  variable_set('flickr_api_key', '300e008dee01986f3b0a5ec3d2b37280');
+  variable_set('flickr_api_secret', '88a313cf7beb7e9c');
+  variable_set('flickr_class', 'colorbox');
+  variable_set('flickr_rel', 'gallery-all');
+  variable_set('colorbox_inline', 1);
+  variable_set('flickr_photos_per_page', '10');
+  variable_set('flickr_default_size', 'm');
+  variable_set('flickr_default_userid', '98518260@N02');
+  $data = array(
+    'user_id' => '',
+    'show_n' => '4',
+    'size' => 's',
+    'sort' => 'unsorted',
+    'filter' => NULL,
+    'media' => 'photos',
+  );
+  variable_set('flickr_block_5', $data);
+
+  // Create some admin links in the navigation menu.
+  $item = array(
+    'link_title' => st('Full HTML text format'),
+    'link_path' => 'admin/config/content/formats/full_html',
+  );
+  menu_link_save($item);
+  $item = array(
+    'link_title' => st('Flickr settings'),
+    'link_path' => 'admin/config/media/flickr',
+  );
+  menu_link_save($item);
+  $item = array(
+    'link_title' => st('AutoFloat settings'),
+    'link_path' => 'admin/config/content/autofloat',
+  );
+  menu_link_save($item);
+  $item = array(
+    'link_title' => st('Colorbox settings'),
+    'link_path' => 'admin/config/media/colorbox',
+  );
+  menu_link_save($item);
+  $item = array(
+    'link_title' => st('Blocks'),
+    'link_path' => 'admin/structure/block',
+  );
+  menu_link_save($item);
+
+  // Create sample pages.
+  $t = get_t();
+
+  $node = new stdClass();
+  $node->uid = 1;
+  $node->language = 'und';
+  $node->type = 'page';
+  $node->status = 1;
+  $node->promote = 1;
+  $node->title = $t('Flickr-Colorbox integration in Drupal 7 & auto float images in text body alternately right and left.');
+  $node->body['und'][0]['value'] = $t('<p>[flickr-photo:id=9247386562,size=m]DEMO PAGE of both the <a href="http://drupal.org/project/autofloat" title="Project page on Drupal.">AutoFloat</a> and <a href="http://drupal.org/project/flickr" title="Project page on Drupal.">Flickr</a> module from the distro at https://drupal.org/project/demo_flickr.<br>They work seamless together out-of-the-box. A huge time-saver.</p><p>Note that in this demo the Flickr and AutoFloat filters are active only on the <a href="/admin/config/content/formats/full_html"><em>Full HTML</em> text format.</a><br />You find admin quick links to the relevant settings in the <em>Navigation</em> menu in the sidebar.</p><p>After installation you might get this error:<br />&nbsp;&nbsp;<em>"Could not connect to Flickr, Error: Connection timed out"</em><br />Just <a href="/node/1/edit">re-save</a> the node.</p>Used:<ul><li><a href="http://drupal.org/" title="Drupal.org">Drupal</a> 7</li><li><a href="http://drupal.org/project/colorbox" title="Project page on Drupal">Colorbox</a></li><li><a href="http://drupal.org/project/autofloat" title="Project page on Drupal">AutoFloat</a></li><li><a href="http://drupal.org/project/flickr" title="Project page on Drupal">Flickr</a> 7.x-1.x-dev</li></ul>Activated Flickr sub-modules:<ul><li>Flickr Block</li><li>Flickr Filter</li><li>Flickr Sets</li><li>Flickr Style</li><li>Flickr Cachewarmer</li></ul>NOTHING MORE, NOTHING LESS.<br />No other customizations, modifications, alterations, additions, whatsoever.<p><span style="background-color:#ffff00;">ALSO THE CAPTION FLOATS AND DIVIDES OVER MORE ROWS IF NECESSARY.</span>. [flickr-photo:id=9247388074,size=q]Tincidunt nec velit adipiscing adipiscing ultrices, integer urna augue porta enim porttitor tortor velit! Urna, nunc sociis porttitor? Rhoncus adipiscing dictumst cum est et ridiculus odio risus nec sed et lorem elit, pulvinar facilisis nec aenean egestas cursus nisi, duis! Enim. Sed, amet dolor dictumst, in augue sociis mauris! Facilisis? Placerat pellentesque amet in in? Cras duis facilisis nec arcu porttitor parturient eu lectus aliquam rhoncus porta tristique, lectus elementum.</p><p>Tincidunt lectus parturient? Magna aliquet ultrices elit! Rhoncus, turpis. Sagittis facilisis mauris cras habitasse, aliquam, risus nunc tincidunt sit nunc pulvinar, nec lectus aenean magnis placerat ac. Tincidunt! Eu, in nunc duis, ac phasellus, amet ultricies amet, ultricies phasellus. [flickr-photo:id=9244604259,size=m]<br /><span style="background-color:#ffff00;">AN IMAGE CAN BE PUT ALSO HALFWAY A PARAGRAPH. THAT IS WHY SPANS ARE USED INSTEAD OF DIVS (<a href="http://stackoverflow.com/a/1611172" title="StackOverfow.com">more info</a>).</span> Et, auctor. Turpis augue in proin pulvinar turpis ac proin aliquam sit pulvinar risus, tristique? Ultricies vut massa nisi dolor, dignissim, enim proin et, rhoncus, a porttitor porttitor!</p><p><span style="background-color:#ffff00;">IMAGES IN A SET OF THUMBNAILS ARE EXCLUDED FROM AUTOFLOAT. TRY TO CLICK A LOCATION NAME OR THE VIDEO (last thumbnail, plays inside Colorbox).</span></p><p style="font-size: 250%;">&#11015;</p>[flickr-photoset:id=72157634563269642,size=q,media=all,num=20]<p>[flickr-photo:id=9247387656,size=s]<span style="background-color:#ffff00;">ON THE SMALLEST SIZE (square 75px) THE TITLE IS SUBSTITUTED WITH THE TERM "FLICKR" TO SAVE SPACE.</span> Auctor ac, urna odio lorem, duis integer nisi nisi, proin dictumst, elementum nisi! Sed. Magna facilisis elementum, sed auctor, montes, et et habitasse porta, amet! Aenean, scelerisque amet est, elit, nascetur porttitor elementum? Risus arcu, tristique platea rhoncus rhoncus lacus ultricies integer eros massa dignissim! Egestas dapibus auctor magna porttitor. Sociis? Velit nec, duis scelerisque dictumst turpis dolor sit.</p><p>[flickr-photo:id=9244503455,size=n]<span style="background-color:#ffff00;">IMAGE SIZE 320 PX ONLY AVAILABLE FOR FLICKR PHOTOS UPLOADED AFTER MARCH 1, 2012.</span> Sit adipiscing ac etiam cum, odio ridiculus pulvinar, a porta tristique, sit cras! Porttitor ridiculus nisi porta? Turpis nunc elit, in ultrices, nisi risus purus vel, amet. In et tincidunt rhoncus. Turpis tempor adipiscing a. Aenean cum lacus auctor nec! Egestas. Lacus sed magna elementum lacus augue. Montes magna ac et nisi rhoncus mauris, vel! Lorem dictumst ultricies lacus.</p><p><span style="background-color:#ffff00;">TRY TO RESIZE THE BROWSER WINDOW TO VERIFY HOW THE SLIDESHOW AND THE IMAGES IN THE SET AND BLOCK ADAPT TO THE AVAILABLE WIDTH.</span></p><p><span style="background-color:#ffff00;">A SLIDESHOW (SEE BELOW) OF A SET OR USER/GROUP PHOTOSTREAM CAN BE USED IN A BLOCK, THE NODE BODY OR FIELD. ALSO A NON-FLASH VERSION IS AVAILABLE. THEY BOTH SUPPORT FULL-SCREEN MODE AND ARE RESPONSIVE.</span></p><p><span style="background-color:#ffff00;">AT THE BOTTOM AN EXAMPLE OF A VIDEO.<br />THE WIDTH CAN BE CONTROLLED (in this case 80%). TRY BOTH FULL-SCREEN.</span></p>&nbsp;<br />[flickr-photoset:id=72157634563269642,size=x]<div style="width:80%;">[flickr-photoset:id=72157644096644712,size=y]</div><!--break-->');
+  $node->body['und'][0]['format'] = 'full_html';
+  $node->menu = array(
+    'enabled' => 1,
+    'mlid' => 0,
+    'module' => 'menu',
+    'hidden' => 0,
+    'has_children' => 0,
+    'customized' => 0,
+    'options' =>
+    array(),
+    'expanded' => 0,
+    'parent_depth_limit' => 8,
+    'link_title' => $t('Example page with AutoFloat'),
+    'description' => '',
+    'parent' => 'main-menu:0',
+    'weight' => '2',
+    'plid' => '0',
+    'menu_name' => 'main-menu',
+  );
+
+  node_save($node);
+
+  $node = new stdClass();
+  $node->uid = 1;
+  $node->language = 'und';
+  $node->type = 'page';
+  $node->status = 1;
+  $node->promote = 0;
+  $node->title = $t('Album examples.');
+  $node->body['und'][0]['value'] = $t('<strong>&#91;flickr-gallery:id=72157648989290536, size=m, num=3, sort=random]</strong>
+results in:
+
+[flickr-gallery:id=72157648989290536, size=m, num=3, sort=random]<br />
+<hr />
+<strong>&#91;flickr-group:id=91484156@N00, size=q, num=4, tags=flowers, filter=interesting, sort=views]</strong>
+results in:
+
+[flickr-group:id=91484156@N00, size=q, num=4, tags=flowers, filter=interesting, sort=views]<br />
+<hr />
+<strong>&#91;flickr-user:id=public, size=t, num=5, tags=Augusto Canario, filter=interesting, sort=views, extend=true]</strong>
+results in:
+
+[flickr-user:id=public, size=t, num=5, tags=Augusto Canario, filter=interesting, sort=views, extend=true]<br />
+<strong>Note: tags can be used also dynamically in a block that takes it from the taxonomy terms of the node it is displayed in (context sensitive).</strong>
+<br /><br />
+<hr />
+<strong>&#91;flickr-user:id=public, size=q, num=4, tags=tower, location=48.85837/2.294481/0.2, filter=interesting, sort=views]</strong>
+results in:
+
+[flickr-user:id=public, size=q, num=4, tags=tower, location=48.85837/2.294481/0.2, filter=interesting, sort=views]<br />
+<hr />
+<strong>&#91;flickr-favorites:id=lolandese, size=q, num=4, tags=tomosborn/people]</strong>
+results in:
+
+[flickr-favorites:id=lolandese, size=q, num=4, tags=tomosborn/people]<br />
+<hr />
+<strong>&#91;flickr-user:id=public, size=q, num=4, location=48.867556/2.364088, date=2015-01-11, filter=interesting, sort=views]</strong>
+results in:
+
+[flickr-user:id=public, size=q, num=4, location=48.867556/2.364088, date=2015-01-11, filter=interesting, sort=views]<!--break-->');
+  $node->body['und'][0]['format'] = 'full_html';
+  $node->menu = array(
+    'enabled' => 1,
+    'mlid' => 0,
+    'module' => 'menu',
+    'hidden' => 0,
+    'has_children' => 0,
+    'customized' => 0,
+    'options' => array(),
+    'expanded' => 0,
+    'parent_depth_limit' => 8,
+    'link_title' => $t('Album examples'),
+    'description' => '',
+    'parent' => 'main-menu:0',
+    'weight' => '3',
+    'plid' => '0',
+    'menu_name' => 'main-menu',
+  );
+
+  node_save($node);
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function flickr_simplytest_uninstall() {
+  // Remove link in the main menu.
+  menu_link_delete(NULL, 'admin/config/media/flickr');
+}

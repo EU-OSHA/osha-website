@@ -1,0 +1,22 @@
+name = Flickr Simplytest
+description = A Simplytest.me demo for this module.
+core = 7.x
+package = Flickr
+hidden = TRUE
+
+dependencies[] = autofloat
+dependencies[] = ctools
+dependencies[] = image
+dependencies[] = flickr
+dependencies[] = flickr_block
+dependencies[] = flickr_filter
+dependencies[] = flickr_sets
+dependencies[] = flickrstyle
+dependencies[] = flickrcachewarmer
+
+; Information added by Drupal.org packaging script on 2015-08-06
+version = "7.x-1.8"
+core = "7.x"
+project = "flickr"
+datestamp = "1438860137"
+

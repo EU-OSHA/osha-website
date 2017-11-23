@@ -73,5 +73,53 @@ function osha_user_default_permissions() {
     'module' => 'comment',
   );
 
+  // Exported permission: 'use text format dangerous_substances_minimal'.
+  $permissions['use text format dangerous_substances_minimal'] = array(
+    'name' => 'use text format dangerous_substances_minimal',
+    'roles' => array(
+      'Dangerous substances' => 'Dangerous substances',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'filter',
+  );
+
+  // Exported permission: 'use text format full_html'.
+  $permissions['use text format full_html'] = array(
+    'name' => 'use text format full_html',
+    'roles' => array(
+      'Approver' => 'Approver',
+      'Content Validator' => 'Content Validator',
+      'Editor' => 'Editor',
+      'Events Coordinator' => 'Events Coordinator',
+      'Events Editor' => 'Events Editor',
+      'Layout Validator' => 'Layout Validator',
+      'Project Manager' => 'Project Manager',
+      'Review Manager' => 'Review Manager',
+      'Translation Liaison' => 'Translation Liaison',
+      'Translation Manager' => 'Translation Manager',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'filter',
+  );
+
+  // Exported permission: 'use text format full_html_minimal'.
+  $permissions['use text format full_html_minimal'] = array(
+    'name' => 'use text format full_html_minimal',
+    'roles' => array(
+      'Approver' => 'Approver',
+      'Content Validator' => 'Content Validator',
+      'Editor' => 'Editor',
+      'Events Coordinator' => 'Events Coordinator',
+      'Events Editor' => 'Events Editor',
+      'Layout Validator' => 'Layout Validator',
+      'Project Manager' => 'Project Manager',
+      'Review Manager' => 'Review Manager',
+      'Translation Liaison' => 'Translation Liaison',
+      'Translation Manager' => 'Translation Manager',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'filter',
+  );
+
   return $permissions;
 }

@@ -994,13 +994,6 @@ function osha_resources_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'flickr_caption_padding';
-  $strongarm->value = '0';
-  $export['flickr_caption_padding'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'flickr_class';
   $strongarm->value = '';
   $export['flickr_class'] = $strongarm;

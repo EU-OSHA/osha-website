@@ -37,3 +37,10 @@ function osha_job_vacancies_update_7002() {
     db_query("update locales_target set lid = 9680 where lid = 9245");
   }
 }
+
+/**
+ * MDR-1450 I2-Introduce hint text inside the input fields
+ */
+function osha_job_vacancies_update_7003() {
+  features_revert(array('osha_job_vacancies' => array('field_base', 'field_instance')));
+}

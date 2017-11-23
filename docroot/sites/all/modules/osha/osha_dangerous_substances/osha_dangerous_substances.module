@@ -6,12 +6,135 @@
 
 include_once 'osha_dangerous_substances.features.inc';
 
+function osha_dangerous_substances_term_page($term) {
+  return disable_term_node_listings_term_page($term);
+}
+
+/**
+ * Implements hook_node_access().
+ */
+function osha_dangerous_substances_node_access($node, $op, $account) {
+  if ($op == 'view' && $node->type == 'dangerous_substances') {
+    if (user_is_anonymous()) {
+      return NODE_ACCESS_DENY;
+    }
+  }
+  return NODE_ACCESS_IGNORE;
+}
+
+function template_preprocess_osha_dangerous_substances_doc(&$vars) {
+  $vars['header'] = $vars['rows']['header'];
+  $vars['body'] = $vars['rows']['body'];
+  $vars['footer'] = $vars['rows']['footer'];
+}
+
+/**
+ * Implements hook_preprocess_views_data_export_doc_body().
+ */
+function template_preprocess_osha_dangerous_substances_doc_body(&$vars) {
+  // Pass through the generic MS Office process.
+  template_preprocess_views_data_export_msoffice_body($vars);
+  $output = '';
+
+  $flip = array(
+    'even' => 'odd',
+    'odd' => 'even',
+  );
+  $class = 'even';
+  foreach ($vars['themed_rows'] as $number => $cells) {
+    // Add odd/even class
+    $class = $flip[$class];
+    if (isset($attributes['class'])) {
+      $attributes['class'] .= ' ' . $class;
+    }
+    else {
+      $attributes['class'] = $class;
+    }
+
+    $output .= '<table class="tableBorder" cellpadding="0" cellspacing="0" border="0" width="100%">';
+    // Build row
+    foreach ($cells as $alias => $cell) {
+      $output .= ' <tr' . drupal_attributes($attributes) . '>';
+      $output .= _theme_table_cell(['width'=>"30%", 'data' => '<b>' . $vars['header'][$alias] . '</b>']);
+      $output .= _theme_table_cell(['width'=>"70%", 'data' => $cell]);
+      $output .= " </tr>\n";
+    }
+    $output .= "</table>";
+    $output .= "<br /><br style='page-break-before:always;'/>";
+  }
+
+  $vars['body'] = $output;
+}
+
+/**
+ * Implements hook_views_plugins().
+ */
+function osha_dangerous_substances_views_plugins() {
+  $module_path = drupal_get_path('module', 'osha_dangerous_substances');
+
+  return array(
+    'style' => array(
+      'osha_dangerous_substances_doc' => array(
+        'title' => t('Doc card file'),
+        'help' => t('Display the view as an Doc card file.'),
+        'handler' => 'views_data_export_plugin_style_export',
+        'export headers' => array('Content-Type' => 'application/vnd.ms-word'),
+        'export feed type' => 'doc',
+        'export feed text' => 'doc',
+        'export feed file' => '%view.doc',
+        'export feed icon' => drupal_get_path('module', 'views_data_export') . '/images/doc.png',
+        'additional themes base' => 'osha_dangerous_substances_doc',
+        'path' => $module_path . '/plugins',
+        'parent' => 'views_data_export_doc',
+        'theme' => 'osha_dangerous_substances_doc',
+        'uses row plugin' => FALSE,
+        'uses fields' => TRUE,
+        'uses options' => TRUE,
+        'type' => 'data_export',
+      ),
+    ),
+  );
+}
 
 function osha_dangerous_substances_preprocess_views_view(&$vars) {
   $view = $vars['view'];
   if($view->name == 'dangerous_substances') {
     drupal_add_css(drupal_get_path('module', 'osha_dangerous_substances') .'/css/osha_dangerous_substances.css');
   }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function osha_dangerous_substances_theme() {
+
+  $theme = array();
+  $path = drupal_get_path('module', 'osha_dangerous_substances');
+
+  $theme['osha_dangerous_substances_doc'] = array(
+    'path' => $path . '/templates',
+    'template' => 'osha_dangerous_substances_doc',
+    'variables' =>  array('view' => NULL, 'options' => NULL, 'rows' => NULL, 'title' => NULL),
+  );
+
+  $theme['osha_dangerous_substances_doc_header'] = array(
+    'path' => $path . '/templates',
+    'template' => 'osha_dangerous_substances_doc_header',
+    'variables' =>  array('view' => NULL, 'options' => NULL, 'rows' => NULL, 'title' => NULL),
+  );
+
+  $theme['osha_dangerous_substances_doc_body'] = array(
+    'path' => $path . '/templates',
+    'template' => 'osha_dangerous_substances_doc_body',
+    'variables' =>  array('view' => NULL, 'options' => NULL, 'rows' => NULL, 'title' => NULL),
+  );
+
+  $theme['osha_dangerous_substances_doc_footer'] = array(
+    'path' => $path . '/templates',
+    'template' => 'osha_dangerous_substances_doc_footer',
+    'variables' =>  array('view' => NULL, 'options' => NULL, 'rows' => NULL, 'title' => NULL),
+  );
+  return $theme;
 }
 
 // MDR-969: remove redirect on save
@@ -42,14 +165,24 @@ function osha_dangerous_substances_element_info_alter(&$type) {
 
 // remove guidelines and help text
 function osha_dangerous_substances_filter_process_format($element) {
+  if (isset($element['#format']) && $element['#format'] === "") {
+    $element['#format'] = NULL;
+  }
   $element = filter_process_format($element);
   if ($element['#bundle'] == 'dangerous_substances') {
     unset($element['format']['guidelines']);
     unset($element['format']['help']);
-    $element['format']['format']['#options'] = [ 'dangerous_substances' => $element['format']['format']['#options']['dangerous_substances'] ];
+    $element['format']['format']['#options'] = [
+      'dangerous_substances' => $element['format']['format']['#options']['dangerous_substances'],
+      'dangerous_substances_minimal' => $element['format']['format']['#options']['dangerous_substances_minimal'],
+    ];
     unset($element['format']['format']['']);
     $element['#format'] = 'dangerous_substances';
   }
+  if ($element['format']['format']['#default_value'] == 'full_html') {
+    $element['format']['format']['#default_value'] = 'full_html_minimal';
+  }
+
   return $element;
 }
 
@@ -74,14 +207,43 @@ function osha_dangerous_substances_facet_items_alter(&$build, &$settings) {
   }
 }
 
+function osha_dangerous_substances_empty_description($item) {
+  if ($item->type == 'dangerous_substances') {
+    if (!$item->body) {
+      return TRUE;
+    }
+  }
+  return FALSE;
+}
+
+/**
+ * Implements hook_entity_property_info_alter().
+ */
+function osha_dangerous_substances_entity_property_info_alter(&$info) {
+  $info['node']['properties']['empty_description'] = array(
+    'type' => 'boolean',
+    'label' => t('Empty description'),
+    'sanitized' => TRUE,
+    'getter callback' => 'osha_dangerous_substances_empty_description',
+  );
+}
+
 /**
  * Implements hook_form_alter().
  */
 function osha_dangerous_substances_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'views_exposed_form' && $form['#id']=='views-exposed-form-dangerous-substances-overview-page') {
-    $form['description']['#title'] = t('Empty description');
-    $form['description']['#type'] = 'checkbox';
-    $form['description']['#return_value'] = 1;
+    $filter_id = 'description';
+    $form[$filter_id]['#title'] = t('Empty description');
+    $form[$filter_id]['#type'] = 'checkbox';
+    $form[$filter_id]['#default_value'] = 0;
+    $form[$filter_id]['#return_value'] = 1;
+    unset($form[$filter_id]['#options']);
+
+    $checked = isset($form_state['input'][$filter_id]) ? intval($_GET[$filter_id]) : $form[$filter_id]['#default_value'];
+    // Now we know whether the checkbox is checked or not, set #value
+    // accordingly.
+    $form[$filter_id]['#value'] = $checked ? $form[$filter_id]['#return_value'] : 0;
   }
 
   if ($form_id == 'dangerous_substances_node_form') {
@@ -204,12 +366,17 @@ function osha_dangerous_substances_search_api_solr_query_alter(array &$call_args
   if (arg(1) == 'dangerous-substances') {
     $sort_order = strtolower(@$_REQUEST['sort_order']);
     $sort_by    = strtolower(@$_REQUEST['sort_by']);
-
-  foreach($call_args['params']['fq'] as $k => $v) {
-    if (strpos('.' . $v, 'bs_status:') && $k) {
-      $call_args['params']['fq'][$k] = '{!tag=facet:field_summary}*:* AND -bs_field_summary:[* TO *]';
+    foreach($call_args['params']['fq'] as $k => $v) {
+        if (strpos('.' . $v, 'sm_search_api_access_node:') && $k) {
+          continue;
+        }
+        if (strpos('.' . $v, 'bs_status:"true") OR (is_author') && $k) {
+          continue;
+        }
+      if (strpos('.' . $v, 'bs_status:') && $k && @$_REQUEST['description']) {
+        $call_args['params']['fq'][$k] = 'bs_empty_description:"true"';
+      }
     }
-  }
     if ($sort_by) {
       $call_args['params']['sort'] = 'ds_field_publication_year ';
       if ($sort_by == 'search_api_relevance') {

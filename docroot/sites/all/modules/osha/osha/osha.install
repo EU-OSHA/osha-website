@@ -459,3 +459,62 @@ function osha_update_7026() {
 function osha_update_7027() {
   features_revert_module('osha');
 }
+/**
+ * Features revert: MDR-1289.
+ */
+function osha_update_7028() {
+  features_revert_module('osha_infographics');
+  features_revert_module('osha_blocks');
+  features_revert_module('osha');
+}
+
+/**
+ * enable module: MDR-1229 Could Flickr albums
+ */
+function osha_update_7029() {
+  module_enable(['osha_flickr']);
+}
+
+/**
+ * MDR-1451 I3-Remove the multiple options for formatting the text
+ */
+function osha_update_7030() {
+  features_revert_module('osha');
+}
+
+/**
+ * MDR-1450 I2-Introduce hint text inside the input fields
+ */
+function osha_update_7031() {
+  features_revert(array('osha' => array('field_base', 'field_instance')));
+}
+
+/**
+ * MDR-1452 I4-Provide to the user a preview of the image
+ */
+function osha_update_7032() {
+  features_revert_module('osha');
+  features_revert_module('osha_dangerous_substances');
+  features_revert_module('osha_infographics');
+}
+
+/**
+ * MDR-1452 I4-Provide to the user a preview of the image - UPDATE
+ */
+function osha_update_7033() {
+  features_revert_module('osha');
+}
+
+/**
+ * MDR-1452 I4-Provide to the user a preview of the image - UPDATE
+ */
+function osha_update_7034() {
+  features_revert(array('osha' => array('field_base', 'field_instance')));
+}
+
+/**
+ * Gallery in type filter.
+ */
+function osha_update_7035() {
+  features_revert(array('osha' => array('views_view')));
+}

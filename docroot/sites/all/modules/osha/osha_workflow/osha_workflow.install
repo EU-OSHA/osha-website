@@ -639,3 +639,18 @@ function osha_workflow_update_7011() {
     'moderate content from ready_to_publish to published',
   ));
 }
+
+/**
+ * Set new moderation block.
+ */
+function osha_workflow_update_7012() {
+  features_revert_module('osha_workflow');
+}
+
+
+/**
+ * MDR-1494 I do not see anymore in the draft the status of content under approval.
+ */
+function osha_workflow_update_7013() {
+  features_revert(array('osha_workflow' => array('fe_block_settings')));
+}

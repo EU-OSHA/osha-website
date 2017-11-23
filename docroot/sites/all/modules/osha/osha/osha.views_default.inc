@@ -265,6 +265,7 @@ function osha_views_default_views() {
     'file' => 'file',
     'flickr' => 'flickr',
     'fop_page' => 'fop_page',
+    'flickr_gallery' => 'flickr_gallery',
     'guideline' => 'guideline',
     'highlight' => 'highlight',
     'infographic' => 'infographic',
@@ -1098,7 +1099,7 @@ function osha_views_default_views() {
     'multiple_to' => '',
     'osha_date_theme' => '',
   );
-  /* Field: Content: For the web */
+  /* Field: Content: For the web / Public */
   $handler->display->display_options['fields']['field_for_the_web']['id'] = 'field_for_the_web';
   $handler->display->display_options['fields']['field_for_the_web']['table'] = 'field_data_field_for_the_web';
   $handler->display->display_options['fields']['field_for_the_web']['field'] = 'field_for_the_web';
@@ -1937,7 +1938,7 @@ function osha_views_default_views() {
     'multiple_to' => '',
     'osha_date_theme' => '',
   );
-  /* Field: Content: For the web */
+  /* Field: Content: For the web / Public */
   $handler->display->display_options['fields']['field_for_the_web']['id'] = 'field_for_the_web';
   $handler->display->display_options['fields']['field_for_the_web']['table'] = 'field_data_field_for_the_web';
   $handler->display->display_options['fields']['field_for_the_web']['field'] = 'field_for_the_web';
@@ -3128,9 +3129,64 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['field_migration_source_value']['table'] = 'field_data_field_migration_source';
   $handler->display->display_options['filters']['field_migration_source_value']['field'] = 'field_migration_source_value';
   $handler->display->display_options['filters']['field_migration_source_value']['operator'] = 'empty';
+  /* Filter criterion: Content: Marked as outdated (field_archived) */
+  $handler->display->display_options['filters']['field_archived_value']['id'] = 'field_archived_value';
+  $handler->display->display_options['filters']['field_archived_value']['table'] = 'field_data_field_archived';
+  $handler->display->display_options['filters']['field_archived_value']['field'] = 'field_archived_value';
+  $handler->display->display_options['filters']['field_archived_value']['operator'] = 'empty';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+    3 => 'OR',
+  );
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  /* Filter criterion: Content: Migration Source (field_migration_source) */
+  $handler->display->display_options['filters']['field_migration_source_value']['id'] = 'field_migration_source_value';
+  $handler->display->display_options['filters']['field_migration_source_value']['table'] = 'field_data_field_migration_source';
+  $handler->display->display_options['filters']['field_migration_source_value']['field'] = 'field_migration_source_value';
+  $handler->display->display_options['filters']['field_migration_source_value']['operator'] = 'empty';
+  $handler->display->display_options['filters']['field_migration_source_value']['group'] = 1;
+  /* Filter criterion: Field: Publication date (field_publication_date) */
+  $handler->display->display_options['filters']['field_publication_date_value']['id'] = 'field_publication_date_value';
+  $handler->display->display_options['filters']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
+  $handler->display->display_options['filters']['field_publication_date_value']['field'] = 'field_publication_date_value';
+  $handler->display->display_options['filters']['field_publication_date_value']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_publication_date_value']['group'] = 2;
+  $handler->display->display_options['filters']['field_publication_date_value']['granularity'] = 'second';
+  $handler->display->display_options['filters']['field_publication_date_value']['default_date'] = 'now';
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'events' => 'events',
+    'wiki_page' => 'wiki_page',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 2;
+  /* Filter criterion: Content: Marked as outdated (field_archived) */
+  $handler->display->display_options['filters']['field_archived_value']['id'] = 'field_archived_value';
+  $handler->display->display_options['filters']['field_archived_value']['table'] = 'field_data_field_archived';
+  $handler->display->display_options['filters']['field_archived_value']['field'] = 'field_archived_value';
+  $handler->display->display_options['filters']['field_archived_value']['operator'] = 'empty';
+  $handler->display->display_options['filters']['field_archived_value']['group'] = 3;
+  /* Filter criterion: Content: Marked as outdated (field_archived) */
+  $handler->display->display_options['filters']['field_archived_value_1']['id'] = 'field_archived_value_1';
+  $handler->display->display_options['filters']['field_archived_value_1']['table'] = 'field_data_field_archived';
+  $handler->display->display_options['filters']['field_archived_value_1']['field'] = 'field_archived_value';
+  $handler->display->display_options['filters']['field_archived_value_1']['value'] = array(
+    0 => '0',
+  );
+  $handler->display->display_options['filters']['field_archived_value_1']['group'] = 3;
   $handler->display->display_options['path'] = 'export/list';
 
   /* Display: Note to editor */
@@ -3283,7 +3339,7 @@ function osha_views_default_views() {
     'wiki_page' => 'wiki_page',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Content: OSHwiki categories (field_wiki_categories) */
+  /* Filter criterion: Content: Wiki categories (field_wiki_categories) */
   $handler->display->display_options['filters']['field_wiki_categories_tid']['id'] = 'field_wiki_categories_tid';
   $handler->display->display_options['filters']['field_wiki_categories_tid']['table'] = 'field_data_field_wiki_categories';
   $handler->display->display_options['filters']['field_wiki_categories_tid']['field'] = 'field_wiki_categories_tid';
@@ -3523,6 +3579,8 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['field_item_type_value']['table'] = 'field_data_field_item_type';
   $handler->display->display_options['filters']['field_item_type_value']['field'] = 'field_item_type_value';
   $handler->display->display_options['filters']['field_item_type_value']['value'] = array(
+    'MS material' => 'MS material',
+    'EU material' => 'EU material',
     'Audiovisual' => 'Audiovisual',
   );
 

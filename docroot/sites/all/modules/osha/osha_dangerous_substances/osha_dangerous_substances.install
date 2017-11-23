@@ -26,7 +26,7 @@ function osha_dangerous_substances_update_7002() {
  * Move provider to field collection and reindex.
  */
 function osha_dangerous_substances_update_7003() {
-  features_revert_module(['osha_dangerous_substances']);
+  features_revert_module('osha_dangerous_substances');
   $query = new EntityFieldQuery;
   $query->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'dangerous_substances');
@@ -62,14 +62,14 @@ function osha_dangerous_substances_update_7003() {
     field_delete_instance($instance);
   }
   search_api_index_reindex('default_content_index');
-  features_revert_module(['osha_dangerous_substances']);
+  features_revert_module('osha_dangerous_substances');
 }
 
 /**
  * Add Original description language field with Available in languages values.
  */
 function osha_dangerous_substances_update_7004() {
-  features_revert_module(['osha_dangerous_substances']);
+  features_revert_module('osha_dangerous_substances');
   $query = new EntityFieldQuery;
   $query->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'dangerous_substances');
@@ -82,7 +82,7 @@ function osha_dangerous_substances_update_7004() {
     }
   }
   search_api_index_reindex('default_content_index');
-  features_revert_module(['osha_dangerous_substances']);
+  features_revert_module('osha_dangerous_substances');
 }
 
 /**
@@ -91,14 +91,14 @@ function osha_dangerous_substances_update_7004() {
 function osha_dangerous_substances_update_7005() {
   features_revert_module('osha_dangerous_substances');
   search_api_index_reindex('default_content_index');
-  features_revert_module(['osha_dangerous_substances']);
+  features_revert_module('osha_dangerous_substances');
 }
 
 /**
  * Add Original description language other field with Available in languages values other.
  */
 function osha_dangerous_substances_update_7006() {
-  features_revert_module(['osha_dangerous_substances']);
+  features_revert_module('osha_dangerous_substances');
   $query = new EntityFieldQuery;
   $query->entityCondition('entity_type', 'node')
     ->entityCondition('bundle', 'dangerous_substances');
@@ -118,19 +118,158 @@ function osha_dangerous_substances_update_7006() {
  * Original description language format changes
  */
 function osha_dangerous_substances_update_7007() {
-  features_revert_module(['osha_dangerous_substances']);
+  features_revert_module('osha_dangerous_substances');
 }
 
 /**
  * Original description language format changes
  */
 function osha_dangerous_substances_update_7008() {
-  features_revert_module(['osha_dangerous_substances']);
+  features_revert_module('osha_dangerous_substances');
 }
 
 /**
  * Author filter
  */
 function osha_dangerous_substances_update_7009() {
-  features_revert_module(['osha_dangerous_substances']);
+  features_revert_module('osha_dangerous_substances');
+}
+
+/**
+ * Empty Content (English) description checkbox
+ */
+function osha_dangerous_substances_update_7010() {
+  features_revert_module('osha_dangerous_substances');
+  search_api_index_reindex('default_content_index');
+  features_revert_module('osha_dangerous_substances');
+}
+
+/**
+ * New DS filters
+ */
+function osha_dangerous_substances_update_7011() {
+  features_revert_module('osha_dangerous_substances');
+  search_api_index_reindex('default_content_index');
+  features_revert_module('osha_dangerous_substances');
+}
+
+/**
+ * Export doc card format
+ */
+function osha_dangerous_substances_update_7012() {
+  cache_clear_all();
+  features_revert_module('osha_dangerous_substances');
+}
+
+/**
+ * New DS filters
+ */
+function osha_dangerous_substances_update_7013() {
+  features_revert_module('osha_dangerous_substances');
+  search_api_index_reindex('default_content_index');
+  features_revert_module('osha_dangerous_substances');
+}
+
+/**
+ * DS permissions
+ */
+function osha_dangerous_substances_update_7014() {
+  features_revert_module('osha_dangerous_substances');
+}
+
+/**
+ * New Empty description implementations.
+ */
+function osha_dangerous_substances_update_7015() {
+  features_revert_module('osha_dangerous_substances');
+  cache_clear_all();
+  search_api_index_reindex('default_content_index');
+}
+
+/**
+ * Removed form autosubmit.
+ */
+function osha_dangerous_substances_update_7016() {
+  features_revert_module('osha_dangerous_substances');
+}
+
+/**
+ * Add workbench_access for node type dangerous substances.
+ */
+function osha_dangerous_substances_update_7017() {
+  features_revert_module('osha_dangerous_substances');
+}
+
+/**
+ * Add DS node default workbench section.
+ */
+function osha_dangerous_substances_update_7018() {
+  $type = 'dangerous_substances';
+  $bundle_section_map = osha_workflow_bundle_section_map();
+  $existing_nids = db_select('workbench_access_node', 'w')
+    ->fields('w', array('nid'))
+    ->execute()
+    ->fetchCol();
+  foreach ($bundle_section_map as $bundle => $section) {
+    if ($type != $bundle) {
+      continue;
+    }
+    $updating_nids = db_select('node', 'n')
+      ->fields('n', array('nid'))
+      ->condition('nid', $existing_nids, 'NOT IN')
+      ->condition('type', $bundle)
+      ->execute()
+      ->fetchCol();
+    if ($term = osha_workflow_get_section_term_by_ldap_id($section)) {
+      foreach ($updating_nids as $nid) {
+        db_insert('workbench_access_node');
+        $record = array(
+          'nid' => $nid,
+          'access_id' => $term->tid,
+          'access_scheme' => 'taxonomy',
+        );
+        drupal_write_record('workbench_access_node', $record);
+      }
+    }
+  }
+}
+
+/**
+ * MDR-1451 I3-Remove the multiple options for formatting the text.
+ */
+function osha_dangerous_substances_update_7019() {
+  features_revert_module('osha_dangerous_substances');
+}
+
+/**
+ * Add DS node default workbench section.
+ */
+function osha_dangerous_substances_update_7020() {
+  osha_dangerous_substances_update_7018();
+}
+
+/**
+ * Add DS node default workbench section.
+ */
+function osha_dangerous_substances_update_7021() {
+  $name = 'Site: Dangerous substances Database';
+  $term = taxonomy_get_term_by_name($name, 'section');
+  if (empty($term)) {
+    $voc = taxonomy_vocabulary_machine_name_load('section');
+    $term = new stdClass();
+    $term->parent = 0;
+    $term->language = 'en';
+    $term->name = $name;
+    $term->vid = $voc->vid;
+    $term->field_ldap_section_code[LANGUAGE_NONE][]['value'] = 'DANGSUDB_PM';
+    taxonomy_term_save($term);
+  }
+  osha_dangerous_substances_update_7018();
+}
+
+/**
+ * MDR-1451 I3-Remove the multiple options for formatting the text.
+ */
+function osha_dangerous_substances_update_7022() {
+  features_revert_module('osha_dangerous_substances');
 }

@@ -12,6 +12,7 @@ phpunit.xml
 results/*
 tmp
 
+robots.txt
 
 # User Generated Content #
 ##########################

@@ -93,3 +93,10 @@ function osha_press_release_update_7002() {
 function osha_press_release_update_7003() {
   variable_set('print_pdf_autoconfig', 0);
 }
+
+/**
+ * MDR-1450 I2-Introduce hint text inside the input fields
+ */
+function osha_press_release_update_7004() {
+  features_revert(array('osha_press_release' => array('field_base', 'field_instance')));
+}

@@ -518,3 +518,22 @@ function osha_update_7034() {
 function osha_update_7035() {
   features_revert(array('osha' => array('views_view')));
 }
+
+/**
+ * MDR-1440 Possibility to tag an album as "HWC 18-19" and display also in HWC18-19 website.
+ */
+function osha_update_7036() {
+  $name = 'HWC 18-19';
+  $term = taxonomy_get_term_by_name($name, 'tags');
+  if (empty($term)) {
+    $voc = taxonomy_vocabulary_machine_name_load('tags');
+    $term = new stdClass();
+    $term->parent = 0;
+    $term->language = 'en';
+    $term->name = $name;
+    $term->vid = $voc->vid;
+    $term->field_tags_code[LANGUAGE_NONE][]['value'] = 'hwc_18_19';
+    taxonomy_term_save($term);
+  }
+  features_revert(array('osha' => array('views_view')));
+}

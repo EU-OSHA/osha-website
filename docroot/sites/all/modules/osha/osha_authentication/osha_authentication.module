@@ -131,6 +131,7 @@ function osha_authentication_user_login(&$edit, $user) {
     foreach($authorization as $role => $sections) {
       switch($role) {
         case 'Editor':
+        case 'Dangerous substances':
           workbench_access_rebuild_user($user->uid, $sections);
           break;
 

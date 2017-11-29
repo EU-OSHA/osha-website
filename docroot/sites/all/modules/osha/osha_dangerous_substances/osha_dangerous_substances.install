@@ -273,3 +273,10 @@ function osha_dangerous_substances_update_7021() {
 function osha_dangerous_substances_update_7022() {
   features_revert_module('osha_dangerous_substances');
 }
+
+/**
+ * MDR-1522 DS database: Change audiovisual by visual resources.
+ */
+function osha_dangerous_substances_update_7023() {
+  features_revert(array('osha_dangerous_substances' => array('field_base', 'field_instance')));
+}

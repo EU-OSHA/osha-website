@@ -3381,6 +3381,33 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['field_thesaurus_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_thesaurus_tid']['vocabulary'] = 'thesaurus';
   $handler->display->display_options['path'] = 'export/oira_wiki';
+
+  /* Display: Gallery */
+  $handler = $view->new_display('page', 'Gallery', 'gallery');
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'flickr_gallery' => 'flickr_gallery',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Taxonomy term: Code (field_tags_code) */
+  $handler->display->display_options['filters']['field_tags_code_value']['id'] = 'field_tags_code_value';
+  $handler->display->display_options['filters']['field_tags_code_value']['table'] = 'field_data_field_tags_code';
+  $handler->display->display_options['filters']['field_tags_code_value']['field'] = 'field_tags_code_value';
+  $handler->display->display_options['filters']['field_tags_code_value']['relationship'] = 'field_tags_tid';
+  $handler->display->display_options['filters']['field_tags_code_value']['value'] = 'hwc_18_19';
+  $handler->display->display_options['path'] = 'export/gallery';
   $translatables['hcw_data_export'] = array(
     t('Master'),
     t('HWC Data Export'),
@@ -3402,6 +3429,7 @@ function osha_views_default_views() {
     t('Content referencing Content from field_aditional_resources'),
     t('Wiki E-tools'),
     t('OSHwiki categories'),
+    t('Gallery'),
   );
   $export['hcw_data_export'] = $view;
 

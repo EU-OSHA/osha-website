@@ -9396,3 +9396,10 @@ div.flickr-photoset{
   	display: block;
   	background: #f0f2f5;
 }
+
+@media screen and (max-width: 500px) {
+	#sliding-popup .popup-content #popup-text{
+		max-width: 100% !important;
+	}
+	
+}

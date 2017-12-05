@@ -13,3 +13,10 @@ function osha_flickr_update_7001() {
 function osha_flickr_update_7002() {
   features_revert(array('osha_flickr' => array('field_base', 'field_instance')));
 }
+
+/**
+ * MDR-1440 Possibility to tag an album as "HWC 18-19" and display also in HWC18-19 website.
+ */
+function osha_flickr_update_7003() {
+  features_revert(array('osha_flickr' => array('field_base', 'field_instance')));
+}

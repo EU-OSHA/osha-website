@@ -127,12 +127,12 @@ function osha_authentication_user_login(&$edit, $user) {
     workbench_access_rebuild_user($user->uid, array());
     osha_workflow_rebuild_pm_sections($user->uid, array());
     osha_workflow_rebuild_rm_sections($user->uid, array());
-
+    $user_sections = [];
     foreach($authorization as $role => $sections) {
       switch($role) {
         case 'Editor':
         case 'Dangerous substances':
-          workbench_access_rebuild_user($user->uid, $sections);
+          $user_sections = array_merge($sections, $user_sections);
           break;
 
         case 'Project Manager':
@@ -144,6 +144,10 @@ function osha_authentication_user_login(&$edit, $user) {
           break;
           break;
       }
+    }
+    if ($user_sections) {
+      $user_sections = array_unique($user_sections);
+      workbench_access_rebuild_user($user->uid, $user_sections);
     }
     // LDAP_APPRV_US_01 - Assign Approver to the default list of approvers
     $is_approver = in_array('Approver', $roles);

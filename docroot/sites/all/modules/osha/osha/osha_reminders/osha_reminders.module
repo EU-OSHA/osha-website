@@ -70,7 +70,7 @@ function osha_reminders_notify_pm() {
  * Send notifications to Heads about Sections review statuses.
  */
 function osha_reminders_notify_heads() {
-  $rid = variable_get('osha_reminders_heads_role', 3);
+  $rid = variable_get('osha_reminders_heads_role', 7);
   $users = OshaWorkflowPermissions::getUsersByRole($rid);
   $params = array();
   $module = 'osha_reminders';

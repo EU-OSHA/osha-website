@@ -6,20 +6,284 @@
 
 include_once 'osha_dangerous_substances.features.inc';
 
+/**
+ * Implements hook_field_formatter_info().
+ */
+function osha_dangerous_substances_field_formatter_info() {
+  return array(
+    'practical_tool_title' => array(
+      'label' => 'practical_tool title link',
+      'field types' => array('text'),
+      'description' => 'Displays link with extra params.',
+    ),
+    'field_collection_title' => array(
+      'label' => t('Fields collection title'),
+      'field types' => array('field_collection'),
+      'settings' => array(
+        'edit' => t('Edit'),
+        'delete' => t('Delete'),
+        'add' => t('Add'),
+        'description' => TRUE,
+      ),
+    ),
+    'external_url' => array(
+      'label' => t('External url link'),
+      'field types' => array('link_field'),
+      'description' => t('External url Link'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_settings_form().
+ */
+function osha_dangerous_substances_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+  $elements = array();
+  if ($display['type'] == 'field_collection_title') {
+    $elements['edit'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Edit link title'),
+      '#default_value' => $settings['edit'],
+      '#description' => t('Leave the title empty, to hide the link.'),
+    );
+    $elements['delete'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Delete link title'),
+      '#default_value' => $settings['delete'],
+      '#description' => t('Leave the title empty, to hide the link.'),
+    );
+    $elements['add'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Add link title'),
+      '#default_value' => $settings['add'],
+      '#description' => t('Leave the title empty, to hide the link.'),
+    );
+    $elements['description'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Show the field description beside the add link.'),
+      '#default_value' => $settings['description'],
+      '#description' => t('If enabled and the add link is shown, the field description is shown in front of the add link.'),
+    );
+  }
+
+  return $elements;
+}
+
+/**
+ * Implements hook_field_formatter_settings_summary().
+ */
+function osha_dangerous_substances_field_formatter_settings_summary($field, $instance, $view_mode) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+  $output = array();
+  if ($display['type'] == 'field_collection_title') {
+    $links = array_filter(array_intersect_key($settings,
+      array_flip(array('add', 'edit', 'delete'))));
+    if ($links) {
+      $output[] = t('Links: @links', array('@links' => check_plain(implode(', ', $links))));
+    }
+    else {
+      $output[] = t('Links: none');
+    }
+  }
+
+  return implode('<br>', $output);
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function osha_dangerous_substances_block_info() {
+  // Block with clear filter link.
+  $blocks['osha_ds_search_clear_filters'] = array(
+    'info' => t('DS Search filters header with clear filter'),
+    'status' => 1,
+    'region' => 'sidebar_first',
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => 'themes/dangerous-substances/ds-tools/*',
+    'cache' => DRUPAL_NO_CACHE,
+    'weight' => 0,
+  );
+
+  $blocks['osha_ds_tools_text'] = array(
+    'info' => t('DS Search tool text'),
+    'status' => 1,
+    'region' => '-1',
+    'visibility' => BLOCK_VISIBILITY_NOTLISTED,
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function osha_dangerous_substances_block_view($delta = '') {
+  switch ($delta) {
+    case 'osha_ds_search_clear_filters':
+      // Add header as in template.
+      $content['header'] = array(
+        '#type' => 'markup',
+        '#markup' => '<h3>' . t('Filter results') . '</h3>',
+      );
+      $query_params = drupal_get_query_parameters();
+      if (!empty($query_params)) {
+        // Clear filter link
+        // it's really just a link to current url without params.
+        $content['link'] = array(
+          '#type' => 'markup',
+          '#markup' => l(t('Clear filter'), current_path()),
+        );
+      }
+      return array(
+        'subject' => '<none>',
+        'content' => drupal_render($content),
+      );
+      break;
+    case 'osha_ds_tools_text':
+      $block['title'] = '<none>';
+      $block['content'] = '';
+      $nid = variable_get('practical_tools_and_guidance_on_dangerous_substances_nid', 0);
+      if ($nid && $node = node_load($nid)) {
+        $w = entity_metadata_wrapper('node', $node->nid);
+        $block['content'] = '
+      <div class="content">
+        <div class="field field-name-body field-type-text-with-summary field-label-hidden">
+          <div class="field-items">
+            <div class="field-item even" property="content:encoded">
+              <p class="Textfo">
+                <span lang="EN-GB" xml:lang="EN-GB">' . $w->body->value()['safe_value'] . '</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>';
+
+      }
+      break;
+  }
+  return $block;
+}
+
+/**
+ * Implements hook_views_post_render().
+ */
+function osha_dangerous_substances_views_post_render(&$view, &$output, &$cache) {
+  if ($view->name == 'practical_tools_and_guidance_on_dangerous_substances') {
+    drupal_add_js(drupal_get_path('module', 'osha_dangerous_substances') . '/js/sort.js', array('weight' => 20));
+    $form = drupal_get_form('osha_practical_tool_sort_form');
+    $order_html = '<div class="sort-container col-xs-3">' . drupal_render($form) . '</div><span class="count-container pull-right">';
+    $output = trim(str_replace('@order', $order_html, $output)) . '</span>';
+  }
+}
+
+function osha_practical_tool_sort_form($form, $form_state) {
+  $form = array();
+  $form['sort_by'] = [
+    '#type' => 'select',
+    '#title' => t('Sort by'),
+    '#default_value' => 'search_api_relevance',
+    '#options' => [
+      'search_api_relevance' => t('Relevance'),
+      'field_publication_year' => t('Year of publication'),
+    ],
+  ];
+  $form['sort_order'] = [
+    '#type' => 'select',
+    '#title' => t('Order'),
+    '#default_value' => 'DESC',
+    '#options' => [
+      'DESC' => t('DESC'),
+      'ASC' => t('ASC'),
+    ],
+  ];
+  $form['sort_by']['#value'] = @$_REQUEST['sort_by'];
+  $form['sort_order']['#value'] = @$_REQUEST['sort_order'];
+  return $form;
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function osha_dangerous_substances_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+
+  switch ($display['type']) {
+    case 'practical_tool_title':
+      $output = isset($items[0]) ? $items[0]['safe_value'] : '';
+      if (!empty($output)) {
+        $output = l($output, 'node/' . $entity->nid, ['query' => ['destination' => request_uri()], 'absolute' => TRUE]);
+      }
+      $element = array(array('#markup' => $output));
+      break;
+
+    case 'external_url':
+      foreach ($items as $delta => $item) {
+        $link_options = $item;
+        unset($link_options['title']);
+        unset($link_options['url']);
+        $link_options['attributes']['target'] = '_blank';
+        $element[$delta]['#markup'] = $item['url'] ? l($item['url'], $item['url'], $link_options) : '';
+      }
+      break;
+
+    case 'field_collection_title':
+      foreach ($items as $delta => $item) {
+        if ($field_collection = field_collection_field_get_entity($item)) {
+          $name = $field_collection->field_fc_provider_name['und'][0]['value'];
+          $output = $name;
+          $element[$delta] = array('#markup' => $output);
+        }
+      }
+      field_collection_field_formatter_links($element, $entity_type, $entity, $field, $instance, $langcode, $items, $display);
+      break;
+  }
+  return $element;
+}
+
 function osha_dangerous_substances_term_page($term) {
   return disable_term_node_listings_term_page($term);
 }
 
 /**
+ * Implements hook_entity_info_alter().
+ *
+ * Add a file type named 'DS Public'.
+ */
+function osha_dangerous_substances_entity_info_alter(&$entity_info) {
+  $entity_info['node']['view modes']['dangerous_substances'] = array(
+    'label' => t('DS Public'),
+    'custom settings' => TRUE,
+  );
+}
+
+/**
  * Implements hook_node_access().
  */
-function osha_dangerous_substances_node_access($node, $op, $account) {
-  if ($op == 'view' && $node->type == 'dangerous_substances') {
+
+/* function osha_dangerous_substances_node_access($node, $op, $account) {
+ if ($op == 'view' && $node->type == 'dangerous_substances') {
     if (user_is_anonymous()) {
       return NODE_ACCESS_DENY;
     }
   }
   return NODE_ACCESS_IGNORE;
+}
+*/
+
+/**
+ * Implements hook_entity_view_mode_alter().
+ */
+function osha_dangerous_substances_entity_view_mode_alter(&$view_mode, $context) {
+  // Only alter the view mode if we are on the test callback.
+  if (($context['entity_type'] == 'node') && ($context['entity']->type == 'dangerous_substances')) {
+    if (user_is_anonymous() || isset($_REQUEST['ds_public'])) {
+      $view_mode = 'dangerous_substances';
+    }
+  }
 }
 
 function template_preprocess_osha_dangerous_substances_doc(&$vars) {
@@ -27,6 +291,7 @@ function template_preprocess_osha_dangerous_substances_doc(&$vars) {
   $vars['body'] = $vars['rows']['body'];
   $vars['footer'] = $vars['rows']['footer'];
 }
+
 
 /**
  * Implements hook_preprocess_views_data_export_doc_body().

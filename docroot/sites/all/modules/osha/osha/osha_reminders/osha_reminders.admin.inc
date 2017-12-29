@@ -28,7 +28,7 @@ function osha_reminders_admin_form($form, &$form_state) {
     '#title' => 'Head of Unit Role',
     '#type' => 'select',
     '#options' => user_roles(),
-    '#default_value' => variable_get('osha_reminders_heads_role', 3),
+    '#default_value' => variable_get('osha_reminders_heads_role', 7),
   );
 
   $form['change_settings']['pm_email_template'] = array(

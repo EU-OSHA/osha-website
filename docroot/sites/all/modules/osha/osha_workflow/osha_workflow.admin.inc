@@ -600,7 +600,7 @@ function osha_workflow_access_section_review_form($form, &$form_state, $access_t
       $review->message,
     );
   }
-  $header = array('Reviewer', 'Data', 'Mesaj');
+  $header = array('Reviewer', 'Data', 'Message');
   $form['reviews']['table'] = array(
     '#markup' => theme('table', array('header' => $header, 'rows' => $rows)),
   );

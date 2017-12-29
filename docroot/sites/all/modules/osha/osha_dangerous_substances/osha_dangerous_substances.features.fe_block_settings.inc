@@ -20,46 +20,6 @@ function osha_dangerous_substances_default_fe_block_settings() {
     'i18n_mode' => 0,
     'module' => 'facetapi',
     'node_types' => array(),
-    'pages' => '',
-    'roles' => array(),
-    'themes' => array(
-      'bartik' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'bartik',
-        'weight' => 0,
-      ),
-      'osha_admin' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'osha_admin',
-        'weight' => 0,
-      ),
-      'osha_frontend' => array(
-        'region' => 'sidebar_first',
-        'status' => 1,
-        'theme' => 'osha_frontend',
-        'weight' => 34,
-      ),
-      'seven' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'seven',
-        'weight' => 0,
-      ),
-    ),
-    'title' => 'Intellectual property rights',
-    'visibility' => 0,
-  );
-
-  $export['facetapi-6UESvdgGlNWwNAW14Ox480cpaXPvX4bM'] = array(
-    'cache' => -1,
-    'custom' => 0,
-    'delta' => '6UESvdgGlNWwNAW14Ox480cpaXPvX4bM',
-    'i18n_block_language' => array(),
-    'i18n_mode' => 0,
-    'module' => 'facetapi',
-    'node_types' => array(),
     'pages' => 'themes/dangerous-substances/search',
     'roles' => array(),
     'themes' => array(
@@ -79,7 +39,48 @@ function osha_dangerous_substances_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 14,
+        'weight' => 33,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => 'Intellectual property rights',
+    'visibility' => 1,
+  );
+
+  $export['facetapi-6UESvdgGlNWwNAW14Ox480cpaXPvX4bM'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => '6UESvdgGlNWwNAW14Ox480cpaXPvX4bM',
+    'i18n_block_language' => array(),
+    'i18n_mode' => 0,
+    'module' => 'facetapi',
+    'node_types' => array(),
+    'pages' => 'themes/dangerous-substances/search
+themes/dangerous-substances/ds-tools',
+    'roles' => array(),
+    'themes' => array(
+      'bartik' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'bartik',
+        'weight' => 0,
+      ),
+      'osha_admin' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'osha_admin',
+        'weight' => 0,
+      ),
+      'osha_frontend' => array(
+        'region' => 'sidebar_first',
+        'status' => 1,
+        'theme' => 'osha_frontend',
+        'weight' => 15,
       ),
       'seven' => array(
         'region' => '',
@@ -119,7 +120,7 @@ function osha_dangerous_substances_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 31,
+        'weight' => 30,
       ),
       'seven' => array(
         'region' => '',
@@ -159,7 +160,7 @@ function osha_dangerous_substances_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 39,
+        'weight' => 38,
       ),
       'seven' => array(
         'region' => '',
@@ -199,7 +200,7 @@ function osha_dangerous_substances_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 19,
+        'weight' => 20,
       ),
       'seven' => array(
         'region' => '',
@@ -220,7 +221,8 @@ function osha_dangerous_substances_default_fe_block_settings() {
     'i18n_mode' => 0,
     'module' => 'facetapi',
     'node_types' => array(),
-    'pages' => 'themes/dangerous-substances/search',
+    'pages' => 'themes/dangerous-substances/search
+themes/dangerous-substances/ds-tools',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -239,7 +241,7 @@ function osha_dangerous_substances_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 16,
+        'weight' => 17,
       ),
       'seven' => array(
         'region' => '',
@@ -300,7 +302,8 @@ function osha_dangerous_substances_default_fe_block_settings() {
     'i18n_mode' => 0,
     'module' => 'facetapi',
     'node_types' => array(),
-    'pages' => 'themes/dangerous-substances/search',
+    'pages' => 'themes/dangerous-substances/search
+themes/dangerous-substances/ds-tools',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -319,7 +322,7 @@ function osha_dangerous_substances_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 15,
+        'weight' => 16,
       ),
       'seven' => array(
         'region' => '',
@@ -340,7 +343,8 @@ function osha_dangerous_substances_default_fe_block_settings() {
     'i18n_mode' => 0,
     'module' => 'facetapi',
     'node_types' => array(),
-    'pages' => 'themes/dangerous-substances/search',
+    'pages' => 'themes/dangerous-substances/search
+themes/dangerous-substances/ds-tools',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -359,7 +363,7 @@ function osha_dangerous_substances_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 37,
+        'weight' => 36,
       ),
       'seven' => array(
         'region' => '',
@@ -399,7 +403,7 @@ function osha_dangerous_substances_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 35,
+        'weight' => 34,
       ),
       'seven' => array(
         'region' => '',
@@ -420,7 +424,8 @@ function osha_dangerous_substances_default_fe_block_settings() {
     'i18n_mode' => 0,
     'module' => 'facetapi',
     'node_types' => array(),
-    'pages' => 'themes/dangerous-substances/search',
+    'pages' => 'themes/dangerous-substances/search
+themes/dangerous-substances/ds-tools',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -439,7 +444,7 @@ function osha_dangerous_substances_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 40,
+        'weight' => 39,
       ),
       'seven' => array(
         'region' => '',
@@ -479,7 +484,7 @@ function osha_dangerous_substances_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 33,
+        'weight' => 32,
       ),
       'seven' => array(
         'region' => '',
@@ -519,7 +524,7 @@ function osha_dangerous_substances_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 29,
+        'weight' => 28,
       ),
       'seven' => array(
         'region' => '',
@@ -559,7 +564,7 @@ function osha_dangerous_substances_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 21,
+        'weight' => 22,
       ),
       'seven' => array(
         'region' => '',
@@ -599,7 +604,7 @@ function osha_dangerous_substances_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 28,
+        'weight' => 27,
       ),
       'seven' => array(
         'region' => '',
@@ -620,7 +625,8 @@ function osha_dangerous_substances_default_fe_block_settings() {
     'i18n_mode' => 0,
     'module' => 'facetapi',
     'node_types' => array(),
-    'pages' => 'themes/dangerous-substances/search',
+    'pages' => 'themes/dangerous-substances/search
+themes/dangerous-substances/ds-tools',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -639,7 +645,7 @@ function osha_dangerous_substances_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 27,
+        'weight' => 26,
       ),
       'seven' => array(
         'region' => '',
@@ -679,7 +685,7 @@ function osha_dangerous_substances_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 36,
+        'weight' => 35,
       ),
       'seven' => array(
         'region' => '',
@@ -700,7 +706,8 @@ function osha_dangerous_substances_default_fe_block_settings() {
     'i18n_mode' => 0,
     'module' => 'facetapi',
     'node_types' => array(),
-    'pages' => 'themes/dangerous-substances/search',
+    'pages' => 'themes/dangerous-substances/search
+themes/dangerous-substances/ds-tools',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -719,7 +726,7 @@ function osha_dangerous_substances_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 20,
+        'weight' => 21,
       ),
       'seven' => array(
         'region' => '',
@@ -759,7 +766,7 @@ function osha_dangerous_substances_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 38,
+        'weight' => 37,
       ),
       'seven' => array(
         'region' => '',
@@ -780,7 +787,49 @@ function osha_dangerous_substances_default_fe_block_settings() {
     'i18n_mode' => 0,
     'module' => 'facetapi',
     'node_types' => array(),
-    'pages' => 'themes/dangerous-substances/search',
+    'pages' => 'themes/dangerous-substances/search
+themes/dangerous-substances/ds-tools',
+    'roles' => array(),
+    'themes' => array(
+      'bartik' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'bartik',
+        'weight' => 0,
+      ),
+      'osha_admin' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'osha_admin',
+        'weight' => 0,
+      ),
+      'osha_frontend' => array(
+        'region' => 'sidebar_first',
+        'status' => 1,
+        'theme' => 'osha_frontend',
+        'weight' => 19,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => 'Worker groups covered',
+    'visibility' => 1,
+  );
+
+  $export['facetapi-p10ryKQWozY46EFH6tpu31b5W8YN9C4N'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => 'p10ryKQWozY46EFH6tpu31b5W8YN9C4N',
+    'i18n_block_language' => array(),
+    'i18n_mode' => 0,
+    'module' => 'facetapi',
+    'node_types' => array(),
+    'pages' => 'themes/dangerous-substances/search
+themes/dangerous-substances/ds-tools',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -808,46 +857,6 @@ function osha_dangerous_substances_default_fe_block_settings() {
         'weight' => 0,
       ),
     ),
-    'title' => 'Worker groups covered',
-    'visibility' => 1,
-  );
-
-  $export['facetapi-p10ryKQWozY46EFH6tpu31b5W8YN9C4N'] = array(
-    'cache' => -1,
-    'custom' => 0,
-    'delta' => 'p10ryKQWozY46EFH6tpu31b5W8YN9C4N',
-    'i18n_block_language' => array(),
-    'i18n_mode' => 0,
-    'module' => 'facetapi',
-    'node_types' => array(),
-    'pages' => 'themes/dangerous-substances/search',
-    'roles' => array(),
-    'themes' => array(
-      'bartik' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'bartik',
-        'weight' => 0,
-      ),
-      'osha_admin' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'osha_admin',
-        'weight' => 0,
-      ),
-      'osha_frontend' => array(
-        'region' => 'sidebar_first',
-        'status' => 1,
-        'theme' => 'osha_frontend',
-        'weight' => 17,
-      ),
-      'seven' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'seven',
-        'weight' => 0,
-      ),
-    ),
     'title' => 'Available in languages',
     'visibility' => 1,
   );
@@ -860,7 +869,8 @@ function osha_dangerous_substances_default_fe_block_settings() {
     'i18n_mode' => 0,
     'module' => 'facetapi',
     'node_types' => array(),
-    'pages' => 'themes/dangerous-substances/search',
+    'pages' => 'themes/dangerous-substances/search
+themes/dangerous-substances/ds-tools',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -879,7 +889,7 @@ function osha_dangerous_substances_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 32,
+        'weight' => 31,
       ),
       'seven' => array(
         'region' => '',
@@ -919,7 +929,7 @@ function osha_dangerous_substances_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 22,
+        'weight' => 23,
       ),
       'seven' => array(
         'region' => '',
@@ -959,7 +969,7 @@ function osha_dangerous_substances_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 30,
+        'weight' => 29,
       ),
       'seven' => array(
         'region' => '',
@@ -969,6 +979,86 @@ function osha_dangerous_substances_default_fe_block_settings() {
       ),
     ),
     'title' => 'Advertising',
+    'visibility' => 1,
+  );
+
+  $export['osha_dangerous_substances-osha_ds_search_clear_filters'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => 'osha_ds_search_clear_filters',
+    'i18n_block_language' => array(),
+    'i18n_mode' => 0,
+    'module' => 'osha_dangerous_substances',
+    'node_types' => array(),
+    'pages' => 'themes/dangerous-substances/ds-tools',
+    'roles' => array(),
+    'themes' => array(
+      'bartik' => array(
+        'region' => 'sidebar_first',
+        'status' => 1,
+        'theme' => 'bartik',
+        'weight' => 0,
+      ),
+      'osha_admin' => array(
+        'region' => 'sidebar_first',
+        'status' => 1,
+        'theme' => 'osha_admin',
+        'weight' => 0,
+      ),
+      'osha_frontend' => array(
+        'region' => 'sidebar_first',
+        'status' => 1,
+        'theme' => 'osha_frontend',
+        'weight' => 0,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 1,
+  );
+
+  $export['osha_dangerous_substances-osha_ds_tools_text'] = array(
+    'cache' => 8,
+    'custom' => 0,
+    'delta' => 'osha_ds_tools_text',
+    'i18n_block_language' => array(),
+    'i18n_mode' => 0,
+    'module' => 'osha_dangerous_substances',
+    'node_types' => array(),
+    'pages' => 'themes/dangerous-substances/ds-tools',
+    'roles' => array(),
+    'themes' => array(
+      'bartik' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'bartik',
+        'weight' => 0,
+      ),
+      'osha_admin' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'osha_admin',
+        'weight' => 0,
+      ),
+      'osha_frontend' => array(
+        'region' => 'content',
+        'status' => 1,
+        'theme' => 'osha_frontend',
+        'weight' => 0,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '<none>',
     'visibility' => 1,
   );
 

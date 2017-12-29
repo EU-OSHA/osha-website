@@ -9,19 +9,28 @@ function osha_reminders_admin_form($form, &$form_state) {
     '#title' => t('Change settings'),
   );
 
-
-  $form['change_settings']['osha_reminders_cron_notification_interval_months'] = array(
-    '#type' => 'textfield',
-    '#title' => 'Months Interval to send PM notifications',
-    '#description' => 'Notifications sent to PM to review their sections.',
-    '#default_value' => variable_get('osha_reminders_cron_notification_interval_months', 6),
+  $form['change_settings']['osha_reminders_pm_notify_md1'] = array(
+    '#type' => 'date',
+    '#title' => 'Months/Day to send PM notifications 1',
+    '#default_value' => variable_get('osha_reminders_pm_notify_md1', ['day' => 15,'month' => 1,'year' => date('Y')]),
   );
 
-  $form['change_settings']['osha_reminders_cron_notification_heads_months'] = array(
-    '#type' => 'textfield',
-    '#title' => 'Months Interval to notify Heads after last PM notification',
-    '#description' => 'Notifications sent to Head of Units to see the content update status.',
-    '#default_value' => variable_get('osha_reminders_cron_notification_heads_months', 1),
+  $form['change_settings']['osha_reminders_heads_notify_md1'] = array(
+    '#type' => 'date',
+    '#title' => 'Months/Day to send Heads notification 1',
+    '#default_value' => variable_get('osha_reminders_heads_notify_md1', ['day' => 15, 'month' => 3,'year' => date('Y')]),
+  );
+
+  $form['change_settings']['osha_reminders_pm_notify_md2'] = array(
+    '#type' => 'date',
+    '#title' => 'Months/Day to send PM notifications 2',
+    '#default_value' => variable_get('osha_reminders_pm_notify_md2', ['day' => 15, 'month' => 6,'year' => date('Y')]),
+  );
+
+  $form['change_settings']['osha_reminders_heads_notify_md2'] = array(
+    '#type' => 'date',
+    '#title' => 'Months/Day to send Heads notification 2',
+    '#default_value' => variable_get('osha_reminders_heads_notify_md2', ['day' => 15, 'month' => 9,'year' => date('Y')]),
   );
 
   $form['change_settings']['osha_reminders_heads_role'] = array(
@@ -101,6 +110,27 @@ Thank you,<br/>'
     $heads_last_run_info = t('Never');
   }
 
+  $form['check_notification'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Check notifications'),
+  );
+  $form['check_notification']['osha_reminders_check_cron_date'] = array(
+    '#type' => 'date',
+    '#title' => 'Cron date',
+    '#default_value' => variable_get('osha_reminders_check_cron_date'),
+  );
+  $form['check_notification']['osha_reminders_check_last_sent'] = array(
+    '#type' => 'date',
+    '#title' => 'Last email sent',
+    '#default_value' => variable_get('osha_reminders_check_last_sent'),
+  );
+  $form['check_notification']['save'] = array(
+    '#type' => 'submit',
+    '#value' => t('Check'),
+    '#submit' => array('osha_reminders_check_dates_submit'),
+  );
+
+
   $form['change_dates'] = array(
     '#type' => 'fieldset',
     '#title' => t('Change dates'),
@@ -148,11 +178,49 @@ Thank you,<br/>'
  */
 function osha_reminders_admin_form_submit($form, &$form_state) {
   // Unset dates.
+  unset($form_state['values']['osha_reminders_check_cron_date']);
+  unset($form_state['values']['osha_reminders_check_last_sent']);
+
   unset($form_state['values']['osha_reminders_pm_notify_last_run']);
   unset($form_state['values']['osha_reminders_heads_notify_last_run']);
   // Save settings
   system_settings_form_submit($form, $form_state);
   drupal_set_message(t('Settings saved successfully'));
+}
+
+function osha_reminders_check_dates_submit($form, &$form_submit) {
+  $curr = $form_submit['values']['osha_reminders_check_cron_date'];
+  $curr = $curr['year'] . '-' . $curr['month'] . '-' . $curr['day'];
+  $curr = strtotime($curr);
+
+  $last_run = $form_submit['values']['osha_reminders_check_last_sent'];
+  $last_run = $last_run['year'] . '-' . $last_run['month'] . '-' . $last_run['day'];
+  $last_run = strtotime($last_run);
+
+  $head1 = variable_get('osha_reminders_heads_notify_md1', ['day' => 15, 'month' => 3,'year' => date('Y')]);
+  $time1 = osha_reminders_convert_to_time($head1);
+  $head2 = variable_get('osha_reminders_heads_notify_md2', ['day' => 15, 'month' => 9,'year' => date('Y')]);
+  $time2 = osha_reminders_convert_to_time($head2);
+
+  $allow_run = osha_reminders_allow_run($curr, $last_run, [$time1, $time2]);
+  if ($allow_run) {
+    drupal_set_message(t('Head of Units allow to run(' . date('Y-m-d', $curr) . ')!'));
+  }
+  else {
+    drupal_set_message(t('Head of Units not allowed!'),'error');
+  }
+
+  $pm1 = variable_get('osha_reminders_pm_notify_md1', ['day' => 15,'month' => 1,'year' => date('Y')]);
+  $time1 = osha_reminders_convert_to_time($pm1);
+  $pm2 = variable_get('osha_reminders_pm_notify_md2', ['day' => 15,'month' => 3,'year' => date('Y')]);
+  $time2 = osha_reminders_convert_to_time($pm2);
+  $allow_run = osha_reminders_allow_run($curr, $last_run, [$time1, $time2]);
+  if ($allow_run) {
+    drupal_set_message(t('PM allow to run(' . date('Y-m-d', $curr) . ')!'));
+  }
+  else {
+    drupal_set_message(t('PM not allowed!'), 'error');
+  }
 }
 
 /**

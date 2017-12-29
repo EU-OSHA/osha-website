@@ -28,29 +28,49 @@ function osha_reminders_cronapi() {
   ));
 }
 
+function osha_reminders_convert_to_time($date) {
+  $date['year'] = date('Y');
+  $date = $date['year'] . '-' . $date['month'] . '-' . $date['day'];
+  $time = strtotime($date);
+  return $time;
+}
+
+function osha_reminders_allow_run($curr, $last_run, $check_dates) {
+  if (date('m-d', $curr) == date('m-d', $last_run)) {
+    return FALSE;
+  }
+  foreach($check_dates as $i => $check_date) {
+    if (date('m-d', $curr) == date('m-d', $check_date)) {
+      return TRUE;
+    }
+  }
+  return FALSE;
+}
+
 /**
  * Implements hook_cron().
  */
 function osha_reminders_cron() {
   // Check if to notify PM about their content.
   $last_run = variable_get('osha_reminders_pm_notify_last_run', REQUEST_TIME);
-  $last_run = new DateTime(date("c", $last_run));
-  $notify_interval = variable_get('osha_reminders_cron_notification_interval_months', 6);
-  $now = new DateTime();
-  $since_last_run = $now->diff($last_run);
-  if ($since_last_run->m >= $notify_interval) {
+  $pm1 = variable_get('osha_reminders_pm_notify_md1', ['day' => 15,'month' => 1,'year' => date('Y')]);
+  $time1 = osha_reminders_convert_to_time($pm1);
+  $pm2 = variable_get('osha_reminders_pm_notify_md2', ['day' => 15,'month' => 3,'year' => date('Y')]);
+  $time2 = osha_reminders_convert_to_time($pm2);
+  $allow_run = osha_reminders_allow_run(REQUEST_TIME, $last_run, [$time1, $time2]);
+  if ($allow_run) {
     osha_reminders_notify_pm();
     variable_set('osha_reminders_pm_notify_last_run', REQUEST_TIME);
   }
 
   // Check if to notify heads about content.
   $heads_last_run = variable_get('osha_reminders_heads_notify_last_run', REQUEST_TIME);
-  $heads_last_run = new DateTime(date("c", $heads_last_run));
-  $heads_since_last_run = $now->diff($heads_last_run);
-  $heads_pm_diff = $last_run->diff($heads_last_run);
-  $heads_notify_interval = variable_get('osha_reminders_cron_notification_heads_months', 1);
-  if ($heads_since_last_run->m > $notify_interval
-    && $heads_pm_diff->m >= $heads_notify_interval) {
+  $head1 = variable_get('osha_reminders_heads_notify_md1', ['day' => 15, 'month' => 3,'year' => date('Y')]);
+  $time1 = osha_reminders_convert_to_time($head1);
+  $head2 = variable_get('osha_reminders_heads_notify_md2', ['day' => 15, 'month' => 9,'year' => date('Y')]);
+  $time2 = osha_reminders_convert_to_time($head2);
+  $allow_run = osha_reminders_allow_run(REQUEST_TIME, $heads_last_run, [$time1, $time2]);
+  if ($allow_run) {
     osha_reminders_notify_heads();
     variable_set('osha_reminders_heads_notify_last_run', REQUEST_TIME);
   }
@@ -137,9 +157,9 @@ function osha_reminders_mail($key, &$message, $params) {
       $body = variable_get('osha_reminder_template_pm_body',
         'Dear [user:name],<br/>
 <br/>
-As project manager of  <a href="[site:url]/admin/config/workbench/access/managers">[pm_section_names]</a>, you are kindly invited to review <a href="[sections_content_url]">the content of your section</a> twice a year.<br/> 
-Please, remember that you need to check that the content is still relevant and up to date, and that all the links work properly.<br/>
+As project manager for [pm_sections], you are kindly invited to review the <a href="[sections_content_url]">content of your section</a>.<br/>
 You can check the broken links in <a href="[broken_links_url]">this page</a>.<br/>
+Please, remember that the content should be relevant and up to date, and the links should work properly.<br/>
 <br/>
 Thanks a lot for reviewing your contents.<br/>'
       );
@@ -156,7 +176,7 @@ Thanks a lot for reviewing your contents.<br/>'
       $body = variable_get('osha_reminder_template_heads_body',
         'Dear [user:name],<br/>
 <br/>
-As you know the contents on the website have to be reviewed every 6 months. In principle the project managers of the different sections should have received their reminders one month ago.<br/> This is a reminder for you to check the content status of <a href="[site:url]/admin/config/workbench/access/managers">in this screen</a>.<br/>
+This is a reminder for you to check content status <a href="[site:url]/admin/config/workbench/access/managers">in this screen</a>.<br/>
 You can check the broken links in <a href="[site:url]/admin/content/linkchecker-broken-links">this page</a>.<br/>
 <br/>
 Thank you,<br/>'

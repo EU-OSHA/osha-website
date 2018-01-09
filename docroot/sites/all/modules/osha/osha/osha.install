@@ -544,3 +544,10 @@ function osha_update_7036() {
 function osha_update_7037() {
   features_revert(array('osha' => array('user_permission', 'variable')));
 }
+
+/**
+ * MDR-1440 HWC18: Possibility to tag an album as "HWC 18-19" and display also in HWC18-19 website.
+ */
+function osha_update_7038() {
+  features_revert(array('osha' => array('views_view')));
+}

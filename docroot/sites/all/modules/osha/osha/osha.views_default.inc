@@ -3406,7 +3406,7 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['field_tags_code_value']['table'] = 'field_data_field_tags_code';
   $handler->display->display_options['filters']['field_tags_code_value']['field'] = 'field_tags_code_value';
   $handler->display->display_options['filters']['field_tags_code_value']['relationship'] = 'field_tags_tid';
-  $handler->display->display_options['filters']['field_tags_code_value']['value'] = 'hwc_18_19';
+  $handler->display->display_options['filters']['field_tags_code_value']['value'] = 'campaign_2018_2019';
   $handler->display->display_options['path'] = 'export/gallery';
   $translatables['hcw_data_export'] = array(
     t('Master'),

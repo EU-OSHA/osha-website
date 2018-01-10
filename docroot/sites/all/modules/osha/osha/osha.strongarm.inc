@@ -1443,6 +1443,50 @@ el.remove();
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'osha_reminders_heads_notify_md1';
+  $strongarm->value = array(
+    'day' => '15',
+    'month' => '3',
+    'year' => '2018',
+  );
+  $export['osha_reminders_heads_notify_md1'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'osha_reminders_heads_notify_md2';
+  $strongarm->value = array(
+    'day' => '15',
+    'month' => '9',
+    'year' => '2018',
+  );
+  $export['osha_reminders_heads_notify_md2'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'osha_reminders_pm_notify_md1';
+  $strongarm->value = array(
+    'day' => '15',
+    'month' => '1',
+    'year' => '2018',
+  );
+  $export['osha_reminders_pm_notify_md1'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'osha_reminders_pm_notify_md2';
+  $strongarm->value = array(
+    'day' => '15',
+    'month' => '6',
+    'year' => '2018',
+  );
+  $export['osha_reminders_pm_notify_md2'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_blog_pattern';
   $strongarm->value = 'blogs/[user:name]';
   $export['pathauto_blog_pattern'] = $strongarm;

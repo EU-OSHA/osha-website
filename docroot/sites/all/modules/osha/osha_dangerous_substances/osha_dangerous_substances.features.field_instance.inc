@@ -240,6 +240,13 @@ function osha_dangerous_substances_field_default_field_instances() {
 Please note: the first paragraph will be displayed as short description, 
 please take this into consideration when you are writing the first paragraph.',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 4,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -352,6 +359,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => 'Please check if advertising is included in the material',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 43,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -437,6 +450,17 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => 'Please add a language code from the list',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'inline',
+        'module' => 'languagefield',
+        'settings' => array(
+          'format' => array(
+            'name' => 'name',
+          ),
+        ),
+        'type' => 'language_default',
+        'weight' => 2,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'languagefield',
@@ -530,6 +554,13 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => 'Please select the type of hazard from the drop down list',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'inline',
+        'module' => 'i18n_taxonomy',
+        'settings' => array(),
+        'type' => 'i18n_taxonomy_term_reference_plain',
+        'weight' => 7,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'taxonomy',
@@ -615,6 +646,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 44,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -705,6 +742,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => 'Please add a short description in original language (only if a description is available on the website or material – no extra drafting or translation)',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 45,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -795,6 +838,13 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => 'Please add the CAS number of the substances covered, if possible',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_plain',
+        'weight' => 12,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -886,6 +936,12 @@ please take this into consideration when you are writing the first paragraph.',
     'description' => 'Please add the contact address for the material
 ',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 42,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -976,6 +1032,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 41,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -1067,6 +1129,12 @@ please take this into consideration when you are writing the first paragraph.',
     'description' => 'Please add the disclaimer for the material
 ',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 38,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -1157,6 +1225,13 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => 'Please add the EC numbers of the substances, if possible',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_plain',
+        'weight' => 13,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -1247,6 +1322,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => 'Please click on the quality criteria (several clicks possible)',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 39,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'taxonomy',
@@ -1332,6 +1413,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 40,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -1415,6 +1502,13 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => 'Please select the exposure route',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'inline',
+        'module' => 'i18n_taxonomy',
+        'settings' => array(),
+        'type' => 'i18n_taxonomy_term_reference_plain',
+        'weight' => 10,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'taxonomy',
@@ -1500,6 +1594,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 46,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -1583,11 +1683,18 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => 'Please fill in the URL to access the material if available. You should enter the full url, including http:// or https://',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'inline',
+        'module' => 'osha_dangerous_substances',
+        'settings' => array(),
+        'type' => 'external_url',
+        'weight' => 3,
+      ),
       'default' => array(
         'label' => 'above',
-        'module' => 'link',
+        'module' => 'osha_dangerous_substances',
         'settings' => array(),
-        'type' => 'link_default',
+        'type' => 'external_url',
         'weight' => 2,
       ),
       'highlights_item' => array(
@@ -1692,6 +1799,18 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'inline',
+        'module' => 'osha_dangerous_substances',
+        'settings' => array(
+          'add' => '',
+          'delete' => '',
+          'description' => 0,
+          'edit' => '',
+        ),
+        'type' => 'field_collection_title',
+        'weight' => 1,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'field_collection',
@@ -1772,8 +1891,13 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => 'Grab Flickr photos taken on or between these dates only.',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 30,
+      ),
       'default' => array(
-        'format_type' => 'long',
         'label' => 'above',
         'module' => 'date',
         'settings' => array(
@@ -1784,7 +1908,6 @@ please take this into consideration when you are writing the first paragraph.',
           'multiple_to' => '',
           'osha_date_theme' => '',
           'show_remaining_days' => FALSE,
-          'show_repeat_rule' => 'show',
         ),
         'type' => 'date_default',
         'weight' => 64,
@@ -1867,6 +1990,13 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => 'Please select the type of hazards related to health effect from the drop down list',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'inline',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 9,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'taxonomy',
@@ -1952,6 +2082,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 47,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -2036,6 +2172,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 53,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -2120,6 +2262,13 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => 'Please select the type of hazards related to state and occurrence in the workplace from the drop down list',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'inline',
+        'module' => 'i18n_taxonomy',
+        'settings' => array(),
+        'type' => 'i18n_taxonomy_term_reference_plain',
+        'weight' => 8,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'taxonomy',
@@ -2203,6 +2352,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 54,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'image',
@@ -2338,6 +2493,12 @@ please take this into consideration when you are writing the first paragraph.',
     'description' => 'Please describe the contact address for the material. 
 ',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 55,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -2420,6 +2581,13 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => 'Please fill in the type of the material',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'inline',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 16,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -2506,6 +2674,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 52,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -2590,6 +2764,13 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => 'Please add a country code from the list',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'inline',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'taxonomy',
@@ -2675,6 +2856,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 51,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -2759,6 +2946,13 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'inline',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 15,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'taxonomy',
@@ -2844,6 +3038,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => 'Please add the measurement method used',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 48,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -2934,6 +3134,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => 'Please add format and quality of the material',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 49,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -3024,6 +3230,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 31,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -3101,6 +3313,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 29,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -3185,6 +3403,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => 'Please add a language code from the list',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 28,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'languagefield',
@@ -3267,6 +3491,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => 'Please add the other information for the material',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 50,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -3359,6 +3589,12 @@ please take this into consideration when you are writing the first paragraph.',
     'description' => 'Please add the ownership information for the material
 ',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 37,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -3450,6 +3686,13 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => 'Please select the prevention measures used',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'inline',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 14,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'taxonomy',
@@ -3535,6 +3778,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 36,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -3625,6 +3874,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 23,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'taxonomy',
@@ -3702,6 +3957,21 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => 'Please select a year of publication, if it is not possible to identify leave it empty.',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'inline',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'osha_date_theme' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 18,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'date',
@@ -3799,6 +4069,12 @@ please take this into consideration when you are writing the first paragraph.',
     'description' => 'Please describe the disclaimer for the material. 
 ',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 24,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -3890,6 +4166,13 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => 'Please add the NACE code of the sector covered in the material',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'inline',
+        'module' => 'i18n_taxonomy',
+        'settings' => array(),
+        'type' => 'i18n_taxonomy_term_reference_plain',
+        'weight' => 5,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'taxonomy',
@@ -3975,6 +4258,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 25,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -4063,6 +4352,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 22,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -4140,6 +4435,13 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => 'Please add the name of the substance or substance group',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 11,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -4242,6 +4544,13 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => 'Please select a target group from the drop down list',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'inline',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 17,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'taxonomy',
@@ -4327,6 +4636,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 19,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -4410,6 +4725,13 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => 'Please select the HAZMAP categories from the drop down list',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'inline',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 6,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'taxonomy',
@@ -4494,6 +4816,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 20,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -4584,6 +4912,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => 'Please fill in the original title of the material',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 21,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -4679,6 +5013,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => 'Please add the time in minutes',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 26,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'cck_time',
@@ -4762,6 +5102,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 27,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -4846,6 +5192,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => 'Please select type of visualisation from the drop down list',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 33,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'taxonomy',
@@ -4931,6 +5283,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 34,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -5015,6 +5373,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => 'Please select the type of workers covered in the material from the drop down list',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 35,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'taxonomy',
@@ -5099,6 +5463,12 @@ please take this into consideration when you are writing the first paragraph.',
     'deleted' => 0,
     'description' => 'Please fill in the English title of the material',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 32,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),

@@ -47,7 +47,7 @@ function osha_workflow_menu() {
     'page callback' => 'osha_workflow_workbench_project_managers',
     'page arguments' => array(),
     'access callback' => array('osha_workflow_user_has_role_access_callback'),
-    'access arguments' => array(OSHA_WORKFLOW_ROLE_PROJECT_MANAGER),
+    'access arguments' => array(OSHA_WORKFLOW_ROLE_PROJECT_MANAGER, OSHA_WORKFLOW_ROLE_APPROVER),
     'type' => MENU_LOCAL_TASK,
     'weight' => -12,
     'file' => 'osha_workflow.admin.inc',
@@ -70,7 +70,7 @@ function osha_workflow_menu() {
     'page callback' => 'drupal_goto',
     'page arguments' => array('admin/config/workbench/access/managers'),
     'access callback' => array('osha_workflow_user_has_role_access_callback'),
-    'access arguments' => array(OSHA_WORKFLOW_ROLE_PROJECT_MANAGER),
+    'access arguments' => array(OSHA_WORKFLOW_ROLE_PROJECT_MANAGER, OSHA_WORKFLOW_ROLE_APPROVER),
     'type' => MENU_LOCAL_TASK,
     'weight' => -12,
     'file' => 'osha_workflow.admin.inc',
@@ -302,12 +302,12 @@ function osha_workflow_permission() {
   return $permissions;
 }
 
-function osha_workflow_user_has_role_access_callback($role = 'OSHA_WORKFLOW_ROLE_ADMINISTRATOR') {
+function osha_workflow_user_has_role_access_callback($role = 'OSHA_WORKFLOW_ROLE_ADMINISTRATOR', $role2 = 'OSHA_WORKFLOW_ROLE_ADMINISTRATOR') {
   global $user;
   if (OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_ADMINISTRATOR, $user)) {
     return TRUE;
   }
-  return OshaWorkflowPermissions::userHasRole($role, $user);
+  return OshaWorkflowPermissions::userHasRole($role, $user) || OshaWorkflowPermissions::userHasRole($role2, $user);
 }
 
 /**

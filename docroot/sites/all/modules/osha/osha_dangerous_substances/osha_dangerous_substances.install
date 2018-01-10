@@ -280,3 +280,36 @@ function osha_dangerous_substances_update_7022() {
 function osha_dangerous_substances_update_7023() {
   features_revert(array('osha_dangerous_substances' => array('field_base', 'field_instance')));
 }
+
+function _osha_dangerous_substances_create_article_node($title, $field_summary, $activity = 169, $article_type = 84) {
+  $node = new stdClass();
+  $node->type = 'article';
+  $node->title = $title;
+  node_object_prepare($node);
+  $node->field_summary['en']['0']['value'] = $field_summary;
+  $node->language = 'en';
+  $node->uid = 1;
+  $node->status = 1;
+  $node->workbench_access = 'section';
+  $node->workbench_moderation_state_new = 'published';
+  $node->field_article_type[LANGUAGE_NONE][0]['tid'] = $article_type;
+  $node->field_activity[LANGUAGE_NONE][0]['tid'] = $activity;
+  $node->field_publication_date[LANGUAGE_NONE][0] = array(
+    'value' => format_date(strtotime('now'), 'custom', 'Y-m-d H:i:s', 'Europe/Madrid'),
+    'timezone' => 'Europe/Madrid',
+    'timezone_db' => 'Europe/Madrid',
+  );
+  node_save($node);
+  return $node;
+}
+
+/**
+ * MDR-1574 Create the search for the dangerous substances database on the corporate: Development.
+ */
+function osha_dangerous_substances_update_7024() {
+  $title = "Practical tools and guidance on dangerous substances";
+  $node = _osha_dangerous_substances_create_article_node($title, '');
+  if ($node->nid) {
+    variable_set('practical_tools_and_guidance_on_dangerous_substances_nid', $node->nid);
+  }
+}

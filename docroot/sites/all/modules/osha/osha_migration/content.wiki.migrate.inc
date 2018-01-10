@@ -371,6 +371,11 @@ class OshaMigrateSourceWiki extends MigrateSource {
     // Use limit because there are other [[wiki links]] in the text.
     $wiki_text = preg_replace($patterns, $replacements, $body, 1);
 
+    // Removes Internal {{LangTempl...}}, {{Template...}}, {{Metadata...}} etc...
+    $patterns[0] = '/{{+(.*)}}/s';
+    $replacements[0] = '';
+    $wiki_text = preg_replace($patterns, $replacements, $wiki_text);
+
     $patterns[0] = '/(<ref[^<]*<\/ref>)/s';
     $replacements[0] = '';
     // Don't use limit for removal of <ref>..</ref>, there are many.
@@ -398,8 +403,6 @@ class OshaMigrateSourceWiki extends MigrateSource {
     $patterns[9] = '/\[\[([a-zA-Z\s\:\-]+)([\|a-zA-Z\s\:\-])*\]\]/';
     // Lists *
     $patterns[10] = "/\*+(.*)?.(;)?$/";
-    // Internal {{Metadata}}
-    $patterns[11] = '/{{+(.*)}}/';
 
     $replacements = array();
     $replacements[0] = '';
@@ -413,7 +416,6 @@ class OshaMigrateSourceWiki extends MigrateSource {
     $replacements[8] = '';
     $replacements[9] = sprintf('<a href="%s${1}">${1}</a>', $osh_wiki_prefix);
     $replacements[10] = '<span>- ${1};</span>';
-    $replacements[11] = '';
 
     $summary = '';
     $char_count = 0;

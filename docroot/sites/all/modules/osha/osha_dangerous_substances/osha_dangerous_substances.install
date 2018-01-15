@@ -313,3 +313,10 @@ function osha_dangerous_substances_update_7024() {
     variable_set('practical_tools_and_guidance_on_dangerous_substances_nid', $node->nid);
   }
 }
+
+/**
+ * MDR-1574 Create the search for the dangerous substances database on the corporate: Development.
+ */
+function osha_dangerous_substances_update_7025() {
+  features_revert(array('osha_dangerous_substances' => array('fe_block_settings', 'variable')));
+}

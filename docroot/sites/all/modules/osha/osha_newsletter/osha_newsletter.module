@@ -1097,12 +1097,14 @@ function osha_newsletter_mail($key, &$message, $params) {
     // Send a test message to the user email.
     case 'test_newsletter':
       $source = entity_collection_load($params['#style']->entity_collection->name);
+      $source->requiredcontexts = array();
       osha_newsletter_build_mail($message, $source);
       break;
     case 'send_newsletter':
       $source = entity_collection_load($params['#style']->entity_collection->name);
       osha_newsletter_build_mail($message, $source);
       $source->field_newsletter_sent[LANGUAGE_NONE][0]['value'] = 1;
+      $source->requiredcontexts = array();
       entity_save('entity_collection', $source);
       break;
     case 'subscribe_email':

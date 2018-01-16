@@ -976,6 +976,15 @@ function osha_workflow_workbench_moderation_states_next_alter(&$access, $op, $no
  * Implements hook_form_alter().
  */
 function osha_workflow_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+
+  if ($form_id == 'workbench_moderation_moderate_form') {
+    $is_approver = OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_APPROVER, $user);
+    if ($is_approver && !osha_workflow_is_last_approver($form['node']['#value'])) {
+      unset($form['state']['#options']['approved']);
+    }
+  }
+
   if ($form_id == 'entity_collection_content_add_form') {
     if ($collection = $form_state['entity_collection']) {
       if ($collection->bundle == 'moderators_group') {

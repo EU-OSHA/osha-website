@@ -982,6 +982,10 @@ function osha_workflow_form_alter(&$form, &$form_state, $form_id) {
     $is_approver = OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_APPROVER, $user);
     if ($is_approver && !osha_workflow_is_last_approver($form['node']['#value'])) {
       unset($form['state']['#options']['approved']);
+      unset($form['state']['#options']['rejected']);
+      if (empty($form['state']['#options'])) {
+        $form['#access'] = FALSE;
+      }
     }
   }
 

@@ -4,13 +4,21 @@
  * Returns the HTML for a dangerous-substances node.
  */
 ?>
-<?php if($page): ?>
-  <div id="page-title" class="page__title title"><?php print t('Dangerous substances');?></div>
-  <div class="view-header back"><?php print l(t('Back to dangerous substances and filter'), 'themes/dangerous-substances/search'); ?></div>
-<?php endif; ?>
+<?php if ($page) { ?>
+    <div id="page-title" class="page__title title"><?php print t('Dangerous substances');?></div>
+    <div class="view-header back"><?php print l(t('Back to dangerous substances and filter'), 'themes/dangerous-substances/search'); ?></div>
+<?php } ?>
+<?php
+if ($view_mode == 'dangerous_substances') {
+  $page = TRUE;
+}
+if ($page && ($view_mode == 'dangerous_substances')) { ?>
+    <div class="view-header back"><?php print l(t('Back to Practical tools and guidance on dangerous substances'), 'themes/dangerous-substances/ds-tools'); ?></div>
+<?php } ?>
 
 <article class="node-<?php print $node->nid; ?> <?php print $classes; ?> clearfix"<?php print $attributes; ?>>
-  <?php if ($title_prefix || $title_suffix || $display_submitted || $unpublished || !$page && $title): ?>
+  <?php
+  if ($title_prefix || $title_suffix || $display_submitted || $unpublished || !$page && $title): ?>
     <header>
       <?php if ( $view_mode != 'osha_search_teaser') { ?>
       <?php print render($title_prefix); ?>

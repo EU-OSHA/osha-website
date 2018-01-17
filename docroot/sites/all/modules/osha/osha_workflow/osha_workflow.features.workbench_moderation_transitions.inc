@@ -14,6 +14,11 @@ function osha_workflow_workbench_moderation_export_transitions() {
       'to_name' => 'final_draft',
       'name' => 'Content rejected by the Project Manager',
     ),
+    'approved:published' => array(
+      'from_name' => 'approved',
+      'to_name' => 'published',
+      'name' => 'Content approved and publishing',
+    ),
     'approved:ready_to_publish' => array(
       'from_name' => 'approved',
       'to_name' => 'ready_to_publish',

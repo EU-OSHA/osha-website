@@ -1360,5 +1360,278 @@ function osha_dangerous_substances_views_default_views() {
   );
   $export['dangerous_substances_overview'] = $view;
 
+  $view = new view();
+  $view->name = 'practical_tools_and_guidance_on_dangerous_substances';
+  $view->description = 'Public search of DS';
+  $view->tag = 'default';
+  $view->base_table = 'search_api_index_default_content_index';
+  $view->human_name = 'Practical tools and guidance on dangerous substances';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Practical tools and guidance on dangerous substances';
+  $handler->display->display_options['css_class'] = 'view-search';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  $handler->display->display_options['header']['result']['content'] = '@order Showing @start - @end from @total';
+  /* No results behavior: Global: Unfiltered text */
+  $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area_text_custom']['content'] = 'No results';
+  /* Field: Indexed Content: Node ID */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'search_api_index_default_content_index';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['link_to_entity'] = 0;
+  /* Field: Indexed Content: Title */
+  $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['table'] = 'search_api_index_default_content_index';
+  $handler->display->display_options['fields']['title_field']['field'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['label'] = '';
+  $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title_field']['type'] = 'practical_tool_title';
+  /* Field: Indexed Content: The main body text */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'search_api_index_default_content_index';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['body']['type'] = 'smart_trim_format';
+  $handler->display->display_options['fields']['body']['settings'] = array(
+    'trim_link' => '0',
+    'trim_length' => '300',
+    'trim_type' => 'chars',
+    'trim_suffix' => '...',
+    'more_link' => '1',
+    'more_text' => 'See more',
+    'summary_handler' => 'full',
+    'trim_options' => array(
+      'text' => 0,
+    ),
+    'trim_preserve_tags' => '',
+  );
+  /* Field: Search: Relevance */
+  $handler->display->display_options['fields']['search_api_relevance']['id'] = 'search_api_relevance';
+  $handler->display->display_options['fields']['search_api_relevance']['table'] = 'search_api_index_default_content_index';
+  $handler->display->display_options['fields']['search_api_relevance']['field'] = 'search_api_relevance';
+  $handler->display->display_options['fields']['search_api_relevance']['label'] = '';
+  $handler->display->display_options['fields']['search_api_relevance']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['search_api_relevance']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['search_api_relevance']['alter']['text'] = '<a href=\'[url]?destination=/en/themes/dangerous-substances/practical-tools-and-guidance-on-dangerous-substances\'>See more</a>';
+  $handler->display->display_options['fields']['search_api_relevance']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['search_api_relevance']['link_to_entity'] = 0;
+  /* Field: Indexed Content: Country */
+  $handler->display->display_options['fields']['field_material_country']['id'] = 'field_material_country';
+  $handler->display->display_options['fields']['field_material_country']['table'] = 'search_api_index_default_content_index';
+  $handler->display->display_options['fields']['field_material_country']['field'] = 'field_material_country';
+  $handler->display->display_options['fields']['field_material_country']['label'] = '';
+  $handler->display->display_options['fields']['field_material_country']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_material_country']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_material_country']['alter']['text'] = '<span class="views-label">Country: </span><span>[field_material_country]</span>';
+  $handler->display->display_options['fields']['field_material_country']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_material_country']['link_to_entity'] = 0;
+  $handler->display->display_options['fields']['field_material_country']['view_mode'] = 'full';
+  $handler->display->display_options['fields']['field_material_country']['bypass_access'] = 0;
+  /* Field: Indexed Content: Available in languages */
+  $handler->display->display_options['fields']['field_available_in_languages']['id'] = 'field_available_in_languages';
+  $handler->display->display_options['fields']['field_available_in_languages']['table'] = 'search_api_index_default_content_index';
+  $handler->display->display_options['fields']['field_available_in_languages']['field'] = 'field_available_in_languages';
+  $handler->display->display_options['fields']['field_available_in_languages']['label'] = '';
+  $handler->display->display_options['fields']['field_available_in_languages']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_available_in_languages']['alter']['text'] = '[field_available_in_languages]';
+  $handler->display->display_options['fields']['field_available_in_languages']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_available_in_languages']['settings'] = array(
+    'format' => array(
+      'name' => 'name',
+      'iso' => 0,
+      'name_native' => 0,
+    ),
+  );
+  $handler->display->display_options['fields']['field_available_in_languages']['delta_offset'] = '0';
+  /* Field: Provider: Provider name (English) (indexed) */
+  $handler->display->display_options['fields']['field_fc_provider_field_fc_provider_name']['id'] = 'field_fc_provider_field_fc_provider_name';
+  $handler->display->display_options['fields']['field_fc_provider_field_fc_provider_name']['table'] = 'search_api_index_default_content_index';
+  $handler->display->display_options['fields']['field_fc_provider_field_fc_provider_name']['field'] = 'field_fc_provider_field_fc_provider_name';
+  $handler->display->display_options['fields']['field_fc_provider_field_fc_provider_name']['label'] = '';
+  $handler->display->display_options['fields']['field_fc_provider_field_fc_provider_name']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_fc_provider_field_fc_provider_name']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_fc_provider_field_fc_provider_name']['alter']['text'] = '<span class="views-label">Provider: </span><span>[field_fc_provider_field_fc_provider_name]</span>';
+  $handler->display->display_options['fields']['field_fc_provider_field_fc_provider_name']['element_label_colon'] = FALSE;
+  /* Field: Indexed Content: URL */
+  $handler->display->display_options['fields']['url']['id'] = 'url';
+  $handler->display->display_options['fields']['url']['table'] = 'search_api_index_default_content_index';
+  $handler->display->display_options['fields']['url']['field'] = 'url';
+  $handler->display->display_options['fields']['url']['label'] = '';
+  $handler->display->display_options['fields']['url']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['url']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['url']['display_as_link'] = FALSE;
+  $handler->display->display_options['fields']['url']['link_to_entity'] = 0;
+  /* Field: Indexed Content: Year of publication */
+  $handler->display->display_options['fields']['field_publication_year']['id'] = 'field_publication_year';
+  $handler->display->display_options['fields']['field_publication_year']['table'] = 'search_api_index_default_content_index';
+  $handler->display->display_options['fields']['field_publication_year']['field'] = 'field_publication_year';
+  $handler->display->display_options['fields']['field_publication_year']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_publication_year']['settings'] = array(
+    'format_type' => 'long',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+    'osha_date_theme' => '',
+  );
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="av-type">
+[field_fc_provider_field_fc_provider_name]<br />
+[field_material_country]
+<span class="views-label">Language: </span><span>[field_available_in_languages]</span>
+</div>';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  /* Sort criterion: Indexed Content: Year of publication */
+  $handler->display->display_options['sorts']['field_publication_year']['id'] = 'field_publication_year';
+  $handler->display->display_options['sorts']['field_publication_year']['table'] = 'search_api_index_default_content_index';
+  $handler->display->display_options['sorts']['field_publication_year']['field'] = 'field_publication_year';
+  $handler->display->display_options['sorts']['field_publication_year']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['field_publication_year']['expose']['label'] = 'Year of publication';
+  /* Sort criterion: Search: Relevance */
+  $handler->display->display_options['sorts']['search_api_relevance']['id'] = 'search_api_relevance';
+  $handler->display->display_options['sorts']['search_api_relevance']['table'] = 'search_api_index_default_content_index';
+  $handler->display->display_options['sorts']['search_api_relevance']['field'] = 'search_api_relevance';
+  $handler->display->display_options['sorts']['search_api_relevance']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['search_api_relevance']['expose']['label'] = 'Relevance';
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+  );
+  /* Filter criterion: Search: Fulltext search */
+  $handler->display->display_options['filters']['search_api_views_fulltext']['id'] = 'search_api_views_fulltext';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['table'] = 'search_api_index_default_content_index';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['field'] = 'search_api_views_fulltext';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['group'] = 1;
+  $handler->display->display_options['filters']['search_api_views_fulltext']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['operator_id'] = 'search_api_views_fulltext_op';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['label'] = 'Search';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['operator'] = 'search_api_views_fulltext_op';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['identifier'] = 'search_api_views_fulltext';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    14 => 0,
+  );
+  $handler->display->display_options['filters']['search_api_views_fulltext']['fields'] = array(
+    'body:value' => 'body:value',
+    'field_title_original' => 'field_title_original',
+    'title' => 'title',
+    'title_field' => 'title_field',
+  );
+  /* Filter criterion: Indexed Content: Content type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'search_api_index_default_content_index';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'dangerous_substances' => 'dangerous_substances',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Indexed Content: Status */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'search_api_index_default_content_index';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = array(
+    1 => '1',
+  );
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  /* Filter criterion: Indexed Content: Item language */
+  $handler->display->display_options['filters']['search_api_language']['id'] = 'search_api_language';
+  $handler->display->display_options['filters']['search_api_language']['table'] = 'search_api_index_default_content_index';
+  $handler->display->display_options['filters']['search_api_language']['field'] = 'search_api_language';
+  $handler->display->display_options['filters']['search_api_language']['value'] = array(
+    'en' => 'en',
+  );
+  $handler->display->display_options['filters']['search_api_language']['group'] = 2;
+  /* Filter criterion: Indexed Content: Item language */
+  $handler->display->display_options['filters']['search_api_language_1']['id'] = 'search_api_language_1';
+  $handler->display->display_options['filters']['search_api_language_1']['table'] = 'search_api_index_default_content_index';
+  $handler->display->display_options['filters']['search_api_language_1']['field'] = 'search_api_language';
+  $handler->display->display_options['filters']['search_api_language_1']['value'] = array(
+    'current' => 'current',
+  );
+  $handler->display->display_options['filters']['search_api_language_1']['group'] = 2;
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['exposed_block'] = TRUE;
+  $handler->display->display_options['path'] = 'themes/dangerous-substances/ds-tools';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'Practical tools and guidance on dangerous substances';
+  $handler->display->display_options['menu']['name'] = 'main-menu';
+  $translatables['practical_tools_and_guidance_on_dangerous_substances'] = array(
+    t('Master'),
+    t('Practical tools and guidance on dangerous substances'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('@order Showing @start - @end from @total'),
+    t('No results'),
+    t('Node ID'),
+    t('.'),
+    t(','),
+    t('<a href=\'[url]?destination=/en/themes/dangerous-substances/practical-tools-and-guidance-on-dangerous-substances\'>See more</a>'),
+    t('<span class="views-label">Country: </span><span>[field_material_country]</span>'),
+    t('[field_available_in_languages]'),
+    t('<span class="views-label">Provider: </span><span>[field_fc_provider_field_fc_provider_name]</span>'),
+    t('Year of publication'),
+    t('<div class="av-type">
+[field_fc_provider_field_fc_provider_name]<br />
+[field_material_country]
+<span class="views-label">Language: </span><span>[field_available_in_languages]</span>
+</div>'),
+    t('Relevance'),
+    t('Search'),
+    t('Page'),
+  );
+  $export['practical_tools_and_guidance_on_dangerous_substances'] = $view;
+
   return $export;
 }

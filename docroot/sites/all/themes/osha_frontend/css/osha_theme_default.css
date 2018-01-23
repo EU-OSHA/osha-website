@@ -9397,9 +9397,110 @@ div.flickr-photoset{
   	background: #f0f2f5;
 }
 
+
+
+
 @media screen and (max-width: 500px) {
 	#sliding-popup .popup-content #popup-text{
 		max-width: 100% !important;
 	}
 	
 }
+
+
+//search dangerous sustances
+//first column
+.page-themes-dangerous-substances-ds-tools .views-exposed-form .views-exposed-widget{
+	float: none;
+	padding: 0px;
+}
+.page-themes-dangerous-substances-ds-tools .sidebars_first #views-exposed-form-practical-tools-and-guidance-on-dangerous-substances-page .views-exposed-widgets{
+	position: relative;
+	margin-top: 15px;
+}
+.page-themes-dangerous-substances-ds-tools .sidebars_first #views-exposed-form-practical-tools-and-guidance-on-dangerous-substances-page .views-exposed-widget.views-widget-filter-search_api_views_fulltext{
+	width: 100%;
+	padding: 0px;
+	
+}
+.page-themes-dangerous-substances-ds-tools .sidebars_first #views-exposed-form-practical-tools-and-guidance-on-dangerous-substances-page .views-exposed-widget.views-widget-filter-search_api_views_fulltext input{
+	margin-bottom: 0px;
+}
+
+
+
+.page-themes-dangerous-substances-ds-tools .sidebars_first #views-exposed-form-practical-tools-and-guidance-on-dangerous-substances-page .views-widget-sort-by,
+.page-themes-dangerous-substances-ds-tools .sidebars_first #views-exposed-form-practical-tools-and-guidance-on-dangerous-substances-page .views-widget-sort-order{
+	display: none;
+}
+
+.page-themes-dangerous-substances-ds-tools .sidebars_first #views-exposed-form-practical-tools-and-guidance-on-dangerous-substances-page .views-exposed-form .views-exposed-widget.views-submit-button{
+	height: inherit;
+	padding: 0px !important;
+    margin: 0px !important;
+    background: inherit;
+    width: inherit;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+
+.page-themes-dangerous-substances-ds-tools .sidebars_first #views-exposed-form-practical-tools-and-guidance-on-dangerous-substances-page .views-exposed-form .form-submit{
+	margin-top: 0px;
+}
+
+.view-practical-tools-and-guidance-on-dangerous-substances{
+	background-color: #e8eef7;
+}
+.view-practical-tools-and-guidance-on-dangerous-substances > .view-content{
+	padding: 15px;
+}
+.view-practical-tools-and-guidance-on-dangerous-substances .view-header{
+	width:100%;
+	padding: 0px;
+	margin: 0px;
+	background-color: #e8eef7;
+	float: none;
+	border-top: 5px solid #003399;
+	border-bottom: 5px solid #003399;
+}
+
+.view-practical-tools-and-guidance-on-dangerous-substances .view-header .sort-container.col-xs-3{
+	max-width: 400px;
+	display: inline-block;
+	padding: 10px 15px;
+}
+.view-practical-tools-and-guidance-on-dangerous-substances .view-header .count-container.pull-right{
+	display: inline-block;
+	float: right;
+    padding: 10px 15px;
+    margin-top: 28px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.page-themes-dangerous-substances-ds-tools .two_column .view-header .form-item-sort-by,
+.page-themes-dangerous-substances-ds-tools .two_column .view-header .form-item-sort-order{
+	width: 150px;
+	display: inline-block;
+}
+
+.view-practical-tools-and-guidance-on-dangerous-substances > .view-content .views-field-title-field{
+	margin-bottom: 10px;
+}
+.view-practical-tools-and-guidance-on-dangerous-substances > .view-content .views-field-nothing .av-type span{
+	display: inline-block;
+	background-color: #99b5d6;
+	border-radius: 5px;
+    padding: 1px 10px;
+    margin-right: 5px;
+    color: white;
+    font-size: 13px;
+}
+.view-practical-tools-and-guidance-on-dangerous-substances > .view-content .views-field-nothing .av-type .views-label{
+	display: none;
+}
+.view-practical-tools-and-guidance-on-dangerous-substances > .view-content .views-field-nothing .av-type br{
+	display: none;
+}
+

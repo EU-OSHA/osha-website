@@ -1407,26 +1407,6 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['title_field']['label'] = '';
   $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title_field']['type'] = 'practical_tool_title';
-  /* Field: Indexed Content: The main body text */
-  $handler->display->display_options['fields']['body']['id'] = 'body';
-  $handler->display->display_options['fields']['body']['table'] = 'search_api_index_default_content_index';
-  $handler->display->display_options['fields']['body']['field'] = 'body';
-  $handler->display->display_options['fields']['body']['label'] = '';
-  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['body']['type'] = 'smart_trim_format';
-  $handler->display->display_options['fields']['body']['settings'] = array(
-    'trim_link' => '0',
-    'trim_length' => '300',
-    'trim_type' => 'chars',
-    'trim_suffix' => '...',
-    'more_link' => '1',
-    'more_text' => 'See more',
-    'summary_handler' => 'full',
-    'trim_options' => array(
-      'text' => 0,
-    ),
-    'trim_preserve_tags' => '',
-  );
   /* Field: Search: Relevance */
   $handler->display->display_options['fields']['search_api_relevance']['id'] = 'search_api_relevance';
   $handler->display->display_options['fields']['search_api_relevance']['table'] = 'search_api_index_default_content_index';
@@ -1503,11 +1483,31 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="av-type">
-[field_fc_provider_field_fc_provider_name]<br />
+[field_fc_provider_field_fc_provider_name]
 [field_material_country]
 <span class="views-label">Language: </span><span>[field_available_in_languages]</span>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  /* Field: Indexed Content: The main body text */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'search_api_index_default_content_index';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['body']['type'] = 'smart_trim_format';
+  $handler->display->display_options['fields']['body']['settings'] = array(
+    'trim_link' => '0',
+    'trim_length' => '300',
+    'trim_type' => 'chars',
+    'trim_suffix' => '...',
+    'more_link' => '1',
+    'more_text' => 'See more',
+    'summary_handler' => 'full',
+    'trim_options' => array(
+      'text' => 0,
+    ),
+    'trim_preserve_tags' => '',
+  );
   /* Sort criterion: Indexed Content: Year of publication */
   $handler->display->display_options['sorts']['field_publication_year']['id'] = 'field_publication_year';
   $handler->display->display_options['sorts']['field_publication_year']['table'] = 'search_api_index_default_content_index';
@@ -1623,7 +1623,7 @@ function osha_dangerous_substances_views_default_views() {
     t('<span class="views-label">Provider: </span><span>[field_fc_provider_field_fc_provider_name]</span>'),
     t('Year of publication'),
     t('<div class="av-type">
-[field_fc_provider_field_fc_provider_name]<br />
+[field_fc_provider_field_fc_provider_name]
 [field_material_country]
 <span class="views-label">Language: </span><span>[field_available_in_languages]</span>
 </div>'),

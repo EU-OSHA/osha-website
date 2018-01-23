@@ -327,3 +327,10 @@ function osha_dangerous_substances_update_7025() {
 function osha_dangerous_substances_update_7026() {
   features_revert(array('osha_dangerous_substances' => array('field_instance')));
 }
+
+/**
+ * MDR-1574 Create the search for the dangerous substances database on the corporate: Development.
+ */
+function osha_dangerous_substances_update_7027() {
+  features_revert(array('osha_dangerous_substances' => array('views_view')));
+}

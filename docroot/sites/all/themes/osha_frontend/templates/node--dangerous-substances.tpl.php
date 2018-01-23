@@ -45,9 +45,9 @@ if ($page && ($view_mode == 'dangerous_substances')) { ?>
 
   <?php
   $map = [
-    'body'=>['title' => t('Description'), 'id' => 'description'],
-    'field_sector_industry_covered'=>['title' => t('Other data'), 'id' => 'other_data'],
-    'field_target_group'=>['title' => t('Access tool'), 'id' => 'access_tool'],
+    'body' => ['title' => t('Description'), 'id' => 'description'],
+    'field_sector_industry_covered' => ['title' => t('Other data'), 'id' => 'other_data'],
+    'field_external_url' => ['title' => t('Access tool'), 'id' => 'access_tool'],
   ];
   // We hide the comments and links now so that we can render them later.
   hide($content['comments']);

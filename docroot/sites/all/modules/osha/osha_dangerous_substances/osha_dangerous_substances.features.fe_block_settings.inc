@@ -61,7 +61,7 @@ function osha_dangerous_substances_default_fe_block_settings() {
     'module' => 'facetapi',
     'node_types' => array(),
     'pages' => 'themes/dangerous-substances/search
-themes/dangerous-substances/ds-tools',
+themes/dangerous-substances/practical-tools-dangerous-substances',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -222,7 +222,7 @@ themes/dangerous-substances/ds-tools',
     'module' => 'facetapi',
     'node_types' => array(),
     'pages' => 'themes/dangerous-substances/search
-themes/dangerous-substances/ds-tools',
+themes/dangerous-substances/practical-tools-dangerous-substances',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -303,7 +303,7 @@ themes/dangerous-substances/ds-tools',
     'module' => 'facetapi',
     'node_types' => array(),
     'pages' => 'themes/dangerous-substances/search
-themes/dangerous-substances/ds-tools',
+themes/dangerous-substances/practical-tools-dangerous-substances',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -344,7 +344,7 @@ themes/dangerous-substances/ds-tools',
     'module' => 'facetapi',
     'node_types' => array(),
     'pages' => 'themes/dangerous-substances/search
-themes/dangerous-substances/ds-tools',
+themes/dangerous-substances/practical-tools-dangerous-substances',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -425,7 +425,7 @@ themes/dangerous-substances/ds-tools',
     'module' => 'facetapi',
     'node_types' => array(),
     'pages' => 'themes/dangerous-substances/search
-themes/dangerous-substances/ds-tools',
+themes/dangerous-substances/practical-tools-dangerous-substances',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -626,7 +626,7 @@ themes/dangerous-substances/ds-tools',
     'module' => 'facetapi',
     'node_types' => array(),
     'pages' => 'themes/dangerous-substances/search
-themes/dangerous-substances/ds-tools',
+themes/dangerous-substances/practical-tools-dangerous-substances',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -707,7 +707,7 @@ themes/dangerous-substances/ds-tools',
     'module' => 'facetapi',
     'node_types' => array(),
     'pages' => 'themes/dangerous-substances/search
-themes/dangerous-substances/ds-tools',
+themes/dangerous-substances/practical-tools-dangerous-substances',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -788,7 +788,7 @@ themes/dangerous-substances/ds-tools',
     'module' => 'facetapi',
     'node_types' => array(),
     'pages' => 'themes/dangerous-substances/search
-themes/dangerous-substances/ds-tools',
+themes/dangerous-substances/practical-tools-dangerous-substances',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -829,7 +829,7 @@ themes/dangerous-substances/ds-tools',
     'module' => 'facetapi',
     'node_types' => array(),
     'pages' => 'themes/dangerous-substances/search
-themes/dangerous-substances/ds-tools',
+themes/dangerous-substances/practical-tools-dangerous-substances',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -870,7 +870,7 @@ themes/dangerous-substances/ds-tools',
     'module' => 'facetapi',
     'node_types' => array(),
     'pages' => 'themes/dangerous-substances/search
-themes/dangerous-substances/ds-tools',
+themes/dangerous-substances/practical-tools-dangerous-substances',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -990,7 +990,7 @@ themes/dangerous-substances/ds-tools',
     'i18n_mode' => 0,
     'module' => 'osha_dangerous_substances',
     'node_types' => array(),
-    'pages' => 'themes/dangerous-substances/ds-tools',
+    'pages' => 'themes/dangerous-substances/practical-tools-dangerous-substances',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -1030,7 +1030,7 @@ themes/dangerous-substances/ds-tools',
     'i18n_mode' => 0,
     'module' => 'osha_dangerous_substances',
     'node_types' => array(),
-    'pages' => 'themes/dangerous-substances/ds-tools',
+    'pages' => 'themes/dangerous-substances/practical-tools-dangerous-substances',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(

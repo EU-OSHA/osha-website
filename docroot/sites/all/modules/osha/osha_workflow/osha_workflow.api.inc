@@ -827,6 +827,17 @@ class OshaWorkflowNotifications {
   }
 
   /**
+   * MDR-1480 PM Highlighted changes.
+   */
+  public static function notifyWebTeamTextChanged($node, $from_state, $to_state) {
+    $params = array(
+      'node' => $node,
+    );
+    $users = osha_workflow_get_node_rm($node);
+    OshaWorkflowNotifications::sendEmail($users, $params, 'osha_workflow', 'osha_workflow_notification_text_changed');
+  }
+
+  /**
    * REV_RM_US_15 Notification sent to WebTeam when a node had status changed.
    */
   public static function notifyWebTeamStatusChanged($node, $from_state, $to_state) {

@@ -35,6 +35,40 @@ define('OSHA_WORKFLOW_STATE_READY_TO_PUBLISH', 'ready_to_publish');
 define('OSHA_WORKFLOW_STATE_PUBLISHED', 'published');
 
 /**
+ * Implements hook_token_info().
+ */
+function osha_workflow_token_info() {
+  $info['tokens']['node']['node-translate'] = array(
+    'name' => t('node translate url'),
+    'description' => t('Node translate url.'),
+    'type' => 'array',
+  );
+  return $info;
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function osha_workflow_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $replacements = array();
+  // Node tokens.
+  if ($type == 'node' && !empty($data['node'])) {
+    $node = $data['node'];
+
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'node-translate':
+          $url_options['absolute'] = TRUE;
+          $replacements[$original] = url('node/' . $node->nid . '/translate', $url_options);
+          break;
+      }
+    }
+  }
+
+  return $replacements;
+}
+
+/**
  * Implements hook_menu().
  *
  * @codeCoverageIgnore
@@ -118,6 +152,147 @@ function osha_workflow_menu() {
     'weight' => 9,
   );
   return $items;
+}
+
+function _osha_workflow_body_rows($old_node, $new_node, $state = 'raw') {
+  // This is an unique index only, so no need for drupal_static().
+  static $table_row_counter = 0;
+
+  if ($theme = variable_get('diff_theme', 'default')) {
+    drupal_add_css(drupal_get_path('module', 'diff') . "/css/diff.{$theme}.css");
+  }
+  module_load_include('inc', 'diff', 'includes/node');
+
+  $rows = array();
+  $context = array(
+    'entity_type' => 'node',
+    'states' => array($state),
+    'view_mode' => 'diff_standard',
+  );
+  $node_diffs = diff_compare_entities($old_node, $new_node, $context);
+
+  // Track line numbers between multiple diffs.
+  $line_stats = array(
+    'counter' => array('x' => 0, 'y' => 0),
+    'offset' => array('x' => 0, 'y' => 0),
+  );
+
+  // Render diffs for each.
+  foreach ($node_diffs as $node_diff) {
+    $show_header = !empty($node_diff['#name']);
+    // These are field level settings.
+    if ($show_header && isset($node_diff['#settings']['show_header'])) {
+      $show_header = $show_header && $node_diff['#settings']['show_header'];
+    }
+
+    // Line counting and line header options.
+    if (empty($node_diff['#settings']['line_counter'])) {
+      $line_counter = FALSE;
+    }
+    else {
+      $line_counter = $node_diff['#settings']['line_counter'];
+    }
+    // Every call to 'line' resets the counters.
+    if ($line_counter) {
+      $line_stats['counter']['x'] = 0;
+      $line_stats['counter']['y'] = 0;
+      if ($line_counter == 'line' && 0) {
+        $line_stats['offset']['x'] = 0;
+        $line_stats['offset']['y'] = 0;
+      }
+      $line_stats_ref = $line_stats;
+    }
+    else {
+      $line_stats_ref = NULL;
+    }
+
+    list($old, $new) = diff_extract_state($node_diff, $state);
+    if ($node_diff_rows = diff_get_rows($old, $new, $line_counter && $line_counter != 'hidden', $line_stats_ref)) {
+      if ($line_counter && $line_counter != 'line') {
+        $line_stats['offset']['x'] += $line_stats_ref['counter']['x'];
+        $line_stats['offset']['y'] += $line_stats_ref['counter']['y'];
+      }
+      if ($show_header) {
+        $rows['diff-header-' . $table_row_counter++] = array(
+          array(
+            'data' => t('Changes to %name', array('%name' => $node_diff['#name'])),
+            'class' => 'diff-section-title',
+            'colspan' => 4,
+          ),
+        );
+      }
+      // To avoid passing counter to the Diff engine, index rows manually here
+      // to allow modules to interact with the table. i.e. no array_merge().
+      foreach ($node_diff_rows as $row) {
+        $rows['diff-row-' . $table_row_counter++] = $row;
+      }
+    }
+  }
+  return $rows;
+}
+
+function osha_workflow_diffs_show($node, $old_vid, $new_vid, $state = NULL) {
+  // Attaches the CSS.
+  $build['#attached'] = diff_build_attachments();
+
+  $default_state = variable_get('diff_default_state_node', 'raw');
+  if (empty($state)) {
+    $state = $default_state;
+  }
+  $state = str_replace('-', '_', $state);
+  if (!array_key_exists($state, diff_available_states())) {
+    $state = $default_state;
+  }
+
+  $node_revisions = node_revision_list($node);
+
+  $old_node = node_load($node->nid, $old_vid);
+  $new_node = node_load($node->nid, $new_vid);
+
+  // Generate table header (date, username, log message).
+  $old_header = t('!date by !username', array(
+    '!date' => l(format_date($old_node->revision_timestamp), "node/$node->nid/revisions/$old_node->vid/view", array('absolute' => 1)),
+    '!username' => theme('username', array('account' => $node_revisions[$old_vid])),
+  ));
+  $new_header = t('!date by !username', array(
+    '!date' => l(format_date($new_node->revision_timestamp), "node/$node->nid/revisions/$new_node->vid/view", array('absolute' => 1)),
+    '!username' => theme('username', array('account' => $node_revisions[$new_vid])),
+  ));
+
+  $old_log = $old_node->log != '' ? '<p class="revision-log">' . filter_xss($old_node->log) . '</p>' : '';
+  $new_log = $new_node->log != '' ? '<p class="revision-log">' . filter_xss($new_node->log) . '</p>' : '';
+
+  $header = _diff_default_header($old_header, $new_header);
+  $rows = array();
+  if ($old_log || $new_log) {
+    $rows['logs'] = array(
+      array(
+        'data' => $old_log,
+        'colspan' => 2,
+      ),
+      array(
+        'data' => $new_log,
+        'colspan' => 2,
+      ),
+    );
+  }
+
+  $body_rows = _osha_workflow_body_rows($old_node, $new_node, $state);
+  // Return if no visible changes on current langauge.
+  if (!$body_rows) {
+    return [];
+  }
+  $rows = array_merge($rows, $body_rows);
+
+  $build['diff_table'] = array(
+    '#theme' => 'table__diff__standard',
+    '#header' => $header,
+    '#rows' => $rows,
+    '#attributes' => array('class' => array('diff')),
+    '#colgroups' => _diff_default_cols(),
+    '#sticky' => FALSE,
+  );
+  return $build;
 }
 
 /**
@@ -776,6 +951,8 @@ function osha_workflow_get_default_section($node) {
  * {@inheritdoc}
  */
 function osha_workflow_workbench_moderation_transition($node, $old, $new) {
+  global $language;
+
   // Review workflow.
   $rm_notified = FALSE;
   if ($old == OSHA_WORKFLOW_STATE_DRAFT && $new == OSHA_WORKFLOW_STATE_FINAL_DRAFT) {
@@ -875,10 +1052,32 @@ function osha_workflow_workbench_moderation_transition($node, $old, $new) {
     OshaWorkflowNotifications::notifyWebTeamStatusChanged($node, $old, $new);
   }
 
+  $detected = arg(3);
+  if (!$detected) {
+    $detected = $language->language;
+  }
+
+  if (($old == $new) && ($detected == 'en')) {
+    $node_revisions = node_revision_list($node);
+    if (count($node_revisions) > 1) {
+      $new = array_shift($node_revisions);
+      $old = array_shift($node_revisions);
+      $new_node = node_load($node->nid, $new->vid);
+      $old_node = node_load($node->nid, $old->vid);
+      if (
+        ($new_node->title_field['en'][0]['value'] != $old_node->title_field['en'][0]['value']) ||
+        ($new_node->body['en'][0]['value'] != $old_node->body['en'][0]['value'])
+      ) {
+        // Notification for title or body changes.
+        OshaWorkflowNotifications::notifyWebTeamTextChanged($node);
+      }
+    }
+  }
+
   // Reindex all published translations
   if( !empty($node->translations->data)) {
-    foreach ($node->translations->data as $language => $tr) {
-      search_api_track_item_change('search_api_et_node', array($language . '_' . $node->nid));
+    foreach ($node->translations->data as $lang => $tr) {
+      search_api_track_item_change('search_api_et_node', array($lang . '_' . $node->nid));
     }
   }
 }
@@ -976,6 +1175,19 @@ function osha_workflow_workbench_moderation_states_next_alter(&$access, $op, $no
  * Implements hook_form_alter().
  */
 function osha_workflow_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+
+  if ($form_id == 'workbench_moderation_moderate_form') {
+    $is_approver = OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_APPROVER, $user);
+    if ($is_approver && !osha_workflow_is_last_approver($form['node']['#value'])) {
+      unset($form['state']['#options']['approved']);
+      unset($form['state']['#options']['rejected']);
+      if (empty($form['state']['#options'])) {
+        $form['#access'] = FALSE;
+      }
+    }
+  }
+
   if ($form_id == 'entity_collection_content_add_form') {
     if ($collection = $form_state['entity_collection']) {
       if ($collection->bundle == 'moderators_group') {
@@ -1442,6 +1654,16 @@ function osha_workflow_mail($key, &$message, $params) {
     '<br>Thank you,'
   );
 
+  if ($key == 'osha_workflow_notification_text_changed') {
+    $body = variable_get('osha_mail_template_text_changed_body',
+      'Dear <b>[user:name]</b>,<br>
+
+      No action is required. This message is just to inform you that there has been a text change on page <a href="[node:node-translate]">[node:title-field]</a>.
+
+      <br>Thank you,'
+    );
+  }
+
   if ($key == 'osha_workflow_notification_admin') {
     $body = variable_get('osha_mail_template_approval_body',
       'Dear <b>[user:name]</b>,<br>
@@ -1455,4 +1677,37 @@ function osha_workflow_mail($key, &$message, $params) {
   }
   $message['subject'] = token_replace($subject, $params);
   $message['body'][] = token_replace($body, $params);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function osha_workflow_form_tmgmt_entity_ui_translate_form_alter(&$form, &$form_state, $form_id) {
+  $nid = arg(1);
+  if ($nid) {
+    $node = node_load($nid);
+  }
+  $revision_list = node_revision_list($node);
+  $vids = array_keys($revision_list);
+  if (count($vids) < 2) {
+    return '';
+  }
+  module_load_include('inc', 'diff', 'diff.pages');
+
+  $diff_limit = variable_get('osha_workflow_diff_limit', 25);
+  $pm_diffs = [];
+  for($i = 0; $i < count($vids); $i++) {
+    if ($i == $diff_limit) {
+      break;
+    }
+    $new_vid = $vids[$i];
+    $old_vid = $vids[$i + 1];
+
+    $build = osha_workflow_diffs_show($node, $old_vid, $new_vid, 'raw_plain');
+    $pm_diffs[] = $build;
+  }
+  if (!$pm_diffs) {
+    return ;
+  }
+  $form['pm_diffs'] = $pm_diffs;
 }

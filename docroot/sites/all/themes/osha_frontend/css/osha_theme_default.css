@@ -9410,32 +9410,32 @@ div.flickr-photoset{
 
 //search dangerous sustances
 //first column
-.page-themes-dangerous-substances-ds-tools .views-exposed-form .views-exposed-widget{
+.page-themes-dangerous-substances-practical-tools-dangerous-substances .views-exposed-form .views-exposed-widget{
 	float: none;
 	padding: 0px;
 }
-.page-themes-dangerous-substances-ds-tools .sidebars_first #views-exposed-form-practical-tools-and-guidance-on-dangerous-substances-page .views-exposed-widgets{
+.page-themes-dangerous-substances-practical-tools-dangerous-substances .sidebars_first #views-exposed-form-practical-tools-and-guidance-on-dangerous-substances-page .views-exposed-widgets{
 	position: relative;
 	margin-top: 15px;
 }
-.page-themes-dangerous-substances-ds-tools .sidebars_first #views-exposed-form-practical-tools-and-guidance-on-dangerous-substances-page .views-exposed-widget.views-widget-filter-search_api_views_fulltext{
+.page-themes-dangerous-substances-practical-tools-dangerous-substances .sidebars_first #views-exposed-form-practical-tools-and-guidance-on-dangerous-substances-page .views-exposed-widget.views-widget-filter-search_api_views_fulltext{
 	width: 100%;
 	padding: 0px;
 	
 }
-.page-themes-dangerous-substances-ds-tools .sidebars_first #views-exposed-form-practical-tools-and-guidance-on-dangerous-substances-page .views-exposed-widget.views-widget-filter-search_api_views_fulltext input{
+.page-themes-dangerous-substances-practical-tools-dangerous-substances .sidebars_first #views-exposed-form-practical-tools-and-guidance-on-dangerous-substances-page .views-exposed-widget.views-widget-filter-search_api_views_fulltext input{
 	margin-bottom: 0px;
 	padding-right: 55px;
 }
 
 
 
-.page-themes-dangerous-substances-ds-tools .sidebars_first #views-exposed-form-practical-tools-and-guidance-on-dangerous-substances-page .views-widget-sort-by,
-.page-themes-dangerous-substances-ds-tools .sidebars_first #views-exposed-form-practical-tools-and-guidance-on-dangerous-substances-page .views-widget-sort-order{
+.page-themes-dangerous-substances-practical-tools-dangerous-substances .sidebars_first #views-exposed-form-practical-tools-and-guidance-on-dangerous-substances-page .views-widget-sort-by,
+.page-themes-dangerous-substances-practical-tools-dangerous-substances .sidebars_first #views-exposed-form-practical-tools-and-guidance-on-dangerous-substances-page .views-widget-sort-order{
 	display: none;
 }
 
-.page-themes-dangerous-substances-ds-tools .sidebars_first #views-exposed-form-practical-tools-and-guidance-on-dangerous-substances-page .views-exposed-form .views-exposed-widget.views-submit-button{
+.page-themes-dangerous-substances-practical-tools-dangerous-substances .sidebars_first #views-exposed-form-practical-tools-and-guidance-on-dangerous-substances-page .views-exposed-form .views-exposed-widget.views-submit-button{
 	height: inherit;
 	padding: 0px !important;
     margin: 0px !important;
@@ -9446,7 +9446,7 @@ div.flickr-photoset{
     right: 0px;
 }
 
-.page-themes-dangerous-substances-ds-tools .sidebars_first #views-exposed-form-practical-tools-and-guidance-on-dangerous-substances-page .views-exposed-form .form-submit{
+.page-themes-dangerous-substances-practical-tools-dangerous-substances .sidebars_first #views-exposed-form-practical-tools-and-guidance-on-dangerous-substances-page .views-exposed-form .form-submit{
 	margin-top: 0px;
 	background-color: #003399;
     box-shadow: none;
@@ -9484,8 +9484,8 @@ div.flickr-photoset{
     font-weight: 600;
 }
 
-.page-themes-dangerous-substances-ds-tools .two_column .view-header .form-item-sort-by,
-.page-themes-dangerous-substances-ds-tools .two_column .view-header .form-item-sort-order{
+.page-themes-dangerous-substances-practical-tools-dangerous-substances .two_column .view-header .form-item-sort-by,
+.page-themes-dangerous-substances-practical-tools-dangerous-substances .two_column .view-header .form-item-sort-order{
 	width: 150px;
 	display: inline-block;
 }

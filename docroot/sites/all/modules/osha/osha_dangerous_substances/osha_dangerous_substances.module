@@ -102,7 +102,7 @@ function osha_dangerous_substances_block_info() {
     'status' => 1,
     'region' => 'sidebar_first',
     'visibility' => BLOCK_VISIBILITY_LISTED,
-    'pages' => 'themes/dangerous-substances/ds-tools/*',
+    'pages' => 'themes/dangerous-substances/practical-tools-dangerous-substances/*',
     'cache' => DRUPAL_NO_CACHE,
     'weight' => 0,
   );

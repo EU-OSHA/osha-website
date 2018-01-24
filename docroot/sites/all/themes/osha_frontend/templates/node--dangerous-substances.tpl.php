@@ -15,7 +15,7 @@ if ($view_mode == 'dangerous_substances') {
   $add_field_group = TRUE;
 }
 if ($page && ($view_mode == 'dangerous_substances')) { ?>
-    <div class="view-header back"><?php print l(t('Back to Practical tools and guidance on dangerous substances'), 'themes/dangerous-substances/ds-tools'); ?></div>
+    <div class="view-header back"><?php print l(t('Back to Practical tools and guidance on dangerous substances'), 'themes/dangerous-substances/practical-tools-dangerous-substances'); ?></div>
 <?php } ?>
 
 <article class="node-<?php print $node->nid; ?> <?php print $classes; ?> clearfix"<?php print $attributes; ?>>

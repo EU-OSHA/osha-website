@@ -1592,7 +1592,7 @@ function osha_dangerous_substances_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['exposed_block'] = TRUE;
-  $handler->display->display_options['path'] = 'themes/dangerous-substances/ds-tools';
+  $handler->display->display_options['path'] = 'themes/dangerous-substances/practical-tools-dangerous-substances';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Practical tools and guidance on dangerous substances';
   $handler->display->display_options['menu']['name'] = 'main-menu';

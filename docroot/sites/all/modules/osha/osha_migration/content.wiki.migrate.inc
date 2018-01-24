@@ -359,7 +359,7 @@ class OshaMigrateSourceWiki extends MigrateSource {
    * @return string
    *   Summary text to add into field_summary
    */
-  public static function getWikiSummaryFromBody($body) {
+  public static function getWikiSummaryFromBody($body, $convert_category = TRUE) {
     $osha_wiki_hostname = variable_get('osha_wiki_hostname', 'https://oshwiki.eu');
     $osh_wiki_prefix = $osha_wiki_hostname . '/wiki/';
 
@@ -385,47 +385,80 @@ class OshaMigrateSourceWiki extends MigrateSource {
     $lines = preg_split('/\n/', $wiki_text);
 
     // Replace wiki formatting with HTML.
-    $patterns = array();
+    $patterns_pre = array();
     // == Headings ==
-    $patterns[0] = '/====\s*([^=]*)\s*====/';
-    $patterns[1] = '/===\s*([^=]*)\s*===/';
-    $patterns[2] = '/==\s*([^=]*)\s*==/';
-    $patterns[3] = '/=\s*([^=]*)\s*=/';
+    $patterns_pre[0] = '/====\s*([^=]*)\s*====/';
+    $patterns_pre[1] = '/===\s*([^=]*)\s*===/';
+    $patterns_pre[2] = '/==\s*([^=]*)\s*==/';
+    $patterns_pre[3] = '/=\s*([^=]*)\s*=/';
     // Link to files [[File:*]]
-    $patterns[4] = '/\[\[File:([^\]\|]*)\|*([^\]]*)\]\]/';
+    $patterns_pre[4] = '/\[\[File:([^\]\|]*)\|*([^\]]*)\]\]/';
     // '''''bold+italic''''', '''bold''', ''italic''
-    $patterns[5] = "/'''([^']*)'''/";
-    $patterns[6] = "/''([^']*)''/";
-    // Replace [[Category:*]] with ''
-    $patterns[7] = '/\[\[Image:([\|a-zA-Z\s\:\-\.])*\]\]/';
-    $patterns[8] = '/\[\[Category:([\|a-zA-Z\s\:\-])*\]\]/';
-    // Replace [[Wiki page title|url]] with <a href='https://oshwiki.eu/Wiki page title'>Wiki page title</a>
-    $patterns[9] = '/\[\[([a-zA-Z\s\:\-]+)([\|a-zA-Z\s\:\-])*\]\]/';
-    // Lists *
-    $patterns[10] = "/\*+(.*)?.(;)?$/";
-    // Replace [url title] with <a href="url">title</a>
-    $patterns[12] = '/\[([a-zA-Z\:\/\.-]*)\s([\|a-zA-Z\s\:\-]*)\]/';
+    $patterns_pre[5] = "/'''([^']*)'''/";
+    $patterns_pre[6] = "/''([^']*)''/";
 
-    $replacements = array();
-    $replacements[0] = '';
-    $replacements[1] = '';
-    $replacements[2] = '';
-    $replacements[3] = '';
-    $replacements[4] = '';
-    $replacements[5] = '<b>${1}</b>';
-    $replacements[6] = '<i>${1}</i>';
-    $replacements[7] = '';
-    $replacements[8] = '';
-    $replacements[9] = sprintf('<a href="%s${1}">${1}</a>', $osh_wiki_prefix);
-    $replacements[10] = '<span>- ${1};</span>';
-    $replacements[12] = '<a href="${1}">${2}</a>';
+
+
+    $patterns_post = array();
+    // Replace [[Category:*]] with ''
+    $patterns_post[7] = '/\[\[Image:([\|a-zA-Z\s\:\-\.])*\]\]/';
+    $patterns_post[8] = '/\[\[Category:([\|a-zA-Z\s\:\-])*\]\]/';
+    // Lists *
+    $patterns_post[10] = "/\*+(.*)?.(;)?$/";
+
+    // Replace [url title] with <a href="url">title</a>
+    $patterns_post[12] = '/\[([a-zA-Z\:\/\.-]*)\s([\|a-zA-Z\s\:\-]*)\]/';
+
+    $callback_patterns = array();
+    $callback_patterns[] = '/\[\[:Category:([\|a-zA-Z\s\:\-\_]*)\|([\|a-zA-Z\s\:\-\_,]*)\]\]/';
+    $callback_patterns[] = '/\[\[([–a-zA-Z\s\:\-\_\(\),]*)\|([\|a-zA-Z\s\:\-\_,\.\(\),]*)\]\]/';
+    // Replace [[Wiki page title|url]] with <a href='https://oshwiki.eu/Wiki page title'>Wiki page title</a>
+    $callback_patterns[] = '/\[\[([a-zA-Z\s\:\-_]+)([\|a-zA-Z\s\:\-])*\]\]/';
+    //    $replacements_post[9] = sprintf('<a href="%s${1}">${1}</a>', $osh_wiki_prefix);
+
+    $replacements_pre = array();
+    $replacements_pre[0] = '';
+    $replacements_pre[1] = '';
+    $replacements_pre[2] = '';
+    $replacements_pre[3] = '';
+    $replacements_pre[4] = '';
+    $replacements_pre[5] = '<b>${1}</b>';
+    $replacements_pre[6] = '<i>${1}</i>';
+
+
+    $replacements_post = array();
+    $replacements_post[7] = '';
+    $replacements_post[8] = '';
+    $replacements_post[10] = '<span>- ${1};</span>';
+
+    $replacements_post[12] = '<a target="_blank" href="${1}">${2}</a>';
 
     $summary = '';
     $char_count = 0;
     foreach ($lines as $line) {
       if ($length = strlen($line)) {
         $char_count += $length;
-        $html_line = preg_replace($patterns, $replacements, $line);
+        $line = preg_replace($patterns_pre, $replacements_pre, $line);
+
+        if ($convert_category) {
+          $line = preg_replace_callback(
+            $callback_patterns,
+            function ($matches) {
+              static $osh_wiki_prefix;
+              if (!$osh_wiki_prefix) {
+                $osha_wiki_hostname = variable_get('osha_wiki_hostname', 'https://oshwiki.eu');
+                $osh_wiki_prefix = $osha_wiki_hostname . '/wiki/';
+              }
+              if (!$matches[2]) {
+                $matches[2] = $matches[1];
+              }
+              return '<a target="_blank" href="' . $osh_wiki_prefix . str_replace(' ','_', trim($matches[1])) . '">' . $matches[2] . '</a>';
+            },
+            $line
+          );
+        }
+
+        $html_line = preg_replace($patterns_post, $replacements_post, $line);
         if (!empty($html_line) && strlen($html_line) >= 2 && "{$html_line[0]}{$html_line[1]}" != '<h') {
           $html_line = '<p>' . $html_line . '</p>';
         }

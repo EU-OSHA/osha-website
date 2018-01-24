@@ -2001,7 +2001,52 @@ a {
 }
 
 
+
+/*search ds*/
+.page-themes-dangerous-substances-ds-tools .sidebars_first #views-exposed-form-practical-tools-and-guidance-on-dangerous-substances-page .views-exposed-widget.views-widget-filter-search_api_views_fulltext input{
+	margin-bottom: 0px;
+	padding-right: 55px;
+	width: 100% !important;
 }
+
+.page-themes-dangerous-substances-ds-tools .sidebars_first #views-exposed-form-practical-tools-and-guidance-on-dangerous-substances-page .views-exposed-form .views-exposed-widget.views-submit-button input{
+	width: inherit !important;
+	border: 1px solid #003399;
+}
+.view-practical-tools-and-guidance-on-dangerous-substances > .view-content .views-field-title-field{
+	margin-top: 15px;
+}
+.view-practical-tools-and-guidance-on-dangerous-substances > .view-content .views-field-body .more-link {
+    background-color: inherit;
+    min-height: 0em;
+    font-size: inherit;
+    padding-top: 0em;
+    padding-bottom: 0em;
+}
+
+/*search ds detail*/
+.node-type-dangerous-substances .node-dangerous-substances{
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.node-type-dangerous-substances .node-dangerous-substances .field-name-body{
+	padding: 0px !important;
+}
+.node-type-dangerous-substances .node-dangerous-substances h3{
+	background: url(../images/separator_home.jpg) repeat-x scroll 100% 100% rgba(0, 0, 0, 0);
+    padding-bottom: 8px;
+    margin-top: 15px;
+}
+.node-type-dangerous-substances .node-dangerous-substances .field-name-field-external-url{
+	padding-right: 0px;
+	padding-left: 0px;
+}
+.node-type-dangerous-substances .node-dangerous-substances .field-label{
+	width: 100%;
+}
+
+}//en media
 
 @media screen and (max-width: 1078px) {
 	.two_column.publications-search-list.form-wrapper #publication-search{

@@ -1,0 +1,12 @@
+name = Metatag: Views Overview
+description = Extends views integration to the metatag overview admin page.
+package = SEO
+core = 7.x
+dependencies[] = metatag_views
+
+; Information added by Drupal.org packaging script on 2016-08-10
+version = "7.x-1.0"
+core = "7.x"
+project = "metatag_views_overview"
+datestamp = "1470830640"
+

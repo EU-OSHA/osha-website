@@ -57,6 +57,18 @@ if ($page && ($view_mode == 'dangerous_substances')) { ?>
     if ($add_field_group && isset($map[$field_name])) {
       print '<h3 id="'.$map[$field_name]['id'].'">' . $map[$field_name]['title'] . '</h3>';
     }
+    if ($field['#field_type']=='taxonomy_term_reference') {
+        $skip = FASLE;
+        foreach($field['#items'] as $item) {
+            if ($item['taxonomy_term']->name == 'Not applicable') {
+              $skip = TRUE;
+              break;
+            }
+        }
+        if ($skip) {
+            continue;
+        }
+    }
     print render($field);
   }
   ?>

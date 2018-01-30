@@ -58,7 +58,7 @@ if ($page && ($view_mode == 'dangerous_substances')) { ?>
       print '<h3 id="'.$map[$field_name]['id'].'">' . $map[$field_name]['title'] . '</h3>';
     }
     if ($field['#field_type']=='taxonomy_term_reference') {
-        $skip = FASLE;
+        $skip = FALSE;
         foreach($field['#items'] as $item) {
             if ($item['taxonomy_term']->name == 'Not applicable') {
               $skip = TRUE;

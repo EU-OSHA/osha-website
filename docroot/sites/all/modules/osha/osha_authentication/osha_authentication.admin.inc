@@ -276,6 +276,7 @@ function osha_authentication_sync_ldap_sections($ldap_server, $test = FALSE) {
   foreach($ldap_sections as $sid => $title) {
     if (!array_key_exists($sid, $mappings)) {
       // Save new section coming from LDAP
+      // taxonomy_term_save()
       $wrapper = entity_property_values_create_entity('taxonomy_term', array(
         'name' => $title,
         'vocabulary' => $voc,

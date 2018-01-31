@@ -9,11 +9,13 @@
     <div class="view-header back"><?php print l(t('Back to dangerous substances and filter'), 'themes/dangerous-substances/search'); ?></div>
 <?php } ?>
 <?php
+$add_field_group = FALSE;
 if ($view_mode == 'dangerous_substances') {
   $page = TRUE;
+  $add_field_group = TRUE;
 }
 if ($page && ($view_mode == 'dangerous_substances')) { ?>
-    <div class="view-header back"><?php print l(t('Back to Practical tools and guidance on dangerous substances'), 'themes/dangerous-substances/ds-tools'); ?></div>
+    <div class="view-header back"><?php print l(t('Back to Practical tools and guidance on dangerous substances'), 'themes/dangerous-substances/practical-tools-dangerous-substances'); ?></div>
 <?php } ?>
 
 <article class="node-<?php print $node->nid; ?> <?php print $classes; ?> clearfix"<?php print $attributes; ?>>
@@ -42,11 +44,21 @@ if ($page && ($view_mode == 'dangerous_substances')) { ?>
   <?php endif; ?>
 
   <?php
+  $map = [
+    'body' => ['title' => t('Description'), 'id' => 'description'],
+    'field_sector_industry_covered' => ['title' => t('Other data'), 'id' => 'other_data'],
+    'field_external_url' => ['title' => t('Access tool'), 'id' => 'access_tool'],
+  ];
   // We hide the comments and links now so that we can render them later.
   hide($content['comments']);
   hide($content['links']);
   // unset to render below after a div
-  print render($content);
+  foreach($content as $field_name => $field) {
+    if ($add_field_group && isset($map[$field_name])) {
+      print '<h3 id="'.$map[$field_name]['id'].'">' . $map[$field_name]['title'] . '</h3>';
+    }
+    print render($field);
+  }
   ?>
   <?php print render($content['links']); ?>
 

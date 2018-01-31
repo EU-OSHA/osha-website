@@ -761,7 +761,14 @@ function osha_tmgmt_node_presave($node) {
   if (!in_array($node->type, $dissalowed) && isset($node->body) && is_array($node->body)) {
     // reformat body text for all languages and enhance paragraphs with unique id's
     foreach(array_keys($node->body) as $lang) {
-      if (isset($node->body[$lang][0]['format']) && $node->body[$lang][0]['format'] == 'full_html') {
+      if (isset($node->body[$lang][0]['format']) &&
+        (
+          ($node->body[$lang][0]['format'] == 'full_html') ||
+          ($node->body[$lang][0]['format'] == 'full_html_minimal') ||
+          ($node->body[$lang][0]['format'] == 'dangerous_substances') ||
+          ($node->body[$lang][0]['format'] == 'dangerous_substances_minimal')
+        )
+      ) {
         // can be not set for a new node with empty body
         $previous_texts = [];
         if (!empty($node->original) && !!empty($node->osha_skip_original_text)) {

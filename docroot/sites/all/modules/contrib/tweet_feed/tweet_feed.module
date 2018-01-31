@@ -765,7 +765,7 @@ function tweet_feed_save_tweet($tweet, $feed, $update_node_id = 0, $hash = NULL,
   $node->language = LANGUAGE_NONE;
 
   // Filter it cleanly since it is going into the title field and remove iconv.
-  $node->title = check_plain(substr(tweet_feed_filter_iconv_text(tweet_feed_filter_smart_quotes($tweet->user->screen_name)) . ': ' . tweet_feed_filter_iconv_text(tweet_feed_filter_smart_quotes($tweet->full_text)), 0, 255));
+  $node->title = substr(check_plain(tweet_feed_filter_iconv_text(tweet_feed_filter_smart_quotes($tweet->user->screen_name)) . ': ' . tweet_feed_filter_iconv_text(tweet_feed_filter_smart_quotes($tweet_text))), 0, 255);
 
   // The tweet itself goes into the tweet contents field
   $node->field_tweet_contents[$node->language][0] = array(

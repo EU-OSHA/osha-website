@@ -1,0 +1,7 @@
+.container-inline .form-item-osha-reminders-pm-notify-md1-year,
+.container-inline .form-item-osha-reminders-pm-notify-md2-year,
+.container-inline .form-item-osha-reminders-heads-notify-md1-year,
+.container-inline .form-item-osha-reminders-heads-notify-md2-year {
+    visibility: hidden;
+    display: none;
+}

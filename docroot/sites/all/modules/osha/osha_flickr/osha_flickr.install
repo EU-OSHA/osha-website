@@ -20,3 +20,10 @@ function osha_flickr_update_7002() {
 function osha_flickr_update_7003() {
   features_revert(array('osha_flickr' => array('field_base', 'field_instance')));
 }
+
+/**
+ * MDR-1671 the URL of the albums is the node number.
+ */
+function osha_flickr_update_7004() {
+  variable_set('pathauto_node_flickr_gallery_pattern', 'photo-gallery/[node:title]');
+}

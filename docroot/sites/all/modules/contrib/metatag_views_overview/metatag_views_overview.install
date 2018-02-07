@@ -1,0 +1,16 @@
+<?php
+/**
+ * @file
+ * Install file.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function metatag_views_overview_install() {
+  if (_metatag_views_overview_needs_conversion()) {
+    $t = get_t();
+    drupal_set_message($t('Please visit the !overview to convert your views metatags to the new format.',
+      array('!overview' => l($t('metatags overview page'), 'admin/config/search/metatags'))));
+  }
+}

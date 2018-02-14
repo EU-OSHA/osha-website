@@ -1362,7 +1362,7 @@ function osha_dangerous_substances_views_default_views() {
 
   $view = new view();
   $view->name = 'practical_tools_and_guidance_on_dangerous_substances';
-  $view->description = 'Public search of DS';
+  $view->description = 'A number of tools and guidance documents have been developed by Member States, European institutions, business associations, soc';
   $view->tag = 'default';
   $view->base_table = 'search_api_index_default_content_index';
   $view->human_name = 'Practical tools and guidance on dangerous substances';
@@ -1592,6 +1592,14 @@ function osha_dangerous_substances_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['exposed_block'] = TRUE;
+  $handler->display->display_options['metatags'] = array(
+    'description' => array(
+      'value' => '[view:description]',
+    ),
+    'keywords' => array(
+      'value' => 'Dangerous substances, Dangerous substances management, Toxicology, Biological hazards, Chemical hazards, Multi-factorial work hazards, Nanoscale materials, practical tools',
+    ),
+  );
   $handler->display->display_options['path'] = 'themes/dangerous-substances/practical-tools-dangerous-substances';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Practical tools and guidance on dangerous substances';

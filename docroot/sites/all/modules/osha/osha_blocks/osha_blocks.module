@@ -88,6 +88,7 @@ function osha_block_related_content_blocks_view() {
   $block2 = block_load('views', 'related_content-block_1');
   $block3 = block_load('views', 'related_events-block_6');
   $array = _block_get_renderable_array(_block_render_blocks(array($block1, $block2, $block3)));
+  drupal_add_js(drupal_get_path('module', 'osha_blocks') . '/js/related_content.js');
   return render($array);
 }
 

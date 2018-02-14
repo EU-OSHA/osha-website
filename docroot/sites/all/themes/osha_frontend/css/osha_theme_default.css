@@ -9546,3 +9546,19 @@ div.flickr-photoset{
 	margin-bottom: 15px;
 }
 
+.logged-in.node-type-dangerous-substances .node-dangerous-substances .field-name-field-item-type,
+.logged-in.node-type-dangerous-substances .node-dangerous-substances .field-name-field-material-country,
+.logged-in.node-type-dangerous-substances .node-dangerous-substances .field-name-field-available-in-languages{
+	display: block;
+	background-color: inherit;
+	border-radius: 0px;
+    padding: 0px;
+    margin-right: 0px;
+    color: inherit;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.logged-in.node-type-dangerous-substances .node-dangerous-substances > div{
+	margin-bottom: 10px;
+}

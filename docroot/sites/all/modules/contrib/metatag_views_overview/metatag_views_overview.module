@@ -1,0 +1,231 @@
+<?php
+/**
+ * @file
+ * Module file.
+ */
+
+/**
+ * Implements hook_ctools_plugin_api().
+ */
+function metatag_views_overview_ctools_plugin_api($owner, $api) {
+  if ($owner == 'metatag' && $api == 'metatag') {
+    return array('version' => 1);
+  }
+}
+
+/**
+ * Implements hook_menu_alter().
+ *
+ * Modify the existing menu so the autoloader can be changed.
+ */
+function metatag_views_overview_menu_alter(&$items) {
+  // Change the autoloader.
+  $items['admin/config/search/metatags/config/%metatag_views_overview_config'] = $items['admin/config/search/metatags/config/%metatag_config'];
+  unset($items['admin/config/search/metatags/config/%metatag_config']);
+}
+
+/**
+ * Implements hook_menu().
+ */
+function metatag_views_overview_menu() {
+  $items = array();
+
+  // Add a link to convert old views tags.
+  if (_metatag_views_overview_needs_conversion()) {
+    $items['admin/config/search/metatags/config/convert'] = array(
+      'title' => 'Convert old Metatag Views',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('metatag_views_overview_convert_form'),
+      'access arguments' => array('administer meta tags'),
+      'type' => MENU_LOCAL_ACTION,
+    );
+  }
+
+  return $items;
+}
+
+/**
+ * Menu autoloader callback.
+ */
+function metatag_views_overview_config_load($instance) {
+  // If we're dealing with a view, run a special process.
+  if (strpos($instance, 'view:') === 0) {
+    list($type, $view_name, $display) = preg_split('/[:-]/', $instance);
+    $view = views_get_view(check_plain($view_name));
+    if ($view && isset($view->display[check_plain($display)])) {
+      $config = new stdClass();
+      $config->instance = 'view:' . $view->name . '-' . check_plain($display);
+      $config->config = (isset($view->display[$display]->display_options['metatags'])) ? $view->display[$display]->display_options['metatags'] : array();
+      $config->export_type = $view->export_type;
+      return $config;
+    }
+  }
+
+  // Default back to standard metatag config load.
+  return metatag_config_load($instance);
+}
+
+/**
+ * Menu convert callback.
+ */
+function metatag_views_overview_convert_form($form, &$form_state) {
+  if (_metatag_views_overview_needs_conversion()) {
+    $form['information'] = array(
+      '#markup' => '<p>' . t('This action will convert any old style views metatags by adding the metatags directly to the view, then deleting the old database records. <em>This action cannot be undone.</em>') . '</p>',
+    );
+    $form['submit'] = array(
+      '#type' => 'submit',
+      '#value' => t('Convert'),
+    );
+  }
+  else {
+    $form['information'] = array(
+      '#markup' => '<p>' . t('There were no old style views metatags found.') . '</p>',
+    );
+  }
+  return $form;
+}
+
+/**
+ * Conversion callback.
+ */
+function metatag_views_overview_convert_form_submit($form, &$form_state) {
+  $batch = array(
+    'operations' => array(),
+    'finished' => '_metatag_views_overview_convert_finished',
+    'title' => t('Metatag Views Convert'),
+    'init_message' => t('Beginning to update old views metatags to new in-view storage.'),
+    'error_message' => t('An error occurred. Please verify your views.'),
+    'file' => drupal_get_path('module', 'metatag_views_overview') . '/metatag_views_overview.batch.inc',
+  );
+
+  // Generates an array of views where each member is
+  // array(0 => view object, 1 => display name).
+  $taggable_views = views_get_applicable_views('uses hook menu');
+  $instances = array();
+
+  // Setup a lookup array of taggable views.
+  foreach ($taggable_views as $view) {
+    $instance_name = 'views:' . $view[0]->name . '_' . $view[1];
+    $instances[$instance_name] = $view;
+  }
+
+  // Process through the existing records.
+  $metatag_views = db_select('metatag_config', 'mc')
+    ->condition('mc.instance', 'views:%', 'LIKE')
+    ->fields('mc', array('cid', 'instance', 'config'))
+    ->execute();
+  foreach ($metatag_views as $view) {
+    if (isset($instances[$view->instance])) {
+      $batch['operations'][] = array(
+        'metatag_views_overview_convert_process',
+        array($view, $instances[$view->instance]),
+      );
+    }
+  }
+
+  batch_set($batch);
+}
+
+/**
+ * Implements hook_metatag_config_default_alter().
+ *
+ * Add the existing views to the metatag overview page.
+ */
+function metatag_views_overview_metatag_config_default_alter(&$configs) {
+  // Add views.
+  $views = views_get_applicable_views('uses hook menu');
+
+  foreach ($views as $key => $view_info) {
+    if (isset($view_info[0]->display[$view_info[1]]->display_options['metatags'])) {
+      $instance = 'view:' . $view_info[0]->name . '-' . $view_info[1];
+      $configs[$instance] = new stdClass();
+      $configs[$instance]->instance = $instance;
+      $configs[$instance]->config = $view_info[0]->display[$view_info[1]]->display_options['metatags'];
+      $configs[$instance]->export_type = $view_info[0]->export_type;
+    }
+  }
+}
+
+/**
+ * Implements hook_page_alter().
+ */
+function metatag_views_overview_page_alter(&$page) {
+  if (request_uri() == '/admin/config/search/metatags') {
+
+    $rows = &$page['content']['system_main']['config_table']['#rows'];
+    foreach ($rows as $instance => $row) {
+
+      if (strpos($instance, 'view:') === 0) {
+        list($type, $view_name, $display) = preg_split('/[:-]/', $instance);
+
+        // Remove non-edit operation links. Those need to be done on views.
+        foreach (array_keys($row['data']['operations']['data']['#links']) as $op) {
+          if ($op != 'edit') {
+            unset($rows[$instance]['data']['operations']['data']['#links'][$op]);
+          }
+        }
+
+        // If this user can edit views, add a link to edit the view.
+        if (user_access('administer views')) {
+          $rows[$instance]['data']['operations']['data']['#links']['edit_view'] = array(
+            'title' => t('Edit view'),
+            'href' => 'admin/structure/views/view/' . $view_name . '/edit/' . $display,
+          );
+        }
+
+      }
+    }
+
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function metatag_views_overview_form_metatag_config_edit_form_alter(&$form, &$form_state) {
+  // If this is a View display metatag form, hijack the submit handler.
+  if (strpos($form['instance']['#value'], 'view:') === 0) {
+    $form['#submit'] = array('metatag_views_overview_config_edit_form_submit');
+  }
+}
+
+/**
+ * Metatag views config edit submit handler.
+ */
+function metatag_views_overview_config_edit_form_submit($form, &$form_state) {
+  // Get default language.
+  $default = $form['metatags']['#language'];
+  // Cleanup the metatags.
+  metatag_filter_values_from_defaults($form_state['values']['metatags'][$default], $form['metatags'][$default]['#metatag_defaults']);
+
+  // Save the metatags to the view.
+  list($type, $view_name, $display) = preg_split('/[:-]/', $form['instance']['#value']);
+  $view = views_get_view($view_name);
+  $view->display[$display]->display_options['metatags'] = $form_state['values']['metatags'][$default];
+  $view->save();
+
+  // Flush caches.
+  cache_clear_all('*', 'cache_metatag', TRUE);
+
+  // Return confirmation.
+  $label = metatag_config_instance_label($form['instance']['#value']);
+  drupal_set_message(t('The meta tag defaults for @label have been saved.', array('@label' => $label)));
+
+  $form_state['redirect'] = 'admin/config/search/metatags';
+}
+
+/**
+ * Helper function to determine if metatags need conversion.
+ */
+function _metatag_views_overview_needs_conversion() {
+  $old_style = db_select('metatag_config', 'mc')
+    ->condition(db_or()
+      ->condition('mc.instance', 'views')
+      ->condition('mc.instance', 'views:', 'LIKE')
+    )
+    ->countQuery()
+    ->execute()
+    ->fetchField();
+  return $old_style ? TRUE : FALSE;
+}

@@ -1326,7 +1326,7 @@ function osha_workflow_block_view($delta = '') {
     }
 
     //  workbench_moderation_node_current_load
-    $content['form'] = drupal_get_form('osha_workflow_moderation_moderate_form', $node);
+    $content['form'] = drupal_get_form('osha_workflow_moderation_moderate_form', $node, "node/{$node->nid}/current-revision");
 
     $block = array(
       'subject' => '',

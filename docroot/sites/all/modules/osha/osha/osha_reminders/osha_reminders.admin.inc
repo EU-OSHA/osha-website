@@ -4,6 +4,7 @@
  * Module's configuration form.
  */
 function osha_reminders_admin_form($form, &$form_state) {
+  drupal_add_css(drupal_get_path('module', 'osha_reminders') .'/css/osha_reminders.css');
   $form['change_settings'] = array(
     '#type' => 'fieldset',
     '#title' => t('Change settings'),

@@ -1424,7 +1424,7 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_material_country']['label'] = '';
   $handler->display->display_options['fields']['field_material_country']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_material_country']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_material_country']['alter']['text'] = '<span class="views-label">Country: </span><span>[field_material_country]</span>';
+  $handler->display->display_options['fields']['field_material_country']['alter']['text'] = '<span>[field_material_country]</span>';
   $handler->display->display_options['fields']['field_material_country']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_material_country']['link_to_entity'] = 0;
   $handler->display->display_options['fields']['field_material_country']['view_mode'] = 'full';
@@ -1435,7 +1435,8 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_available_in_languages']['field'] = 'field_available_in_languages';
   $handler->display->display_options['fields']['field_available_in_languages']['label'] = '';
   $handler->display->display_options['fields']['field_available_in_languages']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_available_in_languages']['alter']['text'] = '[field_available_in_languages]';
+  $handler->display->display_options['fields']['field_available_in_languages']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_available_in_languages']['alter']['text'] = '<span>[field_available_in_languages]</span>';
   $handler->display->display_options['fields']['field_available_in_languages']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_available_in_languages']['settings'] = array(
     'format' => array(
@@ -1452,7 +1453,7 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_fc_provider_field_fc_provider_name']['label'] = '';
   $handler->display->display_options['fields']['field_fc_provider_field_fc_provider_name']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_fc_provider_field_fc_provider_name']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_fc_provider_field_fc_provider_name']['alter']['text'] = '<span class="views-label">Provider: </span><span>[field_fc_provider_field_fc_provider_name]</span>';
+  $handler->display->display_options['fields']['field_fc_provider_field_fc_provider_name']['alter']['text'] = '<span>[field_fc_provider_field_fc_provider_name]</span>';
   $handler->display->display_options['fields']['field_fc_provider_field_fc_provider_name']['element_label_colon'] = FALSE;
   /* Field: Indexed Content: URL */
   $handler->display->display_options['fields']['url']['id'] = 'url';
@@ -1477,6 +1478,15 @@ function osha_dangerous_substances_views_default_views() {
     'show_remaining_days' => 0,
     'osha_date_theme' => '',
   );
+  /* Field: Indexed Content: Type of item */
+  $handler->display->display_options['fields']['field_item_type']['id'] = 'field_item_type';
+  $handler->display->display_options['fields']['field_item_type']['table'] = 'search_api_index_default_content_index';
+  $handler->display->display_options['fields']['field_item_type']['field'] = 'field_item_type';
+  $handler->display->display_options['fields']['field_item_type']['label'] = '';
+  $handler->display->display_options['fields']['field_item_type']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_item_type']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_item_type']['alter']['text'] = '<span>[field_item_type]</span>';
+  $handler->display->display_options['fields']['field_item_type']['element_label_colon'] = FALSE;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
@@ -1485,7 +1495,8 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="av-type">
 [field_fc_provider_field_fc_provider_name]
 [field_material_country]
-<span class="views-label">Language: </span><span>[field_available_in_languages]</span>
+[field_available_in_languages]
+[field_item_type]
 </div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   /* Field: Indexed Content: The main body text */
@@ -1626,14 +1637,16 @@ function osha_dangerous_substances_views_default_views() {
     t('.'),
     t(','),
     t('<a href=\'[url]?destination=/en/themes/dangerous-substances/practical-tools-and-guidance-on-dangerous-substances\'>See more</a>'),
-    t('<span class="views-label">Country: </span><span>[field_material_country]</span>'),
-    t('[field_available_in_languages]'),
-    t('<span class="views-label">Provider: </span><span>[field_fc_provider_field_fc_provider_name]</span>'),
+    t('<span>[field_material_country]</span>'),
+    t('<span>[field_available_in_languages]</span>'),
+    t('<span>[field_fc_provider_field_fc_provider_name]</span>'),
     t('Year of publication'),
+    t('<span>[field_item_type]</span>'),
     t('<div class="av-type">
 [field_fc_provider_field_fc_provider_name]
 [field_material_country]
-<span class="views-label">Language: </span><span>[field_available_in_languages]</span>
+[field_available_in_languages]
+[field_item_type]
 </div>'),
     t('Relevance'),
     t('Search'),

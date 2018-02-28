@@ -3,3 +3,10 @@
 function osha_content_update_7001() {
   features_revert_module('osha_content');
 }
+
+/**
+ * MDR-1710 A way to hide the related publications when they are 'twin'.
+ */
+function osha_content_update_7002() {
+  features_revert(array('osha_content' => array('views_view')));
+}

@@ -390,6 +390,11 @@ function osha_content_views_default_views() {
   $handler->display->display_options['filters']['field_publication_date_value']['operator'] = '<=';
   $handler->display->display_options['filters']['field_publication_date_value']['granularity'] = 'minute';
   $handler->display->display_options['filters']['field_publication_date_value']['default_date'] = 'now';
+  /* Filter criterion: Content: Nid */
+  $handler->display->display_options['filters']['nid']['id'] = 'nid';
+  $handler->display->display_options['filters']['nid']['table'] = 'node';
+  $handler->display->display_options['filters']['nid']['field'] = 'nid';
+  $handler->display->display_options['filters']['nid']['operator'] = 'not empty';
 
   /* Display: Publication Block Center */
   $handler = $view->new_display('block', 'Publication Block Center', 'block_3');

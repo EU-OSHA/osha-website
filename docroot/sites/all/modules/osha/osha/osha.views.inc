@@ -7,6 +7,16 @@
  * to LEFT JOIN node_revision ON node.nid = node_revision.nid
  */
 function osha_views_query_alter(&$view, &$query) {
+  if ($view->name == 'related_content') {
+    foreach ($query->where[0]['conditions'] as $idx => $condition) {
+      if ($condition['field'] instanceof DatabaseCondition) {
+        $conditions =& $condition['field']->conditions();
+        if (count($conditions) == 2) {
+          $query->where[0]['conditions'][$idx] = $conditions[0];
+        }
+      }
+    }
+  }
   if (($view->name == 'related_content') && ($view->current_display == 'block_2')) {
     $node = menu_get_object('node');
     if ($node && $node->type == 'publication') {
@@ -18,12 +28,11 @@ function osha_views_query_alter(&$view, &$query) {
           $excluded_nids[] = $publication->nid;
         }
       }
-      foreach ($query->where as &$condition_group) {
-        foreach ($condition_group['conditions'] as &$condition) {
-          if (reset($condition) == 'node.nid') {
-            $condition = array('field' => 'node.nid', 'value' => $excluded_nids, 'operator' => 'NOT IN');
-            break;
-          }
+
+      foreach ($query->where[0]['conditions'] as $idx => $condition) {
+        if ($condition['field'] == 'node.nid') {
+          $query->where[0]['conditions'][$idx] = array('field' => 'node.nid', 'value' => $excluded_nids, 'operator' => 'NOT IN');
+          break;
         }
       }
     }

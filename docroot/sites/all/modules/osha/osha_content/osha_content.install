@@ -10,3 +10,10 @@ function osha_content_update_7001() {
 function osha_content_update_7002() {
   features_revert(array('osha_content' => array('views_view')));
 }
+
+/**
+ * MDR-1728 Can the 'seminar reports' be shown as tagged on the right hand.
+ */
+function osha_content_update_7003() {
+  features_revert(array('osha_content' => array('views_view')));
+}

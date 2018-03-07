@@ -1896,12 +1896,14 @@ font-weight: normal;
 
 
 	/*-- News */
-	#block-views-related-content-block-1{
+	#block-views-related-content-block-1,
+	#block-views-related-content-block-7{
 		background-color:#FFFFFF;
 		margin-bottom:0em;
 	}
 
-	#block-views-related-content-block-1 h2{
+	#block-views-related-content-block-1 h2,
+	#block-views-related-content-block-7 h2{
 		background: url("../images/news_logo.png") no-repeat scroll 100% 30% transparent;
 		color: #000000;
 		font-family: "Open Sans Condensed",sans-serif;
@@ -1913,7 +1915,8 @@ font-weight: normal;
 		font-weight: bold;
 	}
 
-	#block-views-related-content-block-1 .view-related-content{
+	#block-views-related-content-block-1 .view-related-content,
+	#block-views-related-content-block-7 .view-related-content{
 		background: url("../images/separator_home.jpg") repeat-x scroll 0% -7px rgba(0, 0, 0, 0);
 		height:1%;
 		overflow:hidden;
@@ -1921,15 +1924,18 @@ font-weight: normal;
 	}
 
 	
-	#block-views-related-content-block-1 .view-related-content .views-row{
+	#block-views-related-content-block-1 .view-related-content .views-row,
+	#block-views-related-content-block-7 .view-related-content .views-row{
 		background: url("../images/separator_home.jpg") repeat-x scroll 0% -7px rgba(0, 0, 0, 0);
 	}
 	
-	#block-views-related-content-block-1 .views-field-title-field{
+	#block-views-related-content-block-1 .views-field-title-field,
+	#block-views-related-content-block-7 .views-field-title-field{
 		padding-bottom:0.5em;
 	}
 
-	#block-views-related-content-block-1 a{
+	#block-views-related-content-block-1 a,
+	#block-views-related-content-block-7 a{
 		color:#003399;
 		text-decoration:none;
 		background: url("../images/li_arrow.png") no-repeat scroll 0% 100% transparent;
@@ -1939,7 +1945,8 @@ font-weight: normal;
 		border-bottom:0px!important
 	}
 	
-	#block-views-related-content-block-1 .date-display-single{
+	#block-views-related-content-block-1 .date-display-single,
+	#block-views-related-content-block-7 .date-display-single{
 		display: block;
 		padding-top: 1em;
 		font-size:0.8em;

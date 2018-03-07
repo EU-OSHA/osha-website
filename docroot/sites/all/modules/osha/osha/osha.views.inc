@@ -29,10 +29,12 @@ function osha_views_query_alter(&$view, &$query) {
         }
       }
 
-      foreach ($query->where[0]['conditions'] as $idx => $condition) {
-        if ($condition['field'] == 'node.nid') {
-          $query->where[0]['conditions'][$idx] = array('field' => 'node.nid', 'value' => $excluded_nids, 'operator' => 'NOT IN');
-          break;
+      foreach($query->where as $i => $conditions) {
+        foreach ($conditions['conditions'] as $idx => $condition) {
+          if ($condition['field'] == 'node.nid') {
+            $query->where[$i]['conditions'][$idx] = array('field' => 'node.nid', 'value' => $excluded_nids, 'operator' => 'NOT IN');
+            break;
+          }
         }
       }
     }

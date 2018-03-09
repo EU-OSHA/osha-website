@@ -9,7 +9,7 @@
 ?>
 <?php
     $node = menu_get_object();
-    if (isset($node) && isset($node->article_type_code) && $node->article_type_code == 'introduction') {
+    if (isset($node) && isset($node->article_type_code)) {
     ?>
         <div id="<?php print $block_html_id; ?>" class="menu-block-3 <?php print $classes; ?>"<?php print $attributes; ?>>
 

@@ -224,7 +224,16 @@ class FocalPointsContentListXML extends MigrateList {
         $data->title_field = (string) $attributes['Table0_Details5'];
         $data->field_press_contact_organization = (string) $attributes['Table0_Details1'];
         $data->field_personal_title = (string) $attributes['Table0_Details3'];
+
         $data->field_press_contact_phone = (string) $attributes['Table0_Details6'];
+        if (isset($attributes['Table0_Details9'])) {
+          $prefix = trim((string) $attributes['Table0_Details9']);
+          $parts = explode('(', $prefix);
+          if (count($parts) == 2) {
+            $prefix = trim($parts[0]);
+          }
+          $data->field_press_contact_phone =  $prefix . $data->field_press_contact_phone;
+        }
         $data->field_press_contact_location = (string) $attributes['a_osh_phaddress'];
         $data->field_press_contact_email = (string) $attributes['Table0_Details7'];
         $data->field_website = (string) $attributes['Table0_Details8'];

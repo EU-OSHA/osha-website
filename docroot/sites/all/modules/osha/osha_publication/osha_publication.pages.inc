@@ -52,10 +52,25 @@ function osha_publication_menu_publications_form($form, $form_state) {
     '#suffix' => '</div>',
   );
 
+  $q = db_select('field_data_field_file', 'b');
+  $q->fields('b', array('language'));
+  $q->innerJoin('node', 'a', 'a.nid = b.entity_id AND a.vid = b.revision_id');
+  $q->condition('b.bundle', 'publication');
+  $q->condition('a.status', 1);
+  $q->distinct();
+  $used_languages = $q->execute()->fetchAllKeyed(0, 0);
+
   $enabled_lang = language_list();
   $enabled_lang = osha_sort_language_list($enabled_lang);
+  if (isset($enabled_lang['sh'])) {
+    $enabled_lang['sh']->name = t('Serbian');
+  }
+
   $lang_options = [];
   foreach ($enabled_lang as $lang => $lang_obj) {
+    if (!isset($used_languages[$lang])) {
+      continue;
+    }
     if ($lang_obj->enabled) {
       $lang_options[$lang] = $lang_obj->name;
     }

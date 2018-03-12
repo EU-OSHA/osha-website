@@ -1904,14 +1904,14 @@ font-weight: normal;
 
 	#block-views-related-content-block-1 h2,
 	#block-views-related-content-block-7 h2{
-		background: url("../images/news_logo.png") no-repeat scroll 100% 30% transparent;
+		background: url("../images/news_logo.png") no-repeat scroll 5% 30% transparent;
 		color: #000000;
 		font-family: "Open Sans Condensed",sans-serif;
 		font-size: 1.2em;
 		font-weight: lighter;
 		margin-bottom: 0;
 		padding-bottom: 0;
-		padding-left: 0.5em;
+		padding-left: 2.5em;
 		font-weight: bold;
 	}
 

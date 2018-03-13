@@ -81,7 +81,7 @@ function osha_user_default_permissions() {
   $permissions['moderate article state from ready_to_publish to published'] = array(
     'name' => 'moderate article state from ready_to_publish to published',
     'roles' => array(
-      'Project Manager' => 'Project Manager',
+      'Review Manager' => 'Review Manager',
       'administrator' => 'administrator',
     ),
     'module' => 'workbench_moderation',
@@ -99,9 +99,7 @@ function osha_user_default_permissions() {
   // Exported permission: 'moderate calls state from approved to published'.
   $permissions['moderate calls state from approved to published'] = array(
     'name' => 'moderate calls state from approved to published',
-    'roles' => array(
-      'Project Manager' => 'Project Manager',
-    ),
+    'roles' => array(),
     'module' => 'workbench_moderation',
   );
 
@@ -118,6 +116,7 @@ function osha_user_default_permissions() {
   $permissions['moderate calls state from ready_to_publish to published'] = array(
     'name' => 'moderate calls state from ready_to_publish to published',
     'roles' => array(
+      'Project Manager' => 'Project Manager',
       'administrator' => 'administrator',
     ),
     'module' => 'workbench_moderation',
@@ -172,9 +171,7 @@ function osha_user_default_permissions() {
   // Exported permission: 'moderate directive state from approved to published'.
   $permissions['moderate directive state from approved to published'] = array(
     'name' => 'moderate directive state from approved to published',
-    'roles' => array(
-      'Project Manager' => 'Project Manager',
-    ),
+    'roles' => array(),
     'module' => 'workbench_moderation',
   );
 
@@ -191,6 +188,7 @@ function osha_user_default_permissions() {
   $permissions['moderate directive state from ready_to_publish to published'] = array(
     'name' => 'moderate directive state from ready_to_publish to published',
     'roles' => array(
+      'Review Manager' => 'Review Manager',
       'administrator' => 'administrator',
     ),
     'module' => 'workbench_moderation',
@@ -208,9 +206,7 @@ function osha_user_default_permissions() {
   // Exported permission: 'moderate guideline state from approved to published'.
   $permissions['moderate guideline state from approved to published'] = array(
     'name' => 'moderate guideline state from approved to published',
-    'roles' => array(
-      'Project Manager' => 'Project Manager',
-    ),
+    'roles' => array(),
     'module' => 'workbench_moderation',
   );
 
@@ -227,6 +223,7 @@ function osha_user_default_permissions() {
   $permissions['moderate guideline state from ready_to_publish to published'] = array(
     'name' => 'moderate guideline state from ready_to_publish to published',
     'roles' => array(
+      'Review Manager' => 'Review Manager',
       'administrator' => 'administrator',
     ),
     'module' => 'workbench_moderation',
@@ -316,9 +313,7 @@ function osha_user_default_permissions() {
   // Exported permission: 'moderate job_vacancies state from approved to published'.
   $permissions['moderate job_vacancies state from approved to published'] = array(
     'name' => 'moderate job_vacancies state from approved to published',
-    'roles' => array(
-      'Project Manager' => 'Project Manager',
-    ),
+    'roles' => array(),
     'module' => 'workbench_moderation',
   );
 
@@ -335,6 +330,7 @@ function osha_user_default_permissions() {
   $permissions['moderate job_vacancies state from ready_to_publish to published'] = array(
     'name' => 'moderate job_vacancies state from ready_to_publish to published',
     'roles' => array(
+      'Review Manager' => 'Review Manager',
       'administrator' => 'administrator',
     ),
     'module' => 'workbench_moderation',
@@ -370,7 +366,7 @@ function osha_user_default_permissions() {
   $permissions['moderate news state from ready_to_publish to published'] = array(
     'name' => 'moderate news state from ready_to_publish to published',
     'roles' => array(
-      'Project Manager' => 'Project Manager',
+      'Review Manager' => 'Review Manager',
       'administrator' => 'administrator',
     ),
     'module' => 'workbench_moderation',
@@ -406,7 +402,7 @@ function osha_user_default_permissions() {
   $permissions['moderate press_release state from ready_to_publish to published'] = array(
     'name' => 'moderate press_release state from ready_to_publish to published',
     'roles' => array(
-      'Project Manager' => 'Project Manager',
+      'Review Manager' => 'Review Manager',
       'administrator' => 'administrator',
     ),
     'module' => 'workbench_moderation',
@@ -442,7 +438,7 @@ function osha_user_default_permissions() {
   $permissions['moderate publication state from ready_to_publish to published'] = array(
     'name' => 'moderate publication state from ready_to_publish to published',
     'roles' => array(
-      'Project Manager' => 'Project Manager',
+      'Review Manager' => 'Review Manager',
       'administrator' => 'administrator',
     ),
     'module' => 'workbench_moderation',

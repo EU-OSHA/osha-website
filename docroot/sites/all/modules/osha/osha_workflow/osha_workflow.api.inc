@@ -66,11 +66,13 @@ function osha_workflow_access_get_section_pm($section_id) {
   $access_id = $access['access_id'];
   $access_scheme = $section_tree['access_scheme']['access_scheme'];
 
-  $users = db_select('osha_workflow_access_pm', 'owa')
+  $query = db_select('osha_workflow_access_pm', 'owa')
     ->fields('owa', array('uid'))
     ->condition('access_id', $access_id, '=')
-    ->condition('access_scheme', $access_scheme)
-    ->execute()
+    ->condition('access_scheme', $access_scheme);
+  $query->join('users', 'u', 'owa.uid = u.uid');
+  $query->orderBy('u.name', 'ASC');
+  $users = $query->execute()
     ->fetchAllAssoc('uid');
   if (!empty($users)) {
     $ret = user_load_multiple(array_keys($users));

@@ -197,6 +197,13 @@ function fill_related_publications(&$vars) {
     // exclude self
     $excluded_nids = array();
     array_push($excluded_nids, $vars['node']->nid);
+    if (($vars['node']->type == 'publication') && $vars['node']->field_related_publications) {
+      foreach($vars['node']->field_related_publications as $related_publications) {
+        foreach($related_publications as $related_publication) {
+          array_push($excluded_nids, $related_publication['target_id']);
+        }
+      }
+    }
 
     $query->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', 'publication')

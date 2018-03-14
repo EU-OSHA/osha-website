@@ -16,8 +16,13 @@ function osha_workflow_node_pm_assign_form($form, &$form_state, $node) {
   $section = current($node->workbench_access);
   $section_pms = osha_workflow_access_get_section_pm($section);
   $options = array('' => t('-- Please select --'));
+  $term = taxonomy_term_load($section);
   foreach ($section_pms as $uid => $pm) {
-    $options[$uid] = $pm->name;
+    $options[$term->name][$uid] = $pm->name;
+  }
+  $osha_pms = osha_workflow_access_get_section_pm('section');
+  foreach ($osha_pms as $uid => $pm) {
+    $options[t('Osha')][$uid] = $pm->name;
   }
   $pm_entries = osha_workflow_get_pms_entries($node->nid);
   $project_managers = osha_workflow_get_pms_users($node->nid);

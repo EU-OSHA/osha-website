@@ -1469,7 +1469,7 @@ el.remove();
   $strongarm->value = array(
     'day' => '15',
     'month' => '1',
-    'year' => '2018',
+    'year' => '2019',
   );
   $export['osha_reminders_pm_notify_md1'] = $strongarm;
 

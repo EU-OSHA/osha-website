@@ -1469,7 +1469,7 @@ el.remove();
   $strongarm->value = array(
     'day' => '15',
     'month' => '1',
-    'year' => '2018',
+    'year' => '2019',
   );
   $export['osha_reminders_pm_notify_md1'] = $strongarm;
 
@@ -1764,27 +1764,27 @@ el.remove();
       ),
       2 => array(
         'slot' => 2,
-        'name' => '',
-        'value' => '',
-        'scope' => 'visit',
+        'name' => 'Level1',
+        'value' => '[node:menu-link:parent]',
+        'scope' => 'page',
       ),
       3 => array(
         'slot' => 3,
-        'name' => '',
-        'value' => '',
-        'scope' => 'visit',
+        'name' => 'Level2',
+        'value' => '[node:menu-link:title]',
+        'scope' => 'page',
       ),
       4 => array(
         'slot' => 4,
         'name' => '',
         'value' => '',
-        'scope' => 'visit',
+        'scope' => 'page',
       ),
       5 => array(
         'slot' => 5,
         'name' => '',
         'value' => '',
-        'scope' => 'visit',
+        'scope' => 'page',
       ),
     ),
   );

@@ -551,3 +551,17 @@ function osha_update_7037() {
 function osha_update_7038() {
   features_revert(array('osha' => array('views_view')));
 }
+
+/**
+ * MDR-1670 permissions problem in the legislation section.
+ */
+function osha_update_7039() {
+  features_revert(array('osha' => array('user_permission')));
+}
+
+/**
+ * HW18-460 less entries in DS DB in the campaign than in the corporate.
+ */
+function osha_update_7040() {
+  features_revert(array('osha' => array('views_view')));
+}

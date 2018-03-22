@@ -454,7 +454,7 @@ class OshaMigrateSourceWiki extends MigrateSource {
                 $osha_wiki_hostname = variable_get('osha_wiki_hostname', 'https://oshwiki.eu');
                 $osh_wiki_prefix = $osha_wiki_hostname . '/wiki/';
               }
-              if (!$matches[2]) {
+              if (!@$matches[2]) {
                 $matches[2] = $matches[1];
               }
               return '<a target="_blank" href="' . $osh_wiki_prefix . str_replace(' ','_', trim($matches[1])) . '">' . $matches[2] . '</a>';

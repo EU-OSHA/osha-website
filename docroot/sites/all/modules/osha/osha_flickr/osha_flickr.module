@@ -6,6 +6,15 @@
 
 include_once 'osha_flickr.features.inc';
 
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ *
+ * Alter the node forms.
+ */
+function osha_flickr_form_node_form_alter(&$form, &$form_state, $form_id) {
+  $form['flickr']['#access'] = FALSE;
+}
+
 function osha_flickr_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'flickr_gallery_node_form') {
     drupal_add_css(drupal_get_path('module', 'osha_flickr') .'/css/osha_flickr.css');

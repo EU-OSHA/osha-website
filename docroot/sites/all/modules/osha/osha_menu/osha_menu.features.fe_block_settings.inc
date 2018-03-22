@@ -60,7 +60,8 @@ function osha_menu_default_fe_block_settings() {
     'i18n_mode' => 0,
     'module' => 'menu_block',
     'node_types' => array(),
-    'pages' => 'node/5445',
+    'pages' => 'node/5445
+themes/dangerous-substances/practical-tools-dangerous-substances',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -79,7 +80,7 @@ function osha_menu_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 0,
+        'weight' => 3,
       ),
       'seven' => array(
         'region' => '',
@@ -100,7 +101,7 @@ function osha_menu_default_fe_block_settings() {
     'i18n_mode' => 0,
     'module' => 'menu_block',
     'node_types' => array(),
-    'pages' => '',
+    'pages' => 'node/1409',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -200,6 +201,46 @@ function osha_menu_default_fe_block_settings() {
         'status' => 1,
         'theme' => 'osha_frontend',
         'weight' => 0,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '<none>',
+    'visibility' => 0,
+  );
+
+  $export['menu_block-6'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => 6,
+    'i18n_block_language' => array(),
+    'i18n_mode' => 0,
+    'module' => 'menu_block',
+    'node_types' => array(),
+    'pages' => '',
+    'roles' => array(),
+    'themes' => array(
+      'bartik' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'bartik',
+        'weight' => 0,
+      ),
+      'osha_admin' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'osha_admin',
+        'weight' => 0,
+      ),
+      'osha_frontend' => array(
+        'region' => 'content',
+        'status' => 1,
+        'theme' => 'osha_frontend',
+        'weight' => 11,
       ),
       'seven' => array(
         'region' => '',

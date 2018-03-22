@@ -1,7 +1,7 @@
 name = osha
 core = 7.x
 package = OSHA
-version = 7.x-1.38
+version = 7.x-1.39
 project = osha
 dependencies[] = aggregator
 dependencies[] = comment

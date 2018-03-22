@@ -3610,6 +3610,7 @@ function osha_views_default_views() {
     'MS material' => 'MS material',
     'EU material' => 'EU material',
     'Audiovisual' => 'Audiovisual',
+    'Case study' => 'Case study',
   );
 
   /* Display: Page */

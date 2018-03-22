@@ -7,6 +7,39 @@
  * to LEFT JOIN node_revision ON node.nid = node_revision.nid
  */
 function osha_views_query_alter(&$view, &$query) {
+  if ($view->name == 'related_content') {
+    foreach ($query->where[0]['conditions'] as $idx => $condition) {
+      if ($condition['field'] instanceof DatabaseCondition) {
+        $conditions =& $condition['field']->conditions();
+        if (count($conditions) == 2) {
+          $query->where[0]['conditions'][$idx] = $conditions[0];
+        }
+      }
+    }
+  }
+  if (($view->name == 'related_content') && ($view->current_display == 'block_2')) {
+    $node = menu_get_object('node');
+    if ($node && $node->type == 'publication') {
+      $excluded_nids = array($node->nid);
+      $w = entity_metadata_wrapper('node', $node->nid);
+      $related_publications = $w->field_related_publications->value();
+      if ($related_publications) {
+        foreach($related_publications as $publication) {
+          $excluded_nids[] = $publication->nid;
+        }
+      }
+
+      foreach($query->where as $i => $conditions) {
+        foreach ($conditions['conditions'] as $idx => $condition) {
+          if ($condition['field'] == 'node.nid') {
+            $query->where[$i]['conditions'][$idx] = array('field' => 'node.nid', 'value' => $excluded_nids, 'operator' => 'NOT IN');
+            break;
+          }
+        }
+      }
+    }
+  }
+
   // Switch from JOIN to LEFT JOIN with workbench_moderation_node_history
   // to allow adding content types which are not moderated (i.e. page).
   if ($view->name == 'administration_content') {

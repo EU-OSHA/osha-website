@@ -1904,14 +1904,14 @@ font-weight: normal;
 
 	#block-views-related-content-block-1 h2,
 	#block-views-related-content-block-7 h2{
-		background: url("../images/news_logo.png") no-repeat scroll 5% 30% transparent;
+		background: url("../images/news_logo.png") no-repeat scroll 5% 50% transparent;
 		color: #000000;
 		font-family: "Open Sans Condensed",sans-serif;
-		font-size: 1.2em;
+		font-size: 1.4em;
 		font-weight: lighter;
 		margin-bottom: 0;
 		padding-bottom: 0;
-		padding-left: 2.5em;
+		padding-left: 2.4em;
 		font-weight: bold;
 	}
 
@@ -7438,14 +7438,14 @@ body.page-node-5429 .oshwiki-featured-articles {
 /*EVENTS PORLET*/
 
 #block-views-related-events-block-6 h2{
-	background: url("../images/ico_events.png") no-repeat scroll 100% 30% transparent;
+	background: url("../images/ico_events.png") no-repeat scroll 5% 50% transparent;
 	color: #000000;
 	font-family: "Open Sans Condensed",sans-serif;
-	font-size: 1.2em;
+	font-size: 1.4em;
 	font-weight: lighter;
 	margin-bottom: 0;
 	padding-bottom: 0;
-	padding-left: 0.5em;
+	padding-left: 2.4em;
 	font-weight: bold;
 }
 

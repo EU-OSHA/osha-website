@@ -9,6 +9,10 @@ include_once 'osha_publication.features.inc';
 define('OSHA_PUBLICATION_CONTENT_TYPE_PUBLICATION', 'publication');
 define('SOLR_SEARCH_INDEX', 'default_multilingual_node_index');
 
+function osha_publication_t($title) {
+  return t($title);
+}
+
 /**
  * Implements hook_menu().
  */
@@ -16,6 +20,7 @@ function osha_publication_menu() {
   $items = array();
   $items['tools-and-publications/publications'] = array(
     'title' => 'Publications',
+    'title callback' => 'osha_publication_t',
     'description' => 'Config information for the module',
     'page callback' => 'osha_publication_listing_page',
     'access arguments' => array('access content'),

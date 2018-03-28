@@ -67,11 +67,11 @@ if (arg(0) == 'imce_files') {
 <div id="resizable-content">
 <div id="browse-wrapper">
 
-  <div id="navigation-wrapper" style="visibility: hidden; display: none;">
-    <div class="navigation-text" id="navigation-header"><span><?php /*print t('Navigation'); */?></span></div>
+  <div id="navigation-wrapper" style="display: none;">
+    <div class="navigation-text" id="navigation-header"><span><?php print t('Navigation'); ?></span></div>
     <ul id="navigation-tree"><li class="expanded root"><?php print $tree; ?></li></ul>
   </div>
-<div id="navigation-resizer" class="x-resizer" style="visibility: hidden; display: none;"></div>
+<div id="navigation-resizer" class="x-resizer" style="display: none;"></div>
 
   <div id="sub-browse-wrapper">
 
@@ -108,3 +108,8 @@ if (arg(0) == 'imce_files') {
 <div id="forms-wrapper"><?php print $forms; ?></div>
 
 </div><!-- imce-content -->
+<script>
+    jQuery(document).ready(function ($) {
+        jQuery('#ops-list').append('<li id="op-item-toggle" onclick="jQuery(\'#navigation-wrapper, #navigation-resizer\').toggle(); return false;"><a href="#" name="toggle" title="Toggle tree"><span>Toggle tree</span></a></li>');
+    });
+</script>

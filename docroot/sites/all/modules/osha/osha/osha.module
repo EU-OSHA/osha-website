@@ -830,22 +830,6 @@ function osha_wysiwyg_plugin($editor, $version=0) {
 function osha_form_alter(&$form, &$form_state, $form_id) {
   global $user;
 
-  if ($form_id == 'imce_fileop_form') {
-    $form['fset_toggle'] = array(
-      '#type' => 'fieldset',
-      '#title' => t('Toggle tree'),
-    );
-    $form['fset_toggle']['toggle'] = array(
-      '#type' => 'submit',
-      '#value' => t('Toggle'),
-      '#submit' => array('imce_toggle_submit'),
-      '#attributes' => array(
-        'onclick' => 'jQuery(\'#navigation-wrapper, #navigation-resizer\').toggle(); return false;',
-      ),
-      '#suffix' => '</div>',
-    );
-  }
-
   osha_form_text_fields_placeholders($form, $form_id);
   drupal_add_css(drupal_get_path('module', 'osha') . '/styles/tinymce.css');
 

@@ -152,23 +152,32 @@ function osha_job_vacancies_strongarm() {
       'print' => array(
         'custom_settings' => FALSE,
       ),
+      'dangerous_substances' => array(
+        'custom_settings' => TRUE,
+      ),
+      'osha_search_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '17',
+          'weight' => '24',
         ),
         'redirect' => array(
-          'weight' => '18',
+          'weight' => '25',
         ),
         'language' => array(
           'weight' => '0',
         ),
         'metatags' => array(
-          'weight' => '19',
+          'weight' => '26',
         ),
         'workbench_access' => array(
-          'weight' => '1',
+          'weight' => '0',
+        ),
+        'xmlsitemap' => array(
+          'weight' => '29',
         ),
       ),
       'display' => array(),

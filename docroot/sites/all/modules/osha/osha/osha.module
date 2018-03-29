@@ -329,6 +329,7 @@ function osha_date_format_types() {
   return array(
     'year'  => t('Year'),
     'short_date_eu'  => t('EU short date'),
+    'pubdate_rss'  => t('pubDate RSS'),
     'osha_day_only'  => t('Day only'),
     'month' => t('Month: F'),
     'year_and_month'  => t('Year and Month'),
@@ -345,6 +346,9 @@ function osha_date_formats() {
     ),
     array(
       'type' => 'short_date_eu', 'format'  => 'd/m/Y - H:i', 'locales' => array(),
+    ),
+    array(
+      'type' => 'pubdate_rss', 'format'  => 'r', 'locales' => array(),
     ),
     array(
       'type' => 'osha_day_only', 'format'  => 'd/m/Y', 'locales' => array(),

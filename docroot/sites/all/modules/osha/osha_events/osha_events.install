@@ -209,8 +209,15 @@ function osha_events_update_7020() {
 }
 
 /**
- * MDR-1450 I2-Introduce hint text inside the input fields
+ * MDR-1450 I2-Introduce hint text inside the input fields.
  */
 function osha_events_update_7021() {
   features_revert(array('osha_events' => array('field_base', 'field_instance')));
+}
+
+/**
+ * MDR-1810 WSD-251 - Create a search/filter field "category" on Events.
+ */
+function osha_events_update_7022() {
+  features_revert(array('osha_events' => array('views_view')));
 }

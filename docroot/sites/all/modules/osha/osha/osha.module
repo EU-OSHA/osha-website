@@ -45,8 +45,8 @@ function osha_token_info() {
 }
 
 function osha_get_menu_level($level) {
-  static $menu, $active_trail;
-  if (!$menu && $active_trail) {
+  static $menu;
+  if (!$menu) {
     $active_trail = menu_get_active_trail();
     if ($active_trail) {
       array_shift($active_trail);

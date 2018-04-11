@@ -122,6 +122,8 @@ function osha_dangerous_substances_block_info() {
  * Implements hook_block_view().
  */
 function osha_dangerous_substances_block_view($delta = '') {
+  global $language;
+
   switch ($delta) {
     case 'osha_ds_search_clear_filters':
       // Add header as in template.
@@ -155,7 +157,7 @@ function osha_dangerous_substances_block_view($delta = '') {
           <div class="field-items">
             <div class="field-item even" property="content:encoded">
               <p class="Textfo">
-                <span lang="EN-GB" xml:lang="EN-GB">' . $w->body->value()['safe_value'] . '</span>
+                <span lang="EN-GB" xml:lang="EN-GB">' . $w->language($language->language)->body->value()['safe_value'] . '</span>
               </p>
             </div>
           </div>

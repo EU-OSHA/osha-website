@@ -264,8 +264,7 @@ function osha_dangerous_substances_entity_info_alter(&$entity_info) {
  * Implements hook_node_access().
  */
 
-// Todo: disable and public DS search ready.
-function osha_dangerous_substances_node_access($node, $op, $account) {
+/* function osha_dangerous_substances_node_access($node, $op, $account) {
  if ($op == 'view' && $node->type == 'dangerous_substances') {
     if (user_is_anonymous()) {
       return NODE_ACCESS_DENY;
@@ -273,7 +272,7 @@ function osha_dangerous_substances_node_access($node, $op, $account) {
   }
   return NODE_ACCESS_IGNORE;
 }
-
+*/
 
 /**
  * Implements hook_entity_view_mode_alter().

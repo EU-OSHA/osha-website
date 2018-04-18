@@ -17,6 +17,12 @@ function osha_events_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Please introduce in this box the text of this section.',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -99,6 +105,12 @@ function osha_events_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -175,6 +187,12 @@ function osha_events_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -250,6 +268,12 @@ function osha_events_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -325,6 +349,12 @@ function osha_events_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -400,6 +430,12 @@ function osha_events_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -475,6 +511,12 @@ function osha_events_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -542,6 +584,12 @@ function osha_events_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Mandatory',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -623,6 +671,12 @@ function osha_events_field_default_field_instances() {
 Black - Confirmed <br />
 Grey - Only web or not attendance',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -693,6 +747,12 @@ Grey - Only web or not attendance',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -769,6 +829,12 @@ Grey - Only web or not attendance',
     'deleted' => 0,
     'description' => 'Mandatory',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'list',
@@ -846,6 +912,12 @@ Grey - Only web or not attendance',
     'deleted' => 0,
     'description' => 'Mandatory',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -918,6 +990,12 @@ Grey - Only web or not attendance',
     'deleted' => 0,
     'description' => 'Mandatory',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -987,6 +1065,12 @@ Grey - Only web or not attendance',
     'deleted' => 0,
     'description' => 'Grab Flickr photos taken on or between these dates only.',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'format_type' => 'long',
         'label' => 'above',
@@ -1079,6 +1163,12 @@ Grey - Only web or not attendance',
     'deleted' => 0,
     'description' => 'Mandatory',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1147,6 +1237,12 @@ Grey - Only web or not attendance',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -1224,6 +1320,12 @@ Grey - Only web or not attendance',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1294,6 +1396,12 @@ Grey - Only web or not attendance',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1365,6 +1473,12 @@ Grey - Only web or not attendance',
     'deleted' => 0,
     'description' => 'Mandatory',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -1446,6 +1560,12 @@ Grey - Only web or not attendance',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1515,6 +1635,12 @@ Grey - Only web or not attendance',
     'deleted' => 0,
     'description' => 'Events Related resources file.',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'file',
@@ -1617,6 +1743,12 @@ Grey - Only web or not attendance',
     'deleted' => 0,
     'description' => 'You should enter a number between 1 and 100',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1692,6 +1824,12 @@ Grey - Only web or not attendance',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1762,6 +1900,12 @@ Grey - Only web or not attendance',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1854,6 +1998,12 @@ Grey - Only web or not attendance',
     'deleted' => 0,
     'description' => 'Mandatory',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'date',
@@ -1970,6 +2120,12 @@ Grey - Only web or not attendance',
     'deleted' => 0,
     'description' => 'Mandatory',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'inline',
         'settings' => array(),
@@ -2040,6 +2196,12 @@ Grey - Only web or not attendance',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -2110,6 +2272,12 @@ Grey - Only web or not attendance',
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'osha_events',
@@ -2204,6 +2372,12 @@ Grey - Only web or not attendance',
     'deleted' => 0,
     'description' => 'Mandatory',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'title',

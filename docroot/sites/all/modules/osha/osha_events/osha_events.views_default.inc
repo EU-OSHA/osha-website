@@ -1132,6 +1132,33 @@ function osha_events_views_default_views() {
     14 => 0,
   );
   $handler->display->display_options['filters']['field_for_the_web_value']['reduce_duplicates'] = TRUE;
+  /* Filter criterion: Field: Tags (field_tags) */
+  $handler->display->display_options['filters']['field_tags_tid']['id'] = 'field_tags_tid';
+  $handler->display->display_options['filters']['field_tags_tid']['table'] = 'field_data_field_tags';
+  $handler->display->display_options['filters']['field_tags_tid']['field'] = 'field_tags_tid';
+  $handler->display->display_options['filters']['field_tags_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_tags_tid']['expose']['operator_id'] = 'field_tags_tid_op';
+  $handler->display->display_options['filters']['field_tags_tid']['expose']['label'] = 'Category';
+  $handler->display->display_options['filters']['field_tags_tid']['expose']['operator'] = 'field_tags_tid_op';
+  $handler->display->display_options['filters']['field_tags_tid']['expose']['identifier'] = 'field_tags_tid';
+  $handler->display->display_options['filters']['field_tags_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    14 => 0,
+  );
+  $handler->display->display_options['filters']['field_tags_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_tags_tid']['vocabulary'] = 'tags';
   $handler->display->display_options['path'] = 'admin/content/events';
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Events';

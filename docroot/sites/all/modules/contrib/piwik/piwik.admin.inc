@@ -306,7 +306,7 @@ function piwik_admin_settings_form($form_state) {
   $piwik_custom_vars = variable_get('piwik_custom_var', array());
 
   // Piwik supports up to 5 custom variables.
-  for ($i = 1; $i < 6; $i++) {
+  for ($i = 1; $i < 11; $i++) {
     $form['piwik_custom_var']['slots'][$i]['slot'] = array(
       '#default_value' => $i,
       '#description' => t('Slot number'),

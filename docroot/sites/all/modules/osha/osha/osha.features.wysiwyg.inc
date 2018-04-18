@@ -112,7 +112,6 @@ function osha_wysiwyg_default_profiles() {
           'redo' => 1,
           'link' => 1,
           'anchor' => 1,
-          'image' => 1,
           'formatselect' => 1,
           'fontselect' => 1,
           'fontsizeselect' => 1,
@@ -146,6 +145,12 @@ function osha_wysiwyg_default_profiles() {
         'osha_advanced' => array(
           'osha_advanced' => 1,
           'osha_minimal' => 1,
+        ),
+        'osha_image' => array(
+          'osha_image' => 1,
+        ),
+        'osha_file' => array(
+          'osha_file' => 1,
         ),
         'drupal' => array(
           'media' => 1,

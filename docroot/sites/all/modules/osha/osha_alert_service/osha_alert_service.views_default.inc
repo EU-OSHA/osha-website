@@ -395,7 +395,7 @@ function osha_alert_service_views_default_views() {
   $handler->display->display_options['fields']['nothing_2']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_2']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_2']['label'] = '';
-  $handler->display->display_options['fields']['nothing_2']['alter']['text'] = '[nid] at https://osha.europa.eu';
+  $handler->display->display_options['fields']['nothing_2']['alter']['text'] = '[nid]';
   $handler->display->display_options['fields']['nothing_2']['element_label_colon'] = FALSE;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
@@ -819,7 +819,7 @@ function osha_alert_service_views_default_views() {
   /* Display: Commission latest vacancies */
   $handler = $view->new_display('feed', 'Commission latest vacancies', 'commission_feed');
   $handler->display->display_options['defaults']['link_display'] = FALSE;
-  $handler->display->display_options['link_display'] = 'feed_6';
+  $handler->display->display_options['link_display'] = 'commission_feed';
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'rss';
@@ -885,7 +885,7 @@ function osha_alert_service_views_default_views() {
     t('Asc'),
     t('Desc'),
     t('Job URL'),
-    t('[nid] at https://osha.europa.eu'),
+    t('[nid]'),
     t('[Agency][field_job_vacancies_agency][/Agency] [Reference ID][field_job_vacancies_ref_id][/Reference ID] [Job Title][title]
 [/Job Title] [Deadline Date][field_job_vacancies_deadline][/Deadline Date] [Job URL][field_job_vacancies_url][/Job URL] [Application Open Date][field_publication_date][/Application Open Date] [Type of Contract][field_job_vacancies_contact_type][/Type of Contract] [Grade][field_job_vacancies_grade][/Grade] [Location(s)][field_job_vacancies_location][/Location(s)] [Vacancy Type][field_job_vacancies_type][/Vacancy Type] [Job Description][body][/Job Description]'),
     t('Latest publications'),

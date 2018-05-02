@@ -65,6 +65,11 @@ function osha_blocks_block_view($delta='') {
       break;
 
     case 'osha_block_group_related':
+      if ($node = menu_get_object()) {
+        if ($node->type == 'flickr_gallery') {
+          return array();
+        }
+      }
       $block['subject'] = t('Related');
       $block['content'] = osha_block_related_content_blocks_view();
       break;

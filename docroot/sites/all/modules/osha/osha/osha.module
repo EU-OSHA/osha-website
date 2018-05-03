@@ -1361,6 +1361,21 @@ function osha_node_activity_name($node) {
   return '';
 }
 
+function osha_user_profile_form_redirect_profile($form, &$form_state) {
+  global $user;
+  $form_state['redirect'] = 'user/' . $user->uid;
+  drupal_redirect_form($form_state);
+}
+
+/**
+ * Implments hook_form_FORM_ID_alter().
+ */
+function osha_form_user_profile_form_alter(&$form, $form_state) {
+  if (isset($_REQUEST['pass-reset-token'])) {
+    $form['#submit'][] = 'osha_user_profile_form_redirect_profile';
+  }
+}
+
 /**
  * Export node to JSON.
  *

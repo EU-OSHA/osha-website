@@ -40,7 +40,7 @@ function osha_blocks_block_info() {
 /**
  * Implements hook_block_view().
  */
-function osha_blocks_block_view($delta='') {
+function osha_blocks_block_view($delta = '') {
   $block = array();
 
   switch ($delta) {
@@ -82,6 +82,9 @@ function oshwiki_featured_articles_block_view() {
   $tagged_wikis = array();
   if ($node = menu_get_object()) {
     if ($node->type == 'publication' || $node->type == 'article') {
+      if ($node->vid != $node->workbench_moderation['current']->vid && arg(2) == 'draft') {
+        $node = node_load($node->nid, $node->workbench_moderation['current']->vid);
+      }
       $tagged_wikis = osha_blocks_get_related_wiki($node);
     }
   }

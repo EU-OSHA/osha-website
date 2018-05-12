@@ -14,6 +14,28 @@ function osha_frontend_links__system_main_menu() {
 function osha_frontend_preprocess_views_view_row_rss(&$vars) {
   $item = &$vars['row'];
 
+  $map = [
+    'feed_1' => 'rss_publication',
+    'feed_2' => 'rss_news',
+    'feed_3' => 'rss_events',
+    'feed_7' => 'rss_directive',
+    'feed_9' => 'rss_press_release',
+
+    'feed_4' => 'rss_blog',
+    'feed_5' => 'rss_calls',
+    'feed_6' => 'rss_vacancies',
+    'feed_8' => 'rss_seminars',
+    'feed_10' => 'rss_guidlines',
+  ];
+
+  if ($vars['view']->current_display == 'feed_1') {
+    $item->link .= '/view';
+  }
+
+  if (isset($map[$vars['view']->current_display])) {
+    $item->link .= '?pk_campaign=' . $map[$vars['view']->current_display];
+  }
+
   $vars['title'] = check_plain($item->title);
   $vars['link'] = check_url($item->link);
   $vars['description'] = check_plain($item->description);

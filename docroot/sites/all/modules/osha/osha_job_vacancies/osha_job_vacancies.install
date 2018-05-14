@@ -76,3 +76,10 @@ function osha_job_vacancies_update_7004() {
     }
   }
 }
+
+/**
+ * MDR-1928 add on the vacancies form, EU-OSHA as author by default.
+ */
+function osha_job_vacancies_update_7005() {
+  features_revert(array('osha_job_vacancies' => array('field_instance')));
+}

@@ -287,7 +287,11 @@ function osha_job_vacancies_field_default_field_instances() {
   // Exported field_instance: 'node-job_vacancies-field_author'.
   $field_instances['node-job_vacancies-field_author'] = array(
     'bundle' => 'job_vacancies',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 'EU-OSHA',
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -358,6 +362,11 @@ function osha_job_vacancies_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -370,6 +379,7 @@ function osha_job_vacancies_field_default_field_instances() {
       'type' => 'text_textfield',
       'weight' => 20,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-job_vacancies-field_character_count'.

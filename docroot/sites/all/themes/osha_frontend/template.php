@@ -11,6 +11,26 @@ function osha_frontend_links__system_main_menu() {
   return NULL;
 }
 
+function osha_frontend_preprocess_views_view_row_rss(&$vars) {
+  $item = &$vars['row'];
+
+  $vars['title'] = check_plain($item->title);
+  $vars['link'] = check_url($item->link);
+  $vars['description'] = check_plain($item->description);
+
+  if ($vars['view']->current_display == 'commission_feed') {
+    $nid = intval($item->elements[2]['value']);
+    $item->elements[2]['value'] = l($vars['title'], 'node/' . $nid);
+    foreach ($vars['view']->result as $row) {
+      if ($row->nid == $nid) {
+        $item->elements[0]['value'] = date('d/m/Y', $row->node_created);
+        $item->elements[1]['value'] = 'EU-OSHA';
+      }
+    }
+  }
+  $vars['item_elements'] = empty($item->elements) ? '' : format_xml_elements($item->elements);
+}
+
 /**
  * Implements theme_menu_tree__main_menu().
  */

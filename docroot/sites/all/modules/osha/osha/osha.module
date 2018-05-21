@@ -8,6 +8,107 @@ define('OSHA_ARTICLE_CONTENT_TYPE_ARTICLE', 'article');
 define('OSHA', 'OSHA');
 
 /**
+ * Implements hook_token_info().
+ */
+function osha_token_info() {
+  $info['tokens']['site']['site-language'] = array(
+    'name' => t('Site language'),
+    'description' => t('Site language'),
+    'type' => 'array',
+  );
+  $info['tokens']['site']['menu-level1'] = array(
+    'name' => t('menu level1'),
+    'description' => t('Site level 1 menu'),
+    'type' => 'array',
+  );
+  $info['tokens']['site']['menu-level2'] = array(
+    'name' => t('menu level2'),
+    'description' => t('Site level 2 menu'),
+    'type' => 'array',
+  );
+  $info['tokens']['site']['menu-level3'] = array(
+    'name' => t('menu level3'),
+    'description' => t('Site level 3 menu'),
+    'type' => 'array',
+  );
+  $info['tokens']['site']['menu-level4'] = array(
+    'name' => t('menu level4'),
+    'description' => t('Site level 4 menu'),
+    'type' => 'array',
+  );
+  $info['tokens']['site']['menu-level5'] = array(
+    'name' => t('menu level5'),
+    'description' => t('Site level 5 menu'),
+    'type' => 'array',
+  );
+  return $info;
+}
+
+function osha_get_menu_level($level) {
+  static $menu;
+  if (!$menu) {
+    $active_trail = menu_get_active_trail();
+    if ($active_trail) {
+      array_shift($active_trail);
+      if ($active_trail) {
+        array_shift($active_trail);
+      }
+    }
+    if (variable_get('osha_menu_level_reverse', FALSE)) {
+      krsort($active_trail);
+    }
+    $menu = [];
+    foreach ($active_trail as $trail) {
+      $menu[] = check_plain($trail['title']);
+    }
+  }
+  if (isset($menu[$level])) {
+    return $menu[$level];
+  }
+  return NULL;
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function osha_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  global $language;
+  $replacements = array();
+  // Site tokens.
+  if ($type == 'site') {
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'site-language':
+          $replacements[$original] = $language->language;
+          break;
+
+        case 'menu-level1':
+          $replacements[$original] = osha_get_menu_level(0);
+          break;
+
+        case 'menu-level2':
+          $replacements[$original] = osha_get_menu_level(1);
+          break;
+
+        case 'menu-level3':
+          $replacements[$original] = osha_get_menu_level(2);
+          break;
+
+        case 'menu-level4':
+          $replacements[$original] = osha_get_menu_level(3);
+          break;
+
+        case 'menu-level5':
+          $replacements[$original] = osha_get_menu_level(4);
+          break;
+
+      }
+    }
+  }
+  return $replacements;
+}
+
+/**
  * Implements hook_menu().
  */
 function osha_menu() {
@@ -1258,6 +1359,21 @@ function osha_node_activity_name($node) {
     }
   }
   return '';
+}
+
+function osha_user_profile_form_redirect_profile($form, &$form_state) {
+  global $user;
+  $form_state['redirect'] = 'user/' . $user->uid;
+  drupal_redirect_form($form_state);
+}
+
+/**
+ * Implments hook_form_FORM_ID_alter().
+ */
+function osha_form_user_profile_form_alter(&$form, $form_state) {
+  if (isset($_REQUEST['pass-reset-token'])) {
+    $form['#submit'][] = 'osha_user_profile_form_redirect_profile';
+  }
 }
 
 /**

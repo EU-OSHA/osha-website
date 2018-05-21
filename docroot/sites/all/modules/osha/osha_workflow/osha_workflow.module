@@ -865,7 +865,7 @@ function osha_workflow_bundle_section_map() {
     'guideline' => 'LEGIS',
     'calls' => 'PROCUR',
     'infographic' => 'CORPCM',
-    'dangerous_substances' => 'DANGSUDB_PM',
+    'dangerous_substances' => 'DANGSUDB',
   );
 }
 

@@ -574,3 +574,10 @@ function osha_update_7041() {
   variable_set('imce_custom_content', array('osha_imce_custom_content' => TRUE));
   features_revert(array('osha' => array('wysiwyg')));
 }
+
+/**
+ * MDR-1764 add custom dimensions to the piwik script.
+ */
+function osha_update_7042() {
+  variable_set('osha_menu_level_reverse', FALSE);
+}

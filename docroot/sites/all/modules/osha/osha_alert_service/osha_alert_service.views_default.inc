@@ -262,7 +262,7 @@ function osha_alert_service_views_default_views() {
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* Field: Content: Author */
+  /* Field: Content: Author(s) */
   $handler->display->display_options['fields']['field_author']['id'] = 'field_author';
   $handler->display->display_options['fields']['field_author']['table'] = 'field_data_field_author';
   $handler->display->display_options['fields']['field_author']['field'] = 'field_author';
@@ -326,11 +326,14 @@ function osha_alert_service_views_default_views() {
   $handler->display->display_options['fields']['field_job_vacancies_grade']['label'] = '';
   $handler->display->display_options['fields']['field_job_vacancies_grade']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_job_vacancies_grade']['type'] = 'taxonomy_term_reference_plain';
-  /* Field: Content: Job URL */
-  $handler->display->display_options['fields']['field_job_vacancies_url']['id'] = 'field_job_vacancies_url';
-  $handler->display->display_options['fields']['field_job_vacancies_url']['table'] = 'field_data_field_job_vacancies_url';
-  $handler->display->display_options['fields']['field_job_vacancies_url']['field'] = 'field_job_vacancies_url';
-  $handler->display->display_options['fields']['field_job_vacancies_url']['click_sort_column'] = 'url';
+  /* Field: Content: Path */
+  $handler->display->display_options['fields']['path']['id'] = 'path';
+  $handler->display->display_options['fields']['path']['table'] = 'node';
+  $handler->display->display_options['fields']['path']['field'] = 'path';
+  $handler->display->display_options['fields']['path']['label'] = '';
+  $handler->display->display_options['fields']['path']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['path']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['path']['absolute'] = TRUE;
   /* Field: Content: Location(s) */
   $handler->display->display_options['fields']['field_job_vacancies_location']['id'] = 'field_job_vacancies_location';
   $handler->display->display_options['fields']['field_job_vacancies_location']['table'] = 'field_data_field_job_vacancies_location';
@@ -344,14 +347,6 @@ function osha_alert_service_views_default_views() {
   $handler->display->display_options['fields']['field_job_vacancies_type']['field'] = 'field_job_vacancies_type';
   $handler->display->display_options['fields']['field_job_vacancies_type']['label'] = '';
   $handler->display->display_options['fields']['field_job_vacancies_type']['element_label_colon'] = FALSE;
-  /* Field: Content: Path */
-  $handler->display->display_options['fields']['path']['id'] = 'path';
-  $handler->display->display_options['fields']['path']['table'] = 'node';
-  $handler->display->display_options['fields']['path']['field'] = 'path';
-  $handler->display->display_options['fields']['path']['label'] = '';
-  $handler->display->display_options['fields']['path']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['path']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['path']['absolute'] = TRUE;
   /* Field: Content: Post date */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
@@ -403,7 +398,7 @@ function osha_alert_service_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[Agency][field_job_vacancies_agency][/Agency] [Reference ID][field_job_vacancies_ref_id][/Reference ID] [Job Title][title]
-[/Job Title] [Deadline Date][field_job_vacancies_deadline][/Deadline Date] [Job URL][field_job_vacancies_url][/Job URL] [Application Open Date][field_publication_date][/Application Open Date] [Type of Contract][field_job_vacancies_contact_type][/Type of Contract] [Grade][field_job_vacancies_grade][/Grade] [Location(s)][field_job_vacancies_location][/Location(s)] [Vacancy Type][field_job_vacancies_type][/Vacancy Type] [Job Description][body][/Job Description]';
+[/Job Title] [Deadline Date][field_job_vacancies_deadline][/Deadline Date] [Job URL][path][/Job URL] [Application Open Date][field_publication_date][/Application Open Date] [Type of Contract][field_job_vacancies_contact_type][/Type of Contract] [Grade][field_job_vacancies_grade][/Grade] [Location(s)][field_job_vacancies_location][/Location(s)] [Vacancy Type][field_job_vacancies_type][/Vacancy Type] [Job Description][body][/Job Description]';
   $handler->display->display_options['fields']['nothing']['alter']['strip_tags'] = TRUE;
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['nothing']['element_default_classes'] = FALSE;
@@ -884,10 +879,9 @@ function osha_alert_service_views_default_views() {
     t('Sort by'),
     t('Asc'),
     t('Desc'),
-    t('Job URL'),
     t('[nid]'),
     t('[Agency][field_job_vacancies_agency][/Agency] [Reference ID][field_job_vacancies_ref_id][/Reference ID] [Job Title][title]
-[/Job Title] [Deadline Date][field_job_vacancies_deadline][/Deadline Date] [Job URL][field_job_vacancies_url][/Job URL] [Application Open Date][field_publication_date][/Application Open Date] [Type of Contract][field_job_vacancies_contact_type][/Type of Contract] [Grade][field_job_vacancies_grade][/Grade] [Location(s)][field_job_vacancies_location][/Location(s)] [Vacancy Type][field_job_vacancies_type][/Vacancy Type] [Job Description][body][/Job Description]'),
+[/Job Title] [Deadline Date][field_job_vacancies_deadline][/Deadline Date] [Job URL][path][/Job URL] [Application Open Date][field_publication_date][/Application Open Date] [Type of Contract][field_job_vacancies_contact_type][/Type of Contract] [Grade][field_job_vacancies_grade][/Grade] [Location(s)][field_job_vacancies_location][/Location(s)] [Vacancy Type][field_job_vacancies_type][/Vacancy Type] [Job Description][body][/Job Description]'),
     t('Latest publications'),
     t('Latest news'),
     t('Latest events'),

@@ -34,6 +34,24 @@ function osha_job_vacancies_post_features_enable_feature($component) {
 function osha_job_vacancies_post_features_revert($component) {
 }
 
+function osha_job_vacancies_load_activity_by_code($code) {
+  return db_select('field_data_field_activity_code', 'a')->fields('a', array('entity_id'))->condition('field_activity_code_value', $code)->execute()->fetchField();
+}
+
+function osha_job_vacancies_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+  if ($form_id == 'job_vacancies_node_form') {
+    if (isset($form['field_activity'])
+      && !empty($form['#node'])
+      && empty($form['#node']->nid)
+      && empty($form['field_activity'][LANGUAGE_NONE]['#default_value'])) {
+      if ($tid = osha_job_vacancies_load_activity_by_code('governance_2')) {
+        $form['field_activity'][LANGUAGE_NONE]['#default_value'][] = $tid;
+      }
+    }
+  }
+}
+
 /**
  * Implements hook_node_validate().
  *

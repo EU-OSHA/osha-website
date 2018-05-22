@@ -1365,6 +1365,13 @@ span.date-display-single{
 	padding-bottom:0em;
 	line-height: 1.7em;
 }
+.section-about-eu-osha.bodymedium .field-name-field-summary{
+	margin-bottom: 15px;
+}
+
+.section-about-eu-osha.bodymedium .field-name-body{
+	margin-top: 1.5em;
+}
 
 .menu-block-3 ul{
 	list-style-type: none!important;
@@ -8222,6 +8229,10 @@ a.contextual-links-trigger{
 	margin-top: 1em;
     margin-bottom: 1em;
     clear:both;
+}
+
+.field-name-field-quote{
+	clear: both;
 }
 
 .press-release-quote-image {

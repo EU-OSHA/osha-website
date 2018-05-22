@@ -121,7 +121,7 @@ function osha_frontend_menu_link__menu_block($variables) {
     isset($element['#localized_options']['content']['image'])
   ) {
     $path = file_create_url($element['#localized_options']['content']['image']);
-    $link = l('<img src="' . $path . '" alt="'.$element['#title'].'"/>', $element['#href'],
+    $link = l('<img src="' . $path . '" alt="' . $element['#title'] . '"/>', $element['#href'],
       array('html' => TRUE, 'attributes' => $element['#localized_options']['attributes'])
     );
     return sprintf("\n<li %s>%s</li>", $attr, $link);
@@ -140,14 +140,19 @@ function osha_frontend_menu_link__menu_block($variables) {
   if (!empty($element['#localized_options']['content']['image'])
       && $image_url = file_create_url($element['#localized_options']['content']['image'])) {
     // $image = '<img src="' . $image_url . '" alt=""/>';
-    // we should in fact use empty alt because the image is only decorative (the text is already present in the link)
+    // We should in fact use empty alt because the image is only decorative (the text is already present in the link).
     $image = '<img src="' . $image_url . '" alt="' . $element['#title'] . '"/>';
     $output_image = l($image, $element['#href'], array('html' => TRUE));
   }
 
+  $output_copyright = "";
+  if (!empty($element['#localized_options']['copyright']['copyright'])) {
+    $output_copyright = '<div class="introduction-copyright">' . $element['#localized_options']['copyright']['copyright'] . '</div>';
+  }
   return '<li' . drupal_attributes($element['#attributes']) . '>
     <div class="introduction-title">' . $output_link . '</div>
     <div class="introduction-image">' . $output_image . '</div>
+    ' . $output_copyright . '
     </li>';
 }
 

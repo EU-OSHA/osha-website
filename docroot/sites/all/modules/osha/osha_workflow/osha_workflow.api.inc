@@ -831,7 +831,7 @@ class OshaWorkflowNotifications {
   /**
    * MDR-1480 PM Highlighted changes.
    */
-  public static function notifyWebTeamTextChanged($node, $from_state, $to_state) {
+  public static function notifyWebTeamTextChanged($node) {
     $params = array(
       'node' => $node,
     );

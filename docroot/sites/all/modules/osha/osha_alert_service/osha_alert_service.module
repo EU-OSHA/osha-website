@@ -435,47 +435,65 @@ function osha_alert_service_render_alert($entity) {
   if (!$settings) {
     return '';
   }
-  /*
-  SELECT a.nid, a.type, a.created, c.title_field_value
-  FROM node a
-    INNER JOIN field_data_field_tags b ON (a.nid = b.entity_id AND a.vid = b.revision_id)
-  INNER JOIN field_data_title_field c ON (a.nid = c.entity_id AND a.vid = c.revision_id AND AND c.language = 'en')
-  WHERE
-    a.status = 1
-    AND b.field_tags_tid IN (18, 32, 37)
-    AND a.created >= 1423401066
-    AND a.type IN ('publication', 'news', 'event')
-  GROUP BY a.nid
-  ORDER BY a.type, a.created DESC
-  */
   $q = db_select('node', 'a');
   $q->fields('a', array('nid', 'type', 'created'));
+  $q->fields('b', array('field_tags_tid'));
   $q->fields('c', array('title_field_value'));
   $q->innerJoin('field_data_field_tags', 'b', 'a.nid = b.entity_id AND a.vid = b.revision_id');
   $q->innerJoin('field_data_title_field', 'c', "a.nid = c.entity_id AND a.vid = c.revision_id AND c.language = 'en'");
-  $q->groupBy('a.nid');
   $q->orderBy('a.type', 'ASC');
   $q->orderBy('a.created', 'DESC');
   $q->condition('a.status', 1);
+
   $q->condition('b.field_tags_tid', $settings->section, 'IN');
   $q->condition('a.created', $entity->last_alert, '>=');
+
   $rows = $q->execute()->fetchAll();
-  if(empty($rows)) {
+
+  $new_rows = [];
+  foreach ($rows as $row) {
+    if (isset($new_rows[$row->nid])) {
+      $new_rows[$row->nid]->field_tags[] = $row->field_tags_tid;
+    }
+    else {
+      $new_rows[$row->nid] = $row;
+      $new_rows[$row->nid]->field_tags = [$row->field_tags_tid];
+    }
+  }
+  $rows = array_values($new_rows);
+
+  if (empty($rows)) {
     return '';
   }
   $output = '';
   $row0 = $rows[0];
   $prev_label = 'Type: ' . entity_bundle_label('node', $row0->type);
-  $table = array('rows' => array(), 'caption' => $prev_label, 'attributes' => array());
+  $table = array(
+    'rows' => array(),
+    'caption' => $prev_label,
+    'attributes' => array(),
+  );
   $languages = osha_language_list();
-  foreach($rows as $row) {
+  foreach ($rows as $row) {
     $label = 'Type: ' . entity_bundle_label('node', $row->type);
     if ($label != $prev_label) {
       $output .= theme_table($table);
-      $table = array('rows' => array(), 'caption' => $label, 'attributes' => array());
+      $table = array(
+        'rows' => array(),
+        'caption' => $label,
+        'attributes' => array(),
+      );
     }
-
-    $cells = array(0 => l($row->title_field_value, 'node/' . $row->nid, array('absolute' => TRUE)), 1 => '&nbsp;');
+    $options = array('absolute' => TRUE);
+    foreach ($row->field_tags as $tid) {
+      $term = taxonomy_term_load($tid);
+      $options['query']['pk_campaign'] = 'alert_' . str_replace(' ', '_', strtolower($term->name));
+      break;
+    }
+    $cells = array(
+      0 => l($row->title_field_value, 'node/' . $row->nid, $options),
+      1 => '&nbsp;',
+    );
     // Get all translations needed for the result.
     if (!empty($settings->languages)) {
       $translations = db_select('entity_translation', 'et')
@@ -487,9 +505,10 @@ function osha_alert_service_render_alert($entity) {
       if (!empty($translations)) {
         $translations = osha_sort_language_list(array_combine($translations, $translations));
         $scell = array();
-        foreach($translations as $tr) {
+        foreach ($translations as $tr) {
           $lang = $languages[$tr];
-          $scell[] = l($lang->native, 'node/' . $row->nid, array('absolute' => TRUE, 'language' => $lang));
+          $options = array('absolute' => TRUE, 'language' => $lang, 'query' => $options['query']);
+          $scell[] = l($lang->native, 'node/' . $row->nid, $options);
         }
         $cells[1] = 'Available also in: ' . implode(', ', $scell);
       }
@@ -499,7 +518,6 @@ function osha_alert_service_render_alert($entity) {
   }
   if (!empty($table['rows'])) {
     $output .= theme_table($table);
-    $table = array('rows' => array(), 'caption' => $label, 'attributes' => array());
   }
   return $output;
 }

@@ -1,0 +1,54 @@
+[
+  {
+    "name": "All (no specific target audience)",
+    "code": "all"
+  },
+  {
+    "name": "Employers",
+    "code": "employers"
+  },
+  {
+    "name": "Managers",
+    "code": "managers"
+  },
+  {
+    "name": "Worker representatives",
+    "code": "worker_representatives"
+  },
+  {
+    "name": "Supervisor",
+    "code": "supervisor"
+  },
+  {
+    "name": "Safety officers",
+    "code": "safety_officers"
+  },
+  {
+    "name": "Occupational health physician",
+    "code": "occupational_health_physician"
+  },
+  {
+    "name": "OSH consultant",
+    "code": "osh_consultant"
+  },
+  {
+    "name": "Workers",
+    "code": "workers"
+  },
+  {
+    "name": "Pupils",
+    "code": "pupils"
+  },
+  {
+    "name": "Trainees",
+    "code": "trainees"
+  },
+  {
+    "name": "Trainers",
+    "code": "trainers"
+  },
+  {
+    "name": "Other",
+    "code": "other"
+  }
+]

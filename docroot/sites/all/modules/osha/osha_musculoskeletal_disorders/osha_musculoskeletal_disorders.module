@@ -1,0 +1,298 @@
+<?php
+/**
+ * @file
+ * Code for the OSHA Musculoskeletal Disorders feature.
+ */
+
+include_once 'osha_musculoskeletal_disorders.features.inc';
+
+/**
+ * Implements hook_entity_view_mode_alter().
+ */
+/*function osha_musculoskeletal_disorders_entity_view_mode_alter(&$view_mode, $context) {
+  // Only alter the view mode if we are on the test callback.
+  if (($context['entity_type'] == 'node') && ($context['entity']->type == 'musculoskeletal_disorders')) {
+    if (user_is_anonymous() || isset($_REQUEST['ds_public'])) {
+      //      $view_mode = 'dangerous_substances';
+    }
+  }
+}*/
+
+/**
+ * Empty description filter.
+ */
+function osha_musculoskeletal_disorders_empty_description($item) {
+  if ($item->type == 'musculoskeletal_disorders') {
+    if (!$item->body) {
+      return TRUE;
+    }
+  }
+  return FALSE;
+}
+
+/**
+ * Implements hook_entity_property_info_alter().
+ */
+function osha_musculoskeletal_disorders_entity_property_info_alter(&$info) {
+  $info['node']['properties']['msd_empty_description'] = array(
+    'type' => 'boolean',
+    'label' => t('MSD Empty description'),
+    'sanitized' => TRUE,
+    'getter callback' => 'osha_musculoskeletal_disorders_empty_description',
+  );
+}
+
+/**
+ * Implements hook_node_access().
+ */
+function osha_musculoskeletal_disorders_node_access($node, $op, $account) {
+  if ($op == 'view' && $node->type == 'musculoskeletal_disorders') {
+    if (user_is_anonymous()) {
+      return NODE_ACCESS_DENY;
+    }
+  }
+  return NODE_ACCESS_IGNORE;
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function osha_musculoskeletal_disorders_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'musculoskeletal_disorders_node_form') {
+    unset($form['field_priority_area'][LANGUAGE_NONE]['#options'][3310]);
+    unset($form['field_priority_area'][LANGUAGE_NONE]['#options'][3312]);
+  }
+
+  if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-musculoskeletal-disorders-overview-page') {
+    $filter_id = 'description';
+    $form[$filter_id]['#title'] = t('Empty description');
+    $form[$filter_id]['#type'] = 'checkbox';
+    $form[$filter_id]['#default_value'] = 0;
+    $form[$filter_id]['#return_value'] = 1;
+    unset($form[$filter_id]['#options']);
+
+    $checked = isset($form_state['input'][$filter_id]) ? intval($_GET[$filter_id]) : $form[$filter_id]['#default_value'];
+    // Now we know whether the checkbox is checked or not, set #value
+    // accordingly.
+    $form[$filter_id]['#value'] = $checked ? $form[$filter_id]['#return_value'] : 0;
+  }
+
+  if ($form_id == 'musculoskeletal_disorders_node_form') {
+    $form['field_available_in_languages'][LANGUAGE_NONE]['#options'] = osha_sort_language_list($form['field_available_in_languages'][LANGUAGE_NONE]['#options']);
+    $form['field_original_desc_language'][LANGUAGE_NONE]['#options'] = osha_sort_language_list($form['field_original_desc_language'][LANGUAGE_NONE]['#options']);
+
+    if (!isset($form['#after_build'])) {
+      $form['#after_build'] = array();
+    }
+    $form['#after_build'][] = '_osha_musculoskeletal_disorders_form_after_build';
+  }
+}
+
+function _osha_musculoskeletal_disorders_form_after_build($form, $form_state) {
+
+  // Country code.
+  $_other = _osha_musculoskeletal_disorders_get_other_tid($form, 'field_material_country');
+  $form['field_country_other']['#states'] = ['visible' => ['#edit-field-material-country-und' => ['value' => [$_other]]]];
+
+  // Languages other.
+  $_other = _osha_musculoskeletal_disorders_get_other_tid($form, 'field_available_in_languages');
+  $form['field_languages_other']['#states'] = ['visible' => ['#edit-field-available-in-languages-und' => ['value' => [$_other]]]];
+
+  // Original languages other.
+  $_other = _osha_musculoskeletal_disorders_get_other_tid($form, 'field_original_desc_language');
+  $form['field_original_desc_lang_other']['#states'] = ['visible' => ['#edit-field-original-desc-language-und' => ['value' => [$_other]]]];
+
+  // Tasks covered other.
+  $_other = _osha_musculoskeletal_disorders_get_other_tid($form, 'field_tasks_covered');
+  $form['field_tasks_other']['#states'] = ['visible' => ['#edit-field-tasks-covered-und' => ['value' => [$_other]]]];
+
+  // Hazards other.
+  $_other = _osha_musculoskeletal_disorders_get_other_tid($form, 'field_hazards');
+  $form['field_hazards_other']['#states'] = ['visible' => ['#edit-field-hazards-und' => ['value' => [$_other]]]];
+
+  // Hazard health effect other.
+  $_other = _osha_musculoskeletal_disorders_get_other_tid($form, 'field_health_effects');
+  $form['field_hazard_health_other']['#states'] = ['visible' => ['#edit-field-health-effects-und' => ['value' => [$_other]]]];
+
+  // Worker groups covered other.
+  $_other = _osha_musculoskeletal_disorders_get_other_tid($form, 'field_worker_groups_covered');
+  $form['field_worker_groups_other']['#states'] = ['visible' => ['#edit-field-worker-groups-covered-und' => ['value' => [$_other]]]];
+
+  // Prevention measure other.
+  $_other = _osha_musculoskeletal_disorders_get_other_tid($form, 'field_prevention_measures');
+  $form['field_prevention_measures_other']['#states'] = ['visible' => ['#edit-field-prevention-measures-und' => ['value' => [$_other]]]];
+
+  // Purpose of the material other.
+  $_other = _osha_musculoskeletal_disorders_get_other_tid($form, 'field_purpose_of_the_material');
+  $form['field_material_purpose_other']['#states'] = ['visible' => ['#edit-field-purpose-of-the-material-und' => ['value' => [$_other]]]];
+
+  // Target group other.
+  $_other = _osha_musculoskeletal_disorders_get_other_tid($form, 'field_target_audience');
+  $form['field_target_group_other']['#states'] = ['visible' => ['#edit-field-target-group-und' => ['value' => [$_other]]]];
+
+  // Evaluation other.
+  $_other = _osha_musculoskeletal_disorders_get_other_tid($form, 'field_evaluation_quality_criteri');
+  $form['field_evaluation_other']['#states'] = ['visible' => ['#edit-field-evaluation-quality-criteri-und' => ['value' => [$_other]]]];
+
+  // Type of visual resource other.
+  $_other = _osha_musculoskeletal_disorders_get_other_tid($form, 'field_resource_type');
+  $form['field_resource_type_other']['#states'] = ['visible' => ['#edit-field-resource-type-und' => ['value' => [$_other]]]];
+
+  return $form;
+}
+
+/**
+ * Implements hook_search_api_solr_query_alter().
+ */
+function osha_musculoskeletal_disorders_search_api_solr_query_alter(array &$call_args, SearchApiQueryInterface $query) {
+  if (arg(1) == 'musculoskeletal-disorders') {
+    $sort_order = strtolower(@$_REQUEST['sort_order']);
+    $sort_by    = strtolower(@$_REQUEST['sort_by']);
+    foreach ($call_args['params']['fq'] as $k => $v) {
+      if (strpos('.' . $v, 'sm_search_api_access_node:') && $k) {
+        continue;
+      }
+      if (strpos('.' . $v, 'bs_status:"true") OR (is_author') && $k) {
+        continue;
+      }
+      if (strpos('.' . $v, 'bs_status:') && $k && @$_REQUEST['description']) {
+        $call_args['params']['fq'][$k] = 'bs_msd_empty_description:"true"';
+      }
+    }
+
+    if ($sort_by) {
+      $call_args['params']['sort'] = 'ds_field_publication_year ';
+      if ($sort_by == 'search_api_relevance') {
+        $call_args['params']['sort'] = 'ds_search_api_relevance ';
+      }
+
+      if (!in_array($sort_order, ['asc', 'desc'])) {
+        $sort_order = 'desc';
+      }
+      $call_args['params']['sort'] .= $sort_order;
+    }
+  }
+}
+
+function _osha_musculoskeletal_disorders_add_country_other() {
+
+  $name = 'Other';
+  $code = 'OT';
+
+  $voc = taxonomy_vocabulary_machine_name_load('country');
+  if (empty($voc)) {
+    return;
+  }
+
+  $terms = taxonomy_get_term_by_name($name, 'country');
+  if (empty($terms)) {
+    $term = new stdClass();
+    $term->field_iso2[LANGUAGE_NONE][0]['value'] = $code;
+    $term->vid = $voc->vid;
+    $term->name_original = $name;
+    $term->name = $name;
+    taxonomy_term_save($term);
+  }
+}
+
+function _osha_musculoskeletal_disorders_get_other_tid($element, $field, $other_name = 'other') {
+  if (!isset($element[$field])) {
+    return '-1';
+  }
+  foreach ($element[$field]['und']['#options'] as $tid => $name) {
+    if (strtolower(trim($name)) == $other_name) {
+      return (string) $tid;
+    }
+  }
+  if (isset($_REQUEST['debug'])) {
+    watchdog('osha_musculoskeletal_disorders', '!field no other value found updated', array('!field' => $field));
+  }
+  return '-1';
+}
+
+function osha_musculoskeletal_disorders_add_terms() {
+
+  $map = [
+    'evaluation_quality_criteria' => [
+      'file' => 'evaluation',
+    ],
+
+    'health_effects' => [
+      'file' => 'health_effects',
+    ],
+
+    'prevention_measures_msd' => [
+      'file' => 'prevention_measures',
+    ],
+
+    'resource_type' => [
+      'file' => 'visual_resource_type',
+    ],
+
+    'hazards' => [
+      'file' => 'hazards',
+    ],
+
+    'purpose_of_material' => [
+      'file' => 'material_purpose',
+    ],
+
+    'target_audience' => [
+      'file' => 'target_audience',
+    ],
+
+    'worker_groups_covered' => [
+      'file' => 'worker_groups',
+    ],
+
+  ];
+
+  $migration_module_dir = drupal_get_path('module', 'osha_musculoskeletal_disorders');
+  $terms_created = 0;
+  $terms_updated = 0;
+  foreach ($map as $machine_name => $voc_info) {
+    $code_name = @$voc_info['code'];
+    $voc = taxonomy_vocabulary_machine_name_load($machine_name);
+    if (empty($voc)) {
+      continue;
+    }
+    $json_path = drupal_realpath($migration_module_dir . '/data/' . $voc_info['file'] . '.json');
+    if (is_readable($json_path)) {
+      $data = file_get_contents($json_path);
+      $data = json_decode($data, TRUE);
+
+      foreach ($data as $idx => $row) {
+        $name = $row['name'];
+        if (!$name) {
+          continue;
+        }
+        $terms = taxonomy_get_term_by_name($name, $machine_name);
+        if (empty($terms)) {
+          $term = [];
+          if ($code_name) {
+            $term[$code_name][LANGUAGE_NONE][0]['value'] = $row['code'];
+          }
+
+          $term = (object) $term;
+          $term->vid = $voc->vid;
+          $term->name = $name;
+          $term->weight = $idx;
+          taxonomy_term_save($term);
+          $terms_created++;
+        }
+        else {
+          $tids = array_keys($terms);
+          $term = $terms[$tids[0]];
+          $term->weight = $idx;
+          if ($code_name && !$term->{$code_name}) {
+            $term->{$code_name}[LANGUAGE_NONE][0]['value'] = $row['code'];
+          }
+          taxonomy_term_save($term);
+          $terms_updated++;
+        }
+      }
+    }
+  }
+  watchdog('osha_musculoskeletal_disorders', '!terms_created terms created, !terms_updated terms updated',
+    array('!terms_created' => $terms_created, '!terms_updated' => $terms_updated));
+}

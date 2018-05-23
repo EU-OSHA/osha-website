@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Applicable for employer’s\/company's  level (with focus on SMEs and very small enterprises)",
+    "code": "applicable_for_employer"
+  },
+  {
+    "name": "Transferable to other companies\/sectors\/countries",
+    "code": "transferable_to_other_companies"
+  },
+  {
+    "name": "Easy to understand for the user",
+    "code": "easy_to_understand"
+  },
+  {
+    "name": "Good OSH advice",
+    "code": "good_osh_advice"
+  },
+  {
+    "name": "Focus where possible on preventing the risk at source",
+    "code": "focus_on_preventing_the_risk_at_source"
+  },
+  {
+    "name": "Includes all relevant parties, especially those who will be affected by the actions",
+    "code": "includes_all_relevant_parties"
+  },
+  {
+    "name": "Comes from a credible source",
+    "code": "comes_from_a_credible_source"
+  },
+  {
+    "name": "Does not include\/contain advertising",
+    "code": "does_not_include_advertising"
+  },
+  {
+    "name": "Easy to use or easy to navigate on the website",
+    "code": "easy_to_use"
+  },
+  {
+    "name": "Innovative\/interesting",
+    "code": "innovative_interesting"
+  },
+  {
+    "name": "Realistic work situation",
+    "code": "realistic_work_situation"
+  },
+  {
+    "name": "Other",
+    "code": "other"
+  }
+]

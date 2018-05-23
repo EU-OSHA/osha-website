@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Elimination of hazards",
+    "code": "elimination_of_hazards"
+  },
+  {
+    "name": "Technical measures e.g. ergonomic equipment",
+    "code": "technical_measures_ergonomic_equipment"
+  },
+  {
+    "name": "Reducing\/minimising the risk by organisational measures, e.g. reducing the number of workers exposed, job rotation",
+    "code": "reducing_minimising_the_risk"
+  },
+  {
+    "name": "Adjustments following injury\/sickness absence",
+    "code": "adjustments_following_injury_sickness_absence"
+  },
+  {
+    "name": "Adjustments\/support for chronic MSD disorder\/disease\/pain suffers",
+    "code": "adjustments_support_for_chronic_msd_disorder"
+  },
+  {
+    "name": "Training\/guidance (for workers)",
+    "code": "training_guidance"
+  },
+  {
+    "name": "Exercises",
+    "code": "exercises"
+  },
+  {
+    "name": "Rehabilitation, physiotherapy etc.",
+    "code": "rehabilitation_physiotherapy"
+  },
+  {
+    "name": "Other",
+    "code": "other"
+  }
+]

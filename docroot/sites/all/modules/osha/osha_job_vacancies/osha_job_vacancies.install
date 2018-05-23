@@ -83,3 +83,38 @@ function osha_job_vacancies_update_7004() {
 function osha_job_vacancies_update_7005() {
   features_revert(array('osha_job_vacancies' => array('field_instance')));
 }
+
+/**
+ * MDR-1934 adjustments to the vacancies form.
+ */
+function osha_job_vacancies_update_7006() {
+  features_revert_module('osha_job_vacancies');
+  features_revert(array('osha_alert_service' => array('views_view')));
+  
+  $file = sprintf('%s/job_vacancies.json', dirname(__FILE__));
+  if (!is_readable($file)) {
+    drupal_set_message("Cannot read taxonomy file! ($file).", 'warning');
+  }
+  else {
+    $json = json_decode(file_get_contents($file), TRUE);
+    $taxonomies = array('grade', 'agency');
+    foreach ($taxonomies as $taxonomy) {
+      $voc = taxonomy_vocabulary_machine_name_load($taxonomy);
+      if (empty($voc)) {
+        drupal_set_message("$taxonomy doesn't exits!", 'warning');
+        continue;
+      }
+      foreach ($json[$taxonomy] as $term_name) {
+        $terms = taxonomy_get_term_by_name($term_name, $taxonomy);
+        if (!empty($terms)) {
+          continue;
+        }
+        $term = new stdClass();
+        $term->name = $term->name = $term_name;
+        $term->vid = $voc->vid;
+        $term->language = 'en';
+        taxonomy_term_save($term);
+      }
+    }
+  }
+}

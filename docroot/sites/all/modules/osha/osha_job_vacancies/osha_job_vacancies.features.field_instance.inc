@@ -633,7 +633,11 @@ function osha_job_vacancies_field_default_field_instances() {
   // Exported field_instance: 'node-job_vacancies-field_job_vacancies_agency'.
   $field_instances['node-job_vacancies-field_job_vacancies_agency'] = array(
     'bundle' => 'job_vacancies',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'tid' => 4257,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -1274,100 +1278,6 @@ function osha_job_vacancies_field_default_field_instances() {
       ),
       'type' => 'options_select',
       'weight' => 9,
-    ),
-    'workbench_access_field' => 0,
-  );
-
-  // Exported field_instance: 'node-job_vacancies-field_job_vacancies_url'.
-  $field_instances['node-job_vacancies-field_job_vacancies_url'] = array(
-    'bundle' => 'job_vacancies',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'dangerous_substances' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 25,
-      ),
-      'highlights_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'newsletter_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_resources' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'rss' => array(
-        'label' => 'inline',
-        'module' => 'link',
-        'settings' => array(),
-        'type' => 'link_plain',
-        'weight' => 4,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 7,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_job_vacancies_url',
-    'label' => 'Job URL',
-    'required' => 1,
-    'settings' => array(
-      'absolute_url' => 1,
-      'attributes' => array(
-        'class' => '',
-        'configurable_class' => 0,
-        'configurable_title' => 0,
-        'rel' => '',
-        'target' => 'default',
-        'title' => '',
-      ),
-      'display' => array(
-        'url_cutoff' => 80,
-      ),
-      'enable_tokens' => 1,
-      'entity_translation_sync' => FALSE,
-      'linkit' => array(
-        'button_text' => 'Search',
-        'enable' => 0,
-        'profile' => '',
-      ),
-      'rel_remove' => 'default',
-      'title' => 'none',
-      'title_label_use_field_label' => 0,
-      'title_maxlength' => 128,
-      'title_value' => '',
-      'url' => 0,
-      'user_register_form' => FALSE,
-      'validate_url' => 1,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'link',
-      'settings' => array(),
-      'type' => 'link_field',
-      'weight' => 5,
     ),
     'workbench_access_field' => 0,
   );
@@ -2146,7 +2056,6 @@ function osha_job_vacancies_field_default_field_instances() {
   t('Flickr date taken');
   t('Grab Flickr photos taken on or between these dates only.');
   t('Grade');
-  t('Job URL');
   t('Job vacancies Related resources files.');
   t('Location(s)');
   t('Marked as outdated');

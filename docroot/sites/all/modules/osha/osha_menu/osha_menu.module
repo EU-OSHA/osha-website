@@ -39,3 +39,86 @@ function osha_menu_menu_block_block_delete($form, $form_state) {
   $delta = $form_state['values']['delta'];
   variable_del('menu_block_' . $delta . '_' . OSHA_MENU_RENDER_IMG_VAR_NAME);
 }
+
+function osha_menu_form_menu_edit_item_alter(&$form, $form_state) {
+  $item = $form['original_item']['#value'];
+  _osha_menu_form_alter($form, $item, $form);
+}
+
+function osha_menu_form_node_form_alter(&$form, $form_state) {
+  if (isset($form['menu']['link']) && isset($form['#node']->menu)) {
+    $item = $form['#node']->menu;
+    _osha_menu_form_alter($form['menu']['link'], $item, $form);
+  }
+}
+
+/**
+ * Add the menu attributes to a menu item edit form.
+ *
+ * @param $form
+ *   The menu item edit form passed by reference.
+ * @param $item
+ *   The optional existing menu item for context.
+ */
+function _osha_menu_form_alter(array &$form, array $item = array(), array &$complete_form) {
+
+  $attributes['copyright'] = array(
+    'label' => t('Copyright'),
+    'description' => t('The Copyright caption field.'),
+  );
+
+  // Merge in default values.
+  foreach ($attributes as $attribute => &$info) {
+    $info += array(
+      'form' => array(),
+      'enabled' => 1,
+      'default' => '',
+    );
+    $info['form'] += array(
+      '#type' => 'textfield',
+      '#title' => $info['label'],
+      '#description' => isset($info['description']) ? $info['description'] : '',
+      '#default_value' => "",
+    );
+  }
+  $form['options']['copyright'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Menu fields'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+    '#tree' => TRUE,
+  );
+
+  foreach ($attributes as $attribute => $info) {
+    if (isset($item['options']['copyright'][$attribute])) {
+      // If the menu link already has this attribute, use it.
+      $info['form']['#default_value'] = $item['options'][$attribute];
+      // Convert the classes array to a string for the form.
+    }
+    elseif ($item['mlid']) {
+      // If this is an existing link, use the raw default (usually empty).
+      $info['form']['#default_value'] = $info['default'];
+    }
+
+    $form['options']['copyright'][$attribute] = $info['form'] + array('#access' => $info['enabled']);
+  }
+
+  // Add form values for the reset of $item['options'] and
+  // $item['options']['attributes'] so the values will carry over during save.
+  foreach ($item['options']['copyright'] as $key => $value) {
+    if ($key !== 'attributes' && !isset($form['options'][$key])) {
+      $form['options']['copyright'][$key] = array(
+        '#type' => 'value',
+        '#value' => $value,
+      );
+    }
+  }
+  foreach ($item['options']['copyright'] as $key => $value) {
+    if (!isset($form['options']['copyright'][$key])) {
+      $form['options']['copyright'][$key] = array(
+        '#type' => 'value',
+        '#value' => $value,
+      );
+    }
+  }
+}

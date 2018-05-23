@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Training",
+    "code": "training"
+  },
+  {
+    "name": "Warning message\/Alert",
+    "code": "warning_message_alert"
+  },
+  {
+    "name": "General information",
+    "code": "general_information"
+  },
+  {
+    "name": "Awareness raising",
+    "code": "awareness_raising"
+  },
+  {
+    "name": "Guidance",
+    "code": "guidance"
+  },
+  {
+    "name": "Risk assessment",
+    "code": "risk_assessment"
+  },
+  {
+    "name": "Other",
+    "code": "other"
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Film",
+    "code": "film"
+  },
+  {
+    "name": "Photo",
+    "code": "photo"
+  },
+  {
+    "name": "Poster",
+    "code": "poster"
+  },
+  {
+    "name": "Leaflet\/Booklet",
+    "code": "leaflet_booklet"
+  },
+  {
+    "name": "Infographic",
+    "code": "infographic"
+  },
+  {
+    "name": "Other",
+    "code": "other"
+  }
+]

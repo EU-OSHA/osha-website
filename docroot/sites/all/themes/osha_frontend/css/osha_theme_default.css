@@ -9591,3 +9591,27 @@ div.flickr-photoset{
 .logged-in.node-type-dangerous-substances .node-dangerous-substances > div{
 	margin-bottom: 10px;
 }
+
+
+/*caption images*/
+.views-field-field-copyright{
+	margin-bottom: 0px !important;
+}
+
+.views-field-field-copyright .field-content{
+	margin-bottom: 0px !important;
+	font-size: .8em;
+    margin-top: -20px;
+    font-style: italic;
+    color: #989898;
+    position: absolute;
+}
+
+.introduction-copyright{
+	margin-bottom: 0px !important;
+	font-size: .8em;
+    margin-top: -9px;
+    font-style: italic;
+    color: #989898;
+    position: absolute;
+}

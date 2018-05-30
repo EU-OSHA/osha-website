@@ -17,6 +17,12 @@ function osha_job_vacancies_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Please introduce in this box the text of this section.',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -53,6 +59,13 @@ function osha_job_vacancies_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 0,
+      ),
+      'rss' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 9,
       ),
       'scs' => array(
         'label' => 'above',
@@ -93,7 +106,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 7,
+      'weight' => 15,
     ),
     'workbench_access_field' => 0,
   );
@@ -105,6 +118,12 @@ function osha_job_vacancies_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Select Activity for this content.',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -141,6 +160,12 @@ function osha_job_vacancies_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'rss' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 19,
+      ),
       'scs' => array(
         'label' => 'above',
         'settings' => array(),
@@ -151,7 +176,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 15,
+        'weight' => 23,
       ),
     ),
     'entity_type' => 'node',
@@ -169,7 +194,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 14,
+      'weight' => 22,
     ),
     'workbench_access_field' => 0,
   );
@@ -185,6 +210,12 @@ function osha_job_vacancies_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -221,11 +252,17 @@ function osha_job_vacancies_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'rss' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 18,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 10,
       ),
     ),
     'entity_type' => 'node',
@@ -243,17 +280,27 @@ function osha_job_vacancies_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 15,
+      'weight' => 23,
     ),
   );
 
   // Exported field_instance: 'node-job_vacancies-field_author'.
   $field_instances['node-job_vacancies-field_author'] = array(
     'bundle' => 'job_vacancies',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 'EU-OSHA',
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -290,6 +337,12 @@ function osha_job_vacancies_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'rss' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 17,
+      ),
       'scs' => array(
         'label' => 'above',
         'settings' => array(),
@@ -300,7 +353,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 17,
       ),
     ),
     'entity_type' => 'node',
@@ -309,6 +362,11 @@ function osha_job_vacancies_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -319,8 +377,9 @@ function osha_job_vacancies_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 12,
+      'weight' => 20,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-job_vacancies-field_character_count'.
@@ -330,6 +389,12 @@ function osha_job_vacancies_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Automatically calculated when saving. The count of characters found in the default language text (English).',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -366,11 +431,17 @@ function osha_job_vacancies_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'rss' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 21,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 11,
       ),
     ),
     'entity_type' => 'node',
@@ -390,7 +461,7 @@ function osha_job_vacancies_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 21,
+      'weight' => 27,
     ),
   );
 
@@ -400,6 +471,12 @@ function osha_job_vacancies_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -436,11 +513,17 @@ function osha_job_vacancies_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'rss' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 20,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 9,
+        'weight' => 16,
       ),
     ),
     'entity_type' => 'node',
@@ -467,7 +550,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_select',
-      'weight' => 6,
+      'weight' => 14,
     ),
   );
 
@@ -477,21 +560,16 @@ function osha_job_vacancies_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Grab Flickr photos taken on or between these dates only.',
     'display' => array(
-      'default' => array(
-        'format_type' => 'long',
+      'dangerous_substances' => array(
         'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'osha_date_theme' => '',
-          'show_remaining_days' => FALSE,
-          'show_repeat_rule' => 'show',
-        ),
-        'type' => 'date_default',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 16,
       ),
       'highlights_item' => array(
@@ -512,11 +590,17 @@ function osha_job_vacancies_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'rss' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 23,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 18,
       ),
     ),
     'entity_type' => 'node',
@@ -542,8 +626,155 @@ function osha_job_vacancies_field_default_field_instances() {
         'year_range' => '-100:+1',
       ),
       'type' => 'date_popup',
-      'weight' => 5,
+      'weight' => 12,
     ),
+  );
+
+  // Exported field_instance: 'node-job_vacancies-field_job_vacancies_agency'.
+  $field_instances['node-job_vacancies-field_job_vacancies_agency'] = array(
+    'bundle' => 'job_vacancies',
+    'default_value' => array(
+      0 => array(
+        'tid' => 4257,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 17,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'rss' => array(
+        'label' => 'inline',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_job_vacancies_agency',
+    'label' => 'Agency',
+    'required' => 1,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
+      'type' => 'options_select',
+      'weight' => 1,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance:
+  // 'node-job_vacancies-field_job_vacancies_contact_type'.
+  $field_instances['node-job_vacancies-field_job_vacancies_contact_type'] = array(
+    'bundle' => 'job_vacancies',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 19,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'rss' => array(
+        'label' => 'inline',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 5,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_job_vacancies_contact_type',
+    'label' => 'Type of Contract',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
+      'type' => 'options_select',
+      'weight' => 6,
+    ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-job_vacancies-field_job_vacancies_deadline'.
@@ -552,6 +783,12 @@ function osha_job_vacancies_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'date',
@@ -597,6 +834,21 @@ function osha_job_vacancies_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'rss' => array(
+        'label' => 'inline',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'short_date_eu',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'osha_date_theme' => '',
+          'show_remaining_days' => 0,
+        ),
+        'type' => 'date_default',
+        'weight' => 3,
+      ),
       'scs' => array(
         'label' => 'above',
         'settings' => array(),
@@ -607,7 +859,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 11,
+        'weight' => 19,
       ),
     ),
     'entity_type' => 'node',
@@ -634,8 +886,237 @@ function osha_job_vacancies_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_select',
-      'weight' => 5,
+      'weight' => 13,
     ),
+  );
+
+  // Exported field_instance: 'node-job_vacancies-field_job_vacancies_grade'.
+  $field_instances['node-job_vacancies-field_job_vacancies_grade'] = array(
+    'bundle' => 'job_vacancies',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 18,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'rss' => array(
+        'label' => 'inline',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 6,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_job_vacancies_grade',
+    'label' => 'Grade',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
+      'type' => 'options_select',
+      'weight' => 7,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'node-job_vacancies-field_job_vacancies_location'.
+  $field_instances['node-job_vacancies-field_job_vacancies_location'] = array(
+    'bundle' => 'job_vacancies',
+    'default_value' => array(
+      0 => array(
+        'value' => 'Bilbao',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 24,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'rss' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_plain',
+        'weight' => 7,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 8,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_job_vacancies_location',
+    'label' => 'Location(s)',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 8,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'node-job_vacancies-field_job_vacancies_ref_id'.
+  $field_instances['node-job_vacancies-field_job_vacancies_ref_id'] = array(
+    'bundle' => 'job_vacancies',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 23,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'rss' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_plain',
+        'weight' => 1,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 6,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_job_vacancies_ref_id',
+    'label' => 'Reference ID',
+    'required' => 1,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 2,
+    ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance:
@@ -650,6 +1131,12 @@ function osha_job_vacancies_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -686,6 +1173,12 @@ function osha_job_vacancies_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'rss' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 16,
+      ),
       'scs' => array(
         'label' => 'above',
         'settings' => array(),
@@ -696,7 +1189,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 12,
+        'weight' => 20,
       ),
     ),
     'entity_type' => 'node',
@@ -714,8 +1207,79 @@ function osha_job_vacancies_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 13,
+      'weight' => 21,
     ),
+  );
+
+  // Exported field_instance: 'node-job_vacancies-field_job_vacancies_type'.
+  $field_instances['node-job_vacancies-field_job_vacancies_type'] = array(
+    'bundle' => 'job_vacancies',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 20,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'rss' => array(
+        'label' => 'inline',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 8,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 5,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_job_vacancies_type',
+    'label' => 'Vacancy Type',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
+      'type' => 'options_select',
+      'weight' => 9,
+    ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-job_vacancies-field_nace_codes'.
@@ -725,6 +1289,12 @@ function osha_job_vacancies_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Select Nace code for this content.',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -761,6 +1331,12 @@ function osha_job_vacancies_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'rss' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 12,
+      ),
       'scs' => array(
         'label' => 'above',
         'settings' => array(),
@@ -771,7 +1347,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 22,
       ),
     ),
     'entity_type' => 'node',
@@ -787,7 +1363,7 @@ function osha_job_vacancies_field_default_field_instances() {
       'module' => 'multiple_selects',
       'settings' => array(),
       'type' => 'multiple_selects',
-      'weight' => 10,
+      'weight' => 18,
     ),
     'workbench_access_field' => 0,
   );
@@ -799,6 +1375,12 @@ function osha_job_vacancies_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Automatically calculated when saving. The count of pages of text in the default language (English).',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -835,11 +1417,17 @@ function osha_job_vacancies_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'rss' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 22,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 12,
       ),
     ),
     'entity_type' => 'node',
@@ -859,7 +1447,7 @@ function osha_job_vacancies_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 23,
+      'weight' => 28,
     ),
   );
 
@@ -869,6 +1457,12 @@ function osha_job_vacancies_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Please select the date of publication, if it is not possible to identify leave it empty.',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -914,6 +1508,21 @@ function osha_job_vacancies_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'rss' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'short_date_eu',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'osha_date_theme' => '',
+          'show_remaining_days' => 0,
+        ),
+        'type' => 'date_default',
+        'weight' => 15,
+      ),
       'scs' => array(
         'label' => 'above',
         'settings' => array(),
@@ -924,7 +1533,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 21,
       ),
     ),
     'entity_type' => 'node',
@@ -952,7 +1561,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_select',
-      'weight' => 4,
+      'weight' => 11,
     ),
     'workbench_access_field' => 0,
   );
@@ -963,6 +1572,12 @@ function osha_job_vacancies_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Job vacancies Related resources files.',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'osha_seminar',
@@ -1000,11 +1615,17 @@ function osha_job_vacancies_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'rss' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 13,
       ),
     ),
     'entity_type' => 'node',
@@ -1026,7 +1647,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 8,
+      'weight' => 16,
     ),
     'workbench_access_field' => 0,
   );
@@ -1038,6 +1659,12 @@ function osha_job_vacancies_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Please introduce in this box the text of this section.',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1075,6 +1702,12 @@ function osha_job_vacancies_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'rss' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 14,
+      ),
       'scs' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1085,7 +1718,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 8,
+        'weight' => 15,
       ),
     ),
     'entity_type' => 'node',
@@ -1109,7 +1742,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 3,
+      'weight' => 10,
     ),
     'workbench_access_field' => 0,
   );
@@ -1121,6 +1754,12 @@ function osha_job_vacancies_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Select Tags for this content.',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1157,6 +1796,12 @@ function osha_job_vacancies_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'rss' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 13,
+      ),
       'scs' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1167,7 +1812,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 14,
       ),
     ),
     'entity_type' => 'node',
@@ -1185,7 +1830,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 9,
+      'weight' => 17,
     ),
     'workbench_access_field' => 0,
   );
@@ -1197,6 +1842,12 @@ function osha_job_vacancies_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Select Thesaurus for this content.',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1233,6 +1884,12 @@ function osha_job_vacancies_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'rss' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 11,
+      ),
       'scs' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1243,7 +1900,7 @@ function osha_job_vacancies_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 9,
       ),
     ),
     'entity_type' => 'node',
@@ -1259,7 +1916,7 @@ function osha_job_vacancies_field_default_field_instances() {
       'module' => 'multiple_selects',
       'settings' => array(),
       'type' => 'multiple_selects',
-      'weight' => 11,
+      'weight' => 19,
     ),
     'workbench_access_field' => 0,
   );
@@ -1271,6 +1928,12 @@ function osha_job_vacancies_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'title',
@@ -1327,6 +1990,17 @@ function osha_job_vacancies_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'rss' => array(
+        'label' => 'inline',
+        'module' => 'title',
+        'settings' => array(
+          'title_class' => '',
+          'title_link' => '',
+          'title_style' => 'h1',
+        ),
+        'type' => 'title_linked',
+        'weight' => 2,
+      ),
       'scs' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1364,13 +2038,14 @@ function osha_job_vacancies_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
   t('Activity');
+  t('Agency');
   t('Author');
   t('Automatically calculated when saving. The count of characters found in the default language text (English).');
   t('Automatically calculated when saving. The count of pages of text in the default language (English).');
@@ -1380,13 +2055,16 @@ function osha_job_vacancies_field_default_field_instances() {
   t('Expiration date');
   t('Flickr date taken');
   t('Grab Flickr photos taken on or between these dates only.');
+  t('Grade');
   t('Job vacancies Related resources files.');
+  t('Location(s)');
   t('Marked as outdated');
   t('Nace');
   t('Page count');
   t('Please introduce in this box the text of this section.');
   t('Please select the date of publication, if it is not possible to identify leave it empty.');
   t('Publication date');
+  t('Reference ID');
   t('Related resources');
   t('Select Activity for this content.');
   t('Select Nace code for this content.');
@@ -1397,6 +2075,8 @@ function osha_job_vacancies_field_default_field_instances() {
   t('Tags');
   t('Thesaurus');
   t('Title');
+  t('Type of Contract');
+  t('Vacancy Type');
 
   return $field_instances;
 }

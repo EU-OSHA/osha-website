@@ -273,7 +273,8 @@ safety-and-health-legislation/european-directives
 node/2544
 legislation/guidelines/*
 themes/dangerous-substances/search
-themes/dangerous-substances/search/*',
+themes/dangerous-substances/search/*
+themes/musculoskeletal-disorders/search',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(

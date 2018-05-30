@@ -25,3 +25,7 @@
     content: "Switch to minimal" !important;
     color: #0074bd;
 }
+
+.defaultSkin span.mce_osha_image {
+    background-position:-380px 0;
+}

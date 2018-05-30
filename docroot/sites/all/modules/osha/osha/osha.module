@@ -7,8 +7,132 @@ include_once 'osha.pathauto.inc';
 define('OSHA_ARTICLE_CONTENT_TYPE_ARTICLE', 'article');
 define('OSHA', 'OSHA');
 
+/**
+ * Implements hook_token_info().
+ */
+function osha_token_info() {
+  $info['tokens']['site']['site-language'] = array(
+    'name' => t('Site language'),
+    'description' => t('Site language'),
+    'type' => 'array',
+  );
+  $info['tokens']['site']['menu-level1'] = array(
+    'name' => t('menu level1'),
+    'description' => t('Site level 1 menu'),
+    'type' => 'array',
+  );
+  $info['tokens']['site']['menu-level2'] = array(
+    'name' => t('menu level2'),
+    'description' => t('Site level 2 menu'),
+    'type' => 'array',
+  );
+  $info['tokens']['site']['menu-level3'] = array(
+    'name' => t('menu level3'),
+    'description' => t('Site level 3 menu'),
+    'type' => 'array',
+  );
+  $info['tokens']['site']['menu-level4'] = array(
+    'name' => t('menu level4'),
+    'description' => t('Site level 4 menu'),
+    'type' => 'array',
+  );
+  $info['tokens']['site']['menu-level5'] = array(
+    'name' => t('menu level5'),
+    'description' => t('Site level 5 menu'),
+    'type' => 'array',
+  );
+  return $info;
+}
+
+function osha_get_menu_level($level) {
+  static $menu;
+  if (!$menu) {
+    $active_trail = menu_get_active_trail();
+    if ($active_trail) {
+      array_shift($active_trail);
+      if ($active_trail) {
+        array_shift($active_trail);
+      }
+    }
+    if (variable_get('osha_menu_level_reverse', FALSE)) {
+      krsort($active_trail);
+    }
+    $menu = [];
+    foreach ($active_trail as $trail) {
+      $menu[] = check_plain($trail['title']);
+    }
+  }
+  if (isset($menu[$level])) {
+    return $menu[$level];
+  }
+  return NULL;
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function osha_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  global $language;
+  $replacements = array();
+  // Site tokens.
+  if ($type == 'site') {
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'site-language':
+          $replacements[$original] = $language->language;
+          break;
+
+        case 'menu-level1':
+          $replacements[$original] = osha_get_menu_level(0);
+          break;
+
+        case 'menu-level2':
+          $replacements[$original] = osha_get_menu_level(1);
+          break;
+
+        case 'menu-level3':
+          $replacements[$original] = osha_get_menu_level(2);
+          break;
+
+        case 'menu-level4':
+          $replacements[$original] = osha_get_menu_level(3);
+          break;
+
+        case 'menu-level5':
+          $replacements[$original] = osha_get_menu_level(4);
+          break;
+
+      }
+    }
+  }
+  return $replacements;
+}
+
+/**
+ * Implements hook_menu().
+ */
 function osha_menu() {
   $items = array();
+  $items['imce_images'] = array(
+    'title' => 'File browser',
+    'page callback' => 'imce',
+    'access callback' => 'imce_access',
+    'access arguments' => array(FALSE, 1),
+    'file path' => drupal_get_path('module', 'imce') . '/inc',
+    'file' => 'imce.page.inc',
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['imce_files'] = array(
+    'title' => 'File browser',
+    'page callback' => 'imce',
+    'access callback' => 'imce_access',
+    'access arguments' => array(FALSE, 1),
+    'file path' => drupal_get_path('module', 'imce') . '/inc',
+    'file' => 'imce.page.inc',
+    'type' => MENU_CALLBACK,
+  );
+
   $items['users/autocomplete/%'] = array(
     'title' => 'Autocomplete for cities',
     'page callback' => 'osha_users_autocomplete',
@@ -306,6 +430,7 @@ function osha_date_format_types() {
   return array(
     'year'  => t('Year'),
     'short_date_eu'  => t('EU short date'),
+    'pubdate_rss'  => t('pubDate RSS'),
     'osha_day_only'  => t('Day only'),
     'month' => t('Month: F'),
     'year_and_month'  => t('Year and Month'),
@@ -322,6 +447,9 @@ function osha_date_formats() {
     ),
     array(
       'type' => 'short_date_eu', 'format'  => 'd/m/Y - H:i', 'locales' => array(),
+    ),
+    array(
+      'type' => 'pubdate_rss', 'format'  => 'r', 'locales' => array(),
     ),
     array(
       'type' => 'osha_day_only', 'format'  => 'd/m/Y', 'locales' => array(),
@@ -705,21 +833,98 @@ function osha_wysiwyg_editor_settings_alter(&$settings, $context){
   $settings['theme_advanced_buttons1'] .= ',osha_advanced,osha_minimal';
 }
 
+/**
+ * Implements hook_wysiwyg_plugin().
+ */
 function osha_wysiwyg_plugin($editor, $version=0) {
+  static $integrated = array();
+
+  /*
+  $plugins['imce_image'] = array(
+    'extensions' => array('imce_image' => t('IMCE image 2')),
+    'url' => 'http://drupal.org/project/imce_image',
+    'options' => array(
+      'file_browser_callback' => 'imceImageBrowserImage',
+      'inline_styles' => TRUE,
+    ),
+    'load' => FALSE,
+    //'internal' => FALSE,
+  );
+
+  $plugins['imce_file'] = array(
+    'extensions' => array('imce_file' => t('IMCE file 2')),
+    'url' => 'http://drupal.org/project/imce_file',
+    'options' => array(
+      'file_browser_callback' => 'imceImageBrowserFile',
+      'inline_styles' => TRUE,
+    ),
+    'load' => FALSE,
+    //'internal' => FALSE,
+  );
+  return $plugins;*/
+
+  $plugins = [];
   switch ($editor) {
   case 'tinymce':
-    return array(
-      'osha_advanced' => array(
-        'extensions' => array(
-          'osha_advanced' => t('Osha advanced selector'),
-          'osha_minimal' => t('Osha minimal selector'),
-        ),
-        'load' => TRUE,
-        'internal' => FALSE,
+    $plugins['osha_advanced'] = array(
+      'extensions' => array(
+        'osha_advanced' => t('Osha advanced selector'),
+        'osha_minimal' => t('Osha minimal selector'),
       ),
+      'load' => TRUE,
+      'internal' => FALSE,
     );
-  break;
+
+
+    if (!module_invoke('imce', 'access')) {
+      return $plugins;
+    }
+
+    // Add the edw_helper library for the editor.
+    //  drupal_add_library('edw_helper', $editor);
+
+    // Load our invocation scripts.
+    if (empty($integrated)) {
+      $path = drupal_get_path('module', 'osha');
+      drupal_add_js($path . '/js/osha_imce_wysiwyg.js');
+    }
+
+    if (!isset($integrated[$editor])) {
+      $integrated[$editor] = TRUE;
+      // @todo If some other editor also needs the URL to be passed via
+      //   Drupal.settings.imce, then we need another sub-key '$editor'.
+      $settings = array(
+        'osha_imce' => array(
+          'files_url' => url('imce_files', array('query' => array('app' => $editor . '|url@'))),//'mode' => 'files',
+          'images_url' => url('imce_images', array('query' => array('app' => $editor . '|url@'))),//'mode' => 'images',
+        ),
+      );
+      drupal_add_js($settings, 'setting');
+    }
+
+    // TinyMCE needs to know the filename.
+    $plugins['osha_image'] = array(
+      'path' => drupal_get_path('module', 'osha') . '/editors/' . $editor,
+      'buttons' => array('osha_image' => t('Osha image')),
+      'load' => TRUE,
+      'options' => array(
+        'inline_styles' => TRUE,
+      ),
+      'filename' => 'editor_plugin_image.js',
+    );
+    $plugins['osha_file'] = array(
+      'path' => drupal_get_path('module', 'osha') . '/editors/' . $editor,
+      'buttons' => array('osha_file' => t('Osha file')),
+      'load' => TRUE,
+      'options' => array(
+        'inline_styles' => TRUE,
+      ),
+      'filename' => 'editor_plugin_file.js',
+    );
+
+    break;
   }
+  return $plugins;
 }
 
 /**
@@ -1156,6 +1361,21 @@ function osha_node_activity_name($node) {
   return '';
 }
 
+function osha_user_profile_form_redirect_profile($form, &$form_state) {
+  global $user;
+  $form_state['redirect'] = 'user/' . $user->uid;
+  drupal_redirect_form($form_state);
+}
+
+/**
+ * Implments hook_form_FORM_ID_alter().
+ */
+function osha_form_user_profile_form_alter(&$form, $form_state) {
+  if (isset($_REQUEST['pass-reset-token'])) {
+    $form['#submit'][] = 'osha_user_profile_form_redirect_profile';
+  }
+}
+
 /**
  * Export node to JSON.
  *
@@ -1393,4 +1613,91 @@ function osha_form_text_fields_placeholders_after_build($form, &$form_state) {
   drupal_add_js(drupal_get_path('module', 'osha') . '/js/jquery.charactersRemaining.js');
   drupal_add_js(drupal_get_path('module', 'osha') . '/js/charactersRemaining.js', array('scope' => 'footer'));
   return $form;
+}
+
+function osha_imce_scan_directory($dirname, $imce) {
+
+  $files_only = (arg(0) == 'imce_files') ? TRUE : NULL;
+  $images_only = (arg(0) == 'imce_images') ? TRUE : NULL;
+
+  $directory = array('dirsize' => 0, 'files' => array(), 'subdirectories' => array(), 'error' => FALSE);
+  $diruri = imce_dir_uri($imce, $dirname);
+
+  if (!is_string($dirname) || $dirname == '' || !$handle = opendir($diruri)) {
+    imce_inaccessible_directory($dirname, $imce);
+    $directory['error'] = TRUE;
+    return $directory;
+  }
+
+  while (($file = readdir($handle)) !== FALSE) {
+
+    // Do not include dot files and folders
+    if (substr($file, 0, 1) === '.') {
+      continue;
+    }
+
+    $path = $diruri . $file;
+
+    if (is_dir($path)) {
+      $directory['subdirectories'][] = $file;
+      continue;
+    }
+
+    $width = $height = 0;
+    if ($img = imce_image_info($path)) {
+      $width = $img['width'];
+      $height = $img['height'];
+    }
+    if ($images_only && (!$width || !$height)) {
+      continue;
+    }
+    if ($files_only && ($width || $height)) {
+      continue;
+    }
+    $size = filesize($path);
+    $date = filemtime($path);
+    $directory['files'][$file] = array(
+      'name' => $file,
+      'size' => $size,
+      'width' => $width,
+      'height' => $height,
+      'date' => $date
+    );
+    $directory['dirsize'] += $size;
+  }
+
+  closedir($handle);
+  sort($directory['subdirectories']);
+  return $directory;
+}
+
+function osha_imce_custom_content($imce) {
+  if (arg(0) == 'imce_files') {
+    $path = drupal_get_path('module', 'osha');
+    drupal_add_js($path . '/js/imce_file.js');
+  }
+}
+
+function osha_imce_custom_init($imce, $user) {
+  if (isset($_REQUEST['url'])) {
+    $url = pathinfo($_REQUEST['url'],PATHINFO_DIRNAME);
+    $public_path = parse_url(file_create_url('public://'),PHP_URL_PATH);
+    if (strpos($url, $public_path) === 0) {
+      $dir = str_replace($public_path, '', $url);
+      $sess = TRUE;
+      if (count($imce['directories']) < 2) {
+        $perms = reset($imce['directories']);
+        if (!isset($perms['subnav']) || !$perms['subnav']) {
+          $sess = FALSE;
+        }
+      }
+      if (isset($dir)) {
+        if (imce_check_directory($dir, $imce)) {
+          if ($sess) {
+            $_SESSION['imce_directory'] = rawurlencode($dir);
+          }
+        }
+      }
+    }
+  }
 }

@@ -1074,7 +1074,7 @@ function osha_workflow_workbench_moderation_transition($node, $old, $new) {
     }
   }
 
-  // Reindex all published translations
+  // Reindex all published translations.
   if( !empty($node->translations->data)) {
     foreach ($node->translations->data as $lang => $tr) {
       search_api_track_item_change('search_api_et_node', array($lang . '_' . $node->nid));

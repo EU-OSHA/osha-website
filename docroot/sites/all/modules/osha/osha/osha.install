@@ -565,3 +565,29 @@ function osha_update_7039() {
 function osha_update_7040() {
   features_revert(array('osha' => array('views_view')));
 }
+
+/**
+ * MDR-1511 Cannot find the images added from the editor in the body text.
+ */
+function osha_update_7041() {
+  variable_set('imce_custom_scan', 'osha_imce_scan_directory');
+  variable_set('imce_custom_content', array('osha_imce_custom_content' => TRUE));
+  features_revert(array('osha' => array('wysiwyg')));
+}
+
+/**
+ * MDR-1764 add custom dimensions to the piwik script.
+ */
+function osha_update_7042() {
+  variable_set('osha_menu_level_reverse', FALSE);
+}
+
+/**
+ * MDR-1905 Development MSDs database like the DS one.
+ */
+function osha_update_7043() {
+  module_enable(['osha_musculoskeletal_disorders']);
+  features_revert(array('osha_search' => array('fe_block_settings')));
+  features_revert_module('osha_musculoskeletal_disorders');
+  osha_musculoskeletal_disorders_add_terms();
+}

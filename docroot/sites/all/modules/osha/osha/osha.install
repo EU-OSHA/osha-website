@@ -581,3 +581,13 @@ function osha_update_7041() {
 function osha_update_7042() {
   variable_set('osha_menu_level_reverse', FALSE);
 }
+
+/**
+ * MDR-1905 Development MSDs database like the DS one.
+ */
+function osha_update_7043() {
+  module_enable(['osha_musculoskeletal_disorders']);
+  features_revert(array('osha_search' => array('fe_block_settings')));
+  features_revert_module('osha_musculoskeletal_disorders');
+  osha_musculoskeletal_disorders_add_terms();
+}

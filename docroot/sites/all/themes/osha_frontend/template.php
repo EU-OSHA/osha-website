@@ -14,6 +14,28 @@ function osha_frontend_links__system_main_menu() {
 function osha_frontend_preprocess_views_view_row_rss(&$vars) {
   $item = &$vars['row'];
 
+  $map = [
+    'feed_1' => 'rss_publication',
+    'feed_2' => 'rss_news',
+    'feed_3' => 'rss_events',
+    'feed_7' => 'rss_directive',
+    'feed_9' => 'rss_press_release',
+
+    'feed_4' => 'rss_blog',
+    'feed_5' => 'rss_calls',
+    'feed_6' => 'rss_vacancies',
+    'feed_8' => 'rss_seminars',
+    'feed_10' => 'rss_guidlines',
+  ];
+
+  if ($vars['view']->current_display == 'feed_1') {
+    $item->link .= '/view';
+  }
+
+  if (isset($map[$vars['view']->current_display])) {
+    $item->link .= '?pk_campaign=' . $map[$vars['view']->current_display];
+  }
+
   $vars['title'] = check_plain($item->title);
   $vars['link'] = check_url($item->link);
   $vars['description'] = check_plain($item->description);
@@ -99,7 +121,7 @@ function osha_frontend_menu_link__menu_block($variables) {
     isset($element['#localized_options']['content']['image'])
   ) {
     $path = file_create_url($element['#localized_options']['content']['image']);
-    $link = l('<img src="' . $path . '" alt="'.$element['#title'].'"/>', $element['#href'],
+    $link = l('<img src="' . $path . '" alt="' . $element['#title'] . '"/>', $element['#href'],
       array('html' => TRUE, 'attributes' => $element['#localized_options']['attributes'])
     );
     return sprintf("\n<li %s>%s</li>", $attr, $link);
@@ -118,14 +140,19 @@ function osha_frontend_menu_link__menu_block($variables) {
   if (!empty($element['#localized_options']['content']['image'])
       && $image_url = file_create_url($element['#localized_options']['content']['image'])) {
     // $image = '<img src="' . $image_url . '" alt=""/>';
-    // we should in fact use empty alt because the image is only decorative (the text is already present in the link)
+    // We should in fact use empty alt because the image is only decorative (the text is already present in the link).
     $image = '<img src="' . $image_url . '" alt="' . $element['#title'] . '"/>';
     $output_image = l($image, $element['#href'], array('html' => TRUE));
   }
 
+  $output_copyright = "";
+  if (!empty($element['#localized_options']['copyright']['copyright'])) {
+    $output_copyright = '<div class="introduction-copyright">' . $element['#localized_options']['copyright']['copyright'] . '</div>';
+  }
   return '<li' . drupal_attributes($element['#attributes']) . '>
     <div class="introduction-title">' . $output_link . '</div>
     <div class="introduction-image">' . $output_image . '</div>
+    ' . $output_copyright . '
     </li>';
 }
 

@@ -1,0 +1,58 @@
+[
+    {
+        "name": "Manual handling of loads",
+        "code": "manual_handling_of_loads"
+    },
+    {
+        "name": "Repetitive movements\/work",
+        "code": "repetitive_movements_work"
+    },
+    {
+        "name": "Forceful movements",
+        "code": "forceful_movements"
+    },
+    {
+        "name": "Awkward postures",
+        "code": "awkward_postures"
+    },
+    {
+        "name": "Static postures - standing",
+        "code": "static_postures_standing"
+    },
+    {
+        "name": "Static postures - sitting",
+        "code": "static_postures_sitting"
+    },
+    {
+        "name": "Fast-paced work",
+        "code": "fast_paced_work"
+    },
+    {
+        "name": "Using Display Screen Equipment",
+        "code": "using_display_screen_equipment"
+    },
+    {
+        "name": "Poor work organisation",
+        "code": "poor_work_organisation"
+    },
+    {
+        "name": "Poor work environment, e.g lighting",
+        "code": "poor_work_environment_lighting"
+    },
+    {
+        "name": "Long hours",
+        "code": "long_hours"
+    },
+    {
+        "name": "Stress hazards",
+        "code": "stress_hazards"
+    },
+    {
+        "name": "Working with an existing MSD condition\/disease",
+        "code": "working_with_an_existing_msd_condition_disease"
+    },
+    {
+        "name": "Other",
+        "code": "other"
+    }
+]

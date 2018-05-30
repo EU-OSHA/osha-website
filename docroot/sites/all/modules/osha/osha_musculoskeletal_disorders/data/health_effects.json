@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Back pain or injury",
+    "code": "back_pain_or_injury"
+  },
+  {
+    "name": "Upper limb disorders",
+    "code": "upper_limb_disorders"
+  },
+  {
+    "name": "Lower limb disorders",
+    "code": "lower_limb_disorders"
+  },
+  {
+    "name": "Neck and shoulder disorders",
+    "code": "neck_and_shoulder_disorders"
+  },
+  {
+    "name": "MSDs unspecified",
+    "code": "msds_unspecified"
+  },
+  {
+    "name": "Worsening of existing (chronic) condition",
+    "code": "worsening_of_existing_condition"
+  },
+  {
+    "name": "Stress",
+    "code": "stress"
+  },
+  {
+    "name": "Other",
+    "code": "other"
+  }
+]

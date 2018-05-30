@@ -1,0 +1,4 @@
+<?php
+
+function osha_musculoskeletal_disorders_install() {
+}

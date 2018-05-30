@@ -1,0 +1,42 @@
+[
+  {
+    "name": "All (no specific group)",
+    "code": "all"
+  },
+  {
+    "name": "Ageing and older workers",
+    "code": "ageing_and_older_workers"
+  },
+  {
+    "name": "Disabled workers",
+    "code": "disabled_workers"
+  },
+  {
+    "name": "Sufferer of an MSK disorder or disease",
+    "code": "sufferer_of_an_msk_disorder_or_disease"
+  },
+  {
+    "name": "Home workers",
+    "code": "home_workers"
+  },
+  {
+    "name": "Women",
+    "code": "women"
+  },
+  {
+    "name": "Pregnant workers",
+    "code": "pregnant_workers"
+  },
+  {
+    "name": "Migrant and immigrant workers",
+    "code": "migrant_and_immigrant_workers"
+  },
+  {
+    "name": "Young workers",
+    "code": "young_workers"
+  },
+  {
+    "name": "Other",
+    "code": "other"
+  }
+]

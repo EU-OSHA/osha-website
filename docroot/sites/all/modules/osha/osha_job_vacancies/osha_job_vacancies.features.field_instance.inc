@@ -635,7 +635,7 @@ function osha_job_vacancies_field_default_field_instances() {
     'bundle' => 'job_vacancies',
     'default_value' => array(
       0 => array(
-        'tid' => 4257,
+        'tid' => 4157,
       ),
     ),
     'deleted' => 0,

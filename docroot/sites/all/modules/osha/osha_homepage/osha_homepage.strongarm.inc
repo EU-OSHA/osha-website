@@ -111,6 +111,12 @@ function osha_homepage_strongarm() {
       'print' => array(
         'custom_settings' => FALSE,
       ),
+      'dangerous_substances' => array(
+        'custom_settings' => TRUE,
+      ),
+      'osha_search_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(

@@ -379,6 +379,13 @@ function osha_homepage_views_default_views() {
     'image_style' => 'banner_825_x_255',
     'image_link' => '',
   );
+  /* Field: Content: Copyright */
+  $handler->display->display_options['fields']['field_copyright']['id'] = 'field_copyright';
+  $handler->display->display_options['fields']['field_copyright']['table'] = 'field_data_field_copyright';
+  $handler->display->display_options['fields']['field_copyright']['field'] = 'field_copyright';
+  $handler->display->display_options['fields']['field_copyright']['label'] = '';
+  $handler->display->display_options['fields']['field_copyright']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_copyright']['type'] = 'text_plain';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */

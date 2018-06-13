@@ -528,7 +528,7 @@ please take this into consideration when you are writing the first paragraph.',
     'bundle' => 'musculoskeletal_disorders',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please click on the quality criteria (several clicks possible)',
+    'description' => 'Please select the quality criteria from the drop down list (several options is possible)',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -2110,7 +2110,7 @@ please take this into consideration when you are writing the first paragraph.',
     'bundle' => 'musculoskeletal_disorders',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please select type of visualisation from the drop down list ',
+    'description' => 'Please select type of material visual resource from the drop down list',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -2351,7 +2351,7 @@ please take this into consideration when you are writing the first paragraph.',
     'bundle' => 'musculoskeletal_disorders',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please select a target group from the drop down list',
+    'description' => 'Please select a target audience from the drop down list',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -3181,7 +3181,6 @@ please take this into consideration when you are writing the first paragraph.',
   t('Please add a short description in original language (only if a description is available on the website or material – no extra drafting or translation)');
   t('Please add comments regarding any elements that EU-OSHA could adapt to make pictograms');
   t('Please add the NACE code of the sector covered in the material. Use the NACE Rev 2');
-  t('Please click on the quality criteria (several clicks possible)');
   t('Please describe the material (max. 1500 characters)
 Please note: the first paragraph will be displayed as short description, 
 please take this into consideration when you are writing the first paragraph.');
@@ -3190,14 +3189,15 @@ please take this into consideration when you are writing the first paragraph.');
   t('Please fill in the original title of the material');
   t('Please fill in the type of the material');
   t('Please indicate if the resource contains elements that EU-OSHA could adapt to make pictograms');
-  t('Please select a target group from the drop down list');
+  t('Please select a target audience from the drop down list');
   t('Please select a year of publication, if it is not possible to identify leave it empty.');
   t('Please select the HAZMAP categories from the drop down list');
   t('Please select the prevention measures used');
+  t('Please select the quality criteria from the drop down list (several options is possible)');
   t('Please select the type of hazards related to state and occurrence in the workplace from the drop down list');
   t('Please select the type of health effect from the drop down list');
   t('Please select the type of workers covered in the material from the drop down list');
-  t('Please select type of visualisation from the drop down list ');
+  t('Please select type of material visual resource from the drop down list');
   t('Please tick if yes');
   t('Prevention measures');
   t('Prevention measures other');

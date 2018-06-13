@@ -17,6 +17,12 @@ function osha_homepage_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'link',
@@ -105,6 +111,12 @@ function osha_homepage_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Select Link title for this content.',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'i18n_taxonomy',
@@ -152,6 +164,12 @@ function osha_homepage_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Automatically calculated when saving. The count of characters found in the default language text (English).',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -210,12 +228,76 @@ function osha_homepage_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-banner-field_copyright'.
+  $field_instances['node-banner-field_copyright'] = array(
+    'bundle' => 'banner',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 12,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_copyright',
+    'label' => 'Copyright',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 31,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-banner-field_flickr_date'.
   $field_instances['node-banner-field_flickr_date'] = array(
     'bundle' => 'banner',
     'deleted' => 0,
     'description' => 'Grab Flickr photos taken on or between these dates only.',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'format_type' => 'long',
         'label' => 'above',
@@ -279,6 +361,12 @@ function osha_homepage_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'The header image that will be displayed on page.',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'image',
@@ -390,6 +478,12 @@ function osha_homepage_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Automatically calculated when saving. The count of pages of text in the default language (English).',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -455,6 +549,12 @@ function osha_homepage_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Please introduce in this box the text of this section.',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -509,6 +609,12 @@ function osha_homepage_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -625,6 +731,7 @@ function osha_homepage_field_default_field_instances() {
   t('Automatically calculated when saving. The count of pages of text in the default language (English).');
   t('Banner Link');
   t('Character count');
+  t('Copyright');
   t('Flickr date taken');
   t('Grab Flickr photos taken on or between these dates only.');
   t('Image');

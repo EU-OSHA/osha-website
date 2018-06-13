@@ -118,3 +118,10 @@ function osha_homepage_update_dependencies() {
 function osha_homepage_update_7003() {
   features_revert(array('osha_homepage' => array('field_base', 'field_instance')));
 }
+
+/**
+ * MDR-1898 Caption below the images in the banner/menu blocks(MDR-1680)- MockUps.
+ */
+function osha_homepage_update_7004() {
+  features_revert_module('osha_homepage');
+}

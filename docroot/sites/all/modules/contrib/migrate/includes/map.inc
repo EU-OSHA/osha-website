@@ -44,26 +44,11 @@ abstract class MigrateMap implements Iterator {
   protected $sourceKeyMap, $destinationKeyMap;
 
   /**
-   * Get the source key map.
-   */
-  public function getSourceKeyMap() {
-    return $this->sourceKeyMap;
-  }
-
-  /**
    * Boolean determining whether to track last_imported times in map tables
    *
    * @var boolean
    */
   protected $trackLastImported = FALSE;
-  public function getTrackLastImported() {
-    return $this->trackLastImported;
-  }
-  public function setTrackLastImported($trackLastImported) {
-    if (is_bool($trackLastImported)) {
-      $this->trackLastImported = $trackLastImported;
-    }
-  }
 
   /**
    * Save a mapping from the key values in the source row to the destination
@@ -73,11 +58,9 @@ abstract class MigrateMap implements Iterator {
    * @param $dest_ids
    * @param $status
    * @param $rollback_action
-   * @param $hash
    */
   abstract public function saveIDMapping(stdClass $source_row, array $dest_ids,
-    $status = MigrateMap::STATUS_IMPORTED,
-    $rollback_action = MigrateMap::ROLLBACK_DELETE, $hash = NULL);
+    $status = MigrateMap::STATUS_IMPORTED, $rollback_action = MigrateMap::ROLLBACK_DELETE);
 
   /**
    * Record a message related to a source record

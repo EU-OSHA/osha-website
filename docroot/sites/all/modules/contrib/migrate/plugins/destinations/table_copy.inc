@@ -49,18 +49,13 @@ class MigrateDestinationTableCopy extends MigrateDestination {
     $migration = MigrationBase::currentMigration();
 
     $fields = clone $row;
-    // Remove all map data, otherwise we'll try to write it to the destination
-    // table.
-    foreach ($fields as $field => $data) {
-      if (strpos($field, 'migrate_map_') === 0) {
-        unset($fields->$field);
-      }
-    }
     $keys = array_keys($this->keySchema);
     $values  = array();
     foreach ($keys as $key) {
       $values[] = $row->$key;
     }
+    unset($fields->migrate_map_destid1);
+    unset($fields->needs_update);
     $query = db_merge($this->tableName)->key($keys, $values)->fields((array)$fields);
     try {
       $status = $query->execute();
@@ -77,7 +72,7 @@ class MigrateDestinationTableCopy extends MigrateDestination {
       Migration::displayMessage($e->getMessage());
     }
     catch (Exception $e) {
-      $migration->handleException($e);
+      $this->handleException($e);
     }
   }
 

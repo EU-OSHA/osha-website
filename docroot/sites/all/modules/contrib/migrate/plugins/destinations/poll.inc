@@ -60,16 +60,13 @@ class MigratePollEntityHandler extends MigrateDestinationHandler {
     $this->registerTypes(array('node'));
   }
 
-  /**
-   * Implementation of MigrateDestinationHandler::fields().
-   */
-  public function fields($entity_type, $bundle, $migration = NULL) {
+  public function fields($entity_type, $bundle) {
     if ($bundle == 'poll') {
       $fields = array(
-        'active' => t('Active status'),
-        'runtime' => t('How long the poll runs for in seconds'),
-        'choice' => t('Choices. Each choice is an array with chtext, chvotes, and weight keys.'),
-        'votes' => t('Votes. Each vote is an array with chid (or chtext), uid, hostname, and timestamp keys'),
+        'active' => t('Poll: Active status'),
+        'runtime' => t('Poll: How long the poll runs for in seconds'),
+        'choice' => t('Poll: Choices. Each choice is an array with chtext, chvotes, and weight keys.'),
+        'votes' => t('Poll: Votes. Each vote is an array with chid (or chtext), uid, hostname, and timestamp keys'),
       );
     }
     else {
@@ -100,16 +97,14 @@ class MigratePollEntityHandler extends MigrateDestinationHandler {
 
       // Insert actual votes.
       foreach ($row->votes as $vote) {
-        if (!isset($vote['chid'])) {
+        $chid = $vote['chid'];
+        if (!isset($chid)) {
           $result = db_select('poll_choice', 'pc')
                   ->fields('pc', array('chid'))
                   ->condition('pc.nid', $entity->nid)
                   ->condition('pc.chtext', $vote['chtext'])
                   ->execute();
           $chid = $result->fetchField();
-        }
-        else {
-          $chid = $vote['chid'];
         }
         db_insert('poll_vote')
           ->fields(array(

@@ -47,7 +47,10 @@ function migrate_example_beer_uninstall() {
 }
 
 function migrate_example_beer_disable() {
-  MigrateGroup::deregister('beer');
+  Migration::deregisterMigration('BeerTerm');
+  Migration::deregisterMigration('BeerUser');
+  Migration::deregisterMigration('BeerNode');
+  Migration::deregisterMigration('BeerComment');
 }
 
 function migrate_example_beer_schema_node() {

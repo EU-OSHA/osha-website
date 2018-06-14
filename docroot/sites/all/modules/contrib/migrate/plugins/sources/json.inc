@@ -92,7 +92,7 @@ class MigrateListJSON extends MigrateList {
     if ($json) {
       $data = drupal_json_decode($json);
       if ($data) {
-        $count = count($this->getIDsFromJSON($data));
+        $count = count($data);
       }
     }
     return $count;
@@ -503,7 +503,7 @@ class MigrateSourceJSON extends MigrateSource {
    * @return string
    */
   public function activeUrl() {
-    if (isset($this->activeUrl)) {
+    if ($this->activeUrl) {
       return $this->sourceUrls[$this->activeUrl];
     }
   }

@@ -850,6 +850,23 @@ function osha_tmgmt_job_item_translation_enable($form, &$form_state) {
 }
 
 /**
+ * Update hwc external links language.
+ */
+function osha_tmgtm_update_external_links(&$data, $items) {
+  $url = 'healthy-workplaces.eu/';
+  foreach ($data as $nid => $fields) {
+    $lang = $items[$nid]->target_language;
+    foreach ($fields as $field => $values) {
+      foreach ($values as $i => $value) {
+        $old_text = $value['value']['#text'];
+        $new_text = str_replace($url . 'en/', $url . $lang . '/', $old_text);
+        $data[$nid][$field][$i]['value']['#text'] = $new_text;
+      }
+    }
+  }
+}
+
+/**
  * Extra callback for Uploading XML file on a job.
  */
 function osha_tmgmt_file_translation_upload_submit($form, &$form_state) {
@@ -873,7 +890,10 @@ function osha_tmgmt_file_translation_upload_submit($form, &$form_state) {
       else {
         try {
           // Validation successful, start import.
-          $job->addTranslatedData($controller->import($file->uri));
+          $data = $controller->import($file->uri);
+          $items = $job->getItems();
+          osha_tmgtm_update_external_links($data, $items);
+          $job->addTranslatedData($data);
           $job->addMessage('Successfully imported file.'.$file->uri);
           OshaWorkflowNotifications::notifyTranslationUploadedFile($form_state['tmgmt_job']);
           $job->has_file_uploaded = 1;

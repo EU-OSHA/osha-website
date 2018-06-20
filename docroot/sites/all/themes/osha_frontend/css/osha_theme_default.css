@@ -3879,7 +3879,11 @@ a.button-submit {
 }
 
 #block-osha-alert-service-osha-alert-service-subscribe #osha-alert-service-subscribe-form .form-type-checkbox #edit-newsletter{
-    width:auto!important;
+	width:auto!important;
+}
+
+#block-osha-alert-service-osha-alert-service-subscribe #osha-alert-service-subscribe-form .form-type-checkbox #edit-agree-processing-personal-data {
+	width:auto!important;
 }
 
 .recaptcha_only_if_image{

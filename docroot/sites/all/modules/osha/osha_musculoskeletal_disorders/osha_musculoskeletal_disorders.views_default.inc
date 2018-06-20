@@ -158,7 +158,7 @@ function osha_musculoskeletal_disorders_views_default_views() {
   $handler->display->display_options['fields']['field_type_of_item']['id'] = 'field_type_of_item';
   $handler->display->display_options['fields']['field_type_of_item']['table'] = 'search_api_index_musculoskeletal_disorders_index';
   $handler->display->display_options['fields']['field_type_of_item']['field'] = 'field_type_of_item';
-  /* Field: Indexed Content: Title */
+  /* Field: Indexed Content: Title (English) */
   $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
   $handler->display->display_options['fields']['title_field']['table'] = 'search_api_index_musculoskeletal_disorders_index';
   $handler->display->display_options['fields']['title_field']['field'] = 'title_field';
@@ -201,7 +201,7 @@ function osha_musculoskeletal_disorders_views_default_views() {
   $handler->display->display_options['fields']['field_country_other']['id'] = 'field_country_other';
   $handler->display->display_options['fields']['field_country_other']['table'] = 'search_api_index_musculoskeletal_disorders_index';
   $handler->display->display_options['fields']['field_country_other']['field'] = 'field_country_other';
-  /* Field: Indexed Content: External URL */
+  /* Field: Indexed Content: URL */
   $handler->display->display_options['fields']['field_external_url']['id'] = 'field_external_url';
   $handler->display->display_options['fields']['field_external_url']['table'] = 'search_api_index_musculoskeletal_disorders_index';
   $handler->display->display_options['fields']['field_external_url']['field'] = 'field_external_url';
@@ -358,14 +358,14 @@ function osha_musculoskeletal_disorders_views_default_views() {
     t('Page'),
     t('Data export'),
     t('Type of item'),
-    t('Title'),
+    t('Title (English)'),
     t('Title (original)'),
     t('Priority area'),
     t('Languages'),
     t('Language other'),
     t('Country'),
     t('Country other'),
-    t('External URL'),
+    t('URL'),
     t('Provider'),
     t('Year of publication'),
     t('Sector / Industry covered other'),

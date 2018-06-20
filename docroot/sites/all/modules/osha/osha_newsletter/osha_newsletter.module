@@ -626,6 +626,11 @@ function osha_newsletter_block_subscribe_captcha_form($form, &$form_state) {
     '#attributes' => array('placeholder' => t('E-mail address'), 'title' => t('E-mail address')),
     '#prefix' => '<label for="edit-email" style="position: absolute;left: -9999px">'.t('E-mail address').'</label>'
   );
+  $form['agree_processing_personal_data'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('I agree to the processing of my personal data'),
+    '#default_value' => 0,
+  );
   $form['captcha'] = array(
     '#type' => 'captcha',
     '#captcha_type' => 'default',
@@ -643,17 +648,17 @@ function osha_newsletter_block_subscribe_captcha_form($form, &$form_state) {
 }
 
 function osha_newsletter_block_subscribe_captcha_form_validate($form, &$form_state) {
+  $agree = trim($form_state['values']['agree_processing_personal_data']);
+  if (!$agree) {
+    form_set_error('agree_processing_personal_data', t('Please, tick the box to agree in order to submit your email.'));
+  }
+
   // Need to redirect due to Ajax handling.
   $referer = empty($_SERVER['HTTP_REFERER']) ? '/' : $_SERVER['HTTP_REFERER'];
   // Invalid CAPTCHA.
   if (form_get_errors()) {
     $fs['redirect'] = $referer;
     drupal_redirect_form($fs);
-  }
-
-  $agree = trim($form_state['values']['agree_processing_personal_data']);
-  if (!$agree) {
-    form_set_error('agree_processing_personal_data', t('Please, tick the box to agree in order to submit your email.'));
   }
 
   if (empty($form_state['values']['email']) || !valid_email_address($form_state['values']['email'])) {

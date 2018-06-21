@@ -1,10 +1,129 @@
 OSHA
 ====
 
-Build scripts and source code for the Osha project
+Build scripts and source code for the OSHA project
 
-[![Build Status](http://ci.edw.ro/buildStatus/icon?job=php-osha)](http://ci.edw.ro/job/php-osha/)
 [![Code Climate](https://codeclimate.com/github/EU-OSHA/osha-website/badges/gpa.svg)](https://codeclimate.com/github/EU-OSHA/osha-website)
+
+## 1. Organisation of repository
+* ### Repository Layout
+    Breakdown for what each directory/file is used for. See also readme inside directories.
+    
+    * [conf](https://github.com/EU-OSHA/osha-website/tree/master/conf)
+     * Project specific configuration files
+    * [docroot](https://github.com/EU-OSHA/osha-website/tree/master/docroot)
+     * Drupal root directory
+    * [drush](https://github.com/EU-OSHA/osha-website/tree/master/drush)
+     * Contains project specific drush commands, aliases, and configurations.
+    * [results](https://github.com/EU-OSHA/osha-website/tree/master/results)
+     * This directory is just used to export test results to. A good example of this
+       is when running drush test-run with the --xml option. You can export the xml
+       to this directory for parsing by external tools.
+    * [scripts](https://github.com/EU-OSHA/osha-website/tree/master/scripts)
+     * A directory for project-specific scripts.
+    * [test](https://github.com/EU-OSHA/osha-website/tree/master/tests)
+     * A directory for external tests. This is great for non drupal specific tests
+     such as selenium, qunit, casperjs.
+    * [.gitignore](https://github.com/EU-OSHA/osha-website/blob/master/.gitignore)
+     * Contains the a list of the most common excluded files.
+    * [contrib modules](https://github.com/EU-OSHA/osha-website/tree/master/docroot/sites/all/modules/contrib)
+     * A directory for contributed modules.
+    * [custom modules](https://github.com/EU-OSHA/osha-website/tree/master/docroot/sites/all/modules/osha)
+     * Project specific custom module
+    * [backend custom theme](https://github.com/EU-OSHA/osha-website/tree/master/docroot/sites/all/themes/osha_admin)
+     * Project specific backend theme
+    * [frontend custom theme](https://github.com/EU-OSHA/osha-website/tree/master/docroot/sites/all/themes/osha_frontend)
+     * Project specific frontend theme
+     
+* ### Contrib modules
+* ### Custom modules
+
+    #### Base
+    
+    Name | Description
+    ---------------------| --------------------------
+    osha_breadcrumbs | Breadcrumbs rules
+    osha_authentication | LDAP authentication support
+    osha_blocks | Content Blocks
+    osha_content | No Translation functionality
+    osha_menu | Main and Footer Menus
+    osha_migration | Migrate data from the old website  
+    osha_search | Search customizations
+    osha_sitemap | Sitemap for xmlsitemap
+    osha_sites_migration | Migrating content from other OSHA websites
+    osha_taxonomies | Project Specific Taxonomies
+    osha_workflow | Custom Workflow Moderation
+
+    #### Content types modules
+    
+    Name | Description
+    --------------------- | ---------------------
+    osha | Article, DVS survey, Page, Twitter Tweet Feed, Twitter User Profile and Webform
+    osha_blog | Blog articles content type
+    osha_calls | Calls for contractors
+    osha_dangerous_substances | Dangerous substances
+    osha_eguide | eGuide
+    osha_events | Events
+    osha_flickr | Flickr gallery
+    osha_fop_page | Focal Point Page
+    osha_highlight | News
+    osha_homepage | Homepage banners
+    osha_infographics | Infographics
+    osha_job_vacancies | Job vacancies
+    osha_legislation | Directive and Guideline
+    osha_musculoskeletal_disorders | Musculoskeletal Disorders
+    osha_news | News
+    osha_newsletter | Newsletter article
+    osha_note_to_editor | Notes to editor
+    osha_press_contact | Press Contact
+    osha_press_release | Press Release
+    osha_publication | Publication
+    osha_resources | External URL, Internal files, Flickr photos, Slideshare Presentations and Youtube
+    osha_seminar | Seminar
+    osha_wiki | Wiki
+    
+    #### Helper modules
+    
+    Name | Description
+    ------------ | -------------
+    csrf_checks | Cross-Site_Request_Forgery check
+    dvs | Data Visualization System DVS
+    osha_admin_reports | Admin Excel Reports
+    search_and_replace | Do Search and Replace on the content of nodes.
+    eu_captcha | Verifies if user is a human without necessity to solve a captcha
+    osh_image_gallery | Admin Image Gallery page
+    osha_nodequeue | Allows automatic addition of nodes to the queue
+    osha_short_messages | Generate short messages from nodes
+    osha_unpublish | Unpublish old content
+    wysiwyg_accordion | Accordion plugin based on JQueryUI for Wysiwyg module and TinyMCE
+    osha_contact | Extend Core Contact form
+    osha_lingua_tools | Lingua Tools
+    osha_alert_service | Alert Service
+    osha_slideshare | Slideshare field that allows you to add a slidehare link to a content type
+
+## 2. Major features
+
+## 3. Potentially reusable modules
+
+## 4. Technical strategy and chosen solutions
+* ### Branches
+    
+    This repo branching model follows the article ["A successful Git branching model"](http://nvie.com/posts/a-successful-git-branching-model)
+    
+    Summary:
+    
+    * _master_ - The production branch, updated with each release.
+    * _develop_ - Main development branch. Tests are performed on this branch
+    * _release-_* - Release branches
+    
+* ### Translation workflow
+    
+    * Module page - https://www.drupal.org/project/tmgmt
+    * FAQs: https://www.drupal.org/node/1547632
+
+
+--
+
 
 ## Pre-requisites
 
@@ -98,8 +217,7 @@ to `config.json` and customize to suit your environment
 
 4. (deprecated) (Optional) To run the migration/migration tests see the documentation from [osha_migration](https://github.com/EU-OSHA/osha-website/tree/master/docroot/sites/all/modules/osha_migration) module
 
-Updating an existing instance
-=============================
+# Updating an existing instance
 
 To update an existing instance without reinstalling (and loosing existing content):
 
@@ -134,8 +252,7 @@ Processed 1728 (0 created, 1728 updated, 0 failed, 0 ignored) in 185.1 sec (560/
 'all' cache was cleared.                                                                                              [success]
 ```
 
-Running tests
-=============
+# Running tests
 
 You can use the test.sh script to launch the set of tests designed for the OSHA project.
 
@@ -145,42 +262,5 @@ Command usage:
 * `./test.sh ClassNameTest` - Runs all the test methods from the ClassNameTest test class
 * `./test.sh ClassNameTest testName1,testName2` - Runs only the two tests from the entire class
 
-
-
-## Repository Layout
-Breakdown for what each directory/file is used for. See also readme inside directories.
-
-* [conf](https://github.com/EU-OSHA/osha-website/tree/master/conf)
- * Project specific configuration files
-* [docroot](https://github.com/EU-OSHA/osha-website/tree/master/docroot)
- * Drupal root directory
-* [drush](https://github.com/EU-OSHA/osha-website/tree/master/drush)
- * Contains project specific drush commands, aliases, and configurations.
-* [results](https://github.com/EU-OSHA/osha-website/tree/master/results)
- * This directory is just used to export test results to. A good example of this
-   is when running drush test-run with the --xml option. You can export the xml
-   to this directory for parsing by external tools.
-* [scripts](https://github.com/EU-OSHA/osha-website/tree/master/scripts)
- * A directory for project-specific scripts.
-* [test](https://github.com/EU-OSHA/osha-website/tree/master/tests)
- * A directory for external tests. This is great for non drupal specific tests
- such as selenium, qunit, casperjs.
-* [.gitignore](https://github.com/EU-OSHA/osha-website/blob/master/.gitignore)
- * Contains the a list of the most common excluded files.
-
-## Branches
-
-This repo branching model follows the article ["A successful Git branching model"](http://nvie.com/posts/a-successful-git-branching-model)
-
-Summary:
-
-* _master_ - The production branch, updated with each release.
-* _develop_ - Main development branch. Tests are performed on this branch
-* _release-_* - Release branches
-
-## Translation workflow
-
-* Module page - https://www.drupal.org/project/tmgmt
-* FAQs: https://www.drupal.org/node/1547632
 
 -- edw

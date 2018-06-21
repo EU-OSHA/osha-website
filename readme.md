@@ -26,13 +26,13 @@ Build scripts and source code for the OSHA project
      such as selenium, qunit, casperjs.
     * [.gitignore](https://github.com/EU-OSHA/osha-website/blob/master/.gitignore)
      * Contains the a list of the most common excluded files.
-    * [contrib modules](https://github.com/EU-OSHA/osha-website/tree/master/docroot/sites/all/modules/contrib)
+    * [modules/contrib](https://github.com/EU-OSHA/osha-website/tree/master/docroot/sites/all/modules/contrib)
      * A directory for contributed modules.
-    * [custom modules](https://github.com/EU-OSHA/osha-website/tree/master/docroot/sites/all/modules/osha)
+    * [modules/osha](https://github.com/EU-OSHA/osha-website/tree/master/docroot/sites/all/modules/osha)
      * Project specific custom module
-    * [backend custom theme](https://github.com/EU-OSHA/osha-website/tree/master/docroot/sites/all/themes/osha_admin)
+    * [sites/all/themes/osha_admin](https://github.com/EU-OSHA/osha-website/tree/master/docroot/sites/all/themes/osha_admin)
      * Project specific backend theme
-    * [frontend custom theme](https://github.com/EU-OSHA/osha-website/tree/master/docroot/sites/all/themes/osha_frontend)
+    * [sites/all/themes/osha_frontend](https://github.com/EU-OSHA/osha-website/tree/master/docroot/sites/all/themes/osha_frontend)
      * Project specific frontend theme
      
 * ### Contrib modules

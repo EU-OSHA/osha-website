@@ -6,7 +6,7 @@ Build scripts and source code for the Osha project
 [![Build Status](http://ci.edw.ro/buildStatus/icon?job=php-osha)](http://ci.edw.ro/job/php-osha/)
 [![Code Climate](https://codeclimate.com/github/EU-OSHA/osha-website/badges/gpa.svg)](https://codeclimate.com/github/EU-OSHA/osha-website)
 
-##Pre-requisites
+## Pre-requisites
 
 1. Install Drush (7.0-dev):
 
@@ -18,7 +18,7 @@ Build scripts and source code for the Osha project
 
 2. Virtual host for your Drupal instance that points to the docroot/ directory from this repo
 
-##Quick start##
+## Quick start
 
 1. Copy [conf/config.template.json](https://github.com/EU-OSHA/osha-website/blob/master/conf/config.template.json)
 to `config.json` and customize to suit your environment
@@ -147,7 +147,7 @@ Command usage:
 
 
 
-##Repository Layout##
+## Repository Layout
 Breakdown for what each directory/file is used for. See also readme inside directories.
 
 * [conf](https://github.com/EU-OSHA/osha-website/tree/master/conf)
@@ -168,7 +168,7 @@ Breakdown for what each directory/file is used for. See also readme inside direc
 * [.gitignore](https://github.com/EU-OSHA/osha-website/blob/master/.gitignore)
  * Contains the a list of the most common excluded files.
 
-##Branches##
+## Branches
 
 This repo branching model follows the article ["A successful Git branching model"](http://nvie.com/posts/a-successful-git-branching-model)
 
@@ -178,7 +178,7 @@ Summary:
 * _develop_ - Main development branch. Tests are performed on this branch
 * _release-_* - Release branches
 
-##Translation workflow##
+## Translation workflow
 
 * Module page - https://www.drupal.org/project/tmgmt
 * FAQs: https://www.drupal.org/node/1547632

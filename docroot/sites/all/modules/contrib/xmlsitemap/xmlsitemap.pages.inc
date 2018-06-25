@@ -39,7 +39,6 @@ function xmlsitemap_output_chunk() {
     return MENU_NOT_FOUND;
   }
 
-  dpm($sitemap);
   $chunk = xmlsitemap_get_current_chunk($sitemap);
   $file = xmlsitemap_sitemap_get_file($sitemap, $chunk);
 

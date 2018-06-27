@@ -7,7 +7,7 @@
  */
 
 /*~ class.phpmailer.php
-Orginal release information:
+Original release information:
 .---------------------------------------------------------------------------.
 |  Software: PHPMailer - PHP email class                                    |
 |   Version: 5.1                                                            |
@@ -325,6 +325,7 @@ class PHPMailer {
   private   $sign_key_file  = "";
   private   $sign_key_pass  = "";
   private   $exceptions     = FALSE;
+  private   $logging;
 
   /////////////////////////////////////////////////
   // CONSTANTS
@@ -343,6 +344,7 @@ class PHPMailer {
    * @param boolean $exceptions Should we throw external exceptions?
    */
   public function __construct($exceptions = FALSE) {
+    $this->logging = variable_get('smtp_debugging', SMTP_LOGGING_ERRORS);
     $this->exceptions = ($exceptions == TRUE);
   }
 
@@ -455,7 +457,9 @@ class PHPMailer {
    */
   private function AddAnAddress($kind, $address, $name = '') {
     if (!preg_match('/^(to|cc|bcc|ReplyTo)$/', $kind)) {
-      echo 'Invalid recipient array: ' . kind;
+      if ($this->logging) {
+        watchdog('smtp', 'Invalid recipient array: %kind', array('%kind' => $kind), WATCHDOG_ERROR);
+      }
       return FALSE;
     }
     $address = trim($address);
@@ -465,7 +469,9 @@ class PHPMailer {
       if ($this->exceptions) {
         throw new phpmailerException(t('Invalid address') . ': ' . $address);
       }
-      echo t('Invalid address') . ': ' . $address;
+      if ($this->logging) {
+        watchdog('smtp', 'Invalid address: %address', array('%address' => $address), WATCHDOG_ERROR);
+      }
       return FALSE;
     }
     if ($kind != 'ReplyTo') {
@@ -498,7 +504,9 @@ class PHPMailer {
       if ($this->exceptions) {
         throw new phpmailerException(t('Invalid address') . ': ' . $address);
       }
-      echo t('Invalid address') . ': ' . $address;
+      if ($this->logging) {
+        watchdog('smtp', 'Invalid address: %address', array('%address' => $address), WATCHDOG_ERROR);
+      }
       return FALSE;
     }
     $this->From = $address;
@@ -577,8 +585,6 @@ class PHPMailer {
 
       // Choose the mailer and send through it
       switch ($this->Mailer) {
-        case 'sendmail':
-          return $this->SendmailSend($header, $body);
         case 'smtp':
           return $this->SmtpSend($header, $body);
         default:
@@ -590,57 +596,11 @@ class PHPMailer {
       if ($this->exceptions) {
         throw $e;
       }
-      echo $e->getMessage() . "\n";
+      if ($this->logging) {
+        watchdog_exception('smtp', $e);
+      }
       return FALSE;
     }
-  }
-
-  /**
-   * Sends mail using the $Sendmail program.
-   * @param string $header The message headers
-   * @param string $body The message body
-   * @access protected
-   * @return bool
-   */
-  protected function SendmailSend($header, $body) {
-    if ($this->Sender != '') {
-      $sendmail = sprintf("%s -oi -f %s -t", escapeshellcmd($this->Sendmail), escapeshellarg($this->Sender));
-    }
-    else {
-      $sendmail = sprintf("%s -oi -t", escapeshellcmd($this->Sendmail));
-    }
-    if ($this->SingleTo === TRUE) {
-      foreach ($this->SingleToArray as $key => $val) {
-        if (!@$mail = popen($sendmail, 'w')) {
-          throw new phpmailerException(t('Could not execute: !smail', array('!smail' => $this->Sendmail)), self::STOP_CRITICAL);
-        }
-        fputs($mail, "To: " . $val . "\n");
-        fputs($mail, $header);
-        fputs($mail, $body);
-        $result = pclose($mail);
-        // implement call back function if it exists
-        $isSent = ($result == 0) ? 1 : 0;
-        $this->doCallback($isSent, $val, $this->cc, $this->bcc, $this->Subject, $body);
-        if ($result != 0) {
-          throw new phpmailerException(t('Could not execute: !smail', array('!smail' => $this->Sendmail)), self::STOP_CRITICAL);
-        }
-      }
-    }
-    else {
-      if (!@$mail = popen($sendmail, 'w')) {
-        throw new phpmailerException(t('Could not execute: !smail', array('!smail' => $this->Sendmail)), self::STOP_CRITICAL);
-      }
-      fputs($mail, $header);
-      fputs($mail, $body);
-      $result = pclose($mail);
-      // implement call back function if it exists
-      $isSent = ($result == 0) ? 1 : 0;
-      $this->doCallback($isSent, $this->to, $this->cc, $this->bcc, $this->Subject, $body);
-      if ($result != 0) {
-        throw new phpmailerException(t('Could not execute: !smail', array('!smail' => $this->Sendmail)), self::STOP_CRITICAL);
-      }
-    }
-    return TRUE;
   }
 
   /**
@@ -662,7 +622,7 @@ class PHPMailer {
       $old_from = ini_get('sendmail_from');
       ini_set('sendmail_from', $this->Sender);
       if ($this->SingleTo === TRUE && count($toArr) > 1) {
-        foreach ($toArr as $key => $val) {
+        foreach ($toArr as $val) {
           $rt = @mail($val, $this->EncodeHeader($this->SecureHeader($this->Subject)), $body, $header, $params);
           // implement call back function if it exists
           $isSent = ($rt == 1) ? 1 : 0;
@@ -678,7 +638,7 @@ class PHPMailer {
     }
     else {
       if ($this->SingleTo === TRUE && count($toArr) > 1) {
-        foreach ($toArr as $key => $val) {
+        foreach ($toArr as $val) {
           $rt = @mail($val, $this->EncodeHeader($this->SecureHeader($this->Subject)), $body, $header, $params);
           // implement call back function if it exists
           $isSent = ($rt == 1) ? 1 : 0;
@@ -792,10 +752,11 @@ class PHPMailer {
     $hosts = explode(';', $this->Host);
     $index = 0;
     $connection = $this->smtp->Connected();
+    $lastexception = NULL;
 
     // Retry while there is no connection
-    try {
-      while ($index < count($hosts) && !$connection) {
+    while ($index < count($hosts) && !$connection) {
+      try {
         $hostinfo = array();
         if (preg_match('/^(.+):([0-9]+)$/', $hosts[$index], $hostinfo)) {
           $host = $hostinfo[1];
@@ -830,14 +791,24 @@ class PHPMailer {
             }
           }
         }
-        $index++;
-        if (!$connection) {
-          throw new phpmailerException(t('SMTP Error: Could not connect to SMTP host.'));
+      } catch (phpmailerException $e) {
+        if ($connection) {
+          $this->SmtpClose();
+          $connection = FALSE;
         }
+
+        $lastexception = $e;
       }
-    } catch (phpmailerException $e) {
-      $this->smtp->Reset();
-      throw $e;
+
+      $index++;
+    }
+    if (!$connection) {
+      if ($lastexception != NULL) {
+        throw $lastexception;
+      }
+      else {
+        throw new phpmailerException(t('SMTP Error: Could not connect to SMTP host.'));
+      }
     }
     return TRUE;
   }
@@ -1361,7 +1332,9 @@ class PHPMailer {
       if ($this->exceptions) {
         throw $e;
       }
-      echo $e->getMessage() . "\n";
+      if ($this->logging) {
+        watchdog_exception('smtp', $e);
+      }
       if ( $e->getCode() == self::STOP_CRITICAL ) {
         return FALSE;
       }
@@ -1741,27 +1714,41 @@ class PHPMailer {
    */
   public function EncodeQ($str, $position = 'text') {
     // There should not be any EOL in the string
-    $encoded = preg_replace('/[\r\n]*/', '', $str);
-
+    $pattern = '';
+    $encoded = str_replace(array("\r", "\n"), '', $str);
     switch (strtolower($position)) {
       case 'phrase':
-        $encoded = preg_replace("/([^A-Za-z0-9!*+\/ -])/e", "'='.sprintf('%02X', ord('\\1'))", $encoded);
+        // RFC 2047 section 5.3
+        $pattern = '^A-Za-z0-9!*+\/ -';
         break;
+      /** @noinspection PhpMissingBreakStatementInspection */
       case 'comment':
-        $encoded = preg_replace("/([\(\)\"])/e", "'='.sprintf('%02X', ord('\\1'))", $encoded);
+        // RFC 2047 section 5.2
+        $pattern = '\(\)"';
+        // intentional fall-through
+        // for this reason we build the $pattern without including delimiters and []
       case 'text':
       default:
-        // Replace every high ascii, control =, ? and _ characters
-        //TODO using /e (equivalent to eval()) is probably not a good idea
-        $encoded = preg_replace('/([\000-\011\013\014\016-\037\075\077\137\177-\377])/e',
-              "'='.sprintf('%02X', ord('\\1'))", $encoded);
+        // RFC 2047 section 5.1
+        // Replace every high ascii, control, =, ? and _ characters
+        $pattern = '\000-\011\013\014\016-\037\075\077\137\177-\377' . $pattern;
         break;
     }
-
+    $matches = array();
+    if (preg_match_all("/[{$pattern}]/", $encoded, $matches)) {
+      // If the string contains an '=', make sure it's the first thing we replace
+      // so as to avoid double-encoding
+      $s = array_search('=', $matches[0]);
+      if ($s !== false) {
+        unset($matches[0][$s]);
+        array_unshift($matches[0], '=');
+      }
+      foreach (array_unique($matches[0]) as $char) {
+        $encoded = str_replace($char, '=' . sprintf('%02X', ord($char)), $encoded);
+      }
+    }
     // Replace every spaces to _ (more readable than =20)
-    $encoded = str_replace(' ', '_', $encoded);
-
-    return $encoded;
+    return str_replace(' ', '_', $encoded);
   }
 
   /**
@@ -2203,7 +2190,6 @@ class PHPMailer {
    * @param string $key_pass Password for private key
    */
   public function DKIM_QP($txt) {
-    $tmp="";
     $line="";
     for ($i=0;$i<strlen($txt);$i++) {
       $ord=ord($txt[$i]);

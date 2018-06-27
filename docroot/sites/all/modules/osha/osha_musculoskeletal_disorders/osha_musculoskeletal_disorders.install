@@ -2,3 +2,11 @@
 
 function osha_musculoskeletal_disorders_install() {
 }
+
+
+/**
+ * MDR-1905 Development MSDs database like the DS one.
+ */
+function osha_musculoskeletal_disorders_update_7001() {
+  features_revert_module('osha_musculoskeletal_disorders');
+}

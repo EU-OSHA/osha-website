@@ -217,7 +217,7 @@ function _term_reference_tree_output_list_level(&$element, &$tree) {
         $output .= token_replace($replace, array('term' => $term), array('clear' => TRUE));
       }
       else {
-        $output .= l(entity_label('taxonomy_term', $term), $uri['path'], $uri['options']);
+        $output .= l(filter_xss(entity_label('taxonomy_term', $term)), $uri['path'], $uri['options']);
       }
       if (isset($item['children'])) {
         $output .= _term_reference_tree_output_list_level($element, $item);

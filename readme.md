@@ -127,19 +127,22 @@ Summary:
 * _release_ - Release branch.
 * _master_ - The production branch, updated with each release.
 
-#### Release approach:
+#### Release and deployment:
+
+Release and deployment follows the article ["Release and deployment policy"](https://github.com/EU-OSHA/osha-website/wiki)
+
+Summary:
 
 * We have 2 weeks based (first week staging deploy and second week production deploy) release model.
 * New functionality will be added in develop branch.
 * After testing develop branch will be merged into release branch using GitHub `Pull requests` and created new release using GitHub `Releases`
 * In a week we merge release changes into master branch. The same GitHub `Pull requests` and GitHub `Releases`
 
-* ["Release and deployment policy"](https://github.com/EU-OSHA/osha-website/wiki)
-
 
 - ### Translation Management Tools and Workflow
 
 The Translation Management Tool provides a collection of tools for translating content(nodes), taxonomy terms, literals and menu links.
+
 #### Basic steps of translation proccess:
 
 Step|Description
@@ -155,9 +158,9 @@ Step|Description
 9| [optional] review and validate translation for each job item
 10| accept translation and update node 
 
-* Workflow and Functional specifications https://github.com/EU-OSHA/drupal.tmgmt/blob/master/docs/functional-specifications.pdf
-* Module page - https://www.drupal.org/project/tmgmt
-* FAQs: https://www.drupal.org/node/1547632
+* Workflow and Functional specifications [https://github.com/EU-OSHA/drupal.tmgmt/blob/master/docs/functional-specifications.pdf](https://github.com/EU-OSHA/drupal.tmgmt/blob/master/docs/functional-specifications.pdf)
+* Module page - [https://www.drupal.org/project/tmgmt](https://www.drupal.org/project/tmgmt)
+* FAQs: [https://www.drupal.org/node/1547632](https://www.drupal.org/node/1547632)
 
 - ### Content management workflow
     In short, an editor can add information to the website, a reviewer can check it, and a project manager/administrator can publish it. 

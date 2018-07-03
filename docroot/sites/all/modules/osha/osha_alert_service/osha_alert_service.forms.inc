@@ -122,6 +122,12 @@ function osha_alert_service_subscribe_form($form, &$form_state) {
     );
   }
 
+  $form['agree_processing_personal_data'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('I agree to the processing of my personal data'),
+    '#default_value' => 0,
+  );
+
   $form['actions']['submit'] = array(
     '#type' => 'submit',
     '#name' => 'subscribe',
@@ -216,6 +222,11 @@ function osha_alert_service_edit_form($form, &$form_state) {
  * {@inheritdoc}
  */
 function osha_alert_service_subscribe_form_validate($form, $form_state) {
+  $agree = trim($form_state['values']['agree_processing_personal_data']);
+  if (!$agree) {
+    form_set_error('agree_processing_personal_data', t('Please, tick the box to agree in order to submit your email.'));
+  }
+
   if (empty($form_state['values']['email']) || !valid_email_address($form_state['values']['email'])) {
     form_set_error('email', t('Please enter a valid email address'));
   };

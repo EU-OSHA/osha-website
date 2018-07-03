@@ -357,9 +357,9 @@ function osha_newsletter_block_save($delta = '', $edit = array()) {
 function osha_newsletter_block_view($delta = '') {
   switch($delta) {
     case 'osha_newsletter_subscribe':
-      if(user_access('access content')) {
+      if (user_access('access content')) {
         $block['subject'] = t('OSHMail newsletter');
-        // subscribe form
+
         $markup = '<div>';
         $markup .= t(variable_get('subscribe_block_intro_text', 'Get our monthly update on safety and health at work. <a href="@newsletter_page_url">See more info</a><br/>'));
         $markup .= '<p style="color : #dc2f82;">';
@@ -378,8 +378,9 @@ function osha_newsletter_block_view($delta = '') {
         return $block;
       }
       break;
+
     case 'osha_newsletter_image':
-      if(user_access('access content')) {
+      if (user_access('access content')) {
         $block['subject'] = t('Join OSHMail subscribers');
 
         $image_fid = variable_get('osha_newsletter_image_block_background_img');
@@ -398,8 +399,9 @@ function osha_newsletter_block_view($delta = '') {
         return $block;
       }
       break;
+
     case 'osha_newsletter_subscribe_extra':
-      if(user_access('access content')) {
+      if (user_access('access content')) {
         $block['subject'] = t('OSHMail newsletter');
         $subscribe_form = drupal_get_form('osha_newsletter_subscribe_extra_form');
         $block['content'] = theme('subscribe_extra_block', array(
@@ -408,8 +410,9 @@ function osha_newsletter_block_view($delta = '') {
         return $block;
       }
       break;
+
     case 'osha_newsletter_latest':
-      if(user_access('access content')) {
+      if (user_access('access content')) {
         $block['subject'] = t('Our latest newsletters');
         $block['content'] = _osha_newsletter_latest_block_content();
         return $block;
@@ -492,10 +495,17 @@ function osha_newsletter_subscribe_extra_form() {
     '#attributes' => array(
       'placeholder' => t('E-mail address'),
       'title' => t('E-mail address'),
-      'onclick' => "jQuery('div.captcha').show()"
+      'onclick' => "jQuery('div.captcha').show()",
     ),
-    '#prefix' => '<label for="edit-email" style="position: absolute;left: -9999px">'.t('E-mail address').'</label>'
+    '#prefix' => '<label for="edit-email" style="position: absolute;left: -9999px">' . t('E-mail address') . '</label>',
   );
+
+  $form['agree_processing_personal_data'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('I agree to the processing of my personal data'),
+    '#default_value' => 0,
+  );
+
   if (user_is_anonymous()) {
     $form['captcha'] = array(
       '#type' => 'captcha',
@@ -505,20 +515,20 @@ function osha_newsletter_subscribe_extra_form() {
   $link_label = t(variable_get('subscribe_extra_block_details_link_label', 'How will EU-OSHA use my details?'));
   $link_url = variable_get('subscribe_extra_block_details_link_url', OSHA_PRIVACY_PAGE_URL);
   $form['details_link'] = array(
-    '#markup' => '<a class="privacy-policy-oshmail" href='.url($link_url).'>'.$link_label.'</a><br/>',
+    '#markup' => '<a class="privacy-policy-oshmail" href=' . url($link_url) . '>' . $link_label . '</a><br/>',
   );
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Subscribe'),
-    '#submit' => array('osha_newsletter_block_subscribe_captcha_form_submit')
+    '#submit' => array('osha_newsletter_block_subscribe_captcha_form_submit'),
   );
   $form['unsubscribe_text'] = array(
-    '#markup' => '<hr><span>'.t('Not interested anymore?').'</span>',
+    '#markup' => '<hr><span>' . t('Not interested anymore?') . '</span>',
   );
   $form['unsubscribe'] = array(
     '#type' => 'submit',
     '#value' => t('Unsubscribe'),
-    '#submit' => array('osha_newsletter_unsubscribe_form_submit')
+    '#submit' => array('osha_newsletter_unsubscribe_form_submit'),
   );
 
   return $form;
@@ -555,7 +565,7 @@ function osha_newsletter_block_subscribe_form($form, &$form_state) {
         t('Subscribe'),
         variable_get('subscribe_block_newsletter_page_url', OSHA_NEWSLETTER_PAGE_URL),
         array(
-          'attributes' => array('class' => 'button-submit')
+          'attributes' => array('class' => 'button-submit'),
         )
       );
       $form['submit'] = array(
@@ -572,13 +582,21 @@ function osha_newsletter_block_subscribe_form($form, &$form_state) {
     '#type' => 'textfield',
     '#size' => 30,
     '#attributes' => array('placeholder' => t('E-mail address'), 'title' => t('E-mail address')),
-    '#prefix' => '<label for="edit-email" style="position: absolute;left: -9999px">'.t('E-mail address').'</label>'
+    '#prefix' => '<label for="edit-email" style="position: absolute;left: -9999px">' . t('E-mail address') . '</label>',
   );
   $link_label = t(variable_get('subscribe_block_details_link_label', 'Privacy notice'));
   $link_url = variable_get('subscribe_block_details_link_url', OSHA_PRIVACY_PAGE_URL);
-  $form['details_link'] = array(
-    '#markup' => '<a class="privacy-policy-oshmail" href='.url($link_url).'>'.$link_label.'</a><br/>',
+
+  $form['agree_processing_personal_data'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('I agree to the processing of my personal data'),
+    '#default_value' => 0,
   );
+
+  $form['details_link'] = array(
+    '#markup' => '<a class="privacy-policy-oshmail" href=' . url($link_url) . '>' . $link_label . '</a><br/>',
+  );
+
   if (user_is_anonymous()) {
     drupal_add_library('system', 'drupal.ajax');
     drupal_add_library('system', 'jquery.form');
@@ -587,7 +605,7 @@ function osha_newsletter_block_subscribe_form($form, &$form_state) {
   else {
     $form['submit'] = array(
       '#type' => 'submit',
-      '#value' => t('Subscribe')
+      '#value' => t('Subscribe'),
     );
     $form['#validate'] = array('osha_newsletter_block_subscribe_captcha_form_validate');
     $form['#submit'] = array('osha_newsletter_block_subscribe_captcha_form_submit');
@@ -608,6 +626,11 @@ function osha_newsletter_block_subscribe_captcha_form($form, &$form_state) {
     '#attributes' => array('placeholder' => t('E-mail address'), 'title' => t('E-mail address')),
     '#prefix' => '<label for="edit-email" style="position: absolute;left: -9999px">'.t('E-mail address').'</label>'
   );
+  $form['agree_processing_personal_data'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('I agree to the processing of my personal data'),
+    '#default_value' => 0,
+  );
   $form['captcha'] = array(
     '#type' => 'captcha',
     '#captcha_type' => 'default',
@@ -625,12 +648,19 @@ function osha_newsletter_block_subscribe_captcha_form($form, &$form_state) {
 }
 
 function osha_newsletter_block_subscribe_captcha_form_validate($form, &$form_state) {
-  // Need to redirect due to Ajax handling
+  $agree = trim($form_state['values']['agree_processing_personal_data']);
+  if (!$agree) {
+    form_set_error('agree_processing_personal_data', t('Please, tick the box to agree in order to submit your email.'));
+  }
+
+  // Need to redirect due to Ajax handling.
   $referer = empty($_SERVER['HTTP_REFERER']) ? '/' : $_SERVER['HTTP_REFERER'];
-  if(form_get_errors()) { // Invalid CAPTCHA
+  // Invalid CAPTCHA.
+  if (form_get_errors()) {
     $fs['redirect'] = $referer;
     drupal_redirect_form($fs);
   }
+
   if (empty($form_state['values']['email']) || !valid_email_address($form_state['values']['email'])) {
     form_set_error('email', t('The e-mail address is not valid.'));
     $fs['redirect'] = $referer;
@@ -658,6 +688,12 @@ function osha_newsletter_block_subscribe_captcha_form_submit($form, &$form_state
  * Extra Subscribe form validation.
  */
 function osha_newsletter_subscribe_extra_form_validate($form, &$form_state) {
+
+  $agree = trim($form_state['values']['agree_processing_personal_data']);
+  if (!$agree) {
+    form_set_error('agree_processing_personal_data', t('Please, tick the box to agree in order to submit your email.'));
+  }
+
   $email = trim($form_state['values']['email']);
   if (strlen($email) != 0) {
     if (!valid_email_address($form_state['values']['email'])) {

@@ -70,6 +70,10 @@ function osha_musculoskeletal_disorders_default_search_api_index() {
         "field_health_effects" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_item_type" : { "type" : "string" },
         "field_languages_other" : { "type" : "text" },
+        "field_msd_provider" : {
+          "type" : "list\\u003Cinteger\\u003E",
+          "entity_type" : "field_collection_item"
+        },
         "field_nominated_by_fop" : { "type" : "boolean" },
         "field_original_desc_lang_other" : { "type" : "text" },
         "field_prevention_measures" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },

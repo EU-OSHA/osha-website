@@ -26,6 +26,16 @@ function osha_dangerous_substances_field_formatter_info() {
         'description' => TRUE,
       ),
     ),
+    'field_msd_collection_title' => array(
+      'label' => t('MSD Fields collection title'),
+      'field types' => array('field_collection'),
+      'settings' => array(
+        'edit' => t('Edit'),
+        'delete' => t('Delete'),
+        'add' => t('Add'),
+        'description' => TRUE,
+      ),
+    ),
     'external_url' => array(
       'label' => t('External url link'),
       'field types' => array('link_field'),
@@ -68,6 +78,33 @@ function osha_dangerous_substances_field_formatter_settings_form($field, $instan
     );
   }
 
+  if ($display['type'] == 'field_msd_collection_title') {
+    $elements['edit'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Edit link title'),
+      '#default_value' => $settings['edit'],
+      '#description' => t('Leave the title empty, to hide the link.'),
+    );
+    $elements['delete'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Delete link title'),
+      '#default_value' => $settings['delete'],
+      '#description' => t('Leave the title empty, to hide the link.'),
+    );
+    $elements['add'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Add link title'),
+      '#default_value' => $settings['add'],
+      '#description' => t('Leave the title empty, to hide the link.'),
+    );
+    $elements['description'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Show the field description beside the add link.'),
+      '#default_value' => $settings['description'],
+      '#description' => t('If enabled and the add link is shown, the field description is shown in front of the add link.'),
+    );
+  }
+
   return $elements;
 }
 
@@ -79,6 +116,16 @@ function osha_dangerous_substances_field_formatter_settings_summary($field, $ins
   $settings = $display['settings'];
   $output = array();
   if ($display['type'] == 'field_collection_title') {
+    $links = array_filter(array_intersect_key($settings,
+      array_flip(array('add', 'edit', 'delete'))));
+    if ($links) {
+      $output[] = t('Links: @links', array('@links' => check_plain(implode(', ', $links))));
+    }
+    else {
+      $output[] = t('Links: none');
+    }
+  }
+  if ($display['type'] == 'field_msd_collection_title') {
     $links = array_filter(array_intersect_key($settings,
       array_flip(array('add', 'edit', 'delete'))));
     if ($links) {
@@ -236,6 +283,17 @@ function osha_dangerous_substances_field_formatter_view($entity_type, $entity, $
       foreach ($items as $delta => $item) {
         if ($field_collection = field_collection_field_get_entity($item)) {
           $name = $field_collection->field_fc_provider_name['und'][0]['value'];
+          $output = $name;
+          $element[$delta] = array('#markup' => $output);
+        }
+      }
+      field_collection_field_formatter_links($element, $entity_type, $entity, $field, $instance, $langcode, $items, $display);
+      break;
+
+    case 'field_msd_collection_title':
+      foreach ($items as $delta => $item) {
+        if ($field_collection = field_collection_field_get_entity($item)) {
+          $name = $field_collection->field_msd_provider_name['und'][0]['value'];
           $output = $name;
           $element[$delta] = array('#markup' => $output);
         }

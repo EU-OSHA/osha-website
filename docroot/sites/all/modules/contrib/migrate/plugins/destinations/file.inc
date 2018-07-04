@@ -189,14 +189,7 @@ abstract class MigrateFile extends MigrateFileBase {
     $file->uri = $destination;
     $file->uid = $owner;
     if (!isset($file->filename)) {
-      if ($this->fileReplace == FILE_EXISTS_RENAME) {
-        $basename = drupal_basename($destination);
-        $directory = drupal_dirname($destination);
-        $file->filename = drupal_basename(file_create_filename($basename, $directory));
-      }
-      else {
-        $file->filename = drupal_basename($destination);
-      }
+      $file->filename = drupal_basename($destination);
     }
     if (!isset($file->filemime)) {
       $file->filemime = file_get_mimetype($destination);
@@ -204,18 +197,6 @@ abstract class MigrateFile extends MigrateFileBase {
     if (!isset($file->status)) {
       $file->status = FILE_STATUS_PERMANENT;
     }
-
-    if (empty($file->type) || $file->type == 'file') {
-      // Try to determine the file type.
-      if (module_exists('file_entity')) {
-        $type = file_get_type($file);
-      }
-      elseif ($slash_pos = strpos($file->filemime, '/')) {
-        $type = substr($file->filemime, 0, $slash_pos);
-      }
-      $file->type = isset($type) ? $type : 'file';
-    }
-
     // If we are replacing or reusing an existing filesystem entry,
     // also re-use its database record.
     if ($this->fileReplace == FILE_EXISTS_REPLACE ||
@@ -633,19 +614,6 @@ class MigrateDestinationFile extends MigrateDestinationEntity {
       }
       // @todo: Support DESTINATION case
       $old_file = file_load($file->fid);
-    }
-
-    // 'type' is the bundle property on file entities. It must be set here for
-    // the sake of the prepare handlers, although it may be overridden later
-    // based on the detected mime type.
-    if (empty($file->type)) {
-      // If a bundle was specified in the constructor we use it for filetype.
-      if ($this->bundle != 'file') {
-        $file->type = $this->bundle;
-      }
-      else {
-        $file->type = 'file';
-      }
     }
 
     // Invoke migration prepare handlers

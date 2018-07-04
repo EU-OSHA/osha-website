@@ -4379,8 +4379,8 @@ a.button-submit {
     color: #cbd9ec !important;
     display: block !important;
     height: 220px !important;
-    left: 15px !important;
-    border-right: 8px solid white !important;
+    left: 0px !important;
+    border-right: 0px solid white !important;
     position: absolute !important;
     top: 0 !important;
     width: 60px !important;
@@ -8992,11 +8992,7 @@ body.page-entity-collection h1#page-title{
 	width: 186px;
 	padding-right: 33px;
 }
-.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search #checkboxes-wrapper{
-	position: absolute;
-	bottom: 6px;
-}
-.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search label,
+
 .two_column.dangerous-substances-search-list.form-wrapper #dangerous-substances-search label{
 	color: #003399 !important;
 	font-family: "Open Sans" !important;
@@ -9030,7 +9026,7 @@ body.page-entity-collection h1#page-title{
 	margin-top: -47px;
 }
 
-.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search .form-submit,
+
 .two_column.dangerous-substances-search-list.form-wrapper #dangerous-substances-search .form-submit{
 	background: url("../images/searchico.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
 	border: 0 none;
@@ -9107,7 +9103,120 @@ body.page-entity-collection h1#page-title{
 	visibility: hidden;
 	display: none;
 }
+/* DANGEROUS SUBSTANCES SEARCH LIST */
+.dangerous-substances-search-list .views-exposed-widgets{
+    padding: 10px 15px;
+	margin: 2em 0px 0;
+	background-color: #e8eef7;
+	float: none;
+	border-top: 5px solid #003399;
+	border-bottom: 5px solid #003399;	
+}
+.dangerous-substances-search-list .views-exposed-widgets #dangerous-substances-search {
+	float:none !important;
+	padding:0px;
+	background: none !important;
+}
+.dangerous-substances-search-list .views-exposed-widgets #dangerous-substances-search select, 
+.dangerous-substances-search-list .views-exposed-widgets #dangerous-substances-search input{
+	font-family: 'Open Sans Condensed',sans-serif !important;
+    font-size: 1.1em !important;
+}
+.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search label{
+	color: #003399 !important;
+    font-family: 'Open Sans Condensed',sans-serif;
+	font-size: 1.1em !important;
+}
+.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search label.option{
+	color: #003399 !important;
+	font-family: 'Open Sans Condensed',sans-serif !important;
+    font-size: 1.1em !important;
+}
+.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search #checkboxes-wrapper{
+    position: absolute;
+    bottom: -1em;
+    padding: 1.5em 0 1em;
+}
+.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search .form-submit{
+    border: 0;
+    background: url(../images/searchico.png) no-repeat scroll 5px 5px rgba(255, 255, 255, 1);
+    color: #003399;
+    font-family: "Open Sans Condensed",sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: left;
+    text-decoration: none;
+    display: block;
+    padding-left: 0px;
+    float: left;
+    clear: none;
+    margin-top: -26px;
+    margin-left: -10px;
+    text-indent: -99999px;
+    color: #FFF;
+    font-size: 0px;
+    height: 30px;
+    width: 30px;
+    padding: 10px 10px;
+    display: block;
+}
+.view-id-dangerous_substances_overview{
+	background-color: #e8eef7;
+}
+.view-id-dangerous_substances_overview .view-content h2 {
 
+}
+.view-id-dangerous_substances_overview .view-content h2, 
+.view-id-dangerous_substances_overview .view-content h1 {
+	background: none repeat scroll 0 0 #e8eef7 !important;
+    color: #003399;
+    font-family: "Open Sans Condensed" !important;
+    font-size: 1.35em !important;
+    font-weight: bold;
+    padding-bottom: 2px;
+    padding-left: 0;
+}
+.view-id-dangerous_substances_overview .view-content{
+	padding: 15px;	
+}
+.view-id-dangerous_substances_overview .view-content article{
+	background: url(/sites/all/themes/osha_frontend/images/separator_search.png) repeat-x scroll 0 100% rgba(0,0,0,0);
+    margin-right: 2em;
+    margin-top: 1em;
+    padding-bottom: 1em;
+    clear: both;
+    height: 1%;
+    overflow: hidden;	
+}
+.view-id-dangerous_substances_overview .view-content article .field-type-list-text .field-items{
+	display: inline-block;
+    background-color: #4e6aa0;
+    border-radius: 5px;
+    padding: 1px 10px;
+    margin-right: 5px;
+    color: white;
+    font-size: 13px;
+    margin-bottom: 5px;	
+}
+
+.view-id-dangerous_substances_overview .view-content article .field .field-label{
+	display: inline-block;
+    color: #003399;
+    font-family: "Open Sans Condensed" !important;
+    font-size: 1.05em !important;
+}
+.view-id-dangerous_substances_overview .view-content article .field .field-items{
+	display: inline-block;
+}
+.view-id-dangerous_substances_overview .view-content article .field-type-text-long .field-items{
+	display: block;
+}
+.view-id-dangerous_substances_overview .view-content .field-name-field-summary p{
+	margin: 0;
+}
+.view-id-dangerous_substances_overview .view-content .field-type-text-with-summary p{
+	margin: 0;
+}
 /*STICKY MENU*/
 .fixed {
 	position: fixed;

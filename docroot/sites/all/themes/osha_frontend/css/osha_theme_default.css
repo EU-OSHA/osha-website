@@ -4379,8 +4379,8 @@ a.button-submit {
     color: #cbd9ec !important;
     display: block !important;
     height: 220px !important;
-    left: 15px !important;
-    border-right: 8px solid white !important;
+    left: 0px !important;
+    border-right: 0px solid white !important;
     position: absolute !important;
     top: 0 !important;
     width: 60px !important;

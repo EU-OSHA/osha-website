@@ -302,3 +302,10 @@ function osha_publication_update_7009() {
 function osha_publication_update_7010() {
   features_revert(array('osha_publication' => array('field_base', 'field_instance')));
 }
+
+/**
+ * MDR-2055 Publications carrorusel does not appear.
+ */
+function osha_publication_update_7011() {
+  features_revert(array('osha_publication' => array('views_view')));
+}

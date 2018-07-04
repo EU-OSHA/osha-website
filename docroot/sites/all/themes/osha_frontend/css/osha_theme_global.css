@@ -1972,19 +1972,27 @@ a {
 	padding-right: 15px;
 	padding-left: 15px;
 	padding-top: 20px !important;
+	padding-bottom: 60px !important;
 }
-
+.view-id-dangerous_substances_overview .view-content h2, 
+.view-id-dangerous_substances_overview .view-content h1 {
+	background: none repeat scroll 0 0 #e8eef7 !important;
+    color: #003399;
+    font-family: "Open Sans Condensed" !important;
+    font-size: 1.35em !important;
+	padding: 5px 0 !important;
+}
 #dangerous-substances-search > div{
 	float: none !important;
-	display: inline !important;
-	padding: 0px !important;
-	width: inherit !important;
-
+    display: block !important;
+    padding: 0px !important;
+    width: 100% !important;
+    margin: 5px 0 10px !important;
 }
 #dangerous-substances-search > div #edit-text,
 #dangerous-substances-search > div > select{
-	max-width: 280px;
-	width: 90% !important;
+	max-width:100%;
+	width: 100% !important;
 
 }
 #dangerous-substances-search #checkboxes-wrapper{
@@ -1992,16 +2000,45 @@ a {
 	bottom: 0px !important;
 }
 #dangerous-substances-search #edit-submit-dangerous-substances-overview{
-	position: absolute;
-	top: 45px;
-	left: 80px;
+    position: absolute;
+    top: 97%;
+    left: 10px;
 }
 #dangerous-substances-search #checkboxes-wrapper select.form-item-sort-by label{
 	margin-top: 10px !important;
 }
-
-
-
+.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search .form-submit {
+    border: 0;
+    background: url(../images/searchico.png) no-repeat scroll 12px 50% rgba(255, 255, 255, 1);
+    color: #003399;
+    font-family: "Open Sans Condensed",sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: left;
+    text-decoration: none;
+    display: block;
+    padding-left: 0px;
+    float: none;
+    clear: both;
+    margin-top: -26px;
+    margin-left: -10px;
+    text-indent: 30px;
+    color: #039;
+    font-size: 0px;
+    height: auto;
+    width: auto;
+    padding: 6px 15px;
+    display: block;
+}
+.view-dangerous-substances-overview .view-content .field-name-field-image {
+    margin: 5px 0 15px;
+    float: none !important;
+    text-align: center;
+}
+.view-dangerous-substances-overview .field-name-field-external-url, 
+.view-dangerous-substances-overview  .field-name-field-available-in-languages {
+    padding: 1em;
+}
 /*search ds*/
 .page-themes-dangerous-substances-practical-tools-dangerous-substances .sidebars_first #views-exposed-form-practical-tools-and-guidance-on-dangerous-substances-page .views-exposed-widget.views-widget-filter-search_api_views_fulltext input{
 	margin-bottom: 0px;

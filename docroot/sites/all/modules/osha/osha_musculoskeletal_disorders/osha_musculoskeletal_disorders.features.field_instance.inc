@@ -3021,7 +3021,7 @@ please take this into consideration when you are writing the first paragraph.',
     'bundle' => 'musculoskeletal_disorders',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Only first level categories (32) on: https://hazmap.nlm.nih.gov/job-tasks',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -3571,6 +3571,7 @@ please take this into consideration when you are writing the first paragraph.',
   t('Languages other');
   t('Length of the video');
   t('Nominated by FOP');
+  t('Only first level categories (32) on: https://hazmap.nlm.nih.gov/job-tasks');
   t('Original description languages other');
   t('Please add a country code from the list');
   t('Please add a language code from the list');

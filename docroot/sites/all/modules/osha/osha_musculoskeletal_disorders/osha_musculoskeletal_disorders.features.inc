@@ -58,7 +58,8 @@ function osha_musculoskeletal_disorders_default_search_api_index() {
       "cron_limit" : "50",
       "fields" : {
         "author" : { "type" : "integer", "entity_type" : "user" },
-        "field_country_code" : { "type" : "string" },
+        "field_available_in_languages:safe_value" : { "type" : "list\\u003Cstring\\u003E" },
+        "field_available_in_languages:value" : { "type" : "list\\u003Cstring\\u003E" },
         "field_evaluation_quality_criteri" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_fc_provider" : {
           "type" : "list\\u003Cinteger\\u003E",
@@ -68,8 +69,8 @@ function osha_musculoskeletal_disorders_default_search_api_index() {
         "field_hazards" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_hazards_other" : { "type" : "text" },
         "field_health_effects" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
-        "field_item_type" : { "type" : "string" },
         "field_languages_other" : { "type" : "text" },
+        "field_material_country" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_msd_provider" : {
           "type" : "list\\u003Cinteger\\u003E",
           "entity_type" : "field_collection_item"
@@ -90,6 +91,7 @@ function osha_musculoskeletal_disorders_default_search_api_index() {
         "field_tasks_covered" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_tasks_other" : { "type" : "text" },
         "field_title_original" : { "type" : "text" },
+        "field_type_of_item" : { "type" : "list\\u003Cstring\\u003E" },
         "field_visualisation_mat_other" : { "type" : "text" },
         "field_visualisation_material_typ" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_worker_groups_covered" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },

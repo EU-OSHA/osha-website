@@ -256,7 +256,7 @@ function osha_alert_service_subscribe_form_submit($form, $form_state) {
     drupal_set_message(t('Your alert settings have been changed.'));
   }
   else {
-    // Create alert
+    // Create alert.
     $token = sha1('TIMESTAMP:' . $created);
     $entity = entity_create(
       'osha_alert_service',
@@ -281,7 +281,7 @@ function osha_alert_service_subscribe_form_submit($form, $form_state) {
     drupal_mail('osha_alert_service', 'subscribe', $email, $language->language, $params);
   }
 
-  // Subscribe to OSHMail
+  // Subscribe to OSHMail.
   if ($values['newsletter']) {
     osha_newsletter_block_subscribe_captcha_form_submit($form, $form_state);
   }

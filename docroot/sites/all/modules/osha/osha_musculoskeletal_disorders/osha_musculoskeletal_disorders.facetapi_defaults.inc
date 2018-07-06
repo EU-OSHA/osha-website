@@ -13,6 +13,33 @@ function osha_musculoskeletal_disorders_facetapi_default_facet_settings() {
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
   $facet->api_version = 1;
+  $facet->name = 'search_api@musculoskeletal_disorders_index::field_available_in_languages:value';
+  $facet->searcher = 'search_api@musculoskeletal_disorders_index';
+  $facet->realm = '';
+  $facet->facet = 'field_available_in_languages:value';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'operator' => 'or',
+    'hard_limit' => '50',
+    'dependencies' => array(
+      'facets' => array(),
+      'force_deactivation' => TRUE,
+      'regex' => FALSE,
+    ),
+    'facet_mincount' => '1',
+    'facet_missing' => '0',
+    'flatten' => 0,
+    'query_type' => 'term',
+    'limit_active_items' => 0,
+    'default_true' => '1',
+    'facet_search_ids' => array(),
+    'exclude' => 0,
+  );
+  $export['search_api@musculoskeletal_disorders_index::field_available_in_languages:value'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
   $facet->name = 'search_api@musculoskeletal_disorders_index::field_country_code';
   $facet->searcher = 'search_api@musculoskeletal_disorders_index';
   $facet->realm = '';
@@ -63,6 +90,33 @@ function osha_musculoskeletal_disorders_facetapi_default_facet_settings() {
     'exclude' => 0,
   );
   $export['search_api@musculoskeletal_disorders_index::field_evaluation_quality_criteri'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@musculoskeletal_disorders_index::field_exposure_route';
+  $facet->searcher = 'search_api@musculoskeletal_disorders_index';
+  $facet->realm = '';
+  $facet->facet = 'field_exposure_route';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'operator' => 'or',
+    'hard_limit' => '50',
+    'dependencies' => array(
+      'facets' => array(),
+      'force_deactivation' => TRUE,
+      'regex' => FALSE,
+    ),
+    'facet_mincount' => '1',
+    'facet_missing' => '0',
+    'flatten' => '0',
+    'query_type' => 'term',
+    'limit_active_items' => 0,
+    'default_true' => '1',
+    'facet_search_ids' => array(),
+    'exclude' => 0,
+  );
+  $export['search_api@musculoskeletal_disorders_index::field_exposure_route'] = $facet;
 
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
@@ -144,6 +198,33 @@ function osha_musculoskeletal_disorders_facetapi_default_facet_settings() {
     'exclude' => 0,
   );
   $export['search_api@musculoskeletal_disorders_index::field_item_type'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@musculoskeletal_disorders_index::field_material_country';
+  $facet->searcher = 'search_api@musculoskeletal_disorders_index';
+  $facet->realm = '';
+  $facet->facet = 'field_material_country';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'operator' => 'or',
+    'hard_limit' => '50',
+    'dependencies' => array(
+      'facets' => array(),
+      'force_deactivation' => TRUE,
+      'regex' => FALSE,
+    ),
+    'facet_mincount' => '1',
+    'facet_missing' => '0',
+    'flatten' => '0',
+    'query_type' => 'term',
+    'limit_active_items' => 0,
+    'default_true' => '1',
+    'facet_search_ids' => array(),
+    'exclude' => 0,
+  );
+  $export['search_api@musculoskeletal_disorders_index::field_material_country'] = $facet;
 
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
@@ -337,6 +418,33 @@ function osha_musculoskeletal_disorders_facetapi_default_facet_settings() {
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
   $facet->api_version = 1;
+  $facet->name = 'search_api@musculoskeletal_disorders_index::field_type_of_item';
+  $facet->searcher = 'search_api@musculoskeletal_disorders_index';
+  $facet->realm = '';
+  $facet->facet = 'field_type_of_item';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'operator' => 'or',
+    'hard_limit' => '50',
+    'dependencies' => array(
+      'facets' => array(),
+      'force_deactivation' => TRUE,
+      'regex' => FALSE,
+    ),
+    'facet_mincount' => '1',
+    'facet_missing' => '0',
+    'flatten' => 0,
+    'query_type' => 'term',
+    'limit_active_items' => 0,
+    'default_true' => '1',
+    'facet_search_ids' => array(),
+    'exclude' => 0,
+  );
+  $export['search_api@musculoskeletal_disorders_index::field_type_of_item'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
   $facet->name = 'search_api@musculoskeletal_disorders_index::field_worker_groups_covered';
   $facet->searcher = 'search_api@musculoskeletal_disorders_index';
   $facet->realm = '';
@@ -423,6 +531,118 @@ function osha_musculoskeletal_disorders_facetapi_default_facet_settings() {
     'show_expanded' => 0,
   );
   $export['search_api@musculoskeletal_disorders_index:block:author'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@musculoskeletal_disorders_index:block:field_available_in_languages:safe_value';
+  $facet->searcher = 'search_api@musculoskeletal_disorders_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_available_in_languages:safe_value';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@musculoskeletal_disorders_index:block:field_available_in_languages:safe_value'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@musculoskeletal_disorders_index:block:field_available_in_languages:value';
+  $facet->searcher = 'search_api@musculoskeletal_disorders_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_available_in_languages:value';
+  $facet->enabled = TRUE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_checkbox_links',
+    'filters' => array(
+      'active_items' => array(
+        'status' => 0,
+        'weight' => '-50',
+      ),
+      'exclude_items' => array(
+        'status' => 0,
+        'weight' => '-49',
+      ),
+      'rewrite_items' => array(
+        'status' => 1,
+        'weight' => '-48',
+      ),
+      'narrow_results' => array(
+        'status' => 0,
+        'weight' => '-47',
+      ),
+      'show_if_minimum_items' => array(
+        'status' => 0,
+        'weight' => '-46',
+      ),
+      'deepest_level_items' => array(
+        'status' => 0,
+        'weight' => '-45',
+      ),
+    ),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+      'natural' => 0,
+      'indexed' => 0,
+    ),
+    'sort_weight' => array(
+      'active' => '-50',
+      'count' => '-49',
+      'display' => '-48',
+      'natural' => '0',
+      'indexed' => '0',
+    ),
+    'sort_order' => array(
+      'active' => '3',
+      'count' => '3',
+      'display' => '4',
+      'natural' => '4',
+      'indexed' => '4',
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => '20',
+    'nofollow' => 1,
+    'show_expanded' => 0,
+    'exclude' => '',
+    'regex' => 0,
+    'show_minimum_items' => 2,
+    'rewrite_items' => 1,
+    'empty_text' => array(
+      'value' => '',
+      'format' => 'full_html_minimal',
+    ),
+    'submit_realm' => 'Save and go back to realm settings',
+  );
+  $export['search_api@musculoskeletal_disorders_index:block:field_available_in_languages:value'] = $facet;
 
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
@@ -557,6 +777,53 @@ function osha_musculoskeletal_disorders_facetapi_default_facet_settings() {
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
   $facet->api_version = 1;
+  $facet->name = 'search_api@musculoskeletal_disorders_index:block:field_exposure_route';
+  $facet->searcher = 'search_api@musculoskeletal_disorders_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_exposure_route';
+  $facet->enabled = TRUE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_checkbox_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+      'natural' => 0,
+      'indexed' => 0,
+    ),
+    'sort_weight' => array(
+      'active' => '-50',
+      'count' => '-49',
+      'display' => '-48',
+      'natural' => '0',
+      'indexed' => '0',
+    ),
+    'sort_order' => array(
+      'active' => '3',
+      'count' => '3',
+      'display' => '4',
+      'natural' => '4',
+      'indexed' => '4',
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => '20',
+    'nofollow' => 1,
+    'show_expanded' => 0,
+    'empty_text' => array(
+      'value' => '',
+      'format' => 'full_html_minimal',
+    ),
+    'submit_realm' => 'Save and go back to realm settings',
+  );
+  $export['search_api@musculoskeletal_disorders_index:block:field_exposure_route'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
   $facet->name = 'search_api@musculoskeletal_disorders_index:block:field_fc_provider';
   $facet->searcher = 'search_api@musculoskeletal_disorders_index';
   $facet->realm = 'block';
@@ -589,6 +856,42 @@ function osha_musculoskeletal_disorders_facetapi_default_facet_settings() {
     'show_expanded' => 0,
   );
   $export['search_api@musculoskeletal_disorders_index:block:field_fc_provider'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@musculoskeletal_disorders_index:block:field_for_pictogram_guide';
+  $facet->searcher = 'search_api@musculoskeletal_disorders_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_for_pictogram_guide';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@musculoskeletal_disorders_index:block:field_for_pictogram_guide'] = $facet;
 
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
@@ -636,6 +939,42 @@ function osha_musculoskeletal_disorders_facetapi_default_facet_settings() {
     'submit_realm' => 'Save and go back to realm settings',
   );
   $export['search_api@musculoskeletal_disorders_index:block:field_hazards'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@musculoskeletal_disorders_index:block:field_hazards_other';
+  $facet->searcher = 'search_api@musculoskeletal_disorders_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_hazards_other';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@musculoskeletal_disorders_index:block:field_hazards_other'] = $facet;
 
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
@@ -734,6 +1073,42 @@ function osha_musculoskeletal_disorders_facetapi_default_facet_settings() {
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
   $facet->api_version = 1;
+  $facet->name = 'search_api@musculoskeletal_disorders_index:block:field_languages_other';
+  $facet->searcher = 'search_api@musculoskeletal_disorders_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_languages_other';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@musculoskeletal_disorders_index:block:field_languages_other'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
   $facet->name = 'search_api@musculoskeletal_disorders_index:block:field_legislation_category';
   $facet->searcher = 'search_api@musculoskeletal_disorders_index';
   $facet->realm = 'block';
@@ -766,6 +1141,161 @@ function osha_musculoskeletal_disorders_facetapi_default_facet_settings() {
     'show_expanded' => 0,
   );
   $export['search_api@musculoskeletal_disorders_index:block:field_legislation_category'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@musculoskeletal_disorders_index:block:field_material_country';
+  $facet->searcher = 'search_api@musculoskeletal_disorders_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_material_country';
+  $facet->enabled = TRUE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_checkbox_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+      'natural' => 0,
+      'indexed' => 0,
+    ),
+    'sort_weight' => array(
+      'active' => '-50',
+      'count' => '-49',
+      'display' => '-48',
+      'natural' => '0',
+      'indexed' => '0',
+    ),
+    'sort_order' => array(
+      'active' => '3',
+      'count' => '3',
+      'display' => '4',
+      'natural' => '4',
+      'indexed' => '4',
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => '20',
+    'nofollow' => 1,
+    'show_expanded' => 0,
+    'empty_text' => array(
+      'value' => '',
+      'format' => 'full_html_minimal',
+    ),
+    'submit_realm' => 'Save and go back to realm settings',
+  );
+  $export['search_api@musculoskeletal_disorders_index:block:field_material_country'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@musculoskeletal_disorders_index:block:field_msd_provider';
+  $facet->searcher = 'search_api@musculoskeletal_disorders_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_msd_provider';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@musculoskeletal_disorders_index:block:field_msd_provider'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@musculoskeletal_disorders_index:block:field_nominated_by_fop';
+  $facet->searcher = 'search_api@musculoskeletal_disorders_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_nominated_by_fop';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@musculoskeletal_disorders_index:block:field_nominated_by_fop'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@musculoskeletal_disorders_index:block:field_original_desc_lang_other';
+  $facet->searcher = 'search_api@musculoskeletal_disorders_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_original_desc_lang_other';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@musculoskeletal_disorders_index:block:field_original_desc_lang_other'] = $facet;
 
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
@@ -994,6 +1524,42 @@ function osha_musculoskeletal_disorders_facetapi_default_facet_settings() {
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
   $facet->api_version = 1;
+  $facet->name = 'search_api@musculoskeletal_disorders_index:block:field_resource_type_other';
+  $facet->searcher = 'search_api@musculoskeletal_disorders_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_resource_type_other';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@musculoskeletal_disorders_index:block:field_resource_type_other'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
   $facet->name = 'search_api@musculoskeletal_disorders_index:block:field_sector_industry_covered';
   $facet->searcher = 'search_api@musculoskeletal_disorders_index';
   $facet->realm = 'block';
@@ -1037,6 +1603,42 @@ function osha_musculoskeletal_disorders_facetapi_default_facet_settings() {
     'submit_realm' => 'Save and go back to realm settings',
   );
   $export['search_api@musculoskeletal_disorders_index:block:field_sector_industry_covered'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@musculoskeletal_disorders_index:block:field_sector_industry_other';
+  $facet->searcher = 'search_api@musculoskeletal_disorders_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_sector_industry_other';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@musculoskeletal_disorders_index:block:field_sector_industry_other'] = $facet;
 
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
@@ -1088,6 +1690,78 @@ function osha_musculoskeletal_disorders_facetapi_default_facet_settings() {
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
   $facet->api_version = 1;
+  $facet->name = 'search_api@musculoskeletal_disorders_index:block:field_target_group';
+  $facet->searcher = 'search_api@musculoskeletal_disorders_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_target_group';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@musculoskeletal_disorders_index:block:field_target_group'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@musculoskeletal_disorders_index:block:field_target_group_other';
+  $facet->searcher = 'search_api@musculoskeletal_disorders_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_target_group_other';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@musculoskeletal_disorders_index:block:field_target_group_other'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
   $facet->name = 'search_api@musculoskeletal_disorders_index:block:field_tasks_covered';
   $facet->searcher = 'search_api@musculoskeletal_disorders_index';
   $facet->realm = 'block';
@@ -1135,6 +1809,42 @@ function osha_musculoskeletal_disorders_facetapi_default_facet_settings() {
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
   $facet->api_version = 1;
+  $facet->name = 'search_api@musculoskeletal_disorders_index:block:field_tasks_other';
+  $facet->searcher = 'search_api@musculoskeletal_disorders_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_tasks_other';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@musculoskeletal_disorders_index:block:field_tasks_other'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
   $facet->name = 'search_api@musculoskeletal_disorders_index:block:field_title_original';
   $facet->searcher = 'search_api@musculoskeletal_disorders_index';
   $facet->realm = 'block';
@@ -1167,6 +1877,125 @@ function osha_musculoskeletal_disorders_facetapi_default_facet_settings() {
     'show_expanded' => 0,
   );
   $export['search_api@musculoskeletal_disorders_index:block:field_title_original'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@musculoskeletal_disorders_index:block:field_type_of_item';
+  $facet->searcher = 'search_api@musculoskeletal_disorders_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_type_of_item';
+  $facet->enabled = TRUE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_checkbox_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+      'natural' => 0,
+      'indexed' => 0,
+    ),
+    'sort_weight' => array(
+      'active' => '-50',
+      'count' => '-49',
+      'display' => '-48',
+      'natural' => '0',
+      'indexed' => '0',
+    ),
+    'sort_order' => array(
+      'active' => '3',
+      'count' => '3',
+      'display' => '4',
+      'natural' => '4',
+      'indexed' => '4',
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => '20',
+    'nofollow' => 1,
+    'show_expanded' => 0,
+    'empty_text' => array(
+      'value' => '',
+      'format' => 'full_html_minimal',
+    ),
+    'submit_realm' => 'Save and go back to realm settings',
+  );
+  $export['search_api@musculoskeletal_disorders_index:block:field_type_of_item'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@musculoskeletal_disorders_index:block:field_visualisation_mat_other';
+  $facet->searcher = 'search_api@musculoskeletal_disorders_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_visualisation_mat_other';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@musculoskeletal_disorders_index:block:field_visualisation_mat_other'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@musculoskeletal_disorders_index:block:field_visualisation_material_typ';
+  $facet->searcher = 'search_api@musculoskeletal_disorders_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_visualisation_material_typ';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@musculoskeletal_disorders_index:block:field_visualisation_material_typ'] = $facet;
 
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
@@ -1218,11 +2047,83 @@ function osha_musculoskeletal_disorders_facetapi_default_facet_settings() {
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
   $facet->api_version = 1;
+  $facet->name = 'search_api@musculoskeletal_disorders_index:block:field_worker_groups_other';
+  $facet->searcher = 'search_api@musculoskeletal_disorders_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_worker_groups_other';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@musculoskeletal_disorders_index:block:field_worker_groups_other'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@musculoskeletal_disorders_index:block:field_worker_groups_type';
+  $facet->searcher = 'search_api@musculoskeletal_disorders_index';
+  $facet->realm = 'block';
+  $facet->facet = 'field_worker_groups_type';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@musculoskeletal_disorders_index:block:field_worker_groups_type'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
   $facet->name = 'search_api@musculoskeletal_disorders_index:block:language';
   $facet->searcher = 'search_api@musculoskeletal_disorders_index';
   $facet->realm = 'block';
   $facet->facet = 'language';
-  $facet->enabled = TRUE;
+  $facet->enabled = FALSE;
   $facet->settings = array(
     'weight' => 0,
     'widget' => 'facetapi_checkbox_links',
@@ -1441,6 +2342,42 @@ function osha_musculoskeletal_disorders_facetapi_default_facet_settings() {
     'show_expanded' => 0,
   );
   $export['search_api@musculoskeletal_disorders_index:block:title'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@musculoskeletal_disorders_index:block:type';
+  $facet->searcher = 'search_api@musculoskeletal_disorders_index';
+  $facet->realm = 'block';
+  $facet->facet = 'type';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'weight' => 0,
+    'widget' => 'facetapi_links',
+    'filters' => array(),
+    'active_sorts' => array(
+      'active' => 'active',
+      'count' => 'count',
+      'display' => 'display',
+    ),
+    'sort_weight' => array(
+      'active' => -50,
+      'count' => -49,
+      'display' => -48,
+    ),
+    'sort_order' => array(
+      'active' => 3,
+      'count' => 3,
+      'display' => 4,
+    ),
+    'empty_behavior' => 'none',
+    'facet_more_text' => 'Show more',
+    'facet_fewer_text' => 'Show fewer',
+    'soft_limit' => 20,
+    'nofollow' => 1,
+    'show_expanded' => 0,
+  );
+  $export['search_api@musculoskeletal_disorders_index:block:type'] = $facet;
 
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */

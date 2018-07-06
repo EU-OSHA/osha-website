@@ -16,7 +16,7 @@ function osha_musculoskeletal_disorders_field_default_field_instances() {
     'bundle' => 'field_msd_provider',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please fill in the provider of the material (English version of the name)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -58,7 +58,7 @@ function osha_musculoskeletal_disorders_field_default_field_instances() {
     'bundle' => 'field_msd_provider',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please fill in the provider of the material (Name in original language)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -100,7 +100,7 @@ function osha_musculoskeletal_disorders_field_default_field_instances() {
     'bundle' => 'field_msd_provider',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please fill in the URL of the provider',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -256,7 +256,7 @@ please take this into consideration when you are writing the first paragraph.',
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 28,
+      'weight' => 26,
     ),
     'workbench_access_field' => 0,
   );
@@ -349,7 +349,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 11,
+      'weight' => 10,
     ),
     'workbench_access_field' => 0,
   );
@@ -439,7 +439,7 @@ please take this into consideration when you are writing the first paragraph.',
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 29,
+      'weight' => 27,
     ),
     'workbench_access_field' => 0,
   );
@@ -527,7 +527,7 @@ please take this into consideration when you are writing the first paragraph.',
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 39,
+      'weight' => 38,
     ),
     'workbench_access_field' => 0,
   );
@@ -617,7 +617,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 10,
+      'weight' => 9,
     ),
     'workbench_access_field' => 0,
   );
@@ -707,7 +707,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 33,
+      'weight' => 32,
     ),
     'workbench_access_field' => 0,
   );
@@ -791,7 +791,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 32,
+      'weight' => 31,
     ),
     'workbench_access_field' => 0,
   );
@@ -981,7 +981,7 @@ please take this into consideration when you are writing the first paragraph.',
       'module' => 'multiple_selects',
       'settings' => array(),
       'type' => 'multiple_selects',
-      'weight' => 38,
+      'weight' => 37,
     ),
     'workbench_access_field' => 0,
   );
@@ -1071,7 +1071,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 21,
+      'weight' => 19,
     ),
     'workbench_access_field' => 0,
   );
@@ -1154,7 +1154,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 18,
+      'weight' => 16,
     ),
     'workbench_access_field' => 0,
   );
@@ -1244,7 +1244,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 19,
+      'weight' => 17,
     ),
     'workbench_access_field' => 0,
   );
@@ -1328,7 +1328,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 20,
+      'weight' => 18,
     ),
     'workbench_access_field' => 0,
   );
@@ -1418,7 +1418,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 12,
+      'weight' => 11,
     ),
     'workbench_access_field' => 0,
   );
@@ -1503,7 +1503,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 9,
+      'weight' => 8,
     ),
     'workbench_access_field' => 0,
   );
@@ -1593,7 +1593,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 27,
+      'weight' => 25,
     ),
     'workbench_access_field' => 0,
   );
@@ -1687,7 +1687,96 @@ please take this into consideration when you are writing the first paragraph.',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 7,
+      'weight' => 6,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance:
+  // 'node-musculoskeletal_disorders-field_msd_video_length'.
+  $field_instances['node-musculoskeletal_disorders-field_msd_video_length'] = array(
+    'bundle' => 'musculoskeletal_disorders',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please add the time in minutes.',
+    'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 39,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_search_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_msd_video_length',
+    'label' => 'Length of the video',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 35,
     ),
     'workbench_access_field' => 0,
   );
@@ -1774,7 +1863,7 @@ please take this into consideration when you are writing the first paragraph.',
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 37,
+      'weight' => 36,
     ),
     'workbench_access_field' => 0,
   );
@@ -1864,7 +1953,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 14,
+      'weight' => 12,
     ),
     'workbench_access_field' => 0,
   );
@@ -1952,7 +2041,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 13,
+      'weight' => 28,
     ),
     'workbench_access_field' => 0,
   );
@@ -2036,7 +2125,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 24,
+      'weight' => 22,
     ),
     'workbench_access_field' => 0,
   );
@@ -2126,7 +2215,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 25,
+      'weight' => 23,
     ),
     'workbench_access_field' => 0,
   );
@@ -2320,7 +2409,7 @@ please take this into consideration when you are writing the first paragraph.',
         'year_range' => '1990:+7',
       ),
       'type' => 'date_select',
-      'weight' => 8,
+      'weight' => 7,
     ),
     'workbench_access_field' => 0,
   );
@@ -2404,7 +2493,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 26,
+      'weight' => 24,
     ),
     'workbench_access_field' => 0,
   );
@@ -2488,7 +2577,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 34,
+      'weight' => 33,
     ),
     'workbench_access_field' => 0,
   );
@@ -2578,7 +2667,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 35,
+      'weight' => 34,
     ),
     'workbench_access_field' => 0,
   );
@@ -2663,7 +2752,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 15,
+      'weight' => 13,
     ),
     'workbench_access_field' => 0,
   );
@@ -2747,7 +2836,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 30,
+      'weight' => 29,
     ),
     'workbench_access_field' => 0,
   );
@@ -2837,7 +2926,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 31,
+      'weight' => 30,
     ),
     'workbench_access_field' => 0,
   );
@@ -2921,7 +3010,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 16,
+      'weight' => 14,
     ),
     'workbench_access_field' => 0,
   );
@@ -2932,7 +3021,7 @@ please take this into consideration when you are writing the first paragraph.',
     'bundle' => 'musculoskeletal_disorders',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Only first level categories (32) on: https://hazmap.nlm.nih.gov/job-tasks',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -3011,7 +3100,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 17,
+      'weight' => 15,
     ),
     'workbench_access_field' => 0,
   );
@@ -3193,87 +3282,6 @@ please take this into consideration when you are writing the first paragraph.',
   );
 
   // Exported field_instance:
-  // 'node-musculoskeletal_disorders-field_video_length'.
-  $field_instances['node-musculoskeletal_disorders-field_video_length'] = array(
-    'bundle' => 'musculoskeletal_disorders',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'dangerous_substances' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 14,
-      ),
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 34,
-      ),
-      'highlights_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'newsletter_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_resources' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_search_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 35,
-      ),
-      'osha_slideshow' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_wiki' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_video_length',
-    'label' => 'Length of the video',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'cck_time',
-      'settings' => array(),
-      'type' => 'cck_time_select',
-      'weight' => 36,
-    ),
-    'workbench_access_field' => 0,
-  );
-
-  // Exported field_instance:
   // 'node-musculoskeletal_disorders-field_worker_groups_covered'.
   $field_instances['node-musculoskeletal_disorders-field_worker_groups_covered'] = array(
     'bundle' => 'musculoskeletal_disorders',
@@ -3352,7 +3360,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 22,
+      'weight' => 20,
     ),
     'workbench_access_field' => 0,
   );
@@ -3442,7 +3450,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 23,
+      'weight' => 21,
     ),
     'workbench_access_field' => 0,
   );
@@ -3563,6 +3571,7 @@ please take this into consideration when you are writing the first paragraph.',
   t('Languages other');
   t('Length of the video');
   t('Nominated by FOP');
+  t('Only first level categories (32) on: https://hazmap.nlm.nih.gov/job-tasks');
   t('Original description languages other');
   t('Please add a country code from the list');
   t('Please add a language code from the list');
@@ -3570,12 +3579,16 @@ please take this into consideration when you are writing the first paragraph.',
   t('Please add a short description in original language (only if a description is available on the website or material – no extra drafting or translation)');
   t('Please add comments regarding any elements that EU-OSHA could adapt to make pictograms');
   t('Please add the NACE code of the sector covered in the material. Use the NACE Rev 2');
+  t('Please add the time in minutes.');
   t('Please describe the material (max. 1500 characters)
 Please note: the first paragraph will be displayed as short description, 
 please take this into consideration when you are writing the first paragraph.');
   t('Please fill in the English title of the material');
+  t('Please fill in the URL of the provider');
   t('Please fill in the URL to access the material if available. You should enter the full url, including http:// or https://');
   t('Please fill in the original title of the material');
+  t('Please fill in the provider of the material (English version of the name)');
+  t('Please fill in the provider of the material (Name in original language)');
   t('Please fill in the type of the material');
   t('Please indicate if the resource contains elements that EU-OSHA could adapt to make pictograms');
   t('Please select a target audience from the drop down list');

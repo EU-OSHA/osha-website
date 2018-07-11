@@ -10,7 +10,14 @@ and (max-width : 1024px) {
 		float:none;
 	}
 
-
+	.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search > div, 
+	.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search .form-item-sort-by{
+		float: none;
+	    margin: 0;
+	    padding: 0;
+	    width: 100%;
+	    clear: both;
+	}
 
 
 

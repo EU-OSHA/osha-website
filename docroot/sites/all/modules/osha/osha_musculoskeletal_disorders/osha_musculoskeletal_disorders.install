@@ -22,7 +22,7 @@ function osha_musculoskeletal_disorders_update_7002() {
  * MDR-1905 Development MSDs database like the DS one.
  */
 function osha_musculoskeletal_disorders_update_7003() {
-  $name = 'Site: Musculoskeletal Disorders Database';
+  $name = 'Site: collection of OSH information. external contributors to musculoskeletal disorders';
   $term = taxonomy_get_term_by_name($name, 'section');
   if (empty($term)) {
     $voc = taxonomy_vocabulary_machine_name_load('section');

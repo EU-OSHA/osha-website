@@ -678,6 +678,74 @@ function osha_news_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-news-field_migrate_hwc'.
+  $field_instances['node-news-field_migrate_hwc'] = array(
+    'bundle' => 'news',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 17,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_migrate_hwc',
+    'label' => 'Migrate to HWC',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 36,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-news-field_migration_source'.
   $field_instances['node-news-field_migration_source'] = array(
     'bundle' => 'news',
@@ -1444,6 +1512,7 @@ function osha_news_field_default_field_instances() {
   t('Grab Flickr photos taken on or between these dates only.');
   t('Image');
   t('Marked as outdated');
+  t('Migrate to HWC');
   t('Migration Source');
   t('Page count');
   t('Please introduce in this box the text of this section.');

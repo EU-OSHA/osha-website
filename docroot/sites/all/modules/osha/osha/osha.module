@@ -187,9 +187,14 @@ function osha_menu() {
  * Implements hook_menu_alter().
  */
 function osha_menu_alter(&$items) {
+  $items['taxonomy/term/%taxonomy_term/feed']['page callback'] = 'osha_disable_taxonomy_term_feed';
   if (isset($items['aggregator/sources/%aggregator_feed'])) {
     $items['aggregator/sources/%aggregator_feed']['page callback'] = 'osha_aggregator_page_source';
   }
+}
+
+function osha_disable_taxonomy_term_feed() {
+  drupal_not_found();
 }
 
 /**

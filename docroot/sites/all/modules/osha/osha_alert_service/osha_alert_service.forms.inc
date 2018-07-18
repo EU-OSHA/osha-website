@@ -128,6 +128,11 @@ function osha_alert_service_subscribe_form($form, &$form_state) {
     '#default_value' => 0,
   );
 
+  $link_label = t(variable_get('subscribe_block_details_link_label', 'Privacy notice'));
+  $link_url = variable_get('osha_alert_service_privacy_policy_url', OSHA_ALERT_SERVICE_PRIVACY_PAGE_URL);
+  $form['details_link'] = array(
+    '#markup' => '<a class="privacy-policy-oshmail" href=' . url($link_url) . '>' . $link_label . '</a><br/>',
+  );
   $form['actions']['submit'] = array(
     '#type' => 'submit',
     '#name' => 'subscribe',

@@ -270,6 +270,7 @@ function osha_views_default_views() {
     'highlight' => 'highlight',
     'infographic' => 'infographic',
     'job_vacancies' => 'job_vacancies',
+    'musculoskeletal_disorders' => 'musculoskeletal_disorders',
     'news' => 'news',
     'newsletter_article' => 'newsletter_article',
     'note_to_editor' => 'note_to_editor',
@@ -3339,7 +3340,7 @@ function osha_views_default_views() {
     'wiki_page' => 'wiki_page',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Content: OSHwiki categories (field_wiki_categories) */
+  /* Filter criterion: Content: Wiki categories (field_wiki_categories) */
   $handler->display->display_options['filters']['field_wiki_categories_tid']['id'] = 'field_wiki_categories_tid';
   $handler->display->display_options['filters']['field_wiki_categories_tid']['table'] = 'field_data_field_wiki_categories';
   $handler->display->display_options['filters']['field_wiki_categories_tid']['field'] = 'field_wiki_categories_tid';
@@ -3408,6 +3409,132 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['field_tags_code_value']['relationship'] = 'field_tags_tid';
   $handler->display->display_options['filters']['field_tags_code_value']['value'] = 'campaign_2018_2019';
   $handler->display->display_options['path'] = 'export/gallery';
+
+  /* Display: News */
+  $handler = $view->new_display('page', 'News', 'page_news');
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    4 => 'AND',
+    3 => 'OR',
+    2 => 'OR',
+  );
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  /* Filter criterion: Content: Migration Source (field_migration_source) */
+  $handler->display->display_options['filters']['field_migration_source_value']['id'] = 'field_migration_source_value';
+  $handler->display->display_options['filters']['field_migration_source_value']['table'] = 'field_data_field_migration_source';
+  $handler->display->display_options['filters']['field_migration_source_value']['field'] = 'field_migration_source_value';
+  $handler->display->display_options['filters']['field_migration_source_value']['operator'] = 'empty';
+  $handler->display->display_options['filters']['field_migration_source_value']['group'] = 1;
+  /* Filter criterion: Field: Publication date (field_publication_date) */
+  $handler->display->display_options['filters']['field_publication_date_value']['id'] = 'field_publication_date_value';
+  $handler->display->display_options['filters']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
+  $handler->display->display_options['filters']['field_publication_date_value']['field'] = 'field_publication_date_value';
+  $handler->display->display_options['filters']['field_publication_date_value']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_publication_date_value']['group'] = 2;
+  $handler->display->display_options['filters']['field_publication_date_value']['granularity'] = 'second';
+  $handler->display->display_options['filters']['field_publication_date_value']['default_date'] = 'now';
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'news' => 'news',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 2;
+  /* Filter criterion: Content: Marked as outdated (field_archived) */
+  $handler->display->display_options['filters']['field_archived_value']['id'] = 'field_archived_value';
+  $handler->display->display_options['filters']['field_archived_value']['table'] = 'field_data_field_archived';
+  $handler->display->display_options['filters']['field_archived_value']['field'] = 'field_archived_value';
+  $handler->display->display_options['filters']['field_archived_value']['operator'] = 'empty';
+  $handler->display->display_options['filters']['field_archived_value']['group'] = 3;
+  /* Filter criterion: Content: Marked as outdated (field_archived) */
+  $handler->display->display_options['filters']['field_archived_value_1']['id'] = 'field_archived_value_1';
+  $handler->display->display_options['filters']['field_archived_value_1']['table'] = 'field_data_field_archived';
+  $handler->display->display_options['filters']['field_archived_value_1']['field'] = 'field_archived_value';
+  $handler->display->display_options['filters']['field_archived_value_1']['value'] = array(
+    0 => '0',
+  );
+  $handler->display->display_options['filters']['field_archived_value_1']['group'] = 3;
+  /* Filter criterion: Content: Migrate to HWC (field_migrate_hwc) */
+  $handler->display->display_options['filters']['field_migrate_hwc_value']['id'] = 'field_migrate_hwc_value';
+  $handler->display->display_options['filters']['field_migrate_hwc_value']['table'] = 'field_data_field_migrate_hwc';
+  $handler->display->display_options['filters']['field_migrate_hwc_value']['field'] = 'field_migrate_hwc_value';
+  $handler->display->display_options['filters']['field_migrate_hwc_value']['value'] = array(
+    1 => '1',
+  );
+  $handler->display->display_options['filters']['field_migrate_hwc_value']['group'] = 4;
+  $handler->display->display_options['path'] = 'export/news/list';
+
+  /* Display: Events */
+  $handler = $view->new_display('page', 'Events', 'page_events');
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    4 => 'AND',
+    3 => 'OR',
+    2 => 'OR',
+  );
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  /* Filter criterion: Content: Migration Source (field_migration_source) */
+  $handler->display->display_options['filters']['field_migration_source_value']['id'] = 'field_migration_source_value';
+  $handler->display->display_options['filters']['field_migration_source_value']['table'] = 'field_data_field_migration_source';
+  $handler->display->display_options['filters']['field_migration_source_value']['field'] = 'field_migration_source_value';
+  $handler->display->display_options['filters']['field_migration_source_value']['operator'] = 'empty';
+  $handler->display->display_options['filters']['field_migration_source_value']['group'] = 1;
+  /* Filter criterion: Field: Publication date (field_publication_date) */
+  $handler->display->display_options['filters']['field_publication_date_value']['id'] = 'field_publication_date_value';
+  $handler->display->display_options['filters']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
+  $handler->display->display_options['filters']['field_publication_date_value']['field'] = 'field_publication_date_value';
+  $handler->display->display_options['filters']['field_publication_date_value']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_publication_date_value']['group'] = 2;
+  $handler->display->display_options['filters']['field_publication_date_value']['granularity'] = 'second';
+  $handler->display->display_options['filters']['field_publication_date_value']['default_date'] = 'now';
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'events' => 'events',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 2;
+  /* Filter criterion: Content: Marked as outdated (field_archived) */
+  $handler->display->display_options['filters']['field_archived_value']['id'] = 'field_archived_value';
+  $handler->display->display_options['filters']['field_archived_value']['table'] = 'field_data_field_archived';
+  $handler->display->display_options['filters']['field_archived_value']['field'] = 'field_archived_value';
+  $handler->display->display_options['filters']['field_archived_value']['operator'] = 'empty';
+  $handler->display->display_options['filters']['field_archived_value']['group'] = 3;
+  /* Filter criterion: Content: Marked as outdated (field_archived) */
+  $handler->display->display_options['filters']['field_archived_value_1']['id'] = 'field_archived_value_1';
+  $handler->display->display_options['filters']['field_archived_value_1']['table'] = 'field_data_field_archived';
+  $handler->display->display_options['filters']['field_archived_value_1']['field'] = 'field_archived_value';
+  $handler->display->display_options['filters']['field_archived_value_1']['value'] = array(
+    0 => '0',
+  );
+  $handler->display->display_options['filters']['field_archived_value_1']['group'] = 3;
+  /* Filter criterion: Content: Migrate to HWC (field_migrate_hwc) */
+  $handler->display->display_options['filters']['field_migrate_hwc_value']['id'] = 'field_migrate_hwc_value';
+  $handler->display->display_options['filters']['field_migrate_hwc_value']['table'] = 'field_data_field_migrate_hwc';
+  $handler->display->display_options['filters']['field_migrate_hwc_value']['field'] = 'field_migrate_hwc_value';
+  $handler->display->display_options['filters']['field_migrate_hwc_value']['value'] = array(
+    1 => '1',
+  );
+  $handler->display->display_options['filters']['field_migrate_hwc_value']['group'] = 4;
+  $handler->display->display_options['path'] = 'export/event/list';
   $translatables['hcw_data_export'] = array(
     t('Master'),
     t('HWC Data Export'),
@@ -3430,6 +3557,8 @@ function osha_views_default_views() {
     t('Wiki E-tools'),
     t('OSHwiki categories'),
     t('Gallery'),
+    t('News'),
+    t('Events'),
   );
   $export['hcw_data_export'] = $view;
 
@@ -3583,11 +3712,37 @@ function osha_views_default_views() {
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['label'] = '';
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Field: Content: Updated date */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'node';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['label'] = '';
+  $handler->display->display_options['fields']['changed']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'U';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'year';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['table'] = 'field_data_title_field';
+  $handler->display->display_options['fields']['title_field']['field'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['label'] = '';
+  $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title_field']['link_to_entity'] = 0;
+  /* Field: Content: Updated date */
+  $handler->display->display_options['fields']['changed_1']['id'] = 'changed_1';
+  $handler->display->display_options['fields']['changed_1']['table'] = 'node';
+  $handler->display->display_options['fields']['changed_1']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed_1']['date_format'] = 'medium';
+  $handler->display->display_options['fields']['changed_1']['second_date_format'] = 'year';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Sort criterion: Content: Updated date */
+  $handler->display->display_options['sorts']['changed']['id'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['table'] = 'node';
+  $handler->display->display_options['sorts']['changed']['field'] = 'changed';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -3615,7 +3770,60 @@ function osha_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Field: Content: Updated date */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'node';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['label'] = '';
+  $handler->display->display_options['fields']['changed']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'U';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'year';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Updated date */
+  $handler->display->display_options['sorts']['changed']['id'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['table'] = 'node';
+  $handler->display->display_options['sorts']['changed']['field'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['order'] = 'DESC';
   $handler->display->display_options['path'] = 'export/audio_visual';
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page_1');
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['table'] = 'field_data_title_field';
+  $handler->display->display_options['fields']['title_field']['field'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['label'] = '';
+  $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title_field']['link_to_entity'] = 0;
+  /* Field: Content: Updated date */
+  $handler->display->display_options['fields']['changed_1']['id'] = 'changed_1';
+  $handler->display->display_options['fields']['changed_1']['table'] = 'node';
+  $handler->display->display_options['fields']['changed_1']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed_1']['label'] = 'Modified Date';
+  $handler->display->display_options['fields']['changed_1']['date_format'] = 'medium';
+  $handler->display->display_options['fields']['changed_1']['second_date_format'] = 'year';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Updated date */
+  $handler->display->display_options['sorts']['changed']['id'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['table'] = 'node';
+  $handler->display->display_options['sorts']['changed']['field'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['order'] = 'DESC';
+  $handler->display->display_options['path'] = 'export/ds_info';
   $translatables['hwc_audio_visual_export'] = array(
     t('Master'),
     t('HWC Audio Visual Export'),
@@ -3625,7 +3833,9 @@ function osha_views_default_views() {
     t('Sort by'),
     t('Asc'),
     t('Desc'),
+    t('Updated date'),
     t('Page'),
+    t('Modified Date'),
   );
   $export['hwc_audio_visual_export'] = $view;
 

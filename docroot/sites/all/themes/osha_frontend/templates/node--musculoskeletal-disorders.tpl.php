@@ -53,7 +53,7 @@ if ($page && ($view_mode == 'musculoskeletal_disorders')) { ?>
     if ($add_field_group && isset($map[$field_name])) {
       print '<h3 id="' . $map[$field_name]['id'] . '">' . $map[$field_name]['title'] . '</h3>';
     }
-    if ($field && $field['#field_type'] == 'taxonomy_term_reference') {
+    if (isset($field['#field_type']) && ($field['#field_type'] == 'taxonomy_term_reference')) {
         $skip = FALSE;
         foreach ($field['#items'] as $item) {
             if ($item['taxonomy_term']->name == 'Not applicable') {

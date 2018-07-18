@@ -3235,12 +3235,16 @@ font-weight: normal;
 	padding:0;
 }
 
-#block-osha-newsletter-osha-newsletter-subscribe div {
+#block-osha-newsletter-osha-newsletter-subscribe div{
 	color: #000;
 	font-family: "Open Sans",sans-serif;
 	font-size: 0.9em;
 	margin: 0 0 .5em 0;
 	line-height:1.5em;
+}
+
+#osha-newsletter-block-subscribe-form > div > div > label, #osha-alert-block-front-view-form > div > div > label{
+	font-size: 0.65rem;
 }
 
 #block-osha-newsletter-osha-newsletter-subscribe input {
@@ -3283,13 +3287,13 @@ font-weight: normal;
 	font-weight:bold;
 }
 
-#block-osha-newsletter-osha-newsletter-subscribe input[type="submit"], a.button-submit {
+#block-osha-newsletter-osha-newsletter-subscribe input[type="submit"], a.button-submit, #block-osha-alert-service-osha-alert-block-front-view input[type="submit"]{
 	background: url("../images/flecha.png") no-repeat scroll 96% center #b7c6e3;
     border: 0 none;
     color: #003399;
     float: none;
     font-family: "Open Sans Condensed",sans-serif;
-    font-size: 1.5em;
+    font-size: 1.1rem;
     font-weight: bold;
     margin-top: 0.5em;
     padding-bottom: 0.2em;

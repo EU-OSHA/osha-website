@@ -1,0 +1,24 @@
+diff --git a/docroot/sites/all/modules/contrib/smtp/smtp.mail.inc b/docroot/sites/all/modules/contrib/smtp/smtp.mail.inc
+index 9af8b66..d7d180d 100644
+--- a/docroot/sites/all/modules/contrib/smtp/smtp.mail.inc
++++ b/docroot/sites/all/modules/contrib/smtp/smtp.mail.inc
+@@ -459,13 +459,13 @@ class SmtpMailSystem implements MailSystemInterface {
+     // Process mimemail attachments, which are prepared in mimemail_mail().
+     if (isset($message['params']['attachments'])) {
+       foreach ($message['params']['attachments'] as $attachment) {
+-        if (isset($attachment['filecontent'])) {
+-          $mailer->AddStringAttachment($attachment['filecontent'], $attachment['filename'], 'base64', $attachment['filemime']);
++        if (isset($attachment)) {
++          $mailer->AddStringAttachment($attachment->filecontent, $attachment->filename, 'base64', $attachment->filemime);
+         }
+-        if (isset($attachment['filepath'])) {
+-          $filename = isset($attachment['filename']) ? $attachment['filename'] : basename($attachment['filepath']);
+-          $filemime = isset($attachment['filemime']) ? $attachment['filemime'] : file_get_mimetype($attachment['filepath']);
+-          $mailer->AddAttachment($attachment['filepath'], $filename, 'base64', $filemime);
++        if (!isset($attachment)) {
++          $filename = isset($attachment->filename) ? $attachment->filename : basename($attachment->filepath);
++          $filemime = isset($attachment->filemime) ? $attachment->filemime : file_get_mimetype($attachment->filepath);
++          $mailer->AddAttachment($attachment->filepath, $filename, 'base64', $filemime);
+         }
+       }
+     }

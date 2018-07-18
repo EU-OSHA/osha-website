@@ -371,11 +371,6 @@ class OshaMigrateSourceWiki extends MigrateSource {
     // Use limit because there are other [[wiki links]] in the text.
     $wiki_text = preg_replace($patterns, $replacements, $body, 1);
 
-    // <categorytree>..</categorytree>
-    $patterns[0] = '/(<categorytree.*<\/categorytree>\s*)/s';
-    $replacements[0] = '';
-    $wiki_text = preg_replace($patterns, $replacements, $wiki_text, 1);
-
     // Removes Internal {{LangTempl...}}, {{Template...}}, {{Metadata...}} etc...
     $patterns[0] = '/{{+(.*)}}/s';
     $replacements[0] = '';

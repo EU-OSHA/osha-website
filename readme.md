@@ -1,4 +1,4 @@
-OSHA
+EU-OSHA
 ====
 
 Build scripts and source code for the OSHA project

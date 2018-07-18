@@ -96,3 +96,4 @@ Disallow: /ru/
 Disallow: /sr/
 Disallow: /sh/
 Disallow: /tr/
+Disallow: fop/

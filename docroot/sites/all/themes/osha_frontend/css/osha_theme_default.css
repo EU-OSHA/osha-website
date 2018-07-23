@@ -8909,29 +8909,34 @@ body.page-entity-collection h1#page-title{
 	padding-left: 10px;
 }
 
-.node-dangerous-substances.view-mode-osha_search_teaser {
+.node-dangerous-substances.view-mode-osha_search_teaser,
+.node-musculoskeletal-disorders.view-mode-osha_search_teaser {
 	clear: both;
 	background: url(/sites/all/themes/osha_frontend/images/back-tit-blue.png) repeat-x scroll 0 100% transparent;
 	margin-bottom: 1em;
 	padding-bottom: 1em;
 }
 
-.node-dangerous-substances.view-mode-osha_search_teaser .field-name-field-image {
+.node-dangerous-substances.view-mode-osha_search_teaser .field-name-field-image,
+.node-musculoskeletal-disorders.view-mode-osha_search_teaser .field-name-field-image {
 	float: left;
 	margin-right: 1em;
 	padding-top: 8px;
 }
 
-.node-dangerous-substances.view-mode-osha_search_teaser .field-name-field-image img {
+.node-dangerous-substances.view-mode-osha_search_teaser .field-name-field-image img,
+.node-musculoskeletal-disorders.view-mode-osha_search_teaser .field-name-field-image img {
 	width: 156px;
 	height: auto;
 }
 
-.node-dangerous-substances .field-name-field-publication-date {
+.node-dangerous-substances .field-name-field-publication-date,
+.node-musculoskeletal-disorders .field-name-field-publication-date{
 	font-size: 0.8em;
 }
 
-.node-dangerous-substances.view-mode-osha_search_teaser h2 {
+.node-dangerous-substances.view-mode-osha_search_teaser h2,
+.node-musculoskeletal-disorders.view-mode-osha_search_teaser h2 {
 	font-family: Open Sans Condensed!important;
 	font-size: 1.5em !important;
 	font-weight: bold;
@@ -8941,7 +8946,8 @@ body.page-entity-collection h1#page-title{
 	padding-bottom: 8px;
 }
 
-.node-dangerous-substances.view-mode-osha_search_teaser h2 a {
+.node-dangerous-substances.view-mode-osha_search_teaser h2 a ,
+.node-musculoskeletal-disorders.view-mode-osha_search_teaser h2 a  {
 	border: 0px!important;
 	font-family: Open Sans Condensed!important;
 	letter-spacing: 0px;
@@ -8988,6 +8994,7 @@ body.page-entity-collection h1#page-title{
 	margin-right: 42px;
 }
 .view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search > div,
+.view-musculoskeletal-disorders-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search > div,
 .two_column.dangerous-substances-search-list.form-wrapper #dangerous-substances-search div {
 	float: left;
 	padding-right: 10px;
@@ -9004,7 +9011,8 @@ body.page-entity-collection h1#page-title{
 	font-weight: bold !important;
 }
 
-.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search #edit-text-wrapper label {
+.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search #edit-text-wrapper label,
+.view-musculoskeletal-disorders-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search #edit-text-wrapper label{
 	position: absolute !important;
 	height: 1px;
 	width: 1px;
@@ -9012,6 +9020,7 @@ body.page-entity-collection h1#page-title{
 }
 
 .view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search,
+.view-musculoskeletal-disorders-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search,
 .two_column.dangerous-substances-search-list.form-wrapper #dangerous-substances-search {
 	float:left;
 	padding-right:10px;
@@ -9025,6 +9034,8 @@ body.page-entity-collection h1#page-title{
 
 .view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search .form-item-sort-by,
 .view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search .form-item-sort-order,
+.view-musculoskeletal-disorders-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search .form-item-sort-by,
+.view-musculoskeletal-disorders-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search .form-item-sort-order,
 .two_column.dangerous-substances-search-list.form-wrapper #dangerous-substances-search .form-item-sort-by,
 .two_column.dangerous-substances-search-list.form-wrapper #dangerous-substances-search .form-item-direction{
 	margin-top: -47px;
@@ -9126,22 +9137,26 @@ body.page-entity-collection h1#page-title{
 	font-family: 'Open Sans Condensed',sans-serif !important;
     font-size: 1.1em !important;
 }
-.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search label{
+.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search label,
+.view-musculoskeletal-disorders-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search label{
 	color: #003399 !important;
     font-family: 'Open Sans Condensed',sans-serif;
 	font-size: 1.1em !important;
 }
-.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search label.option{
+.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search label.option ,
+.view-musculoskeletal-disorders-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search label.option  {
 	color: #003399 !important;
 	font-family: 'Open Sans Condensed',sans-serif !important;
     font-size: 1.1em !important;
 }
-.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search #checkboxes-wrapper{
+.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search #checkboxes-wrapper , 
+.view-musculoskeletal-disorders-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search #checkboxes-wrapper{
     position: absolute;
     bottom: -1em;
     padding: 1.5em 0 1em;
 }
-.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search .form-submit{
+.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search .form-submit,
+.view-musculoskeletal-disorders-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search .form-submit{
     border: 0;
     background: url(../images/searchico.png) no-repeat scroll 5px 5px rgba(255, 255, 255, 1);
     color: #003399;
@@ -9164,14 +9179,15 @@ body.page-entity-collection h1#page-title{
     padding: 10px 10px;
     display: block;
 }
-.view-id-dangerous_substances_overview{
+.view-id-dangerous_substances_overview,
+.view-musculoskeletal-disorders-overview{
 	background-color: #e8eef7;
 }
-.view-id-dangerous_substances_overview .view-content h2 {
 
-}
 .view-id-dangerous_substances_overview .view-content h2, 
-.view-id-dangerous_substances_overview .view-content h1 {
+.view-id-dangerous_substances_overview .view-content h1,
+.view-musculoskeletal-disorders-overview .view-content h2,
+.view-musculoskeletal-disorders-overview .view-content h1{
 	background: none repeat scroll 0 0 #e8eef7 !important;
     color: #003399;
     font-family: "Open Sans Condensed" !important;
@@ -9180,10 +9196,12 @@ body.page-entity-collection h1#page-title{
     padding-bottom: 2px;
     padding-left: 0;
 }
-.view-id-dangerous_substances_overview .view-content{
+.view-id-dangerous_substances_overview .view-content,
+.view-musculoskeletal-disorders-overview .view-content{
 	padding: 15px;	
 }
-.view-id-dangerous_substances_overview .view-content article{
+.view-id-dangerous_substances_overview .view-content article,
+.view-musculoskeletal-disorders-overview .view-content article{
 	background: url(/sites/all/themes/osha_frontend/images/separator_search.png) repeat-x scroll 0 100% rgba(0,0,0,0);
     margin-right: 2em;
     margin-top: 1em;
@@ -9192,7 +9210,8 @@ body.page-entity-collection h1#page-title{
     height: 1%;
     overflow: hidden;	
 }
-.view-id-dangerous_substances_overview .view-content article .field-type-list-text .field-items{
+.view-id-dangerous_substances_overview .view-content article .field-type-list-text .field-items,
+.view-musculoskeletal-disorders-overview .view-content article .field-type-list-text .field-items{
 	display: inline-block;
     background-color: #4e6aa0;
     border-radius: 5px;
@@ -9203,22 +9222,27 @@ body.page-entity-collection h1#page-title{
     margin-bottom: 5px;	
 }
 
-.view-id-dangerous_substances_overview .view-content article .field .field-label{
+.view-id-dangerous_substances_overview .view-content article .field .field-label,
+.view-musculoskeletal-disorders-overview .view-content article .field .field-label{
 	display: inline-block;
     color: #003399;
     font-family: "Open Sans Condensed" !important;
     font-size: 1.05em !important;
 }
-.view-id-dangerous_substances_overview .view-content article .field .field-items{
+.view-id-dangerous_substances_overview .view-content article .field .field-items,
+.view-musculoskeletal-disorders-overview .view-content article .field .field-items{
 	display: inline-block;
 }
-.view-id-dangerous_substances_overview .view-content article .field-type-text-long .field-items{
+.view-id-dangerous_substances_overview .view-content article .field-type-text-long .field-items,
+.view-musculoskeletal-disorders-overview .view-content article .field-type-text-long .field-items{
 	display: block;
 }
-.view-id-dangerous_substances_overview .view-content .field-name-field-summary p{
+.view-id-dangerous_substances_overview .view-content .field-name-field-summary p,
+.view-musculoskeletal-disorders-overview .view-content .field-name-field-summary p{
 	margin: 0;
 }
-.view-id-dangerous_substances_overview .view-content .field-type-text-with-summary p{
+.view-id-dangerous_substances_overview .view-content .field-type-text-with-summary p,
+.view-musculoskeletal-disorders-overview .view-content .field-type-text-with-summary p{
 	margin: 0;
 }
 /*STICKY MENU*/

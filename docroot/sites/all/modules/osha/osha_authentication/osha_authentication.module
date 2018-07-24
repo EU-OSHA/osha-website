@@ -123,13 +123,13 @@ function osha_authentication_user_login(&$edit, $user) {
     $roles = osha_authentication_extract_user_roles(array_keys($authorization));
 
     // Update user section assignment if user has roles: Editor, Project Manager or Review Manager
-    // Remove user from all sections before rebuilding it
+    // Remove user from all sections before rebuilding it.
     workbench_access_rebuild_user($user->uid, array());
     osha_workflow_rebuild_pm_sections($user->uid, array());
     osha_workflow_rebuild_rm_sections($user->uid, array());
     $user_sections = [];
-    foreach($authorization as $role => $sections) {
-      switch($role) {
+    foreach ($authorization as $role => $sections) {
+      switch ($role) {
         case 'Editor':
         case 'Dangerous substances':
           $user_sections = array_merge($sections, $user_sections);
@@ -142,18 +142,17 @@ function osha_authentication_user_login(&$edit, $user) {
         case 'Review Manager':
           osha_workflow_rebuild_rm_sections($user->uid, $sections);
           break;
-          break;
       }
     }
     if ($user_sections) {
       $user_sections = array_unique($user_sections);
       workbench_access_rebuild_user($user->uid, $user_sections);
     }
-    // LDAP_APPRV_US_01 - Assign Approver to the default list of approvers
+    // LDAP_APPRV_US_01 - Assign Approver to the default list of approvers.
     $is_approver = in_array('Approver', $roles);
     osha_authentication_user_login_approver($user, $is_approver);
 
-    // Configure translator skills
+    // Configure translator skills.
     $user->tmgmt_translation_skills[LANGUAGE_NONE] = array();
     foreach($languages as $target) {
       $user->tmgmt_translation_skills[LANGUAGE_NONE][] = array(

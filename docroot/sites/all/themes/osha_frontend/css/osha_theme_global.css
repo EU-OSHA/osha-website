@@ -456,13 +456,12 @@ img[alt*="Select language"]{
 #block-osha-newsletter-osha-newsletter-subscribe {
 	margin-bottom: 0em;	
 }
-#block-osha-newsletter-osha-newsletter-subscribe a, #block-osha-alert-service-osha-alert-block-front-view a{
+#block-osha-newsletter-osha-newsletter-subscribe a{
 	font-weight: normal;
 }
-#block-osha-newsletter-osha-newsletter-subscribe input[type="submit"], #block-osha-alert-service-osha-alert-block-front-view input[type="submit"] {
-	padding-right: 3.1em;
+#block-osha-newsletter-osha-newsletter-subscribe input[type="submit"]{
 	margin-top: 0.2em;
-	font-size: 1rem;
+	font-size: 1.4em;
 	background-position: 97% center;
 }
 #block-osha-alert-service-osha-alert-block-front-view .form-item {

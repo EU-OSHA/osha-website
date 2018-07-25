@@ -229,9 +229,10 @@ function osha_alert_service_block_view($delta = '') {
       break;
 
     case 'osha_alert_block_front_view':
+      $form = osha_alert_block_front_view();
       $ret['content'] = array(
         '#type' => 'item',
-        '#markup' => drupal_render(drupal_get_form('osha_alert_block_front_view_form')),
+        '#markup' => drupal_render($form),
       );
       break;
     // Links to RSS feeds below (CW-743).
@@ -278,50 +279,6 @@ function osha_alert_service_block_view($delta = '') {
   }
   return $ret;
 }
-
-function osha_alert_block_front_view_form($form, &$form_submit) {
-  $url = url('alertservice');
-  $form['block'] = array(
-    '#type' => 'item',
-    '#markup' => t(
-      '<div class="link"><span>Interested in specific topics?</span></div>',
-      array('!url' => $url)),
-  );
-  // These variables are defined in osha_newsletter.module
-  $link_label = t(variable_get('subscribe_block_details_link_label', 'Privacy notice'));
-  $link_url = variable_get('osha_alert_service_privacy_policy_url', OSHA_ALERT_SERVICE_PRIVACY_PAGE_URL);
-  
-
-  $form['agree_processing_personal_data_alert'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('I agree to the processing of my personal data'),
-      '#default_value' => 0,
-  );
-
-  $form['details_link'] = array(
-    '#markup' => '<a class="privacy-policy-oshmail" href='.url($link_url).'>'.$link_label.'</a><br/>',
-  );
-  
-  $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => t('Try alert service'),
-  );
-  
-  return $form;
-}
-
-function osha_alert_block_front_view_form_submit($form, &$form_state) {
-  $form_state['redirect'] = 'alertservice';
-}
-
-
-function osha_alert_block_front_view_form_validate(&$form, &$form_state){
-  $agree = trim($form_state['values']['agree_processing_personal_data_alert']);
-  if (!$agree) {
-    form_set_error('', t('Please, tick the box to agree in order to Try alert service.'));
-  }
-}
-
 
 function osha_alert_block_front_view() {
   $url = url('alertservice');

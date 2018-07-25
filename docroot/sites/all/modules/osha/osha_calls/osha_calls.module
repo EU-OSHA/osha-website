@@ -70,9 +70,12 @@ function osha_calls_get_filter_years() {
     }
     $year = $row_year;
     // Overwrite value with a link to archive page.
-    $options = array('query' => array('year' => $row_year));
+    $options = array(
+      'query' => array('year' => $row_year),
+      'attributes' => array('class' => array()),
+    );
     if ($current_year == $year) {
-      $options['attributes']['class'][] = 'active';
+      $options['attributes']['class'][] = 'active-filter';
     }
     $markup[] = l($year, 'about-eu-osha/procurement/calls_archive', $options);
   }

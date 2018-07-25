@@ -591,3 +591,10 @@ function osha_update_7043() {
   features_revert_module('osha_musculoskeletal_disorders');
   osha_musculoskeletal_disorders_add_terms();
 }
+
+/**
+ * MDR-2009 Back end - Events field - Tagging functionality.
+ */
+function osha_update_7044() {
+  features_revert(array('osha' => array('views_view')));
+}

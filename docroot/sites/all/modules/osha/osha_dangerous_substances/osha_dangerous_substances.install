@@ -261,7 +261,7 @@ function osha_dangerous_substances_update_7021() {
     $term->language = 'en';
     $term->name = $name;
     $term->vid = $voc->vid;
-    $term->field_ldap_section_code[LANGUAGE_NONE][]['value'] = 'DANGSUDB_PM';
+    $term->field_ldap_section_code[LANGUAGE_NONE][]['value'] = 'DANGSUDB';
     taxonomy_term_save($term);
   }
   osha_dangerous_substances_update_7018();

@@ -61,6 +61,8 @@ function osha_menu_form_node_form_alter(&$form, $form_state) {
  *   The optional existing menu item for context.
  */
 function _osha_menu_form_alter(array &$form, array $item = array(), array &$complete_form) {
+  // Unset the previous value so that the new values get saved.
+  unset($form['options']['#value']['copyright']);
 
   $attributes['copyright'] = array(
     'label' => t('Copyright'),
@@ -92,7 +94,7 @@ function _osha_menu_form_alter(array &$form, array $item = array(), array &$comp
   foreach ($attributes as $attribute => $info) {
     if (isset($item['options']['copyright'][$attribute])) {
       // If the menu link already has this attribute, use it.
-      $info['form']['#default_value'] = $item['options'][$attribute];
+      $info['form']['#default_value'] = $item['options']['copyright'][$attribute];
       // Convert the classes array to a string for the form.
     }
     elseif ($item['mlid']) {

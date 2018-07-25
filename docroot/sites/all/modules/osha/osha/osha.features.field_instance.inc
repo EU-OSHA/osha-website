@@ -678,9 +678,10 @@ function osha_field_default_field_instances() {
     'description' => 'Please introduce in this box the text of this section.',
     'display' => array(
       'dangerous_substances' => array(
-        'label' => 'above',
+        'label' => 'hidden',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'text_default',
         'weight' => 0,
       ),
       'default' => array(
@@ -4386,6 +4387,7 @@ function osha_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
+          'bypass_access' => FALSE,
           'link' => '',
         ),
         'type' => 'entityreference_label',
@@ -4476,6 +4478,7 @@ function osha_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
+          'bypass_access' => FALSE,
           'link' => '',
         ),
         'type' => 'entityreference_label',

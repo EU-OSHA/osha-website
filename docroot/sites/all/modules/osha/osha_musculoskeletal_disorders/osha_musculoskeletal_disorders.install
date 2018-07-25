@@ -17,3 +17,49 @@ function osha_musculoskeletal_disorders_update_7001() {
 function osha_musculoskeletal_disorders_update_7002() {
   features_revert_module('osha_musculoskeletal_disorders');
 }
+
+/**
+ * MDR-1905 Development MSDs database like the DS one.
+ */
+function osha_musculoskeletal_disorders_update_7003() {
+  $name = 'Site: collection of OSH information. external contributors to musculoskeletal disorders';
+  $term = taxonomy_get_term_by_name($name, 'section');
+  if (empty($term)) {
+    $voc = taxonomy_vocabulary_machine_name_load('section');
+    $term = new stdClass();
+    $term->parent = 0;
+    $term->language = 'en';
+    $term->name = $name;
+    $term->vid = $voc->vid;
+    $term->field_ldap_section_code[LANGUAGE_NONE][]['value'] = 'MUSCDIDB';
+    taxonomy_term_save($term);
+  }
+
+  $bundle_section_map = osha_workflow_bundle_section_map();
+  $existing_nids = db_select('workbench_access_node', 'w')
+    ->fields('w', array('nid'))
+    ->execute()
+    ->fetchCol();
+  foreach ($bundle_section_map as $bundle => $section) {
+    if ('musculoskeletal_disorders' != $bundle) {
+      continue;
+    }
+    $updating_nids = db_select('node', 'n')
+      ->fields('n', array('nid'))
+      ->condition('nid', $existing_nids, 'NOT IN')
+      ->condition('type', $bundle)
+      ->execute()
+      ->fetchCol();
+    if ($term = osha_workflow_get_section_term_by_ldap_id($section)) {
+      foreach ($updating_nids as $nid) {
+        db_insert('workbench_access_node');
+        $record = array(
+          'nid' => $nid,
+          'access_id' => $term->tid,
+          'access_scheme' => 'taxonomy',
+        );
+        drupal_write_record('workbench_access_node', $record);
+      }
+    }
+  }
+}

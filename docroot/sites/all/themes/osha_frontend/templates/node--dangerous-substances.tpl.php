@@ -52,12 +52,12 @@ if ($page && ($view_mode == 'dangerous_substances')) { ?>
   // We hide the comments and links now so that we can render them later.
   hide($content['comments']);
   hide($content['links']);
-  // unset to render below after a div
+  // Unset to render below after a div.
   foreach($content as $field_name => $field) {
     if ($add_field_group && isset($map[$field_name])) {
-      print '<h3 id="'.$map[$field_name]['id'].'">' . $map[$field_name]['title'] . '</h3>';
+      print '<h3 id="' . $map[$field_name]['id'] . '">' . $map[$field_name]['title'] . '</h3>';
     }
-    if ($field['#field_type']=='taxonomy_term_reference') {
+    if (isset($field['#field_type']) && ($field['#field_type'] == 'taxonomy_term_reference')) {
         $skip = FALSE;
         foreach($field['#items'] as $item) {
             if ($item['taxonomy_term']->name == 'Not applicable') {

@@ -456,11 +456,10 @@ img[alt*="Select language"]{
 #block-osha-newsletter-osha-newsletter-subscribe {
 	margin-bottom: 0em;	
 }
-#block-osha-newsletter-osha-newsletter-subscribe  a {
+#block-osha-newsletter-osha-newsletter-subscribe a{
 	font-weight: normal;
 }
-#block-osha-newsletter-osha-newsletter-subscribe input[type="submit"] {
-	padding-right: 2.1em;
+#block-osha-newsletter-osha-newsletter-subscribe input[type="submit"]{
 	margin-top: 0.2em;
 	font-size: 1.4em;
 	background-position: 97% center;

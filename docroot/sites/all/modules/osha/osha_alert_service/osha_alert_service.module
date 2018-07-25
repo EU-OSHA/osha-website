@@ -280,7 +280,6 @@ function osha_alert_service_block_view($delta = '') {
   return $ret;
 }
 
-
 function osha_alert_block_front_view() {
   $url = url('alertservice');
   $form['block'] = array(

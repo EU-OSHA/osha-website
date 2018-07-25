@@ -753,8 +753,8 @@ el.remove();
     'popup_agree_button_message' => 'OK, I agree',
     'popup_disagree_button_message' => 'No, give me more info',
     'popup_info' => array(
-      'value' => '<p><span style="font-size: small;"><strong>The EU-OSHA website uses cookies to gather information necessary for browsing the website, in accordance with the EU-OSHA privacy notice.</strong></span></p><p>By clicking on any link in the EU-OSHA web pages you are giving your consent for the use of cookies.</p>',
-      'format' => 'full_html',
+      'value' => '<p><span style="font-size: small;"><strong>The EU-OSHA website uses cookies to gather information necessary for browsing the website, in accordance with the EU-OSHA privacy notice.</strong></span></p>',
+      'format' => 'full_html_minimal',
     ),
     'popup_agreed_enabled' => 0,
     'popup_hide_agreed' => 1,
@@ -762,7 +762,7 @@ el.remove();
     'popup_hide_button_message' => 'Hide',
     'popup_agreed' => array(
       'value' => '<h2>Thank you for accepting cookies</h2><p>You can now hide this message or find out more about cookies.</p>',
-      'format' => 'full_html',
+      'format' => 'full_html_minimal',
     ),
     'popup_link' => 'node/5436',
     'popup_link_new_window' => 1,
@@ -1765,13 +1765,13 @@ el.remove();
       2 => array(
         'slot' => 2,
         'name' => 'Level1',
-        'value' => '[node:menu-link:parent]',
+        'value' => '[site:menu-level1]',
         'scope' => 'page',
       ),
       3 => array(
         'slot' => 3,
         'name' => 'Level2',
-        'value' => '[node:menu-link:title]',
+        'value' => '[site:menu-level2]',
         'scope' => 'page',
       ),
       4 => array(
@@ -1782,9 +1782,39 @@ el.remove();
       ),
       5 => array(
         'slot' => 5,
+        'name' => 'Language',
+        'value' => '[site:site-language]',
+        'scope' => 'page',
+      ),
+      6 => array(
+        'slot' => 6,
         'name' => '',
         'value' => '',
-        'scope' => 'page',
+        'scope' => 'visit',
+      ),
+      7 => array(
+        'slot' => 7,
+        'name' => '',
+        'value' => '',
+        'scope' => 'visit',
+      ),
+      8 => array(
+        'slot' => 8,
+        'name' => '',
+        'value' => '',
+        'scope' => 'visit',
+      ),
+      9 => array(
+        'slot' => 9,
+        'name' => '',
+        'value' => '',
+        'scope' => 'visit',
+      ),
+      10 => array(
+        'slot' => 10,
+        'name' => '',
+        'value' => '',
+        'scope' => 'visit',
       ),
     ),
   );

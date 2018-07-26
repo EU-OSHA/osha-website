@@ -2091,6 +2091,16 @@ a {
 	width: 100%;
 }
 
+/*Calls filters*/
+.view-calls.view-display-id-page_1 .view-header .filter-years{
+	padding-left: 1em;
+	padding-top: 1em;
+}
+
+.view-calls.view-display-id-page_1 > div.view-header > a{
+	padding-right: 1em;
+}
+
 }//en media
 
 @media screen and (max-width: 1078px) {

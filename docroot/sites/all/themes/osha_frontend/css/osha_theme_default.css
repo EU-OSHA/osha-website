@@ -4048,6 +4048,32 @@ a.button-submit {
 	font-weight:bold;
 }
 
+.view-calls.view-display-id-page_1 .view-header{
+   float: none;
+}
+
+.view-calls.view-display-id-page_1 .view-header .filter-years .filter-values a{
+	display: inline-block;
+    width: auto;
+    background: no-repeat;
+    float: none;
+    padding-left: 0 !important;
+}
+
+.view-calls.view-display-id-page_1 .view-header .filter-years .filter-values a{
+    font-weight: normal;
+}
+
+.view-calls.view-display-id-page_1 .view-header .filter-years .filter-values a.active-filter{
+	font-weight: bold;
+}
+
+.view-calls.view-display-id-page_1 .view-header a{
+	display: inline-block;
+    width: auto !important;
+    padding-left: 1.5em !important;
+}
+
 /*END CALLS*/
 
 

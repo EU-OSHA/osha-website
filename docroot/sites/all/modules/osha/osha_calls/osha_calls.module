@@ -54,13 +54,17 @@ function osha_calls_cron() {
 function osha_calls_get_filter_years() {
   $result = views_get_view_result('calls', 'block_archived_calls');
   $markup = [];
-  if ($result) {
-    $markup[] = l(t('All calls'), 'about-eu-osha/procurement/calls_archive');
-  }
   $year = '';
   $current_year = '';
   if (isset($_REQUEST['year'])) {
     $current_year = $_REQUEST['year'];
+  }
+  if ($result) {
+    $options = [];
+    if (!$current_year) {
+      $options['attributes']['class'][] = 'active-filter';
+    }
+    $markup[] = l(t('All calls'), 'about-eu-osha/procurement/calls_archive', $options);
   }
   foreach ($result as $key => $row) {
     $row_year = format_date(strtotime($row->field_field_publication_date[0]['raw']['value']), 'custom', 'Y');

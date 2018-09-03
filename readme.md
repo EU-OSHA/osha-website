@@ -3,8 +3,6 @@ EU-OSHA
 
 Build scripts and source code for the EU-OSHA project
 
-[![Code Climate](https://codeclimate.com/github/EU-OSHA/osha-website/badges/gpa.svg)](https://codeclimate.com/github/EU-OSHA/osha-website)
-
 ### Definitions, acronyms and abbreviations
 
 Term	| Description

@@ -28,13 +28,14 @@ function osha_sitemap_get_all_sitemaps() {
     ->fields('x')
     ->execute();
 
+  $lastmod_format = variable_get('xmlsitemap_lastmod_format', XMLSITEMAP_LASTMOD_MEDIUM);
   $text = '<?xml version="1.0" encoding="UTF-8"?>';
   $text .= '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
   while($site_map = $query->fetchAssoc()) {
     $context = unserialize($site_map['context']);
     $text .= '<sitemap>';
     $text .= '<loc>' . $base_url . '/' . $context['language'] . '/sitemap.xml' . '</loc>';
-    $text .= '<lastmod>' . gmdate(DATE_ISO8601, $site_map['updated']) . '</lastmod>';
+    $text .= '<lastmod>' . gmdate($lastmod_format, $site_map['updated']) . '</lastmod>';
     $text .= '</sitemap>';
   }
   $text .= '</sitemapindex>';
@@ -56,6 +57,9 @@ function osha_sitemap_xmlsitemap_link_insert(array $link, array $context) {
   osha_sitemap_exclude_menu_to_node($link);
 }
 
+/**
+ * Helper function to exclude menu link to node.
+ */
 function osha_sitemap_exclude_menu_to_node($link) {
   if ($link['type'] == 'menu_link' && strpos($link['loc'], 'node/') === 0) {
     // Disable this from getting into the sitemap.xml

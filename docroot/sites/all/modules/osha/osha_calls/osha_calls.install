@@ -49,8 +49,15 @@ function osha_calls_update_7003() {
 }
 
 /**
- * MDR-1450 I2-Introduce hint text inside the input fields
+ * MDR-1450 I2-Introduce hint text inside the input fields.
  */
 function osha_calls_update_7004() {
   features_revert(array('osha_calls' => array('field_base', 'field_instance')));
+}
+
+/**
+ * MDR-2066 Calls archiving.
+ */
+function osha_calls_update_7005() {
+  features_revert(array('osha_calls' => array('views_view')));
 }

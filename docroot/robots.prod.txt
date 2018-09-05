@@ -97,3 +97,5 @@ Disallow: /sr/
 Disallow: /sh/
 Disallow: /tr/
 Disallow: fop/
+Disallow: /fop/
+Disallow: */fop/

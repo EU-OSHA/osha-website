@@ -9,6 +9,116 @@ include_once 'osha_calls.features.inc';
 define('OSHA_CALLS_CONTENT_TYPE_CALLS', 'calls');
 
 /**
+ * Implements Elysia hook_cronapi().
+ */
+function osha_calls_cronapi() {
+  return array('osha_calls_cron' => array(
+    'description' => 'Unpublish calls',
+    'rule' => '55 0 * * *',
+  ));
+}
+
+function osha_calls_views_query_alter(&$view, &$query) {
+  if (($view->name == 'calls') && ($view->current_display == 'block_1')) {
+    $query->where[1]['conditions'][3]['value'][':field_data_field_publication_date_field_publication_date_value'] = date('Y') - 4;
+  }
+  if (($view->name == 'calls') && ($view->current_display == 'page_1')) {
+    if (isset($_REQUEST['year'])) {
+      $current_year = intval($_REQUEST['year']);
+      $query->where[1]['conditions'][5]['value'][':field_data_field_publication_date_field_publication_date_value'] = $current_year;
+      $query->where[1]['conditions'][5]['value'][':field_data_field_publication_date_field_publication_date_value1'] = $current_year;
+    }
+    else {
+      unset($query->where[1]['conditions'][5]);
+    }
+  }
+}
+
+/**
+ * Implements hook_cron().
+ */
+function osha_calls_cron() {
+  $result = views_get_view_result('calls', 'block_1');
+  $nids = array();
+  foreach ($result as $row) {
+    $nids[] = $row->nid;
+  }
+  $nodes = node_load_multiple($nids);
+  foreach ($nodes as $node) {
+    if (_workbench_moderation_moderate_access($node, OSHA_WORKFLOW_STATE_FINAL_DRAFT)) {
+      workbench_moderation_moderate(node_load($node->nid, $node->vid), OSHA_WORKFLOW_STATE_FINAL_DRAFT);
+    }
+  }
+}
+
+function osha_calls_get_filter_years() {
+  $result = views_get_view_result('calls', 'block_archived_calls');
+  $markup = [];
+  $year = '';
+  $current_year = '';
+  if (isset($_REQUEST['year'])) {
+    $current_year = $_REQUEST['year'];
+  }
+  if ($result) {
+    $options = [];
+    if (!$current_year) {
+      $options['attributes']['class'][] = 'active-filter';
+    }
+    $markup[] = l(t('All calls'), 'about-eu-osha/procurement/calls_archive', $options);
+  }
+  foreach ($result as $key => $row) {
+    $row_year = format_date(strtotime($row->field_field_publication_date[0]['raw']['value']), 'custom', 'Y');
+    if ($year == $row_year) {
+      unset($result[$key]);
+      continue;
+    }
+    $year = $row_year;
+    // Overwrite value with a link to archive page.
+    $options = array(
+      'query' => array('year' => $row_year),
+      'attributes' => array('class' => array()),
+    );
+    if ($current_year == $year) {
+      $options['attributes']['class'][] = 'active-filter';
+    }
+    $markup[] = l($year, 'about-eu-osha/procurement/calls_archive', $options);
+  }
+  return '<div class="filter-years"><div class="filter-title">' . t('Show calls:') . '</div><div class="filter-values">' . implode(' | ', $markup) . '</div></div>';
+}
+
+/**
+ * Implements hook_views_pre_render().
+ *
+ * {@inheritdoc}
+ */
+function osha_calls_views_pre_render(&$view) {
+
+  if ($view->name == 'calls' && ($view->current_display == 'page_1')) {
+    $view->header['area_text_custom']->options['content'] = osha_calls_get_filter_years() . $view->header['area_text_custom']->options['content'];
+  }
+
+  if ($view->name == 'calls' && in_array($view->current_display, array('block_archived_calls'))) {
+    $year = '';
+    foreach ($view->result as $key => $result) {
+      $row_year = format_date(strtotime($result->field_field_publication_date[0]['raw']['value']), 'custom', 'Y');
+      if ($year == $row_year) {
+        unset($view->result[$key]);
+        continue;
+      }
+      $year = $row_year;
+      // Overwrite value with a link to archive page.
+      $result->field_field_publication_date[0]['rendered']['#markup']
+        = l(t('EU-OSHA calls @year', array('@year' => $year)), 'about-eu-osha/procurement/calls_archive', array(
+          'query' => array(
+            'year' => $row_year,
+          ),
+        )
+      );
+    }
+  }
+}
+
+/**
  * Implements hook_field_formatter_info().
  */
 function osha_calls_field_formatter_info() {

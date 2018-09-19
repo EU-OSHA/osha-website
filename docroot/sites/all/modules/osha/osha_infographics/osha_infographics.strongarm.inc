@@ -136,6 +136,9 @@ function osha_infographics_strongarm() {
       'osha_search_teaser' => array(
         'custom_settings' => FALSE,
       ),
+      'dangerous_substances' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(

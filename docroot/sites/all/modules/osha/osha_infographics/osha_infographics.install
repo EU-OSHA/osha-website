@@ -81,12 +81,12 @@ function osha_infographics_add_menu_position_rules() {
  * Change menu position rules for Infographics content type.
  */
 function osha_infographics_change_menu_position_rules() {
-  // Remove old rule
+  // Remove old rule.
   db_delete('menu_position_rules')
     ->condition('admin_title', 'Infographics Menu Rule')
     ->execute();
 
-  // Add new rule
+  // Add new rule.
   if (module_exists('osha') && module_load_include('inc', 'osha', 'osha.utils')) {
     $parent_menu = array('------ Infographics');
     $condition = array('pages' => 'tools-and-publications/infographics/*');
@@ -96,23 +96,30 @@ function osha_infographics_change_menu_position_rules() {
 
 
 function osha_infographics_update_7005() {
-  // revert to create the new field
   features_revert_module('osha_infographics');
 }
 
 function osha_infographics_update_7006() {
-  // revert to create the new field
   features_revert_module('osha_infographics');
 }
 
-//MDR-1289: Features revert.
+/**
+ * MDR-1289: Features revert.
+ */
 function osha_infographics_update_7007() {
   features_revert_module('osha_infographics');
 }
 
 /**
- * MDR-1450 I2-Introduce hint text inside the input fields
+ * MDR-1450 I2-Introduce hint text inside the input fields.
  */
 function osha_infographics_update_7008() {
+  features_revert(array('osha_infographics' => array('field_base', 'field_instance')));
+}
+
+/**
+ * MDR-2154 Infographics section: add new "type" to pdfs and images.
+ */
+function osha_infographics_update_7009() {
   features_revert(array('osha_infographics' => array('field_base', 'field_instance')));
 }

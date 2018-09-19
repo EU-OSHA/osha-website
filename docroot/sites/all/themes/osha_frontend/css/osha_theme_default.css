@@ -9236,8 +9236,8 @@ body.page-entity-collection h1#page-title{
     height: 1%;
     overflow: hidden;	
 }
-.view-id-dangerous_substances_overview .view-content article .field-type-list-text .field-items,
-.view-musculoskeletal-disorders-overview .view-content article .field-type-list-text .field-items{
+.view-id-dangerous_substances_overview .view-content article .field-type-list-text .field-items div,
+.view-musculoskeletal-disorders-overview .view-content article .field-type-list-text .field-items div{
 	display: inline-block;
     background-color: #4e6aa0;
     border-radius: 5px;
@@ -9246,6 +9246,7 @@ body.page-entity-collection h1#page-title{
     color: white;
     font-size: 13px;
     margin-bottom: 5px;	
+    margin-top:5px;
 }
 
 .view-id-dangerous_substances_overview .view-content article .field .field-label,

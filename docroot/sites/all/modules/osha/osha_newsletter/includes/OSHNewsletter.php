@@ -246,7 +246,6 @@ class OSHNewsletter {
 
       $cssClass = drupal_clean_css_identifier('section-' . strtolower($variables['section']->name));
       $content['#attributes']['class'][] = $cssClass;
-      //krumo($content['#attributes']);
     }
     if (!empty($variables['section']->field_link[LANGUAGE_NONE][0]['url'])) {
       $url = $variables['section']->field_link[LANGUAGE_NONE][0]['url'];

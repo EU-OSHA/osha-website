@@ -67,7 +67,6 @@
   else {
     $ts = array();
   }
-
   // Format the table rows:
   if (count($rows)) {
     // $output .= "<tbody>\n";
@@ -101,6 +100,7 @@
       }
     }
   }
+  
   $output .= (count($rows) ? " </thead>\n" : "</tr>\n");
 
   $output .= "</table>\n";

@@ -234,10 +234,6 @@ class OSHNewsletter {
     if (!empty($variables['section']->name)) {
       $icon = self::getConfiguration($entityCollection, 'field_icon', $variables['section']);
       if (!empty($icon)) {
-
-        $cellContent = sprintf("<img src=\"%s\">", $icon);
-        $content['#header'][0]['data'][] = ['data' => $cellContent, 'class' => ['section-icon'] ];
-
         $cellContent = sprintf("<span>%s</span>", $variables['section']->name);
         $content['#header'][1]['data'][] = ['data' => $cellContent, 'class' => ['section-title']];
 
@@ -250,6 +246,7 @@ class OSHNewsletter {
 
       $cssClass = drupal_clean_css_identifier('section-' . strtolower($variables['section']->name));
       $content['#attributes']['class'][] = $cssClass;
+      //krumo($content['#attributes']);
     }
     if (!empty($variables['section']->field_link[LANGUAGE_NONE][0]['url'])) {
       $url = $variables['section']->field_link[LANGUAGE_NONE][0]['url'];
@@ -329,7 +326,6 @@ class OSHNewsletter {
         break;
       case 'newsletter_half_image_left':
         $content['#header'][0]['data'][0]['colspan'] = '2';
-
         $image_url = self::getConfiguration($entityCollection, 'field_background_image', $variables['section'], '');
         $image_fallback_bg = self::getConfiguration($entityCollection, 'field_background_color', $variables['section'], '');
 
@@ -343,7 +339,8 @@ class OSHNewsletter {
         $content['#rows'][] = [
           'data' => [
             [
-              'data' => sprintf("<img src=\"%s\" style=\"width:100%%;max-width:100%%;background-color:%s; \"/>", $image_url, $image_fallback_bg),
+              //'data' => sprintf("<img src=\"%s\" style=\"width:100%%;max-width:100%%;background-color:%s; \"/>", $image_url, $image_fallback_bg),
+              'data' => sprintf("<img src=\"%s\" style=\"display:block;margin:auto;background-color:%s; \"/>", $image_url, $image_fallback_bg),
               'width' => '380',
               'class' => ['template-column', 'newsletter-half-image'],
               'style' => sprintf("max-width: 380px;background-color: %s;",$image_fallback_bg),

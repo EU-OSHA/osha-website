@@ -1,7 +1,7 @@
 name = Infographics
 core = 7.x
 package = OSHA
-version = 7.x-1.1
+version = 7.x-1.2
 project = osha_infographics
 dependencies[] = ctools
 dependencies[] = custom_formatters
@@ -32,6 +32,7 @@ features[field_base][] = field_twin_infographics
 features[field_instance][] = node-infographic-body
 features[field_instance][] = node-infographic-field_activity
 features[field_instance][] = node-infographic-field_archived
+features[field_instance][] = node-infographic-field_external_url
 features[field_instance][] = node-infographic-field_file
 features[field_instance][] = node-infographic-field_flickr_date
 features[field_instance][] = node-infographic-field_image

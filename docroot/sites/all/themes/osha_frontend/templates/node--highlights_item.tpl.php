@@ -22,7 +22,6 @@ $url_query = array();
 if (!empty($campaign_id)) {
   $url_query = array('pk_campaign' => $campaign_id);
 }
-
 ?>
 <table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%" class="highlight-item">
   <tbody>
@@ -46,6 +45,7 @@ if (!empty($campaign_id)) {
                   <tbody>
                     <tr>
                       <td align="center" width="<?php print($highlight_img_width);?>" style="width: <?php print($highlight_img_width);?>px; max-width:<?php print($highlight_img_width);?>px;">
+
                         <?php
                           if ($node->type == 'youtube') {
                             if (!empty($node->field_youtube[LANGUAGE_NONE][0]['video_id'])) {
@@ -154,8 +154,13 @@ if (!empty($campaign_id)) {
                             $body_text = $doc->saveHTML();
                           }
                         }
-                        print($body_text);
+                      
+                       $body_text=substr($body_text,0,430);
+                       $body_text=substr($body_text,0,strripos($body_text," "));
+                       $body_text.="...";
+                       print($body_text);
                       }
+
                       ?>
                     </td>
                   </tr>

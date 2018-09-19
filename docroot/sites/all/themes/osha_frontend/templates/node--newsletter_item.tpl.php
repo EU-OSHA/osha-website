@@ -69,7 +69,7 @@ if (!empty($campaign_id)) {
             ?>
           </td>
           <td colspan="2" style="font-family: Arial, sans-serif; font-size: 14px; padding-bottom: 0;">
-            <span class="item-date"><?php if (trim($country_location) != '' && trim($city_location) != '') { echo $country_location . ' ' . $city_location . ', ';} if (trim($date) != '') { print format_date($date, 'custom', 'd/m/Y');}?></span>
+            <span class="item-date"><?php if (trim($country_location) != '' && trim($city_location) != '') { echo $country_location . ' ' . $city_location . ', ';} if (trim($date) != '') { print format_date($date, 'custom', 'd/m/Y');}?></span> 
           </td>
         <?php else: ?>
           <td colspan="2" style="font-family: Arial, sans-serif; font-size: 14px; padding-bottom: 0;">
@@ -89,7 +89,7 @@ if (!empty($campaign_id)) {
       <?php } ?>
       <td align="right" style="text-align: left; padding-top: 5px; padding-bottom: 10px; padding-left:0px;">
         <?php
-        switch ($node->type) {
+          switch ($node->type) {
           case 'publication':
             print l($node->title, url('node/' . $node->nid . '/view', array('absolute' => TRUE)), array(
               'attributes' => array('style' => 'text-decoration: none; font-family:Arial, sans-serif; font-size: 13px; font-weight: bold;'),
@@ -119,13 +119,39 @@ if (!empty($campaign_id)) {
               goto defaultLabel;
             }
             break;
+          case 'highlight':
+            print l($node->title, url('node/' . $node->nid, array('absolute' => TRUE)), array(
+              'attributes' => array('style' => 'text-decoration: none; font-family:Arial, sans-serif; font-size: 13px; font-weight: bold;'),
+              'query' => $url_query,
+              'external' => TRUE
+            ));  
+                 
+            if (trim(strip_tags($node->body[$language][0]['safe_summary']))) {
+                $clear = strip_tags($node->body[$language][0]['safe_summary']);
+                $clear= "<p>".substrwords($clear, 100)."</p>";
+                print ($clear);
+            }
+            break;
+            case 'news':
+            print l($node->title, url('node/' . $node->nid, array('absolute' => TRUE)), array(
+              'attributes' => array('style' => 'text-decoration: none; font-family:Arial, sans-serif; font-size: 13px; font-weight: bold;'),
+              'query' => $url_query,
+              'external' => TRUE
+            ));  
+                 
+            if (trim(strip_tags($node->field_summary[$language][0]['safe_value']))) {
+                $clear = strip_tags($node->body[$language][0]['safe_value']);
+                $clear= "<p>".substrwords($clear, 100)."</p>";
+                print ($clear);
+            }
+            break;
           default:
             defaultLabel:
             print l($node->title, url('node/' . $node->nid, array('absolute' => TRUE)), array(
               'attributes' => array('style' => 'text-decoration: none; font-family:Arial, sans-serif; font-size: 13px; font-weight: bold;'),
               'query' => $url_query,
               'external' => TRUE
-            ));
+            ));             
             break;
         }
         ?>

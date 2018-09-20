@@ -65,6 +65,7 @@ if (!isset($content['field_thumbnail']) && !empty($node->field_image)) {
     print render($content['body']);
     print render($content['field_image']);
     print render($content['field_file']);
+    print render($content['field_external_url']);
     print render($content['field_twin_infographics']);
   }
   else {

@@ -157,7 +157,7 @@ if (!empty($campaign_id)) {
 
 	                       if (trim(strip_tags($body_text))) {
 	                		$body_text = strip_tags($body_text);
-	                		$body_text=substr($body_text,0,280);
+	                		$body_text=substr($body_text,0,260);
 	                        $body_text=substr($body_text,0,strripos($body_text," "));
 	                        $body_text.="...";
 	                        $body_text= "<p>".$body_text."</p>";

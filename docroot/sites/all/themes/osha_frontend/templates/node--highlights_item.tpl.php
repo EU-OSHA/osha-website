@@ -154,11 +154,15 @@ if (!empty($campaign_id)) {
                             $body_text = $doc->saveHTML();
                           }
                         }
-                      
-                       $body_text=substr($body_text,0,430);
-                       $body_text=substr($body_text,0,strripos($body_text," "));
-                       $body_text.="...";
-                       print($body_text);
+
+	                       if (trim(strip_tags($body_text))) {
+	                		$body_text = strip_tags($body_text);
+	                		$body_text=substr($body_text,0,260);
+	                        $body_text=substr($body_text,0,strripos($body_text," "));
+	                        $body_text.="...";
+	                        $body_text= "<p>".$body_text."</p>";
+	                        print($body_text);
+	            			}
                       }
 
                       ?>

@@ -58,6 +58,8 @@ function osha_musculoskeletal_disorders_node_access($node, $op, $account) {
  * Implements hook_form_alter().
  */
 function osha_musculoskeletal_disorders_form_alter(&$form, &$form_state, $form_id) {
+  drupal_add_js(drupal_get_path('module', 'osha_musculoskeletal_disorders') . '/js/osha_musculoskeletal_disorders.js');
+
   if ($form_id == 'musculoskeletal_disorders_node_form') {
     unset($form['field_priority_area'][LANGUAGE_NONE]['#options'][3310]);
     unset($form['field_priority_area'][LANGUAGE_NONE]['#options'][3312]);
@@ -101,10 +103,6 @@ function _osha_musculoskeletal_disorders_form_after_build($form, $form_state) {
   // Original languages other.
   $_other = _osha_musculoskeletal_disorders_get_other_tid($form, 'field_original_desc_language');
   $form['field_original_desc_lang_other']['#states'] = ['visible' => ['#edit-field-original-desc-language-und' => ['value' => [$_other]]]];
-
-  // Tasks covered other.
-  $_other = _osha_musculoskeletal_disorders_get_other_tid($form, 'field_tasks_covered');
-  $form['field_tasks_other']['#states'] = ['visible' => ['#edit-field-tasks-covered-und' => ['value' => [$_other]]]];
 
   // Hazards other.
   $_other = _osha_musculoskeletal_disorders_get_other_tid($form, 'field_hazards');

@@ -63,3 +63,17 @@ function osha_musculoskeletal_disorders_update_7003() {
     }
   }
 }
+
+/**
+ * MDR-2114 MSDs DB - Comments from the project manager.
+ */
+function osha_musculoskeletal_disorders_update_7004() {
+  // Delete old field instances.
+  if ($instance = field_info_instance('node', 'field_tasks_covered', 'musculoskeletal_disorders')) {
+    field_delete_instance($instance);
+  }
+  if ($instance = field_info_instance('node', 'field_tasks_other', 'musculoskeletal_disorders')) {
+    field_delete_instance($instance);
+  }
+  features_revert_module('osha_musculoskeletal_disorders');
+}

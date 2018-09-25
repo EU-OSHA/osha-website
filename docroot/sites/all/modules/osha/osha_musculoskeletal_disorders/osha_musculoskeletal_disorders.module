@@ -55,6 +55,23 @@ function osha_musculoskeletal_disorders_node_access($node, $op, $account) {
 }
 
 /**
+ * Custom cancel button callback.
+ */
+function osha_musculoskeletal_disorders_form_cancel($form, &$form_state) {
+  $fallback_destinaton = '<front>';
+  if (!empty($form['#node'])) {
+    if (!empty($form['#node']->nid)) {
+      $nid = $form['#node']->nid;
+      $node = node_load($nid);
+      $node_uri = node_uri($node);
+      $fallback_destinaton = $node_uri['path'];
+    }
+  }
+  $url = $_GET['destination'] ? $_GET['destination'] : $fallback_destinaton;
+  drupal_goto($url);
+}
+
+/**
  * Implements hook_form_alter().
  */
 function osha_musculoskeletal_disorders_form_alter(&$form, &$form_state, $form_id) {
@@ -63,6 +80,16 @@ function osha_musculoskeletal_disorders_form_alter(&$form, &$form_state, $form_i
   if ($form_id == 'musculoskeletal_disorders_node_form') {
     unset($form['field_priority_area'][LANGUAGE_NONE]['#options'][3310]);
     unset($form['field_priority_area'][LANGUAGE_NONE]['#options'][3312]);
+    // Add a cancel button.
+    $form['actions']['cancel'] = array(
+      '#type'   => 'submit',
+      '#value'  => t('Cancel'),
+      '#access' => TRUE,
+      '#weight' => 999,
+      '#submit' => array('osha_musculoskeletal_disorders_form_cancel', 'node_form_submit_build_node'),
+      '#limit_validation_errors' => array(),
+      '#attributes' => array('class' => array('btn-cancel')),
+    );
   }
 
   if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-musculoskeletal-disorders-overview-page') {

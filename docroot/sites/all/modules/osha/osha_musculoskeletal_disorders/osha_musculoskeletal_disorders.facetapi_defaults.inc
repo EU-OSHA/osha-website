@@ -121,6 +121,33 @@ function osha_musculoskeletal_disorders_facetapi_default_facet_settings() {
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
   $facet->api_version = 1;
+  $facet->name = 'search_api@musculoskeletal_disorders_index::field_for_pictogram_guide';
+  $facet->searcher = 'search_api@musculoskeletal_disorders_index';
+  $facet->realm = '';
+  $facet->facet = 'field_for_pictogram_guide';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'operator' => 'and',
+    'hard_limit' => '50',
+    'dependencies' => array(
+      'facets' => array(),
+      'force_deactivation' => TRUE,
+      'regex' => FALSE,
+    ),
+    'facet_mincount' => '1',
+    'facet_missing' => '0',
+    'flatten' => 0,
+    'query_type' => 'term',
+    'limit_active_items' => 0,
+    'default_true' => '1',
+    'facet_search_ids' => array(),
+    'exclude' => 0,
+  );
+  $export['search_api@musculoskeletal_disorders_index::field_for_pictogram_guide'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
   $facet->name = 'search_api@musculoskeletal_disorders_index::field_hazards';
   $facet->searcher = 'search_api@musculoskeletal_disorders_index';
   $facet->realm = '';
@@ -225,6 +252,33 @@ function osha_musculoskeletal_disorders_facetapi_default_facet_settings() {
     'exclude' => 0,
   );
   $export['search_api@musculoskeletal_disorders_index::field_material_country'] = $facet;
+
+  $facet = new stdClass();
+  $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
+  $facet->api_version = 1;
+  $facet->name = 'search_api@musculoskeletal_disorders_index::field_nominated_by_fop';
+  $facet->searcher = 'search_api@musculoskeletal_disorders_index';
+  $facet->realm = '';
+  $facet->facet = 'field_nominated_by_fop';
+  $facet->enabled = FALSE;
+  $facet->settings = array(
+    'operator' => 'and',
+    'hard_limit' => '50',
+    'dependencies' => array(
+      'facets' => array(),
+      'force_deactivation' => TRUE,
+      'regex' => FALSE,
+    ),
+    'facet_mincount' => '1',
+    'facet_missing' => '0',
+    'flatten' => 0,
+    'query_type' => 'term',
+    'limit_active_items' => 0,
+    'default_true' => '1',
+    'facet_search_ids' => array(),
+    'exclude' => 0,
+  );
+  $export['search_api@musculoskeletal_disorders_index::field_nominated_by_fop'] = $facet;
 
   $facet = new stdClass();
   $facet->disabled = FALSE; /* Edit this to true to make a default facet disabled initially */
@@ -864,32 +918,43 @@ function osha_musculoskeletal_disorders_facetapi_default_facet_settings() {
   $facet->searcher = 'search_api@musculoskeletal_disorders_index';
   $facet->realm = 'block';
   $facet->facet = 'field_for_pictogram_guide';
-  $facet->enabled = FALSE;
+  $facet->enabled = TRUE;
   $facet->settings = array(
     'weight' => 0,
-    'widget' => 'facetapi_links',
+    'widget' => 'facetapi_checkbox_links',
     'filters' => array(),
     'active_sorts' => array(
       'active' => 'active',
       'count' => 'count',
       'display' => 'display',
+      'natural' => 0,
+      'indexed' => 0,
     ),
     'sort_weight' => array(
-      'active' => -50,
-      'count' => -49,
-      'display' => -48,
+      'active' => '-50',
+      'count' => '-49',
+      'display' => '-48',
+      'natural' => '0',
+      'indexed' => '0',
     ),
     'sort_order' => array(
-      'active' => 3,
-      'count' => 3,
-      'display' => 4,
+      'active' => '3',
+      'count' => '3',
+      'display' => '4',
+      'natural' => '4',
+      'indexed' => '4',
     ),
     'empty_behavior' => 'none',
     'facet_more_text' => 'Show more',
     'facet_fewer_text' => 'Show fewer',
-    'soft_limit' => 20,
+    'soft_limit' => '20',
     'nofollow' => 1,
     'show_expanded' => 0,
+    'empty_text' => array(
+      'value' => '',
+      'format' => 'full_html_minimal',
+    ),
+    'submit_realm' => 'Save and go back to realm settings',
   );
   $export['search_api@musculoskeletal_disorders_index:block:field_for_pictogram_guide'] = $facet;
 
@@ -1232,32 +1297,43 @@ function osha_musculoskeletal_disorders_facetapi_default_facet_settings() {
   $facet->searcher = 'search_api@musculoskeletal_disorders_index';
   $facet->realm = 'block';
   $facet->facet = 'field_nominated_by_fop';
-  $facet->enabled = FALSE;
+  $facet->enabled = TRUE;
   $facet->settings = array(
     'weight' => 0,
-    'widget' => 'facetapi_links',
+    'widget' => 'facetapi_checkbox_links',
     'filters' => array(),
     'active_sorts' => array(
       'active' => 'active',
       'count' => 'count',
       'display' => 'display',
+      'natural' => 0,
+      'indexed' => 0,
     ),
     'sort_weight' => array(
-      'active' => -50,
-      'count' => -49,
-      'display' => -48,
+      'active' => '-50',
+      'count' => '-49',
+      'display' => '-48',
+      'natural' => '0',
+      'indexed' => '0',
     ),
     'sort_order' => array(
-      'active' => 3,
-      'count' => 3,
-      'display' => 4,
+      'active' => '3',
+      'count' => '3',
+      'display' => '4',
+      'natural' => '4',
+      'indexed' => '4',
     ),
     'empty_behavior' => 'none',
     'facet_more_text' => 'Show more',
     'facet_fewer_text' => 'Show fewer',
-    'soft_limit' => 20,
+    'soft_limit' => '20',
     'nofollow' => 1,
     'show_expanded' => 0,
+    'empty_text' => array(
+      'value' => '',
+      'format' => 'full_html_minimal',
+    ),
+    'submit_realm' => 'Save and go back to realm settings',
   );
   $export['search_api@musculoskeletal_disorders_index:block:field_nominated_by_fop'] = $facet;
 
@@ -1766,7 +1842,7 @@ function osha_musculoskeletal_disorders_facetapi_default_facet_settings() {
   $facet->searcher = 'search_api@musculoskeletal_disorders_index';
   $facet->realm = 'block';
   $facet->facet = 'field_tasks_covered';
-  $facet->enabled = TRUE;
+  $facet->enabled = FALSE;
   $facet->settings = array(
     'weight' => 0,
     'widget' => 'facetapi_checkbox_links',

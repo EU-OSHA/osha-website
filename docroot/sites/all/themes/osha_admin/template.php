@@ -3,6 +3,33 @@
  * @file template.php
  */
 
+function osha_admin_textarea($variables) {
+  $element = $variables['element'];
+  element_set_attributes($element, array('id', 'name', 'cols', 'rows'));
+  _form_set_class($element, array('form-textarea'));
+
+  $wrapper_attributes = array(
+    'class' => array('form-textarea-wrapper'),
+  );
+
+  // Add resizable behavior.
+  if (!empty($element['#resizable'])) {
+    drupal_add_library('system', 'drupal.textarea');
+    $wrapper_attributes['class'][] = 'resizable';
+  }
+  if (
+    isset($element['#field_name']) &&
+    ($element['#field_name'] == 'body') &&
+    ($element['#entity']->type == 'musculoskeletal_disorders')
+  ) {
+    $element['#attributes']['data-max-length '] = 1500;
+  }
+
+  $output = '<div' . drupal_attributes($wrapper_attributes) . '>';
+  $output .= '<textarea' . drupal_attributes($element['#attributes']) . '>' . check_plain($element['#value']) . '</textarea>';
+  $output .= '</div>';
+  return $output;
+}
 
 /**
  * Implements hook_preprocess_HOOK() for theme_file_icon().

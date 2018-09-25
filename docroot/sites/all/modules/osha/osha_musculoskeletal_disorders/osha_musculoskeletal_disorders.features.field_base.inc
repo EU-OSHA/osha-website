@@ -75,8 +75,8 @@ function osha_musculoskeletal_disorders_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        'YES' => 'YES',
-        'NO' => 'NO',
+        'NO' => 'No',
+        'YES' => 'Yes',
         'Possibly' => 'Possibly',
       ),
       'allowed_values_function' => '',

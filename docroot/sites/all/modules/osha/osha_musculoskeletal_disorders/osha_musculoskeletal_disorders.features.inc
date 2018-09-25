@@ -88,8 +88,6 @@ function osha_musculoskeletal_disorders_default_search_api_index() {
         "field_target_audience" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_target_group" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_target_group_other" : { "type" : "text" },
-        "field_tasks_covered" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
-        "field_tasks_other" : { "type" : "text" },
         "field_title_original" : { "type" : "text" },
         "field_type_of_item" : { "type" : "list\\u003Cstring\\u003E" },
         "field_visualisation_mat_other" : { "type" : "text" },

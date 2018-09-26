@@ -12,6 +12,7 @@ class OSHNewsletter {
       'newsletter_full_width_list' => 'Summary (full width)',
       'newsletter_half_width_list' => 'Summary (half width)',
       'newsletter_half_image_left' => 'HWC (full width)',
+      'newsletter_oira_half_image_left' => 'OIRA (full width)',
       'newsletter_full_width_2_col_blocks' => 'Events (2 columns)',
       'newsletter_half_width_twitter' => 'Tweets (half width)',
     ];
@@ -23,6 +24,7 @@ class OSHNewsletter {
       'newsletter_full_width_list' => 'newsletter_item',
       'newsletter_half_width_list' => 'newsletter_item',
       'newsletter_half_image_left' => 'newsletter_item',
+       'newsletter_oira_half_image_left' => 'newsletter_item',
       'newsletter_full_width_2_col_blocks' => 'newsletter_item',
       'newsletter_half_width_twitter' => 'newsletter_item',
     ];
@@ -234,10 +236,6 @@ class OSHNewsletter {
     if (!empty($variables['section']->name)) {
       $icon = self::getConfiguration($entityCollection, 'field_icon', $variables['section']);
       if (!empty($icon)) {
-
-        $cellContent = sprintf("<img src=\"%s\">", $icon);
-        $content['#header'][0]['data'][] = ['data' => $cellContent, 'class' => ['section-icon'] ];
-
         $cellContent = sprintf("<span>%s</span>", $variables['section']->name);
         $content['#header'][1]['data'][] = ['data' => $cellContent, 'class' => ['section-title']];
 
@@ -329,7 +327,6 @@ class OSHNewsletter {
         break;
       case 'newsletter_half_image_left':
         $content['#header'][0]['data'][0]['colspan'] = '2';
-
         $image_url = self::getConfiguration($entityCollection, 'field_background_image', $variables['section'], '');
         $image_fallback_bg = self::getConfiguration($entityCollection, 'field_background_color', $variables['section'], '');
 
@@ -343,7 +340,46 @@ class OSHNewsletter {
         $content['#rows'][] = [
           'data' => [
             [
-              'data' => sprintf("<img src=\"%s\" style=\"width:100%%;max-width:100%%;background-color:%s; \"/>", $image_url, $image_fallback_bg),
+              //'data' => sprintf("<img src=\"%s\" style=\"width:100%%;max-width:100%%;background-color:%s; \"/>", $image_url, $image_fallback_bg),
+              'data' => sprintf("<img src=\"%s\" style=\"display:block;margin:auto;background-color:%s; \"/>", $image_url, $image_fallback_bg),
+              'width' => '380',
+              'class' => ['template-column', 'newsletter-half-image'],
+              'style' => sprintf("max-width: 380px;background-color: %s;",$image_fallback_bg),
+            ],
+            [
+
+              'data' => self::renderTemplate($entityCollection, 'newsletter_full_width_list', $variables),
+              'width' => '380',
+              // 'height' => '100%',
+              'class' => ['template-column', 'newsletter-half-content'],
+              'style' => sprintf("max-width: 380px;background-color: %s;",$image_fallback_bg),
+
+            ],
+          ],
+        ];
+        $content['#rows'][]['data'][] = [
+          'data' => '&nbsp;',
+          'colspan' => 2,
+          'style' => 'padding-top: 0; padding-bottom: 20px;font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;',
+        ];
+        break;
+        case 'newsletter_oira_half_image_left':
+        $content['#header'][0]['data'][0]['colspan'] = '2';
+        $image_url = self::getConfiguration($entityCollection, 'field_background_image', $variables['section'], '');
+        $image_fallback_bg = self::getConfiguration($entityCollection, 'field_background_color', $variables['section'], '');
+
+        // Avoid rendering the section title twice
+        unset($variables['section']);
+        $content['#rows'][]['data'][] = [
+          'data' => '&nbsp;',
+          'colspan' => 2,
+          'style' => 'padding-top: 0; padding-bottom: 20px;font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;',
+        ];
+        $content['#rows'][] = [
+          'data' => [
+            [
+              //'data' => sprintf("<img src=\"%s\" style=\"width:100%%;max-width:100%%;background-color:%s; \"/>", $image_url, $image_fallback_bg),
+              'data' => sprintf("<img src=\"%s\" style=\"display:block;margin:auto;background-color:%s; \"/>", $image_url, $image_fallback_bg),
               'width' => '380',
               'class' => ['template-column', 'newsletter-half-image'],
               'style' => sprintf("max-width: 380px;background-color: %s;",$image_fallback_bg),

@@ -1,7 +1,8 @@
 name = OSHA Dangerous substances
+description = OSHA Dangerous substances
 core = 7.x
 package = OSHA
-version = 7.x-1.11
+version = 7.x-1.12
 dependencies[] = cck_time
 dependencies[] = facetapi
 dependencies[] = features

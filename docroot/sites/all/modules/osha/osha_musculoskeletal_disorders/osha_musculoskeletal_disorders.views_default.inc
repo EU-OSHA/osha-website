@@ -233,28 +233,6 @@ function osha_musculoskeletal_disorders_views_default_views() {
   $handler->display->display_options['fields']['field_sector_industry_other']['id'] = 'field_sector_industry_other';
   $handler->display->display_options['fields']['field_sector_industry_other']['table'] = 'search_api_index_musculoskeletal_disorders_index';
   $handler->display->display_options['fields']['field_sector_industry_other']['field'] = 'field_sector_industry_other';
-  /* Field: Indexed Content: Tasks covered */
-  $handler->display->display_options['fields']['field_tasks_covered']['id'] = 'field_tasks_covered';
-  $handler->display->display_options['fields']['field_tasks_covered']['table'] = 'search_api_index_musculoskeletal_disorders_index';
-  $handler->display->display_options['fields']['field_tasks_covered']['field'] = 'field_tasks_covered';
-  $handler->display->display_options['fields']['field_tasks_covered']['link_to_entity'] = 0;
-  $handler->display->display_options['fields']['field_tasks_covered']['view_mode'] = 'full';
-  $handler->display->display_options['fields']['field_tasks_covered']['bypass_access'] = 0;
-  /* Field: Indexed Content: Tasks covered other */
-  $handler->display->display_options['fields']['field_tasks_other']['id'] = 'field_tasks_other';
-  $handler->display->display_options['fields']['field_tasks_other']['table'] = 'search_api_index_musculoskeletal_disorders_index';
-  $handler->display->display_options['fields']['field_tasks_other']['field'] = 'field_tasks_other';
-  /* Field: Indexed Content: Evaluation */
-  $handler->display->display_options['fields']['field_evaluation_quality_criteri']['id'] = 'field_evaluation_quality_criteri';
-  $handler->display->display_options['fields']['field_evaluation_quality_criteri']['table'] = 'search_api_index_musculoskeletal_disorders_index';
-  $handler->display->display_options['fields']['field_evaluation_quality_criteri']['field'] = 'field_evaluation_quality_criteri';
-  $handler->display->display_options['fields']['field_evaluation_quality_criteri']['link_to_entity'] = 1;
-  $handler->display->display_options['fields']['field_evaluation_quality_criteri']['view_mode'] = 'full';
-  $handler->display->display_options['fields']['field_evaluation_quality_criteri']['bypass_access'] = 0;
-  /* Field: Indexed Content: Evaluation other */
-  $handler->display->display_options['fields']['field_evaluation_other']['id'] = 'field_evaluation_other';
-  $handler->display->display_options['fields']['field_evaluation_other']['table'] = 'search_api_index_musculoskeletal_disorders_index';
-  $handler->display->display_options['fields']['field_evaluation_other']['field'] = 'field_evaluation_other';
   /* Field: Indexed Content: Prevention measures other */
   $handler->display->display_options['fields']['field_prevention_measures_other']['id'] = 'field_prevention_measures_other';
   $handler->display->display_options['fields']['field_prevention_measures_other']['table'] = 'search_api_index_musculoskeletal_disorders_index';
@@ -369,10 +347,6 @@ function osha_musculoskeletal_disorders_views_default_views() {
     t('Provider'),
     t('Year of publication'),
     t('Sector / Industry covered other'),
-    t('Tasks covered'),
-    t('Tasks covered other'),
-    t('Evaluation'),
-    t('Evaluation other'),
     t('Prevention measures other'),
     t('Purpose of the material other'),
     t('Worker groups covered (vulnerable groups etc.)'),

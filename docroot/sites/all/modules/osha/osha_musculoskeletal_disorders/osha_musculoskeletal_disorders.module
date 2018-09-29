@@ -155,10 +155,6 @@ function _osha_musculoskeletal_disorders_form_after_build($form, $form_state) {
   $_other = _osha_musculoskeletal_disorders_get_other_tid($form, 'field_target_audience');
   $form['field_target_group_other']['#states'] = ['visible' => ['#edit-field-target-audience-und' => ['value' => [$_other]]]];
 
-  // Evaluation other.
-  $_other = _osha_musculoskeletal_disorders_get_other_tid($form, 'field_evaluation_quality_criteri');
-  $form['field_evaluation_other']['#states'] = ['visible' => ['#edit-field-evaluation-quality-criteri-und' => ['value' => [$_other]]]];
-
   // Type of visual resource other.
   $_other = _osha_musculoskeletal_disorders_get_other_tid($form, 'field_resource_type');
   $form['field_resource_type_other']['#states'] = ['visible' => ['#edit-field-resource-type-und' => ['value' => [$_other]]]];

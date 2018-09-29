@@ -252,46 +252,6 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
     'visibility' => 0,
   );
 
-  $export['facetapi-VXzd8AtPvx41cChJefp8g6elg4m0nrbh'] = array(
-    'cache' => -1,
-    'custom' => 0,
-    'delta' => 'VXzd8AtPvx41cChJefp8g6elg4m0nrbh',
-    'i18n_block_language' => array(),
-    'i18n_mode' => 0,
-    'module' => 'facetapi',
-    'node_types' => array(),
-    'pages' => '',
-    'roles' => array(),
-    'themes' => array(
-      'bartik' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'bartik',
-        'weight' => 0,
-      ),
-      'osha_admin' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'osha_admin',
-        'weight' => 0,
-      ),
-      'osha_frontend' => array(
-        'region' => 'sidebar_first',
-        'status' => 1,
-        'theme' => 'osha_frontend',
-        'weight' => 7,
-      ),
-      'seven' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'seven',
-        'weight' => 0,
-      ),
-    ),
-    'title' => 'Evaluation',
-    'visibility' => 0,
-  );
-
   $export['facetapi-WAJhe6O2ewe97ytsjQFMJK5axqJTDAf4'] = array(
     'cache' => -1,
     'custom' => 0,

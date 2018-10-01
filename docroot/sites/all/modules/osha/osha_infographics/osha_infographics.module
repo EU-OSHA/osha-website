@@ -78,7 +78,7 @@ function osha_infographics_field_formatter_view($entity_type, $entity, $field, $
         unset($link_options['title']);
         unset($link_options['url']);
         $link_options['attributes']['target'] = '_blank';
-        $markup = "<span class='label_multilang_file'>" . t('Website') . " </span>";
+        $markup = "<span class='label_multilang_file'>" . t('Link') . " </span>";
         $markup .= $item['url'] ? l($item['url'], $item['url'], $link_options) : '';
         $element[$delta]['#markup'] = $markup;
       }

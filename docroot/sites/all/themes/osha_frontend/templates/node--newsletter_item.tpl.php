@@ -140,7 +140,7 @@ if (!empty($campaign_id)) {
             ));  
                  
             if (trim(strip_tags($node->field_summary[$language][0]['safe_value']))) {
-                $clear = strip_tags($node->body[$language][0]['safe_value']);
+                $clear = strip_tags($node->field_summary[$language][0]['safe_value']);
                 $clear= "<p>".substrwords($clear, 100)."</p>";
                 print ($clear);
             }

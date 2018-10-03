@@ -155,13 +155,14 @@ if (!empty($campaign_id)) {
                           }
                         }
 
-	                       if (trim(strip_tags($body_text))) {
-	                		$body_text = strip_tags($body_text);
-	                		$body_text=substr($body_text,0,260);
-	                        $body_text=substr($body_text,0,strripos($body_text," "));
-	                        $body_text.="...";
-	                        $body_text= "<p>".$body_text."</p>";
-	                        print($body_text);
+                        $body_summary_highlight = render($node->body[$language][0]['safe_value']);
+	                      if (trim(strip_tags($body_summary_highlight))) {
+	                		    $body_summary_highlight = strip_tags($body_summary_highlight);
+	                		    $body_summary_highlight=substr($body_summary_highlight,0,260);
+	                        $body_summary_highlight=substr($body_summary_highlight,0,strripos($body_summary_highlight," "));
+	                        $body_summary_highlight.="...";
+	                        $body_summary_highlight= "<p>".$body_summary_highlight."</p>";
+	                        print($body_summary_highlight);
 	            			}
                       }
 

@@ -79,14 +79,20 @@ function osha_musculoskeletal_disorders_non_empty($var) {
  * Implements hook_node_validate().
  */
 function osha_musculoskeletal_disorders_node_validate($node, $form, &$form_state) {
-  $body = $node->body[LANGUAGE_NONE][0]['value'];
-  $body = str_replace(['<br>', '<br/>', '&nbsp; '], [' ', ' ', ' '], $body);
-  $body = str_replace('&nbsp;', ' ', $body);
-  $body = strip_tags($body);
-  $words = explode(' ', $body);
-  $words = array_filter($words, "osha_musculoskeletal_disorders_non_empty");
-  if (count($words) > 150) {
-    form_set_error('body', t('Text is too long.Please describe the material in maximum 150 words.'));
+  global  $language;
+  $values = $form_state['values'];
+  if ($node->type == 'musculoskeletal_disorders' &&
+    !empty($values['body'][$language->language][0]['value'])
+  ) {
+    $body = $values['body'][$language->language][0]['value'];
+    $body = str_replace(['<br>', '<br/>', '&nbsp; '], [' ', ' ', ' '], $body);
+    $body = str_replace('&nbsp;', ' ', $body);
+    $body = strip_tags($body);
+    $words = explode(' ', $body);
+    $words = array_filter($words, "osha_musculoskeletal_disorders_non_empty");
+    if (count($words) > 150) {
+      form_set_error('body', t('Text is too long.Please describe the material in maximum 150 words.'));
+    }
   }
 }
 

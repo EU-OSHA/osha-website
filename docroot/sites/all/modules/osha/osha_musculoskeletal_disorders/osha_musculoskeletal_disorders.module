@@ -71,6 +71,25 @@ function osha_musculoskeletal_disorders_form_cancel($form, &$form_state) {
   drupal_goto($url);
 }
 
+function osha_musculoskeletal_disorders_non_empty($var) {
+  return strlen(trim($var)) > 0;
+}
+
+/**
+ * Implements hook_node_validate().
+ */
+function osha_musculoskeletal_disorders_node_validate($node, $form, &$form_state) {
+  $body = $node->body[LANGUAGE_NONE][0]['value'];
+  $body = str_replace(['<br>', '<br/>', '&nbsp; '], [' ', ' ', ' '], $body);
+  $body = str_replace('&nbsp;', ' ', $body);
+  $body = strip_tags($body);
+  $words = explode(' ', $body);
+  $words = array_filter($words, "osha_musculoskeletal_disorders_non_empty");
+  if (count($words) > 150) {
+    form_set_error('body', t('Text is too long.Please describe the material in maximum 150 words.'));
+  }
+}
+
 /**
  * Implements hook_form_alter().
  */

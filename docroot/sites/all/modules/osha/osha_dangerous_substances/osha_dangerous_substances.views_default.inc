@@ -97,7 +97,7 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_item_type']['id'] = 'field_item_type';
   $handler->display->display_options['fields']['field_item_type']['table'] = 'field_data_field_item_type';
   $handler->display->display_options['fields']['field_item_type']['field'] = 'field_item_type';
-  /* Field: Content: Year of publication */
+  /* Field: Content: Date of Publication / Year  */
   $handler->display->display_options['fields']['field_publication_year']['id'] = 'field_publication_year';
   $handler->display->display_options['fields']['field_publication_year']['table'] = 'field_data_field_publication_year';
   $handler->display->display_options['fields']['field_publication_year']['field'] = 'field_publication_year';
@@ -141,7 +141,7 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_hazard_health_effects']['field'] = 'field_hazard_health_effects';
   $handler->display->display_options['fields']['field_hazard_health_effects']['type'] = 'i18n_taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_hazard_health_effects']['delta_offset'] = '0';
-  /* Field: Content: Hazard - health effects other */
+  /* Field: Content: Health effects other */
   $handler->display->display_options['fields']['field_hazard_health_other']['id'] = 'field_hazard_health_other';
   $handler->display->display_options['fields']['field_hazard_health_other']['table'] = 'field_data_field_hazard_health_other';
   $handler->display->display_options['fields']['field_hazard_health_other']['field'] = 'field_hazard_health_other';
@@ -185,7 +185,7 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_contact_address']['table'] = 'field_data_field_contact_address';
   $handler->display->display_options['fields']['field_contact_address']['field'] = 'field_contact_address';
   $handler->display->display_options['fields']['field_contact_address']['type'] = 'text_plain';
-  /* Field: Content: Content (original language) */
+  /* Field: Content: Description (original language) */
   $handler->display->display_options['fields']['field_body_original']['id'] = 'field_body_original';
   $handler->display->display_options['fields']['field_body_original']['table'] = 'field_data_field_body_original';
   $handler->display->display_options['fields']['field_body_original']['field'] = 'field_body_original';
@@ -275,7 +275,7 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_target_group']['field'] = 'field_target_group';
   $handler->display->display_options['fields']['field_target_group']['type'] = 'i18n_taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_target_group']['delta_offset'] = '0';
-  /* Field: Content: Target group other */
+  /* Field: Content: Target audiences other */
   $handler->display->display_options['fields']['field_target_group_other']['id'] = 'field_target_group_other';
   $handler->display->display_options['fields']['field_target_group_other']['table'] = 'field_data_field_target_group_other';
   $handler->display->display_options['fields']['field_target_group_other']['field'] = 'field_target_group_other';
@@ -803,14 +803,14 @@ function osha_dangerous_substances_views_default_views() {
     t('Country other'),
     t('External URL'),
     t('Type of item'),
-    t('Year of publication'),
+    t('Date of Publication / Year '),
     t('Sector / Industry covered other'),
     t('Biological hazard'),
     t('Biological hazard other'),
     t('Exposure route'),
     t('Exposure route other'),
     t('Hazard - health effects'),
-    t('Hazard - health effects other'),
+    t('Health effects other'),
     t('Hazard - physical state'),
     t('Hazard - physical state other'),
     t('Tasks covered'),
@@ -819,7 +819,7 @@ function osha_dangerous_substances_views_default_views() {
     t('Body'),
     t('CAS Number'),
     t('Contact address'),
-    t('Content (original language)'),
+    t('Description (original language)'),
     t('Disclaimer'),
     t('EC number'),
     t('Evaluation'),
@@ -837,7 +837,7 @@ function osha_dangerous_substances_views_default_views() {
     t('Rights description'),
     t('Summary'),
     t('Target group'),
-    t('Target group other'),
+    t('Target audiences other'),
     t('Type of visualisation material'),
     t('Type of visualisation material other'),
     t('Worker groups covered (vulnerable groups etc.)'),
@@ -1375,7 +1375,11 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['title'] = 'Practical tools and guidance on dangerous substances';
   $handler->display->display_options['css_class'] = 'view-search';
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    1 => '1',
+    2 => '2',
+  );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -1388,6 +1392,16 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['header']['result']['table'] = 'views';
   $handler->display->display_options['header']['result']['field'] = 'result';
   $handler->display->display_options['header']['result']['content'] = '@order Showing @start - @end from @total';
+  /* Header: Global: PHP */
+  $handler->display->display_options['header']['php']['id'] = 'php';
+  $handler->display->display_options['header']['php']['table'] = 'views';
+  $handler->display->display_options['header']['php']['field'] = 'php';
+  $handler->display->display_options['header']['php']['php_output'] = '<style>
+.node-13588 header > .node__title {
+    visibility: hidden;
+    display: none;
+}
+</style>';
   /* No results behavior: Global: Unfiltered text */
   $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
   $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';

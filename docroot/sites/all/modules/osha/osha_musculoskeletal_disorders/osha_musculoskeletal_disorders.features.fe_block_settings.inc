@@ -252,10 +252,10 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
     'visibility' => 0,
   );
 
-  $export['facetapi-VXzd8AtPvx41cChJefp8g6elg4m0nrbh'] = array(
+  $export['facetapi-WAJhe6O2ewe97ytsjQFMJK5axqJTDAf4'] = array(
     'cache' => -1,
     'custom' => 0,
-    'delta' => 'VXzd8AtPvx41cChJefp8g6elg4m0nrbh',
+    'delta' => 'WAJhe6O2ewe97ytsjQFMJK5axqJTDAf4',
     'i18n_block_language' => array(),
     'i18n_mode' => 0,
     'module' => 'facetapi',
@@ -279,7 +279,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 7,
+        'weight' => 0,
       ),
       'seven' => array(
         'region' => '',
@@ -288,7 +288,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'weight' => 0,
       ),
     ),
-    'title' => 'Evaluation',
+    'title' => 'Recommended for EU-OSHA pictogram guide',
     'visibility' => 0,
   );
 
@@ -332,10 +332,10 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
     'visibility' => 0,
   );
 
-  $export['facetapi-XQc911PhAHlTubWD2AnkbBQcP6Lq7ObC'] = array(
+  $export['facetapi-hq5EnxYBzk4f2gHVpsYddOPXAXEGYe7E'] = array(
     'cache' => -1,
     'custom' => 0,
-    'delta' => 'XQc911PhAHlTubWD2AnkbBQcP6Lq7ObC',
+    'delta' => 'hq5EnxYBzk4f2gHVpsYddOPXAXEGYe7E',
     'i18n_block_language' => array(),
     'i18n_mode' => 0,
     'module' => 'facetapi',
@@ -359,7 +359,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 17,
+        'weight' => 0,
       ),
       'seven' => array(
         'region' => '',
@@ -368,7 +368,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'weight' => 0,
       ),
     ),
-    'title' => 'Tasks covered',
+    'title' => 'Nominated by FOP',
     'visibility' => 0,
   );
 

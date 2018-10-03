@@ -2,6 +2,15 @@
   width: 500px;
 }
 
+.defaultSkin div.danger {
+  color: #F00;
+}
+
+.hidden {
+  visibility: hidden;
+  display: none;
+}
+
 #edit-changed-wrapper label,
 #edit-changed-wrapper div.views-widget label:first-child,
 #edit-changed-wrapper div.form-item,
@@ -88,7 +97,6 @@ tr.osha_newsletter_section_admin_content {
 .view-id-reporting_view .view-content h3{
   padding-left: 30px;
   font-size: 1.2em;
-  background-color: 
 }
 .view-id-reporting_view .view-content h3 ~ .views-row{
   padding: 10px;

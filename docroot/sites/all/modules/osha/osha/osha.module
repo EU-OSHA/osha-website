@@ -927,7 +927,14 @@ function osha_wysiwyg_plugin($editor, $version=0) {
       'filename' => 'editor_plugin_file.js',
     );
 
+    $plugins['charactersremaining'] = array(
+      'path' => $editor['library path'] . '/plugins/charactersremaining',
+      'extensions' => array('charactersremaining' => t('Characters Remaining')),
+      'internal' => TRUE,
+      'load' => TRUE,
+    );
     break;
+
   }
   return $plugins;
 }

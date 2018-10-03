@@ -36,6 +36,9 @@ function osha_dangerous_substances_wysiwyg_default_profiles() {
         'osha_advanced' => array(
           'osha_minimal' => 1,
         ),
+        'charactersremaining' => array(
+          'charactersremaining' => 1,
+        ),
       ),
       'toolbar_loc' => 'top',
       'toolbar_align' => 'left',
@@ -80,6 +83,9 @@ function osha_dangerous_substances_wysiwyg_default_profiles() {
         ),
         'osha_advanced' => array(
           'osha_advanced' => 1,
+        ),
+        'charactersremaining' => array(
+          'charactersremaining' => 1,
         ),
       ),
       'toolbar_loc' => 'top',

@@ -55,12 +55,67 @@ function osha_musculoskeletal_disorders_node_access($node, $op, $account) {
 }
 
 /**
+ * Custom cancel button callback.
+ */
+function osha_musculoskeletal_disorders_form_cancel($form, &$form_state) {
+  $fallback_destinaton = '<front>';
+  if (!empty($form['#node'])) {
+    if (!empty($form['#node']->nid)) {
+      $nid = $form['#node']->nid;
+      $node = node_load($nid);
+      $node_uri = node_uri($node);
+      $fallback_destinaton = $node_uri['path'];
+    }
+  }
+  $url = $_GET['destination'] ? $_GET['destination'] : $fallback_destinaton;
+  drupal_goto($url);
+}
+
+function osha_musculoskeletal_disorders_non_empty($var) {
+  return strlen(trim($var)) > 0;
+}
+
+/**
+ * Implements hook_node_validate().
+ */
+function osha_musculoskeletal_disorders_node_validate($node, $form, &$form_state) {
+  global  $language;
+  $values = $form_state['values'];
+  if ($node->type == 'musculoskeletal_disorders' &&
+    !empty($values['body'][$language->language][0]['value'])
+  ) {
+    $body = $values['body'][$language->language][0]['value'];
+    $body = str_replace(['<br>', '<br/>', '&nbsp; '], [' ', ' ', ' '], $body);
+    $body = str_replace('&nbsp;', ' ', $body);
+    $body = strip_tags($body);
+    $words = explode(' ', $body);
+    $words = array_filter($words, "osha_musculoskeletal_disorders_non_empty");
+    if (count($words) > 150) {
+      form_set_error('body', t('Text is too long.Please describe the material in maximum 150 words.'));
+    }
+  }
+}
+
+/**
  * Implements hook_form_alter().
  */
 function osha_musculoskeletal_disorders_form_alter(&$form, &$form_state, $form_id) {
+  drupal_add_js(drupal_get_path('module', 'osha_musculoskeletal_disorders') . '/js/osha_musculoskeletal_disorders.js');
+
   if ($form_id == 'musculoskeletal_disorders_node_form') {
     unset($form['field_priority_area'][LANGUAGE_NONE]['#options'][3310]);
     unset($form['field_priority_area'][LANGUAGE_NONE]['#options'][3312]);
+    // Add a cancel button.
+    $text = t(variable_get('msd_cancel_text', 'You are going to lose your current changes, are you sure?'));
+    $form['actions']['cancel'] = array(
+      '#type'   => 'submit',
+      '#value'  => t('Cancel'),
+      '#access' => TRUE,
+      '#weight' => 999,
+      '#submit' => array('osha_musculoskeletal_disorders_form_cancel', 'node_form_submit_build_node'),
+      '#limit_validation_errors' => array(),
+      '#attributes' => array('class' => array('btn-cancel'), 'onclick' => 'if(!confirm("' . $text . '")){return false;}'),
+    );
   }
 
   if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-musculoskeletal-disorders-overview-page') {
@@ -102,10 +157,6 @@ function _osha_musculoskeletal_disorders_form_after_build($form, $form_state) {
   $_other = _osha_musculoskeletal_disorders_get_other_tid($form, 'field_original_desc_language');
   $form['field_original_desc_lang_other']['#states'] = ['visible' => ['#edit-field-original-desc-language-und' => ['value' => [$_other]]]];
 
-  // Tasks covered other.
-  $_other = _osha_musculoskeletal_disorders_get_other_tid($form, 'field_tasks_covered');
-  $form['field_tasks_other']['#states'] = ['visible' => ['#edit-field-tasks-covered-und' => ['value' => [$_other]]]];
-
   // Hazards other.
   $_other = _osha_musculoskeletal_disorders_get_other_tid($form, 'field_hazards');
   $form['field_hazards_other']['#states'] = ['visible' => ['#edit-field-hazards-und' => ['value' => [$_other]]]];
@@ -129,10 +180,6 @@ function _osha_musculoskeletal_disorders_form_after_build($form, $form_state) {
   // Target group other.
   $_other = _osha_musculoskeletal_disorders_get_other_tid($form, 'field_target_audience');
   $form['field_target_group_other']['#states'] = ['visible' => ['#edit-field-target-audience-und' => ['value' => [$_other]]]];
-
-  // Evaluation other.
-  $_other = _osha_musculoskeletal_disorders_get_other_tid($form, 'field_evaluation_quality_criteri');
-  $form['field_evaluation_other']['#states'] = ['visible' => ['#edit-field-evaluation-quality-criteri-und' => ['value' => [$_other]]]];
 
   // Type of visual resource other.
   $_other = _osha_musculoskeletal_disorders_get_other_tid($form, 'field_resource_type');

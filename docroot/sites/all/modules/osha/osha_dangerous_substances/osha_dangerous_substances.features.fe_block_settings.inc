@@ -1048,7 +1048,7 @@ themes/dangerous-substances/practical-tools-dangerous-substances',
         'region' => 'content',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 0,
+        'weight' => 10,
       ),
       'seven' => array(
         'region' => '',

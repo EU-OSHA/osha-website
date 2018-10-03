@@ -22,7 +22,6 @@ function osha_admin_textarea($variables) {
     ($element['#field_name'] == 'body') &&
     ($element['#entity']->type == 'musculoskeletal_disorders')
   ) {
-    $element['#attributes']['data-max-chars'] = 900;
     $element['#attributes']['data-max-words'] = 150;
   }
 

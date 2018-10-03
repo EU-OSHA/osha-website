@@ -99,7 +99,7 @@ function osha_musculoskeletal_disorders_field_default_field_instances() {
     'bundle' => 'musculoskeletal_disorders',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please describe the material (max. 900 characters or 150 words)
+    'description' => 'Please describe the material (max. 150 words)
 Please note: the first paragraph will be displayed as short description, 
 please take this into consideration when you are writing the first paragraph.',
     'display' => array(
@@ -3172,7 +3172,7 @@ please take this into consideration when you are writing the first paragraph.',
   t('Please add comments regarding any elements that EU-OSHA could adapt to make pictograms');
   t('Please add the NACE code(s) of the sector(s) covered in the material. Use the NACE Rev 2');
   t('Please add the time in minutes.');
-  t('Please describe the material (max. 900 characters or 150 words)
+  t('Please describe the material (max. 150 words)
 Please note: the first paragraph will be displayed as short description, 
 please take this into consideration when you are writing the first paragraph.');
   t('Please fill in the English title of the material');

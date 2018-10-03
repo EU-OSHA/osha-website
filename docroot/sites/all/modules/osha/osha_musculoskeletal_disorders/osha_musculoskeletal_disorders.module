@@ -81,6 +81,7 @@ function osha_musculoskeletal_disorders_form_alter(&$form, &$form_state, $form_i
     unset($form['field_priority_area'][LANGUAGE_NONE]['#options'][3310]);
     unset($form['field_priority_area'][LANGUAGE_NONE]['#options'][3312]);
     // Add a cancel button.
+    $text = t(variable_get('msd_cancel_text', 'You are going to loose your current changes, are you sure?'));
     $form['actions']['cancel'] = array(
       '#type'   => 'submit',
       '#value'  => t('Cancel'),
@@ -88,7 +89,7 @@ function osha_musculoskeletal_disorders_form_alter(&$form, &$form_state, $form_i
       '#weight' => 999,
       '#submit' => array('osha_musculoskeletal_disorders_form_cancel', 'node_form_submit_build_node'),
       '#limit_validation_errors' => array(),
-      '#attributes' => array('class' => array('btn-cancel')),
+      '#attributes' => array('class' => array('btn-cancel'), 'onclick' => 'if(!confirm("' . $text . '")){return false;}'),
     );
   }
 

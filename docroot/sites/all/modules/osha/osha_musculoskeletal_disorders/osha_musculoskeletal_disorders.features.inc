@@ -60,7 +60,6 @@ function osha_musculoskeletal_disorders_default_search_api_index() {
         "author" : { "type" : "integer", "entity_type" : "user" },
         "field_available_in_languages:safe_value" : { "type" : "list\\u003Cstring\\u003E" },
         "field_available_in_languages:value" : { "type" : "list\\u003Cstring\\u003E" },
-        "field_evaluation_quality_criteri" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_fc_provider" : {
           "type" : "list\\u003Cinteger\\u003E",
           "entity_type" : "field_collection_item"

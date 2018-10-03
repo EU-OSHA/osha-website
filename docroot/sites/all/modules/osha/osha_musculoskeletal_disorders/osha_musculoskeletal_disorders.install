@@ -93,3 +93,11 @@ function osha_musculoskeletal_disorders_update_7005() {
   features_revert(array('osha_dangerous_substances' => array('wysiwyg')));
   features_revert(array('osha' => array('wysiwyg')));
 }
+
+/**
+ * MDR-2114 MSDs DB - Comments from the project manager.
+ */
+function osha_musculoskeletal_disorders_update_7006() {
+  features_revert(array('osha_musculoskeletal_disorders' => array('field_instance')));
+  variable_set('msd_cancel_text', 'You are going to loose your current changes, are you sure?');
+}

@@ -148,6 +148,8 @@
 
             var tx = ed.getContent({format: 'raw'});
             if (tx) {
+                tx = tx.replace(/<br>/gi, ' ');
+                tx = tx.replace(/<br \/>/gi, ' ');
                 tx = tx.replace(/ &nbsp;/gi, ' ');
                 tx = tx.replace(/<.[^<>]*?>/g, '').replace(/&#160;|&nbsp;/gi, '');
             }

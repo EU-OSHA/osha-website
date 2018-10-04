@@ -142,7 +142,11 @@ if (!empty($campaign_id)) {
             if (trim(strip_tags($node->field_summary[$language][0]['safe_value']))) {
                 $clear = strip_tags($node->field_summary[$language][0]['safe_value']);
                 $clear= "<p>".substrwords($clear, 100)."</p>";
-                print ($clear);
+                  if (!empty($node->parent_section) && ($node->parent_section == 13 || $node->parent_section == 11)) {
+                  }
+                  else {
+                    print ($clear);
+                  }
             }
             break;
           default:

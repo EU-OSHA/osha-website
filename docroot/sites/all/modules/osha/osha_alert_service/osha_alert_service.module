@@ -291,9 +291,6 @@ function osha_alert_block_front_view() {
   // These variables are defined in osha_newsletter.module
   $link_label = t(variable_get('subscribe_block_details_link_label', 'Privacy notice'));
   $link_url = variable_get('osha_alert_service_privacy_policy_url', OSHA_ALERT_SERVICE_PRIVACY_PAGE_URL);
-  $form['details_link'] = array(
-    '#markup' => '<a class="privacy-policy-oshmail" href='.url($link_url).'>'.$link_label.'</a><br/>',
-  );
 
   return $form;
 }

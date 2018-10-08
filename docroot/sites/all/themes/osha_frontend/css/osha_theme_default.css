@@ -6778,7 +6778,7 @@ article.comment p {
 
 .block-osha-alert-service {
 	background-color: #e9edf6;
-	padding: 0em 1em 2.5em 1em;
+	padding: 0em 1em .5em 1em;
 	margin-bottom: 1em;
 }
 
@@ -7434,7 +7434,14 @@ body.page-node-5429 .oshwiki-featured-articles {
 	 margin-bottom: 0em;
 }
 
+.node-infographic .infographics-url-title {
+    margin-top: 1em;
+}
 
+.node-infographic .infographics-url-title a{
+    font-size: 0.9em;
+    font-weight: 700;
+}
 
 .node-infographic .field-type-file .contextual-links-region{
 	border-bottom: 0 none !important;

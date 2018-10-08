@@ -89,6 +89,7 @@ if (!empty($campaign_id)) {
       <?php } ?>
       <td align="right" style="text-align: left; padding-top: 5px; padding-bottom: 10px; padding-left:0px;">
         <?php
+          switch ($node->type) {
           case 'publication':
             print l($node->title, url('node/' . $node->nid . '/view', array('absolute' => TRUE)), array(
               'attributes' => array('style' => 'text-decoration: none; font-family:Arial, sans-serif; font-size: 13px; font-weight: bold;'),

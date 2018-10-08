@@ -142,6 +142,10 @@ function osha_frontend_menu_link__menu_block($variables) {
     // $image = '<img src="' . $image_url . '" alt=""/>';
     // We should in fact use empty alt because the image is only decorative (the text is already present in the link).
     $image = '<img src="' . $image_url . '" alt="' . $element['#title'] . '"/>';
+    if (!empty($element['#localized_options']['copyright']['author'])) {
+      $image .= '<blockquote class="image-field-caption">' . check_markup($element['#localized_options']['copyright']['author'], 'full_html') . '</blockquote>';
+    }
+
     $output_image = l($image, $element['#href'], array('html' => TRUE));
   }
 

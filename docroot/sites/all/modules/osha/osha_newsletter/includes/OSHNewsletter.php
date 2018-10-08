@@ -50,6 +50,7 @@ class OSHNewsletter {
               $v['style']['#default_value'] = $default_templates[$tid];
             }
           }
+          hide($v['hide_summary']);
         }
         elseif (strpos($k, 'node:') === 0) {
           $node = $v['#content']->content;
@@ -595,6 +596,7 @@ class OSHNewsletter {
           $node->campaign_id = $campaign_id;
           $node->parent_section = $current_section;
           $node->old_newsletter = false;
+          $node->hide_summary = $item->hide_summary;
           $content[$current_section]['nodes'][] = [
             '#style' => self::getChildStyle($content[$current_section]['#style']),
             'node' => $node,

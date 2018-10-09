@@ -82,6 +82,7 @@ class EntityCollectionStorageDB extends EntityCollectionStorage {
       $record->eid = $item->entity_id;
       $record->depth = $depth;
       $record->style = $item->style;
+      $record->hide_summary = $item->hide_summary;
       $record->parent = isset($item->parent) && isset($item->parent->key) ? $item->parent->key : 0;
       $record->position = $item->position;
       $record->contexts = $this->serializeContexts($contexts);
@@ -166,7 +167,7 @@ class EntityCollectionStorageDB extends EntityCollectionStorage {
       if (!empty($bundle->settings['store_entity'])) {
         $entity = unserialize($value->entity);
       }
-      $node->addChild($value->entity_type, $value->eid, $entity, $value->style, $value->rsid, $value->position);
+      $node->addChild($value->entity_type, $value->eid, $entity, $value->style, $value->hide_summary, $value->rsid, $value->position);
     }
     // Load all entities
     // and make sure we only do as few entity_loads as possible.

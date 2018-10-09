@@ -53,9 +53,10 @@ class EntityCollectionTreeNode {
    * @param string $name
    * @param stdClass $content
    */
-  public function addChild($type, $entity_id, $content, $style = NULL, $key = NULL, $position = NULL) {
+  public function addChild($type, $entity_id, $content, $style = NULL, $hide_summary = NULL, $key = NULL, $position = NULL) {
     $node = new EntityCollectionTreeNode($type, $entity_id, $content, $style);
     $node->position = isset($position) ? $position : count($this->children);
+    $node->hide_summary = $hide_summary;
     $node->parent = $this;
     return $this->addChildNode($node);
   }

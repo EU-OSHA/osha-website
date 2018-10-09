@@ -219,6 +219,7 @@ function entity_collection_form_validate($form, &$form_state) {
   $entity_collection->name = $form_state['values']['name'];
   $entity_collection->title = $form_state['values']['title'];
   $entity_collection->style = $form_state['values']['style'];
+  $entity_collection->hide_summary = $form_state['values']['hide_summary'];
   $entity_collection->row = $form_state['values']['row'];
   field_attach_form_validate('entity_collection', $entity_collection, $form, $form_state);
 }
@@ -423,6 +424,11 @@ function entity_collection_content_form_content(EntityCollection $entity_collect
         '#options' => $row->getOptions($child->type, $child->content),
       );
     }
+    $form['content'][$key]['hide_summary'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Hide summary'),
+      '#default_value' => $child->hide_summary,
+    );
     $form['content'][$key]['operations'] = array(
       '#type' => 'markup',
       '#markup' => implode(' | ', $links),
@@ -463,12 +469,12 @@ function entity_collection_content_build_tree($entity_collection, $values) {
     }
     // If the we have no parent, we can insert the item on the root.
     if (empty($value['parent'])) {
-      $tree->addChild($value['type'], $value['entity_id'], $entity, $value['style'], $value['key'], $value['position']);
+      $tree->addChild($value['type'], $value['entity_id'], $entity, $value['style'], $value['hide_summary'], $value['key'], $value['position']);
     }
     // If we have a parent and that parent is already inserted,
     // add it to that node,
     elseif (!empty($value['parent']) && $parent = $tree->getChild($value['parent'])) {
-      $parent->addChild($value['type'], $value['entity_id'], $entity, $value['style'], $value['key'], $value['position']);
+      $parent->addChild($value['type'], $value['entity_id'], $entity, $value['style'], $value['hide_summary'], $value['key'], $value['position']);
     }
     // Push the value onto our array again and try again.
     else {
@@ -504,13 +510,14 @@ function theme_entity_collection_content_form(&$variables) {
       $operations = drupal_render($form['content'][$key]['operations']);
       $position = drupal_render($form['content'][$key]['position']);
       $style = drupal_render($form['content'][$key]['style']);
+      $hide_summary = drupal_render($form['content'][$key]['hide_summary']);
       $rendered_key = drupal_render($form['content'][$key]['key']);
       $parent = drupal_render($form['content'][$key]['parent']);
       $depth = drupal_render($form['content'][$key]['depth']);
       $indentation = $form['content'][$key]['depth']['#default_value'] > 0 ? theme('indentation', array('size' => $form['content'][$key]['depth']['#default_value'])) : '';
       $data = array($indentation . $title . $parent . $depth . $rendered_key, $position);
       if ($form['#row']->useStylePerRow()) {
-        $data[] = $style;
+        $data[] = $style . $hide_summary;
       }
       $data[] = $operations;
       $rows[] = array('class' => array('draggable'), 'data' => $data);

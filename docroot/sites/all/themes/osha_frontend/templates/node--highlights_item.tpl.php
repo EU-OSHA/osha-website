@@ -129,6 +129,8 @@ if (!empty($campaign_id)) {
                   <tr>
                     <td colspan="2" style="width: 100%; font-size: 13px; font-family: Arial, sans-serif; color: #000000;">
                       <?php
+                  if (!$hide_summary) {
+
                       $body_text = '';
                       if (isset($field_summary) && is_array($field_summary) && !empty($field_summary)) {
                         $body_text = field_view_field('node', $node, 'field_summary', 'highlights_item');
@@ -139,7 +141,7 @@ if (!empty($campaign_id)) {
                       $body_text = render($body_text);
                       if (!empty($body_text)) {
                         if (!empty($campaign_id)) {
-                          // CW-1896 Add pk_campaign to links inside the body text
+                          // CW-1896 Add pk_campaign to links inside the body text.
                           $doc = new DOMDocument();
                           $doc->loadHTML(mb_convert_encoding($body_text, 'HTML-ENTITIES', "UTF-8"));
                           $links = $doc->getElementsByTagName('a');
@@ -147,25 +149,25 @@ if (!empty($campaign_id)) {
                             $url = $link->getAttribute('href');
                             $url_comp = parse_url($url);
                             if (preg_match('/(osha.europa.eu|napofilm.net|oshwiki.eu|oiraproject.eu|esener.eu|healthy-workplaces.eu|healthyworkplaces.eu|localhost|eu-osha.bilbomatica.es)/', $url_comp['host'])) {
-                              $link->setAttribute('href', $url.($url_comp['query']?'&':'?').'pk_campaign=' . $campaign_id);
+                              $link->setAttribute('href', $url . ($url_comp['query'] ? '&' : '?') . 'pk_campaign=' . $campaign_id);
                             }
                           }
-                          if ($links->length>0) {
+                          if ($links->length > 0) {
                             $body_text = $doc->saveHTML();
                           }
                         }
 
                         $body_summary_highlight = render($node->body[$language][0]['safe_value']);
-	                      if (trim(strip_tags($body_summary_highlight))) {
-	                		    $body_summary_highlight = strip_tags($body_summary_highlight);
-	                		    $body_summary_highlight=substr($body_summary_highlight,0,260);
-	                        $body_summary_highlight=substr($body_summary_highlight,0,strripos($body_summary_highlight," "));
-	                        $body_summary_highlight.="...";
-	                        $body_summary_highlight= "<p>".$body_summary_highlight."</p>";
-	                        print($body_summary_highlight);
-	            			    }
+                        if (trim(strip_tags($body_summary_highlight))) {
+                          $body_summary_highlight = strip_tags($body_summary_highlight);
+                          $body_summary_highlight = substr($body_summary_highlight, 0, 260);
+                          $body_summary_highlight = substr($body_summary_highlight, 0, strripos($body_summary_highlight, " "));
+                          $body_summary_highlight .= "...";
+                          $body_summary_highlight = "<p>" . $body_summary_highlight . "</p>";
+                          print $body_summary_highlight;
+                        }
                       }
-
+                  }
                       ?>
                     </td>
                   </tr>

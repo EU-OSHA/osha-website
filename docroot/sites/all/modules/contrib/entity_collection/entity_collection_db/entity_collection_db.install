@@ -67,7 +67,13 @@ function entity_collection_db_schema() {
       'contexts' => array(
         'type' => 'varchar',
         'length' => 255,
-        'description' => 'The contexts used.'
+        'description' => 'The contexts used.',
+      ),
+      'hide_summary' => array(
+        'description' => 'Hide summary',
+        'type' => 'int',
+        'default' => NULL,
+        'not null' => FALSE,
       ),
     ),
     'primary key' => array('rsid'),
@@ -78,4 +84,19 @@ function entity_collection_db_schema() {
     ),
   );
   return $schema;
+}
+
+/**
+ * MDR-2206 OSHmail: Checkbox to decide to display the intro text or not.
+ */
+function entity_collection_db_update_7001() {
+  if (!db_field_exists('entity_collection_storage', 'hide_summary')) {
+    $field = array(
+      'description' => 'Hide summary',
+      'type' => 'int',
+      'default' => NULL,
+      'not null' => FALSE,
+    );
+    db_add_field('entity_collection_storage', 'hide_summary', $field);
+  }
 }

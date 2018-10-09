@@ -69,8 +69,15 @@ function _osha_menu_form_alter(array &$form, array $item = array(), array &$comp
     'description' => t('The Copyright caption field.'),
   );
 
+  unset($form['options']['#value']['author']);
+
+  $attributes['author'] = array(
+    'label' => t('Author'),
+    'description' => t('The Author caption field.'),
+  );
+
   // Merge in default values.
-  foreach ($attributes as $attribute => &$info) {
+  foreach ($attributes as $attribute => $info) {
     $info += array(
       'form' => array(),
       'enabled' => 1,
@@ -82,6 +89,7 @@ function _osha_menu_form_alter(array &$form, array $item = array(), array &$comp
       '#description' => isset($info['description']) ? $info['description'] : '',
       '#default_value' => "",
     );
+    $attributes[$attribute] = $info;
   }
   $form['options']['copyright'] = array(
     '#type' => 'fieldset',
@@ -108,14 +116,12 @@ function _osha_menu_form_alter(array &$form, array $item = array(), array &$comp
   // Add form values for the reset of $item['options'] and
   // $item['options']['attributes'] so the values will carry over during save.
   foreach ($item['options']['copyright'] as $key => $value) {
-    if ($key !== 'attributes' && !isset($form['options'][$key])) {
+    if ($key !== 'attributes' && !isset($form['options']['copyright'][$key])) {
       $form['options']['copyright'][$key] = array(
         '#type' => 'value',
         '#value' => $value,
       );
     }
-  }
-  foreach ($item['options']['copyright'] as $key => $value) {
     if (!isset($form['options']['copyright'][$key])) {
       $form['options']['copyright'][$key] = array(
         '#type' => 'value',

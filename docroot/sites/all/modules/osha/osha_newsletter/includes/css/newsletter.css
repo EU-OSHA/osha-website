@@ -154,7 +154,6 @@ td.social {
 }
 .newsletter-section + .view-all {
   border: 0;
-  border-top: 1px dashed #dddddd;
   width: 100%;
   display: block;
   text-align: right;
@@ -176,9 +175,7 @@ td.social {
 .newsletter-item td {
   color: #003399;
 }
-.newsletter-full-width-details-row {
-  border-bottom: 1px dashed #dddddd;
-}
+
 .newsletter-full-width-details-row:last-child {
   border-bottom: none;
 }

@@ -270,7 +270,7 @@ class OSHNewsletter {
               'attributes' => ['class' => ['view-all', 'see-more']]
             ]),
             'align' => 'Right',
-            'style' => 'padding-top: 10px; padding-bottom: 20px; border-top: 1px dashed #dddddd;',
+            'style' => 'padding-bottom: 20px;',
           ],
         ]],
         '#attributes' => [

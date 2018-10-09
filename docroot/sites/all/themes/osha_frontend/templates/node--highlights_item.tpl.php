@@ -26,7 +26,7 @@ if (!empty($campaign_id)) {
 <table id="node-<?php print $node->nid; ?>" border="0" cellpadding="0" cellspacing="0" width="100%" class="highlight-item">
   <tbody>
     <tr>
-      <td>
+      <td style="border-bottom:1px dashed #dddddd; padding-bottom: 2em;">
         <table border="0" cellpadding="0" cellspacing="0" class="item-thumbnail-and-title" width="100%">
           <thead>
             <tr>

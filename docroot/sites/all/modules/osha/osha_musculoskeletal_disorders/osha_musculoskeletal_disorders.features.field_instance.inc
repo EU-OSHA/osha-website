@@ -94,71 +94,12 @@ function osha_musculoskeletal_disorders_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance:
-  // 'field_collection_item-field_msd_provider-field_msd_provider_url'.
-  $field_instances['field_collection_item-field_msd_provider-field_msd_provider_url'] = array(
-    'bundle' => 'field_msd_provider',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please fill in the URL of the provider',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'link',
-        'settings' => array(),
-        'type' => 'link_default',
-        'weight' => 2,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'field_name' => 'field_msd_provider_url',
-    'label' => 'Provider URL',
-    'required' => 0,
-    'settings' => array(
-      'absolute_url' => 1,
-      'attributes' => array(
-        'class' => '',
-        'configurable_class' => 0,
-        'configurable_title' => 0,
-        'rel' => '',
-        'target' => 'default',
-        'title' => '',
-      ),
-      'display' => array(
-        'url_cutoff' => 80,
-      ),
-      'enable_tokens' => 1,
-      'entity_translation_sync' => FALSE,
-      'linkit' => array(
-        'button_text' => 'Search',
-        'enable' => 0,
-        'profile' => '',
-      ),
-      'rel_remove' => 'default',
-      'title' => 'optional',
-      'title_label_use_field_label' => 0,
-      'title_maxlength' => 128,
-      'title_value' => '',
-      'url' => 0,
-      'user_register_form' => FALSE,
-      'validate_url' => 1,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'link',
-      'settings' => array(),
-      'type' => 'link_field',
-      'weight' => 2,
-    ),
-    'workbench_access_field' => 0,
-  );
-
   // Exported field_instance: 'node-musculoskeletal_disorders-body'.
   $field_instances['node-musculoskeletal_disorders-body'] = array(
     'bundle' => 'musculoskeletal_disorders',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please describe the material (max. 1500 characters)
+    'description' => 'Please describe the material (max. 150 words)
 Please note: the first paragraph will be displayed as short description, 
 please take this into consideration when you are writing the first paragraph.',
     'display' => array(
@@ -623,180 +564,6 @@ please take this into consideration when you are writing the first paragraph.',
   );
 
   // Exported field_instance:
-  // 'node-musculoskeletal_disorders-field_evaluation_other'.
-  $field_instances['node-musculoskeletal_disorders-field_evaluation_other'] = array(
-    'bundle' => 'musculoskeletal_disorders',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'dangerous_substances' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 17,
-      ),
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 31,
-      ),
-      'highlights_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'newsletter_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_resources' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_search_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 32,
-      ),
-      'osha_slideshow' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_wiki' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_evaluation_other',
-    'label' => 'Evaluation other',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'linkit' => array(
-        'button_text' => 'Search',
-        'enable' => 0,
-        'profile' => '',
-      ),
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 32,
-    ),
-    'workbench_access_field' => 0,
-  );
-
-  // Exported field_instance:
-  // 'node-musculoskeletal_disorders-field_evaluation_quality_criteri'.
-  $field_instances['node-musculoskeletal_disorders-field_evaluation_quality_criteri'] = array(
-    'bundle' => 'musculoskeletal_disorders',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please select the quality criteria from the drop down list (several options is possible)',
-    'display' => array(
-      'dangerous_substances' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 18,
-      ),
-      'default' => array(
-        'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_plain',
-        'weight' => 30,
-      ),
-      'highlights_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'newsletter_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_resources' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_search_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 31,
-      ),
-      'osha_slideshow' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_wiki' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_evaluation_quality_criteri',
-    'label' => 'Evaluation',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(
-        'apply_chosen' => 1,
-      ),
-      'type' => 'options_select',
-      'weight' => 31,
-    ),
-    'workbench_access_field' => 0,
-  );
-
-  // Exported field_instance:
   // 'node-musculoskeletal_disorders-field_external_url'.
   $field_instances['node-musculoskeletal_disorders-field_external_url'] = array(
     'bundle' => 'musculoskeletal_disorders',
@@ -944,9 +711,10 @@ please take this into consideration when you are writing the first paragraph.',
         'weight' => 0,
       ),
       'osha_search_teaser' => array(
-        'label' => 'above',
+        'label' => 'inline',
+        'module' => 'i18n_field',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'i18n_list_default',
         'weight' => 37,
       ),
       'osha_slideshow' => array(
@@ -977,10 +745,10 @@ please take this into consideration when you are writing the first paragraph.',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 0,
-      'module' => 'multiple_selects',
+      'active' => 1,
+      'module' => 'options',
       'settings' => array(),
-      'type' => 'multiple_selects',
+      'type' => 'options_buttons',
       'weight' => 37,
     ),
     'workbench_access_field' => 0,
@@ -1491,7 +1259,7 @@ please take this into consideration when you are writing the first paragraph.',
     'entity_type' => 'node',
     'field_name' => 'field_material_country',
     'label' => 'Country',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
@@ -1824,9 +1592,10 @@ please take this into consideration when you are writing the first paragraph.',
         'weight' => 0,
       ),
       'osha_search_teaser' => array(
-        'label' => 'above',
+        'label' => 'inline',
+        'module' => 'i18n_field',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'i18n_list_default',
         'weight' => 36,
       ),
       'osha_slideshow' => array(
@@ -2287,7 +2056,7 @@ please take this into consideration when you are writing the first paragraph.',
     'entity_type' => 'node',
     'field_name' => 'field_priority_area',
     'label' => 'Priority area',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
@@ -2678,7 +2447,7 @@ please take this into consideration when you are writing the first paragraph.',
     'bundle' => 'musculoskeletal_disorders',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please add the NACE code of the sector covered in the material. Use the NACE Rev 2',
+    'description' => 'Please add the NACE code(s) of the sector(s) covered in the material. Use the NACE Rev 2',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -2927,180 +2696,6 @@ please take this into consideration when you are writing the first paragraph.',
       ),
       'type' => 'text_textfield',
       'weight' => 30,
-    ),
-    'workbench_access_field' => 0,
-  );
-
-  // Exported field_instance:
-  // 'node-musculoskeletal_disorders-field_tasks_covered'.
-  $field_instances['node-musculoskeletal_disorders-field_tasks_covered'] = array(
-    'bundle' => 'musculoskeletal_disorders',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please select the HAZMAP categories from the drop down list',
-    'display' => array(
-      'dangerous_substances' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 35,
-      ),
-      'default' => array(
-        'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_plain',
-        'weight' => 13,
-      ),
-      'highlights_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'newsletter_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_resources' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_search_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 14,
-      ),
-      'osha_slideshow' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_wiki' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_tasks_covered',
-    'label' => 'Tasks covered',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(
-        'apply_chosen' => 1,
-      ),
-      'type' => 'options_select',
-      'weight' => 14,
-    ),
-    'workbench_access_field' => 0,
-  );
-
-  // Exported field_instance:
-  // 'node-musculoskeletal_disorders-field_tasks_other'.
-  $field_instances['node-musculoskeletal_disorders-field_tasks_other'] = array(
-    'bundle' => 'musculoskeletal_disorders',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Only first level categories (32) on: https://hazmap.nlm.nih.gov/job-tasks',
-    'display' => array(
-      'dangerous_substances' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 34,
-      ),
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 14,
-      ),
-      'highlights_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'newsletter_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_resources' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_search_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 15,
-      ),
-      'osha_slideshow' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_wiki' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_tasks_other',
-    'label' => 'Tasks covered other',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'linkit' => array(
-        'button_text' => 'Search',
-        'enable' => 0,
-        'profile' => '',
-      ),
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 15,
     ),
     'workbench_access_field' => 0,
   );
@@ -3560,8 +3155,6 @@ please take this into consideration when you are writing the first paragraph.',
   t('Date of Publication / Year ');
   t('Description (English)');
   t('Description (original language)');
-  t('Evaluation');
-  t('Evaluation other');
   t('Hazards');
   t('Hazards other');
   t('Health effects');
@@ -3571,20 +3164,18 @@ please take this into consideration when you are writing the first paragraph.',
   t('Languages other');
   t('Length of the video');
   t('Nominated by FOP');
-  t('Only first level categories (32) on: https://hazmap.nlm.nih.gov/job-tasks');
   t('Original description languages other');
   t('Please add a country code from the list');
   t('Please add a language code from the list');
   t('Please add a language from the list');
   t('Please add a short description in original language (only if a description is available on the website or material – no extra drafting or translation)');
   t('Please add comments regarding any elements that EU-OSHA could adapt to make pictograms');
-  t('Please add the NACE code of the sector covered in the material. Use the NACE Rev 2');
+  t('Please add the NACE code(s) of the sector(s) covered in the material. Use the NACE Rev 2');
   t('Please add the time in minutes.');
-  t('Please describe the material (max. 1500 characters)
+  t('Please describe the material (max. 150 words)
 Please note: the first paragraph will be displayed as short description, 
 please take this into consideration when you are writing the first paragraph.');
   t('Please fill in the English title of the material');
-  t('Please fill in the URL of the provider');
   t('Please fill in the URL to access the material if available. You should enter the full url, including http:// or https://');
   t('Please fill in the original title of the material');
   t('Please fill in the provider of the material (English version of the name)');
@@ -3593,9 +3184,7 @@ please take this into consideration when you are writing the first paragraph.');
   t('Please indicate if the resource contains elements that EU-OSHA could adapt to make pictograms');
   t('Please select a target audience from the drop down list');
   t('Please select a year of publication, if it is not possible to identify leave it empty.');
-  t('Please select the HAZMAP categories from the drop down list');
   t('Please select the prevention measures used');
-  t('Please select the quality criteria from the drop down list (several options is possible)');
   t('Please select the type of hazards related to state and occurrence in the workplace from the drop down list');
   t('Please select the type of health effect from the drop down list');
   t('Please select the type of workers covered in the material from the drop down list');
@@ -3607,15 +3196,12 @@ please take this into consideration when you are writing the first paragraph.');
   t('Provider');
   t('Provider (English)');
   t('Provider (Original)');
-  t('Provider URL');
   t('Purpose of the material');
   t('Purpose of the material other');
   t('Recommended for EU-OSHA pictogram guide');
   t('Sector / Industry covered');
   t('Target audience');
   t('Target audiences other');
-  t('Tasks covered');
-  t('Tasks covered other');
   t('Title');
   t('Title (original)');
   t('Type of item');

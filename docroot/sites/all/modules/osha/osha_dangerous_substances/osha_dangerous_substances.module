@@ -488,7 +488,7 @@ function osha_dangerous_substances_element_info_alter(&$type) {
   }
 }
 
-// remove guidelines and help text
+// Remove guidelines and help text.
 function osha_dangerous_substances_filter_process_format($element) {
   if (isset($element['#format']) && $element['#format'] === "") {
     $element['#format'] = NULL;

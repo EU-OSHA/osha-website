@@ -31,34 +31,6 @@ function osha_musculoskeletal_disorders_field_default_field_bases() {
     'type' => 'text_long',
   );
 
-  // Exported field_base: 'field_evaluation_quality_criteri'.
-  $field_bases['field_evaluation_quality_criteri'] = array(
-    'active' => 1,
-    'cardinality' => -1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_evaluation_quality_criteri',
-    'indexes' => array(
-      'tid' => array(
-        0 => 'tid',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'taxonomy',
-    'settings' => array(
-      'allowed_values' => array(
-        0 => array(
-          'vocabulary' => 'evaluation_quality_criteria',
-          'parent' => 0,
-        ),
-      ),
-      'entity_translation_sync' => FALSE,
-      'options_list_callback' => 'i18n_taxonomy_allowed_values',
-    ),
-    'translatable' => 0,
-    'type' => 'taxonomy_term_reference',
-  );
-
   // Exported field_base: 'field_for_pictogram_guide'.
   $field_bases['field_for_pictogram_guide'] = array(
     'active' => 1,
@@ -75,8 +47,8 @@ function osha_musculoskeletal_disorders_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        'YES' => 'YES',
-        'NO' => 'NO',
+        'NO' => 'No',
+        'YES' => 'Yes',
         'Possibly' => 'Possibly',
       ),
       'allowed_values_function' => '',
@@ -229,36 +201,6 @@ function osha_musculoskeletal_disorders_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'text',
-  );
-
-  // Exported field_base: 'field_msd_provider_url'.
-  $field_bases['field_msd_provider_url'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_msd_provider_url',
-    'indexes' => array(),
-    'locked' => 0,
-    'module' => 'link',
-    'settings' => array(
-      'attributes' => array(
-        'class' => '',
-        'rel' => '',
-        'target' => 'default',
-      ),
-      'display' => array(
-        'url_cutoff' => 80,
-      ),
-      'enable_tokens' => 1,
-      'entity_translation_sync' => FALSE,
-      'title' => 'optional',
-      'title_maxlength' => 128,
-      'title_value' => '',
-      'url' => 0,
-    ),
-    'translatable' => 0,
-    'type' => 'link_field',
   );
 
   // Exported field_base: 'field_msd_video_length'.

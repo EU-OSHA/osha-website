@@ -1388,7 +1388,43 @@ span.date-display-single{
 	float: left;
 	margin-right: 1.5em;
 	margin-bottom: 0.5em;
+	overflow: hidden;
+	position: relative;
 }
+
+#block-menu-block-3 .introduction-image{
+	position: relative;
+}
+
+blockquote.image-field-caption{
+	font-size: 1.2rem;
+    background-color: rgba(138,152,197,0.6);
+    position: absolute;
+    bottom: 7px;
+    width: 210px;
+    height: 21px;
+    text-align: left;
+    padding: 3px 15px;
+    color: #FFF;
+    border-left: 0;
+    margin-bottom: 0px;
+    margin:0;
+    margin-right: 1.5em;
+}
+
+blockquote.image-field-caption p{
+	padding: 0;
+	margin: 0;
+	font-size:1rem;
+	float: left;
+}
+
+blockquote.image-field-caption span.blockquote-copyright{
+	padding: 0;
+	margin: 0;
+	font-size:1rem;
+}
+
 
 .introduction-title {
 	text-decoration: none;
@@ -9778,11 +9814,17 @@ div.flickr-photoset{
     position: absolute;
 }
 
-.introduction-copyright{
-	margin-bottom: 0px !important;
-	font-size: .8em;
-    margin-top: -9px;
-    font-style: italic;
-    color: #989898;
-    position: absolute;
+.field-name-field-image.field-type-image{
+	position: relative;
+}
+
+.field-name-field-image.field-type-image blockquote.image-field-caption{
+	width: auto;
+    position: relative;
+    margin-right: 0;
+    margin-top: -26px;
+}
+
+.field-name-field-image.field-type-image blockquote.image-field-caption p{
+	font-size: 0.7rem;
 }

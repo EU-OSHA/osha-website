@@ -142,8 +142,19 @@ function osha_frontend_menu_link__menu_block($variables) {
     // $image = '<img src="' . $image_url . '" alt=""/>';
     // We should in fact use empty alt because the image is only decorative (the text is already present in the link).
     $image = '<img src="' . $image_url . '" alt="' . $element['#title'] . '"/>';
-    if (!empty($element['#localized_options']['copyright']['author'])) {
-      $image .= '<blockquote class="image-field-caption">' . check_markup($element['#localized_options']['copyright']['author'], 'full_html') . '</blockquote>';
+    
+    if (!empty($element['#localized_options']['copyright']['author']) || !empty($element['#localized_options']['copyright']['copyright']) ) {   
+     $image .= '<blockquote class="image-field-caption">'; 
+        if (!empty($element['#localized_options']['copyright']['author'])) {
+          $image .= check_markup($element['#localized_options']['copyright']['author'], 'full_html');
+        }
+        if (!empty($element['#localized_options']['copyright']['author']) && !empty($element['#localized_options']['copyright']['copyright']) ) {  
+           $image .= '<span>&nbsp;/&nbsp;</span>';
+        }
+        if (!empty($element['#localized_options']['copyright']['copyright'])) {
+          $image .= '<span class="blockquote-copyright">' . $element['#localized_options']['copyright']['copyright'] . '</span>';
+        }
+      $image .= '</blockquote>'; 
     }
 
     $output_image = l($image, $element['#href'], array('html' => TRUE));
@@ -156,7 +167,6 @@ function osha_frontend_menu_link__menu_block($variables) {
   return '<li' . drupal_attributes($element['#attributes']) . '>
     <div class="introduction-title">' . $output_link . '</div>
     <div class="introduction-image">' . $output_image . '</div>
-    ' . $output_copyright . '
     </li>';
 }
 

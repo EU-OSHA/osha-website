@@ -236,7 +236,7 @@ function osha_dangerous_substances_field_default_field_instances() {
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please describe the material (max. 1500 characters)
+    'description' => 'Please describe the material (max. 150 words)
 Please note: the first paragraph will be displayed as short description, 
 please take this into consideration when you are writing the first paragraph.',
     'display' => array(
@@ -2439,7 +2439,7 @@ please take this into consideration when you are writing the first paragraph.',
       'entity_translation_sync' => 0,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
-      'image_field_caption' => 0,
+      'image_field_caption' => 1,
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
@@ -2454,14 +2454,23 @@ please take this into consideration when you are writing the first paragraph.',
           'public' => 'public',
         ),
         'allowed_types' => array(
+          'audio' => 0,
+          'document' => 0,
           'image' => 'image',
+          'video' => 0,
         ),
-        'browser_plugins' => array(),
+        'browser_plugins' => array(
+          'media_browser_osha--media_browser_osha' => 0,
+          'media_browser_osha--media_browser_osha_my_files' => 0,
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 0,
+          'upload' => 0,
+        ),
         'manualcrop_crop_info' => 1,
         'manualcrop_default_crop_area' => 1,
         'manualcrop_enable' => 1,
         'manualcrop_inline_crop' => 0,
-        'manualcrop_instant_crop' => 0,
+        'manualcrop_instant_crop' => FALSE,
         'manualcrop_instant_preview' => 1,
         'manualcrop_keyboard' => 1,
         'manualcrop_maximize_default_crop_area' => 0,
@@ -2471,8 +2480,6 @@ please take this into consideration when you are writing the first paragraph.',
         'manualcrop_styles_list' => array(),
         'manualcrop_styles_mode' => 'include',
         'manualcrop_thumblist' => 0,
-        'preview_image_style' => 'thumbnail',
-        'progress_indicator' => 'throbber',
       ),
       'type' => 'media_generic',
       'weight' => 53,
@@ -6539,7 +6546,7 @@ please take this into consideration when you are writing the first paragraph.',
 ');
   t('Please describe the disclaimer for the material. 
 ');
-  t('Please describe the material (max. 1500 characters)
+  t('Please describe the material (max. 150 words)
 Please note: the first paragraph will be displayed as short description, 
 please take this into consideration when you are writing the first paragraph.');
   t('Please fill in the English title of the material');

@@ -87,7 +87,7 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_country_other']['table'] = 'field_data_field_country_other';
   $handler->display->display_options['fields']['field_country_other']['field'] = 'field_country_other';
   $handler->display->display_options['fields']['field_country_other']['type'] = 'text_plain';
-  /* Field: Content: External URL */
+  /* Field: Content: URL */
   $handler->display->display_options['fields']['field_external_url']['id'] = 'field_external_url';
   $handler->display->display_options['fields']['field_external_url']['table'] = 'field_data_field_external_url';
   $handler->display->display_options['fields']['field_external_url']['field'] = 'field_external_url';
@@ -801,7 +801,7 @@ function osha_dangerous_substances_views_default_views() {
     t('Languages other'),
     t('Country'),
     t('Country other'),
-    t('External URL'),
+    t('URL'),
     t('Type of item'),
     t('Date of Publication / Year '),
     t('Sector / Industry covered other'),

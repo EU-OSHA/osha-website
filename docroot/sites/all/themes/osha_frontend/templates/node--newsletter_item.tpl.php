@@ -132,12 +132,7 @@ if (!empty($campaign_id)) {
                 if (trim(strip_tags($node->body[$language][0]['safe_summary']))) {
                     $clear = strip_tags($node->body[$language][0]['safe_summary']);
                     $clear = "<p>" . substrwords($clear, 100) . "</p>";
-                    //$node->parent_section 3117 - OiRA block. Delete when MDR-2206 is implemented
-                    if (!empty($node->parent_section) && ($node->parent_section == 13 || $node->parent_section == 11 || $node->parent_section == 3080 || $node->parent_section == 3117)) {
-                    }
-                    else {
-                        print ($clear);
-                   }
+                    print ($clear);
                 }
             }
             break;
@@ -152,12 +147,7 @@ if (!empty($campaign_id)) {
               if (trim(strip_tags($node->field_summary[$language][0]['safe_value']))) {
                 $clear = strip_tags($node->field_summary[$language][0]['safe_value']);
                 $clear = "<p>" . substrwords($clear, 100) . "</p>";
-                //$node->parent_section 3117 - OiRA block. Delete when MDR-2206 is implemented
-                if (!empty($node->parent_section) && ($node->parent_section == 13 || $node->parent_section == 11 || $node->parent_section == 3080 || $node->parent_section == 3117)) {
-                }
-                else {
-                  print ($clear);
-                }
+                print ($clear);
               }
             }
             break;

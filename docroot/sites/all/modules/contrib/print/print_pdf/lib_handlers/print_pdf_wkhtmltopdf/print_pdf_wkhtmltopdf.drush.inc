@@ -2,19 +2,19 @@
 
 /**
  * @file
- * drush integration for print_pdf_wkhtmltopdf module PDF libraries download.
+ * Provides drush integration for print_pdf_wkhtmltopdf module.
  */
 
 /**
- * The PDF project download URL
+ * The PDF project download URL.
  */
-
-// wkhtmltopdf is a binary, requiring a different download for each platform
-define('WKHTMLTOPDF_AMD64_DOWNLOAD_URI', 'http://downloads.sourceforge.net/project/wkhtmltopdf/0.12.0/wkhtmltox-linux-amd64_0.12.0-03c001d.tar.xz');
-define('WKHTMLTOPDF_I386_DOWNLOAD_URI', 'http://downloads.sourceforge.net/project/wkhtmltopdf/0.12.0/wkhtmltox-linux-i386_0.12.0-03c001d.tar.xz');
-define('WKHTMLTOPDF_WIN64_DOWNLOAD_URI', 'http://downloads.sourceforge.net/project/wkhtmltopdf/0.12.0/wkhtmltox-win64_0.12.0-03c001d.exe');
-define('WKHTMLTOPDF_WIN_DOWNLOAD_URI', 'http://downloads.sourceforge.net/project/wkhtmltopdf/0.12.0/wkhtmltox-win32_0.12.0-03c001d.exe');
-define('WKHTMLTOPDF_OSX_DOWNLOAD_URI', 'http://wkhtmltopdf.googlecode.com/files/wkhtmltopdf-OSX-0.10.0_rc2-static.tar.bz2');
+// Since wkhtmltopdf is a binary, a different URL is required for each platform.
+define('WKHTMLTOPDF_LNX64_DOWNLOAD_URI', 'https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz');
+define('WKHTMLTOPDF_LNX32_DOWNLOAD_URI', 'https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-i386.tar.xz');
+define('WKHTMLTOPDF_WIN64_DOWNLOAD_URI', 'https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox-0.12.5-1.msvc2015-win64.exe');
+define('WKHTMLTOPDF_WIN32_DOWNLOAD_URI', 'https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox-0.12.5-1.msvc2015-win32.exe');
+define('WKHTMLTOPDF_OSX64_DOWNLOAD_URI', 'https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox-0.12.5-1.macos-cocoa.pkg');
+define('WKHTMLTOPDF_OSX32_DOWNLOAD_URI', 'https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox-0.12.5-1.macos-carbon.pkg');
 
 /**
  * Implements hook_drush_command().
@@ -36,14 +36,18 @@ function _print_pdf_wkhtmltopdf_drush_download_url() {
 
   switch (drupal_substr(php_uname('s'), 0, 3)) {
     case 'Lin':
-      $ret = (php_uname('m') == 'x86_64') ? WKHTMLTOPDF_AMD64_DOWNLOAD_URI : WKHTMLTOPDF_I386_DOWNLOAD_URI;
+      drush_log(dt('Please note that generic Linux builds are no longer being generated. See https://wkhtmltopdf.org/downloads.html.'), 'warning');
+      $ret = (php_uname('m') == 'x86_64') ? WKHTMLTOPDF_LNX64_DOWNLOAD_URI : WKHTMLTOPDF_LNX32_DOWNLOAD_URI;
       break;
+
     case 'Win':
-      $ret = WKHTMLTOPDF_WIN_DOWNLOAD_URI;
+      $ret = WKHTMLTOPDF_WIN32_DOWNLOAD_URI;
       break;
+
     case 'Dar':
-      $ret = WKHTMLTOPDF_OSX_DOWNLOAD_URI;
+      $ret = (php_uname('m') == 'x86_64') ? WKHTMLTOPDF_OSX64_DOWNLOAD_URI : WKHTMLTOPDF_OSX32_DOWNLOAD_URI;
       break;
+
     default:
       drush_log(dt('wkhtmltopdf is not supported in this system, please choose another library.'), 'error');
       break;

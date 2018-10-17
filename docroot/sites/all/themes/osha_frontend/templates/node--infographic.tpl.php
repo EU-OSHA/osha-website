@@ -65,7 +65,15 @@ if (!isset($content['field_thumbnail']) && !empty($node->field_image)) {
     print render($content['body']);
     print render($content['field_image']);
     print render($content['field_file']);
-    print render($content['field_external_url']);
+  ?>
+  
+  <?php if ($content['field_external_url']['#items'][0]['url']): ?>
+    <div class="infographics-url-title">
+      <a target="_blank" href='<?php print $content['field_external_url']['#items'][0]['url'] ?>'><?php print $content['field_external_url']['#items'][0]['title'] ?></a>
+    </div>
+  <?php endif; ?>
+  
+  <?php
     print render($content['field_twin_infographics']);
   }
   else {

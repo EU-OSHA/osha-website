@@ -364,3 +364,10 @@ function osha_dangerous_substances_update_7030() {
 function osha_dangerous_substances_update_7031() {
   features_revert(array('osha_dangerous_substances' => array('fe_block_settings')));
 }
+
+/**
+ * MDR-2093 NCW: add pictures copyright.
+ */
+function osha_dangerous_substances_update_7032() {
+  features_revert(array('osha_dangerous_substances' => array('field_instance')));
+}

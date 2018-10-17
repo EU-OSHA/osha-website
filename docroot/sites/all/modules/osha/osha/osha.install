@@ -598,3 +598,10 @@ function osha_update_7043() {
 function osha_update_7044() {
   features_revert(array('osha' => array('views_view')));
 }
+
+/**
+ * MDR-2093 NCW: add pictures copyright.
+ */
+function osha_update_7045() {
+  features_revert(array('osha' => array('field_instance')));
+}

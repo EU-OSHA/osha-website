@@ -579,7 +579,7 @@ $command_specific['devify'] = array(
     array(
       'reroute_email_enable_message' => TRUE,
       'reroute_email_enable' => TRUE,
-      'stage_file_proxy_origin' => 'https://ncw.osha.europa.eu',
+      'stage_file_proxy_origin' => 'https://test.osha.europa.eu',
       'stage_file_proxy_use_imagecache_root' => TRUE,
       'stage_file_proxy_hotlink' => FALSE,
       'reroute_email_address' => $cfg->variables->site_mail,

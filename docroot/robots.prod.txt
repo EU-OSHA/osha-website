@@ -101,3 +101,4 @@ Disallow: fop/
 Disallow: /fop/
 Disallow: */fop/
 Disallow: /*taxonomy/term/*/feed
+Disallow: /*taxonomy/term/*

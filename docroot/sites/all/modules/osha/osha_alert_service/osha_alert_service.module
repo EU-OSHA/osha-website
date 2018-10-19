@@ -122,7 +122,7 @@ function osha_alert_service_block_info() {
   }
   $blocks['osha_alert_service_subscribe'] = array(
     'info' => 'Alert Service Subscription',
-    'cache' => DRUPAL_CACHE_GLOBAL,
+    'cache' => DRUPAL_NO_CACHE,
     'status' => 1,
     'region' => 'content',
     'visibility' => BLOCK_VISIBILITY_LISTED,

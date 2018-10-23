@@ -1402,7 +1402,8 @@ blockquote.image-field-caption{
     position: absolute;
     bottom: 7px;
     width: 210px;
-    height: 21px;
+    height: 1%;
+    overflow: hidden;
     text-align: left;
     padding: 3px 15px;
     color: #FFF;
@@ -9822,9 +9823,38 @@ div.flickr-photoset{
 	width: auto;
     position: relative;
     margin-right: 0;
-    margin-top: -26px;
+    margin-top: -29px;
 }
 
 .field-name-field-image.field-type-image blockquote.image-field-caption p{
+	font-size: 0.7rem;
+}
+
+.node-type-news .field-name-field-image.field-type-image blockquote.image-field-caption {
+    width: auto;
+    position: relative;
+    margin-right: 0.8em;
+    clear: both;
+    max-width: 200px;
+    bottom: 29px;
+}
+
+.node-type-dangerous-substances .field-name-field-image.field-type-image blockquote.image-field-caption{
+	max-width: 190px;
+}
+
+.node-publication.view-mode-full .field-name-field-cover-image{
+	position: relative;
+}
+
+.node-publication .field-name-field-cover-image blockquote.image-field-caption {
+    width: auto;
+    position: relative;
+    margin-right: 0em;
+    bottom: 36px;
+    max-width: 125px;
+}
+
+.node-publication .field-name-field-cover-image blockquote.image-field-caption p{
 	font-size: 0.7rem;
 }

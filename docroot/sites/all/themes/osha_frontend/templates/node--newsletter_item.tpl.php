@@ -55,12 +55,12 @@ if (!empty($campaign_id)) {
             $calendar_img = !empty($node->arrow_color) ? "{$calendar_img}-{$node->arrow_color}.png" : "{$calendar_img}.png";
             $calendar_img_path = "{$base_url}/sites/all/modules/osha/osha_newsletter/images/{$calendar_img}";
 
-              print l(theme('image', array(
+            print l(theme('image', array(
               'path' => $calendar_img_path,
               'width' => 40,
               'height' => 36,
               'alt' => 'calendar',
-              'attributes' => array('style' => 'border: 0px;height:35px!important;width:40px!important;')
+              'attributes' => array('style' => 'border: 0px;height:35px!important;width:40px!important;'),
             )), url('node/' . $node->nid, array('absolute' => TRUE)), array(
               'html' => TRUE,
               'external' => TRUE,
@@ -94,9 +94,10 @@ if (!empty($campaign_id)) {
             print l($node->title, url('node/' . $node->nid . '/view', array('absolute' => TRUE)), array(
               'attributes' => array('style' => 'text-decoration: none; font-family:Arial, sans-serif; font-size: 13px; font-weight: bold;'),
               'query' => $url_query,
-              'external' => TRUE
+              'external' => TRUE,
             ));
             break;
+
           case 'twitter_tweet_feed':
             if (!empty($node->field_tweet_author[LANGUAGE_NONE][0]['value'])
                 && !empty($node->field_tweet_contents[LANGUAGE_NONE][0]['value'])
@@ -110,58 +111,54 @@ if (!empty($campaign_id)) {
               goto defaultLabel;
             }
             break;
+
           case 'newsletter_article':
             if (!empty($node->parent_section) && $node->parent_section == 13) {
-              // Coming soon section
+              // Coming soon section.
               print render(field_view_field('node', $node, 'body', 'newsletter_item'));
             }
             else {
               goto defaultLabel;
             }
             break;
+
           case 'highlight':
             print l($node->title, url('node/' . $node->nid, array('absolute' => TRUE)), array(
               'attributes' => array('style' => 'text-decoration: none; font-family:Arial, sans-serif; font-size: 13px; font-weight: bold;'),
               'query' => $url_query,
-              'external' => TRUE
-            ));  
-                 
-            if (trim(strip_tags($node->body[$language][0]['safe_summary']))) {
-                $clear = strip_tags($node->body[$language][0]['safe_summary']);
-                $clear = "<p>" . substrwords($clear, 100) . "</p>";
-                //$node->parent_section 3117 - OiRA block. Delete when MDR-2206 is implemented
-                if (!empty($node->parent_section) && ($node->parent_section == 13 || $node->parent_section == 11 || $node->parent_section == 3080 || $node->parent_section == 3117)) {
-                }
-                else {
+              'external' => TRUE,
+            ));
+            if (!$hide_summary) {
+                if (trim(strip_tags($node->body[$language][0]['safe_summary']))) {
+                    $clear = strip_tags($node->body[$language][0]['safe_summary']);
+                    $clear = "<p>" . substrwords($clear, 100) . "</p>";
                     print ($clear);
-               }
+                }
             }
             break;
-            case 'news':
+
+          case 'news':
             print l($node->title, url('node/' . $node->nid, array('absolute' => TRUE)), array(
               'attributes' => array('style' => 'text-decoration: none; font-family:Arial, sans-serif; font-size: 13px; font-weight: bold;'),
               'query' => $url_query,
-              'external' => TRUE
-            ));  
-                 
-            if (trim(strip_tags($node->field_summary[$language][0]['safe_value']))) {
+              'external' => TRUE,
+            ));
+            if (!$hide_summary) {
+              if (trim(strip_tags($node->field_summary[$language][0]['safe_value']))) {
                 $clear = strip_tags($node->field_summary[$language][0]['safe_value']);
                 $clear = "<p>" . substrwords($clear, 100) . "</p>";
-                //$node->parent_section 3117 - OiRA block. Delete when MDR-2206 is implemented
-              if (!empty($node->parent_section) && ($node->parent_section == 13 || $node->parent_section == 11 || $node->parent_section == 3080 || $node->parent_section == 3117)) {
-              }
-              else {
-                  print ($clear);
+                print ($clear);
               }
             }
             break;
+
           default:
             defaultLabel:
             print l($node->title, url('node/' . $node->nid, array('absolute' => TRUE)), array(
               'attributes' => array('style' => 'text-decoration: none; font-family:Arial, sans-serif; font-size: 13px; font-weight: bold;'),
               'query' => $url_query,
-              'external' => TRUE
-            ));             
+              'external' => TRUE,
+            ));
             break;
         }
         ?>

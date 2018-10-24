@@ -49,11 +49,19 @@ img[alt*="Select language"]{
 #languagesAndSearch #contact > a{
 	margin-right: 7px;
 }
+
 #languagesAndSearch #contact > a::before{
 	content: "|";
 	margin-right: 7px;
 }
 
+.node-type-infographic .field-name-field-thumbnail,
+.node-type-infographic .field-name-field-image,
+.node-type-infographic .field-name-field-file,
+.node-type-infographic .infographics-url-title
+{
+	padding-left: 1em;
+}
 
 #agencyLogo{
 	/* display: none; */

@@ -180,6 +180,22 @@ function piwik_page_alter(&$page) {
       }
     }
 
+    if (variable_get('piwik_translation_set', 0)) {
+      global $language;
+      $params = [];
+      if (variable_get('piwik_query_parameters', 0)) {
+        $params = drupal_get_query_parameters();
+      }
+      $node = menu_get_object();
+      if ($node && $node->nid) {
+        $set_custom_url = drupal_json_encode(url('node/' . $node->nid, array('absolute' => TRUE, 'query' => $params)));
+      }
+      else {
+        $set_custom_url = drupal_json_encode(url(current_path(), array('absolute' => TRUE, 'query' => $params)));
+      }
+      $set_custom_url = str_replace('\/' . $language->language . '\/', '\/', $set_custom_url);
+    }
+
     // Track access denied (403) and file not found (404) pages.
     if ($status == '403 Forbidden') {
       $set_document_title = '"403/URL = " + encodeURIComponent(document.location.pathname+document.location.search) + "/From = " + encodeURIComponent(document.referrer)';

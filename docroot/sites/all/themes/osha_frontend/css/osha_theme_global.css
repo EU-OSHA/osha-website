@@ -21,6 +21,18 @@ body {
 	padding-left: 10px!important;
 }
 
+/*Caption image*/
+
+.node-type-news .field-name-field-image.field-type-image blockquote.image-field-caption {
+    width: auto;
+    position: relative;
+    margin-right: 0.8em;
+    clear: both;
+    max-width: 191px;
+    bottom: 35px;
+    margin: 0 auto;
+}
+
 /*Notes to editor*/
 
 .field-name-field-pr-notes-to-editor .field-items .field-item span{

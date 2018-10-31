@@ -4,21 +4,34 @@
  * osha_lingua_tools module file
  */
 
+/**
+ * Implements hook_permission().
+ */
+function osha_lingua_permission() {
+  $permissions = array();
+  $permissions['use linguatools autocomplete'] = array('title' => t("Use linguatools autocomplete"));
+  $permissions['use linguatools froms'] = array('title' => t("Use linguatools froms"));
+  return $permissions;
+}
+
+/**
+ * Implements hook_menu().
+ */
 function osha_lingua_tools_menu() {
 
   $items['node/%node/linguatools'] = array(
     'title' => 'Lingua Tools',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('form_lingua_form'),
-    'access callback' => 'linguatools_access',
+    'access arguments' => array('use linguatools froms'),
     'weight' => 7,
-    'type' => MENU_LOCAL_TASK
+    'type' => MENU_LOCAL_TASK,
   );
   $items['publication/node/autocomplete'] = array(
     'title' => 'Ajax callback autocomplete node',
     'description' => 'Ajax callback autocomplete node',
     'page callback' => 'osha_publication_node_autocomplete',
-    'access arguments' => array('administer site configuration'),
+    'access arguments' => array('use linguatools autocomplete'),
     'type' => MENU_CALLBACK,
     'weight' => 2,
   );
@@ -26,9 +39,9 @@ function osha_lingua_tools_menu() {
     'title' => 'Copy publication translation',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('osha_copy_publication_translation'),
-    'access callback' => 'linguatools_access',
+    'access arguments' => array('use linguatools froms'),
     'weight' => 8,
-    'type' => MENU_LOCAL_TASK
+    'type' => MENU_LOCAL_TASK,
   );
 
   return $items;
@@ -87,11 +100,11 @@ function osha_copy_publication_translation_preview($form, &$form_state) {
 
   $prefix_title = $form_state['values']['prefix_title'];
   $suffix_title = $form_state['values']['suffix_title'];
-  foreach($selected_languages as $lang_code => $lang_title) {
+  foreach ($selected_languages as $lang_code => $lang_title) {
     if (isset($node->title_field[$lang_code])) {
       $title = $node->title_field[$lang_code][0]['value'];
       $new_title = osha_copy_publication_translation_get_title($prefix_title, $suffix_title, $title, $lang_code);
-      $rows[] = [$lang_title,$title,$new_title];
+      $rows[] = [$lang_title, $title, $new_title];
     }
   }
   $form_state['translation_info'] = '<h2>' . t('Preview titles:') . '</h2>';
@@ -212,7 +225,8 @@ function osha_copy_publication_translation_submit($form, &$form_state) {
           $new_title = osha_copy_publication_translation_get_title($prefix_title, $suffix_title, $source_title, $lang_code);
           $rows[] = [$selected_languages[$lang_code], $new_title, $source_title];
           $new_node->{$field['field_name']}[$lang_code][0]['value'] = $new_title;
-        } else {
+        }
+        else {
           if (@$source_node->{$field['field_name']}[$lang_code]) {
             $new_node->{$field['field_name']}[$lang_code] = $source_node->{$field['field_name']}[$lang_code];
           }
@@ -225,7 +239,7 @@ function osha_copy_publication_translation_submit($form, &$form_state) {
   }
   field_attach_update('node', $new_node);
 
-  // clone url_aliases
+  // Clone url_aliases.
   foreach ($languages as $lang_code => $value) {
     if ($value) {
       $args = array(
@@ -240,9 +254,6 @@ function osha_copy_publication_translation_submit($form, &$form_state) {
     $form_state['translation_info'] = '<h2>' . t('Translated titles:') . '</h2>';
     $form_state['translation_info'] .= theme('table', array('header' => $header, 'rows' => $rows));
   }
-}
-
-function osha_lingua_tools_form_alter(&$form, &$form_state, $form_id) {
 }
 
 /**
@@ -337,15 +348,13 @@ function form_lingua_form($form, &$form_state) {
   $numlen = count($node->translations->data);
 
   if ($numlen <= 1) {
-    //echo ("There are no translations for this node");
     $form['header_text'] = array(
       '#markup' => '<p class="linguaheader">There are no translations for this node.</p>',
-      '#fieldintname' => '0'
+      '#fieldintname' => '0',
     );
   }
   else {
-    //Get the node id, what we want translate.
-
+    // Get the node id, what we want translate.
     $type = $node->type;
     $fields = field_info_instances("node", $type);
     $countfields = 1;
@@ -357,14 +366,14 @@ function form_lingua_form($form, &$form_state) {
       $fieldintname = $field['field_name'];
       $arrayfield = $node->$fieldintname;
 
-      //TODO Check that the field has data
+      // TODO Check that the field has data.
       $numdatosfield = count($arrayfield) + 1;
       $fieldid = $field['field_id'];
       $transfield = istranslatable($fieldid);
 
       $form['header_text'] = array(
         '#markup' => '<p class="linguaheader">Please, select the fields to spread and press the <strong>spread data</strong> button.</p>',
-        '#fieldintname' => '0'
+        '#fieldintname' => '0',
       );
       if ($transfield == 1 && $field['widget']['module'] != 'media' && $field['widget']['module'] != 'file' && $field['widget']['module'] != 'pdf_to_image' && $numdatosfield > 0) {
         $countfields++;
@@ -406,7 +415,7 @@ function form_lingua_form($form, &$form_state) {
     '#multiple' => TRUE,
     '#options' => $languages,
     '#default_value' => array_keys($selected_languages),
-    '#weight' => array('#weight' => 6)
+    '#weight' => array('#weight' => 6),
   );
   $form['create_translations_submit_button'] = array(
     '#type' => 'submit',
@@ -432,7 +441,7 @@ function form_lingua_form($form, &$form_state) {
       '#multiple' => TRUE,
       '#options' => $translated_in,
       '#default_value' => array_keys($translated_in),
-      '#weight' => array('#weight' => 10)
+      '#weight' => array('#weight' => 10),
     );
 
     $form['propagate_files_submit_button'] = array(
@@ -473,20 +482,6 @@ function form_lingua_form($form, &$form_state) {
   return $form;
 }
 
-function linguatools_access() {
-  global $user;
-  $useradmin = 0;
-
-  foreach ($user->roles as $userrol) {
-    if ($userrol == 'administrator') {
-      return TRUE;
-    }
-  }
-
-  return FALSE;
-
-}
-
 function istranslatable($idfield) {
   $result = db_select('field_config', 'f')
     ->fields('f', array('translatable'))
@@ -525,7 +520,8 @@ function form_lingua_form_submit($form, &$form_state) {
 
   foreach ($form as $fieldchk) {
     $fieldintname = $fieldchk['#fieldintname'];
-    if ($fieldintname <> '0') { //0 Is the value of the summary field
+    // 0 Is the value of the summary field.
+    if ($fieldintname <> '0') {
 
       $fieldupdate = $form_state['values'][$fieldchk['#title']];
       if ($fieldupdate) {
@@ -582,7 +578,7 @@ function propage_translation($field_name, $intnodeid, $intrevid, $ispublished, $
     return FALSE;
   }
 
-  //update the field_data fields
+  // Update the field_data fields.
   $data = db_update($table_name)
     ->fields(array(
       $field_name => $propvalue,
@@ -590,7 +586,7 @@ function propage_translation($field_name, $intnodeid, $intrevid, $ispublished, $
     ->condition('entity_id', $intnodeid)
     ->execute();
 
-  //update the field_revision fields
+  // Update the field_revision fields.
   $data2 = db_update($table_rev_name)
     ->fields(array(
       $field_name => $propvalue,
@@ -607,7 +603,7 @@ function propage_url($intnodeid) {
   $propvalue = $node->path['alias'];
 
   $aliasurl = "node/" . $intnodeid;
-  //update the url field
+  // Update the url field.
   $data = db_update('url_alias')
     ->fields(array(
       'alias' => $propvalue,
@@ -651,14 +647,14 @@ function osha_lingua_tools_create_translations($form, &$form_state) {
   foreach ($languages as $lang_code => $value) {
     if ($value) {
       foreach ($fields as $field) {
-        // MC-73 Copy values for translatable file fields
+        // MC-73 Copy values for translatable file fields.
         $new_node->{$field['field_name']}[$lang_code] = $node->{$field['field_name']}[$source_lang];
       }
     }
   }
   field_attach_update('node', $new_node);
 
-  // clone url_aliases
+  // Clone url_aliases.
   foreach ($languages as $lang_code => $value) {
     if ($value) {
       $args = array(

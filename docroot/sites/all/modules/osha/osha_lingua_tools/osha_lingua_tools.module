@@ -7,11 +7,25 @@
 /**
  * Implements hook_permission().
  */
-function osha_lingua_permission() {
+function osha_lingua_tools_permission() {
   $permissions = array();
   $permissions['use linguatools autocomplete'] = array('title' => t("Use linguatools autocomplete"));
-  $permissions['use linguatools froms'] = array('title' => t("Use linguatools froms"));
+  $permissions['use linguatools forms'] = array('title' => t("Use linguatools forms"));
+  $permissions['use linguatools forms for calls content'] = array('title' => t("Use linguatools forms for calls content"));
   return $permissions;
+}
+
+function linguatools_access($node, $account) {
+  $type = is_string($node) ? $node : $node->type;
+  if ($type == 'calls') {
+    if (user_access('use linguatools forms for calls content', $account)) {
+      return NODE_ACCESS_ALLOW;
+    }
+  }
+  elseif (user_access('use linguatools forms', $account)) {
+    return NODE_ACCESS_ALLOW;
+  }
+  return NODE_ACCESS_DENY;
 }
 
 /**
@@ -23,7 +37,9 @@ function osha_lingua_tools_menu() {
     'title' => 'Lingua Tools',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('form_lingua_form'),
-    'access arguments' => array('use linguatools froms'),
+    'access callback' => 'linguatools_access',
+    'access arguments' => array(1),
+
     'weight' => 7,
     'type' => MENU_LOCAL_TASK,
   );
@@ -39,7 +55,7 @@ function osha_lingua_tools_menu() {
     'title' => 'Copy publication translation',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('osha_copy_publication_translation'),
-    'access arguments' => array('use linguatools froms'),
+    'access arguments' => array('use linguatools forms'),
     'weight' => 8,
     'type' => MENU_LOCAL_TASK,
   );

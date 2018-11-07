@@ -52,8 +52,15 @@ function osha_highlight_update_7003() {
 }
 
 /**
- * MDR-1450 I2-Introduce hint text inside the input fields
+ * MDR-1450 I2-Introduce hint text inside the input fields.
  */
 function osha_highlight_update_7004() {
   features_revert(array('osha_highlight' => array('field_base', 'field_instance')));
+}
+
+/**
+ * MDR-2093 NCW: add pictures copyright.
+ */
+function osha_highlight_update_7005() {
+  features_revert(array('osha_highlight' => array('field_instance')));
 }

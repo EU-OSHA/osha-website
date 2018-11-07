@@ -16,7 +16,7 @@ index 07c38dee9..a9b1af708 100644
      }
 +    $form['content'][$key]['hide_summary'] = array(
 +      '#type' => 'checkbox',
-+      '#title' => t('Hide summary'),
++      '#title' => t('Hide intro text'),
 +      '#default_value' => $child->hide_summary,
 +    );
      $form['content'][$key]['operations'] = array(
@@ -65,7 +65,7 @@ index 29c5b2062..9d93dfa19 100644
 +        'description' => 'The contexts used.',
 +      ),
 +      'hide_summary' => array(
-+        'description' => 'Hide summary',
++        'description' => 'Hide intro text',
 +        'type' => 'int',
 +        'default' => NULL,
 +        'not null' => FALSE,
@@ -83,7 +83,7 @@ index 29c5b2062..9d93dfa19 100644
 +function entity_collection_db_update_7001() {
 +  if (!db_field_exists('entity_collection_storage', 'hide_summary')) {
 +    $field = array(
-+      'description' => 'Hide summary',
++      'description' => 'Hide intro text',
 +      'type' => 'int',
 +      'default' => NULL,
 +      'not null' => FALSE,

@@ -1,6 +1,21 @@
 <?php
 
 /**
- * @file
- * Install, update and uninstall functions for osha_lingua_tools module.
+ * MDR-2228 add permissions for linguatools to the calls responsibles.
  */
+function osha_lingua_tools_update_7001() {
+  cache_clear_all();
+  $permissions = array(
+    'use linguatools autocomplete',
+    'use linguatools forms',
+    'use linguatools forms for calls content',
+  );
+  $role = user_role_load_by_name(OSHA_WORKFLOW_ROLE_ADMINISTRATOR);
+  user_role_grant_permissions($role->rid, $permissions);
+  $role = user_role_load_by_name(OSHA_WORKFLOW_ROLE_PROJECT_MANAGER);
+  $permissions = array(
+    'use linguatools autocomplete',
+    'use linguatools forms for calls content',
+  );
+  user_role_grant_permissions($role->rid, $permissions);
+}

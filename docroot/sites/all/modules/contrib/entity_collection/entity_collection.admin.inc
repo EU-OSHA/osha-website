@@ -426,7 +426,7 @@ function entity_collection_content_form_content(EntityCollection $entity_collect
     }
     $form['content'][$key]['hide_summary'] = array(
       '#type' => 'checkbox',
-      '#title' => t('Hide summary'),
+      '#title' => t('Hide intro text'),
       '#default_value' => $child->hide_summary,
     );
     $form['content'][$key]['operations'] = array(

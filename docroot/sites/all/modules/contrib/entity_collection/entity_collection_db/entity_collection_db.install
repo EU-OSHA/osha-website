@@ -70,7 +70,7 @@ function entity_collection_db_schema() {
         'description' => 'The contexts used.',
       ),
       'hide_summary' => array(
-        'description' => 'Hide summary',
+        'description' => 'Hide intro text',
         'type' => 'int',
         'default' => NULL,
         'not null' => FALSE,
@@ -92,7 +92,7 @@ function entity_collection_db_schema() {
 function entity_collection_db_update_7001() {
   if (!db_field_exists('entity_collection_storage', 'hide_summary')) {
     $field = array(
-      'description' => 'Hide summary',
+      'description' => 'Hide intro text',
       'type' => 'int',
       'default' => NULL,
       'not null' => FALSE,

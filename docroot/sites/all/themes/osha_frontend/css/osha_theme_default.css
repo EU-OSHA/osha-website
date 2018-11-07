@@ -4838,7 +4838,9 @@ article.node-press-release .field-name-field-summary p {
 article.node-press-release .field-name-body.field-type-text-with-summary p{
 	margin:0em 0em 1em;
 }
-
+article.node-press-release .field-name-body.field-type-text-with-summary p:last-child{
+	margin:0em;
+}
 .view-press-releases .field-name-title-field {
 	font-family: 'Open Sans Condensed',sans-serif;
 	font-size: 1.4em;

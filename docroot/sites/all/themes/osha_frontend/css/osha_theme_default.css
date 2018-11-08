@@ -8142,6 +8142,77 @@ a.contextual-links-trigger{
 #sliding-popup{
 	overflow: hidden;
 }
+#sliding-popup .eu-cookie-compliance-secondary-button,
+#sliding-popup .eu-cookie-compliance-more-button {
+	cursor: pointer;
+	margin-right: 5px;
+	margin-top: 1em;
+	vertical-align: middle;
+	overflow: visible;
+	width: auto;
+	-moz-box-shadow: inset 0 1px 0 0 #ffffff;
+	-webkit-box-shadow: inset 0 1px 0 0 #ffffff;
+	box-shadow: inset 0 1px 0 0 #ffffff;
+	background-color: #ededed;
+	background-image: -moz-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(5%, #ededed), color-stop(100%, #dfdfdf));
+	background-image: -webkit-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background-image: -o-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background-image: -ms-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background-image: linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	border: 1px solid #dcdcdc;
+	color: #000!important;
+	font-family: Arial, sans-serif;
+	font-weight: bold;
+	padding: 4px 8px;
+	text-decoration: none;
+	text-shadow: 1px 1px 0 #ffffff;
+}
+
+#sliding-popup .eu-cookie-compliance-secondary-button:hover,
+#sliding-popup .eu-cookie-compliance-more-button {
+	background-color: #dfdfdf;
+	background-image: -moz-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(5%, #dfdfdf), color-stop(100%, #ededed));
+	background-image: -webkit-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+	background-image: -o-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+	background-image: -ms-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+	background-image: linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
+}
+
+#sliding-popup .popup-content #popup-text {
+	text-align: center;
+	width: 100%!important;
+	max-width: 100%!important;
+}
+
+#popup-buttons {
+	clear: both;
+	text-align: center;
+	float: left;
+	max-width: 100%!important;
+	font-size: 0.8em;
+}
+
+#popup-buttons button {
+	padding: 1px 5px!important;
+}
+
+#sliding-popup .popup-content #popup-buttons {
+	float: right;
+	margin: 0 0 1em 0;
+	width: 100%;
+	padding: 2px 5px!important;
+}
+
+#sliding-popup .popup-content #popup-text h2 {
+	font-size: 0.9em;
+	padding-top: 1em;
+}
+
 #sliding-popup.sliding-popup-top{
 	display: block;
 	z-index: 9999999!important;

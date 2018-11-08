@@ -1398,7 +1398,7 @@ span.date-display-single{
 
 blockquote.image-field-caption{
 	font-size: 1.2rem;
-    background-color: rgba(138,152,197,0.6);
+    background-color: rgba(138,152,197,0.85);
     position: absolute;
     bottom: 7px;
     width: 210px;
@@ -7442,10 +7442,23 @@ body.page-node-5429 .oshwiki-featured-articles {
 	 margin-right: 0em;
 	 margin-bottom: 0em;
 }
-
+.node-infographic .field-name-field-thumbnail img{
+	float: none;
+  margin: 1rem auto 2rem;
+	display: block;
+}
+.node-infographic .download-img{
+	background: #fbfbfb;
+  padding: 0 1rem 1rem;
+}
+.node-infographic .download-pdf{
+  padding: 0 1rem 1rem;
+  margin-top: 0.3rem;
+  background: #fbfbfb;
+}
 .node-infographic .field-name-field-image a{
 	border-bottom:0px!important;
-	margin-left:0.5em;
+	margin-left: 0.5em;
 	font-weight:bold;
 	font-size:0.8em;
 }
@@ -8275,10 +8288,13 @@ a.contextual-links-trigger{
 }
 
 .osha_target_external_link{
-	background: url("../images/external_link.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
-    margin-left: 0.5em!important;
-    padding-right: 0.8em!important;
-    float:none!important;
+background: url(/sites/all/themes/osha_frontend/images/external_link.png) no-repeat scroll 0 42% rgba(0,0,0,0);
+  margin-left: 0.3em!important;
+  padding-right: 0.6em!important;
+  float: none!important;
+  background-size: 8px 10px;
+  display: inline-block;
+  opacity: 0.85;
 }
 	
 .accesibility_table td{
@@ -9819,19 +9835,22 @@ div.flickr-photoset{
 
 .field-name-field-image.field-type-image{
 	position: relative;
+	clear: both;
 }
 
 .field-name-field-image.field-type-image blockquote.image-field-caption{
 	width: auto;
-    position: relative;
-    margin-right: 0;
-    margin-top: -29px;
+  position: relative;
+  margin-right: 0;
+  margin-top: -29px;
 }
 
 .field-name-field-image.field-type-image blockquote.image-field-caption p{
 	font-size: 0.7rem;
 }
-
+.field-name-field-image.field-type-image blockquote.image-field-caption p span{
+	color: #FFF !important;
+}
 .node-type-news .field-name-field-image.field-type-image blockquote.image-field-caption {
     width: auto;
     position: relative;

@@ -58,6 +58,13 @@ class HWCEventsMigration extends AbstractNCWNodeMigration {
     $row->field_event_type = 'Event';
     $row->field_for_the_web = 'Yes';
     $row->field_event_in_amp = 'No';
+    if (is_array($row->body)) {
+      foreach ($row->body as $key => $value) {
+        if (!is_array($value)) {
+          $row->body[$key] = str_replace("\n", '', $value);
+        }
+      }
+    }
     // field_aditional_resources
 //    $fi = field_info_field('field_aditional_resources');
 //    osha_migration_normalize_field_entityreference($row, 'field_aditional_resources', $fi);

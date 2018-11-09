@@ -3885,12 +3885,17 @@ a.button-submit {
 .view-highlight.field-type-text-with-summary p{
 	margin-top:0em;
 }
-
+.node-type-highlight .field-name-field-image.field-type-image {
+  position: relative;
+  clear: none;
+  float: left;
+  padding-right: 1em;
+}
 .node-highlight.view-mode-full  .field-name-field-image img{
 	max-width:300px;
 	max-height:200px;
-	float:left;
-	margin-right:1em;
+	float:none;
+	margin-right:0em;
 	margin-top:0.7em;
 }
 
@@ -9838,6 +9843,7 @@ div.flickr-photoset{
 	clear: both;
 }
 
+
 .field-name-field-image.field-type-image blockquote.image-field-caption{
 	width: auto;
   position: relative;
@@ -9878,4 +9884,26 @@ div.flickr-photoset{
 
 .node-publication .field-name-field-cover-image blockquote.image-field-caption p{
 	font-size: 0.7rem;
+}
+.node-type-infographic .field-name-field-image.field-type-image{
+	position: relative;
+}
+.node-type-infographic .field-name-field-thumbnail.field-type-image blockquote.image-field-caption {
+	font-size: 1.2rem;
+  background-color: rgba(138,152,197,0.85);
+  width: 350px;
+  position: relative !important;
+  height: auto;
+  overflow: hidden;
+  text-align: left;
+  padding: 0;
+  color: #FFF;
+  border-left: 0;
+  margin:-25px  auto 0;
+}
+.node-type-infographic .field-name-field-thumbnail.field-type-image blockquote.image-field-caption p{
+  padding: 7px 13px;
+  margin: 0;
+  font-size: 0.9rem;
+  float: none;
 }

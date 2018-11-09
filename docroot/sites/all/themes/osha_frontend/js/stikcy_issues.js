@@ -16,7 +16,7 @@ jQuery(document).ready(function() {
 		
 		$('.node-type-events .group-events-description .field-item > p').each(function( index ) {
 			console.log( $( this ).html() );
-			if( $( this ).html() == '<span><br></span>' || $( this ).html() == '<span><br></span><br>' || $( this ).html() == '<br><br>' || $( this ).html() == '<span>&nbsp;</span>' || $( this ).html() == '<br>' ){
+			if( $( this ).html() == '<span><br></span>' || $( this ).html() == '<span><br></span><br>' || $( this ).html() == '<br><br>' || $( this ).html() == '<span>&nbsp;</span>' || $( this ).html() == '&nbsp;' || $( this ).html() == '<br>' ){
 				$( this ).remove();
 			}
 		});

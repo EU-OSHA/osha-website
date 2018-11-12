@@ -858,6 +858,9 @@ function osha_tmgtm_update_external_links(&$data, $items) {
     $lang = $items[$nid]->target_language;
     foreach ($fields as $field => $values) {
       foreach ($values as $i => $value) {
+        if (!is_array($value) || empty($value['value'])) {
+          continue;
+        }
         $old_text = $value['value']['#text'];
         $new_text = str_replace($url . 'en/', $url . $lang . '/', $old_text);
         $data[$nid][$field][$i]['value']['#text'] = $new_text;

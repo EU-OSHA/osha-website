@@ -89,6 +89,9 @@ if (!empty($campaign_id)) {
       <?php } ?>
       <td align="right" style="text-align: left; padding-top: 5px; padding-bottom: 10px; padding-left:0px;">
         <?php
+        $hide_summary = intval($hide_summary);
+        $show_summary = !$hide_summary;
+
           switch ($node->type) {
           case 'publication':
             print l($node->title, url('node/' . $node->nid . '/view', array('absolute' => TRUE)), array(
@@ -128,11 +131,16 @@ if (!empty($campaign_id)) {
               'query' => $url_query,
               'external' => TRUE,
             ));
-            if (!$hide_summary) {
+            if ($show_summary) {
                 if (trim(strip_tags($node->body[$language][0]['safe_summary']))) {
                     $clear = strip_tags($node->body[$language][0]['safe_summary']);
                     $clear = "<p>" . substrwords($clear, 100) . "</p>";
                     print ($clear);
+                }
+                elseif (trim(strip_tags($node->body[$language][0]['safe_value']))) {
+                  $clear = strip_tags($node->body[$language][0]['safe_value']);
+                  $clear = "<p>" . substrwords($clear, 100) . "</p>";
+                  print ($clear);
                 }
             }
             break;
@@ -143,7 +151,7 @@ if (!empty($campaign_id)) {
               'query' => $url_query,
               'external' => TRUE,
             ));
-            if (!$hide_summary) {
+            if ($show_summary) {
               if (trim(strip_tags($node->field_summary[$language][0]['safe_value']))) {
                 $clear = strip_tags($node->field_summary[$language][0]['safe_value']);
                 $clear = "<p>" . substrwords($clear, 100) . "</p>";

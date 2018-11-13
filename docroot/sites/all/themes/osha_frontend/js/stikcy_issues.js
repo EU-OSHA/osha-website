@@ -21,6 +21,15 @@ jQuery(document).ready(function() {
 			}
 		});
 
+
+	if( $('.node-type-press-release article.node-press-release .field p') ){
+		$('.node-type-press-release article.node-press-release .field p').each(function( index ) {
+			if( $( this ).html() == '&nbsp;' || $( this ).html() == '<strong>&nbsp;</strong>'){
+				$( this ).remove();
+			}
+		});
+	}
+
 	});
 })( jQuery );
 

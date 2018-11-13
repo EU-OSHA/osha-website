@@ -21,7 +21,7 @@ function theme_youtube_video($variables) {
   $iv_load_policy = array_key_exists('iv_load_policy', $variables)? $variables['iv_load_policy'] : FALSE;
 
   // Get YouTube settings.
-  $suggest = variable_get('youtube_suggest', TRUE);
+  $suggest = variable_get('youtube_suggest', FALSE);
   $privacy = variable_get('youtube_privacy', FALSE);
   $modestbranding = variable_get('youtube_modestbranding', FALSE);
   $theme = variable_get('youtube_theme', FALSE);

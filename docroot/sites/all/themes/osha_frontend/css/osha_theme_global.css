@@ -17,9 +17,6 @@ body {
 	float: none;
 }
 
-.photo-gallery .gallery-row[class*="col-"]{
-	padding-left: 10px!important;
-}
 
 /*Caption image*/
 

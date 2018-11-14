@@ -9,3 +9,27 @@ jQuery(document).ready(function() {
 
 	});
 });
+
+(function( $ ){
+	$(document).ready(function() {
+
+		
+		$('.node-type-events .group-events-description .field-item > p').each(function( index ) {
+			console.log( $( this ).html() );
+			if( $( this ).html() == '<span><br></span>' || $( this ).html() == '<span><br></span><br>' || $( this ).html() == '<br><br>' || $( this ).html() == '<span>&nbsp;</span>' || $( this ).html() == '&nbsp;' || $( this ).html() == '<br>' ){
+				$( this ).remove();
+			}
+		});
+
+
+	if( $('.node-type-press-release article.node-press-release .field p') ){
+		$('.node-type-press-release article.node-press-release .field p').each(function( index ) {
+			if( $( this ).html() == '&nbsp;' || $( this ).html() == '<strong>&nbsp;</strong>'){
+				$( this ).remove();
+			}
+		});
+	}
+
+	});
+})( jQuery );
+

@@ -30,7 +30,9 @@
 	#content abbr[title]:after {
 		content: " (" attr(title) ")" !important;
 	}
-
+	.osha_share_bottom_container{
+		display: none;
+	}
 
 	/* Turn off any background colors or images. */
 	body, #page, #main, 	#content, table, .view-vacancies .views-row span a {		

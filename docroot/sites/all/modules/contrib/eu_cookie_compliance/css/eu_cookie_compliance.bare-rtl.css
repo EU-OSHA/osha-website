@@ -1,0 +1,8 @@
+#sliding-popup .popup-content #popup-buttons {
+  float: left;
+}
+
+#sliding-popup .popup-content #popup-text {
+  float: right;
+  text-align: right;
+}

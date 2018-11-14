@@ -30,14 +30,15 @@
   <div class ="popup-content info">
     <div id="popup-text">
       <?php print $message ?>
-      <?php if ($disagree_button) : ?>
-        <button type="button" class="find-more-button eu-cookie-compliance-more-button"><?php print $disagree_button; ?></button>
-      <?php endif; ?>
+      
     </div>
     <div id="popup-buttons">
       <button type="button" class="<?php print $primary_button_class; ?>"><?php print $agree_button; ?></button>
       <?php if ($secondary_button_label) : ?>
         <button type="button" class="<?php print $secondary_button_class; ?>" ><?php print $secondary_button_label; ?></button>
+      <?php endif; ?>
+      <?php if ($disagree_button) : ?>
+        <button type="button" class="find-more-button eu-cookie-compliance-more-button"><?php print $disagree_button; ?></button>
       <?php endif; ?>
     </div>
   </div>

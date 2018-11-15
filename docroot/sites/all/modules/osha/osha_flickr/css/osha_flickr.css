@@ -49,6 +49,7 @@
 }
 #content .views-field-field-flickr a{
   height: 249px;
+  overflow: hidden;
   display: block;
   background-repeat: no-repeat !important;
   background-size: cover !important;
@@ -120,12 +121,12 @@
     .container {
       width:100%;
     }
-#content .views-field-field-flickr a {
-  height:auto;
-  display: inline;
-  background-repeat: no-repeat !important;
-  background-size: cover !important;
-}
+    #content .views-field-field-flickr a {
+      height:auto;
+      display: inline;
+      background-repeat: no-repeat !important;
+      background-size: cover !important;
+    }
     .view-id-flickr_albums.view-content .views-row[class*="col-"], 
     .view-photo-gallery .view-content .views-row[class*="col-"], 
     .page-photo-gallery .view-content .views-row[class*="col-"] {

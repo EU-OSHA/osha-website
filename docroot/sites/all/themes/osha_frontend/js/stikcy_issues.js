@@ -29,6 +29,25 @@ jQuery(document).ready(function() {
 			}
 		});
 	}
+$( window ).resize(function() {
+	if( $('.view-flickr-albums') ){
+		console.log($(window).width() );
+		if(  $(window).width()  > 660){
+			 $('.view-flickr-albums .gallery-row .field-content > a').each(function( index ) {
+			 	if( $('img',this ).attr('src') != undefined ){
+				 	$(this).css('background','url(' + $('img',this ).attr('src')  + ')');
+				 	$('img',this).css('display','none');
+			 	}
+			});
+		} else {
+			$('.view-flickr-albums .gallery-row .field-content > a').each(function( index ) {
+				$(this).css('background','none');
+				$('img',this).css('display','block');
+			});
+		}
+
+	}
+});
 
 	});
 })( jQuery );

@@ -15,7 +15,6 @@ jQuery(document).ready(function() {
 
 		
 		$('.node-type-events .group-events-description .field-item > p').each(function( index ) {
-			console.log( $( this ).html() );
 			if( $( this ).html() == '<span><br></span>' || $( this ).html() == '<span><br></span><br>' || $( this ).html() == '<br><br>' || $( this ).html() == '<span>&nbsp;</span>' || $( this ).html() == '&nbsp;' || $( this ).html() == '<br>' ){
 				$( this ).remove();
 			}
@@ -31,7 +30,6 @@ jQuery(document).ready(function() {
 	}
 $( window ).on("load resize",function(e){
 	if( $('.view-flickr-albums') ){
-		console.log($(window).width() );
 		if(  $(window).width()  > 660){
 			 $('.view-flickr-albums .gallery-row .field-content > a').each(function( index ) {
 			 	if( $('img',this ).attr('src') != undefined ){

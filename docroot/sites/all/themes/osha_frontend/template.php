@@ -311,12 +311,6 @@ function osha_frontend_preprocess_node(&$vars) {
   }
 }
 
-function MYTHEME_preprocess_page(&$vars, $hook) {   
-   //Add suggestions for pages based on Node
-   if(arg(1) == 2) {  //For node 2
-    $vars['theme_hook_suggestions'][] =  'page__test_page';
-   } 
-}
 
 /**
  * Implements hook_process_node().

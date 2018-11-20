@@ -364,6 +364,20 @@ function osha_frontend_block_view_alter(&$data, $block) {
  * Implements hook_preprocess_page
  */
 function osha_frontend_preprocess_page(&$variables) {
+  
+  //Add template to external infographic code. node--external-infographic.tpl.php - MDR-2351
+  $n = menu_get_object('node');
+  if ($n) {
+    switch ($n->type) {
+      case "article":
+        $external_infographic = variable_get('ncw_external_infographic_nid', 14885);
+        if ($n->nid == $external_infographic) {
+            $variables['theme_hook_suggestions'][] = 'node__external_infographic';
+        }
+    }
+  }
+
+
   $variables['blog'] = FALSE;
   $bundle = '';
 

@@ -75,7 +75,7 @@ if (!isset($content['field_thumbnail']) && !empty($node->field_image)) {
   
   <?php if ($content['field_external_url']['#items'][0]['url']): ?>
     <div class="infographics-url-title">
-      <a target="_blank" href='<?php print $content['field_external_url']['#items'][0]['url'] ?>'><?php print $content['field_external_url']['#items'][0]['title'] ?></a>
+      <a href='<?php print $content['field_external_url']['#items'][0]['url'] ?>'><?php print $content['field_external_url']['#items'][0]['title'] ?></a>
     </div>
   <?php endif; ?>
   

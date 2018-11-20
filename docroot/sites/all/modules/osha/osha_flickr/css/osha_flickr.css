@@ -45,9 +45,15 @@
 
 #content .field-name-field-cover-flickr a,
 #content .photo-gallery a {
-    border: none;
+  border: none;
 }
-
+#content .views-field-field-flickr a{
+  height: 249px;
+  overflow: hidden;
+  display: block;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
 #content .photo-gallery .views-field-nothing a {
     color: #ffffff;
     font-weight: bold;
@@ -114,6 +120,12 @@
 @media screen and (max-width: 660px) {
     .container {
       width:100%;
+    }
+    #content .views-field-field-flickr a {
+      height:auto;
+      display: inline;
+      background-repeat: no-repeat !important;
+      background-size: cover !important;
     }
     .view-id-flickr_albums.view-content .views-row[class*="col-"], 
     .view-photo-gallery .view-content .views-row[class*="col-"], 

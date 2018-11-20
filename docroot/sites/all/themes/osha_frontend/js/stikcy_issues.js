@@ -29,7 +29,7 @@ jQuery(document).ready(function() {
 			}
 		});
 	}
-$( window ).resize(function() {
+$( window ).on("load resize",function(e){
 	if( $('.view-flickr-albums') ){
 		console.log($(window).width() );
 		if(  $(window).width()  > 660){

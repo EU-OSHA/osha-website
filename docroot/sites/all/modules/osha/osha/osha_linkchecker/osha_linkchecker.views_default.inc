@@ -72,6 +72,13 @@ function osha_linkchecker_views_default_views() {
       'empty_column' => 0,
     ),
   );
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'Congratulations. There are no broken links in this section. Enjoy your day!';
+  $handler->display->display_options['empty']['area']['format'] = 'full_html_minimal';
   /* Relationship: Linkchecker Links: Link ID */
   $handler->display->display_options['relationships']['lid']['id'] = 'lid';
   $handler->display->display_options['relationships']['lid']['table'] = 'linkchecker_link';

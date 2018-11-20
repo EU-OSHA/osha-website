@@ -15,6 +15,7 @@ class OiraNewsMigration extends AbstractNCWNodeMigration {
   function addFieldMappings() {
     parent::addFieldMappings();
 
+    $this->addFieldMapping('uid')->defaultValue(0);
     $this->addFieldMapping('field_tags', 'field_tags');
     $this->addFieldMapping('field_tags:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_tags:create_term')->defaultValue(FALSE);

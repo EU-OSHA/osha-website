@@ -7,13 +7,22 @@
  */
 class HWCEventsMigration extends AbstractNCWNodeMigration {
 
+  /**
+   * {@inheritdoc}
+   */
   public function __construct($arguments) {
     parent::__construct($arguments, 'HWCEventsSource', 'events');
     $this->description = 'Import events from HWC';
   }
 
-  function addFieldMappings() {
+  /**
+   * {@inheritdoc}
+   */
+  protected function addFieldMappings() {
     parent::addFieldMappings();
+    // Node base fields.
+    $uid = variable_get('hwc_migration_default_uid', 0);
+    $this->addFieldMapping('uid')->defaultValue($uid);
 
     $this->addFieldMapping('field_tags', 'field_tags');
     $this->addFieldMapping('field_tags:source_type')->defaultValue('tid');
@@ -40,6 +49,9 @@ class HWCEventsMigration extends AbstractNCWNodeMigration {
     $this->ignoreMetatagMigration();
   }
 
+  /**
+   * {@inheritdoc}
+   */
   protected function getManuallyMigratedFields() {
     return array_merge(array(
       'field_tags',
@@ -48,6 +60,9 @@ class HWCEventsMigration extends AbstractNCWNodeMigration {
       ), parent::getManuallyMigratedFields());
   }
 
+  /**
+   * {@inheritdoc}
+   */
   function prepareRow($row) {
     parent::prepareRow($row);
     $row->field_tags = osha_migration_normalize_code_term_reference($row->field_tags, 'field_tags_code', 'tags');

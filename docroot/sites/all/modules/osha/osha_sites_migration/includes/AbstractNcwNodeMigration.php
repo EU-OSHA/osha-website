@@ -65,7 +65,6 @@ abstract class AbstractNCWNodeMigration extends Migration {
    */
   protected function addFieldMappings() {
     // Node base fields
-    $this->addFieldMapping('uid')->defaultValue(0);
     $this->addFieldMapping('comment')->defaultValue(0);
     $this->addFieldMapping('status', 'status');
     $this->addFieldMapping('title', 'title');
@@ -247,11 +246,18 @@ abstract class AbstractNCWNodeMigration extends Migration {
           'source' => $data['source'],
           'status' => $data['status'],
           'translate' => $data['translate'],
-          'uid' => osha_migration_author_uid(),
+          'uid' => $this->osha_migration_author_uid(),
         ));
       }
       $handler->saveTranslations();
     }
+  }
+
+  /**
+   * Default author uid.
+   */
+  function osha_migration_author_uid() {
+    return 0;
   }
 
   /**
@@ -261,20 +267,26 @@ abstract class AbstractNCWNodeMigration extends Migration {
     MigrationUtil::activateOshaFilesHandler();
   }
 
+  /**
+   * Executes post Import.
+   */
   public function postImport() {
     MigrationUtil::deactivateOshaFilesHandler();
     $this->removeNeedsUpdateItems();
   }
 
+  /**
+   * Migration URL.
+   */
   public function getMigrationURL() {
     $group = $this->getGroup()->getName();
     $root = variable_get($group . '_migration_root_url', '');
-    $source_uri = variable_get($group . '_migration_' .  $this->getMachineName() . '_url');
+    $source_uri = variable_get($group . '_migration_' . $this->getMachineName() . '_url');
     return $root . $source_uri;
   }
 
   public function validateEndpointURL() {
-    if(empty($this->endpoint_url)) {
+    if (empty($this->endpoint_url)) {
       return FALSE;
     }
     return TRUE;

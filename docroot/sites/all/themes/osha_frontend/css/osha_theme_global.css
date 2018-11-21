@@ -2124,3 +2124,9 @@ a {
 		margin-top:0px;
 	}
 }
+
+/*MDR-2351 delete download links pdf / img*/
+
+.node-infographic[about*="how-manage-dangerous-substances"] .download-img , .node-infographic[about*="how-manage-dangerous-substances"] .download-pdf{
+	display: none;
+}

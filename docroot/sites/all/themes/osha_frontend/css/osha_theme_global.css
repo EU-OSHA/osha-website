@@ -17,9 +17,6 @@ body {
 	float: none;
 }
 
-.photo-gallery .gallery-row[class*="col-"]{
-	padding-left: 10px!important;
-}
 
 /*Caption image*/
 
@@ -2126,4 +2123,10 @@ a {
 	.two_column.publications-search-list.form-wrapper #publication-search{
 		margin-top:0px;
 	}
+}
+
+/*MDR-2351 delete download links pdf / img*/
+
+.node-infographic[about*="how-manage-dangerous-substances"] .download-img , .node-infographic[about*="how-manage-dangerous-substances"] .download-pdf{
+	display: none;
 }

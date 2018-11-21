@@ -1,0 +1,14 @@
+#sliding-popup .popup-content #popup-buttons {
+  float: left;
+}
+
+#sliding-popup .popup-content #popup-text {
+  float: right;
+  text-align: right;
+}
+
+#sliding-popup .popup-content #popup-buttons button {
+  -moz-box-shadow: inset 0 0 0 1px #ffffff;
+  -webkit-box-shadow: inset 0 0 0 1px #ffffff;
+  box-shadow: inset 0 0 0 1px #ffffff;
+}

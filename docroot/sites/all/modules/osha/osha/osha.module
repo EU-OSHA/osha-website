@@ -310,23 +310,51 @@ function osha_js_alter(&$javascript) {
   if (empty($javascript['settings']['data'])) {
     return;
   }
-  foreach($javascript['settings']['data'] as $k => &$v) {
+
+  foreach ($javascript['settings']['data'] as $k => &$v) {
     if (array_key_exists('eu_cookie_compliance', $v)) {
-      $popup_en = variable_get('eu_cookie_compliance_en', array());
+      $popup_settings = variable_get('eu_cookie_compliance', array());
+      $method = !empty($popup_settings['method']) ? $popup_settings['method'] : 'opt_in';
+      switch ($method) {
+        case 'default':
+          $primary_button_class = 'agree-button eu-cookie-compliance-default-button';
+          $secondary_button_label = '';
+          $secondary_button_class = '';
+          break;
 
-      $popup_text_info = str_replace(array("\r", "\n"), '', t($popup_en['popup_info']['value']));
+        case 'opt_in':
+          $primary_button_class = 'agree-button eu-cookie-compliance-secondary-button';
+          $secondary_button_label = !empty($popup_settings['disagree_button_label']) ? $popup_settings['disagree_button_label'] : 'Decline';
+          $secondary_button_class = 'decline-button eu-cookie-compliance-default-button';
+          break;
+
+        case 'opt_out':
+          $primary_button_class = 'decline-button eu-cookie-compliance-secondary-button';
+          $secondary_button_label = !empty($popup_settings['popup_agree_button_message']) ? $popup_settings['popup_agree_button_message'] : 'OK, I agree';
+          $secondary_button_class = 'agree-button eu-cookie-compliance-default-button';
+          break;
+      }
+
+      $popup_text_info = str_replace(array("\r", "\n"), '', t($popup_settings['popup_info']['value']));
       $html_info = theme('eu_cookie_compliance_popup_info', array(
-        'message' => check_markup($popup_text_info, $popup_en['popup_info']['format'], FALSE),
-        'agree_button'=> t($popup_en['popup_agree_button_message']),
-        'disagree_button' => t($popup_en['popup_disagree_button_message'])));
-      $popup_text_agreed = str_replace(array("\r", "\n"), '', t($popup_en['popup_agreed']['value']));
+          'message' => check_markup($popup_text_info, $popup_settings['popup_info']['format'], FALSE),
+          'agree_button' => t($popup_settings['popup_agree_button_message']),
+          'disagree_button' => t($popup_settings['popup_disagree_button_message']),
+          'secondary_button_label' => $secondary_button_label,
+          'primary_button_class' => $primary_button_class,
+          'secondary_button_class' => $secondary_button_class,
+        )
+      );
+      $popup_text_agreed = str_replace(array("\r", "\n"), '', t($popup_settings['popup_agreed']['value']));
       $html_agreed = theme('eu_cookie_compliance_popup_agreed', array(
-        'message' => check_markup($popup_text_agreed, $popup_en['popup_agreed']['format'], FALSE),
-        'hide_button' => t($popup_en['popup_hide_button_message']),
-        'find_more_button' => t($popup_en['popup_find_more_button_message'])));
-
+          'message' => check_markup($popup_text_agreed, $popup_settings['popup_agreed']['format'], FALSE),
+          'hide_button' => t($popup_settings['popup_hide_button_message']),
+          'find_more_button' => t($popup_settings['popup_find_more_button_message'])
+        )
+      );
       $v['eu_cookie_compliance']['popup_html_info'] = empty($html_info) ? FALSE : $html_info;
       $v['eu_cookie_compliance']['popup_html_agreed'] = empty($html_agreed) ? FALSE : $html_agreed;
+
       break;
     }
   }

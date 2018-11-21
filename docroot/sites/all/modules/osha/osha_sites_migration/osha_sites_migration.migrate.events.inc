@@ -23,15 +23,12 @@ class HWCEventsMigration extends AbstractNCWNodeMigration {
     $this->addFieldMapping('field_activity:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_activity:create_term')->defaultValue(FALSE);
 
-//    $this->addFieldMapping('field_aditional_resources', 'field_aditional_resources');
-
     $this->addUnmigratedDestinations(array(
       'field_tags:ignore_case',
       'field_organizer',
       'field_speaker',
       'field_partner_id',
       'field_schedule',
-//      'field_related_documents',
       'field_location',
       'field_contact_name',
       'field_contact_phone',
@@ -57,7 +54,6 @@ class HWCEventsMigration extends AbstractNCWNodeMigration {
     $row->field_activity = osha_migration_normalize_code_term_reference($row->field_activity, 'field_activity_code', 'activity');
     $row->field_event_type = 'Event';
     $row->field_for_the_web = 'Yes';
-    $row->field_event_in_amp = 'No';
     if (is_array($row->body)) {
       foreach ($row->body as $key => $value) {
         if (!is_array($value)) {
@@ -65,16 +61,6 @@ class HWCEventsMigration extends AbstractNCWNodeMigration {
         }
       }
     }
-    // field_aditional_resources
-//    $fi = field_info_field('field_aditional_resources');
-//    osha_migration_normalize_field_entityreference($row, 'field_aditional_resources', $fi);
-//    $additional_resources = $row->field_aditional_resources;
-//    $row->field_aditional_resources = array();
-//    foreach ($additional_resources as $original_nid) {
-//      if ($destid1 = ncw_migration_find_additional_resource($original_nid)) {
-//        $row->field_aditional_resources[] = $destid1;
-//      }
-//    }
   }
 }
 

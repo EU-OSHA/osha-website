@@ -3,3 +3,4 @@ description = The OSHA administration theme.
 core = 7.x
 base theme = seven
 stylesheets[screen][] = osha.css
+scripts[] = js/custom.js

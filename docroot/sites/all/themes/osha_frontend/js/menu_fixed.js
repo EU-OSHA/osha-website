@@ -1,7 +1,10 @@
 // Menu scroll
 jQuery(document).ready(function() {
-var nav = jQuery('#block-menu-block-1');
-pos = nav.offset();
+
+
+if (!jQuery(".section-how-to-manage-dangerous-substances")[0]){
+    var nav = jQuery('#block-menu-block-1');
+	pos = nav.offset();
 	if(jQuery("body").height()>=1100){
 		// Esperamos al DOM
 		jQuery(window).scroll(function(){
@@ -28,4 +31,8 @@ pos = nav.offset();
 			}
 		});
 	}
+}
+
+
+
 });

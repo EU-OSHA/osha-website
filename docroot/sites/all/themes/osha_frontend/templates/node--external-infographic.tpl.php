@@ -35,6 +35,11 @@ global $language;
         <?php print '<a href="/' . $language->language . '/tools-and-publications/infographics">'. t("Infographics") .'</a>' ?>
       </span> 
       <span class="delimiter">»</span> 
+      <span class="inline even last"></span>
+       <span class="inline odd">
+        <?php print '<a href="/' . $language->language . '/tools-and-publications/infographics/how-manage-dangerous-substances">'. $node->title .'</a>' ?>
+      </span> 
+      <span class="delimiter">»</span> 
       <span class="inline even last"><?php echo $node->title ?></span>
   </div>
   <div id="main">
@@ -59,10 +64,16 @@ global $language;
       <?php print $feed_icons; ?>
     </div>
 
-    <?php include(drupal_get_path('theme', 'osha_frontend').'/templates/external-infographic-tpl/'. $language->language .'-infographic.php'); ?>
+  <?php include(drupal_get_path('theme', 'osha_frontend').'/templates/external-infographic-tpl/'. $language->language .'-infographic.php'); ?>
+    
+
+
+   
   
   </div>
+
   <?php print render($page['footer']); ?>
+
 </div>
 
 <?php print render($page['bottom']); ?>

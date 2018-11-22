@@ -2130,3 +2130,7 @@ a {
 .node-infographic[about*="how-manage-dangerous-substances"] .download-img , .node-infographic[about*="how-manage-dangerous-substances"] .download-pdf{
 	display: none;
 }
+
+.page-node-14885 .download-img , .page-node-14885 .download-pdf{
+	display: none;
+}

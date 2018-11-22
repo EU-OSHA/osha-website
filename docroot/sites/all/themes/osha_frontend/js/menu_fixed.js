@@ -2,7 +2,7 @@
 jQuery(document).ready(function() {
 
 
-if (!jQuery(".section-how-to-manage-dangerous-substances")[0]){
+if (!jQuery(".no-sticky-infographic")[0]){
     var nav = jQuery('#block-menu-block-1');
 	pos = nav.offset();
 	if(jQuery("body").height()>=1100){

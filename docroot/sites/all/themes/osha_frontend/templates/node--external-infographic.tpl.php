@@ -64,12 +64,10 @@ global $language;
       <?php print $feed_icons; ?>
     </div>
 
-  <?php include(drupal_get_path('theme', 'osha_frontend').'/templates/external-infographic-tpl/'. $language->language .'-infographic.php'); ?>
-    
+    <div class="no-sticky-infographic"> 
+      <?php include(drupal_get_path('theme', 'osha_frontend').'/templates/external-infographic-tpl/'. $language->language .'-infographic.php'); ?>
+    </div>
 
-
-   
-  
   </div>
 
   <?php print render($page['footer']); ?>

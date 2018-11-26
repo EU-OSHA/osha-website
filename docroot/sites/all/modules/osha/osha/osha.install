@@ -607,9 +607,16 @@ function osha_update_7045() {
 }
 
 /**
- * MDR-2257 NCW: Matomo script to overwrite the language for the URLs is not working.
+ * MDR-2257 NCW: Matomo script to overwrite the language for the URLs.
  */
 function osha_update_7046() {
   variable_set('piwik_translation_set', 1);
   variable_set('piwik_query_parameters', 1);
+}
+
+/**
+ * MDR-2335 Could broken links in a page be highlighted when in view mode.
+ */
+function osha_update_7047() {
+  features_revert(array('osha' => array('wysiwyg')));
 }

@@ -2117,7 +2117,7 @@ a {
 	padding-right: 1em;
 }
 
-}//en media
+}
 
 @media screen and (max-width: 1078px) {
 	.two_column.publications-search-list.form-wrapper #publication-search{
@@ -2133,4 +2133,8 @@ a {
 
 .page-node-14885 .download-img , .page-node-14885 .download-pdf{
 	display: none;
+}
+
+.logged-in #content a[data-linkchecker] {
+	color: red;
 }

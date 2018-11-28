@@ -7,13 +7,22 @@
  */
 class HWCNewsMigration extends AbstractNCWNodeMigration {
 
+  /**
+   * {@inheritdoc}
+   */
   public function __construct($arguments) {
     parent::__construct($arguments, 'HWCNewsSource', 'news');
     $this->description = 'Import news from HWC';
   }
 
-  function addFieldMappings() {
+  /**
+   * {@inheritdoc}
+   */
+  protected function addFieldMappings() {
     parent::addFieldMappings();
+    // Node base fields.
+    $uid = variable_get('hwc_migration_default_uid', 0);
+    $this->addFieldMapping('uid')->defaultValue($uid);
 
     $this->addFieldMapping('field_tags', 'field_tags');
     $this->addFieldMapping('field_tags:source_type')->defaultValue('tid');
@@ -22,8 +31,6 @@ class HWCNewsMigration extends AbstractNCWNodeMigration {
     $this->addFieldMapping('field_activity', 'field_activity');
     $this->addFieldMapping('field_activity:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_activity:create_term')->defaultValue(FALSE);
-
-//    $this->addFieldMapping('field_aditional_resources', 'field_aditional_resources');
 
     $this->addUnmigratedDestinations(array(
       'field_tags:ignore_case',
@@ -37,24 +44,20 @@ class HWCNewsMigration extends AbstractNCWNodeMigration {
     $this->ignoreMetatagMigration();
   }
 
+  /**
+   * {@inheritdoc}
+   */
   protected function getManuallyMigratedFields() {
     return array_merge(array('field_tags', 'field_activity'), parent::getManuallyMigratedFields());
   }
 
+  /**
+   * {@inheritdoc}
+   */
   function prepareRow($row) {
     parent::prepareRow($row);
     $row->field_tags = osha_migration_normalize_code_term_reference($row->field_tags, 'field_tags_code', 'tags');
     $row->field_activity = osha_migration_normalize_code_term_reference($row->field_activity, 'field_activity_code', 'activity');
-    // field_aditional_resources
-//    $fi = field_info_field('field_aditional_resources');
-//    osha_migration_normalize_field_entityreference($row, 'field_aditional_resources', $fi);
-//    $additional_resources = $row->field_aditional_resources;
-//    $row->field_aditional_resources = array();
-//    foreach ($additional_resources as $original_nid) {
-//      if ($destid1 = ncw_migration_find_additional_resource($original_nid)) {
-//        $row->field_aditional_resources[] = $destid1;
-//      }
-//    }
   }
 }
 

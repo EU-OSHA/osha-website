@@ -36,3 +36,10 @@ function osha_linkchecker_update_7001() {
 function osha_linkchecker_update_7002() {
   features_revert_module('osha_linkchecker');
 }
+
+/**
+ * MDR-2336 Add a message when there are no broken links in the checker.
+ */
+function osha_linkchecker_update_7003() {
+  features_revert_module('osha_linkchecker');
+}

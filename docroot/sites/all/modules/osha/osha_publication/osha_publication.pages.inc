@@ -220,7 +220,7 @@ function osha_publication_menu_publications_search_native($form_state) {
   }
   $pnids = $q->execute()->fetchCol();
   $nids = array();
-  foreach($pnids as $pnid) {
+  foreach ($pnids as $pnid) {
     $q = db_select('field_data_field_file', 'b');
     $q->fields('b', array('entity_id'));
     $q->innerJoin('node', 'a', 'a.nid = b.entity_id AND a.vid = b.revision_id');
@@ -246,7 +246,7 @@ function osha_publication_menu_publications_search_native($form_state) {
   $current_page = pager_default_initialize(count($nids), $per_page);
   $page = array_chunk($nids, $per_page, TRUE);
   $nodes = node_load_multiple($page[$current_page]);
-  foreach($nodes as $node) {
+  foreach ($nodes as $node) {
     $node->filter_languages = $languages;
   }
   $pager_params = array();
@@ -271,7 +271,8 @@ function osha_publication_menu_publications_search_native($form_state) {
       'tags' => array('<', '<', '', '>', '>'),
       'quantity' => 9,
       'parameters' => $pager_params,
-    ))
+    )
+    ),
   );
   return $ret;
 }
@@ -280,13 +281,13 @@ function osha_publication_menu_publications_search_related($form_state, $native_
   global $language;
   $ret = array();
   $languages = osha_publication_req_param($form_state, 'languages', array($language->language));
-  if(!empty($languages)) {
+  if (!empty($languages)) {
     if (in_array('en', $languages)) {
       return $ret;
     }
   }
   else {
-    if($language->language == 'en') {
+    if ($language->language == 'en') {
       return $ret;
     }
   }
@@ -331,7 +332,8 @@ function osha_publication_menu_publications_search_related($form_state, $native_
   $q->condition('a.status', 1);
   if (!empty($sort)) {
     $q->orderBy('field_publication_date_value', $direction);
-  } else {
+  }
+  else {
     $q->orderBy('field_publication_date_value', 'DESC');
   }
 
@@ -345,7 +347,8 @@ function osha_publication_menu_publications_search_related($form_state, $native_
     $q->condition('d.field_tags_tid', $tags_ids, 'IN');
   }
   $nids = $q->execute()->fetchCol();
-  if (!empty($native_nids)) { // Remove the nodes displayed above (native)
+  // Remove the nodes displayed above (native)/
+  if (!empty($native_nids)) {
     $nids = array_filter($nids, function($nid) use ($native_nids) {
       return !in_array($nid, $native_nids);
     });
@@ -357,7 +360,7 @@ function osha_publication_menu_publications_search_related($form_state, $native_
   $current_page = pager_default_initialize(count($nids), $per_page, 1);
   $page = array_chunk($nids, $per_page, TRUE);
   $nodes = node_load_multiple($page[$current_page]);
-  foreach($nodes as $node) {
+  foreach ($nodes as $node) {
     $node->filter_languages = $languages;
   }
   $pager_params = array();
@@ -377,7 +380,8 @@ function osha_publication_menu_publications_search_related($form_state, $native_
       'quantity' => 9,
       'parameters' => $pager_params,
       'element' => 1,
-    ))
+    )
+    ),
   );
   return $ret;
 }
@@ -386,7 +390,8 @@ function osha_publication_menu_publications_get_query() {
   $server = search_api_server_load('solr_server');
   $index = search_api_index_load(SOLR_SEARCH_INDEX);
   $query = new SearchApiQuery($index);
-  $query->fields(array()); // Avoid PHP notice
+  // Avoid PHP notice.
+  $query->fields(array());
   $solr = new SearchApiSolrService($server);
   return array($solr, $query);
 }
@@ -423,7 +428,9 @@ function _osha_publication_tags_options_list() {
   if (!empty($terms)) {
     foreach ($terms as $key => $term) {
       if (!empty($term->field_tags_code[LANGUAGE_NONE][0]['value'])) {
-        $return[$term->field_tags_code[LANGUAGE_NONE][0]['value']] = $term->name;
+        $code = $term->field_tags_code[LANGUAGE_NONE][0]['value'];
+        $code = str_replace('/', '__', $code);
+        $return[$code] = $term->name;
       }
       else {
         $return[$term->tid] = $term->name;
@@ -437,6 +444,7 @@ function _osha_publication_tags_options_list() {
  * Get tag tid by tag code.
  */
 function _osha_publication_get_tag_by_code($code) {
+  $code = str_replace('__', '/', $code);
   $tid = FALSE;
   $query = new EntityFieldQuery();
   $query->entityCondition('entity_type', 'taxonomy_term')

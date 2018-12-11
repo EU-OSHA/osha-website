@@ -3005,6 +3005,73 @@ font-weight: normal;
 	 clear:both;
 	 margin-top: -2.5em;
 }
+#block-views-our-story-block-look-back .view-header{
+   font-size: 1em;
+	 float: none;
+	 font-family: 'Open Sans', sans-serif;
+	 color:#000;
+	 clear:both;
+	 margin-top: -2.5em;
+}
+#block-views-our-story-block-look-back .item-list-look-back ul{
+	list-style-type: none;
+	margin:0;
+	padding:0;
+}
+#block-views-our-story-block-look-back .item-list-look-back ul li{
+	background: none repeat scroll 0 0 #e8eef7;
+	border-top: 5px solid #003399;
+	padding-bottom: 1rem;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+#block-views-our-story-block-look-back .item-list-look-back ul li .content-group{
+	display: flex;
+}
+#block-views-our-story-block-look-back .item-list-look-back ul li .content-group .image{
+  padding-left: 10px;
+  padding-right: 20px;
+  position: relative;
+}
+#block-views-our-story-block-look-back .item-list-look-back ul li .content-group .image .image-field-caption{
+  height: auto;
+  margin: 0;
+  padding: 2px 5px;
+  bottom: auto;
+}
+#block-views-our-story-block-look-back .item-list-look-back ul li .content-group .image .image-field-caption p{
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+#block-views-our-story-block-look-back .item-list-look-back ul li .content-group .summary{
+  padding-left: 10px;
+  padding-right: 20px;
+   flex: 1 0px;
+}
+#block-views-our-story-block-look-back .item-list-look-back ul li .content-group .summary p{
+  margin-top:0; 
+}
+#block-views-our-story-block-look-back .item-list-look-back ul li .content-group .summary p.more-link-wrapper{
+  margin:0; 
+  text-align: right;
+}
+
+
+#block-views-our-story-block-look-back .item-list-look-back ul li .content-group .summary p.more-link-wrapper .views-more-link{
+	background: url("../images/flecha.png") no-repeat scroll 100% 29% transparent!important;
+	color: #003399;
+	font-family: "Open Sans Condensed",sans-serif!important;
+	font-size: 1.1em!important;
+	padding-bottom: 1em;
+	padding-right: 1.5em;
+	border-bottom:0px!important;
+	text-decoration:none;
+	margin-top:0.5em;
+	font-weight:bold;
+}
+
+
 
 .view-footer{
 	clear: both;

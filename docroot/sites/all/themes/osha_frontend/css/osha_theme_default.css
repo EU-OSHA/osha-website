@@ -10045,3 +10045,62 @@ div.flickr-photoset{
   font-size: 0.9rem;
   float: none;
 }
+
+.key-next-prev-buttons{
+	overflow: hidden;
+	position: absolute;
+  width: 59%;
+  left: 18%;
+  margin-top:-1.5rem;
+}
+
+.key-next-prev-buttons .prev-button.blue{
+	text-align: left;
+	display: inline-block;
+	float: left;
+}
+.key-next-prev-buttons .prev-button.blue .previous-button {
+	background: url(../images/arrow-blue-left.png) no-repeat 0px 0px;
+  background-size: 30px 43px;
+  padding-left: 43px;
+  border-bottom: none !important;
+  display: inline-block;
+}
+.key-next-prev-buttons .prev-button.blue .previous-button .nav-info{
+  color: #003399;
+  font-weight: bold;
+  display: block;
+}
+.key-next-prev-buttons .prev-button.blue .previous-button .nav-title{
+	color: #484848;
+  text-transform: uppercase;
+  font-size: 1.1em;
+  font-weight: 600;
+  display: block;
+}
+
+
+.key-next-prev-buttons .next-button.blue{
+	text-align: right;
+	display: inline-block;
+	float: right;
+}
+.key-next-prev-buttons .next-button.blue .nexting-button {
+  background: url(../images/arrow-blue-right.png) no-repeat 100% 0px;
+  background-size: 30px 43px;
+  padding-right: 43px;
+  border-bottom: none !important;
+  display: inline-block;
+}
+.key-next-prev-buttons .next-button.blue .nexting-button .nav-info{
+  color: #003399;
+  font-weight: bold;
+  display: block;
+}
+.key-next-prev-buttons .next-button.blue .nexting-button .nav-title{
+	color: #484848;
+  text-transform: uppercase;
+  font-size: 1.1em;
+  font-weight: 600;
+  display: block;
+}

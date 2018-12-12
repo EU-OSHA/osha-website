@@ -24,12 +24,6 @@ function ncw_migration_file_get_contents($url) {
   return $result;
 }
 
-
-function osha_migration_author_uid() {
-  return 0;
-}
-
-
 ////////////////////////////// Normalization functions /////////////////////////
 function osha_migration_normalize_field_list_text($row, $field_name, $field_info, $filter_languages) {
   $field = array();

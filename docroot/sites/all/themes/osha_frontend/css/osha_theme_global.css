@@ -2119,8 +2119,6 @@ a {
 
 }
 
-//en media
-
 @media screen and (max-width: 1078px) {
 	.two_column.publications-search-list.form-wrapper #publication-search{
 		margin-top:0px;
@@ -2132,8 +2130,13 @@ a {
 .node-infographic[about*="how-manage-dangerous-substances"] .download-img , .node-infographic[about*="how-manage-dangerous-substances"] .download-pdf{
 	display: none;
 }
+
 .page-node-14885 .download-img , .page-node-14885 .download-pdf{
 	display: none;
+}
+
+.logged-in #content a[data-linkchecker] {
+	color: red;
 }
 
 /*** 25th anniversary  ***/

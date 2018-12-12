@@ -30,3 +30,21 @@ function osha_sites_migration_update_7002() {
     ->condition('machine_name', ['hwc_events', 'hwc_news'], 'IN')
     ->execute();
 }
+
+/*
+ * MDR-2349 events - change anonymous by HWC.
+ */
+function osha_sites_migration_update_7003() {
+  $mail = 'no-reply@osha.europa.eu';
+  $newUser = array(
+    'name' => 'HWC',
+    'pass' => drupal_random_key(8),
+    'mail' => $mail,
+    'status' => 0,
+    'init' => $mail,
+  );
+  $user = user_save(null, $newUser);
+  if ($user && $user->uid) {
+    variable_set('hwc_migration_default_uid', $user->uid);
+  }
+}

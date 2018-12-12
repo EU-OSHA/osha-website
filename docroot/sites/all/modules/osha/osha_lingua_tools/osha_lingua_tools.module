@@ -563,14 +563,19 @@ function propage_translation($field_name, $intnodeid, $intrevid, $ispublished, $
     $table_rev_name = 'field_revision_body';
     $field_name = 'body_value';
   }
+  elseif (($fieldintname == 'field_external_url') || ($fieldintname == 'field_banner_link')) {
+    $table_name = 'field_data_' . $fieldintname;
+    $table_rev_name = 'field_revision_' . $fieldintname;
+    $field_name = $fieldintname . '_url';
+  }
   else {
     $table_name = 'field_data_' . $fieldintname;
     $table_rev_name = 'field_revision_' . $fieldintname;
     $field_name = $fieldintname . '_value';
   }
 
-  //If the status of the node is published then We get the value to spread from the data field else we get the data from the revision field.
-  If ($ispublished == 1) {
+  // If the status of the node is published then We get the value to spread from the data field else we get the data from the revision field.
+  if ($ispublished == 1) {
     $result = db_select($table_name, 'f')
       ->fields('f', array($field_name))
       ->condition('entity_id', $intnodeid, '=')
@@ -589,7 +594,6 @@ function propage_translation($field_name, $intnodeid, $intrevid, $ispublished, $
       ->fetchAssoc();
   }
   $propvalue = $result[$field_name];
-
 
   if ($propvalue == "" || $propvalue == NULL) {
     return FALSE;

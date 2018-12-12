@@ -115,18 +115,20 @@ function _osha_menu_form_alter(array &$form, array $item = array(), array &$comp
 
   // Add form values for the reset of $item['options'] and
   // $item['options']['attributes'] so the values will carry over during save.
-  foreach ($item['options']['copyright'] as $key => $value) {
-    if ($key !== 'attributes' && !isset($form['options']['copyright'][$key])) {
-      $form['options']['copyright'][$key] = array(
-        '#type' => 'value',
-        '#value' => $value,
-      );
-    }
-    if (!isset($form['options']['copyright'][$key])) {
-      $form['options']['copyright'][$key] = array(
-        '#type' => 'value',
-        '#value' => $value,
-      );
+  if (!empty($item['options']['copyright'])) {
+    foreach ($item['options']['copyright'] as $key => $value) {
+      if ($key !== 'attributes' && !isset($form['options']['copyright'][$key])) {
+        $form['options']['copyright'][$key] = array(
+          '#type' => 'value',
+          '#value' => $value,
+        );
+      }
+      if (!isset($form['options']['copyright'][$key])) {
+        $form['options']['copyright'][$key] = array(
+          '#type' => 'value',
+          '#value' => $value,
+        );
+      }
     }
   }
 }

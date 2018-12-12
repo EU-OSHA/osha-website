@@ -961,6 +961,13 @@ function osha_wysiwyg_plugin($editor, $version=0) {
       'internal' => TRUE,
       'load' => TRUE,
     );
+
+    $plugins['linkchecker'] = array(
+      'path' => $editor['library path'] . '/plugins/linkchecker',
+      'extensions' => array('linkchecker' => t('Linkchecker')),
+      'internal' => TRUE,
+      'load' => TRUE,
+    );
     break;
 
   }
@@ -1148,6 +1155,36 @@ function osha_share_popup($node, $options = array()) {
   return theme('osha_share_popup', $vars);
 }
 
+/*
+ * Broken links from linkchecker.
+ */
+function _osha_get_broken_links($node) {
+  $ignore_response_codes = preg_split('/(\r\n?|\n)/', variable_get('linkchecker_ignore_response_codes', "200\n206\n302\n304\n401\n403"));
+  $linkchecker_links = db_query('SELECT ll.* FROM {linkchecker_node} ln INNER JOIN {linkchecker_link} ll ON ln.lid = ll.lid WHERE ln.nid = :nid AND ll.fail_count > :fail_count AND ll.status = :status AND ll.code NOT IN (:codes)', array(':nid' => $node->nid, ':fail_count' => 0, ':status' => 1, ':codes' => $ignore_response_codes));
+  $links = [];
+  foreach ($linkchecker_links as $link) {
+    if (_linkchecker_link_access($link)) {
+      $links[$link->url] = $link;
+    }
+  }
+  return $links;
+}
+
+/*
+ * Implements hook_node_prepare().
+ *
+ * {@inheritdoc}
+ */
+function osha_node_prepare($node) {
+  if (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == 'edit' && isset($node->nid)) {
+    $links = _osha_get_broken_links($node);
+    // Show a message on node edit page if a link check failed once or more.
+    foreach ($links as $link) {
+      drupal_set_message(format_plural($link->fail_count, 'Link check of <a href="@url">@url</a> failed once (status code: @code).', 'Link check of <a href="@url">@url</a> failed @count times (status code: @code).', array('@url' => $link->url, '@code' => $link->code)), 'warning', FALSE);
+    }
+    drupal_add_js(array('osha_linkchecker' => array('urls' => array_keys($links))), 'setting');
+  }
+}
 
 /**
  * Implements hook_node_view().
@@ -1155,6 +1192,17 @@ function osha_share_popup($node, $options = array()) {
  * {@inheritdoc}
  */
 function osha_node_view($node, $view_mode, $langcode) {
+  global $user;
+
+  if ((arg(0) == 'node') && ($user->uid > 0)) {
+    $links = _osha_get_broken_links($node);
+    foreach ($links as $link) {
+      drupal_set_message(format_plural($link->fail_count, 'Link check of <a href="@url">@url</a> failed once (status code: @code).', 'Link check of <a href="@url">@url</a> failed @count times (status code: @code).', array('@url' => $link->url, '@code' => $link->code)), 'warning', FALSE);
+    }
+    drupal_add_js(array('osha_linkchecker' => array('urls' => array_keys($links))), 'setting');
+    drupal_add_js(drupal_get_path('module', 'osha') . '/js/osha_linkchecker.js');
+  }
+
   $pos = strpos(request_uri(), '/rss-feeds');
   // URL can be with or without language
   if ( $pos === 0 || $pos === 3) {
@@ -1598,6 +1646,7 @@ function osha_pathologic_alter(&$url_params, $parts, $settings) {
 function osha_page_build(&$page) {
   if (path_is_admin(current_path())) {
     drupal_add_css(drupal_get_path('module', 'osha') . '/styles/osha_admin.css', array('group' => CSS_THEME));
+    drupal_add_css(drupal_get_path('module', 'osha') . '/styles/osha_linkchecker.css', array('group' => CSS_THEME));
   }
 }
 

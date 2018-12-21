@@ -672,7 +672,7 @@ footer {
 		#multi-lingual-award{
 			position: absolute;
 			right: 0px;
-			margin-top: 9px;
+			margin-top: 0;
 		}
 		#multi-lingual-award img{
 			max-width: 123px;
@@ -2199,4 +2199,9 @@ a {
 	text-transform: uppercase;
 	border-bottom: 0px solid #dc2f82!important;
 	font-size: 0.8em!important;
+}
+
+.node-type-25th-anniversary .field-name-field-quote div div{
+    margin-left: 1em;
+    margin-right: 1em;
 }

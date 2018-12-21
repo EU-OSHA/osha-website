@@ -10048,10 +10048,6 @@ div.flickr-photoset{
 
 .key-next-prev-buttons{
 	overflow: hidden;
-	position: absolute;
-  width: 59%;
-  left: 18%;
-  margin-top:-1.5rem;
 }
 
 .key-next-prev-buttons .prev-button.blue{
@@ -10060,9 +10056,9 @@ div.flickr-photoset{
 	float: left;
 }
 .key-next-prev-buttons .prev-button.blue .previous-button {
-	background: url(../images/arrow-blue-left.png) no-repeat 0px 0px;
-  background-size: 30px 43px;
-  padding-left: 43px;
+	background: url(../images/arrow-blue-left.png) no-repeat 0px 4px;
+  background-size: 30px 40px;
+  padding-left: 35px;
   border-bottom: none !important;
   display: inline-block;
 }
@@ -10073,8 +10069,8 @@ div.flickr-photoset{
 }
 .key-next-prev-buttons .prev-button.blue .previous-button .nav-title{
 	color: #484848;
-  text-transform: uppercase;
-  font-size: 1.1em;
+  text-transform: none;
+  font-size: 1em;
   font-weight: 600;
   display: block;
 }
@@ -10086,9 +10082,9 @@ div.flickr-photoset{
 	float: right;
 }
 .key-next-prev-buttons .next-button.blue .nexting-button {
-  background: url(../images/arrow-blue-right.png) no-repeat 100% 0px;
-  background-size: 30px 43px;
-  padding-right: 43px;
+  background: url(../images/arrow-blue-right.png) no-repeat 100% 4px;
+  background-size: 30px 40px;
+  padding-right: 35px;
   border-bottom: none !important;
   display: inline-block;
 }
@@ -10099,8 +10095,8 @@ div.flickr-photoset{
 }
 .key-next-prev-buttons .next-button.blue .nexting-button .nav-title{
 	color: #484848;
-  text-transform: uppercase;
-  font-size: 1.1em;
+  text-transform: none;
+  font-size: 1em;
   font-weight: 600;
   display: block;
 }

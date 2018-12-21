@@ -64,18 +64,33 @@ if (!isset($content['field_thumbnail']) && !empty($node->field_image)) {
     print render($content['field_thumbnail']);
     print render($content['body']);
 
-    print '<div class="download-img">';
-      print render($content['field_image']);
-    print '</div>';
+    if ($content['field_image']):
+      print '<div class="download-img">';
+        print render($content['field_image']);
+      print '</div>';
+    endif;
     
-    print '<div class="download-pdf">';
-       print render($content['field_file']);
-    print '</div>';
+    if ($content['field_file']):
+      print '<div class="download-pdf">';
+         print render($content['field_file']);
+      print '</div>';
+    endif;
+    
   ?>
   
   <?php if ($content['field_external_url']['#items'][0]['url']): ?>
-    <div class="infographics-url-title">
-      <a href='<?php print $content['field_external_url']['#items'][0]['url'] ?>'><?php print $content['field_external_url']['#items'][0]['title'] ?></a>
+    <div class="infographics-url-title external">
+      <span class="label_multilang_file"><?php echo t("Access the infographic in:"); ?></span>
+      <span class="infographic-lang">
+      <?php
+        foreach ($node->field_external_url as $key => $value) {
+
+      ?>
+          <a href='/<?php print  $key ?><?php print $content['field_external_url']['#items'][0]['url'] ?>?lan=<?php echo $key ?>'><?php echo $key ?> | </a>     
+      <?php   
+        }
+      ?>
+      </span>
     </div>
   <?php endif; ?>
   

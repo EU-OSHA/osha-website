@@ -152,12 +152,14 @@ function osha_publication_menu_publications_search_native($form_state) {
     $query->condition('status', 1);
     $query->condition('type', 'publication');
     $query->condition('field_file:file', 0, '>');
+
+    $query->condition('field_publication_date', time(), '<');
+
     $query->keys($text);
     $query->fields(array('title_field', 'body:value'));
     if (!empty($sort)) {
       $query->sort($sort, $direction);
     }
-
     $results = $server->search($query);
     if (!empty($results['results'])) {
       foreach ($results['results'] as $result) {

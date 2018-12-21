@@ -2131,7 +2131,7 @@ a {
 	display: none;
 }
 
-.page-node-14885 .download-img , .page-node-14885 .download-pdf{
+.page-node-14935 .download-img , .page-node-14885 .download-pdf{
 	display: none;
 }
 
@@ -2170,4 +2170,33 @@ a {
 	  position: relative;
 	  margin:0 auto;
 	}
+}
+
+/*MDR-2376 style link external Infographic*/
+.node-infographic .infographics-url-title.external {
+    margin-top: 1em;
+    float: left;
+    width: 100%;
+}
+
+.node-infographic .infographics-url-title.external .label_multilang_file{
+	float: left;
+}
+
+.infographic-lang{
+	width: 272px;
+    display: block;
+    float: left;
+    padding-left: 10px;
+}
+
+.infographics-url-title{
+    background: #fbfbfb;
+    padding: 1rem 1rem;
+}
+
+.infographics-url-title a{
+	text-transform: uppercase;
+	border-bottom: 0px solid #dc2f82!important;
+	font-size: 0.8em!important;
 }

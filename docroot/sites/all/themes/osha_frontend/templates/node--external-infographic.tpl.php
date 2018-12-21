@@ -37,7 +37,7 @@ global $language;
       <span class="delimiter">»</span> 
       <span class="inline even last"></span>
        <span class="inline odd">
-        <?php print '<a href="/' . $language->language . '/tools-and-publications/infographics/how-manage-dangerous-substances">'. $node->title .'</a>' ?>
+        <?php print '<a href="/' . $language->language . '/tools-and-publications/infographics/how-to-manage-dangerous-substances">'. $node->title .'</a>' ?>
       </span> 
       <span class="delimiter">»</span> 
       <span class="inline even last"><?php echo $node->title ?></span>

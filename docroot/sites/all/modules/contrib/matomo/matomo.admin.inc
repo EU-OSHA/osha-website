@@ -306,7 +306,7 @@ function matomo_admin_settings_form($form_state) {
   $matomo_custom_vars = variable_get('matomo_custom_var', array());
 
   // Matomo supports up to 5 custom variables.
-  for ($i = 1; $i < 6; $i++) {
+  for ($i = 1; $i < 11; $i++) {
     $form['matomo_custom_var']['slots'][$i]['slot'] = array(
       '#default_value' => $i,
       '#description' => t('Slot number'),
@@ -422,6 +422,38 @@ function matomo_admin_settings_form($form_state) {
       'header' => t('Header'),
     ),
     '#default_value' => variable_get('matomo_js_scope', 'header'),
+  );
+
+  $form['custom'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Custom  settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+
+  $form['custom']['matomo_custom_dimension'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Custom dimensions'),
+    '#description' => t('If checked, allow tracking a Custom Dimension across tracking requests.'),
+    '#default_value' => variable_get('matomo_custom_dimension', 1),
+  );
+  $form['custom']['matomo_custom_variable'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Custom variables'),
+    '#description' => t('If checked, allow tracking a Custom Variables.'),
+    '#default_value' => variable_get('matomo_custom_variable', 0),
+  );
+  $form['custom']['matomo_custom_url'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Custom URL'),
+    '#description' => t('If checked, push setCustomUrl function.'),
+    '#default_value' => variable_get('matomo_custom_url', 1),
+  );
+  $form['custom']['matomo_query_parameters'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Query parameters'),
+    '#description' => t('If checked, query parameters will be added to custom URL.'),
+    '#default_value' => variable_get('matomo_query_parameters', 0),
   );
 
   return system_settings_form($form);

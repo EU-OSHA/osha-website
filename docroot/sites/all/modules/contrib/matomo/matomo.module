@@ -179,6 +179,22 @@ function matomo_page_alter(&$page) {
       }
     }
 
+    if (variable_get('matomo_custom_url', 0)) {
+      global $language;
+      $params = [];
+      if (variable_get('matomo_query_parameters', 0)) {
+        $params = drupal_get_query_parameters();
+      }
+      $node = menu_get_object();
+      if ($node && $node->nid) {
+        $set_custom_url = drupal_json_encode(url('node/' . $node->nid, array('absolute' => TRUE, 'query' => $params)));
+      }
+      else {
+        $set_custom_url = drupal_json_encode(url(current_path(), array('absolute' => TRUE, 'query' => $params)));
+      }
+      $set_custom_url = str_replace('\/' . $language->language . '\/', '\/', $set_custom_url);
+    }
+
     // Track access denied (403) and file not found (404) pages.
     if ($status == '403 Forbidden') {
       $set_document_title = '"403/URL = " + encodeURIComponent(document.location.pathname+document.location.search) + "/From = " + encodeURIComponent(document.referrer)';
@@ -202,7 +218,7 @@ function matomo_page_alter(&$page) {
     // Add custom variables.
     $matomo_custom_vars = variable_get('matomo_custom_var', array());
     $custom_variable = '';
-    for ($i = 1; $i < 6; $i++) {
+    for ($i = 1; $i < 11; $i++) {
       $custom_var_name = !empty($matomo_custom_vars['slots'][$i]['name']) ? $matomo_custom_vars['slots'][$i]['name'] : '';
       if (!empty($custom_var_name)) {
         $custom_var_value = !empty($matomo_custom_vars['slots'][$i]['value']) ? $matomo_custom_vars['slots'][$i]['value'] : '';
@@ -231,7 +247,12 @@ function matomo_page_alter(&$page) {
         $custom_var_name = drupal_json_encode($custom_var_name);
         $custom_var_value = drupal_json_encode($custom_var_value);
         $custom_var_scope = drupal_json_encode($custom_var_scope);
-        $custom_variable .= "_paq.push(['setCustomVariable', $i, $custom_var_name, $custom_var_value, $custom_var_scope]);";
+        if (variable_get('matomo_custom_dimension', TRUE)) {
+          $custom_variable .= "_paq.push(['setCustomDimension', $i, $custom_var_value]);";
+        }
+        if (variable_get('matomo_custom_variable', FALSE)) {
+          $custom_variable .= "_paq.push(['setCustomVariable', $i, $custom_var_name, $custom_var_value, $custom_var_scope]);";
+        }
       }
     }
 

@@ -1397,37 +1397,6 @@ span.date-display-single{
 	position: relative;
 }
 
-blockquote.image-field-caption{
-	font-size: 1.2rem;
-    background-color: rgba(138,152,197,0.85);
-    position: absolute;
-    bottom: 7px;
-    width: 210px;
-    height: 1%;
-    overflow: hidden;
-    text-align: left;
-    padding: 3px 15px;
-    color: #FFF;
-    border-left: 0;
-    margin-bottom: 0px;
-    margin:0;
-    margin-right: 1.5em;
-}
-
-blockquote.image-field-caption p{
-	padding: 0;
-	margin: 0;
-	font-size:1rem;
-	float: left;
-}
-
-blockquote.image-field-caption span.blockquote-copyright{
-	padding: 0;
-	margin: 0;
-	font-size:1rem;
-}
-
-
 .introduction-title {
 	text-decoration: none;
 	color: #001791!important;
@@ -3288,18 +3257,26 @@ font-weight: normal;
 	font-weight:normal;
 }
 
+
+.view-news .views-row .field-name-field-image.field-type-image blockquote.image-field-caption{
+	width:70px;
+	bottom:0;
+}
+
+
+
 /*END NEWS LIST*/
 
 /*NEWS DETAIL*/
 
-.node-news img{
-	max-width:200px;
-	max-height:200px;
-	float:left;
-	margin-right:1em;
-	margin-top:0.5em;
+.node-news .field.field-name-field-image.field-type-image > div > div{
+	margin-right: 1em;
 }
 
+.node-news img{
+	float:left;
+	margin-top:0.5em;
+}
 
 .node-news.view-mode-full{
 	margin-top:1em;
@@ -6691,10 +6668,6 @@ a.tabs-primary__tab-link{
 	margin-top:1em;
 }
 
-#block-views-blog-block-1 .image-field-caption{
-	display:none;
-}
-
 /* END BLOG LIST */
 
 /* BLOG DETAIL*/
@@ -9962,91 +9935,6 @@ div.flickr-photoset{
 	margin-bottom: 10px;
 }
 
-
-/*caption images*/
-.views-field-field-copyright{
-	margin-bottom: 0px !important;
-}
-
-.views-field-field-copyright .field-content{
-	margin-bottom: 0px !important;
-	font-size: .8em;
-    margin-top: -20px;
-    font-style: italic;
-    color: #989898;
-    position: absolute;
-}
-
-.field-name-field-image.field-type-image{
-	position: relative;
-	clear: both;
-}
-
-
-.field-name-field-image.field-type-image blockquote.image-field-caption{
-	width: auto;
-  position: relative;
-  margin-right: 0;
-  margin-top: -29px;
-}
-
-.field-name-field-image.field-type-image blockquote.image-field-caption p{
-	font-size: 0.7rem;
-}
-.field-name-field-image.field-type-image blockquote.image-field-caption p span{
-	color: #FFF !important;
-}
-.node-type-news .field-name-field-image.field-type-image blockquote.image-field-caption {
-    width: auto;
-    position: relative;
-    margin-right: 0.8em;
-    clear: both;
-    max-width: 200px;
-    bottom: 29px;
-}
-
-.node-type-dangerous-substances .field-name-field-image.field-type-image blockquote.image-field-caption{
-	max-width: 190px;
-}
-
-.node-publication.view-mode-full .field-name-field-cover-image{
-	position: relative;
-}
-
-.node-publication .field-name-field-cover-image blockquote.image-field-caption {
-    width: auto;
-    position: relative;
-    margin-right: 0em;
-    bottom: 36px;
-    max-width: 125px;
-}
-
-.node-publication .field-name-field-cover-image blockquote.image-field-caption p{
-	font-size: 0.7rem;
-}
-.node-type-infographic .field-name-field-image.field-type-image{
-	position: relative;
-}
-.node-type-infographic .field-name-field-thumbnail.field-type-image blockquote.image-field-caption {
-	font-size: 1.2rem;
-  background-color: rgba(138,152,197,0.85);
-  width: 350px;
-  position: relative !important;
-  height: auto;
-  overflow: hidden;
-  text-align: left;
-  padding: 0;
-  color: #FFF;
-  border-left: 0;
-  margin:-25px  auto 0;
-}
-.node-type-infographic .field-name-field-thumbnail.field-type-image blockquote.image-field-caption p{
-  padding: 7px 13px;
-  margin: 0;
-  font-size: 0.9rem;
-  float: none;
-}
-
 .key-next-prev-buttons{
 	overflow: hidden;
 }
@@ -10114,4 +10002,153 @@ div.flickr-photoset{
 	margin-top: 1em;
     margin-bottom: 1em;
     clear:both;
+}
+
+/*Caption image legend*/
+
+.view-press-releases .field-name-field-image.field-type-image blockquote.image-field-caption{
+	width: 70px;
+	margin-top: -1px;
+}
+
+
+/*caption images*/
+
+blockquote.image-field-caption{
+	font-size: 1.2rem;
+    background-color: rgba(138,152,197,0.85)!important;
+    position: absolute;
+    bottom: 7px;
+    width: auto;
+    height: 1%;
+    overflow: hidden;
+    text-align: left;
+    padding: 3px 15px;
+    color: #FFF;
+    border-left: 0;
+    margin-bottom: 0px;
+    margin:0;
+    margin-right: 1.5em;
+}
+
+blockquote.image-field-caption p{
+	padding: 0;
+	margin: 0;
+	font-size:1rem;
+	float: left;
+}
+
+blockquote.image-field-caption span.blockquote-copyright{
+	padding: 0;
+	margin: 0;
+	font-size:1rem;
+}
+
+.views-field-field-copyright{
+	margin-bottom: 0px !important;
+}
+
+.views-field-field-copyright .field-content{
+	margin-bottom: 0px !important;
+	font-size: .8em;
+    margin-top: -20px;
+    font-style: italic;
+    color: #989898;
+    position: absolute;
+}
+
+.field-name-field-image.field-type-image{
+	position: relative;
+	clear: both;
+}
+
+
+blockquote.image-field-caption{
+  position: relative;
+  margin-right: 0;
+  margin-top: -29px;
+}
+
+blockquote.image-field-caption p{
+	font-size: 0.7rem;
+	width: auto;
+}
+
+
+.field-name-field-image.field-type-image blockquote.image-field-caption p span{
+	color: #FFF !important;
+}
+
+.node-type-news .field-name-field-image.field-type-image blockquote.image-field-caption {
+    width: auto;
+    position: relative;
+    clear: both;
+    bottom: 29px;
+}
+
+.node-type-dangerous-substances .field-name-field-image.field-type-image blockquote.image-field-caption{
+	max-width: 190px;
+}
+
+.node-publication.view-mode-full .field-name-field-cover-image{
+	position: relative;
+}
+
+.node-type-infographic .field-name-field-image.field-type-image{
+	position: relative;
+}
+
+.node-publication .field-name-field-cover-image blockquote.image-field-caption {
+    width: auto;
+    position: relative;
+    margin-right: 0em;
+    bottom: 7px;
+    max-width: 126px;
+    margin-top: 0;
+
+}
+
+.node-type-infographic .field-name-field-thumbnail.field-type-image blockquote.image-field-caption {
+  font-size: 1.2rem;
+  background-color: rgba(138,152,197,0.85);
+  width: 350px;
+  position: relative !important;
+  height: auto;
+  overflow: hidden;
+  text-align: left;
+  padding: 0;
+  color: #FFF;
+  border-left: 0;
+  margin:-25px  auto 0;
+}
+
+.node-type-infographic .field-name-field-thumbnail.field-type-image blockquote.image-field-caption p{
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+#block-views-infographic-block-1 blockquote.image-field-caption{
+	display: none;
+}
+
+.view .views-row img{
+	width:100px;
+}
+
+.view blockquote.image-field-caption{
+    margin-top: 0px;
+}
+
+.view blockquote.image-field-caption p{
+    width: 65px;
+    word-break: break-word;
+}
+
+.view.view-infographic blockquote.image-field-caption{
+    margin-top: -29px;
+}
+
+.view.view-infographic blockquote.image-field-caption p{
+    width: auto;
+    word-break: break-word;
 }

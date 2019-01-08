@@ -652,10 +652,16 @@ footer {
 .menu-block-3 ul {
 	margin: 1em 0 1em 0;
 }*/
+.menu-block-3 ul li:first-child {
+	float: none;
+	padding: 3em 0em 0.7em 0em;
+}
+
 .menu-block-3 ul li {
 	float: none;
-	padding: 0.7em 0em 0.7em 0em;
+	padding: 1.7em 0em 0.7em 0em;
 }
+
 .link_news_events  {
 	text-align: right;	
 }

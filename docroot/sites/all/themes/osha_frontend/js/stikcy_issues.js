@@ -62,6 +62,12 @@ jQuery( window ).load(function() {
 	width_blog = jQuery( '.node-blog .field-name-field-image img' ).width();
 	jQuery( '.node-blog .image-field-caption' ).css('width' , width_blog - 30);
 
+	width_press_release = jQuery( '.node-press-release .field-name-field-image img' ).width();
+	jQuery( '.node-press-release .image-field-caption' ).css('width' , width_press_release - 30);
+
+	width_themes = jQuery( '.menu-block-3 .introduction-image img' ).width();
+	jQuery( '.menu-block-3 .introduction-image .image-field-caption' ).css('width' , width_themes - 30);
+
 	
 	
 });

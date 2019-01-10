@@ -6521,8 +6521,10 @@ a.tabs-primary__tab-link{
 
 .view-blog .views-row{
 	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);
-	padding-bottom:3.5em;
+	padding-bottom:1.5em;
 	padding-top:1em;
+	float: left;
+	width: 100%;
 }
 
 .view-blog .views-field-field-image{

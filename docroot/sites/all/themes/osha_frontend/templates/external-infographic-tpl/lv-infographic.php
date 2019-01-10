@@ -223,9 +223,9 @@ Tiešās izmaksas kancerogēnu vielu arodekspozīcijas dēļ Eiropā veido 2,4 m
 </div>
 
 </div>
-                <div class="close-icon"><img src="http://euosha.pomilio.it/themes/euosha/img/close.png" /></div>
+                <div class="close-icon"><img src="<?php print base_path().path_to_theme(); ?>/images/external-infographic-images/close.png" /></div>
             </div>
-            <img class="col-7 globe" src="http://euosha.pomilio.it/themes/euosha/img/globe.png" />
+            <img class="col-7 globe" src="<?php print base_path().path_to_theme(); ?>/images/external-infographic-images/globe.png" />
             <div class="right-region click-region col-6">
                 <div class="block-region-right">
     <div>

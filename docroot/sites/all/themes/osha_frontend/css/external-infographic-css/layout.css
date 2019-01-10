@@ -16,6 +16,7 @@ and open the template in the editor.
   float: left;
   position: relative;
   font-family: 'Open Sans', sans-serif;
+  width:100%;
 }
 
 #infogrphics {

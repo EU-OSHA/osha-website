@@ -1,28 +1,28 @@
 
-Module: Piwik - Web analytics
+Module: Matomo Analytics
 Author: Alexander Hass <http://www.hass.de/>
 
 
 Description
 ===========
-Adds the Piwik tracking system to your website.
+Adds the Matomo tracking system to your website.
 
 Requirements
 ============
 
-* Piwik installation
-* Piwik website account
+* Matomo installation
+* Matomo website account
 
 
 Installation
 ============
-* Copy the 'piwik' module directory in to your Drupal
+* Copy the 'matomo' module directory in to your Drupal
 sites/all/modules directory as usual.
 
 
 Usage
 =====
-In the settings page enter your Piwik website ID.
+In the settings page enter your Matomo website ID.
 
 You will also need to define what user roles should be tracked.
 Simply tick the roles you would like to monitor.
@@ -36,30 +36,30 @@ Custom variables
 =================
 One example for custom variables tracking is the "User roles" tracking. Enter
 the below configuration data into the custom variables settings form under
-admin/config/system/piwik.
+admin/config/system/matomo.
 
 Slot: 1
 Name: User roles
-Value: [current-user:piwik-role-names]
+Value: [current-user:matomo-role-names]
 Scope: Visitor
 
 Slot: 1
 Name: User ids
-Value: [current-user:piwik-role-ids]
+Value: [current-user:matomo-role-ids]
 Scope: Visitor
 
-More details about custom variables can be found in the Piwik API documentation
-at http://piwik.org/docs/javascript-tracking/#toc-custom-variables.
+More details about custom variables can be found in the Matomo API documentation
+at http://matomo.org/docs/javascript-tracking/#toc-custom-variables.
 
 
 Advanced Settings
 =================
 You can include additional JavaScript snippets in the advanced
 textarea. These can be found on various blog posts, or on the
-official Piwik pages. Support is not provided for any customisations
+official Matomo pages. Support is not provided for any customisations
 you include.
 
-To speed up page loading you may also cache the piwik.js
+To speed up page loading you may also cache the matomo.js
 file locally. You need to make sure the site file system is in public
 download mode.
 
@@ -67,7 +67,7 @@ download mode.
 Known issues
 ============
 Drupal requirements (http://drupal.org/requirements) tell you to configure 
-PHP with "session.save_handler = user", but your Piwik installation may
+PHP with "session.save_handler = user", but your Matomo installation may
 not work with this configuration and gives you a server error 500.
 
 1. You are able to workaround with the PHP default in your php.ini:
@@ -75,8 +75,8 @@ not work with this configuration and gives you a server error 500.
    [Session]
    session.save_handler = files
 
-2. With Apache you may overwrite the PHP setting for the Piwik directory only.
-   If Piwik is installed in /piwik you are able to create a .htaccess file in
+2. With Apache you may overwrite the PHP setting for the Matomo directory only.
+   If Matomo is installed in /matomo you are able to create a .htaccess file in
    this directory with the below code:
 
    # PHP 4, Apache 1.

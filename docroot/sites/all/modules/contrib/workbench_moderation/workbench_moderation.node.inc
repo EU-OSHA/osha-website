@@ -88,14 +88,15 @@ function workbench_moderation_node_history_view($node) {
   }
 
   // Get all of the node revisions, each with its most recent moderation.
-  $query = db_select('node', 'n');
+  $query = db_select('node', 'n')->extend('PagerDefault');
   $query->leftJoin('node_revision', 'r', 'n.nid = r.nid');
   $query->leftJoin('users', 'u', 'r.uid = u.uid');
   $query->addField('n', 'vid', 'live_revision');
   $query->condition('n.nid', $node->nid)
     ->orderBy('r.vid', 'DESC')
     ->fields('r', array('nid', 'vid', 'title', 'log', 'uid', 'timestamp'))
-    ->fields('u', array('name'));
+    ->fields('u', array('name'))
+    ->limit(30);
 
   $revisions = $query->execute()
     ->fetchAllAssoc('vid');
@@ -222,7 +223,7 @@ function workbench_moderation_node_history_view($node) {
   $header = array(t('Revision'), t('Title'), t('Date'), t('Revision actions'), t('Moderation actions'));
 
   // Return properly styled output.
-  return array(
+  $build['pager_table'] = array(
     '#attached' => array(
       'css' => array(
         drupal_get_path('module', 'workbench_moderation') . '/css/workbench_moderation.css',
@@ -232,6 +233,11 @@ function workbench_moderation_node_history_view($node) {
     '#header' => $header,
     '#rows' => $rows,
   );
+
+  // Attach the pager theme.
+  $build['pager_pager'] = array('#theme' => 'pager');
+
+  return $build;
 }
 
 /**

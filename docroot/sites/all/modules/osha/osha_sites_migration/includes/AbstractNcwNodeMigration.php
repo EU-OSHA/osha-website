@@ -234,13 +234,13 @@ abstract class AbstractNCWNodeMigration extends Migration {
   }
 
   /**
-   * Implements Migration::complete() to configure translations
+   * Implements Migration::complete() to configure translations.
    */
   public function complete($entity, stdClass $row) {
     unset($row->translations['data']['en']);
     if (!empty($row->translations['data']) && $this->allowMigrateTranslation()) {
       $handler = entity_translation_get_handler('node', $entity);
-      foreach($row->translations['data'] as $language => $data) {
+      foreach ($row->translations['data'] as $language => $data) {
         $handler->setTranslation(array(
           'language' => $data['language'],
           'source' => $data['source'],

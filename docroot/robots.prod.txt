@@ -132,3 +132,4 @@ Disallow: /*node/9497
 Disallow: /*node/9102
 Disallow: /*node/9520
 Disallow: /*node/11189
+Disallow: /*wiki-page/*

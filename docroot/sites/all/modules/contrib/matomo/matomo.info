@@ -1,0 +1,13 @@
+name = "Matomo Analytics"
+description = Adds Matomo javascript tracking code to all your site's pages.
+core = 7.x
+package = Statistics
+configure = admin/config/system/matomo
+files[] = matomo.test
+test_dependencies[] = token
+
+; Information added by Drupal.org packaging script on 2018-06-04
+version = "7.x-2.11"
+core = "7.x"
+project = "matomo"
+datestamp = "1528147384"

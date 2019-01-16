@@ -20,15 +20,28 @@
 
 	/*Caption image*/
 
+	.view-news .views-row .field-name-field-image.field-type-image blockquote.image-field-caption{
+		margin-top: -7px;
+	}
+
 	.node-type-news .field-name-field-image.field-type-image blockquote.image-field-caption {
 	    width: auto;
-	    position: relative;
-	    margin-right: 0.8em;
-	    clear: both;
-	    max-width: 191px;
-	    bottom: 35px;
-	    margin: 0 auto;
+	    margin: 0;
+    	bottom: 6px;
+    	text-align: center;
+    	margin:0 auto;
+    	max-width: 190px;
 	}
+
+	.field-name-field-image.field-type-image blockquote.image-field-caption p{
+		width: auto;
+	}
+
+	.node-news img{
+		max-width: auto;
+	}
+
+
 
 	/*Notes to editor*/
 
@@ -639,10 +652,16 @@ footer {
 .menu-block-3 ul {
 	margin: 1em 0 1em 0;
 }*/
+.menu-block-3 ul li:first-child {
+	float: none;
+	padding: 3em 0em 0.7em 0em;
+}
+
 .menu-block-3 ul li {
 	float: none;
-	padding: 0.7em 0em 0.7em 0em;
+	padding: 1.7em 0em 0.7em 0em;
 }
+
 .link_news_events  {
 	text-align: right;	
 }
@@ -672,7 +691,7 @@ footer {
 		#multi-lingual-award{
 			position: absolute;
 			right: 0px;
-			margin-top: 9px;
+			margin-top: 0;
 		}
 		#multi-lingual-award img{
 			max-width: 123px;
@@ -1490,8 +1509,12 @@ body.page-search-publications aside.sidebars_first {
 .node-blog .field-name-field-image img {
 	width: auto;
 	height: auto;
-	margin-left: 1em;
 }
+
+.node-blog .field-name-field-image blockquote {
+	margin: 0 auto;
+}
+
 .node-blog .field-name-title-field {
 	padding-right: 0.7em;
 	padding-left: 0.7em;
@@ -2141,11 +2164,21 @@ a {
 
 /*** 25th anniversary  ***/
 @media screen and (max-width: 1005px) {
+	
 	.field-name-field-image.field-type-image {
 	  text-align: center;
 	}
+
+	.node-dangerous-substances .field-name-field-image.field-type-image {
+	  text-align: left;
+	}
+
+	.view-news .field-name-field-image.field-type-image{
+		text-align: left;
+	}
+
 	.field-name-field-image.field-type-image blockquote.image-field-caption {
-	  text-align: center;
+	  text-align: left;
 	  background-color: rgba(255, 255, 255, 0.85);
 	}
 	.field-name-field-image.field-type-image blockquote.image-field-caption p {
@@ -2199,4 +2232,9 @@ a {
 	text-transform: uppercase;
 	border-bottom: 0px solid #dc2f82!important;
 	font-size: 0.8em!important;
+}
+
+.node-type-25th-anniversary .field-name-field-quote div div{
+    margin-left: 1em;
+    margin-right: 1em;
 }

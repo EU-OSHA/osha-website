@@ -50,3 +50,24 @@ $( window ).on("load resize",function(e){
 	});
 })( jQuery );
 
+
+//Js to adapt the caption to the image
+jQuery( window ).load(function() {
+  	width = jQuery( '.node-news .field-name-field-image img' ).width();
+	jQuery( '.node-news .image-field-caption' ).css('width' , width - 30);
+
+	width_highlight = jQuery( '.node-highlight .field-name-field-image img' ).width();
+	jQuery( '.node-highlight .image-field-caption' ).css('width' , width_highlight - 30);
+
+	width_blog = jQuery( '.node-blog .field-name-field-image img' ).width();
+	jQuery( '.node-blog .image-field-caption' ).css('width' , width_blog - 30);
+
+	width_press_release = jQuery( '.node-press-release .field-name-field-image img' ).width();
+	jQuery( '.node-press-release .image-field-caption' ).css('width' , width_press_release - 30);
+
+	width_themes = jQuery( '.menu-block-3 .introduction-image img' ).width();
+	jQuery( '.menu-block-3 .introduction-image .image-field-caption' ).css('width' , width_themes - 30);
+
+	
+	
+});

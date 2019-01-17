@@ -59,8 +59,11 @@ global $base_url;
       $next_title = truncate($vista25th[$nextC]->node_title,$trimat);
       
       ?>
-      <span class="next-button blue"><a href="<?php print($next_url)?>" class="nexting-button"><span class="nav-info"><?php print t('Next'); ?></span>    
-      <span class="nav-title"> <?php print $next_title?></span></a></span>
+      <span class="next-button blue">
+        <a href="<?php print($next_url)?>" class="nexting-button">
+          <span class="nav-info"><?php print t('Next'); ?></span>
+        </a>
+      </span>
      <?php
     }
     elseif($number25 == $number-1) {//Is the last content so we avoid to show the next button
@@ -68,8 +71,11 @@ global $base_url;
       $prev_title = truncate($vista25th[$prevC]->node_title,$trimat);
       $prev_url = $base_url ."/" .$language->language ."/" . drupal_get_path_alias('node/'.$vista25th[$prevC]->nid,$language->language); 
       ?>
-      <span class="prev-button blue"><a href="<?php print($prev_url)?>" class="previous-button"><span class="nav-info"><?php print t('Previous'); ?></span>
-      <span class="nav-title"> <?php print $prev_title?></span></a></span>
+      <span class="prev-button blue">
+        <a href="<?php print($prev_url)?>" class="previous-button">
+          <span class="nav-info"><?php print t('Previous'); ?></span>
+        </a>
+      </span>
       <?php
     }
     else{
@@ -80,11 +86,17 @@ global $base_url;
       $prev_title = truncate($vista25th[$prevC]->node_title,$trimat);
       $prev_url = $base_url ."/" .$language->language ."/" . drupal_get_path_alias('node/'.$vista25th[$prevC]->nid,$language->language);
       ?>
-      <span class="prev-button blue"><a href="<?php print($prev_url)?>" class="previous-button"><span class="nav-info"><?php print t('Previous'); ?></span>
-      <span class="nav-title"> <?php print $prev_title?></span></a></span>
+      <span class="prev-button blue">
+        <a href="<?php print($prev_url)?>" class="previous-button">
+          <span class="nav-info"><?php print t('Previous'); ?></span>
+        </a>
+      </span>
      
-      <span class="next-button blue"><a href="<?php print($next_url)?>" class="nexting-button"><span class="nav-info"><?php print t('Next'); ?></span>
-      <span class="nav-title"> <?php print $next_title?></span></a></span>
+      <span class="next-button blue">
+        <a href="<?php print($next_url)?>" class="nexting-button">
+          <span class="nav-info"><?php print t('Next'); ?></span>
+        </a>
+      </span>
       <?php
     }
   }

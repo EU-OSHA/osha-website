@@ -9950,6 +9950,8 @@ div.flickr-photoset{
 	background: url(../images/arrow-blue-left.png) no-repeat 0px 4px;
   background-size: 30px 40px;
   padding-left: 35px;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
   border-bottom: none !important;
   display: inline-block;
 }
@@ -9976,6 +9978,8 @@ div.flickr-photoset{
   background: url(../images/arrow-blue-right.png) no-repeat 100% 4px;
   background-size: 30px 40px;
   padding-right: 35px;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
   border-bottom: none !important;
   display: inline-block;
 }

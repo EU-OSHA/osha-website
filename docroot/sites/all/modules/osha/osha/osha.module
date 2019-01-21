@@ -109,10 +109,92 @@ function osha_tokens($type, $tokens, array $data = array(), array $options = arr
 }
 
 /**
+ * Menu callback.
+ */
+function osha_admin_redirection_errors() {
+  $header = array(
+    t('Title'),
+    t('Type'),
+    t('Source'),
+    t('Alias / Redirect'),
+    t('Operations'),
+  );
+
+  $query = db_select('redirect', 'r');
+  $query->join('url_alias', 'a', 'r.source=a.alias and r.redirect=a.source');
+  $query->fields('r', array('rid'));
+  $query->distinct();
+  $query->addField('r', 'redirect', 'redirect_redirect');
+  $query->addField('r', 'source', 'redirect_source');
+  $query->addField('a', 'source', 'url_alias_source');
+  $query->addField('a', 'alias', 'url_alias_alias');
+
+  $query->condition('a.source', '%' . db_like('node/') . '%', 'like');
+  $errors = $query->execute()->fetchAll();
+
+  $rows = array();
+  foreach ($errors as &$item) {
+
+    $nid = NULL;
+    $type = NULL;
+    $title = NULL;
+    $operations = NULL;
+
+    $parts = explode('/', $item->url_alias_source);
+    if (is_numeric($parts[1])) {
+      $n = node_load(intval($parts[1]));
+      $nid = $n->nid;
+      $type = $n->type;
+      $title = l($n->title, 'node/' . $nid,
+        ['attributes' => array('target' => '_blank')]
+      );
+      $edit = l(t('edit'), 'node/' . $nid . '/edit',
+        ['attributes' => array('target' => '_blank')]
+      );
+      $alias = l(t('alias'),
+        'admin/config/search/path/list/' . $item->redirect_source,
+        ['attributes' => array('target' => '_blank')]
+      );
+      $redirect = l(t('redirect'),
+        'admin/config/search/redirect/list/' . $item->redirect_source,
+        ['attributes' => array('target' => '_blank')]
+      );
+      $operations = $edit . ' ' . $alias . ' ' . $redirect;
+    }
+
+    $rows[] = [
+      $title,
+      $type,
+      $item->redirect_redirect,
+      $item->redirect_source,
+      $operations,
+    ];
+  }
+
+  if (empty($rows)) {
+    $output = t('No redirection errors.');
+  }
+  else {
+    // Sort rows by field name.
+    ksort($rows);
+    $output = theme('table', array('header' => $header, 'rows' => $rows));
+  }
+  return $output;
+}
+
+/**
  * Implements hook_menu().
  */
 function osha_menu() {
   $items = array();
+
+  $items['admin/reports/redirection_errors'] = array(
+    'title' => 'Redirection errors',
+    'page callback' => 'osha_admin_redirection_errors',
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+
   $items['imce_images'] = array(
     'title' => 'File browser',
     'page callback' => 'imce',

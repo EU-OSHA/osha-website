@@ -228,3 +228,10 @@ function osha_events_update_7022() {
 function osha_events_update_7023() {
   features_revert(array('osha_events' => array('field_base', 'field_instance')));
 }
+
+/**
+ * MDR-2453 events - Split the date field.
+ */
+function osha_events_update_7024() {
+  features_revert(array('osha_events' => array('views_view')));
+}

@@ -15,7 +15,7 @@
 
         _update : function (ed) {
             var t = this;
-            if (Drupal.settings.osha_linkchecker.urls) {
+            if (typeof(Drupal.settings.osha_linkchecker) != "undefined") {
                 var tx = ed.getContent();
                 for (var i = 0; i < Drupal.settings.osha_linkchecker.urls.length; i++) {
                     var url = Drupal.settings.osha_linkchecker.urls[i];

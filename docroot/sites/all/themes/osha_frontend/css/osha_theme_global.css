@@ -41,6 +41,16 @@
 		max-width: auto;
 	}
 
+	.introduction-image a img{
+		width: 250px;
+	}
+
+	.introduction-image .image-field-caption{
+		width: 220px !important;
+	}
+
+
+
 
 
 	/*Notes to editor*/

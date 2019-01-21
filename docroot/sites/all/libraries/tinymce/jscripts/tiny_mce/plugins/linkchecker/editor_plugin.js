@@ -22,10 +22,9 @@
                     if (tx.indexOf('href="' + url) > 0) {
                         tx = tx.replace('href="' + url, 'data-linkchecker="" href="' + url);
                     }
+                    ed.setContent(tx);
                 }
-                ed.setContent(tx);
             }
-
         },
 
         getInfo: function () {

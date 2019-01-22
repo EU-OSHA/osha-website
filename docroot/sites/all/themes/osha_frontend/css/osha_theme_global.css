@@ -691,7 +691,7 @@ footer {
 		#multi-lingual-award{
 			position: absolute;
 			right: 0px;
-			margin-top: 9px;
+			margin-top: 0;
 		}
 		#multi-lingual-award img{
 			max-width: 123px;

@@ -54,7 +54,12 @@ Disallow: /misc/
 Disallow: /modules/
 Disallow: /profiles/
 Disallow: /scripts/
-Disallow: /themes/
+Disallow: /themes/README.txt
+Disallow: /themes/bartik
+Disallow: /themes/engines
+Disallow: /themes/garland
+Disallow: /themes/seven
+Disallow: /themes/stark
 # Files
 Disallow: /CHANGELOG.txt
 Disallow: /cron.php

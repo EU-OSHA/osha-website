@@ -6,38 +6,20 @@ jQuery(document).ready(function () {
 
 
 function hoverThemes() {
-	jQuery("#block-menu-block-3 ul li").each(function() {
-		var obj=jQuery(this);
-		jQuery(".introduction-image img",this).mouseover(function() {
-		obj.find(".introduction-title").css("border-bottom", "10px solid #DC2E81");
-		obj.find(".introduction-title a").css("background","url('/sites/all/themes/osha_frontend/images/flecha.png') 100% 25% no-repeat").css("padding-right", "1.5em");
+	jQuery("#block-menu-block-3 .menu-block-3 ul li").each(function(index) {
+		var obj=jQuery(this);		
+		jQuery(this).mouseover(function() {
+			obj.addClass('active');
 		});
-	});
-	
-	jQuery("#block-menu-block-3 ul li").each(function() {
-		var obj=jQuery(this);
-		jQuery(".introduction-image img",this).mouseout(function() {
-		obj.find(".introduction-title").css("border-bottom", "10px solid #D2DCED");
-		obj.find(".introduction-title a").css("background","none");
+		jQuery(this).mouseout(function() {
+			obj.removeClass('active');
 		});
+
+		if( jQuery('.blockquote-copyright',this).text().length < 2 ){
+			jQuery('.image-field-caption',this).remove();
+		}
+
 	});
-	
-	jQuery("#block-menu-block-3 ul li").each(function() {
-		var obj=jQuery(this);
-		jQuery(".introduction-title",this).mouseover(function() {
-		obj.find(".introduction-title").css("border-bottom", "10px solid #DC2E81");
-		obj.find(".introduction-title a").css("background","url('/sites/all/themes/osha_frontend/images/flecha.png') 100% 25% no-repeat").css("padding-right", "1.5em");
-		});
-	});
-	
-	jQuery("#block-menu-block-3 ul li").each(function() {
-		var obj=jQuery(this);
-		jQuery(".introduction-title",this).mouseout(function() {
-		obj.find(".introduction-title").css("border-bottom", "10px solid #D2DCED");
-		obj.find(".introduction-title a").css("background","none");
-		});
-	});
-	
 	
 	/*INFOGRAPHICS*/
 	

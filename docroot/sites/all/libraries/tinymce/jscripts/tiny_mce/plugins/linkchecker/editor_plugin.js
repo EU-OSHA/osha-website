@@ -15,17 +15,16 @@
 
         _update : function (ed) {
             var t = this;
-            if (Drupal.settings.osha_linkchecker.urls) {
+            if (typeof(Drupal.settings.osha_linkchecker) != "undefined") {
                 var tx = ed.getContent();
                 for (var i = 0; i < Drupal.settings.osha_linkchecker.urls.length; i++) {
                     var url = Drupal.settings.osha_linkchecker.urls[i];
                     if (tx.indexOf('href="' + url) > 0) {
                         tx = tx.replace('href="' + url, 'data-linkchecker="" href="' + url);
                     }
+                    ed.setContent(tx);
                 }
-                ed.setContent(tx);
             }
-
         },
 
         getInfo: function () {

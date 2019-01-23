@@ -68,6 +68,18 @@ function piwik_requirements($phase) {
   $t = get_t();
 
   switch ($phase) {
+    case 'install':
+      if (module_exists('matomo')) {
+        // https://matomo.org/blog/2018/01/piwik-is-now-matomo/
+        $requirements['piwik_matomo_is_installed'] = array(
+          'title' => $t('Piwik is now Matomo!'),
+          'value' => $t('Fails'),
+          'severity' => REQUIREMENT_ERROR,
+          'description' => $t('Piwik has been renamed to Matomo Analytics. Piwik module is blocked now and cannot re-enabled! Please remove piwik module from your system. It is no longer used.'),
+        );
+      }
+      break;
+
     case 'runtime':
       // Module cannot validate piwik URL without external HTTP requests.
       if (variable_get('drupal_http_request_fails', TRUE) && !system_check_http_request()) {
@@ -267,4 +279,138 @@ function piwik_update_7205() {
   else {
     return t('Custom extensions for download tracking setting found. Update skipped!');
   }
+}
+
+/**
+ * Install Matomo module and migrate all settings.
+ */
+function piwik_update_7206(&$sandbox) {
+  // Make the update hook failing so it can re-run later again.
+  if (!module_load_include('module', 'matomo', 'matomo')) {
+    throw new DrupalUpdateException(t('Matomo module is missing. Download it and re-run update.php'));
+  }
+
+  $module_enabled = module_enable(array('matomo'));
+  if ($module_enabled) {
+    $messages[] = t('Successfully installed matomo module.');
+
+    $piwik_cache = variable_get('piwik_cache', 0);
+    $piwik_codesnippet_before = variable_get('piwik_codesnippet_before', '');
+    $piwik_codesnippet_after = variable_get('piwik_codesnippet_after', '');
+    $piwik_custom = variable_get('piwik_custom', 0);
+    $piwik_custom_var = variable_get('piwik_custom_var', array());
+    $piwik_domain_mode = variable_get('piwik_domain_mode', 0);
+    $piwik_js_scope = variable_get('piwik_js_scope', 'header');
+    $piwik_last_cache = variable_get('piwik_last_cache', 0);
+    $piwik_page_title_hierarchy = variable_get('piwik_page_title_hierarchy', FALSE);
+    $piwik_page_title_hierarchy_exclude_home = variable_get('piwik_page_title_hierarchy_exclude_home', TRUE);
+    $piwik_pages = variable_get('piwik_pages', "admin\nadmin/*\nbatch\nnode/add*\nnode/*/*\nuser/*/*");
+    $piwik_privacy_donottrack = variable_get('piwik_privacy_donottrack', 1);
+    $piwik_roles = variable_get('piwik_roles', array());
+    $piwik_site_id = variable_get('piwik_site_id', '');
+    $piwik_site_search = variable_get('piwik_site_search', FALSE);
+    $piwik_trackcolorbox = variable_get('piwik_trackcolorbox', 1);
+    $piwik_trackmailto = variable_get('piwik_trackmailto', 1);
+    $piwik_track = variable_get('piwik_track', 1);
+    $piwik_trackfiles_extensions = variable_get('piwik_trackfiles_extensions', '7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip');
+    $piwik_trackmessages = variable_get('piwik_trackmessages', array());
+    $piwik_trackuserid = variable_get('piwik_trackuserid', 0);
+    $piwik_translation_set = variable_get('piwik_translation_set', 0);
+    $piwik_url_http = variable_get('piwik_url_http', '');
+    $piwik_url_https = variable_get('piwik_url_https', '');
+    $piwik_visibility_pages = variable_get('piwik_visibility_pages', 0);
+    $piwik_visibility_roles = variable_get('piwik_visibility_roles', 0);
+
+    variable_set('matomo_cache', $piwik_cache);
+    variable_set('matomo_codesnippet_before', $piwik_codesnippet_before);
+    variable_set('matomo_codesnippet_after', $piwik_codesnippet_after);
+    variable_set('matomo_custom', $piwik_custom);
+    variable_set('matomo_custom_var', $piwik_custom_var);
+    variable_set('matomo_domain_mode', $piwik_domain_mode);
+    variable_set('matomo_js_scope', $piwik_js_scope);
+    variable_set('matomo_last_cache', $piwik_last_cache);
+    variable_set('matomo_page_title_hierarchy', $piwik_page_title_hierarchy);
+    variable_set('matomo_page_title_hierarchy_exclude_home', $piwik_page_title_hierarchy_exclude_home);
+    variable_set('matomo_pages', $piwik_pages);
+    variable_set('matomo_privacy_donottrack', $piwik_privacy_donottrack);
+    variable_set('matomo_roles', $piwik_roles);
+    variable_set('matomo_site_id', $piwik_site_id);
+    variable_set('matomo_site_search', $piwik_site_search);
+    variable_set('matomo_trackcolorbox', $piwik_trackcolorbox);
+    variable_set('matomo_trackmailto', $piwik_trackmailto);
+    variable_set('matomo_track', $piwik_track);
+    variable_set('matomo_trackfiles_extensions', $piwik_trackfiles_extensions);
+    variable_set('matomo_trackmessages', $piwik_trackmessages);
+    variable_set('matomo_trackuserid', $piwik_trackuserid);
+    variable_set('matomo_translation_set', $piwik_translation_set);
+    variable_set('matomo_url_http', $piwik_url_http);
+    variable_set('matomo_url_https', $piwik_url_https);
+    variable_set('matomo_visibility_pages', $piwik_visibility_pages);
+    variable_set('matomo_visibility_roles', $piwik_visibility_roles);
+
+    $messages[] = t('Copied settings from piwik to matomo module.');
+
+    // Remove matomo default permissions or duplicate 'rid' error occurs.
+    db_delete('role_permission')
+      ->condition('module', 'matomo')
+      ->execute();
+
+    // Migrate piwik permissions to matomo.
+    $permissions = array(
+      'administer piwik' => 'administer matomo',
+      'opt-in or out of tracking' => 'opt-in or out of matomo tracking',
+      'use PHP for tracking visibility' => 'use php for matomo tracking visibility',
+      'add JS snippets for piwik' => 'add js snippets for matomo',
+    );
+    foreach ($permissions as $permission_old_key => $permission_new_key) {
+      db_update('role_permission')
+        ->fields(array(
+          'permission' => $permission_new_key,
+          'module' => 'matomo',
+        ))
+        ->condition(db_and()
+          ->condition('permission', $permission_old_key)
+          ->condition('module', 'piwik')
+        )
+        ->execute();
+    }
+
+    // Clear the user access cache.
+    drupal_static_reset('user_access');
+    drupal_static_reset('user_role_permissions');
+    $messages[] = t('Moved piwik permissions to matomo module.');
+
+    // Disable piwik modules depending on piwik or the migration will fail.
+    $module_disable = module_disable(array('piwik'), FALSE);
+    if (!module_exists('piwik')) {
+      $messages[] = t('Successfully disabled piwik module.');
+    }
+    else {
+      $messages[] = t('FAILED to disable piwik module.');
+
+      // Unconfigure piwik to remove piwik tracking code; if piwik module may failed to disable.
+      variable_set('piwik_site_id', '');
+      $messages[] = t('Unconfigured site id in piwik module to disable double tracking.');
+    }
+
+    // Uninstall piwik module.
+    $module_uninstalled = drupal_uninstall_modules(array('piwik'), FALSE);
+    if ($module_uninstalled) {
+      // Drupal does not remove all entries as the piwik hook is currently running.
+      db_delete('system')
+        ->condition('name', 'piwik')
+        ->execute();
+      db_delete('cache_bootstrap')
+        ->condition('cid', 'system_list')
+        ->execute();
+
+      $messages[] = t('Successfully uninstalled piwik module. Please remove piwik from your system.');
+      drupal_set_message('Piwik is now Matomo! Matomo has been installed. Please remove Piwik module from your system.', 'warning');
+    }
+    else {
+      $messages[] = t('FAILED to uninstall piwik module.');
+    }
+  }
+
+  return empty($messages) ? t('FAILED to migrate piwik to matomo module. Please uninstall piwik module and install matomo module manually!') : implode(' ', $messages);
 }

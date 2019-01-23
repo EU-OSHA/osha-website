@@ -495,10 +495,11 @@ function osha_events_views_default_views() {
     'multiple_to' => '',
     'osha_date_theme' => '',
   );
-  /* Field: Content: Date */
+  /* Field: Event end date */
   $handler->display->display_options['fields']['field_start_date_1']['id'] = 'field_start_date_1';
   $handler->display->display_options['fields']['field_start_date_1']['table'] = 'field_data_field_start_date';
   $handler->display->display_options['fields']['field_start_date_1']['field'] = 'field_start_date';
+  $handler->display->display_options['fields']['field_start_date_1']['ui_name'] = 'Event end date';
   $handler->display->display_options['fields']['field_start_date_1']['label'] = 'End date';
   $handler->display->display_options['fields']['field_start_date_1']['settings'] = array(
     'format_type' => 'long',
@@ -506,6 +507,7 @@ function osha_events_views_default_views() {
     'multiple_number' => '',
     'multiple_from' => '',
     'multiple_to' => '',
+    'show_remaining_days' => 0,
     'osha_date_theme' => '',
   );
   /* Field: Content: Website of event */
@@ -1315,14 +1317,34 @@ function osha_events_views_default_views() {
   $handler->display->display_options['fields']['field_start_date']['table'] = 'field_data_field_start_date';
   $handler->display->display_options['fields']['field_start_date']['field'] = 'field_start_date';
   $handler->display->display_options['fields']['field_start_date']['ui_name'] = 'Event date';
+  $handler->display->display_options['fields']['field_start_date']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_start_date']['alter']['text'] = '[field_start_date-value]';
   $handler->display->display_options['fields']['field_start_date']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_start_date']['type'] = 'date_plain';
   $handler->display->display_options['fields']['field_start_date']['settings'] = array(
     'format_type' => 'osha_day_only',
-    'fromto' => 'both',
+    'fromto' => 'value',
     'multiple_number' => '',
     'multiple_from' => '',
     'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  /* Field: Event end date */
+  $handler->display->display_options['fields']['field_start_date_1']['id'] = 'field_start_date_1';
+  $handler->display->display_options['fields']['field_start_date_1']['table'] = 'field_data_field_start_date';
+  $handler->display->display_options['fields']['field_start_date_1']['field'] = 'field_start_date';
+  $handler->display->display_options['fields']['field_start_date_1']['ui_name'] = 'Event end date';
+  $handler->display->display_options['fields']['field_start_date_1']['label'] = 'End Date';
+  $handler->display->display_options['fields']['field_start_date_1']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_start_date_1']['alter']['text'] = '[field_start_date_1-value2]';
+  $handler->display->display_options['fields']['field_start_date_1']['type'] = 'date_plain';
+  $handler->display->display_options['fields']['field_start_date_1']['settings'] = array(
+    'format_type' => 'long',
+    'fromto' => 'value2',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
   );
   /* Field: Website of event */
   $handler->display->display_options['fields']['field_website_of_event']['id'] = 'field_website_of_event';
@@ -1988,6 +2010,9 @@ function osha_events_views_default_views() {
     t('Location'),
     t('[field_start_date_1] - Events'),
     t('Data export'),
+    t('[field_start_date-value]'),
+    t('End Date'),
+    t('[field_start_date_1-value2]'),
     t('Username'),
     t('Color (field_color)'),
     t('Unit Ref (field_unit_ref)'),

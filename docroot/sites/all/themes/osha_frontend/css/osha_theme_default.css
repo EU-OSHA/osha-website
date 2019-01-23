@@ -10147,6 +10147,10 @@ blockquote.image-field-caption p{
 	width:100px;
 }
 
+.view .views-row .field-type-file img {
+    width: auto;
+}
+
 .view blockquote.image-field-caption{
     margin-top: 0px;
 }

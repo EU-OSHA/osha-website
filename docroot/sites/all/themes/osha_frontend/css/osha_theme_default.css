@@ -2735,11 +2735,6 @@ font-weight: normal;
 	border-bottom:5px solid #003399;
 }
 
-.view-osha-home-banner-top .view-osha-home-banner-top img{
-	width:100%!important;
-	[;height: auto!important;];
-}
-
 .view-osha-home-banner-top .views-field-title{
 	background: url("../images/background-banner-home.png") repeat-x scroll 0 110% rgba(0, 0, 0, 0);
     color: #ffffff;

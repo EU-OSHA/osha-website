@@ -54,7 +54,12 @@ Disallow: /misc/
 Disallow: /modules/
 Disallow: /profiles/
 Disallow: /scripts/
-Disallow: /themes/
+Disallow: /themes/README.txt
+Disallow: /themes/bartik
+Disallow: /themes/engines
+Disallow: /themes/garland
+Disallow: /themes/seven
+Disallow: /themes/stark
 # Files
 Disallow: /CHANGELOG.txt
 Disallow: /cron.php
@@ -132,4 +137,5 @@ Disallow: /*node/9497
 Disallow: /*node/9102
 Disallow: /*node/9520
 Disallow: /*node/11189
-Disallow: /*wiki-page/*
+Disallow: /*wiki-page
+Disallow: /*oshwiki

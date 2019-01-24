@@ -41,6 +41,14 @@
 		max-width: auto;
 	}
 
+	.introduction-image a img{
+		width: 250px;
+	}
+
+
+
+
+
 
 
 	/*Notes to editor*/
@@ -673,18 +681,7 @@ footer {
 	border-top: 1px dashed #039;
 }
 */
-#main-menu-links .introduction-title a {	
-	position: relative;
-	bottom: inherit;
-}
-.introduction-title {
-	border-bottom: 10px solid #d2dced;
-	display: block;
-	height: auto;
-	letter-spacing: normal;
-	margin-bottom: 0.18em;	
-	padding-left:0.2em;
-}
+
 
 	@media screen and (max-width: 450px) {
 
@@ -2237,4 +2234,48 @@ a {
 .node-type-25th-anniversary .field-name-field-quote div div{
     margin-left: 1em;
     margin-right: 1em;
+}
+
+
+
+
+@media screen and (max-width: 1024px) {
+	.menu-block-3 ul {
+	  list-style-type: none!important;
+	  list-style-image: none!important;
+	  margin: 0;
+	  padding: 0;
+	  display: flex;
+	  flex-wrap: wrap;
+	}
+	.menu-block-3 ul li:first-child {
+	  padding: 0;
+	}
+	.menu-block-3 ul li {
+	  padding: 0;
+    width: 47%;
+	}
+	.introduction-image .image-field-caption{
+		width: 100% !important;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.menu-block-3 blockquote.image-field-caption {
+	  position: relative;
+	  margin-right: 0;
+	  margin-top: 0;
+	}
+	.introduction-image .image-field-caption{
+		width: 100% !important;
+	}
+	.introduction-title {
+		height: 60px;
+	}
+}
+@media screen and (max-width: 680px) {
+	.menu-block-3 ul li {
+	  padding: 0;
+    width: 100%;
+	}
 }

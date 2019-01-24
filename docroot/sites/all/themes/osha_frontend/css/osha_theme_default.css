@@ -1387,16 +1387,18 @@ span.date-display-single{
 	margin:0;
 	padding:0;
 	float: left;
-	margin-right: 1.5em;
-	margin-bottom: 0.5em;
+	margin:0.5rem 2% 0.5rem 0;
 	overflow: hidden;
 	position: relative;
+	width: 30%;
 }
 
-#block-menu-block-3 .introduction-image{
-	position: relative;
+.menu-block-3 ul li.active .introduction-title {
+  border-bottom: 10px solid #DC2E81;
 }
-
+.menu-block-3 ul li.active .introduction-title a {
+  background: url(/sites/all/themes/osha_frontend/images/flecha.png) 100% 0.48rem no-repeat;
+}
 .introduction-title {
 	text-decoration: none;
 	color: #001791!important;
@@ -1411,19 +1413,13 @@ span.date-display-single{
 	border-bottom: 10px solid #d2dced;
 	height: 47px;
 	line-height: 1.2em;
-	padding-top: 1em;
-	padding-bottom: 0.2em;
-	width: 216px;
+	padding: 0;
 	position:relative;
 }
 
 .introduction-title a {
-	/*height:2.4em;*/
-	display: inline-table;
-	vertical-align: top;
-}
-
-.introduction-title  a{
+	display: block;
+  width: 100%;
 	position:absolute;
 	bottom:5px;
 	font-family: 'Open Sans Condensed', sans-serif!important;
@@ -1440,7 +1436,17 @@ span.date-display-single{
 	color: #003399;
 	border:0px!important;
 }
-
+#block-menu-block-3 .introduction-image{
+	position: relative;
+}
+#block-menu-block-3 .introduction-image img{
+	width: 100%;
+}
+.menu-block-3  blockquote.image-field-caption{
+  position: relative;
+  margin-right: 0;
+  margin-top: -31px;
+}
 /*END ARTICLES*/
 
 /*ACCORDION*/
@@ -2733,11 +2739,6 @@ font-weight: normal;
 
 .view-osha-home-banner-top.view-display-id-home_page_banner_top{
 	border-bottom:5px solid #003399;
-}
-
-.view-osha-home-banner-top .view-osha-home-banner-top img{
-	width:100%!important;
-	[;height: auto!important;];
 }
 
 .view-osha-home-banner-top .views-field-title{
@@ -9950,6 +9951,8 @@ div.flickr-photoset{
 	background: url(../images/arrow-blue-left.png) no-repeat 0px 4px;
   background-size: 30px 40px;
   padding-left: 35px;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
   border-bottom: none !important;
   display: inline-block;
 }
@@ -9976,6 +9979,8 @@ div.flickr-photoset{
   background: url(../images/arrow-blue-right.png) no-repeat 100% 4px;
   background-size: 30px 40px;
   padding-right: 35px;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
   border-bottom: none !important;
   display: inline-block;
 }
@@ -9994,8 +9999,8 @@ div.flickr-photoset{
 
 .node-type-25th-anniversary .field-name-field-quote div div{
 	float: none;
-	border-top: 5px solid #536e91;
-	border-bottom: 5px solid #536e91;
+	border-top: 2px solid #536e91;
+	border-bottom: 2px solid #536e91;
 	color: #536e91;
 	padding:2em;
 	background-image: url(../images/quotefirst.png), url(../images/quotesecond.png);
@@ -10137,6 +10142,10 @@ blockquote.image-field-caption p{
 	width:100px;
 }
 
+.view .views-row .field-type-file img {
+    width: auto;
+}
+
 .view blockquote.image-field-caption{
     margin-top: 0px;
 }
@@ -10153,4 +10162,24 @@ blockquote.image-field-caption p{
 .view.view-infographic blockquote.image-field-caption p{
     width: auto;
     word-break: break-word;
+}
+
+/* MDR-2448 - Add "quote feature" in article detail pages (25th anniversary) */
+
+.field-name-body blockquote{
+	float: none;
+	border-top: 2px solid #536e91;
+	border-bottom: 2px solid #536e91;
+	color: #536e91;
+	padding:2em;
+	background-image: url(../images/quotefirst.png), url(../images/quotesecond.png);
+	background-position: left 10px, right 93%;
+	background-repeat: no-repeat;
+	margin-top: 1em;
+    margin-bottom: 1em;
+    clear:both;
+}
+
+.field-name-body blockquote p{
+	margin:0;
 }

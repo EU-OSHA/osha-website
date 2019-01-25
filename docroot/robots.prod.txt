@@ -107,6 +107,6 @@ Disallow: /fop/
 Disallow: */fop/
 Disallow: /*taxonomy/term/*/feed
 Disallow: /*taxonomy/term/*
-Disallow: /*node/
+Disallow: /*node/*
 Disallow: /*wiki-page
 Disallow: /*oshwiki

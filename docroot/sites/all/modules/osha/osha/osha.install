@@ -620,3 +620,10 @@ function osha_update_7046() {
 function osha_update_7047() {
   features_revert(array('osha' => array('wysiwyg')));
 }
+
+/**
+ * MDR-2422 A counter of published web items.
+ */
+function osha_update_7048() {
+  features_revert(array('osha' => array('views_view')));
+}

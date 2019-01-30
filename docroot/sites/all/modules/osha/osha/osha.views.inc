@@ -8,6 +8,13 @@
  */
 function osha_views_query_alter(&$view, &$query) {
   if ($view->name == 'related_content') {
+    if (in_array($view->current_display, ['page_1', 'block_1'])) {
+      if ($query->where[0]['conditions'][1]['value'] == 'news') {
+        $query->where[0]['conditions'][1]['value'] = ['highlight', 'news'];
+        $query->where[0]['conditions'][1]['operator'] = 'IN';
+      }
+    }
+
     foreach ($query->where[0]['conditions'] as $idx => $condition) {
       if ($condition['field'] instanceof DatabaseCondition) {
         $conditions =& $condition['field']->conditions();

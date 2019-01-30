@@ -1387,16 +1387,18 @@ span.date-display-single{
 	margin:0;
 	padding:0;
 	float: left;
-	margin-right: 1.5em;
-	margin-bottom: 0.5em;
+	margin:0.5rem 2% 0.5rem 0;
 	overflow: hidden;
 	position: relative;
+	width: 30%;
 }
 
-#block-menu-block-3 .introduction-image{
-	position: relative;
+.menu-block-3 ul li.active .introduction-title {
+  border-bottom: 10px solid #DC2E81;
 }
-
+.menu-block-3 ul li.active .introduction-title a {
+  background: url(/sites/all/themes/osha_frontend/images/flecha.png) 100% 0.48rem no-repeat;
+}
 .introduction-title {
 	text-decoration: none;
 	color: #001791!important;
@@ -1411,19 +1413,13 @@ span.date-display-single{
 	border-bottom: 10px solid #d2dced;
 	height: 47px;
 	line-height: 1.2em;
-	padding-top: 1em;
-	padding-bottom: 0.2em;
-	width: 216px;
+	padding: 0;
 	position:relative;
 }
 
 .introduction-title a {
-	/*height:2.4em;*/
-	display: inline-table;
-	vertical-align: top;
-}
-
-.introduction-title  a{
+	display: block;
+  width: 100%;
 	position:absolute;
 	bottom:5px;
 	font-family: 'Open Sans Condensed', sans-serif!important;
@@ -1440,7 +1436,17 @@ span.date-display-single{
 	color: #003399;
 	border:0px!important;
 }
-
+#block-menu-block-3 .introduction-image{
+	position: relative;
+}
+#block-menu-block-3 .introduction-image img{
+	width: 100%;
+}
+.menu-block-3  blockquote.image-field-caption{
+  position: relative;
+  margin-right: 0;
+  margin-top: -31px;
+}
 /*END ARTICLES*/
 
 /*ACCORDION*/

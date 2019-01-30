@@ -85,12 +85,29 @@ function osha_tmgmt_menu() {
     'title' => 'Retranslate',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('osha_tmgmt_retranslate_ui_form',1),
-    'access arguments' => array('translate interface'),
+    'access callback' => 'osha_tmgmt_retranslate_access',
+    'access arguments' => array(1),
     'type' => MENU_LOCAL_TASK,
     'file' => 'osha_tmgmt.retranslate.inc',
   );
 
   return $items;
+}
+
+/**
+ * Access callback.
+ */
+function osha_tmgmt_retranslate_access($node) {
+  global $user;
+  $type = is_string($node) ? $node : $node->type;
+
+  if (variable_get('language_content_type_' . $type, 0) == 0) {
+    return FALSE;
+  }
+  if (user_access('translate interface', $user)) {
+    return TRUE;
+  }
+  return FALSE;
 }
 
 /**

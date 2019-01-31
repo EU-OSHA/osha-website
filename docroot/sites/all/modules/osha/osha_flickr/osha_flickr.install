@@ -27,3 +27,10 @@ function osha_flickr_update_7003() {
 function osha_flickr_update_7004() {
   variable_set('pathauto_node_flickr_gallery_pattern', 'photo-gallery/[node:title]');
 }
+
+/**
+ * MDR-2551 - Photo Gallery Expand content from English to all languages.
+ */
+function osha_flickr_update_7005() {
+  features_revert_module('osha_flickr');
+}

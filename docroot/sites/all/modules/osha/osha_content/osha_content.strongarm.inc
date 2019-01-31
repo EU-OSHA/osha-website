@@ -32,7 +32,8 @@ banner
 news
 directive
 guideline
-publication';
+publication
+flickr_gallery';
   $export['no_translation_type_exceptions'] = $strongarm;
 
   return $export;

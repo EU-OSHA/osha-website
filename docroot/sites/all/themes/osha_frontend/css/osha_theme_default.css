@@ -7259,7 +7259,11 @@ div.contextual-links-wrapper{
 /*NEWS AND EVENTS*/
 
 .news_and_events ul li{
-	width:21%;
+	width:20.6%;
+}
+
+.news_and_events ul li .text_news_events{
+	min-height: 90px;
 }
 
 .news_and_events ul li .introduction-title{

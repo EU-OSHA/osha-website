@@ -709,11 +709,12 @@ footer {
 	padding: 0.15em 1em 0.15em 1em!important;
 	width: 99.5%;
 }
+
 .news_and_events .introduction-image {
 	width: auto;
-	float: left;
+	float: none;
 	clear: both;
-	padding-right: 1em;
+	padding-right: 0em;
 	margin-bottom: 0em;
 	min-height: 10em;
 }
@@ -1849,6 +1850,10 @@ a {
 	  width: auto!important;
 }
 
+.section-news-events .field.field-name-body.field-type-text-with-summary.field-label-hidden a img { /*Ico Home*/
+	  width: 100%!important;
+}
+
 .wysiwyg_accordion .img_campaigns{
 	width:auto;
 }
@@ -2272,10 +2277,16 @@ a {
 	.introduction-title {
 		height: 60px;
 	}
+
+
 }
 @media screen and (max-width: 680px) {
 	.menu-block-3 ul li {
-	  padding: 0;
-    width: 100%;
+	 	padding: 0;
+   		width: 100%;
+	}
+
+	.news_and_events ul li .text_news_events{
+		min-height: auto;
 	}
 }

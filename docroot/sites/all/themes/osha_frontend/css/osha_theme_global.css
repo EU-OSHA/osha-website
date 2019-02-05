@@ -1504,7 +1504,7 @@ body.page-search-publications aside.sidebars_first {
 }
 
 .node-blog .field-name-field-image blockquote {
-	margin: 0 auto;
+	margin: -12px  auto;
 }
 
 .node-blog .field-name-title-field {
@@ -2173,10 +2173,6 @@ a {
 		text-align: left;
 	}
 
-	.field-name-field-image.field-type-image blockquote.image-field-caption {
-	  text-align: left;
-	  background-color: rgba(255, 255, 255, 0.85);
-	}
 	.field-name-field-image.field-type-image blockquote.image-field-caption p {
 	  float: none;
 	}

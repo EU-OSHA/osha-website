@@ -51,6 +51,10 @@ h2{
     padding-left: 10px;
 }
 
+.node-type-blog h2{
+	clear: both;
+}
+
 #content ol{
 	padding-left:3em!important;
 	list-style-type:decimal!important;
@@ -1442,10 +1446,8 @@ span.date-display-single{
 #block-menu-block-3 .introduction-image img{
 	width: 100%;
 }
-.menu-block-3  blockquote.image-field-caption{
-  position: relative;
-  margin-right: 0;
-  margin-top: -31px;
+.menu-block-3 blockquote.image-field-caption{
+  display: none;
 }
 /*END ARTICLES*/
 
@@ -7495,7 +7497,6 @@ body.page-node-5429 .oshwiki-featured-articles {
 }
 .node-infographic .field-name-field-thumbnail img{
 	float: none;
-  margin: 1rem auto 2rem;
 	display: block;
 }
 .node-infographic .download-img{
@@ -10025,26 +10026,23 @@ div.flickr-photoset{
 
 blockquote.image-field-caption{
 	font-size: 1.2rem;
-    background-color: rgba(138,152,197,0.85)!important;
-    position: absolute;
-    bottom: 7px;
+    color: #000;
+    background-color: transparent;
+    position: relative;
+    bottom: 0;
     width: auto;
     height: 1%;
-    overflow: hidden;
     text-align: left;
-    padding: 3px 15px;
-    color: #FFF;
     border-left: 0;
-    margin-bottom: 0px;
-    margin:0;
-    margin-right: 1.5em;
+    margin: -12px 0 0 0;
+    line-height: 15px;
 }
 
 blockquote.image-field-caption p{
-	padding: 0;
-	margin: 0;
-	font-size:1rem;
-	float: left;
+	font-size: 0.7rem;
+	width: auto;
+	color:#000;
+	margin-top: 5px;
 }
 
 blockquote.image-field-caption span.blockquote-copyright{
@@ -10059,78 +10057,22 @@ blockquote.image-field-caption span.blockquote-copyright{
 
 .views-field-field-copyright .field-content{
 	margin-bottom: 0px !important;
-	font-size: .8em;
-    margin-top: -20px;
-    font-style: italic;
-    color: #989898;
-    position: absolute;
+	font-size: 0.7rem;
+    color: #000;
+    background-color: transparent;
+    position: relative;
+    bottom: 0;
+    width: auto;
+    height: 1%;
+    text-align: left;
+    border-left: 0;
+    margin: -18px 0 0 0;
+    line-height: 15px;
 }
 
 .field-name-field-image.field-type-image{
 	position: relative;
 	clear: both;
-}
-
-
-blockquote.image-field-caption{
-  position: relative;
-  margin-right: 0;
-  margin-top: -29px;
-}
-
-blockquote.image-field-caption p{
-	font-size: 0.7rem;
-	width: auto;
-}
-
-
-.field-name-field-image.field-type-image blockquote.image-field-caption p span{
-	color: #FFF !important;
-}
-
-.node-type-dangerous-substances .field-name-field-image.field-type-image blockquote.image-field-caption{
-	max-width: 190px;
-}
-
-.node-publication.view-mode-full .field-name-field-cover-image{
-	position: relative;
-}
-
-.node-type-infographic .field-name-field-image.field-type-image{
-	position: relative;
-}
-
-.node-publication .field-name-field-cover-image blockquote.image-field-caption {
-    width: auto;
-    position: relative;
-    margin-right: 0em;
-    bottom: 7px;
-    max-width: 126px;
-    margin-top: 0;
-
-}
-
-.node-type-infographic .field-name-field-thumbnail.field-type-image blockquote.image-field-caption {
-  font-size: 1.2rem;
-  background-color: rgba(138,152,197,0.85);
-  width: 350px;
-  position: relative !important;
-  height: auto;
-  overflow: hidden;
-  text-align: left;
-  padding: 0;
-  color: #FFF;
-  border-left: 0;
-  margin:-25px  auto 0;
-}
-
-.node-type-infographic .field-name-field-thumbnail.field-type-image blockquote.image-field-caption p{
-	padding-left: 15px;
-	padding-right: 15px;
-}
-
-#block-views-infographic-block-1 blockquote.image-field-caption{
-	display: none;
 }
 
 .view .views-row img{
@@ -10142,22 +10084,20 @@ blockquote.image-field-caption p{
 }
 
 .view blockquote.image-field-caption{
-    margin-top: 0px;
+    display: none;
 }
 
-.view blockquote.image-field-caption p{
-    width: 65px;
-    word-break: break-word;
+#block-osha-publication-osha-publication-listing .field-name-field-cover-image .image-field-caption,
+#publication_slideshow .field-name-field-cover-image .image-field-caption{
+	display: none;
 }
 
-.view.view-infographic blockquote.image-field-caption{
-    margin-top: -29px;
+
+
+.node-type-news .field-name-field-image.field-type-image blockquote.image-field-caption {
+    max-width:203px;
 }
 
-.view.view-infographic blockquote.image-field-caption p{
-    width: auto;
-    word-break: break-word;
-}
 
 /* MDR-2448 - Add "quote feature" in article detail pages (25th anniversary) */
 
@@ -10177,16 +10117,4 @@ blockquote.image-field-caption p{
 
 .field-name-body blockquote p{
 	margin:0;
-}
-
-.node-type-news .field-name-field-image.field-type-image blockquote.image-field-caption {
-    width: auto;
-    position: relative;
-    clear: both;
-    bottom: 0;
-    background-color: transparent!important;
-    color:#000;
-    padding-left: 0;
-    max-width:203px;
-    line-height: 15px;
 }

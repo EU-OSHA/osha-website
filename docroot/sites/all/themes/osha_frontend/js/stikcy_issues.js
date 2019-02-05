@@ -55,17 +55,15 @@ $( window ).on("load resize",function(e){
 jQuery( window ).load(function() {
  
 	width_highlight = jQuery( '.node-highlight .field-name-field-image img' ).width();
-	jQuery( '.node-highlight .image-field-caption' ).css('width' , width_highlight - 30);
+	jQuery( '.node-highlight .image-field-caption' ).css('width' , width_highlight);
 
 	width_blog = jQuery( '.node-blog .field-name-field-image img' ).width();
-	jQuery( '.node-blog .image-field-caption' ).css('width' , width_blog - 30);
+	jQuery( '.node-blog .image-field-caption' ).css('width' , width_blog);
 
 	width_press_release = jQuery( '.node-press-release .field-name-field-image img' ).width();
 	jQuery( '.node-press-release .image-field-caption' ).css('width' , width_press_release - 30);
 
-	width_themes = jQuery( '.menu-block-3 .introduction-image img' ).width();
-	jQuery( '.menu-block-3 .introduction-image .image-field-caption' ).css('width' , width_themes - 30);
-
-	
+	width_publications = jQuery( '.node-type-publication .field-name-field-cover-image img' ).width();
+	jQuery( '.node-type-publication .field-name-field-cover-image .image-field-caption' ).css('width' , width_publications);
 	
 });

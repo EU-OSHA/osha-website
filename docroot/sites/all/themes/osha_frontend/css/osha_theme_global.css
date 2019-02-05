@@ -26,11 +26,11 @@
 
 	.node-type-news .field-name-field-image.field-type-image blockquote.image-field-caption {
 	    width: auto;
-	    margin: 0;
-    	bottom: 6px;
-    	text-align: center;
-    	margin:0 auto;
-    	max-width: 190px;
+	    bottom: 6px;
+	    text-align: left;
+	    margin: 0 auto;
+	    max-width: 206px;
+	    padding-left: 0;
 	}
 
 	.field-name-field-image.field-type-image blockquote.image-field-caption p{
@@ -44,12 +44,6 @@
 	.introduction-image a img{
 		width: 250px;
 	}
-
-
-
-
-
-
 
 	/*Notes to editor*/
 

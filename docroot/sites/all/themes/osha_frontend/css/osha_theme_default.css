@@ -3260,10 +3260,8 @@ font-weight: normal;
 
 
 .view-news .views-row .field-name-field-image.field-type-image blockquote.image-field-caption{
-	width:70px;
-	bottom:0;
+	display: none;
 }
-
 
 
 /*END NEWS LIST*/
@@ -10090,13 +10088,6 @@ blockquote.image-field-caption p{
 	color: #FFF !important;
 }
 
-.node-type-news .field-name-field-image.field-type-image blockquote.image-field-caption {
-    width: auto;
-    position: relative;
-    clear: both;
-    bottom: 29px;
-}
-
 .node-type-dangerous-substances .field-name-field-image.field-type-image blockquote.image-field-caption{
 	max-width: 190px;
 }
@@ -10186,4 +10177,16 @@ blockquote.image-field-caption p{
 
 .field-name-body blockquote p{
 	margin:0;
+}
+
+.node-type-news .field-name-field-image.field-type-image blockquote.image-field-caption {
+    width: auto;
+    position: relative;
+    clear: both;
+    bottom: 0;
+    background-color: transparent!important;
+    color:#000;
+    padding-left: 0;
+    max-width:203px;
+    line-height: 15px;
 }

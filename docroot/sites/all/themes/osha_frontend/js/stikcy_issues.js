@@ -53,9 +53,7 @@ $( window ).on("load resize",function(e){
 
 //Js to adapt the caption to the image
 jQuery( window ).load(function() {
-  	width = jQuery( '.node-news .field-name-field-image img' ).width();
-	jQuery( '.node-news .image-field-caption' ).css('width' , width - 30);
-
+ 
 	width_highlight = jQuery( '.node-highlight .field-name-field-image img' ).width();
 	jQuery( '.node-highlight .image-field-caption' ).css('width' , width_highlight - 30);
 

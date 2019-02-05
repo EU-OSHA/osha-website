@@ -65,5 +65,8 @@ jQuery( window ).load(function() {
 
 	width_publications = jQuery( '.node-type-publication .field-name-field-cover-image img' ).width();
 	jQuery( '.node-type-publication .field-name-field-cover-image .image-field-caption' ).css('width' , width_publications);
+
+	width_node_news = jQuery( '.node-type-news .field-name-field-image img' ).width();
+	jQuery( '.node-type-news .image-field-caption' ).css('width' , width_node_news);
 	
 });

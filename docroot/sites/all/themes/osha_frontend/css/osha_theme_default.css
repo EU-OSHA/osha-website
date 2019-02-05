@@ -10093,12 +10093,6 @@ blockquote.image-field-caption span.blockquote-copyright{
 }
 
 
-
-.node-type-news .field-name-field-image.field-type-image blockquote.image-field-caption {
-    max-width:203px;
-}
-
-
 /* MDR-2448 - Add "quote feature" in article detail pages (25th anniversary) */
 
 .field-name-body blockquote{

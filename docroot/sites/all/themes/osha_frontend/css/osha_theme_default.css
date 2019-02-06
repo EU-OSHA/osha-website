@@ -10092,6 +10092,12 @@ blockquote.image-field-caption span.blockquote-copyright{
 	display: none;
 }
 
+.node-type-blog .node-blog .field-name-body ul{
+	padding: 0 0 0 15px;
+	position: relative;
+	left: 15px;
+}
+
 
 /* MDR-2448 - Add "quote feature" in article detail pages (25th anniversary) */
 

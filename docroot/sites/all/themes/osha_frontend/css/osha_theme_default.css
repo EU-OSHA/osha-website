@@ -10112,3 +10112,12 @@ blockquote.image-field-caption span.blockquote-copyright{
 .field-name-body blockquote p{
 	margin:0;
 }
+
+#block-menu-block-6 .menu-block-6 ul li{
+	width: 48%;
+	margin: 0.5rem 1% 0.5rem 1%;
+}
+
+#block-menu-block-6 .menu-block-6 ul li img{
+	width: 100%;
+}

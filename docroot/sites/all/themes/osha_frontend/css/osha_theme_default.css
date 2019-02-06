@@ -6581,6 +6581,11 @@ a.tabs-primary__tab-link{
 	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);
 }
 
+.blog-archive-block{
+	height: 1%;
+	overflow: hidden;
+}
+
 .blog-archive-block h3{
 	background: url("../images/triangle-collapsed.png") no-repeat scroll 96% center #e8eef7 !important;
     border: 0 none;

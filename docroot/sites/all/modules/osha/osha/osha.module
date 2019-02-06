@@ -1038,14 +1038,14 @@ function osha_wysiwyg_plugin($editor, $version=0) {
     );
 
     $plugins['charactersremaining'] = array(
-      'path' => $editor['library path'] . '/plugins/charactersremaining',
+      'path' => 'sites/all/libraries/tinymce/jscripts/tiny_mce/plugins/charactersremaining',
       'extensions' => array('charactersremaining' => t('Characters Remaining')),
       'internal' => TRUE,
       'load' => TRUE,
     );
 
     $plugins['linkchecker'] = array(
-      'path' => $editor['library path'] . '/plugins/linkchecker',
+      'path' => 'sites/all/libraries/tinymce/jscripts/tiny_mce/plugins/charactersremaining',
       'extensions' => array('linkchecker' => t('Linkchecker')),
       'internal' => TRUE,
       'load' => TRUE,

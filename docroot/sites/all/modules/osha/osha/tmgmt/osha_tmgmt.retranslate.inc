@@ -80,7 +80,11 @@ function osha_tmgmt_retranslate_ui_form($form, &$form_state, $node) {
   $form['#fields'] = array();
   foreach ($fields as $field_name => $field) {
     $field_info = field_info_field($field_name);
-    if ($field_info['translatable'] && in_array($field_info['type'], array('text', 'text_with_summary', 'text_long'))) {
+    if (
+      $field_info['translatable'] && in_array($field_info['type'],
+        array('text', 'text_with_summary', 'text_long')
+      )
+    ) {
       $form['#fields'][] = $field_name;
       $value = $wrapper_current->{$field_name}->value();
       if (!empty($value)) {
@@ -133,6 +137,7 @@ function osha_tmgmt_retranslate_ui_form($form, &$form_state, $node) {
             break;
 
           case 'text_long':
+            $value = $value['value'];
             $form[$field_name] = array(
               '#type' => 'checkbox',
               '#prefix' => '<label>' . $fields[$field_name]['label'] . '</label>',
@@ -143,8 +148,8 @@ function osha_tmgmt_retranslate_ui_form($form, &$form_state, $node) {
               $form[$field_name]['#default_value'] = TRUE;
             }
             else {
+              $clean_source_text = OshaTMGMTRetranslate::get_field_value($node->nid, $node->type, $clean_revision, 'en', $field_name);
               if ($value != $clean_source_text) {
-                $clean_source_text = OshaTMGMTRetranslate::get_field_value($node->nid, $node->type, $clean_revision, 'en', $field_name);
                 $form[$field_name]['#default_value'] = TRUE;
               }
             }
@@ -153,7 +158,7 @@ function osha_tmgmt_retranslate_ui_form($form, &$form_state, $node) {
       }
     }
   }
-
+  
   $form['#attached']['css'] = array(
     drupal_get_path('module', 'osha_tmgmt') . '/css/retranslation.css',
   );

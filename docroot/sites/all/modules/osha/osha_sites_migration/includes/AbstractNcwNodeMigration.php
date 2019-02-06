@@ -319,7 +319,6 @@ abstract class AbstractNCWNodeMigration extends Migration {
     $map = $this->getMap();
     $source = $this->getSource();
     $removed = $map->getRowsNeedingUpdate(10000);
-    $to_be_removed = array();
     if (!empty($removed)) {
       // Check if the needs review nodes are indeed missing in source.
       foreach ($removed as $to_remove) {
@@ -333,7 +332,9 @@ abstract class AbstractNCWNodeMigration extends Migration {
         $info = curl_getinfo($curl);
         curl_close($curl);
         if (!empty($info['http_code']) && in_array($info['http_code'], [404, 403])) {
-          node_delete($to_remove->destid1);
+          if ($to_remove->destid1) {
+            node_delete($to_remove->destid1);
+          }
           $this->getMap()->delete(array($to_remove->sourceid1));
           watchdog('osha_sites_migration', 'Deleting NODE that are not in the source anymore (@migration): !nids.',
             array('!nids' => $to_remove->destid1, '@migration' => $this->getMachineName()), WATCHDOG_INFO);

@@ -6595,6 +6595,7 @@ a.tabs-primary__tab-link{
     padding-bottom: 2px;
     padding-left: 10px;
 	cursor:pointer;
+	clear: both;
 }
 
 .blog-archive-block h3.expand{

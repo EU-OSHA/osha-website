@@ -10049,7 +10049,7 @@ blockquote.image-field-caption{
 }
 
 blockquote.image-field-caption p{
-	font-size: 0.7rem;
+	font-size: 10px;
 	width: auto;
 	color:#000;
 	margin-top: 5px;
@@ -10067,7 +10067,7 @@ blockquote.image-field-caption span.blockquote-copyright{
 
 .views-field-field-copyright .field-content{
 	margin-bottom: 0px !important;
-	font-size: 0.7rem;
+	font-size: 10px;
     color: #000;
     background-color: transparent;
     position: relative;

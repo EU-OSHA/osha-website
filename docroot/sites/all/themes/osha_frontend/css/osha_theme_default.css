@@ -947,12 +947,13 @@ span.date-display-single{
 }
 
 .node-publication .field-name-field-publication-bookshop-id span img{
-	background: url("../images/summary_arrow.png") no-repeat scroll 80% 27% rgba(0, 0, 0, 0);
+	background: url("../images/summary_arrow.png") no-repeat scroll 83% 27% rgba(0, 0, 0, 0);
 	margin-right: 0em;
     margin-top: 10px;
     right: 0em;
     padding-right: 7em;
     padding-left: 1em;
+    width: 143px;
 }
 
 .pager .pager-current{

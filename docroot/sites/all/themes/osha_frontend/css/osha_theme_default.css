@@ -10138,3 +10138,8 @@ blockquote.image-field-caption span.blockquote-copyright{
 #block-menu-block-6 .menu-block-6 ul li img{
 	width: 100%;
 }
+
+
+img.file-icon {
+    width: auto!important;
+}

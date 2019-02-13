@@ -494,7 +494,7 @@ function osha_dangerous_substances_filter_process_format($element) {
     $element['#format'] = NULL;
   }
   $element = filter_process_format($element);
-  if ($element['#bundle'] == 'dangerous_substances') {
+  if ((!empty($element['#bundle'])) && ($element['#bundle'] == 'dangerous_substances')) {
     unset($element['format']['guidelines']);
     unset($element['format']['help']);
     $element['format']['format']['#options'] = [

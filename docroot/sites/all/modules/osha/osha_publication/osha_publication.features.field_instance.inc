@@ -917,7 +917,6 @@ function osha_publication_field_default_field_instances() {
         'weight' => 0,
       ),
       'default' => array(
-        'format_type' => 'long',
         'label' => 'above',
         'module' => 'date',
         'settings' => array(
@@ -928,7 +927,6 @@ function osha_publication_field_default_field_instances() {
           'multiple_to' => '',
           'osha_date_theme' => '',
           'show_remaining_days' => FALSE,
-          'show_repeat_rule' => 'show',
         ),
         'type' => 'date_default',
         'weight' => 26,
@@ -1281,9 +1279,8 @@ function osha_publication_field_default_field_instances() {
       ),
       'default' => array(
         'label' => 'hidden',
-        'module' => 'osha_publication',
         'settings' => array(),
-        'type' => 'publication_bookshop_id',
+        'type' => 'hidden',
         'weight' => 4,
       ),
       'highlights_item' => array(

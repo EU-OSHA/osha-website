@@ -70,7 +70,7 @@ function osha_publication_export() {
     $q->condition('t.field_tags_tid', $tags_ids, 'IN');
   }
   if (!empty($_GET['limit'])) {
-    $q->range(0, $_GET['limit']);
+    $q->range(0, intval($_GET['limit']));
   }
   $nids = $q->execute()->fetchAllKeyed();
 
@@ -247,7 +247,7 @@ function osha_publication_req_param($form_state, $name, $default = NULL) {
   if (!empty($_GET[$name])) {
     if (is_array($_GET[$name])) {
       $ret = array();
-      foreach($_GET[$name] as $v) {
+      foreach ($_GET[$name] as $v) {
         $ret[] = check_plain($v);
       }
       return $ret;
@@ -538,7 +538,7 @@ function osha_publication_theme() {
       'variables' => array('file' => NULL, 'delta' => NULL),
     ),
     'osha_publication_bookshop_id_format' => array(
-      'variables' => array('bookshop_id' => NULL, 'delta' => NULL),
+      'variables' => array('title' => NULL),
     ),
     'osha_publication_twin_publications_format' => array(
       'variables' => array('items' => NULL),
@@ -562,6 +562,7 @@ function osha_publication_field_formatter_view($entity_type, $entity, $field, $i
         );
       }
       break;
+
     case 'file_publication_related_res':
       foreach ($items as $delta => $item) {
         $element[$delta] = array(
@@ -571,15 +572,16 @@ function osha_publication_field_formatter_view($entity_type, $entity, $field, $i
         );
       }
       break;
+
     case 'publication_bookshop_id':
       foreach ($items as $delta => $item) {
         $element[$delta] = array(
           '#theme' => 'osha_publication_bookshop_id_format',
-          '#bookshop_id' => $item,
-          '#delta' => $delta,
+          '#title' => check_plain($entity->title),
         );
       }
       break;
+
     case 'publication_twin_publications':
       foreach ($items as $delta => $item) {
 
@@ -589,6 +591,7 @@ function osha_publication_field_formatter_view($entity_type, $entity, $field, $i
         '#items' => $items,
       );
       break;
+
     case 'publication_title_linked':
       $settings = $display['settings'];
       $output = isset($items[0]) ? $items[0]['safe_value'] : '';
@@ -678,15 +681,15 @@ function theme_osha_publication_file_publication_related_res_format($element) {
  * Formats the bookshop id as link to bookshop.europa.eu
  */
 function theme_osha_publication_bookshop_id_format($element) {
-  $code = $element['bookshop_id']['value'];
-  $url = 'http://bookshop.europa.eu/is-bin/INTERSHOP.enfinity/WFS/EU-Bookshop-Site/en_GB/-/EUR/ViewPublication-Start?PublicationKey='.$code;
-  $image_path = drupal_get_path('theme', 'osha_frontend') . '/images/content/EUPublications_logo.svg';
-
-  return empty($code)?'':'<span>'.t('Order a printed copy').
-    '<a href="'.$url.'" target="_blank"><img src="/'.$image_path.
-    '" alt="'.t('EU Publications: You can order a printed copy of this document').
-    '" title="'.t('EU Publications: You can order a printed copy of this document').
-    '"></a></span>';
+  $url = 'https://publications.europa.eu/en/search-results' .
+    '?p_p_id=portal2012searchExecutor_WAR_portal2012portlet_INSTANCE_q8EzsBteHybf' .
+    '&p_p_lifecycle=1&p_p_state=normal&facet.author=OSHA&facet.collection=EUPub' .
+    '&language=en&startRow=1&resultsPerPage=10&SEARCH_TYPE=SIMPLE&queryText=' . urlencode(trim($element['title']));
+  $image_path = drupal_get_path('theme', 'osha_frontend') . '/images/content/eu_bookshop.gif';
+  return '<span>' . t('Order a printed copy') .
+    '<a href="' . $url . '" target="_blank"><img src="/' . $image_path .
+    '" alt="' . t('EU Publications: You can order a printed copy of this document') .
+    '" title="' . t('EU Publications: You can order a printed copy of this document') .
 }
 
 /*

@@ -36,6 +36,16 @@ function osha_publication_menu() {
   return $items;
 }
 
+
+/**
+ * Implements hook_form_alter().
+ */
+function osha_publication_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'publication_node_form') {
+    $form['field_publication_bookshop_id']['#access'] = FALSE;
+  }
+}
+
 function osha_publication_listing_page() {
   return '';
 }

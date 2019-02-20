@@ -685,7 +685,7 @@ function theme_osha_publication_bookshop_id_format($element) {
     '?p_p_id=portal2012searchExecutor_WAR_portal2012portlet_INSTANCE_q8EzsBteHybf' .
     '&p_p_lifecycle=1&p_p_state=normal&facet.author=OSHA&facet.collection=EUPub' .
     '&language=en&startRow=1&resultsPerPage=10&SEARCH_TYPE=SIMPLE&queryText=' . urlencode(trim($element['title']));
-  $image_path = drupal_get_path('theme', 'osha_frontend') . '/images/content/eu_bookshop.gif';
+  $image_path = drupal_get_path('theme', 'osha_frontend') . '/images/content/EUPublications_logo.svg';
   return '<span>' . t('Order a printed copy') .
     '<a href="' . $url . '" target="_blank"><img src="/' . $image_path .
     '" alt="' . t('EU Publications: You can order a printed copy of this document') .

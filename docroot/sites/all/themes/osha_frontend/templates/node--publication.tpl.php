@@ -43,7 +43,17 @@
   if (isset($content['field_aditional_resources'])) {
     hide($content['field_aditional_resources']);
   }
-  print render($content);
+  foreach ($content as $key => $item) {
+    print render($item);
+    if (($view_mode == 'full') && ($key == 'field_banner_publications_office')) {
+        hide($content[$key]);
+        if ($item['#items'][0]['value']) {
+          echo '<div class="field field-name-field-publication-bookshop-id field-type-text field-label-hidden"><div class="field-items"><div class="field-item even">';
+          echo theme('osha_publication_bookshop_id_format', ['title' => $title]);
+          echo '</div></div></div>';
+        }
+    }
+  }
   // render related publications(dynamic from template preprocess_node
   if ( $view_mode == 'full') {
     if ($total_related_publications > 0) { ?>

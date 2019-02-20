@@ -44,7 +44,6 @@
     hide($content['field_aditional_resources']);
   }
   foreach ($content as $key => $item) {
-    print render($item);
     if (($view_mode == 'full') && ($key == 'field_banner_publications_office')) {
         hide($content[$key]);
         if ($item['#items'][0]['value']) {
@@ -52,6 +51,9 @@
           echo theme('osha_publication_bookshop_id_format', ['title' => $title]);
           echo '</div></div></div>';
         }
+    }
+    else {
+      print render($item);
     }
   }
   // render related publications(dynamic from template preprocess_node

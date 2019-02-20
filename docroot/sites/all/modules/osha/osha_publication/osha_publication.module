@@ -690,6 +690,7 @@ function theme_osha_publication_bookshop_id_format($element) {
     '<a href="' . $url . '" target="_blank"><img src="/' . $image_path .
     '" alt="' . t('EU Publications: You can order a printed copy of this document') .
     '" title="' . t('EU Publications: You can order a printed copy of this document') .
+    '"></a></span>';
 }
 
 /*

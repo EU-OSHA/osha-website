@@ -688,9 +688,8 @@ function theme_osha_publication_bookshop_id_format($element) {
   $image_path = drupal_get_path('theme', 'osha_frontend') . '/images/content/eu_bookshop.gif';
   return '<span>' . t('Order a printed copy') .
     '<a href="' . $url . '" target="_blank"><img src="/' . $image_path .
-    '" alt="' . t('EU Bookshop: You can order a printed copy of this document') .
-    '" title="' . t('EU Bookshop: You can order a printed copy of this document') .
-    '"></a></span>';
+    '" alt="' . t('EU Publications: You can order a printed copy of this document') .
+    '" title="' . t('EU Publications: You can order a printed copy of this document') .
 }
 
 /*

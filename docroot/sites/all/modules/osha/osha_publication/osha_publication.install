@@ -316,3 +316,10 @@ function osha_publication_update_7011() {
 function osha_publication_update_7012() {
   features_revert(array('osha_publication' => array('field_instance')));
 }
+
+/**
+ * MDR-2568 change the links to the publications office.
+ */
+function osha_publication_update_7013() {
+  features_revert(array('osha_publication' => array('field_instance')));
+}

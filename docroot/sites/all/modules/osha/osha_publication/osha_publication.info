@@ -18,6 +18,7 @@ dependencies[] = file
 dependencies[] = file_entity
 dependencies[] = i18n_taxonomy
 dependencies[] = image
+dependencies[] = list
 dependencies[] = media
 dependencies[] = multiple_selects
 dependencies[] = number

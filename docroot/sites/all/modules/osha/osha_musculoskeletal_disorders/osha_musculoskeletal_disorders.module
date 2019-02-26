@@ -251,9 +251,6 @@ function _osha_musculoskeletal_disorders_get_other_tid($element, $field, $other_
       return (string) $tid;
     }
   }
-  if (isset($_REQUEST['debug'])) {
-    watchdog('osha_musculoskeletal_disorders', '!field no other value found updated', array('!field' => $field));
-  }
   return '-1';
 }
 
@@ -340,6 +337,4 @@ function osha_musculoskeletal_disorders_add_terms() {
       }
     }
   }
-  watchdog('osha_musculoskeletal_disorders', '!terms_created terms created, !terms_updated terms updated',
-    array('!terms_created' => $terms_created, '!terms_updated' => $terms_updated));
 }

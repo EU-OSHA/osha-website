@@ -48,7 +48,7 @@
         hide($content[$key]);
         if ($item['#items'][0]['value']) {
           echo '<div class="field field-name-field-publication-bookshop-id field-type-text field-label-hidden"><div class="field-items"><div class="field-item even">';
-          echo theme('osha_publication_bookshop_id_format', ['title' => $title]);
+          echo theme('osha_publication_bookshop_id_format', ['title' => $node->title]);
           echo '</div></div></div>';
         }
     }

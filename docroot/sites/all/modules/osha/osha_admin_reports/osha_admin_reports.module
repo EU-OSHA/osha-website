@@ -73,7 +73,11 @@ function template_preprocess_views_data_export_xlsx(&$vars) {
     }
     $data = $view->style_plugin->rendered_fields;
     foreach ($data as $key => $row) {
-      $data[$key] = array_values($row);
+      $values = array_values($row);
+      foreach ($values as &$value) {
+        $value = decode_entities($value);
+      }
+      $data[$key] = $values;
     }
     phpexcel_export($headers, $data, $path);
   }

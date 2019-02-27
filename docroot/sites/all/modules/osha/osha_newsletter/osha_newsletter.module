@@ -359,16 +359,8 @@ function osha_newsletter_block_view($delta = '') {
     case 'osha_newsletter_subscribe':
       if (user_access('access content')) {
         $block['subject'] = t('OSHMail newsletter');
-
         $markup = '<div>';
         $markup .= t(variable_get('subscribe_block_intro_text', 'Get our monthly update on safety and health at work. <a href="@newsletter_page_url">See more info</a><br/>'));
-        $markup .= '<p style="color : #dc2f82;">';
-        $markup .= t(variable_get('subscribe_block_intro_text_second_line_start', 'Join'));
-        $markup .= ' ';
-        $markup .= t(variable_get('subscribe_block_subscribers_no', '65.000'));
-        $markup .= ' ';
-        $markup .= t(variable_get('subscribe_block_intro_text_second_line_end', 'subscribers'));
-        $markup .= '!</p>';
         $markup .= '</div>';
         $link_url = variable_get('subscribe_block_newsletter_page_url', OSHA_NEWSLETTER_PAGE_URL);
         $markup = strtr($markup, array('@newsletter_page_url' => url($link_url)));

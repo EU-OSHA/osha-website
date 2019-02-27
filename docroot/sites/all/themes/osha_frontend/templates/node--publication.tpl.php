@@ -36,16 +36,28 @@
   // We hide the comments and links now so that we can render them later.
   hide($content['comments']);
   hide($content['links']);
-  // unset to render below after a div
+  // Unset to render below after a div.
   if (isset($content['field_related_oshwiki_articles'])) {
     hide($content['field_related_oshwiki_articles']);
   }
   if (isset($content['field_aditional_resources'])) {
     hide($content['field_aditional_resources']);
   }
-  print render($content);
-  // render related publications(dynamic from template preprocess_node
-  if ( $view_mode == 'full') {
+  foreach ($content as $key => $item) {
+    if (($view_mode == 'full') && ($key == 'field_banner_publications_office')) {
+        hide($content[$key]);
+        if ($item['#items'][0]['value']) {
+          echo '<div class="field field-name-field-publication-bookshop-id field-type-text field-label-hidden"><div class="field-items"><div class="field-item even">';
+          echo theme('osha_publication_bookshop_id_format', ['title' => $node->title]);
+          echo '</div></div></div>';
+        }
+    }
+    else {
+      print render($item);
+    }
+  }
+  // Render related publications(dynamic from template preprocess_node).
+  if ($view_mode == 'full') {
     if ($total_related_publications > 0) { ?>
       <div id="related-publications">
         <div class="related_publications_head"><span><?php print t('Related publications');?><span></div>

@@ -316,3 +316,34 @@ function osha_publication_update_7011() {
 function osha_publication_update_7012() {
   features_revert(array('osha_publication' => array('field_instance')));
 }
+
+/**
+ * MDR-2568 change the links to the publications office.
+ */
+function osha_publication_update_7013() {
+  features_revert(array('osha_publication' => array('field_instance')));
+}
+
+/**
+ * MDR-2568 change the links to the publications office.
+ */
+function osha_publication_update_7014() {
+  features_revert(array('osha_publication' => array('field_base', 'field_instance')));
+  $nids = db_select('field_data_field_publication_bookshop_id', 'pb')
+    ->fields('pb', array('entity_id'))
+    ->distinct()
+    ->condition('field_publication_bookshop_id_value', '', '!=')
+    ->execute()
+    ->fetchCol();
+  foreach ($nids as $nid) {
+    $node = node_load($nid);
+    if ($node->field_publication_bookshop_id) {
+      foreach ($node->field_publication_bookshop_id as $lang => $value) {
+        if (!empty($value[0]['value'])) {
+          $node->field_banner_publications_office[$lang][0]['value'] = '1';
+        }
+      }
+      node_save($node);
+    }
+  }
+}

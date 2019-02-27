@@ -11,7 +11,6 @@ include_once 'osha_workflow.pm.inc';
 
 /* Publishing workflow roles */
 define('OSHA_WORKFLOW_ROLE_EDITOR', 'Editor');
-define('OSHA_WORKFLOW_ROLE_DANGEROUS_SUBSTANCES', 'Dangerous substances');
 define('OSHA_WORKFLOW_ROLE_REVIEW_MANAGER', 'Review Manager');
 define('OSHA_WORKFLOW_ROLE_PROJECT_MANAGER', 'Project Manager');
 define('OSHA_WORKFLOW_ROLE_APPROVER', 'Approver');
@@ -507,11 +506,10 @@ function osha_workflow_node_access($node, $operation, $user) {
   $is_rm = OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_REVIEW_MANAGER, $user);
   $is_pm = OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_PROJECT_MANAGER, $user);
   $is_editor = OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_EDITOR, $user);
-  $is_ds = OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_DANGEROUS_SUBSTANCES, $user);
 
   /* Global whitelist independend of create/update */
-  // If is not DS/Editor/PM/RM leave permissions to Drupal
-  if (!$is_ds && !$is_editor && !$is_rm && !$is_pm && !$is_approver) {
+  // If is not Editor/PM/RM leave permissions to Drupal
+  if (!$is_editor && !$is_rm && !$is_pm && !$is_approver) {
     return NODE_ACCESS_IGNORE;
   }
   // Event editors can add any event.
@@ -529,10 +527,6 @@ function osha_workflow_node_access($node, $operation, $user) {
     /* Editor role */
     // Editors are allowed to edit the content in their own section
     if ($is_editor && $bundle_in_editor_section) {
-      return NODE_ACCESS_IGNORE;
-    }
-    // DS are allowed to edit the content in their own section
-    if ($is_ds && $bundle_in_editor_section) {
       return NODE_ACCESS_IGNORE;
     }
 
@@ -858,7 +852,6 @@ function osha_workflow_get_section_term_by_ldap_id($section) {
  * Map bundles to sections code from ldap.
  */
 function osha_workflow_bundle_section_map() {
-  $section = variable_get('musculoskeletal_disorders_section', 'MUSCDIDB');
   return array(
     'news' => 'AWRACT',
     'highlight' => 'AWRACT',
@@ -873,7 +866,7 @@ function osha_workflow_bundle_section_map() {
     'calls' => 'PROCUR',
     'infographic' => 'CORPCM',
     'dangerous_substances' => 'DANGSUDB',
-    'musculoskeletal_disorders' => $section,
+    'musculoskeletal_disorders' => 'MUSCDIDB',
   );
 }
 

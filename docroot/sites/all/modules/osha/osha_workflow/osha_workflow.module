@@ -858,7 +858,6 @@ function osha_workflow_get_section_term_by_ldap_id($section) {
  * Map bundles to sections code from ldap.
  */
 function osha_workflow_bundle_section_map() {
-  $section = variable_get('musculoskeletal_disorders_section', 'MUSCDIDB');
   return array(
     'news' => 'AWRACT',
     'highlight' => 'AWRACT',
@@ -873,7 +872,7 @@ function osha_workflow_bundle_section_map() {
     'calls' => 'PROCUR',
     'infographic' => 'CORPCM',
     'dangerous_substances' => 'DANGSUDB',
-    'musculoskeletal_disorders' => $section,
+    'musculoskeletal_disorders' => 'MUSCDIDB',
   );
 }
 

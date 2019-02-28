@@ -11,7 +11,7 @@ include_once 'osha_workflow.pm.inc';
 
 /* Publishing workflow roles */
 define('OSHA_WORKFLOW_ROLE_EDITOR', 'Editor');
-define('OSHA_WORKFLOW_ROLE_OSH_DB_EDITOR', 'OSH DB editor');
+define('OSHA_WORKFLOW_ROLE_OSH_DB_EDITOR', 'OSH Collaborator');
 define('OSHA_WORKFLOW_ROLE_REVIEW_MANAGER', 'Review Manager');
 define('OSHA_WORKFLOW_ROLE_PROJECT_MANAGER', 'Project Manager');
 define('OSHA_WORKFLOW_ROLE_APPROVER', 'Approver');

@@ -131,7 +131,7 @@ function osha_authentication_user_login(&$edit, $user) {
     foreach ($authorization as $role => $sections) {
       switch ($role) {
         case 'Editor':
-        case 'Dangerous substances':
+        case 'OSH DB editor':
           $user_sections = array_merge($sections, $user_sections);
           break;
 

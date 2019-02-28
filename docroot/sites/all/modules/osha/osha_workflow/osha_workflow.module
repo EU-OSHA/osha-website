@@ -11,6 +11,7 @@ include_once 'osha_workflow.pm.inc';
 
 /* Publishing workflow roles */
 define('OSHA_WORKFLOW_ROLE_EDITOR', 'Editor');
+define('OSHA_WORKFLOW_ROLE_OSH_DB_EDITOR', 'OSH DB editor');
 define('OSHA_WORKFLOW_ROLE_REVIEW_MANAGER', 'Review Manager');
 define('OSHA_WORKFLOW_ROLE_PROJECT_MANAGER', 'Project Manager');
 define('OSHA_WORKFLOW_ROLE_APPROVER', 'Approver');
@@ -506,10 +507,11 @@ function osha_workflow_node_access($node, $operation, $user) {
   $is_rm = OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_REVIEW_MANAGER, $user);
   $is_pm = OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_PROJECT_MANAGER, $user);
   $is_editor = OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_EDITOR, $user);
+  $is_osh_db_editor = OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_OSH_DB_EDITOR, $user);
 
   /* Global whitelist independend of create/update */
-  // If is not Editor/PM/RM leave permissions to Drupal
-  if (!$is_editor && !$is_rm && !$is_pm && !$is_approver) {
+  // If is not DS/Editor/PM/RM leave permissions to Drupal
+  if (!$is_osh_db_editor && !$is_editor && !$is_rm && !$is_pm && !$is_approver) {
     return NODE_ACCESS_IGNORE;
   }
   // Event editors can add any event.
@@ -525,19 +527,23 @@ function osha_workflow_node_access($node, $operation, $user) {
     $bundle_in_pm_section = osha_workflow_bundle_in_pm_section($node, $user);
 
     /* Editor role */
-    // Editors are allowed to edit the content in their own section
+    // Editors are allowed to edit the content in their own section.
     if ($is_editor && $bundle_in_editor_section) {
+      return NODE_ACCESS_IGNORE;
+    }
+    // DS are allowed to edit the content in their own section.
+    if ($is_osh_db_editor && $bundle_in_editor_section) {
       return NODE_ACCESS_IGNORE;
     }
 
     /* Review manager */
-    // Allow Review manager to moderate content in their own section
+    // Allow Review manager to moderate content in their own section.
     if ($is_rm && $bundle_in_rm_section) {
       return NODE_ACCESS_IGNORE;
     }
 
     /* Project manager */
-    // Allow Review manager to moderate content in their own section
+    // Allow Review manager to moderate content in their own section.
     if ($is_pm && $bundle_in_pm_section) {
       return NODE_ACCESS_IGNORE;
     }
@@ -550,7 +556,7 @@ function osha_workflow_node_access($node, $operation, $user) {
     $node_in_pm_section = osha_workflow_node_in_pm_section($node, $user);
 
 
-    // Assuming if not moderated, no workbench access restrictions apply
+    // Assuming if not moderated, no workbench access restrictions apply.
     // @todo: can have workbench_access but without moderation?
     if (!isset($node->workbench_moderation) || !isset($node->workbench_access)) {
       return NODE_ACCESS_IGNORE;
@@ -563,8 +569,8 @@ function osha_workflow_node_access($node, $operation, $user) {
     }
 
     /* Editor role */
-    if($node_in_editor_section) {
-      // If editor is node owner or state is published, allow further editing
+    if ($node_in_editor_section) {
+      // If editor is node owner or state is published, allow further editing.
       if (osha_workflow_get_node_owner($node->nid, $node->uid) == $user->uid || $state == OSHA_WORKFLOW_STATE_PUBLISHED) {
         return NODE_ACCESS_IGNORE;
       }
@@ -584,7 +590,7 @@ function osha_workflow_node_access($node, $operation, $user) {
 
     /* Approver (next approver) */
     if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED && osha_workflow_is_next_approver($node->nid)) {
-      // Approver needs acces to edit because to add comments
+      // Approver needs acces to edit because to add comments.
       return NODE_ACCESS_IGNORE;
     }
   }

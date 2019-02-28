@@ -10,9 +10,9 @@
 function osha_dangerous_substances_user_default_roles() {
   $roles = array();
 
-  // Exported role: OSH DB editor.
-  $roles['OSH DB editor'] = array(
-    'name' => 'OSH DB editor',
+  // Exported role: OSH Collaborator.
+  $roles['OSH Collaborator'] = array(
+    'name' => 'OSH Collaborator',
     'weight' => 13,
   );
 

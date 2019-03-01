@@ -1,5 +1,5 @@
 /*!
-* jQuery meanMenu v2.0.8
+* jQuery meanMenu v2.0.8  (Drupal Responsive Menus version)
 * @Copyright (C) 2012-2014 Chris Wharton @ MeanThemes (https://github.com/meanthemes/meanMenu)
 *
 */
@@ -50,10 +50,14 @@
 				options = $.extend(defaults, options);
 
 				// get browser width
-				var currentWidth = window.innerWidth || document.documentElement.clientWidth;
+				var currentWidth = document.documentElement.clientWidth || document.body.clientWidth;
 
 				return this.each(function () {
 						var meanMenu = options.meanMenuTarget;
+                        // For Drupal, track the original menu, but make a clone and remove
+                        // ul.contextual links for removal of the responsive version.
+                        var meanMenuClone = options.meanMenuTarget.clone();
+                        meanMenuClone.find('.contextual-links-wrapper').remove().find('ul.contextual-links').remove();
 						var meanContainer = options.meanMenuContainer;
 						var meanMenuClose = options.meanMenuClose;
 						var meanMenuCloseSize = options.meanMenuCloseSize;
@@ -87,7 +91,7 @@
 						var meanRevealPos = "";
 						var meanCentered = function() {
 							if (meanRevealPosition === "center") {
-								var newWidth = window.innerWidth || document.documentElement.clientWidth;
+								var newWidth = document.documentElement.clientWidth || document.body.clientWidth;
 								var meanCenter = ( (newWidth/2)-22 )+"px";
 								meanRevealPos = "left:" + meanCenter + ";right:auto;";
 
@@ -147,7 +151,7 @@
 									jQuery('.mean-container').prepend('<div class="mean-bar"><a href="#nav" class="meanmenu-reveal" style="'+meanStyles+'">Show Navigation</a><nav class="mean-nav"></nav></div>');
 
 									//push meanMenu navigation into .mean-nav
-									var meanMenuContents = jQuery(meanMenu).html();
+									var meanMenuContents = jQuery(meanMenuClone).html();
 									jQuery('.mean-nav').html(meanMenuContents);
 
 									// remove all classes from EVERYTHING inside meanmenu nav
@@ -241,7 +245,7 @@
 						if (!isMobile) {
 								// reset menu on resize above meanScreenWidth
 								jQuery(window).resize(function () {
-										currentWidth = window.innerWidth || document.documentElement.clientWidth;
+										currentWidth = document.documentElement.clientWidth || document.body.clientWidth;
 										if (currentWidth > meanScreenWidth) {
 												meanOriginal();
 										} else {
@@ -258,7 +262,7 @@
 
 					jQuery(window).resize(function () {
 								// get browser width
-								currentWidth = window.innerWidth || document.documentElement.clientWidth;
+								currentWidth = document.documentElement.clientWidth || document.body.clientWidth;
 
 								if (!isMobile) {
 										meanOriginal();

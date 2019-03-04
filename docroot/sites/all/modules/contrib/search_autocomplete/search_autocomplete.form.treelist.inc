@@ -3,7 +3,7 @@
 /**
  * @file
  * Search Autocomplete
- * Display the list of form to autocomplete and themis it as a draggable table.
+ * Display the list of form to autocomplete and theme it as a draggable table.
  *
  * Sponsored by:
  * www.axiomcafe.fr
@@ -11,7 +11,7 @@
 
 // ---------------------------------------------------------------------------
 /**
- * Menu Callback: create the form to list the searchforms.
+ * Menu Callback: create the form to list the search forms.
  *
  * @return array
  *   the form
@@ -32,8 +32,8 @@ function search_autocomplete_treelist_form($form, &$form_state) {
     $weight         = $values->weight;
     $enabled        = $values->enabled;
     $parent_fid     = $values->parent_fid;
-    $translite      = variable_get('sa_translite', true);
-    $admin_helper   = variable_get('sa_admin_helper', true);
+    $translite      = variable_get('sa_translite', TRUE);
+    $admin_helper   = variable_get('sa_admin_helper', TRUE);
 
     $form['my_items'][$fid] = array(
       'title' => array(
@@ -91,10 +91,10 @@ function search_autocomplete_treelist_form($form, &$form_state) {
   // Use admin helper tool option settings.
   $title = t('Use autocompletion helper tool for Search Autocomplete administrators.');
   $form['admin_helper'] = array(
-      '#type'           => 'checkbox',
-      '#title'          => $title,
-      '#description'    => t('If enabled, user with "administer Search Autocomplete" permission will be able to use admin helper tool on input fields (recommanded).'),
-      '#default_value'  => $admin_helper,
+    '#type'           => 'checkbox',
+    '#title'          => $title,
+    '#description'    => t('If enabled, user with "administer Search Autocomplete" permission will be able to use admin helper tool on input fields (recommended).'),
+    '#default_value'  => $admin_helper,
   );
 
   // Submit buton.
@@ -162,7 +162,7 @@ function theme_search_autocomplete_treelist_form($variables) {
     );
   }
   // Create table headers.
-  $header = array(t('Form nam'),
+  $header = array(t('Form name'),
     t('Enabled'),
     t('Weight'),
     array(
@@ -170,7 +170,7 @@ function theme_search_autocomplete_treelist_form($variables) {
       'colspan' => 2,
     ),
   );
-  // Themize the table and render the form.
+  // Theme the table and render the form.
   $output  = theme('table', array(
     'header' => $header,
     'rows' => $rows,
@@ -190,6 +190,7 @@ function theme_search_autocomplete_treelist_form($variables) {
 // ---------------------------------------------------------------------------.
 /**
  * Helper function: get the forms from database and render them hierarchically.
+ *
  * Return the items sorted.
  */
 function _search_autocomplete_get_items() {
@@ -225,8 +226,9 @@ function _search_autocomplete_get_ordered_list($parent, $items, $depth = 0) {
       $item->depth = $depth;
       $children[] = $item;
     }
-    else
+    else {
       $remnant[] = $item;
+    }
   }
 
   // Sort the direct children by weight.
@@ -257,7 +259,8 @@ function _search_autocomplete_get_ordered_list($parent, $items, $depth = 0) {
  *   -1 otherwise
  */
 function _search_autocomplete_sort_by_weight($a, $b) {
-  if ($a->weight == $b->weight)
+  if ($a->weight == $b->weight) {
     return 0;
+  }
   return ($a->weight < $b->weight) ? -1 : 1;
 }

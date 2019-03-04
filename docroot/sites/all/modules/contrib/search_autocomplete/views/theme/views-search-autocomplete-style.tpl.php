@@ -1,12 +1,13 @@
 <?php
 /**
- * @file views-views-json-style.tpl.php
+ * @file
  * This template file is never used. The switch for choosing among the different
  * views_search_autocomplete_* themes based on format is done in
  * views_plugin_style_json->theme_functions()
  *
  * - $view: The View object.
- * - $rows: Array of row objects as rendered by _search_autocomplete_render_fields
+ * - $rows: Array of row objects as rendered by
+ *   _search_autocomplete_render_fields
  * - $options: Array of plugin style options
  *
  * @ingroup views_templates
@@ -26,6 +27,6 @@ else :
   $content_type = 'application/json';
   drupal_add_http_header("Content-Type", "$content_type; charset=utf-8");
   print $json;
-  //Don't think this is needed in .tpl.php files: module_invoke_all('exit');
+  // Don't think this is needed in .tpl.php files: module_invoke_all('exit');
   exit;
 endif;

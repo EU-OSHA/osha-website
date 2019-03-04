@@ -15,7 +15,9 @@ files[] = ldap_authentication.admin.inc
 files[] = tests/ldap_authentication.test
 
 ; Information added by Drupal.org packaging script on 2017-02-15
-version = "7.x-2.0-beta12"
+version = "7.x-2.2"
+; patched security update from 7.x-2.2.
+; real version = "7.x-2.0-beta12"
 core = "7.x"
 project = "ldap"
 datestamp = "1487199794"

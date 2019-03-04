@@ -81,7 +81,7 @@ function _ldap_authentication_form_user_profile_form_alter(&$form, $form_state) 
   $auth_conf = ldap_authentication_get_valid_conf();
   if ($auth_conf && ldap_authentication_ldap_authenticated($form['#user'])) {
     if ($auth_conf->emailOption == LDAP_AUTHENTICATION_EMAIL_FIELD_REMOVE) {
-      $form['account']['mail']['#type'] = 'hidden';
+      $form['account']['mail']['#access'] = FALSE;
     }
     elseif ($auth_conf->emailOption == LDAP_AUTHENTICATION_EMAIL_FIELD_DISABLE) {
       $form['account']['mail']['#disabled'] = TRUE;

@@ -277,6 +277,16 @@ function link_field_validate($entity_type, $entity, $field, $instance, $langcode
     }
   }
 
+  foreach ($items as $delta => $value) {
+    if (isset($value['attributes']) && is_string($value['attributes'])) {
+      $errors[$field['field_name']][$langcode][$delta][] = array(
+        'error' => 'link_required',
+        'message' => t('String values are not acceptable for attributes.'),
+        'error_element' => array('url' => TRUE, 'title' => FALSE),
+      );
+    }
+  }
+
   if ($instance['settings']['url'] === 'optional' && $instance['settings']['title'] === 'optional' && $instance['required'] && !$optional_field_found) {
     $errors[$field['field_name']][$langcode][0][] = array(
       'error' => 'link_required',
@@ -444,7 +454,7 @@ function _link_validate(&$item, $delta, $field, $entity, $instance, $langcode, &
   }
   // In a totally bizzaro case, where URLs and titles are optional but the field is required, ensure there is at least one link.
   if ($instance['settings']['url'] === 'optional' && $instance['settings']['title'] === 'optional'
-      && (strlen(trim($item['url'])) !== 0 || strlen(trim($item['title'])) !== 0)) {
+    && (strlen(trim($item['url'])) !== 0 || strlen(trim($item['title'])) !== 0)) {
     $optional_field_found = TRUE;
   }
   // Require entire field.
@@ -460,13 +470,13 @@ function _link_validate(&$item, $delta, $field, $entity, $instance, $langcode, &
 /**
  * Clean up user-entered values for a link field according to field settings.
  *
- * @param array $item 
+ * @param array $item
  *   A single link item, usually containing url, title, and attributes.
- * @param int $delta 
+ * @param int $delta
  *   The delta value if this field is one of multiple fields.
- * @param array $field 
+ * @param array $field
  *   The CCK field definition.
- * @param object $entity 
+ * @param object $entity
  *   The entity containing this link.
  */
 function _link_sanitize(&$item, $delta, &$field, $instance, &$entity) {

@@ -20,7 +20,7 @@ function search_autocomplete_views_plugins() {
         'title'             => t('Autocompletion JSON'),
         'path'              => $path . '/plugins',
         'help'              => t('Displays nodes in the JSON data format.'),
-        'handler'           => 'search_autocomplete_views_plugin_style',
+        'handler'           => 'SearchAutocompleteViewsPluginStyle',
         'theme'             => 'views_search_autocomplete_style',
         'theme file'        => 'views_search_autocomplete_style.theme.inc',
         'theme path'        => $path . '/theme',

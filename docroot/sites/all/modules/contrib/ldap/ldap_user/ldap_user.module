@@ -1108,8 +1108,8 @@ function ldap_user_field_widget_form(&$form, &$form_state, $field, $instance, $l
   switch ($instance['widget']['type']) {
     case 'ldap_user_hidden':
       $element['value'] = $element + array(
-        '#type' => 'hidden',
-        '#default_value' => isset($items[$delta]['value']) ? $items[$delta]['value'] : NULL,
+        '#type' => 'value',
+        '#value' => isset($items[$delta]['value']) ? $items[$delta]['value'] : NULL,
       );
       break;
   }

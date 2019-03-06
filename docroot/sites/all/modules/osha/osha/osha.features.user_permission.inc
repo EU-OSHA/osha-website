@@ -506,7 +506,7 @@ function osha_user_default_permissions() {
   $permissions['use text format dangerous_substances_minimal'] = array(
     'name' => 'use text format dangerous_substances_minimal',
     'roles' => array(
-      'Dangerous substances' => 'Dangerous substances',
+      'OSH Collaborator' => 'OSH Collaborator',
       'administrator' => 'administrator',
     ),
     'module' => 'filter',

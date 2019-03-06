@@ -627,3 +627,13 @@ function osha_update_7047() {
 function osha_update_7048() {
   features_revert(array('osha' => array('views_view')));
 }
+
+/**
+ * MDR-2614 MSDs database entry form comments.
+ */
+function osha_update_7049() {
+  if ($role = user_role_load_by_name('Dangerous substances')) {
+    $role->name = 'OSH DB editor';
+    user_role_save($role);
+  }
+}

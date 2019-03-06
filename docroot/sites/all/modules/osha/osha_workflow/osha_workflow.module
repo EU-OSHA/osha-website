@@ -527,23 +527,23 @@ function osha_workflow_node_access($node, $operation, $user) {
     $bundle_in_pm_section = osha_workflow_bundle_in_pm_section($node, $user);
 
     /* Editor role */
-    // Editors are allowed to edit the content in their own section
+    // Editors are allowed to edit the content in their own section.
     if ($is_editor && $bundle_in_editor_section) {
       return NODE_ACCESS_IGNORE;
     }
-    // DS are allowed to edit the content in their own section
+    // DS are allowed to edit the content in their own section.
     if ($is_ds && $bundle_in_editor_section) {
       return NODE_ACCESS_IGNORE;
     }
 
     /* Review manager */
-    // Allow Review manager to moderate content in their own section
+    // Allow Review manager to moderate content in their own section.
     if ($is_rm && $bundle_in_rm_section) {
       return NODE_ACCESS_IGNORE;
     }
 
     /* Project manager */
-    // Allow Review manager to moderate content in their own section
+    // Allow Review manager to moderate content in their own section.
     if ($is_pm && $bundle_in_pm_section) {
       return NODE_ACCESS_IGNORE;
     }
@@ -556,10 +556,12 @@ function osha_workflow_node_access($node, $operation, $user) {
     $node_in_pm_section = osha_workflow_node_in_pm_section($node, $user);
 
 
-    // Assuming if not moderated, no workbench access restrictions apply
+    // Assuming if not moderated, no workbench access restrictions apply.
     // @todo: can have workbench_access but without moderation?
     if (!isset($node->workbench_moderation) || !isset($node->workbench_access)) {
-      return NODE_ACCESS_IGNORE;
+      if (!in_array($node->type, ['musculoskeletal_disorders', 'dangerous_substances'])) {
+        return NODE_ACCESS_IGNORE;
+      }
     }
 
     $state = $node->workbench_moderation['current']->state;
@@ -569,8 +571,8 @@ function osha_workflow_node_access($node, $operation, $user) {
     }
 
     /* Editor role */
-    if($node_in_editor_section) {
-      // If editor is node owner or state is published, allow further editing
+    if ($node_in_editor_section) {
+      // If editor is node owner or state is published, allow further editing.
       if (osha_workflow_get_node_owner($node->nid, $node->uid) == $user->uid || $state == OSHA_WORKFLOW_STATE_PUBLISHED) {
         return NODE_ACCESS_IGNORE;
       }
@@ -590,7 +592,7 @@ function osha_workflow_node_access($node, $operation, $user) {
 
     /* Approver (next approver) */
     if ($state == OSHA_WORKFLOW_STATE_TO_BE_APPROVED && osha_workflow_is_next_approver($node->nid)) {
-      // Approver needs acces to edit because to add comments
+      // Approver needs acces to edit because to add comments.
       return NODE_ACCESS_IGNORE;
     }
   }

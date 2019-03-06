@@ -26,6 +26,10 @@ version = 7.x-2.x-dev
 
 ; Information added by Drupal.org packaging script on 2017-02-26
 version = "7.x-2.0-rc7"
+;
+version = "7.x-2.19"
+; patched security update from 7.x-2.19.
+; real version = "7.x-2.x-dev..."
 core = "7.x"
 project = "media"
 datestamp = "1488120487"

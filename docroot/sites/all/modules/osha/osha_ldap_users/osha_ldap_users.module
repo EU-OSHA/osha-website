@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * Implements hook_user_load().
+ */
+function osha_ldap_users_user_load($users) {
+  $uids = array_keys($users);
+  if (arg(0) == 'user' && arg(2) == 'devel' && !empty($uids)) {
+    $active = workbench_access_get_active_tree();
+
+    $query = "SELECT access_id FROM {osha_workflow_access_pm} WHERE access_scheme = :access_scheme AND uid = :uid";
+    $pms = db_query($query, array(':access_scheme' => $active['access_scheme']['access_type'], ':uid' => $uids[0]))->fetchAllKeyed(0, 0);
+    foreach ($pms as &$section) {
+      if ($section != 'section') {
+        $section = taxonomy_term_load($section)->name;
+      }
+    }
+    $users[$uids[0]]->access_pms = $pms;
+
+    $query = "SELECT access_id FROM {osha_workflow_access_rm} WHERE access_scheme = :access_scheme AND uid = :uid";
+    $rms = db_query($query, array(':access_scheme' => $active['access_scheme']['access_type'], ':uid' => $uids[0]))->fetchAllKeyed(0, 0);
+    foreach ($rms as &$section) {
+      if ($section != 'section') {
+        $section = taxonomy_term_load($section)->name;
+      }
+    }
+    $users[$uids[0]]->access_rms = $rms;
+  }
+}

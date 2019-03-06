@@ -52,7 +52,7 @@
           echo '</div></div></div>';
         }
     }
-    else {
+    elseif ($key != 'links') {
       print render($item);
     }
   }

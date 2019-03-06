@@ -130,6 +130,9 @@ function osha_translation_alternatives_message_block_view() {
     $extra_languages = osha_disabled_language_list();
     if (!empty($node->translations->data)) {
       $translations = array();
+      if (!empty($extra_languages['nol'])) {
+        unset($extra_languages['nol']);
+      }
       foreach ($extra_languages as $lang) {
         if (!empty($node->translations->data[$lang])
           && !empty($languages[$lang])

@@ -559,7 +559,9 @@ function osha_workflow_node_access($node, $operation, $user) {
     // Assuming if not moderated, no workbench access restrictions apply.
     // @todo: can have workbench_access but without moderation?
     if (!isset($node->workbench_moderation) || !isset($node->workbench_access)) {
-      return NODE_ACCESS_IGNORE;
+      if (!in_array($node->type, ['musculoskeletal_disorders', 'dangerous_substances'])) {
+        return NODE_ACCESS_IGNORE;
+      }
     }
 
     $state = $node->workbench_moderation['current']->state;

@@ -284,6 +284,7 @@ function osha_calls_views_default_views() {
   $handler->display->display_options['filters']['field_expiration_date_value']['table'] = 'field_data_field_expiration_date';
   $handler->display->display_options['filters']['field_expiration_date_value']['field'] = 'field_expiration_date_value';
   $handler->display->display_options['filters']['field_expiration_date_value']['operator'] = '<';
+  $handler->display->display_options['filters']['field_expiration_date_value']['granularity'] = 'minute';
   $handler->display->display_options['filters']['field_expiration_date_value']['default_date'] = 'now';
   /* Filter criterion: Field: Publication date (field_publication_date) */
   $handler->display->display_options['filters']['field_publication_date_value']['id'] = 'field_publication_date_value';

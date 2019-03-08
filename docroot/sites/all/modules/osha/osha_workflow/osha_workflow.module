@@ -602,6 +602,12 @@ function osha_workflow_node_access($node, $operation, $user) {
     }
   }
 
+  if ($operation == 'delete') {
+    $node_in_pm_section = osha_workflow_node_in_pm_section($node, $user);
+    if ($node_in_pm_section && in_array($node->type, ['musculoskeletal_disorders', 'dangerous_substances'])) {
+      return NODE_ACCESS_IGNORE;
+    }
+  }
   return NODE_ACCESS_DENY;
 }
 

@@ -510,7 +510,7 @@ function osha_workflow_node_access($node, $operation, $user) {
   $is_osh_db_editor = OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_OSH_DB_EDITOR, $user);
 
   /* Global whitelist independend of create/update */
-  // If is not DS/Editor/PM/RM leave permissions to Drupal
+  // If is not DS/Editor/PM/RM leave permissions to Drupal.
   if (!$is_osh_db_editor && !$is_editor && !$is_rm && !$is_pm && !$is_approver) {
     return NODE_ACCESS_IGNORE;
   }
@@ -559,7 +559,14 @@ function osha_workflow_node_access($node, $operation, $user) {
     // Assuming if not moderated, no workbench access restrictions apply.
     // @todo: can have workbench_access but without moderation?
     if (!isset($node->workbench_moderation) || !isset($node->workbench_access)) {
-      return NODE_ACCESS_IGNORE;
+      if ($is_pm) {
+        if (!in_array($node->type, ['musculoskeletal_disorders', 'dangerous_substances'])) {
+          return NODE_ACCESS_IGNORE;
+        }
+      }
+      else {
+        return NODE_ACCESS_IGNORE;
+      }
     }
 
     $state = $node->workbench_moderation['current']->state;
@@ -595,6 +602,12 @@ function osha_workflow_node_access($node, $operation, $user) {
     }
   }
 
+  if ($operation == 'delete') {
+    $node_in_pm_section = osha_workflow_node_in_pm_section($node, $user);
+    if ($node_in_pm_section && in_array($node->type, ['musculoskeletal_disorders', 'dangerous_substances'])) {
+      return NODE_ACCESS_IGNORE;
+    }
+  }
   return NODE_ACCESS_DENY;
 }
 

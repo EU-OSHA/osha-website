@@ -85,7 +85,6 @@ if (!empty($campaign_id)) {
                               'attributes' => array('style' => 'border: 0px;max-width: 100%;height:auto;background-color: #ffffff;vertical-align:middle;')
                             )), url('node/' . $node->nid, array('absolute' => TRUE)), array(
                               'html' => TRUE,
-                              'query' => $url_query,
                               'external' => TRUE,
                               'attributes' => array(
                                 'style' => 'display:block;border:1px solid #efefef;',

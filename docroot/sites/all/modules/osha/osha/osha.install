@@ -637,3 +637,11 @@ function osha_update_7049() {
     user_role_save($role);
   }
 }
+
+/**
+ * MDR-2694 Remove the arrows in the Anniversary articles and add 'view all'.
+ */
+function osha_update_7050() {
+  features_revert(array('osha' => array('field_instance')));
+  features_revert(array('osha' => array('views_view')));
+}

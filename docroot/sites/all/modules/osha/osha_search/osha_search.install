@@ -93,3 +93,13 @@ function osha_search_update_7005() {
 function osha_search_update_7006() {
   features_revert_module('osha_search');
 }
+
+/**
+ * MDR-2694 Remove the arrows in the Anniversary articles and add 'view all'.
+ */
+function osha_search_update_7007() {
+  $index = search_api_index_load('default_multilingual_node_index');
+  $index->options['datasource']['bundles'][] = '25th_anniversary';
+  $index->save();
+  features_revert_module('osha_search');
+}

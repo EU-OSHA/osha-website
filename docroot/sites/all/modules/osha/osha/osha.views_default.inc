@@ -27,6 +27,9 @@ function osha_views_default_views() {
   $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['search_api_bypass_access'] = 0;
+  $handler->display->display_options['query']['options']['entity_access'] = 0;
+  $handler->display->display_options['query']['options']['parse_mode'] = 'direct';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '5';
@@ -97,6 +100,59 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = array(
     1 => '1',
   );
+  /* Filter criterion: Indexed Multilingual Content: Item language */
+  $handler->display->display_options['filters']['search_api_language']['id'] = 'search_api_language';
+  $handler->display->display_options['filters']['search_api_language']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['filters']['search_api_language']['field'] = 'search_api_language';
+  $handler->display->display_options['filters']['search_api_language']['value'] = array(
+    'en' => 'en',
+    'bg' => 'bg',
+    'es' => 'es',
+    'cs' => 'cs',
+    'da' => 'da',
+    'de' => 'de',
+    'et' => 'et',
+    'el' => 'el',
+    'fr' => 'fr',
+    'hr' => 'hr',
+    'it' => 'it',
+    'lv' => 'lv',
+    'lt' => 'lt',
+    'hu' => 'hu',
+    'mt' => 'mt',
+    'nl' => 'nl',
+    'pl' => 'pl',
+    'pt' => 'pt',
+    'ro' => 'ro',
+    'sk' => 'sk',
+    'sl' => 'sl',
+    'fi' => 'fi',
+    'sv' => 'sv',
+    'is' => 'is',
+    'no' => 'no',
+  );
+  $handler->display->display_options['filters']['search_api_language']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['search_api_language']['expose']['operator_id'] = 'search_api_language_op';
+  $handler->display->display_options['filters']['search_api_language']['expose']['label'] = 'Item language';
+  $handler->display->display_options['filters']['search_api_language']['expose']['operator'] = 'search_api_language_op';
+  $handler->display->display_options['filters']['search_api_language']['expose']['identifier'] = 'search_api_language';
+  $handler->display->display_options['filters']['search_api_language']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    14 => 0,
+  );
+  $handler->display->display_options['filters']['search_api_language']['expose']['reduce'] = 0;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -120,6 +176,7 @@ function osha_views_default_views() {
     t('Multilingual ID'),
     t('Publication date'),
     t('Relevance'),
+    t('Item language'),
     t('Page'),
   );
   $export['25th_anniversary_articles'] = $view;

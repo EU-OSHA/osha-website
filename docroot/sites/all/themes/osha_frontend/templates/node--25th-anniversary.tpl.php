@@ -15,11 +15,7 @@
   }
   print render($content);
   ?>
-  <?php if ($page) { ?>
-    <div class="more-link"><?php echo l(t('View all'), 'about-eu-osha/our-story/look-back-future'); ?></div>
-  <?php
-  }
-  else { ?>
-    <div class="see-link"><?php echo l(t('See more'), 'node/' . $node->nid); ?></div>
+  <?php if (!$page) { ?>
+      <div class="see-link"><?php echo l(t('See more'), 'node/' . $node->nid); ?></div>
   <?php }?>
 </article>

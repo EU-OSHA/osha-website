@@ -174,16 +174,16 @@ function osha_events_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '3',
+          'weight' => '36',
         ),
         'title' => array(
           'weight' => '4',
         ),
         'path' => array(
-          'weight' => '2',
+          'weight' => '38',
         ),
         'redirect' => array(
-          'weight' => '1',
+          'weight' => '37',
         ),
         'workbench_access' => array(
           'weight' => '1',
@@ -192,7 +192,7 @@ function osha_events_strongarm() {
           'weight' => '4',
         ),
         'xmlsitemap' => array(
-          'weight' => '28',
+          'weight' => '35',
         ),
       ),
       'display' => array(),

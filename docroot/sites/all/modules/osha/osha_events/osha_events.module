@@ -21,29 +21,37 @@ function osha_events_node_access($node, $op, $account) {
  * Implements hook_form_alter().
  */
 function osha_events_form_alter(&$form, &$form_state, $form_id) {
+
+  $form['field_agency_initial_contact']['#access'] = FALSE;
+  $form['field_satisfaction_rate']['#access'] = FALSE;
+  $form['field_event_in_amp']['#access'] = FALSE;
+  $form['field_agency_contact_reply']['#access'] = FALSE;
+  $form['field_number_of_attendees']['#access'] = FALSE;
+  $form['field_organized_by_eu_osha']['#access'] = FALSE;
+
   switch ($form_id) {
     case 'events_node_form':
       $form['#validate'][] = 'osha_events_form_validate';
-      // Activity field changes
+      // Activity field changes.
       if (isset($form['field_activity'][LANGUAGE_NONE][0])) {
         unset($form['field_activity'][LANGUAGE_NONE]['add_more']);
-        // Extract the field field tree to change cardinality
+        // Extract the field field tree to change cardinality.
         $field = $form['field_activity'][LANGUAGE_NONE][0]['tid'];
 
-        // Show the label as usual
+        // Show the label as usual.
         unset($field['#title_display']);
 
         // Field is not required, so add also an empty option.
         $field['#required'] = FALSE;
         $field['#options'] = array('' => t('- None -')) + $field['#options'];
-        // Switch validator
+        // Switch validator.
         $field['#element_validate'] = array('options_field_widget_validate');
 
         $form['field_activity'][LANGUAGE_NONE] = $field;
       }
 
-      // Create new event form
-      if(!isset($form['#node']->nid)){
+      // Create new event form.
+      if (!isset($form['#node']->nid)) {
         drupal_add_js(drupal_get_path('module', 'osha_events') . '/js/new_event_form.js');
       }
 

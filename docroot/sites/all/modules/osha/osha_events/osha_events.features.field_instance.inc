@@ -15,7 +15,7 @@ function osha_events_field_default_field_instances() {
     'bundle' => 'events',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please introduce in this box the text of this section.',
+    'description' => 'Please describe here in an engaging way the event. This text will be published on the website.',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -93,7 +93,7 @@ function osha_events_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 25,
+      'weight' => 28,
     ),
     'workbench_access_field' => 0,
   );
@@ -103,7 +103,7 @@ function osha_events_field_default_field_instances() {
     'bundle' => 'events',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select the appropriate EU-OSHA activity.',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -163,21 +163,15 @@ function osha_events_field_default_field_instances() {
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
+      'active' => 0,
       'module' => 'multiple_selects',
       'settings' => array(
         'apply_chosen' => '',
-        'shs' => array(
-          'create_new_levels' => 0,
-          'create_new_terms' => 0,
-          'force_deepest' => 0,
-          'node_count' => 0,
-          'use_chosen' => 'chosen',
-        ),
       ),
       'type' => 'multiple_selects',
       'weight' => 15,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-events-field_adonis'.
@@ -185,7 +179,7 @@ function osha_events_field_default_field_instances() {
     'bundle' => 'events',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'References number of the invitation and the Agency’s reply must be included in this field.',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -238,7 +232,7 @@ function osha_events_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_adonis',
-    'label' => 'Adonis',
+    'label' => 'Ares/Adonis',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -259,6 +253,7 @@ function osha_events_field_default_field_instances() {
       'type' => 'text_textfield',
       'weight' => 13,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-events-field_agency_contact_reply'.
@@ -338,7 +333,7 @@ function osha_events_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 22,
+      'weight' => 25,
     ),
   );
 
@@ -419,7 +414,7 @@ function osha_events_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 18,
+      'weight' => 19,
     ),
   );
 
@@ -428,7 +423,7 @@ function osha_events_field_default_field_instances() {
     'bundle' => 'events',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please add here the initials of the staff member attending the event.',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -500,8 +495,9 @@ function osha_events_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 19,
+      'weight' => 20,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-events-field_agency_role'.
@@ -509,7 +505,7 @@ function osha_events_field_default_field_instances() {
     'bundle' => 'events',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please select the role that the Agency is playing in this event.',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -575,6 +571,84 @@ function osha_events_field_default_field_instances() {
       'type' => 'multiple_selects',
       'weight' => 17,
     ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'node-events-field_agenda'.
+  $field_instances['node-events-field_agenda'] = array(
+    'bundle' => 'events',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please indicate, if the agenda of the event is available.',
+    'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 35,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_agenda',
+    'label' => 'Agenda',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
+      'type' => 'options_select',
+      'weight' => 12,
+    ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-events-field_city'.
@@ -582,7 +656,7 @@ function osha_events_field_default_field_instances() {
     'bundle' => 'events',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Mandatory',
+    'description' => 'Use capital letters only for the first letter (ex. Bilbao).',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -657,7 +731,7 @@ function osha_events_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 8,
+      'weight' => 6,
     ),
     'workbench_access_field' => 0,
   );
@@ -735,7 +809,7 @@ Grey - Only web or not attendance',
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 27,
+      'weight' => 30,
     ),
     'workbench_access_field' => 0,
   );
@@ -745,7 +819,7 @@ Grey - Only web or not attendance',
     'bundle' => 'events',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please add here any information, which could be useful for decision-making purposes.',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -817,7 +891,7 @@ Grey - Only web or not attendance',
         'size' => 255,
       ),
       'type' => 'text_textfield',
-      'weight' => 23,
+      'weight' => 26,
     ),
     'workbench_access_field' => 0,
   );
@@ -896,7 +970,7 @@ Grey - Only web or not attendance',
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 7,
+      'weight' => 5,
     ),
     'workbench_access_field' => 0,
   );
@@ -974,7 +1048,7 @@ Grey - Only web or not attendance',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 21,
+      'weight' => 24,
     ),
     'workbench_access_field' => 0,
   );
@@ -988,7 +1062,7 @@ Grey - Only web or not attendance',
       ),
     ),
     'deleted' => 0,
-    'description' => 'Mandatory',
+    'description' => 'Please choose the appropriate type of event.',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -1054,7 +1128,84 @@ Grey - Only web or not attendance',
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 4,
+      'weight' => 1,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'node-events-field_fast'.
+  $field_instances['node-events-field_fast'] = array(
+    'bundle' => 'events',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please indicate if this event is supported by the Agency via the FAST scheme or not.',
+    'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 34,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_fast',
+    'label' => 'FAST',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
+      'type' => 'options_select',
+      'weight' => 18,
     ),
     'workbench_access_field' => 0,
   );
@@ -1146,7 +1297,7 @@ Grey - Only web or not attendance',
         'year_range' => '-100:+1',
       ),
       'type' => 'date_popup',
-      'weight' => 5,
+      'weight' => 3,
     ),
   );
 
@@ -1159,7 +1310,7 @@ Grey - Only web or not attendance',
       ),
     ),
     'deleted' => 0,
-    'description' => 'Mandatory',
+    'description' => 'Please indicate, if event’s item should be published on the website or not.',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -1223,7 +1374,84 @@ Grey - Only web or not attendance',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 11,
+      'weight' => 9,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'node-events-field_key_performance'.
+  $field_instances['node-events-field_key_performance'] = array(
+    'bundle' => 'events',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please indicate, if this event is to be counted in the framework of the KPI monitoring framework.',
+    'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 31,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_key_performance',
+    'label' => 'Key Performance Indicator',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
+      'type' => 'options_select',
+      'weight' => 10,
     ),
     'workbench_access_field' => 0,
   );
@@ -1233,7 +1461,7 @@ Grey - Only web or not attendance',
     'bundle' => 'events',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Place where the event takes place.',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -1306,7 +1534,84 @@ Grey - Only web or not attendance',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 9,
+      'weight' => 7,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'node-events-field_media_promotion'.
+  $field_instances['node-events-field_media_promotion'] = array(
+    'bundle' => 'events',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'If you want some special promotion for this event, please contact the editorial team at urrutia@osha.europa.eu at least 4 weeks before the event is taking place.',
+    'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 32,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_media_promotion',
+    'label' => 'Media/promotion',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
+      'type' => 'options_select',
+      'weight' => 22,
     ),
     'workbench_access_field' => 0,
   );
@@ -1383,10 +1688,10 @@ Grey - Only web or not attendance',
       'active' => 1,
       'module' => 'options',
       'settings' => array(
-        'display_label' => 0,
+        'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 33,
+      'weight' => 34,
     ),
     'workbench_access_field' => 0,
   );
@@ -1462,7 +1767,7 @@ Grey - Only web or not attendance',
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 29,
+      'weight' => 31,
     ),
     'workbench_access_field' => 0,
   );
@@ -1540,7 +1845,7 @@ Grey - Only web or not attendance',
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 24,
+      'weight' => 27,
     ),
   );
 
@@ -1549,7 +1854,7 @@ Grey - Only web or not attendance',
     'bundle' => 'events',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Mandatory',
+    'description' => 'Please indicate here the organisation responsible for the organisation of the event. If an acronym exists for the organisation, please include “acronym (UPPERCASE) ‘-‘complete name (sentence case)”: (i.e.. HSE – Health and Safety Executive).',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -1622,7 +1927,7 @@ Grey - Only web or not attendance',
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 5,
+      'weight' => 2,
     ),
     'workbench_access_field' => 0,
   );
@@ -1702,7 +2007,84 @@ Grey - Only web or not attendance',
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 6,
+      'weight' => 4,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'node-events-field_publications_exhibition_su'.
+  $field_instances['node-events-field_publications_exhibition_su'] = array(
+    'bundle' => 'events',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please download the publications request form and send it to the publications team at least 4 weeks before the event is taking place.',
+    'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 33,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_publications_exhibition_su',
+    'label' => 'Publications/exhibition support',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
+      'type' => 'options_select',
+      'weight' => 21,
     ),
     'workbench_access_field' => 0,
   );
@@ -1711,7 +2093,7 @@ Grey - Only web or not attendance',
   $field_instances['node-events-field_related_documents'] = array(
     'bundle' => 'events',
     'deleted' => 0,
-    'description' => 'Events Related resources file.',
+    'description' => 'Please attach here the agenda and any other relevant events related documentation (i.e.  presentations, call for abstracts, leaflets, brochures).',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -1809,7 +2191,7 @@ Grey - Only web or not attendance',
         'manualcrop_thumblist' => 0,
       ),
       'type' => 'media_generic',
-      'weight' => 26,
+      'weight' => 29,
     ),
     'workbench_access_field' => 0,
   );
@@ -1887,7 +2269,7 @@ Grey - Only web or not attendance',
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 20,
+      'weight' => 23,
     ),
   );
 
@@ -1966,7 +2348,7 @@ Grey - Only web or not attendance',
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 31,
+      'weight' => 33,
     ),
     'workbench_access_field' => 0,
   );
@@ -2065,7 +2447,7 @@ Grey - Only web or not attendance',
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 30,
+      'weight' => 32,
     ),
     'workbench_access_field' => 0,
   );
@@ -2074,7 +2456,7 @@ Grey - Only web or not attendance',
   $field_instances['node-events-field_start_date'] = array(
     'bundle' => 'events',
     'deleted' => 0,
-    'description' => 'Mandatory',
+    'description' => 'Select the date from the calendar.',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -2186,7 +2568,7 @@ Grey - Only web or not attendance',
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 10,
+      'weight' => 8,
     ),
     'workbench_access_field' => 0,
   );
@@ -2196,7 +2578,7 @@ Grey - Only web or not attendance',
     'bundle' => 'events',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Mandatory',
+    'description' => 'Please choose the tag correctly, as the events item will be displayed in the corresponding section of the corporate website. Pay special attention to campaign related events, as those events also appear on the campaign website.',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -2272,7 +2654,7 @@ Grey - Only web or not attendance',
     'bundle' => 'events',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please select the appropriate EU-OSHA unit.',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -2332,7 +2714,7 @@ Grey - Only web or not attendance',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 0,
+      'active' => 1,
       'module' => 'options',
       'settings' => array(
         'apply_chosen' => '',
@@ -2348,7 +2730,7 @@ Grey - Only web or not attendance',
     'bundle' => 'events',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Please insert here the URL of the website, where the event is promoted by its organiser and more information about the event can be found.',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -2438,7 +2820,7 @@ Grey - Only web or not attendance',
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 12,
+      'weight' => 11,
     ),
     'workbench_access_field' => 0,
   );
@@ -2448,7 +2830,7 @@ Grey - Only web or not attendance',
     'bundle' => 'events',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Mandatory',
+    'description' => 'Please add here the official title of the event. Please do not use ALL CAPS, but sentence case (i.e. Towards Better Work and Well-being).',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -2625,11 +3007,12 @@ Grey - Only web or not attendance',
   // Translatables
   // Included for use with string extractors like potx.
   t('Activity');
-  t('Adonis');
   t('Agency contact / reply');
   t('Agency initial contact');
   t('Agency rep confirmed');
   t('Agency role');
+  t('Agenda');
+  t('Ares/Adonis');
   t('Category/Tag');
   t('City');
   t('Color');
@@ -2638,29 +3021,53 @@ Grey - Only web or not attendance',
   t('Date');
   t('Description');
   t('Event in AMP');
-  t('Events Related resources file.');
+  t('FAST');
   t('Flickr date taken');
   t('For the web / Public');
   t('Grab Flickr photos taken on or between these dates only.');
+  t('If you want some special promotion for this event, please contact the editorial team at urrutia@osha.europa.eu at least 4 weeks before the event is taking place.');
+  t('Key Performance Indicator');
   t('Location');
   t('Mandatory');
+  t('Media/promotion');
   t('Migrate to HWC');
   t('Migration Source');
   t('Name');
   t('Number of attendees');
   t('Organization');
   t('Organized by EU-OSHA');
-  t('Please introduce in this box the text of this section.');
+  t('Place where the event takes place.');
+  t('Please add here any information, which could be useful for decision-making purposes.');
+  t('Please add here the initials of the staff member attending the event.');
+  t('Please add here the official title of the event. Please do not use ALL CAPS, but sentence case (i.e. Towards Better Work and Well-being).');
+  t('Please attach here the agenda and any other relevant events related documentation (i.e.  presentations, call for abstracts, leaflets, brochures).');
+  t('Please choose the appropriate type of event.');
+  t('Please choose the tag correctly, as the events item will be displayed in the corresponding section of the corporate website. Pay special attention to campaign related events, as those events also appear on the campaign website.');
+  t('Please describe here in an engaging way the event. This text will be published on the website.');
+  t('Please download the publications request form and send it to the publications team at least 4 weeks before the event is taking place.');
+  t('Please indicate here the organisation responsible for the organisation of the event. If an acronym exists for the organisation, please include “acronym (UPPERCASE) ‘-‘complete name (sentence case)”: (i.e.. HSE – Health and Safety Executive).');
+  t('Please indicate if this event is supported by the Agency via the FAST scheme or not.');
+  t('Please indicate, if event’s item should be published on the website or not.');
+  t('Please indicate, if the agenda of the event is available.');
+  t('Please indicate, if this event is to be counted in the framework of the KPI monitoring framework.');
+  t('Please insert here the URL of the website, where the event is promoted by its organiser and more information about the event can be found.');
+  t('Please select the appropriate EU-OSHA unit.');
+  t('Please select the role that the Agency is playing in this event.');
+  t('Publications/exhibition support');
   t('Red: TBD - TBC <br />
 Black - Confirmed <br />
 Grey - Only web or not attendance');
+  t('References number of the invitation and the Agency’s reply must be included in this field.');
   t('Related resources');
   t('Satisfaction rate');
+  t('Select the appropriate EU-OSHA activity.');
+  t('Select the date from the calendar.');
   t('Show in NCW');
   t('Source url');
   t('Title');
   t('Type');
   t('Unit Ref');
+  t('Use capital letters only for the first letter (ex. Bilbao).');
   t('Website of event');
   t('You should enter a number between 1 and 100');
 

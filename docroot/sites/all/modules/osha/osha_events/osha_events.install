@@ -235,3 +235,10 @@ function osha_events_update_7023() {
 function osha_events_update_7024() {
   features_revert(array('osha_events' => array('views_view')));
 }
+
+/**
+ * MDR-2609 NCW Backend Events List - several improvements.
+ */
+function osha_events_update_7025() {
+  features_revert_module('osha_events');
+}

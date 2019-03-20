@@ -24,6 +24,7 @@ function osha_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = '25th Anniversary';
   $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_text'] = 'See more';
   $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -39,6 +40,10 @@ function osha_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'entity';
   $handler->display->display_options['row_options']['view_mode'] = 'teaser';
+  /* Header: Global: Unfiltered text */
+  $handler->display->display_options['header']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['header']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['header']['area_text_custom']['field'] = 'area_text_custom';
   /* Field: Indexed Multilingual Content: Multilingual ID */
   $handler->display->display_options['fields']['search_api_et_id']['id'] = 'search_api_et_id';
   $handler->display->display_options['fields']['search_api_et_id']['table'] = 'search_api_index_default_multilingual_node_index';
@@ -160,7 +165,7 @@ function osha_views_default_views() {
   $translatables['25th_anniversary_articles'] = array(
     t('Master'),
     t('25th Anniversary'),
-    t('more'),
+    t('See more'),
     t('Apply'),
     t('Reset'),
     t('Sort by'),
@@ -178,6 +183,7 @@ function osha_views_default_views() {
     t('Relevance'),
     t('Item language'),
     t('Page'),
+    t('more'),
   );
   $export['25th_anniversary_articles'] = $view;
 
@@ -1301,7 +1307,7 @@ function osha_views_default_views() {
   $handler->display->display_options['fields']['field_tags_1']['type'] = 'i18n_taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_tags_1']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_tags_1']['separator'] = '\\n';
-  /* Field: Content: Adonis */
+  /* Field: Content: Ares/Adonis */
   $handler->display->display_options['fields']['field_adonis']['id'] = 'field_adonis';
   $handler->display->display_options['fields']['field_adonis']['table'] = 'field_data_field_adonis';
   $handler->display->display_options['fields']['field_adonis']['field'] = 'field_adonis';
@@ -2140,7 +2146,7 @@ function osha_views_default_views() {
   $handler->display->display_options['fields']['field_tags_1']['type'] = 'i18n_taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_tags_1']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_tags_1']['separator'] = '\\n';
-  /* Field: Content: Adonis */
+  /* Field: Content: Ares/Adonis */
   $handler->display->display_options['fields']['field_adonis']['id'] = 'field_adonis';
   $handler->display->display_options['fields']['field_adonis']['table'] = 'field_data_field_adonis';
   $handler->display->display_options['fields']['field_adonis']['field'] = 'field_adonis';

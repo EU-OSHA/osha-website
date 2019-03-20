@@ -1170,8 +1170,8 @@ function osha_field_default_field_instances() {
         'module' => 'title',
         'settings' => array(
           'title_class' => '',
-          'title_link' => '',
-          'title_style' => '',
+          'title_link' => 'content',
+          'title_style' => 'h2',
         ),
         'type' => 'title_linked',
         'weight' => 1,

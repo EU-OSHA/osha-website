@@ -431,6 +431,12 @@ function osha_events_views_default_views() {
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Color */
+  $handler->display->display_options['fields']['field_color']['id'] = 'field_color';
+  $handler->display->display_options['fields']['field_color']['table'] = 'field_data_field_color';
+  $handler->display->display_options['fields']['field_color']['field'] = 'field_color';
+  $handler->display->display_options['fields']['field_color']['alter']['text'] = '[field_color]';
+  $handler->display->display_options['fields']['field_color']['element_label_colon'] = FALSE;
   /* Field: Content: For the web / Public */
   $handler->display->display_options['fields']['field_for_the_web']['id'] = 'field_for_the_web';
   $handler->display->display_options['fields']['field_for_the_web']['table'] = 'field_data_field_for_the_web';
@@ -1947,7 +1953,6 @@ function osha_events_views_default_views() {
   $handler->display->display_options['filters']['field_tags_tid']['id'] = 'field_tags_tid';
   $handler->display->display_options['filters']['field_tags_tid']['table'] = 'field_data_field_tags';
   $handler->display->display_options['filters']['field_tags_tid']['field'] = 'field_tags_tid';
-  $handler->display->display_options['filters']['field_tags_tid']['value'] = '';
   $handler->display->display_options['filters']['field_tags_tid']['group'] = 1;
   $handler->display->display_options['filters']['field_tags_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_tags_tid']['expose']['operator_id'] = 'field_tags_tid_op';
@@ -1970,7 +1975,9 @@ function osha_events_views_default_views() {
     13 => 0,
     14 => 0,
   );
+  $handler->display->display_options['filters']['field_tags_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_tags_tid']['vocabulary'] = 'tags';
+  $handler->display->display_options['filters']['field_tags_tid']['error_message'] = FALSE;
   $handler->display->display_options['path'] = 'admin/content/events-export';
   $handler->display->display_options['displays'] = array(
     'page' => 'page',
@@ -2023,6 +2030,8 @@ function osha_events_views_default_views() {
 <div class="grey"></div><p>Only web or not attendance<p>
 </div>'),
     t('<span class="result_summary">Displaying @start - @end of @total</span>'),
+    t('Color'),
+    t('[field_color]'),
     t('Activity'),
     t('Type of event'),
     t('Title'),
@@ -2040,7 +2049,6 @@ function osha_events_views_default_views() {
 <li>[edit_node]</li>
 <li>[delete_node]</li>
 </ul>'),
-    t('Color'),
     t('Not from'),
     t('Source'),
     t('For the web'),

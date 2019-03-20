@@ -12,19 +12,20 @@
     <?php require "header.tpl.php"; ?>
   </header>
   <?php print $breadcrumb; ?>
-  <div id="main">
-	<?php
-      // Render the sidebars to see if there's anything in them.
-      $sidebar_first  = render($page['sidebar_first']);
-      // andrei: remove sidebar_second from introduction pages
-      $node = menu_get_object();
-      if (isset($node) && isset($node->article_type_code) && $node->article_type_code != 'section') {
+  <div id="main"><?php
+    // Render the sidebars to see if there's anything in them.
+    $sidebar_first = render($page['sidebar_first']);
+    // Andrei: remove sidebar_second from introduction pages.
+    $show_25th = FALSE;
+    $node = menu_get_object();
+    if (isset($node) && isset($node->article_type_code) && $node->article_type_code != 'section') {
         unset($page['sidebar_second']);
-      }
-      $sidebar_second = render($page['sidebar_second']);
-
+    }
+    $sidebar_second = render($page['sidebar_second']);
+    if (isset($node) && ($node->type == '25th_anniversary')) {
+      $show_25th = TRUE;
+    }
     ?>
-
     <?php if ($sidebar_first): ?>
       <aside class="sidebars_first">
         <?php print $sidebar_first; ?>
@@ -50,9 +51,13 @@
           <?php print render($page['above_title']); ?>
         </div>
     <?php } ?>
-      <?php if ($title): ?>
+      <?php if ($show_25th) { ?>
+          <div id="page-title" class="page__title title"><?php print t('EU-OSHA 1994-2019');?></div>
+          <div class="view-header back"><?php print l(t('Back to EU-OSHA 1994-2019 view'), 'about-eu-osha/our-story/look-back-future/25-anniversary-articles'); ?></div>
+      <?php } ?>
+      <?php if ($title) { ?>
         <h1 class="page__title title" id="page-title"><?php print $title; ?></h1>
-      <?php endif; ?>
+      <?php }; ?>
       <?php print render($title_suffix); ?>
       <?php print $messages; ?>
       <?php print render($tabs); ?>

@@ -17,6 +17,22 @@
 		float: none;
 	}
 
+	.view-25th-anniversary-articles .views-exposed-form{
+		padding-left: 1em;
+	}
+
+	.view-25th-anniversary-articles #edit-search-api-language-wrapper label, .form-item.form-type-select.form-item-sort-by label, .form-item.form-type-select.form-item-sort-order label {
+	    border-bottom: 0px solid #E8EEF7!important;
+	    margin-bottom: 0.25em;
+	}
+
+
+	.view-25th-anniversary-articles .view-header{
+		padding:1em;
+		width: 93%;
+	}
+
+
 
 	/*Caption image*/
 

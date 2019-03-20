@@ -15,7 +15,7 @@ abstract class AbstractNCWNodeMigration extends Migration {
 
     $this->highwaterField = ['name' => 'changed'];
 
-    /** Disable linkchecker globally to avoid failures during migration */
+    // Disable linkchecker globally to avoid failures during migration.
     global $linkchecker_disable_scan;
     $linkchecker_disable_scan = TRUE;
 
@@ -61,10 +61,10 @@ abstract class AbstractNCWNodeMigration extends Migration {
   }
 
   /**
-   * Configure field mappings, reads bundle field information
+   * Configure field mappings, reads bundle field information.
    */
   protected function addFieldMappings() {
-    // Node base fields
+    // Node base fields.
     $this->addFieldMapping('comment')->defaultValue(0);
     $this->addFieldMapping('status', 'status');
     $this->addFieldMapping('title', 'title');
@@ -81,15 +81,15 @@ abstract class AbstractNCWNodeMigration extends Migration {
 //    $this->addFieldMapping('path', 'path');
     $this->addFieldMapping('workbench_access')->defaultValue('section'); // Assign default section
 
-    // Handle field migration in a generic way
+    // Handle field migration in a generic way.
     $fields = field_info_instances('node', $this->bundle);
     $exposed = $this->source->fields();
-    foreach($fields as $field_name => $field_info) {
+    foreach ($fields as $field_name => $field_info) {
       $field_base = field_info_field($field_name);
       if (array_key_exists($field_name, $exposed) && !in_array($field_name, $this->getManuallyMigratedFields())) {
         $this->addFieldMapping($field_name, $field_name);
 
-        // Extra mappings depending on field type
+        // Extra mappings depending on field type.
         $fi = field_info_field($field_name);
         if ($fi['translatable'] == 1
           && $fi['type'] != 'taxonomy_term_reference' /* field_organised_by */) {
@@ -182,11 +182,11 @@ abstract class AbstractNCWNodeMigration extends Migration {
     try {
       osha_sites_migration_debug('!klass:      * Preparing source node: !id', array(
         '!klass' => get_class($this),
-        '!id' => $row->nid
+        '!id' => $row->nid,
       ));
       $row->field_migration_source = $this->site_source;
       $row->path = !empty($row->path['alias']) ? $row->path['alias'] : NULL;
-      // Normalize JSON structure, to match migrate expectations for field data
+      // Normalize JSON structure, to match migrate expectations for field data.
       $fields = field_info_instances('node', $this->bundle);
       foreach ($fields as $field_name => $field_info) {
         if (in_array($field_name, $this->getManuallyMigratedFields())) {
@@ -194,7 +194,7 @@ abstract class AbstractNCWNodeMigration extends Migration {
         }
         $fi = field_info_field($field_name);
         if ($fi['type'] == 'entityreference') {
-          // Entity references will be manually handled by each migration
+          // Entity references will be manually handled by each migration.
           continue;
         }
         $normalizer = 'osha_migration_normalize_field_' . $fi['type'];
@@ -211,7 +211,8 @@ abstract class AbstractNCWNodeMigration extends Migration {
           $row->{$field_name} = array();
         }
       }
-    } catch(Exception $e) {
+    }
+    catch(Exception $e) {
       osha_sites_migration_debug("Exception while preparing the row: {$row->nid}", 'error');
       return FALSE;
     }
@@ -325,9 +326,9 @@ abstract class AbstractNCWNodeMigration extends Migration {
         $url = $source->itemURL($to_remove->sourceid1);
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_NOBODY, true);
+        curl_setopt($curl, CURLOPT_NOBODY, TRUE);
         curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 5);
-        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, TRUE);
         $result = curl_exec($curl);
         $info = curl_getinfo($curl);
         curl_close($curl);

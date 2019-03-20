@@ -551,16 +551,6 @@ function osha_events_views_default_views() {
   $handler->display->display_options['fields']['field_adonis']['table'] = 'field_data_field_adonis';
   $handler->display->display_options['fields']['field_adonis']['field'] = 'field_adonis';
   $handler->display->display_options['fields']['field_adonis']['element_label_colon'] = FALSE;
-  /* Field: Content: Number of attendees */
-  $handler->display->display_options['fields']['field_number_of_attendees']['id'] = 'field_number_of_attendees';
-  $handler->display->display_options['fields']['field_number_of_attendees']['table'] = 'field_data_field_number_of_attendees';
-  $handler->display->display_options['fields']['field_number_of_attendees']['field'] = 'field_number_of_attendees';
-  $handler->display->display_options['fields']['field_number_of_attendees']['label'] = 'Number of participants';
-  $handler->display->display_options['fields']['field_number_of_attendees']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_number_of_attendees']['settings'] = array(
-    'thousand_separator' => ' ',
-    'prefix_suffix' => 1,
-  );
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
@@ -1391,17 +1381,6 @@ function osha_events_views_default_views() {
   $handler->display->display_options['fields']['field_adonis']['field'] = 'field_adonis';
   $handler->display->display_options['fields']['field_adonis']['ui_name'] = 'Adonis';
   $handler->display->display_options['fields']['field_adonis']['element_label_colon'] = FALSE;
-  /* Field: Number of attendees */
-  $handler->display->display_options['fields']['field_number_of_attendees']['id'] = 'field_number_of_attendees';
-  $handler->display->display_options['fields']['field_number_of_attendees']['table'] = 'field_data_field_number_of_attendees';
-  $handler->display->display_options['fields']['field_number_of_attendees']['field'] = 'field_number_of_attendees';
-  $handler->display->display_options['fields']['field_number_of_attendees']['ui_name'] = 'Number of attendees';
-  $handler->display->display_options['fields']['field_number_of_attendees']['label'] = 'Number of participants';
-  $handler->display->display_options['fields']['field_number_of_attendees']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_number_of_attendees']['settings'] = array(
-    'thousand_separator' => ' ',
-    'prefix_suffix' => 1,
-  );
   /* Field: Username */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
@@ -2042,7 +2021,6 @@ function osha_events_views_default_views() {
     t('Publications/exhibition support'),
     t('Media/promotion'),
     t('Key Performance Indicator'),
-    t('Number of participants'),
     t('Created by'),
     t('Action'),
     t('<ul class="links inline">

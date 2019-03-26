@@ -1465,7 +1465,7 @@ Grey - Only web or not attendance',
     'bundle' => 'events',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'If you want some special promotion for this event, please contact the editorial team at urrutia@osha.europa.eu at least 4 weeks before the event is taking place.',
+    'description' => 'If you want some special promotion for this event, please contact the editorial team at <a href="mailto:urrutia@osha.europa.eu">urrutia@osha.europa.eu</a> at least 4 weeks before the event is taking place.',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -1828,7 +1828,7 @@ Grey - Only web or not attendance',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_organization',
-    'label' => 'Organization',
+    'label' => 'Organisation',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -2940,11 +2940,10 @@ Grey - Only web or not attendance',
   t('Date');
   t('Description');
   t('Event in AMP');
-  t('FAST');
   t('Flickr date taken');
   t('For the web / Public');
   t('Grab Flickr photos taken on or between these dates only.');
-  t('If you want some special promotion for this event, please contact the editorial team at urrutia@osha.europa.eu at least 4 weeks before the event is taking place.');
+  t('If you want some special promotion for this event, please contact the editorial team at <a href="mailto:urrutia@osha.europa.eu">urrutia@osha.europa.eu</a> at least 4 weeks before the event is taking place.');
   t('Key Performance Indicator');
   t('Location');
   t('Mandatory');
@@ -2953,7 +2952,7 @@ Grey - Only web or not attendance',
   t('Migration Source');
   t('Name');
   t('Number of attendees');
-  t('Organization');
+  t('Organisation');
   t('Organized by EU-OSHA');
   t('Place where the event takes place.');
   t('Please add here any information, which could be useful for decision-making purposes.');
@@ -2961,11 +2960,10 @@ Grey - Only web or not attendance',
   t('Please add here the official title of the event. Please do not use ALL CAPS, but sentence case (i.e. Towards Better Work and Well-being).');
   t('Please attach here the agenda and any other relevant events related documentation (i.e.  presentations, call for abstracts, leaflets, brochures).');
   t('Please choose the appropriate type of event.');
-  t('Please choose the tag correctly, as the events item will be displayed in the corresponding section of the corporate website. Pay special attention to campaign related events, as those events also appear on the campaign website.');
+  t('Please choose the tag correctly, as the events item will be displayed in the corresponding section of the corporate website.');
   t('Please describe here in an engaging way the event. This text will be published on the website.');
   t('Please download the publications request form and send it to the publications team at least 4 weeks before the event is taking place.');
   t('Please indicate here the organisation responsible for the organisation of the event. If an acronym exists for the organisation, please include “acronym (UPPERCASE) ‘-‘complete name (sentence case)”: (i.e.. HSE – Health and Safety Executive).');
-  t('Please indicate if this event is supported by the Agency via the FAST scheme or not.');
   t('Please indicate, if event’s item should be published on the website or not.');
   t('Please indicate, if the agenda of the event is available.');
   t('Please indicate, if this event is to be counted in the framework of the KPI monitoring framework.');

@@ -1132,82 +1132,6 @@ Grey - Only web or not attendance',
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-events-field_fast'.
-  $field_instances['node-events-field_fast'] = array(
-    'bundle' => 'events',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please indicate if this event is supported by the Agency via the FAST scheme or not.',
-    'display' => array(
-      'dangerous_substances' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 9,
-      ),
-      'highlights_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'newsletter_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_resources' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_slideshow' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_wiki' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_fast',
-    'label' => 'FAST',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(
-        'apply_chosen' => '',
-      ),
-      'type' => 'options_select',
-      'weight' => 18,
-    ),
-    'workbench_access_field' => 0,
-  );
-
   // Exported field_instance: 'node-events-field_flickr_date'.
   $field_instances['node-events-field_flickr_date'] = array(
     'bundle' => 'events',
@@ -2573,7 +2497,7 @@ Grey - Only web or not attendance',
     'bundle' => 'events',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please choose the tag correctly, as the events item will be displayed in the corresponding section of the corporate website. Pay special attention to campaign related events, as those events also appear on the campaign website.',
+    'description' => 'Please choose the tag correctly, as the events item will be displayed in the corresponding section of the corporate website.',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',

@@ -21,29 +21,37 @@ function osha_events_node_access($node, $op, $account) {
  * Implements hook_form_alter().
  */
 function osha_events_form_alter(&$form, &$form_state, $form_id) {
+
+  $form['field_agency_initial_contact']['#access'] = FALSE;
+  $form['field_satisfaction_rate']['#access'] = FALSE;
+  $form['field_event_in_amp']['#access'] = FALSE;
+  $form['field_agency_contact_reply']['#access'] = FALSE;
+  $form['field_number_of_attendees']['#access'] = FALSE;
+  $form['field_organized_by_eu_osha']['#access'] = FALSE;
+
   switch ($form_id) {
     case 'events_node_form':
       $form['#validate'][] = 'osha_events_form_validate';
-      // Activity field changes
+      // Activity field changes.
       if (isset($form['field_activity'][LANGUAGE_NONE][0])) {
         unset($form['field_activity'][LANGUAGE_NONE]['add_more']);
-        // Extract the field field tree to change cardinality
+        // Extract the field field tree to change cardinality.
         $field = $form['field_activity'][LANGUAGE_NONE][0]['tid'];
 
-        // Show the label as usual
+        // Show the label as usual.
         unset($field['#title_display']);
 
         // Field is not required, so add also an empty option.
         $field['#required'] = FALSE;
         $field['#options'] = array('' => t('- None -')) + $field['#options'];
-        // Switch validator
+        // Switch validator.
         $field['#element_validate'] = array('options_field_widget_validate');
 
         $form['field_activity'][LANGUAGE_NONE] = $field;
       }
 
-      // Create new event form
-      if(!isset($form['#node']->nid)){
+      // Create new event form.
+      if (!isset($form['#node']->nid)) {
         drupal_add_js(drupal_get_path('module', 'osha_events') . '/js/new_event_form.js');
       }
 
@@ -71,7 +79,7 @@ function osha_events_form_alter(&$form, &$form_state, $form_id) {
 }
 
 /**
- * After build callback for events_node_form
+ * After build callback for events_node_form.
  */
 function osha_events_node_form_after_build($form, &$form_state) {
   drupal_add_js(drupal_get_path('module', 'osha_events') . '/js/event_form.js');
@@ -95,25 +103,6 @@ function osha_events_form_validate($form, &$form_state) {
     if (empty($type) || $type == 'Visit') {
       form_set_error('field_event_type', 'Events of type <b>Visit</b> can not be published');
     }
-    // if (empty($values['body'][$node->language][0]['value'])) {
-    //   form_set_error('body', 'You have to add a Description.');
-    // }
-    /* MDR-1142
-    if (empty($values['field_start_date'][LANGUAGE_NONE][0]['value'])) {
-      form_set_error('field_start_date', 'You have to add a Start Date.');
-    }
-    if (empty($values['field_start_date'][LANGUAGE_NONE][0]['value2'])) {
-      form_set_error('field_start_date', 'You have to add an End Date .');
-    }
-    */
-    /* Disabled since MC-9
-    if (empty($values['field_website_of_event'][LANGUAGE_NONE][0]['title'])) {
-      form_set_error('field_website_of_event', 'You have to add a Web site name.');
-    }
-    if (empty($values['field_website_of_event'][LANGUAGE_NONE][0]['url'])) {
-      form_set_error('field_website_of_event', 'You have to add a Web site url.');
-    }
-    */
     if (empty($values['field_organization'][LANGUAGE_NONE][0]['value'])) {
       form_set_error('field_organization', 'You have to add an Organization.');
     }
@@ -144,7 +133,7 @@ function osha_events_form_validate($form, &$form_state) {
     }
   }
 
-  // Check if the event is unique by Start and End Date field
+  // Check if the event is unique by Start and End Date field.
   $start_date = $form_state['values']['field_start_date']['und'][0]['value'];
   $end_date = $form_state['values']['field_start_date']['und'][0]['value2'];
 
@@ -154,17 +143,17 @@ function osha_events_form_validate($form, &$form_state) {
       ->fieldCondition('field_start_date', 'value', $start_date, '=')
       ->fieldCondition('field_start_date', 'value2', $end_date, '=')
       ->entityOrderBy('entity_id', 'DESC');
-  if ( isset($node->nid) ) {
-      $query->entityCondition('entity_id', $node->nid, '!=');
+  if (isset($node->nid)) {
+    $query->entityCondition('entity_id', $node->nid, '!=');
   }
   $results = $query->execute();
 
   if (isset($results['node']) && count($results['node']) >= 1) {
     drupal_set_message(t('One or more events have the same Start and End date.'), 'warning');
     $events = '';
-    foreach($results['node'] as $nid => $node_obj){
+    foreach ($results['node'] as $nid => $node_obj) {
       $node = node_load($nid);
-      $events .= l($node->title, 'node/'.$nid);
+      $events .= l($node->title, 'node/' . $nid);
       $events .= '<br />';
     }
     drupal_set_message($events, 'warning');
@@ -180,7 +169,7 @@ function osha_events_query_alter($query) {
     }
     $sql = strtr($sql, $quoted);
     dpm($sql);
-  }
+}
 }
 
 
@@ -254,24 +243,25 @@ function osha_events_phpexcel_export($op, &$data, &$phpexcel, $options, $column 
     'Grey' => '808080',
     'Yellow' => 'FFFF00',
     'Green' => '008000',
-    'Blue' => '0000FF'
+    'Blue' => '0000FF',
   );
-  switch($op) {
+  switch ($op) {
     case 'post cell':
       if ($row == 1) {
-        // first row
-        $styleArray = array('font'  => array('bold' => TRUE));
-        $phpexcel->getStyleByColumnAndRow($column,$row)->applyFromArray($styleArray);
-      } else {
-        // use the color named in the first cell of the current row
+        // First row.
+        $styleArray = array('font' => array('bold' => TRUE));
+        $phpexcel->getStyleByColumnAndRow($column, $row)->applyFromArray($styleArray);
+      }
+      else {
+        // Use the color named in the first cell of the current row.
         $first_cell = $phpexcel->getCellByColumnAndRow(0, $row)->getValue();
         if (!empty($xls_colours[$first_cell])) {
           $styleArray = array(
             'font'  => array(
-              'color' => array('rgb' => $xls_colours[$first_cell])
-            )
+              'color' => array('rgb' => $xls_colours[$first_cell]),
+            ),
           );
-          $phpexcel->getStyleByColumnAndRow($column,$row)->applyFromArray($styleArray);
+          $phpexcel->getStyleByColumnAndRow($column, $row)->applyFromArray($styleArray);
         }
       }
       break;
@@ -288,7 +278,7 @@ function osha_events_element_info_alter(&$type) {
 }
 
 /**
- * Change field label
+ * Change field label.
  */
 function osha_events_link_field_process($element, $form_state, $complete_form) {
   switch ($element['#field_name']) {
@@ -310,7 +300,7 @@ function osha_events_field_formatter_info() {
       'label' => 'Translated title, as link',
       'field types' => array('link_field'),
       'description' => 't(title) as link.',
-    )
+    ),
   );
   return $info;
 }
@@ -342,7 +332,7 @@ function osha_events_theme() {
   return array(
     'osha_events_translated_title_as_link_format' => array(
       'variables' => array('entity' => NULL, 'item' => NULL, 'delta' => NULL),
-    )
+    ),
   );
 }
 
@@ -353,7 +343,8 @@ function theme_osha_events_translated_title_as_link_format($element) {
   $item = $element['item'];
   if (empty($item['title'])) {
     $title = $item['display_url'];
-  } else {
+  }
+  else {
     $title = t($item['title']);
   }
   return l($title, $item['url'], array(
@@ -361,6 +352,6 @@ function theme_osha_events_translated_title_as_link_format($element) {
     'query' => $item['query'],
     'fragment' => $item['fragment'],
     'absolute' => $item['absolute'],
-    'html' => $item['html']
+    'html' => $item['html'],
   ));
 }

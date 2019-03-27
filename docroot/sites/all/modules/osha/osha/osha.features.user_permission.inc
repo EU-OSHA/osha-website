@@ -507,6 +507,7 @@ function osha_user_default_permissions() {
     'name' => 'use text format dangerous_substances_minimal',
     'roles' => array(
       'OSH Collaborator' => 'OSH Collaborator',
+      'Project Manager' => 'Project Manager',
       'administrator' => 'administrator',
     ),
     'module' => 'filter',

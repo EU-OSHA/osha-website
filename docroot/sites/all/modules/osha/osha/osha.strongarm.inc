@@ -143,6 +143,20 @@ el.remove();
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'comment_25th_anniversary';
+  $strongarm->value = '1';
+  $export['comment_25th_anniversary'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'comment_anonymous_25th_anniversary';
+  $strongarm->value = '0';
+  $export['comment_anonymous_25th_anniversary'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'comment_anonymous_article';
   $strongarm->value = '0';
   $export['comment_anonymous_article'] = $strongarm;
@@ -178,6 +192,13 @@ el.remove();
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'comment_default_mode_25th_anniversary';
+  $strongarm->value = 1;
+  $export['comment_default_mode_25th_anniversary'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'comment_default_mode_article';
   $strongarm->value = 1;
   $export['comment_default_mode_article'] = $strongarm;
@@ -202,6 +223,13 @@ el.remove();
   $strongarm->name = 'comment_default_mode_webform';
   $strongarm->value = 1;
   $export['comment_default_mode_webform'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'comment_default_per_page_25th_anniversary';
+  $strongarm->value = '50';
+  $export['comment_default_per_page_25th_anniversary'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -241,6 +269,13 @@ el.remove();
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'comment_form_location_25th_anniversary';
+  $strongarm->value = 1;
+  $export['comment_form_location_25th_anniversary'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'comment_form_location_article';
   $strongarm->value = 1;
   $export['comment_form_location_article'] = $strongarm;
@@ -276,6 +311,13 @@ el.remove();
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'comment_preview_25th_anniversary';
+  $strongarm->value = '1';
+  $export['comment_preview_25th_anniversary'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'comment_preview_article';
   $strongarm->value = '1';
   $export['comment_preview_article'] = $strongarm;
@@ -300,6 +342,13 @@ el.remove();
   $strongarm->name = 'comment_preview_webform';
   $strongarm->value = '1';
   $export['comment_preview_webform'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'comment_subject_field_25th_anniversary';
+  $strongarm->value = 1;
+  $export['comment_subject_field_25th_anniversary'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -745,41 +794,6 @@ el.remove();
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'eu_cookie_compliance_en';
-  $strongarm->value = array(
-    'popup_enabled' => 1,
-    'popup_clicking_confirmation' => 0,
-    'popup_position' => 1,
-    'popup_agree_button_message' => 'OK, I agree',
-    'popup_disagree_button_message' => 'No, give me more info',
-    'popup_info' => array(
-      'value' => '<p><span style="font-size: small;"><strong>The EU-OSHA website uses cookies to gather information necessary for browsing the website, in accordance with the EU-OSHA privacy notice.</strong></span></p>',
-      'format' => 'full_html_minimal',
-    ),
-    'popup_agreed_enabled' => 0,
-    'popup_hide_agreed' => 1,
-    'popup_find_more_button_message' => 'More info',
-    'popup_hide_button_message' => 'Hide',
-    'popup_agreed' => array(
-      'value' => '<h2>Thank you for accepting cookies</h2><p>You can now hide this message or find out more about cookies.</p>',
-      'format' => 'full_html_minimal',
-    ),
-    'popup_link' => 'node/5436',
-    'popup_link_new_window' => 1,
-    'popup_height' => '120',
-    'popup_width' => '100%',
-    'popup_delay' => '1',
-    'popup_bg_hex' => '575958',
-    'popup_text_hex' => 'ffffff',
-    'domains_option' => '1',
-    'domains_list' => '',
-    'exclude_paths' => '',
-  );
-  $export['eu_cookie_compliance_en'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'exclude_node_title_content_type_modes_article';
   $strongarm->value = array(
     'full' => 'full',
@@ -805,6 +819,84 @@ el.remove();
   $strongarm->name = 'exclude_node_title_content_type_value_article';
   $strongarm->value = 'all';
   $export['exclude_node_title_content_type_value_article'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'field_bundle_settings_node__25th_anniversary';
+  $strongarm->value = array(
+    'view_modes' => array(
+      'teaser' => array(
+        'custom_settings' => TRUE,
+      ),
+      'osha_slideshow' => array(
+        'custom_settings' => TRUE,
+      ),
+      'dangerous_substances' => array(
+        'custom_settings' => TRUE,
+      ),
+      'highlights_item' => array(
+        'custom_settings' => TRUE,
+      ),
+      'newsletter_item' => array(
+        'custom_settings' => TRUE,
+      ),
+      'osha_resources' => array(
+        'custom_settings' => TRUE,
+      ),
+      'osha_wiki' => array(
+        'custom_settings' => TRUE,
+      ),
+      'full' => array(
+        'custom_settings' => FALSE,
+      ),
+      'rss' => array(
+        'custom_settings' => FALSE,
+      ),
+      'search_index' => array(
+        'custom_settings' => FALSE,
+      ),
+      'search_result' => array(
+        'custom_settings' => FALSE,
+      ),
+      'diff_standard' => array(
+        'custom_settings' => FALSE,
+      ),
+      'osha_search_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
+      'print' => array(
+        'custom_settings' => FALSE,
+      ),
+      'token' => array(
+        'custom_settings' => FALSE,
+      ),
+    ),
+    'extra_fields' => array(
+      'form' => array(
+        'metatags' => array(
+          'weight' => '11',
+        ),
+        'path' => array(
+          'weight' => '8',
+        ),
+        'redirect' => array(
+          'weight' => '10',
+        ),
+        'workbench_access' => array(
+          'weight' => '6',
+        ),
+        'xmlsitemap' => array(
+          'weight' => '9',
+        ),
+        'language' => array(
+          'weight' => '7',
+        ),
+      ),
+      'display' => array(),
+    ),
+  );
+  $export['field_bundle_settings_node__25th_anniversary'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -1075,6 +1167,13 @@ el.remove();
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'language_content_type_25th_anniversary';
+  $strongarm->value = '4';
+  $export['language_content_type_25th_anniversary'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'language_content_type_article';
   $strongarm->value = '4';
   $export['language_content_type_article'] = $strongarm;
@@ -1209,6 +1308,15 @@ el.remove();
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'menu_options_25th_anniversary';
+  $strongarm->value = array(
+    0 => 'main-menu',
+  );
+  $export['menu_options_25th_anniversary'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'menu_options_article';
   $strongarm->value = array(
     0 => 'main-menu',
@@ -1241,6 +1349,13 @@ el.remove();
     0 => 'main-menu',
   );
   $export['menu_options_webform'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'menu_parent_25th_anniversary';
+  $strongarm->value = 'main-menu:0';
+  $export['menu_parent_25th_anniversary'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -1336,6 +1451,16 @@ el.remove();
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'node_options_25th_anniversary';
+  $strongarm->value = array(
+    0 => 'moderation',
+    1 => 'revision',
+  );
+  $export['node_options_25th_anniversary'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'node_options_article';
   $strongarm->value = array(
     0 => 'moderation',
@@ -1369,6 +1494,13 @@ el.remove();
     0 => 'status',
   );
   $export['node_options_webform'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_preview_25th_anniversary';
+  $strongarm->value = '1';
+  $export['node_preview_25th_anniversary'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -1411,6 +1543,13 @@ el.remove();
   $strongarm->name = 'node_revision_delete_track_article';
   $strongarm->value = 1;
   $export['node_revision_delete_track_article'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_submitted_25th_anniversary';
+  $strongarm->value = 0;
+  $export['node_submitted_25th_anniversary'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -1753,76 +1892,6 @@ el.remove();
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'piwik_custom_var';
-  $strongarm->value = array(
-    'slots' => array(
-      1 => array(
-        'slot' => 1,
-        'name' => 'Activity',
-        'value' => '[node:field-activity]',
-        'scope' => 'page',
-      ),
-      2 => array(
-        'slot' => 2,
-        'name' => 'Level1',
-        'value' => '[site:menu-level1]',
-        'scope' => 'page',
-      ),
-      3 => array(
-        'slot' => 3,
-        'name' => 'Level2',
-        'value' => '[site:menu-level2]',
-        'scope' => 'page',
-      ),
-      4 => array(
-        'slot' => 4,
-        'name' => '',
-        'value' => '',
-        'scope' => 'page',
-      ),
-      5 => array(
-        'slot' => 5,
-        'name' => 'Language',
-        'value' => '[site:site-language]',
-        'scope' => 'page',
-      ),
-      6 => array(
-        'slot' => 6,
-        'name' => '',
-        'value' => '',
-        'scope' => 'visit',
-      ),
-      7 => array(
-        'slot' => 7,
-        'name' => '',
-        'value' => '',
-        'scope' => 'visit',
-      ),
-      8 => array(
-        'slot' => 8,
-        'name' => '',
-        'value' => '',
-        'scope' => 'visit',
-      ),
-      9 => array(
-        'slot' => 9,
-        'name' => '',
-        'value' => '',
-        'scope' => 'visit',
-      ),
-      10 => array(
-        'slot' => 10,
-        'name' => '',
-        'value' => '',
-        'scope' => 'visit',
-      ),
-    ),
-  );
-  $export['piwik_custom_var'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'search_active_modules';
   $strongarm->value = array(
     'apachesolr_search' => 'apachesolr_search',
@@ -1905,6 +1974,16 @@ el.remove();
   $strongarm->name = 'spamspan_dot_enable';
   $strongarm->value = '1';
   $export['spamspan_dot_enable'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'xmlsitemap_settings_node_25th_anniversary';
+  $strongarm->value = array(
+    'status' => '1',
+    'priority' => '0.5',
+  );
+  $export['xmlsitemap_settings_node_25th_anniversary'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

@@ -23,8 +23,22 @@ global $language;
     <tr>
       <td style="padding-top: 15px; padding-bottom: 15px; text-align: center; font-family: Arial,sans-serif; font-size: 12px; color: #333333;">
         <p><b><?php print t('Occupational Safety and Health News &ndash; Europe brought to you by EU-OSHA.');?></b></p>
-        <p><?php global $base_url; print t('Visit us at: <a href="@base_url" style="@style">@base_url</a>',
-                    array('@style' => 'color: #003399; border-bottom-style: solid; border-bottom-width: 1px; text-decoration: none;', '@base_url' => $base_url.'/'.$language->language)); ?>
+        <p><?php
+          global $base_url;
+          $href = url($base_url . '/' . $language->language,
+            array(
+              'alias' => TRUE,
+              'absolute' => TRUE,
+              'query' => $url_query,
+            )
+          );
+          print t('Visit us at: <a href="@href" style="@style">@base_url</a>',
+            array(
+              '@style' => 'color: #003399; border-bottom-style: solid; border-bottom-width: 1px; text-decoration: none;',
+              '@base_url' => $base_url . '/' . $language->language,
+              '@href' => $href,
+            )
+          ); ?>
           <?php print '&nbsp;'?>
           <?php print t('Contact us: <a href="mailto:@mail" style="@style">@mail</a>',
             array('@style' => 'color: #003399; border-bottom-style: solid; border-bottom-width: 1px; text-decoration: none;', '@mail' => 'information@osha.europa.eu')); ?>

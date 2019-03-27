@@ -61,7 +61,7 @@ class OSHNewsletter {
       $form['actions']['send_newsletter'] = array(
         '#type' => 'submit',
         '#value' => t('Send newsletter to subscribers'),
-        '#submit' => array('osha_newsletter_send_email_to_subscribers')
+        '#submit' => array('osha_newsletter_send_email_to_subscribers'),
       );
 
 
@@ -82,7 +82,7 @@ class OSHNewsletter {
       $form['test_newsletter_content']['send_test_newsletter'] = array(
         '#type' => 'submit',
         '#value' => t('Send test newsletter'),
-        '#submit' => array('osha_newsletter_send_test_email')
+        '#submit' => array('osha_newsletter_send_test_email'),
       );
     }
 
@@ -90,7 +90,7 @@ class OSHNewsletter {
     $form['#attached']['js'][] = "{$modulePath}/includes/js/collection_form.js";
     $form['#attached']['js'][] = [
       'data' => [
-        'osha_newsletter' => ['basepath' => $modulePath]
+        'osha_newsletter' => ['basepath' => $modulePath],
       ],
       'type' => 'setting',
     ];

@@ -212,3 +212,8 @@ ul.primary {
 #entity-collection-content-form select {
   width: 100%;
 }
+
+#block-system-main .views-field-field-color {
+  visibility: hidden;
+  display: none;
+}

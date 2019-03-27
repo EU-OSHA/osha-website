@@ -10143,3 +10143,137 @@ blockquote.image-field-caption span.blockquote-copyright{
 img.file-icon {
 	width: auto!important;
 }
+
+/* MDR-2694 - Remove the arrows in the Anniversary articles and add 'view all */
+
+.view-25th-anniversary-articles #edit-search-api-language-wrapper , .view-25th-anniversary-articles .views-exposed-widget.views-widget-sort-order{
+	display: none;
+}
+
+.view-25th-anniversary-articles .views-exposed-form{
+	padding-bottom: 2em;
+	border-bottom: 1px solid #003399;
+	margin-bottom: 2em;
+}
+
+.view-25th-anniversary-articles #edit-search-api-views-fulltext-wrapper{
+	float: left;
+    padding-top: 40px;		
+}
+
+.view-25th-anniversary-articles .views-widget-sort-by{
+	width: 200px;
+}
+
+.view-25th-anniversary-articles #edit-search-api-views-fulltext{
+	height: 35px;
+	border: 1px solid #003399;
+	border-radius: 5px;
+	background: url(../images/pink-search.png) no-repeat 96%;
+	width: 200px!important;
+}
+
+.view-25th-anniversary-articles #edit-sort-by{
+	height: 35px;
+	border: 1px solid #003399;
+	border-radius: 5px;
+	-moz-appearance: button;
+	-webkit-appearance: button;
+    background: url("../images/pink-select.png") no-repeat scroll 96% center #FFF;
+    padding-left: 5px;
+    width: 200px!important;
+}
+
+.view-25th-anniversary-articles #edit-sort-by::-ms-expand {
+    display: none;
+}
+
+.view-25th-anniversary-articles .view-header{
+	float: none;
+    clear: both;
+    width: 100%;
+    margin-top: 1em;
+    color: #003399;
+    font-size: 0.95em;
+    font-weight: normal;
+    font-family: "Open Sans", sans-serif;
+    line-height: 1.7em;
+}
+
+.view-25th-anniversary-articles .see-link a{
+    background: url(../images/flecha.png) no-repeat scroll 100% 55% transparent!important;
+    color: #003399;
+    font-family: "Open Sans Condensed",sans-serif!important;
+    font-size: 0.9em!important;
+    border-bottom: 0px!important;
+    text-decoration: none;
+    font-weight: bold;
+    padding-bottom: 2px;
+    padding-right: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.view-25th-anniversary-articles .see-link a:hover{
+    background: url(../images/flecha.png) no-repeat scroll 96% 55% #003399!important;
+   	color: #FFF!important;
+   	padding-left: 10px;
+   	padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.view-25th-anniversary-articles .views-submit-button{
+	width: auto;
+	float: left;
+}
+
+#edit-submit-25th-anniversary-articles {
+    background: #FFF;
+    border: 1px solid #003399;
+    border-radius: 5px;
+    color: #003399;
+    float: none;
+    font-family: "Open Sans Condensed",sans-serif;
+    font-size: 1em;
+    font-weight: bold;
+    padding-right: 2.3em;
+    height: 35px;
+    margin-top: 20px;
+    text-align: center;
+    padding-right: 8px;
+    width: auto!important;
+}
+
+#edit-submit-25th-anniversary-articles:hover{
+    background: #003399;
+    border: 1px solid #003399;
+    border-radius: 5px;
+    color: #FFF;
+    float: none;
+    font-family: "Open Sans Condensed",sans-serif;
+    font-size: 1em;
+    font-weight: bold;
+    padding-right: 2.3em;
+    height: 35px;
+    margin-top: 20px;
+    text-align: center;
+    padding-right: 8px;
+}
+
+.view-25th-anniversary-articles .date-display-single{
+	color: #003399;
+	font-size: 0.8em;
+}
+
+.view-25th-anniversary-articles .views-row{
+    clear: both;
+    background: url(/sites/all/themes/osha_frontend/images/back-tit-blue.png) repeat-x scroll 0 100% transparent;
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+}
+
+.view-25th-anniversary-articles h2{
+    background: transparent;
+    padding-left: 0;
+    margin: 0.5em 0;
+}

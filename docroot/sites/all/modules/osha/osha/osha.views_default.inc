@@ -11,6 +11,183 @@ function osha_views_default_views() {
   $export = array();
 
   $view = new view();
+  $view->name = '25th_anniversary_articles';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'search_api_index_default_multilingual_node_index';
+  $view->human_name = '25th Anniversary articles';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = '25th Anniversary';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_text'] = 'See more';
+  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['search_api_bypass_access'] = 0;
+  $handler->display->display_options['query']['options']['entity_access'] = 0;
+  $handler->display->display_options['query']['options']['parse_mode'] = 'direct';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '5';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'entity';
+  $handler->display->display_options['row_options']['view_mode'] = 'teaser';
+  /* Header: Global: Unfiltered text */
+  $handler->display->display_options['header']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['header']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['header']['area_text_custom']['field'] = 'area_text_custom';
+  /* Field: Indexed Multilingual Content: Multilingual ID */
+  $handler->display->display_options['fields']['search_api_et_id']['id'] = 'search_api_et_id';
+  $handler->display->display_options['fields']['search_api_et_id']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['fields']['search_api_et_id']['field'] = 'search_api_et_id';
+  /* Sort criterion: Indexed Multilingual Content: Publication date */
+  $handler->display->display_options['sorts']['field_publication_date']['id'] = 'field_publication_date';
+  $handler->display->display_options['sorts']['field_publication_date']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['sorts']['field_publication_date']['field'] = 'field_publication_date';
+  $handler->display->display_options['sorts']['field_publication_date']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['field_publication_date']['expose']['label'] = 'Publication date';
+  /* Sort criterion: Search: Relevance */
+  $handler->display->display_options['sorts']['search_api_relevance']['id'] = 'search_api_relevance';
+  $handler->display->display_options['sorts']['search_api_relevance']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['sorts']['search_api_relevance']['field'] = 'search_api_relevance';
+  $handler->display->display_options['sorts']['search_api_relevance']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['search_api_relevance']['expose']['label'] = 'Relevance';
+  /* Filter criterion: Indexed Multilingual Content: Content type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    '25th_anniversary' => '25th_anniversary',
+  );
+  /* Filter criterion: Search: Fulltext search */
+  $handler->display->display_options['filters']['search_api_views_fulltext']['id'] = 'search_api_views_fulltext';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['field'] = 'search_api_views_fulltext';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['operator_id'] = 'search_api_views_fulltext_op';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['operator'] = 'search_api_views_fulltext_op';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['identifier'] = 'search_api_views_fulltext';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    14 => 0,
+  );
+  $handler->display->display_options['filters']['search_api_views_fulltext']['fields'] = array(
+    'body:summary' => 'body:summary',
+    'body:value' => 'body:value',
+    'field_aditional_resources:title' => 'field_aditional_resources:title',
+    'field_aditional_resources:title_field' => 'field_aditional_resources:title_field',
+    'field_tags:name' => 'field_tags:name',
+  );
+  /* Filter criterion: Indexed Multilingual Content: Status */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = array(
+    1 => '1',
+  );
+  /* Filter criterion: Indexed Multilingual Content: Item language */
+  $handler->display->display_options['filters']['search_api_language']['id'] = 'search_api_language';
+  $handler->display->display_options['filters']['search_api_language']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['filters']['search_api_language']['field'] = 'search_api_language';
+  $handler->display->display_options['filters']['search_api_language']['value'] = array(
+    'en' => 'en',
+    'bg' => 'bg',
+    'es' => 'es',
+    'cs' => 'cs',
+    'da' => 'da',
+    'de' => 'de',
+    'et' => 'et',
+    'el' => 'el',
+    'fr' => 'fr',
+    'hr' => 'hr',
+    'it' => 'it',
+    'lv' => 'lv',
+    'lt' => 'lt',
+    'hu' => 'hu',
+    'mt' => 'mt',
+    'nl' => 'nl',
+    'pl' => 'pl',
+    'pt' => 'pt',
+    'ro' => 'ro',
+    'sk' => 'sk',
+    'sl' => 'sl',
+    'fi' => 'fi',
+    'sv' => 'sv',
+    'is' => 'is',
+    'no' => 'no',
+  );
+  $handler->display->display_options['filters']['search_api_language']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['search_api_language']['expose']['operator_id'] = 'search_api_language_op';
+  $handler->display->display_options['filters']['search_api_language']['expose']['label'] = 'Item language';
+  $handler->display->display_options['filters']['search_api_language']['expose']['operator'] = 'search_api_language_op';
+  $handler->display->display_options['filters']['search_api_language']['expose']['identifier'] = 'search_api_language';
+  $handler->display->display_options['filters']['search_api_language']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    14 => 0,
+  );
+  $handler->display->display_options['filters']['search_api_language']['expose']['reduce'] = 0;
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['path'] = 'about-eu-osha/our-story/look-back-future/25-anniversary-articles';
+  $translatables['25th_anniversary_articles'] = array(
+    t('Master'),
+    t('25th Anniversary'),
+    t('See more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('Multilingual ID'),
+    t('Publication date'),
+    t('Relevance'),
+    t('Item language'),
+    t('Page'),
+    t('more'),
+  );
+  $export['25th_anniversary_articles'] = $view;
+
+  $view = new view();
   $view->name = 'administration_content';
   $view->description = '';
   $view->tag = 'default';
@@ -1130,7 +1307,7 @@ function osha_views_default_views() {
   $handler->display->display_options['fields']['field_tags_1']['type'] = 'i18n_taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_tags_1']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_tags_1']['separator'] = '\\n';
-  /* Field: Content: Adonis */
+  /* Field: Content: Ares/Adonis */
   $handler->display->display_options['fields']['field_adonis']['id'] = 'field_adonis';
   $handler->display->display_options['fields']['field_adonis']['table'] = 'field_data_field_adonis';
   $handler->display->display_options['fields']['field_adonis']['field'] = 'field_adonis';
@@ -1969,7 +2146,7 @@ function osha_views_default_views() {
   $handler->display->display_options['fields']['field_tags_1']['type'] = 'i18n_taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_tags_1']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_tags_1']['separator'] = '\\n';
-  /* Field: Content: Adonis */
+  /* Field: Content: Ares/Adonis */
   $handler->display->display_options['fields']['field_adonis']['id'] = 'field_adonis';
   $handler->display->display_options['fields']['field_adonis']['table'] = 'field_data_field_adonis';
   $handler->display->display_options['fields']['field_adonis']['field'] = 'field_adonis';

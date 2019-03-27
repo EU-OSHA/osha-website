@@ -140,6 +140,14 @@ function osha_image_default_styles() {
  */
 function osha_node_info() {
   $items = array(
+    '25th_anniversary' => array(
+      'name' => '25th anniversary',
+      'base' => 'node_content',
+      'description' => '25th anniversary pages',
+      'has_title' => '1',
+      'title_label' => 'Title',
+      'help' => '',
+    ),
     'article' => array(
       'name' => 'Article',
       'base' => 'node_content',

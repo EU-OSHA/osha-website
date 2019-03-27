@@ -115,6 +115,7 @@ function osha_wysiwyg_default_profiles() {
           'formatselect' => 1,
           'fontselect' => 1,
           'fontsizeselect' => 1,
+          'blockquote' => 1,
           'code' => 1,
           'cut' => 1,
           'paste' => 1,

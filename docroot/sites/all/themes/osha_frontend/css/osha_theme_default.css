@@ -3628,7 +3628,8 @@ a.button-submit {
 	padding-bottom:0.5em;
 }
 
-.node-seminar .field-name-field-related-resources .field-label{
+.node-seminar .field-name-field-report .field-label,
+.node-seminar .field-name-field-related-resources .field-label {
 	color: #000000;
     font-family: "Open Sans Condensed",sans-serif;
     font-size: 1.6em;

@@ -27,3 +27,10 @@ function osha_seminar_add_menu_position_rules() {
 function osha_seminar_update_7001() {
   features_revert(array('osha_seminar' => array('field_base', 'field_instance')));
 }
+
+/**
+ * MDR-2737 improvements for seminars.
+ */
+function osha_seminar_update_7002() {
+  features_revert(array('osha_seminar' => array('field_base', 'field_instance')));
+}

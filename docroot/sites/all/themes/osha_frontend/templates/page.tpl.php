@@ -52,8 +52,7 @@
         </div>
     <?php } ?>
       <?php if ($show_25th) { ?>
-          <div id="page-title" class="page__title title"><?php print t('EU-OSHA 1994-2019');?></div>
-          <div class="view-header back"><?php print l(t('Back to EU-OSHA 1994-2019 view'), 'about-eu-osha/our-story/look-back-future/25-anniversary-articles'); ?></div>
+          <div class="view-header back cut-paste"><?php print l(t('View all'), '/look-back'); ?></div>
       <?php } ?>
       <?php if ($title) { ?>
         <h1 class="page__title title" id="page-title"><?php print $title; ?></h1>

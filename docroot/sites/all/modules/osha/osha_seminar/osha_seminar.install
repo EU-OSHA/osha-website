@@ -5,13 +5,6 @@ function osha_seminar_install() {
 }
 
 /**
- * Add publication menu position rules
- */
-//function osha_seminar_update_7001() {
-//  osha_seminar_add_menu_position_rules();
-//}
-
-/**
  * Add menu position rules for publication content type.
  */
 function osha_seminar_add_menu_position_rules() {
@@ -22,7 +15,7 @@ function osha_seminar_add_menu_position_rules() {
 }
 
 /**
- * MDR-1450 I2-Introduce hint text inside the input fields
+ * MDR-1450 I2-Introduce hint text inside the input fields.
  */
 function osha_seminar_update_7001() {
   features_revert(array('osha_seminar' => array('field_base', 'field_instance')));

@@ -706,13 +706,13 @@ function osha_newsletter_subscribe_extra_form_validate($form, &$form_state) {
 
 function _get_listserv_subscription_email() {
   global $user;
-  $listserv = explode("@", variable_get('osha_newsletter_listserv', 'listserv@list.osha.europa.eu'));
+  $listserv = explode("@", variable_get('osha_newsletter_listserv', 'crm-oshmail@osha.europa.eu'));
   $listserv_domain = '';
   if (isset($listserv[1])) {
     $listserv_domain = $listserv[1];
   }
 
-  $list_name = variable_get('osha_newsletter_list_name', 'OSHMail-Test');
+  $list_name = variable_get('osha_newsletter_list_name', 'crm-oshmail');
 
   if ($listserv_domain != '') {
     return $list_name . '@' . $listserv_domain;

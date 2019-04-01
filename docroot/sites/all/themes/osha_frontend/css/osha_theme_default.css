@@ -2992,14 +2992,21 @@ hr{
 	 clear:both;
 	 margin-top: -2.5em;
 }
+
+
+#block-views-our-story-block-look-back .item-list-look-back h2{
+	background: transparent;
+	padding-left: 0;
+} 
+
 #block-views-our-story-block-look-back .item-list-look-back ul{
 	list-style-type: none;
 	margin:0;
 	padding:0;
 }
+
 #block-views-our-story-block-look-back .item-list-look-back ul li{
-	background: none repeat scroll 0 0 #e8eef7;
-	border-top: 5px solid #003399;
+	background: url(/sites/all/themes/osha_frontend/images/back-tit-blue.png) repeat-x scroll 0 100% transparent;
 	padding-bottom: 1rem;
 	display: flex;
 	flex-direction: column;
@@ -3025,7 +3032,7 @@ hr{
 }
 #block-views-our-story-block-look-back .item-list-look-back ul li .content-group .summary{
   padding-left: 10px;
-  padding-right: 20px;
+  padding-right: 0;
    flex: 1 0px;
 }
 #block-views-our-story-block-look-back .item-list-look-back ul li .content-group .summary p{

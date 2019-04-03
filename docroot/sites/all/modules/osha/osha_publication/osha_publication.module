@@ -30,7 +30,7 @@ function osha_publication_menu() {
     'description' => 'Export publications filtered by tags',
     'page callback' => 'osha_publication_export',
     'access arguments' => array('access content'),
-    'delivery callback' => 'drupal_json_output'
+    'delivery callback' => 'drupal_json_output',
   );
 
   return $items;
@@ -110,16 +110,15 @@ function osha_publication_export() {
 function osha_publication_url_inbound_alter(&$path, $original_path, $path_language) {
   global $language_url;
   $args = arg();
-
   // MC-175 - publication search pretty path.
   // break down in filters the publication search path.
-  if (strpos($path, 'tools-and-publications/publications') >= 0) {
+  if (strpos($path, 'tools-and-publications/publications') !== FALSE) {
     $menu_item = menu_get_item($path);
     if (in_array($menu_item['page_callback'], ['osha_publication_listing_page', 'osha_publication_export'])) {
       if ($menu_item['page_callback'] == 'osha_publication_listing_page') {
         $path = 'tools-and-publications/publications';
       }
-      else if ($menu_item['page_callback'] == 'osha_publication_export') {
+      elseif ($menu_item['page_callback'] == 'osha_publication_export') {
         $path = 'export/tools-and-publications/publications';
       }
       if (count($args) > 2) {
@@ -150,9 +149,10 @@ function osha_publication_url_inbound_alter(&$path, $original_path, $path_langua
 
   // For publications, the default url should serve the file.
   // if the path ends with /view than should serve the node.
-  // see CW-1072
+  // See CW-1072.
   $orig_path_alias = drupal_lookup_path('alias', $original_path);
   $orig_path_source = drupal_lookup_path('source', $original_path);
+
   if (end($args) == 'view') {
     // If path exists, don't do anything.
     if (empty($orig_path_alias) && empty($orig_path_source)) {
@@ -170,7 +170,7 @@ function osha_publication_url_inbound_alter(&$path, $original_path, $path_langua
       $path_alias = path_load($path_source);
       if (empty($path_alias)) {
         // It may be a redirect with /view appended.
-        $redirect = redirect_load_by_source($url);
+        $redirect = redirect_load_by_source($url, $language_url->language);
         if (!empty($redirect->redirect)) {
           $path_alias = path_load(array('source' => $redirect->redirect));
         }
@@ -183,6 +183,7 @@ function osha_publication_url_inbound_alter(&$path, $original_path, $path_langua
     }
   }
   else {
+    $redirect = redirect_load_by_source($original_path, $language_url->language);
     if (empty($orig_path_source)) {
       // The url might be the system path, not alias.
       $path_source = drupal_lookup_path('source', $orig_path_alias);
@@ -191,10 +192,18 @@ function osha_publication_url_inbound_alter(&$path, $original_path, $path_langua
       $path_source = $orig_path_source;
     }
     $path_alias = path_load($path_source);
+
+    if (!empty($redirect->redirect)) {
+      $path_alias = path_load(array('source' => $redirect->redirect));
+      if ($path_alias) {
+        $path = $path_alias['source'];
+      }
+    }
+
     $source = '';
     if (!empty($path_alias)
         && preg_match("/node\/[\d]{1,99}$/", $path_alias['source'])) {
-      // Alias with source node/nid
+      // Alias with source node/nid.
       $source = $path_alias['source'];
     }
     elseif (preg_match("/node\/[\d]{1,99}$/", $original_path)) {

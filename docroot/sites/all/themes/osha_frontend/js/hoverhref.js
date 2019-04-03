@@ -275,3 +275,17 @@ if (jQuery(".node-type-flickr-gallery")[0]){
 }
 
 });
+
+
+jQuery(document).ready(function() {
+	jQuery( ".accordion-view" ).click(function() {
+		jQuery( '#block-views-our-story-block-look-back .item-list-look-back ul li' ).toggleClass("active");
+		jQuery( '.accordion-view.less' ).toggleClass("active");
+		jQuery( '.accordion-view.more' ).toggleClass("no-active");
+	});
+
+	jQuery('.cut-paste').appendTo('.node-25th-anniversary');
+});
+
+
+

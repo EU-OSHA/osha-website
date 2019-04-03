@@ -20,4 +20,5 @@
     <?php endforeach; ?>
   <?php print $list_type_suffix; ?>
 <?php print $wrapper_suffix; ?>
-<div class="more-link"><?php echo l(t('View all'), 'about-eu-osha/our-story/look-back-future/25-anniversary-articles'); ?></div>
+<div class="more-link accordion-view more"><?php echo t('View all'); ?></div>
+<div class="more-link accordion-view less"><?php echo t('View less'); ?></div>

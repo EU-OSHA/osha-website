@@ -645,3 +645,11 @@ function osha_update_7050() {
   features_revert(array('osha' => array('field_instance')));
   features_revert(array('osha' => array('views_view')));
 }
+
+/**
+ * MDR-2500 New process for the OSH Mail subscribers.
+ */
+function osha_update_7051() {
+  variable_set('osha_newsletter_listserv', 'crm-oshmail@osha.europa.eu');
+  variable_set('osha_newsletter_list_name', 'crm-oshmail');
+}

@@ -1,0 +1,170 @@
+<?php
+
+/**
+ * @file
+ * Short_answer question type for the Quiz module.
+ *
+ * Short answer is structurally similar to long answer. However, the module
+ * mechanism makes it very difficult for these two modules (either one of
+ * which may be disabled) to effectively share code.
+ */
+
+/**
+ * Implements hook_help().
+ */
+function short_answer_help($path, $args) {
+  if ($path == 'admin/help#short_answer') {
+    return t('This module provides a short answer question type for Quiz.');
+  }
+}
+
+/**
+ * Implements hook_permission().
+ */
+function short_answer_permission() {
+  return array(
+    'use regex for short answer' => array(
+      'title' => t('use regex for short answer'),
+      'description' => t('Use PHP "regular expressions" the advanced option for automated response evaluation.'),
+      'restrict access' => TRUE,
+    ),
+  );
+}
+
+/**
+ * Implements hook_quiz_question_info().
+ */
+function short_answer_quiz_question_info() {
+  return array(
+    'short_answer' => array(
+      'name' => t('Short answer question'),
+      'description' => t('Quiz questions that allow a user to enter a line of text.'),
+      'question provider' => 'ShortAnswerQuestion',
+      'response provider' => 'ShortAnswerResponse',
+      // All wrapper functions are in the quiz_question module.
+      'module' => 'quiz_question',
+    ),
+  );
+}
+
+/**
+ * Implements hook_quiz_question_config().
+ */
+function short_answer_quiz_question_config() {
+  $form['short_answer_default_max_score'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Default max score'),
+    '#description' => t('Choose the default maximum score for a short answer question.'),
+    '#default_value' => variable_get('short_answer_default_max_score', 5),
+  );
+  $form['#validate'][] = 'short_answer_config_validate';
+  return $form;
+}
+
+/**
+ * Validate the short_answer config form values.
+ */
+function short_answer_config_validate($form, $form_state) {
+  if ($form_state['values']['short_answer_default_max_score'] <= 0) {
+    form_set_error('short_answer_default_max_score', t('The default max score must be greater than 0'));
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function short_answer_theme($existing, $type, $theme, $path) {
+  $module_path = drupal_get_path('module', 'short_answer');
+  return array(
+    'short_answer_response_form' => array(
+      'render element' => 'form',
+      'path' => $module_path . '/theme',
+      'file' => 'short_answer.theme.inc',
+    ),
+    'short_answer_user_answer' => array(
+      'variables' => array('answer' => NULL, 'correct' => NULL),
+      'path' => $module_path . '/theme',
+      'file' => 'short_answer.theme.inc',
+    ),
+    'short_answer_answering_form' => array(
+      'render element' => 'form',
+      'path' => $module_path . '/theme',
+      'template' => 'short-answer-answering-form',
+    ),
+  );
+}
+
+/**
+ * Set a score for a short answer question.
+ *
+ * This stores a score for a long answer question and marks that question as
+ * having been evaluated. The function updates all of the necessary data
+ * sources so that the individual answer results should be reflected in the
+ * total scoring table.
+ *
+ * @param array $values
+ *   The FAPI $form_state['values'].
+ * @param bool $update_total
+ *   Shall the total score be updated?
+ */
+function short_answer_score_an_answer($values, $update_total = TRUE) {
+  $nid = $values['nid'];
+  $vid = $values['vid'];
+  $result_id = $values['result_id'];
+  $score = $values['score'];
+  $answer_feedback = $values['answer_feedback'];
+  $quiz = $values['quiz'];
+
+  $question_node = node_load($nid, $vid);
+  $quiz_question_response = _quiz_question_response_get_instance($result_id, $question_node);
+  $ratio = $quiz_question_response->getWeightedRatio();
+
+  db_merge('quiz_short_answer_user_answers')
+    ->fields(array(
+      'score' => !empty($score) && !empty($ratio) ? $score / $ratio : 0,
+      'is_evaluated' => 1,
+      'answer_feedback' => empty($answer_feedback['value']) ? '' : $answer_feedback['value'],
+      'answer_feedback_format' => empty($answer_feedback['format']) ? '' : $answer_feedback['format'],
+    ))
+    ->key(array('result_answer_id' => $quiz_question_response->result_answer_id))
+    ->execute();
+
+  // Now the user data has been updated. We also need to update the data in the
+  // quiz tables.
+  $quiz_result_answer = entity_load_single('quiz_result_answer', $quiz_question_response->result_answer_id);
+  $quiz_result_answer->points_awarded = $score;
+  $quiz_result_answer->is_correct = $quiz_question_response->isCorrect();
+  $quiz_result_answer->save();
+
+  // Third, we update the main quiz results table.
+  if ($update_total) {
+    quiz_update_total_score($quiz, $result_id);
+  }
+}
+
+/**
+ * Submit function for the report form.
+ *
+ * @param array $values
+ *   The FAPI $form_state['values'].
+ */
+function short_answer_report_submit($values) {
+  short_answer_score_an_answer($values, FALSE);
+}
+
+/**
+ * Implements hook_field_extra_fields().
+ */
+function short_answer_field_extra_fields() {
+  $extra = array();
+  $extra['node']['short_answer'] = array(
+    'form' => array(
+      'answer' => array(
+        'label' => t('Answer'),
+        'description' => t('Provide the answer and the method by which the answer will be evaluated.'),
+        'weight' => -4,
+      ),
+    ),
+  );
+  return $extra;
+}

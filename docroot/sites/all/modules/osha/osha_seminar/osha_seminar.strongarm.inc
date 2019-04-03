@@ -154,26 +154,35 @@ function osha_seminar_strongarm() {
       'print' => array(
         'custom_settings' => FALSE,
       ),
+      'dangerous_substances' => array(
+        'custom_settings' => TRUE,
+      ),
+      'osha_search_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '26',
+          'weight' => '14',
         ),
         'title' => array(
           'weight' => '2',
         ),
         'path' => array(
-          'weight' => '27',
+          'weight' => '15',
         ),
         'redirect' => array(
-          'weight' => '28',
+          'weight' => '16',
         ),
         'workbench_access' => array(
           'weight' => '0',
         ),
         'language' => array(
           'weight' => '1',
+        ),
+        'xmlsitemap' => array(
+          'weight' => '18',
         ),
       ),
       'display' => array(),

@@ -518,9 +518,6 @@ function osha_newsletter_subscribe_extra_form() {
     '#value' => t('Subscribe'),
     '#submit' => array('osha_newsletter_block_subscribe_captcha_form_submit'),
   );
-  $form['unsubscribe_text'] = array(
-    '#markup' => '<hr><span>' . t('Not interested anymore?') . '</span>',
-  );
 
   return $form;
 }

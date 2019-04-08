@@ -672,12 +672,10 @@ function osha_newsletter_block_subscribe_captcha_form_submit($form, &$form_state
   $port = variable_get('crm_subscribe_port', '8081'); // 8082
   $url = 'https://jira.osha.europa.eu:' . $port . '/OSHAService/ServiceApp.svc/subscriber?email=' . $email . '&type=' . $type;
   $result = osha_newsletter_file_get_contents($url);
-  if (strpos($result, 'Succeed')) {
-    watchdog('osha_newsletter', 'Successfully subscribed %email.', array('%email' => $email));
-  }
   // Need to redirect due to Ajax handling.
   $referer = empty($_SERVER['HTTP_REFERER']) ? '/' : $_SERVER['HTTP_REFERER'];
   $form_state['redirect'] = $referer;
+  drupal_set_message(t('You should receive a confirmation email in your inbox in the coming minutes. Otherwise, please check your spam folder. Thanks a lot for subscribing.'));
 }
 
 /**

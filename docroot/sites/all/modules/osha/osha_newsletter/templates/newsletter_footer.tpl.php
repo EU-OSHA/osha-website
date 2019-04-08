@@ -117,6 +117,29 @@ global $language;
       </td>
     </tr>
     <tr>
+      <td style="text-align: center;">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <tbody>
+            <tr>
+              <td style="text-align: center; font-family: Arial, sans-serif; color: #333333; font-size: 13px;">
+                <p><?php $text = t('No longer wish to receive OSHmail? <a href="@url" style="@style">Unsubscribe here.</a>',
+                    array(
+                      '@style' => 'color: #003399; text-decoration: none;',
+                      '@url' => 'https://analytics-eu.clickdimensions.com/oshaeuropaeu-arn3o/pages/knqquecaeemaabqvrpqfg.html',
+                    )
+                  );
+                  $text = str_replace('href', 'target="_blank" href', $text);
+                  echo $text;
+                ?>
+                </p>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    <tr>
         <td style="text-align: center;">
             <table border="0" cellpadding="0" cellspacing="0" width="100%">
                 <tbody>

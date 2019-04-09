@@ -2371,3 +2371,8 @@ a {
 .cut-paste{
 	padding-top: 2em;
 }
+
+/* Hide newsletter unsubscribe in Frontend MDR-2500 */
+.hide-front-unsubscribe{
+	display: none;
+}

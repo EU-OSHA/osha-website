@@ -1,6 +1,6 @@
 <?php
 /**
- * Class MigrateOshaBlog migrates blog.txt contents. The data
+ * Class MigrateOshaBlog migrates FocalPoints.xml contents. The data
  * is stored inside the <em>Blog</em> content type.
  */
 class MigrateOshaFocalPoints extends OSHADynamicMigration {
@@ -10,7 +10,7 @@ class MigrateOshaFocalPoints extends OSHADynamicMigration {
    */
   public function __construct($arguments) {
     parent::__construct(MigrateGroup::getInstance('OSHA Content types'));
-    $this->description = 'Import "Focal Points" contents from CSV file';
+    $this->description = 'Import "Focal Points" contents from FocalPoints.xml file';
 
     /* Remove limits on time/memory, slower machines will fail */
     $this->timeLimit = 0;

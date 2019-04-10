@@ -25,7 +25,7 @@ class NewsletterTest extends OshaWebTestCase {
     parent::setUp();
     $success = module_enable(array('entity_collection', 'osha_newsletter'), TRUE);
     $this->assertTrue($success);
-    // Log in as superuser
+    // Log in as superuser.
     $user = user_load(1);
     $user->pass_raw = 'test';
     $user = user_save($user, array('pass' => 'test'));
@@ -33,21 +33,21 @@ class NewsletterTest extends OshaWebTestCase {
   }
 
   public function testNewsletter() {
-    // Test if mail is sent
+    // Test if mail is sent.
     $this->drupalPost('', array('email' => 'invalid'), t('Subscribe'));
     $this->assertText(t('That e-mail address is not valid.'));
     $this->drupalPost('', array('email' => 'test@example.com'), t('Subscribe'));
     $this->assertText(t('Your subscription has been submitted succesfully.'));
     $mails = $this->drupalGetMails();
-    $this->assertEqual($mails[0]['to'], 'listserv@list.osha.europa.eu');
+    $this->assertEqual($mails[0]['to'], 'crm-oshmail@osha.europa.eu');
     $this->assertEqual($mails[0]['from'], 'test@example.com');
     $this->assertEqual($mails[0]['body'], 'subscribe OSHMail-Test anonymous' . "\n");
 
-    // Check if configuration is correct
+    // Check if configuration is correct.
     $this->drupalGet('admin/config/content/newsletter');
-    $this->assertField('osha_newsletter_listserv', 'listserv@list.osha.europa.eu');
+    $this->assertField('osha_newsletter_listserv', 'crm-oshmail@osha.europa.eu');
     $this->assertField('osha_newsletter_listserv_from', 'oshmail@osha.europa.eu');
-    $this->assertField('osha_newsletter_list_name', 'OSHMail-Test');
+    $this->assertField('osha_newsletter_list_name', 'crm-oshmail');
     $this->assertField('osha_newsletter_after_max_nodes', '30');
     $this->assertField('osha_newsletter_node_view_mode', 'full');
     $this->assertFieldChecked('edit-osha-newsletter-allowed-bundles-article');
@@ -59,4 +59,5 @@ class NewsletterTest extends OshaWebTestCase {
     $this->assertFieldChecked('edit-osha-newsletter-allowed-bundles-publication');
     $this->assertField('osha_newsletter_term_ct_map[view_mode_highlight]', 'highlights_item');
   }
+
 }

@@ -10,6 +10,32 @@
 function osha_seminar_field_default_field_bases() {
   $field_bases = array();
 
+  // Exported field_base: 'field_report'.
+  $field_bases['field_report'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_report',
+    'indexes' => array(
+      'fid' => array(
+        0 => 'fid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'file',
+    'settings' => array(
+      'display_default' => 0,
+      'display_field' => 0,
+      'entity_translation_sync' => array(
+        0 => 'fid',
+      ),
+      'uri_scheme' => 'public',
+    ),
+    'translatable' => 1,
+    'type' => 'file',
+  );
+
   // Exported field_base: 'field_seminar_end_date'.
   $field_bases['field_seminar_end_date'] = array(
     'active' => 1,

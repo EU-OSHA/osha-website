@@ -17,6 +17,10 @@ function osha_search_menu() {
     'access callback' => TRUE,
     'page arguments' => array(1),
   );
+  $items['search-autocomplete'] = array(
+    'page callback' => 'osha_search_autocomplete_callback',
+    'access callback' => TRUE,
+  );
   $items['admin/config/search/osha_search'] = array(
     'title' => 'OSHA Search',
     'description' => 'Config information for osha search',
@@ -331,6 +335,9 @@ function osha_search_change_sort_field_empty_query($element) {
  * When using search_autocomplete module.
  */
 function osha_search_autocomplete_callback($search = '*') {
+  if (empty(arg(1)) && !empty($_REQUEST['term'])) {
+    $search = $_REQUEST['term'];
+  }
   $search = check_plain($search);
   global $language;
   $lang = $language->language;

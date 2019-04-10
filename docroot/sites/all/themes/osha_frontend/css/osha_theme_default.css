@@ -10285,3 +10285,8 @@ img.file-icon {
     padding-left: 0;
     margin: 0.5em 0;
 }
+
+/* Hide newsletter unsubscribe in Frontend MDR-2500 */
+.hide-front-unsubscribe{
+	display: none;
+}

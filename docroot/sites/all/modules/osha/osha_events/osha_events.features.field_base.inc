@@ -550,33 +550,6 @@ function osha_events_field_default_field_bases() {
     'type' => 'list_text',
   );
 
-  // Exported field_base: 'field_fast'.
-  $field_bases['field_fast'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_fast',
-    'indexes' => array(
-      'value' => array(
-        0 => 'value',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'list',
-    'settings' => array(
-      'allowed_values' => array(
-        'Yes' => 'Yes',
-        'No' => 'No',
-        'Don\'t know' => 'Don\'t know',
-      ),
-      'allowed_values_function' => '',
-      'entity_translation_sync' => FALSE,
-    ),
-    'translatable' => 0,
-    'type' => 'list_text',
-  );
-
   // Exported field_base: 'field_for_the_web'.
   $field_bases['field_for_the_web'] = array(
     'active' => 1,

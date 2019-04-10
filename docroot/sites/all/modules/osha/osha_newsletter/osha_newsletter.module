@@ -518,14 +518,6 @@ function osha_newsletter_subscribe_extra_form() {
     '#value' => t('Subscribe'),
     '#submit' => array('osha_newsletter_block_subscribe_captcha_form_submit'),
   );
-  $form['unsubscribe_text'] = array(
-    '#markup' => '<hr><span>' . t('Not interested anymore?') . '</span>',
-  );
-  $form['unsubscribe'] = array(
-    '#type' => 'submit',
-    '#value' => t('Unsubscribe'),
-    '#submit' => array('osha_newsletter_unsubscribe_form_submit'),
-  );
 
   return $form;
 }
@@ -663,19 +655,27 @@ function osha_newsletter_block_subscribe_captcha_form_validate($form, &$form_sta
   }
 }
 
+function osha_newsletter_file_get_contents($url) {
+  $ch = curl_init();
+  curl_setopt($ch, CURLOPT_URL, $url);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+  curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+  curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+  $result = curl_exec($ch);
+  curl_close($ch);
+  return $result;
+}
+
 function osha_newsletter_block_subscribe_captcha_form_submit($form, &$form_state) {
   $email = $form_state['values']['email'];
-  $to = variable_get('osha_newsletter_listserv', 'listserv@list.osha.europa.eu');
-  osha_newsletter_send_email(
-    'subscribe_email',
-    $to,
-    $email,
-    $form_state,
-    t('Your subscription has been submitted succesfully.')
-  );
+  $type = variable_get('crm_subscribe_type', 'OSH');
+  $port = variable_get('crm_subscribe_port', '8081'); // 8082
+  $url = 'https://jira.osha.europa.eu:' . $port . '/OSHAService/ServiceApp.svc/subscriber?email=' . $email . '&type=' . $type;
+  $result = osha_newsletter_file_get_contents($url);
   // Need to redirect due to Ajax handling.
   $referer = empty($_SERVER['HTTP_REFERER']) ? '/' : $_SERVER['HTTP_REFERER'];
   $form_state['redirect'] = $referer;
+  drupal_set_message(t('You should receive a confirmation email in your inbox in the coming minutes. Otherwise, please check your spam folder. Thanks a lot for subscribing.'));
 }
 
 /**
@@ -701,14 +701,13 @@ function osha_newsletter_subscribe_extra_form_validate($form, &$form_state) {
 
 function _get_listserv_subscription_email() {
   global $user;
-
-  $listserv = explode("@", variable_get('osha_newsletter_listserv', 'listserv@list.osha.europa.eu'));
+  $listserv = explode("@", variable_get('osha_newsletter_listserv', 'crm-oshmail@osha.europa.eu'));
   $listserv_domain = '';
   if (isset($listserv[1])) {
     $listserv_domain = $listserv[1];
   }
 
-  $list_name = variable_get('osha_newsletter_list_name', 'OSHMail-Test');
+  $list_name = variable_get('osha_newsletter_list_name', 'crm-oshmail');
 
   if ($listserv_domain != '') {
     return $list_name . '@' . $listserv_domain;
@@ -716,17 +715,6 @@ function _get_listserv_subscription_email() {
   else {
     return $user->mail;
   }
-}
-
-/**
- * Form submission logic for the subscription form.
- */
-function osha_newsletter_unsubscribe_form_submit($form, &$form_state) {
-  $unsubscribe_email = $form_state['values']['email'];
-  $to = variable_get('osha_newsletter_listserv', 'listserv@list.osha.europa.eu');
-
-  osha_newsletter_send_email('unsubscribe_email', $to, $unsubscribe_email, $form_state,
-    t('You have succesfully unsubscribed'));
 }
 
 /**
@@ -1134,14 +1122,6 @@ function osha_newsletter_mail($key, &$message, $params) {
       entity_save('entity_collection', $source);
       break;
 
-    case 'subscribe_email':
-      osha_newsletter_build_subscribe_mail($message);
-      break;
-
-    case 'unsubscribe_email':
-      osha_newsletter_build_unsubscribe_mail($message);
-      break;
-
   }
 }
 
@@ -1268,36 +1248,6 @@ function osha_newsletter_format_body($text) {
   }
 
   return $text;
-}
-
-/**
- * Implements hook_mail().
- */
-function osha_newsletter_build_subscribe_mail(&$message) {
-  // Get list name.
-  $list = variable_get('osha_newsletter_list_name', 'OSHMail-Test');
-
-  // Get message data from source.
-  $message['subject'] = '';
-  $message['body']['body'] = 'subscribe ' . $list . ' anonymous';
-
-  // Optional params for HTML mails.
-  $message['params']['plain'] = NULL;
-}
-
-/**
- * Implements hook_mail().
- */
-function osha_newsletter_build_unsubscribe_mail(&$message) {
-  // Get list name.
-  $list = variable_get('osha_newsletter_list_name', 'OSHMail-Test');
-
-  // Get message data from source.
-  $message['subject'] = '';
-  $message['body']['body'] = 'unsubscribe ' . $list;
-
-  // Optional params for HTML mails.
-  $message['params']['plain'] = NULL;
 }
 
 /**

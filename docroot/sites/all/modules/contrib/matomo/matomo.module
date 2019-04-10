@@ -282,7 +282,7 @@ function matomo_page_alter(&$page) {
 
     // Set custom url.
     if (!empty($set_custom_url)) {
-      $script .= '_paq.push(["setCustomUrl", ' . $set_custom_url . ']);';
+      $script .= '_paq.push(["setCustomUrl", ' . $set_custom_url . ' + window.location.hash]);';
     }
     // Set custom document title.
     if (!empty($set_document_title)) {

@@ -116,7 +116,7 @@ global $language;
         </table>
       </td>
     </tr>
-    <tr>
+    <tr class="hide-front-unsubscribe">
       <td style="text-align: center;">
         <table border="0" cellpadding="0" cellspacing="0" width="100%">
           <tbody>

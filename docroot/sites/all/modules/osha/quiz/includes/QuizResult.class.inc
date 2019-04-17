@@ -10,6 +10,7 @@ class QuizResult extends Entity {
    * @return QuizResultAnswer[]
    */
   public function getLayout() {
+
     $layouts = drupal_static('quiz_result_layout', array());
 
     if (!isset($layouts[$this->identifier()])) {
@@ -24,8 +25,10 @@ class QuizResult extends Entity {
       $layout = array();
 
       $quiz_result_answers = entity_load('quiz_result_answer', FALSE, array('result_id' => array($this->identifier())));
+      
       if ($quiz_result_answers) {
         foreach ($quiz_result_answers as $quiz_result_answer) {
+          
           if (!empty($relationships[$quiz_result_answer->question_nid])) {
             $relationship = $relationships[$quiz_result_answer->question_nid];
           }
@@ -42,6 +45,7 @@ class QuizResult extends Entity {
           );
         }
         ksort($layout, SORT_NUMERIC);
+        //Show all the answers
         $layouts[$this->identifier()] = $layout;
       }
     }

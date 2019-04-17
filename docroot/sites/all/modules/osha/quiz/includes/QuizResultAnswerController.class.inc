@@ -37,8 +37,8 @@ class QuizResultAnswerController extends EntityAPIController {
 
     $labels = array(
       'attempt' => t('Your answer'),
-      'choice' => t('Choice'),
-      'correct' => t('Correct?'),
+      'choice' => t('Answers'),
+      'correct' => t('Is Correct?'),
       'solution' => t('Correct answer'),
     );
     drupal_alter('quiz_feedback_labels', $labels);
@@ -77,8 +77,10 @@ class QuizResultAnswerController extends EntityAPIController {
     if ($rows) {
       $headers = array_intersect_key($labels, $rows[0]);
       $type = $instance->getQuizQuestion()->node->type;
-      dpm($type);
-      $out['table']['#markup'] = theme('quiz_question_feedback__' . $type, array('labels' => $headers, 'data' => $rows));
+      $tema = theme('quiz_question_feedback__' . $type, array('labels' => $headers, 'data' => $rows));
+      $tema = str_replace('<table class="sticky-enabled">', "<table  style='width:100%' class='quiz-feedback-table sticky-enabled'>", $tema);
+      
+      $out['table']['#markup'] = $tema;
     }
 
    

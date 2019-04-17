@@ -89,7 +89,7 @@ function theme_quiz_progress($variables) {
   drupal_add_js(drupal_get_path('module', 'quiz') . '/js/quiz.jumper.js');
   $output = '';
   $output .= '<div id="quiz-progress">';
-  $text = ''; //'Page <span id="quiz-question-number">!x</span> of <span id="quiz-num-questions">@y</span>';
+  $text = t('Question') . ' <span id="quiz-question-number">!x</span> '. t('of') . ' <span id="quiz-num-questions">@y</span>';
 
   // Just text.
   $output .= t($text, array('!x' => $variables['current'], '@y' => count($variables['questions'])));

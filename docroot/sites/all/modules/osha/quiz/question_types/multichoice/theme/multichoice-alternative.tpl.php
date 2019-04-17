@@ -26,8 +26,10 @@ print drupal_render_children($form);
 // alternatives.
 foreach ($titles as $key => $value) {
   $row = array();
-  $row[] = array('data' => drupal_render($fullOptions[$key]), 'width' => 35);
+  $row[] = array('data' => drupal_render($fullOptions[$key]), 'width' => 10);
   $row[] = $value;
   $rows[] = array('data' => $row, 'class' => array('multichoice-row'));
 }
-print theme('table', array('header' => array(), 'rows' => $rows));
+$tema = theme('table', array('header' => array(), 'rows' => $rows));
+$tema = str_replace("<table>", "<table  style='width:100%' class='quiz-table'>", $tema);
+print $tema;

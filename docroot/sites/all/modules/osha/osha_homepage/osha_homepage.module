@@ -5,25 +5,158 @@
  */
 
 include_once 'osha_homepage.features.inc';
-        
+
 /**
- * implements hook_preprocess_node()
+ * Implements hook_block_info().
  */
-function osha_homepage_init() {
-    if(drupal_is_front_page()){
-      $jssor_path = libraries_get_path('jquery-slider-master');
-      drupal_add_js($jssor_path . '/jssor.slider.mini.js');
-      drupal_add_css($jssor_path . '/jssor.css');
-    }
+function osha_homepage_block_info() {
+  $blocks = array();
+  $blocks['osha_homepage_tweets'] = array(
+    'info' => t('Homepage Tweets'),
+    'cache' => DRUPAL_CACHE_PER_USER | DRUPAL_CACHE_PER_PAGE,
+  );
+  $blocks['osha_homepage_follow_us'] = array(
+    'info' => t('Follow us on'),
+    'cache' => DRUPAL_CACHE_PER_USER | DRUPAL_CACHE_PER_PAGE,
+    'region' => 'sidebar_second',
+  );
+  $blocks['osha_homepage_news_events'] = array(
+    'info' => t('News and Events'),
+    'cache' => DRUPAL_CACHE_PER_USER | DRUPAL_CACHE_PER_PAGE,
+  );
+  $blocks['osha_homepage_footer'] = array(
+    'info' => t('Footer map'),
+    'cache' => DRUPAL_CACHE_PER_USER | DRUPAL_CACHE_PER_PAGE,
+  );
+
+  return $blocks;
 }
 
 /**
- * Implements hook_views_pre_render().
+ * Implements hook_block_configure().
  */
-function osha_homepage_views_pre_render(&$view) {
-  $jssor_path = libraries_get_path('jquery-slider-master');
-  if ($view->name == 'esener_carousel') {
-    drupal_add_js($jssor_path . '/jssor.slider.mini.js');
-    drupal_add_css($jssor_path . '/jssor.css');
+function osha_homepage_block_configure($delta = '') {
+  $form = array();
+
+  switch ($delta) {
+    case 'osha_homepage_news_events':
+      $newsletters_no_options = array();
+      for ($i = 0; $i <= 3; $i++) {
+        $newsletters_no_options[$i] = $i;
+      }
+      $form['osha_hp_news_limit'] = array(
+        '#type' => 'select',
+        '#title' => 'How many news items do you want to display?',
+        '#options' => $newsletters_no_options,
+        '#default_value' => variable_get('osha_hp_news_limit', 2),
+      );
+      break;
   }
+
+  return $form;
+}
+
+/**
+ * Implements hook_block_save().
+ */
+function osha_homepage_block_save($delta = '', $edit = array()) {
+  // We need to save settings from the configuration form.
+  switch ($delta) {
+    case 'osha_homepage_news_events':
+      variable_set('osha_hp_news_limit', $edit['osha_hp_news_limit']);
+      break;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function osha_homepage_theme() {
+
+  $theme = [];
+  $path = drupal_get_path('module', 'osha_homepage');
+
+  $theme['osha_homepage_tweets'] = [
+    'path' => $path . '/templates',
+    'template' => 'osha_homepage_tweets',
+    'variables' => [
+      'view' => NULL,
+      'options' => NULL,
+      'rows' => NULL,
+      'title' => NULL,
+    ],
+  ];
+  $theme['osha_homepage_follow_us'] = [
+    'path' => $path . '/templates',
+    'template' => 'osha_homepage_follow_us',
+    'variables' => [],
+  ];
+
+  $theme['footer_block_theme'] = [
+    'path' => $path . '/templates',
+    'render element' => 'element',
+    'template' => 'footer-menu-block',
+    'variables' => array(
+      'menu_data' => [],
+    ),
+  ];
+  return $theme;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function osha_homepage_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+    case 'osha_homepage_tweets':
+      $block['subject'] = t('Latest tweets');
+      $block['content'] = theme('osha_homepage_tweets');
+
+      break;
+
+    case 'osha_homepage_news_events':
+      $block['subject'] = t('News and Events');
+      $content = '<div class="view-news-and-events"><div class="row">' . osha_homepage_news_events_blocks_view() . '</div>';
+      $content .= '<div class="more-link revamp">';
+      $content .= l(t('View all news'), 'oshnews');
+      $content .= l(t('View all events'), 'events');
+      $content .= '</div></div>';
+      $block['content'] = $content;
+      break;
+
+    case 'osha_homepage_follow_us':
+      $block['content'] = theme('osha_homepage_follow_us');
+      break;
+
+    case 'osha_homepage_footer':
+      $menu_data = [];
+      $all_data = menu_tree_all_data('main-menu', NULL, 3);
+      foreach ($all_data as $row) {
+        foreach ($row['below'] as $key => $menu) {
+          $menu_data[$key] = $menu;
+        }
+      }
+      $block['content'] = theme('footer_block_theme', ['menu_data' => $menu_data]);
+      break;
+  }
+
+  return $block;
+}
+
+function osha_homepage_news_events_blocks_view() {
+  $blocks = [];
+  $limit = variable_get('osha_hp_news_limit', 2);
+  if ($limit) {
+    $blocks[] = block_load('views', 'news-oshnews_latest');
+  }
+  $limit = 3 - $limit;
+  if ($limit) {
+    $blocks[] = block_load('views', 'upcoming_events-block');
+  }
+  $array = _block_get_renderable_array(
+    _block_render_blocks($blocks)
+  );
+  return render($array);
 }

@@ -22,12 +22,9 @@
  * - $pager: The pager next/prev links to display, if any
  * - $exposed: Exposed widget form/info to display
  * - $feed_icon: Feed icon to display, if any
- * - $more: A link to view more, if any
+ * - $more: A link to view more, if any.
  *
  * @ingroup views_templates
  */
 ?>
-<div class="container">
-    <h2 class="home"><?php print t('Recommended resources'); ?></h2>
-    <div class="content-recommended-resources"><?php print $rows ?></div>
-</div>
+<?php print $rows;

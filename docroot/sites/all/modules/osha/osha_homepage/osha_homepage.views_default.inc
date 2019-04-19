@@ -281,10 +281,11 @@ function osha_homepage_views_default_views() {
   $handler->display->display_options['fields']['field_banner_link']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_banner_link']['click_sort_column'] = 'url';
   $handler->display->display_options['fields']['field_banner_link']['type'] = 'link_title_plain';
-  /* Sort criterion: Global: Random */
-  $handler->display->display_options['sorts']['random']['id'] = 'random';
-  $handler->display->display_options['sorts']['random']['table'] = 'views';
-  $handler->display->display_options['sorts']['random']['field'] = 'random';
+  /* Sort criterion: Nodequeue: Position */
+  $handler->display->display_options['sorts']['position']['id'] = 'position';
+  $handler->display->display_options['sorts']['position']['table'] = 'nodequeue_nodes';
+  $handler->display->display_options['sorts']['position']['field'] = 'position';
+  $handler->display->display_options['sorts']['position']['relationship'] = 'nodequeue_rel';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -303,6 +304,19 @@ function osha_homepage_views_default_views() {
   /* Display: Home page banner top */
   $handler = $view->new_display('block', 'Home page banner top', 'home_page_banner_top');
   $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '3';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_options']['row_class'] = 'home-boxes';
+  $handler->display->display_options['style_options']['default_row_class'] = FALSE;
+  $handler->display->display_options['style_options']['row_class_special'] = FALSE;
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Content: Link title (field_banner_link_title) */
   $handler->display->display_options['relationships']['field_banner_link_title_tid']['id'] = 'field_banner_link_title_tid';
@@ -332,6 +346,13 @@ function osha_homepage_views_default_views() {
   $handler->display->display_options['fields']['title_field']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title_field']['link_to_entity'] = 0;
+  /* Field: Content: Subtitle */
+  $handler->display->display_options['fields']['field_subtitle']['id'] = 'field_subtitle';
+  $handler->display->display_options['fields']['field_subtitle']['table'] = 'field_data_field_subtitle';
+  $handler->display->display_options['fields']['field_subtitle']['field'] = 'field_subtitle';
+  $handler->display->display_options['fields']['field_subtitle']['label'] = '';
+  $handler->display->display_options['fields']['field_subtitle']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_subtitle']['element_label_colon'] = FALSE;
   /* Field: Content: Summary */
   $handler->display->display_options['fields']['field_summary']['id'] = 'field_summary';
   $handler->display->display_options['fields']['field_summary']['table'] = 'field_data_field_summary';
@@ -349,6 +370,7 @@ function osha_homepage_views_default_views() {
   $handler->display->display_options['fields']['field_banner_link_1']['label'] = '';
   $handler->display->display_options['fields']['field_banner_link_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_banner_link_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_banner_link_1']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_banner_link_1']['click_sort_column'] = 'url';
   $handler->display->display_options['fields']['field_banner_link_1']['type'] = 'link_plain';
   /* Field: Taxonomy term: Name */
@@ -369,14 +391,14 @@ function osha_homepage_views_default_views() {
   $handler->display->display_options['fields']['field_image']['field'] = 'field_image';
   $handler->display->display_options['fields']['field_image']['label'] = '';
   $handler->display->display_options['fields']['field_image']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_image']['alter']['text'] = '<a href="[field_banner_link_1]"><div class="views-field-title">[field_summary]</div>[field_image][name_field]</a>';
+  $handler->display->display_options['fields']['field_image']['alter']['text'] = '<a href="[field_banner_link_1]"><h2>[title_field]</h2><h3>[field_subtitle]</h3><span class="content-box"><span class="content-background"></span>[field_image]</span></a><a class="box-link" href="[field_banner_link_1]">[name_field]</a>';
   $handler->display->display_options['fields']['field_image']['alter']['target'] = '_blank';
   $handler->display->display_options['fields']['field_image']['alter']['nl2br'] = TRUE;
-  $handler->display->display_options['fields']['field_image']['element_class'] = 'view-osha-home-banner-top';
   $handler->display->display_options['fields']['field_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_image']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_image']['settings'] = array(
-    'image_style' => 'banner_825_x_255',
+    'image_style' => 'home_intro',
     'image_link' => '',
   );
   /* Field: Content: Copyright */
@@ -384,7 +406,10 @@ function osha_homepage_views_default_views() {
   $handler->display->display_options['fields']['field_copyright']['table'] = 'field_data_field_copyright';
   $handler->display->display_options['fields']['field_copyright']['field'] = 'field_copyright';
   $handler->display->display_options['fields']['field_copyright']['label'] = '';
+  $handler->display->display_options['fields']['field_copyright']['element_type'] = 'span';
+  $handler->display->display_options['fields']['field_copyright']['element_class'] = 'copyright';
   $handler->display->display_options['fields']['field_copyright']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_copyright']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_copyright']['type'] = 'text_plain';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -413,10 +438,12 @@ function osha_homepage_views_default_views() {
   /* Display: Home page banner footer */
   $handler = $view->new_display('block', 'Home page banner footer', 'home_page_banner_footer');
   $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '8';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_options']['row_class'] = 'rr-element';
   $handler->display->display_options['style_options']['default_row_class'] = FALSE;
   $handler->display->display_options['style_options']['row_class_special'] = FALSE;
   $handler->display->display_options['defaults']['style_options'] = FALSE;
@@ -466,8 +493,8 @@ function osha_homepage_views_default_views() {
   $handler->display->display_options['fields']['field_image']['label'] = '';
   $handler->display->display_options['fields']['field_image']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_image']['alter']['text'] = '<a href="[field_banner_link_1]">
-<div class="views-field-title"><h2>[title_field]</h2></div>
-[field_image]
+<span class="rr-content-img">[field_image]</span>
+<h3>[title_field]</h3>
 </a>';
   $handler->display->display_options['fields']['field_image']['alter']['path'] = '[field_banner_link_1]';
   $handler->display->display_options['fields']['field_image']['alter']['alt'] = '[title]';
@@ -476,7 +503,7 @@ function osha_homepage_views_default_views() {
   $handler->display->display_options['fields']['field_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_image']['settings'] = array(
-    'image_style' => 'banner_195_160',
+    'image_style' => '',
     'image_link' => '',
   );
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
@@ -515,12 +542,12 @@ function osha_homepage_views_default_views() {
     t('home_page_main_carousel'),
     t('<h1>[field_summary]</h1>'),
     t('<span class="views-field-field-banner-link">[name_field]</span>'),
-    t('<a href="[field_banner_link_1]"><div class="views-field-title">[field_summary]</div>[field_image][name_field]</a>'),
+    t('<a href="[field_banner_link_1]"><h2>[title_field]</h2><h3>[field_subtitle]</h3><span class="content-box"><span class="content-background"></span>[field_image]</span></a><a class="box-link" href="[field_banner_link_1]">[name_field]</a>'),
     t('Home page banner footer'),
     t('home_page_recommended_resources'),
     t('<a href="[field_banner_link_1]">
-<div class="views-field-title"><h2>[title_field]</h2></div>
-[field_image]
+<span class="rr-content-img">[field_image]</span>
+<h3>[title_field]</h3>
 </a>'),
     t('[title]'),
   );

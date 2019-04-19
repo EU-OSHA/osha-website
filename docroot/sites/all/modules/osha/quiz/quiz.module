@@ -1036,7 +1036,6 @@ function quiz_load($nodes) {
 function quiz_view($node) {
   // Number of questions is needed on the statistics page.
   $node->number_of_questions = quiz_get_number_of_questions($node->vid, $node->nid);
-
   $node->content['stats'] = array(
     '#markup' => theme('quiz_view_stats', array('node' => $node)),
     '#weight' => -1,
@@ -1892,8 +1891,8 @@ function quiz_take_quiz($quiz) {
  */
 function quiz_take_question($quiz, $question_number) {
   // Preserve "Take" tab.
-  $item = menu_get_item("node/$quiz->nid/take");
-  menu_set_item(NULL, $item);
+ // $item = menu_get_item("node/$quiz->nid/take");
+ // menu_set_item(NULL, $item);
 
   if (!empty($_SESSION['quiz'][$quiz->nid]['result_id'])) {
     $quiz_result = quiz_result_load($_SESSION['quiz'][$quiz->nid]['result_id']);
@@ -3556,26 +3555,32 @@ function quiz_take_question_feedback_form($form, &$form_state, $quiz, $question_
 
   $form['actions']['#type'] = 'actions';
 
-  
-  $form['actions']['next'] = array(
-    '#type' => 'submit',
-    '#submit' => array('quiz_take_question_feedback_submit'),
-    '#value' => t('Next question'),
-  );
- 
+  if ($quiz_result->time_end) {
+    // Quiz is done.
+    $form['actions']['finish'] = array(
+      '#type' => 'submit',
+      '#submit' => array('quiz_take_question_feedback_end_submit'),
+      '#value' => t('Finish'),
+    );
+  }
+  else {
+    $form['actions']['next'] = array(
+      '#type' => 'submit',
+      '#submit' => array('quiz_take_question_feedback_submit'),
+      '#value' => t('Next question'),
+    );
+  }
 
   // Add feedback.
   $out = array();
   foreach ($quiz_result->getLayout() as $question) {
     if ($question['number'] == $question_number && $question['qnr_pid']) {
-
       // Question is in a page.
       foreach ($quiz_result->getLayout() as $question2) {
-
         if ($question2['qnr_pid'] == $question['qnr_pid']) {
           $qra = entity_load_single('quiz_result_answer', $question2['result_answer_id']);
           $out[] = array(
-            '#title' => t('Question @num', array('@num' => $question2['display_number'])) ,
+            '#title' => t('Question @num', array('@num' => $question2['display_number'])),
             '#type' => 'fieldset',
             'feedback' => $qra->view(),
           );
@@ -3588,17 +3593,18 @@ function quiz_take_question_feedback_form($form, &$form_state, $quiz, $question_
   if (empty($out)) {
 
     $layout = $quiz_result->getLayout();
-dpm( $layout[$question_number]['result_answer_id']);
-    $qra = entity_load_single('quiz_result_answer', $layout[$question_number]['result_answer_id']);
 
+    $qra = entity_load_single('quiz_result_answer', $layout[$question_number]['result_answer_id']);
+    
+    $title = node_load($qra->question_nid);
+    $Qtitle= $title->title;
     $out[] = array(
-      '#title' => t('Question @num', array('@num' => $layout[$question_number]['display_number'])),
+      '#title' => $Qtitle,
       '#type' => 'fieldset',
       'feedback' => $qra->view(),
     );
   }
-dpm($out);
-
+  
   $form['feedback'] = $out;
 
   return $form;

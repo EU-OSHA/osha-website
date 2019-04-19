@@ -398,20 +398,26 @@ class MultichoiceQuestion extends QuizQuestion {
    * @see QuizQuestion::getAnsweringForm()
    */
   public function getAnsweringForm(array $form_state = NULL, $result_id) {
-    //dpm($form_state);
     $element = parent::getAnsweringForm($form_state, $result_id);
+
 
     // We use an array looking key to be able to store multiple answers in
     // tries. At the moment all user answers have to be stored in tries. This
     // is something we plan to fix in quiz 5.x.
     $element['#theme'] = 'multichoice_alternative';
+
     if (isset($result_id)) {
       // This question has already been answered. We load the answer.
       $response = new MultichoiceResponse($result_id, $this->node);
+      
     }
     for ($i = 0; isset($this->node->alternatives[$i]); $i++) {
       $short = $this->node->alternatives[$i];
       $answer_markup = check_markup($short['answer']['value'], $short['answer']['format']);
+      $answer_markup= str_replace("<p>", "", $answer_markup);
+      $answer_markup= str_replace("</p>", "", $answer_markup);
+      $answer_markup = "<p class='quiz-answer'>" . t($answer_markup) . "</p>";
+     
       if (drupal_strlen($answer_markup) > 0) {
         $element['user_answer']['#options'][$short['id']] = $answer_markup;
       }
@@ -435,7 +441,7 @@ class MultichoiceQuestion extends QuizQuestion {
     }
     else {
       $element['user_answer']['#type'] = 'radios';
-      $element['user_answer']['#title'] = t('Choose one');
+      //$element['user_answer']['#title'] = t('Choose one');
       if (isset($response)) {
         $selection = $response->getResponse();
         if (is_array($selection)) {
@@ -443,7 +449,6 @@ class MultichoiceQuestion extends QuizQuestion {
         }
       }
     }
-
     $element['#attached']['js'] = array(
       drupal_get_path('module', 'multichoice') . '/multichoice.js',
     );

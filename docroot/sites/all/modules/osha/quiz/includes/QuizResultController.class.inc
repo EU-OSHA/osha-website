@@ -176,10 +176,12 @@ class QuizResultController extends EntityAPIController {
     }
 
     if ($questions) {
-      $out['questions'] = $questions;
+      //Show all the questions or not
+      //$out['questions'] = $questions;
     }
 
     $quiz_feedback['#markup'] = '';
+   
     if (quiz_feedback_can_review('quiz_feedback', $entity)) {
       $summary = _quiz_get_summary_text($entity);
       // Show quiz feedback.
@@ -190,6 +192,7 @@ class QuizResultController extends EntityAPIController {
         $quiz_feedback['#markup'] .= '<div id="quiz-summary">' . $summary['result'] . '</div>';
       }
     }
+    
     if ($quiz_feedback['#markup']) {
       $out['summary'] = $quiz_feedback;
     }
@@ -203,7 +206,6 @@ class QuizResultController extends EntityAPIController {
     if (!element_children($out)) {
       $out['no_feedback_text']['#markup'] = t('You have finished this @quiz.', array('@quiz' => QUIZ_NAME));
     }
-
     return $out;
   }
 

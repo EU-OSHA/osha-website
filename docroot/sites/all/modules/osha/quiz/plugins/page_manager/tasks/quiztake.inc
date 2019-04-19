@@ -38,24 +38,7 @@ function quiz_quiztake_page_manager_tasks() {
  */
 function quiz_quiztake_menu_alter(&$items, $task) {
 
-  if (variable_get('quiz_quiztake_disabled', TRUE)) {
-    return;
-  }
-
-  $callback = $items['node/%quiz_menu/take/%question_number']['page callback'];
-  // Override the node edit handler for our purpose.
-  if ($callback == 'quiz_take_question' || variable_get('page_manager_override_anyway', FALSE)) {
-    $items['node/%quiz_menu/take/%question_number']['page callback'] = 'quiz_quiztake';
-    $items['node/%quiz_menu/take/%question_number']['file path'] = $task['path'];
-    $items['node/%quiz_menu/take/%question_number']['file'] = $task['file'];
-  }
-  else {
-    //variable_set('quiz_quiztake_disabled', TRUE);
-    if (!empty($GLOBALS['page_manager_enabling_quiz'])) {
-      drupal_set_message(t('Page manager module is unable to enable Quiz take Node because some other module already has overridden with %callback.', array('%callback' => $callback)), 'warning');
-    }
-    return;
-  }
+ 
 }
 
 /**

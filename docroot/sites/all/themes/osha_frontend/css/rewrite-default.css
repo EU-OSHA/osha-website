@@ -3,13 +3,26 @@
     top:0px!important;
 }
 
+#block-osha-homepage-osha-homepage-tweets{
+    height: 560px;
+    overflow-y: scroll;
+    border-bottom: 1px solid #e1e8ed;
+    padding-bottom: 9px;
+    padding-left: 0em;
+    margin-left: 15px;
+}
+
+#block-views-highlight-block-2{
+    background: none;
+}
+
 h1{
-	letter-spacing: initial;
+    letter-spacing: initial;
 }
 
 .container{
-	max-width: 1160px;
-	margin: 0 auto;
+    max-width: 1160px;
+    margin: 0 auto;
 }
 
 .view-header.back a {
@@ -23,7 +36,7 @@ h1{
 }
 
 #block-menu-block-1 .menu li:hover ul{
-	margin-left: -4px;
+    margin-left: -4px;
 }
 
 #block-menu-block-1 li:nth-child(8) ul {
@@ -42,8 +55,8 @@ h1{
 }
 
 #block-osha-newsletter-osha-newsletter-subscribe{
-	background: none;
-	font-size: 1rem;
+    background: none;
+    font-size: 1rem;
 }
 
 #edit-search-api-language-wrapper label{
@@ -56,9 +69,9 @@ h1{
 }
 
 #block-osha-newsletter-osha-newsletter-subscribe > div{
-	float: left;
+    float: left;
     width: 93%;
-	background-color: #e9edf6;
+    background-color: #e9edf6;
     color: #003399;
     padding: 1em 1em 0 1em;
     margin: 0;
@@ -66,20 +79,20 @@ h1{
 }
 
 #block-osha-newsletter-osha-newsletter-subscribe .text-input-agree{
-	display: inline-block;
-	float: right;
+    display: inline-block;
+    float: right;
     width: 82%;
 }
 
 #block-osha-newsletter-osha-newsletter-subscribe .form-item-email{
-	margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 #block-osha-newsletter-osha-newsletter-subscribe a{
-	clear: both;
-	float: none;
-	font-weight: normal;
-	display: block;
+    clear: both;
+    float: none;
+    font-weight: normal;
+    display: block;
     border: 0px;
     text-decoration: underline;
     font-size: 0.9rem;
@@ -90,31 +103,31 @@ h1{
 }
 
 #block-osha-newsletter-osha-newsletter-subscribe label{
-	color:#003399;
-	font-size: 0.9rem;
+    color:#003399;
+    font-size: 0.9rem;
     padding-top: 10px;
     padding-right: 14px;
 }
 
 #block-views-highlight-block-2 h2{
-	float: none;
+    float: none;
 }
 
 #block-osha-newsletter-osha-newsletter-subscribe h2{
-	margin-bottom: 0.5em;
+    margin-bottom: 0.5em;
 }
 
 #block-osha-newsletter-osha-newsletter-subscribe h2 a{
     font-family: 'Open Sans',sans-serif;
     font-size: 1.5rem!important;
-	margin-bottom: 15px;
-	padding-bottom: 0;
-	text-decoration: none;
+    margin-bottom: 15px;
+    padding-bottom: 0;
+    text-decoration: none;
 }
 
 #newsletter-subscription-form-wrapper{
-	padding-top: 0!important;
-	margin-bottom: 2em!important;
+    padding-top: 0!important;
+    margin-bottom: 2em!important;
 }
 
 #block-views-highlight-block-2 h2{
@@ -122,8 +135,8 @@ h1{
 }
 
 .front h2.home{
-	background: transparent;
-	font-family: 'Open Sans',sans-serif;
+    background: transparent;
+    font-family: 'Open Sans',sans-serif;
     font-weight: bold!important;
     font-size: 1.6rem!important;
     color: #003399!important;
@@ -138,7 +151,7 @@ h1{
 }
 
 .front h2.home a{
-	font-family: 'Open Sans',sans-serif;
+    font-family: 'Open Sans',sans-serif;
     font-weight: bold!important;
     font-size: 1.6rem!important;
     color: #003399!important;
@@ -195,10 +208,10 @@ h1{
 }
 
 #block-osha-newsletter-osha-newsletter-subscribe input[type="submit"]{
-	background: #b2c7e5;
-	text-align: center;
-	margin-top: 1.5em;
-	padding-right: 0;
+    background: #b2c7e5;
+    text-align: center;
+    margin-top: 1.5em;
+    padding-right: 0;
     padding-left: 0;
     font-family: "Open Sans", verdana, sans-serif;
     font-size: 1rem;
@@ -218,58 +231,58 @@ h1{
 /*Pagination*/
 
 .pager{
-	padding-top: 2em;
+    padding-top: 2em;
 }
 
 .pager .pager-current {
     font-size: 1em;
     color: #ca2273;
     border:1px solid #003399;
-	padding: 0.5em 1em 0.5em 1em;
-	margin-right: 10px;
+    padding: 0.5em 1em 0.5em 1em;
+    margin-right: 10px;
 }
 
 .pager .pager-item{
-	border:1px solid #cfddee;
-	padding: 0.5em 1em 0.5em 1em;
-	margin-right: 10px;
+    border:1px solid #cfddee;
+    padding: 0.5em 1em 0.5em 1em;
+    margin-right: 10px;
 }
 
 .pager .pager-item:hover{
-	border:1px solid #003399;
+    border:1px solid #003399;
 }
 
 .pager .pager-item:hover a{
-	color: #003399;
+    color: #003399;
 }
 
 .pager li a{
-	color:#cfddee;
+    color:#cfddee;
 }
 
 .pager .pager-previous{
-	margin-right: 10px;
+    margin-right: 10px;
 }
 
 .pager li img{
-	padding-top: 4px;
+    padding-top: 4px;
     position: absolute;
 }
 
 .pager li img:hover{
-	opacity: 0.6;
+    opacity: 0.6;
 }
 
 .pager .pager-previous{
-	padding-right: 20px;
+    padding-right: 20px;
 }
 
 .pager .pager-first{
-	padding-right: 30px;
+    padding-right: 30px;
 }
 
 .pager .pager-last{
-	padding-left:20px; 
+    padding-left:20px; 
 }
 
 
@@ -291,7 +304,7 @@ h1{
 
 /* Footer */
 footer{
-	background:#003399;
+    background:#003399;
 }
 
 footer #edit-submit--4{
@@ -299,8 +312,8 @@ footer #edit-submit--4{
 }
 
 .footer-line{
-	margin: 0 auto;
-	clear: both;
+    margin: 0 auto;
+    clear: both;
 }
 
 #footer div#block-menu-block-4 ul {
@@ -316,3 +329,52 @@ footer #edit-submit--4{
     opacity: 0.8;
 }
 
+
+@media screen and (min-width: 1007px) {
+
+    #header.fixedHeader{
+        padding-top: 25px;
+    }
+
+    .fixedHeader #block-lang-dropdown-language-content, .fixedHeader #block-search-form, .fixedHeader #socialNetworksBlue, .fixedHeader img[alt*="Select language"]{
+        display: block;
+    }
+
+    .fixedHeader #languagesAndSearch #contact .a_small, .fixedHeader #languagesAndSearch #contact .a_medium, .fixedHeader #languagesAndSearch #contact .a_big{
+        display: inline-block;
+    }
+
+    .fixedHeader #languagesAndSearch #contact{
+        margin-top: -10px;
+    }
+
+    .fixedHeader #languagesAndSearch #contact > a::before{
+        content: '';
+        margin-right: 0;
+    }
+
+    .fixedHeader img[alt*="Select language"]{
+        position: absolute;
+        right: 62px;
+        top: 23px;
+    }
+
+    #contact > a:nth-child(5){
+        display: block;
+    }
+
+    .fixedHeader #languagesAndSearch{
+        width: 106px;
+        right: 1px;
+        top: 25px;
+    }
+
+    .fixedHeader #block-search-form{ 
+        margin-top: -52px;
+    }
+
+    .fixedHeader #lang-dropdown-select-language_content{
+        margin-top: -76px;
+    }
+
+}

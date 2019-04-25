@@ -327,7 +327,7 @@ a.box-link{
     margin-bottom: 10px;
 }
 
-.view-highlight h3 a{
+.view-id-highlight .view-content .views-field-title a{
     color: #003399;
     font-family: 'Open Sans',sans-serif;
     font-size: 1.3rem;
@@ -338,13 +338,14 @@ a.box-link{
     font-weight: bold;
 }
 
-.view-highlight h3 a:hover{
+.view-id-highlight .view-content .views-field-title a:hover{
     text-decoration: underline;
 }
 
 .view-highlight span.date-display-single{
     padding-top: 0;
     padding-left: 0;
+    font-size:12.8px!important;
 }
 
 .view-highlight  .views-field-body .field-content{

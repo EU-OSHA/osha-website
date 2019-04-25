@@ -142,6 +142,21 @@ function osha_homepage_image_default_styles() {
     ),
   );
 
+  // Exported image style: resource.
+  $styles['resource'] = array(
+    'label' => 'resource',
+    'effects' => array(
+      3 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 66,
+          'height' => 66,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   return $styles;
 }
 

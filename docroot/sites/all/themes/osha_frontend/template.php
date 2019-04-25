@@ -585,7 +585,9 @@ function osha_frontend_aggregator_block_item($variables) {
  */
 function osha_frontend_preprocess_block(&$vars) {
   $block = $vars['block'];
-
+  if ($block->delta == 'osha_homepage_tweets') {
+    $vars['title_attributes_array']['class'][] = 'home';
+  }
   if ($block->delta == 'oshwiki_featured_articles') {
     $vars['block_html_id'] = 'related-wiki';
     $vars['title_attributes_array']['class'][] = 'related_wiki_head';

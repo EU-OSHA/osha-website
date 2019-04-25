@@ -19,8 +19,7 @@ window.twttr = (function(d, s, id) {
     return t;
 }(document, "script", "twitter-wjs"));
 </script>
-<a class="twitter-timeline" data-chrome="nofooter noheader"
-   href="https://twitter.com/eu_osha" data-cards="hidden"
-   data-tweet-limit="3">
-  Tweets by @EU-OSHA
-</a>
+<?php
+foreach($tweets as $id => $name) {
+  echo '<blockquote class="twitter-tweet" data-cards="hidden" data-lang="en"><a href="' . "https://twitter.com/" . $name . "/status/" . $id . '" title="' . $name . '"> </a></blockquote>';
+}

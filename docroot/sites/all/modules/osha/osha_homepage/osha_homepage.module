@@ -80,10 +80,7 @@ function osha_homepage_theme() {
     'path' => $path . '/templates',
     'template' => 'osha_homepage_tweets',
     'variables' => [
-      'view' => NULL,
-      'options' => NULL,
-      'rows' => NULL,
-      'title' => NULL,
+      'tweets' => NULL,
     ],
   ];
   $theme['osha_homepage_follow_us'] = [
@@ -103,6 +100,47 @@ function osha_homepage_theme() {
   return $theme;
 }
 
+function osha_homepage_cron() {
+  $library_path = (module_exists('libraries') && libraries_get_path('twitter')) ? libraries_get_path('twitter') : 'sites/all/libraries/twitter';
+  require_once $library_path . '/TwitterAPIExchange.php';
+
+  $consumer_key = variable_get('social_twitter_consumer_key', '');
+  $consumer_secret = variable_get('social_twitter_consumer_secret', '');
+  $oauth_access_token = variable_get('social_twitter_oauth_access_token', '');
+  $oauth_access_token_secret = variable_get('social_twitter_oauth_access_token_secret', '');
+
+  if (!$consumer_key || !$consumer_secret || !$oauth_access_token || !$oauth_access_token_secret) {
+    return;
+  }
+
+  $screen_name = variable_get('social_twitter_screen_name', 'eu_osha');
+  $count = variable_get('social_dashboard_limit', 3);
+  $getfield = '?tweet_mode=extended&include_entities=true&include_rts=true&screen_name=' . $screen_name . '&count=' . $count;
+  $url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
+  $requestMethod = 'GET';
+  $twitter = new TwitterAPIExchange(
+    [
+      'consumer_key' => $consumer_key,
+      'consumer_secret' => $consumer_secret,
+      'oauth_access_token' => $oauth_access_token,
+      'oauth_access_token_secret' => $oauth_access_token_secret,
+    ]
+  );
+  $response = $twitter->setGetfield($getfield)->buildOauth($url, $requestMethod)->performRequest();
+  $data = json_decode($response, TRUE);
+  $tweets = [];
+  foreach ($data as $tweet) {
+    $id_str = $tweet['id_str'];
+    $name = $tweet['user']['screen_name'];
+    $tweets[$id_str] = $name;
+  }
+  if (!count($tweets)) {
+    watchdog('social_dashboard', '[CRON]Error no twitter tweets found!');
+  }
+  variable_set('osha_homepage_tweets', $tweets);
+  return $tweets;
+}
+
 /**
  * Implements hook_block_view().
  */
@@ -111,9 +149,9 @@ function osha_homepage_block_view($delta = '') {
 
   switch ($delta) {
     case 'osha_homepage_tweets':
+      $tweets = variable_get('osha_homepage_tweets', []);
       $block['subject'] = t('Latest tweets');
-      $block['content'] = theme('osha_homepage_tweets');
-
+      $block['content'] = theme('osha_homepage_tweets', ['tweets' => $tweets]);
       break;
 
     case 'osha_homepage_news_events':

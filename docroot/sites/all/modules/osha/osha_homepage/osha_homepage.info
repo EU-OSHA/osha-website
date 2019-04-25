@@ -44,6 +44,7 @@ features[field_instance][] = node-banner-title_field
 features[field_instance][] = taxonomy_term-banner_links-name_field
 features[image][] = banner_195_160
 features[image][] = banner_825_x_255
+features[image][] = resource
 features[node][] = banner
 features[taxonomy][] = banner_links
 features[variable][] = comment_anonymous_banner

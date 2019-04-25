@@ -180,6 +180,20 @@ h1{
     float: left;
 }
 
+#block-osha-newsletter-osha-newsletter-subscribe input.form-text{
+    border: 1px solid #003399;
+    clear: both;
+    float: left;
+    background: #FFF;
+    color: #003399
+    min-width: 210px;
+    border-radius: 3px;
+    padding: 0.5em 1em;
+    font-weight: normal;
+    margin-right: 10px;
+    height: 35px;
+}
+
 #block-osha-newsletter-osha-newsletter-subscribe input[type="submit"]{
 	background: #b2c7e5;
 	text-align: center;
@@ -188,6 +202,17 @@ h1{
     padding-left: 0;
     font-family: "Open Sans", verdana, sans-serif;
     font-size: 1rem;
+    border-radius: 3px;
+    min-width: 120px;
+    height: 35px;
+}
+
+.view-osha-home-banner-top.view-display-id-home_page_banner_top{
+    border-bottom: 0;
+}
+
+.view-osha-home-banner-top.view-display-id-home_page_banner_top .view-content{
+    width: 100%;
 }
 
 /*Pagination*/
@@ -267,6 +292,10 @@ h1{
 /* Footer */
 footer{
 	background:#003399;
+}
+
+footer #edit-submit--4{
+    margin-top: 0;
 }
 
 .footer-line{

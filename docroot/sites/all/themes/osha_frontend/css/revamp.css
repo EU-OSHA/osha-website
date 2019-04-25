@@ -132,6 +132,10 @@ a.see-more-arrow:hover{
 
 /* Home intro boxes */
 
+.region-home-intro{
+    width: 100%;
+}
+
 .revamp .left_column{
     width: 73.7%;
 }
@@ -207,6 +211,7 @@ a.see-more-arrow:hover{
     font-weight: lighter;
     z-index: 999;
     transition: 0.8s;
+    line-height: 30px;
 }
 
 .home-boxes h3{
@@ -249,7 +254,7 @@ a.box-link{
 }
 
 .home-boxes:hover h2{
-    bottom: 45px;
+    bottom: 60px;
     transition: 0.8s;
 }
 

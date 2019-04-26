@@ -105,11 +105,32 @@ jQuery(document).ready(function($){
 		}
 	}
 
-	/* NO INCLUDE IN PROD */
-	/*
-		$(window).on("resize",function(e){
-		    location.reload(); 
+	/*Ellipsis News and Events Home page*/
+
+	var character = 85;
+	var count1 = $("div.view-news-and-events > div.row > div:nth-child(1) > h3 > a").text().length;
+	var count2 = $("div.view-news-and-events > div.row > div:nth-child(2) > h3 > a").text().length;
+	var count3 = $("div.view-news-and-events > div.row > div:nth-child(3) > h3 > a").text().length;
+
+	if (count1 > character){
+		$("div.view-news-and-events > div.row > div:nth-child(1) > h3 a").text(function(){
+    		return $(this).text().substring(0,character);
 		});
+		$( "div.view-news-and-events > div.row > div:nth-child(1) > h3 a" ).append( "..." );
+	}
+
+	if (count2 > character){
+		$("div.view-news-and-events > div.row > div:nth-child(2) > h3 a").text(function(){
+    		return $(this).text().substring(0,character);
+		});
+		$( "div.view-news-and-events > div.row > div:nth-child(2) > h3 a" ).append( "..." );
+	}
+
+	if (count3 > character){
+		$("div.view-news-and-events > div.row > div:nth-child(4) > h3 a").text(function(){
+    		return $(this).text().substring(0,character);
+		});
+		$( "div.view-news-and-events > div.row > div:nth-child(3) > h3 a" ).append( "..." );
+	}
 	
-	*/
 });

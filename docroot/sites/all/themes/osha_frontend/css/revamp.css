@@ -559,8 +559,9 @@ a.box-link{
     color: #003399!important;
     text-decoration: none!important;
     text-align: center;
-    padding: 6px 0;
-    height: auto;
+    padding: 0;
+    line-height: 33px;
+    height: 35px;
 }
 
 .btn-light-blue:hover{

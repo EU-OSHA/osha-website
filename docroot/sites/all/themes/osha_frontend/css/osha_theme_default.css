@@ -5273,16 +5273,16 @@ div.contextual-links-wrapper a{
 
 /*SEARCH AUTOCOMPLETE*/
 
-#ui-theme-basic-blue{
+ul[data-sa-theme="basic-blue"]{
 	padding-bottom:1em!important;
 }
 
-#ui-theme-basic-blue .ui-autocomplete-field-group.banner{
+ul[data-sa-theme="basic-blue"] .ui-autocomplete-field-group.banner{
 	background: none!important;
 
 }
 
-#ui-theme-basic-blue .ui-autocomplete-field-group{
+ul[data-sa-theme="basic-blue"] .ui-autocomplete-field-group{
 	background: url("../images/separator_home.jpg") repeat-x scroll 43% 0 rgba(0, 0, 0, 0);
     color: #000;
     float: left;
@@ -5294,19 +5294,19 @@ div.contextual-links-wrapper a{
     width: 90%;
 }
 
-#ui-theme-basic-blue .ui-menu-item-first{
+ul[data-sa-theme="basic-blue"] .ui-menu-item-first{
 	border:0px;
 }
 
 
 
-#ui-theme-basic-blue.ui-menu{
+ul[data-sa-theme="basic-blue"].ui-menu{
 	/*Search box*/
 	width:350px!important;
 	left:60%!important;
 }
 
-#ui-theme-basic-blue.ui-menu .ui-menu-item a{
+ul[data-sa-theme="basic-blue"].ui-menu .ui-menu-item a{
 	background: url("../images/li_arrow.png") no-repeat scroll 5% 54% transparent;
     color: #003399;
     font-size: 0.8em;
@@ -5320,7 +5320,7 @@ div.contextual-links-wrapper a{
 	border:0px!important;
 }
 
-#ui-theme-basic-blue.ui-menu .ui-menu-item a .ui-autocomplete-field-type{
+ul[data-sa-theme="basic-blue"].ui-menu .ui-menu-item a .ui-autocomplete-field-type{
 	display:none;
 }
 

@@ -239,6 +239,7 @@ h1{
 
 .view-osha-home-banner-top.view-display-id-home_page_banner_top{
     border-bottom: 0;
+    margin-bottom: 0;
 }
 
 .view-osha-home-banner-top.view-display-id-home_page_banner_top .view-content{
@@ -378,6 +379,7 @@ footer #edit-submit--4{
 
     #contact > a:nth-child(5){
         display: block;
+        width: 110px;
     }
 
     .fixedHeader #languagesAndSearch{

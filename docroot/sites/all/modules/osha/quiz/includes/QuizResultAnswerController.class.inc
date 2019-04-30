@@ -38,7 +38,7 @@ class QuizResultAnswerController extends EntityAPIController {
     $labels = array(
       'attempt' => t('Your answer'),
       'choice' => t('Answers'),
-      'correct' => t('Is Correct?'),
+      'correct' => t('Your answer'),
       'solution' => t('Correct answer'),
     );
     drupal_alter('quiz_feedback_labels', $labels);

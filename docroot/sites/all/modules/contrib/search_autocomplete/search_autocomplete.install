@@ -73,11 +73,14 @@ function search_autocomplete_schema() {
         'default'     => 10,
       ),
       'no_results'   => array(
-        'description' => 'Maximum number of suggestions',
-        'type'        => 'varchar',
-        'length'      => 50,
-        'not null'    => FALSE,
-        'default'     => '-- no results --',
+        'description' => 'Display field when no suggestion available.',
+        'type'        => 'text',
+        'size'        => 'big',
+      ),
+      'all_results'   => array(
+        'description' => 'Display field when some suggestion are available.',
+        'type'        => 'text',
+        'size'        => 'big',
       ),
       'auto_submit'   => array(
         'description' => 'Define if form should be autosubmitted when suggestion is choosen',
@@ -147,7 +150,7 @@ function search_autocomplete_install() {
   // ----------------
   // Declare insertion statement.
   $insert = db_insert('search_autocomplete_forms')
-                ->fields(array('title', 'selector', 'weight', 'enabled', 'min_char', 'max_sug', 'auto_submit', 'auto_redirect', 'data_source', 'data_callback', 'data_static', 'data_view', 'theme'));
+                ->fields(array('title', 'selector', 'weight', 'enabled', 'min_char', 'max_sug', 'no_results', 'all_results', 'auto_submit', 'auto_redirect', 'data_source', 'data_callback', 'data_static', 'data_view', 'theme'));
   $insert->values(array(
     'title' => st('Search page - Node Tab') . "  (search/node/%)",
     'selector'      => '#search-form[action="/search/node"] #edit-keys',
@@ -155,43 +158,91 @@ function search_autocomplete_install() {
     'enabled'       => $enabled,
     'min_char'      => $trigger,
     'max_sug'       => $limit,
+    'no_results'    => json_encode(array(
+      'label' => st('No results found for [search-phrase]. Click to perform full search.'),
+      'value' => '[search-phrase]',
+      'link'  => '',
+      'group' => array(
+        'group_id' => 'no_results',
+      ),
+    )),
+    'all_results'  => json_encode(array(
+      'label' => st('View all results for [search-phrase].'),
+      'value' => '[search-phrase]',
+      'link'  => '',
+      'group' => array(
+        'group_id' => 'all_results',
+      ),
+    )),
     'translite'     => 1,
     'auto_submit'   => 1,
     'auto_redirect' => 1,
     'data_source'   => 'view',
-    'data_callback' => '',
+    'data_callback' => 'search_autocomplete/autocomplete/1/',
     'data_static'   => '',
     'data_view'     => 'words_autocomplete',
     'theme'         => 'basic-green.css',
   ));
   $insert->values(array(
-    'title'     => st('Search page - User Tab') . "  (search/user/%)",
-    'selector'  => '#search-form[action="/search/user"] #edit-keys',
-    'weight'    => 1,
-    'enabled'   => $enabled,
-    'min_char'  => $trigger,
-    'max_sug'   => $limit,
+    'title'         => st('Search page - User Tab') . "  (search/user/%)",
+    'selector'      => '#search-form[action="/search/user"] #edit-keys',
+    'weight'        => 1,
+    'enabled'       => $enabled,
+    'min_char'      => $trigger,
+    'max_sug'       => $limit,
+    'no_results'    => json_encode(array(
+        'label' => st('No results found for [search-phrase]. Click to perform full search.'),
+        'value' => '[search-phrase]',
+        'link'  => '',
+        'group' => array(
+            'group_id' => 'no_results',
+        ),
+    )),
+    'all_results'   => json_encode(array(
+        'label' => st('View all results for [search-phrase].'),
+        'value' => '[search-phrase]',
+        'link'  => '',
+        'group' => array(
+            'group_id' => 'all_results',
+        ),
+    )),
     'translite'     => 1,
     'auto_submit'   => 1,
     'auto_redirect' => 1,
     'data_source'   => 'view',
-    'data_callback' => '',
+    'data_callback' => 'search_autocomplete/autocomplete/2/',
     'data_static'   => '',
     'data_view'     => 'users_autocomplete',
     'theme'         => 'user-blue.css',
   ));
   $insert->values(array(
-    'title'     => st('Search Block'),
-    'selector'  => "#edit-search-block-form--2",
-    'weight'    => 0,
-    'enabled'   => $enabled,
-    'min_char'  => $trigger,
-    'max_sug'   => $limit,
+    'title'         => st('Search Block'),
+    'selector'      => "#edit-search-block-form--2",
+    'weight'        => 0,
+    'enabled'       => $enabled,
+    'min_char'      => $trigger,
+    'max_sug'       => $limit,
+    'no_results'    => json_encode(array(
+        'label' => st('No results found for [search-phrase]. Click to perform full search.'),
+        'value' => '[search-phrase]',
+        'link'  => '',
+        'group' => array(
+            'group_id' => 'no_results',
+        ),
+    )),
+    'all_results'  => json_encode(array(
+        'label' => st('View all results for [search-phrase].'),
+        'value' => '[search-phrase]',
+        'link'  => '',
+        'group' => array(
+            'group_id' => 'all_results',
+        ),
+    )),
     'translite'     => 1,
     'auto_submit'   => 1,
     'auto_redirect' => 1,
     'data_source'   => 'view',
-    'data_callback' => '',
+    'data_callback' => 'search_autocomplete/autocomplete/3/',
     'data_static'   => '',
     'data_view'     => 'nodes_autocomplete',
     'theme'         => 'basic-green.css',
@@ -270,7 +321,7 @@ function search_autocomplete_update_7407(&$sandbox) {
     ->condition('sa.selector', '#search-form[action="/search/node"] #edit-keys', '=')
     ->execute()
     ->fetchAssoc();
-  db_update('search_autocomplete_forms') // Table name no longer needs {}
+  db_update('search_autocomplete_forms')
   ->fields(array(
       'data_source'   => 'view',
       'data_callback' => 'search_autocomplete/autocomplete/' . $fid['fid'] . '/',
@@ -285,7 +336,7 @@ function search_autocomplete_update_7407(&$sandbox) {
   ->condition('sa.selector', '#search-form[action="/search/user"] #edit-keys', '=')
   ->execute()
   ->fetchAssoc();
-  db_update('search_autocomplete_forms') // Table name no longer needs {}
+  db_update('search_autocomplete_forms')
   ->fields(array(
       'data_source'   => 'view',
       'data_view'     => 'users_autocomplete',
@@ -300,7 +351,7 @@ function search_autocomplete_update_7407(&$sandbox) {
   ->condition('sa.selector', '#edit-search-block-form--2', '=')
   ->execute()
   ->fetchAssoc();
-  db_update('search_autocomplete_forms') // Table name no longer needs {}
+  db_update('search_autocomplete_forms')
   ->fields(array(
       'data_source'   => 'view',
       'data_view'     => 'nodes_autocomplete',
@@ -317,14 +368,106 @@ function search_autocomplete_update_7407(&$sandbox) {
  */
 function search_autocomplete_update_7408(&$sandbox) {
 
-  $translite = db_select('search_autocomplete_forms', 'sa')
-    ->fields('sa', array('translite'))
-    ->execute()
-    ->fetchAssoc();
+  if (db_field_exists('search_autocomplete_forms', 'translite')) {
+    $translite = db_select('search_autocomplete_forms', 'sa')
+      ->fields('sa', array('translite'))
+      ->execute()
+      ->fetchAssoc();
 
-  db_drop_field('search_autocomplete_forms', 'translite');
+    db_drop_field('search_autocomplete_forms', 'translite');
 
-  variable_set('sa_translite', $translite['translite']);
+    variable_set('sa_translite', $translite['translite']);
+  }
 
   return (t('Update to 7.x-4.0 has been done.'));
+}
+
+/**
+ * Migrate no_results field from 4.0 to 4.1 default value
+ */
+function search_autocomplete_update_7410(&$sandbox) {
+  if (db_field_exists('search_autocomplete_forms', 'no_results')) {
+    db_update('search_autocomplete_forms')
+      ->fields(array('no_results'   => '-- No results found for <b>[search-phrase]</b> --'))
+      ->execute();
+  }
+  return (t('Update no_results field default value has been done.'));
+}
+
+/**
+ * Migrate no_results and all_results fields from 4.0 to 4.1 default values
+ */
+function search_autocomplete_update_7411(&$sandbox) {
+  if (!db_field_exists('search_autocomplete_forms', 'no_results')) {
+    $field = array(
+      'description' => 'Display field when no suggestion available.',
+      'type'        => 'text',
+      'size'        => 'big',
+    );
+    db_add_field('search_autocomplete_forms', 'no_results', $field);
+  }
+  else {
+    db_change_field('search_autocomplete_forms', 'no_results', 'no_results',
+      array(
+      'description' => 'Display field when no suggestion available.',
+      'type'        => 'text',
+      'size'        => 'big',
+    ));
+  }
+  db_update('search_autocomplete_forms')
+  ->fields(array('no_results'   => json_encode(array(
+    'label' => t('No results found for [search-phrase]. Click to perform full search.'),
+    'value' => '[search-phrase]',
+    'link'  => '',
+    'group' => array(
+      'group_id' => 'no_results',
+    ),
+  ))))
+  ->execute();
+
+  if (!db_field_exists('search_autocomplete_forms', 'all_results')) {
+    $field = array(
+      'description' => 'Display field when some suggestion are available.',
+      'type'        => 'text',
+      'size'        => 'big',
+    );
+    db_add_field('search_autocomplete_forms', 'all_results', $field);
+  }
+  db_update('search_autocomplete_forms')
+  ->fields(array('all_results'   => json_encode(array(
+    'label' => t('View all results for [search-phrase].'),
+    'value' => '[search-phrase]',
+    'link'  => '',
+    'group' => array(
+      'group_id' => 'all_results',
+    ),
+  ))))
+  ->execute();
+}
+
+/**
+ * Migrate no_results and all_results fields from 4.1 to 4.2 default values
+ */
+function search_autocomplete_update_7420(&$sandbox) {
+
+  $all_fields = db_select('search_autocomplete_forms', 'sa')
+    ->fields('sa', array('fid', 'no_results', 'all_results'))
+    ->execute()
+    ->fetchAllAssoc('fid');
+
+  foreach ($all_fields as $fid => $field) {
+    // Remove html tags in no_results label
+    $no_results = json_decode($field->no_results);
+    $no_results->label = strip_tags($no_results->label);
+    $all_results = json_decode($field->all_results);
+    $all_results->label = strip_tags($all_results->label);
+
+    db_update('search_autocomplete_forms')
+      ->fields(array(
+        'no_results'   => json_encode($no_results),
+        'all_results'   => json_encode($all_results)
+      ))
+      ->condition('fid', $fid, '=')
+      ->execute();
+  }
 }

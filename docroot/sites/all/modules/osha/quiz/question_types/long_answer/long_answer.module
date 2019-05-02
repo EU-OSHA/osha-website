@@ -1,0 +1,156 @@
+<?php
+
+/**
+ * @file
+ * Long_answer question type for the Quiz module.
+ *
+ * Long answer questions make use of the quiz question framework
+ * (quiz_question.module). The functions in this file are largely used for
+ * grading long answer questions. Most of the real logic is in
+ * long_answer.classes.inc.
+ */
+
+/**
+ * Implements hook_help().
+ */
+function long_answer_help($path, $arg) {
+  if ($path == 'admin/help#long_answer') {
+    return '<p>' . t('This module provides long-answer (essay, multi-paragraph) questions to the quiz module.') .
+      '</p><p>' . t('A long-answer question is designed to provide the quiz taker a lengthy area to expand on ideas.
+      Common forms of long-answer questions include essays, single paragraph responses, hypothesis design problems,
+      outlines and summaries, and lengthier math problems
+      where the focus is on showing work rather than simply getting the correct answer.') . '</p>';
+  }
+}
+
+/**
+ * Implements hook_quiz_question_info().
+ */
+function long_answer_quiz_question_info() {
+  return array(
+    'long_answer' => array(
+      'name' => t('Long answer question'),
+      'description' => t('Quiz questions that allow a user to enter multiple paragraphs of text.'),
+      'question provider' => 'LongAnswerQuestion',
+      'response provider' => 'LongAnswerResponse',
+      // All wrapper functions are in the quiz_question module.
+      'module' => 'quiz_question',
+    ),
+  );
+}
+
+/**
+ * Implements hook_quiz_question_config().
+ */
+function long_answer_quiz_question_config() {
+  $form['long_answer_default_max_score'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Default max score'),
+    '#description' => t('Choose the default maximum score for a long answer question.'),
+    '#default_value' => variable_get('long_answer_default_max_score', 10),
+  );
+  $form['#validate'][] = 'long_answer_config_validate';
+  return $form;
+}
+
+/**
+ * Validate the long_answer config form values.
+ */
+function long_answer_config_validate($form, $form_state) {
+  if ($form_state['values']['long_answer_default_max_score'] <= 0) {
+    form_set_error('long_answer_default_max_score', t('The default max score must be greater than 0'));
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function long_answer_theme() {
+  return array(
+    'long_answer_response_form' => array(
+      'render element' => 'form',
+      'path' => drupal_get_path('module', 'long_answer') . '/theme',
+      'file' => 'long_answer.theme.inc',
+    ),
+    'long_answer_answering_form' => array(
+      'render element' => 'form',
+      'path' => drupal_get_path('module', 'long_answer') . '/theme',
+      'template' => 'long-answer-answering-form',
+    ),
+  );
+}
+
+/**
+ * Set a score for a long answer question.
+ *
+ * This stores a score for a long answer question and marks that question as
+ * having been evaluated. The function updates all of the necessary data
+ * sources so that the individual answer results should be reflected in the
+ * total scoring table.
+ *
+ * @param array $values
+ *   The FAPI $form_state['values'].
+ * @param bool $update_total
+ *   Shall the total score be updated?
+ */
+function long_answer_score_an_answer($values, $update_total = TRUE) {
+  $nid = $values['nid'];
+  $vid = $values['vid'];
+  $result_id = $values['result_id'];
+  $score = $values['score'];
+  $answer_feedback = $values['answer_feedback'];
+  $quiz = $values['quiz'];
+
+  $question_node = node_load($nid, $vid);
+  $quiz_question_response = _quiz_question_response_get_instance($result_id, $question_node);
+  $ratio = $quiz_question_response->getWeightedRatio();
+
+  db_merge('quiz_long_answer_user_answers')
+    ->fields(array(
+      'score' => !empty($score) && !empty($ratio) ? $score / $ratio : 0,
+      'is_evaluated' => 1,
+      'answer_feedback' => empty($answer_feedback['value']) ? '' : $answer_feedback['value'],
+      'answer_feedback_format' => empty($answer_feedback['format']) ? '' : $answer_feedback['format'],
+    ))
+    ->key(array('result_answer_id' => $quiz_question_response->result_answer_id))
+    ->execute();
+
+  // Now the user data has been updated. We also need to update the data in the
+  // quiz tables.
+  $quiz_result_answer = entity_load_single('quiz_result_answer', $quiz_question_response->result_answer_id);
+  $quiz_result_answer->points_awarded = $score;
+  $quiz_result_answer->is_correct = $quiz_question_response->isCorrect();
+  $quiz_result_answer->save();
+
+  // Third, we update the main quiz results table.
+  if ($update_total) {
+    quiz_update_total_score($quiz, $result_id);
+  }
+}
+
+/**
+ * Submit function for the report form.
+ *
+ * @param array $values
+ *   The FAPI $form_state['values'].
+ */
+function long_answer_report_submit($values) {
+  long_answer_score_an_answer($values, FALSE);
+}
+
+/**
+ * Implements hook_field_extra_fields().
+ */
+function long_answer_field_extra_fields() {
+  $extra = array();
+  $extra['node']['long_answer'] = array(
+    'form' => array(
+      'rubric' => array(
+        'label' => t('Rubric'),
+        'description' => t('Specify the criteria for grading the response'),
+        'weight' => -4,
+      ),
+    ),
+  );
+  return $extra;
+}

@@ -32,7 +32,7 @@ function search_autocomplete_form_add() {
     '#maxlength'      => 255,
     '#required'       => TRUE,
   );
-  $descr = t('Enter a valid query selector for the form. This should be an id or a class surrounding the input box.') . '<br/>' . t('Do not include input. In case of a doubt, refer to the <a href="http://projects.axiomcafe.fr/search-autocomplete">documentation</a>');
+  $descr = t('Enter a valid query selector for the form. This should be an id or a class surrounding the input box.') . '<br/>' . t('Do not include input. In case of a doubt, refer to the <a href="http://drupal-addict.com/nos-projets/search-autocomplete">documentation</a>');
   $form['selector'] = array(
     '#title'          => t('Selector'),
     '#description'    => $descr,
@@ -41,7 +41,7 @@ function search_autocomplete_form_add() {
     '#maxlength'      => 255,
     '#required'       => TRUE,
   );
-  // Submit buton.
+  // Submit button.
   $form['submit'] = array(
     '#type'           => 'submit',
     '#value'          => t('Save'),
@@ -62,7 +62,7 @@ function search_autocomplete_form_add_submit($form, &$form_state) {
   // Get the form values.
   $values = $form_state['values'];
 
-  // Check if aready existing records.
+  // Check if already existing records.
   $result = db_select('search_autocomplete_forms', 'f')
     ->fields('f')
     ->condition('title', $values['title'])
@@ -77,15 +77,31 @@ function search_autocomplete_form_add_submit($form, &$form_state) {
 
   // Insert the new form in database.
   $fid = db_insert('search_autocomplete_forms')
-          ->fields(array(
-            'title' => $values['title'],
-            'selector' => $values['selector'],
-          ))
-          ->execute();
+    ->fields(array(
+      'title'       => $values['title'],
+      'selector'    => $values['selector'],
+      'no_results'  => json_encode(array( // manually add no_results default
+        'label' => t('No results found for [search-phrase]. Click to perform full search.'),
+        'value' => '[search-phrase]',
+        'link'  => '',
+        'group' => array(
+          'group_id' => 'no_results',
+        ),
+      )),
+      'all_results'  => json_encode(array( // manually add all_results default
+        'label' => t('View all results for [search-phrase].'),
+        'value' => '[search-phrase]',
+        'link'  => '',
+        'group' => array(
+          'group_id' => 'all_results',
+        ),
+      )),
+    ))
+    ->execute();
 
   // Redirect to configuration page.
   $form_state['redirect'] = 'admin/config/search/search_autocomplete/' . $fid . '/configure';
 
   // Give a return to the user.
-  $ok_query ? drupal_set_message(t('The form has been created successfully !') . '<br/>' . t('Please check its configuration.')) : drupal_set_message(t("An error has occured while creating the form. Please, double check your settings!"), 'error');
+  $ok_query ? drupal_set_message(t('The form has been created successfully!') . '<br/>' . t('Please check its configuration.')) : drupal_set_message(t("An error has occurred while creating the form. Please, double check your settings!"), 'error');
 }

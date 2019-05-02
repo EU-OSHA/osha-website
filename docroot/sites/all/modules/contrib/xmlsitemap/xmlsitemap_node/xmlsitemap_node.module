@@ -14,10 +14,31 @@ function xmlsitemap_node_entity_info_alter(array &$entity_info) {
 /**
  * Implements hook_cron().
  *
- * Process old nodes not found in the {xmlsitemap} table.
+ * Process nodes that need to be added to or updated in the {xmlsitemap} table.
  */
 function xmlsitemap_node_cron() {
-  xmlsitemap_node_xmlsitemap_index_links(xmlsitemap_var('batch_limit'));
+  $limit = xmlsitemap_var('batch_limit');
+
+  // Process nodes that have been queued in hook_node_update().
+  $queue = DrupalQueue::get('xmlsitemap_node');
+  while ($limit > 0 && $item = $queue->claimItem()) {
+    $limit--;
+    try {
+      $node = node_load($item->data['nid']);
+      $link = xmlsitemap_node_create_link($node, $item->data['language']);
+      xmlsitemap_link_save($link, array($link['type'] => $node));
+      $queue->deleteItem($item);
+    }
+    catch (Exception $e) {
+      // In case of exception log it and leave the item in the queue
+      // to be processed again later.
+      watchdog_exception('xmlsitemap_node', $e);
+    }
+  }
+
+  // Add nodes that are missing from the {xmlsitemap} table.
+  // This catches nodes that were created prior to this module being enabled.
+  xmlsitemap_node_xmlsitemap_index_links($limit);
 }
 
 /**
@@ -56,8 +77,7 @@ function xmlsitemap_node_xmlsitemap_process_node_links(array $nids) {
  * Implements hook_node_insert().
  */
 function xmlsitemap_node_node_insert(stdClass $node) {
-  global $language;
-  xmlsitemap_node_node_update($node, $language->language);
+  xmlsitemap_node_node_update($node);
 }
 
 /**
@@ -65,8 +85,11 @@ function xmlsitemap_node_node_insert(stdClass $node) {
  */
 function xmlsitemap_node_node_update(stdClass $node) {
   global $language;
-  $link = xmlsitemap_node_create_link($node, $language->language);
-  xmlsitemap_link_save($link, array($link['type'] => $node));
+  // Node access can not be accurately determined in hook_node_update() because
+  // node grants have not yet been written to the table, so we defer creation of
+  // a sitemap link and process during cron.
+  $queue = DrupalQueue::get('xmlsitemap_node');
+  $queue->createItem(['nid' => $node->nid, 'language' => $language->language]);
 }
 
 /**

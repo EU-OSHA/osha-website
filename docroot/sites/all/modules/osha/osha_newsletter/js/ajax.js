@@ -15,7 +15,7 @@
         if (email) {
           jQuery('div.form-item-email input.form-text').val(Drupal.checkPlain(email));
         }
-        if (agree) {
+        if (agree && agree != '0') {
           jQuery(".form-item-agree-processing-personal-data input.form-checkbox").prop('checked', true);
         }
       }

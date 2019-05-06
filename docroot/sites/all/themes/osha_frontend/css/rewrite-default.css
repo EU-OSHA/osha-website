@@ -33,6 +33,23 @@
     background: none;
 }
 
+#block-menu-block-1 .menu li  {
+    padding: 1.4em 0.2em 0.8em 0.2em;
+}
+
+.fixedHeader #lang-dropdown-select-language_content{
+    z-index: 99999999999;
+    position: absolute;
+    right: 0;
+}
+
+.fixedHeader #block-search-form{
+    z-index: 9999999999999;
+    top: 125px;
+    right: 0px;
+    position: absolute;
+}
+
 h1{
     letter-spacing: initial;
 }

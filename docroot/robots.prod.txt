@@ -129,3 +129,4 @@ Disallow: /*?filter=
 Disallow: /*?op=
 Disallow: /*?search_api_views_fulltext
 Disallow: /*=field_available_in_languages
+Disallow: /*/feed

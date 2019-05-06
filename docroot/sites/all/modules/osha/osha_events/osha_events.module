@@ -38,15 +38,15 @@ function osha_field_widget_form_alter(&$element, &$form_state, $context) {
  */
 function osha_events_form_alter(&$form, &$form_state, $form_id) {
 
-  $form['field_agency_initial_contact']['#access'] = FALSE;
-  $form['field_satisfaction_rate']['#access'] = FALSE;
-  $form['field_event_in_amp']['#access'] = FALSE;
-  $form['field_agency_contact_reply']['#access'] = FALSE;
-  $form['field_number_of_attendees']['#access'] = FALSE;
-  $form['field_organized_by_eu_osha']['#access'] = FALSE;
-
   switch ($form_id) {
     case 'events_node_form':
+      $form['field_agency_initial_contact']['#access'] = FALSE;
+      $form['field_satisfaction_rate']['#access'] = FALSE;
+      $form['field_event_in_amp']['#access'] = FALSE;
+      $form['field_agency_contact_reply']['#access'] = FALSE;
+      $form['field_number_of_attendees']['#access'] = FALSE;
+      $form['field_organized_by_eu_osha']['#access'] = FALSE;
+
       $form['#validate'][] = 'osha_events_form_validate';
       // Activity field changes.
       if (isset($form['field_activity'][LANGUAGE_NONE][0])) {

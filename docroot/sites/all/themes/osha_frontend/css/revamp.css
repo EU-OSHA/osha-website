@@ -41,6 +41,14 @@ div.view-header.back.revamp{
     margin-top: -15px;
 }
 
+#icons img:hover, #contact a:hover{
+    opacity: 0.8;
+}
+
+#lang-dropdown-select-language_content{
+    cursor: pointer;
+}
+
 .search-new-design{
     height: 35px;
     border: 1px solid #003399;
@@ -88,7 +96,7 @@ div.view-header.back.revamp{
 
 .copyright{
     font-size: 0.7rem;
-    margin-top: -12px;
+    margin-top: -10px;
     display: block;
 }
 
@@ -414,6 +422,46 @@ a.box-link{
     margin-left: -6px; 
 }
 
+.region-footer-sitemap #newsletter-subscription-form-wrapper #edit-submit--3{
+    float: left;
+    background: #b2c7e5;
+    color: #003399;
+    border: 0px;
+    border-radius: 3px;
+    padding: 0.5em 1em;
+    font-weight: bold;
+    min-width: 120px;
+    height: 35px;
+    margin-top: -22px;
+    margin-left: 2em;
+}
+
+.region-footer-sitemap #newsletter-subscription-form-wrapper #edit-submit--3:hover{
+    opacity: 0.8;
+}
+
+.region-footer-sitemap #newsletter-subscription-form-wrapper #edit-submit--4{
+    float: left;
+    background: #b2c7e5;
+    color: #003399;
+    border: 0px;
+    border-radius: 3px;
+    padding: 0.5em 1em;
+    font-weight: bold;
+    min-width: 120px;
+    height: 35px;
+    margin-top: -22px;
+    margin-left: 2em;
+}
+
+.region-footer-sitemap #newsletter-subscription-form-wrapper #edit-submit--4:hover{
+    opacity: 0.8;
+}
+
+.captchaContainer{
+    margin-top: 1em;
+}
+
 
 /*Home NEWS and EVENTS*/
 
@@ -483,6 +531,11 @@ a.box-link{
     font-size: 0.9rem;
 }
 
+html[lang=de] .content-home-event a.see-more-arrow{
+    font-size: 0.7rem;
+    padding-bottom: 9px;
+}
+
 .content-home-event .tag-news-events{
     font-family: 'Open Sans Condensed', sans-serif;
     text-transform: uppercase;
@@ -493,6 +546,11 @@ a.box-link{
     font-weight: bold;
     padding: 7px 1em;
     letter-spacing: 3px;
+}
+
+html[lang=de] .content-home-event .tag-news-events{
+    padding: 7px 7px;
+    font-size: 8px;
 }
 
 
@@ -583,11 +641,27 @@ a.box-link{
     padding: 0;
 }
 
+.captchaImg{
+    float: left;
+}
+
+.captchaContainer .captchaReadAudio{
+    clear: none;
+    float: left;
+}
+
+.captchaContainer .captchaRefresh{
+    margin-top: -38px!important;
+    margin-left: 221px;
+}
+
 .content-subscribe a{
     text-decoration: underline;
     margin-bottom: 10px;
     float: left;
     clear: both;
+    border-bottom: 0;
+    font-weight: normal;
 }
 
 .content-subscribe a:hover{
@@ -682,14 +756,25 @@ input[type=checkbox]:checked:disabled + label:before {
     padding-bottom: 14px;
 }
 
+/*
 a.privacy{
     clear: none;
     float: left;
     padding-left: 94px;
     padding-top: 1em;
 }
+*/
 
-.btn-light-white{
+a.privacy {
+    clear: none;
+    float: left;
+    padding-left: 434px;
+    padding-top: 0em;
+    margin-top: -24px;
+}
+
+
+.btn-light-white, .region-footer-sitemap #edit-email--3, .region-footer-sitemap #edit-email--4, #security_code{
     clear: both;
     float: left;
     background:#FFF; 
@@ -701,6 +786,11 @@ a.privacy{
     margin-right: 10px;
     min-width: 420px;
     height: 35px;
+}
+
+#security_code{
+    min-width: 100px;
+    float: none;
 }
 
 .btn-light-white.right-column{

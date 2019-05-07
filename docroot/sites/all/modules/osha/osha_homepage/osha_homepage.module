@@ -14,19 +14,27 @@ function osha_homepage_block_info() {
   $blocks['osha_homepage_tweets'] = array(
     'info' => t('Homepage Tweets'),
     'cache' => DRUPAL_CACHE_PER_USER | DRUPAL_CACHE_PER_PAGE,
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => '<front>',
   );
   $blocks['osha_homepage_follow_us'] = array(
     'info' => t('Follow us on'),
     'cache' => DRUPAL_CACHE_PER_USER | DRUPAL_CACHE_PER_PAGE,
     'region' => 'sidebar_second',
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => '<front>',
   );
   $blocks['osha_homepage_news_events'] = array(
     'info' => t('News and Events'),
     'cache' => DRUPAL_CACHE_PER_USER | DRUPAL_CACHE_PER_PAGE,
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => '<front>',
   );
   $blocks['osha_homepage_footer'] = array(
     'info' => t('Footer map'),
     'cache' => DRUPAL_CACHE_PER_USER | DRUPAL_CACHE_PER_PAGE,
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => '<front>',
   );
 
   return $blocks;

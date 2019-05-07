@@ -554,7 +554,12 @@ function osha_newsletter_block_subscribe_load_ajax() {
   $email_id = $form['email']['#id'];
   $content = drupal_render($form);
   $commands = array();
-  $commands[] = ajax_command_replace('#newsletter-subscription-form-wrapper', $content);
+  if (arg(3)=='footer') {
+    $commands[] = ajax_command_replace('#footer-newsletter-subscription-form-wrapper', $content);
+  }
+  else {
+    $commands[] = ajax_command_replace('#newsletter-subscription-form-wrapper', $content);
+  }
   $commands[] = ajax_command_invoke('#' . $email_id, 'focus');
   $commands[] = ajax_command_invoke(NULL, 'captcha_init');
   $page = array(
@@ -566,6 +571,8 @@ function osha_newsletter_block_subscribe_load_ajax() {
 
 function osha_newsletter_footer_block_subscribe_form($form, &$form_state) {
   $form = array();
+  $form['#prefix'] = '<div id="footer-newsletter-subscription-form-wrapper">';
+  $form['#suffix'] = '</div>';
   if ($node = menu_get_object('node')) {
     if (user_is_anonymous() && $node->type == 'blog') {
       $form = array();

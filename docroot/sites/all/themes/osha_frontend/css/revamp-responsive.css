@@ -91,6 +91,18 @@
         height: 100%;
     }
 
+    .content-home-event h3{
+        min-height: 84px;
+    }
+
+    html[lang=de] .content-home-event a.see-more-arrow {
+        padding-left: 2px;
+    }
+
+    html[lang=de] .content-home-event .tag-news-events {
+        padding: 7px 1px;
+    }
+
     .content-home-event{
         margin-right: 0.8em;
     }
@@ -118,6 +130,10 @@
         margin-left: 1em;
         clear: both;
         margin-top: 1em;
+    }
+
+    .follow-us-icons a{
+        margin-right: 1.3em;
     }
 
     /*Tools and Resources*/
@@ -393,6 +409,8 @@
 
     .revamp h2{
         padding-left: 0;
+        font-size: 1.2em;
+        line-height: normal;
     }
 
     .revamp .right-column h2{
@@ -421,6 +439,10 @@
 
     .content-home-event {
         width: 100%;
+    }
+
+    .view-highlight .img-highlight{
+        height: 200px;
     }
 
      .pager-total{
@@ -623,8 +645,15 @@
         min-width: 354px;
     }
 
+    /*
     .content-form-newsletter a.privacy{
         padding-left: 52px;
+    }
+    */
+
+    .content-form-newsletter a.privacy{
+        padding-left: 0;
+        margin-top: 0;
     }
 
     #footer * li.menu__item {

@@ -127,10 +127,39 @@ jQuery(document).ready(function($){
 	}
 
 	if (count3 > character){
-		$("div.view-news-and-events > div.row > div:nth-child(4) > h3 a").text(function(){
+		$("div.view-news-and-events > div.row > div:nth-child(3) > h3 a").text(function(){
     		return $(this).text().substring(0,character);
 		});
 		$( "div.view-news-and-events > div.row > div:nth-child(3) > h3 a" ).append( "..." );
+	}
+
+
+	/*Ellipsis Home intro boxes*/
+	
+	var character_intro = 60;
+	var count1_intro = $(".home-intro > div:nth-child(1) > a:nth-child(1) > h2").text().length;
+	var count2_intro = $(".home-intro > div:nth-child(2) > a:nth-child(1) > h2").text().length;
+	var count3_intro = $(".home-intro > div:nth-child(2) > a:nth-child(1) > h2").text().length;
+
+	if (count1_intro > character_intro){
+		$(".home-intro > div:nth-child(1) > a:nth-child(1) > h2").text(function(){
+    		return $(this).text().substring(0,character_intro);
+		});
+		$( ".home-intro > div:nth-child(1) > a:nth-child(1) > h2" ).append( "..." );
+	}
+
+	if (count2_intro > character_intro){
+		$(".home-intro > div:nth-child(2) > a:nth-child(1) > h2").text(function(){
+    		return $(this).text().substring(0,character_intro);
+		});
+		$( ".home-intro > div:nth-child(2) > a:nth-child(1) > h2" ).append( "..." );
+	}
+
+	if (count3_intro > character_intro){
+		$(".home-intro > div:nth-child(3) > a:nth-child(1) > h2").text(function(){
+    		return $(this).text().substring(0,character_intro);
+		});
+		$( ".home-intro > div:nth-child(3) > a:nth-child(1) > h2" ).append( "..." );
 	}
 	
 });

@@ -4,7 +4,7 @@
 }
 
 #block-osha-homepage-osha-homepage-tweets{
-    height: 653px;
+    height: 634px;
     overflow-y: scroll;
     border-bottom: 1px solid #e1e8ed;
     padding-bottom: 9px;
@@ -93,6 +93,10 @@ h1{
     font-size: 1rem;
 }
 
+#block-osha-newsletter-osha-newsletter-subscribe .captcha .form-type-textfield .description{
+    clear: both;
+}
+
 #edit-search-api-language-wrapper label{
     padding-bottom: 0.1em;
 }
@@ -110,6 +114,10 @@ h1{
     padding: 1em 1em 0 1em;
     margin: 0;
     font-size: 0.9rem;
+}
+
+#newsletter-subscription-form-wrapper{
+    margin-top: -10px!important;
 }
 
 #block-osha-newsletter-osha-newsletter-subscribe .text-input-agree{
@@ -139,7 +147,8 @@ h1{
 #block-osha-newsletter-osha-newsletter-subscribe label{
     color:#003399;
     font-size: 0.9rem;
-    padding-top: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     padding-right: 14px;
 }
 
@@ -162,6 +171,11 @@ h1{
 #newsletter-subscription-form-wrapper{
     padding-top: 0!important;
     margin-bottom: 2em!important;
+    padding-bottom: 1em!important;;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe a{
+    clear: none;
 }
 
 #block-views-highlight-block-2 h2{
@@ -244,7 +258,7 @@ h1{
 #block-osha-newsletter-osha-newsletter-subscribe input[type="submit"]{
     background: #b2c7e5;
     text-align: center;
-    margin-top: 1.5em;
+    margin-top: 0;
     padding-right: 0;
     padding-left: 0;
     font-family: "Open Sans", verdana, sans-serif;
@@ -252,6 +266,22 @@ h1{
     border-radius: 3px;
     min-width: 120px;
     height: 35px;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe input[type="submit"]:hover{
+    opacity: 0.8;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe .captcha .form-type-textfield input{
+    margin-bottom: 0px;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe .captcha .form-type-textfield label{
+    padding-bottom: 0;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe .captcha .form-type-textfield .description{
+    font-size: 0.7rem!important;
 }
 
 .view-osha-home-banner-top.view-display-id-home_page_banner_top{

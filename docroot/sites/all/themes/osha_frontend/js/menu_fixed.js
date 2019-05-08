@@ -10,10 +10,7 @@ if (!jQuery(".no-sticky-infographic")[0]){
 		jQuery(window).scroll(function(){
 			// Anclamos el menú si el scroll es
 			// mayor a la posición superior del tag
-			if ( (jQuery(this).scrollTop() >= 170)){
-				jQuery('#header').css('top', '-150px');
-			}
-			if ( (jQuery(this).scrollTop() >= 470)){
+			if ( (jQuery(this).scrollTop() >= 140)){
 			// Añadimos la clase fixes al menú y la clase stickey a breadcrumb para que se siga viendo
 				//jQuery('#block-menu-block-1').addClass('fixed');
 				jQuery('#header').addClass('fixedHeader');
@@ -26,7 +23,7 @@ if (!jQuery(".no-sticky-infographic")[0]){
 					jQuery('.breadcrumb').addClass('stickey');
 				}			
 			// Eliminamos las clases para volver a la posición original
-			} else if ( (jQuery(this).scrollTop() <= 80)){
+			} else if ( (jQuery(this).scrollTop() <= 110)){
 			// Elimina clase fixes y stickey
 				//jQuery('#block-menu-block-1').removeClass('fixed');
 				jQuery('.breadcrumb').removeClass('stickey');

@@ -18,8 +18,7 @@
 @import "print.css";
 
 /* SMACSS theme rules */
-@import "osha_theme_default.css";
-@import "revamp.css";
-@import "rewrite-default.css";
-@import "osha_theme_global.css";
-@import "revamp-responsive.css";
+ @import "osha_theme_default.css"; 
+ @import "osha_theme_global.css"; 
+
+

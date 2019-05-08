@@ -125,31 +125,3 @@ function osha_homepage_update_7003() {
 function osha_homepage_update_7004() {
   features_revert_module('osha_homepage');
 }
-
-/**
- * MDR-2786 NCW - Revamp - Home page development.
- */
-function osha_homepage_update_7005() {
-  features_revert_module('osha_homepage');
-  db_update('block')
-    ->fields(array(
-      'region' => -1,
-    ))
-    ->condition('theme', 'osha_frontend')
-    ->condition('delta', ['news-oshnews_latest', 'upcoming_events-block', 'osha_alert_block_front_view'], 'IN')
-    ->execute();
-}
-
-/**
- * MDR-1898 Caption below the images in the banner/menu blocks(MDR-1680)- MockUps.
- */
-function osha_homepage_update_7006() {
-  features_revert(array('osha_homepage' => array('views_view')));
-}
-
-/**
- * MDR-2786 NCW - Revamp - Home page development.
- */
-function osha_homepage_update_7007() {
-  features_revert(array('osha_homepage' => array('views_view')));
-}

@@ -653,10 +653,3 @@ function osha_update_7051() {
   variable_set('osha_newsletter_listserv', 'crm-oshmail@osha.europa.eu');
   variable_set('osha_newsletter_list_name', 'crm-oshmail');
 }
-
-/**
- * MDR-2786 NCW - Revamp - Home page development.
- */
-function osha_update_7052() {
-  features_revert(array('osha' => array('fe_block_settings')));
-}

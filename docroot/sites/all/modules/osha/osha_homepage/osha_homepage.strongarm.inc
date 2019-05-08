@@ -121,22 +121,22 @@ function osha_homepage_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '10',
+          'weight' => '8',
         ),
         'title' => array(
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '8',
+          'weight' => '6',
         ),
         'redirect' => array(
-          'weight' => '9',
+          'weight' => '7',
         ),
         'language' => array(
           'weight' => '0',
         ),
         'xmlsitemap' => array(
-          'weight' => '13',
+          'weight' => '30',
         ),
       ),
       'display' => array(),

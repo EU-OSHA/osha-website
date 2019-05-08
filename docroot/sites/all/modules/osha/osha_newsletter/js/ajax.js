@@ -18,8 +18,12 @@
     }
   };
 })(jQuery);
+var captcha_ready = false;
 (function($) {
   $.fn.captcha_init = function() {
-    captcha.init();
+    if (!captcha_ready) {
+      captcha.init();
+    }
+    captcha_ready = true;
   };
-})(jQuery);
+})(jQuery, captcha_ready);

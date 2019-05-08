@@ -554,7 +554,8 @@ function osha_newsletter_block_subscribe_load_ajax() {
   $email_id = $form['email']['#id'];
   $content = drupal_render($form);
   $commands = array();
-  if (arg(3)=='footer') {
+  if (arg(3) == 'footer') {
+    $content = str_replace('newsletter-subscription-form-wrapper', 'footer-newsletter-subscription-form-wrapper', $content);
     $commands[] = ajax_command_replace('#footer-newsletter-subscription-form-wrapper', $content);
   }
   else {

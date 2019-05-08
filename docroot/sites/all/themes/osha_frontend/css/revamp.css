@@ -422,7 +422,7 @@ a.box-link{
     margin-left: -6px; 
 }
 
-.region-footer-sitemap #newsletter-subscription-form-wrapper #edit-submit--3{
+.region-footer-sitemap .form-submit{
     float: left;
     background: #b2c7e5;
     color: #003399;
@@ -432,31 +432,18 @@ a.box-link{
     font-weight: bold;
     min-width: 120px;
     height: 35px;
-    margin-top: -22px;
+    margin-top: -22px !important;
     margin-left: 2em;
 }
 
-.region-footer-sitemap #newsletter-subscription-form-wrapper #edit-submit--3:hover{
+body.logged-in .region-footer-sitemap .form-submit{
+    margin-top: -1px !important;
+}
+
+.region-footer-sitemap .form-submit:hover{
     opacity: 0.8;
 }
 
-.region-footer-sitemap #newsletter-subscription-form-wrapper #edit-submit--4{
-    float: left;
-    background: #b2c7e5;
-    color: #003399;
-    border: 0px;
-    border-radius: 3px;
-    padding: 0.5em 1em;
-    font-weight: bold;
-    min-width: 120px;
-    height: 35px;
-    margin-top: -22px;
-    margin-left: 2em;
-}
-
-.region-footer-sitemap #newsletter-subscription-form-wrapper #edit-submit--4:hover{
-    opacity: 0.8;
-}
 
 .captchaContainer{
     margin-top: 1em;
@@ -625,6 +612,7 @@ html[lang=de] .content-home-event .tag-news-events{
     padding: 0;
     line-height: 33px;
     height: 35px;
+    font-weight: bold !important;
 }
 
 .btn-light-blue:hover{

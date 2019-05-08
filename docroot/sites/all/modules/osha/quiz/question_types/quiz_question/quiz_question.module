@@ -228,7 +228,7 @@ function quiz_question_answering_form($form, $form_state, $nodes, $result_id) {
   $form['navigation']['submit_hidden'] = array(
     '#weight' => -9999,
     '#type' => 'submit',
-    '#value' => $is_last ? t('Check') : t('Check'),
+    '#value' => $is_last ? t('Finish') : t('Next'),
     '#attributes' => array('style' => 'display: none'),
   );
 
@@ -254,7 +254,7 @@ function quiz_question_answering_form($form, $form_state, $nodes, $result_id) {
   $form['navigation']['submit'] = array(
     '#weight' => 30,
     '#type' => 'submit',
-    '#value' => $is_last ? t('Check') : t('Check'),
+    '#value' => $is_last ? t('Finish') : t('Next'),
   );
 
   if ($is_last && $quiz->backwards_navigation && !$quiz->repeat_until_correct) {

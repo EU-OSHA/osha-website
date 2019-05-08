@@ -5272,16 +5272,16 @@ div.contextual-links-wrapper a{
 
 /*SEARCH AUTOCOMPLETE*/
 
-ul[data-sa-theme="basic-blue"]{
+#ui-theme-basic-blue{
 	padding-bottom:1em!important;
 }
 
-ul[data-sa-theme="basic-blue"] .ui-autocomplete-field-group.banner{
+#ui-theme-basic-blue .ui-autocomplete-field-group.banner{
 	background: none!important;
 
 }
 
-ul[data-sa-theme="basic-blue"] .ui-autocomplete-field-group{
+#ui-theme-basic-blue .ui-autocomplete-field-group{
 	background: url("../images/separator_home.jpg") repeat-x scroll 43% 0 rgba(0, 0, 0, 0);
     color: #000;
     float: left;
@@ -5293,19 +5293,19 @@ ul[data-sa-theme="basic-blue"] .ui-autocomplete-field-group{
     width: 90%;
 }
 
-ul[data-sa-theme="basic-blue"] .ui-menu-item-first{
+#ui-theme-basic-blue .ui-menu-item-first{
 	border:0px;
 }
 
 
 
-ul[data-sa-theme="basic-blue"].ui-menu{
+#ui-theme-basic-blue.ui-menu{
 	/*Search box*/
 	width:350px!important;
 	left:60%!important;
 }
 
-ul[data-sa-theme="basic-blue"].ui-menu .ui-menu-item a{
+#ui-theme-basic-blue.ui-menu .ui-menu-item a{
 	background: url("../images/li_arrow.png") no-repeat scroll 5% 54% transparent;
     color: #003399;
     font-size: 0.8em;
@@ -5319,7 +5319,7 @@ ul[data-sa-theme="basic-blue"].ui-menu .ui-menu-item a{
 	border:0px!important;
 }
 
-ul[data-sa-theme="basic-blue"].ui-menu .ui-menu-item a .ui-autocomplete-field-type{
+#ui-theme-basic-blue.ui-menu .ui-menu-item a .ui-autocomplete-field-type{
 	display:none;
 }
 
@@ -10429,9 +10429,9 @@ a.quiz-start-link:hover{
 .quiz-question-multichoice input[type='radio']:before {
     content: '';
     display: block;
-    width: 10px;
-    height: 10px;
-    margin: 4px 3px 3px 4px;
+    width: 11px;
+    height: 11px;
+    margin: 3px 3px 3px 4px;
     border-radius: 50%;
 }
 
@@ -10473,7 +10473,6 @@ table.quiz-feedback-table th{
  	border-bottom: 1px solid #003399;
  	margin-bottom: 1em;
  	text-align: center;
- 	min-width: 100px;
 }
 
 table.quiz-feedback-table > thead > tr > th:nth-child(2){
@@ -10612,7 +10611,6 @@ table.quiz-feedback-table.sticky-enabled.tableheader-processed.sticky-table > tb
     border-bottom-right-radius: 15px;
 	border-left: 1px solid #cfddee;
     border-right: 1px solid #cfddee;
-    padding-bottom: 3em;
 }
 
 #quiz-summary p{
@@ -10623,43 +10621,4 @@ table.quiz-feedback-table.sticky-enabled.tableheader-processed.sticky-table > tb
 
 .page-node-quiz-results .tabs-primary.tabs.primary{
 	display: none;
-}
-
-.section-25th-anniversary-quiz .osha-share-widget-print{
-	display:none;
-}
-
-.quiz-gb{
-	float: left;
-}
-
-.quiz-gb a{
-    background: url(../images/flecha-izq.png) no-repeat scroll 0% 61% transparent!important;
-    color: #003399;
-    font-family: "Open Sans Condensed",sans-serif!important;
-    font-size: 1.1em!important;
-    padding-left: 1.5em;
-    padding-right: 0em!important;
-    text-decoration: none;
-    border: 0px!important;
-    font-weight: bold;
-}
-
-.quiz-ma{
-	float: right;
-	margin-right: 1em;
-}
-
-.quiz-ma a{
-    background: url(../images/flecha.png) no-repeat scroll 100% 29% transparent!important;
-    color: #003399;
-    float: right;
-    font-family: "Open Sans Condensed",sans-serif!important;
-    font-size: 1.1em!important;
-    padding-bottom: 1em;
-    padding-right: 1.5em;
-    border-bottom: 0px!important;
-    text-decoration: none;
-    margin-top: 0.5em;
-    font-weight: bold;
 }

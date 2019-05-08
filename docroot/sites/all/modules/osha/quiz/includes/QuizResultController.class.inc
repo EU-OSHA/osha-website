@@ -183,7 +183,6 @@ class QuizResultController extends EntityAPIController {
     $quiz_feedback['#markup'] = '';
    
     if (quiz_feedback_can_review('quiz_feedback', $entity)) {
-
       $summary = _quiz_get_summary_text($entity);
       // Show quiz feedback.
       if (!empty($summary['passfail'])) {

@@ -1871,7 +1871,7 @@ a {
 }
 
 
-ul[data-sa-theme="basic-blue"].ui-menu{
+#ui-theme-basic-blue.ui-menu{
 	/*Search box*/
 	left:3%!important;
 }

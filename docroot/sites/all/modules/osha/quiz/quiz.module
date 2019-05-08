@@ -1956,7 +1956,7 @@ function quiz_take_question($quiz, $question_number) {
     // These are the two button op values that are accepted for answering
     // questions.
     $button_op1 = drupal_json_encode(t('Finish'));
-    $button_op2 = drupal_json_encode(t('Next'));
+    $button_op2 = drupal_json_encode(t('Check'));
     $js = "
             function quiz_finished() {
               // Find all buttons with a name of 'op'.

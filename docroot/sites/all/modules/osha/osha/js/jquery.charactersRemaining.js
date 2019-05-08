@@ -45,7 +45,13 @@
                 if (!self.next('.' + settings.className).length) {
                     self.after(element);
                 }
-                self.attr('placeholder', 'Title. Max ' + parseInt(self.attr('maxlength')) + ' characters.') ;
+                if (jQuery('.field-name-field-organization').length) {
+                    self.attr('placeholder', 'Event title. Max ' + parseInt(self.attr('maxlength')) + ' characters.');
+                }
+                else {
+                    self.attr('placeholder', 'Title. Max ' + parseInt(self.attr('maxlength')) + ' characters.');
+                }
+
                 charactersRemaining($(value));
             });
         }());

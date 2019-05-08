@@ -110,3 +110,23 @@ Disallow: /*taxonomy/term/*
 Disallow: /*node/*
 Disallow: /*wiki-page
 Disallow: /*oshwiki
+# disallow ?
+Disallow: /*related-content
+Disallow: /*search/seminars?
+Disallow: /*practical-tools-dangerous-substances?
+Disallow: /*search/blog?
+Disallow: /*oshevents?
+Allow: /*search/site
+Disallow: /*search/site?
+Disallow: /*?sort_by
+Disallow: /*&sort_by
+Disallow: /*page=
+Disallow: /*field_tags
+Disallow: /*action=share
+Disallow: /*sort_by=
+Disallow: /*?search_block_form
+Disallow: /*?filter=
+Disallow: /*?op=
+Disallow: /*?search_api_views_fulltext
+Disallow: /*=field_available_in_languages
+Disallow: /*/feed

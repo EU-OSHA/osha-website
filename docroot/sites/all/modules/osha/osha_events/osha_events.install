@@ -244,8 +244,46 @@ function osha_events_update_7025() {
 }
 
 /**
- * MDR-2786 NCW - Revamp - Home page development.
+ * MDR-2758 Events creation fields - Mandatory fields and value by default.
  */
 function osha_events_update_7026() {
+  features_revert(array('osha_events' => array('field_instance')));
+
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'events');
+  $result = $query->execute();
+  if (isset($result['node'])) {
+    $events_nids = array_keys($result['node']);
+    $events = entity_load('node', $events_nids);
+    foreach ($events as $node) {
+      $changes = FALSE;
+      if (empty($node->field_key_performance[LANGUAGE_NONE][0]['value'])) {
+        $node->field_key_performance[LANGUAGE_NONE][0]['value'] = 'No';
+        $changes = TRUE;
+      }
+      if (empty($node->field_agenda[LANGUAGE_NONE][0]['value'])) {
+        $node->field_agenda[LANGUAGE_NONE][0]['value'] = 'No';
+        $changes = TRUE;
+      }
+      if (empty($node->field_publications_exhibition_su[LANGUAGE_NONE][0]['value'])) {
+        $node->field_publications_exhibition_su[LANGUAGE_NONE][0]['value'] = 'No';
+        $changes = TRUE;
+      }
+      if (empty($node->field_media_promotion[LANGUAGE_NONE][0]['value'])) {
+        $node->field_media_promotion[LANGUAGE_NONE][0]['value'] = 'No';
+        $changes = TRUE;
+      }
+      if ($changes) {
+        node_save($node);
+      }
+    }
+  }
+}
+
+/**
+ * MDR-2786 NCW - Revamp - Home page development.
+ */
+function osha_events_update_7027() {
   features_revert(array('osha_events' => array('views_view')));
 }

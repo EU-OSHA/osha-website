@@ -429,6 +429,30 @@ footer #edit-submit--4{
         width: 110px;
     }
 
+    html[lang="de"] #contact > a:nth-child(5){
+        width: 120px;
+        line-height: 15px;
+        margin-left: -6px;
+        margin-top: 4px;
+    }
+
+     html[lang="lt"] #contact > a:nth-child(5), html[lang="fi"] #contact > a:nth-child(5){
+        width: 154px;
+        line-height: 15px;
+        margin-left: -37px;
+        margin-top: 7px;
+        margin-bottom: 7px;
+    }
+
+    html[lang="de"] #contact > a:nth-child(6), html[lang="fi"] #contact > a:nth-child(6){
+        margin-left: -6px;
+    }
+
+    html[lang="lt"] #contact > a:nth-child(6) {
+        margin-left: -29px;
+        width: 144px;
+    }
+
     .fixedHeader #languagesAndSearch{
         width: 106px;
         right: 1px;

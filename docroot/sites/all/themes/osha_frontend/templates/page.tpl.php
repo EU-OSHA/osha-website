@@ -83,17 +83,7 @@
 	
   </div>
 
-  <?php if (isset($page['footer'])) : ?>
-      <footer id="footer" class="<?php print $classes; ?>">
-        <?php if (isset($page['footer_subscribe'])) : ?>
-          <?php print render($page['footer_subscribe']); ?>
-        <?php endif; ?>
-        <?php if (isset($page['footer_sitemap'])) : ?>
-          <?php print render($page['footer_sitemap']); ?>
-        <?php endif; ?>
-        <?php print render($page['footer']); ?>
-      </footer>
-  <?php endif; ?>
+  <?php print render($page['footer']); ?>
 
 </div>
 

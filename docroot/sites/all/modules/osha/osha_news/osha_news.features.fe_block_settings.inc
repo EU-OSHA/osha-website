@@ -20,7 +20,7 @@ function osha_news_default_fe_block_settings() {
     'i18n_mode' => 0,
     'module' => 'views',
     'node_types' => array(),
-    'pages' => '<front>',
+    'pages' => '',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(

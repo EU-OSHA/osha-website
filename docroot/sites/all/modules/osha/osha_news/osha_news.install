@@ -24,10 +24,3 @@ function osha_news_update_7003() {
 function osha_news_update_7004() {
   features_revert(array('osha_news' => array('field_instance')));
 }
-
-/**
- * MDR-2786 NCW - Revamp - Home page development.
- */
-function osha_news_update_7005() {
-  features_revert(array('osha_news' => array('views_view', 'fe_block_settings')));
-}

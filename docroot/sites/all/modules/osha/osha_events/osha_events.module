@@ -18,6 +18,22 @@ function osha_events_node_access($node, $op, $account) {
 }
 
 /**
+ * Implements hook_field_widget_form_alter().
+ *
+ * {@inheritdoc}
+ */
+function osha_field_widget_form_alter(&$element, &$form_state, $context) {
+  if (
+    (isset($context['form']['#node_edit_form']) && $context['form']['#node_edit_form'] == TRUE) &&
+    ($context['form']['type']['#value'] == 'events') &&
+    !empty($element['#field_name']) &&
+    ($element['#field_name'] == 'field_organization')
+  ) {
+    $element['value']['#attributes']['placeholder'] = t('The name of the organisation');
+  }
+}
+
+/**
  * Implements hook_form_alter().
  */
 function osha_events_form_alter(&$form, &$form_state, $form_id) {

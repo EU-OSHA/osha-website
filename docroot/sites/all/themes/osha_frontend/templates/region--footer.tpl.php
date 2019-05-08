@@ -51,8 +51,8 @@
  */
 ?>
 <?php if ($content): ?>
-  <footer id="footer" class="<?php print $classes; ?>">
-    <div id="footer-first-line" class="footer footer-line"><?php print t("&copy; ");print date("Y");print t(" EU-OSHA | ");global $language;print l(t("an agency of the European Union"),"http://europa.eu/about-eu/agencies/index_".$language->language.".htm", array('external' => TRUE, 'attributes' => array('target'=>'_blank'))) ?></div>
-    <div id="footer-second-line" class="footer footer-line"><?php print $content; ?></div>
-  </footer>
+<footer id="footer" class="<?php print $classes; ?>">
+    <div id="footer-first-line" class="footer footer-line container"><?php print t("&copy; ");print date("Y");print t(" EU-OSHA | ");global $language;print l(t("an agency of the European Union"),"http://europa.eu/about-eu/agencies/index_".$language->language.".htm", array('external' => TRUE, 'attributes' => array('target'=>'_blank'))) ?></div>
+    <div id="footer-second-line" class="footer footer-line container"><?php print $content; ?></div>
+</footer>
 <?php endif; ?>

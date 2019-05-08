@@ -27,52 +27,7 @@
  * @ingroup views_templates
  */
 ?>
-<script>
-
-jQuery(document).ready(function ($) {	
-	var disp = 0;	
-	if (window.innerWidth < 1220)  var numPieces = 4; else 	var numPieces = 5;
-	
-	var options = {
-        $AutoPlay: false,
-        $AutoPlaySteps: 1,
-        $SlideDuration: 160,
-        $SlideWidth: 200,
-        $SlideSpacing: 3,
-        $DisplayPieces: numPieces,
-		$HWA: false,
-        $BulletNavigatorOptions: {
-            $Class: $JssorBulletNavigator$,
-            $ChanceToShow: 1,
-            $AutoCenter: 1,
-        },
-
-        $ArrowNavigatorOptions: {
-            $Class: $JssorArrowNavigator$,
-            $ChanceToShow: 1,
-            $AutoCenter: 2,
-            $Steps: 1
-        }
-    };
-    var jssor_slider1 = new $JssorSlider$("recommended_resources", options);	
-});
-
-</script>
-<div class="title_recomended_resources_home"><?php print t('Recommended resources'); ?></div>
-<div id="recommended_resources">
-    <div id="num_slides" u="slides">
-    <?php print $rows ?>
-    </div>
-	<script>
-		var numberOfItems = jQuery('#num_slides > div').length;
-		var numPieces = 5;
-		
-		if (window.innerWidth < 1220) numPieces = 4;
-
-		if (numberOfItems > numPieces) {			
-			document.write("<span u='arrowleft' class='jssora03l\'></span>");
-			
-			document.write("<span u='arrowright' class='jssora03r'></span>");
-		}
-	</script>
+<div class="container">
+    <h2 class="home"><?php print t('Recommended resources'); ?></h2>
+    <div class="content-recommended-resources"><?php print $rows ?></div>
 </div>

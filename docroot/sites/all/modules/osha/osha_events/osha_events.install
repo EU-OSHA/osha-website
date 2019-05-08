@@ -280,3 +280,10 @@ function osha_events_update_7026() {
     }
   }
 }
+
+/**
+ * MDR-2786 NCW - Revamp - Home page development.
+ */
+function osha_events_update_7027() {
+  features_revert(array('osha_events' => array('views_view')));
+}

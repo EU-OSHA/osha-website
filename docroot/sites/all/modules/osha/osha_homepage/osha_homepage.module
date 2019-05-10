@@ -179,10 +179,15 @@ function osha_homepage_block_view($delta = '') {
     case 'osha_homepage_footer':
       $menu_data = [];
       $all_data = menu_tree_all_data('main-menu', NULL, 3);
-      foreach ($all_data as $row) {
+      foreach ($all_data as $row_key => $row) {
+        $new_item = $row;
+        $new_item['below'] = [];
         foreach ($row['below'] as $key => $menu) {
-          $menu_data[$key] = $menu;
+          foreach ($menu['below'] as $subkey => $submenu) {
+            $new_item['below'][$subkey] = $submenu;
+          }
         }
+        $menu_data[$row_key] = $new_item;
       }
       $block['content'] = theme('footer_block_theme', ['menu_data' => $menu_data]);
       break;

@@ -11,6 +11,14 @@ function osha_frontend_links__system_main_menu() {
   return NULL;
 }
 
+function osha_frontend_implode_comma_and_join($names) {
+  $last = array_pop($names);
+  if ($names) {
+    return implode(', ', $names) . ' ' . t('and') . ' ' . $last;
+  }
+  return $last;
+}
+
 /**
  * Returns HTML for a set of checkbox form elements.
  *
@@ -37,9 +45,8 @@ function osha_frontend_checkboxes($variables) {
           $sub_tids[$sub_tid] = $term->name;
         }
         $search = 'for="edit-publication-type-' . $tid . '"';
-        $attr = drupal_attributes(['title' => implode(', ', $sub_tids)]);
-        $replace = $search . ' ' . $attr;
-        $variables['element']['#children'] = str_replace($search, $replace, $variables['element']['#children']);;
+        $attr = drupal_attributes(['title' => $title . ' ' . t('include') . ' ' . osha_frontend_implode_comma_and_join($sub_tids)]);
+        $variables['element']['#children'] = str_replace($search, $search . ' ' . $attr, $variables['element']['#children']);;
       }
     }
   }

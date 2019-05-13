@@ -11,6 +11,54 @@ function osha_frontend_links__system_main_menu() {
   return NULL;
 }
 
+/**
+ * Returns HTML for a set of checkbox form elements.
+ *
+ * @param $variables
+ *   An associative array containing:
+ *   - element: An associative array containing the properties of the element.
+ *     Properties used: #children, #attributes.
+ *
+ * @ingroup themeable
+ */
+function osha_frontend_checkboxes($variables) {
+  if ($variables['element']['#name'] == 'publication_type') {
+    $map = osha_publication_get_main_publication_types_map();
+    foreach ($variables['element']['#options'] as $tid => $title) {
+      $sub_tids = [];
+      foreach ($map as $sub_tid => $main_tid) {
+        if ($tid == $main_tid) {
+          $sub_tids[$sub_tid] = $sub_tid;
+        }
+      }
+      if (count($sub_tids) > 1) {
+        foreach ($sub_tids as $sub_tid) {
+          $term = taxonomy_term_load($sub_tid);
+          $sub_tids[$sub_tid] = $term->name;
+        }
+        $search = 'for="edit-publication-type-' . $tid . '"';
+        $attr = drupal_attributes(['title' => implode(', ', $sub_tids)]);
+        $replace = $search . ' ' . $attr;
+        $variables['element']['#children'] = str_replace($search, $replace, $variables['element']['#children']);;
+      }
+    }
+  }
+
+  $element = $variables['element'];
+  $attributes = array();
+  if (isset($element['#id'])) {
+    $attributes['id'] = $element['#id'];
+  }
+  $attributes['class'][] = 'form-checkboxes';
+  if (!empty($element['#attributes']['class'])) {
+    $attributes['class'] = array_merge($attributes['class'], $element['#attributes']['class']);
+  }
+  if (isset($element['#attributes']['title'])) {
+    $attributes['title'] = $element['#attributes']['title'];
+  }
+  return '<div' . drupal_attributes($attributes) . '>' . (!empty($element['#children']) ? $element['#children'] : '') . '</div>';
+}
+
 function osha_frontend_preprocess_views_view_row_rss(&$vars) {
   $item = &$vars['row'];
 

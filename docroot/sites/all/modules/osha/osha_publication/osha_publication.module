@@ -757,3 +757,70 @@ function osha_publication_osha_tmgmt_i18n_string_list() {
 function osha_publication_node_view_alter(&$build){
   osha_thumbnail_alt_title($build, 'publication', 'field_cover_image', 'image');
 }
+
+/**
+ * Implements hook_entity_property_info_alter().
+ */
+function osha_publication_entity_property_info_alter(&$info) {
+  $info['node']['properties']['main_publication_type'] = array(
+    'type' => 'taxonomy_term',
+    'label' => t('Main Publication Type'),
+    'sanitized' => TRUE,
+    'getter callback' => 'osha_publication_node_get_main_publication_type',
+  );
+  $info['node']['properties']['main_tags'] = array(
+    'type' => 'list<taxonomy_term>',
+    'label' => t('Main Tags'),
+    'sanitized' => TRUE,
+    'getter callback' => 'osha_publication_node_get_main_tags',
+  );
+}
+
+function osha_publication_node_get_main_tags($item) {
+  $tags = [];
+  $map = osha_publication_get_main_tags_map();
+  if (!empty($item->field_tags)) {
+    foreach($item->field_tags[LANGUAGE_NONE] as $tag) {
+      if (!empty($map[$tag['tid']])) {
+        $tags[] = taxonomy_term_load($map[$tag['tid']]);
+      }
+    }
+  }
+  return $tags;
+}
+
+function osha_publication_node_get_main_publication_type($item) {
+  if ($item->type != 'publication') {
+    return NULL;
+  }
+  $map = osha_publication_get_main_publication_types_map(FALSE);
+  $tid = $item->field_publication_type[LANGUAGE_NONE][0]['tid'];
+  if (!empty($map[$tid])) {
+    $parent_tid = $map[$tid];
+    return taxonomy_term_load($parent_tid);
+  }
+  elseif (array_key_exists($tid, $map)) {
+    return taxonomy_term_load($tid);
+  }
+  return NULL;
+}
+
+function osha_publication_get_main_publication_types_map($parent = TRUE) {
+  $q = db_select('taxonomy_term_hierarchy', 't');
+  $q->join('field_data_field_publication_type', 'e', 'e.field_publication_type_tid = t.tid');
+  $q->distinct();
+  $q->fields('t', ['tid', 'parent']);
+  if ($parent) {
+    $q->condition('t.parent', 0, '>');
+  }
+  return $q->execute()->fetchAllKeyed(0,1);
+}
+
+function osha_publication_get_main_tags_map() {
+  $q = db_select('taxonomy_term_hierarchy', 't');
+  $q->join('field_data_field_tags', 'e', 'e.field_tags_tid = t.tid');
+  $q->distinct();
+  $q->fields('t', ['tid', 'parent']);
+  $q->condition('t.parent', 0, '>');
+  return $q->execute()->fetchAllKeyed(0,1);
+}

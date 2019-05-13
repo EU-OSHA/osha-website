@@ -14,7 +14,9 @@ function osha_publication_menu_publications_form($form, $form_state) {
     '#method' => 'GET',
     'left-column' => array(
       '#type' => 'container',
-      '#attributes' => array('class' => array('publications-sidebar-first'))
+      '#attributes' => array(
+        'class' => array('publications-sidebar-first'),
+      ),
     ),
     'content' => array(
       '#type' => 'container',
@@ -84,13 +86,13 @@ function osha_publication_menu_publications_form($form, $form_state) {
   );
   $form['left-column']['tags'] = array(
     '#type' => 'checkboxes',
-    '#options' => _osha_publication_tags_options_list(),
+    '#options' => _osha_publication_tags_options_list(TRUE),
     '#default_value' => $tags,
     '#title' => t('Topics'),
   );
   $form['left-column']['publication_type'] = array(
     '#type' => 'checkboxes',
-    '#options' => _publication_type_options_list(),
+    '#options' => _publication_type_options_list(TRUE),
     '#default_value' => $publication_type,
     '#title' => t('Type'),
   );
@@ -187,11 +189,17 @@ function osha_publication_menu_publications_search_native($form_state) {
       }
     }
   }
+  $types_map = osha_publication_get_main_publication_types_map(FALSE);
   $publication_type_ids = array();
   if (!empty($publication_type)) {
     foreach ($publication_type as $pubt) {
       if ($pubt) {
         $publication_type_ids[] = $pubt;
+        foreach ($types_map as $tid => $main_tid) {
+          if ($pubt == $main_tid) {
+            $publication_type_ids[] = $tid;
+          }
+        }
       }
     }
   }
@@ -208,7 +216,8 @@ function osha_publication_menu_publications_search_native($form_state) {
   $q->condition('a.status', 1);
   if (!empty($sort)) {
     $q->orderBy('field_publication_date_value', $direction);
-  } else {
+  }
+  else {
     $q->orderBy('field_publication_date_value', 'DESC');
   }
   if (!empty($restrict)) {
@@ -401,13 +410,22 @@ function osha_publication_menu_publications_get_query() {
 /**
  * Get options for publication type filter.
  */
-function _publication_type_options_list() {
+function _publication_type_options_list($map_only = FALSE) {
+  $map = osha_publication_get_main_publication_types_map();
   $return = array();
   $vocabulary = taxonomy_vocabulary_machine_name_load('publication_types');
   if (!empty($vocabulary)) {
     $terms = taxonomy_get_tree($vocabulary->vid);
     foreach ($terms as $key => $term) {
-      $return[$term->tid] = $term->name;
+      if ($map_only) {
+        if (!empty($map[$term->tid])) {
+          $term = taxonomy_term_load($map[$term->tid]);
+          $return[$term->tid] = $term->name;
+        }
+      }
+      else {
+        $return[$term->tid] = $term->name;
+      }
     }
   }
   return $return;
@@ -416,7 +434,8 @@ function _publication_type_options_list() {
 /**
  * Get options for publication type filter.
  */
-function _osha_publication_tags_options_list() {
+function _osha_publication_tags_options_list($map_only = FALSE) {
+
   $return = array();
   $q = db_select('field_data_field_tags', 't')
     ->distinct();
@@ -426,6 +445,19 @@ function _osha_publication_tags_options_list() {
   $q->innerJoin('taxonomy_term_data', 'td', 'td.tid = t.field_tags_tid');
   $q->orderBy('td.name', 'ASC');
   $tids = $q->execute()->fetchCol();
+  if ($map_only) {
+    $map = osha_publication_get_main_tags_map();
+    $old_tids = $tids;
+    $tids = [];
+    foreach ($old_tids as $tid) {
+      if (!empty($map[$tid])) {
+        $tids[] = $map[$tid];
+      }
+      else {
+        $tids[] = $tids;
+      }
+    }
+  }
   $terms = taxonomy_term_load_multiple($tids);
   if (!empty($terms)) {
     foreach ($terms as $key => $term) {

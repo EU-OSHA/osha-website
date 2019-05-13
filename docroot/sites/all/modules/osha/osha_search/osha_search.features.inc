@@ -228,6 +228,8 @@ function osha_search_default_search_api_index() {
         "field_wiki_page_url:title" : { "type" : "text" },
         "field_wiki_page_url:url" : { "type" : "uri" },
         "language" : { "type" : "string" },
+        "main_publication_type" : { "type" : "integer", "entity_type" : "taxonomy_term" },
+        "main_tags" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "nid" : { "type" : "integer" },
         "search_api_access_node" : { "type" : "list\\u003Cstring\\u003E" },
         "search_api_et_id" : { "type" : "string" },

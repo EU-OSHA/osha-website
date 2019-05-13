@@ -782,7 +782,7 @@ function osha_publication_node_get_main_tags($item) {
   if (!empty($item->field_tags)) {
     foreach($item->field_tags[LANGUAGE_NONE] as $tag) {
       if (!empty($map[$tag['tid']])) {
-        $tags[] = taxonomy_term_load($map[$tag['tid']]);
+        $tags[$map[$tag['tid']]] = $map[$tag['tid']];
       }
     }
   }

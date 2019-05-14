@@ -23,21 +23,41 @@ function osha_events_node_access($node, $op, $account) {
  * {@inheritdoc}
  */
 function osha_field_widget_form_alter(&$element, &$form_state, $context) {
-  if (
-    (isset($context['form']['#node_edit_form']) && $context['form']['#node_edit_form'] == TRUE) &&
-    ($context['form']['type']['#value'] == 'events') &&
-    !empty($element['#field_name']) &&
-    ($element['#field_name'] == 'field_organization')
-  ) {
-    $element['value']['#attributes']['placeholder'] = t('The name of the organisation');
+  $is_edit_form = (isset($context['form']['#node_edit_form']) && $context['form']['#node_edit_form'] == TRUE);
+  $is_events_form = $is_edit_form && ($context['form']['type']['#value'] == 'events');
+  if ($is_events_form && !empty($element['#field_name'])) {
+    switch ($element['#field_name']) {
+      case 'field_organization':
+        $placeholder = t('The name of the organisation');
+        $element['value']['#attributes']['placeholder'] = $placeholder;
+        break;
+      case 'field_city':
+        $placeholder = t('Event city');
+        $element['value']['#attributes']['placeholder'] = $placeholder;
+        break;
+      case 'field_location':
+        $placeholder = 'Location of the event, e.g. name of venue, hall, hotel.';
+        $element['value']['#attributes']['placeholder'] = $placeholder;
+        break;
+    }
   }
+}
+
+function _form_add_website_placeholder_after_build($form) {
+  $placeholder = t('Website of event');
+  $form['field_website_of_event'][LANGUAGE_NONE][0]['url']['#attributes']['placeholder'] = $placeholder;
+  return $form;
 }
 
 /**
  * Implements hook_form_alter().
  */
 function osha_events_form_alter(&$form, &$form_state, $form_id) {
-
+  $is_edit_form = isset($form['#node_edit_form']) && $form['#node_edit_form'] == TRUE;
+  $is_events_form = $is_edit_form && $form['type']['#value'] == 'events';
+  if ($is_events_form) {
+    $form['#after_build'] = array('_form_add_website_placeholder_after_build');
+  }
   switch ($form_id) {
     case 'events_node_form':
       $form['field_agency_initial_contact']['#access'] = FALSE;

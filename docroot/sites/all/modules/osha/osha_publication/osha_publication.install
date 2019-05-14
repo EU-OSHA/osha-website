@@ -353,14 +353,26 @@ function osha_publication_update_7014() {
  */
 function osha_publication_update_7015() {
   osha_publication_types_create_new_terms();
-  osha_publication_types_assign_parents();
 }
 
 /**
  * MDR-2735 create main publication type taxonomy.
  */
 function osha_publication_update_7016() {
+  osha_publication_tags_assign_parents();
+}
+
+/**
+ * MDR-2736 create main publication type taxonomy.
+ */
+function osha_publication_update_7017() {
   osha_publication_tags_create_new_terms();
+}
+
+/**
+ * MDR-2736 create main publication type taxonomy.
+ */
+function osha_publication_update_7018() {
   osha_publication_tags_assign_parents();
 }
 
@@ -437,6 +449,19 @@ Training resources
   $new_tree = explode("\n", $new_tree);
   $name = 'publication_types';
   $vocabulary = taxonomy_vocabulary_machine_name_load($name);
+  $query = db_select('taxonomy_term_data', 't')->fields('h', array('tid', 'parent'));
+  $query->join('taxonomy_term_hierarchy', 'h', ' t.tid = h.tid');
+  $query->condition('t.vid', $vocabulary->vid)
+    ->orderBy('t.weight')
+    ->orderBy('t.name');
+  $tids = $query->execute()->fetchAll();
+  foreach ($tids as $term) {
+    if ($term->parent == $term->tid) {
+      $term = taxonomy_term_load($term->tid);
+      $term->parent = [];
+      taxonomy_term_save($term);
+    }
+  }
   $tree = taxonomy_get_tree($vocabulary->vid);
 
   $tags_map = [];
@@ -461,8 +486,10 @@ Training resources
       $term = taxonomy_term_load($min_tid);
       $tids = $tags_map[$main];
       $max_tid = max($tids);
-      $term->parent = $max_tid;
-      taxonomy_term_save($term);
+      if ($max_tid != $min_tid) {
+        $term->parent = $max_tid;
+        taxonomy_term_save($term);
+      }
     }
   }
 }
@@ -557,8 +584,10 @@ Work-related diseases
       if (!empty($tags_map[$main])) {
         $tids = $tags_map[$main];
         $max_tid = max($tids);
-        $term->parent = $max_tid;
-        taxonomy_term_save($term);
+        if ($max_tid != $min_tid) {
+          $term->parent = $max_tid;
+          taxonomy_term_save($term);
+        }
       }
       else {
         watchdog('osha_publication', 'term ' . $main . ' not found!', WATCHDOG_ALERT);
@@ -601,6 +630,19 @@ Work-related diseases';
   $new_terms = explode("\n", $new_terms);
   $name = 'tags';
   $vocabulary = taxonomy_vocabulary_machine_name_load($name);
+  $query = db_select('taxonomy_term_data', 't')->fields('h', array('tid', 'parent'));
+  $query->join('taxonomy_term_hierarchy', 'h', ' t.tid = h.tid');
+  $query->condition('t.vid', $vocabulary->vid)
+    ->orderBy('t.weight')
+    ->orderBy('t.name');
+  $tids = $query->execute()->fetchAll();
+  foreach ($tids as $term) {
+    if ($term->parent == $term->tid) {
+      $term = taxonomy_term_load($term->tid);
+      $term->parent = [];
+      taxonomy_term_save($term);
+    }
+  }
   $tree = taxonomy_get_tree($vocabulary->vid);
   foreach ($tree as $i => $term) {
     $tags_map[$term->name] = $term->tid;

@@ -30,6 +30,27 @@ function osha_frontend_implode_comma_and_join($names) {
  * @ingroup themeable
  */
 function osha_frontend_checkboxes($variables) {
+  if ($variables['element']['#name'] == 'tags') {
+    $map = osha_publication_get_main_tags_map();
+    foreach ($variables['element']['#options'] as $tid => $title) {
+      $sub_tids = [];
+      foreach ($map as $sub_tid => $main_tid) {
+        if ($tid == $main_tid) {
+          $sub_tids[$sub_tid] = $sub_tid;
+        }
+      }
+      if (count($sub_tids) > 1) {
+        foreach ($sub_tids as $sub_tid) {
+          $term = taxonomy_term_load($sub_tid);
+          $sub_tids[$sub_tid] = $term->name;
+        }
+        $search = 'for="edit-tags-' . $tid . '"';
+        $attr = drupal_attributes(['title' => $title . ' ' . t('include') . ' ' . osha_frontend_implode_comma_and_join($sub_tids)]);
+        $variables['element']['#children'] = str_replace($search, $search . ' ' . $attr, $variables['element']['#children']);
+      }
+    }
+  }
+
   if ($variables['element']['#name'] == 'publication_type') {
     $map = osha_publication_get_main_publication_types_map();
     foreach ($variables['element']['#options'] as $tid => $title) {

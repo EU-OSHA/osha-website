@@ -95,15 +95,6 @@
         min-height: 84px;
     }
 
-    html[lang=de] .content-home-event a.see-more-arrow {
-        padding-left: 2px;
-        background: transparent;
-    }
-
-    html[lang=de] .content-home-event .tag-news-events {
-        padding: 7px 1px;
-    }
-
     .content-home-event{
         margin-right: 0.8em;
     }
@@ -142,7 +133,7 @@
         font-size: 0.6em;
     }
 
-    html[lang=de] .content-home-event a.see-more-arrow, html[lang=lv] .content-home-event a.see-more-arrow, html[lang=lt] .content-home-event a.see-more-arrow, html[lang=hu] .content-home-event a.see-more-arrow, html[lang=mt] .content-home-event a.see-more-arrow, html[lang=nl] .content-home-event a.see-more-arrow {
+    html[lang=lv] .content-home-event a.see-more-arrow, html[lang=lt] .content-home-event a.see-more-arrow, html[lang=hu] .content-home-event a.see-more-arrow, html[lang=mt] .content-home-event a.see-more-arrow, html[lang=nl] .content-home-event a.see-more-arrow {
         font-size: 0.7rem;
         background: transparent;
     }

@@ -671,6 +671,13 @@ function osha_newsletter_block_subscribe_form($form, &$form_state) {
     drupal_add_library('system', 'drupal.ajax');
     drupal_add_library('system', 'jquery.form');
     drupal_add_js(drupal_get_path('module', 'osha_newsletter') . '/js/ajax.js');
+    drupal_add_js(
+      [
+        'osha_newsletter' => [
+          'agree' => @$_REQUEST['agree'],
+          'email' => strip_tags(@$_REQUEST['email']),
+        ],
+      ], 'setting');
   }
   else {
     $form['submit'] = array(

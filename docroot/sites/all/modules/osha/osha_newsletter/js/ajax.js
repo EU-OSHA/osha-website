@@ -8,16 +8,13 @@
         var base = '#edit-email';
         Drupal.ajax['captcha-block'] = new Drupal.ajax(base, this, ajax_settings);
       });
-      if (eval('typeof URLSearchParams')) {
-        var searchParams = new URLSearchParams(window.location.search);
-        var agree = searchParams.get('agree');
-        var email = searchParams.get('email');
-        if (email) {
-          jQuery('div.form-item-email input.form-text').val(Drupal.checkPlain(email));
-        }
-        if (agree && agree != '0') {
-          jQuery(".form-item-agree-processing-personal-data input.form-checkbox").prop('checked', true);
-        }
+      var agree = Drupal.settings.osha_newsletter.agree;
+      var email = Drupal.settings.osha_newsletter.email;
+      if (email) {
+        jQuery('div.form-item-email input.form-text').val(Drupal.checkPlain(email));
+      }
+      if (agree && agree != '0') {
+        jQuery(".form-item-agree-processing-personal-data input.form-checkbox").prop('checked', true);
       }
     }
   };

@@ -559,7 +559,7 @@
 
 @media screen and (max-width: 990px) {
 
-     h1.revamp {
+    h1.revamp {
         margin-left: 0;
     }
 
@@ -672,6 +672,15 @@
 
     #footer * li.menu__item {
         margin: 5px 1em 0 0;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+
+    a.privacy {
+        float: left;
+        padding-top: 5px; 
     }
 
 }

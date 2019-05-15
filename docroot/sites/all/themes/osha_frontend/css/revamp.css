@@ -149,7 +149,7 @@ a.see-more-arrow:hover{
 }
 
 .revamp .left_column{
-    width: 73.7%;
+    width: 73.4%;
 }
 
 .home-intro{
@@ -379,8 +379,12 @@ a.box-link{
 
 .view-highlight .views-field-view-node{
     margin-top: 1.6em;
+    float: right;
 }
 
+.view-highlight .row:nth-child(2) .views-field-view-node{
+    float: left;
+}
 
 .view-highlight .row:nth-child(2) .img-highlight{
     float: right;
@@ -518,9 +522,11 @@ body.logged-in .region-footer-sitemap .form-submit{
     font-size: 0.9rem;
 }
 
-html[lang=de] .content-home-event a.see-more-arrow{
+html[lang=de] .content-home-event a.see-more-arrow, html[lang=cs] .content-home-event a.see-more-arrow, html[lang=el] .content-home-event a.see-more-arrow, html[lang=pl] .content-home-event a.see-more-arrow{
     font-size: 0.7rem;
     padding-bottom: 9px;
+    background-position-x: 94%;
+    background-position-y: 45%;
 }
 
 .content-home-event .tag-news-events{
@@ -537,7 +543,7 @@ html[lang=de] .content-home-event a.see-more-arrow{
 
 html[lang=de] .content-home-event .tag-news-events{
     padding: 7px 7px;
-    font-size: 8px;
+    font-size: 12px;
 }
 
 
@@ -627,6 +633,15 @@ html[lang=de] .content-home-event .tag-news-events{
 .content-subscribe h3{
     margin: 0;
     padding: 0;
+}
+
+.content-subscribe h3 a{
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.content-subscribe h3 a:hover{
+    text-decoration: underline;
 }
 
 .captchaImg{
@@ -744,23 +759,17 @@ input[type=checkbox]:checked:disabled + label:before {
     padding-bottom: 14px;
 }
 
-/*
-a.privacy{
-    clear: none;
-    float: left;
-    padding-left: 94px;
-    padding-top: 1em;
-}
-*/
-
 a.privacy {
-    clear: none;
-    float: left;
-    padding-left: 434px;
     padding-top: 0em;
     margin-top: -24px;
+    float: right;
+    display: block;
+    width: 100px;
 }
 
+.not-logged-in  .form-item-agree-processing-personal-data{
+    padding-right: 10em;
+}
 
 .btn-light-white, .region-footer-sitemap #edit-email--3, .region-footer-sitemap #edit-email--4, #security_code{
     clear: both;
@@ -827,7 +836,16 @@ a.privacy {
 .footer-site-map li.parent{
     float: left;
     padding-right: 1.8em;
-    width: 119px;
+    width: 103px;
+}
+
+#footer > div > div > ul > li:nth-child(1){
+    width: 70px;
+}
+
+html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container > ul > li:nth-child(3) > ul > li:nth-child(2) > ul > li:nth-child(1) > a{
+    width: 100px;
+    display: block;
 }
 
 .footer-site-map li{

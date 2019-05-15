@@ -95,14 +95,6 @@
         min-height: 84px;
     }
 
-    html[lang=de] .content-home-event a.see-more-arrow {
-        padding-left: 2px;
-    }
-
-    html[lang=de] .content-home-event .tag-news-events {
-        padding: 7px 1px;
-    }
-
     .content-home-event{
         margin-right: 0.8em;
     }
@@ -134,6 +126,16 @@
 
     .follow-us-icons a{
         margin-right: 1.3em;
+    }
+
+    /*News and Events*/
+    html[lang=de] .content-home-event .tag-news-events, html[lang=cs] .content-home-event .tag-news-events, html[lang=el] .content-home-event .tag-news-events, html[lang=pl] .content-home-event .tag-news-events{
+        font-size: 0.6em;
+    }
+
+    html[lang=lv] .content-home-event a.see-more-arrow, html[lang=lt] .content-home-event a.see-more-arrow, html[lang=hu] .content-home-event a.see-more-arrow, html[lang=mt] .content-home-event a.see-more-arrow, html[lang=nl] .content-home-event a.see-more-arrow {
+        font-size: 0.7rem;
+        background: transparent;
     }
 
     /*Tools and Resources*/
@@ -530,7 +532,6 @@
         padding: 1em;
     }
 
-
     /* Footer */
     footer {
         padding-bottom: 1em;
@@ -549,7 +550,7 @@
 
 @media screen and (max-width: 990px) {
 
-     h1.revamp {
+    h1.revamp {
         margin-left: 0;
     }
 
@@ -640,16 +641,20 @@
         padding-bottom: 1em;
     }
 
+    html[lang=de] .content-home-event .tag-news-events, html[lang=cs] .content-home-event .tag-news-events, html[lang=el] .content-home-event .tag-news-events, html[lang=pl] .content-home-event .tag-news-events{
+        font-size: 0.9em;
+    }
+
+   html[lang=de] .content-home-event a.see-more-arrow, html[lang=lv] .content-home-event a.see-more-arrow, html[lang=lt] .content-home-event a.see-more-arrow, html[lang=hu] .content-home-event a.see-more-arrow, html[lang=mt] .content-home-event a.see-more-arrow, html[lang=nl] .content-home-event a.see-more-arrow {
+        font-size: 0.9em;
+        padding-left: 14px;
+        background: url(../images/flecha.png) no-repeat scroll 87% 53% transparent;
+    }  
+
     /*Footer*/
     .content-form-newsletter .btn-light-white{
         min-width: 354px;
     }
-
-    /*
-    .content-form-newsletter a.privacy{
-        padding-left: 52px;
-    }
-    */
 
     .content-form-newsletter a.privacy{
         padding-left: 0;
@@ -658,6 +663,15 @@
 
     #footer * li.menu__item {
         margin: 5px 1em 0 0;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+
+    a.privacy {
+        float: left;
+        padding-top: 5px; 
     }
 
 }

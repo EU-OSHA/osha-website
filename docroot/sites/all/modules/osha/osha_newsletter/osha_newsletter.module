@@ -373,7 +373,7 @@ function osha_newsletter_block_view($delta = '') {
         $url = url('alertservice');
         $alert_service = t('<a class="btn-light-blue try-alert" href="!url">Try alert service</a>', array('!url' => $url));
         $markup = '<div class="container"><div class="content-subscribe">' . $alert_service . '<div class="content-form-newsletter">';
-        $markup .= '<h3>' . t('OSHmail newsletter') . '</h3>';
+        $markup .= '<h3><a href="@newsletter_page_url">' . t('OSHmail newsletter') . '</a></h3>';
         $markup .=  t('<a href="@newsletter_page_url">See more info</a>');
         $link_url = variable_get('subscribe_block_newsletter_page_url', OSHA_NEWSLETTER_PAGE_URL);
         $markup = strtr($markup, array('@newsletter_page_url' => url($link_url)));

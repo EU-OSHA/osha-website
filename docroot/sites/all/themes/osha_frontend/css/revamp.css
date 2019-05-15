@@ -522,7 +522,7 @@ body.logged-in .region-footer-sitemap .form-submit{
     font-size: 0.9rem;
 }
 
-html[lang=cs] .content-home-event a.see-more-arrow, html[lang=el] .content-home-event a.see-more-arrow, html[lang=pl] .content-home-event a.see-more-arrow{
+html[lang=de] .content-home-event a.see-more-arrow, html[lang=cs] .content-home-event a.see-more-arrow, html[lang=el] .content-home-event a.see-more-arrow, html[lang=pl] .content-home-event a.see-more-arrow{
     font-size: 0.7rem;
     padding-bottom: 9px;
     background-position-x: 94%;
@@ -539,6 +539,11 @@ html[lang=cs] .content-home-event a.see-more-arrow, html[lang=el] .content-home-
     font-weight: bold;
     padding: 7px 1em;
     letter-spacing: 3px;
+}
+
+html[lang=de] .content-home-event .tag-news-events{
+    padding: 7px 7px;
+    font-size: 12px;
 }
 
 

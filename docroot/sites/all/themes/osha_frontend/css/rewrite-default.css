@@ -366,6 +366,10 @@ h1{
     margin-left: 10px!important;
 }
 
+.publications-sidebar-first .form-item.form-type-checkboxes label[for=edit-languages], .publications-sidebar-first .form-item.form-type-checkboxes label[for=edit-tags], .publications-sidebar-first .form-item.form-type-checkboxes label[for=edit-publication-type]{
+    clear: both;
+}
+
 
 /* Footer */
 footer{

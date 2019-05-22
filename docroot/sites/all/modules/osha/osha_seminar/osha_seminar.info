@@ -21,6 +21,7 @@ dependencies[] = options
 dependencies[] = osha
 dependencies[] = osha_highlight
 dependencies[] = osha_legislation
+dependencies[] = osha_seminar
 dependencies[] = osha_wiki
 dependencies[] = search_api_views
 dependencies[] = smart_trim

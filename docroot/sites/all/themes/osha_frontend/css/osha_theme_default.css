@@ -10663,3 +10663,7 @@ table.quiz-feedback-table.sticky-enabled.tableheader-processed.sticky-table > tb
     margin-top: 0.5em;
     font-weight: bold;
 }
+
+.publications-sidebar-first .form-item.form-type-checkboxes label[for=edit-languages], .publications-sidebar-first .form-item.form-type-checkboxes label[for=edit-tags], .publications-sidebar-first .form-item.form-type-checkboxes label[for=edit-publication-type]{
+    clear: both;
+}

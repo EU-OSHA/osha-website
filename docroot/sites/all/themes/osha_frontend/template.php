@@ -429,7 +429,7 @@ function osha_frontend_block_view_alter(&$data, $block) {
   if ($block->module == 'quicktabs' && isset($data['content']['content']['divs'])) {
     foreach ($data['content']['content']['divs'] as $index => $div) {
       if (isset($div['content']['#bundle']) && $div['content']['#bundle'] == 'article') {
-        // hide "Show details" link for articles used in quicktabs
+        // Hide "Show details" link for articles used in quicktabs.
         unset($data['content']['content']['divs'][$index]['content']['links']['node']['#links']['node-readmore']);
       }
     }
@@ -437,18 +437,17 @@ function osha_frontend_block_view_alter(&$data, $block) {
 }
 
 /**
- * Implements hook_preprocess_page
+ * Implements hook_preprocess_page().
  */
 function osha_frontend_preprocess_page(&$variables) {
-  
-  //Add template to external infographic code. node--external-infographic.tpl.php - MDR-2351
+  // Template node--external-infographic.tpl.php - MDR-2351.
   $n = menu_get_object('node');
   if ($n) {
     switch ($n->type) {
       case "article":
         $external_infographic = variable_get('ncw_external_infographic_nid', 14885);
         if ($n->nid == $external_infographic) {
-            $variables['theme_hook_suggestions'][] = 'node__external_infographic';
+          $variables['theme_hook_suggestions'][] = 'node__external_infographic';
         }
     }
   }
@@ -514,7 +513,7 @@ function osha_frontend_preprocess_page(&$variables) {
           '#items' => [
             [
               'id' => $primary,
-            ]
+            ],
           ],
           ['#markup' => $markup],
         ];
@@ -529,6 +528,15 @@ function osha_frontend_preprocess_page(&$variables) {
         '#markup' => l($link_title, $link_href, array('attributes' => array('class' => array('back-to-link pull-right')))),
       );
     }
+  }
+}
+
+/**
+ * Implements hook_preprocess_html().
+ */
+function osha_frontend_preprocess_html(&$variables) {
+  if (drupal_is_front_page()) {
+    $variables['classes_array'][] = 'revamp';
   }
 }
 
@@ -627,7 +635,6 @@ function osha_frontend_on_the_web_image($variables) {
   return theme('image', $variables);
 }
 
-
 /**
  * Returns HTML for an individual feed item for display in the block.
  *
@@ -649,14 +656,23 @@ function osha_frontend_aggregator_block_item($variables) {
 }
 
 /**
- * Override or insert variables into the block template
+ * Override or insert variables into the block template.
  */
 function osha_frontend_preprocess_block(&$vars) {
   $block = $vars['block'];
-
+  if ($block->delta == 'osha_homepage_tweets') {
+    $vars['title_attributes_array']['class'][] = 'home';
+  }
   if ($block->delta == 'oshwiki_featured_articles') {
     $vars['block_html_id'] = 'related-wiki';
     $vars['title_attributes_array']['class'][] = 'related_wiki_head';
+  }
+
+  if ($block->delta == 'osha_newsletter_subscribe') {
+    $vars['title_attributes_array']['class'][] = 'home';
+  }
+  if ($block->delta == 'highlight-block_2') {
+    $vars['title_attributes_array']['class'][] = 'home';
   }
 }
 

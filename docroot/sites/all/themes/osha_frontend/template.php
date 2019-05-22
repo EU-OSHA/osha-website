@@ -121,7 +121,6 @@ function osha_frontend_preprocess_views_view_row_rss(&$vars) {
     $item->elements[2]['value'] = l($vars['title'], 'node/' . $nid);
     foreach ($vars['view']->result as $row) {
       if ($row->nid == $nid) {
-        $item->elements[0]['value'] = date('d/m/Y', $row->node_created);
         $item->elements[1]['value'] = 'EU-OSHA';
       }
     }

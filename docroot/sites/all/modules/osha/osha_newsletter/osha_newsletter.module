@@ -687,6 +687,7 @@ function osha_newsletter_block_subscribe_form($form, &$form_state) {
     $form['#validate'] = array('osha_newsletter_block_subscribe_captcha_form_validate');
     $form['#submit'] = array('osha_newsletter_block_subscribe_captcha_form_submit');
   }
+
   $link_label = t(variable_get('subscribe_block_details_link_label', 'Privacy notice'));
   $link_url = variable_get('subscribe_block_details_link_url', OSHA_PRIVACY_PAGE_URL);
   $form['details_link'] = array(

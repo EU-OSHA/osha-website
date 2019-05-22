@@ -103,3 +103,10 @@ function osha_search_update_7007() {
   $index->save();
   features_revert_module('osha_search');
 }
+
+/**
+ * MDR-2736 Create main topic tag for publications and other stuff (Dev).
+ */
+function osha_search_update_7008() {
+  features_revert_module('osha_search');
+}

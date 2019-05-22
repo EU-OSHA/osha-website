@@ -121,7 +121,6 @@ function osha_frontend_preprocess_views_view_row_rss(&$vars) {
     $item->elements[2]['value'] = l($vars['title'], 'node/' . $nid);
     foreach ($vars['view']->result as $row) {
       if ($row->nid == $nid) {
-        $item->elements[0]['value'] = date('d/m/Y', $row->node_created);
         $item->elements[1]['value'] = 'EU-OSHA';
       }
     }
@@ -209,9 +208,9 @@ function osha_frontend_menu_link__menu_block($variables) {
   if (!$render_img) {
     return theme_menu_link($variables);
   }
-  // $element['#attributes']['data-image-url'] = $image_url;
   $output_link = l($element['#title'], $element['#href'], $element['#localized_options']);
 
+  $image = '';
   $output_image = "";
   if (!empty($element['#localized_options']['content']['image'])
       && $image_url = file_create_url($element['#localized_options']['content']['image'])) {
@@ -235,10 +234,11 @@ function osha_frontend_menu_link__menu_block($variables) {
 
     $output_image = l($image, $element['#href'], array('html' => TRUE));
   }
-
-  $output_copyright = "";
-  if (!empty($element['#localized_options']['copyright']['copyright'])) {
-    $output_copyright = '<div class="introduction-copyright">' . $element['#localized_options']['copyright']['copyright'] . '</div>';
+  if (($variables['element']['#theme'][0] == 'menu_link__menu_block__3') && (arg(1) == 20)) {
+    $options = $element['#localized_options'];
+    $options['html'] = TRUE;
+    $text = '<span class="content-img">' . $image . '</span><h2>' . $element['#title'] . '</h2>';
+    return '<div class="content-box-sub">' . l($text, $element['#href'], $options) . '</div>';
   }
   return '<li' . drupal_attributes($element['#attributes']) . '>
     <div class="introduction-title">' . $output_link . '</div>
@@ -313,25 +313,25 @@ function osha_frontend_apachesolr_sort_list($vars) {
 
 
 /**
- * Called from hook_preprocess_node
+ * Called from hook_preprocess_node.
  */
 function fill_related_publications(&$vars) {
   $vars['total_related_publications'] = 0;
-  // get 3 related publications by common tags
+  // Get 3 related publications by common tags.
   $tags_tids = array();
   if (!empty($vars['field_tags'])) {
     $tags_tids = $vars['field_tags'][LANGUAGE_NONE];
   }
 
   if (!empty($tags_tids)) {
-    // query all publications with the same tags
+    // Query all publications with the same tags.
     $tids = array();
     foreach ($tags_tids as $tid) {
       array_push($tids, $tid['tid']);
     }
 
     $query = new EntityFieldQuery();
-    // exclude self
+    // Exclude self.
     $excluded_nids = array();
     array_push($excluded_nids, $vars['node']->nid);
     if (($vars['node']->type == 'publication') && $vars['node']->field_related_publications) {
@@ -450,6 +450,11 @@ function osha_frontend_preprocess_page(&$variables) {
         if ($n->nid == $external_infographic) {
           $variables['theme_hook_suggestions'][] = 'node__external_infographic';
         }
+        break;
+
+      case "publication":
+        $variables['theme_hook_suggestions'][] = 'page__node__publication';
+        break;
     }
   }
 
@@ -465,7 +470,7 @@ function osha_frontend_preprocess_page(&$variables) {
     $variables['blog'] = TRUE;
   }
 
-  // MC-123 Open all languages with one click
+  // MC-123 Open all languages with one click.
   if (isset($variables['node'])) {
     $node = $variables['node'];
     drupal_add_js(array(
@@ -479,7 +484,7 @@ function osha_frontend_preprocess_page(&$variables) {
     drupal_add_js(drupal_get_path('module', 'osha') . '/js/open_all_translations.js');
   }
 
-  // add back to links (e.g. Back to news)
+  // Add back to links (e.g. Back to news).
   if (isset($variables['node'])) {
     $node = $variables['node'];
     $tag_vars = array(
@@ -539,6 +544,15 @@ function osha_frontend_preprocess_html(&$variables) {
   if (drupal_is_front_page()) {
     $variables['classes_array'][] = 'revamp';
   }
+  $req_uri = request_path();
+  if (drupal_is_front_page() || (strpos($req_uri, 'tools-and-publications/publications') >= 0)) {
+    $variables['classes_array'][] = 'revamp';
+    $variables['classes_array'][] = 'page-publications';
+  }
+
+  if (arg(0) == 'node' && arg(1) == 20) {
+    $variables['classes_array'][] = 'page-tools-and-resources';
+  }
 }
 
 /**
@@ -550,6 +564,10 @@ function osha_frontend_page_alter(&$page) {
     && count(element_children($page['content']['system_main']['nodes']) == 1)) {
     $keys = element_children($page['content']['system_main']['nodes']);
     $node = &$page['content']['system_main']['nodes'][current($keys)];
+    if ($node && $node['#node']->nid == 20) {
+        unset($node['links']['osha_share']);
+        unset($page['content']['osha_share']);
+    }
     if (!empty($node['links']['osha_share'])) {
       $links = $node['links']['osha_share'];
       unset($node['links']['osha_share']);
@@ -725,7 +743,7 @@ function osha_frontend_pager_link($variables) {
     }
   }
 
-  // Set each pager link title
+  // Set each pager link title.
   if (!isset($attributes['title'])) {
     static $titles = NULL;
     if (!isset($titles)) {

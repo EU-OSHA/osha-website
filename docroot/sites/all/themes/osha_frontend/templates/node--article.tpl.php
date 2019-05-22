@@ -29,6 +29,9 @@
   <?php endif; ?>
 
   <?php
+  if ($nid == 20) {
+    $content['title_field'][0]['#markup'] = str_replace('<h1>','<h1 class="revamp">', $content['title_field'][0]['#markup']);
+  }
   // We hide the comments and links now so that we can render them later.
   hide($content['comments']);
   hide($content['links']);

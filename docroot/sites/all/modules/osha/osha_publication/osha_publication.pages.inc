@@ -14,9 +14,9 @@ function osha_publication_menu_publications_form($form, $form_state) {
     '#method' => 'GET',
     'left-column' => array(
       '#type' => 'container',
-      '#attributes' => array(
-        'class' => array('publications-sidebar-first'),
-      ),
+      '#attributes' => array('class' => ['content-filters']),
+      '#prefix' => '<aside class="sidebars_first">',
+      '#suffix' => '</aside>',
     ),
     'content' => array(
       '#type' => 'container',
@@ -31,26 +31,19 @@ function osha_publication_menu_publications_form($form, $form_state) {
     '#maxlength' => 200,
     '#default_value' => $text,
     '#title_display' => 'invisible',
-    '#attributes' => array('placeholder' => t('Search')),
-    '#prefix' => '<div id="publication-search">',
+    '#attributes' => array('placeholder' => t('Search'), 'class' => ['search-new-design']),
+    '#prefix' => '<div class="views-exposed-widgets clearfix"><div id="edit-search-api-views-fulltext-wrapper" class="views-exposed-widget">',
+    '#suffix' => '</div>',
+
   );
   $sorts = array('search_api_relevance' => t('Relevance'), 'field_publication_date' => t('Publication date'));
   $form['content']['sort_by'] = array(
     '#title' => t('Sort by'),
     '#type' => 'select',
     '#default_value' => $sort,
+    '#attributes' => array('class' => ['new-select-style']),
     '#options' => $sorts,
-  );
-  $order = array('desc' => t('Desc'), 'asc' => t('Asc'));
-  $form['content']['direction'] = array(
-    '#title' => t('Order'),
-    '#type' => 'select',
-    '#default_value' => $direction,
-    '#options' => $order,
-  );
-  $form['content']['submit'] = array(
-    '#type' => 'submit',
-    '#value' => t('Search'),
+    '#prefix' => '<div class="views-exposed-widget">',
     '#suffix' => '</div>',
   );
 
@@ -78,18 +71,21 @@ function osha_publication_menu_publications_form($form, $form_state) {
     }
   }
 
-  $form['left-column']['languages'] = array(
-    '#type' => 'checkboxes',
+  $form['content']['languages'] = array(
+    '#type' => 'select',
     '#options' => $lang_options,
     '#default_value' => $languages,
     '#title' => t('Available in languages'),
+    '#attributes' => array('class' => ['new-select-style']),
+    '#prefix' => '<div class="views-exposed-widget">',
+    '#suffix' => '</div></div>',
   );
-  $form['left-column']['tags'] = array(
-    '#type' => 'checkboxes',
-    '#options' => _osha_publication_tags_options_list(TRUE),
-    '#default_value' => $tags,
-    '#title' => t('Topics'),
+
+  $form['content']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Search'),
   );
+
   $form['left-column']['publication_type'] = array(
     '#type' => 'checkboxes',
     '#options' => _publication_type_options_list(TRUE),
@@ -252,7 +248,7 @@ function osha_publication_menu_publications_search_native($form_state) {
   if (!empty($restrict)) {
     $nids = array_intersect(array_unique($restrict), $nids);
   }
-
+  $total = count($nids);
   $per_page = 7;
   $current_page = pager_default_initialize(count($nids), $per_page);
   $page = array_chunk($nids, $per_page, TRUE);
@@ -273,13 +269,12 @@ function osha_publication_menu_publications_search_native($form_state) {
   if (count($languages) == 1) {
     $showing_lang = current($languages);
   }
-
   $ret = array(
     '#nids' => $nids,
-    '#prefix' => '<h2 class="h4-title">' . t('Publications available') . '</h2>',
+    '#prefix' => '<h2>' . t('Publications available') . ' (' . $total . ')</h2>',
     'results-native' => node_view_multiple($nodes, 'osha_search_teaser', 0, $showing_lang),
     '#suffix' => theme('pager', array(
-      'tags' => array('<', '<', '', '>', '>'),
+      'tags' => array(),
       'quantity' => 9,
       'parameters' => $pager_params,
     )

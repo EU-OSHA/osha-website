@@ -36,6 +36,9 @@ function osha_publication_menu() {
   return $items;
 }
 
+function osha_publication_cron() {
+  // Todo add pdf count...
+}
 
 /**
  * Implements hook_form_alter().
@@ -440,6 +443,10 @@ function osha_publication_workbench_moderation_transition($node, $old, $new) {
  */
 function osha_publication_field_formatter_info() {
   $info = array(
+    'publication_term_reference_plain' => array(
+      'label' => t('Plain text (localized) for publication'),
+      'field types' => array('taxonomy_term_reference'),
+    ),
     'file_publication_file' => array(
       'label' => 'Publication file',
       'field types' => array('file'),
@@ -592,6 +599,20 @@ function osha_publication_field_formatter_view($entity_type, $entity, $field, $i
       }
       break;
 
+    case 'publication_term_reference_plain':
+      $language = i18n_language_interface();
+      foreach ($items as $delta => $item) {
+        $item['taxonomy_term'] = taxonomy_term_load($item['tid']);
+        $name = ($item['tid'] != 'autocreate' ? i18n_taxonomy_term_name($item['taxonomy_term'], $language->language): $item['name']);
+        $element[$delta] = array(
+          '#markup' => check_plain($name),
+        );
+        if ($delta) {
+          $element[$delta-1]['#markup'] .= ', ';
+        }
+      }
+      break;
+
     case 'publication_bookshop_id':
       foreach ($items as $delta => $item) {
         $element[$delta] = array(
@@ -674,7 +695,7 @@ function theme_osha_publication_file_publication_file_format($element) {
 
   foreach ($node->field_file as $lang => $object) {
     if ( $lang == $node->language || $file_fid != $object[0]['fid'] ) {
-      $output .= '<a href="' . file_create_url($object[0]['uri']) . '">' . strtoupper($lang) . '</a> | ';
+      $output .= '<a target="_blank" href="' . file_create_url($object[0]['uri']) . '">' . strtoupper($lang) . '</a> | ';
     }
   }
   $output = substr($output, 0, -3);
@@ -705,11 +726,11 @@ function theme_osha_publication_bookshop_id_format($element) {
     '&p_p_lifecycle=1&p_p_state=normal&facet.author=OSHA&facet.collection=EUPub' .
     '&language=en&startRow=1&resultsPerPage=10&SEARCH_TYPE=SIMPLE&queryText=' . urlencode(trim($element['title']));
   $image_path = drupal_get_path('theme', 'osha_frontend') . '/images/content/EUPublications_logo.svg';
-  return '<span>' . t('Order a printed copy') .
-    '<a href="' . $url . '" target="_blank"><img src="/' . $image_path .
+  return '<div class="content-order-copy">' .
+    '<a href="' . $url . '" target="_blank">' . t('Order a printed copy') . '<img src="/' . $image_path .
     '" alt="' . t('EU Publications: You can order a printed copy of this document') .
     '" title="' . t('EU Publications: You can order a printed copy of this document') .
-    '"></a></span>';
+    '"></a></div>';
 }
 
 /*

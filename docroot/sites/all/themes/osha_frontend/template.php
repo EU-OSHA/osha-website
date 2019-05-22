@@ -217,19 +217,19 @@ function osha_frontend_menu_link__menu_block($variables) {
     // $image = '<img src="' . $image_url . '" alt=""/>';
     // We should in fact use empty alt because the image is only decorative (the text is already present in the link).
     $image = '<img src="' . $image_url . '" alt="' . $element['#title'] . '"/>';
-    
-    if (!empty($element['#localized_options']['copyright']['author']) || !empty($element['#localized_options']['copyright']['copyright']) ) {   
-     $image .= '<blockquote class="image-field-caption">'; 
-        if (!empty($element['#localized_options']['copyright']['author'])) {
-          $image .= check_markup($element['#localized_options']['copyright']['author'], 'full_html');
-        }
-        if (!empty($element['#localized_options']['copyright']['author']) && !empty($element['#localized_options']['copyright']['copyright']) ) {  
-           $image .= '<span>&nbsp;/&nbsp;</span>';
-        }
-        if (!empty($element['#localized_options']['copyright']['copyright'])) {
-          $image .= '<span class="blockquote-copyright">' . $element['#localized_options']['copyright']['copyright'] . '</span>';
-        }
-      $image .= '</blockquote>'; 
+
+    if (!empty($element['#localized_options']['copyright']['author']) || !empty($element['#localized_options']['copyright']['copyright'])) {
+      $image .= '<blockquote class="image-field-caption">';
+      if (!empty($element['#localized_options']['copyright']['author'])) {
+        $image .= check_markup($element['#localized_options']['copyright']['author'], 'full_html');
+      }
+      if (!empty($element['#localized_options']['copyright']['author']) && !empty($element['#localized_options']['copyright']['copyright'])) {
+        $image .= '<span>&nbsp;/&nbsp;</span>';
+      }
+      if (!empty($element['#localized_options']['copyright']['copyright'])) {
+        $image .= '<span class="blockquote-copyright">' . $element['#localized_options']['copyright']['copyright'] . '</span>';
+      }
+      $image .= '</blockquote>';
     }
 
     $output_image = l($image, $element['#href'], array('html' => TRUE));
@@ -335,8 +335,8 @@ function fill_related_publications(&$vars) {
     $excluded_nids = array();
     array_push($excluded_nids, $vars['node']->nid);
     if (($vars['node']->type == 'publication') && $vars['node']->field_related_publications) {
-      foreach($vars['node']->field_related_publications as $related_publications) {
-        foreach($related_publications as $related_publication) {
+      foreach ($vars['node']->field_related_publications as $related_publications) {
+        foreach ($related_publications as $related_publication) {
           array_push($excluded_nids, $related_publication['target_id']);
         }
       }
@@ -357,10 +357,10 @@ function fill_related_publications(&$vars) {
       $count = 0;
       foreach ($result['node'] as $n) {
         $node = node_load($n->nid);
-        if ($node->status == 0 ) {
+        if ($node->status == 0) {
           // add unpublished only for admin, do not include in count
           if (OshaWorkflowPermissions::userHasRole('administrator', $user)) {
-            $vars['tagged_related_publications'][] = node_view($node,'teaser');
+            $vars['tagged_related_publications'][] = node_view($node, 'teaser');
           }
         } else {
           $vars['tagged_related_publications'][] = node_view($node,'teaser');
@@ -700,10 +700,11 @@ function osha_frontend_preprocess_block(&$vars) {
  */
 function osha_frontend_pager($variables) {
   // Overwrite pager links.
-  $variables['tags'][0] = '«';
-  $variables['tags'][1] = '‹';
-  $variables['tags'][3] = '›';
-  $variables['tags'][4] = '»';
+  $theme_path = drupal_get_path('theme', 'osha_frontend');
+  $variables['tags'][0] = '<img alt="first page" src="/' . $theme_path . '/images/pag-first.png">';
+  $variables['tags'][1] = '<img alt="back page" src="/' . $theme_path . '/images/pag-back.png">';
+  $variables['tags'][3] = '<img alt="back page" src="/' . $theme_path . '/images/pag-next.png">';
+  $variables['tags'][4] = '<img alt="back page" src="/' . $theme_path . '/images/pag-end.png">';
   return theme_pager($variables);
 }
 
@@ -772,7 +773,7 @@ function osha_frontend_pager_link($variables) {
     $url = $req_uri;
   }
   $attributes['href'] = url($url, array('query' => $query));
-  return '<a' . drupal_attributes($attributes) . '>' . check_plain($text) . '</a>';
+  return '<a' . drupal_attributes($attributes) . '>' . $text . '</a>';
 }
 
 function osha_frontend_node_bundle($row) {

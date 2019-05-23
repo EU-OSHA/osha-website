@@ -678,3 +678,10 @@ Work-related diseases';
     taxonomy_term_save($term);
   }
 }
+
+/**
+ * MDR-2842 NCW - Revamp - Publications list and detail - Development.
+ */
+function osha_publication_update_7019() {
+  features_revert_module('osha_publication');
+}

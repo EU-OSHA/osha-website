@@ -685,3 +685,36 @@ Work-related diseases';
 function osha_publication_update_7019() {
   features_revert_module('osha_publication');
 }
+
+function osha_publication_update_7020() {
+  // Left menu block.
+  db_update('block')
+    ->fields(['pages' => 'node/5445
+themes/dangerous-substances/practical-tools-dangerous-substances
+photo-gallery
+tools-and-publications
+tools-and-publications/publications
+tools-and-publications/publications/*'])
+    ->condition('bid', 151)
+    ->execute();
+
+  // Clear filter.
+  db_update('block')
+    ->fields(['pages' => 'search/*
+tools-and-publications/seminars
+legislation/directives/*
+safety-and-health-legislation/european-directives
+node/2544
+legislation/guidelines/*
+themes/dangerous-substances/search
+themes/dangerous-substances/search/*
+themes/musculoskeletal-disorders/search'])
+    ->condition('bid', 947)
+    ->execute();
+
+  // Rss block
+  db_update('block')
+    ->fields(['region' => -1])
+    ->condition('bid', 939)
+    ->execute();
+}

@@ -46,6 +46,8 @@ function osha_field_widget_form_alter(&$element, &$form_state, $context) {
 function _form_add_website_placeholder_after_build($form) {
   $placeholder = t('Website of event');
   $form['field_website_of_event'][LANGUAGE_NONE][0]['url']['#attributes']['placeholder'] = $placeholder;
+  drupal_add_js(drupal_get_path('module', 'osha') . '/js/jquery.charactersRemaining.js');
+  drupal_add_js(drupal_get_path('module', 'osha') . '/js/charactersRemaining.js', array('scope' => 'footer'));
   return $form;
 }
 

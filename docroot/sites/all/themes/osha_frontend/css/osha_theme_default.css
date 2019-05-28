@@ -9679,6 +9679,35 @@ body.page-entity-collection .newsletter-container {
 	margin: 0 auto !important;
 }
 
+#slideshare-popup-container {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.7);
+	z-index: 1000000;
+}
+
+#slideshare-popup-container .slideshare-widget-container {
+	width: 100%;
+	text-align: center;
+}
+
+#slideshare-popup-container .close-slideshare-popup-container {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+}
+
+#slideshare-popup-container .close-slideshare-popup-container .close-slideshare-popup span {
+	display: block;
+	width: 30px;
+	height: 30px;
+	line-height: 25px;
+	font-size: 24px;
+}
+
 #share-popup-container {
 	position: fixed;
 	left: 0;

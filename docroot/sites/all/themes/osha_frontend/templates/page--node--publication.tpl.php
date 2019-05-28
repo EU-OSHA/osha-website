@@ -12,7 +12,7 @@
       <?php require "header.tpl.php"; ?>
     </header>
   <?php print $breadcrumb; ?>
-    <div id="main">
+<!--    <div id="main">-->
       <?php print render($page['highlighted']); ?>
         <a id="main-content"></a>
       <?php print render($title_prefix); ?>
@@ -41,7 +41,7 @@
           </div>
       <?php endif; ?>
 
-    </div>
+<!--    </div>-->
 
   <?php if (isset($page['footer'])) : ?>
       <footer id="footer" class="<?php print $classes; ?>">

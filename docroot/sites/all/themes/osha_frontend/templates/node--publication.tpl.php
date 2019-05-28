@@ -43,14 +43,8 @@ if ($view_mode == 'full') {
                 </div>
             </div>
             <div class="content-downloads">
-                <span class="title-download">Downloads</span>
-                <div class="content-languages-download">
-                    <span class="title-select">Publication</span>
-                    <select id="edit-search-api-language" name="search_api_language" class="form-select new-select-style">
-                    </select>
-                    <a href=""><img alt="download" src="<?php print drupal_get_path('theme', 'osha_frontend'); ?>/images/content/download-ico.png"></a>
-                </div>
-                <?php
+              <?php
+                print render(drupal_get_form('osha_publication_download_form'));
                 if ($content['field_banner_publications_office']['#items'][0]['value']) {
                     echo theme('osha_publication_bookshop_id_format', ['title' => $node->title]);
                 }
@@ -66,6 +60,34 @@ if ($view_mode == 'full') {
     print render($content['field_related_publications']);
   }
 }
+elseif ($view_mode == 'osha_resources') {
+  $publication_type = '<strong>' . t('Type') . ': </strong>' . strip_tags(render($content['field_publication_type']));
+  $pages_count = strip_tags(render($content['field_pages_count']));
+?>
+<div class="content-related-publications publications">
+    <div class="publications-left-column"><?php print render($content['field_cover_image']); ?></div>
+    <div class="publications-right-column">
+        <div class="content-publication-info">
+            <span class="date-display-single"><?php print strip_tags(render($content['field_publication_date'])); ?></span>
+            <span class="label"><?php print $publication_type; ?></span>
+            <span class="pages">
+        <?php
+        if ($pages_count) {
+          print $pages_count . ' ' . t('pages');
+        } ?>
+        </span>
+        </div>
+        <h2><?php print strip_tags(render($content['title_field']), '<a>'); ?></h2>
+      <?php
+      print l(t('See more'), $node_url . '/view', array(
+        'attributes' => array('class' => ['see-more-arrow']),
+        'query' => $url_query,
+        'external' => TRUE,
+      ));
+      ?>
+    </div>
+</div>
+<?php }
 elseif ($view_mode != 'osha_search_teaser') {
 ?>
 <article class="node-<?php print $node->nid; ?> <?php print $classes; ?> clearfix"<?php print $attributes; ?>>

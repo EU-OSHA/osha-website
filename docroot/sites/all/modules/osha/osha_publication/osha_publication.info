@@ -108,6 +108,7 @@ features[variable][] = node_revision_delete_number_publication
 features[variable][] = node_revision_delete_track_publication
 features[variable][] = node_submitted_publication
 features[variable][] = xmlsitemap_settings_node_publication
+features[views_view][] = publication_pages_count
 features[views_view][] = publications
 features_exclude[field_base][field_tags] = field_tags
 features_exclude[field_base][field_flickr_tags] = field_flickr_tags

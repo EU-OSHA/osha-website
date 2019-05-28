@@ -718,3 +718,11 @@ themes/musculoskeletal-disorders/search'])
     ->condition('bid', 939)
     ->execute();
 }
+
+function osha_publication_update_7021() {
+  features_revert_module('osha_wiki');
+  features_revert_module('osha_resources');
+  features_revert_module('osha_infographics');
+  features_revert_module('osha_publication');
+
+}

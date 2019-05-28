@@ -458,7 +458,6 @@ function osha_frontend_preprocess_page(&$variables) {
     }
   }
 
-
   $variables['blog'] = FALSE;
   $bundle = '';
 
@@ -541,6 +540,10 @@ function osha_frontend_preprocess_page(&$variables) {
  * Implements hook_preprocess_html().
  */
 function osha_frontend_preprocess_html(&$variables) {
+  $node = menu_get_object();
+  if ($node && $node->type == 'publication') {
+    $variables['classes_array'][] = 'page-publication-detail';
+  }
   if (drupal_is_front_page()) {
     $variables['classes_array'][] = 'revamp';
   }

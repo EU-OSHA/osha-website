@@ -1284,11 +1284,11 @@ div.publications-detail-right-column > a.download{
 
 /* Publications Related Resources */
 
-.related-reources  h2{
+.related-resources  h2{
     margin-bottom: 0;
 }
 
-.page-publication-detail .related-reources h3{
+.page-publication-detail .related-resources h3{
     width: 100%;
     float: left;
     background: url(../images/grey-h3-line.png) 0 60% repeat-x;
@@ -1297,14 +1297,14 @@ div.publications-detail-right-column > a.download{
     padding: 0;
 }
 
-.page-publication-detail .related-reources h3 span{
+.page-publication-detail .related-resources h3 span{
     background: #cfddee;    
     font-size: 1.2rem;
     padding-right: 1em;
 }
 
 
-.content-related-prublications{
+.content-related-publications{
     float: left;
     width: 100%;
     height: 220px;
@@ -1313,47 +1313,47 @@ div.publications-detail-right-column > a.download{
     margin-bottom: 1em;
 }
 
-.content-related-prublications .content-publication-info{
+.content-related-publications .content-publication-info{
     padding-top: 1em;
     padding-right: 6em;  
 }
 
-.content-related-prublications h2{
+.content-related-publications h2{
     width: 90%;
     height: 80px;
     margin-bottom: 1em;
     line-height: 25px;
 }
 
-.content-related-prublications h2 a{
+.content-related-publications h2 a{
     text-decoration: none;
     font-size: 1.2rem;
     color: #003399;
     font-weight: 400;
 }
 
-.content-related-prublications h2 a:hover{
+.content-related-publications h2 a:hover{
     text-decoration: underline;
 }
 
-.content-related-prublications.oshwiki{
+.content-related-publications.oshwiki{
     padding: 1em 1em 2em 2em;
     width: auto;
     height: auto;
 }
 
-.content-related-prublications.oshwiki h2 {
+.content-related-publications.oshwiki h2 {
     width: 90%;
     height: auto;
     margin-bottom: 1em;
     line-height: 25px;
 }
 
-.content-related-prublications.oshwiki h2 a{
+.content-related-publications.oshwiki h2 a{
     font-weight: 600;
 }
 
-.content-related-prublications.oshwiki p{
+.content-related-publications.oshwiki p{
     color:#003399;
 }
 

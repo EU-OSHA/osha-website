@@ -71,7 +71,7 @@ foreach ($rows as $node_type => $items) {
                     <!-- Modal content -->
                     <div class="modal-content">
                         <span class="close close<?php print ($i + 1) ?>">&times;</span>
-                        <iframe class="videoIframe js-videoIframe videoModal-<?php ?>" src="https://www.youtube-nocookie.com/embed/<?php print $video_id ?>?autoplay=1"  allowfullscreen></iframe>
+                        <iframe class="videoIframe js-videoIframe videoModal-<?php print ($i + 1)?>" src="https://www.youtube-nocookie.com/embed/<?php print $video_id ?>"  allowfullscreen></iframe>
                     </div>
 
                 </div>

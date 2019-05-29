@@ -359,7 +359,7 @@ h1{
     display: none!important;
 }
 
-.node-type-publication .sidebars_first, .page-events .sidebars_first 
+.node-type-publication .sidebars_first, .page-events .sidebars_first, .page-publications.revamp .sidebars_first
 {
     border-top: 0px solid #003399;
     margin-top: 41px;

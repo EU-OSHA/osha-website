@@ -1132,18 +1132,13 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
 }
 
 .page-publication-detail .publications-detail h1{
-    background: transparent;
-    padding: 0 0 1em 0;
-    margin: 0;
-    line-height: 20px;
-}
-
-.page-publication-detail .publications-detail h1{
     font-family: 'Open Sans',sans-serif;
+    background: transparent;
     text-decoration: none;
     font-size: 1.2rem;
     color:#003399;
-    line-height: 20px;
+    line-height: 24px;
+    font-weight: 600;
 }
 
 .page-publication-detail .publications-detail h2{
@@ -1247,6 +1242,10 @@ span.title-download {
 
 .chosen-container-multi .chosen-choices li.search-field{
     padding-top: 5px;
+}
+
+.chosen-container-active .chosen-choices{
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.3)
 }
 
 .new-select-style .chosen-choices{

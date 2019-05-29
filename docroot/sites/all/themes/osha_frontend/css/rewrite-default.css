@@ -359,14 +359,14 @@ h1{
     display: none!important;
 }
 
-.node-type-publication .sidebars_first, .page-events .sidebars_first, .page-publications.revamp .sidebars_first
+.page-tools-and-publications .sidebars_first, .page-oshevents .sidebars_first, .page-tools-and-publications.revamp .sidebars_first
 {
     border-top: 0px solid #003399;
     margin-top: 41px;
     margin-right: 0em;
 }
 
-.page-publications.revamp #content, .page-events #content{
+.page-tools-and-publications.revamp #content, .page-oshevents #content{
     width: 80.1%!important;
     border-top: 0px solid #003399;
     margin-top: 3em;

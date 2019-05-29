@@ -870,14 +870,14 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
     padding: 0;
 }
 
-.page-tools-and-resources .field-name-field-summary, .page-publications .field-name-field-summary, .page-events .field-name-field-summary
+.page-tools-and-resources .field-name-field-summary, .page-tools-and-publications .field-name-field-summary, .page-oshevents .field-name-field-summary
 {
     margin: 0;
     padding: 0;
     width: 75%;
 }
 
-.page-tools-and-resources .field-name-field-summary p, .page-publications .field-name-field-summary p, .page-events .field-name-field-summary p
+.page-tools-and-resources .field-name-field-summary p, .page-tools-and-publications .field-name-field-summary p, .page-oshevents .field-name-field-summary p
 {
     font-size: 1rem;
     margin: 0;
@@ -893,21 +893,28 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
     float: left;
     margin-top: 1em;
     margin-bottom: 2em;
+}
+
+.sub-home ul{
+    padding: 0;
+    margin: 0;
     display: flex;
-    justify-content: center;
-    flex-flow:row wrap;
-    -webkit-flex-flow: row wrap; 
+    flex-wrap: wrap;
 }
 
 .content-box-sub{
     float: left;
-    width: 23%;
+    width: 23.7%;
     margin-right: 1em;
     margin-bottom: 1em;
+    display: flex;
+    background: #003399;
 }
 
-.content-box-sub a{
+#content .content-box-sub a{
+    width: 100%;
     text-decoration: none;
+    border-bottom: 0;
 }
 
 .content-box-sub a:hover img{      
@@ -928,12 +935,12 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
     font-family: 'Open Sans',sans-serif;
     background: #003399;
     color: #FFF;
-    font-size: 1rem;
+    font-size: 0.9rem;
     letter-spacing: 1px;
     margin: 0;
-    padding-top: 10px;
-    padding-bottom: 10px;
     clear: both;
+    line-height: 20px;
+    padding: 10px;
 }
 
 /* Publications */
@@ -1036,13 +1043,13 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
     font-weight: bold !important;
 }
 
-.page-publications .views-exposed-form{
+.page-tools-and-publications .views-exposed-form{
     padding-bottom: 2em;
     border-bottom: 1px solid #003399;
     margin-bottom: 2em;
 }
 
-.page-publications .views-exposed-widget, .page-events .views-exposed-widget{
+.page-tools-and-publications .views-exposed-widget, .page-oshevents .views-exposed-widget{
     float: left;
     padding-top: 0!important;
     width: 32.3%!important;
@@ -1053,11 +1060,11 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
     margin-right: 0;
 }
 
-.page-publications select::-ms-expand , .page-events select::-ms-expand {
+.page-tools-and-publications select::-ms-expand , .page-oshevents select::-ms-expand {
     display: none;
 }
 
-.page-publications .view-header{
+.page-tools-and-publications .view-header{
     float: none;
     clear: both;
     width: 100%;
@@ -1074,12 +1081,12 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
     margin-right: 2em;
 }
 
-.page-publications .see-more-arrow{
+.page-tools-and-publications .see-more-arrow{
     font-size: 0.9rem;
     margin-left: 0em;
 }
 
-.page-publications .publications-right-column h2{
+.page-tools-and-publications .publications-right-column h2{
     line-height: 27px;
     height: 83px;
 }
@@ -1233,11 +1240,12 @@ span.title-download {
 
 .content-languages-download .new-select-style{
     width: 50%!important;
-    background: url(../images/pink-select.png) no-repeat scroll 96% center transparent;
+    background: url(../images/pink-select.png) no-repeat scroll 96% 11px transparent;
     color: #003399;
     float: left;
     margin-right: 2em;
-    height: 35px;
+    height: auto;
+    padding-bottom: 7px;
 }
 
 .chosen-container-multi .chosen-choices li.search-field{
@@ -1699,11 +1707,11 @@ img.icon-play:hover{
     padding-right: 1em;
 }
 
-.page-events .more-link {    
+.page-oshevents .more-link {    
     background: transparent;
 }
 
-.page-events .more-link a{
+.page-oshevents .more-link a{
     position: absolute;
     margin-left: -135px;
     bottom:-13px;

@@ -39,6 +39,7 @@
 
 div.view-header.back.revamp{
     margin-top: -15px;
+    float: right;
 }
 
 #icons img:hover, #contact a:hover{
@@ -100,17 +101,18 @@ div.view-header.back.revamp{
     display: block;
 }
 
-select.new-select-style{
+.new-select-style{
     height: 35px;
     border: 1px solid #003399;
     border-radius: 5px;
-    -moz-appearance: button;
-    -webkit-appearance: button;
     background: url("../images/pink-select.png") no-repeat scroll 94% center #FFF;
     padding-left: 10px;
     width: 100%!important;
     color:#003399;
     cursor: pointer;
+     -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    appearance:none;
 }   
 
 
@@ -1136,15 +1138,12 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
     line-height: 20px;
 }
 
-.page-publication-detail .publications-detail h1 a{
+.page-publication-detail .publications-detail h1{
     font-family: 'Open Sans',sans-serif;
     text-decoration: none;
     font-size: 1.2rem;
     color:#003399;
-}
-
-.page-publication-detail .publications-detail h1 a:hover{
-    text-decoration: underline;
+    line-height: 20px;
 }
 
 .page-publication-detail .publications-detail h2{
@@ -1214,7 +1213,11 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
 
 .content-languages-download{
     color:#003399;
-    padding: 1em;
+    padding: 1em;  
+    float: left;
+    border-bottom: 12px solid #FFF;
+    width: 100%;
+    padding-top: 25px;
 }
 
 span.title-download {
@@ -1225,21 +1228,33 @@ span.title-download {
     background: #FFF;
 }
 
-span.title-select{
+#osha-publication-download-form > div > div > label{
     display:block;
     float: left;
     padding-right: 5px;
     padding-top: 5px;
+    font-weight: 500;
 }
 
-.content-languages-download select.new-select-style{
-    width: 58%!important;
+.content-languages-download .new-select-style{
+    width: 50%!important;
     background: url(../images/pink-select.png) no-repeat scroll 96% center transparent;
     color: #003399;
+    float: left;
+    margin-right: 2em;
+    height: 35px;
+}
+
+.chosen-container-multi .chosen-choices li.search-field{
+    padding-top: 5px;
+}
+
+.new-select-style .chosen-choices{
+    background: transparent;
+    border:0;
 }
 
 .content-languages-download a img{
-    float: right;
     padding-top: 6px;
 }
 
@@ -1261,12 +1276,13 @@ span.title-select{
 }
 
 .content-order-copy a{
-    color:#003399;
+    color: #003399;
     font-weight: bold;
     text-decoration: underline;
-    font-size: 1rem;
+    font-size: 0.9rem;
     padding-right: 20px;
     float: left;
+    padding-top: 1.5em;
 }
 
 .content-order-copy a:hover{
@@ -1284,11 +1300,11 @@ div.publications-detail-right-column > a.download{
 
 /* Publications Related Resources */
 
-.related-reources  h2{
+.related-resources  h2{
     margin-bottom: 0;
 }
 
-.page-publication-detail .related-reources h3{
+.page-publication-detail .related-resources h3{
     width: 100%;
     float: left;
     background: url(../images/grey-h3-line.png) 0 60% repeat-x;
@@ -1297,14 +1313,14 @@ div.publications-detail-right-column > a.download{
     padding: 0;
 }
 
-.page-publication-detail .related-reources h3 span{
+.page-publication-detail .related-resources h3 span{
     background: #cfddee;    
     font-size: 1.2rem;
     padding-right: 1em;
 }
 
 
-.content-related-prublications{
+.content-related-publications{
     float: left;
     width: 100%;
     height: 220px;
@@ -1313,47 +1329,47 @@ div.publications-detail-right-column > a.download{
     margin-bottom: 1em;
 }
 
-.content-related-prublications .content-publication-info{
+.content-related-publications .content-publication-info{
     padding-top: 1em;
     padding-right: 6em;  
 }
 
-.content-related-prublications h2{
+.content-related-publications h2{
     width: 90%;
     height: 80px;
     margin-bottom: 1em;
     line-height: 25px;
 }
 
-.content-related-prublications h2 a{
+.content-related-publications h2 a{
     text-decoration: none;
     font-size: 1.2rem;
     color: #003399;
     font-weight: 400;
 }
 
-.content-related-prublications h2 a:hover{
+.content-related-publications h2 a:hover{
     text-decoration: underline;
 }
 
-.content-related-prublications.oshwiki{
+.content-related-publications.oshwiki{
     padding: 1em 1em 2em 2em;
     width: auto;
     height: auto;
 }
 
-.content-related-prublications.oshwiki h2 {
+.content-related-publications.oshwiki h2 {
     width: 90%;
     height: auto;
     margin-bottom: 1em;
     line-height: 25px;
 }
 
-.content-related-prublications.oshwiki h2 a{
+.content-related-publications.oshwiki h2 a{
     font-weight: 600;
 }
 
-.content-related-prublications.oshwiki p{
+.content-related-publications.oshwiki p{
     color:#003399;
 }
 
@@ -1390,6 +1406,11 @@ div.publications-detail-right-column > a.download{
     float: left;
     margin-top: 1em;
     margin-right: 1em;
+}
+
+.content-related-boxes .box .field-name-field-thumbnail{
+    height: 280px;
+    overflow: hidden;
 }
 
 .content-related-boxes img{
@@ -1556,14 +1577,14 @@ img.icon-play:hover{
     padding-top: 1em;
 }
 
-.sidebars_first select.new-select-style{
+.sidebars_first .new-select-style{
     margin-left: 0;
     font-size: 0.9em !important;
     width: 100% !important;
 
 }
 
-select.new-select-style.calendar{
+.new-select-style.calendar{
     background: url("../images/ico-calendar.png") no-repeat scroll 96% center #FFF;
 }  
 

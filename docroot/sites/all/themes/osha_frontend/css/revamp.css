@@ -24,7 +24,7 @@
     font-family: 'Open Sans',sans-serif;
     font-size: 2rem;
     margin-bottom: 0;
-    font-weight: 900;
+    font-weight: 600;
 }
 
 .revamp h2{
@@ -886,6 +886,7 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
 
 .page-tools-and-resources .field-name-field-summary p{
     margin: 0;
+    padding-top: 10px;
 }
 
 .sub-home{

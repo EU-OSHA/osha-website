@@ -552,8 +552,10 @@ function osha_frontend_preprocess_html(&$variables) {
   if (drupal_is_front_page()) {
     $variables['classes_array'][] = 'revamp';
   }
-  $list_page = arg(0) . arg(1) . arg(2);
-  if ($list_page == 'tools-and-publications/publications') {
+//  $list_page = arg(0) . arg(1) . arg(2);
+//  if ($list_page == 'tools-and-publications/publications') {
+  $req_uri = request_path();
+  if (drupal_is_front_page() || (strpos($req_uri, 'tools-and-publications/publications') >= 0)) {
     $variables['classes_array'][] = 'revamp';
   }
   if ($list_page == 'oshevents') {

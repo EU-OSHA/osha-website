@@ -25,11 +25,33 @@ if (!isset($content['field_thumbnail']) && !empty($node->field_image)) {
 }
 
 ?>
-<?php if($page): ?>
+<?php if($page) { ?>
   <div id="page-title" class="page__title title">&nbsp;</div>
   <div class="view-header back"><?php print l(t('Back to Infographics'), 'tools-and-publications/infographics'); ?></div>
-<?php endif; ?>
-
+<?php } ?>
+<?php
+if($view_mode == 'osha_resources'){
+  $pages_count = strip_tags(render($content['field_pages_count']));
+    ?>
+    <div class="box">
+      <?php print render($content['field_thumbnail']); ?>
+        <span class="date-display-single"><?php print strip_tags(render($content['field_publication_date'])); ?></span>
+        <span class="time-video">
+        <?php
+        if ($pages_count) {
+          print $pages_count . ' ' . t('pages');
+        } ?>
+        </span>
+        <h2><?php print strip_tags(render($content['title_field']), '<a>'); ?></h2>
+      <?php
+      print l(t('View'), $node_url, array(
+        'attributes' => array('class' => ['see-more-arrow']),
+        'query' => $url_query,
+        'external' => TRUE,
+      ));
+      ?>
+    </div>
+<?php } else { ?>
 <article class="node-<?php print $node->nid; ?> <?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
   <?php if ($title_prefix || $title_suffix || $display_submitted || $unpublished || !$page && $title): ?>
@@ -103,3 +125,4 @@ if (!isset($content['field_thumbnail']) && !empty($node->field_image)) {
   ?>
 
 </article>
+<?php } ?>

@@ -842,6 +842,15 @@ function osha_resources_strongarm() {
       'osha_resources' => array(
         'custom_settings' => TRUE,
       ),
+      'dangerous_substances' => array(
+        'custom_settings' => TRUE,
+      ),
+      'osha_search_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
+      'question' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -909,6 +918,12 @@ function osha_resources_strongarm() {
         'custom_settings' => TRUE,
       ),
       'osha_search_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
+      'dangerous_substances' => array(
+        'custom_settings' => TRUE,
+      ),
+      'question' => array(
         'custom_settings' => FALSE,
       ),
     ),

@@ -14,19 +14,27 @@ function osha_homepage_block_info() {
   $blocks['osha_homepage_tweets'] = array(
     'info' => t('Homepage Tweets'),
     'cache' => DRUPAL_CACHE_PER_USER | DRUPAL_CACHE_PER_PAGE,
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => '<front>',
   );
   $blocks['osha_homepage_follow_us'] = array(
     'info' => t('Follow us on'),
     'cache' => DRUPAL_CACHE_PER_USER | DRUPAL_CACHE_PER_PAGE,
     'region' => 'sidebar_second',
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => '<front>',
   );
   $blocks['osha_homepage_news_events'] = array(
     'info' => t('News and Events'),
     'cache' => DRUPAL_CACHE_PER_USER | DRUPAL_CACHE_PER_PAGE,
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => '<front>',
   );
   $blocks['osha_homepage_footer'] = array(
     'info' => t('Footer map'),
     'cache' => DRUPAL_CACHE_PER_USER | DRUPAL_CACHE_PER_PAGE,
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => '<front>',
   );
 
   return $blocks;
@@ -100,6 +108,16 @@ function osha_homepage_theme() {
   return $theme;
 }
 
+/**
+ * Implements Elysia hook_cronapi().
+ */
+function osha_homepage_cronapi() {
+  return array('osha_homepage_cron' => array(
+    'description' => 'Tweets for homepage',
+    'rule' => '*/5 * * * *', // Every 5 minutes
+  ));
+}
+
 function osha_homepage_cron() {
   $library_path = (module_exists('libraries') && libraries_get_path('twitter')) ? libraries_get_path('twitter') : 'sites/all/libraries/twitter';
   require_once $library_path . '/TwitterAPIExchange.php';
@@ -171,10 +189,15 @@ function osha_homepage_block_view($delta = '') {
     case 'osha_homepage_footer':
       $menu_data = [];
       $all_data = menu_tree_all_data('main-menu', NULL, 3);
-      foreach ($all_data as $row) {
+      foreach ($all_data as $row_key => $row) {
+        $new_item = $row;
+        $new_item['below'] = [];
         foreach ($row['below'] as $key => $menu) {
-          $menu_data[$key] = $menu;
+          foreach ($menu['below'] as $subkey => $submenu) {
+            $new_item['below'][$subkey] = $submenu;
+          }
         }
+        $menu_data[$row_key] = $new_item;
       }
       $block['content'] = theme('footer_block_theme', ['menu_data' => $menu_data]);
       break;

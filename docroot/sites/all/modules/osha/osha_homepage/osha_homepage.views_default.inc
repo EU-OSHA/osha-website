@@ -304,6 +304,7 @@ function osha_homepage_views_default_views() {
   /* Display: Home page banner top */
   $handler = $view->new_display('block', 'Home page banner top', 'home_page_banner_top');
   $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'home-intro';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '3';
@@ -394,7 +395,9 @@ function osha_homepage_views_default_views() {
   $handler->display->display_options['fields']['field_image']['alter']['text'] = '<a href="[field_banner_link_1]"><h2>[title_field]</h2><h3>[field_subtitle]</h3><span class="content-box"><span class="content-background"></span>[field_image]</span></a><a class="box-link" href="[field_banner_link_1]">[name_field]</a>';
   $handler->display->display_options['fields']['field_image']['alter']['target'] = '_blank';
   $handler->display->display_options['fields']['field_image']['alter']['nl2br'] = TRUE;
+  $handler->display->display_options['fields']['field_image']['element_type'] = '0';
   $handler->display->display_options['fields']['field_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_image']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['field_image']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_image']['settings'] = array(
@@ -409,6 +412,7 @@ function osha_homepage_views_default_views() {
   $handler->display->display_options['fields']['field_copyright']['element_type'] = 'span';
   $handler->display->display_options['fields']['field_copyright']['element_class'] = 'copyright';
   $handler->display->display_options['fields']['field_copyright']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_copyright']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['field_copyright']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_copyright']['type'] = 'text_plain';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;

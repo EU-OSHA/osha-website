@@ -4,13 +4,93 @@
  * Returns the HTML for a publication node.
  */
 ?>
-<?php if($page): ?>
-  <div id="page-title" class="page__title title"><?php print t('Publications');?></div>
-  <div class="view-header back"><?php print l(t('Back to publications and filter'), 'tools-and-publications/publications'); ?></div>
-<?php endif; ?>
+<?php
+if ($view_mode == 'full') {
+    // Append oshwiki in related resources.
+    foreach ($content['field_related_oshwiki_articles']['#items'] as $idx => $row) {
+      $content['field_aditional_resources']['#items'][] = $row;
+      $content['field_aditional_resources'][] = $content['field_related_oshwiki_articles'][$idx];
+    }
 
+    $tags = strip_tags(render($content['field_tags']));
+    $publication_type = '<strong>' . t('Type') . ': </strong>' . strip_tags(render($content['field_publication_type']));
+    $pages_count = strip_tags(render($content['field_pages_count']));
+?>
+    <div class="container">
+        <!-- PUBLICATION DETAIL -->
+        <div class="view-header back revamp"><?php print l(t('Back to publications and filter'), 'tools-and-publications/publications'); ?></div>
+        <div class="publications-detail">
+            <div class="publications-row">
+                <div class="publications-left-column"><?php print render($content['field_cover_image']); ?></div>
+                <div class="publications-detail-right-column">
+                    <div class="content-publication-info">
+                        <span class="date-display-single"><?php print strip_tags(render($content['field_publication_date'])); ?></span>
+                        <span class="label"><?php print $publication_type; ?></span>
+                        <span class="pages">
+                            <?php
+                            if ($pages_count) {
+                              print $pages_count . ' ' . t('pages');
+                            } ?>
+                        </span>
+                    </div>
+                    <h1><?php print strip_tags(render($content['title_field']), '<a>'); ?></h1>
+                    <?php if ($tags) { ?>
+                    <div class="keywords">
+                        <span><?php print t('Keywords') ?>:</span><span><?php print $tags ?></span>
+                    </div>
+                    <?php } ?>
+                    <div class="pub-text"><?php print render($content['body']) ?></div>
+                </div>
+            </div>
+            <div class="content-downloads">
+              <?php
+                print render(drupal_get_form('osha_publication_download_form'));
+                if ($content['field_banner_publications_office']['#items'][0]['value']) {
+                    echo theme('osha_publication_bookshop_id_format', ['title' => $node->title]);
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+  <?php
+  if (isset($content['field_aditional_resources'])) {
+    print render($content['field_aditional_resources']);
+  }
+  if (isset($content['field_related_publications'])) {
+    print render($content['field_related_publications']);
+  }
+}
+elseif ($view_mode == 'osha_resources') {
+  $publication_type = '<strong>' . t('Type') . ': </strong>' . strip_tags(render($content['field_publication_type']));
+  $pages_count = strip_tags(render($content['field_pages_count']));
+?>
+<div class="content-related-publications publications">
+    <div class="publications-left-column"><?php print render($content['field_cover_image']); ?></div>
+    <div class="publications-right-column">
+        <div class="content-publication-info">
+            <span class="date-display-single"><?php print strip_tags(render($content['field_publication_date'])); ?></span>
+            <span class="label"><?php print $publication_type; ?></span>
+            <span class="pages">
+        <?php
+        if ($pages_count) {
+          print $pages_count . ' ' . t('pages');
+        } ?>
+        </span>
+        </div>
+        <h2><?php print strip_tags(render($content['title_field']), '<a>'); ?></h2>
+      <?php
+      print l(t('See more'), $node_url . '/view', array(
+        'attributes' => array('class' => ['see-more-arrow']),
+        'query' => $url_query,
+        'external' => TRUE,
+      ));
+      ?>
+    </div>
+</div>
+<?php }
+elseif ($view_mode != 'osha_search_teaser') {
+?>
 <article class="node-<?php print $node->nid; ?> <?php print $classes; ?> clearfix"<?php print $attributes; ?>>
-
   <?php if ($title_prefix || $title_suffix || $display_submitted || $unpublished || !$page && $title): ?>
     <header>
       <?php print render($title_prefix); ?>
@@ -78,3 +158,34 @@
   <?php print render($content['comments']); ?>
 
 </article>
+<?php
+}
+else {
+  $publication_type = '<strong>' . t('Type') . ': </strong>' . strip_tags(render($content['field_publication_type']));
+  $pages_count = strip_tags(render($content['field_pages_count']));
+?>
+<div class="revamp-row">
+    <div class="publications-left-column"><?php print render($content['field_cover_image']); ?></div>
+    <div class="publications-right-column">
+        <div class="content-publication-info">
+            <span class="date-display-single"><?php print strip_tags(render($content['field_publication_date'])); ?></span>
+            <span class="label"><?php print $publication_type; ?></span>
+            <span class="pages">
+            <?php
+            if ($pages_count) {
+              print $pages_count . ' ' . t('pages');
+            } ?>
+            </span>
+        </div>
+        <h2><?php print strip_tags(render($content['title_field']), '<a>'); ?></h2>
+<?php
+  print l(t('See more'), $node_url . '/view', array(
+    'attributes' => array('class' => ['see-more-arrow']),
+    'query' => $url_query,
+    'external' => TRUE,
+  ));
+?>
+    </div>
+</div>
+<?php
+}

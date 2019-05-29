@@ -165,7 +165,7 @@
         margin-left: 0;
     }
 
-    .content-related-prublications h2{
+    .content-related-publications h2{
         height: auto;
         margin-bottom: 0em;
         margin-top: 0;
@@ -603,7 +603,7 @@
         min-height: auto;
     }
 
-    .content-related-prublications{
+    .content-related-publications{
         height: auto;
         padding-bottom: 1em;
     }
@@ -612,7 +612,7 @@
         padding-left: 1em;
     }
 
-    .content-related-prublications.oshwiki{
+    .content-related-publications.oshwiki{
         padding:1em 0;
     }
 
@@ -840,11 +840,11 @@
         float: right;
     }
 
-    .content-related-prublications.oshwiki h2{
+    .content-related-publications.oshwiki h2{
         margin-bottom: 0;
     }
 
-    .content-related-prublications.oshwiki p{
+    .content-related-publications.oshwiki p{
         margin-top: 0;
     }
 
@@ -853,18 +853,18 @@
         margin-right: 0;
     }
 
-    .content-related-prublications.related{
+    .content-related-publications.related{
         height: auto;
         padding-bottom: 1em;
         width: 100%;
     }
 
-    .content-related-prublications img{
+    .content-related-publications img{
         height: auto;
         width: 100%;
     }
 
-    .content-related-prublications.publications .publications-left-column{
+    .content-related-publications.publications .publications-left-column{
         width: 107px;
         margin-right: 10px;
     }
@@ -876,7 +876,7 @@
         margin-top: 0;
     }
     
-    .content-related-prublications h2 a {
+    .content-related-publications h2 a {
         font-size: 0.8rem;
     }
 
@@ -884,7 +884,7 @@
         float: right;
     }
 
-    .content-related-prublications.related .pages{
+    .content-related-publications.related .pages{
         float: none;
     }
 

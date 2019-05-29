@@ -11,6 +11,82 @@ function osha_frontend_links__system_main_menu() {
   return NULL;
 }
 
+function osha_frontend_implode_comma_and_join($names) {
+  $last = array_pop($names);
+  if ($names) {
+    return implode(', ', $names) . ' ' . t('and') . ' ' . $last;
+  }
+  return $last;
+}
+
+/**
+ * Returns HTML for a set of checkbox form elements.
+ *
+ * @param $variables
+ *   An associative array containing:
+ *   - element: An associative array containing the properties of the element.
+ *     Properties used: #children, #attributes.
+ *
+ * @ingroup themeable
+ */
+function osha_frontend_checkboxes($variables) {
+  if ($variables['element']['#name'] == 'tags') {
+    $map = osha_publication_get_main_tags_map();
+    foreach ($variables['element']['#options'] as $tid => $title) {
+      $sub_tids = [];
+      foreach ($map as $sub_tid => $main_tid) {
+        if ($tid == $main_tid) {
+          $sub_tids[$sub_tid] = $sub_tid;
+        }
+      }
+      if (count($sub_tids) > 1) {
+        foreach ($sub_tids as $sub_tid) {
+          $term = taxonomy_term_load($sub_tid);
+          $sub_tids[$sub_tid] = $term->name;
+        }
+        $search = 'for="edit-tags-' . $tid . '"';
+        $attr = drupal_attributes(['title' => $title . ' ' . t('include') . ' ' . osha_frontend_implode_comma_and_join($sub_tids)]);
+        $variables['element']['#children'] = str_replace($search, $search . ' ' . $attr, $variables['element']['#children']);
+      }
+    }
+  }
+
+  if ($variables['element']['#name'] == 'publication_type') {
+    $map = osha_publication_get_main_publication_types_map();
+    foreach ($variables['element']['#options'] as $tid => $title) {
+      $sub_tids = [];
+      foreach ($map as $sub_tid => $main_tid) {
+        if ($tid == $main_tid) {
+          $sub_tids[$sub_tid] = $sub_tid;
+        }
+      }
+      if (count($sub_tids) > 1) {
+        foreach ($sub_tids as $sub_tid) {
+          $term = taxonomy_term_load($sub_tid);
+          $sub_tids[$sub_tid] = $term->name;
+        }
+        $search = 'for="edit-publication-type-' . $tid . '"';
+        $attr = drupal_attributes(['title' => $title . ' ' . t('include') . ' ' . osha_frontend_implode_comma_and_join($sub_tids)]);
+        $variables['element']['#children'] = str_replace($search, $search . ' ' . $attr, $variables['element']['#children']);;
+      }
+    }
+  }
+
+  $element = $variables['element'];
+  $attributes = array();
+  if (isset($element['#id'])) {
+    $attributes['id'] = $element['#id'];
+  }
+  $attributes['class'][] = 'form-checkboxes';
+  if (!empty($element['#attributes']['class'])) {
+    $attributes['class'] = array_merge($attributes['class'], $element['#attributes']['class']);
+  }
+  if (isset($element['#attributes']['title'])) {
+    $attributes['title'] = $element['#attributes']['title'];
+  }
+  return '<div' . drupal_attributes($attributes) . '>' . (!empty($element['#children']) ? $element['#children'] : '') . '</div>';
+}
+
 function osha_frontend_preprocess_views_view_row_rss(&$vars) {
   $item = &$vars['row'];
 
@@ -45,7 +121,6 @@ function osha_frontend_preprocess_views_view_row_rss(&$vars) {
     $item->elements[2]['value'] = l($vars['title'], 'node/' . $nid);
     foreach ($vars['view']->result as $row) {
       if ($row->nid == $nid) {
-        $item->elements[0]['value'] = date('d/m/Y', $row->node_created);
         $item->elements[1]['value'] = 'EU-OSHA';
       }
     }
@@ -133,36 +208,37 @@ function osha_frontend_menu_link__menu_block($variables) {
   if (!$render_img) {
     return theme_menu_link($variables);
   }
-  // $element['#attributes']['data-image-url'] = $image_url;
   $output_link = l($element['#title'], $element['#href'], $element['#localized_options']);
 
+  $image = '';
   $output_image = "";
   if (!empty($element['#localized_options']['content']['image'])
       && $image_url = file_create_url($element['#localized_options']['content']['image'])) {
     // $image = '<img src="' . $image_url . '" alt=""/>';
     // We should in fact use empty alt because the image is only decorative (the text is already present in the link).
     $image = '<img src="' . $image_url . '" alt="' . $element['#title'] . '"/>';
-    
-    if (!empty($element['#localized_options']['copyright']['author']) || !empty($element['#localized_options']['copyright']['copyright']) ) {   
-     $image .= '<blockquote class="image-field-caption">'; 
-        if (!empty($element['#localized_options']['copyright']['author'])) {
-          $image .= check_markup($element['#localized_options']['copyright']['author'], 'full_html');
-        }
-        if (!empty($element['#localized_options']['copyright']['author']) && !empty($element['#localized_options']['copyright']['copyright']) ) {  
-           $image .= '<span>&nbsp;/&nbsp;</span>';
-        }
-        if (!empty($element['#localized_options']['copyright']['copyright'])) {
-          $image .= '<span class="blockquote-copyright">' . $element['#localized_options']['copyright']['copyright'] . '</span>';
-        }
-      $image .= '</blockquote>'; 
+
+    if (!empty($element['#localized_options']['copyright']['author']) || !empty($element['#localized_options']['copyright']['copyright'])) {
+      $image .= '<blockquote class="image-field-caption">';
+      if (!empty($element['#localized_options']['copyright']['author'])) {
+        $image .= check_markup($element['#localized_options']['copyright']['author'], 'full_html');
+      }
+      if (!empty($element['#localized_options']['copyright']['author']) && !empty($element['#localized_options']['copyright']['copyright'])) {
+        $image .= '<span>&nbsp;/&nbsp;</span>';
+      }
+      if (!empty($element['#localized_options']['copyright']['copyright'])) {
+        $image .= '<span class="blockquote-copyright">' . $element['#localized_options']['copyright']['copyright'] . '</span>';
+      }
+      $image .= '</blockquote>';
     }
 
     $output_image = l($image, $element['#href'], array('html' => TRUE));
   }
-
-  $output_copyright = "";
-  if (!empty($element['#localized_options']['copyright']['copyright'])) {
-    $output_copyright = '<div class="introduction-copyright">' . $element['#localized_options']['copyright']['copyright'] . '</div>';
+  if (($variables['element']['#theme'][0] == 'menu_link__menu_block__3') && (arg(1) == 20)) {
+    $options = $element['#localized_options'];
+    $options['html'] = TRUE;
+    $text = '<span class="content-img">' . $image . '</span><h2>' . $element['#title'] . '</h2>';
+    return '<div class="content-box-sub">' . l($text, $element['#href'], $options) . '</div>';
   }
   return '<li' . drupal_attributes($element['#attributes']) . '>
     <div class="introduction-title">' . $output_link . '</div>
@@ -237,30 +313,30 @@ function osha_frontend_apachesolr_sort_list($vars) {
 
 
 /**
- * Called from hook_preprocess_node
+ * Called from hook_preprocess_node.
  */
 function fill_related_publications(&$vars) {
   $vars['total_related_publications'] = 0;
-  // get 3 related publications by common tags
+  // Get 3 related publications by common tags.
   $tags_tids = array();
   if (!empty($vars['field_tags'])) {
     $tags_tids = $vars['field_tags'][LANGUAGE_NONE];
   }
 
   if (!empty($tags_tids)) {
-    // query all publications with the same tags
+    // Query all publications with the same tags.
     $tids = array();
     foreach ($tags_tids as $tid) {
       array_push($tids, $tid['tid']);
     }
 
     $query = new EntityFieldQuery();
-    // exclude self
+    // Exclude self.
     $excluded_nids = array();
     array_push($excluded_nids, $vars['node']->nid);
     if (($vars['node']->type == 'publication') && $vars['node']->field_related_publications) {
-      foreach($vars['node']->field_related_publications as $related_publications) {
-        foreach($related_publications as $related_publication) {
+      foreach ($vars['node']->field_related_publications as $related_publications) {
+        foreach ($related_publications as $related_publication) {
           array_push($excluded_nids, $related_publication['target_id']);
         }
       }
@@ -281,10 +357,10 @@ function fill_related_publications(&$vars) {
       $count = 0;
       foreach ($result['node'] as $n) {
         $node = node_load($n->nid);
-        if ($node->status == 0 ) {
+        if ($node->status == 0) {
           // add unpublished only for admin, do not include in count
           if (OshaWorkflowPermissions::userHasRole('administrator', $user)) {
-            $vars['tagged_related_publications'][] = node_view($node,'teaser');
+            $vars['tagged_related_publications'][] = node_view($node, 'teaser');
           }
         } else {
           $vars['tagged_related_publications'][] = node_view($node,'teaser');
@@ -374,9 +450,13 @@ function osha_frontend_preprocess_page(&$variables) {
         if ($n->nid == $external_infographic) {
           $variables['theme_hook_suggestions'][] = 'node__external_infographic';
         }
+        break;
+
+      case "publication":
+        $variables['theme_hook_suggestions'][] = 'page__node__publication';
+        break;
     }
   }
-
 
   $variables['blog'] = FALSE;
   $bundle = '';
@@ -389,7 +469,7 @@ function osha_frontend_preprocess_page(&$variables) {
     $variables['blog'] = TRUE;
   }
 
-  // MC-123 Open all languages with one click
+  // MC-123 Open all languages with one click.
   if (isset($variables['node'])) {
     $node = $variables['node'];
     drupal_add_js(array(
@@ -403,7 +483,7 @@ function osha_frontend_preprocess_page(&$variables) {
     drupal_add_js(drupal_get_path('module', 'osha') . '/js/open_all_translations.js');
   }
 
-  // add back to links (e.g. Back to news)
+  // Add back to links (e.g. Back to news).
   if (isset($variables['node'])) {
     $node = $variables['node'];
     $tag_vars = array(
@@ -460,8 +540,21 @@ function osha_frontend_preprocess_page(&$variables) {
  * Implements hook_preprocess_html().
  */
 function osha_frontend_preprocess_html(&$variables) {
+  $node = menu_get_object();
+  if ($node && $node->type == 'publication') {
+    $variables['classes_array'][] = 'page-publication-detail';
+  }
   if (drupal_is_front_page()) {
     $variables['classes_array'][] = 'revamp';
+  }
+  $req_uri = request_path();
+  if (drupal_is_front_page() || (strpos($req_uri, 'tools-and-publications/publications') >= 0)) {
+    $variables['classes_array'][] = 'revamp';
+    $variables['classes_array'][] = 'page-publications';
+  }
+
+  if (arg(0) == 'node' && arg(1) == 20) {
+    $variables['classes_array'][] = 'page-tools-and-resources';
   }
 }
 
@@ -474,6 +567,10 @@ function osha_frontend_page_alter(&$page) {
     && count(element_children($page['content']['system_main']['nodes']) == 1)) {
     $keys = element_children($page['content']['system_main']['nodes']);
     $node = &$page['content']['system_main']['nodes'][current($keys)];
+    if ($node && $node['#node']->nid == 20) {
+        unset($node['links']['osha_share']);
+        unset($page['content']['osha_share']);
+    }
     if (!empty($node['links']['osha_share'])) {
       $links = $node['links']['osha_share'];
       unset($node['links']['osha_share']);
@@ -606,10 +703,11 @@ function osha_frontend_preprocess_block(&$vars) {
  */
 function osha_frontend_pager($variables) {
   // Overwrite pager links.
-  $variables['tags'][0] = '«';
-  $variables['tags'][1] = '‹';
-  $variables['tags'][3] = '›';
-  $variables['tags'][4] = '»';
+  $theme_path = drupal_get_path('theme', 'osha_frontend');
+  $variables['tags'][0] = '<img alt="first page" src="/' . $theme_path . '/images/pag-first.png">';
+  $variables['tags'][1] = '<img alt="back page" src="/' . $theme_path . '/images/pag-back.png">';
+  $variables['tags'][3] = '<img alt="back page" src="/' . $theme_path . '/images/pag-next.png">';
+  $variables['tags'][4] = '<img alt="back page" src="/' . $theme_path . '/images/pag-end.png">';
   return theme_pager($variables);
 }
 
@@ -649,7 +747,7 @@ function osha_frontend_pager_link($variables) {
     }
   }
 
-  // Set each pager link title
+  // Set each pager link title.
   if (!isset($attributes['title'])) {
     static $titles = NULL;
     if (!isset($titles)) {
@@ -678,7 +776,7 @@ function osha_frontend_pager_link($variables) {
     $url = $req_uri;
   }
   $attributes['href'] = url($url, array('query' => $query));
-  return '<a' . drupal_attributes($attributes) . '>' . check_plain($text) . '</a>';
+  return '<a' . drupal_attributes($attributes) . '>' . $text . '</a>';
 }
 
 function osha_frontend_node_bundle($row) {

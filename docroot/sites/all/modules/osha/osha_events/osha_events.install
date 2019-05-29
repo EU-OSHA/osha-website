@@ -287,3 +287,10 @@ function osha_events_update_7026() {
 function osha_events_update_7027() {
   features_revert(array('osha_events' => array('views_view')));
 }
+
+/**
+ * MDR-2843 NCW - Revamp - Events list - Development.
+ */
+function osha_events_update_7028() {
+  features_revert_module('osha_events');
+}

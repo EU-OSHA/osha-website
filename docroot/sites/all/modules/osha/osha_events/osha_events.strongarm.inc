@@ -173,6 +173,9 @@ function osha_events_strongarm() {
       'dangerous_substances' => array(
         'custom_settings' => TRUE,
       ),
+      'question' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(

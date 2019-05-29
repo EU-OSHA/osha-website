@@ -455,7 +455,7 @@ function path_breadcrumbs_breadcrumb($variables) {
     $delimiter = '<img alt="delemiter" src="/sites/all/themes/osha_frontend/images/delimiter-off.png">';
     $delimiter = '<span class="delimiter">' . trim($delimiter) . '</span>';
 
-    $classes = array('breadcrumb');
+    $classes = array('breadcrumb breadcrumb-fluid');
 
     // Show contextual link if it is Path Breadcrumbs variant.
     $prefix = '';

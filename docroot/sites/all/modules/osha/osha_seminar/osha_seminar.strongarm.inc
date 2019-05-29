@@ -160,20 +160,23 @@ function osha_seminar_strongarm() {
       'osha_search_teaser' => array(
         'custom_settings' => FALSE,
       ),
+      'question' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '14',
+          'weight' => '26',
         ),
         'title' => array(
           'weight' => '2',
         ),
         'path' => array(
-          'weight' => '15',
+          'weight' => '27',
         ),
         'redirect' => array(
-          'weight' => '16',
+          'weight' => '28',
         ),
         'workbench_access' => array(
           'weight' => '0',
@@ -182,7 +185,7 @@ function osha_seminar_strongarm() {
           'weight' => '1',
         ),
         'xmlsitemap' => array(
-          'weight' => '18',
+          'weight' => '30',
         ),
       ),
       'display' => array(),

@@ -457,6 +457,9 @@ function osha_frontend_preprocess_page(&$variables) {
         break;
     }
   }
+  if (arg(0) . arg(1) == 'oshevents') {
+    $variables['theme_hook_suggestions'][] = 'page__newevents';
+  }
 
   $variables['blog'] = FALSE;
   $bundle = '';
@@ -543,16 +546,20 @@ function osha_frontend_preprocess_html(&$variables) {
   $node = menu_get_object();
   if ($node && $node->type == 'publication') {
     $variables['classes_array'][] = 'page-publication-detail';
+    $variables['classes_array'][] = 'revamp';
+    $variables['classes_array'][] = 'page-publications';
   }
   if (drupal_is_front_page()) {
     $variables['classes_array'][] = 'revamp';
   }
-  $req_uri = request_path();
-  if (drupal_is_front_page() || (strpos($req_uri, 'tools-and-publications/publications') >= 0)) {
+  $list_page = arg(0) . arg(1) . arg(2);
+  if ($list_page == 'tools-and-publications/publications') {
+    $variables['classes_array'][] = 'revamp';
+  }
+  if ($list_page == 'oshevents') {
     $variables['classes_array'][] = 'revamp';
     $variables['classes_array'][] = 'page-publications';
   }
-
   if (arg(0) == 'node' && arg(1) == 20) {
     $variables['classes_array'][] = 'page-tools-and-resources';
   }

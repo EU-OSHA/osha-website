@@ -11,7 +11,7 @@
   <header class="header" id="header" role="banner">
     <?php require "header.tpl.php"; ?>
   </header>
-  <?php print $breadcrumb; ?>
+  <?php if ($breadcrumb) print '<div class="breadcrumb-fluid">' . $breadcrumb . '</div>'; ?>
     <?php
     // Render the sidebars to see if there's anything in them.
     $sidebar_first = render($page['sidebar_first']);

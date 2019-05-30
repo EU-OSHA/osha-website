@@ -921,7 +921,7 @@
         width: 100%;
     }
 
-    .box-events-summary.last{
+    .box-events-summary.views-row-last{
         margin-right: auto;
     }
 
@@ -936,7 +936,7 @@
         background: transparent;
     }
 
-    #content .revamp-row.events a.add-to-my-calendar{
+    #content .revamp-row.events .add-to-my-calendar{
         position: relative;
         float: none;
     }

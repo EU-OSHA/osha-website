@@ -36,14 +36,13 @@ function osha_publication_menu() {
   return $items;
 }
 
-
 /**
  * Implements Elysia hook_cronapi().
  */
 function osha_publication_cronapi() {
-  return array('osha_homepage_cron' => array(
+  return array('osha_publication_cron' => array(
     'description' => 'Publicatio  pdf pages count update',
-    'rule' => '*/15 * * * *', // Every 5 minutes
+    'rule' => '*/15 * * * *', // Every 15 minutes
   ));
 }
 

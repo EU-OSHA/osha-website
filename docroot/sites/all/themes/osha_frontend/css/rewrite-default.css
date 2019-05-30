@@ -50,8 +50,11 @@
     position: absolute;
 }
 
-h1{
-    letter-spacing: initial;
+ h1{
+    font-family: 'Open Sans',sans-serif;
+    font-size: 2rem;
+    margin-bottom: 0;
+    font-weight: 600;
 }
 
 .container{
@@ -93,6 +96,12 @@ h1{
 #block-osha-newsletter-osha-newsletter-subscribe{
     background: none;
     font-size: 1rem;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe a.privacy-policy-oshmail{
+    float: left;
+    clear: both;
+    margin-top: 5px;
 }
 
 #block-osha-newsletter-osha-newsletter-subscribe .captcha .form-type-textfield .description{

@@ -20,6 +20,10 @@
     padding-bottom: 3em;
 }
 
+.page-oshevents .content-fluid{
+    padding-bottom: 0;
+}
+
  h1.revamp{
     font-family: 'Open Sans',sans-serif;
     font-size: 2rem;
@@ -870,18 +874,30 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
     padding: 0;
 }
 
-.page-tools-and-resources .field-name-field-summary, .page-tools-and-publications .field-name-field-summary, .page-oshevents .field-name-field-summary
-{
+.page-tools-and-resources .field-name-field-summary, .page-tools-and-publications .field-name-field-summary, .page-oshevents .field-name-field-summary{
     margin: 0;
     padding: 0;
     width: 75%;
 }
 
-.page-tools-and-resources .field-name-field-summary p, .page-tools-and-publications .field-name-field-summary p, .page-oshevents .field-name-field-summary p
-{
+.page-tools-and-resources .field-name-body, .page-tools-and-publications .field-name-body, .page-oshevents .field-name-body{
+    margin: 0;
+    padding: 0;
+    width: 75%;
+}
+
+.page-tools-and-resources .field-name-field-summary p, .page-tools-and-publications .field-name-field-summary p, .page-oshevents .field-name-field-summary p{
     font-size: 1rem;
     margin: 0;
     padding-bottom: 2em;
+    color: #003399;
+}
+
+.page-tools-and-resources .field-name-body p, .page-tools-and-publications .field-name-body p, .page-oshevents .field-name-body p{
+    font-size: 1rem;
+    margin: 0;
+    padding-bottom: 2em;
+    color: #003399;
 }
 
 .page-tools-and-resources .field-name-field-summary p{
@@ -1592,7 +1608,7 @@ img.icon-play:hover{
 
 }
 
-.new-select-style.calendar{
+.page-oshevents .block-osha-events .new-select-style{
     background: url("../images/ico-calendar.png") no-repeat scroll 96% center #FFF;
 }  
 
@@ -1605,13 +1621,22 @@ img.icon-play:hover{
     border: 1px solid #55575d;
 }
 
+.view-latest-seminars .view-content{
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .box-events-summary {
     background: #FFF;
     padding: 1em;
-    width: 46.8%;
+    width: 46.89%;
     float: left;
     position: relative;
     margin-right: 1em;
+}
+
+.views-row-last.box-events-summary{
+    margin-right: 0;
 }
 
 .box-events-summary.last {
@@ -1636,6 +1661,7 @@ img.icon-play:hover{
     color: #003399;
     font-size: 0.8rem;
     display: block;
+    line-height: 16px;
 }
 
 .box-events-summary .right-column .summary{
@@ -1719,9 +1745,11 @@ img.icon-play:hover{
     background: transparent;
 }
 
-.container.events{
-    border-top: 2px solid #003399;
-    clear: both;
+.section-oshevents .content-fluid.events .container{
+    height: 1%;
+    overflow: hidden;
+    border-bottom: 2px solid #003399;
+    padding-bottom: 3em;        
 }
 
 .revamp-row.events{

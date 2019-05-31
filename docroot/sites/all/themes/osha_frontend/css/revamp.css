@@ -1829,6 +1829,9 @@ input[type=checkbox].add-to-calendar-checkbox {
 .code_us{
     background: url(../images/events/big/eeuu-180x180.png) no-repeat center;
 }
+.code_ca{
+    background: url(../images/events/big/Canada-180x180.png) no-repeat center;
+}
 
 .box-events-summary .right-column{
     float: left;

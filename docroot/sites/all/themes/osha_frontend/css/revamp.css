@@ -1174,6 +1174,7 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
 
 .page-publication-detail .publications-detail {
     float: left;
+    width: 100%;
     padding-bottom: 2em;
 }
 
@@ -1256,7 +1257,6 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
     color:#003399;
     padding: 1em;  
     float: left;
-    border-bottom: 12px solid #FFF;
     width: 100%;
     padding-top: 25px;
 }
@@ -1312,6 +1312,7 @@ span.title-download {
     color:#003399;
     padding: 1.5em 0 0 1em;
     border-top:10px solid #FFF;
+    clear: both;
 }
 
 .content-order-copy img{

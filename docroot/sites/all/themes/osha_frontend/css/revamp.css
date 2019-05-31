@@ -69,6 +69,18 @@ div.view-header.back.revamp{
     color:#003399;
 }
 
+.views-exposed-form .views-exposed-widget input.search-new-design{
+    height: 35px;
+    border: 1px solid #003399;
+    border-radius: 5px;
+    background: url(../images/pink-search.png) no-repeat 96% 55%;
+    width: 100%!important;
+    float: left;
+    margin-top: 25px;
+    padding-left: 10px;
+    color:#003399;
+}
+
 .search-new-design.events{
     margin-top: 12px; 
     margin-bottom: 17px;
@@ -968,6 +980,12 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
 
 /* Latest Publications */
 
+.wrapper-responsive-box {
+    width: 100%;
+    display: flex;
+    margin: 0 auto;
+}
+
 .box-latest-publications{
     background: #FFF;
     width: 32.5%;
@@ -1633,7 +1651,7 @@ img.icon-play:hover{
 .box-events-summary {
     background: #FFF;
     padding: 1em;
-    width: 46.89%;
+    width: 46.8%;
     float: left;
     position: relative;
     margin-right: 1em;

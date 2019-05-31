@@ -41,6 +41,10 @@
         padding-bottom: 1em;
     }
 
+    .box-events-summary{
+        width: 45.6%;
+    }
+
     .revamp .sidebars_first{
         margin-left: 1%;
     }
@@ -49,11 +53,11 @@
         padding-left: 13px;
     }
 
-    .page-tools-and-resources .field-name-field-summary, .page-publications .field-name-field-summary, .page-events .field-name-field-summary{
+    .page-tools-and-resources .field-name-field-summary, .page-tools-and-publications .field-name-field-summary, .page-oshevents .field-name-field-summary{
         padding-left: 15px;
     }
 
-    .page-publications #content, .page-events #content {
+    .page-tools-and-publications #content, .page-oshevents #content {
         width: 75%!important;
         margin-left: 3%!important;
         border-top: 0px solid #003399;
@@ -147,7 +151,7 @@
 
     /* Publications */
 
-    .page-publications .views-exposed-widget, .page-events .views-exposed-widget {
+    .page-tools-and-publications .views-exposed-widget, .page-oshevents .views-exposed-widget {
         width: 28.3%!important;
     }
 
@@ -426,7 +430,7 @@
         padding-left: 0;
     }
 
-    .page-tools-and-resources .field-name-field-summary, .page-publications .field-name-field-summary, .page-events .field-name-field-summary{
+    .page-tools-and-resources .field-name-field-summary, .page-tools-and-publications .field-name-field-summary, .page-oshevents .field-name-field-summary{
         width: 90%;
     }
 
@@ -454,7 +458,7 @@
 
     /*Publications*/
 
-    .page-publications .publications-right-column h2{
+    .page-tools-and-publications .publications-right-column h2{
         padding-left: 0;
     }
 
@@ -487,7 +491,7 @@
 
     /* Events*/
     .box-events-summary{
-        width: 46.6%;
+        width: 45.6%;
         margin-bottom: 0;
         margin-left: 0em;
         padding-bottom: 0;
@@ -579,7 +583,7 @@
     }
 
      /*Publications*/
-    .page-publications #content, .page-events #content{
+    .page-tools-and-publications #content, .page-oshevents #content{
         width: 97%!important;
     }
 
@@ -646,11 +650,17 @@
         font-size: 0.9em;
     }
 
-   html[lang=de] .content-home-event a.see-more-arrow, html[lang=lv] .content-home-event a.see-more-arrow, html[lang=lt] .content-home-event a.see-more-arrow, html[lang=hu] .content-home-event a.see-more-arrow, html[lang=mt] .content-home-event a.see-more-arrow, html[lang=nl] .content-home-event a.see-more-arrow {
+    html[lang=de] .content-home-event a.see-more-arrow, html[lang=lv] .content-home-event a.see-more-arrow, html[lang=lt] .content-home-event a.see-more-arrow, html[lang=hu] .content-home-event a.see-more-arrow, html[lang=mt] .content-home-event a.see-more-arrow, html[lang=nl] .content-home-event a.see-more-arrow {
         font-size: 0.9em;
         padding-left: 14px;
         background: url(../images/flecha.png) no-repeat scroll 87% 53% transparent;
-    }  
+    } 
+
+    /*Pagination*/
+
+    .item-list ul.pager{
+        display: block;
+    } 
 
     /*Footer*/
     .content-form-newsletter .btn-light-white{
@@ -791,7 +801,7 @@
         width: 90%;
     }
 
-    .page-publications .views-exposed-widget, .page-events .views-exposed-widget {
+    .page-tools-and-publications .views-exposed-widget, .page-oshevents .views-exposed-widget {
         width: 98%!important;
     }
 
@@ -801,11 +811,11 @@
         clear: both;
     }
 
-    .page-publications .views-exposed-widget, .page-events .views-exposed-widget{
+    .page-tools-and-publications .views-exposed-widget, .page-oshevents .views-exposed-widget{
         padding-top: 10px!important;
     }
 
-    .page-publications .publications-right-column h2{
+    .page-tools-and-publications .publications-right-column h2{
         height: auto;
     }
 
@@ -930,7 +940,7 @@
         padding-bottom: 2em;
     }
 
-    .page-events .more-link a{
+    .page-oshevents .more-link a{
         position: relative;
         margin-left: auto;
         bottom:-13px;

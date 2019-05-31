@@ -20,17 +20,24 @@
     padding-bottom: 3em;
 }
 
+.page-oshevents .content-fluid{
+    padding-bottom: 0;
+}
+
  h1.revamp{
     font-family: 'Open Sans',sans-serif;
     font-size: 2rem;
     margin-bottom: 0;
-    font-weight: 900;
+    font-weight: 600;
 }
 
 .revamp h2{
     font-family: 'Open Sans',sans-serif;
     background: transparent;
     padding-left: 0;
+    font-weight: 600;
+    font-size: 1.35rem;
+    color: #003399;
 }
 
 #content h2 a:hover{
@@ -870,22 +877,35 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
     padding: 0;
 }
 
-.page-tools-and-resources .field-name-field-summary, .page-publications .field-name-field-summary, .page-events .field-name-field-summary
-{
+.page-tools-and-resources .field-name-field-summary, .page-tools-and-publications .field-name-field-summary, .page-oshevents .field-name-field-summary{
     margin: 0;
     padding: 0;
     width: 75%;
 }
 
-.page-tools-and-resources .field-name-field-summary p, .page-publications .field-name-field-summary p, .page-events .field-name-field-summary p
-{
+.page-tools-and-resources .field-name-body, .page-tools-and-publications .field-name-body, .page-oshevents .field-name-body{
+    margin: 0;
+    padding: 0;
+    width: 75%;
+}
+
+.page-tools-and-resources .field-name-field-summary p, .page-tools-and-publications .field-name-field-summary p, .page-oshevents .field-name-field-summary p{
     font-size: 1rem;
     margin: 0;
     padding-bottom: 2em;
+    color: #003399;
+}
+
+.page-tools-and-resources .field-name-body p, .page-tools-and-publications .field-name-body p, .page-oshevents .field-name-body p{
+    font-size: 1rem;
+    margin: 0;
+    padding-bottom: 1em;
+    color: #003399;
 }
 
 .page-tools-and-resources .field-name-field-summary p{
     margin: 0;
+    padding-top: 10px;
 }
 
 .sub-home{
@@ -893,21 +913,29 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
     float: left;
     margin-top: 1em;
     margin-bottom: 2em;
+}
+
+.sub-home ul{
+    padding: 0;
+    margin: 0;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    flex-flow:row wrap;
-    -webkit-flex-flow: row wrap; 
 }
 
 .content-box-sub{
     float: left;
-    width: 23%;
+    width: 23.7%;
     margin-right: 1em;
     margin-bottom: 1em;
+    display: flex;
+    background: #003399;
 }
 
-.content-box-sub a{
+#content .content-box-sub a{
+    width: 100%;
     text-decoration: none;
+    border-bottom: 0;
 }
 
 .content-box-sub a:hover img{      
@@ -928,12 +956,12 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
     font-family: 'Open Sans',sans-serif;
     background: #003399;
     color: #FFF;
-    font-size: 1rem;
+    font-size: 0.9rem;
     letter-spacing: 1px;
     margin: 0;
-    padding-top: 10px;
-    padding-bottom: 10px;
     clear: both;
+    line-height: 20px;
+    padding: 10px;
 }
 
 /* Publications */
@@ -1036,13 +1064,13 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
     font-weight: bold !important;
 }
 
-.page-publications .views-exposed-form{
+.page-tools-and-publications .views-exposed-form{
     padding-bottom: 2em;
     border-bottom: 1px solid #003399;
     margin-bottom: 2em;
 }
 
-.page-publications .views-exposed-widget, .page-events .views-exposed-widget{
+.page-tools-and-publications .views-exposed-widget, .page-oshevents .views-exposed-widget{
     float: left;
     padding-top: 0!important;
     width: 32.3%!important;
@@ -1053,11 +1081,11 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
     margin-right: 0;
 }
 
-.page-publications select::-ms-expand , .page-events select::-ms-expand {
+.page-tools-and-publications select::-ms-expand , .page-oshevents select::-ms-expand {
     display: none;
 }
 
-.page-publications .view-header{
+.page-tools-and-publications .view-header{
     float: none;
     clear: both;
     width: 100%;
@@ -1074,12 +1102,12 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
     margin-right: 2em;
 }
 
-.page-publications .see-more-arrow{
+.page-tools-and-publications .see-more-arrow{
     font-size: 0.9rem;
     margin-left: 0em;
 }
 
-.page-publications .publications-right-column h2{
+.page-tools-and-publications .publications-right-column h2{
     line-height: 27px;
     height: 83px;
 }
@@ -1233,11 +1261,12 @@ span.title-download {
 
 .content-languages-download .new-select-style{
     width: 50%!important;
-    background: url(../images/pink-select.png) no-repeat scroll 96% center transparent;
+    background: url(../images/pink-select.png) no-repeat scroll 96% 11px transparent;
     color: #003399;
     float: left;
     margin-right: 2em;
-    height: 35px;
+    height: auto;
+    padding-bottom: 7px;
 }
 
 .chosen-container-multi .chosen-choices li.search-field{
@@ -1583,7 +1612,7 @@ img.icon-play:hover{
 
 }
 
-.new-select-style.calendar{
+.page-oshevents .block-osha-events .new-select-style{
     background: url("../images/ico-calendar.png") no-repeat scroll 96% center #FFF;
 }  
 
@@ -1596,13 +1625,22 @@ img.icon-play:hover{
     border: 1px solid #55575d;
 }
 
+.view-latest-seminars .view-content{
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .box-events-summary {
     background: #FFF;
     padding: 1em;
-    width: 46.8%;
+    width: 46.89%;
     float: left;
     position: relative;
     margin-right: 1em;
+}
+
+.views-row-last.box-events-summary{
+    margin-right: 0;
 }
 
 .box-events-summary.views-row-last {
@@ -1677,118 +1715,119 @@ input[type=checkbox].add-to-calendar-checkbox {
 .event_country {
     width: 99px;
     height: 109px;
+    margin: 0 auto;
 }
 
 .code_en{
-    background: url(../images/calendar-england.png) no-repeat center;
+    background: url(../images/events/big/England-180x180.png) no-repeat center;
 }
 .code_at{
-    background: url(../images/calendar-austria.png) no-repeat center;
+    background: url(../images/events/big/Austria-180x180.png) no-repeat center;
 }
 .code_ch{
-    background: url(../images/calendar-switzerland.png) no-repeat center;
+    background: url(../images/events/big/Switzerland-180x180.png) no-repeat center;
 }
 .code_bg{
-    background: url(../images/calendar-bulgaria.png) no-repeat center;
+    background: url(../images/events/big/Bulgaria-180x180.png) no-repeat center;
 }
 .code_be{
-    background: url(../images/calendar-belgium.png) no-repeat center;
+    background: url(../images/events/big/Belgium-180x180.png) no-repeat center;
 }
 .code_cz{
-    background: url(../images/calendar-czech-republic.png) no-repeat center;
+    background: url(../images/events/big/Czech-Republic-180x180.png) no-repeat center;
 }
 .code_cs{
-    background: url(../images/calendar-czech-republic.png) no-repeat center;
+    background: url(../images/events/big/Czech-Republic-180x180.png) no-repeat center;
 }
 .code_dk{
-    background: url(../images/calendar-denmark.png) no-repeat center;
+    background: url(../images/events/big/Denmark-180x180.png) no-repeat center;
 }
 .code_de{
-    background: url(../images/calendar-germany.png) no-repeat center;
+    background: url(../images/events/big/Germany-180x180.png) no-repeat center;
 }
 .code_el{
-    background: url(../images/calendar-greece.png) no-repeat center;
+    background: url(../images/events/big/Greece-180x180.png) no-repeat center;
 }
 .code_es{
-    background: url(../images/calendar-spain.png) no-repeat center;
+    background: url(../images/events/big/Spain-180x180.png) no-repeat center;
 }
 .code_eu{
-    background: url(../images/calendar-european-union.png) no-repeat center;
+    background: url(../images/events/big/European-Union-180x180.png) no-repeat center;
 }
 .code_ee{
-    background: url(../images/calendar-estonia.png) no-repeat center;
+    background: url(../images/events/big/Estonia-180x180.png) no-repeat center;
 }
 .code_fi{
-    background: url(../images/calendar-finland.png) no-repeat center;
+    background: url(../images/events/big/Finland-180x180.png) no-repeat center;
 }
 .code_hr{
-    background: url(../images/calendar-croatia.png) no-repeat center;
+    background: url(../images/events/big/Croatia-180x180.png) no-repeat center;
 }
 .code_fr{
-    background: url(../images/calendar-france.png) no-repeat center;
+    background: url(../images/events/big/France-180x180.png) no-repeat center;
 }
 .code_hu{
-    background: url(../images/calendar-hungary.png) no-repeat center;
+    background: url(../images/events/big/Hungary-180x180.png) no-repeat center;
 }
 .code_is{
-    background: url(../images/calendar-iceland.png) no-repeat center;
+    background: url(../images/events/big/Iceland-180x180.png) no-repeat center;
 }
 .code_it{
-    background: url(../images/calendar-italy.png) no-repeat center;
+    background: url(../images/events/big/Italy-180x180.png) no-repeat center;
 }
 .code_lv{
-    background: url(../images/calendar-latvia.png) no-repeat center;
+    background: url(../images/events/big/Latvia-180x180.png) no-repeat center;
 }
 .code_lt{
-    background: url(../images/calendar-lithuania.png) no-repeat center;
+    background: url(../images/events/big/Lithuania-180x180.png) no-repeat center;
 }
 .code_lu{
-    background: url(../images/calendar-luxembourg.png) no-repeat center;
+    background: url(../images/events/big/Luxembourg-180x180.png) no-repeat center;
 }
 .code_li{
-    background: url(../images/calendar-liechtenstein.png) no-repeat center;
+    background: url(../images/events/big/Liechtenstein-180x180.png) no-repeat center;
 }
 .code_nl{
-    background: url(../images/calendar-netherlands.png) no-repeat center;
+    background: url(../images/events/big/Netherlands-180x180.png) no-repeat center;
 }
 .code_mt{
-    background: url(../images/calendar-malta.png) no-repeat center;
+    background: url(../images/events/big/Malta-180x180.png) no-repeat center;
 }
 .code_no{
-    background: url(../images/calendar-norway.png) no-repeat center;
+    background: url(../images/events/big/Norway-180x180.png) no-repeat center;
 }
 .code_pl{
-    background: url(../images/calendar-poland.png) no-repeat center;
+    background: url(../images/events/big/Poland-180x180.png) no-repeat center;
 }
 .code_pt{
-    background: url(../images/calendar-portugal.png) no-repeat center;
+    background: url(../images/events/big/Portugal-180x180.png) no-repeat center;
 }
 .code_ro{
-    background: url(../images/calendar-romania.png) no-repeat center;
+    background: url(../images/events/big/Romania-180x180.png) no-repeat center;
 }
 .code_sk{
-    background: url(../images/calendar-slovakia.png) no-repeat center;
+    background: url(../images/events/big/Slovakia-180x180.png) no-repeat center;
 }
 .code_si{
-    background: url(../images/calendar-slovenia.png) no-repeat center;
+    background: url(../images/events/big/Slovenia-180x180.png) no-repeat center;
 }
 .code_se{
-    background: url(../images/calendar-sweden.png) no-repeat center;
+    background: url(../images/events/big/Sweden-180x180.png) no-repeat center;
 }
 .code_ie{
-    background: url(../images/calendar-ireland.png) no-repeat center;
+    background: url(../images/events/big/Ireland-180x180.png) no-repeat center;
 }
 .code_uk{
-    background: url(../images/calendar-united-kingdom.png) no-repeat center;
+    background: url(../images/events/big/United-Kingdom-180x180.png) no-repeat center;
 }
 .code_cn{
-    background: url(../images/calendar-china.png) no-repeat center;
+    background: url(../images/events/big/China-180x180.png) no-repeat center;
 }
 .code_cy{
-    background: url(../images/calendar-republic-of-cyprus.png) no-repeat center;
+    background: url(../images/events/big/Republic-of-Cyprus-180x180.png) no-repeat center;
 }
 .code_us{
-    background: url(../images/calendar-eeuu.png) no-repeat center;
+    background: url(../images/events/big/eeuu-180x180.png) no-repeat center;
 }
 
 .box-events-summary .right-column{
@@ -1800,6 +1839,7 @@ input[type=checkbox].add-to-calendar-checkbox {
     color: #003399;
     font-size: 0.8rem;
     display: block;
+    line-height: 16px;
 }
 
 .box-events-summary .right-column .summary{
@@ -1872,20 +1912,22 @@ input[type=checkbox].add-to-calendar-checkbox {
     padding-right: 1em;
 }
 
-.page-events .more-link {    
+.page-oshevents .more-link {    
     background: transparent;
 }
 
-.page-events .more-link a{
+.page-oshevents .more-link a{
     position: absolute;
     margin-left: -135px;
     bottom:-13px;
     background: transparent;
 }
 
-.container.events{
-    border-top: 2px solid #003399;
-    clear: both;
+.section-oshevents .content-fluid.events .container{
+    height: 1%;
+    overflow: hidden;
+    border-bottom: 2px solid #003399;
+    padding-bottom: 3em;        
 }
 
 .revamp-row.events{
@@ -1921,4 +1963,11 @@ input[type=checkbox].add-to-calendar-checkbox {
 
 .revamp-row.events .box-events-summary a.see-more-arrow {
     font-size: 0.9rem;
+}
+
+
+.group-seminar-event-details .field-type-datetime .date-display-single{
+    font-weight: normal;
+    padding-top: 0;
+    padding-left: 0;
 }

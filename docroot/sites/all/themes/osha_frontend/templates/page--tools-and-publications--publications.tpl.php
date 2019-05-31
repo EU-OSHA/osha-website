@@ -41,9 +41,6 @@
           <?php print render($page['above_title']); ?>
         </div>
     <?php } ?>
-      <?php if ($title) { ?>
-        <h1 class="revamp"><?php print $title; ?></h1>
-      <?php }; ?>
       <?php print render($title_suffix); ?>
 
       <?php print $messages; ?>

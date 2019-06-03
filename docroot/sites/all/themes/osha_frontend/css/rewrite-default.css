@@ -387,12 +387,6 @@
     display: none;
 }
 
-.page-oshevents #content .views-exposed-widget.views-widget-sort-by{
-    width: 29%!important;
-    margin-right: 0;
-    padding-right: 0;
-}
-
 .publications-search-list  > #edit-submit--3{
     display: none!important;
 }
@@ -413,6 +407,14 @@
     margin-top: 3em;
     margin-left: 10px!important;
 }
+
+
+@media screen and (max-width: 990px) {
+    .page-tools-and-publications.revamp #content, .page-oshevents #content{
+        width: 97%!important;
+    }
+}
+
 
 .publications-sidebar-first .form-item.form-type-checkboxes label[for=edit-languages], .publications-sidebar-first .form-item.form-type-checkboxes label[for=edit-tags], .publications-sidebar-first .form-item.form-type-checkboxes label[for=edit-publication-type]{
     clear: both;

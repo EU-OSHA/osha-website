@@ -2,6 +2,12 @@
     padding-top: 333px;
 }
 
+#main{
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
 .breadcrumb-fluid{
     border-bottom: 2px solid #cfddee;
     padding-bottom: 5px;
@@ -58,6 +64,18 @@ div.view-header.back.revamp{
 }
 
 .search-new-design{
+    height: 35px;
+    border: 1px solid #003399;
+    border-radius: 5px;
+    background: url(../images/pink-search.png) no-repeat 96% 55%;
+    width: 100%!important;
+    float: left;
+    margin-top: 25px;
+    padding-left: 10px;
+    color:#003399;
+}
+
+.views-exposed-form .views-exposed-widget input.search-new-design{
     height: 35px;
     border: 1px solid #003399;
     border-radius: 5px;
@@ -872,11 +890,6 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
 
 /* Tools and resources */
 
-.page-tools-and-resources h1{
-    margin:0;
-    padding: 0;
-}
-
 .page-tools-and-resources .field-name-field-summary, .page-tools-and-publications .field-name-field-summary, .page-oshevents .field-name-field-summary{
     margin: 0;
     padding: 0;
@@ -967,6 +980,12 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
 /* Publications */
 
 /* Latest Publications */
+
+.wrapper-responsive-box {
+    width: 100%;
+    display: flex;
+    margin: 0 auto;
+}
 
 .box-latest-publications{
     background: #FFF;
@@ -1156,6 +1175,7 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
 
 .page-publication-detail .publications-detail {
     float: left;
+    width: 100%;
     padding-bottom: 2em;
 }
 
@@ -1238,7 +1258,6 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
     color:#003399;
     padding: 1em;  
     float: left;
-    border-bottom: 12px solid #FFF;
     width: 100%;
     padding-top: 25px;
 }
@@ -1294,6 +1313,7 @@ span.title-download {
     color:#003399;
     padding: 1.5em 0 0 1em;
     border-top:10px solid #FFF;
+    clear: both;
 }
 
 .content-order-copy img{
@@ -1630,10 +1650,16 @@ img.icon-play:hover{
     flex-wrap: wrap;
 }
 
+.views-exposed-widget.views-widget-sort-by{
+    margin-right: 0;
+    padding-right: 0;
+    width: 29%!important;
+}
+
 .box-events-summary {
     background: #FFF;
     padding: 1em;
-    width: 46.89%;
+    width: 46.8%;
     float: left;
     position: relative;
     margin-right: 1em;
@@ -1829,6 +1855,9 @@ input[type=checkbox].add-to-calendar-checkbox {
 .code_us{
     background: url(../images/events/big/eeuu-180x180.png) no-repeat center;
 }
+.code_ca{
+    background: url(../images/events/big/Canada-180x180.png) no-repeat center;
+}
 
 .box-events-summary .right-column{
     float: left;
@@ -1950,7 +1979,6 @@ input[type=checkbox].add-to-calendar-checkbox {
 #content .revamp-row.events .add-to-my-calendar{
     clear: both;
     float: right;
-    padding-top: 0.4em;
     padding-left: 2em;
     border-bottom: 0;
     text-decoration: underline;

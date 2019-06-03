@@ -2,6 +2,12 @@
     padding-top: 333px;
 }
 
+#main{
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
 .breadcrumb-fluid{
     border-bottom: 2px solid #cfddee;
     padding-bottom: 5px;
@@ -884,11 +890,6 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
 
 /* Tools and resources */
 
-.page-tools-and-resources h1{
-    margin:0;
-    padding: 0;
-}
-
 .page-tools-and-resources .field-name-field-summary, .page-tools-and-publications .field-name-field-summary, .page-oshevents .field-name-field-summary{
     margin: 0;
     padding: 0;
@@ -1649,6 +1650,12 @@ img.icon-play:hover{
     flex-wrap: wrap;
 }
 
+.views-exposed-widget.views-widget-sort-by{
+    margin-right: 0;
+    padding-right: 0;
+    width: 29%!important;
+}
+
 .box-events-summary {
     background: #FFF;
     padding: 1em;
@@ -1972,7 +1979,6 @@ input[type=checkbox].add-to-calendar-checkbox {
 #content .revamp-row.events .add-to-my-calendar{
     clear: both;
     float: right;
-    padding-top: 0.4em;
     padding-left: 2em;
     border-bottom: 0;
     text-decoration: underline;

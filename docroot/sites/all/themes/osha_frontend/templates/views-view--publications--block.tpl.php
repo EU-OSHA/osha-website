@@ -30,6 +30,8 @@
 <div class="content-fluid">
     <div class="container">
         <h2><?php echo t('Recommended publications'); ?></h2>
-        <?php print $rows ?>
+        <div class="wrapper-responsive-box">
+        	<?php print $rows ?>
+        </div>
     </div>
 </div>

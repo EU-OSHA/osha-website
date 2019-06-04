@@ -50,8 +50,11 @@
     position: absolute;
 }
 
-h1{
-    letter-spacing: initial;
+ h1{
+    font-family: 'Open Sans',sans-serif;
+    font-size: 2rem;
+    margin-bottom: 0;
+    font-weight: 600;
 }
 
 .container{
@@ -93,6 +96,12 @@ h1{
 #block-osha-newsletter-osha-newsletter-subscribe{
     background: none;
     font-size: 1rem;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe a.privacy-policy-oshmail{
+    float: left;
+    clear: both;
+    margin-top: 5px;
 }
 
 #block-osha-newsletter-osha-newsletter-subscribe .captcha .form-type-textfield .description{
@@ -355,23 +364,57 @@ h1{
 
 /* Publications contents */
 
+.page-oshevents #content .chosen-container-single .chosen-single{
+    background: transparent;
+    box-shadow: 0 0 0px white inset, 0 0px 0px rgba(0, 0, 0, 0.1);
+    border-bottom:0;
+    padding: 0;
+    margin: 0;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border:0;
+    font-size: 14.4px;
+    padding-top: 5px;
+}
+
+.page-oshevents #content .chosen-container-single .chosen-single > div{
+    display: none;
+}
+
+.page-oshevents #content .views-exposed-widget.views-submit-button{
+    background: transparent;
+    display: none;
+}
+
 .publications-search-list  > #edit-submit--3{
     display: none!important;
 }
 
-.node-type-publication .sidebars_first, .page-events .sidebars_first, .page-publications.revamp .sidebars_first
-{
+.page-tools-and-publications .sidebars_first, .page-oshevents .sidebars_first, .page-tools-and-publications.revamp .sidebars_first{
     border-top: 0px solid #003399;
     margin-top: 41px;
     margin-right: 0em;
 }
 
-.page-publications.revamp #content, .page-events #content{
+.page-tools-and-resources #content{
+    border-top: 0px solid #003399;
+}
+
+.page-tools-and-publications.revamp #content, .page-oshevents #content{
     width: 80.1%!important;
     border-top: 0px solid #003399;
     margin-top: 3em;
     margin-left: 10px!important;
 }
+
+
+@media screen and (max-width: 990px) {
+    .page-tools-and-publications.revamp #content, .page-oshevents #content{
+        width: 97%!important;
+    }
+}
+
 
 .publications-sidebar-first .form-item.form-type-checkboxes label[for=edit-languages], .publications-sidebar-first .form-item.form-type-checkboxes label[for=edit-tags], .publications-sidebar-first .form-item.form-type-checkboxes label[for=edit-publication-type]{
     clear: both;

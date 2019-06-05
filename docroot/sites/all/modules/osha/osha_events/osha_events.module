@@ -79,8 +79,6 @@ function osha_events_form_alter(&$form, &$form_state, $form_id) {
         // Show the label as usual.
         unset($field['#title_display']);
 
-        // Field is not required, so add also an empty option.
-        $field['#required'] = FALSE;
         $field['#options'] = array('' => t('- None -')) + $field['#options'];
         // Switch validator.
         $field['#element_validate'] = array('options_field_widget_validate');

@@ -140,7 +140,7 @@ function osha_events_form_validate($form, &$form_state) {
       form_set_error('field_event_type', 'Events of type <b>Visit</b> can not be published');
     }
     if (empty($values['field_organization'][LANGUAGE_NONE][0]['value'])) {
-      form_set_error('field_organization', 'You have to add an Organization.');
+//      form_set_error('field_organization', 'You have to add an Organization.');
     }
 
     if (empty($values['field_tags'][LANGUAGE_NONE][0]['tid'])) {

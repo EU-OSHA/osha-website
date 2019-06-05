@@ -292,13 +292,13 @@ function osha_seminar_views_default_views() {
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['footer'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Indexed Multilingual Content: Tags */
-  $handler->display->display_options['fields']['field_tags']['id'] = 'field_tags';
-  $handler->display->display_options['fields']['field_tags']['table'] = 'search_api_index_default_multilingual_node_index';
-  $handler->display->display_options['fields']['field_tags']['field'] = 'field_tags';
-  $handler->display->display_options['fields']['field_tags']['link_to_entity'] = 1;
-  $handler->display->display_options['fields']['field_tags']['view_mode'] = 'full';
-  $handler->display->display_options['fields']['field_tags']['bypass_access'] = 0;
+  /* Field: Indexed Multilingual Content: Main Tags */
+  $handler->display->display_options['fields']['main_tags']['id'] = 'main_tags';
+  $handler->display->display_options['fields']['main_tags']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['fields']['main_tags']['field'] = 'main_tags';
+  $handler->display->display_options['fields']['main_tags']['link_to_entity'] = 1;
+  $handler->display->display_options['fields']['main_tags']['view_mode'] = 'full';
+  $handler->display->display_options['fields']['main_tags']['bypass_access'] = 0;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Search: Fulltext search */
   $handler->display->display_options['arguments']['search_api_views_fulltext']['id'] = 'search_api_views_fulltext';
@@ -310,7 +310,7 @@ function osha_seminar_views_default_views() {
   $handler->display->display_options['arguments']['search_api_views_fulltext']['not'] = 0;
   $handler->display->display_options['block_description'] = 'Seminar Topics Facet';
   $handler->display->display_options['linked_path'] = 'search/seminars';
-  $handler->display->display_options['facet_field'] = 'field_tags';
+  $handler->display->display_options['facet_field'] = 'main_tags';
   $translatables['search_seminars'] = array(
     t('Master'),
     t('Search seminars'),

@@ -59,6 +59,31 @@ function osha_musculoskeletal_disorders_taxonomy_default_vocabularies() {
         ),
       ),
     ),
+    'msd_priority_area' => array(
+      'name' => 'MSD Priority area',
+      'machine_name' => 'msd_priority_area',
+      'description' => '',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+      'language' => 'und',
+      'i18n_mode' => 0,
+      'rdf_mapping' => array(
+        'rdftype' => array(
+          0 => 'skos:ConceptScheme',
+        ),
+        'name' => array(
+          'predicates' => array(
+            0 => 'dc:title',
+          ),
+        ),
+        'description' => array(
+          'predicates' => array(
+            0 => 'rdfs:comment',
+          ),
+        ),
+      ),
+    ),
     'prevention_measures_msd' => array(
       'name' => 'MSD Prevention measures',
       'machine_name' => 'prevention_measures_msd',

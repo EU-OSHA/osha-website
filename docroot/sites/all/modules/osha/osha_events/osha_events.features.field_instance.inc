@@ -115,7 +115,7 @@ function osha_events_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 26,
+        'weight' => 27,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -191,7 +191,7 @@ function osha_events_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 17,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -273,7 +273,7 @@ function osha_events_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 22,
+        'weight' => 23,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -354,7 +354,7 @@ function osha_events_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 19,
+        'weight' => 20,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -435,7 +435,7 @@ function osha_events_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 20,
+        'weight' => 21,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -517,7 +517,7 @@ function osha_events_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 18,
+        'weight' => 19,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -591,7 +591,7 @@ function osha_events_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 9,
+        'weight' => 10,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -754,7 +754,7 @@ Grey - Only web or not attendance',
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 15,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -830,7 +830,7 @@ Grey - Only web or not attendance',
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 23,
+        'weight' => 24,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -995,7 +995,7 @@ Grey - Only web or not attendance',
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 21,
+        'weight' => 22,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -1073,7 +1073,7 @@ Grey - Only web or not attendance',
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 14,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -1244,7 +1244,7 @@ Grey - Only web or not attendance',
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 15,
+        'weight' => 16,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -1557,7 +1557,7 @@ Grey - Only web or not attendance',
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 29,
+        'weight' => 30,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -1633,7 +1633,7 @@ Grey - Only web or not attendance',
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 11,
+        'weight' => 12,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -1709,7 +1709,7 @@ Grey - Only web or not attendance',
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 24,
+        'weight' => 25,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -1873,7 +1873,7 @@ Grey - Only web or not attendance',
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 28,
+        'weight' => 29,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -2132,7 +2132,7 @@ Grey - Only web or not attendance',
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 25,
+        'weight' => 26,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -2293,7 +2293,7 @@ Grey - Only web or not attendance',
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 11,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -2369,7 +2369,7 @@ Grey - Only web or not attendance',
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 12,
+        'weight' => 13,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -2589,7 +2589,7 @@ Grey - Only web or not attendance',
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 27,
+        'weight' => 28,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -2665,7 +2665,7 @@ Grey - Only web or not attendance',
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 17,
+        'weight' => 18,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -3201,6 +3201,44 @@ Grey - Only web or not attendance',
     ),
   );
 
+  // Exported field_instance: 'taxonomy_term-tags-field_main_topic'.
+  $field_instances['taxonomy_term-tags-field_main_topic'] = array(
+    'bundle' => 'tags',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_main_topic',
+    'label' => 'Main Topic',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 2,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Activity');
@@ -3224,6 +3262,7 @@ Grey - Only web or not attendance',
   t('If you want some special promotion for this event, please contact the editorial team at <a href="mailto:urrutia@osha.europa.eu">urrutia@osha.europa.eu</a> at least 4 weeks before the event is taking place.');
   t('Key Performance Indicator');
   t('Location');
+  t('Main Topic');
   t('Mandatory');
   t('Media/promotion');
   t('Migrate to HWC');

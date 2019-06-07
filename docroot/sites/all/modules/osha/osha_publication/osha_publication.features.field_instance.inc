@@ -2636,6 +2636,45 @@ function osha_publication_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'taxonomy_term-publication_types-field_main_category'.
+  $field_instances['taxonomy_term-publication_types-field_main_category'] = array(
+    'bundle' => 'publication_types',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_main_category',
+    'label' => 'Main category',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 2,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Activity');
@@ -2652,6 +2691,7 @@ function osha_publication_field_default_field_instances() {
   t('File');
   t('Flickr date taken');
   t('Grab Flickr photos taken on or between these dates only.');
+  t('Main category');
   t('Marked as outdated');
   t('Nace');
   t('Number of pages');

@@ -850,18 +850,28 @@ function osha_publication_entity_property_info_alter(&$info) {
 
 function osha_publication_node_get_main_tags($item) {
   $tags = [];
-  $map = osha_publication_get_main_tags_map();
+  $map = osha_publication_get_main_tags_map(FALSE);
   if (!empty($item->field_tags)) {
     foreach($item->field_tags[LANGUAGE_NONE] as $tag) {
-      if (!empty($map[$tag['tid']])) {
-        $tags[$map[$tag['tid']]] = $map[$tag['tid']];
+      $tid = $tag['tid'];
+      if (!empty($map[$tid])) {
+        $tid = $map[$tid];
       }
+      $term = taxonomy_term_load($tid);
+      if (!$term->field_tags_code) {
+        continue;
+      }
+      if (!$term->field_tags_code[LANGUAGE_NONE][0]['value']) {
+        continue;
+      }
+      $tags[$tid] = $tid;
     }
   }
   return $tags;
 }
 
 function osha_publication_node_get_main_publication_type($item) {
+  $type = null;
   if ($item->type != 'publication') {
     return NULL;
   }
@@ -869,12 +879,18 @@ function osha_publication_node_get_main_publication_type($item) {
   $tid = $item->field_publication_type[LANGUAGE_NONE][0]['tid'];
   if (!empty($map[$tid])) {
     $parent_tid = $map[$tid];
-    return taxonomy_term_load($parent_tid);
+    $term = taxonomy_term_load($parent_tid);
   }
   elseif (array_key_exists($tid, $map)) {
-    return taxonomy_term_load($tid);
+    $term = taxonomy_term_load($tid);
   }
-  return NULL;
+  if (!$term->field_main_category) {
+    return null;
+  }
+  if (!$term->field_main_category[LANGUAGE_NONE][0]['value']) {
+    return null;
+  }
+  return $type;
 }
 
 function osha_publication_get_main_publication_types_map($parent = TRUE) {
@@ -888,11 +904,13 @@ function osha_publication_get_main_publication_types_map($parent = TRUE) {
   return $q->execute()->fetchAllKeyed(0,1);
 }
 
-function osha_publication_get_main_tags_map() {
+function osha_publication_get_main_tags_map($parent = TRUE) {
   $q = db_select('taxonomy_term_hierarchy', 't');
   $q->join('field_data_field_tags', 'e', 'e.field_tags_tid = t.tid');
   $q->distinct();
   $q->fields('t', ['tid', 'parent']);
-  $q->condition('t.parent', 0, '>');
+  if ($parent) {
+    $q->condition('t.parent', 0, '>');
+  }
   return $q->execute()->fetchAllKeyed(0,1);
 }

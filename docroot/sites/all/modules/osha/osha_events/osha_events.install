@@ -287,3 +287,11 @@ function osha_events_update_7026() {
 function osha_events_update_7027() {
   features_revert(array('osha_events' => array('views_view')));
 }
+
+/**
+ * MDR-2736 Create main topic tag for publications and other stuff (Dev).
+ */
+function osha_events_update_7028() {
+  features_revert(array('osha_publication' => array('field_base', 'field_instance')));
+  features_revert(array('osha_events' => array('field_base', 'field_instance')));
+}

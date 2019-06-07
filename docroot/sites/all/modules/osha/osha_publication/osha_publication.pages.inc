@@ -178,7 +178,7 @@ function osha_publication_menu_publications_search_native($form_state) {
   $tags_ids = array();
   if (!empty($tags)) {
     foreach ($tags as $tag) {
-      if (is_int($tag)) {
+      if (is_numeric($tag)) {
         $tags_ids[] = $tag;
       }
       else {
@@ -189,6 +189,17 @@ function osha_publication_menu_publications_search_native($form_state) {
       }
     }
   }
+  $tags_map = osha_publication_get_main_tags_map(FALSE);
+  $publication_tags_ids = array();
+  foreach ($tags_ids as $pubt) {
+    $publication_tags_ids[] = $pubt;
+    foreach ($tags_map as $tid => $main_tid) {
+      if ($pubt == $main_tid) {
+        $publication_tags_ids[] = $tid;
+      }
+    }
+  }
+
   $types_map = osha_publication_get_main_publication_types_map(FALSE);
   $publication_type_ids = array();
   if (!empty($publication_type)) {
@@ -208,7 +219,7 @@ function osha_publication_menu_publications_search_native($form_state) {
   $q = db_select('node', 'a');
   $q->innerJoin('field_data_field_publication_type', 'b', 'a.nid = b.entity_id');
   $q->innerJoin('field_data_field_publication_date', 'c', 'a.nid = c.entity_id');
-  if (!empty($tags_ids)) {
+  if (!empty($publication_tags_ids)) {
     $q->innerJoin('field_data_field_tags', 'd', 'a.nid = d.entity_id');
   }
   $q->fields('a', array('nid', 'vid'));
@@ -226,8 +237,8 @@ function osha_publication_menu_publications_search_native($form_state) {
   if (!empty($publication_type_ids)) {
     $q->condition('b.field_publication_type_tid', $publication_type_ids, 'IN');
   }
-  if (!empty($tags_ids)) {
-    $q->condition('d.field_tags_tid', $tags_ids, 'IN');
+  if (!empty($publication_tags_ids)) {
+    $q->condition('d.field_tags_tid', $publication_tags_ids, 'IN');
   }
   $pnids = $q->execute()->fetchCol();
   $nids = array();

@@ -816,11 +816,13 @@ function osha_publication_get_main_publication_types_map($parent = TRUE) {
   return $q->execute()->fetchAllKeyed(0,1);
 }
 
-function osha_publication_get_main_tags_map() {
+function osha_publication_get_main_tags_map($parent = TRUE) {
   $q = db_select('taxonomy_term_hierarchy', 't');
   $q->join('field_data_field_tags', 'e', 'e.field_tags_tid = t.tid');
   $q->distinct();
   $q->fields('t', ['tid', 'parent']);
-  $q->condition('t.parent', 0, '>');
+  if ($parent) {
+    $q->condition('t.parent', 0, '>');
+  }
   return $q->execute()->fetchAllKeyed(0,1);
 }

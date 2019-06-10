@@ -210,7 +210,7 @@ function osha_homepage_news_events_blocks_view() {
   $blocks = [];
   $limit = variable_get('osha_hp_news_limit', 2);
   if ($limit) {
-    $blocks[] = block_load('views', 'news-oshnews_latest');
+    $blocks[] = block_load('views', 'news-front');
   }
   $limit = 3 - $limit;
   if ($limit) {

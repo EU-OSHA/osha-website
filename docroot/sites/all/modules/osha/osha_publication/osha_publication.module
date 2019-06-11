@@ -8,6 +8,10 @@ include_once 'osha_publication.features.inc';
 
 define('OSHA_PUBLICATION_CONTENT_TYPE_PUBLICATION', 'publication');
 define('SOLR_SEARCH_INDEX', 'default_multilingual_node_index');
+define('OSHA_PDF_DOWN_PATH', 'public://pdf_download');
+if (!defined('PCLZIP_TEMPORARY_DIR')) {
+  define('PCLZIP_TEMPORARY_DIR', variable_get('file_temporary_path', '/tmp') . '/');
+}
 
 function osha_publication_t($title) {
   return t($title);
@@ -31,6 +35,12 @@ function osha_publication_menu() {
     'page callback' => 'osha_publication_export',
     'access arguments' => array('access content'),
     'delivery callback' => 'drupal_json_output',
+  );
+  $items['node/%node/download_pdf'] = array(
+    'page callback' => 'osha_publication_download_pdf',
+    'page arguments' => array(1),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
   );
 
   return $items;
@@ -321,7 +331,6 @@ function osha_publication_options_list() {
   return $return;
 }
 
-
 /**
  * Implements hook_file_view().
  */
@@ -430,16 +439,124 @@ function osha_publication_views_pre_render(&$view) {
   }
 }
 
+function osha_publication_get_archive_drupal_path($files, $base_name, $dir_path, $drupal_dir_path) {
+  $archive_path = file_create_filename($base_name, $dir_path);
+  if (file_exists($archive_path)) {
+    return $archive_path;
+  }
+  if (!empty($files)) {
+    // Return if dir don't exists.
+    if (!file_prepare_directory($drupal_dir_path, FILE_CREATE_DIRECTORY)) {
+      watchdog('osha_publication', 'The directory !dir could not be accessed!', array('!dir' => $drupal_dir_path), WATCHDOG_ERROR);
+//      return NULL;
+    }
+    // Check if it's enough disks pace to create the archive.
+    $files_size = 0;
+    foreach ($files as $file) {
+      $files_size += $file['filesize'];
+      if (disk_free_space($dir_path) < $files_size) {
+        watchdog('napo_film', 'There is not enough space to create a zip with files of !size MB!',
+          array('!size' => $files_size / pow(1024, 2)), WATCHDOG_ERROR);
+        return NULL;
+      }
+    }
+
+    $pclzip_library = libraries_load('pclzip');
+    libraries_load_files($pclzip_library);
+    // Open the archive.
+    $archive = new PclZip($archive_path);
+    $files_paths = array();
+    foreach ($files as $file) {
+      $files_paths[] = drupal_realpath($file['uri']);
+    }
+    $result = $archive->add($files_paths, PCLZIP_OPT_REMOVE_ALL_PATH, PCLZIP_OPT_TEMP_FILE_THRESHOLD, 10);
+    if (empty($result)) {
+      return NULL;
+    }
+    // Return drupal scheme file path.
+    $archive_name = drupal_basename($archive_path);
+    $archive_drupal_path = $drupal_dir_path . '/' . $archive_name;
+    return $archive_drupal_path;
+  }
+  return NULL;
+}
+
+
+/**
+ * Implements hook_libraries_info().
+ */
+function osha_publication_libraries_info() {
+  $libraries['pclzip'] = array(
+    'name' => 'PclZip',
+    'vendor url' => 'http://www.phpconcept.net/pclzip',
+    'download url' => 'http://www.phpconcept.net/pclzip/pclzip-downloads',
+    'version arguments' => array(
+      'file' => 'readme.txt',
+      'pattern' => 'PclZip\s+([0-9a-zA-Z\.-]+)',
+      'lines' => 5,
+      'cols' => 20,
+    ),
+    'files' => array(
+      'php' => array(
+        'pclzip.lib.php',
+      ),
+    ),
+  );
+  return $libraries;
+}
+
+function osha_publication_download_pdf($node) {
+  $files = array();
+  $nid = $node->nid;
+  if (!$node || $node->type != 'publication') {
+    return '';
+  }
+  foreach ($_REQUEST['selected'] as $lang) {
+    if (!empty($node->field_file[$lang])) {
+      $files[$lang] = $node->field_file[$lang][0];
+    }
+  }
+  $drupal_dir_path = OSHA_PDF_DOWN_PATH;
+  $dir_path = drupal_realpath($drupal_dir_path);
+  $base_name = $nid . '_publication_download_' . rand(10, 9999) . '.zip';
+  $archive_path = osha_publication_get_archive_drupal_path($files, $base_name, $dir_path, $drupal_dir_path);
+  if ($archive_path) {
+    $headers = array(
+      'Content-Type'              => 'application/zip',
+      'Content-Disposition'       => 'attachment; filename="' . drupal_basename($archive_path) . '"',
+      'Content-Length'            => filesize($archive_path),
+      'Content-Transfer-Encoding' => 'binary',
+      'Pragma'                    => 'no-cache',
+      'Cache-Control'             => 'must-revalidate, post-check=0, pre-check=0',
+      'Expires'                   => '0',
+      'Accept-Ranges'             => 'bytes',
+    );
+    file_transfer($archive_path, $headers);
+  }
+  drupal_set_message(t("There was an error downloading the file!"), 'error');
+  drupal_not_found();
+  exit;
+}
+
 function osha_publication_download_form($form, $form_state) {
   $list = language_list();
   $form = array();
   $node = menu_get_object();
   $options = [];
+  $download_links = [];
+
   foreach ($node->field_file as $lang => $files) {
     $options[$lang] = $list[$lang]->name;
+    $download_links[$lang] = file_create_url($files[0]['uri']);
   }
-  $form['#prefix'] = '<span class="title-download">'.t('Downloads').'</span><div class="content-languages-download">';
+  $form['#action'] = '/node/' . $node->nid . '/download_pdf';
+  $form['#method'] = 'POST';
+  $form['#prefix'] = '<span class="title-download">' . t('Downloads') . '</span><div class="content-languages-download">';
   $form['#suffix'] = '</div>';
+  $form['nid'] = [
+    '#type' => 'hidden',
+    '#default_value' => $node->nid,
+  ];
   $form['selected'] = array(
     '#type' => 'select',
     '#title' => t('Publication'),
@@ -447,8 +564,13 @@ function osha_publication_download_form($form, $form_state) {
     '#chosen' => TRUE,
     '#attributes' => ['class' => array('new-select-style')],
     '#options' => $options,
-    '#suffix' => '<a href=""><img alt="download" src="/' . drupal_get_path('theme', 'osha_frontend') . '/images/download-ico.png"></a>',
+    '#suffix' => '<a href="#" id="download_pdf"><img alt="download" src="/' . drupal_get_path('theme', 'osha_frontend') . '/images/download-ico.png"></a>',
   );
+  $form['content']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Download'),
+  );
+  drupal_add_js(array('osha_publication' => array('links' => $download_links)), 'setting');
   return $form;
 }
 

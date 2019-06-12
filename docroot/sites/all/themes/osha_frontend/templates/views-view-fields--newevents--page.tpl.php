@@ -59,7 +59,10 @@ if ($node->field_show_eu_flag && $node->field_show_eu_flag['und'][0]['value']) {
       'attributes' => array('class' => ['see-more-arrow']),
     ));
     ?>
-    <?php if ($end_date) { ?>
+    <?php if ($end_date) {
+        $description = strip_tags($fields['body']->content);
+        $description = str_replace("''", "", $description);
+        ?>
       <a class="add-to-my-calendar" id="add-to-calendar-<?php print $nid; ?>" href="#"></a>
       <script>
           var myCalendar<?php print $nid; ?> = createCalendar({
@@ -69,7 +72,7 @@ if ($node->field_show_eu_flag && $node->field_show_eu_flag['und'][0]['value']) {
                   title: '<?php print strip_tags($fields['title_field']->content); ?>',
                   start: new Date('<?php print $start_date; ?>'),
                   end: new Date('<?php print $end_date; ?>'),
-                  description: '<?php print $fields['body']->content; ?>'
+                  description: '<?php print $description; ?>'
               }
           });
           document.querySelector('#add-to-calendar-<?php print $nid; ?>').appendChild(myCalendar<?php print $nid; ?>);

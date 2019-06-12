@@ -228,7 +228,7 @@
     }
 
     .box-events-summary {
-        min-height: 200px;
+        min-height: auto;
         margin-bottom: 1em;
         margin-left: 0;
     }

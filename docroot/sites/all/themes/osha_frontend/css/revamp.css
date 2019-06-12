@@ -1665,6 +1665,7 @@ img.icon-play:hover{
 .view-latest-seminars .view-content{
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
 }
 
 .views-exposed-widget.views-widget-sort-by{
@@ -1693,7 +1694,6 @@ img.icon-play:hover{
 .box-events-summary .left-column{
     float: left;
     width: 145px;
-    height: 180px;
     margin-right: 20px;
     text-align: center;
     margin-top: 2em;

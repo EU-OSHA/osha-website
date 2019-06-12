@@ -2032,3 +2032,8 @@ input[type=checkbox].add-to-calendar-checkbox {
     padding-top: 0;
     padding-left: 0;
 }
+
+#views-exposed-form-newevents-page #edit-field-start-date-value-wrapper,
+#views-exposed-form-newevents-page #edit-field-start-date-value2-wrapper {
+    display: none;
+}

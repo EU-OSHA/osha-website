@@ -77,12 +77,6 @@ if ($node->field_show_eu_flag && $node->field_show_eu_flag['und'][0]['value']) {
           });
           document.querySelector('#add-to-calendar-<?php print $nid; ?>').appendChild(myCalendar<?php print $nid; ?>);
       </script>
-      <style>
-        .view-id-newevents #edit-field-start-date-value-wrapper,
-        .view-id-newevents #edit-field-start-date-value2-wrapper {
-          display: none;
-        }
-      </style>
     <?php } ?>
   </div>
 </div>

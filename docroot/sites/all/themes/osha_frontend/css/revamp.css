@@ -1,3 +1,7 @@
+#toolbar{
+    z-index: 99999999999;
+}
+
 #page.sticked{
     padding-top: 333px;
 }
@@ -15,7 +19,7 @@
 }
 
 #socialNetworksBlue{
-    z-index: 99999999999;
+    z-index: 999999999;
 }
 
 .content-fluid{
@@ -202,7 +206,7 @@ a.see-more-arrow:hover{
 .home-boxes .content-background{
 	position: absolute;
     width: 100%;
-    height: 245px;
+    height: 100%;
     background: rgba(0,51,153,0);
     background: -moz-linear-gradient(top, rgba(0,51,153,0) 48%, rgba(0,51,153,0.65) 76%, rgba(0,51,153,0.65) 100%);
     background: -webkit-gradient(left top, left bottom, color-stop(48%, rgba(0,51,153,0)), color-stop(76%, rgba(0,51,153,0.65)), color-stop(100%, rgba(0,51,153,0.65)));
@@ -218,7 +222,7 @@ a.see-more-arrow:hover{
 .home-boxes:hover .content-background{
 	position: absolute;
     width: 100%;
-    height: 245px;
+    height: 100%;
 
     background: rgba(0,51,153,0);
     background: -moz-linear-gradient(top, rgba(0,51,153,0) 12%, rgba(0,51,153,0.05) 16%, rgba(0,51,153,0.65) 65%, rgba(0,51,153,0.65) 100%);
@@ -233,7 +237,7 @@ a.see-more-arrow:hover{
 .home-boxes:hover .content-background{
 	position: absolute;
     width: 100%;
-    height: 245px;
+    height: 100%;
 }
 
 .home-boxes h2{
@@ -1127,7 +1131,7 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
 
 .page-tools-and-publications .publications-right-column h2{
     line-height: 27px;
-    height: 83px;
+    font-weight: 400;
 }
 
 .page-tools-and-publications .publications-right-column h2 a{
@@ -1712,8 +1716,8 @@ img.icon-play:hover{
 
 .add-to-calendar-checkbox:checked ~ a {
     display: block;
-    width: 150px;
-    margin-left: 20px;
+    margin-left: 0;
+    border-bottom: 0 !important;
 }
 
 input[type=checkbox].add-to-calendar-checkbox {
@@ -1927,7 +1931,7 @@ input[type=checkbox].add-to-calendar-checkbox {
     width: auto;
     line-height: 20px;
     font-size: 0.9rem;
-    width: 91px;
+    width: 100px;
     padding-left: 30px;
     float: right;
 }
@@ -1991,7 +1995,14 @@ input[type=checkbox].add-to-calendar-checkbox {
     padding-left: 2em;
     border-bottom: 0;
     text-decoration: underline;
-    background: url(../images/ico-add-to-my-calendar.png) no-repeat 0 87%;
+    background: url(../images/ico-add-to-my-calendar.png) no-repeat 0 1px;
+    cursor: default;
+    width: 200px;
+    text-align: left;
+}
+
+.add-to-calendar > label{
+    cursor: pointer;
 }
 
 #content .revamp-row.events .add-to-my-calendar:hover{

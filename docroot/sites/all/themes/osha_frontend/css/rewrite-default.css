@@ -13,6 +13,13 @@
     clear: both;
 }
 
+ul[data-sa-theme="basic-blue"].ui-menu {
+    width: 350px!important;
+    left: inherit!important;
+    right: 3%;
+    top: 11%!important;
+}
+
 #block-osha-homepage-osha-homepage-tweets::-webkit-scrollbar-track
 {
     background-color: #e1e8ed;
@@ -115,6 +122,11 @@
 .sidebars_second .block{
     padding: 0 1em 0.5em;
     margin-bottom: 1em;
+}
+
+.sidebars_second .date-display-single{
+    padding-left: 0;
+    color:#000;
 }
 
 #block-osha-newsletter-osha-newsletter-subscribe > div{
@@ -406,6 +418,11 @@
     border-top: 0px solid #003399;
     margin-top: 3em;
     margin-left: 10px!important;
+}
+
+#ui-datepicker-div table tr td{     
+    display: table-cell !important;
+    width: auto;
 }
 
 

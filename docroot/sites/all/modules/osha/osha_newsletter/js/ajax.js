@@ -8,15 +8,23 @@
         var base = '#edit-email';
         Drupal.ajax['captcha-block'] = new Drupal.ajax(base, this, ajax_settings);
       });
-      var agree = Drupal.settings.osha_newsletter.agree;
-      var email = Drupal.settings.osha_newsletter.email;
+      var agree = '';
+      var email = '';
+      if (typeof Drupal.settings.osha_newsletter != 'undefined') {
+        if (typeof Drupal.settings.osha_newsletter.agree != 'undefined') {
+          agree = Drupal.settings.osha_newsletter.agree;
+        }
+        if (typeof Drupal.settings.osha_newsletter.email != 'undefined') {
+          email = Drupal.settings.osha_newsletter.email;
+        }
+      }
       if (email) {
         jQuery('div.form-item-email input.form-text').val(Drupal.checkPlain(email));
       }
       if (agree && agree != '0') {
         jQuery(".form-item-agree-processing-personal-data input.form-checkbox").prop('checked', true);
       }
-      $('#edit-email--2').once('osha_newsletter_captcha_block', function() {
+      $('#edit-email--2').once('osha_newsletter_captcha_block', function () {
         var ajax_settings = {};
         ajax_settings.url = Drupal.settings.basePath + Drupal.settings.pathPrefix + 'newsletter/ajax/block/footer';
         ajax_settings.event = 'click';

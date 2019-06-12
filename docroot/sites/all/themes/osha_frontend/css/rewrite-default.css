@@ -205,6 +205,10 @@ ul[data-sa-theme="basic-blue"].ui-menu {
     font-family: 'Open Sans',sans-serif;
 }
 
+.sidebars_second #block-views-news-oshnews-latest h3{
+    margin: 0;
+}
+
 .front h2.home{
     background: transparent;
     font-family: 'Open Sans',sans-serif;

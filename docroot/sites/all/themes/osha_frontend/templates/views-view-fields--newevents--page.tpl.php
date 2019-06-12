@@ -55,13 +55,14 @@ if ($node->field_show_eu_flag && $node->field_show_eu_flag['und'][0]['value']) {
     <span class="event-country"><?php print $fields['field_city']->content; ?>, <?php print $fields['field_country_code']->content; ?></span>
     <h2><?php print strip_tags($fields['title_field']->content, '<a>'); ?></h2>
     <p class="summary"><?php print $fields['body']->content; ?></p>
-    <?php
-    print l(t('See more'), 'node/' . $nid, array(
+    <?php print l(t('See more'), '/node/' . $nid, array(
       'attributes' => array('class' => ['see-more-arrow']),
-      'external' => TRUE,
     ));
     ?>
-    <?php if ($end_date) { ?>
+    <?php if ($end_date) {
+        $description = strip_tags($fields['body']->content);
+        $description = str_replace("'", "", $description);
+        ?>
       <span class="add-to-my-calendar" id="add-to-calendar-<?php print $nid; ?>" href="#"></span>
       <script>
           var myCalendar<?php print $nid; ?> = createCalendar({
@@ -71,7 +72,7 @@ if ($node->field_show_eu_flag && $node->field_show_eu_flag['und'][0]['value']) {
                   title: '<?php print strip_tags($fields['title_field']->content); ?>',
                   start: new Date('<?php print $start_date; ?>'),
                   end: new Date('<?php print $end_date; ?>'),
-                  description: '<?php print $fields['body']->content; ?>'
+                  description: '<?php print $description; ?>'
               }
           });
           document.querySelector('#add-to-calendar-<?php print $nid; ?>').appendChild(myCalendar<?php print $nid; ?>);

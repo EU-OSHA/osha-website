@@ -46,6 +46,8 @@ function osha_field_widget_form_alter(&$element, &$form_state, $context) {
 function _form_add_website_placeholder_after_build($form) {
   $placeholder = t('Website of event');
   $form['field_website_of_event'][LANGUAGE_NONE][0]['url']['#attributes']['placeholder'] = $placeholder;
+  drupal_add_js(drupal_get_path('module', 'osha') . '/js/jquery.charactersRemaining.js');
+  drupal_add_js(drupal_get_path('module', 'osha') . '/js/charactersRemaining.js', array('scope' => 'footer'));
   return $form;
 }
 
@@ -142,8 +144,6 @@ function osha_events_form_alter(&$form, &$form_state, $form_id) {
         // Show the label as usual.
         unset($field['#title_display']);
 
-        // Field is not required, so add also an empty option.
-        $field['#required'] = FALSE;
         $field['#options'] = array('' => t('- None -')) + $field['#options'];
         // Switch validator.
         $field['#element_validate'] = array('options_field_widget_validate');
@@ -205,7 +205,7 @@ function osha_events_form_validate($form, &$form_state) {
       form_set_error('field_event_type', 'Events of type <b>Visit</b> can not be published');
     }
     if (empty($values['field_organization'][LANGUAGE_NONE][0]['value'])) {
-      form_set_error('field_organization', 'You have to add an Organization.');
+//      form_set_error('field_organization', 'You have to add an Organization.');
     }
 
     if (empty($values['field_tags'][LANGUAGE_NONE][0]['tid'])) {

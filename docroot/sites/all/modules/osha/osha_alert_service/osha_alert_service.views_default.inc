@@ -824,7 +824,7 @@ function osha_alert_service_views_default_views() {
   $handler->display->display_options['row_options']['link_field'] = 'path';
   $handler->display->display_options['row_options']['description_field'] = 'nothing';
   $handler->display->display_options['row_options']['creator_field'] = 'field_author';
-  $handler->display->display_options['row_options']['date_field'] = 'created';
+  $handler->display->display_options['row_options']['date_field'] = 'field_publication_date';
   $handler->display->display_options['row_options']['guid_field_options'] = array(
     'guid_field' => 'nothing_2',
     'guid_field_is_permalink' => 0,
@@ -929,7 +929,6 @@ function osha_alert_service_views_default_views() {
   $handler->display->display_options['fields']['field_job_vacancies_deadline']['field'] = 'field_job_vacancies_deadline';
   $handler->display->display_options['fields']['field_job_vacancies_deadline']['label'] = '';
   $handler->display->display_options['fields']['field_job_vacancies_deadline']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_job_vacancies_deadline']['type'] = 'date_plain';
   $handler->display->display_options['fields']['field_job_vacancies_deadline']['settings'] = array(
     'format_type' => 'commission_rss',
     'fromto' => 'both',
@@ -937,21 +936,23 @@ function osha_alert_service_views_default_views() {
     'multiple_from' => '',
     'multiple_to' => '',
     'show_remaining_days' => 0,
+    'osha_date_theme' => '',
   );
   /* Field: Field: Publication date */
   $handler->display->display_options['fields']['field_publication_date']['id'] = 'field_publication_date';
   $handler->display->display_options['fields']['field_publication_date']['table'] = 'field_data_field_publication_date';
   $handler->display->display_options['fields']['field_publication_date']['field'] = 'field_publication_date';
   $handler->display->display_options['fields']['field_publication_date']['label'] = '';
+  $handler->display->display_options['fields']['field_publication_date']['alter']['strip_tags'] = TRUE;
   $handler->display->display_options['fields']['field_publication_date']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_publication_date']['type'] = 'date_plain';
   $handler->display->display_options['fields']['field_publication_date']['settings'] = array(
-    'format_type' => 'short_date_eu',
+    'format_type' => 'commission_rss',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
     'multiple_to' => '',
     'show_remaining_days' => 0,
+    'osha_date_theme' => '',
   );
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing_2']['id'] = 'nothing_2';

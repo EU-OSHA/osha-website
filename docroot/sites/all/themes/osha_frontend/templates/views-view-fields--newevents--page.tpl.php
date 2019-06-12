@@ -61,7 +61,7 @@ if ($node->field_show_eu_flag && $node->field_show_eu_flag['und'][0]['value']) {
     ?>
     <?php if ($end_date) {
         $description = strip_tags($fields['body']->content);
-        $description = str_replace("''", "", $description);
+        $description = str_replace("'", "", $description);
         ?>
       <a class="add-to-my-calendar" id="add-to-calendar-<?php print $nid; ?>" href="#"></a>
       <script>

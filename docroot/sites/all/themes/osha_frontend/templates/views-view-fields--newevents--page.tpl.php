@@ -63,7 +63,7 @@ if ($node->field_show_eu_flag && $node->field_show_eu_flag['und'][0]['value']) {
         $description = strip_tags($fields['body']->content);
         $description = str_replace("'", "", $description);
         ?>
-      <a class="add-to-my-calendar" id="add-to-calendar-<?php print $nid; ?>" href="#"></a>
+      <span class="add-to-my-calendar" id="add-to-calendar-<?php print $nid; ?>" href="#"></span>
       <script>
           var myCalendar<?php print $nid; ?> = createCalendar({
               options: {

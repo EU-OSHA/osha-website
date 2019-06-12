@@ -120,10 +120,10 @@ tools-and-publications/publications',
         'weight' => 0,
       ),
       'osha_frontend' => array(
-        'region' => 'sidebar_first',
-        'status' => 1,
+        'region' => '',
+        'status' => 0,
         'theme' => 'osha_frontend',
-        'weight' => 14,
+        'weight' => 23,
       ),
       'seven' => array(
         'region' => '',
@@ -134,6 +134,86 @@ tools-and-publications/publications',
     ),
     'title' => 'Topics',
     'visibility' => 1,
+  );
+
+  $export['facetapi-IYV4lO4uBWV9Cstx0SMmJ5nValwNGZX4'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => 'IYV4lO4uBWV9Cstx0SMmJ5nValwNGZX4',
+    'i18n_block_language' => array(),
+    'i18n_mode' => 0,
+    'module' => 'facetapi',
+    'node_types' => array(),
+    'pages' => 'search/*',
+    'roles' => array(),
+    'themes' => array(
+      'bartik' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'bartik',
+        'weight' => 0,
+      ),
+      'osha_admin' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'osha_admin',
+        'weight' => 0,
+      ),
+      'osha_frontend' => array(
+        'region' => 'sidebar_first',
+        'status' => 1,
+        'theme' => 'osha_frontend',
+        'weight' => 22,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => 'Topics',
+    'visibility' => 1,
+  );
+
+  $export['facetapi-ROXIK6Y7tQue0DgP244H4JOcqy10UCEc'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => 'ROXIK6Y7tQue0DgP244H4JOcqy10UCEc',
+    'i18n_block_language' => array(),
+    'i18n_mode' => 0,
+    'module' => 'facetapi',
+    'node_types' => array(),
+    'pages' => '',
+    'roles' => array(),
+    'themes' => array(
+      'bartik' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'bartik',
+        'weight' => 0,
+      ),
+      'osha_admin' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'osha_admin',
+        'weight' => 0,
+      ),
+      'osha_frontend' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'osha_frontend',
+        'weight' => 0,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 0,
   );
 
   $export['facetapi-bhmRHTzU2n0ejKZP9wDI0S1oi2DgbSDm'] = array(

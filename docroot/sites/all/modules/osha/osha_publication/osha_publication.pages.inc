@@ -14,7 +14,9 @@ function osha_publication_menu_publications_form($form, $form_state) {
     '#method' => 'GET',
     'left-column' => array(
       '#type' => 'container',
-      '#attributes' => array('class' => array('publications-sidebar-first'))
+      '#attributes' => array(
+        'class' => array('publications-sidebar-first'),
+      ),
     ),
     'content' => array(
       '#type' => 'container',
@@ -84,16 +86,18 @@ function osha_publication_menu_publications_form($form, $form_state) {
   );
   $form['left-column']['tags'] = array(
     '#type' => 'checkboxes',
-    '#options' => _osha_publication_tags_options_list(),
+    '#options' => _osha_publication_tags_options_list(TRUE),
     '#default_value' => $tags,
     '#title' => t('Topics'),
   );
+
   $form['left-column']['publication_type'] = array(
     '#type' => 'checkboxes',
-    '#options' => _publication_type_options_list(),
+    '#options' => _publication_type_options_list(TRUE),
     '#default_value' => $publication_type,
     '#title' => t('Type'),
   );
+
   if (empty($form_state['input'])) {
     $form['content']['results-native'] = osha_publication_menu_publications_search_native($form_state);
     $native_nids = $form['content']['results-native']['#nids'];
@@ -176,7 +180,7 @@ function osha_publication_menu_publications_search_native($form_state) {
   $tags_ids = array();
   if (!empty($tags)) {
     foreach ($tags as $tag) {
-      if (is_int($tag)) {
+      if (is_numeric($tag)) {
         $tags_ids[] = $tag;
       }
       else {
@@ -187,11 +191,29 @@ function osha_publication_menu_publications_search_native($form_state) {
       }
     }
   }
+
+  $tags_map = osha_publication_get_main_tags_map(FALSE);
+  $publication_tags_ids = array();
+  foreach ($tags_ids as $pubt) {
+    $publication_tags_ids[] = $pubt;
+    foreach ($tags_map as $tid => $main_tid) {
+      if ($pubt == $main_tid) {
+        $publication_tags_ids[] = $tid;
+      }
+    }
+  }
+
+  $types_map = osha_publication_get_main_publication_types_map(FALSE);
   $publication_type_ids = array();
   if (!empty($publication_type)) {
     foreach ($publication_type as $pubt) {
       if ($pubt) {
         $publication_type_ids[] = $pubt;
+        foreach ($types_map as $tid => $main_tid) {
+          if ($pubt == $main_tid) {
+            $publication_type_ids[] = $tid;
+          }
+        }
       }
     }
   }
@@ -200,7 +222,7 @@ function osha_publication_menu_publications_search_native($form_state) {
   $q = db_select('node', 'a');
   $q->innerJoin('field_data_field_publication_type', 'b', 'a.nid = b.entity_id');
   $q->innerJoin('field_data_field_publication_date', 'c', 'a.nid = c.entity_id');
-  if (!empty($tags_ids)) {
+  if (!empty($publication_tags_ids)) {
     $q->innerJoin('field_data_field_tags', 'd', 'a.nid = d.entity_id');
   }
   $q->fields('a', array('nid', 'vid'));
@@ -208,7 +230,8 @@ function osha_publication_menu_publications_search_native($form_state) {
   $q->condition('a.status', 1);
   if (!empty($sort)) {
     $q->orderBy('field_publication_date_value', $direction);
-  } else {
+  }
+  else {
     $q->orderBy('field_publication_date_value', 'DESC');
   }
   if (!empty($restrict)) {
@@ -217,8 +240,8 @@ function osha_publication_menu_publications_search_native($form_state) {
   if (!empty($publication_type_ids)) {
     $q->condition('b.field_publication_type_tid', $publication_type_ids, 'IN');
   }
-  if (!empty($tags_ids)) {
-    $q->condition('d.field_tags_tid', $tags_ids, 'IN');
+  if (!empty($publication_tags_ids)) {
+    $q->condition('d.field_tags_tid', $publication_tags_ids, 'IN');
   }
   $pnids = $q->execute()->fetchCol();
   $nids = array();
@@ -264,7 +287,6 @@ function osha_publication_menu_publications_search_native($form_state) {
   if (count($languages) == 1) {
     $showing_lang = current($languages);
   }
-
   $ret = array(
     '#nids' => $nids,
     '#prefix' => '<h2 class="h4-title">' . t('Publications available') . '</h2>',
@@ -401,13 +423,28 @@ function osha_publication_menu_publications_get_query() {
 /**
  * Get options for publication type filter.
  */
-function _publication_type_options_list() {
+function _publication_type_options_list($map_only = FALSE) {
+  $map = osha_publication_get_main_publication_types_map();
   $return = array();
   $vocabulary = taxonomy_vocabulary_machine_name_load('publication_types');
   if (!empty($vocabulary)) {
     $terms = taxonomy_get_tree($vocabulary->vid);
     foreach ($terms as $key => $term) {
-      $return[$term->tid] = $term->name;
+      if ($map_only) {
+        if (!empty($map[$term->tid])) {
+          $term = taxonomy_term_load($map[$term->tid]);
+          if (!$term->field_main_category) {
+            continue;
+          }
+          if (!$term->field_main_category[LANGUAGE_NONE][0]['value']) {
+            continue;
+          }
+          $return[$term->tid] = $term->name;
+        }
+      }
+      else {
+        $return[$term->tid] = $term->name;
+      }
     }
   }
   return $return;
@@ -416,7 +453,8 @@ function _publication_type_options_list() {
 /**
  * Get options for publication type filter.
  */
-function _osha_publication_tags_options_list() {
+function _osha_publication_tags_options_list($map_only = FALSE) {
+
   $return = array();
   $q = db_select('field_data_field_tags', 't')
     ->distinct();
@@ -426,6 +464,25 @@ function _osha_publication_tags_options_list() {
   $q->innerJoin('taxonomy_term_data', 'td', 'td.tid = t.field_tags_tid');
   $q->orderBy('td.name', 'ASC');
   $tids = $q->execute()->fetchCol();
+  if ($map_only) {
+    $map = osha_publication_get_main_tags_map();
+    $old_tids = $tids;
+    $tids = [];
+    foreach ($old_tids as $tid) {
+      $term_id = $tid;
+      if (!empty($map[$term_id])) {
+        $term_id = $map[$term_id];
+      }
+      $term = taxonomy_term_load($term_id);
+      if (!$term->field_main_topic) {
+        continue;
+      }
+      if (!$term->field_main_topic[LANGUAGE_NONE][0]['value']) {
+        continue;
+      }
+      $tids[] = $term_id;
+    }
+  }
   $terms = taxonomy_term_load_multiple($tids);
   if (!empty($terms)) {
     foreach ($terms as $key => $term) {

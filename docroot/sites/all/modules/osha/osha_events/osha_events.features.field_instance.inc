@@ -633,7 +633,7 @@ function osha_events_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_agenda',
     'label' => 'Agenda',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
@@ -1360,7 +1360,7 @@ Grey - Only web or not attendance',
     'entity_type' => 'node',
     'field_name' => 'field_key_performance',
     'label' => 'Key Performance Indicator',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
@@ -1519,7 +1519,7 @@ Grey - Only web or not attendance',
     'entity_type' => 'node',
     'field_name' => 'field_media_promotion',
     'label' => 'Media/promotion',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
@@ -1991,7 +1991,7 @@ Grey - Only web or not attendance',
     'entity_type' => 'node',
     'field_name' => 'field_publications_exhibition_su',
     'label' => 'Publications/exhibition support',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
@@ -2923,6 +2923,44 @@ Grey - Only web or not attendance',
     ),
   );
 
+  // Exported field_instance: 'taxonomy_term-tags-field_main_topic'.
+  $field_instances['taxonomy_term-tags-field_main_topic'] = array(
+    'bundle' => 'tags',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_main_topic',
+    'label' => 'Main Topic',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 2,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Activity');
@@ -2946,6 +2984,7 @@ Grey - Only web or not attendance',
   t('If you want some special promotion for this event, please contact the editorial team at <a href="mailto:urrutia@osha.europa.eu">urrutia@osha.europa.eu</a> at least 4 weeks before the event is taking place.');
   t('Key Performance Indicator');
   t('Location');
+  t('Main Topic');
   t('Mandatory');
   t('Media/promotion');
   t('Migrate to HWC');

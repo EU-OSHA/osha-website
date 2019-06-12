@@ -11,6 +11,82 @@ function osha_frontend_links__system_main_menu() {
   return NULL;
 }
 
+function osha_frontend_implode_comma_and_join($names) {
+  $last = array_pop($names);
+  if ($names) {
+    return implode(', ', $names) . ' ' . t('and') . ' ' . $last;
+  }
+  return $last;
+}
+
+/**
+ * Returns HTML for a set of checkbox form elements.
+ *
+ * @param $variables
+ *   An associative array containing:
+ *   - element: An associative array containing the properties of the element.
+ *     Properties used: #children, #attributes.
+ *
+ * @ingroup themeable
+ */
+function osha_frontend_checkboxes($variables) {
+  if ($variables['element']['#name'] == 'tags') {
+    $map = osha_publication_get_main_tags_map();
+    foreach ($variables['element']['#options'] as $tid => $title) {
+      $sub_tids = [];
+      foreach ($map as $sub_tid => $main_tid) {
+        if ($tid == $main_tid) {
+          $sub_tids[$sub_tid] = $sub_tid;
+        }
+      }
+      if (count($sub_tids) > 1) {
+        foreach ($sub_tids as $sub_tid) {
+          $term = taxonomy_term_load($sub_tid);
+          $sub_tids[$sub_tid] = $term->name;
+        }
+        $search = 'for="edit-tags-' . $tid . '"';
+        $attr = drupal_attributes(['title' => $title . ' ' . t('include') . ' ' . osha_frontend_implode_comma_and_join($sub_tids)]);
+        $variables['element']['#children'] = str_replace($search, $search . ' ' . $attr, $variables['element']['#children']);
+      }
+    }
+  }
+
+  if ($variables['element']['#name'] == 'publication_type') {
+    $map = osha_publication_get_main_publication_types_map();
+    foreach ($variables['element']['#options'] as $tid => $title) {
+      $sub_tids = [];
+      foreach ($map as $sub_tid => $main_tid) {
+        if ($tid == $main_tid) {
+          $sub_tids[$sub_tid] = $sub_tid;
+        }
+      }
+      if (count($sub_tids) > 1) {
+        foreach ($sub_tids as $sub_tid) {
+          $term = taxonomy_term_load($sub_tid);
+          $sub_tids[$sub_tid] = $term->name;
+        }
+        $search = 'for="edit-publication-type-' . $tid . '"';
+        $attr = drupal_attributes(['title' => $title . ' ' . t('include') . ' ' . osha_frontend_implode_comma_and_join($sub_tids)]);
+        $variables['element']['#children'] = str_replace($search, $search . ' ' . $attr, $variables['element']['#children']);;
+      }
+    }
+  }
+
+  $element = $variables['element'];
+  $attributes = array();
+  if (isset($element['#id'])) {
+    $attributes['id'] = $element['#id'];
+  }
+  $attributes['class'][] = 'form-checkboxes';
+  if (!empty($element['#attributes']['class'])) {
+    $attributes['class'] = array_merge($attributes['class'], $element['#attributes']['class']);
+  }
+  if (isset($element['#attributes']['title'])) {
+    $attributes['title'] = $element['#attributes']['title'];
+  }
+  return '<div' . drupal_attributes($attributes) . '>' . (!empty($element['#children']) ? $element['#children'] : '') . '</div>';
+}
+
 function osha_frontend_preprocess_views_view_row_rss(&$vars) {
   $item = &$vars['row'];
 
@@ -45,7 +121,6 @@ function osha_frontend_preprocess_views_view_row_rss(&$vars) {
     $item->elements[2]['value'] = l($vars['title'], 'node/' . $nid);
     foreach ($vars['view']->result as $row) {
       if ($row->nid == $nid) {
-        $item->elements[0]['value'] = date('d/m/Y', $row->node_created);
         $item->elements[1]['value'] = 'EU-OSHA';
       }
     }
@@ -354,7 +429,7 @@ function osha_frontend_block_view_alter(&$data, $block) {
   if ($block->module == 'quicktabs' && isset($data['content']['content']['divs'])) {
     foreach ($data['content']['content']['divs'] as $index => $div) {
       if (isset($div['content']['#bundle']) && $div['content']['#bundle'] == 'article') {
-        // hide "Show details" link for articles used in quicktabs
+        // Hide "Show details" link for articles used in quicktabs.
         unset($data['content']['content']['divs'][$index]['content']['links']['node']['#links']['node-readmore']);
       }
     }
@@ -362,18 +437,17 @@ function osha_frontend_block_view_alter(&$data, $block) {
 }
 
 /**
- * Implements hook_preprocess_page
+ * Implements hook_preprocess_page().
  */
 function osha_frontend_preprocess_page(&$variables) {
-  
-  //Add template to external infographic code. node--external-infographic.tpl.php - MDR-2351
+  // Template node--external-infographic.tpl.php - MDR-2351.
   $n = menu_get_object('node');
   if ($n) {
     switch ($n->type) {
       case "article":
         $external_infographic = variable_get('ncw_external_infographic_nid', 14885);
         if ($n->nid == $external_infographic) {
-            $variables['theme_hook_suggestions'][] = 'node__external_infographic';
+          $variables['theme_hook_suggestions'][] = 'node__external_infographic';
         }
     }
   }
@@ -439,7 +513,7 @@ function osha_frontend_preprocess_page(&$variables) {
           '#items' => [
             [
               'id' => $primary,
-            ]
+            ],
           ],
           ['#markup' => $markup],
         ];
@@ -552,7 +626,6 @@ function osha_frontend_on_the_web_image($variables) {
   return theme('image', $variables);
 }
 
-
 /**
  * Returns HTML for an individual feed item for display in the block.
  *
@@ -574,7 +647,7 @@ function osha_frontend_aggregator_block_item($variables) {
 }
 
 /**
- * Override or insert variables into the block template
+ * Override or insert variables into the block template.
  */
 function osha_frontend_preprocess_block(&$vars) {
   $block = $vars['block'];

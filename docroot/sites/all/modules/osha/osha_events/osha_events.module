@@ -18,19 +18,57 @@ function osha_events_node_access($node, $op, $account) {
 }
 
 /**
+ * Implements hook_field_widget_form_alter().
+ *
+ * {@inheritdoc}
+ */
+function osha_field_widget_form_alter(&$element, &$form_state, $context) {
+  $is_edit_form = (isset($context['form']['#node_edit_form']) && $context['form']['#node_edit_form'] == TRUE);
+  $is_events_form = $is_edit_form && ($context['form']['type']['#value'] == 'events');
+  if ($is_events_form && !empty($element['#field_name'])) {
+    switch ($element['#field_name']) {
+      case 'field_organization':
+        $placeholder = t('The name of the organisation');
+        $element['value']['#attributes']['placeholder'] = $placeholder;
+        break;
+      case 'field_city':
+        $placeholder = t('Event city');
+        $element['value']['#attributes']['placeholder'] = $placeholder;
+        break;
+      case 'field_location':
+        $placeholder = 'Location of the event, e.g. name of venue, hall, hotel.';
+        $element['value']['#attributes']['placeholder'] = $placeholder;
+        break;
+    }
+  }
+}
+
+function _form_add_website_placeholder_after_build($form) {
+  $placeholder = t('Website of event');
+  $form['field_website_of_event'][LANGUAGE_NONE][0]['url']['#attributes']['placeholder'] = $placeholder;
+  drupal_add_js(drupal_get_path('module', 'osha') . '/js/jquery.charactersRemaining.js');
+  drupal_add_js(drupal_get_path('module', 'osha') . '/js/charactersRemaining.js', array('scope' => 'footer'));
+  return $form;
+}
+
+/**
  * Implements hook_form_alter().
  */
 function osha_events_form_alter(&$form, &$form_state, $form_id) {
-
-  $form['field_agency_initial_contact']['#access'] = FALSE;
-  $form['field_satisfaction_rate']['#access'] = FALSE;
-  $form['field_event_in_amp']['#access'] = FALSE;
-  $form['field_agency_contact_reply']['#access'] = FALSE;
-  $form['field_number_of_attendees']['#access'] = FALSE;
-  $form['field_organized_by_eu_osha']['#access'] = FALSE;
-
+  $is_edit_form = isset($form['#node_edit_form']) && $form['#node_edit_form'] == TRUE;
+  $is_events_form = $is_edit_form && $form['type']['#value'] == 'events';
+  if ($is_events_form) {
+    $form['#after_build'] = array('_form_add_website_placeholder_after_build');
+  }
   switch ($form_id) {
     case 'events_node_form':
+      $form['field_agency_initial_contact']['#access'] = FALSE;
+      $form['field_satisfaction_rate']['#access'] = FALSE;
+      $form['field_event_in_amp']['#access'] = FALSE;
+      $form['field_agency_contact_reply']['#access'] = FALSE;
+      $form['field_number_of_attendees']['#access'] = FALSE;
+      $form['field_organized_by_eu_osha']['#access'] = FALSE;
+
       $form['#validate'][] = 'osha_events_form_validate';
       // Activity field changes.
       if (isset($form['field_activity'][LANGUAGE_NONE][0])) {
@@ -41,8 +79,6 @@ function osha_events_form_alter(&$form, &$form_state, $form_id) {
         // Show the label as usual.
         unset($field['#title_display']);
 
-        // Field is not required, so add also an empty option.
-        $field['#required'] = FALSE;
         $field['#options'] = array('' => t('- None -')) + $field['#options'];
         // Switch validator.
         $field['#element_validate'] = array('options_field_widget_validate');
@@ -104,7 +140,7 @@ function osha_events_form_validate($form, &$form_state) {
       form_set_error('field_event_type', 'Events of type <b>Visit</b> can not be published');
     }
     if (empty($values['field_organization'][LANGUAGE_NONE][0]['value'])) {
-      form_set_error('field_organization', 'You have to add an Organization.');
+//      form_set_error('field_organization', 'You have to add an Organization.');
     }
 
     if (empty($values['field_tags'][LANGUAGE_NONE][0]['tid'])) {

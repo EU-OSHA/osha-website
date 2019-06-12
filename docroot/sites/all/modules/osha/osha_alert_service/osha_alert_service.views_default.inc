@@ -262,7 +262,7 @@ function osha_alert_service_views_default_views() {
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* Field: Content: Author(s) */
+  /* Field: Content: Author */
   $handler->display->display_options['fields']['field_author']['id'] = 'field_author';
   $handler->display->display_options['fields']['field_author']['table'] = 'field_data_field_author';
   $handler->display->display_options['fields']['field_author']['field'] = 'field_author';
@@ -824,11 +824,153 @@ function osha_alert_service_views_default_views() {
   $handler->display->display_options['row_options']['link_field'] = 'path';
   $handler->display->display_options['row_options']['description_field'] = 'nothing';
   $handler->display->display_options['row_options']['creator_field'] = 'field_author';
-  $handler->display->display_options['row_options']['date_field'] = 'created';
+  $handler->display->display_options['row_options']['date_field'] = 'field_publication_date';
   $handler->display->display_options['row_options']['guid_field_options'] = array(
     'guid_field' => 'nothing_2',
     'guid_field_is_permalink' => 0,
   );
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Author */
+  $handler->display->display_options['fields']['field_author']['id'] = 'field_author';
+  $handler->display->display_options['fields']['field_author']['table'] = 'field_data_field_author';
+  $handler->display->display_options['fields']['field_author']['field'] = 'field_author';
+  $handler->display->display_options['fields']['field_author']['label'] = '';
+  $handler->display->display_options['fields']['field_author']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_author']['type'] = 'text_plain';
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['title']['hide_alter_empty'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Agency */
+  $handler->display->display_options['fields']['field_job_vacancies_agency']['id'] = 'field_job_vacancies_agency';
+  $handler->display->display_options['fields']['field_job_vacancies_agency']['table'] = 'field_data_field_job_vacancies_agency';
+  $handler->display->display_options['fields']['field_job_vacancies_agency']['field'] = 'field_job_vacancies_agency';
+  $handler->display->display_options['fields']['field_job_vacancies_agency']['label'] = '';
+  $handler->display->display_options['fields']['field_job_vacancies_agency']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_job_vacancies_agency']['type'] = 'taxonomy_term_reference_plain';
+  /* Field: Content: Reference ID */
+  $handler->display->display_options['fields']['field_job_vacancies_ref_id']['id'] = 'field_job_vacancies_ref_id';
+  $handler->display->display_options['fields']['field_job_vacancies_ref_id']['table'] = 'field_data_field_job_vacancies_ref_id';
+  $handler->display->display_options['fields']['field_job_vacancies_ref_id']['field'] = 'field_job_vacancies_ref_id';
+  $handler->display->display_options['fields']['field_job_vacancies_ref_id']['label'] = '';
+  $handler->display->display_options['fields']['field_job_vacancies_ref_id']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_job_vacancies_ref_id']['type'] = 'text_plain';
+  /* Field: Content: Type of Contract */
+  $handler->display->display_options['fields']['field_job_vacancies_contact_type']['id'] = 'field_job_vacancies_contact_type';
+  $handler->display->display_options['fields']['field_job_vacancies_contact_type']['table'] = 'field_data_field_job_vacancies_contact_type';
+  $handler->display->display_options['fields']['field_job_vacancies_contact_type']['field'] = 'field_job_vacancies_contact_type';
+  $handler->display->display_options['fields']['field_job_vacancies_contact_type']['label'] = '';
+  $handler->display->display_options['fields']['field_job_vacancies_contact_type']['element_label_colon'] = FALSE;
+  /* Field: Content: Body */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['alter']['trim_whitespace'] = TRUE;
+  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['body']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['body']['hide_alter_empty'] = FALSE;
+  $handler->display->display_options['fields']['body']['type'] = 'text_plain';
+  $handler->display->display_options['fields']['body']['settings'] = array(
+    'trim_length' => '600',
+  );
+  /* Field: Content: Grade */
+  $handler->display->display_options['fields']['field_job_vacancies_grade']['id'] = 'field_job_vacancies_grade';
+  $handler->display->display_options['fields']['field_job_vacancies_grade']['table'] = 'field_data_field_job_vacancies_grade';
+  $handler->display->display_options['fields']['field_job_vacancies_grade']['field'] = 'field_job_vacancies_grade';
+  $handler->display->display_options['fields']['field_job_vacancies_grade']['label'] = '';
+  $handler->display->display_options['fields']['field_job_vacancies_grade']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_job_vacancies_grade']['type'] = 'taxonomy_term_reference_plain';
+  /* Field: Content: Path */
+  $handler->display->display_options['fields']['path']['id'] = 'path';
+  $handler->display->display_options['fields']['path']['table'] = 'node';
+  $handler->display->display_options['fields']['path']['field'] = 'path';
+  $handler->display->display_options['fields']['path']['label'] = '';
+  $handler->display->display_options['fields']['path']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['path']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['path']['absolute'] = TRUE;
+  /* Field: Content: Location(s) */
+  $handler->display->display_options['fields']['field_job_vacancies_location']['id'] = 'field_job_vacancies_location';
+  $handler->display->display_options['fields']['field_job_vacancies_location']['table'] = 'field_data_field_job_vacancies_location';
+  $handler->display->display_options['fields']['field_job_vacancies_location']['field'] = 'field_job_vacancies_location';
+  $handler->display->display_options['fields']['field_job_vacancies_location']['label'] = '';
+  $handler->display->display_options['fields']['field_job_vacancies_location']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_job_vacancies_location']['type'] = 'text_plain';
+  /* Field: Content: Vacancy Type */
+  $handler->display->display_options['fields']['field_job_vacancies_type']['id'] = 'field_job_vacancies_type';
+  $handler->display->display_options['fields']['field_job_vacancies_type']['table'] = 'field_data_field_job_vacancies_type';
+  $handler->display->display_options['fields']['field_job_vacancies_type']['field'] = 'field_job_vacancies_type';
+  $handler->display->display_options['fields']['field_job_vacancies_type']['label'] = '';
+  $handler->display->display_options['fields']['field_job_vacancies_type']['element_label_colon'] = FALSE;
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = '';
+  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['created']['date_format'] = 'commission_rss';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'year';
+  /* Field: Content: Deadline */
+  $handler->display->display_options['fields']['field_job_vacancies_deadline']['id'] = 'field_job_vacancies_deadline';
+  $handler->display->display_options['fields']['field_job_vacancies_deadline']['table'] = 'field_data_field_job_vacancies_deadline';
+  $handler->display->display_options['fields']['field_job_vacancies_deadline']['field'] = 'field_job_vacancies_deadline';
+  $handler->display->display_options['fields']['field_job_vacancies_deadline']['label'] = '';
+  $handler->display->display_options['fields']['field_job_vacancies_deadline']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_job_vacancies_deadline']['settings'] = array(
+    'format_type' => 'commission_rss',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+    'osha_date_theme' => '',
+  );
+  /* Field: Field: Publication date */
+  $handler->display->display_options['fields']['field_publication_date']['id'] = 'field_publication_date';
+  $handler->display->display_options['fields']['field_publication_date']['table'] = 'field_data_field_publication_date';
+  $handler->display->display_options['fields']['field_publication_date']['field'] = 'field_publication_date';
+  $handler->display->display_options['fields']['field_publication_date']['label'] = '';
+  $handler->display->display_options['fields']['field_publication_date']['alter']['strip_tags'] = TRUE;
+  $handler->display->display_options['fields']['field_publication_date']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_publication_date']['settings'] = array(
+    'format_type' => 'commission_rss',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+    'osha_date_theme' => '',
+  );
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing_2']['id'] = 'nothing_2';
+  $handler->display->display_options['fields']['nothing_2']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing_2']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing_2']['label'] = '';
+  $handler->display->display_options['fields']['nothing_2']['alter']['text'] = '[nid]';
+  $handler->display->display_options['fields']['nothing_2']['element_label_colon'] = FALSE;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[Agency][field_job_vacancies_agency][/Agency] [Reference ID][field_job_vacancies_ref_id][/Reference ID] [Job Title][title]
+[/Job Title] [Deadline Date][field_job_vacancies_deadline][/Deadline Date] [Job URL][path][/Job URL] [Application Open Date][field_publication_date][/Application Open Date] [Type of Contract][field_job_vacancies_contact_type][/Type of Contract] [Grade][field_job_vacancies_grade][/Grade] [Location(s)][field_job_vacancies_location][/Location(s)] [Vacancy Type][field_job_vacancies_type][/Vacancy Type] [Job Description][body][/Job Description]';
+  $handler->display->display_options['fields']['nothing']['alter']['strip_tags'] = TRUE;
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['nothing']['element_default_classes'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['groups'] = array(
     1 => 'AND',

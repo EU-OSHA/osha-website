@@ -1275,6 +1275,10 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
     padding-top: 25px;
 }
 
+.content-languages-download input[type="submit"]{
+    display: none;
+}
+
 span.title-download {
     color: #003399;
     font-weight: bold;
@@ -1989,7 +1993,7 @@ input[type=checkbox].add-to-calendar-checkbox {
     width: 68%;
 }
 
-#content .revamp-row.events .add-to-my-calendar{
+#content .revamp-row.events .add-to-calendar{
     clear: both;
     float: right;
     padding-left: 2em;
@@ -1999,6 +2003,15 @@ input[type=checkbox].add-to-calendar-checkbox {
     cursor: default;
     width: 200px;
     text-align: left;
+}
+
+.add-to-my-calendar label{
+   color: #003399;
+   cursor: pointer;
+}
+
+#content .revamp-row.events .add-to-calendar:hover{
+   text-decoration: none;
 }
 
 .add-to-calendar > label{

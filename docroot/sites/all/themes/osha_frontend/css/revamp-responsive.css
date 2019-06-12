@@ -264,7 +264,7 @@
 }
 
 
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 1024px) {
 
     /* General */
 
@@ -430,6 +430,14 @@
     /*General*/
     #page {
         padding-top: 155px;
+    }
+
+    .mean-container #block-search-form, .mean-container #block-lang-dropdown-language-content, .mean-container #languagesAndSearch{
+        width: auto;
+    }
+
+    #ui-id-1{
+        display: none !important;
     }
 
     .breadcrumb-fluid{
@@ -606,6 +614,18 @@
     #edit-search-api-language-wrapper label, .form-item.form-type-select.form-item-sort-by label, .form-item.form-type-select.form-item-sort-order label{
         margin-bottom: 0;
     }
+
+    /*Home*/
+    .home-boxes:hover h2 {
+        bottom: 80px;
+        transition: 0.8s;
+    }
+
+    .twitter-tweet-rendered{
+       margin: 1em auto !important;
+    }
+
+
 }
 
 @media screen and (min-width: 1007px) and (max-width: 1200px){
@@ -1010,7 +1030,15 @@
 
     #content .revamp-row.events .add-to-my-calendar{
         position: relative;
-        float: none;
+        float: left;
+        display: block;
+        width: 100%;
+        margin-left: 0em;
+        padding-top: 0;
+    }
+
+    .events-view h2{
+        padding-top: 1em;
     }
 
     /* Footer */

@@ -1761,6 +1761,10 @@ input[type=checkbox].add-to-calendar-checkbox {
     margin: 0 auto;
 }
 
+.event_country{
+    background: url(../images/events/big/default-calendar-180x180.png) no-repeat center;
+}
+
 .code_en{
     background: url(../images/events/big/England-180x180.png) no-repeat center;
 }

@@ -164,13 +164,13 @@ a.see-more-arrow:hover{
     margin-left: -1em;
 }
 
-.date-display-single{
+.front .date-display-single{
     font-size: 0.8rem;
     color:#003399;
     padding-left: 15px;
     padding-top: 1em;
     display: block;
-    font-weight: normal;
+    font-weight: bold;
 }
 
 /* Home intro boxes */

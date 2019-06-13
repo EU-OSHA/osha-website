@@ -39,7 +39,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 16,
+        'weight' => 28,
       ),
       'seven' => array(
         'region' => '',
@@ -79,7 +79,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 20,
+        'weight' => 35,
       ),
       'seven' => array(
         'region' => '',
@@ -119,7 +119,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 11,
+        'weight' => 18,
       ),
       'seven' => array(
         'region' => '',
@@ -159,7 +159,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 18,
+        'weight' => 31,
       ),
       'seven' => array(
         'region' => '',
@@ -199,7 +199,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 10,
+        'weight' => 17,
       ),
       'seven' => array(
         'region' => '',
@@ -239,7 +239,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 15,
+        'weight' => 26,
       ),
       'seven' => array(
         'region' => '',
@@ -279,7 +279,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 0,
+        'weight' => 3,
       ),
       'seven' => array(
         'region' => '',
@@ -319,7 +319,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 13,
+        'weight' => 21,
       ),
       'seven' => array(
         'region' => '',
@@ -359,7 +359,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 0,
+        'weight' => 2,
       ),
       'seven' => array(
         'region' => '',
@@ -399,7 +399,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 8,
+        'weight' => 11,
       ),
       'seven' => array(
         'region' => '',
@@ -439,7 +439,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 9,
+        'weight' => 15,
       ),
       'seven' => array(
         'region' => '',
@@ -479,7 +479,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 14,
+        'weight' => 24,
       ),
       'seven' => array(
         'region' => '',
@@ -519,7 +519,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 19,
+        'weight' => 33,
       ),
       'seven' => array(
         'region' => '',
@@ -559,7 +559,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 12,
+        'weight' => 19,
       ),
       'seven' => array(
         'region' => '',

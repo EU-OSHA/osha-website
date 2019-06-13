@@ -101,3 +101,46 @@ function osha_musculoskeletal_disorders_update_7006() {
   features_revert(array('osha_musculoskeletal_disorders' => array('field_instance')));
   variable_set('msd_cancel_text', 'You are going to lose your current changes, are you sure?');
 }
+
+/**
+ * MDR-2896 MSDs DB - changes to some of the drop downs.
+ */
+function osha_musculoskeletal_disorders_update_7007() {
+  features_revert_module('osha_musculoskeletal_disorders');
+  if ($voc = taxonomy_vocabulary_machine_name_load('worker_groups_covered')) {
+    $terms = array(
+      'LGBTI',
+      'Children / schoolchildren',
+    );
+    foreach ($terms as $term) {
+      $v = (object) array('name' => $term, 'vid' => $voc->vid);
+      taxonomy_term_save($v);
+    }
+  }
+
+  if ($voc = taxonomy_vocabulary_machine_name_load('prevention_measures_msd')) {
+    $terms = array(
+      'Improving individual working techniques (e.g manual handling postures)',
+    );
+    foreach ($terms as $term) {
+      $v = (object) array('name' => $term, 'vid' => $voc->vid);
+      taxonomy_term_save($v);
+    }
+  }
+
+  if ($voc = taxonomy_vocabulary_machine_name_load('msd_priority_area')) {
+    $terms = array(
+      'Facts and figures and costs related to MSDs',
+      'Prevention',
+      'Working with MSDs',
+      'Future generation of workers',
+      'Diversity',
+      'Sedentary work',
+      'MSDs & psychosocial risks',
+    );
+    foreach ($terms as $term) {
+      $v = (object) array('name' => $term, 'vid' => $voc->vid);
+      taxonomy_term_save($v);
+    }
+  }
+}

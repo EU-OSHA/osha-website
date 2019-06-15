@@ -294,3 +294,10 @@ function osha_events_update_7027() {
 function osha_events_update_7028() {
   features_revert_module('osha_events');
 }
+
+/**
+ * MDR-2941 Events- search by free text - page reloads each time we add a character.
+ */
+function osha_events_update_7029() {
+  features_revert(array('osha_events' => array('views_view')));
+}

@@ -2474,7 +2474,7 @@ function osha_events_views_default_views() {
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
   $handler->display->display_options['exposed_form']['options']['expose_sort_order'] = FALSE;
-  $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
+  $handler->display->display_options['exposed_form']['options']['autosubmit_hide'] = FALSE;
   $handler->display->display_options['exposed_form']['options']['bef'] = array(
     'general' => array(
       'input_required' => 0,
@@ -2538,15 +2538,8 @@ function osha_events_views_default_views() {
         'datepicker_options' => '',
       ),
     ),
-    'field_aditional_resources_title_field' => array(
+    'search_api_views_fulltext' => array(
       'bef_format' => 'default',
-      'slider_options' => array(
-        'bef_slider_min' => '0',
-        'bef_slider_max' => '99999',
-        'bef_slider_step' => '1',
-        'bef_slider_animate' => '',
-        'bef_slider_orientation' => 'horizontal',
-      ),
       'more_options' => array(
         'autosubmit' => 0,
         'is_secondary' => 0,

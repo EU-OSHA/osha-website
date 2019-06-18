@@ -455,7 +455,7 @@ function osha_publication_get_archive_drupal_path($files, $base_name, $dir_path,
     foreach ($files as $file) {
       $files_size += $file['filesize'];
       if (disk_free_space($dir_path) < $files_size) {
-        watchdog('napo_film', 'There is not enough space to create a zip with files of !size MB!',
+        watchdog('osha_publication', 'There is not enough space to create a zip with files of !size MB!',
           array('!size' => $files_size / pow(1024, 2)), WATCHDOG_ERROR);
         return NULL;
       }
@@ -467,7 +467,13 @@ function osha_publication_get_archive_drupal_path($files, $base_name, $dir_path,
     $archive = new PclZip($archive_path);
     $files_paths = array();
     foreach ($files as $file) {
-      $files_paths[] = drupal_realpath($file['uri']);
+      $path = drupal_realpath($file['uri']);
+      if (file_exists($path)) {
+        $files_paths[] = $path;
+      }
+      else {
+        watchdog('osha_publication', 'The file !path could not be accessed!', array('!path' => $path), WATCHDOG_ERROR);
+      }
     }
     $result = $archive->add($files_paths, PCLZIP_OPT_REMOVE_ALL_PATH, PCLZIP_OPT_TEMP_FILE_THRESHOLD, 10);
     if (empty($result)) {
@@ -511,31 +517,62 @@ function osha_publication_download_pdf($node) {
   if (!$node || $node->type != 'publication') {
     return '';
   }
-  foreach ($_REQUEST['selected'] as $lang) {
+  foreach ($_REQUEST['languages'] as $lang) {
     if (!empty($node->field_file[$lang])) {
       $files[$lang] = $node->field_file[$lang][0];
     }
   }
-  $drupal_dir_path = OSHA_PDF_DOWN_PATH;
-  $dir_path = drupal_realpath($drupal_dir_path);
-  $base_name = $nid . '_publication_download_' . rand(10, 9999) . '.zip';
-  $archive_path = osha_publication_get_archive_drupal_path($files, $base_name, $dir_path, $drupal_dir_path);
-  if ($archive_path) {
-    $headers = array(
-      'Content-Type'              => 'application/zip',
-      'Content-Disposition'       => 'attachment; filename="' . drupal_basename($archive_path) . '"',
-      'Content-Length'            => filesize($archive_path),
-      'Content-Transfer-Encoding' => 'binary',
-      'Pragma'                    => 'no-cache',
-      'Cache-Control'             => 'must-revalidate, post-check=0, pre-check=0',
-      'Expires'                   => '0',
-      'Accept-Ranges'             => 'bytes',
-    );
-    file_transfer($archive_path, $headers);
+  if (count($files) > 1) {
+    $drupal_dir_path = OSHA_PDF_DOWN_PATH;
+    $dir_path = drupal_realpath($drupal_dir_path);
+    $base_name = $nid . '_publication_download_' . rand(10, 9999) . '.zip';
+    $archive_path = osha_publication_get_archive_drupal_path($files, $base_name, $dir_path, $drupal_dir_path);
+    if ($archive_path) {
+      $headers = array(
+        'Content-Type'              => 'application/zip',
+        'Content-Disposition'       => 'attachment; filename="' . drupal_basename($archive_path) . '"',
+        'Content-Length'            => filesize($archive_path),
+        'Content-Transfer-Encoding' => 'binary',
+        'Pragma'                    => 'no-cache',
+        'Cache-Control'             => 'must-revalidate, post-check=0, pre-check=0',
+        'Expires'                   => '0',
+        'Accept-Ranges'             => 'bytes',
+      );
+      file_transfer($archive_path, $headers);
+    }
+  }
+  else {
+    reset($files);
+    $file = current($files);
+    $file_path = drupal_realpath($file['uri']);
+    if ($file_path) {
+      $headers = array(
+        'Content-Type'              => 'application/pdf',
+        'Content-Disposition'       => 'attachment; filename="' . drupal_basename($file_path) . '"',
+        'Content-Length'            => filesize($file_path),
+        'Content-Transfer-Encoding' => 'binary',
+        'Pragma'                    => 'no-cache',
+        'Cache-Control'             => 'must-revalidate, post-check=0, pre-check=0',
+        'Expires'                   => '0',
+        'Accept-Ranges'             => 'bytes',
+      );
+      file_transfer($file_path, $headers);
+    }
   }
   drupal_set_message(t("There was an error downloading the file!"), 'error');
   drupal_not_found();
   exit;
+}
+
+function osha_publication_download_form_validate($form, $form_state) {
+  if (empty($form_state['values']['selected'])) {
+    form_set_error('', t('Please select the language/s'));
+  }
+}
+
+function osha_publication_download_form_submit($form, $form_state) {
+  $node = menu_get_object();
+  drupal_goto('node/' . $node->nid . '/download_pdf', array('query' => array('languages' => $form_state['values']['selected'])));
 }
 
 function osha_publication_download_form($form, $form_state) {
@@ -549,7 +586,6 @@ function osha_publication_download_form($form, $form_state) {
     $options[$lang] = $list[$lang]->name;
     $download_links[$lang] = file_create_url($files[0]['uri']);
   }
-  $form['#action'] = '/node/' . $node->nid . '/download_pdf';
   $form['#method'] = 'POST';
   $form['#prefix'] = '<span class="title-download">' . t('Downloads') . '</span><div class="content-languages-download">';
   $form['#suffix'] = '</div>';

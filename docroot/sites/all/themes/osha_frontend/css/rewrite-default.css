@@ -9,7 +9,6 @@
     border-bottom: 1px solid #e1e8ed;
     padding-bottom: 9px;
     padding-left: 0em;
-    margin-left: 15px;
     clear: both;
 }
 
@@ -18,6 +17,20 @@ ul[data-sa-theme="basic-blue"].ui-menu {
     left: inherit!important;
     right: 3%;
     top: 11%!important;
+}
+
+.section-alertservice .form-item-newsletter label.option{
+    float: none;
+    padding-bottom: 1em;
+}
+
+.section-alertservice .form-item-agree-processing-personal-data label.option{
+    float: none;
+    padding-bottom: 1em;
+}
+
+.section-alertservice #osha-alert-service-subscribe-form .container-inline.form-submit{
+    padding-left: 0;
 }
 
 #block-osha-homepage-osha-homepage-tweets::-webkit-scrollbar-track
@@ -69,12 +82,16 @@ ul[data-sa-theme="basic-blue"].ui-menu {
     margin: 0 auto;
 }
 
-.view-header.back a {
+.section-oshevents .view-header.back a, .page-publications .view-header.back a{
     font-family: "Open Sans",sans-serif!important;
-    font-size: 1em;
+    font-size: 0.8rem;
     padding-left: 30px;
     float: right;
     font-weight: 600;
+}
+
+.node-news .field-name-title-field a{
+    font-size: 1.2rem;
 }
 
 .view-header.back a:hover{
@@ -101,14 +118,18 @@ ul[data-sa-theme="basic-blue"].ui-menu {
 }
 
 #block-osha-newsletter-osha-newsletter-subscribe{
-    background: none;
+    background-color: #ecf1fb;
     font-size: 1rem;
+    padding: 0 0 1em 0;
+    height: 1%;
+    overflow: hidden;
 }
 
 #block-osha-newsletter-osha-newsletter-subscribe a.privacy-policy-oshmail{
     float: left;
     clear: both;
     margin-top: 5px;
+    padding-bottom: 1em;
 }
 
 #block-osha-newsletter-osha-newsletter-subscribe .captcha .form-type-textfield .description{
@@ -129,11 +150,9 @@ ul[data-sa-theme="basic-blue"].ui-menu {
 }
 
 #block-osha-newsletter-osha-newsletter-subscribe > div{
-    float: left;
-    width: 93%;
-    background-color: #e9edf6;
+
     color: #003399;
-    padding: 1em 1em 0 1em;
+    padding: 0 1em 0 1em;
     margin: 0;
     font-size: 0.9rem;
 }
@@ -180,20 +199,18 @@ ul[data-sa-theme="basic-blue"].ui-menu {
 
 #block-osha-newsletter-osha-newsletter-subscribe h2{
     margin-bottom: 0.5em;
+    background: #FFF;
 }
 
 #block-osha-newsletter-osha-newsletter-subscribe h2 a{
     font-family: 'Open Sans',sans-serif;
     font-size: 1.5rem!important;
-    margin-bottom: 15px;
-    padding-bottom: 0;
+    padding-bottom: 15px;
     text-decoration: none;
 }
 
 #newsletter-subscription-form-wrapper{
     padding-top: 0!important;
-    margin-bottom: 2em!important;
-    padding-bottom: 1em!important;;
 }
 
 #block-osha-newsletter-osha-newsletter-subscribe a{

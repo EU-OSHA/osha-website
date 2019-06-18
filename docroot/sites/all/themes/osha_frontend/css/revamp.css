@@ -1035,6 +1035,10 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
 
 .box-latest-publications .label{ 
     color:#003399;
+    display: block;
+    float: none;
+    width: 100%;
+    padding-bottom: 1.7em;
 }
 
 .box-latest-publications h2 a{
@@ -1058,6 +1062,10 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
     bottom: 0;
     position: absolute;
     right: 0;
+}
+
+.publications-detail-right-column .keywords{
+    padding-top: 1em;
 }
 
 /* Publications List */
@@ -1696,7 +1704,7 @@ img.icon-play:hover{
     width: 145px;
     margin-right: 20px;
     text-align: center;
-    margin-top: 2em;
+    margin-top: 1em;
 }
 
 .event_country{

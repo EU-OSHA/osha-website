@@ -175,9 +175,6 @@
     }
 
      /*Publications detail*/
-    .page-publication-detail .publications-detail{
-        padding: 1em;
-    }
 
     .publications-row{
         width: 98%;
@@ -324,6 +321,7 @@
 
     .page-tools-and-publications .publications-right-column h2{
         padding-left: 0;
+        margin-top: 0;
     }
 
     .revamp #edit-search-api-language-wrapper label, .revamp .form-item.form-type-select.form-item-sort-by label, .revamp .form-item.form-type-select.form-item-sort-order label {
@@ -428,6 +426,15 @@
 @media screen and (max-width: 1006px){
 
     /*General*/
+
+    #sliding-popup.sliding-popup-top{
+        z-index: 9999999999!important;
+    }
+
+    .meanmenu-reveal.meanclose {
+        color: #FFFFFF !important;
+    }
+
     #page {
         padding-top: 155px;
     }
@@ -457,7 +464,7 @@
         text-align: left;
         position: absolute;
         top: 125px;
-        z-index: 99999999999999999999;
+        z-index: 999999999;
         right: 5px;
         cursor: pointer;
         margin: 0;
@@ -594,7 +601,7 @@
 
     #contact{
         position: absolute;
-        z-index: 99999999999999;
+        z-index: 999999999;
         top:117px;
         right:10%;
     }
@@ -625,6 +632,15 @@
        margin: 1em auto !important;
     }
 
+    /* Publications list */
+    .page-tools-and-publications .publications-right-column h2 a{
+        height: auto;
+    }
+
+    /*Publications detail*/
+    .publications-detail-right-column{
+        width: 93%;
+    }
 
 }
 
@@ -706,6 +722,29 @@
     }
 
     /*Events*/
+
+    .node-type-events #page-title, .node-type-events .field-name-title-field h1 {
+        background: #FFF !important;
+        color: #003399 !important;
+        padding-left: 0 !important;
+        padding-top: 1em !important;
+        font-size: 1.4rem;
+    }
+
+    .node-type-events #page-title{
+        padding-left: 18px!important;
+        padding-top: 10px !important;
+    }
+
+    .node-type-events .view-header.back{
+        background: #FFF !important;
+
+    }
+
+    .node-type-events .view-header.back a{
+        color: #003399 !important;
+    }
+
     .sidebars_first label{
         padding-left: 1em;
     }
@@ -808,6 +847,8 @@
     #contact > a:nth-child(5){
         text-indent: -99999px;
         background: url(../images/ico-news-events-menu.png) no-repeat 0 0 ;
+        position: relative;
+        width: 30px;
     }
 
     /*Home*/

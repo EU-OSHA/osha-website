@@ -915,6 +915,18 @@
         max-width: 360px; /* TO DO */ 
     }
 
+    .view-highlight .row .views-field-view-node{
+        float: left !important;
+    }
+
+    .view-highlight .row .see-more-arrow{
+        padding-left: 0 !important;
+    }
+
+    .front #block-osha-homepage-osha-homepage-tweets{
+        margin-top: 1em;
+    }
+
     .front div.more-link > a:nth-child(2) {
         margin: 1em auto;
     }

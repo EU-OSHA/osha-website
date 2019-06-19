@@ -27,8 +27,8 @@ $node = $row->_entity_properties['entity object'];
 $date = $node->field_start_date[LANGUAGE_NONE][0];
 $country_code = strtolower($node->field_country_code[LANGUAGE_NONE][0]['value']);
 $nid = '';
-if ($row) {
-  $nid = $row->entity;
+if ($node) {
+  $nid = $node->nid;
 }
 if ($date) {
   $date_object = new DateObject($date['value'], new DateTimeZone($date['timezone_db']));

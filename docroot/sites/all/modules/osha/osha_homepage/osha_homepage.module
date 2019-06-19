@@ -194,6 +194,9 @@ function osha_homepage_block_view($delta = '') {
         $new_item['below'] = [];
         foreach ($row['below'] as $key => $menu) {
           foreach ($menu['below'] as $subkey => $submenu) {
+            if ($submenu['link']['hidden']) {
+              continue;
+            }
             $new_item['below'][$subkey] = $submenu;
           }
         }

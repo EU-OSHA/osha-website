@@ -679,7 +679,7 @@ function osha_publication_field_formatter_info() {
     'publication_title_linked' => array(
       'label' => t('Publication Linked and wrapped'),
       'field types' => array('text'),
-      'settings' => array('title_style' => '', 'title_link' => '', 'title_class' => ''),
+      'settings' => array('title_style' => '', 'title_link' => '', 'title_class' => '', 'trim_length' => '', 'trim_suffix' => ''),
     ),
   );
   return $info;
@@ -728,7 +728,18 @@ function osha_publication_field_formatter_settings_form($field, $instance, $view
     '#default_value' => $settings['title_class'],
     '#element_validate' => array('_title_validate_class'),
   );
-
+  $element['trim_length'] = array(
+    '#title' => t('Trim length'),
+    '#type' => 'textfield',
+    '#description' => t(''),
+    '#default_value' => $settings['trim_length'],
+  );
+  $element['trim_suffix'] = array(
+    '#title' => t('Trim lenght'),
+    '#type' => 'textfield',
+    '#description' => t(''),
+    '#default_value' => $settings['trim_suffix'],
+  );
   return $element;
 }
 
@@ -758,6 +769,12 @@ function osha_publication_field_formatter_settings_summary($field, $instance, $v
     $summary[] = t('Wrap tag classes: @classes', array('@classes' => $settings['title_class']));
   }
 
+  if (isset($settings['trim_length']) && $settings['trim_length'] != '') {
+    $summary[] = t('Trim length: @trim_length', array('@trim_length' => $settings['trim_length']));
+    if (isset($settings['trim_suffix']) && $settings['trim_suffix'] != '') {
+      $summary[] = t('Suffix: @trim_suffix', array('@trim_suffix' => $settings['trim_suffix']));
+    }
+  }
   return implode('<br />', $summary);
 }
 
@@ -845,6 +862,12 @@ function osha_publication_field_formatter_view($entity_type, $entity, $field, $i
       $settings = $display['settings'];
       $output = isset($items[0]) ? $items[0]['safe_value'] : '';
 
+      if (!empty($settings['trim_length']) && strlen($output) > intval($settings['trim_length'])) {
+        $output = substr($output, 0, $settings['trim_length']);
+        if (!empty($settings['trim_suffix'])) {
+          $output .= $settings['trim_suffix'];
+        }
+      }
       if (!empty($output) && $settings['title_link'] == 'content') {
         $uri = entity_uri($entity_type, $entity);
         $path = url($uri['path']);

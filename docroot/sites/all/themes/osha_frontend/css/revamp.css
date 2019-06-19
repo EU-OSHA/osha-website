@@ -164,13 +164,13 @@ a.see-more-arrow:hover{
     margin-left: -1em;
 }
 
-.date-display-single{
+.front .date-display-single{
     font-size: 0.8rem;
     color:#003399;
     padding-left: 15px;
     padding-top: 1em;
     display: block;
-    font-weight: normal;
+    font-weight: bold;
 }
 
 /* Home intro boxes */
@@ -1035,6 +1035,10 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
 
 .box-latest-publications .label{ 
     color:#003399;
+    display: block;
+    float: none;
+    width: 100%;
+    padding-bottom: 1.7em;
 }
 
 .box-latest-publications h2 a{
@@ -1058,6 +1062,10 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
     bottom: 0;
     position: absolute;
     right: 0;
+}
+
+.publications-detail-right-column .keywords{
+    padding-top: 1em;
 }
 
 /* Publications List */
@@ -1301,8 +1309,10 @@ span.title-download {
     color: #003399;
     float: left;
     margin-right: 2em;
-    height: auto;
     padding-bottom: 7px;
+    padding-top: 6px;
+    overflow: initial;
+    height: initial;
 }
 
 .chosen-container-multi .chosen-choices li.search-field{
@@ -1462,7 +1472,10 @@ div.publications-detail-right-column > a.download{
 
 /* Related Boxes */
 .content-related-boxes{
- clear: both;
+    clear: both;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 .content-related-boxes .box{
@@ -1473,9 +1486,16 @@ div.publications-detail-right-column > a.download{
     margin-right: 1em;
 }
 
-.content-related-boxes .box .field-name-field-thumbnail{
-    height: 280px;
-    overflow: hidden;
+.content-related-boxes.slideshare > div:nth-child(3){
+    margin-right: 0;
+}
+
+.content-related-boxes.infographic > div:nth-child(3){
+    margin-right: 0;
+}
+
+.content-related-videos > div:nth-child(3){
+    margin-right: 0;
 }
 
 .content-related-boxes img{
@@ -1483,9 +1503,6 @@ div.publications-detail-right-column > a.download{
     height: auto;
 }
 
-.content-related-boxes > .box:last-child{
-    margin-right: 0;
-}
 
 .box .date-display-single{
     float: left;
@@ -1501,7 +1518,6 @@ div.publications-detail-right-column > a.download{
 }
 
 .box h2{
-    min-height: 48px;
     float: none;
     clear: both;
     line-height: 25px;
@@ -1527,6 +1543,9 @@ div.publications-detail-right-column > a.download{
 /*Videos*/
 .content-related-videos{
     clear: both;
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
 }
 
 .content-related-videos .video{
@@ -1696,7 +1715,7 @@ img.icon-play:hover{
     width: 145px;
     margin-right: 20px;
     text-align: center;
-    margin-top: 2em;
+    margin-top: 1em;
 }
 
 .event_country{
@@ -1759,6 +1778,10 @@ input[type=checkbox].add-to-calendar-checkbox {
     width: 99px;
     height: 109px;
     margin: 0 auto;
+}
+
+.event_country{
+    background: url(../images/events/big/default-calendar-180x180.png) no-repeat center;
 }
 
 .code_en{

@@ -47,8 +47,11 @@ if ($slideshare_html) {
 foreach ($rows as $node_type => $items) {
     print '<h3><span>' . $bundles[$node_type] . '</span></h3>';
     $class = "content-related-boxes";
-    if (in_array($node_type, ['slideshare', 'infographic'])) {
-      $class = "content-related-boxes";
+    if (in_array($node_type, ['slideshare'])) {
+      $class = "content-related-boxes slideshare";
+    }
+    elseif ($node_type == 'infographic') {
+      $class = "content-related-boxes infographic";
     }
     elseif ($node_type == 'youtube') {
       $class = "content-related-videos";

@@ -1309,8 +1309,10 @@ span.title-download {
     color: #003399;
     float: left;
     margin-right: 2em;
-    height: auto;
     padding-bottom: 7px;
+    padding-top: 6px;
+    overflow: initial;
+    height: initial;
 }
 
 .chosen-container-multi .chosen-choices li.search-field{
@@ -1470,7 +1472,10 @@ div.publications-detail-right-column > a.download{
 
 /* Related Boxes */
 .content-related-boxes{
- clear: both;
+    clear: both;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 .content-related-boxes .box{
@@ -1481,9 +1486,16 @@ div.publications-detail-right-column > a.download{
     margin-right: 1em;
 }
 
-.content-related-boxes .box .field-name-field-thumbnail{
-    height: 280px;
-    overflow: hidden;
+.content-related-boxes.slideshare > div:nth-child(3){
+    margin-right: 0;
+}
+
+.content-related-boxes.infographic > div:nth-child(3){
+    margin-right: 0;
+}
+
+.content-related-videos > div:nth-child(3){
+    margin-right: 0;
 }
 
 .content-related-boxes img{
@@ -1491,9 +1503,6 @@ div.publications-detail-right-column > a.download{
     height: auto;
 }
 
-.content-related-boxes > .box:last-child{
-    margin-right: 0;
-}
 
 .box .date-display-single{
     float: left;
@@ -1509,7 +1518,6 @@ div.publications-detail-right-column > a.download{
 }
 
 .box h2{
-    min-height: 48px;
     float: none;
     clear: both;
     line-height: 25px;
@@ -1535,6 +1543,9 @@ div.publications-detail-right-column > a.download{
 /*Videos*/
 .content-related-videos{
     clear: both;
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
 }
 
 .content-related-videos .video{

@@ -2735,12 +2735,12 @@ function osha_events_views_default_views() {
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['nid']['separator'] = '';
   $handler->display->display_options['fields']['nid']['link_to_entity'] = 0;
-  /* Sort criterion: Indexed Multilingual Content: Start date */
-  $handler->display->display_options['sorts']['field_seminar_start_date']['id'] = 'field_seminar_start_date';
-  $handler->display->display_options['sorts']['field_seminar_start_date']['table'] = 'search_api_index_default_multilingual_node_index';
-  $handler->display->display_options['sorts']['field_seminar_start_date']['field'] = 'field_seminar_start_date';
-  $handler->display->display_options['sorts']['field_seminar_start_date']['exposed'] = TRUE;
-  $handler->display->display_options['sorts']['field_seminar_start_date']['expose']['label'] = 'Start date';
+  /* Sort criterion: Date: Start date (indexed) */
+  $handler->display->display_options['sorts']['field_start_date_value']['id'] = 'field_start_date_value';
+  $handler->display->display_options['sorts']['field_start_date_value']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['sorts']['field_start_date_value']['field'] = 'field_start_date_value';
+  $handler->display->display_options['sorts']['field_start_date_value']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['field_start_date_value']['expose']['label'] = 'Start date';
   /* Sort criterion: Search: Relevance */
   $handler->display->display_options['sorts']['search_api_relevance']['id'] = 'search_api_relevance';
   $handler->display->display_options['sorts']['search_api_relevance']['table'] = 'search_api_index_default_multilingual_node_index';
@@ -2901,7 +2901,7 @@ function osha_events_views_default_views() {
   $handler->display->display_options['path'] = 'oshevents';
   $translatables['newevents'] = array(
     t('Master'),
-    t('Events'),
+    t('<none>'),
     t('more'),
     t('Apply'),
     t('Reset'),

@@ -13,6 +13,7 @@ dependencies[] = osha_job_vacancies
 dependencies[] = osha_news
 dependencies[] = osha_publication
 dependencies[] = osha_seminar
+dependencies[] = strongarm
 features[context][] = context_latest_oshnews
 features[context][] = context_newsletter
 features[ctools][] = context:context:3

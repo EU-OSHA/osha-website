@@ -91,6 +91,7 @@ function osha_blocks_context_default_contexts() {
         'node/1457' => 'node/1457',
         'node/1410' => 'node/1410',
         'node/1450' => 'node/1450',
+        'node/14993' => 'node/14993',
       ),
     ),
     'views' => array(

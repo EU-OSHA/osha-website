@@ -1137,6 +1137,11 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
     margin-left: 0em;
 }
 
+html[lang=el] .page-tools-and-publications .see-more-arrow{
+    font-size: 0.75rem;
+    background-position-x: 94%;
+}
+
 .page-tools-and-publications .publications-right-column h2{
     line-height: 27px;
     font-weight: 400;
@@ -1983,13 +1988,21 @@ input[type=checkbox].add-to-calendar-checkbox {
 
 .page-oshevents .more-link {    
     background: transparent;
+    text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 .page-oshevents .more-link a{
     position: absolute;
-    margin-left: -135px;
-    bottom:-13px;
-    background: transparent;
+    bottom: -17px;
+}
+
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+     .page-oshevents .more-link a { 
+            margin-left: -140px;
+        } /* IE11 */
 }
 
 .section-oshevents .content-fluid.events .container{

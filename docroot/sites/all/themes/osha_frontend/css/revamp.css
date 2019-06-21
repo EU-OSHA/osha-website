@@ -173,6 +173,37 @@ a.see-more-arrow:hover{
     font-weight: bold;
 }
 
+.front h2.home{
+    background: transparent;
+    font-family: 'Open Sans',sans-serif;
+    font-weight: bold!important;
+    font-size: 1.6rem!important;
+    color: #003399!important;
+    letter-spacing: 0;
+    margin-bottom: 4px;
+    padding: 0;
+    margin: 0;
+    padding-bottom: 0.2em;
+    line-height: 1.2em;
+    padding-top: 0.1em;
+    clear: both;
+}
+
+.front h2.home a{
+    font-family: 'Open Sans',sans-serif;
+    font-weight: bold!important;
+    font-size: 1.6rem!important;
+    color: #003399!important;
+    letter-spacing: 0;
+    margin-bottom: 4px;
+    padding: 0;
+    margin: 0;
+    padding-bottom: 1em;
+    line-height: 1.2em;
+    padding-top: 0.1em;
+    text-decoration: none;
+}
+
 /* Home intro boxes */
 
 .region-home-intro{
@@ -673,6 +704,10 @@ html[lang=de] .content-home-event .tag-news-events{
 
 .content-subscribe h3 a:hover{
     text-decoration: underline;
+}
+
+.captcha{
+    clear: both;
 }
 
 .captchaImg{

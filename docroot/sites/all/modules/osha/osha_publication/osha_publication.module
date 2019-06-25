@@ -363,6 +363,9 @@ function osha_publication_node_view($node, $view_mode, $langcode) {
       file_transfer($file->uri, $headers);
     }
   }
+  elseif (arg(1) == $node->nid) {
+    $node->content['download_form'] = drupal_get_form('osha_publication_download_form');
+  }
 }
 
 /**

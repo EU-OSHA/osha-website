@@ -303,9 +303,9 @@ function osha_events_update_7029() {
 }
 
 /**
- * .
+ * MDR-3014 Revamp Highlights - Right column.
  */
 function osha_events_update_7030() {
   features_revert(array('osha_seminar' => array('views_view')));
-  features_revert(array('osha_events' => array('views_view')));
+  features_revert_module('osha_events');
 }

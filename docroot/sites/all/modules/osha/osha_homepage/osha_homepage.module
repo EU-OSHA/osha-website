@@ -217,7 +217,7 @@ function osha_homepage_news_events_blocks_view() {
   }
   $limit = 3 - $limit;
   if ($limit) {
-    $blocks[] = block_load('views', 'upcoming_events-block');
+    $blocks[] = block_load('views', 'homepage_events-block');
   }
   $array = _block_get_renderable_array(
     _block_render_blocks($blocks)

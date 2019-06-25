@@ -1,7 +1,7 @@
 name = OSHA Events
 core = 7.x
 package = OSHA
-version = 7.x-1.20
+version = 7.x-1.21
 project = osha_events
 dependencies[] = better_exposed_filters
 dependencies[] = entity
@@ -136,6 +136,7 @@ features[variable][] = xmlsitemap_settings_node_news
 features[variable][] = xmlsitemap_settings_node_seminar
 features[views_view][] = events
 features[views_view][] = events_index
+features[views_view][] = homepage_events
 features[views_view][] = latest_seminars
 features[views_view][] = newevents
 features[views_view][] = oshevents

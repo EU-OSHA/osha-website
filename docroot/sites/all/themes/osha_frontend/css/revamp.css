@@ -1355,8 +1355,8 @@ span.title-download {
     height: initial;
 }
 
-.chosen-container-multi .chosen-choices li.search-field{
-    padding-top: 5px;
+.chosen-container-multi .chosen-choices{
+    padding: 0 5px 0px 0px;
 }
 
 .chosen-container-active .chosen-choices{

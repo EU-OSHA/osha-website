@@ -861,10 +861,24 @@ function osha_publication_field_formatter_view($entity_type, $entity, $field, $i
     case 'publication_title_linked':
       $settings = $display['settings'];
       $output = isset($items[0]) ? $items[0]['safe_value'] : '';
-
-      if (!empty($settings['trim_length']) && strlen($output) > intval($settings['trim_length'])) {
-        $output = substr($output, 0, $settings['trim_length']);
-        if (!empty($settings['trim_suffix'])) {
+      $orig_output = $output;
+      if (!empty($settings['trim_length']) && drupal_strlen($orig_output) > intval($settings['trim_length'])) {
+        if (module_exists('views')) {
+          $output = views_trim_text([
+              'max_length' => $settings['trim_length'],
+              'word_boundary' => TRUE,
+              'ellipsis' => FALSE,
+              'html' => TRUE,
+          ], $output);
+        }
+        else {
+          $output = text_summary($output, NULL, $settings['trim_length']);
+        }
+        $shortened = FALSE;
+        if (drupal_strlen($output) != drupal_strlen($orig_output)) {
+          $shortened = TRUE;
+        }
+        if ($shortened && !empty($settings['trim_suffix'])) {
           $output .= $settings['trim_suffix'];
         }
       }

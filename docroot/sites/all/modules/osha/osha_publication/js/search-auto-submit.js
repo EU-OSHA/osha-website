@@ -20,7 +20,7 @@
                     if (tags.length) {
                         uri += '/' + 'tags-' + tags.join('-');
                     }
-                    $form.find('[name^=languages]:checked').each(function(){
+                    $('#edit-languages :selected').each(function(){
                         languages.push($(this).val());
                     });
                     if (languages.length) {

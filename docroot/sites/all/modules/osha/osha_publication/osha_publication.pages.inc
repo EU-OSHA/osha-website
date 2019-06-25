@@ -5,7 +5,7 @@ function osha_publication_menu_publications_form($form, $form_state) {
   drupal_set_title(t('Publications'));
   $text = osha_publication_req_param($form_state, 'text');
   $sort = osha_publication_req_param($form_state, 'sort_by', 'search_api_relevance');
-  $direction = osha_publication_req_param($form_state, 'direction', 'desc');
+  $direction = 'desc';
   $languages = osha_publication_req_param($form_state, 'languages', array($language->language));
   $tags = osha_publication_req_param($form_state, 'tags', array());
   $publication_type = osha_publication_req_param($form_state, 'publication_type', array());
@@ -77,6 +77,8 @@ function osha_publication_menu_publications_form($form, $form_state) {
     '#default_value' => $languages,
     '#title' => t('Available in languages'),
     '#attributes' => array('class' => ['new-select-style']),
+    '#chosen' => TRUE,
+    '#multiple' => TRUE,
     '#prefix' => '<div class="views-exposed-widget">',
     '#suffix' => '</div></div>',
   );
@@ -116,7 +118,7 @@ function osha_publication_menu_publications_form($form, $form_state) {
     drupal_get_path('module', 'osha_publication') . '/js/search-auto-submit.js',
   );
 
-  $get_params = array('text', 'sort_by', 'direction');
+  $get_params = array('text', 'sort_by');
   drupal_add_js(array('osha_publication' => array('get_params' => $get_params)), 'setting');
 
   return $form;
@@ -147,7 +149,7 @@ function osha_publication_menu_publications_search_native($form_state) {
   $languages = osha_publication_req_param($form_state, 'languages', array($language->language));
   $text = osha_publication_req_param($form_state, 'text');
   $sort = osha_publication_req_param($form_state, 'sort_by', 'search_api_relevance');
-  $direction = osha_publication_req_param($form_state, 'direction', 'desc');
+  $direction = 'desc';
   $tags = osha_publication_req_param($form_state, 'tags', array());
   $publication_type = osha_publication_req_param($form_state, 'publication_type', array());
 

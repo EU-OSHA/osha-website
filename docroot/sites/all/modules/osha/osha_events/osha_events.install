@@ -301,3 +301,11 @@ function osha_events_update_7028() {
 function osha_events_update_7029() {
   features_revert(array('osha_events' => array('views_view')));
 }
+
+/**
+ * .
+ */
+function osha_events_update_7030() {
+  features_revert(array('osha_seminar' => array('views_view')));
+  features_revert(array('osha_events' => array('views_view')));
+}

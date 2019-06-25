@@ -271,7 +271,7 @@ function osha_publication_menu_publications_search_native($form_state) {
     $nids = array_intersect(array_unique($restrict), $nids);
   }
   $total = count($nids);
-  $per_page = 7;
+  $per_page = 5;
   $current_page = pager_default_initialize(count($nids), $per_page);
   $page = array_chunk($nids, $per_page, TRUE);
   $nodes = node_load_multiple($page[$current_page]);

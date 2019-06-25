@@ -55,11 +55,13 @@ if ($node->field_show_eu_flag && $node->field_show_eu_flag['und'][0]['value']) {
     <span class="event-country"><?php print $fields['field_city']->content; ?>, <?php print $fields['field_country_code']->content; ?></span>
     <h2><?php print strip_tags($fields['title_field']->content, '<a>'); ?></h2>
     <p class="summary"><?php print $fields['body']->content; ?></p>
-    <?php print l(t('See more'), '/node/' . $nid, array(
+    <?php
+    print l(t('See more'), 'node/' . $nid, array(
       'attributes' => array('class' => ['see-more-arrow']),
     ));
     ?>
-    <?php if ($end_date) {
+    <?php
+    if ($end_date && $date['value'] > date('Y-m-d H:i:s')) {
         $description = strip_tags($fields['body']->content);
         $description = str_replace("'", "", $description);
         ?>

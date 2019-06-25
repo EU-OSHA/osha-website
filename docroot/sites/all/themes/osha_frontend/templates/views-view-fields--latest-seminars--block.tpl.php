@@ -46,7 +46,7 @@ if ($row->field_field_show_eu_flag[0]['raw']['value']) {
     'external' => TRUE,
   ));
   ?>
-  <?php if ($fields['field_report']->content) { ?>
+  <?php if ($fields['field_pages_count']->content) { ?>
     <a class="report-available" href="<?php print $fields['field_report']->content; ?>"><?php print t('Report available'); ?> (<?php print $fields['field_pages_count']->content; ?>)</a>
   <?php } ?>
 </div>

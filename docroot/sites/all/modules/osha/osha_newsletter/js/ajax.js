@@ -1,9 +1,12 @@
 (function($){
   Drupal.behaviors.osha_newsletter_captcha_block = {
     attach: function (context, settings) {
-      $('#edit-email').once('osha_newsletter_captcha_block', function() {
+      $('#edit-email').once('osha_newsletter_captcha_block', function () {
         var ajax_settings = {};
         ajax_settings.url = Drupal.settings.basePath + Drupal.settings.pathPrefix + 'newsletter/ajax/block';
+        if (!jQuery('body').hasClass('front') && !$('#block-osha-newsletter-osha-newsletter-subscribe').length) {
+          ajax_settings.url = ajax_settings.url + '/footer';
+        }
         ajax_settings.event = 'click';
         var base = '#edit-email';
         Drupal.ajax['captcha-block'] = new Drupal.ajax(base, this, ajax_settings);

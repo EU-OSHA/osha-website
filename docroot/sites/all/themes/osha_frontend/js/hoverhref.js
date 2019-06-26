@@ -298,7 +298,7 @@ jQuery(document).ready(function() {
 		jQuery('#block-menu-block-1').css('display','block');
 		jQuery('.breadcrumb-fluid').css('display','block');
 	}
-	
+
 	jQuery( "body > div.mean-bar > a" ).click(function() {
 		jQuery( 'body > div.mean-bar > nav > div > ul' ).toggleClass( "active" );
 	});

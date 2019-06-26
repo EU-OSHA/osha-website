@@ -1222,7 +1222,8 @@ html[lang=el] .page-tools-and-publications .see-more-arrow{
 .pager-total{
     position: absolute;
     top:2em;
-    right: 13em;
+    right: 0;
+    font-size: 0.8rem;
 }
 
 .pager-total span{

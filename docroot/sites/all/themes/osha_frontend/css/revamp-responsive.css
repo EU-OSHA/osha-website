@@ -65,7 +65,7 @@
     }
 
     .pager-total{
-        right: 4%;
+        top:-1em;
     }
 
     /*Home Page*/
@@ -785,7 +785,12 @@
 
     .item-list ul.pager{
         display: block;
+        padding: 2em 0;
     } 
+
+    .pager .pager-current {
+        padding: 0.4em 0.5em 0.4em 0.5em;
+    }
 
     /*Footer*/
     .content-form-newsletter .btn-light-white{

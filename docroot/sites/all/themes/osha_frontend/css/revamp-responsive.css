@@ -470,6 +470,10 @@
         border-bottom: 0;
     }
 
+    #block-osha-newsletter-osha-newsletter-subscribe {
+        margin-bottom: 1em;
+    }
+
      /*Header*/
      #block-search-form{
         width: 0;

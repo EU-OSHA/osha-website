@@ -173,6 +173,37 @@ a.see-more-arrow:hover{
     font-weight: bold;
 }
 
+.front h2.home{
+    background: transparent;
+    font-family: 'Open Sans',sans-serif;
+    font-weight: bold!important;
+    font-size: 1.6rem!important;
+    color: #003399!important;
+    letter-spacing: 0;
+    margin-bottom: 4px;
+    padding: 0;
+    margin: 0;
+    padding-bottom: 0.2em;
+    line-height: 1.2em;
+    padding-top: 0.1em;
+    clear: both;
+}
+
+.front h2.home a{
+    font-family: 'Open Sans',sans-serif;
+    font-weight: bold!important;
+    font-size: 1.6rem!important;
+    color: #003399!important;
+    letter-spacing: 0;
+    margin-bottom: 4px;
+    padding: 0;
+    margin: 0;
+    padding-bottom: 1em;
+    line-height: 1.2em;
+    padding-top: 0.1em;
+    text-decoration: none;
+}
+
 /* Home intro boxes */
 
 .region-home-intro{
@@ -675,6 +706,10 @@ html[lang=de] .content-home-event .tag-news-events{
     text-decoration: underline;
 }
 
+.captcha{
+    clear: both;
+}
+
 .captchaImg{
     float: left;
 }
@@ -1137,6 +1172,11 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
     margin-left: 0em;
 }
 
+html[lang=el] .page-tools-and-publications .see-more-arrow{
+    font-size: 0.75rem;
+    background-position-x: 94%;
+}
+
 .page-tools-and-publications .publications-right-column h2{
     line-height: 27px;
     font-weight: 400;
@@ -1315,8 +1355,8 @@ span.title-download {
     height: initial;
 }
 
-.chosen-container-multi .chosen-choices li.search-field{
-    padding-top: 5px;
+.chosen-container-multi .chosen-choices{
+    padding: 0 5px 0px 0px;
 }
 
 .chosen-container-active .chosen-choices{
@@ -1983,13 +2023,21 @@ input[type=checkbox].add-to-calendar-checkbox {
 
 .page-oshevents .more-link {    
     background: transparent;
+    text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 .page-oshevents .more-link a{
     position: absolute;
-    margin-left: -135px;
-    bottom:-13px;
-    background: transparent;
+    bottom: -17px;
+}
+
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+     .page-oshevents .more-link a { 
+            margin-left: -140px;
+        } /* IE11 */
 }
 
 .section-oshevents .content-fluid.events .container{

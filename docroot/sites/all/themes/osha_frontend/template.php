@@ -352,22 +352,23 @@ function fill_related_publications(&$vars) {
     $limit = 3;
     global $user;
     if (!empty($result)) {
-      $vars['total_related_publications'] = sizeof($result['node']);
+      $vars['total_related_publications'] = count($result['node']);
       $vars['tagged_related_publications'] = array();
       $count = 0;
       foreach ($result['node'] as $n) {
         $node = node_load($n->nid);
         if ($node->status == 0) {
-          // add unpublished only for admin, do not include in count
+          // Add unpublished only for admin, do not include in count.
           if (OshaWorkflowPermissions::userHasRole('administrator', $user)) {
-            $vars['tagged_related_publications'][] = node_view($node, 'teaser');
+            $vars['tagged_related_publications'][] = $node;
           }
-        } else {
-          $vars['tagged_related_publications'][] = node_view($node,'teaser');
+        }
+        else {
+          $vars['tagged_related_publications'][] = $node;
           $count++;
         }
         if ($count == $limit) {
-          // max 3 related publications
+          // Max 3 related publications.
           break;
         }
       }

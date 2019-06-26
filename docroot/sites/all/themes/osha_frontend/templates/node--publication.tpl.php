@@ -6,15 +6,29 @@
 ?>
 <?php
 if ($view_mode == 'full') {
-    // Append oshwiki in related resources.
-    foreach ($content['field_related_oshwiki_articles']['#items'] as $idx => $row) {
-      $content['field_aditional_resources']['#items'][] = $row;
-      $content['field_aditional_resources'][] = $content['field_related_oshwiki_articles'][$idx];
-    }
+  foreach ($tagged_related_publications as $rel_related_publication) {
+    $content['field_aditional_resources']['#items'][] = [
+      'target_id' => $rel_related_publication->nid,
+      'entity' => $rel_related_publication,
+      'access' => TRUE,
+    ];
+    $content['field_aditional_resources'][] = [
+      'node' => [
+        $rel_related_publication->nid => node_view($rel_related_publication, 'osha_resources'),
+        '#sorted' => TRUE,
+      ],
+    ];
+  }
 
-    $tags = strip_tags(render($content['field_tags']));
-    $publication_type = '<strong>' . t('Type') . ': </strong>' . strip_tags(render($content['field_publication_type']));
-    $pages_count = strip_tags(render($content['field_pages_count']));
+  // Append oshwiki in related resources.
+  foreach ($content['field_related_oshwiki_articles']['#items'] as $idx => $row) {
+    $content['field_aditional_resources']['#items'][] = $row;
+    $content['field_aditional_resources'][] = $content['field_related_oshwiki_articles'][$idx];
+  }
+
+  $tags = strip_tags(render($content['field_tags']));
+  $publication_type = strip_tags(render($content['field_publication_type']));
+  $pages_count = strip_tags(render($content['field_pages_count']));
 ?>
     <div class="container">
         <!-- PUBLICATION DETAIL -->
@@ -25,7 +39,7 @@ if ($view_mode == 'full') {
                 <div class="publications-detail-right-column">
                     <div class="content-publication-info">
                         <span class="date-display-single"><?php print strip_tags(render($content['field_publication_date'])); ?></span>
-                        <span class="label"><?php print $publication_type; ?></span>
+                        <span class="label"><strong><?php print t('Type') ?>: </strong><?php print $publication_type; ?></span>
                         <span class="pages">
                             <?php
                             if ($pages_count) {

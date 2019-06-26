@@ -5,6 +5,11 @@
  */
 ?>
 <?php
+
+if (empty($url_query)) {
+  $url_query = [];
+}
+
 if ($view_mode == 'full') {
   foreach ($tagged_related_publications as $rel_related_publication) {
     $content['field_aditional_resources']['#items'][] = [

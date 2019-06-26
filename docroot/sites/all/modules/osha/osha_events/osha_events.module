@@ -66,6 +66,17 @@ function osha_events_block_info() {
   return $blocks;
 }
 
+/**
+ * Implements hook_search_api_solr_query_alter().
+ */
+function osha_events_search_api_solr_query_alter(array &$call_args, SearchApiQueryInterface $query) {
+  if (arg(0) == 'oshevents') {
+    if (!isset($_REQUEST['field_start_date_value'])) {
+      $query->params['fq'][] = 'ds_field_start_date\:value:["' . date("Y-m-d\TH:i:s.000\Z") . 'Z" TO *]';
+    }
+  }
+}
+
 function osha_events_dates_form($form, $form_state) {
   $form = array();
   $form['#prefix'] = '<div class="content-filters">';
@@ -88,6 +99,9 @@ function osha_events_dates_form($form, $form_state) {
   if (!empty($_REQUEST['field_start_date_value'])) {
     $date = explode('/', $_REQUEST['field_start_date_value']['date']);
     $form['from_date']['#default_value'] = $date[2] . '-' . $date[1] . '-' . $date[0];
+  }
+  else {
+    $form['from_date']['#default_value'] = date('Y-m-d');
   }
   if (!empty($_REQUEST['field_start_date_value2'])) {
     $date = explode('/', $_REQUEST['field_start_date_value2']['date']);

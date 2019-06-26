@@ -77,6 +77,7 @@ div.view-header.back.revamp{
     margin-top: 25px;
     padding-left: 10px;
     color:#003399;
+    padding-right: 30px;
 }
 
 .views-exposed-form .views-exposed-widget input.search-new-design{
@@ -1140,6 +1141,10 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
     padding-top: 0!important;
     width: 32.3%!important;
     margin-right: 1em;
+}
+
+.page-tools-and-publications .views-exposed-widget .new-select-style .chosen-choices{
+    padding-top: 4px;
 }
 
 .views-exposed-widgets > div:last-child{

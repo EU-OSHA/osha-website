@@ -293,16 +293,18 @@ function osha_publication_menu_publications_search_native($form_state) {
   if (count($languages) == 1) {
     $showing_lang = current($languages);
   }
+  $start = $current_page * $per_page;
+  $pager = theme('pager', array(
+    'tags' => array(),
+    'quantity' => 9,
+    'parameters' => $pager_params,
+  ));
+  $suffix = '<div class="content-pagination container">' . $pager . '<div class="pager-total"><span>(' . ($start + 1) . ' - ' . ($start + count($nodes)) . ')</span></div></div>';
   $ret = array(
     '#nids' => $nids,
     '#prefix' => '<h2>' . t('Publications available') . ' (' . $total . ')</h2>',
     'results-native' => node_view_multiple($nodes, 'osha_search_teaser', 0, $showing_lang),
-    '#suffix' => theme('pager', array(
-      'tags' => array(),
-      'quantity' => 9,
-      'parameters' => $pager_params,
-    )
-    ),
+    '#suffix' => $suffix,
   );
   return $ret;
 }

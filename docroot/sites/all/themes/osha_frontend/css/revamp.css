@@ -68,7 +68,7 @@ div.view-header.back.revamp{
 }
 
 .search-new-design{
-    height: 35px;
+    height: 37px;
     border: 1px solid #003399;
     border-radius: 5px;
     background: url(../images/pink-search.png) no-repeat 96% 55%;
@@ -132,7 +132,8 @@ div.view-header.back.revamp{
 }
 
 .new-select-style{
-    height: 35px;
+    min-height: 35px;
+    height: auto;
     border: 1px solid #003399;
     border-radius: 5px;
     background: url("../images/pink-select.png") no-repeat scroll 94% center #FFF;
@@ -144,6 +145,10 @@ div.view-header.back.revamp{
     -webkit-appearance:none; /* Safari and Chrome */
     appearance:none;
 }   
+
+#edit-sort-by{
+    min-height: 37px;
+}
 
 
 a.see-more-arrow {

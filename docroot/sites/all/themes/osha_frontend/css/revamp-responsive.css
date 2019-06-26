@@ -12,6 +12,11 @@
     .modal-content{
         height: 73%;
     }
+
+     .page-tools-and-publications .block-nodeblock, .section-oshevents .block-nodeblock{
+        padding-left: 1em;
+        padding-right: 1em;
+    }
 }
 
 
@@ -323,7 +328,35 @@
         right:2%;
     }
 
+    /*Home*/
+    .front .sidebars_second_home{
+        width: 100%;
+    }
+
+    .front .sidebars_second_home #block-osha-newsletter-osha-newsletter-subscribe{
+        float: left;
+    }
+
+    .front .sidebars_second_home #block-osha-homepage-osha-homepage-tweets{
+        height: 257px;
+        clear: none;
+        float: left;
+        margin-left: 1em;
+    }
+
+    .front .sidebars_second_home #block-osha-homepage-osha-homepage-follow-us{
+        clear: both;
+    }
+
     /*Publications*/
+
+    .box-latest-publications .right-column{
+        width: 95%;
+    }
+
+    .page-tools-and-publications .publications-right-column h2 a{
+        height: auto;
+    }
 
     .page-tools-and-publications .publications-right-column h2{
         padding-left: 0;
@@ -342,6 +375,10 @@
         padding: 0 0 2em 0;
     }
 
+    .page-tools-and-publications .content-filters{
+        padding: 1em;
+    }
+
     .filters-header{
         padding-left: 10px;
     }
@@ -358,6 +395,12 @@
     }
 
     /* Events*/
+
+    .content-home-event {
+        width: 32.5%;
+        margin-right: 2px;
+    }
+
     .box-events-summary{
         width: 45.6%;
         margin-bottom: 0;
@@ -406,7 +449,7 @@
 
     .box-events-summary .report-available {
         font-size: 0.7rem;
-        width: 62px;
+        width: 80px;
     }
 
     .events-view h2{
@@ -671,6 +714,15 @@
     .page-tools-and-publications #content, .page-oshevents #content{
         width: 75%!important;
     }
+
+    .news_and_events ul li {
+        width: 20.6%;
+    }
+
+    .section-news-events article{
+        padding-left: 1em;
+        padding-top: 1em;
+    }
 }
 
 
@@ -887,11 +939,11 @@
     /*Home*/
 
     .home-intro{
-        width: 75%;
+        width: 100%;
     }
 
     .home-boxes {
-        width: 100%;
+        width: 33%;
         height: auto;
         margin-bottom: 2em;
         margin-right: 0;
@@ -899,11 +951,6 @@
 
     .home-boxes .content-background {
         height: 100%;
-    }
-
-    .content-recommended-resources{
-        width: 260px;
-        margin: 0 auto;
     }
 
     .view-news-and-events .more-link {
@@ -973,7 +1020,15 @@
     }
 
     .page-tools-and-publications .views-exposed-widget, .page-oshevents .views-exposed-widget {
+        width: 101%!important;
+    }
+
+    #edit_languages_chosen{
         width: 98%!important;
+    }
+
+    .page-tools-and-publications .content-filters{
+        padding: 0;
     }
 
     .publications-right-column {
@@ -1198,6 +1253,41 @@
         padding-bottom: 5px;
         padding-left: 0;
         display: block;
+    }
+
+}
+
+
+@media screen and (max-width: 940px){
+
+    .front .sidebars_second_home{
+        width: 100%;
+    }
+
+    .front .sidebars_second_home #block-osha-newsletter-osha-newsletter-subscribe{
+        float: none;
+    }
+
+    .front .sidebars_second_home #block-osha-homepage-osha-homepage-tweets{
+        height: 257px;
+        clear: both;
+        float: none;
+        margin-left: 1em;
+    }
+}
+
+@media screen and (max-width: 700px){
+    .home-boxes{
+        width: 100%;
+    }
+
+    .content-home-event {
+        width: 100%;
+    }
+
+    .content-recommended-resources{
+        width: 260px;
+        margin: 0 auto;
     }
 
 }

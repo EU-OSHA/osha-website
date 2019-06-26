@@ -1230,6 +1230,7 @@ html[lang=el] .page-tools-and-publications .see-more-arrow{
 .content-pagination{
     position: relative;
     clear: both;
+    padding-bottom: 1em;
 }
 
 .pager-total{

@@ -823,6 +823,11 @@
 }
 
 @media screen and (max-width: 768px) {
+
+    .page-tools-and-resources .field-name-body p, .page-tools-and-publications .field-name-body p, .page-oshevents .field-name-body p{
+        padding-top: 1em;
+    }
+
     .section-oshevents .content-fluid.events .container{
         border-bottom: 0 solid #003399;  
     }

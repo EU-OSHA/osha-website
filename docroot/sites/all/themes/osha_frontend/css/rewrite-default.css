@@ -365,6 +365,10 @@ ul[data-sa-theme="basic-blue"].ui-menu {
 
 /* Publications contents */
 
+.page-tools-and-publications .block-nodeblock, .section-oshevents .block-nodeblock{
+    display: block;
+}
+
 .page-oshevents #content .chosen-container-single .chosen-single{
     background: transparent;
     box-shadow: 0 0 0px white inset, 0 0px 0px rgba(0, 0, 0, 0.1);

@@ -2828,7 +2828,7 @@ function osha_events_views_default_views() {
   $handler->display->display_options['footer']['result']['id'] = 'result';
   $handler->display->display_options['footer']['result']['table'] = 'views';
   $handler->display->display_options['footer']['result']['field'] = 'result';
-  $handler->display->display_options['footer']['result']['content'] = '<span class="result_summary">Displaying @start - @end of @total</span>';
+  $handler->display->display_options['footer']['result']['content'] = '<div class="pager-total"><span>@start - @end</span></div>';
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
@@ -3151,7 +3151,7 @@ function osha_events_views_default_views() {
     t('‹ previous'),
     t('next ›'),
     t('last »'),
-    t('<span class="result_summary">Displaying @start - @end of @total</span>'),
+    t('<div class="pager-total"><span>@start - @end</span></div>'),
     t('<div class="view-empty">No results</div>'),
     t('[field_start_date] - [field_start_date_1]'),
     t('[field_start_date_2]'),

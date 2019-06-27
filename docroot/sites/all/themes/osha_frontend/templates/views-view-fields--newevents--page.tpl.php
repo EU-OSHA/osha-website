@@ -38,7 +38,7 @@ if ($date) {
   $date_object->setTimezone(new DateTimeZone($date['timezone']));
   $end_date = date_format_date($date_object, 'custom', 'm/d/Y H:i:s');
   if ($start_date == $end_date) {
-    $end_date = '';
+//    $end_date = '';
   }
 }
 if ($node->field_show_eu_flag && $node->field_show_eu_flag['und'][0]['value']) {

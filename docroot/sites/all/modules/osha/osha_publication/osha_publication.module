@@ -785,6 +785,7 @@ function osha_publication_field_formatter_settings_summary($field, $instance, $v
  * Implements hook_theme().
  */
 function osha_publication_theme() {
+  $path = drupal_get_path('module', 'osha_publication');
   return array(
     'osha_publication_file_publication_file_format' => array(
       'variables' => array('entity' => NULL, 'file' => NULL, 'delta' => NULL),
@@ -797,6 +798,11 @@ function osha_publication_theme() {
     ),
     'osha_publication_twin_publications_format' => array(
       'variables' => array('items' => NULL),
+    ),
+    'osha_publications_related_resources' => array(
+      'template' => 'osha_publications_related_resources',
+      'variables' => array('items' => NULL),
+      'path' => $path . '/templates'
     ),
   );
 }

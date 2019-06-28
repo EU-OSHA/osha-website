@@ -11,18 +11,20 @@ if (empty($url_query)) {
 }
 
 if ($view_mode == 'full') {
-  foreach ($tagged_related_publications as $rel_related_publication) {
-    $content['field_aditional_resources']['#items'][] = [
-      'target_id' => $rel_related_publication->nid,
-      'entity' => $rel_related_publication,
-      'access' => TRUE,
-    ];
-    $content['field_aditional_resources'][] = [
-      'node' => [
-        $rel_related_publication->nid => node_view($rel_related_publication, 'osha_resources'),
-        '#sorted' => TRUE,
-      ],
-    ];
+  if (variable_get('allow_tagged_related_publications', FALSE)) {
+    foreach ($tagged_related_publications as $rel_related_publication) {
+      $content['field_aditional_resources']['#items'][] = [
+        'target_id' => $rel_related_publication->nid,
+        'entity' => $rel_related_publication,
+        'access' => TRUE,
+      ];
+      $content['field_aditional_resources'][] = [
+        'node' => [
+          $rel_related_publication->nid => node_view($rel_related_publication, 'osha_resources'),
+          '#sorted' => TRUE,
+        ],
+      ];
+    }
   }
 
   // Append oshwiki in related resources.
@@ -72,9 +74,17 @@ if ($view_mode == 'full') {
         </div>
     </div>
   <?php
-  if (isset($content['field_aditional_resources'])) {
-    print render($content['field_aditional_resources']);
+  $items = [];
+  foreach (array_keys($content['field_aditional_resources']['#items']) as $key) {
+    $items[] = $content['field_aditional_resources'][$key];
   }
+  print theme('osha_publications_related_resources', [
+    'items' => $items,
+  ]);
+  if (isset($content['field_aditional_resources'])) {
+    hide($content['field_aditional_resources']);
+  }
+
   if (isset($content['field_related_publications'])) {
     print render($content['field_related_publications']);
   }

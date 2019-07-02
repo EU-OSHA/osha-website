@@ -34,7 +34,6 @@ function osha_publication_menu_publications_form($form, $form_state) {
     '#attributes' => array('placeholder' => t('Search'), 'class' => ['search-new-design']),
     '#prefix' => '<div class="views-exposed-widgets clearfix"><div id="edit-search-api-views-fulltext-wrapper" class="views-exposed-widget">',
     '#suffix' => '</div>',
-
   );
   $sorts = array('search_api_relevance' => t('Relevance'), 'field_publication_date' => t('Publication date'));
   $form['content']['sort_by'] = array(

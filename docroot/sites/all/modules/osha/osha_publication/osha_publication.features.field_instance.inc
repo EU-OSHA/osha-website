@@ -1951,8 +1951,9 @@ function osha_publication_field_default_field_instances() {
       ),
       'osha_search_teaser' => array(
         'label' => 'hidden',
+        'module' => 'i18n_taxonomy',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'i18n_taxonomy_term_reference_plain',
         'weight' => 10,
       ),
       'osha_slideshow' => array(

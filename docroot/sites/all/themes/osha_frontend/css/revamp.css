@@ -2143,3 +2143,12 @@ input[type=checkbox].add-to-calendar-checkbox {
 #views-exposed-form-newevents-page #edit-field-start-date-value2-wrapper {
     display: none;
 }
+
+/*MDR-3040 Revamp Tablet Header - Language and Search box are not aligned*/
+@media only screen and (device-width: 768px) {
+  /* For general iPad layouts */
+    #search-block-form{
+        margin-right: -10px;
+        padding-right: 0px;
+    }
+}

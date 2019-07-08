@@ -39,7 +39,7 @@ if ($view_mode == 'full') {
 ?>
     <div class="container">
         <!-- PUBLICATION DETAIL -->
-        <div class="view-header back revamp"><?php print l(t('Back to publications and filter'), 'tools-and-publications/publications'); ?></div>
+        <div class="view-header back revamp"><?php print l(t('Back to publications and filter'), 'publications'); ?></div>
         <div class="publications-detail">
             <div class="publications-row">
                 <div class="publications-left-column"><?php print render($content['field_cover_image']); ?></div>

@@ -5,6 +5,9 @@
  */
 $publication_type = '<strong>' . t('Type') . ': </strong>' . strip_tags(render($content['field_publication_type']));
 $pages_count = strip_tags(render($content['field_pages_count']));
+if (empty($url_query)) {
+  $url_query = [];
+}
 ?>
 <div class="left-column">
   <?php print render($content['field_cover_image']); ?>

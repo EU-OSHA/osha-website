@@ -10,7 +10,7 @@ function osha_publication_menu_publications_form($form, $form_state) {
   $tags = osha_publication_req_param($form_state, 'tags', array());
   $publication_type = osha_publication_req_param($form_state, 'publication_type', array());
   $form = array(
-    '#action' => url('tools-and-publications/publications'),
+    '#action' => url('publications'),
     '#method' => 'GET',
     'left-column' => array(
       '#type' => 'container',

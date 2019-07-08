@@ -644,7 +644,7 @@ safety-and-health-legislation/european-guidelines',
   $path_breadcrumb->api_version = 1;
   $path_breadcrumb->machine_name = 'osh_publications';
   $path_breadcrumb->name = 'Publications list';
-  $path_breadcrumb->path = 'tools-and-publications/publications';
+  $path_breadcrumb->path = 'publications';
   $path_breadcrumb->data = array(
     'titles' => array(
       0 => '%site:current-page:menu-link:pb-join:name',

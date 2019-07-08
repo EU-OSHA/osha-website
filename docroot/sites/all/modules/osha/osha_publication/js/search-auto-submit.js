@@ -33,7 +33,7 @@
                         uri += '/' + 'type_' + types.join('_');
                     }
                     var url = Drupal.settings.basePath + Drupal.settings.pathPrefix;
-                    url += 'tools-and-publications/publications';
+                    url += 'publications';
                     url += uri;
                     if (typeof Drupal.settings.osha_publication.get_params != 'undefined' && Drupal.settings.osha_publication.get_params != null) {
                         var params_uri = [];

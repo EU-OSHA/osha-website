@@ -555,8 +555,11 @@ function osha_frontend_preprocess_html(&$variables) {
   }
   $list_page = arg(0) . arg(1) . arg(2);
   $req_uri = request_path();
-  if (drupal_is_front_page() || (strpos($req_uri, 'tools-and-publications/publications') >= 0)) {
+  if (drupal_is_front_page() || (strpos($req_uri, 'publications') >= 0)) {
     $variables['classes_array'][] = 'revamp';
+  }
+  if (arg(0) . arg(1) == 'publications') {
+    $variables['classes_array'][] = 'page-tools-and-publications';
   }
   if ($list_page == 'oshevents') {
     $variables['classes_array'][] = 'revamp';
@@ -741,7 +744,7 @@ function osha_frontend_pager_link($variables) {
   // Set pagination url for publication search pretty path.
   $req_uri = request_path();
   $is_pretty_search = FALSE;
-  if (strpos($req_uri, 'tools-and-publications/publications') >= 0) {
+  if (strpos($req_uri, 'publications') >= 0) {
     $is_pretty_search = TRUE;
     $req_uri = preg_replace('/^' . $language->language . '\//', '', $req_uri);
   }

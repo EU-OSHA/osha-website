@@ -308,7 +308,7 @@ function osha_nodequeue_sort_alter(&$nodes, $sqid) {
     osha_expire_view_page('about-eu-osha/press-room');
   }
   if ($sqid == 6) {
-    osha_expire_view_page('tools-and-publications/publications');
+    osha_expire_view_page('publications');
   }
 }
 

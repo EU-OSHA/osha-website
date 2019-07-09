@@ -1082,7 +1082,6 @@ function osha_publication_node_get_main_tags($item) {
 }
 
 function osha_publication_node_get_main_publication_type($item) {
-  $type = null;
   if ($item->type != 'publication') {
     return NULL;
   }
@@ -1101,7 +1100,7 @@ function osha_publication_node_get_main_publication_type($item) {
   if (!$term->field_main_category[LANGUAGE_NONE][0]['value']) {
     return null;
   }
-  return $type;
+  return $term;
 }
 
 function osha_publication_get_main_publication_types_map($parent = TRUE) {

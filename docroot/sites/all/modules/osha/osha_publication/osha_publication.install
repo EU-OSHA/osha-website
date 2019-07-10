@@ -738,3 +738,26 @@ function osha_publication_update_7022() {
 function osha_publication_update_7023() {
   features_revert(array('osha_publication' => array('field_instance')));
 }
+
+/**
+ * .
+ */
+function osha_publication_update_7024() {
+  variable_set('pathauto_update_action', 2);
+  $start = 0;
+  $limit_count = 50;
+  $break_at = 1000;
+  while (1) {
+    $resource = db_query("SELECT nid FROM node WHERE type='publication' AND status=1 LIMIT $start, $limit_count");
+    foreach ($resource as $result) {
+      $node = node_load($result->nid);
+      $node->path['pathauto'] = TRUE;
+      $node->path['alias'] = str_replace('tools-and-publications/', '', $node->path['alias']);
+      pathauto_node_update_alias($node, 'update');
+    }
+    $start += $limit_count;
+    if ($start >= $break_at) {
+      break;
+    }
+  }
+}

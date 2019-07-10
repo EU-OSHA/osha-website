@@ -58,7 +58,7 @@ function osha_publication_menu() {
  */
 function osha_publication_cronapi() {
   return array('osha_publication_cron' => array(
-    'description' => 'Publicatio  pdf pages count update',
+    'description' => 'Publication pdf pages count update',
     'rule' => '*/15 * * * *', // Every 15 minutes
   ));
 }
@@ -160,11 +160,11 @@ function osha_publication_url_inbound_alter(&$path, $original_path, $path_langua
   $args = arg();
   // MC-175 - publication search pretty path.
   // break down in filters the publication search path.
-  if (strpos($path, 'tools-and-publications/publications') !== FALSE) {
+  if (strpos($path, 'publications') !== FALSE) {
     $menu_item = menu_get_item($path);
     if (in_array($menu_item['page_callback'], ['osha_publication_listing_page', 'osha_publication_export'])) {
       if ($menu_item['page_callback'] == 'osha_publication_listing_page') {
-        $path = 'tools-and-publications/publications';
+        $path = 'publications';
       }
       elseif ($menu_item['page_callback'] == 'osha_publication_export') {
         $path = 'export/tools-and-publications/publications';

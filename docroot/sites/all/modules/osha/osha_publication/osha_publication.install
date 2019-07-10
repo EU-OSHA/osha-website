@@ -743,6 +743,13 @@ function osha_publication_update_7023() {
  * .
  */
 function osha_publication_update_7024() {
+}
+
+/**
+ * MDR-3012 Revamp Publications - URL.
+ */
+function osha_publication_update_7025() {
+  variable_set('pathauto_node_publication_pattern', 'publications/[node:title]');
   variable_set('pathauto_update_action', 2);
   $start = 0;
   $limit_count = 50;

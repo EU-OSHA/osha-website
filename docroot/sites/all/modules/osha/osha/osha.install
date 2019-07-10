@@ -660,3 +660,11 @@ function osha_update_7051() {
 function osha_update_7052() {
   features_revert(array('osha' => array('fe_block_settings')));
 }
+
+/**
+ * Revamp publication path alias update.
+ */
+function osha_update_7053() {
+  variable_set('pathauto_node_publication_pattern', 'publications/[node:title]');
+}
+

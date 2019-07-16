@@ -1,0 +1,13 @@
+name = Pagerer example
+description = "Pagerer example."
+package = User interface
+core = 7.x
+
+dependencies[] = pagerer
+
+; Information added by drupal.org packaging script on 2013-03-25
+version = "7.x-1.1"
+core = "7.x"
+project = "pagerer"
+datestamp = "1364252117"
+

@@ -691,6 +691,11 @@ function osha_publication_field_formatter_info() {
       'field types' => array('text'),
       'settings' => array('title_style' => '', 'title_link' => '', 'title_class' => '', 'trim_length' => '', 'trim_suffix' => ''),
     ),
+    'publication_image' => array(
+      'label' => t('Publication image'),
+      'field types' => array('image'),
+      'settings' => array('image_style' => '', 'image_link' => ''),
+    ),
   );
   return $info;
 }
@@ -700,7 +705,31 @@ function osha_publication_field_formatter_info() {
  */
 function osha_publication_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
   $settings = $instance['display'][$view_mode]['settings'];
+  $display = $instance['display'][$view_mode];
+
   $element = array();
+  if ($display['type'] == 'publication_image') {
+    $image_styles = image_style_options(FALSE, PASS_THROUGH);
+    $element['image_style'] = array(
+      '#title' => t('Image style'),
+      '#type' => 'select',
+      '#default_value' => $settings['image_style'],
+      '#empty_option' => t('None (original image)'),
+      '#options' => $image_styles,
+    );
+
+    $link_types = array(
+      'content' => t('Content'),
+    );
+    $element['image_link'] = array(
+      '#title' => t('Link image to'),
+      '#type' => 'select',
+      '#default_value' => $settings['image_link'],
+      '#empty_option' => t('Nothing'),
+      '#options' => $link_types,
+    );
+    return $element;
+  }
 
   $wrap_tags = array(
     '_none' => t('- None -'),
@@ -760,6 +789,35 @@ function osha_publication_field_formatter_settings_summary($field, $instance, $v
   $settings = $instance['display'][$view_mode]['settings'];
   $summary = array();
 
+  $display = $instance['display'][$view_mode];
+  if ($display['type'] == 'publication_image') {
+    $settings = $display['settings'];
+
+    $summary = array();
+
+    $image_styles = image_style_options(FALSE, PASS_THROUGH);
+    // Unset possible 'No defined styles' option.
+    unset($image_styles['']);
+    // Styles could be lost because of enabled/disabled modules that defines
+    // their styles in code.
+    if (isset($image_styles[$settings['image_style']])) {
+      $summary[] = t('Image style: @style', array('@style' => $image_styles[$settings['image_style']]));
+    }
+    else {
+      $summary[] = t('Original image');
+    }
+
+    $link_types = array(
+      'content' => t('Linked to content'),
+    );
+    // Display this setting only if image is linked.
+    if (isset($link_types[$settings['image_link']])) {
+      $summary[] = $link_types[$settings['image_link']];
+    }
+
+    return implode('<br />', $summary);
+  }
+
   if (empty($settings)) {
     return;
   }
@@ -810,6 +868,9 @@ function osha_publication_theme() {
       'template' => 'osha_publications_related_resources',
       'variables' => array('items' => NULL),
       'path' => $path . '/templates'
+    ),
+    'osha_image_formatter' => array(
+      'variables' => array('item' => NULL, 'path' => NULL, 'image_style' => NULL),
     ),
   );
 }
@@ -872,6 +933,30 @@ function osha_publication_field_formatter_view($entity_type, $entity, $field, $i
         '#theme' => 'osha_publication_twin_publications_format',
         '#items' => $items,
       );
+      break;
+
+    case 'publication_image':
+
+      foreach ($items as $delta => $item) {
+        // Check if the formatter involves a link.
+        if ($display['settings']['image_link'] == 'content') {
+        $uri = entity_uri($entity_type, $entity);
+        $path = url($uri['path']);
+        if ($entity->type == 'publication') {
+          $path .= '/view';
+        }
+        $uri = array(
+          'path' => $path,
+          'options' => array(),
+        );
+        }
+        $element[$delta] = array(
+          '#theme' => 'osha_image_formatter',
+          '#item' => $item,
+          '#image_style' => $display['settings']['image_style'],
+          '#path' => isset($uri) ? $uri : '',
+        );
+      }
       break;
 
     case 'publication_title_linked':
@@ -939,6 +1024,51 @@ function osha_publication_field_formatter_view($entity_type, $entity, $field, $i
       return $element;
   }
   return $element;
+}
+
+function theme_osha_image_formatter($variables) {
+  $item = $variables['item'];
+  $image = array(
+    'path' => $item['uri'],
+  );
+
+  if (array_key_exists('alt', $item)) {
+    $image['alt'] = $item['alt'];
+  }
+
+  if (isset($item['attributes'])) {
+    $image['attributes'] = $item['attributes'];
+  }
+
+  if (isset($item['width']) && isset($item['height'])) {
+    $image['width'] = $item['width'];
+    $image['height'] = $item['height'];
+  }
+
+  // Do not output an empty 'title' attribute.
+  if (isset($item['title']) && drupal_strlen($item['title']) > 0) {
+    $image['title'] = $item['title'];
+  }
+
+  if ($variables['image_style']) {
+    $image['style_name'] = $variables['image_style'];
+    $output = theme('image_style', $image);
+  }
+  else {
+    $output = theme('image', $image);
+  }
+
+  // The link path and link options are both optional, but for the options to be
+  // processed, the link path must at least be an empty string.
+  if (isset($variables['path']['path'])) {
+    $path = $variables['path']['path'];
+    $options = isset($variables['path']['options']) ? $variables['path']['options'] : array();
+    // When displaying an image inside a link, the html option must be TRUE.
+    $options['html'] = TRUE;
+    $output = '<a href="' . check_plain($path) . '">' . $output . '</a>';
+  }
+
+  return $output;
 }
 
 /*

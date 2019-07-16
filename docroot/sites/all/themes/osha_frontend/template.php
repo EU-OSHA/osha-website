@@ -723,6 +723,10 @@ function osha_frontend_pager($variables) {
   return theme_pager($variables);
 }
 
+function osha_frontend_pagerer_standard($variables) {
+  return osha_pagerer_theme_handler('pagerer_standard', $variables);
+}
+
 /**
  * Implements hook_pager_link().
  *

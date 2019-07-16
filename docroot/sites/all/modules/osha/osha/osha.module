@@ -1980,7 +1980,7 @@ function osha_pagerer_theme_handler($theme, $variables) {
   // Add Pagerer's css.
   drupal_add_css(drupal_get_path('module', 'pagerer') . '/pagerer.css');
   // Resolve tags. The tags key bears already localised strings.
-  $variables['tags'] = osha_pagerer_theme_handler($theme, $variables['display'], isset($variables['tags']) ? $variables['tags'] : array());
+  $variables['tags'] = osha_pagerer_tags_merge_default($theme, $variables['display'], isset($variables['tags']) ? $variables['tags'] : array());
   // Resolve markers.
   $markers = _pagerer_resolve_markers($variables);
   // Short to main markers.

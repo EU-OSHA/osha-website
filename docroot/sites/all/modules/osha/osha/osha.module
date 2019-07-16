@@ -1894,10 +1894,10 @@ function osha_pagerer_tags_merge_default($theme, $display_mode, $tags = NULL) {
     case 'pagerer_standard':
       $default_tags = array(
         'page'             => t("@number"),
-        'first'            => t("« first"),
-        'previous'         => t("‹ previous"),
-        'next'             => t("next ›"),
-        'last'             => t("last »"),
+        'first'            => t("«"),
+        'previous'         => t("‹"),
+        'next'             => t("›"),
+        'last'             => t("»"),
         'total'            => t("of @total"),
         'page_label'       => t("Page"),
         'item_label'       => t("Item"),

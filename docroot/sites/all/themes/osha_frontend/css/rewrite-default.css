@@ -314,6 +314,7 @@ table.pagerer tbody tr td div.item-list, table.pagerer tbody tr td div.item-list
 
 #content table.pagerer a{
     vertical-align: middle;
+    padding: 10px 15px;
 }
 
 .pager{
@@ -324,22 +325,26 @@ table.pagerer tbody tr td div.item-list, table.pagerer tbody tr td div.item-list
     font-size: 1em;
     color: #ca2273;
     border:1px solid #003399;
-    padding: 0.5em 1em 0.5em 1em !important;
+    padding: 0.6em 1em 0.5em 1em !important;
     margin-right: 10px;
     display: inline-block;
-    margin-top: 10px!important;
+    margin-top: 11px!important;
 }
 
 .pager .pager-item{
-    border:1px solid #cfddee;
-    padding: 0.5em 1em 0.5em 1em !important;
     margin-right: 10px;
     display: inline-block;
     margin-top: 10px!important;
 }
 
-.pager .pager-item:hover{
+.pager .pager-item a{
+    border:1px solid #cfddee;
+    border-bottom: 1px solid #cfddee !important;
+}
+
+.pager .pager-item a:hover{
     border:1px solid #003399;
+    border-bottom: 1px solid #003399 !important;
 }
 
 .pager .pager-item:hover a{

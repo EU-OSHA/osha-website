@@ -78,9 +78,11 @@ if ($view_mode == 'full') {
   foreach (array_keys($content['field_aditional_resources']['#items']) as $key) {
     $items[] = $content['field_aditional_resources'][$key];
   }
-  print theme('osha_publications_related_resources', [
-    'items' => $items,
-  ]);
+  if ($items) {
+    print theme('osha_publications_related_resources', [
+      'items' => $items,
+    ]);
+  }
   if (isset($content['field_aditional_resources'])) {
     hide($content['field_aditional_resources']);
   }

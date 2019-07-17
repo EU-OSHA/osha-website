@@ -609,6 +609,10 @@ body.logged-in .region-footer-sitemap .form-submit{
     padding: 0;
 }
 
+.content-home-event .views-field-view-node{
+    text-align: left;
+}
+
 .content-home-event:nth-child(3){
     margin-right:0;
 }

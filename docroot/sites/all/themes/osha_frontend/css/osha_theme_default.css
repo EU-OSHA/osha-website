@@ -10678,7 +10678,7 @@ table.quiz-feedback-table.sticky-enabled.tableheader-processed.sticky-table > tb
   min-width: 80%;
 }
 
-.view-id-quiz_user_results th, .view-id-quiz_user_result td{
+.view-id-quiz_user_results th, .view-id-quiz_user_results td{
   border:1px solid gray;
   padding:0.5em;
 }

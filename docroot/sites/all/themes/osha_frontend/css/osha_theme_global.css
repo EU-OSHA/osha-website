@@ -13,6 +13,10 @@
 		max-width: 100%;
 	}
 
+	.pagerer.pagerer-left{
+		display: none;
+	}
+
 	.photo-gallery .col-xs-12 {
 		float: none;
 	}
@@ -689,8 +693,9 @@ footer {
 .link_news_events  {
 	text-align: right;	
 }
+
 .link_news_events a {
-	float: none;
+	margin-top: 0.5em;
 }
 
 
@@ -2178,7 +2183,7 @@ ul[data-sa-theme="basic-blue"].ui-menu{
 
 /*** 25th anniversary  ***/
 @media screen and (max-width: 1005px) {
-	
+
 	.field-name-field-image.field-type-image {
 	  text-align: center;
 	}
@@ -2352,7 +2357,7 @@ ul[data-sa-theme="basic-blue"].ui-menu{
     background: url(../images/ico-plus.png) no-repeat right 25%;
     padding-left: 10px;
     color: #003399;
-    font-family: "Open Sans Condensed",sans-serif!important;
+    font-family: "Open Sans",sans-serif!important;
     font-size: 1.1em!important;
     padding-bottom: 1em;
     padding-right: 0;
@@ -2375,4 +2380,10 @@ ul[data-sa-theme="basic-blue"].ui-menu{
 /* Hide newsletter unsubscribe in Frontend MDR-2500 */
 .hide-front-unsubscribe{
 	display: none;
+}
+
+@media screen and (min-width: 1007px) {
+	.pagerer-center{
+		display: none;
+	}
 }

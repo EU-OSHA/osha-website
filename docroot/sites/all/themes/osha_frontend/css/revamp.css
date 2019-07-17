@@ -1177,6 +1177,21 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
     width: 180px;
 }
 
+/*MDR-3057 Revamp Publication List: Filters*/
+.form-item-languages .chosen-container .chosen-choices .search-choice{
+    border:none;
+    background:none;
+    box-shadow: none;
+}
+
+.form-item-languages .chosen-container .search-choice span{
+    color:#003399;    
+}
+
+.form-item-languages .chosen-container .search-choice a.search-choice-close{
+    border-bottom:none !important;
+}
+
 .filters-header{
     color:#003399;
     font-size: 1.2rem;
@@ -2182,4 +2197,13 @@ input[type=checkbox].add-to-calendar-checkbox {
 #views-exposed-form-newevents-page #edit-field-start-date-value-wrapper,
 #views-exposed-form-newevents-page #edit-field-start-date-value2-wrapper {
     display: none;
+}
+
+/*MDR-3040 Revamp Tablet Header - Language and Search box are not aligned*/
+@media only screen and (device-width: 768px) {
+  /* For general iPad layouts */
+    #search-block-form{
+        margin-right: -10px;
+        padding-right: 0px;
+    }
 }

@@ -48,6 +48,18 @@
     font-weight: 600;
     font-size: 1.35rem;
     color: #003399;
+    margin-bottom: 0;
+    line-height: 30px;
+}
+
+.page-tools-and-publications .content-fluid h2{
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.page-tools-and-publications .content-fluid .right-column h2{
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 #content h2 a:hover{
@@ -131,7 +143,7 @@ div.view-header.back.revamp{
     display: block;
 }
 
-.new-select-style{
+.new-select-style, .form-select{
     min-height: 35px;
     height: auto;
     border: 1px solid #003399;
@@ -150,24 +162,58 @@ div.view-header.back.revamp{
     min-height: 37px;
 }
 
+.osha-share-widget ul li a:hover{
+    opacity: 0.8;
+}
 
-a.see-more-arrow {
-    font-size: 1.063em;
+
+a.see-more-arrow, .node-readmore a, .more-link a, .view .views-field-view-node a, #become-partner-link a, #join-list-link a, .sidebars_second .view-footer a, .OSHWiki .p3 a, .view-search-directives .links a, .more-link-wrapper a, .see-link a, .link_news_events a{
+    font-size: 12px;
     font-family: 'Open Sans',sans-serif;
     color: #003399;
-    background: url(../images/flecha.png) no-repeat scroll 87% 53% transparent;
-    padding: 0.5em 3em 0.5em 1em;
+    background: url(../images/flecha.png) no-repeat scroll 89% 53% transparent;
+    padding: 0.5em 3em 0.5em 1em !important;
     text-decoration: none;
     padding-left: 0em;
     border-bottom: 0px!important;
     font-weight: bold;
 }
 
-a.see-more-arrow:hover{
+a.see-more-arrow:hover, .node-readmore a:hover, .more-link a:hover, .view .views-field-view-node a:hover, #become-partner-link a:hover, #join-list-link a:hover, .sidebars_second .view-footer a:hover, .OSHWiki .p3 a:hover, .view-search-directives .links a:hover, .more-link-wrapper a:hover, .see-link a:hover, .link_news_events a:hover{
     color: #FFF!important;
-    background: url(../images/flecha.png) no-repeat scroll 87% 53% #003399;
-    padding: 0.5em 3em 0.5em 1em;
+    background: url(../images/flecha.png) no-repeat scroll 89% 53% #003399;
+    padding: 0.5em 3em 0.5em 1em !important;
     margin-left: -1em;
+    -webkit-transition: background-color 800ms linear;
+    -moz-transition: background-color 800ms linear;
+    -o-transition: background-color 800ms linear;
+    -ms-transition: background-color 800ms linear;
+    transition: background-color 800ms linear;
+}
+
+.view-search-directives .links .node-readmore{
+    float: right;
+}
+
+.OSHWiki .p3 a img{
+    display: none;
+}
+
+.see-link{  
+    text-align: right;
+}
+
+a.see-more-arrow{
+    font-size: 15px !important;
+}
+
+.sidebars_second  #become-partner-link a, .sidebars_second  #join-list-link a, .sidebars_second .view-footer a{
+    float: right;
+}
+
+.views-field-view-node{
+    text-align: right;
+    padding-bottom: 10px;
 }
 
 .front .date-display-single{
@@ -193,6 +239,7 @@ a.see-more-arrow:hover{
     line-height: 1.2em;
     padding-top: 0.1em;
     clear: both;
+    border-bottom: 0 !important;
 }
 
 .front h2.home a{
@@ -245,12 +292,12 @@ a.see-more-arrow:hover{
     width: 100%;
     height: 100%;
     background: rgba(0,51,153,0);
-    background: -moz-linear-gradient(top, rgba(0,51,153,0) 48%, rgba(0,51,153,0.65) 76%, rgba(0,51,153,0.65) 100%);
-    background: -webkit-gradient(left top, left bottom, color-stop(48%, rgba(0,51,153,0)), color-stop(76%, rgba(0,51,153,0.65)), color-stop(100%, rgba(0,51,153,0.65)));
-    background: -webkit-linear-gradient(top, rgba(0,51,153,0) 48%, rgba(0,51,153,0.65) 76%, rgba(0,51,153,0.65) 100%);
-    background: -o-linear-gradient(top, rgba(0,51,153,0) 48%, rgba(0,51,153,0.65) 76%, rgba(0,51,153,0.65) 100%);
-    background: -ms-linear-gradient(top, rgba(0,51,153,0) 48%, rgba(0,51,153,0.65) 76%, rgba(0,51,153,0.65) 100%);
-    background: linear-gradient(to bottom, rgba(0,51,153,0) 48%, rgba(0,51,153,0.65) 76%, rgba(0,51,153,0.65) 100%);
+    background: -moz-linear-gradient(top, rgba(0,51,153,0) 30%, rgba(0,51,153,0.65) 76%, rgba(0,51,153,0.65) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(30%, rgba(0,51,153,0)), color-stop(76%, rgba(0,51,153,0.65)), color-stop(100%, rgba(0,51,153,0.65)));
+    background: -webkit-linear-gradient(top, rgba(0,51,153,0) 30%, rgba(0,51,153,0.65) 76%, rgba(0,51,153,0.65) 100%);
+    background: -o-linear-gradient(top, rgba(0,51,153,0) 30%, rgba(0,51,153,0.65) 76%, rgba(0,51,153,0.65) 100%);
+    background: -ms-linear-gradient(top, rgba(0,51,153,0) 30%, rgba(0,51,153,0.65) 76%, rgba(0,51,153,0.65) 100%);
+    background: linear-gradient(to bottom, rgba(0,51,153,0) 30%, rgba(0,51,153,0.65) 76%, rgba(0,51,153,0.65) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#003399', endColorstr='#003399', GradientType=0 );
     -webkit-transition: width 2s; /* For Safari 3.1 to 6.0 */
     transition: width 2s;
@@ -260,7 +307,6 @@ a.see-more-arrow:hover{
 	position: absolute;
     width: 100%;
     height: 100%;
-
     background: rgba(0,51,153,0);
     background: -moz-linear-gradient(top, rgba(0,51,153,0) 12%, rgba(0,51,153,0.05) 16%, rgba(0,51,153,0.65) 65%, rgba(0,51,153,0.65) 100%);
     background: -webkit-gradient(left top, left bottom, color-stop(12%, rgba(0,51,153,0)), color-stop(16%, rgba(0,51,153,0.05)), color-stop(65%, rgba(0,51,153,0.65)), color-stop(100%, rgba(0,51,153,0.65)));
@@ -279,20 +325,21 @@ a.see-more-arrow:hover{
 
 .home-boxes h2{
     font-family: 'Open Sans', sans-serif;
-	background: transparent;
+    background: transparent;
     color: #FFF;
     position: absolute;
     font-size: 1.7rem;
     letter-spacing: 0;
     margin-left: 15px;
     margin-right: 15px;
-    bottom: 30px;
+    bottom: 0;
     margin-bottom: 0;
     padding: 0 0 0.4em 0;
     font-weight: lighter;
     z-index: 999;
     transition: 0.8s;
     line-height: 30px;
+    padding-bottom: 20px;
 }
 
 .home-boxes h3{
@@ -367,6 +414,7 @@ a.box-link{
     color: #003399;
     font-size: 1rem;
     padding-bottom: 0.5em;
+    margin-top: 15px;
 }
 
 .follow-us-icons{
@@ -1088,6 +1136,7 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
     float: none;
     width: 100%;
     padding-bottom: 1.7em;
+    line-height: 20px;
 }
 
 .box-latest-publications h2 a{
@@ -1187,7 +1236,7 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
 
 .page-tools-and-publications .see-more-arrow{
     font-size: 0.9rem;
-    margin-left: 0em;
+    margin-left: -1em;
 }
 
 html[lang=el] .page-tools-and-publications .see-more-arrow{
@@ -1599,6 +1648,12 @@ div.publications-detail-right-column > a.download{
     margin-left: 0;
 }
 
+.content-related-boxes .box a{
+    margin-left: 0em;
+    margin-right: 1em;
+    margin-top: 8px;
+}
+
 
 /*Videos*/
 .content-related-videos{
@@ -1656,7 +1711,7 @@ img.icon-play:hover{
     clear: both;
     line-height: 25px;
     margin: 0;
-    padding: 0 6px 0 0;
+    padding: 0 6px 20px 0;
     font-size: 1.2rem;
     font-weight: normal;
 }

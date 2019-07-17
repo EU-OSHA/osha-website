@@ -135,26 +135,26 @@ jQuery(document).ready(function($){
 
 	/*Ellipsis Home intro boxes*/
 	
-	var character_intro = 60;
+	var character_intro = 72;
 	var count1_intro = $(".home-intro > div:nth-child(1) > a:nth-child(1) > h2").text().length;
 	var count2_intro = $(".home-intro > div:nth-child(2) > a:nth-child(1) > h2").text().length;
-	var count3_intro = $(".home-intro > div:nth-child(2) > a:nth-child(1) > h2").text().length;
+	var count3_intro = $(".home-intro > div:nth-child(3) > a:nth-child(1) > h2").text().length;
 
-	if (count1_intro > character_intro){
+	if (count1_intro >= character_intro){
 		$(".home-intro > div:nth-child(1) > a:nth-child(1) > h2").text(function(){
     		return $(this).text().substring(0,character_intro);
 		});
 		$( ".home-intro > div:nth-child(1) > a:nth-child(1) > h2" ).append( "..." );
 	}
 
-	if (count2_intro > character_intro){
+	if (count2_intro >= character_intro){
 		$(".home-intro > div:nth-child(2) > a:nth-child(1) > h2").text(function(){
     		return $(this).text().substring(0,character_intro);
 		});
 		$( ".home-intro > div:nth-child(2) > a:nth-child(1) > h2" ).append( "..." );
 	}
 
-	if (count3_intro > character_intro){
+	if (count3_intro >= character_intro){
 		$(".home-intro > div:nth-child(3) > a:nth-child(1) > h2").text(function(){
     		return $(this).text().substring(0,character_intro);
 		});

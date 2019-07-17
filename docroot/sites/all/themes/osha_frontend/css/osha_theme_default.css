@@ -9643,3 +9643,26 @@ table.quiz-feedback-table.sticky-enabled.tableheader-processed.sticky-table > tb
 .contextual-links-trigger{
 	background: none !important;
 }
+
+/* RLR QUIZ - MDR-2848 - 25th Anniversary Quiz report ***************************/
+.view-id-quiz_user_results{
+  margin-left: 10em;
+
+}
+
+.view-id-quiz_user_results table{
+  min-width: 80%;
+}
+
+.view-id-quiz_user_results th, .view-id-quiz_user_results td{
+  border:1px solid gray;
+  padding:0.5em;
+}
+
+.view-id-quiz_user_results .views-exposed-widgets > div:last-child{
+float: right;
+width: 300px;
+margin-top: -10px;
+}
+
+/*END RLR QUIZ - MDR-2848 - 25th Anniversary Quiz report ***************************/

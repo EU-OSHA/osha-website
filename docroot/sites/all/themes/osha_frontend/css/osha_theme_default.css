@@ -10670,23 +10670,79 @@ table.quiz-feedback-table.sticky-enabled.tableheader-processed.sticky-table > tb
 
 /* RLR QUIZ - MDR-2848 - 25th Anniversary Quiz report ***************************/
 .view-id-quiz_user_results{
-  margin-left: 10em;
+ 	margin-left: 10em;
 
 }
 
 .view-id-quiz_user_results table{
-  min-width: 80%;
+ 	min-width: 80%;
 }
 
-.view-id-quiz_user_results th, .view-id-quiz_user_results td{
-  border:1px solid gray;
-  padding:0.5em;
+.view-id-quiz_user_results th{
+	background:  #003399;
+	color: #FFF;
+	padding:0.5em;
+	border-right: 1px solid #CCC;
+}
+
+.view-id-quiz_user_results table thead tr th:nth-child(3){
+	border-right: 1px solid #003399;
+}
+
+.view-id-quiz_user_results td{
+	border:1px solid #CCC;
+	padding:0.5em;
+}
+
+.view-id-quiz_user_results td b{
+	color: #003399;
 }
 
 .view-id-quiz_user_results .views-exposed-widgets > div:last-child{
-float: right;
-width: 300px;
-margin-top: -10px;
+	float: left;
+	width: 300px;
+	margin-top: -10px;
+	margin-left: 1em;
+}
+
+.view-id-quiz_user_results input{
+    min-height: 35px;
+    height: auto;
+    border: 1px solid #003399;
+    border-radius: 5px;
+    padding-left: 10px;
+    width: 100%!important;
+    color: #003399;
+    cursor: pointer;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    max-width: 175px;
+    margin-right: 1em;
+}
+
+.view-id-quiz_user_results input[type="submit"]{
+	background: #FFF;
+    border: 1px solid #003399;
+    border-radius: 5px;
+    color: #003399;
+    float: none;
+    font-family: "Open Sans",sans-serif;
+    font-size: 1em;
+    font-weight: bold;
+    padding-right: 2.3em;
+    height: 35px;
+    margin-top: 17px!important;
+    text-align: center;
+    padding-right: 8px;
+    width: auto!important;
+}
+
+
+.view-id-quiz_user_results input[type="submit"]:hover{
+	background: #003399;
+    border: 1px solid #003399; 
+    color: #FFF;
 }
 
 /*END RLR QUIZ - MDR-2848 - 25th Anniversary Quiz report ***************************/

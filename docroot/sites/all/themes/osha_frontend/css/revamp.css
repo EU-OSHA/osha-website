@@ -657,10 +657,12 @@ body.logged-in .region-footer-sitemap .form-submit{
 }
 
 html[lang=de] .content-home-event a.see-more-arrow, html[lang=cs] .content-home-event a.see-more-arrow, html[lang=el] .content-home-event a.see-more-arrow, html[lang=pl] .content-home-event a.see-more-arrow{
-    font-size: 0.7rem;
+    font-size: 0.7rem !important;
     padding-bottom: 9px;
     background-position-x: 94%;
-    background-position-y: 45%;
+    background-position-y: 53%;
+    margin-top: 0px;
+    padding: 8px 38px 6px 9px !important;
 }
 
 .content-home-event .tag-news-events{

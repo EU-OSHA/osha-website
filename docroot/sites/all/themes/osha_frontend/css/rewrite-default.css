@@ -844,3 +844,7 @@ footer{
 .menu-block-2 ul  li ul li:nth-child(2){
     margin-top: 0;
 }
+
+.video{
+    position: relative;
+}

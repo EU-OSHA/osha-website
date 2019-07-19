@@ -3,22 +3,28 @@
  * @file
  * Returns the HTML for a publication node.
  */
-?>
-<?php
 
 if (empty($url_query)) {
   $url_query = [];
 }
 
 if ($view_mode == 'full') {
-  if (variable_get('allow_tagged_related_publications', FALSE)) {
+  $publications_related_resources = [];
+  // Move Additional Resources into Related resources.
+  if (!empty($content['field_aditional_resources'])) {
+    $publications_related_resources = $content['field_aditional_resources'];
+    unset($content['field_aditional_resources']);
+  }
+  // Move Based on topic Related Publications into Additional resources.
+  $publications_aditional_resources = [];
+  if ($tagged_related_publications) {
     foreach ($tagged_related_publications as $rel_related_publication) {
-      $content['field_aditional_resources']['#items'][] = [
+      $publications_aditional_resources['#items'][] = [
         'target_id' => $rel_related_publication->nid,
         'entity' => $rel_related_publication,
         'access' => TRUE,
       ];
-      $content['field_aditional_resources'][] = [
+      $publications_aditional_resources[] = [
         'node' => [
           $rel_related_publication->nid => node_view($rel_related_publication, 'osha_resources'),
           '#sorted' => TRUE,
@@ -26,11 +32,21 @@ if ($view_mode == 'full') {
       ];
     }
   }
-
-  // Append oshwiki in related resources.
+  // Append oshwiki in Related resources.
   foreach ($content['field_related_oshwiki_articles']['#items'] as $idx => $row) {
-    $content['field_aditional_resources']['#items'][] = $row;
-    $content['field_aditional_resources'][] = $content['field_related_oshwiki_articles'][$idx];
+    $publications_related_resources['#items'][] = $row;
+    $publications_related_resources[] = $content['field_related_oshwiki_articles'][$idx];
+  }
+  if (isset($content['field_related_oshwiki_articles'])) {
+    hide($content['field_related_oshwiki_articles']);
+  }
+  // Append Twin publications in Related resources.
+  foreach ($content['field_related_publications']['#items'] as $idx => $row) {
+    $publications_related_resources['#items'][] = $row;
+    $publications_related_resources[] = $content['field_related_publications'][$idx];
+  }
+  if (isset($content['field_related_publications'])) {
+    hide($content['field_related_publications']);
   }
 
   $tags = strip_tags(render($content['field_tags']));
@@ -38,7 +54,6 @@ if ($view_mode == 'full') {
   $pages_count = strip_tags(render($content['field_pages_count']));
 ?>
     <div class="container">
-        <!-- PUBLICATION DETAIL -->
         <div class="view-header back revamp"><?php print l(t('Back to publications and filter'), 'publications'); ?></div>
         <div class="publications-detail">
             <div class="publications-row">
@@ -74,23 +89,30 @@ if ($view_mode == 'full') {
         </div>
     </div>
   <?php
-  $items = [];
-  foreach (array_keys($content['field_aditional_resources']['#items']) as $key) {
-    $items[] = $content['field_aditional_resources'][$key];
+  if ($publications_related_resources) {
+    $related_resources = [];
+    foreach (array_keys($publications_related_resources['#items']) as $key) {
+      $related_resources[] = $publications_related_resources[$key];
+    }
+    if ($related_resources) {
+      print theme('osha_publications_related_resources', [
+        'items' => $related_resources,
+      ]);
+    }
   }
-  if ($items) {
-    print theme('osha_publications_related_resources', [
-      'items' => $items,
-    ]);
-  }
-  if (isset($content['field_aditional_resources'])) {
-    hide($content['field_aditional_resources']);
-  }
-
-  if (isset($content['field_related_publications'])) {
-    print render($content['field_related_publications']);
+  if ($publications_aditional_resources) {
+    $aditional_resources = [];
+    foreach (array_keys($publications_aditional_resources['#items']) as $key) {
+      $aditional_resources[] = $publications_aditional_resources[$key];
+    }
+    if ($aditional_resources) {
+      print theme('osha_publications_aditional_resources', [
+        'items' => $aditional_resources,
+      ]);
+    }
   }
 }
+
 elseif ($view_mode == 'osha_resources') {
   $publication_type = '<strong>' . t('Type') . ': </strong>' . strip_tags(render($content['field_publication_type']));
   $pages_count = strip_tags(render($content['field_pages_count']));

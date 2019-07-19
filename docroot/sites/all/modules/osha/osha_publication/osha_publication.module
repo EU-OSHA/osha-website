@@ -869,6 +869,11 @@ function osha_publication_theme() {
       'variables' => array('items' => NULL),
       'path' => $path . '/templates'
     ),
+    'osha_publications_aditional_resources' => array(
+      'template' => 'osha_publications_aditional_resources',
+      'variables' => array('items' => NULL),
+      'path' => $path . '/templates'
+    ),
     'osha_image_formatter' => array(
       'variables' => array('item' => NULL, 'path' => NULL, 'image_style' => NULL),
     ),

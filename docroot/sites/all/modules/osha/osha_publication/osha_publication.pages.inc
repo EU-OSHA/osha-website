@@ -407,7 +407,7 @@ function osha_publication_menu_publications_search_related($form_state, $native_
     '#prefix' => '<h4>' . t('Other relevant publications in English') . '</h4>',
     'results-related' => node_view_multiple($nodes, 'osha_search_teaser', 0, $language->language),
     '#suffix' => theme('pager', array(
-      'tags' => array('<', '<', '', '>', '>'),
+      'tags' => array(),
       'quantity' => 9,
       'parameters' => $pager_params,
       'element' => 1,

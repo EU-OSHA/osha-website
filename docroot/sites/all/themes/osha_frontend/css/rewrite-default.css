@@ -312,7 +312,7 @@ table.pagerer tbody tr td div.item-list, table.pagerer tbody tr td div.item-list
     vertical-align: middle;
 }
 
-#content table.pagerer a{
+#content .pager li a{
     vertical-align: middle;
     padding: 10px 15px;
 }
@@ -368,17 +368,15 @@ table.pagerer tbody tr td div.item-list, table.pagerer tbody tr td div.item-list
     opacity: 0.6;
 }
 
-.pager .pager-previous{
-    padding-right: 20px;
+.pager-first a, .pager-previous a, .pager-next a, .pager-last a{
+    padding: 3px !important;
 }
 
-.pager .pager-first{
-    padding-right: 30px;
+.pager-first a:hover, .pager-previous a:hover, .pager-next a:hover, .pager-last a:hover{
+    opacity: 0.8;
 }
 
-.pager .pager-last{
-    padding-left:20px; 
-}
+
 
 .pager-item.breaker{
     border:0 !important;
@@ -509,9 +507,10 @@ footer{
     #contact > a:nth-child(5){
         display: block;
         width: 110px;
+        line-height: 25px;
     }
 
-    html[lang="de"] #contact > a:nth-child(5){
+    html[lang="de"] #contact > a:nth-child(5), html[lang="bg"] #contact > a:nth-child(5), html[lang="da"] #contact > a:nth-child(5), html[lang="es"] #contact > a:nth-child(5){
         width: 120px;
         line-height: 15px;
         margin-left: -6px;
@@ -761,7 +760,7 @@ footer{
 }
 
 #edit-sort-by, #edit-sort-order {
-    min-height: 35px;
+    min-height: 37px;
     height: auto;
     border: 1px solid #003399;
     border-radius: 5px;
@@ -773,6 +772,12 @@ footer{
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
+    font-size: 13px;
+    line-height: 32px;
+}
+
+#edit-sort-by option, #edit-sort-order option{
+    min-height: 37px;
 }
 
 #edit-search-block-form--3, #select_facetapi-facet-search-apidefault-multilingual-node-index-block-field-date-of-directive{
@@ -846,5 +851,45 @@ footer{
 }
 
 .video{
+    position: relative;
+}
+
+.front h2.home{
+    background: transparent;
+    font-family: 'Open Sans',sans-serif;
+    font-weight: bold!important;
+    font-size: 1.6rem!important;
+    color: #003399!important;
+    letter-spacing: 0;
+    margin-bottom: 4px;
+    padding: 0;
+    margin: 0;
+    padding-bottom: 0.2em;
+    line-height: 1.2em;
+    padding-top: 0.1em;
+    clear: both;
+    border-bottom: 0 !important;
+}
+
+.front h2.home a{
+    font-family: 'Open Sans',sans-serif;
+    font-weight: bold!important;
+    font-size: 1.6rem!important;
+    color: #003399!important;
+    letter-spacing: 0;
+    margin-bottom: 4px;
+    padding: 0;
+    margin: 0;
+    padding-bottom: 1em;
+    line-height: 1.2em;
+    padding-top: 0.1em;
+    text-decoration: none;
+}
+
+label{
+    color: #003399;
+}
+
+.view-footer{
     position: relative;
 }

@@ -711,19 +711,19 @@ function osha_publication_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => 'medium',
+          'image_style' => 'publications',
         ),
         'type' => 'image',
         'weight' => 0,
       ),
       'osha_slideshow' => array(
         'label' => 'hidden',
-        'module' => 'image',
+        'module' => 'osha_publication',
         'settings' => array(
           'image_link' => 'content',
-          'image_style' => 'thumbnail',
+          'image_style' => 'publications',
         ),
-        'type' => 'image',
+        'type' => 'publication_image',
         'weight' => 0,
       ),
       'osha_wiki' => array(

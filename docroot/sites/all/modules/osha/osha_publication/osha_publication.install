@@ -768,3 +768,10 @@ function osha_publication_update_7025() {
     }
   }
 }
+
+/**
+ * MDR-3012 Revamp Publications - URL.
+ */
+function osha_publication_update_7026() {
+  features_revert(array('osha_publication' => array('field_base', 'field_instance')));
+}

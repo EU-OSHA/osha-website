@@ -441,10 +441,37 @@ table.pagerer tbody tr td div.item-list, table.pagerer tbody tr td div.item-list
     width: auto;
 }
 
+@media screen and (max-width: 1200px) {
+
+    .page-tools-and-publications #content, .page-oshevents #content {
+        width: 75%!important;
+        margin-left: 3%!important;
+        border-top: 0px solid #003399;
+        margin-top: 3em;
+    }
+
+}
+
+
+@media screen and (min-width: 1007px) and (max-width: 1200px){
+    .page-tools-and-publications #content, .page-oshevents #content{
+        width: 75%!important;
+    }
+
+    .news_and_events ul li {
+        width: 20.6%;
+    }
+
+    .section-news-events article{
+        padding-left: 1em;
+        padding-top: 1em;
+    }
+}
+
 
 @media screen and (max-width: 990px) {
     .page-tools-and-publications.revamp #content, .page-oshevents #content{
-        width: 97%!important;
+        width: 90%!important;
     }
 }
 

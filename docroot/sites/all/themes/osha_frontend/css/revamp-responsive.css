@@ -59,13 +59,6 @@
         padding-left: 15px;
     }
 
-    .page-tools-and-publications #content, .page-oshevents #content {
-        width: 95%!important;
-        margin-left: 3%!important;
-        border-top: 0px solid #003399;
-        margin-top: 3em;
-    }
-
     .pager-total{
         top:-1em;
     }
@@ -725,21 +718,6 @@
 
 }
 
-@media screen and (min-width: 1007px) and (max-width: 1200px){
-    .page-tools-and-publications #content, .page-oshevents #content{
-        width: 75%!important;
-    }
-
-    .news_and_events ul li {
-        width: 20.6%;
-    }
-
-    .section-news-events article{
-        padding-left: 1em;
-        padding-top: 1em;
-    }
-}
-
 
 @media screen and (max-width: 990px) {
 
@@ -1236,6 +1214,10 @@
 
     .events-view h2{
         padding-top: 1em;
+    }
+
+    #content .revamp-row.events .add-to-calendar{
+        float: none;
     }
 
     /* Footer */

@@ -9,6 +9,7 @@
 }
 
 @media screen and (max-width: 1360px) {
+
     .modal-content{
         height: 73%;
     }
@@ -52,10 +53,6 @@
 
     .revamp .sidebars_first{
         margin-left: 1%;
-    }
-
-    h1.revamp{
-        padding-left: 13px;
     }
 
     .page-tools-and-resources .field-name-field-summary, .page-tools-and-publications .field-name-field-summary, .page-oshevents .field-name-field-summary{
@@ -287,23 +284,29 @@
     }
 
     .revamp h2{
-        padding-left: 0;
-        font-size: 1.2em;
+        font-size: 1.35rem;
         line-height: normal;
     }
 
     .revamp .right-column h2{
         padding-left: 0;
     }
- 
 
     #block-views-highlight-block-2 h2{
         background: transparent;
         padding-left: 0;
     }
 
+    table.pagerer tbody tr td div.item-list ul.pager li.pager-first, table.pagerer tbody tr td div.item-list ul.pager li.pager-previous, table.pagerer tbody tr td div.item-list ul.pager li.pager-next, table.pagerer tbody tr td div.item-list ul.pager li.pager-last{
+        font-size: 12px;
+    }
+
     .page-tools-and-resources .field-name-field-summary, .page-tools-and-publications .field-name-field-summary, .page-oshevents .field-name-field-summary{
         width: 90%;
+    }
+
+    .node-article .field-name-field-summary p{
+        margin-top: 0;
     }
 
     #block-views-highlight-block-2 {
@@ -515,6 +518,18 @@
 
     #block-osha-newsletter-osha-newsletter-subscribe {
         margin-bottom: 1em;
+    }
+
+    .page-tools-and-resources .field-name-body p, .page-tools-and-publications .field-name-body p, .page-oshevents .field-name-body p{
+        margin: 0;
+    }
+
+    #content{
+        padding: 0 1em;
+    }
+
+    .field-name-field-aditional-resources img.icon-play{
+        width: 75px;
     }
 
      /*Header*/
@@ -809,6 +824,15 @@
         padding-left: 1em;
     }
 
+    .section-safety-and-health-legislation .sidebars_first label{
+        padding-left: 0;
+    }
+
+    a.see-more-arrow, .node-readmore a, .more-link a, .view .views-field-view-node a, #become-partner-link a, #join-list-link a, .sidebars_second .view-footer a, .OSHWiki .p3 a, .view-search-directives .links a, .more-link-wrapper a, .see-link a, .link_news_events a{
+        background: url(../images/flecha.png) no-repeat scroll 80% 53% transparent;
+        padding: 0.5em 4em 0.5em 1em !important;
+    }
+
     .content-filters .views-widget{
         padding-left: 1em;
         padding-right: 1em;
@@ -842,6 +866,20 @@
 
     .pager .pager-current {
         padding: 0.4em 0.5em 0.4em 0.5em;
+    }
+
+    /* Gallery */
+    .view-id-flickr_albums.view-content .views-row[class*="col-"], .view-photo-gallery .view-content .views-row[class*="col-"], .page-photo-gallery .view-content .views-row[class*="col-"]{
+        margin: 10px 10px 0 0 !important;
+        width: 95%;
+    }
+
+    .view-id-flickr_albums .views-row img{
+        width: 100%;
+    }
+
+    .view-id-flickr_albums .view-content{
+        margin: 0 1em 0 0em;
     }
 
     /*Footer*/

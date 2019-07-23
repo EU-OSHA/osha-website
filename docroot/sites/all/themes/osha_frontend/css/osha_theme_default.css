@@ -1316,6 +1316,7 @@ span.date-display-single{
 	list-style-image:none!important;
 	margin:0;
 	padding:0;
+	margin-right: 1em !important;
 }
 
 .menu-block-3 ul li{
@@ -2870,17 +2871,6 @@ hr{
 	min-width:8.2em;
 }
 
-.node-news .field-name-title-field a,
-.node-events .field-name-title-field a{
-    border-bottom: 0 none !important;
-    color: #003399;
-    font-family: Open Sans Condensed !important;
-    font-size: 1.6em;
-    line-height: 1.1em;
-    margin: 0 0 0.7em;
-	font-weight:bold;
-}
-
 .node-news .field-name-field-summary {
 	margin: 0.1em 0 0 0;
 	padding:0;
@@ -2945,13 +2935,7 @@ hr{
 }
 
 .node-news.view-mode-full .field-name-title-field h1{
-	border-bottom: 0 none !important;
-	color: #003399;
-	font-family: Open Sans Condensed !important;
-	font-size: 1.6em;
-	line-height: 1.1em;
-	margin: 0 0 0.7em;
-	font-weight:bold;
+	font-size: 1.35rem;
 }
 
 
@@ -3076,7 +3060,7 @@ a.button-submit {
 
 }
 
-.node-news ul.links.inline .node-readmore, .node-events ul.links.inline .node-readmore, .node-highlight ul.links.inline .node-readmore{
+.node-news ul.links.inline .node-readmore, .node-events ul.links.inline .node-readmore, .node-highlight ul.links.inline .node-readmore, .node-press-release ul.links.inline .node-readmore{
 	float: right;
 }
 
@@ -3406,18 +3390,21 @@ a.button-submit {
 
 
 .back-to-link{
-	background: url("../images/flecha-izq.png") no-repeat scroll 78% center transparent;
+	background: url("../images/flecha-izq.png") no-repeat scroll 6% center transparent!important;
     color: #003399;
-    float: right;
-    font-family: "Open Sans Condensed",sans-serif!important;
-    font-size: 1.1em;
     margin: 0;
     padding-bottom: 0.3em;
-    padding-right: 0;
+    padding-right: 0em!important;
     text-align: right;
     width: 100%;
 	border-bottom:0px!important;
+	padding-left:1em;
 	font-weight:bold;
+	font-family: "Open Sans",sans-serif!important;
+    font-size: 0.8rem;
+    padding-left: 18px;
+    float: right;
+    font-weight: 600;
 }
 
 /*SEMINARS*/
@@ -4254,7 +4241,7 @@ article.node-press-release{
 	padding-left:0.8em;
 }
 
-.view-press-releases article.node-highlight{
+.view-press-releases article.node-highlight, #block-views-press-releases-block .view-press-releases{
 	padding-left:0.8em;
 }
 
@@ -5375,11 +5362,6 @@ a.tabs-primary__tab-link{
 
 /* ADITIONAL RESOURCES */
 
-.field-name-field-aditional-resources img.icon-play{
-	top: 44%;
-    left: 31%;
-}
-
 .field-name-field-aditional-resources .field-label{
 	background: url("../images/separator_home.jpg") repeat-x scroll 0 100% rgba(0, 0, 0, 0);
     clear: both;
@@ -5762,7 +5744,7 @@ a.tabs-primary__tab-link{
 .view-blog .views-field.views-field-title a{
 	border-bottom: 0 none !important;
 	font-family: "Open Sans Condensed",sans-serif !important;
-	font-size: 1.5em;
+	font-size: 1.35rem;
 	color: #003399;
 	padding-top: 0.5em;
 	padding-bottom: 0.5em;
@@ -6677,20 +6659,7 @@ body.page-node-5429 .oshwiki-featured-articles {
     text-decoration: none;
 }
 
-
-
 /*EVENTS DETAIL TESTING*/
-.node-events .field-name-title-field a {
-  border-bottom: 0 none !important;
-  color: #003399;
-  font-family: Open Sans Condensed !important;
-  font-size: 1.6em;
-  line-height: 1.1em;
-  margin: 0 0 0.7em;
-  font-weight: bold;
-}
-
-
 .node-events ul.links.inline {
   float: right;
   text-align: right;
@@ -7623,11 +7592,6 @@ display:block!important;
 .view-id-advisory_groups .views-field-nothing-2 .file-icon{
 	vertical-align: middle;
 }
-
-#content iframe{
-	max-width: 99%!important;
-}
-
 
 /*Block Camapaing 2012-2013*/
 

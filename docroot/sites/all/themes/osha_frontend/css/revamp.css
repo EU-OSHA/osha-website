@@ -703,6 +703,10 @@ html[lang=de] .content-home-event .tag-news-events{
     padding-bottom: 3em;
 }
 
+.content-subscribe label{
+    color: #FFF;
+}
+
 .btn-light-blue{
     float: left;
     background:#b2c7e5; 
@@ -916,6 +920,11 @@ a.privacy {
 }
 .btn-light-white:-moz-placeholder { /* Firefox 18- */
   color: #b2c7e5;
+}
+
+/* Contact us */
+.section-contact-us .field.field-name-body h2{
+    padding-bottom: 1em;
 }
 
 /* Footer Sitemap */
@@ -2209,3 +2218,4 @@ input[type=checkbox].add-to-calendar-checkbox {
         padding-right: 0px;
     }
 }
+

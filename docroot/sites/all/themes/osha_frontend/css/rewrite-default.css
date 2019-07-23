@@ -200,9 +200,12 @@ ul[data-sa-theme="basic-blue"].ui-menu {
 
 #block-osha-newsletter-osha-newsletter-subscribe h2 a{
     font-family: 'Open Sans',sans-serif;
-    font-size: 1.5rem!important;
     padding-bottom: 15px;
     text-decoration: none;
+}
+
+.front #block-osha-newsletter-osha-newsletter-subscribe h2 a{
+    font-size: 1.5rem!important;
 }
 
 #newsletter-subscription-form-wrapper{
@@ -850,10 +853,6 @@ footer{
     margin-top: 0;
 }
 
-.video{
-    position: relative;
-}
-
 .front h2.home{
     background: transparent;
     font-family: 'Open Sans',sans-serif;
@@ -892,4 +891,116 @@ label{
 
 .view-footer{
     position: relative;
+}
+
+.sidebars_second .pager-total{
+    display: none;
+}
+
+.ui-accordion .ui-accordion-header{
+    margin-top: 10px;
+}
+
+/* Related Resources - Articles, Seminars, etc. */
+
+.field-name-field-aditional-resources .field-item{
+    background: url(../images/back-tit-blue.png) repeat-x scroll 0 100% transparent;
+    padding: 1em 0;
+    float: left;
+    clear: both;
+    width: 100%;
+}
+
+.field-name-field-aditional-resources .field-item .field-item{
+    background: none;
+    padding: 0;
+}
+
+.field-name-field-aditional-resources .field-name-title-field{
+    clear: both;
+}
+
+.field-name-field-aditional-resources .field-name-title-field a{
+    font-size: 1.35rem;
+}
+
+.field-name-field-aditional-resources .field-name-title-field a:hover{
+    text-decoration: underline;
+}
+
+.field-name-field-aditional-resources .box .field-name-field-thumbnail{
+    max-width: 235px;
+}
+
+.field-name-field-aditional-resources .box .date-display-single{
+    width: 100%;
+}
+
+.field-name-field-aditional-resources .box img{
+    max-width: 235px;
+}
+
+.field-name-field-aditional-resources .box a{
+    margin-top: 10px;
+    margin-left: 0;
+}
+
+.field-name-field-aditional-resources .box .osha_target_external_link{
+    display: none;
+}
+
+.field-name-field-aditional-resources .video{
+    position: relative;
+    width: 235px;
+}
+
+.field-name-field-aditional-resources .video img{
+    width: 235px;
+    height: auto;
+}
+
+.field-name-field-aditional-resources .video h2{
+    float: none;
+    padding-bottom: 0;
+}
+
+.field-name-field-aditional-resources img.icon-play{
+    top: 22%;
+    left: 36%;
+    width: 65px;
+}
+
+.field-name-field-aditional-resources .flickr-image img{
+    max-width: 235px;
+}
+
+.field-name-field-aditional-resources .flickr-image .osha_target_external_link{
+    display: none;
+}
+
+.field-name-field-aditional-resources span.flickr-credit{
+    float: none;
+    clear: both;
+    line-height: 25px;
+    margin: 0;
+    padding: 0 6px 0 0;
+    font-size: 1.2rem;
+    font-weight: normal;
+    max-width: 235px;
+    overflow: inherit;
+}
+
+.field-name-field-aditional-resources span.flickr-credit a{
+    position: relative;
+}
+
+.field-name-field-aditional-resources span.flickr-credit > a > .osha_target_external_link{
+    position: absolute;
+    top: 0;
+    left: 230px;
+}
+
+
+.field-name-field-aditional-resources span.flickr-metadata{
+    font-size: 0.8rem;
 }

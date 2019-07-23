@@ -105,6 +105,12 @@ jQuery(document).ready(function($){
 		}
 	}
 
+	/* No pagerer display - move result @total results */
+	if (!$(".pagerer-pager ")[0]){
+		$('.pager-total').addClass('no-pagerer');
+	}
+	
+
 	/*Ellipsis News and Events Home page*/
 
 	var character = 65;

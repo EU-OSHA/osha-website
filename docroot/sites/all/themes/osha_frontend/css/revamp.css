@@ -100,10 +100,11 @@ div.view-header.back.revamp{
     background: url(../images/pink-search.png) no-repeat 96% 55%;
     width: 100%!important;
     float: left;
-    margin-top: 25px;
+    margin-top: 24px;
     padding-left: 10px;
     color:#003399;
     padding-right: 30px;
+    font-size: 13px;
 }
 
 .views-exposed-form .views-exposed-widget input.search-new-design{
@@ -158,7 +159,7 @@ div.view-header.back.revamp{
 }
 
 .new-select-style, .form-select{
-    min-height: 35px;
+    min-height: 34px;
     height: auto;
     border: 1px solid #003399;
     border-radius: 5px;
@@ -237,38 +238,6 @@ a.see-more-arrow{
     padding-top: 1em;
     display: block;
     font-weight: bold;
-}
-
-.front h2.home{
-    background: transparent;
-    font-family: 'Open Sans',sans-serif;
-    font-weight: bold!important;
-    font-size: 1.6rem!important;
-    color: #003399!important;
-    letter-spacing: 0;
-    margin-bottom: 4px;
-    padding: 0;
-    margin: 0;
-    padding-bottom: 0.2em;
-    line-height: 1.2em;
-    padding-top: 0.1em;
-    clear: both;
-    border-bottom: 0 !important;
-}
-
-.front h2.home a{
-    font-family: 'Open Sans',sans-serif;
-    font-weight: bold!important;
-    font-size: 1.6rem!important;
-    color: #003399!important;
-    letter-spacing: 0;
-    margin-bottom: 4px;
-    padding: 0;
-    margin: 0;
-    padding-bottom: 1em;
-    line-height: 1.2em;
-    padding-top: 0.1em;
-    text-decoration: none;
 }
 
 /* Home intro boxes */
@@ -734,6 +703,10 @@ html[lang=de] .content-home-event .tag-news-events{
     padding-bottom: 3em;
 }
 
+.content-subscribe label{
+    color: #FFF;
+}
+
 .btn-light-blue{
     float: left;
     background:#b2c7e5; 
@@ -947,6 +920,11 @@ a.privacy {
 }
 .btn-light-white:-moz-placeholder { /* Firefox 18- */
   color: #b2c7e5;
+}
+
+/* Contact us */
+.section-contact-us .field.field-name-body h2{
+    padding-bottom: 1em;
 }
 
 /* Footer Sitemap */
@@ -1331,6 +1309,14 @@ html[lang=el] .page-tools-and-publications .see-more-arrow{
     font-weight: bold;
 }
 
+.pager-total.default-view{
+    top: -32px;
+}
+
+.pager-total.default-view.no-pagerer{ 
+    top: 0;
+}
+
 /* Publication detail */
 
 .publications-row {
@@ -1421,7 +1407,7 @@ html[lang=el] .page-tools-and-publications .see-more-arrow{
 
 .content-languages-download{
     color:#003399;
-    padding: 1em;  
+    padding: 0.5em;  
     float: left;
     width: 100%;
     padding-top: 25px;
@@ -1448,15 +1434,19 @@ span.title-download {
 }
 
 .content-languages-download .new-select-style{
-    width: 50%!important;
+    width: 196px!important;
     background: url(../images/pink-select.png) no-repeat scroll 96% 11px transparent;
     color: #003399;
     float: left;
-    margin-right: 2em;
+    margin-right: 0.5em;
     padding-bottom: 7px;
     padding-top: 6px;
     overflow: initial;
     height: initial;
+}
+
+html[lang=el] .content-languages-download .new-select-style input, html[lang=hu] .content-languages-download .new-select-style input{
+    font-size: 10px !important;
 }
 
 .chosen-container-multi .chosen-choices{
@@ -2180,10 +2170,11 @@ input[type=checkbox].add-to-calendar-checkbox {
     padding-left: 2em;
     border-bottom: 0;
     text-decoration: underline;
-    background: url(../images/ico-add-to-my-calendar.png) no-repeat 0 1px;
+    background: url(../images/ico-add-to-my-calendar.png) no-repeat 0 11px;
     cursor: default;
     width: 200px;
     text-align: left;
+    padding-top: 9px;
 }
 
 .add-to-my-calendar label{
@@ -2204,7 +2195,7 @@ input[type=checkbox].add-to-calendar-checkbox {
 }
 
 .revamp-row.events .box-events-summary a.see-more-arrow {
-    font-size: 0.9rem;
+    margin-left: -1em;
 }
 
 
@@ -2227,3 +2218,4 @@ input[type=checkbox].add-to-calendar-checkbox {
         padding-right: 0px;
     }
 }
+

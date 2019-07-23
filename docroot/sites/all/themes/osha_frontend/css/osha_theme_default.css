@@ -850,60 +850,6 @@ span.date-display-single{
 	padding-right: 0.3em;
 }
 
-.node-publication.node-teaser .links {
-	background: url("../images/flecha.png") no-repeat scroll right center transparent;
-    color: #003399;
-    float: right;
-    font-family: "Open Sans Condensed",sans-serif;
-    font-size: 1.1em;
-    margin: 0;
-    padding-bottom: 0.3em;
-    text-align: right;
-    width: 100%;
-	font-weight:bold;
-}
-
-
-.node.node-article.node-teaser .links {
-	background: url("../images/flecha.png") no-repeat scroll right center transparent;
-    color: #003399;
-    float: right;
-    font-family: "Open Sans Condensed",sans-serif;
-    font-size: 1.1em;
-    margin: 0;
-    padding-bottom: 0.3em;
-    text-align: right;
-    width: 100%;
-	font-weight:bold;
-}
-
-.node-publication .field-name-field-wiki-page-url a {
-	background: url("../images/flecha.png") no-repeat scroll right 24% transparent;
-    color: #003399;
-    float: right;
-    font-family: "Open Sans Condensed",sans-serif!important;
-    font-size: 1.1em;
-    margin: 0;
-    padding-bottom: 1.3em;
-    text-align: right;
-    width: 100%;
-	padding-right:1.5em;
-	border-bottom:0px!important;
-}
-.node-publication.node-teaser .links  a{
-	padding-right:0.5em;
-	font-family: "Open Sans Condensed",sans-serif!important;
-	border-bottom:0px!important;
-	color: #003399;
-	text-decoration: none;
-}
-
-.node.node-article.node-teaser  .links  a{
-	padding-right:0.5em;
-	font-family: "Open Sans Condensed",sans-serif!important;
-	border-bottom:0px!important
-}
-
 .node-publication .field-name-field-publication-bookshop-id{
 	background-color: #e9edf6;
 	padding-top: 1em;
@@ -917,6 +863,10 @@ span.date-display-single{
     padding-left: 7px;
 }
 
+.view-related-content .views-row .node-teaser ul.links li.node-readmore{
+	float: right;
+	padding-bottom: 10px;
+}
 
 .node-publication .field-name-field-publication-bookshop-id span.osha_target_external_link{
 	display:none!important;
@@ -1366,6 +1316,7 @@ span.date-display-single{
 	list-style-image:none!important;
 	margin:0;
 	padding:0;
+	margin-right: 1em !important;
 }
 
 .menu-block-3 ul li{
@@ -2713,7 +2664,7 @@ hr{
 .view-header{
 	 font-size: 1.1em;
 	 float: right;
-	 font-family: 'Open Sans Condensed', sans-serif;
+	 font-family: 'Open Sans', sans-serif;
 	 color:#003399;
 	 clear:both;
 	 margin-top: -2.5em;
@@ -2920,17 +2871,6 @@ hr{
 	min-width:8.2em;
 }
 
-.node-news .field-name-title-field a,
-.node-events .field-name-title-field a{
-    border-bottom: 0 none !important;
-    color: #003399;
-    font-family: Open Sans Condensed !important;
-    font-size: 1.6em;
-    line-height: 1.1em;
-    margin: 0 0 0.7em;
-	font-weight:bold;
-}
-
 .node-news .field-name-field-summary {
 	margin: 0.1em 0 0 0;
 	padding:0;
@@ -2995,13 +2935,7 @@ hr{
 }
 
 .node-news.view-mode-full .field-name-title-field h1{
-	border-bottom: 0 none !important;
-	color: #003399;
-	font-family: Open Sans Condensed !important;
-	font-size: 1.6em;
-	line-height: 1.1em;
-	margin: 0 0 0.7em;
-	font-weight:bold;
+	font-size: 1.35rem;
 }
 
 
@@ -3119,26 +3053,15 @@ a.button-submit {
 	/* display:none!important; Display none to others social pages - CW-1509 */
 }
 
-.node-news ul.links.inline,
-.node-events ul.links.inline{
-	float: right;
-    text-align: right;
-    width: 100%;
-	padding-bottom:0em;
-	margin:0;
-	background: url("../images/flecha.png") no-repeat scroll right 50% transparent!important;
-	font-size: 1.1em;
+
+.node-news ul.links.inline, .node-events ul.links.inline, .node-highlight ul.links.inline{
+	display: block;
+	clear: both;
 
 }
 
-.node-news ul.links.inline a,
-.node-events ul.links.inline a {
-	border-bottom:0px!important;
-	padding-right: 0.5em;
-	font-family: "Open Sans Condensed",sans-serif!important;
-	color: #003399!important;
-	border-bottom:0px!important;
-	font-weight:bold;
+.node-news ul.links.inline .node-readmore, .node-events ul.links.inline .node-readmore, .node-highlight ul.links.inline .node-readmore, .node-press-release ul.links.inline .node-readmore{
+	float: right;
 }
 
 /* osha share */
@@ -3450,9 +3373,6 @@ a.button-submit {
 .view-header .back-to-link{
 	background: url("../images/flecha-izq.png") no-repeat scroll 6% center transparent!important;
     color: #003399;
-    float: right;
-    font-family: "Open Sans Condensed",sans-serif!important;
-    font-size: 1.1em;
     margin: 0;
     padding-bottom: 0.3em;
     padding-right: 0em!important;
@@ -3461,22 +3381,30 @@ a.button-submit {
 	border-bottom:0px!important;
 	padding-left:1em;
 	font-weight:bold;
+	font-family: "Open Sans",sans-serif!important;
+    font-size: 0.8rem;
+    padding-left: 18px;
+    float: right;
+    font-weight: 600;
 }
 
 
 .back-to-link{
-	background: url("../images/flecha-izq.png") no-repeat scroll 78% center transparent;
+	background: url("../images/flecha-izq.png") no-repeat scroll 6% center transparent!important;
     color: #003399;
-    float: right;
-    font-family: "Open Sans Condensed",sans-serif!important;
-    font-size: 1.1em;
     margin: 0;
     padding-bottom: 0.3em;
-    padding-right: 0;
+    padding-right: 0em!important;
     text-align: right;
     width: 100%;
 	border-bottom:0px!important;
+	padding-left:1em;
 	font-weight:bold;
+	font-family: "Open Sans",sans-serif!important;
+    font-size: 0.8rem;
+    padding-left: 18px;
+    float: right;
+    font-weight: 600;
 }
 
 /*SEMINARS*/
@@ -3549,33 +3477,6 @@ a.button-submit {
 
 /*END SEMINARS LIST*/
 
-
-
-
-
-/*SHARE LINKS HIGHLIGHS*/
-.node-highlight ul.links.inline{
-	float: right;
-    text-align: right;
-    width: 100%;
-	margin-top:-1.5em;
-	margin-bottom: 0;
-}
-
-.node-highlight ul.links.inline a{
-	border-bottom:0px!important
-
-}
-
-.node-highlight ul.links.inline .node-readmore, .node-press-release ul.links.inline .node-readmore{
-	margin-top:1.5em;
-	display: block;
-	text-align: right;
-    padding-right: 0;
-    margin-bottom: 5px;
-}
-
-/*END SHARE LINKS HIGHLIGHS*/
 
 /*HIGHLIGHS SECTION*/
 
@@ -3761,6 +3662,7 @@ a.button-submit {
 	height:1%;
 	overflow:hidden;
 	clear:both;
+	background: url(../images/back-tit-blue.png) repeat-x scroll 0 100% transparent;
 }
 
 .view-calls.view-id-calls .views-field-title-field{
@@ -3783,20 +3685,20 @@ a.button-submit {
 }
 
 .view-calls.view-id-calls .view-header a{
-	background: url("../images/flecha-izq.png") no-repeat scroll left center transparent;
-	color: #003399;
-	float: right;
-	font-family: "Open Sans Condensed",sans-serif!important;
-	font-size: 1.1em;
-	margin: 0;
-	padding-bottom: 0.3em;
-	text-align: right;
-	width: 100%;
-	padding-left:0.8em;
-	padding-right:0em;
-	text-decoration:none!important;
-	border-bottom:0px!important;
-	font-weight:bold;
+	background: url(../images/flecha-izq.png) no-repeat scroll left center transparent;
+    color: #003399;
+    float: right;
+    font-family: "Open Sans",sans-serif!important;
+    font-size: 15px;
+    margin: 0;
+    padding-bottom: 0.3em;
+    text-align: right;
+    width: 100%;
+    padding-left: 0.8em;
+    padding-right: 0em;
+    text-decoration: none!important;
+    border-bottom: 0px!important;
+    font-weight: 600;
 }
 
 .view-calls.view-display-id-page_1 .view-header{
@@ -3961,7 +3863,7 @@ a.button-submit {
 
 .view-highlight .views-row{
 	background: url("../images/separator_home.jpg") repeat-x scroll 0 100% rgba(0, 0, 0, 0);
-    padding-bottom: 0em;
+    padding-bottom: 1em;
     width: 100%;
 }
 
@@ -4240,15 +4142,12 @@ a.button-submit {
 	padding-bottom:1em;
 }
 
-.node-seminar .links .node-readmore a{
-	background: url("../images/flecha.png") no-repeat scroll 94% 61% transparent;
-    border: 0 none !important;
-    color: #003399;
-    font-family: "Open Sans Condensed",sans-serif !important;
-    font-size: 1em;
-    padding-right: 2.1em;
-    text-decoration: none;
-	font-weight:bold;
+.seminar-teaser-title{
+	margin-top: 0;
+}
+
+.field-name-field-seminar-location{
+	color: #003399;
 }
 
 .view-search-seminars .view-content .views-row .node-seminar .links.inline{
@@ -4342,7 +4241,7 @@ article.node-press-release{
 	padding-left:0.8em;
 }
 
-.view-press-releases article.node-highlight{
+.view-press-releases article.node-highlight, #block-views-press-releases-block .view-press-releases{
 	padding-left:0.8em;
 }
 
@@ -5467,7 +5366,7 @@ a.tabs-primary__tab-link{
 	background: url("../images/separator_home.jpg") repeat-x scroll 0 100% rgba(0, 0, 0, 0);
     clear: both;
     color: #000000;
-    font-family: "Open Sans Condensed",sans-serif;
+    font-family: "Open Sans",sans-serif;
     font-size: 1.6em;
     font-weight: lighter;
     margin-bottom: 0;
@@ -5825,7 +5724,7 @@ a.tabs-primary__tab-link{
 
 /* BLOG LIST */
 
-.view-blog  a {
+.view-blog .views-field-field-image a{
 	border:0px!important
 }
 
@@ -5845,7 +5744,7 @@ a.tabs-primary__tab-link{
 .view-blog .views-field.views-field-title a{
 	border-bottom: 0 none !important;
 	font-family: "Open Sans Condensed",sans-serif !important;
-	font-size: 1.5em;
+	font-size: 1.35rem;
 	color: #003399;
 	padding-top: 0.5em;
 	padding-bottom: 0.5em;
@@ -6760,20 +6659,7 @@ body.page-node-5429 .oshwiki-featured-articles {
     text-decoration: none;
 }
 
-
-
 /*EVENTS DETAIL TESTING*/
-.node-events .field-name-title-field a {
-  border-bottom: 0 none !important;
-  color: #003399;
-  font-family: Open Sans Condensed !important;
-  font-size: 1.6em;
-  line-height: 1.1em;
-  margin: 0 0 0.7em;
-  font-weight: bold;
-}
-
-
 .node-events ul.links.inline {
   float: right;
   text-align: right;
@@ -7707,11 +7593,6 @@ display:block!important;
 	vertical-align: middle;
 }
 
-#content iframe{
-	max-width: 99%!important;
-}
-
-
 /*Block Camapaing 2012-2013*/
 
 #block-nodeblock-8675 h2 { 
@@ -7886,10 +7767,6 @@ body.page-entity-collection h1#page-title{
     line-height: 30px;
     font-weight: bold;
     padding-bottom: 10px;
-}
-
-.view-press-releases .highlight-teaser-title{
-	font-size: 1em;
 }
 
 .field-content.infographics-teaser-title{
@@ -8628,11 +8505,12 @@ body.page-entity-collection h1#page-title{
     width: 20px !important;
     background: url(../images/pink-search.png) no-repeat 96% 55%;
     cursor: pointer;
-    position: absolute;
-    top: 7px;
+    top: -12px;
     font-size: 0px;
     right: 7px;
     padding-left: 5px;
+    z-index: 9999;
+    position: absolute;
 }
 
 .page-search-site .two_column #page-title{

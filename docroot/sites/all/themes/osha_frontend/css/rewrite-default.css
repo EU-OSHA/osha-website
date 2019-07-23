@@ -75,6 +75,15 @@ ul[data-sa-theme="basic-blue"].ui-menu {
     font-size: 2rem;
     margin-bottom: 0;
     font-weight: 600;
+    color: #003399;
+}
+
+#page-title{
+    font-family: 'Open Sans',sans-serif;
+    font-size: 2rem;
+    margin-bottom: 0;
+    font-weight: 600;
+    color: #003399;
 }
 
 .container{
@@ -227,6 +236,7 @@ ul[data-sa-theme="basic-blue"].ui-menu {
 #content h2 a{
     font-family: 'Open Sans',sans-serif!important;
     font-weight: 400;
+    font-size: 1.35rem;
 }
 
 #block-views-highlight-block-2 {
@@ -313,6 +323,7 @@ table.pagerer{
 
 table.pagerer tbody tr td div.item-list, table.pagerer tbody tr td div.item-list ul.pager{
     vertical-align: middle;
+    padding: 0 0 0.5em 0;
 }
 
 #content .pager li a{
@@ -421,19 +432,12 @@ table.pagerer tbody tr td div.item-list, table.pagerer tbody tr td div.item-list
 
 .page-tools-and-publications .sidebars_first, .page-oshevents .sidebars_first, .page-tools-and-publications.revamp .sidebars_first{
     border-top: 0px solid #003399;
-    margin-top: 41px;
+    margin-top: 0;
     margin-right: 0em;
 }
 
 .page-tools-and-resources #content{
     border-top: 0px solid #003399;
-}
-
-.page-tools-and-publications.revamp #content, .page-oshevents #content{
-    width: 80.1%!important;
-    border-top: 0px solid #003399;
-    margin-top: 3em;
-    margin-left: 10px!important;
 }
 
 #ui-datepicker-div table tr td{     
@@ -856,7 +860,7 @@ footer{
     padding: 5px 1.5em!important;
 }
 
-#block-views-highlight-block-2 .more-link a:hover, #block-osha-homepage-osha-homepage-news-events .more-link a:hover{
+.not-front #block-views-highlight-block-2 .more-link a:hover, .not-front #block-osha-homepage-osha-homepage-news-events .more-link a:hover{
     margin-left: 0;
 }
 

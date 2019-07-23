@@ -3498,17 +3498,6 @@ a.button-submit {
 	padding-top: 1em;
 }
 
-.node-highlight.view-mode-full .field-name-title-field h1 {
-	border-bottom: 0 none !important;
-	color: #003399;
-	font-family: Open Sans Condensed !important;
-	font-size: 1.5em;
-	line-height: 1.1em;
-	margin: 0;
-	font-weight: bold!important;
-	letter-spacing: 0px!important;
-}
-
 .node-highlight.view-mode-full .field-name-field-summary p{
 	color:#000000;
 	font-size:1em;

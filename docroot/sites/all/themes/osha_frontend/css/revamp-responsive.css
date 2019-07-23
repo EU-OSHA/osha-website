@@ -350,6 +350,11 @@
         width: 95%;
     }
 
+    .page-tools-and-publications.revamp #content, .page-oshevents #content{
+        width: 74%!important;
+        float: right;
+    }
+
     .page-tools-and-publications .publications-right-column h2 a{
         height: auto;
     }
@@ -387,7 +392,7 @@
         margin: 0;
         float: left;
         margin-right: 1em;
-        width: 280px;
+        min-width: 205px;
     }
 
     /* Events*/
@@ -706,6 +711,11 @@
        margin: 1em auto !important;
     }
 
+    /* Publications */
+    .page-tools-and-publications.revamp #content, .page-oshevents #content{
+        width: 97.8%!important;
+    }
+
     /* Publications list */
     .page-tools-and-publications .publications-right-column h2 a{
         height: auto;
@@ -1018,6 +1028,12 @@
     }
 
      /*Publications*/
+
+    .page-tools-and-publications.revamp #content, .page-oshevents #content{
+        width: 88.8%!important;
+        float: left;
+    }
+
     .box-latest-publications{
         width: 100%;
         margin-bottom: 1em;
@@ -1044,7 +1060,7 @@
     }
 
     .page-tools-and-publications .content-filters{
-        padding: 0;
+        padding: 0 0 1em 0;
     }
 
     .publications-right-column {
@@ -1340,5 +1356,9 @@
 
     .content-form-newsletter{
         margin-left: 0;
+    }
+
+    table.pagerer tbody tr td div.item-list ul.pager li.pager-first, table.pagerer tbody tr td div.item-list ul.pager li.pager-previous, table.pagerer tbody tr td div.item-list ul.pager li.pager-next, table.pagerer tbody tr td div.item-list ul.pager li.pager-last{
+        font-size: 9px;
     }
 }

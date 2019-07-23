@@ -1214,7 +1214,7 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
 .page-tools-and-publications .views-exposed-widget, .page-oshevents .views-exposed-widget{
     float: left;
     padding-top: 0!important;
-    width: 32.3%!important;
+    width: 32.1%!important;
     margin-right: 1em;
 }
 
@@ -2039,6 +2039,10 @@ input[type=checkbox].add-to-calendar-checkbox {
     background: url(../images/events/big/Canada-180x180.png) no-repeat center;
 }
 
+#block-views-latest-seminars-block .container h2{
+    padding-bottom: 1em;
+}
+
 .box-events-summary .right-column{
     float: left;
     width: 68%;
@@ -2077,7 +2081,6 @@ input[type=checkbox].add-to-calendar-checkbox {
     color:#003399;
     font-size: 0.9rem;
     font-weight: bold!important;
-    line-height: 18px;
     text-decoration: none;
 }
 
@@ -2131,6 +2134,8 @@ input[type=checkbox].add-to-calendar-checkbox {
 .page-oshevents .more-link a{
     position: absolute;
     bottom: -17px;
+    padding: 5px 1.5em !important;
+    margin-left: 0;
 }
 
 

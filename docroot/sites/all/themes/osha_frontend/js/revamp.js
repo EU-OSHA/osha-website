@@ -166,5 +166,10 @@ jQuery(document).ready(function($){
 		});
 		$( ".home-intro > div:nth-child(3) > a:nth-child(1) > h2" ).append( "..." );
 	}
+
+	/* Cookies declined */
+	$(".decline-button").click(function() {
+		$('#sliding-popup').remove();
+	});
 	
 });

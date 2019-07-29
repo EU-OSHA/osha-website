@@ -4,6 +4,7 @@ core = 7.x
 package = OSHA
 version = 7.x-1.0
 project = osha_resources
+dependencies[] = cck_time
 dependencies[] = ctools
 dependencies[] = custom_formatters
 dependencies[] = date

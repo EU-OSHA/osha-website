@@ -442,6 +442,12 @@ function osha_frontend_block_view_alter(&$data, $block) {
  * Implements hook_preprocess_page().
  */
 function osha_frontend_preprocess_page(&$variables) {
+  if (arg(0) == 'related-content') {
+    $breadcrumb = drupal_get_breadcrumb();
+    unset($breadcrumb[1]);
+    drupal_set_breadcrumb($breadcrumb);
+  }
+  
   // Template node--external-infographic.tpl.php - MDR-2351.
   $n = menu_get_object('node');
   if ($n) {

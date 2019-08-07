@@ -1080,6 +1080,10 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
 
 /* Latest Publications */
 
+.block-osha-publication {
+    padding-top: 2em;
+}
+
 .wrapper-responsive-box {
     width: 100%;
     display: flex;

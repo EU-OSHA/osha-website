@@ -19,3 +19,14 @@ function osha_lingua_tools_update_7001() {
   );
   user_role_grant_permissions($role->rid, $permissions);
 }
+
+/**
+ * MDR-3062 Add linguatools option to site review managers.
+ */
+function osha_lingua_tools_update_7002() {
+  user_role_grant_permissions(OSHA_WORKFLOW_ROLE_REVIEW_MANAGER, [
+    'use linguatools autocomplete',
+    'use linguatools forms',
+    'use linguatools forms for calls content',
+  ]);
+}

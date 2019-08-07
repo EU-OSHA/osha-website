@@ -294,7 +294,9 @@ function osha_alert_service_subscribe_form_submit($form, $form_state) {
 }
 
 function osha_alert_service_edit_form_validate($form, $form_state) {
-  osha_alert_service_subscribe_form_validate($form, $form_state);
+  if (empty($form_state['values']['email']) || !valid_email_address($form_state['values']['email'])) {
+    form_set_error('email', t('Please enter a valid email address'));
+  };
   if (!empty($form_state['values']['email']) && valid_email_address($form_state['values']['email'])) {
     $alerts = osha_alert_service_osha_alert_service_load_by_email($form_state['values']['email']);
     if (empty($alerts)) {

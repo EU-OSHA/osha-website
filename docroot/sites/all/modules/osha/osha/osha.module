@@ -406,7 +406,7 @@ function osha_js_alter(&$javascript) {
 
         case 'opt_in':
           $primary_button_class = 'agree-button eu-cookie-compliance-secondary-button';
-          $secondary_button_label = !empty($popup_settings['disagree_button_label']) ? $popup_settings['disagree_button_label'] : 'Decline';
+          $secondary_button_label = !empty($popup_settings['disagree_button_label']) ? $popup_settings['disagree_button_label'] : t('Decline');
           $secondary_button_class = 'decline-button eu-cookie-compliance-default-button';
           break;
 

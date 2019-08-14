@@ -281,6 +281,7 @@ function osha_events_form_validate($form, &$form_state) {
 
 function osha_events_views_pre_render(&$view) {
   if ($view->name == 'newevents') {
+    drupal_add_js(array('osha_events' => array('add_to_calendar' => t('Add to my calendar'))), 'setting');
     drupal_add_js(drupal_get_path('module', 'osha_events') . '/js/ouical.min.js');
   }
 }

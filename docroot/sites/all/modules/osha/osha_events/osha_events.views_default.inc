@@ -2693,7 +2693,7 @@ function osha_events_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = '<none>';
+  $handler->display->display_options['title'] = 'Events';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -3134,7 +3134,7 @@ function osha_events_views_default_views() {
   $handler->display->display_options['path'] = 'oshevents';
   $translatables['newevents'] = array(
     t('Master'),
-    t('<none>'),
+    t('Events'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -3147,10 +3147,10 @@ function osha_events_views_default_views() {
     t('Items per page'),
     t('- All -'),
     t('Offset'),
-    t('« first'),
-    t('‹ previous'),
-    t('next ›'),
-    t('last »'),
+    t('«'),
+    t('‹'),
+    t('›'),
+    t('»'),
     t('<div class="pager-total"><span>@start - @end / @total</span></div>'),
     t('<div class="view-empty">No results</div>'),
     t('[field_start_date] - [field_start_date_1]'),

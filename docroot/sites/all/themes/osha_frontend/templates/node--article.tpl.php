@@ -29,17 +29,38 @@
   <?php endif; ?>
 
   <?php
+  $publications_related_resources = [];
+  // Move Additional Resources into Related resources.
+  if (!empty($content['field_aditional_resources'])) {
+    $publications_related_resources = $content['field_aditional_resources'];
+    unset($content['field_aditional_resources']);
+  }
+  if (isset($content['field_aditional_resources'])) {
+    hide($content['field_aditional_resources']);
+  }
   if ($nid == 20) {
-    $content['title_field'][0]['#markup'] = str_replace('<h1>','<h1 class="revamp">', $content['title_field'][0]['#markup']);
+    $content['title_field'][0]['#markup'] = str_replace('<h1>', '<h1 class="revamp">', $content['title_field'][0]['#markup']);
   }
   // We hide the comments and links now so that we can render them later.
   hide($content['comments']);
   hide($content['links']);
-  // unset to render below after a div
+  // Unset to render below after a div.
   if (isset($content['field_related_oshwiki_articles'])) {
     hide($content['field_related_oshwiki_articles']);
   }
   print render($content);
+
+  if ($publications_related_resources) {
+    $related_resources = [];
+    foreach (array_keys($publications_related_resources['#items']) as $key) {
+      $related_resources[] = $publications_related_resources[$key];
+    }
+    if ($related_resources) {
+      print theme('osha_publications_related_resources', [
+        'items' => $related_resources,
+      ]);
+    }
+  }
   ?>
 
   <?php print render($content['links']); ?>

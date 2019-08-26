@@ -871,7 +871,7 @@ function osha_publication_theme() {
     ),
     'osha_publications_aditional_resources' => array(
       'template' => 'osha_publications_aditional_resources',
-      'variables' => array('items' => NULL),
+      'variables' => array('items' => NULL, 'view_all' => NULL),
       'path' => $path . '/templates'
     ),
     'osha_image_formatter' => array(
@@ -1077,16 +1077,16 @@ function theme_osha_image_formatter($variables) {
 }
 
 /*
- * Formats the main attachment and show links in all languages
+ * Formats the main attachment and show links in all languages.
  */
 function theme_osha_publication_file_publication_file_format($element) {
   $node = $element['entity'];
   $file = (object) $element['file'];
   $icon_directory = drupal_get_path('theme', 'osha_frontend') . '/images/file_icons';
 
-  $output = "<span class='label_publication_file'>Download</span>";
+  $output = "<span class='label_publication_file'>" . t('Download') . " </span>";
   $output .= theme('file_icon', array('file' => $file, 'icon_directory' => $icon_directory));
-  $output .= "<span class='label_publication_file'>in:</span>";
+  $output .= "<span class='label_publication_file'>" . t('in:') . "</span>";
 
   $file_fid = isset($node->field_file[$node->language][0]['fid']) ? $node->field_file[$node->language][0]['fid'] : NULL;
 
@@ -1099,8 +1099,8 @@ function theme_osha_publication_file_publication_file_format($element) {
   return $output;
 }
 
-/*
- * Formats the related resources (attached files) as icon and description/filename
+/**
+ * Formats the related resources (attached files) as icon and description/filename.
  */
 function theme_osha_publication_file_publication_related_res_format($element) {
   $file = (object) $element['file'];

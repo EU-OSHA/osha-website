@@ -5,7 +5,6 @@ function osha_publication_menu_publications_form($form, $form_state) {
   drupal_set_title(t('Publications'));
   $text = osha_publication_req_param($form_state, 'text');
   $sort = osha_publication_req_param($form_state, 'sort_by', 'search_api_relevance');
-  $direction = 'desc';
   $languages = osha_publication_req_param($form_state, 'languages', array($language->language));
   $tags = osha_publication_req_param($form_state, 'tags', array());
   $publication_type = osha_publication_req_param($form_state, 'publication_type', array());

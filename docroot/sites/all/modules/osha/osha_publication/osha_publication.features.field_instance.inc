@@ -1284,7 +1284,7 @@ function osha_publication_field_default_field_instances() {
         'weight' => 0,
       ),
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'number',
         'settings' => array(
           'decimal_separator' => '.',
@@ -2273,9 +2273,10 @@ function osha_publication_field_default_field_instances() {
         'weight' => 0,
       ),
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
+        'module' => 'osha_publication',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'publication_term_reference_plain',
         'weight' => 17,
       ),
       'highlights_item' => array(

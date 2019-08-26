@@ -70,7 +70,8 @@ if ($view_mode == 'full') {
                         </span>
                     </div>
                     <h1><?php print strip_tags(render($content['title_field']), '<a>'); ?></h1>
-                    <?php if ($tags) { ?>
+                    <?php
+                    if ($tags) { ?>
                     <div class="keywords">
                         <span><?php print t('Keywords') ?>:</span><span><?php print $tags ?></span>
                     </div>
@@ -108,6 +109,7 @@ if ($view_mode == 'full') {
     if ($aditional_resources) {
       print theme('osha_publications_aditional_resources', [
         'items' => $aditional_resources,
+        'view_all' => $view_all,
       ]);
     }
   }

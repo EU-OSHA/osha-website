@@ -320,7 +320,7 @@ function fill_related_publications(&$vars) {
   // Get 3 related publications by common tags.
   $tags_tids = array();
   if (!empty($vars['field_tags'])) {
-    $tags_tids = $vars['field_tags'][LANGUAGE_NONE];
+    $tags_tids = $vars['field_tags'];
   }
 
   if (!empty($tags_tids)) {
@@ -372,7 +372,7 @@ function fill_related_publications(&$vars) {
           break;
         }
       }
-      $vars['view_all'] = l(t('View all'), 'related-content/' . $vars['node']->nid . '/publication/' . implode('+', $tids));
+      $vars['view_all'] = l(t('View all'), 'related-content/' . $vars['node']->nid . '/publications/' . implode('+', $tids));
     }
   }
 }
@@ -447,7 +447,7 @@ function osha_frontend_preprocess_page(&$variables) {
     unset($breadcrumb[1]);
     drupal_set_breadcrumb($breadcrumb);
   }
-  
+
   // Template node--external-infographic.tpl.php - MDR-2351.
   $n = menu_get_object('node');
   if ($n) {

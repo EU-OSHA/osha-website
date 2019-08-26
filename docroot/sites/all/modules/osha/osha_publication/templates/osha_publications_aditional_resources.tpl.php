@@ -6,4 +6,5 @@
         <?php print render($item);?>
       </div>
   <?php } ?>
+  <div class="more-link"><?php echo $view_all; ?></div>
 </div>

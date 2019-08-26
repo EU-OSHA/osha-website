@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * @file
+ *   Provide a duplicate field for title to allow Search API Sorts to use it.
+ */
+
+/**
+ * Implements hook_entity_property_info_alter().
+ */
+function search_api_title2_entity_property_info_alter(&$info) {
+  $info['node']['properties']['title2'] = array(
+    'type'            => 'text',
+    'label'           => t('Title #2'),
+    'sanitized'       => TRUE,
+    'getter callback' => 'search_api_title2_getter_callback',
+  );
+}
+
+/**
+ * Getter callback for title2 property.
+ *
+ * @param object $item
+ *   Node.
+ *
+ * @return string
+ *   Title.
+ */
+function search_api_title2_getter_callback($item) {
+  return $item->title;
+}

@@ -782,3 +782,10 @@ function osha_publication_update_7026() {
 function osha_publication_update_7027() {
   features_revert(array('osha_publication' => array('field_base', 'field_instance')));
 }
+
+/**
+ * MDR-3069 Revamp Publication list- HWC20 Sort functionality.
+ */
+function osha_publication_update_7028() {
+  module_enable(array('search_api_title2'));
+}

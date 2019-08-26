@@ -4,7 +4,7 @@ function osha_publication_menu_publications_form($form, $form_state) {
   global $language;
   drupal_set_title(t('Publications'));
   $text = osha_publication_req_param($form_state, 'text');
-  $sort = osha_publication_req_param($form_state, 'sort_by', 'search_api_relevance');
+  $sort_by = osha_publication_req_param($form_state, 'sort_by', 'field_publication_date');
   $languages = osha_publication_req_param($form_state, 'languages', array($language->language));
   $tags = osha_publication_req_param($form_state, 'tags', array());
   $publication_type = osha_publication_req_param($form_state, 'publication_type', array());
@@ -34,11 +34,14 @@ function osha_publication_menu_publications_form($form, $form_state) {
     '#prefix' => '<div class="views-exposed-widgets clearfix"><div id="edit-search-api-views-fulltext-wrapper" class="views-exposed-widget">',
     '#suffix' => '</div>',
   );
-  $sorts = array('search_api_relevance' => t('Relevance'), 'field_publication_date' => t('Publication date'));
+  $sorts = [
+    'field_publication_date' => t('Publication date'),
+    'alphabetically' => t('Alphabetically'),
+  ];
   $form['content']['sort_by'] = array(
     '#title' => t('Sort by'),
     '#type' => 'select',
-    '#default_value' => $sort,
+    '#default_value' => $sort_by,
     '#attributes' => array('class' => ['new-select-style']),
     '#options' => $sorts,
     '#prefix' => '<div class="views-exposed-widget">',
@@ -146,8 +149,7 @@ function osha_publication_menu_publications_search_native($form_state) {
   global $language;
   $languages = osha_publication_req_param($form_state, 'languages', array($language->language));
   $text = osha_publication_req_param($form_state, 'text');
-  $sort = osha_publication_req_param($form_state, 'sort_by', 'search_api_relevance');
-  $direction = 'desc';
+  $sort_by = osha_publication_req_param($form_state, 'sort_by', 'field_publication_date');
   $tags = osha_publication_req_param($form_state, 'tags', array());
   $publication_type = osha_publication_req_param($form_state, 'publication_type', array());
 
@@ -165,9 +167,14 @@ function osha_publication_menu_publications_search_native($form_state) {
 
     $query->keys($text);
     $query->fields(array('title_field', 'body:value'));
-    if (!empty($sort)) {
-      $query->sort($sort, $direction);
+
+    if ($sort_by == 'field_publication_date') {
+      $query->sort('field_publication_date', 'DESC');
     }
+    else {
+      $query->sort('title2', 'ASC');
+    }
+
     $results = $server->search($query);
     if (!empty($results['results'])) {
       foreach ($results['results'] as $result) {
@@ -232,12 +239,14 @@ function osha_publication_menu_publications_search_native($form_state) {
   $q->fields('a', array('nid', 'vid'));
   $q->condition('a.type', 'publication');
   $q->condition('a.status', 1);
-  if (!empty($sort)) {
-    $q->orderBy('field_publication_date_value', $direction);
-  }
-  else {
+
+  if ($sort_by == 'field_publication_date') {
     $q->orderBy('field_publication_date_value', 'DESC');
   }
+  else {
+    $q->orderBy('title', 'ASC');
+  }
+
   if (!empty($restrict)) {
     $q->condition('a.nid', $restrict, 'IN');
   }
@@ -282,9 +291,8 @@ function osha_publication_menu_publications_search_native($form_state) {
   if ($is_search) {
     $pager_params['text'] = $text;
   }
-  if (!empty($sort)) {
-    $pager_params['sort_by'] = $sort;
-    $pager_params['direction'] = $direction;
+  if (!empty($sort_by)) {
+    $pager_params['sort_by'] = $sort_by;
   }
 
   $showing_lang = $language->language;
@@ -322,7 +330,7 @@ function osha_publication_menu_publications_search_related($form_state, $native_
     }
   }
   $text = osha_publication_req_param($form_state, 'text');
-  $sort = osha_publication_req_param($form_state, 'sort_by', 'search_api_relevance');
+  $sort_by = osha_publication_req_param($form_state, 'sort_by', 'field_publication_date');
   $direction = osha_publication_req_param($form_state, 'direction', 'desc');
   $tags = osha_publication_req_param($form_state, 'tags', array());
   $publication_type = osha_publication_req_param($form_state, 'publication_type', array());
@@ -360,11 +368,11 @@ function osha_publication_menu_publications_search_related($form_state, $native_
   $q->fields('a', array('nid', 'vid'));
   $q->condition('a.type', 'publication');
   $q->condition('a.status', 1);
-  if (!empty($sort)) {
-    $q->orderBy('field_publication_date_value', $direction);
+  if ($sort_by == 'field_publication_date') {
+    $q->orderBy('field_publication_date_value', 'ASC');
   }
   else {
-    $q->orderBy('field_publication_date_value', 'DESC');
+    $q->orderBy('title', 'DESC');
   }
 
   if (!empty($restrict)) {
@@ -397,8 +405,8 @@ function osha_publication_menu_publications_search_related($form_state, $native_
   if ($is_search) {
     $pager_params['text'] = $text;
   }
-  if (!empty($sort)) {
-    $pager_params['sort_by'] = $sort;
+  if (!empty($sort_by)) {
+    $pager_params['sort_by'] = $sort_by;
     $pager_params['direction'] = $direction;
   }
 

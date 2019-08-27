@@ -113,7 +113,7 @@ jQuery(document).ready(function($){
 
 	/*Ellipsis News and Events Home page*/
 
-	var character = 65;
+	var character = 60;
 	var count1 = $("div.view-news-and-events > div.row > div:nth-child(1) > h3 > a").text().length;
 	var count2 = $("div.view-news-and-events > div.row > div:nth-child(2) > h3 > a").text().length;
 	var count3 = $("div.view-news-and-events > div.row > div:nth-child(3) > div:nth-child(2) > h3 > a").text().length;

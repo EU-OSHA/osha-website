@@ -817,8 +817,8 @@
     }
 
     a.see-more-arrow, .node-readmore a, .more-link a, .view .views-field-view-node a, #become-partner-link a, #join-list-link a, .sidebars_second .view-footer a, .OSHWiki .p3 a, .view-search-directives .links a, .more-link-wrapper a, .see-link a, .link_news_events a{
-        background: url(../images/flecha.png) no-repeat scroll 80% 53% transparent;
-        padding: 0.5em 4em 0.5em 1em !important;
+        background: url(../images/flecha.png) no-repeat scroll right 53% transparent !important;
+        padding: 0.5em 2em 0.5em 1em !important;
     }
 
     .content-filters .views-widget{
@@ -836,7 +836,7 @@
     }
 
     html[lang=de] .content-home-event .tag-news-events, html[lang=cs] .content-home-event .tag-news-events, html[lang=el] .content-home-event .tag-news-events, html[lang=pl] .content-home-event .tag-news-events{
-        font-size: 0.9em;
+        font-size: 0.6em;
     }
 
     html[lang=de] .content-home-event a.see-more-arrow, html[lang=lv] .content-home-event a.see-more-arrow, html[lang=lt] .content-home-event a.see-more-arrow, html[lang=hu] .content-home-event a.see-more-arrow, html[lang=mt] .content-home-event a.see-more-arrow, html[lang=nl] .content-home-event a.see-more-arrow {

@@ -169,9 +169,8 @@ function osha_publication_url_inbound_alter(&$path, $original_path, $path_langua
       elseif ($menu_item['page_callback'] == 'osha_publication_export') {
         $path = 'export/tools-and-publications/publications';
       }
-      if (count($args) > 2) {
+      if (count($args) > 1) {
         $search_args = $args;
-        array_shift($search_args);
         array_shift($search_args);
         foreach ($search_args as $search_filter) {
           if (strpos($search_filter, 'l_') === 0) {

@@ -545,11 +545,19 @@ footer{
     }
 
     html[lang="de"] #contact > a:nth-child(5), html[lang="bg"] #contact > a:nth-child(5), html[lang="da"] #contact > a:nth-child(5), html[lang="es"] #contact > a:nth-child(5){
-        width: 120px;
+        width: 116px;
         line-height: 15px;
         margin-left: -6px;
         margin-top: 4px;
     }
+
+    html[lang="de"] #contact > a:nth-child(6), html[lang="bg"] #contact > a:nth-child(6), html[lang="da"] #contact > a:nth-child(6), html[lang="es"] #contact > a:nth-child(6){
+        width: 116px;
+        line-height: 15px;
+        margin-left: -6px;
+        margin-top: 4px;
+    }
+
 
      html[lang="lt"] #contact > a:nth-child(5), html[lang="fi"] #contact > a:nth-child(5){
         width: 154px;

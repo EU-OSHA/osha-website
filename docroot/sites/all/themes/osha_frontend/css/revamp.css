@@ -97,7 +97,6 @@ div.view-header.back.revamp{
     height: 37px;
     border: 1px solid #003399;
     border-radius: 5px;
-    background: url(../images/pink-search.png) no-repeat 96% 55%;
     width: 100%!important;
     float: left;
     margin-top: 24px;
@@ -105,6 +104,20 @@ div.view-header.back.revamp{
     color:#003399;
     padding-right: 30px;
     font-size: 13px;
+}
+
+#edit-search-api-views-fulltext-wrapper{
+    position: relative;
+}
+
+#edit-search-api-views-fulltext-wrapper input[type=submit]{
+    position: absolute;
+    width: 20px;
+    top: 33px;
+    right: 6px;
+    background: url(../images/pink-search.png) no-repeat 96% 55%;
+    border: 0;
+    text-indent: -9999999px;
 }
 
 .views-exposed-form .views-exposed-widget input.search-new-design{

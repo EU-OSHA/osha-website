@@ -668,3 +668,69 @@ function osha_update_7053() {
   variable_set('pathauto_node_publication_pattern', 'publications/[node:title]');
 }
 
+/**
+ * MDR-3061 update permissions and ldap groups.
+ */
+function osha_update_7054() {
+  $map = [
+    'LEGIS'=>[
+      2,
+      11,
+      2544,
+      2425,
+      6,
+      13497,
+    ],
+    'AWARDS'=>[
+      4,
+    ],
+    'FILMAW'=>[
+      13370,
+      13370,
+      10423,
+      9412,
+      5846,
+      7668,
+      7667,
+      7666,
+      7669,
+      7665,
+      892,
+      877,
+    ],
+    'DVTS'=>[
+      13822,
+    ],
+    'NAPO'=>[
+      1464,
+    ],
+  ];
+  $names = [
+    'LEGIS' =>'Site: Legislation',
+    'AWARDS' => 'Site: Awards',
+    'FILMAW' => 'Site: Film awards',
+    'DVTS' => 'Site: Datavisualisation',
+    'NAPO' => 'Site: Napo',
+  ];
+  $voc = taxonomy_vocabulary_machine_name_load('section');
+  foreach ($map as $section_code => $nids) {
+    $name = $names[$section_code];
+    $term = osha_workflow_get_section_term_by_ldap_id($section_code);
+    if (empty($term)) {
+      $term = new stdClass();
+      $term->parent = 0;
+      $term->language = 'en';
+      $term->name = $name;
+      $term->vid = $voc->vid;
+      $term->field_ldap_section_code[LANGUAGE_NONE][]['value'] = $section_code;
+      taxonomy_term_save($term);
+    }
+    foreach ($nids as $nid) {
+      $node = node_load($nid);
+      if (empty($node->workbench_access[$term->tid])) {
+        $node->workbench_access = [$term->tid=>$term->tid];
+        node_save($node);
+      }
+    }
+  }
+}

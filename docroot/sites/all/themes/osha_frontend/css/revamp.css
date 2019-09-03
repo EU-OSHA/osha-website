@@ -2288,6 +2288,7 @@ article.node-article .related-resources .box h2{
 
 .region-footer-sitemap .content-subscribe #footer-newsletter-subscription-form-wrapper .privacy{
 	float: none;
+	width: 100%;
 }
 
 /*MDR-3040 Revamp Tablet Header - Language and Search box are not aligned*/

@@ -2244,6 +2244,29 @@ input[type=checkbox].add-to-calendar-checkbox {
     display: none;
 }
 
+/*MDR-3156 Article - Additional resources - Youtube videos*/
+article.node-article .related-resources .container{
+	padding-left: 1em;
+}
+
+article.node-article .related-resources .container h3{
+	margin-bottom: 0.5em;
+}
+
+article.node-article .related-resources .video .icon-play{
+	top:9%;
+	left:37%;
+	width: 50px;
+}
+
+article.node-article .related-resources .video h2{
+	font-size: 1rem;
+}
+
+article.node-article .related-resources .box h2{
+	font-size: 1rem;
+}
+
 /*MDR-3040 Revamp Tablet Header - Language and Search box are not aligned*/
 @media only screen and (device-width: 768px) {
   /* For general iPad layouts */

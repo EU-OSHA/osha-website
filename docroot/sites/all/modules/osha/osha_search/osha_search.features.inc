@@ -235,6 +235,7 @@ function osha_search_default_search_api_index() {
         "source" : { "type" : "integer", "entity_type" : "node" },
         "status" : { "type" : "integer" },
         "title" : { "type" : "text", "boost" : "2.0" },
+        "title2" : { "type" : "string" },
         "title_field" : { "type" : "text", "boost" : "2.0" },
         "type" : { "type" : "string" },
         "url" : { "type" : "uri" },

@@ -2276,6 +2276,20 @@ article.node-article .related-resources .box h2{
 	font-size: 1rem;
 }
 
+/*MDR-3218 Revamp - Try alert button misplaced*/
+.region-footer-sitemap .content-subscribe .try-alert{
+	max-width: 220px;
+	height: 100%;
+}
+
+.region-footer-sitemap .content-subscribe #footer-newsletter-subscription-form-wrapper .form-item-agree-processing-personal-data .option{
+	width: 420px;
+}
+
+.region-footer-sitemap .content-subscribe #footer-newsletter-subscription-form-wrapper .privacy{
+	float: none;
+}
+
 /*MDR-3040 Revamp Tablet Header - Language and Search box are not aligned*/
 @media only screen and (device-width: 768px) {
   /* For general iPad layouts */

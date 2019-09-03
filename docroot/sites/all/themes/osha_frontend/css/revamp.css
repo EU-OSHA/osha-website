@@ -2244,6 +2244,15 @@ input[type=checkbox].add-to-calendar-checkbox {
     display: none;
 }
 
+/*MDR-3163 Duplicated alerts for the same email*/
+#osha-alert-service-subscribe-form #security_code{
+	border: 1px solid #003399;
+}
+
+#osha-alert-service-edit-form #security_code{
+	border: 1px solid #003399;
+}
+
 /*MDR-3156 Article - Additional resources - Youtube videos*/
 article.node-article .related-resources .container{
 	padding-left: 1em;

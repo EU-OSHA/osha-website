@@ -441,6 +441,16 @@ function _publication_type_options_list($map_only = FALSE) {
           }
           $return[$term->tid] = $term->name;
         }
+        else {
+          $term = taxonomy_term_load($term->tid);
+          if (!$term->field_main_category) {
+            continue;
+          }
+          if (!$term->field_main_category[LANGUAGE_NONE][0]['value']) {
+            continue;
+          }
+          $return[$term->tid] = $term->name;
+        }
       }
       else {
         $return[$term->tid] = $term->name;

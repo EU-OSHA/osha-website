@@ -759,7 +759,11 @@ function osha_update_7055() {
     'e-guides' => 'tools-and-resources/e-guides',
     'tools-and-publications/oshwiki' => 'tools-and-resources/oshwiki',
     'tools-and-publications/oira' => 'tools-and-resources/oira',
-
+    'osh-e-tools' => 'themes/osh-e-tools',
+    'tools-and-publications/tools-osh-management' => 'themes/osh-e-tools',
+    'tools-and-publications/seminars' => 'tools-and-resources/seminars',
+    'oshevents/seminars' => 'tools-and-resources/seminars',
+    'surveys-and-statistics-osh/esener' => 'facts-and-figures/esener',
   ];
   foreach($map as $old_alias => $new_alias) {
     $aliases = db_select('url_alias', 'u')

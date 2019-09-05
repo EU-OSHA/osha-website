@@ -2311,6 +2311,11 @@ article.node-article .related-resources .box h2{
 	background: none;
 }
 
+/*MDR-3239 Seminar detail page*/
+article.node-seminar{
+	margin-top: 1em;
+}
+
 /*MDR-3040 Revamp Tablet Header - Language and Search box are not aligned*/
 @media only screen and (device-width: 768px) {
   /* For general iPad layouts */

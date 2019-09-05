@@ -2291,6 +2291,22 @@ article.node-article .related-resources .box h2{
 	width: 100%;
 }
 
+/*MDR-3237 OSHmail page*/
+#block-osha-newsletter-osha-newsletter-latest {
+    border-top: 2px solid #003399;
+}
+
+#block-osha-newsletter-osha-newsletter-latest #latest-newsletters-block h2{
+	font-size: 1rem !important;
+	font-weight: normal !important;
+	border-bottom: 2px solid #003399;
+}
+
+#block-osha-newsletter-osha-newsletter-latest #latest-newsletters-block h2 a{
+	background-color: transparent;
+
+}
+
 /*MDR-3040 Revamp Tablet Header - Language and Search box are not aligned*/
 @media only screen and (device-width: 768px) {
   /* For general iPad layouts */

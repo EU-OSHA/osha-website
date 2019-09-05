@@ -2300,6 +2300,7 @@ article.node-article .related-resources .box h2{
 	font-size: 1rem !important;
 	font-weight: normal !important;
 	border-bottom: 2px solid #003399;
+	padding-bottom: 0.5em;
 }
 
 #block-osha-newsletter-osha-newsletter-latest #latest-newsletters-block h2 a{

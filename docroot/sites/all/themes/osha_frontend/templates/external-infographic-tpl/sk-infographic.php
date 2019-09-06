@@ -49,7 +49,7 @@
                                     <a href="http://www.linkedin.com/company/european-agency-for-safety-and-health-at-work" target="_blank"><img alt="Follow EU OSHA in LinkedIn" src="<?php print base_path().path_to_theme(); ?>/images/external-infographic-images/linkedin-icon.png" title="LinkedIn"></a>
                                     <a href="https://www.youtube.com/user/EUOSHA" target="_blank"><img alt="EU OSHA channel in Youtube" src="<?php print base_path().path_to_theme(); ?>/images/external-infographic-images/youtube-icon.png" title="Youtube"></a>
                                     <a href="https://www.flickr.com/photos/euosha/albums" target="_blank"><img alt="EU OSHA Flickr photos" src="<?php print base_path().path_to_theme(); ?>/images/external-infographic-images/flickr-icon.png" title="Flickr"></a>
-                                    <a href="https://osha.europa.eu/tools-and-publications/blog" target="_blank"><img alt="EU OSHA Blog with more information in workplace safety and health" src="<?php print base_path().path_to_theme(); ?>/images/external-infographic-images/blogger-icon.png" title="Blog"></a>
+                                    <a href="https://osha.europa.eu/tools-and-resources/blog" target="_blank"><img alt="EU OSHA Blog with more information in workplace safety and health" src="<?php print base_path().path_to_theme(); ?>/images/external-infographic-images/blogger-icon.png" title="Blog"></a>
                                 </div>
                             </div>
 

@@ -584,7 +584,7 @@ safety-and-health-legislation/european-guidelines',
           'name' => 'path_visibility',
           'settings' => array(
             'visibility_setting' => '1',
-            'paths' => 'tools-and-publications/blog',
+            'paths' => 'tools-and-resources/blog',
           ),
           'context' => 'empty',
           'not' => TRUE,

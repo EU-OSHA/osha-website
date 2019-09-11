@@ -16,5 +16,5 @@
   </div>
 <?php endforeach; ?>
 <div class="more-link revamp">
-  <?php print l(t('See all reports of past events'), 'tools-and-publications/seminars', array()); ?>
+  <?php print l(t('See all reports of past events'), 'tools-and-resources/seminars', array()); ?>
 </div>

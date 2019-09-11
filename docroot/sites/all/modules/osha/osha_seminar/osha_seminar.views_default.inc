@@ -47,7 +47,7 @@ function osha_seminar_views_default_views() {
   $handler->display->display_options['header']['area_text_custom']['id'] = 'area_text_custom';
   $handler->display->display_options['header']['area_text_custom']['table'] = 'views';
   $handler->display->display_options['header']['area_text_custom']['field'] = 'area_text_custom';
-  $handler->display->display_options['header']['area_text_custom']['content'] = '<a class="seminar_back-to-seminars back-to-link" href="/tools-and-publications/seminars">Back to seminars</a>';
+  $handler->display->display_options['header']['area_text_custom']['content'] = '<a class="seminar_back-to-seminars back-to-link" href="/tools-and-resources/seminars">Back to seminars</a>';
   /* Footer: Global: Result summary */
   $handler->display->display_options['footer']['result']['id'] = 'result';
   $handler->display->display_options['footer']['result']['table'] = 'views';
@@ -327,7 +327,7 @@ function osha_seminar_views_default_views() {
     t('‹'),
     t('›'),
     t('»'),
-    t('<a class="seminar_back-to-seminars back-to-link" href="/tools-and-publications/seminars">Back to seminars</a>'),
+    t('<a class="seminar_back-to-seminars back-to-link" href="/tools-and-resources/seminars">Back to seminars</a>'),
     t('Displaying @start - @end of @total'),
     t('No results'),
     t('Multilingual ID'),

@@ -53,7 +53,7 @@
                       'alt' => t('Facebook')
                     ),
                     'blog' => array(
-                      'path' => url('tools-and-publications/blog', array('alias' => TRUE, 'absolute' => TRUE)),
+                      'path' => url('tools-and-resources/blog', array('alias' => TRUE, 'absolute' => TRUE)),
                       'alt' => t('blog')
                     ),
                     'youtube' => array(

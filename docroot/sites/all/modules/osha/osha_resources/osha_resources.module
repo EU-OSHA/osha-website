@@ -163,7 +163,13 @@ function osha_resources_field_formatter_settings_form($field, $instance, $view_m
 
   return $element;
 }
-
+function osha_resources_video($ids = NULL) {
+  static $video_ids = [];
+  if ($ids) {
+    $video_ids = $ids;
+  }
+  return $video_ids;
+}
 /**
  * Implements hook_node_presave().
  */

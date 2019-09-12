@@ -31,6 +31,37 @@ function osha_seminar_post_features_enable_feature($component) {
   }
 }
 
+
+/**
+ * Implements Elysia hook_cronapi().
+ */
+function osha_seminar_cronapi() {
+  return array('osha_seminar_cron' => array(
+    'description' => 'Seminar pdf pages count update',
+    'rule' => '*/30 * * * *', // Every 15 minutes
+  ));
+}
+
+function osha_seminar_cron() {
+  $result = views_get_view_result('seminar_pages_count');
+  $diff = variable_get('node_changed_diff', 0);
+  foreach ($result as $row) {
+    $changed = date('Y-m-d H:i:s', $row->node_changed + $diff);
+    if ($changed > $row->field_field_pages_count_updated[0]['raw']['value']) {
+      $uri = $row->field_field_report[0]['raw']['uri'];
+      $path = drupal_realpath($uri);
+      $pages_count = pdf_to_image_count_pages($path);
+      $node = node_load($row->nid);
+      $node->field_pages_count[LANGUAGE_NONE][0]['value'] = $pages_count;
+      $node->field_pages_count_updated[LANGUAGE_NONE][0]['timezone'] = 'Europe/Madrid';
+      $node->field_pages_count_updated[LANGUAGE_NONE][0]['timezone_db'] = 'Europe/Madrid';
+      $node->field_pages_count_updated[LANGUAGE_NONE][0]['date_type'] = 'datetime';
+      $node->field_pages_count_updated[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i:s');
+      node_save($node);
+    }
+  }
+}
+
 /**
  * Implements hook_field_formatter_info().
  */

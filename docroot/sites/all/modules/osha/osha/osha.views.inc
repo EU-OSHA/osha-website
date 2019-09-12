@@ -13,7 +13,7 @@ function osha_views_query_alter(&$view, &$query) {
       $view->set_items_per_page($limit);
     }
   }
-  if (($view->name == 'upcoming_events') && ($view->current_display == 'block')) {
+  if (($view->name == 'homepage_events') && ($view->current_display == 'block')) {
     $limit = 3 - variable_get('osha_hp_news_limit', 2);
     if ($limit) {
       $view->set_items_per_page($limit);

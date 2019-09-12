@@ -373,7 +373,7 @@ class OshaMigratePublications extends OSHADynamicMigration {
       $tmp_path = $row->path;
       $languages = array_keys($entity->translations->data);
       foreach($languages as $language){
-        $row->path[$language] = 'tools-and-publications/publications/' . $matches[1];
+        $row->path[$language] = 'publications/' . $matches[1];
       }
       MigrationUtil::createAliases($entity, $row, 'node', 'nid');
       $row->path = $tmp_path;

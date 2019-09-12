@@ -289,9 +289,23 @@ function osha_events_update_7027() {
 }
 
 /**
- * MDR-2736 Create main topic tag for publications and other stuff (Dev).
+ * MDR-2843 NCW - Revamp - Events list - Development.
  */
 function osha_events_update_7028() {
-  features_revert(array('osha_publication' => array('field_base', 'field_instance')));
-  features_revert(array('osha_events' => array('field_base', 'field_instance')));
+  features_revert_module('osha_events');
+}
+
+/**
+ * MDR-2941 Events- search by free text - page reloads each time we add a character.
+ */
+function osha_events_update_7029() {
+  features_revert(array('osha_events' => array('views_view')));
+}
+
+/**
+ * MDR-3014 Revamp Highlights - Right column.
+ */
+function osha_events_update_7030() {
+  features_revert(array('osha_seminar' => array('views_view')));
+  features_revert_module('osha_events');
 }

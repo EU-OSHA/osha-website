@@ -6,7 +6,7 @@
 		<a target="_blank" href="https://www.youtube.com/user/EUOSHA"><img src="/sites/all/themes/osha_frontend/images/youtube-icon.png" alt="EU OSHA channel in Youtube" title="Youtube"></a>
 		<a target="_blank" href="https://www.flickr.com/photos/euosha/albums"><img src="/sites/all/themes/osha_frontend/images/flickr-icon.png" alt="EU OSHA Flickr photos" title="Flickr"></a>
         <a target="_blank" href="https://www.slideshare.net/EUOSHA"><img src="/sites/all/themes/osha_frontend/images/footer-slideshare-new.png" alt="EU OSHA Slideshare " title="Slideshare"></a>
-        <a target="_blank" href="<?php echo url('tools-and-publications/blog', array('alias' => TRUE)); ?>"><img src="/sites/all/themes/osha_frontend/images/blogger-icon.png" alt="EU OSHA Blog with more information in workplace safety and health" title="Blog"></a>
+        <a href="<?php echo url('tools-and-resources/blog', array('alias' => TRUE)); ?>"><img src="/sites/all/themes/osha_frontend/images/blogger-icon.png" alt="EU OSHA Blog with more information in workplace safety and health" title="Blog"></a>
 	</div>
 </div>
 <div id="languagesAndSearch">

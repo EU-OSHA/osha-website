@@ -31,7 +31,7 @@ function osha_events_context_default_contexts() {
     'path' => array(
       'values' => array(
         '<front>' => '<front>',
-        'tools-and-publications/blog' => 'tools-and-publications/blog',
+        'tools-and-resources/blog' => 'tools-and-resources/blog',
         'node/5445' => 'node/5445',
       ),
     ),

@@ -69,63 +69,61 @@ function osha_publication_update_7005() {
 function osha_publication_update_7006() {
   global $base_url;
   $aliases = array(
-    '/tools-and-publications/publications/reports/economic_incentives_TE3109255ENC',
-    '/tools-and-publications/publications/reports/105',
-    '/tools-and-publications/publications/reports/mainstreaming_osh_business',
-    '/tools-and-publications/publications/reports/TERO09009ENC',
-    '/tools-and-publications/publications/reports/mainstream_osh_university_education',
-    '/tools-and-publications/publications/reports/TE7809894ENC',
-    '/tools-and-publications/publications/reports/TEWE09006ENC',
-    '/tools-and-publications/publications/reports/TEWE09001ENC',
-    '/tools-and-publications/publications/reports/548OELs',
-    '/tools-and-publications/publications/reports/TE3008390ENC_chemical_risks',
-    '/tools-and-publications/publications/reports/8108322_vibration_exposure',
-    '/tools-and-publications/publications/reports/TE7007049ENC_skin_diseases',
-    '/tools-and-publications/publications/reports/en_TE8107132ENC.pdf',
-    '/tools-and-publications/publications/reports/7807118',
-    '/tools-and-publications/publications/corporate/2006',
-    '/tools-and-publications/publications/corporate/brochure_2007',
-    '/tools-and-publications/publications/magazine/9',
-    '/tools-and-publications/publications/corporate/2005',
-    '/tools-and-publications/publications/corporate/2005full',
-    '/tools-and-publications/publications/reports/6805648',
-    '/tools-and-publications/publications/reports/6805535',
-    '/tools-and-publications/publications/magazine/8',
-    '/tools-and-publications/publications/corporate/20050929',
-    '/tools-and-publications/publications/corporate/2004',
-    '/tools-and-publications/publications/corporate/2004full',
-    '/tools-and-publications/publications/reports/314',
-    '/tools-and-publications/publications/reports/210',
-    '/tools-and-publications/publications/magazine/7',
-    '/tools-and-publications/publications/reports/313',
-    '/tools-and-publications/publications/reports/107',
-    '/tools-and-publications/publications/corporate/2003full',
-    '/tools-and-publications/publications/corporate/2003',
-    '/tools-and-publications/publications/reports/312',
-    '/tools-and-publications/publications/reports/209',
-    '/tools-and-publications/publications/reports/406',
-    '/tools-and-publications/publications/corporate/2002',
-    '/tools-and-publications/publications/magazine/6',
-    '/tools-and-publications/publications/reports/105',
-    '/tools-and-publications/publications/corporate/2001',
-    '/tools-and-publications/publications/magazine/5',
-    '/tools-and-publications/publications/magazine/4',
-    '/tools-and-publications/publications/reports/103',
-    '/tools-and-publications/publications/reports/102',
-    '/tools-and-publications/publications/reports/304',
-    '/tools-and-publications/publications/magazine/3',
-    '/tools-and-publications/publications/corporate/2013full',
-    '/tools-and-publications/publications/corporate/2011full',
-    '/tools-and-publications/publications/corporate/ar_summary_2011',
-    '/tools-and-publications/publications/reports/transport-sector_TERO10001ENC',
-    '/tools-and-publications/publications/reports/safe-maintenance-TEWE10003ENC',
-    '/tools-and-publications/publications/reports/TE-81-08-478-EN-C_OSH_in_figures_stress_at_work',
-    '/tools-and-publications/publications/osh-figures-stress-work-facts-and-figures',
+    '/publications/reports/economic_incentives_TE3109255ENC',
+    '/publications/reports/mainstreaming_osh_business',
+    '/publications/reports/mainstream_osh_university_education',
+    '/publications/reports/TE7809894ENC',
+    '/publications/reports/TEWE09006ENC',
+    '/publications/reports/TEWE09001ENC',
+    '/publications/reports/548OELs',
+    '/publications/reports/TE3008390ENC_chemical_risks',
+    '/publications/reports/8108322_vibration_exposure',
+    '/publications/reports/TE7007049ENC_skin_diseases',
+    '/publications/reports/en_TE8107132ENC.pdf',
+    '/publications/reports/7807118',
+    '/publications/corporate/2006',
+    '/publications/corporate/brochure_2007',
+    '/publications/magazine/9',
+    '/publications/corporate/2005',
+    '/publications/corporate/2005full',
+    '/publications/reports/6805648',
+    '/publications/reports/6805535',
+    '/publications/magazine/8',
+    '/publications/corporate/20050929',
+    '/publications/corporate/2004',
+    '/publications/corporate/2004full',
+    '/publications/reports/314',
+    '/publications/reports/210',
+    '/publications/magazine/7',
+    '/publications/reports/313',
+    '/publications/reports/107',
+    '/publications/corporate/2003full',
+    '/publications/corporate/2003',
+    '/publications/reports/312',
+    '/publications/reports/209',
+    '/publications/reports/406',
+    '/publications/corporate/2002',
+    '/publications/magazine/6',
+    '/publications/reports/105',
+    '/publications/corporate/2001',
+    '/publications/magazine/5',
+    '/publications/magazine/4',
+    '/publications/reports/103',
+    '/publications/reports/102',
+    '/publications/reports/304',
+    '/publications/magazine/3',
+    '/publications/corporate/2013full',
+    '/publications/corporate/2011full',
+    '/publications/corporate/ar_summary_2011',
+    '/publications/reports/transport-sector_TERO10001ENC',
+    '/publications/reports/safe-maintenance-TEWE10003ENC',
+    '/publications/reports/TE-81-08-478-EN-C_OSH_in_figures_stress_at_work',
+    '/publications/osh-figures-stress-work-facts-and-figures',
     '/publications/reports/305',
     '/publications/reports/401',
     '/publications/magazine/2',
     '/publications/reports/201',
-    '/tools-and-publications/publications/corporate/1998',
+    '/publications/corporate/1998',
   );
 
   $images_dir = 'public://publications/cover_images';
@@ -178,13 +176,13 @@ function osha_publication_update_7006() {
 function osha_publication_update_7007() {
   global $base_url;
   $aliases = array(
-    '/tools-and-publications/publications/reports/201',
-    '/tools-and-publications/publications/reports/esener_workers-involvement',
-    '/tools-and-publications/publications/reports/TE7809894ENC',
-    '/tools-and-publications/publications/reports/305',
-    '/tools-and-publications/publications/reports/401',
-    '/tools-and-publications/publications/magazine/2',
-    '/tools-and-publications/publications/reports/303',
+    '/publications/reports/201',
+    '/publications/reports/esener_workers-involvement',
+    '/publications/reports/TE7809894ENC',
+    '/publications/reports/305',
+    '/publications/reports/401',
+    '/publications/magazine/2',
+    '/publications/reports/303',
   );
 
   $images_dir = 'public://publications/cover_images';
@@ -677,4 +675,117 @@ Work-related diseases';
     }
     taxonomy_term_save($term);
   }
+}
+
+/**
+ * MDR-2842 NCW - Revamp - Publications list and detail - Development.
+ */
+function osha_publication_update_7019() {
+  features_revert_module('osha_publication');
+}
+
+function osha_publication_update_7020() {
+  // Left menu block.
+  db_update('block')
+    ->fields(['pages' => 'node/5445
+themes/dangerous-substances/practical-tools-dangerous-substances
+photo-gallery
+tools-and-publications
+publications
+publications/*'])
+    ->condition('bid', 151)
+    ->execute();
+
+  // Clear filter.
+  db_update('block')
+    ->fields(['pages' => 'search/*
+tools-and-publications/seminars
+legislation/directives/*
+safety-and-health-legislation/european-directives
+node/2544
+legislation/guidelines/*
+themes/dangerous-substances/search
+themes/dangerous-substances/search/*
+themes/musculoskeletal-disorders/search'])
+    ->condition('bid', 947)
+    ->execute();
+
+  // Rss block
+  db_update('block')
+    ->fields(['region' => -1])
+    ->condition('bid', 939)
+    ->execute();
+}
+
+function osha_publication_update_7021() {
+  features_revert_module('osha_wiki');
+  features_revert_module('osha_resources');
+  features_revert_module('osha_infographics');
+  features_revert_module('osha_publication');
+
+}
+
+/**
+ * MDR-2984 Publication: recommended publication goes to the PDF instead of to the page detail.
+ */
+function osha_publication_update_7022() {
+  features_revert(array('osha_publication' => array('field_instance')));
+}
+
+/**
+ * MDR-2967 PUBLICATIONS: No "related resources" in Publications.
+ */
+function osha_publication_update_7023() {
+  features_revert(array('osha_publication' => array('field_instance')));
+}
+
+/**
+ * .
+ */
+function osha_publication_update_7024() {
+}
+
+/**
+ * MDR-3012 Revamp Publications - URL.
+ */
+function osha_publication_update_7025() {
+  variable_set('pathauto_node_publication_pattern', 'publications/[node:title]');
+  variable_set('pathauto_update_action', 2);
+  $start = 0;
+  $limit_count = 50;
+  $break_at = 1000;
+  while (1) {
+    $resource = db_query("SELECT nid FROM node WHERE type='publication' AND status=1 LIMIT $start, $limit_count");
+    foreach ($resource as $result) {
+      $node = node_load($result->nid);
+      $node->path['pathauto'] = TRUE;
+      $node->path['alias'] = str_replace('tools-and-publications/', '', $node->path['alias']);
+      pathauto_node_update_alias($node, 'update');
+    }
+    $start += $limit_count;
+    if ($start >= $break_at) {
+      break;
+    }
+  }
+}
+
+/**
+ * MDR-3012 Revamp Publications - URL.
+ */
+function osha_publication_update_7026() {
+  features_revert(array('osha_publication' => array('field_base', 'field_instance')));
+}
+
+/**
+ * MDR-3157 Publication detail page.
+ */
+function osha_publication_update_7027() {
+  features_revert(array('osha_publication' => array('field_base', 'field_instance')));
+}
+
+/**
+ * MDR-3069 Revamp Publication list- HWC20 Sort functionality.
+ */
+function osha_publication_update_7028() {
+  module_enable(array('search_api_title2'));
 }

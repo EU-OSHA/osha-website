@@ -105,9 +105,15 @@ jQuery(document).ready(function($){
 		}
 	}
 
+	/* No pagerer display - move result @total results */
+	if (!$(".pagerer-pager ")[0]){
+		$('.pager-total').addClass('no-pagerer');
+	}
+	
+
 	/*Ellipsis News and Events Home page*/
 
-	var character = 65;
+	var character = 60;
 	var count1 = $("div.view-news-and-events > div.row > div:nth-child(1) > h3 > a").text().length;
 	var count2 = $("div.view-news-and-events > div.row > div:nth-child(2) > h3 > a").text().length;
 	var count3 = $("div.view-news-and-events > div.row > div:nth-child(3) > div:nth-child(2) > h3 > a").text().length;
@@ -135,30 +141,35 @@ jQuery(document).ready(function($){
 
 	/*Ellipsis Home intro boxes*/
 	
-	var character_intro = 60;
+	var character_intro = 72;
 	var count1_intro = $(".home-intro > div:nth-child(1) > a:nth-child(1) > h2").text().length;
 	var count2_intro = $(".home-intro > div:nth-child(2) > a:nth-child(1) > h2").text().length;
-	var count3_intro = $(".home-intro > div:nth-child(2) > a:nth-child(1) > h2").text().length;
+	var count3_intro = $(".home-intro > div:nth-child(3) > a:nth-child(1) > h2").text().length;
 
-	if (count1_intro > character_intro){
+	if (count1_intro >= character_intro){
 		$(".home-intro > div:nth-child(1) > a:nth-child(1) > h2").text(function(){
     		return $(this).text().substring(0,character_intro);
 		});
 		$( ".home-intro > div:nth-child(1) > a:nth-child(1) > h2" ).append( "..." );
 	}
 
-	if (count2_intro > character_intro){
+	if (count2_intro >= character_intro){
 		$(".home-intro > div:nth-child(2) > a:nth-child(1) > h2").text(function(){
     		return $(this).text().substring(0,character_intro);
 		});
 		$( ".home-intro > div:nth-child(2) > a:nth-child(1) > h2" ).append( "..." );
 	}
 
-	if (count3_intro > character_intro){
+	if (count3_intro >= character_intro){
 		$(".home-intro > div:nth-child(3) > a:nth-child(1) > h2").text(function(){
     		return $(this).text().substring(0,character_intro);
 		});
 		$( ".home-intro > div:nth-child(3) > a:nth-child(1) > h2" ).append( "..." );
 	}
+
+	/* Cookies declined */
+	$(".decline-button").click(function() {
+		$('#sliding-popup').remove();
+	});
 	
 });

@@ -1,0 +1,104 @@
+<?php
+/**
+ * @file
+ * Pagerer install
+ *
+ * Pagerer installation hooks.
+ *
+ * Drupal core 7.x
+ *
+ * @package  User interface
+ * @author   mondrake <mondrake@mondrake.org>
+ */
+
+/**
+ * Implements hook_install().
+ */
+function pagerer_install() {
+  $t = get_t();
+  drupal_set_message(
+    $t(
+      'The Pagerer module has been installed. Visit <a href="@url">configure</a> for configuration.',
+      array('@url' => url('admin/config/user-interface/pagerer'))
+    )
+  );
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function pagerer_uninstall() {
+  // Remove all variables whose name begins with 'pagerer'.
+  $res = db_select('variable', 'v')
+      ->fields('v')
+      ->condition('name', 'pagerer%', 'LIKE')
+      ->execute();
+  if ($res) {
+    foreach ($res as $row) {
+      variable_del($row->name);
+      drupal_set_message(t('Variable %var has been deleted.', array('%var' => $row->name)));
+    }
+  }
+}
+
+/**
+ * Update Pagerer variable and themes.
+ */
+function pagerer_update_7100() {
+  // Ensure latest theme definitions are loaded in registry.
+  drupal_theme_rebuild();
+  // Get rid of any leftover 'tags' keys in pagerer variable.
+  $vars = variable_get('pagerer', array());
+  if (isset($vars['tags'])) {
+    unset($vars['tags']);
+  }
+  foreach (array('left_pane', 'center_pane', 'right_pane') as $p) {
+    if (isset($vars[$p]['theme_variables']['tags'])) {
+      unset($vars[$p]['theme_variables']['tags']);
+    }
+  }
+  variable_set('pagerer', $vars);
+}
+
+/**
+ * 1. Prepare Pagerer variables for 7.x-1.1.
+ */
+function pagerer_update_7101() {
+  // Split 7.x-1.0 pagerer variable.
+  $vars = variable_get('pagerer', array());
+  $core_replace = array();
+  if (isset($vars['left_pane'])) {
+    $core_replace['left_pane'] = $vars['left_pane'];
+  }
+  if (isset($vars['center_pane'])) {
+    $core_replace['center_pane'] = $vars['center_pane'];
+  }
+  if (isset($vars['right_pane'])) {
+    $core_replace['right_pane'] = $vars['right_pane'];
+  }
+  variable_set('pagerer.preset.core_replace', $core_replace);
+  unset(
+    $vars['left_pane'],
+    $vars['center_pane'],
+    $vars['right_pane']
+  );
+  if ($vars['pagerer_override_pager']) {
+    $vars['pagerer_override_pager'] = 'core_replace';
+  }
+  else {
+    $vars['pagerer_override_pager'] = 'core';
+  }
+  variable_set('pagerer', $vars);
+}
+
+/**
+ * 2. Prepare Pagerer variables for 7.x-1.1.
+ */
+function pagerer_update_7102() {
+  $vars = variable_get('pagerer', array());
+  if (!isset($vars['core_override_preset'])) {
+    $vars['core_override_preset'] = isset($vars['pagerer_override_pager']) ? $vars['pagerer_override_pager'] : 'core';
+  }
+  unset($vars['pagerer_override_pager']);
+  variable_set('pagerer', $vars);
+}

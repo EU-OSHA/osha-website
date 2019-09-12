@@ -280,6 +280,13 @@ if (jQuery(".node-type-flickr-gallery")[0]){
 /*JS que no hace falta en Drupal*/
 
 jQuery(document).ready(function() {
+	jQuery( ".accordion-view" ).click(function() {
+		jQuery( '#block-views-our-story-block-look-back .item-list-look-back ul li' ).toggleClass("active");
+		jQuery( '.accordion-view.less' ).toggleClass("active");
+		jQuery( '.accordion-view.more' ).toggleClass("no-active");
+	});
+
+	jQuery('.cut-paste').appendTo('.node-25th-anniversary');
 
 	if (jQuery(window).width() < 1006) {
 		jQuery('body').addClass('mean-container');
@@ -293,9 +300,6 @@ jQuery(document).ready(function() {
 	}
 
 	jQuery( "body > div.mean-bar > a" ).click(function() {
-	jQuery( 'body > div.mean-bar > nav > div > ul' ).toggleClass( "active" );
+		jQuery( 'body > div.mean-bar > nav > div > ul' ).toggleClass( "active" );
+	});
 });
-
-
-});
-

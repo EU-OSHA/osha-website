@@ -190,7 +190,7 @@ function osha_slideshare_theme(){
 /**
  * Save Slide Thumbnail
  */
-function saveThumbnail($api_key, $secret_key, $slideshow_id){
+function saveThumbnail($api_key, $secret_key, $slideshow_id) {
   $files = variable_get('file_public_path', conf_path() . '/files');
   $file_name = $slideshow_id . '.jpg';
   $dest = $files . '/slideshare/' . $file_name;
@@ -228,7 +228,7 @@ function saveThumbnail($api_key, $secret_key, $slideshow_id){
  * Connect to Slideshare and get information
  * about the URL provided
  */
-function getSlideshareInfos($slideshow_url, $slideshow_id){
+function getSlideshareInfos($slideshow_url, $slideshow_id) {
   $files = variable_get('file_public_path', conf_path() . '/files');
   $file_name = $slideshow_id . '.jpg';
   $dest = $files . '/slideshare/' . $file_name;
@@ -241,4 +241,39 @@ function getSlideshareInfos($slideshow_url, $slideshow_id){
     'path' => $slideshow_url,
     'image' => $image,
   ));
+}
+
+function save_slideshare_oembed($slideshare_id, $slideshare_url) {
+  $files = variable_get('file_public_path', conf_path() . '/files');
+  $file_name = $slideshare_id . '.json';
+  $dest = $files . '/slideshare/' . $file_name;
+  if (!file_exists($dest)) {
+    $json = file_get_contents('https://www.slideshare.net/api/oembed/2?format=json&url=' . $slideshare_url);
+    file_put_contents($dest, $json);
+  }
+}
+
+function get_slideshare_oembed($slideshare_id, $slideshare_url) {
+  $files = variable_get('file_public_path', conf_path() . '/files');
+  $file_name = $slideshare_id . '.json';
+  $dest = $files . '/slideshare/' . $file_name;
+  $json = [];
+  if (!file_exists($dest)) {
+    save_slideshare_oembed($slideshare_id, $slideshare_url);
+  }
+  if (file_exists($dest)) {
+    $json = json_decode(file_get_contents($dest), TRUE);
+  }
+  return $json;
+}
+
+function get_slideshare_img($slideshare_id) {
+  $files = variable_get('file_public_path', conf_path() . '/files');
+  $file_name = $slideshare_id . '.jpg';
+  $dest = $files . '/slideshare/' . $file_name;
+  $image = '';
+  if (file_exists($dest)) {
+    $image = theme('image', array('path' => $dest));
+  }
+  return $image;
 }

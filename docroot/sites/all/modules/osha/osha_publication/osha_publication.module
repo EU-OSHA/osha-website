@@ -1216,6 +1216,7 @@ function osha_publication_node_get_main_tags($item) {
 }
 
 function osha_publication_node_get_main_publication_type($item) {
+  $type = null;
   if ($item->type != 'publication') {
     return NULL;
   }

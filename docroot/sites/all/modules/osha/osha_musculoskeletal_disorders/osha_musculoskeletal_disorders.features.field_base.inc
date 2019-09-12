@@ -139,7 +139,7 @@ function osha_musculoskeletal_disorders_field_default_field_bases() {
   // Exported field_base: 'field_msd_priority_area'.
   $field_bases['field_msd_priority_area'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_msd_priority_area',
@@ -432,9 +432,6 @@ function osha_musculoskeletal_disorders_field_default_field_bases() {
         'Visual resources' => 'Visual resources',
         'Guides & Tools' => 'Guides & Tools',
         'Case study' => 'Case study',
-        'Visual resource' => 'removed',
-        'Tool' => 'removed',
-        'Guidance' => 'removed',
       ),
       'allowed_values_function' => '',
       'entity_translation_sync' => FALSE,

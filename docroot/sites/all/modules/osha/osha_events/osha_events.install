@@ -309,3 +309,12 @@ function osha_events_update_7030() {
   features_revert(array('osha_seminar' => array('views_view')));
   features_revert_module('osha_events');
 }
+
+/**
+ * MDR-2914 Migration News/Highlights&Events - Show in HWC20.
+ */
+function osha_events_update_7031() {
+  features_revert_module('osha_events');
+  features_revert_module('osha_news');
+  features_revert_module('osha_highlight');
+}

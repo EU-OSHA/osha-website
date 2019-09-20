@@ -168,7 +168,7 @@ function osha_publication_menu_publications_search_native($form_state) {
     $query->condition('field_publication_date', time(), '<');
 
     $query->keys($text);
-    $query->fields(array('title_field', 'body:value'));
+    $query->fields(array('title_field', 'body:value', 'field_tags:name'));
 
     if ($sort_by == 'field_publication_date') {
       $query->sort('field_publication_date', 'DESC');

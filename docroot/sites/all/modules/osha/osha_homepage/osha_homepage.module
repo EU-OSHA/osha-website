@@ -5,16 +5,224 @@
  */
 
 include_once 'osha_homepage.features.inc';
-        
+
 /**
- * implements hook_preprocess_node()
+ * Implements hook_block_info().
  */
-function osha_homepage_init() {
-    if(drupal_is_front_page()){
-      $jssor_path = libraries_get_path('jquery-slider-master');
-      drupal_add_js($jssor_path . '/jssor.slider.mini.js');
-      drupal_add_css($jssor_path . '/jssor.css');
-    }
+function osha_homepage_block_info() {
+  $blocks = array();
+  $blocks['osha_homepage_tweets'] = array(
+    'info' => t('Homepage Tweets'),
+    'cache' => DRUPAL_CACHE_PER_USER | DRUPAL_CACHE_PER_PAGE,
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => '<front>',
+  );
+  $blocks['osha_homepage_follow_us'] = array(
+    'info' => t('Follow us on'),
+    'cache' => DRUPAL_CACHE_PER_USER | DRUPAL_CACHE_PER_PAGE,
+    'region' => 'sidebar_second',
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => '<front>',
+  );
+  $blocks['osha_homepage_news_events'] = array(
+    'info' => t('News and Events'),
+    'cache' => DRUPAL_CACHE_PER_USER | DRUPAL_CACHE_PER_PAGE,
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => '<front>',
+  );
+  $blocks['osha_homepage_footer'] = array(
+    'info' => t('Footer map'),
+    'cache' => DRUPAL_CACHE_PER_USER | DRUPAL_CACHE_PER_PAGE,
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => '<front>',
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_configure().
+ */
+function osha_homepage_block_configure($delta = '') {
+  $form = array();
+
+  switch ($delta) {
+    case 'osha_homepage_news_events':
+      $newsletters_no_options = array();
+      for ($i = 0; $i <= 3; $i++) {
+        $newsletters_no_options[$i] = $i;
+      }
+      $form['osha_hp_news_limit'] = array(
+        '#type' => 'select',
+        '#title' => 'How many news items do you want to display?',
+        '#options' => $newsletters_no_options,
+        '#default_value' => variable_get('osha_hp_news_limit', 2),
+      );
+      break;
+  }
+
+  return $form;
+}
+
+/**
+ * Implements hook_block_save().
+ */
+function osha_homepage_block_save($delta = '', $edit = array()) {
+  // We need to save settings from the configuration form.
+  switch ($delta) {
+    case 'osha_homepage_news_events':
+      variable_set('osha_hp_news_limit', $edit['osha_hp_news_limit']);
+      break;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function osha_homepage_theme() {
+
+  $theme = [];
+  $path = drupal_get_path('module', 'osha_homepage');
+
+  $theme['osha_homepage_tweets'] = [
+    'path' => $path . '/templates',
+    'template' => 'osha_homepage_tweets',
+    'variables' => [
+      'tweets' => NULL,
+    ],
+  ];
+  $theme['osha_homepage_follow_us'] = [
+    'path' => $path . '/templates',
+    'template' => 'osha_homepage_follow_us',
+    'variables' => [],
+  ];
+
+  $theme['footer_block_theme'] = [
+    'path' => $path . '/templates',
+    'render element' => 'element',
+    'template' => 'footer-menu-block',
+    'variables' => array(
+      'menu_data' => [],
+    ),
+  ];
+  return $theme;
+}
+
+/**
+ * Implements Elysia hook_cronapi().
+ */
+function osha_homepage_cronapi() {
+  return array('osha_homepage_cron' => array(
+    'description' => 'Tweets for homepage',
+    'rule' => '*/5 * * * *', // Every 5 minutes
+  ));
+}
+
+function osha_homepage_cron() {
+  $library_path = (module_exists('libraries') && libraries_get_path('twitter')) ? libraries_get_path('twitter') : 'sites/all/libraries/twitter';
+  require_once $library_path . '/TwitterAPIExchange.php';
+
+  $consumer_key = variable_get('social_twitter_consumer_key', '');
+  $consumer_secret = variable_get('social_twitter_consumer_secret', '');
+  $oauth_access_token = variable_get('social_twitter_oauth_access_token', '');
+  $oauth_access_token_secret = variable_get('social_twitter_oauth_access_token_secret', '');
+
+  if (!$consumer_key || !$consumer_secret || !$oauth_access_token || !$oauth_access_token_secret) {
+    return;
+  }
+
+  $screen_name = variable_get('social_twitter_screen_name', 'eu_osha');
+  $count = variable_get('social_dashboard_limit', 3);
+  $getfield = '?tweet_mode=extended&include_entities=true&include_rts=true&screen_name=' . $screen_name . '&count=' . $count;
+  $url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
+  $requestMethod = 'GET';
+  $twitter = new TwitterAPIExchange(
+    [
+      'consumer_key' => $consumer_key,
+      'consumer_secret' => $consumer_secret,
+      'oauth_access_token' => $oauth_access_token,
+      'oauth_access_token_secret' => $oauth_access_token_secret,
+    ]
+  );
+  $response = $twitter->setGetfield($getfield)->buildOauth($url, $requestMethod)->performRequest();
+  $data = json_decode($response, TRUE);
+  $tweets = [];
+  foreach ($data as $tweet) {
+    $id_str = $tweet['id_str'];
+    $name = $tweet['user']['screen_name'];
+    $tweets[$id_str] = $name;
+  }
+  if (!count($tweets)) {
+    watchdog('social_dashboard', '[CRON]Error no twitter tweets found!');
+  }
+  variable_set('osha_homepage_tweets', $tweets);
+  return $tweets;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function osha_homepage_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+    case 'osha_homepage_tweets':
+      $tweets = variable_get('osha_homepage_tweets', []);
+      $block['subject'] = t('Latest tweets');
+      $block['content'] = theme('osha_homepage_tweets', ['tweets' => $tweets]);
+      break;
+
+    case 'osha_homepage_news_events':
+      $block['subject'] = t('News and Events');
+      $content = '<div class="view-news-and-events"><div class="row">' . osha_homepage_news_events_blocks_view() . '</div>';
+      $content .= '<div class="more-link revamp">';
+      $content .= l(t('View all news'), 'oshnews');
+      $content .= l(t('View all events'), 'events');
+      $content .= '</div></div>';
+      $block['content'] = $content;
+      break;
+
+    case 'osha_homepage_follow_us':
+      $block['content'] = theme('osha_homepage_follow_us');
+      break;
+
+    case 'osha_homepage_footer':
+      $menu_data = [];
+      $all_data = menu_tree_all_data('main-menu', NULL, 3);
+      foreach ($all_data as $row_key => $row) {
+        $new_item = $row;
+        $new_item['below'] = [];
+        foreach ($row['below'] as $key => $menu) {
+          foreach ($menu['below'] as $subkey => $submenu) {
+            if ($submenu['link']['hidden']) {
+              continue;
+            }
+            $new_item['below'][$subkey] = $submenu;
+          }
+        }
+        $menu_data[$row_key] = $new_item;
+      }
+      $block['content'] = theme('footer_block_theme', ['menu_data' => $menu_data]);
+      break;
+  }
+
+  return $block;
+}
+
+function osha_homepage_news_events_blocks_view() {
+  $blocks = [];
+  $limit = variable_get('osha_hp_news_limit', 2);
+  if ($limit) {
+    $blocks[] = block_load('views', 'news-front');
+  }
+  $limit = 3 - $limit;
+  if ($limit) {
+    $blocks[] = block_load('views', 'homepage_events-block');
+  }
+  $array = _block_get_renderable_array(
+    _block_render_blocks($blocks)
+  );
+  return render($array);
 }
 
 /**

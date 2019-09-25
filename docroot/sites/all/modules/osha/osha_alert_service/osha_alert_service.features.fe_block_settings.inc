@@ -375,46 +375,6 @@ highlights',
     'visibility' => 1,
   );
 
-  $export['osha_alert_service-osha_publication_rss'] = array(
-    'cache' => 8,
-    'custom' => 0,
-    'delta' => 'osha_publication_rss',
-    'i18n_block_language' => array(),
-    'i18n_mode' => 0,
-    'module' => 'osha_alert_service',
-    'node_types' => array(),
-    'pages' => 'tools-and-publications/publications',
-    'roles' => array(),
-    'themes' => array(
-      'bartik' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'bartik',
-        'weight' => 1,
-      ),
-      'osha_admin' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'osha_admin',
-        'weight' => 1,
-      ),
-      'osha_frontend' => array(
-        'region' => 'content',
-        'status' => 1,
-        'theme' => 'osha_frontend',
-        'weight' => 0,
-      ),
-      'seven' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'seven',
-        'weight' => 1,
-      ),
-    ),
-    'title' => '<none>',
-    'visibility' => 1,
-  );
-
   $export['osha_alert_service-osha_seminar_rss'] = array(
     'cache' => 8,
     'custom' => 0,

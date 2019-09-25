@@ -242,3 +242,79 @@ function osha_events_update_7024() {
 function osha_events_update_7025() {
   features_revert_module('osha_events');
 }
+
+/**
+ * MDR-2758 Events creation fields - Mandatory fields and value by default.
+ */
+function osha_events_update_7026() {
+  features_revert(array('osha_events' => array('field_instance')));
+
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'events');
+  $result = $query->execute();
+  if (isset($result['node'])) {
+    $events_nids = array_keys($result['node']);
+    $events = entity_load('node', $events_nids);
+    foreach ($events as $node) {
+      $changes = FALSE;
+      if (empty($node->field_key_performance[LANGUAGE_NONE][0]['value'])) {
+        $node->field_key_performance[LANGUAGE_NONE][0]['value'] = 'No';
+        $changes = TRUE;
+      }
+      if (empty($node->field_agenda[LANGUAGE_NONE][0]['value'])) {
+        $node->field_agenda[LANGUAGE_NONE][0]['value'] = 'No';
+        $changes = TRUE;
+      }
+      if (empty($node->field_publications_exhibition_su[LANGUAGE_NONE][0]['value'])) {
+        $node->field_publications_exhibition_su[LANGUAGE_NONE][0]['value'] = 'No';
+        $changes = TRUE;
+      }
+      if (empty($node->field_media_promotion[LANGUAGE_NONE][0]['value'])) {
+        $node->field_media_promotion[LANGUAGE_NONE][0]['value'] = 'No';
+        $changes = TRUE;
+      }
+      if ($changes) {
+        node_save($node);
+      }
+    }
+  }
+}
+
+/**
+ * MDR-2786 NCW - Revamp - Home page development.
+ */
+function osha_events_update_7027() {
+  features_revert(array('osha_events' => array('views_view')));
+}
+
+/**
+ * MDR-2843 NCW - Revamp - Events list - Development.
+ */
+function osha_events_update_7028() {
+  features_revert_module('osha_events');
+}
+
+/**
+ * MDR-2941 Events- search by free text - page reloads each time we add a character.
+ */
+function osha_events_update_7029() {
+  features_revert(array('osha_events' => array('views_view')));
+}
+
+/**
+ * MDR-3014 Revamp Highlights - Right column.
+ */
+function osha_events_update_7030() {
+  features_revert(array('osha_seminar' => array('views_view')));
+  features_revert_module('osha_events');
+}
+
+/**
+ * MDR-2914 Migration News/Highlights&Events - Show in HWC20.
+ */
+function osha_events_update_7031() {
+  features_revert_module('osha_events');
+  features_revert_module('osha_news');
+  features_revert_module('osha_highlight');
+}

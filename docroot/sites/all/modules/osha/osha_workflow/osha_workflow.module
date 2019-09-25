@@ -560,7 +560,7 @@ function osha_workflow_node_access($node, $operation, $user) {
     // @todo: can have workbench_access but without moderation?
     if (!isset($node->workbench_moderation) || !isset($node->workbench_access)) {
       if ($is_pm) {
-        if (!in_array($node->type, ['musculoskeletal_disorders', 'dangerous_substances'])) {
+        if ($node->type != 'musculoskeletal_disorders') {
           return NODE_ACCESS_IGNORE;
         }
       }

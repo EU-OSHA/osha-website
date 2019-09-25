@@ -42,7 +42,7 @@ legislation/directive/*',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 13,
+        'weight' => 20,
       ),
       'seven' => array(
         'region' => '',
@@ -63,7 +63,8 @@ legislation/directive/*',
     'i18n_mode' => 0,
     'module' => 'facetapi',
     'node_types' => array(),
-    'pages' => 'tools-and-publications/publications',
+    'pages' => 'publications
+tools-and-publications/publications',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -82,7 +83,7 @@ legislation/directive/*',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 15,
+        'weight' => 24,
       ),
       'seven' => array(
         'region' => '',
@@ -104,7 +105,48 @@ legislation/directive/*',
     'module' => 'facetapi',
     'node_types' => array(),
     'pages' => 'search/*
+publications
 tools-and-publications/publications',
+    'roles' => array(),
+    'themes' => array(
+      'bartik' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'bartik',
+        'weight' => 0,
+      ),
+      'osha_admin' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'osha_admin',
+        'weight' => 0,
+      ),
+      'osha_frontend' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'osha_frontend',
+        'weight' => 23,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => 'Topics',
+    'visibility' => 1,
+  );
+
+  $export['facetapi-IYV4lO4uBWV9Cstx0SMmJ5nValwNGZX4'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => 'IYV4lO4uBWV9Cstx0SMmJ5nValwNGZX4',
+    'i18n_block_language' => array(),
+    'i18n_mode' => 0,
+    'module' => 'facetapi',
+    'node_types' => array(),
+    'pages' => 'search/*',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -123,7 +165,7 @@ tools-and-publications/publications',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 14,
+        'weight' => 22,
       ),
       'seven' => array(
         'region' => '',
@@ -134,6 +176,46 @@ tools-and-publications/publications',
     ),
     'title' => 'Topics',
     'visibility' => 1,
+  );
+
+  $export['facetapi-ROXIK6Y7tQue0DgP244H4JOcqy10UCEc'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => 'ROXIK6Y7tQue0DgP244H4JOcqy10UCEc',
+    'i18n_block_language' => array(),
+    'i18n_mode' => 0,
+    'module' => 'facetapi',
+    'node_types' => array(),
+    'pages' => '',
+    'roles' => array(),
+    'themes' => array(
+      'bartik' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'bartik',
+        'weight' => 0,
+      ),
+      'osha_admin' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'osha_admin',
+        'weight' => 0,
+      ),
+      'osha_frontend' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'osha_frontend',
+        'weight' => 0,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 0,
   );
 
   $export['facetapi-bhmRHTzU2n0ejKZP9wDI0S1oi2DgbSDm'] = array(
@@ -163,7 +245,7 @@ tools-and-publications/publications',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 10,
+        'weight' => 16,
       ),
       'seven' => array(
         'region' => '',
@@ -244,7 +326,7 @@ search/wiki',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 6,
+        'weight' => 9,
       ),
       'seven' => array(
         'region' => 'sidebar_first',
@@ -266,6 +348,7 @@ search/wiki',
     'module' => 'osha_search',
     'node_types' => array(),
     'pages' => 'search/*
+publications
 tools-and-publications/publications
 tools-and-publications/seminars
 legislation/directives/*
@@ -293,7 +376,7 @@ themes/musculoskeletal-disorders/search',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 5,
+        'weight' => 6,
       ),
       'seven' => array(
         'region' => 'content',
@@ -333,7 +416,7 @@ themes/musculoskeletal-disorders/search',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 26,
+        'weight' => 40,
       ),
       'seven' => array(
         'region' => '',
@@ -499,7 +582,7 @@ safety-and-health-legislation/european-directives',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 8,
+        'weight' => 10,
       ),
       'seven' => array(
         'region' => '',
@@ -540,7 +623,7 @@ search/seminars',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 9,
+        'weight' => 13,
       ),
       'seven' => array(
         'region' => '',

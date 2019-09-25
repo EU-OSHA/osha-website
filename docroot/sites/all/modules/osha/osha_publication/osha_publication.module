@@ -8,6 +8,10 @@ include_once 'osha_publication.features.inc';
 
 define('OSHA_PUBLICATION_CONTENT_TYPE_PUBLICATION', 'publication');
 define('SOLR_SEARCH_INDEX', 'default_multilingual_node_index');
+define('OSHA_PDF_DOWN_PATH', 'public://pdf_download');
+if (!defined('PCLZIP_TEMPORARY_DIR')) {
+  define('PCLZIP_TEMPORARY_DIR', variable_get('file_temporary_path', '/tmp') . '/');
+}
 
 function osha_publication_t($title) {
   return t($title);
@@ -18,6 +22,13 @@ function osha_publication_t($title) {
  */
 function osha_publication_menu() {
   $items = array();
+  $items['publications'] = array(
+    'title' => 'Publications',
+    'title callback' => 'osha_publication_t',
+    'description' => 'Config information for the module',
+    'page callback' => 'osha_publication_listing_page',
+    'access arguments' => array('access content'),
+  );
   $items['tools-and-publications/publications'] = array(
     'title' => 'Publications',
     'title callback' => 'osha_publication_t',
@@ -32,10 +43,45 @@ function osha_publication_menu() {
     'access arguments' => array('access content'),
     'delivery callback' => 'drupal_json_output',
   );
+  $items['node/%node/download_pdf'] = array(
+    'page callback' => 'osha_publication_download_pdf',
+    'page arguments' => array(1),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
 
   return $items;
 }
 
+/**
+ * Implements Elysia hook_cronapi().
+ */
+function osha_publication_cronapi() {
+  return array('osha_publication_cron' => array(
+    'description' => 'Publication pdf pages count update',
+    'rule' => '*/15 * * * *', // Every 15 minutes
+  ));
+}
+
+function osha_publication_cron() {
+  $result = views_get_view_result('publication_pages_count');
+  $diff = variable_get('node_changed_diff', 0);
+  foreach ($result as $row) {
+    $changed = date('Y-m-d H:i:s', $row->node_changed + $diff);
+    if ($changed > $row->field_field_pages_count_updated[0]['raw']['value']) {
+      $uri = $row->field_field_file[0]['raw']['uri'];
+      $path = drupal_realpath($uri);
+      $pages_count = pdf_to_image_count_pages($path);
+      $node = node_load($row->nid);
+      $node->field_pages_count[LANGUAGE_NONE][0]['value'] = $pages_count;
+      $node->field_pages_count_updated[LANGUAGE_NONE][0]['timezone'] = 'Europe/Madrid';
+      $node->field_pages_count_updated[LANGUAGE_NONE][0]['timezone_db'] = 'Europe/Madrid';
+      $node->field_pages_count_updated[LANGUAGE_NONE][0]['date_type'] = 'datetime';
+      $node->field_pages_count_updated[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i:s');
+      node_save($node);
+    }
+  }
+}
 
 /**
  * Implements hook_form_alter().
@@ -43,6 +89,8 @@ function osha_publication_menu() {
 function osha_publication_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'publication_node_form') {
     $form['field_publication_bookshop_id']['#access'] = FALSE;
+    $form['field_pages_count']['#access'] = FALSE;
+    $form['field_pages_count_updated']['#access'] = FALSE;
   }
 }
 
@@ -112,18 +160,17 @@ function osha_publication_url_inbound_alter(&$path, $original_path, $path_langua
   $args = arg();
   // MC-175 - publication search pretty path.
   // break down in filters the publication search path.
-  if (strpos($path, 'tools-and-publications/publications') !== FALSE) {
+  if (strpos($path, 'publications') !== FALSE) {
     $menu_item = menu_get_item($path);
     if (in_array($menu_item['page_callback'], ['osha_publication_listing_page', 'osha_publication_export'])) {
       if ($menu_item['page_callback'] == 'osha_publication_listing_page') {
-        $path = 'tools-and-publications/publications';
+        $path = 'publications';
       }
       elseif ($menu_item['page_callback'] == 'osha_publication_export') {
         $path = 'export/tools-and-publications/publications';
       }
-      if (count($args) > 2) {
+      if (count($args) > 1) {
         $search_args = $args;
-        array_shift($search_args);
         array_shift($search_args);
         foreach ($search_args as $search_filter) {
           if (strpos($search_filter, 'l_') === 0) {
@@ -290,7 +337,6 @@ function osha_publication_options_list() {
   return $return;
 }
 
-
 /**
  * Implements hook_file_view().
  */
@@ -301,6 +347,7 @@ function osha_publication_node_view($node, $view_mode, $langcode) {
   if (!in_array($node->type, array('publication', 'file'))) {
     return;
   }
+  drupal_add_js(drupal_get_path('module', 'osha_publication') . '/js/osha_publication.js');
   $args = arg();
   if (end($args) == 'file_view' && $view_mode == 'full') {
     $show_lang = $langcode;
@@ -321,6 +368,9 @@ function osha_publication_node_view($node, $view_mode, $langcode) {
       );
       file_transfer($file->uri, $headers);
     }
+  }
+  elseif (arg(1) == $node->nid) {
+    $node->content['download_form'] = drupal_get_form('osha_publication_download_form');
   }
 }
 
@@ -398,6 +448,177 @@ function osha_publication_views_pre_render(&$view) {
   }
 }
 
+function osha_publication_get_archive_drupal_path($files, $base_name, $dir_path, $drupal_dir_path) {
+  $archive_path = file_create_filename($base_name, $dir_path);
+  if (file_exists($archive_path)) {
+    return $archive_path;
+  }
+  if (!empty($files)) {
+    // Return if dir don't exists.
+    if (!file_prepare_directory($drupal_dir_path, FILE_CREATE_DIRECTORY)) {
+      watchdog('osha_publication', 'The directory !dir could not be accessed!', array('!dir' => $drupal_dir_path), WATCHDOG_ERROR);
+//      return NULL;
+    }
+    // Check if it's enough disks pace to create the archive.
+    $files_size = 0;
+    foreach ($files as $file) {
+      $files_size += $file['filesize'];
+      if (disk_free_space($dir_path) < $files_size) {
+        watchdog('osha_publication', 'There is not enough space to create a zip with files of !size MB!',
+          array('!size' => $files_size / pow(1024, 2)), WATCHDOG_ERROR);
+        return NULL;
+      }
+    }
+
+    $pclzip_library = libraries_load('pclzip');
+    libraries_load_files($pclzip_library);
+    // Open the archive.
+    $archive = new PclZip($archive_path);
+    $files_paths = array();
+    foreach ($files as $file) {
+      $path = drupal_realpath($file['uri']);
+      if (file_exists($path)) {
+        $files_paths[] = $path;
+      }
+      else {
+        watchdog('osha_publication', 'The file !path could not be accessed!', array('!path' => $path), WATCHDOG_ERROR);
+      }
+    }
+    $result = $archive->add($files_paths, PCLZIP_OPT_REMOVE_ALL_PATH, PCLZIP_OPT_TEMP_FILE_THRESHOLD, 10);
+    if (empty($result)) {
+      return NULL;
+    }
+    // Return drupal scheme file path.
+    $archive_name = drupal_basename($archive_path);
+    $archive_drupal_path = $drupal_dir_path . '/' . $archive_name;
+    return $archive_drupal_path;
+  }
+  return NULL;
+}
+
+
+/**
+ * Implements hook_libraries_info().
+ */
+function osha_publication_libraries_info() {
+  $libraries['pclzip'] = array(
+    'name' => 'PclZip',
+    'vendor url' => 'http://www.phpconcept.net/pclzip',
+    'download url' => 'http://www.phpconcept.net/pclzip/pclzip-downloads',
+    'version arguments' => array(
+      'file' => 'readme.txt',
+      'pattern' => 'PclZip\s+([0-9a-zA-Z\.-]+)',
+      'lines' => 5,
+      'cols' => 20,
+    ),
+    'files' => array(
+      'php' => array(
+        'pclzip.lib.php',
+      ),
+    ),
+  );
+  return $libraries;
+}
+
+function osha_publication_download_pdf($node) {
+  $files = array();
+  $nid = $node->nid;
+  if (!$node || $node->type != 'publication') {
+    return '';
+  }
+  foreach ($_REQUEST['languages'] as $lang) {
+    if (!empty($node->field_file[$lang])) {
+      $files[$lang] = $node->field_file[$lang][0];
+    }
+  }
+  if (count($files) > 1) {
+    $drupal_dir_path = OSHA_PDF_DOWN_PATH;
+    $dir_path = drupal_realpath($drupal_dir_path);
+    $base_name = $nid . '_publication_download_' . rand(10, 9999) . '.zip';
+    $archive_path = osha_publication_get_archive_drupal_path($files, $base_name, $dir_path, $drupal_dir_path);
+    if ($archive_path) {
+      $headers = array(
+        'Content-Type'              => 'application/zip',
+        'Content-Disposition'       => 'attachment; filename="' . drupal_basename($archive_path) . '"',
+        'Content-Length'            => filesize($archive_path),
+        'Content-Transfer-Encoding' => 'binary',
+        'Pragma'                    => 'no-cache',
+        'Cache-Control'             => 'must-revalidate, post-check=0, pre-check=0',
+        'Expires'                   => '0',
+        'Accept-Ranges'             => 'bytes',
+      );
+      file_transfer($archive_path, $headers);
+    }
+  }
+  else {
+    reset($files);
+    $file = current($files);
+    $file_path = drupal_realpath($file['uri']);
+    if ($file_path) {
+      $headers = array(
+        'Content-Type'              => 'application/pdf',
+        'Content-Disposition'       => 'attachment; filename="' . drupal_basename($file_path) . '"',
+        'Content-Length'            => filesize($file_path),
+        'Content-Transfer-Encoding' => 'binary',
+        'Pragma'                    => 'no-cache',
+        'Cache-Control'             => 'must-revalidate, post-check=0, pre-check=0',
+        'Expires'                   => '0',
+        'Accept-Ranges'             => 'bytes',
+      );
+      file_transfer($file_path, $headers);
+    }
+  }
+  drupal_set_message(t("There was an error downloading the file!"), 'error');
+  drupal_not_found();
+  exit;
+}
+
+function osha_publication_download_form_validate($form, $form_state) {
+  if (empty($form_state['values']['selected'])) {
+    form_set_error('', t('Please select the language/s'));
+  }
+}
+
+function osha_publication_download_form_submit($form, $form_state) {
+  $node = menu_get_object();
+  drupal_goto('node/' . $node->nid . '/download_pdf', array('query' => array('languages' => $form_state['values']['selected'])));
+}
+
+function osha_publication_download_form($form, $form_state) {
+  $list = language_list();
+  $form = array();
+  $node = menu_get_object();
+  $options = [];
+  $download_links = [];
+
+  foreach ($node->field_file as $lang => $files) {
+    $options[$lang] = $list[$lang]->name;
+    $download_links[$lang] = file_create_url($files[0]['uri']);
+  }
+  $form['#method'] = 'POST';
+  $form['#prefix'] = '<span class="title-download">' . t('Downloads') . '</span><div class="content-languages-download">';
+  $form['#suffix'] = '</div>';
+  $form['nid'] = [
+    '#type' => 'hidden',
+    '#default_value' => $node->nid,
+  ];
+  $form['selected'] = array(
+    '#type' => 'select',
+    '#title' => t('Publication'),
+    '#multiple' => TRUE,
+    '#chosen' => TRUE,
+    '#attributes' => ['class' => array('new-select-style')],
+    '#options' => $options,
+    '#suffix' => '<a href="#" id="download_pdf"><img alt="download" src="/' . drupal_get_path('theme', 'osha_frontend') . '/images/download-ico.png"></a>',
+  );
+  $form['content']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Download'),
+  );
+  drupal_add_js(array('osha_publication' => array('links' => $download_links)), 'setting');
+  return $form;
+}
+
 /**
  * Implements hook_post_features_enable_feature().
  *
@@ -440,6 +661,10 @@ function osha_publication_workbench_moderation_transition($node, $old, $new) {
  */
 function osha_publication_field_formatter_info() {
   $info = array(
+    'publication_term_reference_plain' => array(
+      'label' => t('Plain text (localized) for publication'),
+      'field types' => array('taxonomy_term_reference'),
+    ),
     'file_publication_file' => array(
       'label' => 'Publication file',
       'field types' => array('file'),
@@ -463,7 +688,12 @@ function osha_publication_field_formatter_info() {
     'publication_title_linked' => array(
       'label' => t('Publication Linked and wrapped'),
       'field types' => array('text'),
-      'settings' => array('title_style' => '', 'title_link' => '', 'title_class' => ''),
+      'settings' => array('title_style' => '', 'title_link' => '', 'title_class' => '', 'trim_length' => '', 'trim_suffix' => ''),
+    ),
+    'publication_image' => array(
+      'label' => t('Publication image'),
+      'field types' => array('image'),
+      'settings' => array('image_style' => '', 'image_link' => ''),
     ),
   );
   return $info;
@@ -474,7 +704,31 @@ function osha_publication_field_formatter_info() {
  */
 function osha_publication_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
   $settings = $instance['display'][$view_mode]['settings'];
+  $display = $instance['display'][$view_mode];
+
   $element = array();
+  if ($display['type'] == 'publication_image') {
+    $image_styles = image_style_options(FALSE, PASS_THROUGH);
+    $element['image_style'] = array(
+      '#title' => t('Image style'),
+      '#type' => 'select',
+      '#default_value' => $settings['image_style'],
+      '#empty_option' => t('None (original image)'),
+      '#options' => $image_styles,
+    );
+
+    $link_types = array(
+      'content' => t('Content'),
+    );
+    $element['image_link'] = array(
+      '#title' => t('Link image to'),
+      '#type' => 'select',
+      '#default_value' => $settings['image_link'],
+      '#empty_option' => t('Nothing'),
+      '#options' => $link_types,
+    );
+    return $element;
+  }
 
   $wrap_tags = array(
     '_none' => t('- None -'),
@@ -512,7 +766,18 @@ function osha_publication_field_formatter_settings_form($field, $instance, $view
     '#default_value' => $settings['title_class'],
     '#element_validate' => array('_title_validate_class'),
   );
-
+  $element['trim_length'] = array(
+    '#title' => t('Trim length'),
+    '#type' => 'textfield',
+    '#description' => t(''),
+    '#default_value' => $settings['trim_length'],
+  );
+  $element['trim_suffix'] = array(
+    '#title' => t('Trim lenght'),
+    '#type' => 'textfield',
+    '#description' => t(''),
+    '#default_value' => $settings['trim_suffix'],
+  );
   return $element;
 }
 
@@ -522,6 +787,35 @@ function osha_publication_field_formatter_settings_form($field, $instance, $view
 function osha_publication_field_formatter_settings_summary($field, $instance, $view_mode) {
   $settings = $instance['display'][$view_mode]['settings'];
   $summary = array();
+
+  $display = $instance['display'][$view_mode];
+  if ($display['type'] == 'publication_image') {
+    $settings = $display['settings'];
+
+    $summary = array();
+
+    $image_styles = image_style_options(FALSE, PASS_THROUGH);
+    // Unset possible 'No defined styles' option.
+    unset($image_styles['']);
+    // Styles could be lost because of enabled/disabled modules that defines
+    // their styles in code.
+    if (isset($image_styles[$settings['image_style']])) {
+      $summary[] = t('Image style: @style', array('@style' => $image_styles[$settings['image_style']]));
+    }
+    else {
+      $summary[] = t('Original image');
+    }
+
+    $link_types = array(
+      'content' => t('Linked to content'),
+    );
+    // Display this setting only if image is linked.
+    if (isset($link_types[$settings['image_link']])) {
+      $summary[] = $link_types[$settings['image_link']];
+    }
+
+    return implode('<br />', $summary);
+  }
 
   if (empty($settings)) {
     return;
@@ -542,6 +836,12 @@ function osha_publication_field_formatter_settings_summary($field, $instance, $v
     $summary[] = t('Wrap tag classes: @classes', array('@classes' => $settings['title_class']));
   }
 
+  if (isset($settings['trim_length']) && $settings['trim_length'] != '') {
+    $summary[] = t('Trim length: @trim_length', array('@trim_length' => $settings['trim_length']));
+    if (isset($settings['trim_suffix']) && $settings['trim_suffix'] != '') {
+      $summary[] = t('Suffix: @trim_suffix', array('@trim_suffix' => $settings['trim_suffix']));
+    }
+  }
   return implode('<br />', $summary);
 }
 
@@ -549,6 +849,7 @@ function osha_publication_field_formatter_settings_summary($field, $instance, $v
  * Implements hook_theme().
  */
 function osha_publication_theme() {
+  $path = drupal_get_path('module', 'osha_publication');
   return array(
     'osha_publication_file_publication_file_format' => array(
       'variables' => array('entity' => NULL, 'file' => NULL, 'delta' => NULL),
@@ -561,6 +862,19 @@ function osha_publication_theme() {
     ),
     'osha_publication_twin_publications_format' => array(
       'variables' => array('items' => NULL),
+    ),
+    'osha_publications_related_resources' => array(
+      'template' => 'osha_publications_related_resources',
+      'variables' => array('items' => NULL),
+      'path' => $path . '/templates'
+    ),
+    'osha_publications_aditional_resources' => array(
+      'template' => 'osha_publications_aditional_resources',
+      'variables' => array('items' => NULL, 'view_all' => NULL),
+      'path' => $path . '/templates'
+    ),
+    'osha_image_formatter' => array(
+      'variables' => array('item' => NULL, 'path' => NULL, 'image_style' => NULL),
     ),
   );
 }
@@ -592,6 +906,20 @@ function osha_publication_field_formatter_view($entity_type, $entity, $field, $i
       }
       break;
 
+    case 'publication_term_reference_plain':
+      $language = i18n_language_interface();
+      foreach ($items as $delta => $item) {
+        $item['taxonomy_term'] = taxonomy_term_load($item['tid']);
+        $name = ($item['tid'] != 'autocreate' ? i18n_taxonomy_term_name($item['taxonomy_term'], $language->language): $item['name']);
+        $element[$delta] = array(
+          '#markup' => check_plain($name),
+        );
+        if ($delta) {
+          $element[$delta-1]['#markup'] .= ', ';
+        }
+      }
+      break;
+
     case 'publication_bookshop_id':
       foreach ($items as $delta => $item) {
         $element[$delta] = array(
@@ -611,10 +939,54 @@ function osha_publication_field_formatter_view($entity_type, $entity, $field, $i
       );
       break;
 
+    case 'publication_image':
+
+      foreach ($items as $delta => $item) {
+        // Check if the formatter involves a link.
+        if ($display['settings']['image_link'] == 'content') {
+        $uri = entity_uri($entity_type, $entity);
+        $path = url($uri['path']);
+        if ($entity->type == 'publication') {
+          $path .= '/view';
+        }
+        $uri = array(
+          'path' => $path,
+          'options' => array(),
+        );
+        }
+        $element[$delta] = array(
+          '#theme' => 'osha_image_formatter',
+          '#item' => $item,
+          '#image_style' => $display['settings']['image_style'],
+          '#path' => isset($uri) ? $uri : '',
+        );
+      }
+      break;
+
     case 'publication_title_linked':
       $settings = $display['settings'];
       $output = isset($items[0]) ? $items[0]['safe_value'] : '';
-
+      $orig_output = $output;
+      if (!empty($settings['trim_length']) && drupal_strlen($orig_output) > intval($settings['trim_length'])) {
+        if (module_exists('views')) {
+          $output = views_trim_text([
+              'max_length' => $settings['trim_length'],
+              'word_boundary' => TRUE,
+              'ellipsis' => FALSE,
+              'html' => TRUE,
+          ], $output);
+        }
+        else {
+          $output = text_summary($output, NULL, $settings['trim_length']);
+        }
+        $shortened = FALSE;
+        if (drupal_strlen($output) != drupal_strlen($orig_output)) {
+          $shortened = TRUE;
+        }
+        if ($shortened && !empty($settings['trim_suffix'])) {
+          $output .= $settings['trim_suffix'];
+        }
+      }
       if (!empty($output) && $settings['title_link'] == 'content') {
         $uri = entity_uri($entity_type, $entity);
         $path = url($uri['path']);
@@ -658,31 +1030,76 @@ function osha_publication_field_formatter_view($entity_type, $entity, $field, $i
   return $element;
 }
 
+function theme_osha_image_formatter($variables) {
+  $item = $variables['item'];
+  $image = array(
+    'path' => $item['uri'],
+  );
+
+  if (array_key_exists('alt', $item)) {
+    $image['alt'] = $item['alt'];
+  }
+
+  if (isset($item['attributes'])) {
+    $image['attributes'] = $item['attributes'];
+  }
+
+  if (isset($item['width']) && isset($item['height'])) {
+    $image['width'] = $item['width'];
+    $image['height'] = $item['height'];
+  }
+
+  // Do not output an empty 'title' attribute.
+  if (isset($item['title']) && drupal_strlen($item['title']) > 0) {
+    $image['title'] = $item['title'];
+  }
+
+  if ($variables['image_style']) {
+    $image['style_name'] = $variables['image_style'];
+    $output = theme('image_style', $image);
+  }
+  else {
+    $output = theme('image', $image);
+  }
+
+  // The link path and link options are both optional, but for the options to be
+  // processed, the link path must at least be an empty string.
+  if (isset($variables['path']['path'])) {
+    $path = $variables['path']['path'];
+    $options = isset($variables['path']['options']) ? $variables['path']['options'] : array();
+    // When displaying an image inside a link, the html option must be TRUE.
+    $options['html'] = TRUE;
+    $output = '<a href="' . check_plain($path) . '">' . $output . '</a>';
+  }
+
+  return $output;
+}
+
 /*
- * Formats the main attachment and show links in all languages
+ * Formats the main attachment and show links in all languages.
  */
 function theme_osha_publication_file_publication_file_format($element) {
   $node = $element['entity'];
   $file = (object) $element['file'];
   $icon_directory = drupal_get_path('theme', 'osha_frontend') . '/images/file_icons';
 
-  $output = "<span class='label_publication_file'>Download</span>";
+  $output = "<span class='label_publication_file'>" . t('Download') . " </span>";
   $output .= theme('file_icon', array('file' => $file, 'icon_directory' => $icon_directory));
-  $output .= "<span class='label_publication_file'>in:</span>";
+  $output .= "<span class='label_publication_file'>" . t('in:') . "</span>";
 
   $file_fid = isset($node->field_file[$node->language][0]['fid']) ? $node->field_file[$node->language][0]['fid'] : NULL;
 
   foreach ($node->field_file as $lang => $object) {
     if ( $lang == $node->language || $file_fid != $object[0]['fid'] ) {
-      $output .= '<a href="' . file_create_url($object[0]['uri']) . '">' . strtoupper($lang) . '</a> | ';
+      $output .= '<a target="_blank" href="' . file_create_url($object[0]['uri']) . '">' . strtoupper($lang) . '</a> | ';
     }
   }
   $output = substr($output, 0, -3);
   return $output;
 }
 
-/*
- * Formats the related resources (attached files) as icon and description/filename
+/**
+ * Formats the related resources (attached files) as icon and description/filename.
  */
 function theme_osha_publication_file_publication_related_res_format($element) {
   $file = (object) $element['file'];
@@ -705,11 +1122,11 @@ function theme_osha_publication_bookshop_id_format($element) {
     '&p_p_lifecycle=1&p_p_state=normal&facet.author=OSHA&facet.collection=EUPub' .
     '&language=en&startRow=1&resultsPerPage=10&SEARCH_TYPE=SIMPLE&queryText=' . urlencode(trim($element['title']));
   $image_path = drupal_get_path('theme', 'osha_frontend') . '/images/content/EUPublications_logo.svg';
-  return '<span>' . t('Order a printed copy') .
-    '<a href="' . $url . '" target="_blank"><img src="/' . $image_path .
+  return '<div class="content-order-copy">' .
+    '<a href="' . $url . '" target="_blank">' . t('Order a printed copy') . '<img src="/' . $image_path .
     '" alt="' . t('EU Publications: You can order a printed copy of this document') .
     '" title="' . t('EU Publications: You can order a printed copy of this document') .
-    '"></a></span>';
+    '"></a></div>';
 }
 
 /*
@@ -756,4 +1173,107 @@ function osha_publication_osha_tmgmt_i18n_string_list() {
  */
 function osha_publication_node_view_alter(&$build){
   osha_thumbnail_alt_title($build, 'publication', 'field_cover_image', 'image');
+}
+
+/**
+ * Implements hook_entity_property_info_alter().
+ */
+function osha_publication_entity_property_info_alter(&$info) {
+  $info['node']['properties']['main_publication_type'] = array(
+    'type' => 'taxonomy_term',
+    'label' => t('Main Publication Type'),
+    'sanitized' => TRUE,
+    'getter callback' => 'osha_publication_node_get_main_publication_type',
+  );
+  $info['node']['properties']['main_tags'] = array(
+    'type' => 'list<taxonomy_term>',
+    'label' => t('Main Tags'),
+    'sanitized' => TRUE,
+    'getter callback' => 'osha_publication_node_get_main_tags',
+  );
+}
+
+function osha_publication_node_get_main_tags($item) {
+  $tags = [];
+  $map = osha_publication_get_main_tags_map(FALSE);
+  if (!empty($item->field_tags)) {
+    foreach($item->field_tags[LANGUAGE_NONE] as $tag) {
+      $tid = $tag['tid'];
+      if (!empty($map[$tid])) {
+        $tid = $map[$tid];
+      }
+      $term = taxonomy_term_load($tid);
+      if (!$term->field_tags_code) {
+        continue;
+      }
+      if (!$term->field_tags_code[LANGUAGE_NONE][0]['value']) {
+        continue;
+      }
+      $tags[$tid] = $tid;
+    }
+  }
+  return $tags;
+}
+
+function osha_publication_node_get_main_publication_type($item) {
+  $type = null;
+  if ($item->type != 'publication') {
+    return NULL;
+  }
+  $map = osha_publication_get_main_publication_types_map(FALSE);
+  $tid = $item->field_publication_type[LANGUAGE_NONE][0]['tid'];
+  if (!empty($map[$tid])) {
+    $parent_tid = $map[$tid];
+    $term = taxonomy_term_load($parent_tid);
+  }
+  elseif (array_key_exists($tid, $map)) {
+    $term = taxonomy_term_load($tid);
+  }
+  if (!$term->field_main_category) {
+    return null;
+  }
+  if (!$term->field_main_category[LANGUAGE_NONE][0]['value']) {
+    return null;
+  }
+  return $term;
+}
+
+function osha_publication_get_main_publication_types_map($parent = TRUE) {
+  $q = db_select('taxonomy_term_hierarchy', 't');
+  $q->join('field_data_field_publication_type', 'e', 'e.field_publication_type_tid = t.tid');
+  $q->distinct();
+  $q->fields('t', ['tid', 'parent']);
+  if ($parent) {
+    $q->condition('t.parent', 0, '>');
+  }
+  return $q->execute()->fetchAllKeyed(0,1);
+}
+
+function osha_publication_get_main_tags_map($parent = TRUE) {
+  $q = db_select('taxonomy_term_hierarchy', 't');
+  $q->join('field_data_field_tags', 'e', 'e.field_tags_tid = t.tid');
+  $q->distinct();
+  $q->fields('t', ['tid', 'parent']);
+  if ($parent) {
+    $q->condition('t.parent', 0, '>');
+  }
+  return $q->execute()->fetchAllKeyed(0,1);
+}
+
+/**
+ * Get tag tid by tag code.
+ */
+function _osha_publication_get_tag_by_code($code) {
+  $code = str_replace('__', '/', $code);
+  $tid = FALSE;
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'taxonomy_term')
+    ->fieldCondition('field_tags_code', 'value', $code, '=')
+    ->range(0, 1);
+  $result = $query->execute();
+
+  if (isset($result['taxonomy_term'])) {
+    $tid = current(array_keys($result['taxonomy_term']));
+  }
+  return $tid;
 }

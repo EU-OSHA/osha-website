@@ -584,7 +584,7 @@ safety-and-health-legislation/european-guidelines',
           'name' => 'path_visibility',
           'settings' => array(
             'visibility_setting' => '1',
-            'paths' => 'tools-and-publications/blog',
+            'paths' => 'tools-and-resources/blog',
           ),
           'context' => 'empty',
           'not' => TRUE,
@@ -644,7 +644,7 @@ safety-and-health-legislation/european-guidelines',
   $path_breadcrumb->api_version = 1;
   $path_breadcrumb->machine_name = 'osh_publications';
   $path_breadcrumb->name = 'Publications list';
-  $path_breadcrumb->path = 'tools-and-publications/publications';
+  $path_breadcrumb->path = 'publications';
   $path_breadcrumb->data = array(
     'titles' => array(
       0 => '%site:current-page:menu-link:pb-join:name',
@@ -850,8 +850,8 @@ safety-and-health-legislation/european-guidelines',
       2 => '!page_title',
     ),
     'paths' => array(
-      0 => 'tools-and-publications',
-      1 => 'tools-and-publications/seminars',
+      0 => 'tools-and-resources',
+      1 => 'tools-and-resources/seminars',
       2 => '<none>',
     ),
     'home' => 1,

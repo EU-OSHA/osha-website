@@ -69,63 +69,61 @@ function osha_publication_update_7005() {
 function osha_publication_update_7006() {
   global $base_url;
   $aliases = array(
-    '/tools-and-publications/publications/reports/economic_incentives_TE3109255ENC',
-    '/tools-and-publications/publications/reports/105',
-    '/tools-and-publications/publications/reports/mainstreaming_osh_business',
-    '/tools-and-publications/publications/reports/TERO09009ENC',
-    '/tools-and-publications/publications/reports/mainstream_osh_university_education',
-    '/tools-and-publications/publications/reports/TE7809894ENC',
-    '/tools-and-publications/publications/reports/TEWE09006ENC',
-    '/tools-and-publications/publications/reports/TEWE09001ENC',
-    '/tools-and-publications/publications/reports/548OELs',
-    '/tools-and-publications/publications/reports/TE3008390ENC_chemical_risks',
-    '/tools-and-publications/publications/reports/8108322_vibration_exposure',
-    '/tools-and-publications/publications/reports/TE7007049ENC_skin_diseases',
-    '/tools-and-publications/publications/reports/en_TE8107132ENC.pdf',
-    '/tools-and-publications/publications/reports/7807118',
-    '/tools-and-publications/publications/corporate/2006',
-    '/tools-and-publications/publications/corporate/brochure_2007',
-    '/tools-and-publications/publications/magazine/9',
-    '/tools-and-publications/publications/corporate/2005',
-    '/tools-and-publications/publications/corporate/2005full',
-    '/tools-and-publications/publications/reports/6805648',
-    '/tools-and-publications/publications/reports/6805535',
-    '/tools-and-publications/publications/magazine/8',
-    '/tools-and-publications/publications/corporate/20050929',
-    '/tools-and-publications/publications/corporate/2004',
-    '/tools-and-publications/publications/corporate/2004full',
-    '/tools-and-publications/publications/reports/314',
-    '/tools-and-publications/publications/reports/210',
-    '/tools-and-publications/publications/magazine/7',
-    '/tools-and-publications/publications/reports/313',
-    '/tools-and-publications/publications/reports/107',
-    '/tools-and-publications/publications/corporate/2003full',
-    '/tools-and-publications/publications/corporate/2003',
-    '/tools-and-publications/publications/reports/312',
-    '/tools-and-publications/publications/reports/209',
-    '/tools-and-publications/publications/reports/406',
-    '/tools-and-publications/publications/corporate/2002',
-    '/tools-and-publications/publications/magazine/6',
-    '/tools-and-publications/publications/reports/105',
-    '/tools-and-publications/publications/corporate/2001',
-    '/tools-and-publications/publications/magazine/5',
-    '/tools-and-publications/publications/magazine/4',
-    '/tools-and-publications/publications/reports/103',
-    '/tools-and-publications/publications/reports/102',
-    '/tools-and-publications/publications/reports/304',
-    '/tools-and-publications/publications/magazine/3',
-    '/tools-and-publications/publications/corporate/2013full',
-    '/tools-and-publications/publications/corporate/2011full',
-    '/tools-and-publications/publications/corporate/ar_summary_2011',
-    '/tools-and-publications/publications/reports/transport-sector_TERO10001ENC',
-    '/tools-and-publications/publications/reports/safe-maintenance-TEWE10003ENC',
-    '/tools-and-publications/publications/reports/TE-81-08-478-EN-C_OSH_in_figures_stress_at_work',
-    '/tools-and-publications/publications/osh-figures-stress-work-facts-and-figures',
+    '/publications/reports/economic_incentives_TE3109255ENC',
+    '/publications/reports/mainstreaming_osh_business',
+    '/publications/reports/mainstream_osh_university_education',
+    '/publications/reports/TE7809894ENC',
+    '/publications/reports/TEWE09006ENC',
+    '/publications/reports/TEWE09001ENC',
+    '/publications/reports/548OELs',
+    '/publications/reports/TE3008390ENC_chemical_risks',
+    '/publications/reports/8108322_vibration_exposure',
+    '/publications/reports/TE7007049ENC_skin_diseases',
+    '/publications/reports/en_TE8107132ENC.pdf',
+    '/publications/reports/7807118',
+    '/publications/corporate/2006',
+    '/publications/corporate/brochure_2007',
+    '/publications/magazine/9',
+    '/publications/corporate/2005',
+    '/publications/corporate/2005full',
+    '/publications/reports/6805648',
+    '/publications/reports/6805535',
+    '/publications/magazine/8',
+    '/publications/corporate/20050929',
+    '/publications/corporate/2004',
+    '/publications/corporate/2004full',
+    '/publications/reports/314',
+    '/publications/reports/210',
+    '/publications/magazine/7',
+    '/publications/reports/313',
+    '/publications/reports/107',
+    '/publications/corporate/2003full',
+    '/publications/corporate/2003',
+    '/publications/reports/312',
+    '/publications/reports/209',
+    '/publications/reports/406',
+    '/publications/corporate/2002',
+    '/publications/magazine/6',
+    '/publications/reports/105',
+    '/publications/corporate/2001',
+    '/publications/magazine/5',
+    '/publications/magazine/4',
+    '/publications/reports/103',
+    '/publications/reports/102',
+    '/publications/reports/304',
+    '/publications/magazine/3',
+    '/publications/corporate/2013full',
+    '/publications/corporate/2011full',
+    '/publications/corporate/ar_summary_2011',
+    '/publications/reports/transport-sector_TERO10001ENC',
+    '/publications/reports/safe-maintenance-TEWE10003ENC',
+    '/publications/reports/TE-81-08-478-EN-C_OSH_in_figures_stress_at_work',
+    '/publications/osh-figures-stress-work-facts-and-figures',
     '/publications/reports/305',
     '/publications/reports/401',
     '/publications/magazine/2',
     '/publications/reports/201',
-    '/tools-and-publications/publications/corporate/1998',
+    '/publications/corporate/1998',
   );
 
   $images_dir = 'public://publications/cover_images';
@@ -178,13 +176,13 @@ function osha_publication_update_7006() {
 function osha_publication_update_7007() {
   global $base_url;
   $aliases = array(
-    '/tools-and-publications/publications/reports/201',
-    '/tools-and-publications/publications/reports/esener_workers-involvement',
-    '/tools-and-publications/publications/reports/TE7809894ENC',
-    '/tools-and-publications/publications/reports/305',
-    '/tools-and-publications/publications/reports/401',
-    '/tools-and-publications/publications/magazine/2',
-    '/tools-and-publications/publications/reports/303',
+    '/publications/reports/201',
+    '/publications/reports/esener_workers-involvement',
+    '/publications/reports/TE7809894ENC',
+    '/publications/reports/305',
+    '/publications/reports/401',
+    '/publications/magazine/2',
+    '/publications/reports/303',
   );
 
   $images_dir = 'public://publications/cover_images';
@@ -346,4 +344,448 @@ function osha_publication_update_7014() {
       node_save($node);
     }
   }
+}
+
+/**
+ * MDR-2735 create main publication type taxonomy.
+ */
+function osha_publication_update_7015() {
+  osha_publication_types_create_new_terms();
+}
+
+/**
+ * MDR-2735 create main publication type taxonomy.
+ */
+function osha_publication_update_7016() {
+  osha_publication_tags_assign_parents();
+}
+
+/**
+ * MDR-2736 create main publication type taxonomy.
+ */
+function osha_publication_update_7017() {
+  osha_publication_tags_create_new_terms();
+}
+
+/**
+ * MDR-2736 create main publication type taxonomy.
+ */
+function osha_publication_update_7018() {
+  osha_publication_tags_assign_parents();
+}
+
+function osha_publication_types_create_new_terms() {
+  $new_terms = 'Case studies
+Corporate publications
+Discussion papers
+European Guides
+Info sheets
+Promotional Material
+Reports
+Training resources';
+  $new_terms = explode("\n", $new_terms);
+  $name = 'publication_types';
+  $vocabulary = taxonomy_vocabulary_machine_name_load($name);
+  $tree = taxonomy_get_tree($vocabulary->vid);
+  foreach ($tree as $i => $term) {
+    $tags_map[$term->name] = $term->tid;
+  }
+  foreach ($new_terms as $new_term) {
+    $term_names = [];
+    if (!empty($tags_map[$new_term])) {
+      $tid = $tags_map[$new_term];
+      $term = taxonomy_term_load($tid);
+      $term_names = $term->name_field;
+      unset($term_names['en']);
+    }
+    $term = new stdClass();
+    $term->name = $term->name_field['en'][0]['value'] = $new_term;
+    $term->vid = $vocabulary->vid;
+    $term->language = 'en';
+    taxonomy_term_save($term);
+    // Setting Translations.
+    $translation_handler = entity_translation_get_handler('taxonomy_term', $term);
+    $term->translations = $translation_handler->getTranslations();
+    foreach ($term_names as $lang => $name) {
+      if (!isset($term->translations->data[$lang])) {
+        $translation_handler->setTranslation(array(
+          'translate' => 0,
+          'status' => 1,
+          'uid' => 1,
+          'language' => $lang,
+          'source' => 'en',
+        ));
+      }
+      $term->name_field[$lang][0]['value'] = $name;
+    }
+    taxonomy_term_save($term);
+  }
+}
+
+function osha_publication_types_assign_parents() {
+  $new_tree = 'Case studies
+  Case studies
+Corporate publications
+  Annual reports and other corporate publications
+  Evaluation reports
+  Corporate strategies and programming documents
+Discussion papers
+  Discussion papers
+European Guides
+  European Guides
+Info sheets
+  E-facts
+  Factsheets
+  Info sheets
+Promotional Material
+  Promotional Material
+Reports
+  Reports
+  Literature reviews
+Training resources
+  Training resources';
+  $new_tree = explode("\n", $new_tree);
+  $name = 'publication_types';
+  $vocabulary = taxonomy_vocabulary_machine_name_load($name);
+  $query = db_select('taxonomy_term_data', 't')->fields('h', array('tid', 'parent'));
+  $query->join('taxonomy_term_hierarchy', 'h', ' t.tid = h.tid');
+  $query->condition('t.vid', $vocabulary->vid)
+    ->orderBy('t.weight')
+    ->orderBy('t.name');
+  $tids = $query->execute()->fetchAll();
+  foreach ($tids as $term) {
+    if ($term->parent == $term->tid) {
+      $term = taxonomy_term_load($term->tid);
+      $term->parent = [];
+      taxonomy_term_save($term);
+    }
+  }
+  $tree = taxonomy_get_tree($vocabulary->vid);
+
+  $tags_map = [];
+  foreach ($tree as $i => $term) {
+    $name = trim($term->name);
+    if (empty($tags_map[$name])) {
+      $tags_map[$name] = [$term->tid];
+    }
+    else {
+      $tags_map[$name][] = $term->tid;
+    }
+  }
+  $main = '';
+  foreach ($new_tree as $row) {
+    $name = trim($row);
+    if (strlen($row) == strlen($name)) {
+      $main = trim($row);
+    }
+    elseif (!empty($tags_map[$name])) {
+      $tids = $tags_map[$name];
+      $min_tid = min($tids);
+      $term = taxonomy_term_load($min_tid);
+      $tids = $tags_map[$main];
+      $max_tid = max($tids);
+      if ($max_tid != $min_tid) {
+        $term->parent = $max_tid;
+        taxonomy_term_save($term);
+      }
+    }
+  }
+}
+
+function osha_publication_tags_assign_parents() {
+  $new_tree = 'Accident prevention
+  Accident prevention
+Ageing and OSH
+  Ageing and OSH
+Agriculture and forestry
+  Agriculture
+Campaigns
+  Campaign 2018-2019
+Corporate
+  Corporate
+  Corporate strategies and work programmes
+Dangerous substances
+  Biological agents
+  Carcinogens
+  Dangerous substances
+Digitalisation
+  ICT/digitalisation
+Education
+  Mainstreaming OSH into education
+Emerging risks
+  Emerging risks
+ESENER
+  ESENER
+Good OSH is good for business
+  Good OSH is good for business
+Green jobs
+  Green jobs
+Health Care
+  Health Care
+HORECA
+  HORECA
+Leadership and worker participation
+  Leadership
+  Worker Participation
+Maintenance
+  Maintenance
+Microenterprises
+  Microenterprises
+Musculoskeletal disorders
+  Musculoskeletal disorders
+Nanomaterials
+  Nanomaterials
+Noise
+  Noise
+OiRA
+  OiRA
+OSH and young people
+  OSH and young people
+Psychosocial risks and stress
+  Psychosocial risks and stress
+Risk assessment
+  Risk assessment
+Transport
+  Road Transport
+Women and OSH
+  Women and OSH
+Work-related diseases
+  Alert and sentinel systems
+  Rehabilitation
+  Work related diseases
+  Work-related cancer';
+  $new_tree = explode("\n", $new_tree);
+  $name = 'tags';
+  $vocabulary = taxonomy_vocabulary_machine_name_load($name);
+  $tree = taxonomy_get_tree($vocabulary->vid);
+
+  $tags_map = [];
+  foreach ($tree as $i => $term) {
+    $name = trim($term->name);
+    if (empty($tags_map[$name])) {
+      $tags_map[$name] = [$term->tid];
+    }
+    else {
+      $tags_map[$name][] = $term->tid;
+    }
+  }
+  $main = '';
+  foreach ($new_tree as $row) {
+    $name = trim($row);
+    if (strlen($row) == strlen($name)) {
+      $main = trim($row);
+    }
+    elseif (!empty($tags_map[$name])) {
+      $tids = $tags_map[$name];
+      $min_tid = min($tids);
+      $term = taxonomy_term_load($min_tid);
+      if (!empty($tags_map[$main])) {
+        $tids = $tags_map[$main];
+        $max_tid = max($tids);
+        if ($max_tid != $min_tid) {
+          $term->parent = $max_tid;
+          taxonomy_term_save($term);
+        }
+      }
+      else {
+        watchdog('osha_publication', 'term ' . $main . ' not found!', WATCHDOG_ALERT);
+      }
+    }
+    else {
+      watchdog('osha_publication', 'term ' . $name . ' not found!', WATCHDOG_ALERT);
+    }
+  }
+}
+
+function osha_publication_tags_create_new_terms() {
+  $new_terms = 'Accident prevention
+Ageing and OSH
+Agriculture and forestry
+Campaigns
+Corporate
+Dangerous substances
+Digitalisation
+Education
+Emerging risks
+ESENER
+Good OSH is good for business
+Green jobs
+Health Care
+HORECA
+Leadership and worker participation
+Maintenance
+Microenterprises
+Musculoskeletal disorders
+Nanomaterials
+Noise
+OiRA
+OSH and young people
+Psychosocial risks and stress
+Risk assessment
+Transport
+Women and OSH
+Work-related diseases';
+  $new_terms = explode("\n", $new_terms);
+  $name = 'tags';
+  $vocabulary = taxonomy_vocabulary_machine_name_load($name);
+  $query = db_select('taxonomy_term_data', 't')->fields('h', array('tid', 'parent'));
+  $query->join('taxonomy_term_hierarchy', 'h', ' t.tid = h.tid');
+  $query->condition('t.vid', $vocabulary->vid)
+    ->orderBy('t.weight')
+    ->orderBy('t.name');
+  $tids = $query->execute()->fetchAll();
+  foreach ($tids as $term) {
+    if ($term->parent == $term->tid) {
+      $term = taxonomy_term_load($term->tid);
+      $term->parent = [];
+      taxonomy_term_save($term);
+    }
+  }
+  $tree = taxonomy_get_tree($vocabulary->vid);
+  foreach ($tree as $i => $term) {
+    $tags_map[$term->name] = $term->tid;
+  }
+  foreach ($new_terms as $new_term) {
+    $term_names = [];
+    if (!empty($tags_map[$new_term])) {
+      $tid = $tags_map[$new_term];
+      $term = taxonomy_term_load($tid);
+      $term_names = $term->name_field;
+      unset($term_names['en']);
+    }
+    $term = new stdClass();
+    $term->name = $term->name_field['en'][0]['value'] = $new_term;
+    $term->vid = $vocabulary->vid;
+    $term->language = 'en';
+    taxonomy_term_save($term);
+    // Setting Translations.
+    $translation_handler = entity_translation_get_handler('taxonomy_term', $term);
+    $term->translations = $translation_handler->getTranslations();
+    foreach ($term_names as $lang => $name) {
+      if (!isset($term->translations->data[$lang])) {
+        $translation_handler->setTranslation(array(
+          'translate' => 0,
+          'status' => 1,
+          'uid' => 1,
+          'language' => $lang,
+          'source' => 'en',
+        ));
+      }
+      $term->name_field[$lang][0]['value'] = $name;
+    }
+    taxonomy_term_save($term);
+  }
+}
+
+/**
+ * MDR-2842 NCW - Revamp - Publications list and detail - Development.
+ */
+function osha_publication_update_7019() {
+  features_revert_module('osha_publication');
+}
+
+function osha_publication_update_7020() {
+  // Left menu block.
+  db_update('block')
+    ->fields(['pages' => 'node/5445
+themes/dangerous-substances/practical-tools-dangerous-substances
+photo-gallery
+tools-and-publications
+publications
+publications/*'])
+    ->condition('bid', 151)
+    ->execute();
+
+  // Clear filter.
+  db_update('block')
+    ->fields(['pages' => 'search/*
+tools-and-publications/seminars
+legislation/directives/*
+safety-and-health-legislation/european-directives
+node/2544
+legislation/guidelines/*
+themes/dangerous-substances/search
+themes/dangerous-substances/search/*
+themes/musculoskeletal-disorders/search'])
+    ->condition('bid', 947)
+    ->execute();
+
+  // Rss block
+  db_update('block')
+    ->fields(['region' => -1])
+    ->condition('bid', 939)
+    ->execute();
+}
+
+function osha_publication_update_7021() {
+  features_revert_module('osha_wiki');
+  features_revert_module('osha_resources');
+  features_revert_module('osha_infographics');
+  features_revert_module('osha_publication');
+
+}
+
+/**
+ * MDR-2984 Publication: recommended publication goes to the PDF instead of to the page detail.
+ */
+function osha_publication_update_7022() {
+  features_revert(array('osha_publication' => array('field_instance')));
+}
+
+/**
+ * MDR-2967 PUBLICATIONS: No "related resources" in Publications.
+ */
+function osha_publication_update_7023() {
+  features_revert(array('osha_publication' => array('field_instance')));
+}
+
+/**
+ * .
+ */
+function osha_publication_update_7024() {
+}
+
+/**
+ * MDR-3012 Revamp Publications - URL.
+ */
+function osha_publication_update_7025() {
+  variable_set('pathauto_node_publication_pattern', 'publications/[node:title]');
+  variable_set('pathauto_update_action', 2);
+  $start = 0;
+  $limit_count = 50;
+  $break_at = 1000;
+  while (1) {
+    $resource = db_query("SELECT nid FROM node WHERE type='publication' AND status=1 LIMIT $start, $limit_count");
+    foreach ($resource as $result) {
+      $node = node_load($result->nid);
+      $node->path['pathauto'] = TRUE;
+      $node->path['alias'] = str_replace('tools-and-publications/', '', $node->path['alias']);
+      pathauto_node_update_alias($node, 'update');
+    }
+    $start += $limit_count;
+    if ($start >= $break_at) {
+      break;
+    }
+  }
+}
+
+/**
+ * MDR-3012 Revamp Publications - URL.
+ */
+function osha_publication_update_7026() {
+  features_revert(array('osha_publication' => array('field_base', 'field_instance')));
+}
+
+/**
+ * MDR-3157 Publication detail page.
+ */
+function osha_publication_update_7027() {
+  features_revert(array('osha_publication' => array('field_base', 'field_instance')));
+}
+
+/**
+ * MDR-3069 Revamp Publication list- HWC20 Sort functionality.
+ */
+function osha_publication_update_7028() {
+  module_enable(array('search_api_title2'));
 }

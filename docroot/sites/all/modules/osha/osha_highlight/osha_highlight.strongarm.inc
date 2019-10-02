@@ -143,6 +143,12 @@ function osha_highlight_strongarm() {
       'osha_search_teaser' => array(
         'custom_settings' => FALSE,
       ),
+      'dangerous_substances' => array(
+        'custom_settings' => TRUE,
+      ),
+      'question' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -163,6 +169,9 @@ function osha_highlight_strongarm() {
         ),
         'workbench_access' => array(
           'weight' => '0',
+        ),
+        'xmlsitemap' => array(
+          'weight' => '30',
         ),
       ),
       'display' => array(),

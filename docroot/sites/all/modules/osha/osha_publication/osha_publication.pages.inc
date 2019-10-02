@@ -168,7 +168,7 @@ function osha_publication_menu_publications_search_native($form_state) {
     $query->condition('field_publication_date', time(), '<');
 
     $query->keys($text);
-    $query->fields(array('title_field', 'body:value'));
+    $query->fields(array('title_field', 'body:value', 'field_tags:name'));
 
     if ($sort_by == 'field_publication_date') {
       $query->sort('field_publication_date', 'DESC');
@@ -270,6 +270,13 @@ function osha_publication_menu_publications_search_native($form_state) {
   if (count($languages) == 1) {
     $showing_lang = current($languages);
   }
+  $start = $current_page * $per_page;
+  $pager = theme('pager', array(
+    'tags' => array(),
+    'quantity' => 9,
+    'parameters' => $pager_params,
+  ));
+  $suffix = '<div class="content-pagination container">' . $pager . '<div class="pager-total"><span>' . ($start + 1) . ' - ' . ($start + count($nodes)) . ' / ' . $total . '</span></div></div>';
   $ret = array(
     '#nids' => $nids,
     '#prefix' => '<h2>' . t('Publications available') . ' (' . $total . ')</h2>',

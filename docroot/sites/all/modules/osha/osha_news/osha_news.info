@@ -45,6 +45,7 @@ features[field_instance][] = node-news-field_migration_source
 features[field_instance][] = node-news-field_page_count
 features[field_instance][] = node-news-field_publication_date
 features[field_instance][] = node-news-field_show_in_ncw
+features[field_instance][] = node-news-field_show_on
 features[field_instance][] = node-news-field_source_url
 features[field_instance][] = node-news-field_summary
 features[field_instance][] = node-news-field_tags

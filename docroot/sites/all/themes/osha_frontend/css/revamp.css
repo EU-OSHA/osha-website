@@ -2317,6 +2317,11 @@ article.node-seminar{
 	margin-top: 1em;
 }
 
+/*Remove double arrow in Focal points detail pages*/
+.view-fop-page-links div a{
+    background:none;
+}
+
 /*MDR-3040 Revamp Tablet Header - Language and Search box are not aligned*/
 @media only screen and (device-width: 768px) {
   /* For general iPad layouts */

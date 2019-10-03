@@ -7,6 +7,12 @@
  * to LEFT JOIN node_revision ON node.nid = node_revision.nid
  */
 function osha_views_query_alter(&$view, &$query) {
+  if ($view->name == 'press_releases') {
+    if (!empty($query->table_queue['field_data_field_show_on'])) {
+      $query->table_queue['field_data_field_show_on']['join']->type = "LEFT";
+    }
+  }
+
   if (($view->name == 'news') && ($view->current_display == 'oshnews_latest')) {
     $limit = variable_get('osha_hp_news_limit', 2);
     if ($limit) {

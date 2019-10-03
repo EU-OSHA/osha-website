@@ -1,0 +1,85 @@
+Pagerer 7.x-1.1, 2013-03-25
+---------------------------
+- Updated README.txt
+
+Pagerer 7.x-1.1-beta2, 2013-03-07
+---------------------------------
+- Issue #1933000 by mondrake: Fixed wrong behavior with AJAX Views preview
+  when paginating via jQuery elements.
+- Issue #1933798 by mondrake: Fixed scrollpane pager not showing up correctly
+  on iPad.
+- Issue #1930034 by mondrake: Added additional classes/wrappers in Pagerer
+  HTML to facilitate styling.
+- Issue #1924022 by mondrake: Improve interaction with themes/modules that
+  override Drupal's core pager functions.
+
+Pagerer 7.x-1.1-beta1, 2013-01-26
+---------------------------------
+- Issue #1894474 by mondrake: Implemented a Views pager plugin.
+- Issue #1890978 by mondrake: Implemented pager configuration presets.
+- Issue #1870586 by mondrake: Implemented theme 'pagerer_scrollpane'.
+  introducing a jQuery scrolling pager.
+- Issue #1870586 by mondrake: Make automatic widget width resizing optional.
+- Issue #1858410 by mondrake: code cleanup.
+  - introduced new theme variable 'fl_breakers'.
+  - simplify the logic the request path is passed to js elements via
+    _pagerer_itemize_js_element() => using request_path() and
+    drupal_http_build_query() instead of url().
+  - reduce code duplication among _pagerer_itemize_first_link,
+    _pagerer_itemize_previous_link, _pagerer_itemize_next_link,
+    and _pagerer_itemize_last_link => reduced to one function where the link
+    scope is passed as a parameter.
+
+Pagerer 7.x-1.0, 2012-12-04
+---------------------------
+- Issue #1843026 by mondrake: replaced theme_table(...) with
+  theme('table', ...).
+- Issue #1843026 by mondrake: implement test case for core pager replacement.
+
+Pagerer 7.x-1.0-beta3, 2012-11-05
+---------------------------------
+- Issue #1825492 by mondrake: fixed usage of t() calls.
+- Issue #1818272 by mondrake: fixed tag labels do not translate.
+- Issue #1817798 by mondrake: fixed presenting options for jQuery-enabled
+  themes/elements when jQuery Update is not installed.
+- Issue #1818292 by joelrosen, mondrake: fixed creation of faulty URLs
+  for js enabled elements if HTTPS is set.
+
+Pagerer 7.x-1.0-beta2, 2012-09-17
+---------------------------------
+- module: simplified logic for itemisation of first/prev/next/ last nav
+  links.
+- module: fixed - pager was showing up in some cases when no items were
+  in the pager.
+- module: slider degradation when no jQuery - added nav links.
+- module: corrected generation of HTML title attributes - display absolute
+  values always also for relative mode progressive/adaptive pagers.
+- module: corrected adaptive slider behaviour - when no l/r adaptive locks
+  exist then release lock.
+- example.module: added pagerer version to the example page title, small
+  layout cosmetics.
+- Issue #1745056 by mondrake: Introduced more options for the jQuery slider.
+- Issue #1757264 by mondrake: Fixed Views preview navigation.
+- css: fine tuning.
+- module: t-ed item range string building.
+
+Pagerer 7.x-1.0-beta1, 2012-08-21
+---------------------------------
+- module: improved handling of the 'page_ak' querystring fragment for the
+  adaptive theme.
+- module: removed bypass for theme_pagerer() that was forcing a separator
+  item when configured to 'none', adjusted CSS to keep visual consistency.
+- js: added management of 'home', 'end' and 'esc' keys in widget, will go
+  to first/last/current page respectively.
+- js: added integration with Views AJAX.
+- README.txt: corrected formatting.
+- module: more graceful degradation if jQuery elements are not available.
+- module: added additional separators between first/last label and first/last
+  page to keep visualization consistent.
+- example.module: changed example not to display potentially sensitive
+  information, added a third query to improve demo.
+- module: jQuery update module needed also for mini pager.
+
+Pagerer 7.x-1.0-alpha1, 2012-07-06
+----------------------------------
+- First release.

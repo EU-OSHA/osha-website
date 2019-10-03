@@ -108,6 +108,16 @@ function osha_homepage_theme() {
   return $theme;
 }
 
+/**
+ * Implements Elysia hook_cronapi().
+ */
+function osha_homepage_cronapi() {
+  return array('osha_homepage_cron' => array(
+    'description' => 'Tweets for homepage',
+    'rule' => '*/5 * * * *', // Every 5 minutes
+  ));
+}
+
 function osha_homepage_cron() {
   $library_path = (module_exists('libraries') && libraries_get_path('twitter')) ? libraries_get_path('twitter') : 'sites/all/libraries/twitter';
   require_once $library_path . '/TwitterAPIExchange.php';
@@ -184,6 +194,9 @@ function osha_homepage_block_view($delta = '') {
         $new_item['below'] = [];
         foreach ($row['below'] as $key => $menu) {
           foreach ($menu['below'] as $subkey => $submenu) {
+            if ($submenu['link']['hidden']) {
+              continue;
+            }
             $new_item['below'][$subkey] = $submenu;
           }
         }
@@ -200,14 +213,25 @@ function osha_homepage_news_events_blocks_view() {
   $blocks = [];
   $limit = variable_get('osha_hp_news_limit', 2);
   if ($limit) {
-    $blocks[] = block_load('views', 'news-oshnews_latest');
+    $blocks[] = block_load('views', 'news-front');
   }
   $limit = 3 - $limit;
   if ($limit) {
-    $blocks[] = block_load('views', 'upcoming_events-block');
+    $blocks[] = block_load('views', 'homepage_events-block');
   }
   $array = _block_get_renderable_array(
     _block_render_blocks($blocks)
   );
   return render($array);
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function osha_homepage_views_pre_render(&$view) {
+  $jssor_path = libraries_get_path('jquery-slider-master');
+  if ($view->name == 'esener_carousel') {
+    drupal_add_js($jssor_path . '/jssor.slider.mini.js');
+    drupal_add_css($jssor_path . '/jssor.css');
+  }
 }

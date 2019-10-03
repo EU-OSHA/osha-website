@@ -133,7 +133,7 @@ function osha_highlight_views_default_views() {
   $handler->display->display_options['fields']['field_image']['element_wrapper_class'] = 'img-highlight';
   $handler->display->display_options['fields']['field_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_image']['settings'] = array(
-    'image_style' => 'medium_crop_220',
+    'image_style' => 'home_news',
     'image_link' => 'content',
   );
   /* Field: Field: Publication date */

@@ -12,13 +12,55 @@ function osha_events_default_fe_block_settings() {
 
   $export['version'] = '2.0';
 
-  $export['views--exp-oshevents-page'] = array(
-    'cache' => -1,
+  $export['nodeblock-5322'] = array(
+    'cache' => 1,
     'custom' => 0,
-    'delta' => '-exp-oshevents-page',
+    'delta' => 5322,
     'i18n_block_language' => array(),
     'i18n_mode' => 0,
-    'module' => 'views',
+    'module' => 'nodeblock',
+    'node_types' => array(),
+    'pages' => 'tools-and-publications/events
+tools-and-publications/oshevents
+oshevents',
+    'roles' => array(),
+    'themes' => array(
+      'bartik' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'bartik',
+        'weight' => 0,
+      ),
+      'osha_admin' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'osha_admin',
+        'weight' => 0,
+      ),
+      'osha_frontend' => array(
+        'region' => 'highlighted',
+        'status' => 1,
+        'theme' => 'osha_frontend',
+        'weight' => 0,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '<none>',
+    'visibility' => 1,
+  );
+
+  $export['osha_events-osha_events_dates'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => 'osha_events_dates',
+    'i18n_block_language' => array(),
+    'i18n_mode' => 0,
+    'module' => 'osha_events',
     'node_types' => array(),
     'pages' => 'oshevents',
     'roles' => array(),
@@ -39,7 +81,7 @@ function osha_events_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 5,
+        'weight' => 0,
       ),
       'seven' => array(
         'region' => '',
@@ -80,7 +122,7 @@ node/5322',
         'region' => '',
         'status' => 0,
         'theme' => 'osha_frontend',
-        'weight' => 17,
+        'weight' => 144,
       ),
       'seven' => array(
         'region' => '',
@@ -120,7 +162,7 @@ node/5322',
         'region' => '',
         'status' => 0,
         'theme' => 'osha_frontend',
-        'weight' => 3,
+        'weight' => 138,
       ),
       'seven' => array(
         'region' => '',
@@ -133,15 +175,17 @@ node/5322',
     'visibility' => 0,
   );
 
-  $export['views-upcoming_events-block'] = array(
+  $export['views-latest_seminars-block'] = array(
     'cache' => -1,
     'custom' => 0,
-    'delta' => 'upcoming_events-block',
+    'delta' => 'latest_seminars-block',
     'i18n_block_language' => array(),
     'i18n_mode' => 0,
     'module' => 'views',
     'node_types' => array(),
-    'pages' => '',
+    'pages' => 'tools-and-publications/events
+tools-and-publications/oshevents
+oshevents',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -157,8 +201,48 @@ node/5322',
         'weight' => 0,
       ),
       'osha_frontend' => array(
+        'region' => 'highlighted',
+        'status' => 1,
+        'theme' => 'osha_frontend',
+        'weight' => 1,
+      ),
+      'seven' => array(
         'region' => '',
         'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 1,
+  );
+
+  $export['views-upcoming_events-block'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => 'upcoming_events-block',
+    'i18n_block_language' => array(),
+    'i18n_mode' => 0,
+    'module' => 'views',
+    'node_types' => array(),
+    'pages' => '<front>',
+    'roles' => array(),
+    'themes' => array(
+      'bartik' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'bartik',
+        'weight' => 0,
+      ),
+      'osha_admin' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'osha_admin',
+        'weight' => 0,
+      ),
+      'osha_frontend' => array(
+        'region' => 'sidebar_second',
+        'status' => 1,
         'theme' => 'osha_frontend',
         'weight' => 23,
       ),

@@ -87,7 +87,7 @@ $directory = drupal_get_path('module','osha_newsletter');
                   'alt' => t('Flickr')
                 ),
                 'blog' => array(
-                  'path' => url('tools-and-publications/blog', array('alias' => TRUE, 'absolute' => TRUE, 'query' => $url_query)),
+                  'path' => url('tools-and-resources/blog', array('alias' => TRUE, 'absolute' => TRUE, 'query' => $url_query)),
                   'alt' => t('Blog')
                 ),
               );

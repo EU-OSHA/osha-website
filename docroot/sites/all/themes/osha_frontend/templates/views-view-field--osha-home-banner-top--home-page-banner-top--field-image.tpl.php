@@ -24,4 +24,7 @@
 ?>
 <?php
 $output = str_replace('class="views-field-field-banner-link"', '', $output);
+if (url_is_external($row->field_field_banner_link_1['0']['raw']['url'])) {
+  $output = str_replace('<a ', '<a target="_blank" ', $output);
+}
 print $output;

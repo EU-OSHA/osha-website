@@ -1,0 +1,71 @@
+<?php
+/**
+ * @file
+ * Pagerer test case script.
+ *
+ * A collection of pager themes to enhance Drupal standard pager.
+ *
+ * Drupal core 7.x
+ *
+ * @package  User interface
+ * @author   mondrake <mondrake@mondrake.org>
+ */
+
+/**
+ * Functional tests for Pagerer.
+ */
+class PagererTest extends PagerFunctionalWebTestCase {
+
+  protected $pagererAdmin = 'admin/config/user-interface/pagerer';
+
+  /**
+   * Get info.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Replacement of Drupal core pager',
+      'description' => "Checks that when the basic 'pagerer_standard' theme is set up as a replacement of Drupal core pager, it still provides the same HTML.",
+      'group' => 'Pagerer',
+    );
+  }
+
+  /**
+   * Set up.
+   */
+  public function setUp() {
+    // Enable required modules.
+    $modules = array(
+      'dblog',
+      'pagerer',
+    );
+    DrupalWebTestCase::setUp($modules);
+
+    // Insert 300 log messages.
+    for ($i = 0; $i < 300; $i++) {
+      watchdog('pager_test', $this->randomString(), NULL, WATCHDOG_DEBUG);
+    }
+
+    $this->admin_user = $this->drupalCreateUser(array(
+      'access site reports',
+      'administer site configuration',
+    ));
+    $this->drupalLogin($this->admin_user);
+
+    $edit = array(
+      'name' => 'core_replace',
+    );
+    $this->drupalPost($this->pagererAdmin . '/add', $edit, 'Create preset');
+    $edit = array(
+      'core_override_preset' => 'core_replace',
+    );
+    $this->drupalPost($this->pagererAdmin, $edit, 'Save configuration');
+  }
+
+  /**
+   * Tear down.
+   */
+  public function tearDown() {
+    DrupalWebTestCase::tearDown();
+  }
+
+}

@@ -102,6 +102,7 @@ class HWCEventsSource extends AbstractNCWNodeSource {
       'field_related_documents',
       'field_event_in_amp',
       'field_for_the_web',
+      'field_show_eu_flag',
     );
     return array_combine($fields, $fields);
   }

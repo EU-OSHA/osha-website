@@ -13,7 +13,7 @@ function osha_publication_taxonomy_default_vocabularies() {
       'name' => 'Publication Types',
       'machine_name' => 'publication_types',
       'description' => '',
-      'hierarchy' => 0,
+      'hierarchy' => 1,
       'module' => 'taxonomy',
       'weight' => 0,
       'language' => 'und',

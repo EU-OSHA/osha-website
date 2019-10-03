@@ -52,9 +52,92 @@ function _form_add_website_placeholder_after_build($form) {
 }
 
 /**
+ * Implements hook_block_info().
+ */
+function osha_events_block_info() {
+  $blocks = array();
+  $blocks['osha_events_dates'] = array(
+    'info' => t('events filter dates'),
+    'status' => 1,
+    'region' => '-1',
+    'visibility' => BLOCK_VISIBILITY_NOTLISTED,
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_search_api_solr_query_alter().
+ */
+function osha_events_search_api_solr_query_alter(array &$call_args, SearchApiQueryInterface $query) {
+  if (arg(0) == 'oshevents') {
+    if (!isset($_REQUEST['field_start_date_value'])) {
+      $fq = variable_get('solr_event_start_date_fq', 'ds_field_start_date\:value:');
+      if ($fq) {
+        $call_args['params']['fq'][] = $fq . '["' . date("Y-m-d\TH:i:s") . 'Z" TO *]';
+      }
+    }
+  }
+}
+
+function osha_events_dates_form($form, $form_state) {
+  $form = array();
+  $form['#prefix'] = '<div class="content-filters">';
+  $form['#suffix'] = '</div>';
+  $date_format = 'd/m/Y';
+  $form['from_date'] = array(
+    '#type' => 'date_popup',
+    '#date_format'=> $date_format,
+    '#date_year_range' => '-3:+3',
+    '#title' => t('From date'),
+    '#attributes' => ['class' => ['new-select-style']],
+  );
+  $form['to_date'] = array(
+    '#type' => 'date_popup',
+    '#date_format'=> $date_format,
+    '#date_year_range' => '-3:+3',
+    '#title' => t('To date'),
+    '#attributes' => ['class' => ['new-select-style']],
+  );
+  if (!empty($_REQUEST['field_start_date_value'])) {
+    $date = explode('/', $_REQUEST['field_start_date_value']['date']);
+    $form['from_date']['#default_value'] = $date[2] . '-' . $date[1] . '-' . $date[0];
+  }
+  else {
+    $form['from_date']['#default_value'] = date('Y-m-d');
+  }
+  if (!empty($_REQUEST['field_start_date_value2'])) {
+    $date = explode('/', $_REQUEST['field_start_date_value2']['date']);
+    $form['to_date']['#default_value'] = $date[2] . '-' . $date[1] . '-' . $date[0];
+  }
+  return $form;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function osha_events_block_view($delta = '') {
+  $block = array();
+  if ($delta == 'osha_events_dates') {
+    drupal_add_js(drupal_get_path('module', 'osha_events') . '/js/auto-submit.js', array('weight' => 20));
+    drupal_add_js(drupal_get_path('module', 'osha_events') . '/js/filter_dates.js', array('weight' => 20));
+    $block['content'] = drupal_get_form('osha_events_dates_form');
+  }
+  return $block;
+}
+
+/**
  * Implements hook_form_alter().
  */
 function osha_events_form_alter(&$form, &$form_state, $form_id) {
+  if (($form_id == 'views_exposed_form') && ($form['#id'] == 'views-exposed-form-newevents-page')) {
+    $form['search_api_views_fulltext']['#attributes']['placeholder'] = t('Search in resources');
+    $form['search_api_views_fulltext']['#attributes']['class'][] = 'search-new-design';
+
+    $form['sort_by']['#attributes']['class'][] = 'new-select-style';
+    $form['field_country_code']['#attributes']['class'][] = 'new-select-style';
+    $form['field_country_code']['#chosen'] = TRUE;
+  }
   $is_edit_form = isset($form['#node_edit_form']) && $form['#node_edit_form'] == TRUE;
   $is_events_form = $is_edit_form && $form['type']['#value'] == 'events';
   if ($is_events_form) {
@@ -196,7 +279,15 @@ function osha_events_form_validate($form, &$form_state) {
   }
 }
 
+function osha_events_views_pre_render(&$view) {
+  if ($view->name == 'newevents') {
+    drupal_add_js(array('osha_events' => array('add_to_calendar' => t('Add to my calendar'))), 'setting');
+    drupal_add_js(drupal_get_path('module', 'osha_events') . '/js/ouical.min.js');
+  }
+}
+
 function osha_events_query_alter($query) {
+
   if ($query->hasTag('debug')) {
     $sql = (string)$query;
     $connection = Database::getConnection();
@@ -215,6 +306,10 @@ function osha_events_query_alter($query) {
 function osha_events_date_popup_process_alter(&$element, &$form_state, $context) {
   if ($element['#name'] == 'field_start_date_value' || $element['#name'] == 'field_start_date_value2') {
     //unset($element['date']['#description']);
+    unset($element['date']['#title']);
+  }
+  if ($element['#name'] == 'from_date' || $element['#name'] == 'to_date') {
+    unset($element['date']['#description']);
     unset($element['date']['#title']);
   }
 }

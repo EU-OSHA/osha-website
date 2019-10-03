@@ -655,9 +655,23 @@ function osha_update_7051() {
 }
 
 /**
- * MDR-3061 update permissions and ldap groups.
+ * MDR-2786 NCW - Revamp - Home page development.
  */
 function osha_update_7052() {
+  features_revert(array('osha' => array('fe_block_settings')));
+}
+
+/**
+ * Revamp publication path alias update.
+ */
+function osha_update_7053() {
+  variable_set('pathauto_node_publication_pattern', 'publications/[node:title]');
+}
+
+/**
+ * MDR-3061 update permissions and ldap groups.
+ */
+function osha_update_7054() {
   $map = [
     'LEGIS'=>[
       2,
@@ -720,3 +734,57 @@ function osha_update_7052() {
     }
   }
 }
+
+/**
+ * MDR-3214 Update urls according NCW revamp.
+ */
+function osha_update_7055() {
+  $map = [
+    'data-visualisation' => 'facts-and-figures/data-visualisation',
+    'tools-and-publications/economics-occupational-safety-and-health-value-osh-society' => 'facts-and-figures/data-visualisation/economics-occupational-safety-and-health-value-osh-society',
+    'tools-and-publications/interactive-dashboard' => 'facts-and-figures/data-visualisation/interactive-dashboard',
+    'tools-and-publications/safer-and-healthier-work-any-age-data-visualisation-tool' => 'facts-and-figures/data-visualisation/safer-and-healthier-work-any-age-data-visualisation-tool',
+    'surveys-and-statistics-osh/european-opinion-polls-safety-and-health-work/european-opinion-poll-occupational-safety-and-health-2013' => 'facts-and-figures/european-opinion-polls-safety-and-health-work/european-opinion-poll-occupational-safety-and-health-2013',
+    'surveys-and-statistics-osh/european-opinion-polls-safety-and-health-work/european-opinion-poll-occupational-safety-and-health-2012' => 'facts-and-figures/european-opinion-polls-safety-and-health-work/european-opinion-poll-occupational-safety-and-health-2012',
+    'surveys-and-statistics-osh/european-opinion-polls-safety-and-health-work/european-opinion-poll-occupational-safety-and-health-2009' => 'facts-and-figures/european-opinion-polls-safety-and-health-work/european-opinion-poll-occupational-safety-and-health-2009',
+
+    'napo-safety-smile' => 'tools-and-resources/napo-safety-smile',
+    'tools-and-publications/osh-campaign-toolkit' => 'tools-and-resources/osh-campaign-toolkit',
+    'tools-and-publications/infographics' => 'tools-and-resources/infographics',
+
+    'tools-and-publications/e-guide-managing-stress-and-psychosocial-risks' => 'tools-and-resources/e-guides/e-guide-managing-stress-and-psychosocial-risks',
+    'tools-and-publications/e-guide-all-ages' => 'tools-and-resources/e-guides/e-guide-all-ages',
+    'tools-and-publications/eu-e-guide-vehicle-safety-vesafe' => 'tools-and-resources/e-guides/eu-e-guide-vehicle-safety-vesafe',
+    'themes/dangerous-substances/dangerous-substances-e-tool' => 'tools-and-resources/e-guides/dangerous-substances-e-tool',
+    'e-guides' => 'tools-and-resources/e-guides',
+    'tools-and-publications/oshwiki' => 'tools-and-resources/oshwiki',
+    'tools-and-publications/oira' => 'tools-and-resources/oira',
+    'osh-e-tools' => 'themes/osh-e-tools',
+    'tools-and-publications/tools-osh-management' => 'themes/osh-e-tools',
+    'tools-and-publications/seminars' => 'tools-and-resources/seminars',
+    'oshevents/seminars' => 'tools-and-resources/seminars',
+    'surveys-and-statistics-osh/esener' => 'facts-and-figures/esener',
+  ];
+  foreach($map as $old_alias => $new_alias) {
+    $aliases = db_select('url_alias', 'u')
+      ->fields('u', array('source', 'alias'))
+      ->distinct()
+      ->condition('alias', $old_alias)
+      ->execute()
+      ->fetchAll();
+
+    if ($aliases) {
+      foreach ($aliases as $row) {
+        db_update('url_alias')
+          ->condition('source', $row->source)
+          ->condition('alias', $row->alias)
+          ->fields(array(
+            'alias' => $new_alias
+          ))
+          ->execute();
+        osha_create_redirect($row->alias, $row->source);
+      }
+    }
+  }
+}
+

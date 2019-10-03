@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 @import url('https://fonts.googleapis.com/css?family=Oswald:300,400,700&subset=cyrillic');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700&subset=cyrillic,greek');
 
@@ -8,22 +7,6 @@ body {
  //background:#D2DCED;
  overflow-y:scroll;
 }
-
-#page-title{
-	background: url("../images/separator_home.jpg") repeat-x scroll 100% 125% rgba(0, 0, 0, 0);
-	padding-bottom:0.3em;
-	font-weight:bold;
-	font-family: 'Open Sans Condensed';
-	font-style: normal;
-	font-size: 2.15em;
-	color: #003399;
-	letter-spacing: -0.75px;
-	margin-bottom: 4px;
-	padding-bottom: 0.2em;
-	line-height: 1.2em;
-	padding-top: 0.1em;
-}
-
 
 h1{
 	font-family: 'Open Sans Condensed';
@@ -542,6 +525,8 @@ img[alt*="Select language"]{
     margin-top: -4.7em;
     padding-left: 0.6em;
     width: 139px!important;
+    min-height: 20px;
+    border-radius: 0;
 }
 
 .form-item{
@@ -865,60 +850,6 @@ span.date-display-single{
 	padding-right: 0.3em;
 }
 
-.node-publication.node-teaser .links {
-	background: url("../images/flecha.png") no-repeat scroll right center transparent;
-    color: #003399;
-    float: right;
-    font-family: "Open Sans Condensed",sans-serif;
-    font-size: 1.1em;
-    margin: 0;
-    padding-bottom: 0.3em;
-    text-align: right;
-    width: 100%;
-	font-weight:bold;
-}
-
-
-.node.node-article.node-teaser .links {
-	background: url("../images/flecha.png") no-repeat scroll right center transparent;
-    color: #003399;
-    float: right;
-    font-family: "Open Sans Condensed",sans-serif;
-    font-size: 1.1em;
-    margin: 0;
-    padding-bottom: 0.3em;
-    text-align: right;
-    width: 100%;
-	font-weight:bold;
-}
-
-.node-publication .field-name-field-wiki-page-url a {
-	background: url("../images/flecha.png") no-repeat scroll right 24% transparent;
-    color: #003399;
-    float: right;
-    font-family: "Open Sans Condensed",sans-serif!important;
-    font-size: 1.1em;
-    margin: 0;
-    padding-bottom: 1.3em;
-    text-align: right;
-    width: 100%;
-	padding-right:1.5em;
-	border-bottom:0px!important;
-}
-.node-publication.node-teaser .links  a{
-	padding-right:0.5em;
-	font-family: "Open Sans Condensed",sans-serif!important;
-	border-bottom:0px!important;
-	color: #003399;
-	text-decoration: none;
-}
-
-.node.node-article.node-teaser  .links  a{
-	padding-right:0.5em;
-	font-family: "Open Sans Condensed",sans-serif!important;
-	border-bottom:0px!important
-}
-
 .node-publication .field-name-field-publication-bookshop-id{
 	background-color: #e9edf6;
 	padding-top: 1em;
@@ -932,6 +863,10 @@ span.date-display-single{
     padding-left: 7px;
 }
 
+.view-related-content .views-row .node-teaser ul.links li.node-readmore{
+	float: right;
+	padding-bottom: 10px;
+}
 
 .node-publication .field-name-field-publication-bookshop-id span.osha_target_external_link{
 	display:none!important;
@@ -1376,15 +1311,12 @@ span.date-display-single{
 	margin-bottom: 15px;
 }
 
-.section-about-eu-osha.bodymedium .field-name-body{
-	margin-top: 1.5em;
-}
-
 .menu-block-3 ul{
 	list-style-type: none!important;
 	list-style-image:none!important;
 	margin:0;
 	padding:0;
+	margin-right: 1em !important;
 }
 
 .menu-block-3 ul li{
@@ -1666,7 +1598,7 @@ margin: 0.2em 0px 0.2em 0.3em;
 	/**margin-right: 2em;**/
 }
 
-.OSHWiki
+.OSHWiki, #block-on-the-web-0
 {
 	background-color: #ecf1fb;
     margin-bottom: 20px;
@@ -1698,31 +1630,14 @@ margin: 0.2em 0px 0.2em 0.3em;
 	display:block;
 }
 
-.OSHWiki .p3, .OSHWikiWhite .p3
-{
-	font-family : Open Sans Condensed;
-	font-size : 1.188em;
+.OSHWiki .p3, .OSHWikiWhite .p3{
 	color : #003399!important;
 	font-weight: bold;
 	text-align: right;
 	width: 95%
 }
 
-.OSHWiki .p3 a
-{
-	font-family : Open Sans Condensed;
-	font-size : 1.188em;
-	color : #003399!important;
-	font-weight: bold;
-	margin-top: 0.3em;
-	text-align: right;
-	width: 95%;
-	text-decoration:none;
-}
-
-
-.OSHWikiWhite .p4
-{
+.OSHWikiWhite .p4{
  font-family : "Open Sans", sans-serif;
  font-weight:lighter;
  font-size : 0.750em;
@@ -1813,181 +1728,6 @@ font-weight: normal;
 }
 
 /**END WIKIZONE**/
-
-/*SIDEBAR SECOND*/
-
-	/*-- OSHWiki */
-	#block-views-related-content-block-4{
-		background-color:#e9edf6;
-	}
-
-	#block-views-related-content-block-4 h2{
-		background: url("../images/oshwiki_logo.png") no-repeat scroll 5% 30% transparent;
-		padding-left:2em;
-	}
-
-	#block-views-related-content-block-4  .view-id-related_content{
-		line-height: 1em;
-		width: 80%;
-	}
-
-	#block-views-related-content-block-4 .views-field-title-field{
-		padding-left:1em;
-		padding-bottom:0.5em;
-	}
-
-	#block-views-related-content-block-4 a{
-		color:#003399;
-		text-decoration:none;
-		background: url("../images/flecha.png") no-repeat scroll 100% 100% transparent;
-		padding-right:2em;
-		font-size:0.8em;
-		font-weight:bold;
-		border-bottom:0px!important
-	}
-
-
-	/*-- Publications */
-	#block-views-related-content-block-2{
-		background-color:#FFFFFF;
-		border-top: 5px solid #003399;
-		padding-bottom:1.5em;
-		padding-top: 0.5em;
-	}
-
-	#block-views-related-content-block-2 h2{
-		background: url("../images/publications_logo.png") no-repeat scroll 5% 30% transparent;
-		padding-left:2em;
-		color:#000000;
-		font-family: 'Open Sans Condensed', sans-serif;
-		font-size: 1.4em;
-		font-weight: bold;
-		padding-left:2.4em;
-
-	}
-
-	#block-views-related-content-block-2 .views-field-title-field{
-		padding-left:1em;
-		padding-bottom:1.5em;
-		padding-top:0.5em;
-		line-height:1.5em;
-	}
-
-	#block-views-related-content-block-2 a{
-		color:#003399;
-		text-decoration:none;
-		background: url("../images/li_arrow.png") no-repeat scroll 0% 100% transparent;
-		padding-left:1em;
-		font-size:0.8em;
-		font-weight:bold;
-		border-bottom:0px!important
-	}
-
-	
-	
-	#block-views-related-content-block-2 .view-related-content .views-row {
-    background: url("../images/separator_home.jpg") repeat-x scroll 0 100% rgba(0, 0, 0, 0);
-}
-
-
-	#block-views-related-content-block-2 .more-link a{
-		background: url("../images/flecha.png") no-repeat scroll 100% 28% transparent; /*porlet publications*/
-		color: #003399;
-		float: right;
-		font-family: "Open Sans Condensed",sans-serif;
-		font-size: 1em;
-		padding-right:2em;
-		border-bottom:0px!important
-	}
-
-
-	/*-- Related*/
-
-	.region-sidebar-second h4{
-		margin-bottom:0px;
-		background: url("../images/related_logo.png") no-repeat scroll 3% 106% transparent;
-		border-top: 5px solid #003399;
-		color: #000000;
-		font-family: "Open Sans Condensed",sans-serif;
-		font-size: 1.4em;
-		font-weight: bold;
-		padding-left: 2.4em;
-		padding-top: 0.5em;
-		padding-bottom:0px;
-		margin-bottom:0em;
-		margin-top:0px;
-	}
-
-
-	/*-- News */
-	#block-views-related-content-block-1,
-	#block-views-related-content-block-7{
-		background-color:#FFFFFF;
-		margin-bottom:0em;
-	}
-
-	#block-views-related-content-block-1 h2{
-		background: url("../images/news_logo.png") no-repeat scroll 5% 50% transparent;
-		color: #000000;
-		font-family: "Open Sans Condensed",sans-serif;
-		font-size: 1.4em;
-		font-weight: lighter;
-		margin-bottom: 0;
-		padding-bottom: 0;
-		padding-left: 2.4em;
-		font-weight: bold;
-	}
-
-	#block-views-related-content-block-7 h2{
-		background: url("../images/seminars_logo.png") no-repeat scroll 5% 50% transparent;
-		color: #000000;
-		font-family: "Open Sans Condensed",sans-serif;
-		font-size: 1.4em;
-		font-weight: lighter;
-		margin-bottom: 0;
-		padding-bottom: 0;
-		padding-left: 2.4em;
-		font-weight: bold;
-	}
-
-	#block-views-related-content-block-1 .view-related-content,
-	#block-views-related-content-block-7 .view-related-content{
-		background: url("../images/separator_home.jpg") repeat-x scroll 0% -7px rgba(0, 0, 0, 0);
-		height:1%;
-		overflow:hidden;
-		padding-left:0.8em;
-	}
-
-	
-	#block-views-related-content-block-1 .view-related-content .views-row,
-	#block-views-related-content-block-7 .view-related-content .views-row{
-		background: url("../images/separator_home.jpg") repeat-x scroll 0% -7px rgba(0, 0, 0, 0);
-	}
-	
-	#block-views-related-content-block-1 .views-field-title-field,
-	#block-views-related-content-block-7 .views-field-title-field{
-		padding-bottom:0.5em;
-	}
-
-	#block-views-related-content-block-1 a,
-	#block-views-related-content-block-7 a{
-		color:#003399;
-		text-decoration:none;
-		background: url("../images/li_arrow.png") no-repeat scroll 0% 100% transparent;
-		padding-left:1em;
-		font-size:0.8em;
-		font-weight:bold;
-		border-bottom:0px!important
-	}
-	
-	#block-views-related-content-block-1 .date-display-single,
-	#block-views-related-content-block-7 .date-display-single{
-		display: block;
-		padding-top: 1em;
-		font-size:0.8em;
-	}
-
-/*END SIDEBAR SECOND*/
 
 /*RELATED WIKI IN SECTIONS*/
 
@@ -2088,7 +1828,7 @@ font-weight: normal;
 	padding-top:1em!important;
 }
 .views-exposed-widget.views-submit-button{
-	padding-top:1.3em!important;
+	padding-top:1.2em!important;
 }
 
 #views-exposed-form-search-site #edit-search-block-form--3-wrapper {
@@ -2100,18 +1840,8 @@ font-weight: normal;
 	height:1.4em;
 }
 
-#edit-search-api-views-fulltext-wrapper label{
-	color: #003399;
-	font-size: 0.8em;
-	font-weight: bold;
-	font-family: "Open Sans", sans-serif;
-	padding-bottom: 0.2em;
-
-}
-
 #edit-search-api-views-fulltext-wrapper input{
 	margin-bottom:0.5em;
-
 }
 
 #edit-search-api-language-wrapper label{
@@ -2121,7 +1851,6 @@ font-weight: normal;
 	font-family: "Open Sans", sans-serif;
 	padding-bottom: 0.2em;
 }
-
 
 #edit-search-api-language-wrapper{
 	background: none;
@@ -2457,7 +2186,7 @@ hr{
 
 #block-osha-search-osha-search-clear-filters h3{
 	color: #000;
-	font-family: 'Open Sans Condensed',sans-serif;
+	font-family: 'Open Sans',sans-serif;
 	font-size: 1.25em;
 	font-weight: lighter;
 	margin: 0;
@@ -2520,7 +2249,7 @@ hr{
     margin-bottom: 0.5em;
     margin-top: 0.5em;
     padding-bottom: 2px;
-    padding-left: 10px;
+    padding-left: 10px !important;
     padding-top: 2px;
 }
 
@@ -2595,14 +2324,14 @@ hr{
 #block-osha-publication-osha-publication-listing .two_column.publications-search-list .h4-title,
 #block-osha-publication-osha-publication-listing .two_column.publications-search-list h4
 {
-	clear:both;
-	background: none repeat scroll 0 0 #e8eef7;
+	font-family: 'Open Sans',sans-serif;
+    background: transparent;
+    padding-left: 0;
+    font-weight: 600;
+    font-size: 1.35rem;
     color: #003399;
-    font-family: "Open Sans Condensed";
-    font-size: 1.35em;
-    font-weight: bold;
-    padding-bottom: 2px;
-    padding-left: 10px;
+    margin-bottom: 0;
+    line-height: 30px;
 }
 
 .two_column.publications-search-list.form-wrapper #publication-search div{
@@ -2665,53 +2394,9 @@ hr{
 
 /* LATEST NEWS HOME*/
 
-
-#block-views-news-oshnews-latest{
-	border-top: 5px solid #003399;
-}
-
-#block-views-news-oshnews-latest h2{
-	color: #000;
-	font-family: 'Open Sans Condensed',sans-serif;
-	font-size: 1.25em;
-	font-weight: lighter;
-	margin: 0;
-	padding: 0 0 0.3em;
-	background: none repeat scroll 0 0 #FFFFFF;
-	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);
-	font-weight: bold;
-}
-
-.view-display-id-oshnews_latest a {
-	color:#003399;
-	text-decoration:none;
-	background: url("../images/li_arrow.png") no-repeat scroll 0 60% transparent;
-	font-weight:bold;
-	padding-left:1em;
-	font-size:0.8em;
-}
-
 .view-display-id-oshnews_latest .date-display-single {
 	display:block;
 	font-weight:bold!important;
-}
-
-.view-highlight .more-link a{
-	margin-top:-1.5em!important;
-}
-
-.more-link a{
-	background: url("../images/flecha.png") no-repeat scroll 100% 29% transparent!important;
-    color: #003399;
-    float: right;
-    font-family: "Open Sans Condensed",sans-serif!important;
-    font-size: 1.1em!important;
-    padding-bottom: 1em;
-    padding-right: 1.5em;
-	border-bottom:0px!important;
-	text-decoration:none;
-	margin-top:0.5em;
-	font-weight:bold;
 }
 
 .view-display-id-latest_news_block  .views-row{
@@ -2979,7 +2664,7 @@ hr{
 .view-header{
 	 font-size: 1.1em;
 	 float: right;
-	 font-family: 'Open Sans Condensed', sans-serif;
+	 font-family: 'Open Sans', sans-serif;
 	 color:#003399;
 	 clear:both;
 	 margin-top: -2.5em;
@@ -2997,6 +2682,7 @@ hr{
 #block-views-our-story-block-look-back .item-list-look-back h2{
 	background: transparent;
 	padding-left: 0;
+	padding-bottom: 0.5em;
 } 
 
 #block-views-our-story-block-look-back .item-list-look-back ul{
@@ -3041,32 +2727,6 @@ hr{
 #block-views-our-story-block-look-back .item-list-look-back ul li .content-group .summary p.more-link-wrapper{
   margin:0; 
   text-align: right;
-}
-
-
-#block-views-our-story-block-look-back .item-list-look-back ul li .content-group .summary p.more-link-wrapper .views-more-link{
-	background: url("../images/flecha.png") no-repeat scroll 100% 29% transparent!important;
-	color: #003399;
-	font-family: "Open Sans Condensed",sans-serif!important;
-	font-size: 1.1em!important;
-	padding-bottom: 1em;
-	padding-right: 1.5em;
-	border-bottom:0px!important;
-	text-decoration:none;
-	margin-top:0.5em;
-	font-weight:bold;
-}
-
-
-
-.view-footer{
-	clear: both;
-    color: #003399;
-    float: right;
-    font-family: "Open Sans Condensed",sans-serif;
-    font-size: 1.1em;
-    margin-top: -1.4em;
-    width: 90px;
 }
 
 .view-id-highlight .view-content{
@@ -3115,17 +2775,6 @@ hr{
 	padding-right:2.1em;
 	text-decoration:none;
 	border:0px!important;
-}
-
-.view-footer a
-{
-	background: url("../images/flecha.png") no-repeat scroll 85% 61% transparent;
-	color: #003399;
-	font-family: "Open Sans Condensed",sans-serif;
-	font-size: 1em;
-	padding-right:2.1em;
-	text-decoration:none;
-	font-weight:bold;
 }
 
 .highlights_row{
@@ -3222,17 +2871,6 @@ hr{
 	min-width:8.2em;
 }
 
-.node-news .field-name-title-field a,
-.node-events .field-name-title-field a{
-    border-bottom: 0 none !important;
-    color: #003399;
-    font-family: Open Sans Condensed !important;
-    font-size: 1.6em;
-    line-height: 1.1em;
-    margin: 0 0 0.7em;
-	font-weight:bold;
-}
-
 .node-news .field-name-field-summary {
 	margin: 0.1em 0 0 0;
 	padding:0;
@@ -3297,13 +2935,7 @@ hr{
 }
 
 .node-news.view-mode-full .field-name-title-field h1{
-	border-bottom: 0 none !important;
-	color: #003399;
-	font-family: Open Sans Condensed !important;
-	font-size: 1.6em;
-	line-height: 1.1em;
-	margin: 0 0 0.7em;
-	font-weight:bold;
+	font-size: 1.35rem;
 }
 
 
@@ -3363,7 +2995,7 @@ hr{
 #block-osha-newsletter-osha-newsletter-subscribe h2 a{
 	font-family: 'Open Sans Condensed', sans-serif;
 	border-bottom: 0px solid #dc2f82;
-	font-weight: lighter;
+	font-weight: bold;
 	font-size:1em;
 	border-bottom:0px!important
 }
@@ -3421,26 +3053,15 @@ a.button-submit {
 	/* display:none!important; Display none to others social pages - CW-1509 */
 }
 
-.node-news ul.links.inline,
-.node-events ul.links.inline{
-	float: right;
-    text-align: right;
-    width: 100%;
-	padding-bottom:0em;
-	margin:0;
-	background: url("../images/flecha.png") no-repeat scroll right 50% transparent!important;
-	font-size: 1.1em;
+
+.node-news ul.links.inline, .node-events ul.links.inline, .node-highlight ul.links.inline{
+	display: block;
+	clear: both;
 
 }
 
-.node-news ul.links.inline a,
-.node-events ul.links.inline a {
-	border-bottom:0px!important;
-	padding-right: 0.5em;
-	font-family: "Open Sans Condensed",sans-serif!important;
-	color: #003399!important;
-	border-bottom:0px!important;
-	font-weight:bold;
+.node-news ul.links.inline .node-readmore, .node-events ul.links.inline .node-readmore, .node-highlight ul.links.inline .node-readmore, .node-press-release ul.links.inline .node-readmore{
+	float: right;
 }
 
 /* osha share */
@@ -3752,9 +3373,6 @@ a.button-submit {
 .view-header .back-to-link{
 	background: url("../images/flecha-izq.png") no-repeat scroll 6% center transparent!important;
     color: #003399;
-    float: right;
-    font-family: "Open Sans Condensed",sans-serif!important;
-    font-size: 1.1em;
     margin: 0;
     padding-bottom: 0.3em;
     padding-right: 0em!important;
@@ -3763,22 +3381,30 @@ a.button-submit {
 	border-bottom:0px!important;
 	padding-left:1em;
 	font-weight:bold;
+	font-family: "Open Sans",sans-serif!important;
+    font-size: 0.8rem;
+    padding-left: 18px;
+    float: right;
+    font-weight: 600;
 }
 
 
 .back-to-link{
-	background: url("../images/flecha-izq.png") no-repeat scroll 78% center transparent;
+	background: url("../images/flecha-izq.png") no-repeat scroll 6% center transparent!important;
     color: #003399;
-    float: right;
-    font-family: "Open Sans Condensed",sans-serif!important;
-    font-size: 1.1em;
     margin: 0;
     padding-bottom: 0.3em;
-    padding-right: 0;
+    padding-right: 0em!important;
     text-align: right;
     width: 100%;
 	border-bottom:0px!important;
+	padding-left:1em;
 	font-weight:bold;
+	font-family: "Open Sans",sans-serif!important;
+    font-size: 0.8rem;
+    padding-left: 18px;
+    float: right;
+    font-weight: 600;
 }
 
 /*SEMINARS*/
@@ -3826,7 +3452,7 @@ a.button-submit {
 
 #block-views-seminars-block .view-seminars ul li {
 	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);
-	padding-bottom:3em;
+	padding-bottom:0.5em;
 }
 
 #block-views-seminars-block .view-seminars ul li .views-field-field-seminar-start-date span.date-display-single{
@@ -3845,59 +3471,12 @@ a.button-submit {
 	clear: both;
 }
 
-#block-views-seminars-block .view-seminars ul li h2{
-	background: none;
-    font-size: 1em;
-    padding: 0px;
-    margin:0px;
-}
-
 #block-views-seminars-block .view-seminars ul li .views-field-title-field a{
-	 font-size:1.5em;
-	 font-family: "Open Sans Condensed",sans-serif!important;
-	 border-bottom:0px!important;
-	 font-weight:bold;
-}
-
-#block-views-seminars-block .view-seminars ul li .views-field-view-node span a{
-	background: url("../images/flecha.png") no-repeat scroll 85% 61% transparent;
-    color: #003399;
-    float: right;
-    font-family: "Open Sans Condensed",sans-serif;
-    font-size: 1.2em;
-    padding-right: 2.5em;
-    text-decoration: none;
-	border-bottom: 0px!important;
-	font-weight:bold;
+	margin-top: 1em;
 }
 
 /*END SEMINARS LIST*/
 
-
-
-
-
-/*SHARE LINKS HIGHLIGHS*/
-.node-highlight ul.links.inline{
-	float: right;
-    text-align: right;
-    width: 100%;
-	padding-bottom:1.5em;
-	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);
-	margin-top:-1.5em;
-}
-
-.node-highlight ul.links.inline a{
-	border-bottom:0px!important
-
-}
-
-.node-highlight ul.links.inline .node-readmore{
-	margin-top:1.5em;
-	display: block;
-}
-
-/*END SHARE LINKS HIGHLIGHS*/
 
 /*HIGHLIGHS SECTION*/
 
@@ -3917,17 +3496,6 @@ a.button-submit {
 .node-highlight.view-mode-full .field-name-field-publication-date span{
 	display: block;
 	padding-top: 1em;
-}
-
-.node-highlight.view-mode-full .field-name-title-field h1 {
-	border-bottom: 0 none !important;
-	color: #003399;
-	font-family: Open Sans Condensed !important;
-	font-size: 1.5em;
-	line-height: 1.1em;
-	margin: 0;
-	font-weight: bold!important;
-	letter-spacing: 0px!important;
 }
 
 .node-highlight.view-mode-full .field-name-field-summary p{
@@ -3965,6 +3533,11 @@ a.button-submit {
     text-decoration: underline;
     font-size: 1.3em;
 	border-bottom:0px!important
+}
+
+.view-calls ul{
+	padding-left: 0.8em;
+	margin-top: 0;
 }
 
 /*End Publication tein detail OSHWiki featured articles*/
@@ -4072,46 +3645,17 @@ a.button-submit {
 /*CALLS*/
 
 .view-calls .view-content .views-row{
-	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);
 	padding-bottom:0.5em;
 	padding-top:0.5em;
 	padding-left: 0.8em;
 	height:1%;
 	overflow:hidden;
 	clear:both;
+	background: url(../images/back-tit-blue.png) repeat-x scroll 0 100% transparent;
 }
 
 .view-calls.view-id-calls .views-field-title-field{
 	margin-bottom:1em;
-}
-
-.view-calls.view-id-calls .views-field-title-field a{
-	border-bottom: 0 none !important;
-	color: #003399;
-	font-family: Open Sans Condensed !important;
-	font-size: 1.3em;
-	line-height: 1.1em;
-	margin: 0 0 0.7em;
-	font-weight:bold;
-}
-
-.view-calls .views-field-field-publication-date  .date-display-single{
-	font-size:0.8em;
-}
-
-.view-calls .views-row  span a{
-	background: url("../images/flecha.png") no-repeat scroll right center transparent;
-	color: #003399;
-	float: right;
-	font-family: "Open Sans Condensed",sans-serif!important;
-	font-size: 1.1em;
-	margin:0;
-	padding-bottom: 0.3em;
-	text-align: right;
-	width: 100%;
-	border:0px!important;
-	padding-right: 1.5em;
-	font-weight:bold;
 }
 
 .view-calls.view-id-calls .view-footer a{
@@ -4130,20 +3674,20 @@ a.button-submit {
 }
 
 .view-calls.view-id-calls .view-header a{
-	background: url("../images/flecha-izq.png") no-repeat scroll left center transparent;
-	color: #003399;
-	float: right;
-	font-family: "Open Sans Condensed",sans-serif!important;
-	font-size: 1.1em;
-	margin: 0;
-	padding-bottom: 0.3em;
-	text-align: right;
-	width: 100%;
-	padding-left:0.8em;
-	padding-right:0em;
-	text-decoration:none!important;
-	border-bottom:0px!important;
-	font-weight:bold;
+	background: url(../images/flecha-izq.png) no-repeat scroll left center transparent;
+    color: #003399;
+    float: right;
+    font-family: "Open Sans",sans-serif!important;
+    font-size: 15px;
+    margin: 0;
+    padding-bottom: 0.3em;
+    text-align: right;
+    width: 100%;
+    padding-left: 0.8em;
+    padding-right: 0em;
+    text-decoration: none!important;
+    border-bottom: 0px!important;
+    font-weight: 600;
 }
 
 .view-calls.view-display-id-page_1 .view-header{
@@ -4188,22 +3732,6 @@ a.button-submit {
 
 .view-vacancies .views-field-title{
 	margin-bottom:1em;
-}
-
-.view-vacancies .views-field-title a{
-	background: none!important;
-	padding-right: 0em!important;
-}
-
-.view-vacancies .views-field-title a{
-	color: #003399;
-	font-family: 'Open Sans Condensed',sans-serif!important;
-	font-size: 1.35em;
-	line-height: 1.1em;
-	text-decoration: none;
-	padding: 0;
-	border-bottom: 0px!important;
-	font-weight:bold;
 }
 
 #block-block-7 {
@@ -4261,22 +3789,6 @@ a.button-submit {
 .view-vacancies .views-row  .views-field-view-node span {
 	display:block;
 	text-align:right;
-	
-}
-
-.view-vacancies .views-row  span a{
-	background: url("../images/flecha.png") no-repeat scroll right center transparent;
-	color: #003399;
-	font-family: "Open Sans Condensed",sans-serif!important;
-	font-size: 1.1em;
-	margin: 1em 0 0 0;
-	padding-bottom: 0.3em;
-	text-align: right;
-	width: 100%;
-	border:0px!important;
-	padding-right: 1.5em;
-	font-weight:bold;
-	
 }
 
 /*END VACANCIES - CAREES*/
@@ -4338,32 +3850,9 @@ a.button-submit {
 	color:#000000!important;
 }
 
-.view-highlight .links.inline{
-	background: url("../images/flecha.png") no-repeat scroll right 50% transparent!important;
-	color: #003399;
-	float: right;
-	font-family: "Open Sans Condensed",sans-serif;
-	font-size: 1.1em;
-	margin: 0;
-	padding-bottom: 0.3em;
-	text-align: right;
-	width: 100%;
-	font-weight:bold;
-	
-}
-
-.view-highlight ul.links.inline a{
-	padding-right: 0.5em;
-	font-family: "Open Sans Condensed",sans-serif!important;
-	color: #003399!important;
-	border-bottom:0px!important;
-	font-weight:bold;
-
-}
-
 .view-highlight .views-row{
 	background: url("../images/separator_home.jpg") repeat-x scroll 0 100% rgba(0, 0, 0, 0);
-    padding-bottom: 0em;
+    padding-bottom: 1em;
     width: 100%;
 }
 
@@ -4592,25 +4081,12 @@ a.button-submit {
 	clear:both;
 }
 
-.views-exposed-widgets .views-exposed-widget label{
-	color: #003399 !important;
-    font-family: "Open Sans" !important;
-    font-size: 0.9em !important;
-    font-weight: bold !important;
-    padding-bottom: 0.1em;
-
-}
-
 #block-views-exp-search-directives-page #edit-filter{
 	width:100%;
 }
 
 #block-views-exp-search-directives-page #edit-filter-title{
 	width:100%;
-}
-
-#block-views-exp-search-directives-page .form-item.form-type-select.form-item-f-0 select{
-	width: 93%!important;
 }
 
 .node-seminar header h2 {
@@ -4655,15 +4131,12 @@ a.button-submit {
 	padding-bottom:1em;
 }
 
-.node-seminar .links .node-readmore a{
-	background: url("../images/flecha.png") no-repeat scroll 94% 61% transparent;
-    border: 0 none !important;
-    color: #003399;
-    font-family: "Open Sans Condensed",sans-serif !important;
-    font-size: 1em;
-    padding-right: 2.1em;
-    text-decoration: none;
-	font-weight:bold;
+.seminar-teaser-title{
+	margin-top: 0;
+}
+
+.field-name-field-seminar-location{
+	color: #003399;
 }
 
 .view-search-seminars .view-content .views-row .node-seminar .links.inline{
@@ -4675,25 +4148,6 @@ a.button-submit {
 
 
 /* PRESS CONTACTS BLOCK*/
-
-#block-views-press-contacts-block{
-	border-top: 5px solid #003399;
-}
-
-#block-views-press-contacts-block h2{
-	color: #000;
-	font-family: 'Open Sans Condensed',sans-serif;
-	font-size: 1.55em;
-	font-weight: bold;
-	margin: 0;
-	padding: 0.3em 1em 0.3em;
-	background: none repeat scroll 0 0 #FFFFFF;
-	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);
-}
-
-.view-press-contacts{
-	padding-left:1.5em;
-}
 
 #block-views-press-contacts-block table{
 	margin-top:0em;
@@ -4709,7 +4163,8 @@ a.button-submit {
 
 #block-views-press-contacts-block .views-field-field-press-contact-job-title{
 	font-weight:bold;
-	font-size: 0.9em;
+	font-size: 14px;
+	color: #333;
 }
 
 #block-views-press-contacts-block .views-field-title a{
@@ -4723,60 +4178,17 @@ a.button-submit {
 }
 
 #block-views-press-contacts-block .views-field-field-press-contact-email a{
-	color:#003399;
-	text-decoration:none;
-	background: url("../images/mailto.png") no-repeat scroll 0% 84% rgba(0, 0, 0, 0);
-	padding-left: 1.2em;
-	font-weight:bold;
-	font-size:0.9em;
+	color: #003399;
+    text-decoration: none;
+    background: url(../images/mailto.png) no-repeat scroll 0% 5px rgba(0, 0, 0, 0);
+    padding-left: 1.2em;
+    font-size: 0.9em;
 
 }
-
-#block-views-press-contacts-block .view-press-contacts .view-footer{
-	border-top: 5px solid #003399;
-	width: 108%;
-	padding: 0.5em 0em;
-	margin-top: 0em;
-	text-align: left;
-	float: left;
-	margin-left: -1.3em;
-}
-
-#block-views-press-contacts-block .view-press-contacts .view-footer .press-kit-link{
-	background: none;
-	float: left;
-	color: #000;
-	font-family: 'Open Sans Condensed',sans-serif!important;
-	font-size: 1.3em!important;
-	font-weight: bold;
-	margin: 0;
-	padding: 0em 0em 0 0.8em;
-	background: none repeat scroll 0 0 #FFFFFF;
-}
-
 
 /* END PRESS CONTACTS BLOCK*/
 
 /* FOLLOW US ON block-on-the-web */
-
-.block-on-the-web{
-	border-top: 5px solid #003399;
-	margin: 0;
-	clear:both;
-	padding-left: 0.8em;
-}
-
-.block-on-the-web h2{
-	background:none;
-	float:none;
-	color: #000;
-	font-family: 'Open Sans Condensed',sans-serif;
-	font-size: 1.55em;
-	font-weight: bold;
-	margin: 0;
-	padding: 0em 0em 0 0.3em;
-	background: none repeat scroll 0 0 #FFFFFF;
-}
 
 .block-on-the-web span{
 	display: block;
@@ -4788,41 +4200,6 @@ a.button-submit {
 
 /* END FOLLOW US ON block-on-the-web */
 
-/* EU-OSHA in the media */
-
-.block-aggregator{
-    border-top: 5px solid #003399;
-	clear:both;
-	background: url("../images/separator_home.jpg") repeat-x scroll 0 100%
-}
-
-.block-aggregator h2{
-	color: #000;
-	font-family: 'Open Sans Condensed',sans-serif;
-	font-size: 1.55em;
-	font-weight: bold;
-	margin: 0;
-	padding: 0 1em 0.3em;
-	background: none repeat scroll 0 0 #FFFFFF;
-	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);
-}
-
-.block-aggregator .item-list ul{
-	padding:0 0 1em 1.5em;
-	margin:0;
-	list-style:none;
-}
-
-.block-aggregator .item-list ul a{
-	color: #003399;
-	text-decoration: none;
-	background: url("../images/li_arrow.png") no-repeat scroll 0 100% transparent;
-	font-weight: bold;
-	padding-left: 1em;
-	font-size: 0.8em;
-}
-
-/* END EU-OSHA in the media */
 
 
 /*PRESS ROOM CONTENT*/
@@ -4831,64 +4208,36 @@ a.button-submit {
 	float:none;
 	clear:both;
 	margin-top:1em;
-	background: none repeat scroll 0 0 #e8eef7;
-    color: #003399;
-    font-family: "Open Sans Condensed";
-    font-size: 1.35em;
     font-weight: bold;
-    padding-bottom: 2px;
     padding-left: 10px;
-	line-height: 2em;
+	font-family: 'Open Sans',sans-serif;
+    background: transparent;
+    padding-left: 0;
+    font-weight: 600;
+    font-size: 1.35rem;
+    color: #003399;
+    padding-bottom: 10px;
 }
 
-.view-press-releases .links.inline {
-	color: #003399;
-	float: right;
-	font-family: "Open Sans Condensed",sans-serif;
-	font-size: 1.1em;
-	margin: 0;
-	padding-bottom: 0.3em;
-	text-align: right;
-	width: 100%;
-	font-weight:bold;
-}
-
-.view-press-releases .links.inline  a{
-	padding-right: 0.5em;
-	font-family: "Open Sans Condensed",sans-serif!important;
-	border-bottom: 0px!important;
-	background: url("../images/flecha.png") no-repeat scroll right center transparent;
-	padding-right:1.5em;
+#block-views-press-releases-block h2{
+	padding-bottom: 10px;
 }
 
 article.node-press-release{
 	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);
 	padding-bottom:1em;
-	padding-top:2.5em;
+	padding-top:0;
 	padding-left:0.8em;
 }
 
-.view-press-releases article.node-highlight{
-	padding-bottom:1em;
-	padding-top:0.5em;
+.view-press-releases article.node-highlight, #block-views-press-releases-block .view-press-releases{
 	padding-left:0.8em;
 }
 
-article.node-press-release .field-name-title-field h1{
-	border-bottom: 0 none !important;
-	color: #003399;
-	font-family: Open Sans Condensed !important;
-	font-size: 1.6em;
-	font-weight: normal;
-	line-height: 1.1em;
-	margin: 0 0 0em;
-	font-weight:bold;
-}
-
-article.node-press-release .field-name-field-image {
+article.node-press-release .field-name-field-image, article.node-highlight .field-name-field-image{
 	  float: left;
 	  padding-right: 1em;
-	  padding-top: 1.5em;
+	  padding-top: 0;
 }
 
 article.node-press-release .press-release-date {
@@ -4906,51 +4255,10 @@ article.node-press-release .field-name-body.field-type-text-with-summary p{
 article.node-press-release .field-name-body.field-type-text-with-summary p:last-child{
 	margin:0em;
 }
-.view-press-releases .field-name-title-field {
-	font-family: 'Open Sans Condensed',sans-serif;
-	font-size: 1.4em;
-	font-weight: 300;
-	letter-spacing: -0.75px;
-	padding-bottom: 0.5em;
-}
-
-.view-press-releases .field-name-title-field a{
-	border-bottom: 0 none !important;
-	color: #003399;
-	font-family: Open Sans Condensed !important;
-	font-weight: normal;
-	line-height: 1.1em;
-	margin: 0 0 0em;
-	font-weight:bold;
-}
-
-.view-press-releases .field-name-title-field h1 {
-	padding-bottom: 0.5em;
-	padding-top: 0.2em;
-	margin:0;
-	background: none!important;
-	line-height: 0.1em;
-  	padding-left: 0px!important;
-}
 
 .view-press-releases .field-name-body p {
 	padding:0;
 	margin:0.2em 0 0.5em;
-}
-
-.view-press-releases .field-name-title-field h1 a{
-	border-bottom: 0 none !important;
-	color: #003399;
-	font-family: Open Sans Condensed !important;
-	font-size: 0.5em;
-	font-weight: normal;
-	margin: 0 0 0em;
-	font-weight:bold;
-
-}
-
-#block-views-press-releases-block{
-	margin-top:1.5em;
 }
 
 .view-press-releases .field-name-field-summary {
@@ -5142,36 +4450,19 @@ article.node-guideline ul li.node-readmore a{
 .view-search-directives .field-name-title-field a{
 	border-bottom: 0 none !important;
     color: #003399 !important;
-    font-family: "Open Sans Condensed",sans-serif !important;
+    font-family: "Open Sans",sans-serif !important;
     font-size: 1.5em;
-	font-weight:bold;
-
 }
 
-.view-search-directives  .links {
-	background: url("../images/flecha.png") no-repeat scroll right center transparent;
-	color: #003399;
-	float: right;
-	font-family: "Open Sans Condensed",sans-serif;
-	font-size: 1.1em;
-	margin: 0;
-	padding-bottom: 0.3em;
-	text-align: right;
-	width: 100%;
-	font-weight:bold;
-}
-
-.view-search-directives  .links a{
-	padding-right: 0.5em;
-	font-family: "Open Sans Condensed",sans-serif!important;
-	border-bottom: 0px!important;
+.view-search-directives .field-name-title-field a:hover{
+	text-decoration: underline !important;
 }
 
 .view-search-directives  .field-name-field-summary{
 	padding:0;
 }
 
-.view-search-directives  .field-name-field-summary .field-items{
+.view-search-directives .field-name-field-summary .field-items{
 	padding-top:0.5em;
 	padding-bottom:0.5em;
 }
@@ -5262,8 +4553,10 @@ div.contextual-links-wrapper a{
 }
 
 .view-empty {
-	padding-top:1em;
-	font-weight:bold;
+	padding-top: 0.5em;
+    font-weight: normal;
+    font-size: 0.9rem;
+    padding-left: 1em;
 }
 
 .recaptcha_only_if_image{
@@ -5372,13 +4665,6 @@ a.tabs-primary__tab-link{
 
 /* SEARCH RESULTS */
 
-.view-search.view-id-search{
-	background: none repeat scroll 0 0 #ebf1f7;
-    margin-top: -2em;
-    padding-left: 2em;
-    padding-top: 0.5em;
-}
-
 .view.view-search .view-header p{
   text-align: right;
   font-weight: bold;
@@ -5447,13 +4733,6 @@ a.tabs-primary__tab-link{
 	width: auto;
 }
 
-#block-views-exp-search-site{
-	background: #EBF1F7;
-    margin-top: -1.5em;
-    padding-top: 1em;
-	padding-left:1.8em;
-}
-
 #block-views-exp-search-wiki{
 	background: #EBF1F7;
     margin-top: -1.5em;
@@ -5478,12 +4757,14 @@ a.tabs-primary__tab-link{
 
 .view-search .views-row  .views-field-title-field a{
 	color:#003399;
-	//float:left;
 	margin-right:1em;
 	border-bottom: 0 none !important;
-    font-family: "Open Sans Condensed",sans-serif !important;
+    font-family: "Open Sans",sans-serif !important;
     font-size: 1.5em;
-	font-weight:bold;
+}
+
+#content > div.view.view-search.view-id-search.view-display-id-site > div.view-header{
+	display: none;
 }
 
 #block-views-exp-search-site #edit-search-wrapper {
@@ -5579,70 +4860,6 @@ a.tabs-primary__tab-link{
 
 /* EVENTS HOME*/
 
-#block-views-upcoming-events-block{
-	border-top: 5px solid #003399;
-	margin-bottom:3em;
-}
-
-#block-twitter-block-1{
-	border-top: 5px solid #003399;
-	margin-bottom:3em;
-}
-
-#block-views-upcoming-events-block h2{
-	color: #000;
-	font-family: 'Open Sans Condensed',sans-serif!important;
-	font-size: 1.25em;
-	font-weight: lighter;
-	margin: 0;
-	padding: 0 0 0.3em;
-	background: none repeat scroll 0 0 #FFFFFF;
-	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);
-	font-weight: bold;
-}
-
-#block-twitter-block-1 h2{
-	color: #000;
-	font-family: 'Open Sans Condensed',sans-serif!important;
-	font-size: 1.25em;
-	font-weight: lighter;
-	margin: 0;
-	padding: 0 0 0.3em;
-	background: none repeat scroll 0 0 #FFFFFF;
-	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);
-	font-weight: bold;
-}
-
-#block-views-upcoming-events-block .views-row{
-	font-weight:bold;
-	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);
-    padding-bottom: 1em;
-    padding-top: 0em;
-}
-
-#block-views-upcoming-events-block .date-display-single{
-	font-size: 0.8em;
-	font-weight: bold;
-	float: left;
-	padding-right: 0.5em;
-}
-
-#block-views-upcoming-events-block .date-display-start{
-	font-size:0.8em;
-	font-weight:bold;
-}
-
-#block-views-upcoming-events-block .date-display-end{
-	font-size:0.8em;
-	font-weight:bold;
-}
-
-.view-oshevents ul {
-	list-style:none;
-	padding: 0;
-	margin: 0;
-}
-
 .view-oshevents  .views-field-field-start-date .field-content{
 	float:left;
 	padding-right: 0.2em;
@@ -5723,26 +4940,6 @@ a.tabs-primary__tab-link{
 }
 
 .view-upcoming-events .title{
-	clear:both;
-}
-
-.view-upcoming-events .views-field-title-field a {
-	color:#003399;
-	text-decoration:none;
-	background: url("../images/li_arrow.png") no-repeat scroll 0 50% transparent;
-	font-weight:bold;
-	padding-left:1em;
-	font-size:0.8em;
-	clear:both;
-}
-
-#block-twitter-block-1 a {
-	color:#003399;
-	text-decoration:none;
-	background: url("../images/li_arrow.png") no-repeat scroll 0 50% transparent;
-	font-weight:bold;
-	padding-left:1em;
-	font-size:0.8em;
 	clear:both;
 }
 
@@ -6158,7 +5355,7 @@ a.tabs-primary__tab-link{
 	background: url("../images/separator_home.jpg") repeat-x scroll 0 100% rgba(0, 0, 0, 0);
     clear: both;
     color: #000000;
-    font-family: "Open Sans Condensed",sans-serif;
+    font-family: "Open Sans",sans-serif;
     font-size: 1.6em;
     font-weight: lighter;
     margin-bottom: 0;
@@ -6516,21 +5713,7 @@ a.tabs-primary__tab-link{
 
 /* BLOG LIST */
 
-#block-views-blog-block-1 h2.block__title.block-title{
-	font-family: 'Open Sans Condensed';
-	font-style: normal;
-	font-weight: bold;
-	font-size: 2.15em;
-	color: #003399;
-	letter-spacing: -0.75px;
-	margin-bottom: 4px;
-	padding: 0;
-	margin: 0;
-	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% transparent;
-	border-top: 5px solid #003399;
-}
-
-.view-blog  a {
+.view-blog .views-field-field-image a{
 	border:0px!important
 }
 
@@ -6547,26 +5730,13 @@ a.tabs-primary__tab-link{
 	margin-right:1em;
 }
 
-.view-blog  .views-field.views-field-title a{
+.view-blog .views-field.views-field-title a{
 	border-bottom: 0 none !important;
 	font-family: "Open Sans Condensed",sans-serif !important;
-	font-size: 1.5em;
+	font-size: 1.35rem;
 	color: #003399;
 	padding-top: 0.5em;
 	padding-bottom: 0.5em;
-	font-weight:bold;
-}
-
-.view-blog  .views-field-view-node a{
-	background: url("../images/flecha.png") no-repeat scroll 85% 29% transparent;
-	color: #003399;
-	float: right;
-	font-family: "Open Sans Condensed",sans-serif!important;
-	font-size: 1.2em;
-	padding-bottom: 1em;
-	padding-right: 2.5em;
-	margin-top:0em;
-	border-bottom:0px!important;
 	font-weight:bold;
 }
 
@@ -6576,23 +5746,6 @@ a.tabs-primary__tab-link{
 
 .view-blog  .views-field-field-summary p{
 	margin-top:0em;
-}
-
-#block-views-blog-block-2{
-	background-color:#FFFFFF;
-	border-top: 5px solid #003399;
-	padding-bottom:1.5em;
-}
-
-#block-views-blog-block-2 h2{
-	color: #000;
-	font-family: 'Open Sans Condensed',sans-serif;
-	font-size: 1.45em;
-	font-weight: bold;
-	margin: 0;
-	padding: 0 0 0.3em;
-	background: none repeat scroll 0 0 #FFFFFF;
-	background: url("../images/separator_home.jpg") repeat-x scroll 0% 100% rgba(0, 0, 0, 0);
 }
 
 .blog-archive-block{
@@ -6633,17 +5786,6 @@ a.tabs-primary__tab-link{
 	margin:0em!important;
 }
 
-.blog-archive-block ul li  a{
-	 background: url("../images/li_arrow.png") no-repeat scroll 0 100% transparent;
-    color: #003399;
-    font-size: 0.8em;
-    font-weight: bold;
-    padding-left: 1em;
-    text-decoration: none;
-	padding-top:0em;
-	margin:0em;
-}
-
 #block-block-8 p  {
 	margin-top:0em;
 }
@@ -6681,10 +5823,6 @@ a.tabs-primary__tab-link{
 #block-views-exp-search-blog-page{
 	border-top:5px solid #003399;
 	margin:0;
-}
-
-#block-views-exp-search-blog-page #edit-filter{
-	width:10em;
 }
 
 #edit-submit-search-blog{
@@ -6884,12 +6022,6 @@ article.comment p {
 
 /* BLOCK HOME TRY ALERT SERVICE */
 
-.block-osha-alert-service {
-	background-color: #e9edf6;
-	padding: 0em 1em .5em 1em;
-	margin-bottom: 1em;
-}
-
 .block-osha-alert-service span{
 	display: block;
     font-family: "Open Sans Condensed",sans-serif !important;
@@ -7005,78 +6137,10 @@ article.comment p {
 
 /* PRESS ROOM BLOCKS */
 
-#block-osha-press-release-osha-press-rel-join-list {
-	clear:both;
-	border-top: 5px solid #003399;
-}	
 
-#block-osha-press-release-osha-press-rel-join-list h2{
-	line-height: 1.3em;
-    padding-left: 1.2em;
-    padding-right: 2em;
-    padding-top: 0.5em;
-	padding-bottom:0.5em;
-}
-
-#join-list{
-	background: none repeat scroll 0 0 #e8eef7;
-	padding: 0em 1.6em 4em 1.7em;
-}
-
-#join-list-link a{
-	background: url("../images/flecha.png") no-repeat scroll 100% 29% transparent!important;
-	color: #003399;
-	float: right;
-	font-family: "Open Sans Condensed",sans-serif!important;
-	font-size: 1.1em!important;
-	padding-bottom: 1em;
-	padding-right: 1.5em;
-	border-bottom: 0px!important;
-	text-decoration: none;
-	margin-top: 1em;
-	font-weight: bold;
-}
-
-#block-osha-press-release-osha-press-rel-become-partner{
-	clear:both;
-	border-top: 5px solid #003399;
-}
-
-#block-osha-press-release-osha-press-rel-become-partner h2{
-	line-height: 1.3em;
-    padding-left: 1.2em;
-    padding-right: 2em;
-    padding-top: 0.5em;
-	padding-bottom:0.5em;
-}
-
-#become-partner {
-	background: none repeat scroll 0 0 #e8eef7;
-	padding: 0em 1.6em 4em 1.7em;
-}
-
-#become-partner a{
-	background: url("../images/flecha.png") no-repeat scroll 100% 29% transparent!important;
-	color: #003399;
-	float: right;
-	font-family: "Open Sans Condensed",sans-serif!important;
-	font-size: 1.1em!important;
-	padding-bottom: 1em;
-	padding-right: 1.5em;
-	border-bottom: 0px!important;
-	text-decoration: none;
-	margin-top: 1em;
-	font-weight: bold;
-}
-
-#block-osha-alert-service-press-release-rss{
-	border-top: 5px solid #003399;
-	background: transparent!important;
-}
-
-#block-osha-alert-service-press-release-rss a {
+#block-osha-alert-service-press-release-rss .rss-feed {
   border: 0px!important;
-  background: url("../images/rss.png") no-repeat scroll 0% 16px transparent!important;
+  background: url("../images/rss.png") no-repeat scroll 0% 16px transparent;
   padding-left: 2em;
   padding-top: 1em;
   font-weight: bold;
@@ -7084,8 +6148,7 @@ article.comment p {
   font-family: "Open Sans", sans-serif;
   text-decoration: none;
   color: #003399!important;
-  font-size: 0.9em;
-  
+  font-size: 0.9em; 
 }
 
 /* END PRESS ROOM BLOCKS */
@@ -7106,7 +6169,7 @@ div.contextual-links-wrapper{
 	background:transparent!important;
 }
 
-#block-osha-alert-service-osha-events-rss a{
+#block-osha-alert-service-osha-events-rss .rss-feed{
 	border: 0px!important;
 	background: url("../images/rss.png") no-repeat scroll 0% 86% transparent!important;
 	padding-left: 2em;
@@ -7119,7 +6182,7 @@ div.contextual-links-wrapper{
 	background:transparent!important;
 }
 
-#block-osha-alert-service-osha-publication-rss a{
+#block-osha-alert-service-osha-publication-rss .rss-feed{
 	border: 0px!important;
 	background: url("../images/rss.png") no-repeat scroll 0% 86% transparent!important;
 	padding-left: 2em;
@@ -7133,7 +6196,7 @@ div.contextual-links-wrapper{
 	background:transparent!important;
 }
 
-#block-osha-alert-service-osha-seminar-rss a{
+#block-osha-alert-service-osha-seminar-rss .rss-feed{
 	border: 0px!important;
 	background: url("../images/rss.png") no-repeat scroll 0% 86% transparent!important;
 	padding-left: 2em;
@@ -7147,7 +6210,7 @@ div.contextual-links-wrapper{
 	padding-left: 0em;
 }
 
-#block-osha-alert-service-osha-news-rss a{
+#block-osha-alert-service-osha-news-rss .rss-feed{
 	border: 0px!important;
 	background: url("../images/rss.png") no-repeat scroll 0% 86% transparent!important;
 	padding-left: 2em;
@@ -7165,7 +6228,7 @@ div.contextual-links-wrapper{
 	padding-left: 0em;
 }
 
-#block-osha-alert-service-osha-calls-rss a{
+#block-osha-alert-service-osha-calls-rss .rss-feed{
 	border: 0px!important;
 	background: url("../images/rss.png") no-repeat scroll 0% 86% transparent!important;
 	padding-left: 2em;
@@ -7183,7 +6246,7 @@ div.contextual-links-wrapper{
 	padding-left: 0em;
 }
 
-#block-osha-alert-service-osha-job-vacancies-rss a{
+#block-osha-alert-service-osha-job-vacancies-rss .rss-feed{
 	border: 0px!important;
 	background: url("../images/rss.png") no-repeat scroll 0% 86% transparent!important;
 	padding-left: 2em;
@@ -7201,7 +6264,7 @@ div.contextual-links-wrapper{
 	padding-left: 0em;
 }
 
-#block-osha-alert-service-osha-blog-rss a{
+#block-osha-alert-service-osha-blog-rss .rss-feed{
 	border: 0px!important;
 	background: url("../images/rss.png") no-repeat scroll 0% 86% transparent!important;
 	padding-left: 2em;
@@ -7220,7 +6283,7 @@ div.contextual-links-wrapper{
 	clear:both;
 }
 
-#block-osha-alert-service-osha-directives-rss a{
+#block-osha-alert-service-osha-directives-rss .rss-feed{
 	border: 0px!important;
 	background: url("../images/rss.png") no-repeat scroll 0% 86% transparent!important;
 	padding-left: 2em;
@@ -7231,6 +6294,7 @@ div.contextual-links-wrapper{
 	text-decoration: none;
 	color: #003399!important;
 	font-size:0.9em;
+	margin-bottom: 1em;
 }
 
 #block-osha-alert-service-osha-guidelines-rss{
@@ -7239,7 +6303,7 @@ div.contextual-links-wrapper{
 	clear:both;
 }
 
-#block-osha-alert-service-osha-guidelines-rss a{
+#block-osha-alert-service-osha-guidelines-rss .rss-feed{
 	border: 0px!important;
 	background: url("../images/rss.png") no-repeat scroll 0% 86% transparent!important;
 	padding-left: 2em;
@@ -7258,20 +6322,11 @@ div.contextual-links-wrapper{
 
 /*PAGINATION*/
 
-.pager-first a{
-	font-size:1.2em!important;
-}
-
-.pager-previous a{
-	font-size:1.2em!important;
-}
-
-.pager-next a{
-	font-size:1.2em!important;
-}
-
-.pager-last  a{
-	font-size:1.2em!important;
+.pager-first a, .pager-previous a, .pager-next a, .pager-last  a{
+	font-size: 3.1em!important;
+    font-weight: normal!important;
+    color: #E61D74!important;
+    padding-top: 17px;
 }
 
 /*END PAGINATION*/
@@ -7283,31 +6338,17 @@ div.contextual-links-wrapper{
 }
 
 .news_and_events ul li .text_news_events{
-	min-height: 90px;
+	min-height: 100px;
 }
 
 .news_and_events ul li .introduction-title{
 	padding-top:1em!important
 }
-<scr
-.text_news_events{
-	font-size:0.8em;
-	height:11em;
-	background: url("../images/separator_home.jpg") repeat-x scroll 0 100% rgba(0, 0, 0, 0);
-}
+
 
 .link_news_events a{
-	background: url("../images/flecha.png") no-repeat scroll 100% 29% transparent!important;
-	color: #003399;
+	font-size: 0.9em!important;
 	float: right;
-	font-family: "Open Sans Condensed",sans-serif!important;
-	font-size: 1.1em!important;
-	padding-bottom: 1em;
-	padding-right: 1.5em;
-	border-bottom: 0px!important;
-	text-decoration: none;
-	margin-top: 1em;
-	font-weight: bold;
 }
 
 
@@ -7356,7 +6397,7 @@ div.contextual-links-wrapper{
 	overflow: hidden;
 }
 
-#block-views-infographic-block-1 .view-infographic  .views-row{
+#block-views-infographic-block-1 .view-infographic .views-row{
 	float:left;
 	width:16.2em;
 	padding-right:2em;
@@ -7400,13 +6441,14 @@ div.contextual-links-wrapper{
     width: 216px;
 }
 
-#block-views-infographic-block-1 .view-infographic  .views-row .views-field-title-field a {
+#block-views-infographic-block-1 .view-infographic .views-row .views-field-title-field a {
 	border: 0 none !important;
     bottom: 5px;
     color: #003399;
     font-family: "Open Sans Condensed",sans-serif !important;
     position: absolute;
     text-decoration: none;
+    font-weight: bold;
 }
 
 #block-views-infographic-block-1 .view-infographic  .views-row .views-field-field-thumbnail a{
@@ -7488,14 +6530,6 @@ body.page-node-5429 .oshwiki-featured-articles {
 	padding-bottom: 2px;
 	padding-left: 10px;
 	line-height: 2em;
-}
-
-.node-infographic h1{
-	color: #003399;
-	font-family: Open Sans Condensed;
-	font-size: 1.5em !important;
-	font-weight: bold;
-	padding-top: 0.5em;
 }
 
 .node-infographic img{
@@ -7614,114 +6648,7 @@ body.page-node-5429 .oshwiki-featured-articles {
     text-decoration: none;
 }
 
-/*EVENTS PORLET*/
-
-#block-views-related-events-block-6 h2{
-	background: url("../images/ico_events.png") no-repeat scroll 5% 50% transparent;
-	color: #000000;
-	font-family: "Open Sans Condensed",sans-serif;
-	font-size: 1.4em;
-	font-weight: lighter;
-	margin-bottom: 0;
-	padding-bottom: 0;
-	padding-left: 2.4em;
-	font-weight: bold;
-}
-
-#block-views-related-events-block-6  a{
-    color: #003399;
-	text-decoration: none;
-	background: url("../images/li_arrow.png") no-repeat scroll 0% 100% transparent;
-	padding-left: 1em;
-	font-size: 0.8em;
-	font-weight: bold;
-	border-bottom: 0px!important;
-}
-
-#block-views-related-events-block-6 .views-field-field-start-date{
-	font-weight:bold;
-	font-size: 0.8em;
-}
-
-#block-views-related-events-block-6  .view-related-events{
-	padding-left:0.8em;
-	padding-top: 1em;
-	background: url("../images/separator_home.jpg") repeat-x scroll 0% -7px rgba(0, 0, 0, 0);
-	padding-bottom: 1em;
-}
-
-
-#block-views-related-events-block-6  .view-related-events .views-row{
-	padding-bottom:1em;
-	background: url("../images/separator_home.jpg") repeat-x scroll 0% 95% rgba(0, 0, 0, 0);
-}
-
-/*END EVENTS PORLET*/
-
-
-/*EVENTS PORLET testing*/
-
-#block-views-related-events-block-6  .view-related-events {
-  padding-left: 0.8em;
-  padding-top: 1em;
-  background: url(/sites/all/themes/osha_frontend/images/separator_home.jpg) repeat-x scroll 0% -7px rgba(0,0,0,0);
-  padding-bottom: 1em;
-}
-
-#block-views-related-events-block-6 h2{
-	background: url("../images/ico_events.png") no-repeat scroll 5% 50% transparent;
-	color: #000000;
-	font-family: "Open Sans Condensed",sans-serif;
-	font-size: 1.4em;
-	font-weight: lighter;
-	margin-bottom: 0;
-	padding-bottom: 0;
-	padding-left: 2.4em;
-	font-weight: bold;
-}
-
-#block-views-related-events-block-6 a{
-    color: #003399;
-	text-decoration: none;
-	background: url("../images/li_arrow.png") no-repeat scroll 0% 100% transparent;
-	padding-left: 1em;
-	font-size: 0.8em;
-	font-weight: bold;
-	border-bottom: 0px!important;
-}
-
-#block-views-related-events-block-6 .views-field-field-start-date{
-	font-weight:bold;
-	font-size: 0.8em;
-}
-
-#block-views-related-events-block-6 .view-related-content{
-	padding-left:0.8em;
-	padding-top: 1em;
-	background: url("../images/separator_home.jpg") repeat-x scroll 0% -7px rgba(0, 0, 0, 0);
-	padding-bottom: 1em;
-}
-
-
-#block-views-related-events-block-6  .view-related-content .views-row{
-	padding-bottom:1em;
-	background: url("../images/separator_home.jpg") repeat-x scroll 0% 95% rgba(0, 0, 0, 0);
-}
-
-/*END EVENTS PORLET TESTING*/
-
 /*EVENTS DETAIL TESTING*/
-.node-events .field-name-title-field a {
-  border-bottom: 0 none !important;
-  color: #003399;
-  font-family: Open Sans Condensed !important;
-  font-size: 1.6em;
-  line-height: 1.1em;
-  margin: 0 0 0.7em;
-  font-weight: bold;
-}
-
-
 .node-events ul.links.inline {
   float: right;
   text-align: right;
@@ -7870,74 +6797,31 @@ body.page-node-5429 .oshwiki-featured-articles {
 	width: auto;
 }
 
-#edit-submit-oshevents {
-	background: url("../images/flecha.png") no-repeat scroll 96% center #e8eef7;
-	border: 0 none;
-	color: #003399;
-	float: none;
-	font-family: "Open Sans Condensed",sans-serif;
-	font-size: 1.2em;
-	font-weight: bold;
-	margin-top: 0.5em;
-	padding: 0.2em 2.3em 0.2em 0.4em;
-	text-align: right;
-	width: auto;
+.sidebars_first input[type="submit"]{
+	background: #FFF;
+    border: 1px solid #003399;
+    border-radius: 5px;
+    color: #003399;
+    float: none;
+    font-family: "Open Sans",sans-serif;
+    font-size: 1em;
+    font-weight: bold;
+    padding-right: 2.3em;
+    height: 35px;
+    margin-top: 20px;
+    text-align: center;
+    padding-right: 8px;
+    width: auto!important;
 }
 
-#edit-submit-search-seminars{
-	background: url("../images/flecha.png") no-repeat scroll 96% center #e8eef7;
-	border: 0 none;
-	color: #003399;
-	float: none;
-	font-family: "Open Sans Condensed",sans-serif;
-	font-size: 1.2em;
-	font-weight: bold;
-	margin-top: 0.5em;
-	padding-bottom: 0.2em;
-	padding-right: 2em;
-	padding-top: 0.2em;
-	text-align: right;
-	width: auto!important;
-	margin-top:1em;
-}
-
-#edit-submit-search{
-	background: url("../images/flecha.png") no-repeat scroll 96% center #e8eef7;
-	border: 0 none;
-	color: #003399;
-	float: none;
-	font-family: "Open Sans Condensed",sans-serif;
-	font-size: 1.2em;
-	font-weight: bold;
-	margin-top: 0.5em;
-	padding-bottom: 0.2em;
-	padding-right: 2em;
-	padding-top: 0.2em;
-	text-align: right;
-	width: auto;
-	margin-top:1em;
-}
-
-
-#edit-submit-search-directives{
-	background: url("../images/flecha.png") no-repeat scroll 96% center #e8eef7;
-	border: 0 none;
-	color: #003399;
-	float: none;
-	font-family: "Open Sans Condensed",sans-serif;
-	font-size: 1.2em;
-	font-weight: bold;
-	margin-top: 0.5em;
-	padding-bottom: 0.2em;
-	padding-right: 2em;
-	padding-top: 0.2em;
-	text-align: left;
-	width: auto!important;
-	margin-top: 1em;
+.sidebars_first input[type="submit"]:hover{
+    background: #003399;
+    border: 1px solid #003399;
+    color: #FFF;
 }
 
 #edit-submit-search-blog{
-	background: url("../images/flecha.png") no-repeat scroll 96% center #e8eef7;
+	background: url("../images/flecha.png") no-repeat scroll 96% center #FFF;
 	border: 0 none;
 	color: #003399;
 	float: none;
@@ -7950,7 +6834,8 @@ body.page-node-5429 .oshwiki-featured-articles {
 	padding-top: 0.2em;
 	text-align: left;
 	width: auto;
-	margin-top: 1em;
+	margin-top: 0;
+	float: right;
 }
 
 .user-info-from-cookie.contact-form #edit-submit{
@@ -8697,11 +7582,6 @@ display:block!important;
 	vertical-align: middle;
 }
 
-#content iframe{
-	max-width: 99%!important;
-}
-
-
 /*Block Camapaing 2012-2013*/
 
 #block-nodeblock-8675 h2 { 
@@ -8876,10 +7756,6 @@ body.page-entity-collection h1#page-title{
     line-height: 30px;
     font-weight: bold;
     padding-bottom: 10px;
-}
-
-.view-press-releases .highlight-teaser-title{
-	font-size: 1em;
 }
 
 .field-content.infographics-teaser-title{
@@ -9602,82 +8478,85 @@ body.page-entity-collection h1#page-title{
 
 /*Search layout redesign*/
 .page-search-site #osha-search-basic-input-form{
-	padding: 0px 15px 15px 15px;
-    background-color: #e8eef7;
-    position: relative;
+	position: relative;
 }
 .page-search-site #osha-search-basic-input-form #edit-search-block-form{
 	padding-right: 30px;
+	height: 37px;
+    border: 1px solid #003399;
+    border-radius: 5px;
+    padding-left: 10px;
 }
 .page-search-site #osha-search-basic-input-form #edit-submit{
 	height: 25px;
     border: none;
     overflow: hidden;
-    width: 20px;
-    background: rgba(0,0,0,0) url(../images/searchico.png) no-repeat 0px center;
+    width: 20px !important;
+    background: url(../images/pink-search.png) no-repeat 96% 55%;
     cursor: pointer;
-    position: absolute;
-    top: 0px;
+    top: -12px;
     font-size: 0px;
-    right: 19px;
+    right: 7px;
+    padding-left: 5px;
+    z-index: 9999;
+    position: absolute;
 }
 
 .page-search-site .two_column #page-title{
 	display: none;
 }
-.page-search-site .two_column #block-views-exp-search-site{
-	border-top: 5px solid #003399;
-	margin-top: -5px;
-	padding-left: 0px;
-	padding-top: 0px;
-}
+
 .page-search-site .two_column #block-views-exp-search-site:first-child > div{
 	background: inherit !important;
 
-}
-.page-search-site .two_column #block-views-exp-search-site > div{
-	color: #003399;
-	font-size: 1.2em;
-	font-weight: bold;
-	background: url(../images/separator_search.png) repeat-x scroll 0 100% rgba(0, 0, 0, 0);
-	padding-left: 30px;
-	padding-bottom: 10px;
-	padding-top: 10px;
-}
-.page-search-site .two_column .views-exposed-widgets{
-	background: url(../images/separator_search.png) repeat-x scroll 0 100% rgba(0, 0, 0, 0);
-	padding-bottom: 15px;
 }
 
 .page-search-site .two_column .views-exposed-widgets .views-submit-button{
 	display: none;
 }
-.page-search-site .two_column .views-exposed-widgets .views-widget-sort-by{
-	margin-left: 30px;
-	padding-top: 0px !important;
-	position: relative;
-	z-index: 2;
-}
+
 .page-search-site .two_column .views-exposed-widgets .views-widget-sort-order{
 	padding-top: 0px !important;
 	position: relative;
 	z-index: 2;
+	width: 100px;
+    margin-top: 1em;
+    margin-left: 1em;
 }
 
-.page-search-site .two_column .view-id-search .view-header{
-	padding-right: 30px;
-    font-weight: bold;
-    width: 100%;
-    text-align: right;
-    padding-bottom: 5px;
-    border-bottom: 5px solid #003399;
-    margin-top: -3.5em;
-    padding-top: 17px;
-}
 /*end search layout redesign*/
 
 body.page-entity-collection .newsletter-container {
 	margin: 0 auto !important;
+}
+
+#slideshare-popup-container {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.7);
+	z-index: 1000000;
+}
+
+#slideshare-popup-container .slideshare-widget-container {
+	width: 100%;
+	text-align: center;
+}
+
+#slideshare-popup-container .close-slideshare-popup-container {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+}
+
+#slideshare-popup-container .close-slideshare-popup-container .close-slideshare-popup span {
+	display: block;
+	width: 30px;
+	height: 30px;
+	line-height: 25px;
+	font-size: 24px;
 }
 
 #share-popup-container {
@@ -9844,20 +8723,10 @@ div.flickr-photoset{
     right: 0px;
 }
 
-.page-themes-dangerous-substances-practical-tools-dangerous-substances .sidebars_first #views-exposed-form-practical-tools-and-guidance-on-dangerous-substances-page .views-exposed-form .form-submit{
-	margin-top: 0px;
-	background-color: #003399;
-    box-shadow: none;
-    border: 2px solid #003399;
-    color: white;
-}
-
-.view-practical-tools-and-guidance-on-dangerous-substances{
-	background-color: #e8eef7;
-}
 .view-practical-tools-and-guidance-on-dangerous-substances > .view-content{
 	padding: 15px;
 }
+
 .view-practical-tools-and-guidance-on-dangerous-substances .view-header{
 	width:100%;
 	padding: 0px;
@@ -10166,7 +9035,8 @@ img.file-icon {
 
 .view-25th-anniversary-articles #edit-search-api-views-fulltext-wrapper{
 	float: left;
-    padding-top: 40px;		
+    padding-top: 38px;
+    margin-right: 1em;		
 }
 
 .view-25th-anniversary-articles .views-widget-sort-by{
@@ -10189,7 +9059,7 @@ img.file-icon {
 	-webkit-appearance: button;
     background: url("../images/pink-select.png") no-repeat scroll 96% center #FFF;
     padding-left: 5px;
-    width: 200px!important;
+    width: 222px!important;
 }
 
 .view-25th-anniversary-articles #edit-sort-by::-ms-expand {
@@ -10208,28 +9078,6 @@ img.file-icon {
     line-height: 1.7em;
 }
 
-.view-25th-anniversary-articles .see-link a{
-    background: url(../images/flecha.png) no-repeat scroll 100% 55% transparent!important;
-    color: #003399;
-    font-family: "Open Sans Condensed",sans-serif!important;
-    font-size: 0.9em!important;
-    border-bottom: 0px!important;
-    text-decoration: none;
-    font-weight: bold;
-    padding-bottom: 2px;
-    padding-right: 30px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-
-.view-25th-anniversary-articles .see-link a:hover{
-    background: url(../images/flecha.png) no-repeat scroll 96% 55% #003399!important;
-   	color: #FFF!important;
-   	padding-left: 10px;
-   	padding-top: 5px;
-    padding-bottom: 5px;
-}
-
 .view-25th-anniversary-articles .views-submit-button{
 	width: auto;
 	float: left;
@@ -10241,7 +9089,7 @@ img.file-icon {
     border-radius: 5px;
     color: #003399;
     float: none;
-    font-family: "Open Sans Condensed",sans-serif;
+    font-family: "Open Sans",sans-serif;
     font-size: 1em;
     font-weight: bold;
     padding-right: 2.3em;
@@ -10255,17 +9103,7 @@ img.file-icon {
 #edit-submit-25th-anniversary-articles:hover{
     background: #003399;
     border: 1px solid #003399;
-    border-radius: 5px;
     color: #FFF;
-    float: none;
-    font-family: "Open Sans Condensed",sans-serif;
-    font-size: 1em;
-    font-weight: bold;
-    padding-right: 2.3em;
-    height: 35px;
-    margin-top: 20px;
-    text-align: center;
-    padding-right: 8px;
 }
 
 .view-25th-anniversary-articles .date-display-single{
@@ -10665,10 +9503,17 @@ table.quiz-feedback-table.sticky-enabled.tableheader-processed.sticky-table > tb
     font-weight: bold;
 }
 
+.publications-sidebar-first .form-item.form-type-checkboxes label[for=edit-languages], .publications-sidebar-first .form-item.form-type-checkboxes label[for=edit-tags], .publications-sidebar-first .form-item.form-type-checkboxes label[for=edit-publication-type]{
+    clear: both;
+}
+
+.contextual-links-trigger{
+	background: none !important;
+}
+
 /* RLR QUIZ - MDR-2848 - 25th Anniversary Quiz report ***************************/
 .view-id-quiz_user_results{
  	margin-left: 10em;
-
 }
 
 .view-id-quiz_user_results table{

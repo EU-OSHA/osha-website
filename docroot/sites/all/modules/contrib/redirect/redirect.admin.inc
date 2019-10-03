@@ -504,7 +504,7 @@ function _redirect_extract_url_options(&$element, &$form_state) {
   }
 
   if (!url_is_external($parsed['url'])) {
-    if (strpos($parsed['url'], 'tools-and-publications/publications')!==0) {
+    if (strpos($parsed['url'], 'publications') !== 0) {
       $parsed['url'] = drupal_get_normal_path($parsed['url'], $form_state['values']['language']);
     }
   }

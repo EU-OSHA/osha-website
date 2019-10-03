@@ -120,7 +120,12 @@ class MigrateOshaFocalPoints extends OSHADynamicMigration {
    */
   public function prepare($entity, $row) {
     $entity->path['pathauto'] = 0;
-    $country = MigrationUtil::getCountryIso2ByName($row->field_country_iso2);
+    if (strtoupper($row->field_country_iso2) == 'NORTH MACEDONIA') {
+      $country = MigrationUtil::getCountryIso2ByName('Macedonia');
+    }
+    else {
+      $country = MigrationUtil::getCountryIso2ByName($row->field_country_iso2);
+    }
     if ($country == NULL) {
       $this->displayMessage('Focal Points Country '
         . $row->field_country_iso2 . ' not found', 'warning');

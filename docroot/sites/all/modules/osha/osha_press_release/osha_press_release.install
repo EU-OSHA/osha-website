@@ -46,7 +46,7 @@ function osha_press_release_add_menu_position_rules() {
     $parent_menu = '------ Press room';
     $condition = array('content_type' => array('press_release' => 'press_release'));
     osha_add_menu_position_rule('Press room Menu Rule', $parent_menu, $condition);
-    
+
     // Menu position rule for See all Press Releases Menu Rule.
     $condition = array('pages' => 'press-releases');
     osha_add_menu_position_rule('See all Press Releases Menu Rule', $parent_menu, $condition);
@@ -99,4 +99,11 @@ function osha_press_release_update_7003() {
  */
 function osha_press_release_update_7004() {
   features_revert(array('osha_press_release' => array('field_base', 'field_instance')));
+}
+
+/**
+ * MDR-2820 Highlights - Include a multiple selection field to display in 'Press Room' page.
+ */
+function osha_press_release_update_7005() {
+  features_revert_module('osha_press_release');
 }

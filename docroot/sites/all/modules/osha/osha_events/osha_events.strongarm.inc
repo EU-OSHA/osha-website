@@ -173,20 +173,23 @@ function osha_events_strongarm() {
       'dangerous_substances' => array(
         'custom_settings' => TRUE,
       ),
+      'question' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '36',
+          'weight' => '37',
         ),
         'title' => array(
           'weight' => '4',
         ),
         'path' => array(
-          'weight' => '38',
+          'weight' => '39',
         ),
         'redirect' => array(
-          'weight' => '37',
+          'weight' => '38',
         ),
         'workbench_access' => array(
           'weight' => '1',
@@ -195,7 +198,7 @@ function osha_events_strongarm() {
           'weight' => '4',
         ),
         'xmlsitemap' => array(
-          'weight' => '35',
+          'weight' => '36',
         ),
       ),
       'display' => array(),

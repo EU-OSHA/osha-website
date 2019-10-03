@@ -42,7 +42,7 @@ legislation/directive/*',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 13,
+        'weight' => 20,
       ),
       'seven' => array(
         'region' => '',
@@ -63,7 +63,8 @@ legislation/directive/*',
     'i18n_mode' => 0,
     'module' => 'facetapi',
     'node_types' => array(),
-    'pages' => 'tools-and-publications/publications',
+    'pages' => 'publications
+tools-and-publications/publications',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -82,7 +83,7 @@ legislation/directive/*',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 15,
+        'weight' => 24,
       ),
       'seven' => array(
         'region' => '',
@@ -104,6 +105,7 @@ legislation/directive/*',
     'module' => 'facetapi',
     'node_types' => array(),
     'pages' => 'search/*
+publications
 tools-and-publications/publications',
     'roles' => array(),
     'themes' => array(
@@ -243,7 +245,7 @@ tools-and-publications/publications',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 10,
+        'weight' => 16,
       ),
       'seven' => array(
         'region' => '',
@@ -324,7 +326,7 @@ search/wiki',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 6,
+        'weight' => 9,
       ),
       'seven' => array(
         'region' => 'sidebar_first',
@@ -346,6 +348,7 @@ search/wiki',
     'module' => 'osha_search',
     'node_types' => array(),
     'pages' => 'search/*
+publications
 tools-and-publications/publications
 tools-and-publications/seminars
 legislation/directives/*
@@ -373,7 +376,7 @@ themes/musculoskeletal-disorders/search',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 5,
+        'weight' => 6,
       ),
       'seven' => array(
         'region' => 'content',
@@ -413,7 +416,7 @@ themes/musculoskeletal-disorders/search',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 26,
+        'weight' => 40,
       ),
       'seven' => array(
         'region' => '',
@@ -579,7 +582,7 @@ safety-and-health-legislation/european-directives',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 8,
+        'weight' => 10,
       ),
       'seven' => array(
         'region' => '',
@@ -620,7 +623,7 @@ search/seminars',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 9,
+        'weight' => 13,
       ),
       'seven' => array(
         'region' => '',

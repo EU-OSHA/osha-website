@@ -1,0 +1,145 @@
+/**
+ * @file
+ *
+ * Pagerer
+ *
+ * A collection of pager themes to enhance Drupal standard pager.
+ *
+ * Drupal core 7.x
+ *
+ * @package  User interface
+ * @author   mondrake <mondrake@mondrake.org>
+ */
+
+table.pagerer {
+  border: 0;
+  margin: 0.5em 0;
+  padding: 0;
+}
+table.pagerer tbody,
+table.pagerer tbody tr,
+table.pagerer tbody tr td {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+table.pagerer tbody tr td div.item-list,
+table.pagerer tbody tr td div.item-list ul.pager {
+  list-style-image: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0.1em 0 0 0;
+  vertical-align: middle;
+}
+table.pagerer tbody tr td div.item-list ul.pager li.pager-item,
+table.pagerer tbody tr td div.item-list ul.pager li.pager-current,
+table.pagerer tbody tr td div.item-list ul.pager li.pager-first,
+table.pagerer tbody tr td div.item-list ul.pager li.pager-previous,
+table.pagerer tbody tr td div.item-list ul.pager li.pager-next,
+table.pagerer tbody tr td div.item-list ul.pager li.pager-last {
+  list-style-image: none;
+  list-style-type: none;
+  margin: 0 0.3em 0 0.3em;
+  padding: 0.1em 0 0 0;
+  vertical-align: middle;
+}
+table.pagerer tbody tr td div.item-list ul.pager li.first {
+  margin-left: 0;
+}
+table.pagerer tbody tr td div.item-list ul.pager li.last {
+  margin-right: 0;
+}
+table.pagerer tbody tr td div.item-list ul.pager li.separator.pager-item,
+table.pagerer tbody tr td div.item-list ul.pager li.breaker.pager-item,
+table.pagerer tbody tr td div.item-list ul.pager li.widget.pager-item,
+table.pagerer tbody tr td div.item-list ul.pager li.widget.pager-current {
+  margin: 0;
+}
+.pagerer-left .item-list .pager {
+  text-align: left;
+}
+.pagerer-center .item-list .pager {
+  text-align: center;
+}
+.pagerer-right .item-list .pager {
+  text-align: right;
+}
+div.pagerer-slider-handle-icon.throbber {
+  background-image: url(images/throbber.gif);
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+}
+
+/* pagerer-page widget */
+.pagerer-page {
+  border: 1px black dotted;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+.pagerer-page-has-focus {
+  background-color: Gainsboro;
+}
+
+/* pagerer-slider widget */
+div.pagerer-slider {
+  display: inline-block;
+}
+div.pagerer-slider  .ui-slider-handle {
+  text-align: center;
+  vertical-align: top;
+}
+div.pagerer-slider-control-icon {
+  display: inline-block;
+  vertical-align: text-bottom;
+}
+div.pagerer-slider-handle-icon {
+  display: inline-block;
+}
+
+/* pagerer scrollpane */
+div.pagerer-pager.scrollpane-wrapper ul.pager li {
+  display: inline-block;
+}
+ul.pager li.pagerer-scrollpane {
+  display: inline-block;
+  padding: 0;
+  vertical-align: middle;
+}
+/* scrollpane viewport */
+ul.pager li.pagerer-scrollpane div.item-list {
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border: 1px solid;
+  border-radius: 6px;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+}
+/* scrollpane embedded pager */
+ul.pager li.pagerer-scrollpane ul.pager {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+}
+/* scrollpane embedded pager elements */
+ul.pager li.pagerer-scrollpane ul.pager li.pager-current,
+ul.pager li.pagerer-scrollpane ul.pager li.pager-item {
+  position: absolute;
+  white-space: nowrap;
+}
+
+/* Admin */
+table.pagerer_admin_panes_config,
+table.pagerer_admin_panes_config tbody,
+table.pagerer_admin_panes_config tbody tr,
+table.pagerer_admin_panes_config tbody tr td {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+table.pagerer-admin-preset-list td.pagerer-admin-preset-preview {
+  font-size: 70%;
+}

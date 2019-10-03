@@ -308,7 +308,7 @@ function osha_nodequeue_sort_alter(&$nodes, $sqid) {
     osha_expire_view_page('about-eu-osha/press-room');
   }
   if ($sqid == 6) {
-    osha_expire_view_page('tools-and-publications/publications');
+    osha_expire_view_page('publications');
   }
 }
 
@@ -406,7 +406,7 @@ function osha_js_alter(&$javascript) {
 
         case 'opt_in':
           $primary_button_class = 'agree-button eu-cookie-compliance-secondary-button';
-          $secondary_button_label = !empty($popup_settings['disagree_button_label']) ? $popup_settings['disagree_button_label'] : 'Decline';
+          $secondary_button_label = !empty($popup_settings['disagree_button_label']) ? $popup_settings['disagree_button_label'] : t('Decline');
           $secondary_button_class = 'decline-button eu-cookie-compliance-default-button';
           break;
 
@@ -546,6 +546,7 @@ function osha_date_format_types() {
     'year'  => t('Year'),
     'short_date_eu'  => t('EU short date'),
     'pubdate_rss'  => t('pubDate RSS'),
+    'commission_rss' => t('Commission RSS'),
     'osha_day_only'  => t('Day only'),
     'month' => t('Month: F'),
     'year_and_month'  => t('Year and Month'),
@@ -565,6 +566,9 @@ function osha_date_formats() {
     ),
     array(
       'type' => 'pubdate_rss', 'format'  => 'r', 'locales' => array(),
+    ),
+    array(
+      'type' => 'commission_rss', 'format'  => 'Y-m-d H:i', 'locales' => array(),
     ),
     array(
       'type' => 'osha_day_only', 'format'  => 'd/m/Y', 'locales' => array(),
@@ -1871,4 +1875,366 @@ function osha_imce_custom_init($imce, $user) {
       }
     }
   }
+}
+/**
+ * Default tags for Pagerer's themes.
+ *
+ * @param string $theme
+ *   theme name
+ * @param string $display_mode
+ *   what is being displayed within [pages|items|item_ranges]
+ * @param array $tags
+ *   an array of tags to be merged with defaults
+ *
+ * @return array
+ *   merged array of custom and default tags
+ */
+function osha_pagerer_tags_merge_default($theme, $display_mode, $tags = NULL) {
+  switch ($theme) {
+    case 'pagerer_standard':
+      $default_tags = array(
+        'page'             => t("@number"),
+        'first'            => t("«"),
+        'previous'         => t("‹"),
+        'next'             => t("›"),
+        'last'             => t("»"),
+        'total'            => t("of @total"),
+        'page_label'       => t("Page"),
+        'item_label'       => t("Item"),
+        'item_range_label' => t("Items"),
+      );
+      break;
+
+    default:
+      $default_tags = array(
+        'page'             => t("@number"),
+        'first'            => t("«"),
+        'previous'         => t("<"),
+        'next'             => t(">"),
+        'last'             => t("»"),
+        'previous_progr'   => t("-@number"),
+        'next_progr'       => t("+@number"),
+        'total'            => t("of @total"),
+        'page_label'       => t("Page"),
+        'item_label'       => t("Item"),
+        'item_range_label' => t("Items"),
+      );
+      break;
+
+  }
+  switch ($display_mode) {
+    case 'pages':
+      $default_titles = array(
+        'page_title'     => t("Go to page @number"),
+        'first_title'    => t("Go to first page"),
+        'previous_title' => t("Go to previous page"),
+        'next_title'     => t("Go to next page"),
+        'last_title'     => t("Go to last page"),
+        'widget_title'   => t("Enter page, then press Return."),
+        'slider_title'   => t("Drag the handle to the page required."),
+      );
+      break;
+
+    case 'items':
+      $default_titles = array(
+        'page_title'     => t("Go to item @number"),
+        'first_title'    => t("Go to first item"),
+        'previous_title' => t("Go to previous items"),
+        'next_title'     => t("Go to next items"),
+        'last_title'     => t("Go to last items"),
+        'widget_title'   => t("Enter item, then press Return."),
+        'slider_title'   => t("Drag the handle to the item required."),
+      );
+      break;
+
+    case 'item_ranges':
+      $default_titles = array(
+        'page_title'     => t("Go to items @number"),
+        'first_title'    => t("Go to first items"),
+        'previous_title' => t("Go to previous items"),
+        'next_title'     => t("Go to next items"),
+        'last_title'     => t("Go to last items"),
+        'widget_title'   => t("Enter item, then press Return."),
+        'slider_title'   => t("Drag the handle to the item required."),
+      );
+      break;
+
+  }
+  $default_titles['slider_tickmark_title'] = "Then, click on the tickmark.";
+  $default_tags += $default_titles;
+  if ($tags) {
+    return array_merge($default_tags, $tags);
+  }
+  else {
+    return $default_tags;
+  }
+}
+
+function osha_pagerer_theme_handler($theme, $variables) {
+  global $pager_total, $pager_limits;
+
+  // Check if pager is needed; if not, return immediately.
+  if ($pager_total[$variables['element']] <= 1) {
+    return NULL;
+  }
+  // Add Pagerer's css.
+  drupal_add_css(drupal_get_path('module', 'pagerer') . '/pagerer.css');
+  // Resolve tags. The tags key bears already localised strings.
+  $variables['tags'] = osha_pagerer_tags_merge_default($theme, $variables['display'], isset($variables['tags']) ? $variables['tags'] : array());
+  // Resolve markers.
+  $markers = _pagerer_resolve_markers($variables);
+  // Short to main markers.
+  $c = $markers['pager_current'] - 1;
+  $m = $markers['pager_max'] - 1;
+
+  // Set adaptive markers.
+  global $_pagerer_ak_array;
+  $qps = drupal_get_query_parameters();
+  // Initialise global array for all pagers' adaptive keys.
+  if (!isset($_pagerer_ak_array)) {
+    // Take querystring parameters if existing.
+    if (isset($qps['page_ak'])) {
+      // A 'page_ak' query parameter exists in the calling URL.
+      $_pagerer_ak_array = explode(',', $qps['page_ak']);
+    }
+    else {
+      $_pagerer_ak_array = array();
+    }
+  }
+  // Set default 'page_ak' querystring parameter for this pager.
+  if (isset($qps['page_ak'])) {
+    $page_ak = implode(',', _pagerer_load_ak_array(NULL, $variables['element'], $_pagerer_ak_array));
+    $variables['parameters']['page_ak'] = $page_ak;
+  }
+
+  // Determine pager items needed.
+  $pages = array();
+  switch ($theme) {
+    case 'pagerer_adaptive':
+      // Determine adaptive keys coming from query parameters.
+      list($pl, $pr, $px) = array(0, $m, NULL);
+      if (isset($_pagerer_ak_array[$variables['element']])) {
+        // Adaptive keys for the specific element exist.
+        $tmp = explode('.', $_pagerer_ak_array[$variables['element']]);
+        $pl = isset($tmp[0]) ? ($tmp[0] ? $tmp[0] : 0) : 0;
+        $pr = isset($tmp[1]) ? $tmp[1] : $m;
+        $px = isset($tmp[2]) ? $tmp[2] : NULL;
+      }
+      // First.
+      $pages[0]['interval'] = -$c;
+      list($pages[0]['text'], $pages[0]['text_title']) = _pagerer_get_page_text($variables, $markers, -$c, 'page', 'absolute', 'first');
+      $pages[0]['page_pl'] = 0;
+      $pages[0]['page_pr'] = $m;
+      // Last.
+      $pages[$m]['interval'] = $m - $c;
+      list($pages[$m]['text'], $pages[$m]['text_title']) = _pagerer_get_page_text($variables, $markers, $m - $c, 'page', 'absolute', 'last');
+      $pages[$m]['page_pl'] = 0;
+      $pages[$m]['page_pr'] = $m;
+      // Neighborhood.
+      $pages += _pagerer_get_neighborhood_pages($variables, $markers);
+      // Adaptive keys left pointed page.
+      if (($pl > 0) and !isset($pages[$pl])) {
+        $pages[$pl]['interval'] = $pl + 1 - $markers['pager_current'];
+        list($pages[$pl]['text'], $pages[$pl]['text_title']) = _pagerer_get_page_text($variables, $markers, -$markers['pager_current'] + $pl + 1, 'page', $variables['progr_links']);
+        $pages[$pl]['progressive'] = TRUE;
+      }
+      // Adaptive keys right pointed page.
+      if (($pr < $m) and !isset($pages[$pr])) {
+        $pages[$pr]['interval'] = $pr - $markers['pager_current'] + 1;
+        list($pages[$pr]['text'], $pages[$pr]['text_title']) = _pagerer_get_page_text($variables, $markers, $pr - $markers['pager_current'] + 1, 'page', $variables['progr_links']);
+        $pages[$pr]['progressive'] = TRUE;
+      }
+      // Adaptive pages.
+      $pages += _pagerer_get_adaptive_pages(
+        $variables,
+        $markers,
+        $pages,
+        $pl, $pr, $px
+      );
+      ksort($pages);
+      // Enrich pages with adaptive markers.
+      if ($pages) {
+        $kpages = array_keys($pages);
+        // Determines first adaptive pages left and right of the neighborhood,
+        // if existing.
+        $la = $ra = NULL;
+        for ($x = 1; $x < count($kpages) - 1; $x++) {
+          if (isset($pages[$kpages[$x]]['progressive'])) {
+            if ($kpages[$x] < $c) {
+              $la = $kpages[$x];
+            }
+            if ($kpages[$x] > $c) {
+              $ra = $kpages[$x];
+              break;
+            }
+          }
+        }
+        // Set adaptive markers.
+        for ($x = 1; $x < count($kpages) - 1; $x++) {
+          $d = &$pages[$kpages[$x]];
+          // Skip current page.
+          if ($kpages[$x] == $c) {
+            continue;
+          }
+          // Adaptive page.
+          if (isset($pages[$kpages[$x]]['progressive'])) {
+            $d['page_pl'] = $kpages[$x - 1];
+            $d['page_pr'] = $kpages[$x + 1];
+            continue;
+          }
+          // Else, neighborhood page.
+          // Set left page and right page pointers.
+          if (!is_null($px)) {
+            $d['page_pl'] = $pl;
+            $d['page_pr'] = $pr;
+          }
+          else {
+            $d['page_pl'] = !is_null($pl) ? $pl : 0;
+            $d['page_pr'] = !is_null($pr) ? $pr : $m;
+          }
+          // Set holding marker - determine left and right offset
+          // of the page vs current page.
+          $off = NULL;
+          if ($kpages[$x] < $c) {
+            $off = $la ? $kpages[$x] - $la : NULL;
+          }
+          elseif ($kpages[$x] > $c) {
+            $off = $ra ? $ra - $kpages[$x] : NULL;
+          }
+          // If an offset exists, and is larger than half neighborhood,
+          // then an holding marker is set. If offset is null, then
+          // there are no left (or right) adaptive pointers, so we will
+          // reset adaptive keys.
+          if ($off) {
+            if ($off > $markers['pager_middle']) {
+              $d['page_px'] = !is_null($px) ? $px : $c;
+            }
+          }
+          else {
+            if ($kpages[$x] < $c) {
+              $d['page_pl'] = 0;
+              $d['page_pr'] = $c;
+            }
+            elseif ($kpages[$x] > $c) {
+              $d['page_pl'] = $c;
+              $d['page_pr'] = $m;
+            }
+          }
+        }
+      }
+      break;
+
+    case 'pagerer_progressive':
+      // First.
+      $pages[0]['interval'] = -$c;
+      list($pages[0]['text'], $pages[0]['text_title']) = _pagerer_get_page_text($variables, $markers, -$c, 'page', 'absolute', 'first');
+      // Last.
+      $pages[$m]['interval'] = $m - $c;
+      list($pages[$m]['text'], $pages[$m]['text_title']) = _pagerer_get_page_text($variables, $markers, $m - $c, 'page', 'absolute', 'last');
+      // Neighborhood.
+      $pages += _pagerer_get_neighborhood_pages($variables, $markers);
+      // Progressive.
+      if (!empty($variables['factors'])) {
+        $factors = explode(',', $variables['factors']);
+        foreach ($factors as $scale_factor) {
+          $pages = _pagerer_get_progressive_pages($variables, $markers, $pages, $scale_factor, 10);
+        }
+      }
+      ksort($pages);
+      break;
+
+    case 'pagerer_mini':
+    case 'pagerer_slider':
+      // Current.
+      $pages[$c]['interval'] = 0;
+      list($pages[$c]['text'], $pages[$c]['text_title']) = _pagerer_get_page_text($variables, $markers, 0);
+      break;
+
+    case 'pagerer_scrollpane':
+      // Current.
+      $pages[$c]['interval'] = 0;
+      break;
+
+    case 'pagerer_standard':
+    default:
+      // Neighborhood.
+      $pages += _pagerer_get_neighborhood_pages($variables, $markers);
+  }
+
+  // Compose pager.
+  $items = array();
+  // 1 - Labels.
+  if ($variables['label_display'] == 'first') {
+    $items[] = array(
+      'class' => array('pager-item'),
+      'data' => _pagerer_get_page_tag($variables),
+    );
+    if ($variables['pager_separator'] != 'none') {
+      $items[] = array(
+        'class' => array('pager-item', 'separator'),
+        'data' => $variables['pager_separator'],
+      );
+    }
+  }
+  if ($variables['total_display'] == 'first') {
+    $items[] = array(
+      'class' => array('pager-item'),
+      'data' => format_string($variables['tags']['total'], array('@total' => _pagerer_get_total($variables, $markers))),
+    );
+    if ($variables['pager_separator'] != 'none') {
+      $items[] = array(
+        'class' => array('pager-item', 'separator'),
+        'data' => $variables['pager_separator'],
+      );
+    }
+  }
+  // 2 - First + previous links.
+  if ($variables['first_link'] == 'always' or ($variables['first_link'] == 'not_on_first' and $c <> 0)) {
+    $items[] = _pagerer_itemize_link('first', $variables, $markers);
+  }
+  if ($variables['previous_link'] == 'always' or ($variables['previous_link'] == 'not_on_first' and $c <> 0)) {
+    $items[] = _pagerer_itemize_link('previous', $variables, $markers);
+  }
+  // 3 - Pages.
+  $items = array_merge($items, _pagerer_itemize_page_links($variables, $markers, $pages));
+  // 4 - Next + last links.
+  if ($variables['next_link'] == 'always' or ($variables['next_link'] == 'not_on_last' and $c <> $m)) {
+    $items[] = _pagerer_itemize_link('next', $variables, $markers);
+  }
+  if ($variables['last_link'] == 'always' or ($variables['last_link'] == 'not_on_last' and $c <> $m)) {
+    $items[] = _pagerer_itemize_link('last', $variables, $markers);
+  }
+  // 5 - Labels.
+  if ($variables['label_display'] == 'last') {
+    if ($variables['pager_separator'] != 'none') {
+      $items[] = array(
+        'class' => array('pager-item', 'separator'),
+        'data' => $variables['pager_separator'],
+      );
+    }
+    $items[] = array(
+      'class' => array('pager-item'),
+      'data' => _pagerer_get_page_tag($variables),
+    );
+  }
+  if ($variables['total_display'] == 'last') {
+    if ($variables['pager_separator'] != 'none') {
+      $items[] = array(
+        'class' => array('pager-item', 'separator'),
+        'data' => $variables['pager_separator'],
+      );
+    }
+    $items[] = array(
+      'class' => array('pager-item'),
+      'data' => format_string($variables['tags']['total'], array('@total' => _pagerer_get_total($variables, $markers))),
+    );
+  }
+
+  // If a scrollpane pager, add a wrapper class.
+  $scrollpane_wrapper = ($variables['current_display'] == 'scrollpane') ? 'scrollpane-wrapper' : NULL;
+
+  return '<h2 class="element-invisible">' . t("Pages") . '</h2><div class="pagerer-pager ' . $scrollpane_wrapper . '">' . theme('item_list', array(
+      'items' => $items,
+      'attributes' => array('class' => array('pager')),
+    )) . '</div>';
 }

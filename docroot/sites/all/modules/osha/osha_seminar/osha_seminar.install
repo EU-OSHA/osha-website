@@ -27,3 +27,28 @@ function osha_seminar_update_7001() {
 function osha_seminar_update_7002() {
   features_revert(array('osha_seminar' => array('field_base', 'field_instance')));
 }
+
+/**
+ * MDR-3090 Change the url of summaries.
+ */
+function osha_seminar_update_7003() {
+  variable_set('pathauto_node_seminar_pattern', 'tools-and-resources/seminars/[node:title]');
+  variable_set('pathauto_update_action', 2);
+  $start = 0;
+  $limit_count = 50;
+  $break_at = 1000;
+  while (1) {
+    $resource = db_query("SELECT nid FROM node WHERE type='seminar' AND status=1 LIMIT $start, $limit_count");
+    foreach ($resource as $result) {
+      $node = node_load($result->nid);
+      $node->path['pathauto'] = TRUE;
+      $node->path['alias'] = str_replace('tools-and-publications/', 'tools-and-resources/', $node->path['alias']);
+      pathauto_node_update_alias($node, 'update');
+    }
+    $start += $limit_count;
+    if ($start >= $break_at) {
+      break;
+    }
+  }
+}
+

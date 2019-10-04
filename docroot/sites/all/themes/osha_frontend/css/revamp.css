@@ -172,7 +172,8 @@ div.view-header.back.revamp{
 }
 
 .new-select-style, .form-select{
-    min-height: 34px;
+    /*MDR-3262 - revamp: Publications detail. Decrease the box to chose the language to download*/
+    /*min-height: 34px;*/
     height: auto;
     border: 1px solid #003399;
     border-radius: 5px;
@@ -1392,7 +1393,9 @@ html[lang=hu] .page-tools-and-publications .views-exposed-widget label{
 
 .page-publication-detail .content-publication-info{
     padding-top:0;
-    font-size: 0.7rem;
+    /*MDR-3263 - revamp - Publications: too small font size for type and number of pages*/
+    /*font-size: 0.7rem;*/
+    font-size: 0.9rem;
 }
 
 .page-publication-detail .content-publication-info .date-display-single{
@@ -1464,7 +1467,9 @@ span.title-download {
 
 .content-languages-download .new-select-style{
     width: 196px!important;
-    background: url(../images/pink-select.png) no-repeat scroll 96% 11px transparent;
+    /*MDR-3262 - revamp: Publications detail. Decrease the box to chose the language to download*/
+    /*background: url(../images/pink-select.png) no-repeat scroll 96% 11px transparent;*/
+    background: url(../images/pink-select.png) no-repeat scroll 96% center transparent;
     color: #003399;
     float: left;
     margin-right: 0.5em;

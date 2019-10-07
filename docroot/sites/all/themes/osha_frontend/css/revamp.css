@@ -1360,6 +1360,8 @@ html[lang=hu] .page-tools-and-publications .views-exposed-widget label{
     float: left;
     width: 100%;
     padding-bottom: 2em;
+    /*MDR-3261 revamp: publications detail too much space for the intro text*/
+    border-bottom: 1px solid #003399;
 }
 
 .page-publication-detail .publications-detail h1{

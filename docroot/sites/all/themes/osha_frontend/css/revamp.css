@@ -1317,6 +1317,8 @@ html[lang=hu] .page-tools-and-publications .views-exposed-widget label{
 
 .content-publication-info span.date-display-single{
     padding: 0;
+    /*MDR-3263 revamp - Publications: too small font size for type and number of pages*/
+    font-size: 0.9rem !important;
 }
 
 .content-pagination{

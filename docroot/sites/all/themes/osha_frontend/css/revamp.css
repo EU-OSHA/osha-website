@@ -1317,6 +1317,8 @@ html[lang=hu] .page-tools-and-publications .views-exposed-widget label{
 
 .content-publication-info span.date-display-single{
     padding: 0;
+    /*MDR-3263 revamp - Publications: too small font size for type and number of pages*/
+    font-size: 0.9rem !important;
 }
 
 .content-pagination{
@@ -1358,6 +1360,8 @@ html[lang=hu] .page-tools-and-publications .views-exposed-widget label{
     float: left;
     width: 100%;
     padding-bottom: 2em;
+    /*MDR-3261 revamp: publications detail too much space for the intro text*/
+    border-bottom: 1px solid #003399;
 }
 
 .page-publication-detail .publications-detail h1{
@@ -2325,6 +2329,48 @@ article.node-seminar{
 /*Remove double arrow in Focal points detail pages*/
 .view-fop-page-links div a{
     background:none;
+}
+
+/*MDR-3279 Wrong display of the pdf files*/
+.field-name-field-colection-related-resource .field-label{
+    font-family: 'Open Sans',sans-serif;
+    background: transparent;
+    padding-left: 0;
+    font-weight: 600;
+    font-size: 1.35rem;
+    color: #003399;
+    margin-bottom: 0;
+    line-height: 30px;
+}
+
+.field-name-field-colection-related-resource .field-items .field-item {
+    margin-bottom:0;
+}
+
+.field-name-field-colection-related-resource .field-items .field-item .field-collection-view{
+    padding: 0.3em 0 1em 0;
+    background: url(/sites/all/themes/osha_frontend/images/back-tit-blue.png) repeat-x scroll 0 100% transparent;
+    border-bottom:none;
+}
+
+.field-collection-item-field-colection-related-resource .content .field-name-field-related-resource-title .field-label{
+    display:none;
+}
+
+.field-collection-item-field-colection-related-resource .content .field-name-field-related-resource-title .field-items .field-item{
+    font-size: 1.17em;
+    font-weight: bold;
+    line-height: 1.28205em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.field-collection-item-field-colection-related-resource .content .field-name-field-related-resources-files .field-label{
+    display:none;
+}
+
+.field-collection-container{
+    border-bottom:0;
 }
 
 /*MDR-3040 Revamp Tablet Header - Language and Search box are not aligned*/

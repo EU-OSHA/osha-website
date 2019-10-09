@@ -13,9 +13,21 @@
  * @see search_autocomplete.views.inc
  */
 
-
+/**
+ * Prepares variables for views search autocomplete styles templates.
+ *
+ * Default template: views-search-autocomplete-style.tpl.php
+ *
+ * @param array $vars
+ *   An associative array containing:
+ *   - view: The view object to style.
+ *   - rows: An array of rows to render.
+ *   - options: An array of style options.
+ *
+ * @ingroup themeable
+ */
 function template_preprocess_views_search_autocomplete_style(&$vars) {
-global $base_root;
+  global $base_root;
 
   $view = $vars['view'];
   $rows = $vars['rows'];
@@ -40,18 +52,23 @@ global $base_root;
 
     // Extract the URL...
     $regexp = "<a\s[^>]*href=(\"??)([^\" >]*?)\\1[^>]*>(.*)<\/a>";
+    $link_value = $row[$style_options['input_link']]->raw;
     if (preg_match("/$regexp/siU", htmlspecialchars_decode($row[$style_options['input_link']]->content, ENT_QUOTES), $matches)) {
-      $link = $base_root . $matches[2];
-      // And build the link object.
-      $object['link'] = trim($link);
-    } else {
-      $object['link'] = $row[$style_options['input_link']]->content;
+        $link_value = $matches[2];
     }
+    if (url_is_external($link_value) || valid_url($link_value, TRUE)) {
+      $link = $link_value;
+    }
+    else {
+      $link = $base_root . $link_value;
+    }
+    // And build the link object.
+    $object['link'] = trim($link);
 
     /* ----------------
      * Build the value...
      * ----------------  */
-    $object['value'] = trim(strip_tags($row[$style_options['input_label']]->content));
+    $object['value'] = filter_xss(htmlspecialchars_decode(trim($row[$style_options['input_label']]->content, ENT_QUOTES)));
 
     /* ----------------
      * Build the array of output fields...
@@ -60,10 +77,13 @@ global $base_root;
     foreach ($style_options['output_fields'] as $field_name) {
       // Add the field if the value is not null.
       if (array_key_exists($field_name, $row) && $row[$field_name] && $row[$field_name]->content) {
-        $object['fields'][$field_name] = trim($row[$field_name]->label . ' ' . $row[$field_name]->content);
+        $object['fields'][$field_name] = filter_xss(htmlspecialchars_decode(trim($row[$field_name]->label . ' ' . $row[$field_name]->content), ENT_QUOTES), array('a', 'em', 'strong', 'cite', 'blockquote', 'code', 'ul', 'ol', 'li', 'dl', 'dt', 'dd', 'img'));
       }
     }
 
+    /* ----------------
+     * Sort by group objects if needed.
+     * ----------------  */
     if ($style_options['group_by']) {
       $group_type = $style_options['group_by'];
       $group_name = $row[$group_type]->content;
@@ -71,25 +91,48 @@ global $base_root;
         $objects[$group_name] = array();
       }
       $objects[$group_name][] = $object;
-    } else{
+    }
+    else {
       $objects[] = $object;
     }
   }
 
-//   if ($style_options['group_by']) {
-//     array_multisort($key_objects, SORT_ASC, $objects);
-//   }
-
+  /* ----------------
+   * Build group info if grouping is enabled.
+   * ----------------  */
   $returns = array();
   if ($style_options['group_by']) {
     foreach ($objects as $group_name => $group) {
-      $group[0]['group']['group_id'] = preg_replace('/\W+/','',strtolower(strip_tags($group_name)));;
+      $group[0]['group']['group_id'] = preg_replace('/\W+/', '', strtolower(strip_tags($group_name)));;
       $group[0]['group']['group_name'] = trim($group_name);
       $returns = array_merge($returns, $group);
     }
     $vars["rows"] = $returns;
-  } else {
+  }
+  else {
     // Check if user wants nested arrays.
     $vars["rows"] = $objects;
   }
+
+ /* ----------------
+  * Add $no_results and $all_results if needed.
+  * ----------------  */
+  if (!empty($view->autocompletion_data)) {
+    // Check case between $no_results and $all_results
+    if (empty($vars["rows"])) {
+      // No results case.
+      $no_results = str_replace('[search-phrase]', $view->autocompletion_data['user_input'], $view->autocompletion_data['no_results']);
+      $suggestion = json_decode($no_results);
+    }
+    else {
+      // All results case.
+      $no_results = str_replace('[search-phrase]', $view->autocompletion_data['user_input'], $view->autocompletion_data['all_results']);
+      $suggestion = json_decode($no_results);
+    }
+    if (!empty($suggestion->label)) {
+      $suggestion->fields['label'] = html_entity_decode(stripslashes(str_replace('[search-phrase]', $view->autocompletion_data['user_input'], $suggestion->label)));
+    }
+    $vars["rows"][] = $suggestion;
+  }
+
 }

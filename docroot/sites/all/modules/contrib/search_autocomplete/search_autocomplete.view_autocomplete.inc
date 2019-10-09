@@ -20,14 +20,18 @@ function search_autocomplete_views_api() {
 }
 
 /**
- * Takes each field from a row object and renders the field as determined by the field's theme
+ * Renders each field in a row object using a field's theme.
  *
- * @param $view
- *   View the row belongs to
- * @param $row
- *   Row object
+ * Takes each field from a row object and renders the field as determined by the
+ * field's theme
+ *
+ * @param object $view
+ *   View the row belongs to.
+ * @param object $row
+ *   Row object.
+ *
  * @return array
- *   Object containing all the raw and rendered fields
+ *   Object containing all the raw and rendered fields.
  */
 function _search_autocomplete_render_fields($view, $row) {
   $field_ids = array_keys($view->field);
@@ -45,7 +49,9 @@ function _search_autocomplete_render_fields($view, $row) {
         }
         $field_is_multiple = TRUE;
       }
-      else $field_raw = $view->field[$field->options['id']]->advanced_render($row);
+      else {
+        $field_raw = $view->field[$field->options['id']]->advanced_render($row);
+      }
     }
     else {
       $field_output = $view->field[$field->options['id']]->advanced_render($row);
@@ -64,7 +70,7 @@ function _search_autocomplete_render_fields($view, $row) {
           $object->content = $field_output;
         }
         $object->raw = $field_raw;
-        $object->class = drupal_clean_css_identifier(strtolower($id));//views_css_safe($id);
+        $object->class = drupal_clean_css_identifier(strtolower($id));
 
         $object->label = check_plain($view->field[$id]->label());
 
@@ -90,9 +96,10 @@ function _search_autocomplete_render_fields($view, $row) {
  * Encodes JSON in a pretty-printed fashion.
  *
  * Only used inside the preview on the view configuration page.
- * @deprecated The $option parameter in PHP 5.4.0 json_encode() deprecates this function.
+ * @deprecated The $option parameter in PHP 5.4.0 json_encode() deprecates this
+ * function.
  *
- * @see _search_autocomplete_json_encode
+ * @see _search_autocomplete_json_encode()
  */
 function _search_autocomplete_encode_formatted($json, $depth = 0) {
 
@@ -112,7 +119,16 @@ function _search_autocomplete_encode_formatted($json, $depth = 0) {
 
     case 'resource':
     case 'string':
-      $search   = array('"', chr(92), chr(8), chr(12), chr(13) . chr(10), chr(10), chr(13), chr(9));
+      $search   = array(
+        '"',
+        chr(92),
+        chr(8),
+        chr(12),
+        chr(13) . chr(10),
+        chr(10),
+        chr(13),
+        chr(9),
+      );
       $replace  = array('\"', '\\', '\b', '\f', '\n', '\n', '\r', '\t');
       $output   = str_replace($search, $replace, $json);
 
@@ -122,7 +138,7 @@ function _search_autocomplete_encode_formatted($json, $depth = 0) {
       // Arrays in JSON can't be associative.  If the array is empty or if it
       // has sequential whole number keys starting with 0, it's not associative
       // so we can go ahead and convert it as an array.
-      if (empty($json) || array_keys($json) === range(0, sizeof($json) - 1)) {
+      if (empty($json) || array_keys($json) === range(0, count($json) - 1)) {
         $output = array();
         foreach ($json as $val) {
           $output[] = $indent . $base_indent . _search_autocomplete_encode_formatted($val, $depth + 1);
@@ -143,22 +159,16 @@ function _search_autocomplete_encode_formatted($json, $depth = 0) {
   }
 }
 
-function _search_autocomplete_debug_stop($var, $location) {
-  print("Location:$location\n");
-  var_dump($var);
-  module_Invoke_all('exit');
-  exit;
+/**
+ * Implements hook_views_default_views().
+ */
+function search_autocomplete_views_default_views() {
+  // Creates a defaults view as a user helper.
+  return search_autocomplete_view_autocomplete();
 }
 
 /**
- * Implements hook_views_default_views().
- * Creates a defaults view as a user helper
- */
-function search_autocomplete_views_default_views() {
-  return search_autocomplete_view_autocomplete();
-}
-/**
- * Begin view
+ * Begin view.
  */
 function search_autocomplete_view_autocomplete() {
 
@@ -172,7 +182,7 @@ function search_autocomplete_view_autocomplete() {
   $view_nodes->core = 7;
   $view_nodes->api_version = '3.0';
   $view_nodes->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
-  
+
   /* Display: Master */
   $handler = $view_nodes->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Node title suggestions for autocompletion';
@@ -183,8 +193,8 @@ function search_autocomplete_view_autocomplete() {
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Appliquer';
-  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Trier par';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
+  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Sort by';
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '15';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -262,7 +272,7 @@ function search_autocomplete_view_autocomplete() {
     4 => 0,
     3 => 0,
   );
-  
+
   /* Display: Page */
   $handler = $view_nodes->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'nodes-autocomplete';
@@ -280,7 +290,7 @@ function search_autocomplete_view_autocomplete() {
   $view_users->core = 7;
   $view_users->api_version = '3.0';
   $view_users->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
-  
+
   /* Display: Master */
   $handler = $view_users->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'users_autocomplete';
@@ -292,8 +302,8 @@ function search_autocomplete_view_autocomplete() {
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Appliquer';
-  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Trier par';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
+  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Sort by';
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '15';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -360,7 +370,7 @@ function search_autocomplete_view_autocomplete() {
     4 => 0,
     3 => 0,
   );
-  
+
   /* Display: Page */
   $handler = $view_users->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'users-autocomplete';
@@ -376,7 +386,7 @@ function search_autocomplete_view_autocomplete() {
   $view_words->core = 7;
   $view_words->api_version = '3.0';
   $view_words->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
-  
+
   /* Display: Master */
   $handler = $view_words->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'words-autocomplete';
@@ -386,8 +396,8 @@ function search_autocomplete_view_autocomplete() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Appliquer';
-  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Trier par';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
+  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Sort by';
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '15';
   $handler->display->display_options['style_plugin'] = 'search_autocomplete';
@@ -437,11 +447,11 @@ function search_autocomplete_view_autocomplete() {
     1 => 0,
     3 => 0,
   );
-  
+
   /* Display: Page */
   $handler = $view_words->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'words-autocomplete';
-  
+
   $views[$view_words->name] = $view_words;
 
   return $views;

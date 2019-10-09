@@ -1,6 +1,6 @@
 <?php
 /**
- * Class MigrateOshaBlog migrates blog.txt contents. The data
+ * Class MigrateOshaBlog migrates FocalPoints.xml contents. The data
  * is stored inside the <em>Blog</em> content type.
  */
 class MigrateOshaFocalPoints extends OSHADynamicMigration {
@@ -10,7 +10,7 @@ class MigrateOshaFocalPoints extends OSHADynamicMigration {
    */
   public function __construct($arguments) {
     parent::__construct(MigrateGroup::getInstance('OSHA Content types'));
-    $this->description = 'Import "Focal Points" contents from CSV file';
+    $this->description = 'Import "Focal Points" contents from FocalPoints.xml file';
 
     /* Remove limits on time/memory, slower machines will fail */
     $this->timeLimit = 0;
@@ -120,7 +120,12 @@ class MigrateOshaFocalPoints extends OSHADynamicMigration {
    */
   public function prepare($entity, $row) {
     $entity->path['pathauto'] = 0;
-    $country = MigrationUtil::getCountryIso2ByName($row->field_country_iso2);
+    if (strtoupper($row->field_country_iso2) == 'NORTH MACEDONIA') {
+      $country = MigrationUtil::getCountryIso2ByName('Macedonia');
+    }
+    else {
+      $country = MigrationUtil::getCountryIso2ByName($row->field_country_iso2);
+    }
     if ($country == NULL) {
       $this->displayMessage('Focal Points Country '
         . $row->field_country_iso2 . ' not found', 'warning');

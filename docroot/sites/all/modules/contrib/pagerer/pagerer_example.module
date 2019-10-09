@@ -1,0 +1,291 @@
+<?php
+/**
+ * @file
+ * Pagerer example
+ *
+ * Display various combinations of Pagerer themes.
+ *
+ * Drupal core 7.x
+ *
+ * @package  User interface
+ * @author   mondrake <mondrake@mondrake.org>
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function pagerer_example_menu() {
+  $items['pagerer/example'] = array(
+    'title' => 'Pagerer example',
+    'description' => 'Display various combinations of Pagerer themes.',
+    'page callback' => 'pagerer_example_page',
+    'access callback' => TRUE,
+  );
+  return $items;
+}
+
+/**
+ * Build the pagerer example.
+ *
+ * @return array
+ *   A render array.
+ */
+function pagerer_example_page() {
+
+  // Set the page title to show running pagerer version.
+  $module_info = system_get_info('module', 'pagerer');
+  drupal_set_title(t("Pagerer @version - example page", array('@version' => $module_info['version'])), PASS_THROUGH);
+
+  // Check if jQuery update is installed.
+  if (!module_exists('jquery_update')) {
+    drupal_set_message(
+      t("Pagerer requires the 'jQuery update' module to be installed and enabled, to display properly 'pagerer_mini' and 'pagerer_slider' pagers."),
+      'status',
+      FALSE
+    );
+  }
+
+  // It will not work for Internet Explorer below version 9. In such case,
+  // raise a warning message.
+  $browser_info = _pagerer_browser_info();
+  if ($browser_info['browser'] == 'MSIE' and $browser_info['version_major'] < 9) {
+    drupal_set_message(
+      t("Internet Explorer version 9+ is needed to display correctly the slider and the scrollpane elements."),
+      'warning',
+      FALSE
+    );
+  }
+
+  // *** First data table - associated to pager element 0 ***
+  $header_0 = array(
+    array('data' => 'wid'),
+    array('data' => 'type'),
+    array('data' => 'timestamp'),
+  );
+  $query_0 = db_select('watchdog', 'd')->extend('PagerDefault')->element(0);
+  $query_0->fields('d', array('wid', 'type', 'timestamp'));
+  $result_0 = $query_0
+    ->limit(5)
+    ->orderBy('d.wid')
+    ->execute();
+  $rows_0 = array();
+  foreach ($result_0 as $row) {
+    $rows_0[] = array('data' => (array) $row);
+  }
+
+  // *** Second data table - associated to pager element 1 ***
+  $header_1 = array(
+    array('data' => 'dfid'),
+    array('data' => 'format'),
+    array('data' => 'type'),
+  );
+  $query_1 = db_select('date_formats', 'd')->extend('PagerDefault')->element(1);
+  $query_1->fields('d', array('dfid', 'format', 'type'));
+  $result_1 = $query_1
+    ->limit(10)
+    ->orderBy('d.dfid')
+    ->execute();
+  $rows_1 = array();
+  foreach ($result_1 as $row) {
+    $rows_1[] = array('data' => (array) $row);
+  }
+
+  // *** Third data table - associated to pager element 2 ***
+  $header_2 = array(
+    array('data' => 'path'),
+    array('data' => 'title'),
+  );
+  $query_2 = db_select('menu_router', 'd')->extend('PagerDefault')->element(2);
+  $query_2->fields('d', array('path', 'title'));
+  $result_2 = $query_2
+    ->limit(5)
+    ->orderBy('d.path')
+    ->execute();
+  $rows_2 = array();
+  foreach ($result_2 as $row) {
+    $rows_2[] = array('data' => (array) $row);
+  }
+
+  // Some description.
+  $build['initdesc'] = array('#markup' => t("This page is an example of pagerer's features. It runs three separate queries on the database, and renders three tables with the results. A distinct pager is associated to each of the tables, and each pager is rendered through various pagerer's themes.") . '<p/><hr/>');
+
+  // Create a render array ($build) which will be themed as a table with a
+  // pager.
+  // First table.
+  $build['l_pager_table_0'] = array('#markup' => '<br/><br/><h2><b>' . t("First data table:") . '</b></h2>');
+  $build['pager_table_0'] = array(
+    '#theme' => 'table',
+    '#header' => $header_0,
+    '#rows' => $rows_0,
+    '#empty' => t("There are no watchdog records found in the db"),
+  );
+
+  // Attach the pager themes.
+  $build['l_pager_pager_0'] = array('#markup' => '<b>' . t("Drupal standard 'pager' theme:") . '</b>');
+  $build['pager_pager_0'] = array(
+    '#theme' => 'pagerer',
+    '#preset' => 'core',
+    '#element' => 0,
+  );
+  $build['l_pagerer_standard_0'] = array('#markup' => '<br/>' . t("<b>'pagerer_standard' pager theme (mimick of Drupal's standard)</b> in three 'display' modes: 'pages', 'items', and 'item_ranges'"));
+  $build['pagerer_standard_pages_0'] = array(
+    '#theme' => 'pagerer_standard',
+    '#element' => 0,
+  );
+  $build['pagerer_standard_items_0'] = array(
+    '#theme' => 'pagerer_standard',
+    '#display' => 'items',
+    '#element' => 0,
+  );
+  $build['pagerer_standard_item_ranges_0'] = array(
+    '#theme' => 'pagerer_standard',
+    '#display' => 'item_ranges',
+    '#element' => 0,
+  );
+  $build['l_pagerer_progressive_0'] = array('#markup' => '<br/><b>' . t("'pagerer_progressive' pager theme:") . '</b>');
+  $build['pagerer_progressive_0'] = array(
+    '#theme' => 'pagerer_progressive',
+    '#element' => 0,
+  );
+  $build['l_pagerer_adaptive_0'] = array('#markup' => '<br/><b>' . t("'pagerer_adaptive' pager theme:") . '</b>');
+  $build['pagerer_adaptive_0'] = array(
+    '#theme' => 'pagerer_adaptive',
+    '#element' => 0,
+  );
+  $build['l_pagerer_mini_0'] = array('#markup' => '<br/><b>' . t("'pagerer_mini' pager theme:") . '</b>');
+  $build['pagerer_mini_0'] = array(
+    '#theme' => 'pagerer_mini',
+    '#element' => 0,
+  );
+  $build['l_pagerer_scrollpane_0'] = array('#markup' => '<br/><b>' . t("'pagerer_scrollpane' pager theme:") . '</b>');
+  $build['pagerer_scrollpane_0'] = array(
+    '#theme' => 'pagerer_scrollpane',
+    '#element' => 0,
+  );
+  $build['l_pagerer_slider_0'] = array('#markup' => '<br/><b>' . t("'pagerer_slider' pager theme:") . '</b>');
+  $build['pagerer_slider_0'] = array(
+    '#theme' => 'pagerer_slider',
+    '#element' => 0,
+  );
+
+  $build['l_pagerer_pagerer_0'] = array('#markup' => '<br/><b>' . t("'pagerer' core replacement theme:") . '</b>');
+  $build['pagerer_pagerer_0'] = array(
+    '#theme' => 'pagerer',
+    '#preset' => _pagerer_get_variable('core_override_preset'),
+    '#element' => 0,
+  );
+
+  $build['end_table_0'] = array(
+    '#markup' => '<p/><hr/>',
+  );
+
+  // Second table.
+  $build['l_pager_table_1'] = array('#markup' => '<br/><br/><h2><b>' . t("Second data table:") . '</b></h2>');
+  $build['pager_table_1'] = array(
+    '#theme' => 'table',
+    '#header' => $header_1,
+    '#rows' => $rows_1,
+    '#empty' => t("There are no date formats found in the db"),
+  );
+
+  // Attach the pager themes.
+  $build['l_pagerer_adaptive_1'] = array('#markup' => '<br/><b>' . t("'pagerer_adaptive' pager theme:") . '</b>');
+  $build['pagerer_adaptive_1'] = array(
+    '#theme' => 'pagerer_adaptive',
+    '#element' => 1,
+  );
+  $build['l_pagerer_pagerer_1'] = array('#markup' => '<br/><b>' . t("'pagerer' core replacement theme:") . '</b>');
+  $build['pagerer_pagerer_1'] = array(
+    '#theme' => 'pagerer',
+    '#preset' => _pagerer_get_variable('core_override_preset'),
+    '#element' => 1,
+  );
+  $build['l_pagerer_pagerer_direct_1'] = array('#markup' => '<br/><b>' . t("'pagerer' (direct call from module) theme:") . '</b> ' . t("Note the usage of the 'tags' variables to customise labels and hover titles."));
+  $build['pagerer_pagerer_direct_1'] = array(
+    '#theme' => 'pagerer',
+    '#left_pane' => array(
+      'theme_name' => 'pagerer_mini',
+      'theme_variables' => array(
+        'tags'            => array(
+          'first_title'    => t("Go to the beginning of the recordset"),
+          'previous_title' => t("Go to the previous range of records"),
+        ),
+        'display'         => 'items',
+        'label_display'   => 'none',
+        'current_display' => 'none',
+        'total_display'   => 'none',
+        'first_link'      => 'always',
+        'previous_link'   => 'always',
+        'next_link'       => 'never',
+        'last_link'       => 'never',
+      ),
+    ),
+    '#center_pane' => array(
+      'theme_name' => 'pagerer_mini',
+      'theme_variables' => array(
+        'tags'            => array(
+          'item_label'           => t("Record"),
+          'widget_title'   => t("Enter record and press Return. Up/Down arrow keys are enabled."),
+        ),
+        'display'         => 'items',
+        'label_display'   => 'before_current',
+        'current_display' => 'widget',
+        'total_display'   => 'after_current',
+        'first_link'      => 'never',
+        'previous_link'   => 'never',
+        'next_link'       => 'never',
+        'last_link'       => 'never',
+      ),
+    ),
+    '#right_pane' => array(
+      'theme_name' => 'pagerer_mini',
+      'theme_variables' => array(
+        'tags'            => array(
+          'next_title'     => t("Go to the next range of records"),
+          'last_title'     => t("Go to the end of the recordset"),
+        ),
+        'display'         => 'items',
+        'label_display'   => 'none',
+        'current_display' => 'none',
+        'total_display'   => 'none',
+        'first_link'      => 'never',
+        'previous_link'   => 'never',
+        'next_link'       => 'always',
+        'last_link'       => 'always',
+      ),
+    ),
+    '#element' => 1,
+  );
+
+  $build['end_table_1'] = array(
+    '#markup' => '<p/><hr/>',
+  );
+
+  // Third table.
+  $build['l_pager_table_2'] = array('#markup' => '<br/><br/><h2><b>' . t("Third data table:") . '</b></h2>');
+  $build['pager_table_2'] = array(
+    '#theme' => 'table',
+    '#header' => $header_2,
+    '#rows' => $rows_2,
+    '#empty' => t("There are no menu routers found in the db"),
+  );
+
+  // Attach the pager themes.
+  $build['l_pagerer_adaptive_2'] = array('#markup' => '<br/><b>' . t("'pagerer_adaptive' pager theme:") . '</b>');
+  $build['pagerer_adaptive_2'] = array(
+    '#theme' => 'pagerer_adaptive',
+    '#element' => 2,
+  );
+  $build['l_pagerer_pagerer_2'] = array('#markup' => '<br/><b>' . t("'pagerer' core replacement theme:") . '</b>');
+  $build['pagerer_pagerer_2'] = array(
+    '#theme' => 'pagerer',
+    '#preset' => _pagerer_get_variable('core_override_preset'),
+    '#element' => 2,
+  );
+
+  $build['end_table_2'] = array(
+    '#markup' => '<p/><hr/>',
+  );
+
+  return $build;
+}

@@ -494,7 +494,7 @@ function osha_dangerous_substances_filter_process_format($element) {
     $element['#format'] = NULL;
   }
   $element = filter_process_format($element);
-  if ($element['#bundle'] == 'dangerous_substances') {
+  if ((!empty($element['#bundle'])) && ($element['#bundle'] == 'dangerous_substances')) {
     unset($element['format']['guidelines']);
     unset($element['format']['help']);
     $element['format']['format']['#options'] = [
@@ -600,10 +600,7 @@ function _osha_dangerous_substances_get_other_tid($element, $field, $other_name 
       return (string)$tid;
     }
   }
-  if (isset($_REQUEST['debug'])) {
-    watchdog('osha_dangerous_substances', '!field no other value found updated', array('!field' => $field) );
-  }
-  return '-1'; // todo ...
+  return '-1';
 }
 
 function _osha_dangerous_substances_form_after_build($form, $form_state) {
@@ -865,5 +862,4 @@ function osha_dangerous_substances_add_taxonomy() {
       }
     }
   }
-  watchdog('osha_dangerous_substances', '!terms_created terms created, !terms_updated terms updated', array('!terms_created' => $terms_created, '!terms_updated' => $terms_updated) );
 }

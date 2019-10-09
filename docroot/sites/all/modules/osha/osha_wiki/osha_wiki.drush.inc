@@ -32,7 +32,8 @@ function drush_osha_wiki_categories_sync() {
         continue;
       }
       $name = $category->{'*'};
-      $term = reset(taxonomy_get_term_by_name($name, $voc->machine_name));
+      $terms = taxonomy_get_term_by_name($name, $voc->machine_name);
+      $term = reset($terms);
       if (!$term) {
         continue;
 //        $term = array(
@@ -79,7 +80,7 @@ function drush_osha_wiki_categories_sync() {
             drush_log("Created new child term of '{$name}': '{$child_name}'", "ok");
           }
 
-          // If creating new term, we search for pages tagged with it
+          // If creating new term, we search for pages tagged with it.
           $categorymembers_child_url = 'http://oshwiki.eu/api.php?action=query&list=categorymembers&format=json&cmtitle=Category:' . urlencode($child_name) . '&cmprop=title|type|ids&cmlimit=500';
           $content_3 = file_get_contents($categorymembers_child_url);
           $categorymembers_child = json_decode($content_3);
@@ -99,10 +100,10 @@ function drush_osha_wiki_categories_sync() {
     }
   }
 
-  if(!empty($pages_to_migrate)) {
+  if (!empty($pages_to_migrate)) {
     // Remove existing pages.
     $query = db_select('field_data_title_field', 'a')
-      ->fields('a', array('title_field_value','entity_id'))
+      ->fields('a', array('title_field_value', 'entity_id'))
       ->condition('a.bundle', 'wiki_page')
       ->condition('a.title_field_value', $pages_to_migrate, 'IN');
 
@@ -117,7 +118,7 @@ function drush_osha_wiki_categories_sync() {
         drush_log("Migrating page: '{$page}'", "status");
       }
       // MediaWiki won't work if too many titles are given at once so we need
-      // to run the migration for every page separately
+      // to run the migration for every page separately.
       osha_wiki_migrate_wikipages_by_title(array($page));
     }
   }

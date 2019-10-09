@@ -452,7 +452,7 @@ function path_breadcrumbs_breadcrumb($variables) {
     }
 
     // Get breadcrumb delimiter and wrap it into <span> for customization.
-    $delimiter = variable_get('path_breadcrumbs_delimiter', '»');
+    $delimiter = '<img alt="delemiter" src="/sites/all/themes/osha_frontend/images/delimiter-off.png">';
     $delimiter = '<span class="delimiter">' . trim($delimiter) . '</span>';
 
     $classes = array('breadcrumb');
@@ -470,7 +470,8 @@ function path_breadcrumbs_breadcrumb($variables) {
     }
 
     // Build final version of breadcrumb's HTML output.
-    $output .= '<div class="' . implode(' ', $classes) . '"' . $root_property . '>' . $prefix . implode(" $delimiter ", $breadcrumbs) . '</div>';
+    $last_delimiter = '<img alt="delemiter" src="/sites/all/themes/osha_frontend/images/delimiter-on.png">';
+    $output .= '<div class="' . implode(' ', $classes) . '"' . $root_property . '>' . $prefix . implode(" $delimiter ", $breadcrumbs) . $last_delimiter . '</div>';
 
     return $output;
   }

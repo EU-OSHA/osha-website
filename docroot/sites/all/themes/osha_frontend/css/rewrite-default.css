@@ -1,0 +1,1045 @@
+.fixedHeader{
+    transition: top 0.8s linear;
+    top:0px!important;
+}
+
+#block-osha-homepage-osha-homepage-tweets{
+    height: 679px;
+    overflow-y: scroll;
+    border-bottom: 1px solid #e1e8ed;
+    padding-bottom: 9px;
+    padding-left: 0em;
+    clear: both;
+}
+
+ul[data-sa-theme="basic-blue"].ui-menu {
+    width: 350px!important;
+    left: inherit!important;
+    right: 3%;
+    top: 11%!important;
+}
+
+.section-alertservice .form-item-newsletter label.option{
+    float: none;
+    padding-bottom: 1em;
+}
+
+.section-alertservice .form-item-agree-processing-personal-data label.option{
+    float: none;
+    padding-bottom: 1em;
+}
+
+.section-alertservice #osha-alert-service-subscribe-form .container-inline.form-submit{
+    padding-left: 0;
+}
+
+#block-osha-homepage-osha-homepage-tweets::-webkit-scrollbar-track
+{
+    background-color: #e1e8ed;
+}
+
+#block-osha-homepage-osha-homepage-tweets::-webkit-scrollbar
+{
+    width: 5px;
+    background-color: #F5F5F5;
+}
+
+#block-osha-homepage-osha-homepage-tweets::-webkit-scrollbar-thumb
+{
+    background-color: #003399;
+}
+
+#block-views-highlight-block-2{
+    background: none;
+}
+
+#block-menu-block-1 .menu li  {
+    padding: 1.4em 0.1em 0.8em 0.1em;
+}
+
+.fixedHeader #lang-dropdown-select-language_content{
+    z-index: 99999999999;
+    position: absolute;
+    right: 0;
+}
+
+.fixedHeader #block-search-form{
+    z-index: 9999999999999;
+    top: 125px;
+    right: 0px;
+    position: absolute;
+}
+
+ h1{
+    font-family: 'Open Sans',sans-serif;
+    font-size: 2rem;
+    margin-bottom: 0;
+    font-weight: 600;
+    color: #003399;
+}
+
+#page-title{
+    font-family: 'Open Sans',sans-serif;
+    font-size: 2rem;
+    margin-bottom: 0;
+    font-weight: 600;
+    color: #003399;
+}
+
+.container{
+    max-width: 1160px;
+    margin: 0 auto;
+}
+
+.view-header.back a{
+    font-family: "Open Sans",sans-serif!important;
+    font-size: 0.8rem;
+    padding-left: 30px;
+    float: right;
+    font-weight: 600;
+}
+
+.node-news .field-name-title-field a{
+    font-size: 1.2rem;
+}
+
+.view-header.back a:hover{
+    text-decoration: underline;
+}
+
+#block-menu-block-1 .menu li:hover ul{
+    margin-left: -4px;
+}
+
+#block-menu-block-1 li:nth-child(8) ul {
+    margin-left: -110px!important;
+    width: 21em!important;
+}
+
+#block-menu-block-1 li:nth-child(9) ul {
+    margin-left: -106px!important;
+    width: 338px!important;
+}
+
+#block-menu-block-1 li:nth-child(9) ul li ul {
+    margin-left: -6px !important;
+    width: 316px !important;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe{
+    background-color: #ecf1fb;
+    font-size: 1rem;
+    padding: 0 0 1em 0;
+    height: 1%;
+    overflow: hidden;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe a.privacy-policy-oshmail{
+    float: left;
+    clear: both;
+    margin-top: 5px;
+    padding-bottom: 1em;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe .captcha .form-type-textfield .description{
+    clear: both;
+}
+
+#edit-search-api-language-wrapper label{
+    padding-bottom: 0.1em;
+}
+
+.sidebars_second .date-display-single{
+    padding-left: 0;
+    color:#000;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe > div{
+
+    color: #003399;
+    padding: 0 1em 0 1em;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+#newsletter-subscription-form-wrapper{
+    margin-top: -10px!important;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe .text-input-agree{
+    display: inline-block;
+    float: right;
+    width: 82%;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe .form-item-email{
+    margin-bottom: 0;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe a{
+    clear: both;
+    float: none;
+    font-weight: normal;
+    display: block;
+    border: 0px;
+    text-decoration: underline;
+    font-size: 0.9rem;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe a:hover{
+    text-decoration: none;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe label{
+    color:#003399;
+    font-size: 0.9rem;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 14px;
+}
+
+#block-views-highlight-block-2 h2{
+    float: none;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe h2{
+    margin-bottom: 0.5em;
+    background: #FFF;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe h2 a{
+    font-family: 'Open Sans',sans-serif;
+    padding-bottom: 15px;
+    text-decoration: none;
+}
+
+.front #block-osha-newsletter-osha-newsletter-subscribe h2 a{
+    font-size: 1.5rem!important;
+}
+
+#newsletter-subscription-form-wrapper{
+    padding-top: 0!important;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe a{
+    clear: none;
+}
+
+#block-views-highlight-block-2 h2{
+    font-family: 'Open Sans',sans-serif;
+}
+
+.sidebars_second #block-views-news-oshnews-latest h3{
+    margin: 0;
+}
+
+#content h2 a{
+    font-family: 'Open Sans',sans-serif!important;
+    font-weight: 400;
+    font-size: 1.35rem;
+}
+
+#block-views-highlight-block-2 {
+    margin-left: 0em;
+}
+
+#block-views-0070c12a2761cd76e16f8eb8fc4e1de6 {
+    border-top: 0px solid #003399;
+    margin: 0.5em auto 0;
+    width: 100%;
+    max-width: 100%;
+}
+
+.block.recomended-resources {
+    clear: both;
+    border-top: 0px solid #003399;
+    margin: 2.5em auto 0;
+    width: 100%;
+    max-width: 100%;
+    background: #cfddee;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    float: left;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe input.form-text{
+    border: 1px solid #003399;
+    clear: both;
+    float: left;
+    background: #FFF;
+    color: #003399
+    min-width: 210px;
+    border-radius: 3px;
+    padding: 0.5em 1em;
+    font-weight: normal;
+    margin-right: 10px;
+    height: 35px;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe input[type="submit"]{
+    background: #b2c7e5;
+    text-align: center;
+    margin-top: 0;
+    padding-right: 0;
+    padding-left: 0;
+    font-family: "Open Sans", verdana, sans-serif;
+    font-size: 1rem;
+    border-radius: 3px;
+    min-width: 120px;
+    height: 35px;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe input[type="submit"]:hover{
+    opacity: 0.8;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe .captcha .form-type-textfield input{
+    margin-bottom: 0px;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe .captcha .form-type-textfield label{
+    padding-bottom: 0;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe .captcha .form-type-textfield .description{
+    font-size: 0.7rem!important;
+}
+
+.view-osha-home-banner-top.view-display-id-home_page_banner_top{
+    border-bottom: 0;
+    margin-bottom: 0;
+}
+
+.view-osha-home-banner-top.view-display-id-home_page_banner_top .view-content{
+    width: 100%;
+}
+
+/*Pagination*/
+
+table.pagerer{
+    margin: 0 auto;
+    width: auto;
+}
+
+table.pagerer tbody tr td div.item-list, table.pagerer tbody tr td div.item-list ul.pager{
+    vertical-align: middle;
+    padding: 0 0 0.5em 0;
+}
+
+#content .pager li a{
+    vertical-align: middle;
+    padding: 10px 15px;
+}
+
+.pager{
+    padding-top: 2em;
+}
+
+.pager .pager-current {
+    font-size: 1em;
+    color: #ca2273;
+    border:1px solid #003399;
+    padding: 0.6em 1em 0.5em 1em !important;
+    margin-right: 10px;
+    display: inline-block;
+    margin-top: 11px!important;
+}
+
+.pager .pager-item{
+    margin-right: 10px;
+    display: inline-block;
+    margin-top: 10px!important;
+}
+
+.pager .pager-item a{
+    border:1px solid #cfddee;
+    border-bottom: 1px solid #cfddee !important;
+}
+
+.pager .pager-item a:hover{
+    border:1px solid #003399;
+    border-bottom: 1px solid #003399 !important;
+}
+
+.pager .pager-item:hover a{
+    color: #003399;
+}
+
+.pager li a{
+    color:#cfddee;
+}
+
+.pager .pager-previous{
+    margin-right: 10px;
+}
+
+.pager li img{
+    padding-top: 4px;
+    position: absolute;
+}
+
+.pager li img:hover{
+    opacity: 0.6;
+}
+
+.pager-first a, .pager-previous a, .pager-next a, .pager-last a{
+    padding: 3px !important;
+}
+
+.pager-first a:hover, .pager-previous a:hover, .pager-next a:hover, .pager-last a:hover{
+    opacity: 0.8;
+}
+
+
+
+.pager-item.breaker{
+    border:0 !important;
+}
+
+
+/* Publications contents */
+
+.page-tools-and-publications .block-nodeblock, .section-oshevents .block-nodeblock{
+    display: block;
+}
+
+.page-oshevents #content .chosen-container-single .chosen-single{
+    background: transparent;
+    box-shadow: 0 0 0px white inset, 0 0px 0px rgba(0, 0, 0, 0.1);
+    border-bottom:0;
+    padding: 0;
+    margin: 0;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border:0;
+    font-size: 14.4px;
+    padding-top: 5px;
+}
+
+.page-oshevents #content .chosen-container-single .chosen-single > div{
+    display: none;
+}
+
+.page-oshevents #content .views-exposed-widget.views-submit-button{
+    background: transparent;
+    display: none;
+}
+
+.publications-search-list  > #edit-submit--3{
+    display: none!important;
+}
+
+.page-tools-and-publications .sidebars_first, .page-oshevents .sidebars_first, .page-tools-and-publications.revamp .sidebars_first{
+    border-top: 0px solid #003399;
+    margin-top: 0;
+    margin-right: 0em;
+}
+
+.page-tools-and-resources #content{
+    border-top: 0px solid #003399;
+}
+
+#ui-datepicker-div table tr td{     
+    display: table-cell !important;
+    width: auto;
+}
+
+@media screen and (max-width: 1200px) {
+
+    .page-tools-and-publications #content, .page-oshevents #content {
+        width: 75%!important;
+        margin-left: 3%!important;
+        border-top: 0px solid #003399;
+        margin-top: 3em;
+    }
+
+}
+
+
+@media screen and (min-width: 1007px) and (max-width: 1200px){
+    .page-tools-and-publications #content, .page-oshevents #content{
+        width: 75%!important;
+    }
+
+    .news_and_events ul li {
+        width: 20.6%;
+    }
+
+    .section-news-events article{
+        padding-left: 1em;
+        padding-top: 1em;
+    }
+}
+
+
+@media screen and (max-width: 990px) {
+    .page-tools-and-publications.revamp #content, .page-oshevents #content{
+        width: 90%!important;
+    }
+}
+
+
+.publications-sidebar-first .form-item.form-type-checkboxes label[for=edit-languages], .publications-sidebar-first .form-item.form-type-checkboxes label[for=edit-tags], .publications-sidebar-first .form-item.form-type-checkboxes label[for=edit-publication-type]{
+    clear: both;
+}
+
+
+/* Footer */
+footer{
+    background:#003399;
+}
+
+.footer-line{
+    margin: 0 auto;
+    clear: both;
+}
+
+#footer div#block-menu-block-4 ul {
+    padding: 0.5em 0 0 1.3em;
+    margin: 0;
+}
+
+.footer #block-menu-block-4 * li.menu__item a:hover{
+    text-decoration: underline;
+}
+
+.footer #block-menu-block-5 a:hover img{
+    opacity: 0.8;
+}
+
+
+@media screen and (min-width: 1007px) {
+
+    #header.fixedHeader{
+        padding-top: 25px;
+    }
+
+    .fixedHeader #block-lang-dropdown-language-content, .fixedHeader #block-search-form, .fixedHeader #socialNetworksBlue, .fixedHeader img[alt*="Select language"]{
+        display: block;
+    }
+
+    .fixedHeader #languagesAndSearch #contact .a_small, .fixedHeader #languagesAndSearch #contact .a_medium, .fixedHeader #languagesAndSearch #contact .a_big{
+        display: inline-block;
+    }
+
+    .fixedHeader #languagesAndSearch #contact{
+        margin-top: -10px;
+    }
+
+    .fixedHeader #languagesAndSearch #contact > a::before{
+        content: '';
+        margin-right: 0;
+    }
+
+    .fixedHeader img[alt*="Select language"]{
+        position: absolute;
+        right: 62px;
+        top: 23px;
+    }
+
+    #contact > a:nth-child(5){
+        display: block;
+        width: 110px;
+        line-height: 25px;
+    }
+
+    html[lang="de"] #contact > a:nth-child(5), html[lang="bg"] #contact > a:nth-child(5), html[lang="da"] #contact > a:nth-child(5), html[lang="es"] #contact > a:nth-child(5){
+        width: 116px;
+        line-height: 15px;
+        margin-left: -6px;
+        margin-top: 4px;
+    }
+
+    html[lang="de"] #contact > a:nth-child(6), html[lang="bg"] #contact > a:nth-child(6), html[lang="da"] #contact > a:nth-child(6), html[lang="es"] #contact > a:nth-child(6){
+        width: 116px;
+        line-height: 15px;
+        margin-left: -6px;
+        margin-top: 4px;
+    }
+
+
+     html[lang="lt"] #contact > a:nth-child(5), html[lang="fi"] #contact > a:nth-child(5){
+        width: 154px;
+        line-height: 15px;
+        margin-left: -37px;
+        margin-top: 7px;
+        margin-bottom: 7px;
+    }
+
+    html[lang="de"] #contact > a:nth-child(6), html[lang="fi"] #contact > a:nth-child(6){
+        margin-left: -6px;
+    }
+
+    html[lang="lt"] #contact > a:nth-child(6) {
+        margin-left: -29px;
+        width: 144px;
+    }
+
+    .fixedHeader #languagesAndSearch{
+        width: 106px;
+        right: 1px;
+        top: 25px;
+    }
+
+    .fixedHeader #block-search-form{ 
+        margin-top: -52px;
+    }
+
+    .fixedHeader #lang-dropdown-select-language_content{
+        margin-top: -76px;
+    }
+
+}
+
+
+/* Bilbomatica Support - Redefine block if not is the revamp pages */
+
+#content{
+    border-top: 0;
+}
+
+.sidebars_first, .publications-sidebar-first{
+    border-top: 0;
+}
+
+.sidebars_second h2{
+    line-height: inherit;
+}
+
+.sidebars_first .region-sidebar-first #block-menu-block-2 .menu-block-2 ul li a{
+    font-family: 'Open Sans',sans-serif;
+    background: transparent;
+    padding-left: 0;
+    font-weight: 600;
+    font-size: 1.35rem;
+    color: #003399;
+}
+
+.block-aggregator{
+    background: none;
+}
+
+.sidebars_second .block{
+    float: left;
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.sidebars_second .block ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebars_second .block ul a:hover{
+    text-decoration: underline !important;
+}
+
+.sidebars_second .block .views-field-title-field a:hover, .sidebars_second .views-row  a:hover{
+    text-decoration: underline !important;
+}
+
+.sidebars_second .block h2{
+    margin-bottom: 0 !important;
+    background: #FFF !important;
+    font-family: 'Open Sans', sans-serif !important;
+    font-weight: bold !important;
+    font-size: 1.15rem !important;
+    color: #003399 !important;
+    letter-spacing: 0 !important;
+    line-height: 1.2em !important;
+    clear: both !important;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+    border-bottom: 5px solid #003399;
+}
+
+#block-views-related-content-block-2, 
+#block-views-related-events-block-6, 
+#block-views-related-content-block-7,
+#block-views-related-content-block-1,
+#block-views-exp-search-blog-page h2
+{
+    background: url(../images/separator_home.jpg) repeat-x scroll 100% 100% rgba(0, 0, 0, 0);
+    padding: 10px;
+    width: 251px;
+    border-radius: 2px;
+    padding-bottom: 2em;
+}
+
+#block-views-related-content-block-2 h2, 
+#block-views-related-events-block-6 h2, 
+#block-views-related-content-block-7 h2,
+#block-views-related-content-block-1 h2,
+#block-views-exp-search-blog-page h2
+{
+    font-family: 'Open Sans light', sans-serif !important;
+    font-size: 1rem !important;
+    border-bottom: 0;
+    padding-bottom: 3px;
+    border-bottom: 0;
+    padding-top: 0 !important;
+    margin-bottom: 5px !important;
+    margin-top: 0px!important;
+}
+
+.sidebars_second #block-osha-newsletter-osha-newsletter-subscribe h2{
+    border-bottom: 0;
+    margin-top: 0! important;
+}
+
+.sidebars_second .view.view-blog{
+    margin-bottom: 1em;
+}
+
+.feed-item-date, .date-display-single, .field-content.country, .date-display-start, .date-display-end, .field-content.city, .date-display-range{
+    color: #003399 !important;
+    font-size: 12px !important;
+    font-weight: bold !important;
+}
+
+.sidebars_second .views-row, .sidebars_second .block ul li{
+    background: none;
+    padding-bottom: 10px;
+    line-height: 15px;
+}
+
+.sidebars_second #block-views-blog-block-2 ul li{
+    background: none !important;
+    padding-top: 10px !important;
+    padding-left: 10px !important;
+}
+
+.sidebars_second .views-row .date-display-single{
+    font-size: 12px;
+}
+
+.sidebars_second .views-row a, .sidebars_second .block ul li a{
+    color: #003399;
+    text-decoration: none;
+    font-size: 12px !important;
+    font-weight: normal;
+    border-bottom: 0px!important;
+    display: flex;
+}
+
+.sidebars_second .views-row a:before, .sidebars_second .block ul li a:before{
+    content: ' ';
+    background: url(/sites/all/themes/osha_frontend/images/li_arrow.png) no-repeat scroll 0 100% transparent;
+    float: left;
+    padding-right: 15px;
+    height: 15px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#join-list-intro, #become-partner-intro{
+    font-size: 12px !important;
+    padding-top: 0;
+    line-height: 15px;
+    color: #333;
+}
+
+#join-list-intro{
+    padding-bottom: 10px;
+}
+
+.view-press-contacts{
+    padding-left:0;
+}
+
+#block-on-the-web-0{
+    margin-top: 1em;
+}
+
+#block-on-the-web-0 h2{
+    margin-bottom: 10px!important;
+    margin-bottom: 10px!important;
+    background: transparent!important;
+    border-bottom: 0px;
+    font-size: 0.9rem!important;
+    padding-left: 1em;
+}
+
+.block-on-the-web span{
+    padding-left: 1.2em;
+}
+
+.block-on-the-web span:hover{
+    opacity: 0.8;
+}
+
+.sidebars_second .views-exposed-widget{
+    padding: 0;
+    width: 100%;
+}
+
+.sidebars_second .views-exposed-widget #edit-filter{
+    width: 100%;
+    height: 37px;
+    border: 1px solid #003399;
+    border-radius: 5px;
+    background: url(../images/pink-search.png) no-repeat 96% 55%;
+    width: 100%!important;
+    float: left;
+    margin-top: 0;
+    padding-left: 10px;
+    color: #003399;
+    padding-right: 30px;
+}
+
+.sidebars_second .views-exposed-widget.views-submit-button{
+    height: 40px;
+}
+
+.sidebars_second .views-exposed-widgets .views-exposed-widget label{
+    padding-top: 10px;
+}
+
+.photo-gallery .views-field-nothing .date-display-single{
+    color:#FFF !important;
+}
+
+#edit-sort-by, #edit-sort-order {
+    min-height: 37px;
+    height: auto;
+    border: 1px solid #003399;
+    border-radius: 5px;
+    background: url(../images/pink-select.png) no-repeat scroll 94% center #FFF;
+    padding-left: 10px;
+    width: 100%!important;
+    color: #003399;
+    cursor: pointer;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    font-size: 13px;
+    line-height: 32px;
+}
+
+#edit-sort-by option, #edit-sort-order option{
+    min-height: 37px;
+}
+
+#edit-search-block-form--3, #select_facetapi-facet-search-apidefault-multilingual-node-index-block-field-date-of-directive{
+    min-height: 35px;
+    height: auto;
+    border: 1px solid #003399;
+    border-radius: 5px;
+    background: url(../images/pink-select.png) no-repeat scroll 94% center #FFF;
+    padding-left: 10px;
+    width: 100%!important;
+    color: #003399;
+    cursor: pointer;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+#select_facetapi-facet-search-apidefault-multilingual-node-index-block-field-date-of-directive{
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+#block-osha-search-osha-search-box #edit-search-block-form--3{
+    background: url(../images/pink-search.png) no-repeat 96% 55%;
+}
+
+.region-sidebar-first input[type="text"]{
+    min-height: 35px;
+    height: auto;
+    border: 1px solid #003399;
+    border-radius: 5px;
+    padding-left: 10px;
+    width: 100%!important;
+    color: #003399;
+    cursor: pointer;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.views-exposed-form .views-exposed-widget{
+    padding: 0;
+}
+
+#block-views-highlight-block-2 .more-link a, #block-osha-homepage-osha-homepage-news-events .more-link a{
+    padding: 5px 1.5em!important;
+}
+
+.not-front #block-views-highlight-block-2 .more-link a:hover, .not-front #block-osha-homepage-osha-homepage-news-events .more-link a:hover{
+    margin-left: 0;
+}
+
+.chosen-container-multi .chosen-choices li.search-choice .search-choice-close{
+    border-bottom: 0 !important;
+}
+
+.views-exposed-form label{
+    font-weight: normal;
+}
+
+#block-views-exp-search-directives-page .views-exposed-widget.views-submit-button{
+    padding-top: 0 !important;
+}
+
+.menu-block-2 ul li:nth-child(2){
+    margin-top: 1em;
+}
+
+.menu-block-2 ul  li ul li:nth-child(2){
+    margin-top: 0;
+}
+
+.front h2.home{
+    background: transparent;
+    font-family: 'Open Sans',sans-serif;
+    font-weight: bold!important;
+    font-size: 1.6rem!important;
+    color: #003399!important;
+    letter-spacing: 0;
+    margin-bottom: 4px;
+    padding: 0;
+    margin: 0;
+    padding-bottom: 0.2em;
+    line-height: 1.2em;
+    padding-top: 0.1em;
+    clear: both;
+    border-bottom: 0 !important;
+}
+
+.front h2.home a{
+    font-family: 'Open Sans',sans-serif;
+    font-weight: bold!important;
+    font-size: 1.6rem!important;
+    color: #003399!important;
+    letter-spacing: 0;
+    margin-bottom: 4px;
+    padding: 0;
+    margin: 0;
+    padding-bottom: 1em;
+    line-height: 1.2em;
+    padding-top: 0.1em;
+    text-decoration: none;
+}
+
+label{
+    color: #003399;
+}
+
+.view-footer{
+    position: relative;
+}
+
+.sidebars_second .pager-total{
+    display: none;
+}
+
+.ui-accordion .ui-accordion-header{
+    margin-top: 10px;
+}
+
+/* Related Resources - Articles, Seminars, etc. */
+
+.field-name-field-aditional-resources .field-item{
+    background: url(../images/back-tit-blue.png) repeat-x scroll 0 100% transparent;
+    padding: 1em 0;
+    float: left;
+    clear: both;
+    width: 100%;
+}
+
+.field-name-field-aditional-resources .field-item .field-item{
+    background: none;
+    padding: 0;
+}
+
+.field-name-field-aditional-resources .field-name-title-field{
+    clear: both;
+}
+
+.field-name-field-aditional-resources .field-name-title-field a{
+    font-size: 1.35rem;
+}
+
+.field-name-field-aditional-resources .field-name-title-field a:hover{
+    text-decoration: underline;
+}
+
+.field-name-field-aditional-resources .box .field-name-field-thumbnail{
+    max-width: 235px;
+}
+
+.field-name-field-aditional-resources .box .date-display-single{
+    width: 100%;
+}
+
+.field-name-field-aditional-resources .box img{
+    max-width: 235px;
+}
+
+.field-name-field-aditional-resources .box a{
+    margin-top: 10px;
+    margin-left: 0;
+}
+
+.field-name-field-aditional-resources .box .osha_target_external_link{
+    display: none;
+}
+
+.field-name-field-aditional-resources .video{
+    position: relative;
+    width: 235px;
+}
+
+.field-name-field-aditional-resources .video img{
+    width: 235px;
+    height: auto;
+}
+
+.field-name-field-aditional-resources .video h2{
+    float: none;
+    padding-bottom: 0;
+}
+
+.field-name-field-aditional-resources img.icon-play{
+    top: 22%;
+    left: 36%;
+    width: 65px;
+}
+
+.field-name-field-aditional-resources .flickr-image img{
+    max-width: 235px;
+}
+
+.field-name-field-aditional-resources .flickr-image .osha_target_external_link{
+    display: none;
+}
+
+.field-name-field-aditional-resources span.flickr-credit{
+    float: none;
+    clear: both;
+    line-height: 25px;
+    margin: 0;
+    padding: 0 6px 0 0;
+    font-size: 1.2rem;
+    font-weight: normal;
+    max-width: 235px;
+    overflow: inherit;
+}
+
+.field-name-field-aditional-resources span.flickr-credit a{
+    position: relative;
+}
+
+.field-name-field-aditional-resources span.flickr-credit > a > .osha_target_external_link{
+    position: absolute;
+    top: 0;
+    left: 230px;
+}
+
+
+.field-name-field-aditional-resources span.flickr-metadata{
+    font-size: 0.8rem;
+}

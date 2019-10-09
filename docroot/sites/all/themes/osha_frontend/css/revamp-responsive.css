@@ -1,0 +1,1364 @@
+@media screen and (min-width: 1680px){
+    .home-intro {
+        display: block;
+        margin-bottom: 1em;
+        float: left;
+        width: 100%;
+    }
+
+}
+
+@media screen and (max-width: 1360px) {
+
+    .modal-content{
+        height: 73%;
+    }
+
+     .page-tools-and-publications .block-nodeblock, .section-oshevents .block-nodeblock{
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+}
+
+
+@media screen and (max-width: 1200px) {
+
+    /* General */
+
+    .content-fluid{
+        padding: 1%;
+        width: 98%;
+    }
+
+    .container.additional{
+        padding: 1%;
+        width: 98%;
+    }
+
+    .revamp .left_column{
+        padding-left: 1em;
+        width: 71.9%;
+    }
+
+    .wrapper-responsive-box{
+        width: 98%;
+        display: flex;
+        margin:0 auto;
+        padding-bottom: 1em;
+    }
+
+    .box-events-summary{
+        width: 45.6%;
+    }
+
+    .revamp .sidebars_first{
+        margin-left: 1%;
+    }
+
+    .page-tools-and-resources .field-name-field-summary, .page-tools-and-publications .field-name-field-summary, .page-oshevents .field-name-field-summary{
+        padding-left: 15px;
+    }
+
+    .pager-total{
+        top:-1em;
+    }
+
+    /*Home Page*/
+    .front h2.home{
+        padding-left: 0em;
+    }
+
+    .front .recomended-resources h2.home{
+        padding-left: 1em;
+    }
+
+    .btn-light-white.right-column {
+        min-width: 195px;
+    }
+
+    .home-boxes .content-background{
+        height: 245px;
+    }
+
+    #block-osha-newsletter-osha-newsletter-subscribe .text-input-agree {
+        width: 78%;
+        float: left;
+        padding-bottom: 1em;
+    }
+
+    .home-boxes img{
+        height: 100%;
+    }
+
+    .content-home-event h3{
+        min-height: 84px;
+    }
+
+    .content-home-event{
+        margin-right: 0.8em;
+    }
+
+    .content-recommended-resources{
+        width: 600px;
+        margin: 0 auto;
+    }
+
+    .content-recommended-resources .row {
+        margin-top: 0em;
+    }
+
+    .content-recommended-resources .row:nth-child(1){
+        margin-top: 2em;
+    }
+
+    .try-alert{
+        margin-top: 1em;
+        color:#FFF;
+    }
+
+    .content-form-newsletter {
+        float: left;
+        margin-left: 1em;
+        clear: both;
+        margin-top: 1em;
+    }
+
+    .follow-us-icons a{
+        margin-right: 1.3em;
+    }
+
+    /*News and Events*/
+
+    .section-oshevents .content-fluid.events .container{
+        padding-bottom: 1.5em;
+    }
+
+    .page-oshevents .revamp-row{
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+
+    .page-oshevents .events-view h2{
+        margin: 0;
+    }
+
+    .page-oshevents .revamp-row.events .box-events-summary{
+        padding-bottom: 0;
+    }
+
+    html[lang=de] .content-home-event .tag-news-events, html[lang=cs] .content-home-event .tag-news-events, html[lang=el] .content-home-event .tag-news-events, html[lang=pl] .content-home-event .tag-news-events{
+        font-size: 0.6em;
+    }
+
+    html[lang=lv] .content-home-event a.see-more-arrow, html[lang=lt] .content-home-event a.see-more-arrow, html[lang=hu] .content-home-event a.see-more-arrow, html[lang=mt] .content-home-event a.see-more-arrow, html[lang=nl] .content-home-event a.see-more-arrow {
+        font-size: 0.7rem;
+        background: transparent;
+    }
+
+    /*Tools and Resources*/
+
+    .revamp .content-box-sub h2{
+        padding-left:10px;
+        padding-right: 10px;
+    }
+
+    /* Publications */
+
+    .page-tools-and-publications .views-exposed-widget, .page-oshevents .views-exposed-widget {
+        width: 28.3%!important;
+        float: left
+    }
+
+     /*Publications detail*/
+
+    .page-publication-detail .publications-detail{
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+
+    .publications-row{
+        width: 98%;
+    }
+
+    .content-downloads{
+        width: 93%;
+        max-width: 387px;
+        margin-left: 0;
+    }
+
+    .content-related-publications h2{
+        height: auto;
+        margin-bottom: 0em;
+        margin-top: 0;
+    }
+
+    .content-related-videos .video {
+        position: relative;
+        width: 32.3%;
+        float: left;
+        margin-top: 1em;
+        margin-right: 1em;
+    }
+
+      .content-related-boxes .box {
+        position: relative;
+        width: 32.3%;
+        height: auto;
+        float: left;
+        margin-top: 1em;
+        margin-right: 1em;
+    }
+
+    /* Events */
+
+    .box-events-summary .left-column{
+        height: auto;
+        margin-bottom: 1em;
+        text-align: left;
+        width: 47px;
+    }
+
+    .box-events-summary .left-column .event_country{
+        width: 50px;
+        height: 109px;
+        margin: 0;
+        background-position-y: top!important;
+    }
+
+    .box-events-summary {
+        min-height: auto;
+        margin-bottom: 1em;
+        margin-left: 0;
+    }
+
+    .box-events-summary .right-column{
+        width: 85%;
+        position: relative;
+    }
+
+    #content .revamp-row.events .add-to-my-calendar{
+        font-size: 0.8rem;
+    }
+
+    /*Footer*/
+
+    .content-subscribe{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        justify-content: center;
+        padding-left: 1em;
+    }
+
+    #footer-first-line {
+        padding-left: 1em;
+        border-top: 0px solid #FFF;
+    }
+
+    .footer-site-map{
+        display: none;
+    }
+
+}
+
+
+@media screen and (max-width: 1024px) {
+
+    /* General */
+
+    .revamp .left_column{
+        padding-left: 0;
+        width: 100%;
+    }
+
+    h1.revamp {
+        clear:both;
+        margin-left:12px;
+    }
+
+    .revamp h2{
+        font-size: 1.35rem;
+        line-height: normal;
+    }
+
+    .revamp .right-column h2{
+        padding-left: 0;
+    }
+
+    #block-views-highlight-block-2 h2{
+        background: transparent;
+        padding-left: 0;
+    }
+
+    table.pagerer tbody tr td div.item-list ul.pager li.pager-first, table.pagerer tbody tr td div.item-list ul.pager li.pager-previous, table.pagerer tbody tr td div.item-list ul.pager li.pager-next, table.pagerer tbody tr td div.item-list ul.pager li.pager-last{
+        font-size: 12px;
+    }
+
+    .page-tools-and-resources .field-name-field-summary, .page-tools-and-publications .field-name-field-summary, .page-oshevents .field-name-field-summary{
+        width: 90%;
+    }
+
+    .node-article .field-name-field-summary p{
+        margin-top: 0;
+    }
+
+    #block-views-highlight-block-2 {
+        margin-left: 12px;
+        margin-right: 12px;
+    }
+
+    .news-events {
+        padding-left: 12px;
+        margin-right: 12px;
+    }
+
+    .content-home-event {
+        width: 100%;
+    }
+
+    .view-highlight .img-highlight{
+        height: 200px;
+    }
+
+     .pager-total{
+        right:2%;
+    }
+
+    /*Home*/
+    .front .sidebars_second_home{
+        width: 100%;
+    }
+
+    .front .sidebars_second_home #block-osha-newsletter-osha-newsletter-subscribe{
+        float: left;
+    }
+
+    .front .sidebars_second_home #block-osha-homepage-osha-homepage-tweets{
+        height: 257px;
+        clear: none;
+        float: left;
+        margin-left: 1em;
+    }
+
+    .front .sidebars_second_home #block-osha-homepage-osha-homepage-follow-us{
+        clear: both;
+    }
+
+    /*Publications*/
+
+    .box-latest-publications .right-column{
+        width: 95%;
+    }
+
+    .page-tools-and-publications.revamp #content, .page-oshevents #content{
+        width: 74%!important;
+        float: right;
+    }
+
+    .page-tools-and-publications .publications-right-column h2 a{
+        height: auto;
+    }
+
+    .page-tools-and-publications .publications-right-column h2{
+        padding-left: 0;
+        margin-top: 0;
+    }
+
+    .revamp #edit-search-api-language-wrapper label, .revamp .form-item.form-type-select.form-item-sort-by label, .revamp .form-item.form-type-select.form-item-sort-order label {
+        border-bottom: 0;
+    }
+
+    .content-filters {
+        width: 98%;
+        margin-bottom: 1em;
+        margin-left: 1%;
+        margin-right: 1%;
+        padding: 0 0 2em 0;
+    }
+
+    .page-tools-and-publications .content-filters{
+        padding: 1em;
+    }
+
+    .filters-header{
+        padding-left: 10px;
+    }
+
+    #edit-tags{
+        padding: 1em;
+    }
+
+    .form-checkboxes .form-item, .form-radios .form-item {
+        margin: 0;
+        float: left;
+        margin-right: 1em;
+        min-width: 205px;
+    }
+
+    /* Events*/
+
+    .content-home-event {
+        width: 32.5%;
+        margin-right: 2px;
+    }
+
+    .box-events-summary{
+        width: 45.6%;
+        margin-bottom: 0;
+        margin-left: 0em;
+        padding-bottom: 0;
+        padding-left: 10px;
+    }
+
+    .content-home-event h3{
+        margin: 0;
+    }
+
+    .content-home-event h3 a{
+        min-height: auto;
+    }
+
+    .box-events-summary .left-column{
+        margin-top: 0;
+    }
+
+    .box-latest-publications .left-column, .publications-left-column{
+        display: none;
+    }
+
+    .content-related-publications.publications{
+        height: auto;
+        padding-bottom: 2em;
+    }
+
+    .publications-detail-right-column .field-name-field-summary{
+        padding: 0 !important;
+    }
+
+    .content-related-publications .publications-right-column{
+        padding-left: 1em;
+    }
+
+    .box-events-summary .right-column{
+        width: 80%;
+        padding-bottom: 1em;
+    }
+
+    .box-events-summary h2 a{
+        width: 100%;
+    }
+
+    .box-events-summary .report-available {
+        font-size: 0.7rem;
+        width: 80px;
+    }
+
+    .events-view h2{
+        padding-left: 0;
+    }
+
+    .content-filters-wrap{
+        padding: 1em;
+    }
+
+    
+        .container-inline-date{
+            float: left;
+            clear: none;
+            padding-left: 1em;
+        }
+   
+
+    /* Footer */
+    footer {
+        padding-bottom: 1em;
+        border-bottom: 0;
+    }
+
+    #footer div#block-menu-block-4 ul{
+        padding-bottom: 0.5em;
+    }
+
+    #footer div#block-menu-block-5 {
+        padding-top: 5px;
+    }
+
+}
+
+
+@media screen and (max-width: 1006px){
+
+    /*General*/
+
+    #sliding-popup.sliding-popup-top{
+        z-index: 9999999999!important;
+    }
+
+    .meanmenu-reveal.meanclose {
+        color: #FFFFFF !important;
+    }
+
+    #page {
+        padding-top: 155px;
+    }
+
+    .mean-container #block-search-form, .mean-container #block-lang-dropdown-language-content, .mean-container #languagesAndSearch{
+        width: auto;
+    }
+
+    #ui-id-1{
+        display: none !important;
+    }
+
+    .breadcrumb-fluid{
+        border-bottom: 0;
+    }
+
+    #block-osha-newsletter-osha-newsletter-subscribe {
+        margin-bottom: 1em;
+    }
+
+    .page-tools-and-resources .field-name-body p, .page-tools-and-publications .field-name-body p, .page-oshevents .field-name-body p{
+        margin: 0;
+    }
+
+    #content{
+        padding: 0 1em;
+    }
+
+    .field-name-field-aditional-resources img.icon-play{
+        width: 75px;
+    }
+
+     /*Header*/
+     #block-search-form{
+        width: 0;
+        border-color: inherit;
+        border-style: none;
+        border-width: 0;
+        color: transparent;
+        cursor: pointer;
+        height: 25px;
+        margin-left: 5px;
+        text-align: left;
+        position: absolute;
+        top: 125px;
+        z-index: 999999999;
+        right: 5px;
+        cursor: pointer;
+        margin: 0;
+        padding: 0;
+    }
+
+    #edit-actions{
+        background: url(../images/menu-search-ico.png) no-repeat scroll 100% 0 rgba(0, 0, 0, 0);
+        border-color: inherit;
+        border-style: none;
+        border-width: 0;
+        color: transparent;
+        cursor: pointer;
+        height: 25px;
+        margin-left: 5px;
+        text-align: left;
+        width: 30px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 99999999999999999999;
+        cursor: pointer;
+        margin: 0;
+        padding: 0;
+    }
+
+    #edit-search-block-form--2{   
+        position: absolute;
+        width: 0;
+        background: #FFF;
+        top: -3px;
+        right: 27px;
+        border-bottom-left-radius: 10px;
+        border-top-left-radius: 10px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        color:#003399;
+        height: 30px;
+        font-size: 0.8rem;
+        opacity: 0;
+      
+    }
+
+    #edit-search-block-form--2.expand , #block-search-form.expand{
+        width: 220px;
+        opacity: 1;
+        z-index: 99999999999;
+        -webkit-transition: width .3s ease-in-out;
+        -moz-transition: width .3s ease-in-out;
+        -o-transition: width .3s ease-in-out;
+        transition: width .3s ease-in-out;
+    }   
+
+    #edit-submit--2{
+        pointer-events: none;
+    }
+
+
+    #block-search-form input[type="submit"]{
+        background: transparent;
+    }
+
+    .wrapper-responsive-box {
+        width: 98%;
+        display: flex;
+        margin: 0 auto;
+    }
+
+    #agencyLogo {
+        position: absolute;
+        top: 37px;
+        float: right;
+        left: 0;
+    }
+
+    #europeLogo {
+        display: block;
+        position: absolute;
+        top: 4px;
+        float: right;
+        left: 10em;
+    }
+
+    #multi-lingual-award {
+        position: absolute;
+        right: 1%;
+        top: 5px;
+        z-index: 99999999;
+        margin-top: 0;
+    }
+
+    .a_small , .a_medium , .a_big , #header a.printfriendly{
+        display: none;
+    }
+
+    #languagesAndSearch #contact > a::before {
+        content: "";
+    }
+
+    .mean-container .mean-bar {
+        float: none;
+        background: #fff;
+        padding: 0 0 8px;
+        margin-top: 0;
+        border-bottom: 0;
+        position: absolute;
+        top: 103px;
+        width: 100%;
+        background: #003399;
+    }
+
+    .mean-container a.meanmenu-reveal span{
+        background: #FFF;
+    }
+
+    .mean-container .mean-nav ul:first-child {
+        border-top: 0;
+        margin-top: 0;
+    }
+
+    .form-item.form-type-select.form-item-lang-dropdown-select{
+        width: 110px;
+        position: absolute;
+        top: 105px;
+        left: 60px;
+        background: transparent;
+        z-index: 9999999;
+        margin-top: 2em!important;
+    }
+
+    #lang-dropdown-select-language_content{
+        background: url(../images/icoSelect-white.png) no-repeat scroll 96px center #003399;
+    }
+
+    #contact{
+        position: absolute;
+        z-index: 999999999;
+        top:117px;
+        right:10%;
+    }
+
+    #languagesAndSearch #contact > a {
+        color: #FFF;
+    }
+
+    #edit-search-api-views-fulltext-wrapper{
+        padding-top: 15px!important;
+    }
+
+    .page-tools-and-publications #edit-search-api-views-fulltext-wrapper{
+        padding-top: 0!important;
+    }
+
+    #edit-search-api-language-wrapper label, .form-item.form-type-select.form-item-sort-by label, .form-item.form-type-select.form-item-sort-order label{
+        margin-bottom: 0;
+    }
+
+    /*Home*/
+    .home-boxes:hover h2 {
+        bottom: 80px;
+        transition: 0.8s;
+    }
+
+    .twitter-tweet-rendered{
+       margin: 1em auto !important;
+    }
+
+    /* Publications */
+    .page-tools-and-publications.revamp #content, .page-oshevents #content{
+        width: 97.8%!important;
+    }
+
+    /* Publications list */
+    .page-tools-and-publications .publications-right-column h2 a{
+        height: auto;
+    }
+
+    /*Publications detail*/
+    .publications-detail-right-column{
+        width: 93%;
+    }
+
+}
+
+
+@media screen and (max-width: 990px) {
+
+    h1.revamp {
+        margin-left: 0;
+    }
+
+    /*Home*/
+    .home-intro {
+        clear: both;
+        margin: 0 auto;
+        float: none;
+    }
+
+    .home-boxes {
+        width: 32%;
+        height: 180px;
+        margin-bottom: 1.5em;
+        margin-right: 10px;
+    }
+
+    .home-boxes .content-background {
+        height: 182px;
+    }
+
+    /* Related and Resources */
+    .content-box-sub {
+        width: 33%;
+    }
+
+
+    /*Publications detail*/
+
+     .content-related-boxes .box h2{
+        min-height: auto;
+    }
+
+    .content-related-publications{
+        height: auto;
+        padding-bottom: 1em;
+    }
+
+    .publications-detail-right-column{
+        padding-left: 1em;
+    }
+
+    .content-related-publications.oshwiki{
+        padding:1em 0;
+    }
+
+    .content-downloads {
+        width: 97%;
+        max-width: 97%;
+        margin-left: 0;
+    }
+
+    /*Events*/
+
+    .node-type-events #page-title, .node-type-events .field-name-title-field h1 {
+        background: #FFF !important;
+        color: #003399 !important;
+        padding-left: 0 !important;
+        padding-top: 1em !important;
+        font-size: 1.4rem;
+    }
+
+    .node-type-events #page-title{
+        padding-left: 18px!important;
+        padding-top: 10px !important;
+    }
+
+    .node-type-events .view-header.back{
+        background: #FFF !important;
+
+    }
+
+    .node-type-events .view-header.back a{
+        color: #003399 !important;
+    }
+
+    .sidebars_first label{
+        padding-left: 1em;
+    }
+
+    .section-safety-and-health-legislation .sidebars_first label{
+        padding-left: 0;
+    }
+
+    a.see-more-arrow, .node-readmore a, .more-link a, .view .views-field-view-node a, #become-partner-link a, #join-list-link a, .sidebars_second .view-footer a, .OSHWiki .p3 a, .view-search-directives .links a, .more-link-wrapper a, .see-link a, .link_news_events a{
+        background: url(../images/flecha.png) no-repeat scroll right 53% transparent !important;
+        padding: 0.5em 2em 0.5em 1em !important;
+    }
+
+    .content-filters .views-widget{
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+
+    .revamp-row.events .box-events-summary .right-column{
+         width: 85%;
+    }
+
+    .box-events-summary{
+        background: #FFF;
+        padding-bottom: 1em;
+    }
+
+    html[lang=de] .content-home-event .tag-news-events, html[lang=cs] .content-home-event .tag-news-events, html[lang=el] .content-home-event .tag-news-events, html[lang=pl] .content-home-event .tag-news-events{
+        font-size: 0.6em;
+    }
+
+    html[lang=de] .content-home-event a.see-more-arrow, html[lang=lv] .content-home-event a.see-more-arrow, html[lang=lt] .content-home-event a.see-more-arrow, html[lang=hu] .content-home-event a.see-more-arrow, html[lang=mt] .content-home-event a.see-more-arrow, html[lang=nl] .content-home-event a.see-more-arrow {
+        font-size: 0.9em;
+        padding-left: 14px;
+        background: url(../images/flecha.png) no-repeat scroll 87% 53% transparent;
+    } 
+
+    /*Pagination*/
+
+    .item-list ul.pager{
+        display: block;
+        padding: 2em 0;
+    } 
+
+    .pager .pager-current {
+        padding: 0.4em 0.5em 0.4em 0.5em;
+    }
+
+    /* Gallery */
+    .view-id-flickr_albums.view-content .views-row[class*="col-"], .view-photo-gallery .view-content .views-row[class*="col-"], .page-photo-gallery .view-content .views-row[class*="col-"]{
+        margin: 10px 10px 0 0 !important;
+        width: 95%;
+    }
+
+    .view-id-flickr_albums .views-row img{
+        width: 100%;
+    }
+
+    .view-id-flickr_albums .view-content{
+        margin: 0 1em 0 0em;
+    }
+
+    /*Footer*/
+    .content-form-newsletter .btn-light-white{
+        min-width: 354px;
+    }
+
+    .content-form-newsletter a.privacy{
+        padding-left: 0;
+        margin-top: 0;
+    }
+
+    #footer * li.menu__item {
+        margin: 5px 1em 0 0;
+    }
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 990px) {
+
+    .content-related-boxes .box, .content-related-videos .video{
+        width: 48%;
+    }
+
+    .content-related-boxes.slideshare > div:nth-child(3){
+        margin-right: 1em;
+    }
+
+    .content-related-boxes.infographic > div:nth-child(3){
+        margin-right: 1em;
+    }
+
+    .content-related-videos > div:nth-child(3){
+        margin-right: 1em;
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    .page-tools-and-resources .field-name-body p, .page-tools-and-publications .field-name-body p, .page-oshevents .field-name-body p{
+        padding-top: 1em;
+    }
+
+    .section-oshevents .content-fluid.events .container{
+        border-bottom: 0 solid #003399;  
+    }
+
+    .section-oshevents .content-fluid.events .container{
+        padding-bottom: 0;
+    }
+
+    a.privacy {
+        float: left;
+        padding-top: 5px; 
+    }
+
+    /* General */
+
+    .wrapper-responsive-box {
+        width: 98%;
+        display: flex;
+        margin: 0 auto;
+        flex-wrap: wrap;
+    }
+
+    .pager .pager-item {
+        padding: 0.2em 0.5em 0.2em 0.5em;  
+    }
+
+    .pager .pager-current {
+        padding: 0.4em 0.5em 0.4em 0.5em;
+    }
+
+    .pager .pager-item {
+        margin-bottom: 12px;
+        display: inline-block;
+    }
+
+    .pager-total{
+        display: none;
+    }
+
+    .pager .pager-item.hide-responsive-pager{
+        display: none;
+    }
+
+    /*Header*/
+    #contact > a:nth-child(5){
+        text-indent: -99999px;
+        background: url(../images/ico-news-events-menu.png) no-repeat 0 0 ;
+        position: relative;
+        width: 30px;
+    }
+
+    /*Home*/
+
+    .home-intro{
+        width: 100%;
+    }
+
+    .home-boxes {
+        width: 33%;
+        height: auto;
+        margin-bottom: 2em;
+        margin-right: 0;
+    }
+
+    .home-boxes .content-background {
+        height: 100%;
+    }
+
+    .view-news-and-events .more-link {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .more-link.revamp{
+        background: transparent;
+        display: block;
+    }
+
+    .more-link.revamp a{
+        display: block;
+        float: none;
+        margin-right: -2px;
+        max-width: 310px;
+        margin: 1em auto;
+    }
+
+    div.block.twiteer > img{
+        width: 100%;
+        max-width: 360px; /* TO DO */ 
+    }
+
+    .view-highlight .row .views-field-view-node{
+        float: left !important;
+    }
+
+    .view-highlight .row .see-more-arrow{
+        padding-left: 0 !important;
+    }
+
+    .front #block-osha-homepage-osha-homepage-tweets{
+        margin-top: 1em;
+    }
+
+    .front div.more-link > a:nth-child(2) {
+        margin: 1em auto;
+    }
+
+    .view-highlight .views-field-body .field-content{
+        display: none;
+    }
+
+     /* Related and Resources */
+    .content-box-sub {
+        width: 60%;
+    }
+
+     /*Publications*/
+
+    .page-tools-and-publications.revamp #content, .page-oshevents #content{
+        width: 88.8%!important;
+        float: left;
+    }
+
+    .box-latest-publications{
+        width: 100%;
+        margin-bottom: 1em;
+    }
+
+    .box-latest-publications .left-column {
+        float: left;
+        width: 100%;
+        height: 207px;
+        padding: 1em 0 0 0;
+        text-align: center;
+    }
+
+    .box-latest-publications .right-column {  
+        width: 90%;
+    }
+
+    .page-tools-and-publications .views-exposed-widget, .page-oshevents .views-exposed-widget {
+        width: 101%!important;
+    }
+
+    #edit_languages_chosen{
+        width: 98%!important;
+    }
+
+    .page-tools-and-publications .content-filters{
+        padding: 0 0 1em 0;
+    }
+
+    .publications-right-column {
+        padding-right: 1em;
+        float: none;
+        clear: both;
+    }
+
+    .page-tools-and-publications .views-exposed-widget, .page-oshevents .views-exposed-widget{
+        padding-top: 10px!important;
+    }
+
+    .page-tools-and-publications .publications-right-column h2{
+        height: auto;
+    }
+
+    .content-publication-info{
+        display: block;
+    }
+
+    .box-latest-publications .label {
+        width: 100%;
+        display: block;
+    }
+
+    .box-latest-publications a.see-more-arrow{
+        position: relative;
+        display: inline-block;
+        right: 0;
+    }
+
+    /* Publications Detail */
+
+    .content-related-videos .video {
+        position: relative;
+        width: 100%;
+        float: left;
+        margin-top: 1em;
+        margin-right: 1em;
+    }
+
+    .content-related-boxes .box{
+        position: relative;
+        width: 100%;
+        height: auto;
+        float: left;
+        margin-top: 1em;
+        margin-right: 1em;
+    }
+
+    div.publications-detail-right-column > a.download{
+        margin-left: 0;
+        padding-left: 0;
+    }
+
+    div.view-header.back.revamp {
+        margin-top: 0;
+        background: transparent;
+        color: #003399;
+    }
+
+    div.view-header.back.revamp a{
+        color: #003399!important;
+        float: right;
+    }
+
+    .content-related-publications.oshwiki h2{
+        margin-bottom: 0;
+    }
+
+    .content-related-publications.oshwiki p{
+        margin-top: 0;
+    }
+
+    .publications-left-column{
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .content-related-publications.related{
+        height: auto;
+        padding-bottom: 1em;
+        width: 100%;
+    }
+
+    .content-related-publications img{
+        height: auto;
+        width: 100%;
+    }
+
+    .content-related-publications.publications .publications-left-column{
+        width: 107px;
+        margin-right: 10px;
+    }
+
+    .publications-detail-right-column h2 {
+        padding-bottom: 1em;
+        line-height: 17px;
+        padding-top: 0;
+        margin-top: 0;
+    }
+    
+    .content-related-publications h2 a {
+        font-size: 0.8rem;
+    }
+
+    .content-publication-info .pages{
+        float: right;
+    }
+
+    .content-related-publications.related .pages{
+        float: none;
+    }
+
+
+    /* Events */
+    .box-latest-publications {
+        width: 90%;
+        margin: 0 auto 1em auto;
+    }
+
+    .box-latest-publications.last {
+        margin-right: auto;
+    }
+
+    .box-events-summary .left-column{
+        display: none;
+    }
+
+    #edit-search-api-views-fulltext-wrapper input{
+        margin-top: 0;
+    }
+
+    .box-events-summary {
+        width: 86%;
+        height: auto;
+        margin: 0 auto 1em;
+    }
+
+    .box-events-summary .right-column{
+        width: 100%;
+    }
+
+    .box-events-summary.views-row-last{
+        margin-right: auto;
+    }
+
+    .content-fluid.events{
+        padding-bottom: 2em;
+    }
+
+    .page-oshevents .more-link a{
+        position: relative;
+        margin-left: auto;
+        bottom:-13px;
+        background: transparent;
+    }
+
+    #content .revamp-row.events .add-to-my-calendar{
+        position: relative;
+        float: left;
+        display: block;
+        width: 100%;
+        margin-left: 0em;
+        padding-top: 0;
+    }
+
+    .events-view h2{
+        padding-top: 1em;
+    }
+
+    #content .revamp-row.events .add-to-calendar{
+        float: none;
+    }
+
+    /* Footer */
+
+    footer {
+        border-bottom: 0;
+    }
+
+    .content-subscribe{
+        padding: 0.5em;
+    }
+
+    .btn-light-blue{ 
+        min-width: 100%;
+    }
+
+    .content-form-newsletter .btn-light-white {
+        min-width: 100%;
+        margin-bottom: 1em;
+    }
+
+    .content-subscribe {
+        padding: 0.5em;
+        max-width: 310px;
+        margin: 0 auto;
+        display: block;
+        float: none;
+    }
+
+    a.try-alert{
+        margin-left: 14px;
+        width: 295px;
+        min-width: 297px;
+    }
+
+    .content-form-newsletter a.privacy {
+        padding-left: 0;
+    }
+
+    .content-form-newsletter input[type=checkbox] + label:before{
+        margin-right: 2px;
+    }
+
+    .content-form-newsletter label.option{
+        font-size: 0.8rem;
+        width: 100%;
+    }
+
+    #footer div#block-menu-block-5 {
+        float: none;
+        width: 280px;
+        margin: 1.5em auto 0;
+        padding-bottom: 5px;
+        padding-left: 0;
+        display: block;
+    }
+
+}
+
+
+@media screen and (max-width: 940px){
+
+    .front .sidebars_second_home{
+        width: 100%;
+    }
+
+    .front .sidebars_second_home #block-osha-newsletter-osha-newsletter-subscribe{
+        float: none;
+    }
+
+    .front .sidebars_second_home #block-osha-homepage-osha-homepage-tweets{
+        height: 257px;
+        clear: both;
+        float: none;
+        margin-left: 1em;
+    }
+}
+
+@media screen and (max-width: 700px){
+    .home-boxes{
+        width: 100%;
+    }
+
+    .content-home-event {
+        width: 100%;
+    }
+
+    .content-recommended-resources{
+        width: 260px;
+        margin: 0 auto;
+    }
+
+}
+
+@media screen and (max-width: 480px) {
+
+    .view-highlight .img-highlight {
+        float: left;
+        padding-right: 1em;
+        width: 100%;
+        height: auto;
+    }
+
+    .view-highlight .img-highlight img{
+        width: 100%;
+        height: auto;
+    }
+
+    /* Home */
+     .home-intro{
+        width: 95%;
+    }
+
+    /*Footer*/
+
+    a.try-alert{
+        margin-left: 0;
+        min-width: 310px;
+    }
+
+    .content-form-newsletter{
+        margin-left: 0;
+    }
+
+    table.pagerer tbody tr td div.item-list ul.pager li.pager-first, table.pagerer tbody tr td div.item-list ul.pager li.pager-previous, table.pagerer tbody tr td div.item-list ul.pager li.pager-next, table.pagerer tbody tr td div.item-list ul.pager li.pager-last{
+        font-size: 9px;
+    }
+}

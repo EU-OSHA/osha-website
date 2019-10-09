@@ -190,7 +190,12 @@ function matomo_page_alter(&$page) {
         $set_custom_url = drupal_json_encode(url('node/' . $node->nid, array('absolute' => TRUE, 'query' => $params)));
       }
       else {
-        $set_custom_url = drupal_json_encode(url(current_path(), array('absolute' => TRUE, 'query' => $params)));
+        if (drupal_is_front_page()) {
+          $set_custom_url = drupal_json_encode(url('home', array('absolute' => TRUE, 'query' => $params)));
+        }
+        else {
+          $set_custom_url = drupal_json_encode(url(current_path(), array('absolute' => TRUE, 'query' => $params)));
+        }
       }
       $set_custom_url = str_replace('\/' . $language->language . '\/', '\/', $set_custom_url);
     }
@@ -277,7 +282,7 @@ function matomo_page_alter(&$page) {
 
     // Set custom url.
     if (!empty($set_custom_url)) {
-      $script .= '_paq.push(["setCustomUrl", ' . $set_custom_url . ']);';
+      $script .= '_paq.push(["setCustomUrl", ' . $set_custom_url . ' + window.location.hash]);';
     }
     // Set custom document title.
     if (!empty($set_document_title)) {

@@ -11,20 +11,21 @@
   <header class="header" id="header" role="banner">
     <?php require "header.tpl.php"; ?>
   </header>
-  <?php print $breadcrumb; ?>
-  <div id="main">
-	<?php
-      // Render the sidebars to see if there's anything in them.
-      $sidebar_first  = render($page['sidebar_first']);
-      // andrei: remove sidebar_second from introduction pages
-      $node = menu_get_object();
-      if (isset($node) && isset($node->article_type_code) && $node->article_type_code != 'section') {
+  <?php if ($breadcrumb) print '<div class="breadcrumb-fluid">' . $breadcrumb . '</div>'; ?>
+  <div id="main"><?php
+    // Render the sidebars to see if there's anything in them.
+    $sidebar_first = render($page['sidebar_first']);
+    // Andrei: remove sidebar_second from introduction pages.
+    $show_25th = FALSE;
+    $node = menu_get_object();
+    if (isset($node) && isset($node->article_type_code) && $node->article_type_code != 'section') {
         unset($page['sidebar_second']);
-      }
-      $sidebar_second = render($page['sidebar_second']);
-
+    }
+    $sidebar_second = render($page['sidebar_second']);
+    if (isset($node) && ($node->type == '25th_anniversary')) {
+      $show_25th = TRUE;
+    }
     ?>
-
     <?php if ($sidebar_first): ?>
       <aside class="sidebars_first">
         <?php print $sidebar_first; ?>
@@ -50,9 +51,12 @@
           <?php print render($page['above_title']); ?>
         </div>
     <?php } ?>
-      <?php if ($title): ?>
+      <?php if ($show_25th) { ?>
+          <div class="view-header back cut-paste"><?php print l(t('View all'), '/look-back'); ?></div>
+      <?php } ?>
+      <?php if ($title) { ?>
         <h1 class="page__title title" id="page-title"><?php print $title; ?></h1>
-      <?php endif; ?>
+      <?php }; ?>
       <?php print render($title_suffix); ?>
       <?php print $messages; ?>
       <?php print render($tabs); ?>
@@ -79,7 +83,17 @@
 	
   </div>
 
-  <?php print render($page['footer']); ?>
+  <?php if (isset($page['footer'])) : ?>
+      <footer id="footer" class="<?php print $classes; ?>">
+        <?php if (isset($page['footer_subscribe'])) : ?>
+          <?php print render($page['footer_subscribe']); ?>
+        <?php endif; ?>
+        <?php if (isset($page['footer_sitemap'])) : ?>
+          <?php print render($page['footer_sitemap']); ?>
+        <?php endif; ?>
+        <?php print render($page['footer']); ?>
+      </footer>
+  <?php endif; ?>
 
 </div>
 

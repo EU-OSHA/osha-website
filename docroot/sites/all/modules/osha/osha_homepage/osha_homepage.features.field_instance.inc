@@ -99,7 +99,7 @@ function osha_homepage_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 3,
+      'weight' => 5,
     ),
     'workbench_access_field' => 0,
   );
@@ -152,7 +152,7 @@ function osha_homepage_field_default_field_instances() {
         'apply_chosen' => 0,
       ),
       'type' => 'options_select',
-      'weight' => 3,
+      'weight' => 6,
     ),
     'workbench_access_field' => 0,
   );
@@ -224,7 +224,7 @@ function osha_homepage_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 9,
+      'weight' => 11,
     ),
   );
 
@@ -281,7 +281,7 @@ function osha_homepage_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 31,
+      'weight' => 3,
     ),
     'workbench_access_field' => 0,
   );
@@ -351,7 +351,7 @@ function osha_homepage_field_default_field_instances() {
         'year_range' => '-100:+1',
       ),
       'type' => 'date_popup',
-      'weight' => 5,
+      'weight' => 7,
     ),
   );
 
@@ -466,7 +466,7 @@ function osha_homepage_field_default_field_instances() {
         'manualcrop_thumblist' => 0,
       ),
       'type' => 'media_generic',
-      'weight' => 1,
+      'weight' => 2,
     ),
     'workbench_access_field' => 0,
   );
@@ -538,8 +538,67 @@ function osha_homepage_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 10,
+      'weight' => 12,
     ),
+  );
+
+  // Exported field_instance: 'node-banner-field_subtitle'.
+  $field_instances['node-banner-field_subtitle'] = array(
+    'bundle' => 'banner',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 13,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_subtitle',
+    'label' => 'Subtitle',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 1,
+    ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-banner-field_summary'.
@@ -597,7 +656,7 @@ function osha_homepage_field_default_field_instances() {
         'rows' => 3,
       ),
       'type' => 'text_textarea',
-      'weight' => 2,
+      'weight' => 4,
     ),
     'workbench_access_field' => 0,
   );
@@ -740,6 +799,7 @@ function osha_homepage_field_default_field_instances() {
   t('Page count');
   t('Please introduce in this box the text of this section.');
   t('Select Link title for this content.');
+  t('Subtitle');
   t('Summary');
   t('The header image that will be displayed on page.');
   t('Title');

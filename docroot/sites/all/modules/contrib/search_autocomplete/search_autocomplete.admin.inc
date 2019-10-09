@@ -63,12 +63,14 @@ function search_autocomplete_menu() {
   // Create a tab for settings.
   $items['admin/config/search/search_autocomplete/settings'] = array(
     'title'             => 'Search Autocomplete settings',
+    'description'       => 'Search Autocompletion main tab on setting page.',
     'type'              => MENU_DEFAULT_LOCAL_TASK,
     'weight'            => 1,
   );
   // Create an admin setting page: add a new form.
   $items['admin/config/search/search_autocomplete/add'] = array(
     'title'             => 'Add a form',
+    'description'       => 'Create a new autocompletion form tab on setting page.',
     'page callback'     => 'drupal_get_form',
     'page arguments'    => array('search_autocomplete_form_add'),
     'access arguments'  => array('administer Search Autocomplete'),
@@ -92,7 +94,7 @@ function search_autocomplete_menu() {
     'access arguments'  => array('administer Search Autocomplete'),
     'file'              => 'search_autocomplete.form.delete.inc',
   );
-  // create a callback page for JSON suggestions
+  // Create a callback page for JSON suggestions.
   $items['search_autocomplete/autocomplete'] = array(
     'title' => 'Autocompleton when using view',
     'page callback' => 'search_autocomplete_autocomplete',
@@ -101,11 +103,11 @@ function search_autocomplete_menu() {
     'access arguments' => array('access content'),
     'file' => 'search_autocomplete.autocomplete.inc',
   );
-  
+
   $items['views/autocomplete'] = array(
     'title' => 'Autocomplete view selector',
     'page callback' => 'search_autocomplete_views_autocomplete',
-    // access not properly checked on callbacks (see function)
+    // Access not properly checked on callbacks (see function).
     'type' => MENU_CALLBACK,
     'access callback' => TRUE,
     'access arguments' => array('access content'),
@@ -133,7 +135,7 @@ function search_autocomplete_help($path, $arg) {
 
     case 'admin/config/search/search_autocomplete/add':
       $help  = '<div>' . t('This page allows you to add a new form to be autocompleted with the Search Autocomplete module.') . '</div>';
-      $help .= '<div>' . t('This is an advanced feature configuration. Use it only if you know what you are doing and after reading <a href="http://projects.axiomcafe.fr/search-autocomplete">documentation</a>. If you wish help, please ask for a new default form to be added in the next release of Search Autocomplete module.') . '</div>';
+      $help .= '<div>' . t('This is an advanced feature configuration. Use it only if you know what you are doing and after reading <a href="http://drupal-addict.com/nos-projets/search-autocomplete">documentation</a>. If you wish help, please ask for a new default form to be added in the next release of Search Autocomplete module.') . '</div>';
       break;
 
     case 'admin/config/search/search_autocomplete/%/configure':

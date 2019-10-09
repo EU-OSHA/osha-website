@@ -1,6 +1,6 @@
 <?php if($page): ?>
   <div id="page-title" class="page__title title">&nbsp;</div>
-  <div class="view-header back"><?php print l(t('Back to latest posts'), 'tools-and-publications/blog'); ?></div>
+  <div class="view-header back"><?php print l(t('Back to latest posts'), 'tools-and-resources/blog'); ?></div>
 <?php endif; ?>
 
 <article class="node-<?php print $node->nid; ?> <?php print $classes; ?> clearfix"<?php print $attributes; ?>>

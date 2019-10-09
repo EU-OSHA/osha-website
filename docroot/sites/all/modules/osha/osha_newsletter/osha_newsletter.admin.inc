@@ -11,11 +11,11 @@ function osha_newsletter_admin_form() {
   $form['osha_newsletter_listserv'] = array(
     '#type' => 'textfield',
     '#title' => t('Listserv e-mail address'),
-    '#default_value' => variable_get('osha_newsletter_listserv', 'listserv@list.osha.europa.eu'),
+    '#default_value' => variable_get('osha_newsletter_listserv', 'crm-oshmail@osha.europa.eu'),
     '#size' => 40,
     '#attributes' => array('tabindex' => 1),
     '#maxlength' => 60,
-    '#description' => t('Destination listserv account to send the subscribe/unsubscribe newsletter requests'),
+    '#description' => t('Destination CRM account to send the subscribe newsletter requests'),
     '#required' => TRUE,
   );
 
@@ -33,7 +33,7 @@ function osha_newsletter_admin_form() {
   $form['osha_newsletter_list_name'] = array(
     '#type' => 'textfield',
     '#title' => t('List name'),
-    '#default_value' => variable_get('osha_newsletter_list_name', 'OSHMail-Test'),
+    '#default_value' => variable_get('osha_newsletter_list_name', 'crm-oshmail'),
     '#attributes' => array('tabindex' => 2),
     '#size' => 40,
     '#maxlength' => 40,

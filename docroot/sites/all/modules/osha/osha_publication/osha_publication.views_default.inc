@@ -11,6 +11,144 @@ function osha_publication_views_default_views() {
   $export = array();
 
   $view = new view();
+  $view->name = 'publication_pages_count';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'publication_pages_count';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '250';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'title' => 'title',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'title' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: File */
+  $handler->display->display_options['fields']['field_file']['id'] = 'field_file';
+  $handler->display->display_options['fields']['field_file']['table'] = 'field_data_field_file';
+  $handler->display->display_options['fields']['field_file']['field'] = 'field_file';
+  $handler->display->display_options['fields']['field_file']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_file']['type'] = 'file_url_plain';
+  /* Field: Content: File (field_file:language) */
+  $handler->display->display_options['fields']['language']['id'] = 'language';
+  $handler->display->display_options['fields']['language']['table'] = 'field_data_field_file';
+  $handler->display->display_options['fields']['language']['field'] = 'language';
+  /* Field: Content: Number of pages */
+  $handler->display->display_options['fields']['field_pages_count']['id'] = 'field_pages_count';
+  $handler->display->display_options['fields']['field_pages_count']['table'] = 'field_data_field_pages_count';
+  $handler->display->display_options['fields']['field_pages_count']['field'] = 'field_pages_count';
+  $handler->display->display_options['fields']['field_pages_count']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Content: Pages count updated */
+  $handler->display->display_options['fields']['field_pages_count_updated']['id'] = 'field_pages_count_updated';
+  $handler->display->display_options['fields']['field_pages_count_updated']['table'] = 'field_data_field_pages_count_updated';
+  $handler->display->display_options['fields']['field_pages_count_updated']['field'] = 'field_pages_count_updated';
+  $handler->display->display_options['fields']['field_pages_count_updated']['settings'] = array(
+    'format_type' => 'long',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+    'osha_date_theme' => '',
+  );
+  /* Field: Content: Updated date */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'node';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'pubdate_rss';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'year';
+  /* Sort criterion: Content: Updated date */
+  $handler->display->display_options['sorts']['changed']['id'] = 'changed';
+  $handler->display->display_options['sorts']['changed']['table'] = 'node';
+  $handler->display->display_options['sorts']['changed']['field'] = 'changed';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'publication' => 'publication',
+  );
+  /* Filter criterion: Content: File (field_file:fid) */
+  $handler->display->display_options['filters']['field_file_fid']['id'] = 'field_file_fid';
+  $handler->display->display_options['filters']['field_file_fid']['table'] = 'field_data_field_file';
+  $handler->display->display_options['filters']['field_file_fid']['field'] = 'field_file_fid';
+  $handler->display->display_options['filters']['field_file_fid']['operator'] = 'not empty';
+  /* Filter criterion: Content: File (field_file:language) */
+  $handler->display->display_options['filters']['language']['id'] = 'language';
+  $handler->display->display_options['filters']['language']['table'] = 'field_data_field_file';
+  $handler->display->display_options['filters']['language']['field'] = 'language';
+  $handler->display->display_options['filters']['language']['value'] = array(
+    'en' => 'en',
+  );
+  $translatables['publication_pages_count'] = array(
+    t('Master'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('Displaying @start - @end of @total'),
+    t('File'),
+    t('File (field_file:language)'),
+    t('Number of pages'),
+    t('Pages count updated'),
+    t('Updated date'),
+  );
+  $export['publication_pages_count'] = $view;
+
+  $view = new view();
   $view->name = 'publications';
   $view->description = '';
   $view->tag = 'default';
@@ -22,7 +160,7 @@ function osha_publication_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Publications';
+  $handler->display->display_options['title'] = 'Recommended publications';
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
@@ -31,7 +169,7 @@ function osha_publication_views_default_views() {
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '5';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '3';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'node';
@@ -107,8 +245,8 @@ function osha_publication_views_default_views() {
   $handler = $view->new_display('block', 'Block', 'slidehow');
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_options']['row_class'] = 'box-latest-publications';
   $handler->display->display_options['style_options']['default_row_class'] = FALSE;
-  $handler->display->display_options['style_options']['row_class_special'] = FALSE;
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'node';
@@ -208,7 +346,7 @@ function osha_publication_views_default_views() {
   $handler->display->display_options['block_description'] = 'Publications Slideshow';
   $translatables['publications'] = array(
     t('Master'),
-    t('Publications'),
+    t('Recommended publications'),
     t('more'),
     t('Apply'),
     t('Reset'),

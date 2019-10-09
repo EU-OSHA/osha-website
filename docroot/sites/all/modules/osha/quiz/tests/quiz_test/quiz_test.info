@@ -1,0 +1,10 @@
+name = Quiz test fixtures
+package = Quiz core
+core = 7.x
+hidden = TRUE
+
+; Information added by Drupal.org packaging script on 2019-01-03
+version = "7.x-5.4"
+core = "7.x"
+project = "quiz"
+datestamp = "1546535293"

@@ -193,9 +193,18 @@ function osha_wiki_strongarm() {
         'custom_settings' => TRUE,
       ),
       'osha_resources' => array(
-        'custom_settings' => FALSE,
+        'custom_settings' => TRUE,
       ),
       'print' => array(
+        'custom_settings' => FALSE,
+      ),
+      'dangerous_substances' => array(
+        'custom_settings' => TRUE,
+      ),
+      'osha_search_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
+      'question' => array(
         'custom_settings' => FALSE,
       ),
     ),

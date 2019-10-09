@@ -50,7 +50,7 @@ function osha_blocks_default_fe_block_settings() {
         'region' => 'content',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => -50,
+        'weight' => 7,
       ),
       'seven' => array(
         'region' => '',
@@ -71,7 +71,8 @@ function osha_blocks_default_fe_block_settings() {
     'i18n_mode' => 0,
     'module' => 'osha_blocks',
     'node_types' => array(),
-    'pages' => '',
+    'pages' => 'node/13937
+node/13962',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -90,7 +91,7 @@ function osha_blocks_default_fe_block_settings() {
         'region' => 'sidebar_second',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 15,
+        'weight' => 18,
       ),
       'seven' => array(
         'region' => '',
@@ -138,7 +139,7 @@ function osha_blocks_default_fe_block_settings() {
         'region' => 'content',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 0,
+        'weight' => 16,
       ),
       'seven' => array(
         'region' => '',
@@ -178,10 +179,10 @@ function osha_blocks_default_fe_block_settings() {
         'weight' => 0,
       ),
       'osha_frontend' => array(
-        'region' => 'content',
-        'status' => 1,
+        'region' => '',
+        'status' => 0,
         'theme' => 'osha_frontend',
-        'weight' => 40,
+        'weight' => 42,
       ),
       'seven' => array(
         'region' => '',
@@ -221,7 +222,7 @@ function osha_blocks_default_fe_block_settings() {
         'region' => 'sidebar_second',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 11,
+        'weight' => 16,
       ),
       'seven' => array(
         'region' => '',
@@ -263,7 +264,7 @@ function osha_blocks_default_fe_block_settings() {
         'region' => 'sidebar_second',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 12,
+        'weight' => 17,
       ),
       'seven' => array(
         'region' => '',

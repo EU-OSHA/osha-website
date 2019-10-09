@@ -83,7 +83,7 @@ abstract class AbstractNCWNodeSource extends MigrateSource {
   }
 
   /**
-   * Remote call to load the data from the endpoint URL
+   * Remote call to load the data from the endpoint URL.
    */
   public function readData() {
     osha_sites_migration_debug('!klass: Starting reading items from !url', array('!klass' => get_class($this), '!url' => $this->endpoint_url));
@@ -102,7 +102,7 @@ abstract class AbstractNCWNodeSource extends MigrateSource {
         if ($rowd = $this->fileGetContents($node_url)) {
           if ($row_ob = json_decode($rowd, TRUE)) {
             $row = new stdClass();
-            foreach($row_ob as $k => $v) {
+            foreach ($row_ob as $k => $v) {
               $row->$k = $v;
             }
             $this->rows[$id] = $row;
@@ -125,7 +125,6 @@ abstract class AbstractNCWNodeSource extends MigrateSource {
   }
 
   public function fileGetContents($url) {
-    //@todo replace all instances of fileGetContents
     return ncw_migration_file_get_contents($url);
   }
 
@@ -139,17 +138,17 @@ abstract class AbstractNCWNodeSource extends MigrateSource {
 
   public function fields() {
     return array(
-        'nid' => 'nid',
-        'title' => 'title',
-        'created' => 'created',
-        'changed' => 'changed',
-        'status' => 'status',
-        'promote' => 'promote',
-        'sticky' => 'sticky',
-        'log' => 'log',
-        'language' => 'language',
-        'path' => 'path',
-      ) + $this->contentFields();
+      'nid' => 'nid',
+      'title' => 'title',
+      'created' => 'created',
+      'changed' => 'changed',
+      'status' => 'status',
+      'promote' => 'promote',
+      'sticky' => 'sticky',
+      'log' => 'log',
+      'language' => 'language',
+      'path' => 'path',
+    ) + $this->contentFields();
   }
 
   /**

@@ -66,9 +66,7 @@
  * @see page.tpl.php
  * @ingroup print
  */
-?>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
+?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
   "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php print $language->language; ?>" version="XHTML+RDFa 1.0" dir="<?php print $language->dir; ?>">
   <head>
@@ -195,7 +193,7 @@
                     'alt' => t('Facebook')
                   ),
                   'blog' => array(
-                    'path' => url('tools-and-publications/blog', array('alias' => TRUE)),
+                    'path' => url('tools-and-resources/blog', array('alias' => TRUE)),
                     'alt' => t('blog')
                   ),
                   'youtube' => array(

@@ -11,17 +11,18 @@
 
 include_once('search_autocomplete.admin.inc');
 include_once('search_autocomplete.view_autocomplete.inc');
-
+include_once('search_autocomplete.features.inc');
 
 /**
- * Implements hook_init().
+ * Implements hook_page_build().
  *
- * Add autocomplete.js on everypage.
+ * Add autocomplete.js on every page.
  */
-function search_autocomplete_init() {
+function search_autocomplete_page_build() {
 
-  // Checkout if user have authorization to access the autocompleted form.
+  // Checkout if user have authorization use admin tools.
   if (user_access('administer Search Autocomplete') && variable_get('sa_admin_helper', TRUE)) {
+    // Add the admin tools.
     drupal_add_js(drupal_get_path('module', 'search_autocomplete') . '/js/search_autocomplete.admin.js');
     drupal_add_css(drupal_get_path('module', 'search_autocomplete') . '/css/search_autocomplete.admin.css');
   }
@@ -31,19 +32,23 @@ function search_autocomplete_init() {
     // Checkout if the db exists (it should).
     if (db_table_exists('search_autocomplete_forms')) {
       // Get every form to autocomplete.
-      $result = db_query('SELECT * FROM {search_autocomplete_forms} WHERE enabled=1');
-      // Build the setting array to transfert to JS.
+      $result = db_select('search_autocomplete_forms', 'f')
+                  ->fields('f')
+                  ->condition('enabled', 1, '=')
+                  ->execute()
+                  ->fetchAllAssoc('fid');
+      // Build the setting array to transfer to JS.
       foreach ($result as $match) {
         $form_id = 'form' . $match->fid;
         $input_data  = explode("\n", $match->data_static);
         $data_static = array();
-        for ($i=0; $i < count($input_data); $i++) {
+        for ($i = 0; $i < count($input_data); $i++) {
           $cut = strripos($input_data[$i], '=>');
           $object = array();
           if ($cut > 0) {
             $object['label']  = trim(substr($input_data[$i], 0, $cut));
             $object['value']  = trim(substr($input_data[$i], 0, $cut));
-            $object['link']   = trim(substr($input_data[$i], $cut+2, strlen($input_data[$i])));
+            $object['link']   = trim(substr($input_data[$i], $cut + 2, strlen($input_data[$i])));
           }
           else {
             $object['label']  = trim($input_data[$i]);
@@ -59,20 +64,28 @@ function search_autocomplete_init() {
         if ($match->data_source != 'static') {
           if (url_is_external($match->data_callback)) {
             $data_source = 'external';
-          } else {
+          }
+          else {
             $data_source = 'internal';
             $data_callback = urldecode(url($match->data_callback, array('absolute' => TRUE)));
           }
         }
+
+        // Translate no_results label.
+        $no_results = json_decode($match->no_results);
+        $no_results->label = t($no_results->label);
+
+        // Translate all_results label.
+        $all_results = json_decode($match->all_results);
+        $all_results->label = t($all_results->label);
 
         drupal_add_js(array('search_autocomplete' => array(
           $form_id          => array(
             'selector'      => $match->selector,
             'minChars'      => $match->min_char,
             'max_sug'       => $match->max_sug,
-            'no_results'    => $match->no_results,
             'type'          => $data_source,
-            'datas'         => $match->data_source == 2 ? $data_static : $data_callback,
+            'datas'         => $match->data_source == 'static' ? $data_static : $data_callback,
             'fid'           => $match->fid,
             // Get the css filename with '-' instead of ' ', lower case and no '.css'.
             'theme'         => str_replace(' ', '-', strtolower($theme_id)),
@@ -124,21 +137,6 @@ function search_autocomplete_image_default_styles() {
 }
 
 /**
- * HELP FUNCTION: replace placeholders in the input string.
- *
- * @param $input  the string to be replaced
- * @param $args   the array of placeholders and values
- */
-function search_autocomplete_replaceArguments(&$input, &$args) {
-  $modified = FALSE;
-  foreach ($args as $key => $data) {
-    $input = preg_replace('#' . $key . '#', $data, $input);
-    $modified = TRUE;
-  }
-  return $modified;
-}
-
-/**
  * Helper function: get from database if suggestions should be translited.
  */
 function search_autocomplete_get_translite() {
@@ -151,4 +149,22 @@ function search_autocomplete_get_translite() {
     ->fetchField();
 
   return $result;
+}
+
+/**
+ * Implements hook_features_api().
+ *
+ * Here we define the components that we want to make exportable.  For this
+ * particular module, we want to make the configurations exportable.
+ */
+function search_autocomplete_features_api() {
+
+  return array(
+      'search_autocomplete_config' => array(
+          'name' => 'Search Autocomplete features ',
+          'file' => 'search_autocomplete.features.inc',
+          'default_hook' => 'search_autocomplete_config_features_default_settings',
+          'feature_source' => TRUE,
+      ),
+  );
 }

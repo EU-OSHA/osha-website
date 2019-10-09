@@ -20,7 +20,8 @@ function osha_publication_default_fe_block_settings() {
     'i18n_mode' => 0,
     'module' => 'osha_publication',
     'node_types' => array(),
-    'pages' => 'tools-and-publications/publications',
+    'pages' => 'publications
+tools-and-publications/publications',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -60,7 +61,8 @@ function osha_publication_default_fe_block_settings() {
     'i18n_mode' => 0,
     'module' => 'views',
     'node_types' => array(),
-    'pages' => 'tools-and-publications/publications',
+    'pages' => 'publications
+tools-and-publications/publications',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -79,7 +81,7 @@ function osha_publication_default_fe_block_settings() {
         'region' => 'content',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 8,
+        'weight' => 9,
       ),
       'seven' => array(
         'region' => '',

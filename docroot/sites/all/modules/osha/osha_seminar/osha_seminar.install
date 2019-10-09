@@ -5,13 +5,6 @@ function osha_seminar_install() {
 }
 
 /**
- * Add publication menu position rules
- */
-//function osha_seminar_update_7001() {
-//  osha_seminar_add_menu_position_rules();
-//}
-
-/**
  * Add menu position rules for publication content type.
  */
 function osha_seminar_add_menu_position_rules() {
@@ -22,8 +15,40 @@ function osha_seminar_add_menu_position_rules() {
 }
 
 /**
- * MDR-1450 I2-Introduce hint text inside the input fields
+ * MDR-1450 I2-Introduce hint text inside the input fields.
  */
 function osha_seminar_update_7001() {
   features_revert(array('osha_seminar' => array('field_base', 'field_instance')));
 }
+
+/**
+ * MDR-2737 improvements for seminars.
+ */
+function osha_seminar_update_7002() {
+  features_revert(array('osha_seminar' => array('field_base', 'field_instance')));
+}
+
+/**
+ * MDR-3090 Change the url of summaries.
+ */
+function osha_seminar_update_7003() {
+  variable_set('pathauto_node_seminar_pattern', 'tools-and-resources/seminars/[node:title]');
+  variable_set('pathauto_update_action', 2);
+  $start = 0;
+  $limit_count = 50;
+  $break_at = 1000;
+  while (1) {
+    $resource = db_query("SELECT nid FROM node WHERE type='seminar' AND status=1 LIMIT $start, $limit_count");
+    foreach ($resource as $result) {
+      $node = node_load($result->nid);
+      $node->path['pathauto'] = TRUE;
+      $node->path['alias'] = str_replace('tools-and-publications/', 'tools-and-resources/', $node->path['alias']);
+      pathauto_node_update_alias($node, 'update');
+    }
+    $start += $limit_count;
+    if ($start >= $break_at) {
+      break;
+    }
+  }
+}
+

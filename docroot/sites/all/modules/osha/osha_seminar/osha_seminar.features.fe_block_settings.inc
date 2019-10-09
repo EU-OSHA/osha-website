@@ -39,7 +39,7 @@ function osha_seminar_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 8,
+        'weight' => 12,
       ),
       'seven' => array(
         'region' => '',
@@ -79,7 +79,7 @@ function osha_seminar_default_fe_block_settings() {
         'region' => 'content',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 1,
+        'weight' => 31,
       ),
       'seven' => array(
         'region' => '',

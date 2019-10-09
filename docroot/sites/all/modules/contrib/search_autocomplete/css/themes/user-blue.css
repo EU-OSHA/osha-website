@@ -10,41 +10,31 @@
  */
 
 /* AUTOCOMPLETE */
-.ui-theme-user-blue.ui-autocomplete {
+input[data-sa-theme="user-blue"].ui-autocomplete {
   position: absolute;
   cursor: default;
 }
-* html .ui-theme-user-blue.ui-autocomplete {
+* html input[data-sa-theme="user-blue"].ui-autocomplete {
   width: 1px; /* without this, the menu expands to 100% in IE6 */
 }
-.ui-theme-user-blue.ui-autocomplete-input {
-  background-image: url("images/throbber.gif");
-  background-position: 100% 4px;
-  background-repeat: no-repeat;
-}
-.ui-theme-user-blue.ui-autocomplete-loading {
-  background-image: url("images/throbber.gif");
-  background-position: 100% -16px;
-  background-repeat: no-repeat;
-}
 
-.ui-theme-user-blue.ui-widget-content {
+input[data-sa-theme="user-blue"].ui-widget-content {
   background: none;
   border-radius: 0px;
   color: #2c2c2c;
   border: 1px solid #c8c8c8;
   box-shadow: 2px 2px 2px -1px rgba(128,128,128,0.6);
   position: absolute;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   font-family: Arial,Tahoma,"Bitstream Vera Sans",sans-serif;
   font-size: 1em;
 }
 
 /* AUTOCOMPLETE MENU */
-#ui-theme-user-blue div {
+ul[data-sa-theme="user-blue"] div {
   display: block;
 }
-#ui-theme-user-blue.ui-menu {
+ul[data-sa-theme="user-blue"].ui-menu {
   list-style: none;
   padding: 0px;
   margin: 0;
@@ -52,44 +42,44 @@
   float: left;
   min-width: 350px;
 }
-#ui-theme-user-blue.ui-menu .ui-menu {
+ul[data-sa-theme="user-blue"].ui-menu .ui-menu {
   margin-top: -3px;
 }
-#ui-theme-user-blue.ui-menu .ui-menu-item {
+ul[data-sa-theme="user-blue"].ui-menu .ui-menu-item {
   margin: 0;
   padding: 0;
   float: left;
   clear: left;
-  width: 100%;  
+  width: 100%;
   line-height: 14px;
   font-size: 12px;
 }
-#ui-theme-user-blue.ui-menu .ui-menu-item a {
+ul[data-sa-theme="user-blue"].ui-menu .ui-menu-item a {
   text-decoration: none;
   display: block;
   padding: 0;
 }
-#ui-theme-user-blue.ui-menu .ui-menu-item a {
+ul[data-sa-theme="user-blue"].ui-menu .ui-menu-item a {
   font-weight: normal;
   margin: -1px;
 }
 
 /* Interaction States */
-#ui-theme-user-blue .ui-state-hover {
+ul[data-sa-theme="user-blue"] .ui-state-hover {
   background: none;
   border: none;
   border-radius: 0px;
   background-color: #4f4fff;
-  color: #FFFFFF;
+  color: #ffffff;
 }
-#ui-theme-user-blue .ui-autocomplete-fields {
+ul[data-sa-theme="user-blue"] .ui-autocomplete-fields {
   padding: 5px 6px;
   overflow: hidden;
 }
-#ui-theme-user-blue .ui-menu-item-first {
+ul[data-sa-theme="user-blue"] .ui-menu-item-first {
   border-top: 1px solid #a9a9f9;
 }
-#ui-theme-user-blue .ui-autocomplete-field-group {
+ul[data-sa-theme="user-blue"] .ui-autocomplete-field-group {
   background-position: right top;
   background-repeat: no-repeat;
   color: #1200db;
@@ -97,10 +87,10 @@
   position: relative;
   right: 5px;
 }
-#ui-theme-user-blue .ui-autocomplete-field-name {
+ul[data-sa-theme="user-blue"] .ui-autocomplete-field-name {
   font-size: 20px;
 }
-#ui-theme-user-blue .ui-autocomplete-field-picture {
+ul[data-sa-theme="user-blue"] .ui-autocomplete-field-picture {
   float: left;
   margin-right: 10px;
 }

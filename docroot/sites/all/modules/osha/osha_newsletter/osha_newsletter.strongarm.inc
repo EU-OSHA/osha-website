@@ -288,7 +288,7 @@ function osha_newsletter_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'osha_newsletter_listserv';
-  $strongarm->value = 'listserv@list.osha.europa.eu';
+  $strongarm->value = 'crm-oshmail@osha.europa.eu';
   $export['osha_newsletter_listserv'] = $strongarm;
 
   $strongarm = new stdClass();

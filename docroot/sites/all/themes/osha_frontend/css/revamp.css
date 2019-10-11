@@ -269,6 +269,7 @@ a.see-more-arrow{
     flex-wrap: wrap;
     justify-content: center;
     margin-bottom: 1em;
+    width: 100%;
 }
 
 .home-boxes{

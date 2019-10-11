@@ -79,32 +79,6 @@ jQuery(document).ready(function($){
 	}  
 
 
-	/* Sticky menu revamp desing */
-
-	if (!$(".no-sticky-infographic")[0]){
-	    var nav = $('#block-menu-block-1');
-		pos = nav.offset();
-		if($("body").height()>=1100){
-			if($("body").width()>= 1024) {
-				$(window).scroll(function(){
-					if ( ($(this).scrollTop() >= 340)){
-						$('#header').addClass('fixedHeader');
-						var text = '/blog';
-						var url_blog = $(location).attr('href');
-						if (url_blog.indexOf(text) != -1) {
-							$('.breadcrumb').removeClass('stickey');
-						}else{
-							$('.breadcrumb').addClass('stickey');
-						}			
-					} else if ( ($(this).scrollTop() <= 110)){
-						$('.breadcrumb').removeClass('stickey');
-						$('#header').removeClass('fixedHeader');
-					}
-				});
-			}
-		}
-	}
-
 	/* No pagerer display - move result @total results */
 	if (!$(".pagerer-pager ")[0]){
 		$('.pager-total').addClass('no-pagerer');

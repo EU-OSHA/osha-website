@@ -3,8 +3,6 @@
 (function( $ ){
 	$(document).ready(function() {
 
-		$('.messages--error').remove();
-
 		if (!$(".no-sticky-infographic")[0])
 		{
 			var prevScrollpos = $(window).offset.top;

@@ -788,3 +788,9 @@ function osha_update_7055() {
   }
 }
 
+/**
+ * MDR-3009 Development - Estimation to place the DS glossary in the Corporate website.
+ */
+function osha_update_7056() {
+  module_enable(array('osha_glossary'));
+}

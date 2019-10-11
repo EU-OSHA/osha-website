@@ -1,0 +1,11 @@
+<?php
+/**
+ * @file
+ * Code for the NCW Glossary feature.
+ */
+
+include_once 'osha_glossary.features.inc';
+/**
+ * @file
+ * Code for the NCW Glossary feature.
+ */

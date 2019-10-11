@@ -48,3 +48,11 @@ function osha_sites_migration_update_7003() {
     variable_set('hwc_migration_default_uid', $user->uid);
   }
 }
+
+/*
+ * MDR-3009 Development - Estimation to place the DS glossary in the Corporate website.
+ */
+function osha_sites_migration_update_7004() {
+  variable_set('hwc_migration_HWCGlossary_url', '/export/taxonomy/glossary');
+  variable_set('hwc_migration_HWCGlossaryType_url', '/export/taxonomy/glossary_type');
+}

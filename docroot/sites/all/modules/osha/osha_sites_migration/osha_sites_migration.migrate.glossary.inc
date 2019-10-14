@@ -49,7 +49,7 @@ class HWCGlossaryMigration extends AbstractNCWTaxonomyTermMigration {
     parent::prepareRow($row);
     $taxonomy = 'field_glossary_type';
     $vocabulary = 'glossary_type';
-    $source_migration_name = 'tax_' . $vocabulary;
+    $source_migration_name = 'HWCGlossaryType';
     if ($row->field_glossary_type) {
       $orig_taxonomies = $row->field_glossary_type;
       $original = [$row->field_glossary_type['tid']];

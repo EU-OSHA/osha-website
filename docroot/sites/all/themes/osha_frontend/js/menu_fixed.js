@@ -1,41 +1,39 @@
 // Menu scroll
-jQuery(document).ready(function() {
+/* Sticky menu revamp desing */
+(function( $ ){
+	$(document).ready(function() {
 
+		if (!$(".no-sticky-infographic")[0])
+		{
+			var prevScrollpos = $(window).offset.top;
 
-if (!jQuery(".no-sticky-infographic")[0]){
-    var nav = jQuery('#block-menu-block-1');
-	pos = nav.offset();
-	if(jQuery("body").height()>=1100){
-		// Esperamos al DOM
-		jQuery(window).scroll(function(){
-			// Anclamos el menú si el scroll es
-			// mayor a la posición superior del tag
-			if ( (jQuery(this).scrollTop() >= 170)){
-				jQuery('#header').css('top', '-150px');
-			}
-			if ( (jQuery(this).scrollTop() >= 470)){
-			// Añadimos la clase fixes al menú y la clase stickey a breadcrumb para que se siga viendo
-				//jQuery('#block-menu-block-1').addClass('fixed');
-				jQuery('#header').addClass('fixedHeader');
-				var text = '/blog';
-				var url_blog = jQuery(location).attr('href');
-				//If the URL have blog. Remove the class stickey
-				if (url_blog.indexOf(text) != -1) {
-					jQuery('.breadcrumb').removeClass('stickey');
-				}else{
-					jQuery('.breadcrumb').addClass('stickey');
-				}			
-			// Eliminamos las clases para volver a la posición original
-			} else if ( (jQuery(this).scrollTop() <= 80)){
-			// Elimina clase fixes y stickey
-				//jQuery('#block-menu-block-1').removeClass('fixed');
-				jQuery('.breadcrumb').removeClass('stickey');
-				jQuery('#header').removeClass('fixedHeader');
-			}
-		});
-	}
-}
+			$(window).on("load resize scroll",function(e){
+				if( $(window).width() > 1006 )
+				{
+					$('body').css('padding-top','12.9rem');
+				} else {
+					$('body').css('padding-top','155px');
+				}
+			});
+			
+			$('#header').addClass('fixedHeader');
 
-
-
-});
+			$(window).scroll(function(){
+		    var currentScrollPos = $(window).scrollTop();
+	      if(prevScrollpos > currentScrollPos)
+	      {
+	        $('#header').removeClass('hide-header');
+	      }
+	      else
+	      {
+					$('#header').addClass('hide-header');
+					if( ($(this).scrollTop() <= 80) )
+					{
+						//$('#header').removeClass('hide-header');
+					}		        
+	      }
+		    prevScrollpos = currentScrollPos;
+		  });
+		}
+	});
+})( jQuery );

@@ -2374,6 +2374,87 @@ article.node-seminar{
     border-bottom:0;
 }
 
+/*MDR-2930 Revamp the press room as the HWC2020 one*/
+.view-press-releases{
+    float: left;
+}
+
+.view-press-releases .img-pressreleases{
+	float: left;
+    padding-right: 1em;
+    width: 220px;
+    height: 220px;
+}
+
+.view-press-releases .img-pressreleases img{
+    width: 220px;
+    height: 173px;
+}
+
+.view-press-releases h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.view-id-press_releases .view-content .views-field-title a{
+    color: #003399;
+    font-family: 'Open Sans',sans-serif;
+    font-size: 1.3rem;
+    line-height: 1.1em;
+    text-decoration: none;
+    padding: 0;
+    border-bottom: 0px!important;
+    font-weight: bold;
+}
+
+.view-id-press_releases .view-content .views-field-title a:hover{
+    text-decoration: underline;
+}
+
+.view-press-releases span.date-display-single{
+    padding-top: 0;
+    padding-left: 0;
+    font-size:12.8px!important;
+}
+
+.view-press-releases  .views-field-body .field-content{
+    line-height: 20px;
+}
+
+.view-press-releases .row{
+    background: url(../images/separator_home.jpg) repeat-x scroll 0% 100% rgba(0,0,0,0);
+    float: left;
+    padding-top: 1em;
+    padding-bottom: 2em;
+    width: 100%;
+}
+
+.view-press-releases .views-field-view-node{
+    margin-top: 1.6em;
+    float: right;
+}
+
+.view-press-releases .views-row-even .views-field-view-node{
+    float: left;
+}
+
+.view-press-releases .views-row-even .img-pressreleases{
+    float: right;
+    padding-right: 0;
+    padding-left: 1em;
+}
+
+.view-press-releases .views-row-even .see-more-arrow{
+    margin-left: 0;
+    padding-left: 1em;
+}
+
+.view-press-releases .row .views-field-view-node span a{
+	margin-left: 0;
+    padding-left: 1em;
+}
+
+
 /*MDR-3040 Revamp Tablet Header - Language and Search box are not aligned*/
 @media only screen and (device-width: 768px) {
   /* For general iPad layouts */

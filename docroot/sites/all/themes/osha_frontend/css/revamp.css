@@ -2540,3 +2540,22 @@ article.node-seminar{
     padding-bottom: 1.3em;
     margin-top: 5px;
 }
+
+/* MDR-3272:revamp - Links to the stress e-guide are missing */
+
+.e-guide-links{
+
+}
+.e-guide-links img{
+    float: left;
+    margin-right: 1rem;
+}
+.e-guide-links ul{
+    list-style: none;
+    padding:0;
+    display: flex; 
+    justify-content: flex-start;
+}
+.e-guide-links ul li{
+    padding: 0 0.2rem;
+}

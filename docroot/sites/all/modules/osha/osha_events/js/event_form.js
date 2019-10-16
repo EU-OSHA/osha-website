@@ -38,9 +38,6 @@ jQuery(document).ready(function() {
             }
             jQuery('.description', country_div).text(Drupal.t('Mandatory'));
             jQuery('.description', city_div).text(Drupal.t('Mandatory'));
-            if (jQuery(this).val() != 'FAST') {
-              jQuery('input', city_div).val('');
-            }
             jQuery('#edit-field-city-und-0-value').removeAttr('disabled');
             jQuery('#edit-field-country-code-und').removeAttr('disabled').trigger("chosen:updated");
         }

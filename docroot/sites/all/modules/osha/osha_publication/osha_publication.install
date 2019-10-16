@@ -43,7 +43,7 @@ function osha_publication_update_7003() {
     foreach ($terms as $term_name) {
       $term = new stdClass();
       $term->vid = $vocabulary->vid;
-      $term->name = $term->name_field['en'][0]['value'] = $term_name; 
+      $term->name = $term->name_field['en'][0]['value'] = $term_name;
       $term->language = 'en';
       taxonomy_term_save($term);
     }
@@ -788,4 +788,11 @@ function osha_publication_update_7027() {
  */
 function osha_publication_update_7028() {
   module_enable(array('search_api_title2'));
+}
+
+/**
+ * MDR-3326 Create the "display in" drop down field for publications.
+ */
+function osha_publication_update_7029() {
+  features_revert(array('osha_publication' => array('field_instance')));
 }

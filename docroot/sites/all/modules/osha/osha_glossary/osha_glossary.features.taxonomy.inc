@@ -1,19 +1,19 @@
 <?php
 /**
  * @file
- * osha_publication.features.taxonomy.inc
+ * osha_glossary.features.taxonomy.inc
  */
 
 /**
  * Implements hook_taxonomy_default_vocabularies().
  */
-function osha_publication_taxonomy_default_vocabularies() {
+function osha_glossary_taxonomy_default_vocabularies() {
   return array(
-    'publication_types' => array(
-      'name' => 'Publication Types',
-      'machine_name' => 'publication_types',
+    'glossary' => array(
+      'name' => 'Glossary',
+      'machine_name' => 'glossary',
       'description' => '',
-      'hierarchy' => 1,
+      'hierarchy' => 0,
       'module' => 'taxonomy',
       'weight' => 0,
       'language' => 'und',
@@ -34,10 +34,10 @@ function osha_publication_taxonomy_default_vocabularies() {
         ),
       ),
     ),
-    'relevant_for' => array(
-      'name' => 'Relevant for',
-      'machine_name' => 'relevant_for',
-      'description' => 'Tag publications that will be displayed in Campaign website',
+    'glossary_type' => array(
+      'name' => 'Glossary type',
+      'machine_name' => 'glossary_type',
+      'description' => '',
       'hierarchy' => 0,
       'module' => 'taxonomy',
       'weight' => 0,

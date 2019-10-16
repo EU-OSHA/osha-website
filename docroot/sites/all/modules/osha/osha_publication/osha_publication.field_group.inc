@@ -48,7 +48,7 @@ function osha_publication_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Summary & Resources',
-    'weight' => '15',
+    'weight' => '16',
     'children' => array(
       0 => 'field_publication_related_res',
       1 => 'field_related_publications',

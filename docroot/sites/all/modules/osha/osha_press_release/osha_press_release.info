@@ -23,6 +23,7 @@ dependencies[] = osha
 dependencies[] = osha_highlight
 dependencies[] = osha_publication
 dependencies[] = osha_taxonomies
+dependencies[] = smart_trim
 dependencies[] = strongarm
 dependencies[] = taxonomy
 dependencies[] = text

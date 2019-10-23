@@ -3,10 +3,8 @@
 include_once 'includes/AbstractNcwNodeMigration.php';
 include_once 'includes/AbstractNcwNodeSource.php';
 include_once 'includes/migrate_utils.php';
-include_once 'osha_sites_migration.migrate.inc';
 include_once 'osha_sites_migration.migrate.news.inc';
 include_once 'osha_sites_migration.migrate.events.inc';
-include_once 'osha_sites_migration.migrate.glossary.inc';
 include_once 'osha_sites_migration.migrate.oira_news.inc';
 
 
@@ -124,16 +122,6 @@ function osha_sites_migration_migrate_api() {
       'HWCNews' => array(
         'group_name' => 'hwc',
         'class_name' => 'HWCNewsMigration',
-        'site_source' => 'hwc',
-      ),
-      'HWCGlossaryType' => array(
-        'group_name' => 'hwc',
-        'class_name' => 'HWCGlossaryTypeMigration',
-        'site_source' => 'hwc',
-      ),
-      'HWCGlossary' => array(
-        'group_name' => 'hwc',
-        'class_name' => 'HWCGlossaryMigration',
         'site_source' => 'hwc',
       ),
       'OiraNews' => array(

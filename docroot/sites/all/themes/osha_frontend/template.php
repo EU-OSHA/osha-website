@@ -372,7 +372,7 @@ function fill_related_publications(&$vars) {
           break;
         }
       }
-      $vars['view_all'] = l(t('View all'), 'related-content/' . $vars['node']->nid . '/publications/' . implode('+', $tids));
+      $vars['view_all'] = l(t('View all'), 'related-content/' . $vars['node']->nid . '/publication/' . implode('+', $tids));
     }
   }
 }

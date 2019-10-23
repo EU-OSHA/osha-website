@@ -61,7 +61,14 @@ header{
 	padding-left:0px!important;
 	padding-right:0px!important;
 }
-
+#header.hide-header{
+	position: fixed;
+	top: -12rem !important;
+  -webkit-transition: all 0.6s; 
+  transition: all 0.6s;
+  z-index: 999999999;
+  width: 100%;
+}
 .a_small a{
 	//padding-left:0.5em;
 	padding-right:0.2em;
@@ -8391,22 +8398,22 @@ body.page-entity-collection h1#page-title{
 		display: none;
 	}
 	.fixedHeader #agencyLogo a img{
-		margin-top: 10px;
-	    width: 180px;
+		//margin-top: 10px;
+	  //width: 180px;
 	}
 
 	.fixedHeader #europeLogo{
-	    margin: 2.5em 0em 0em 1.5em;
+	  //margin: 2.5em 0em 0em 1.5em;
 	}
 	.fixedHeader #europeLogo img{
-	    width: 50px;
+	  //width: 50px;
 	}
 	.fixedHeader #multi-lingual-award{
-		margin-top: 8px;
-		margin-left: 10px;
+		//margin-top: 8px;
+		//margin-left: 10px;
 	}
 	.fixedHeader #multi-lingual-award img{
-		max-width: 140px;
+		//max-width: 140px;
 	}
 
 	.fixedHeader #block-menu-block-1{
@@ -9586,5 +9593,3 @@ table.quiz-feedback-table.sticky-enabled.tableheader-processed.sticky-table > tb
     border: 1px solid #003399; 
     color: #FFF;
 }
-
-/*END RLR QUIZ - MDR-2848 - 25th Anniversary Quiz report ***************************/

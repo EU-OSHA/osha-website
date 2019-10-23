@@ -172,7 +172,8 @@ div.view-header.back.revamp{
 }
 
 .new-select-style, .form-select{
-    min-height: 34px;
+    /*MDR-3262 - revamp: Publications detail. Decrease the box to chose the language to download*/
+    /*min-height: 34px;*/
     height: auto;
     border: 1px solid #003399;
     border-radius: 5px;
@@ -268,6 +269,7 @@ a.see-more-arrow{
     flex-wrap: wrap;
     justify-content: center;
     margin-bottom: 1em;
+    width: 100%;
 }
 
 .home-boxes{
@@ -1316,6 +1318,8 @@ html[lang=hu] .page-tools-and-publications .views-exposed-widget label{
 
 .content-publication-info span.date-display-single{
     padding: 0;
+    /*MDR-3263 revamp - Publications: too small font size for type and number of pages*/
+    font-size: 0.9rem !important;
 }
 
 .content-pagination{
@@ -1357,6 +1361,8 @@ html[lang=hu] .page-tools-and-publications .views-exposed-widget label{
     float: left;
     width: 100%;
     padding-bottom: 2em;
+    /*MDR-3261 revamp: publications detail too much space for the intro text*/
+    border-bottom: 1px solid #003399;
 }
 
 .page-publication-detail .publications-detail h1{
@@ -1392,7 +1398,9 @@ html[lang=hu] .page-tools-and-publications .views-exposed-widget label{
 
 .page-publication-detail .content-publication-info{
     padding-top:0;
-    font-size: 0.7rem;
+    /*MDR-3263 - revamp - Publications: too small font size for type and number of pages*/
+    /*font-size: 0.7rem;*/
+    font-size: 0.9rem;
 }
 
 .page-publication-detail .content-publication-info .date-display-single{
@@ -1464,7 +1472,9 @@ span.title-download {
 
 .content-languages-download .new-select-style{
     width: 196px!important;
-    background: url(../images/pink-select.png) no-repeat scroll 96% 11px transparent;
+    /*MDR-3262 - revamp: Publications detail. Decrease the box to chose the language to download*/
+    /*background: url(../images/pink-select.png) no-repeat scroll 96% 11px transparent;*/
+    background: url(../images/pink-select.png) no-repeat scroll 96% center transparent;
     color: #003399;
     float: left;
     margin-right: 0.5em;
@@ -2317,6 +2327,134 @@ article.node-seminar{
 	margin-top: 1em;
 }
 
+/*Remove double arrow in Focal points detail pages*/
+.view-fop-page-links div a{
+    background:none;
+}
+
+/*MDR-3279 Wrong display of the pdf files*/
+.field-name-field-colection-related-resource .field-label{
+    font-family: 'Open Sans',sans-serif;
+    background: transparent;
+    padding-left: 0;
+    font-weight: 600;
+    font-size: 1.35rem;
+    color: #003399;
+    margin-bottom: 0;
+    line-height: 30px;
+}
+
+.field-name-field-colection-related-resource .field-items .field-item {
+    margin-bottom:0;
+}
+
+.field-name-field-colection-related-resource .field-items .field-item .field-collection-view{
+    padding: 0.3em 0 1em 0;
+    background: url(/sites/all/themes/osha_frontend/images/back-tit-blue.png) repeat-x scroll 0 100% transparent;
+    border-bottom:none;
+}
+
+.field-collection-item-field-colection-related-resource .content .field-name-field-related-resource-title .field-label{
+    display:none;
+}
+
+.field-collection-item-field-colection-related-resource .content .field-name-field-related-resource-title .field-items .field-item{
+    font-size: 1.17em;
+    font-weight: bold;
+    line-height: 1.28205em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.field-collection-item-field-colection-related-resource .content .field-name-field-related-resources-files .field-label{
+    display:none;
+}
+
+.field-collection-container{
+    border-bottom:0;
+}
+
+/*MDR-2930 Revamp the press room as the HWC2020 one*/
+.view-press-releases{
+    float: left;
+}
+
+.view-press-releases .img-pressreleases{
+	float: left;
+    padding-right: 1em;
+    width: 220px;
+    height: 220px;
+}
+
+.view-press-releases .img-pressreleases img{
+    width: 220px;
+    height: 173px;
+}
+
+.view-press-releases h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.view-id-press_releases .view-content .views-field-title a{
+    color: #003399;
+    font-family: 'Open Sans',sans-serif;
+    font-size: 1.3rem;
+    line-height: 1.1em;
+    text-decoration: none;
+    padding: 0;
+    border-bottom: 0px!important;
+    font-weight: bold;
+}
+
+.view-id-press_releases .view-content .views-field-title a:hover{
+    text-decoration: underline;
+}
+
+.view-press-releases span.date-display-single{
+    padding-top: 0;
+    padding-left: 0;
+    font-size:12.8px!important;
+}
+
+.view-press-releases  .views-field-body .field-content{
+    line-height: 20px;
+}
+
+.view-press-releases .row{
+    background: url(../images/separator_home.jpg) repeat-x scroll 0% 100% rgba(0,0,0,0);
+    float: left;
+    padding-top: 1em;
+    padding-bottom: 2em;
+    width: 100%;
+}
+
+.view-press-releases .views-field-view-node{
+    margin-top: 1.6em;
+    float: right;
+}
+
+.view-press-releases .views-row-even .views-field-view-node{
+    float: left;
+}
+
+.view-press-releases .views-row-even .img-pressreleases{
+    float: right;
+    padding-right: 0;
+    padding-left: 1em;
+}
+
+.view-press-releases .views-row-even .see-more-arrow{
+    margin-left: 0;
+    padding-left: 1em;
+}
+
+.view-press-releases .row .views-field-view-node span a{
+	margin-left: 0;
+    padding-left: 1em;
+}
+
+
 /*MDR-3040 Revamp Tablet Header - Language and Search box are not aligned*/
 @media only screen and (device-width: 768px) {
   /* For general iPad layouts */
@@ -2326,7 +2464,82 @@ article.node-seminar{
     }
 }
 
-/* MDR-3272:revamp - Links to the stress e-guide are missing */
+/* MDR-3009 - Development - Estimation to place the DS glossary in the Corporate website */
+
+.view-glossary-list .glossary_type .type-name{
+    margin: 0;
+    outline: 0;
+    line-height: 1.3;
+    text-decoration: none;
+    list-style: none;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    height: auto;
+    font-family: 'Open Sans Condensed';
+    font-size: 1.35em;
+    font-weight: bold;
+    color: #003399;
+    background: #e8eef7;
+    border: 0px;
+    margin-bottom: 0.3em;
+    display: block;
+    cursor: pointer;
+    position: relative;
+    min-height: 0;
+    width: 86%;
+    padding-right: 1.5em;
+    padding-left: 0.5em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+    margin-top: 10px;
+    position: relative;
+}
+
+.view-glossary-list .glossary_type .type-name .glyphicon-triangle-bottom{
+    background: url(/sites/all/themes/osha_frontend/images/triangle-collapsed.png) no-repeat scroll 96% center transparent;
+    display: block;
+    position: absolute;
+    right: 18px;
+    width: 28px;
+    height: 28px;
+}
+
+.glossary_type.active .type-name .glyphicon-triangle-bottom{
+    background: url(/sites/all/themes/osha_frontend/images/triangle-expanded.png) no-repeat scroll 96% center transparent;
+}
+
+.view-glossary-list .glossary_type.active:nth-child(1) .type-name .glyphicon-triangle-bottom{
+    background: url(/sites/all/themes/osha_frontend/images/triangle-collapsed.png) no-repeat scroll 96% center transparent;
+}
+
+.view-glossary-list .glossary_type:nth-child(1) .type-name .glyphicon-triangle-bottom{
+    background: url(/sites/all/themes/osha_frontend/images/triangle-expanded.png) no-repeat scroll 96% center transparent;
+}
+
+.view-glossary-list .glossary_type .term-title{
+    color: #003399;
+    padding-left: 2em;
+    font-weight: bold;
+}
+
+.glossary_type > .content-term, .view-glossary-list .glossary_type.active:nth-child(1)  > .content-term{ 
+    max-height: 0;
+    transition: max-height 0.4s ease-out;
+    overflow: hidden;
+    width: 87%;
+}
+
+.glossary_type.active > .content-term, .view-glossary-list .glossary_type:nth-child(1)  > .content-term{
+    max-height: 500rem;
+    transition: max-height 0.8s ease-in;
+    width: 87%;
+}
+
+.view-glossary-list .term-description p{
+    background: url(/sites/all/themes/osha_frontend/images/back-tit-blue.png) repeat-x scroll 0 100% transparent;
+    padding-bottom: 1.3em;
+    margin-top: 5px;
+}
 
 .e-guide-links{
     margin: 1rem 0 0;

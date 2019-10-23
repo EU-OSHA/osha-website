@@ -200,7 +200,7 @@ abstract class AbstractNCWNodeMigration extends Migration {
         $normalizer = 'osha_migration_normalize_field_' . $fi['type'];
         if (function_exists($normalizer)) {
           $filter_languages = array();
-          if (!$this->allowMigrateTranslation()) {
+          if (!$this->allowMigrateTranslation() && $field_name != 'field_show_on') {
             $filter_languages = array('en');
           }
           $normalizer($row, $field_name, $fi, $filter_languages);

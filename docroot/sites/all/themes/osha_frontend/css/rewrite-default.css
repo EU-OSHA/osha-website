@@ -1,5 +1,5 @@
 .fixedHeader{
-    transition: top 0.8s linear;
+    transition: top 0.6s linear;
     top:0px!important;
 }
 
@@ -587,7 +587,7 @@ footer{
     }
 
     .fixedHeader #lang-dropdown-select-language_content{
-        margin-top: -76px;
+       // margin-top: -76px;
     }
 
 }

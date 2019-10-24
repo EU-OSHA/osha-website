@@ -2508,11 +2508,11 @@ article.node-seminar{
     background: url(/sites/all/themes/osha_frontend/images/triangle-expanded.png) no-repeat scroll 96% center transparent;
 }
 
-.view-glossary-list .glossary_type.active:nth-child(1) .type-name .glyphicon-triangle-bottom{
+.view-glossary-list .glossary_type.active:nth-child(4) .type-name .glyphicon-triangle-bottom{
     background: url(/sites/all/themes/osha_frontend/images/triangle-collapsed.png) no-repeat scroll 96% center transparent;
 }
 
-.view-glossary-list .glossary_type:nth-child(1) .type-name .glyphicon-triangle-bottom{
+.view-glossary-list .glossary_type:nth-child(4) .type-name .glyphicon-triangle-bottom{
     background: url(/sites/all/themes/osha_frontend/images/triangle-expanded.png) no-repeat scroll 96% center transparent;
 }
 
@@ -2522,14 +2522,14 @@ article.node-seminar{
     font-weight: bold;
 }
 
-.glossary_type > .content-term, .view-glossary-list .glossary_type.active:nth-child(1)  > .content-term{ 
+.glossary_type > .content-term, .view-glossary-list .glossary_type.active:nth-child(4)  > .content-term{ 
     max-height: 0;
     transition: max-height 0.4s ease-out;
     overflow: hidden;
     width: 87%;
 }
 
-.glossary_type.active > .content-term, .view-glossary-list .glossary_type:nth-child(1)  > .content-term{
+.glossary_type.active > .content-term, .view-glossary-list .glossary_type:nth-child(4)  > .content-term{
     max-height: 500rem;
     transition: max-height 0.8s ease-in;
     width: 87%;

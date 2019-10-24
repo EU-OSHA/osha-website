@@ -172,8 +172,7 @@ div.view-header.back.revamp{
 }
 
 .new-select-style, .form-select{
-    /*MDR-3262 - revamp: Publications detail. Decrease the box to chose the language to download*/
-    /*min-height: 34px;*/
+    min-height: 34px;
     height: auto;
     border: 1px solid #003399;
     border-radius: 5px;
@@ -1474,6 +1473,7 @@ span.title-download {
     width: 196px!important;
     /*MDR-3262 - revamp: Publications detail. Decrease the box to chose the language to download*/
     /*background: url(../images/pink-select.png) no-repeat scroll 96% 11px transparent;*/
+    min-height: auto;
     background: url(../images/pink-select.png) no-repeat scroll 96% center transparent;
     color: #003399;
     float: left;

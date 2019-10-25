@@ -1341,13 +1341,7 @@ html[lang=hu] .page-tools-and-publications .views-exposed-widget label{
     font-weight: bold;
 }
 
-.pager-total.default-view{
-    top: -32px;
-}
 
-.pager-total.default-view.no-pagerer{ 
-    top: 0;
-}
 
 /* Publication detail */
 

@@ -172,8 +172,7 @@ div.view-header.back.revamp{
 }
 
 .new-select-style, .form-select{
-    /*MDR-3262 - revamp: Publications detail. Decrease the box to chose the language to download*/
-    /*min-height: 34px;*/
+    min-height: 34px;
     height: auto;
     border: 1px solid #003399;
     border-radius: 5px;
@@ -1342,13 +1341,7 @@ html[lang=hu] .page-tools-and-publications .views-exposed-widget label{
     font-weight: bold;
 }
 
-.pager-total.default-view{
-    top: -32px;
-}
 
-.pager-total.default-view.no-pagerer{ 
-    top: 0;
-}
 
 /* Publication detail */
 
@@ -1474,6 +1467,7 @@ span.title-download {
     width: 196px!important;
     /*MDR-3262 - revamp: Publications detail. Decrease the box to chose the language to download*/
     /*background: url(../images/pink-select.png) no-repeat scroll 96% 11px transparent;*/
+    min-height: auto;
     background: url(../images/pink-select.png) no-repeat scroll 96% center transparent;
     color: #003399;
     float: left;
@@ -2508,11 +2502,11 @@ article.node-seminar{
     background: url(/sites/all/themes/osha_frontend/images/triangle-expanded.png) no-repeat scroll 96% center transparent;
 }
 
-.view-glossary-list .glossary_type.active:nth-child(1) .type-name .glyphicon-triangle-bottom{
+.view-glossary-list .glossary_type.active:nth-child(4) .type-name .glyphicon-triangle-bottom{
     background: url(/sites/all/themes/osha_frontend/images/triangle-collapsed.png) no-repeat scroll 96% center transparent;
 }
 
-.view-glossary-list .glossary_type:nth-child(1) .type-name .glyphicon-triangle-bottom{
+.view-glossary-list .glossary_type:nth-child(4) .type-name .glyphicon-triangle-bottom{
     background: url(/sites/all/themes/osha_frontend/images/triangle-expanded.png) no-repeat scroll 96% center transparent;
 }
 
@@ -2522,14 +2516,14 @@ article.node-seminar{
     font-weight: bold;
 }
 
-.glossary_type > .content-term, .view-glossary-list .glossary_type.active:nth-child(1)  > .content-term{ 
+.glossary_type > .content-term, .view-glossary-list .glossary_type.active:nth-child(4)  > .content-term{ 
     max-height: 0;
     transition: max-height 0.4s ease-out;
     overflow: hidden;
     width: 87%;
 }
 
-.glossary_type.active > .content-term, .view-glossary-list .glossary_type:nth-child(1)  > .content-term{
+.glossary_type.active > .content-term, .view-glossary-list .glossary_type:nth-child(4)  > .content-term{
     max-height: 500rem;
     transition: max-height 0.8s ease-in;
     width: 87%;
@@ -2566,4 +2560,11 @@ article.node-seminar{
 }
 .e-guide-links ul li a:hover{
     background: #f2f2f2;
+}
+
+
+.ui-accordion-content .view .view-header{
+    margin-top: 0;
+    color: #000;
+    font-size: 1em;
 }

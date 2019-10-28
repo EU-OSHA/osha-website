@@ -318,7 +318,10 @@ ul[data-sa-theme="basic-blue"].ui-menu {
 
 table.pagerer{
     margin: 0 auto;
-    width: auto;
+    width: 100%;
+    float: left;
+    display: flex;
+    justify-content: center;
 }
 
 table.pagerer tbody tr td div.item-list, table.pagerer tbody tr td div.item-list ul.pager{
@@ -930,6 +933,7 @@ label{
 
 .view-footer{
     position: relative;
+    height: 60px;
 }
 
 .sidebars_second .pager-total{

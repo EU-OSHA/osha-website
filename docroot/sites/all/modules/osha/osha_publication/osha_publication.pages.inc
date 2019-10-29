@@ -186,6 +186,7 @@ function osha_publication_menu_publications_search_native($form_state) {
     }
     if (empty($restrict)) {
       return array(
+        '#prefix' => '<p>' . t('No results') . '</p>',
         '#nids' => '',
       );
     }

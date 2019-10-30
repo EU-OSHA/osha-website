@@ -2541,6 +2541,8 @@ article.node-seminar{
     margin-top: 5px;
 }
 
+/* MDR-3272:revamp - Links to the stress e-guide are missing */
+
 .e-guide-links{
     margin: 1rem 0 0;
 }
@@ -2564,4 +2566,11 @@ article.node-seminar{
 }
 .e-guide-links ul li a:hover{
     background: #f2f2f2;
+}
+
+
+.ui-accordion-content .view .view-header{
+    margin-top: 0;
+    color: #000;
+    font-size: 1em;
 }

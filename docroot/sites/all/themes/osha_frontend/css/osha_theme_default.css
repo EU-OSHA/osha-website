@@ -1332,7 +1332,7 @@ span.date-display-single{
 	margin:0;
 	padding:0;
 	float: left;
-	margin:0.5rem 2% 0.5rem 0;
+	margin:0.5rem 2% 0.7rem 0;
 	overflow: hidden;
 	position: relative;
 	width: 30%;
@@ -1387,9 +1387,7 @@ span.date-display-single{
 #block-menu-block-3 .introduction-image img{
 	width: 100%;
 }
-.menu-block-3 blockquote.image-field-caption{
-  display: none;
-}
+
 /*END ARTICLES*/
 
 /*ACCORDION*/
@@ -8921,32 +8919,81 @@ div.flickr-photoset{
 /*caption images*/
 
 blockquote.image-field-caption{
-	font-size: 1.2rem;
-    color: #000;
-    background-color: transparent;
-    position: relative;
-    bottom: 0;
-    width: auto;
-    height: 1%;
-    text-align: left;
-    border-left: 0;
-    margin: -12px 0 0 0;
-    line-height: 15px;
+  color: #000;
+  background-color: transparent;
+  position: relative;
+  bottom: 0;
+  width: auto;
+  height: 1%;
+  text-align: left;
+  border-left: 0;
+  margin: -6px 0 0 0;
+  line-height: 15px;
 }
 
 blockquote.image-field-caption p{
 	font-size: 10px;
 	width: auto;
 	color:#000;
-	margin-top: 5px;
+	margin:0px;
 }
 
 blockquote.image-field-caption span.blockquote-copyright{
 	padding: 0;
 	margin: 0;
-	font-size:1rem;
+	font-size: 10px;
 }
-
+.menu-block-3 blockquote.image-field-caption{
+	margin: -6px 0 0 0;
+}
+.menu-block-3 blockquote.image-field-caption p, 
+.menu-block-3 blockquote.image-field-caption span, 
+.menu-block-3 blockquote.image-field-caption span.blockquote-copyright{
+	font-size: 10px;
+  color: #000;
+  background-color: transparent;
+  position: relative;
+  font-family: "Open Sans";
+  display: inline;
+  line-height: 5px;
+  margin:0;
+}
+.page-node-20 .content-box-sub{
+	background: transparent;
+	margin-bottom: 1.5em;
+}
+.page-node-20 .content-box-sub .content-img{
+  display: flex;
+  position: relative;
+  flex-direction: column;
+	position: relative;
+}
+.page-node-20 .content-box-sub .content-img img{
+	float: none;
+  order: 1;
+}
+.page-node-20 .content-box-sub .content-img h2{
+  order: 2;
+}
+.page-node-20 .content-box-sub blockquote.image-field-caption{
+	margin: 0;
+	width: 100%;
+	height: auto;
+	padding:0;
+  order: 3;
+}
+.content-box-sub blockquote.image-field-caption p, 
+.content-box-sub blockquote.image-field-caption span, 
+.content-box-sub blockquote.image-field-caption span.blockquote-copyright{
+	font-size: 10px;
+  color: #000;
+  background-color: transparent;
+  position: relative;
+  font-family: "Open Sans";
+  display: inline;
+  line-height: 5px;
+  margin: 5px 0;
+}
 .views-field-field-copyright{
 	margin-bottom: 0px !important;
 }

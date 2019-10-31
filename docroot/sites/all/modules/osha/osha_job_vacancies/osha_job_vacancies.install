@@ -91,3 +91,10 @@ function osha_job_vacancies_update_7006() {
   features_revert_module('osha_job_vacancies');
   features_revert(array('osha_alert_service' => array('views_view')));
 }
+
+/**
+ * MDR-3303 new field on vacancies and changes on view
+ */
+function osha_job_vacancies_update_7007() {
+  features_revert_module('osha_job_vacancies');
+}

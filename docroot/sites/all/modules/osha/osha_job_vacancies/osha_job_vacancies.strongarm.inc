@@ -162,22 +162,22 @@ function osha_job_vacancies_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'path' => array(
-          'weight' => '24',
+          'weight' => '23',
         ),
         'redirect' => array(
-          'weight' => '25',
+          'weight' => '24',
         ),
         'language' => array(
           'weight' => '0',
         ),
         'metatags' => array(
-          'weight' => '26',
+          'weight' => '25',
         ),
         'workbench_access' => array(
           'weight' => '0',
         ),
         'xmlsitemap' => array(
-          'weight' => '29',
+          'weight' => '28',
         ),
       ),
       'display' => array(),

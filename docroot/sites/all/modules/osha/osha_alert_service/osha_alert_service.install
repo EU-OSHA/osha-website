@@ -174,3 +174,10 @@ function osha_alert_service_update_7004() {
 function osha_alert_service_update_7005() {
   features_revert(array('osha_alert_service' => array('views_view')));
 }
+
+/**
+ * MDR-3303 RSS vacancies view update
+ */
+function osha_alert_service_update_7006() {
+  features_revert(array('osha_alert_service' => array('views_view')));
+}

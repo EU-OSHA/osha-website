@@ -95,6 +95,17 @@ function osha_flickr_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Contextual filter: Content: Photo Gallery Type (field_photo_gallery_type) */
+  $handler->display->display_options['arguments']['field_photo_gallery_type_tid']['id'] = 'field_photo_gallery_type_tid';
+  $handler->display->display_options['arguments']['field_photo_gallery_type_tid']['table'] = 'field_data_field_photo_gallery_type';
+  $handler->display->display_options['arguments']['field_photo_gallery_type_tid']['field'] = 'field_photo_gallery_type_tid';
+  $handler->display->display_options['arguments']['field_photo_gallery_type_tid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_photo_gallery_type_tid']['exception']['value'] = '-';
+  $handler->display->display_options['arguments']['field_photo_gallery_type_tid']['default_argument_type'] = 'raw';
+  $handler->display->display_options['arguments']['field_photo_gallery_type_tid']['default_argument_options']['index'] = '0';
+  $handler->display->display_options['arguments']['field_photo_gallery_type_tid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_photo_gallery_type_tid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_photo_gallery_type_tid']['summary_options']['items_per_page'] = '25';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -135,9 +146,71 @@ function osha_flickr_views_default_views() {
     t('next ›'),
     t('last »'),
     t('<span class="gallery_list_detail_container">[field_publication_date][title]</span>'),
+    t('All'),
     t('Page'),
   );
   $export['flickr_albums'] = $view;
+
+  $view = new view();
+  $view->name = 'gallery_types';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'taxonomy_term_data';
+  $view->human_name = 'gallery types';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Field: Field: Image */
+  $handler->display->display_options['fields']['field_image']['id'] = 'field_image';
+  $handler->display->display_options['fields']['field_image']['table'] = 'field_data_field_image';
+  $handler->display->display_options['fields']['field_image']['field'] = 'field_image';
+  $handler->display->display_options['fields']['field_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_image']['settings'] = array(
+    'image_style' => 'infographic_thumbnail',
+    'image_link' => '',
+  );
+  /* Field: Taxonomy term: Name */
+  $handler->display->display_options['fields']['name_field']['id'] = 'name_field';
+  $handler->display->display_options['fields']['name_field']['table'] = 'field_data_name_field';
+  $handler->display->display_options['fields']['name_field']['field'] = 'name_field';
+  $handler->display->display_options['fields']['name_field']['link_to_entity'] = 0;
+  /* Filter criterion: Taxonomy vocabulary: Machine name */
+  $handler->display->display_options['filters']['machine_name']['id'] = 'machine_name';
+  $handler->display->display_options['filters']['machine_name']['table'] = 'taxonomy_vocabulary';
+  $handler->display->display_options['filters']['machine_name']['field'] = 'machine_name';
+  $handler->display->display_options['filters']['machine_name']['value'] = array(
+    'photo_gallery_type' => 'photo_gallery_type',
+  );
+  $translatables['gallery_types'] = array(
+    t('Master'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('Image'),
+    t('Name'),
+  );
+  $export['gallery_types'] = $view;
 
   return $export;
 }

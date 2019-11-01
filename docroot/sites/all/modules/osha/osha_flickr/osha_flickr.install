@@ -34,3 +34,10 @@ function osha_flickr_update_7004() {
 function osha_flickr_update_7005() {
   features_revert_module('osha_flickr');
 }
+
+/**
+ * MDR-3315 NCW - Photo Gallery.
+ */
+function osha_flickr_update_7005() {
+  features_revert_module('osha_flickr');
+}

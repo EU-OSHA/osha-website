@@ -672,6 +672,15 @@ function osha_flickr_theme() {
     );
     // Theme function for the primary photo formatters of a Flickr photo set.
   }
+  $path = drupal_get_path('module', 'osha_flickr');
+  $themes['photo_gallery_types'] = array(
+    'template' => 'photo_gallery_types',
+    'variables' => array(
+      'rows' => NULL,
+    ),
+    'path' => $path . '/templates'
+  );
+
   return $themes + array(
       'osha_flickr_photo' => array(
         'variables' => array(

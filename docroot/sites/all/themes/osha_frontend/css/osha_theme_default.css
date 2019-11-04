@@ -55,6 +55,13 @@ h2{
 	font-size:1.1em;
 }
 
+body.logged-in{
+  padding-top: 17.9rem !important; 
+}
+body.logged-in .fixedHeader{
+	top: 60px!important;
+}
+
 header{
 	background-color:#FFFFFF;
 	margin:0px;

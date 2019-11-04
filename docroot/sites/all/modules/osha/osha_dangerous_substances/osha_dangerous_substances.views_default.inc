@@ -87,7 +87,7 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_country_other']['table'] = 'field_data_field_country_other';
   $handler->display->display_options['fields']['field_country_other']['field'] = 'field_country_other';
   $handler->display->display_options['fields']['field_country_other']['type'] = 'text_plain';
-  /* Field: Content: URL */
+  /* Field: Content: External URL */
   $handler->display->display_options['fields']['field_external_url']['id'] = 'field_external_url';
   $handler->display->display_options['fields']['field_external_url']['table'] = 'field_data_field_external_url';
   $handler->display->display_options['fields']['field_external_url']['field'] = 'field_external_url';
@@ -801,7 +801,7 @@ function osha_dangerous_substances_views_default_views() {
     t('Languages other'),
     t('Country'),
     t('Country other'),
-    t('URL'),
+    t('External URL'),
     t('Type of item'),
     t('Date of Publication / Year '),
     t('Sector / Industry covered other'),
@@ -1385,6 +1385,13 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['tags']['first'] = '«';
+  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹';
+  $handler->display->display_options['pager']['options']['tags']['next'] = '›';
+  $handler->display->display_options['pager']['options']['tags']['last'] = '»';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Header: Global: Result summary */
@@ -1641,10 +1648,10 @@ function osha_dangerous_substances_views_default_views() {
     t('Items per page'),
     t('- All -'),
     t('Offset'),
-    t('« first'),
-    t('‹ previous'),
-    t('next ›'),
-    t('last »'),
+    t('«'),
+    t('‹'),
+    t('›'),
+    t('»'),
     t('@order Showing @start - @end from @total'),
     t('No results'),
     t('Node ID'),

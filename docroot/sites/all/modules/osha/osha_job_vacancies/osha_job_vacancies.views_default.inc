@@ -22,7 +22,7 @@ function osha_job_vacancies_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Job vacancies';
+  $handler->display->display_options['title'] = 'Reserve lists';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'View all';
   $handler->display->display_options['access']['type'] = 'perm';
@@ -168,6 +168,14 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['operator'] = '>=';
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['granularity'] = 'minute';
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['default_date'] = 'now';
+  /* Filter criterion: Content: Reserve List (field_reserve_list) */
+  $handler->display->display_options['filters']['field_reserve_list_value']['id'] = 'field_reserve_list_value';
+  $handler->display->display_options['filters']['field_reserve_list_value']['table'] = 'field_data_field_reserve_list';
+  $handler->display->display_options['filters']['field_reserve_list_value']['field'] = 'field_reserve_list_value';
+  $handler->display->display_options['filters']['field_reserve_list_value']['operator'] = 'not';
+  $handler->display->display_options['filters']['field_reserve_list_value']['value'] = array(
+    1 => '1',
+  );
   $handler->display->display_options['path'] = 'open_job_vacancies';
 
   /* Display: Closed job vacancies PAGE */
@@ -368,9 +376,74 @@ function osha_job_vacancies_views_default_views() {
   $handler->display->display_options['filters']['field_expiration_date_value']['granularity'] = 'minute';
   $handler->display->display_options['filters']['field_expiration_date_value']['default_date'] = 'now';
   $handler->display->display_options['path'] = 'closed-jobs-preview';
+
+  /* Display: Reserve list TAB */
+  $handler = $view->new_display('page', 'Reserve list TAB', 'page_5');
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['empty'] = TRUE;
+  $handler->display->display_options['header']['area']['content'] = '<p id="tmgmt-1">Reserve lists are composed of the candidates who came for an interview at the time of the recruitment procedure for the posts listed and who obtained the best overall marks. Candidates in the reserve list may be offered contracts at a later date without subsequent selection procedure.</p><p id="tmgmt-2">For some Contract Agent positions, EU-OSHA may use the EPSO database.</p>';
+  $handler->display->display_options['header']['area']['format'] = 'full_html_minimal';
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'Currently, there are no vacancies available in this section.';
+  $handler->display->display_options['empty']['area']['format'] = 'full_html_minimal';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'job_vacancies' => 'job_vacancies',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Workbench Moderation: Published */
+  $handler->display->display_options['filters']['published']['id'] = 'published';
+  $handler->display->display_options['filters']['published']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['published']['field'] = 'published';
+  $handler->display->display_options['filters']['published']['value'] = '1';
+  $handler->display->display_options['filters']['published']['group'] = 1;
+  /* Filter criterion: Field: Publication date (field_publication_date) */
+  $handler->display->display_options['filters']['field_publication_date_value']['id'] = 'field_publication_date_value';
+  $handler->display->display_options['filters']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
+  $handler->display->display_options['filters']['field_publication_date_value']['field'] = 'field_publication_date_value';
+  $handler->display->display_options['filters']['field_publication_date_value']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_publication_date_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_publication_date_value']['default_date'] = 'now';
+  /* Filter criterion: Content: Deadline (field_job_vacancies_deadline) */
+  $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['id'] = 'field_job_vacancies_deadline_value';
+  $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['table'] = 'field_data_field_job_vacancies_deadline';
+  $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['field'] = 'field_job_vacancies_deadline_value';
+  $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['operator'] = '>=';
+  $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['default_date'] = 'now';
+  $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['year_range'] = '-10:+10';
+  /* Filter criterion: Content: Reserve List (field_reserve_list) */
+  $handler->display->display_options['filters']['field_reserve_list_value']['id'] = 'field_reserve_list_value';
+  $handler->display->display_options['filters']['field_reserve_list_value']['table'] = 'field_data_field_reserve_list';
+  $handler->display->display_options['filters']['field_reserve_list_value']['field'] = 'field_reserve_list_value';
+  $handler->display->display_options['filters']['field_reserve_list_value']['value'] = array(
+    1 => '1',
+  );
+  $handler->display->display_options['path'] = 'open_job_reserve_list';
   $translatables['vacancies'] = array(
     t('Master'),
-    t('Job vacancies'),
+    t('Reserve lists'),
     t('View all'),
     t('Apply'),
     t('Reset'),
@@ -391,6 +464,8 @@ function osha_job_vacancies_views_default_views() {
     t('Evaluation underway job vacancies TAB'),
     t('Closed job vacancies TAB'),
     t('<a href="inside-eu-osha/careers">Careers</a>'),
+    t('Reserve list TAB'),
+    t('<p id="tmgmt-1">Reserve lists are composed of the candidates who came for an interview at the time of the recruitment procedure for the posts listed and who obtained the best overall marks. Candidates in the reserve list may be offered contracts at a later date without subsequent selection procedure.</p><p id="tmgmt-2">For some Contract Agent positions, EU-OSHA may use the EPSO database.</p>'),
   );
   $export['vacancies'] = $view;
 

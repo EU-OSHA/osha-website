@@ -28,12 +28,12 @@ function osha_job_vacancies_quicktabs_default_quicktabs() {
       'type' => 'node',
     ),
     1 => array(
-      'nid' => '5331',
-      'view_mode' => 'teaser',
-      'hide_title' => 1,
+      'vid' => 'vacancies',
+      'display' => 'page_5',
+      'args' => '',
       'title' => 'Reserve lists',
       'weight' => '-99',
-      'type' => 'node',
+      'type' => 'view',
     ),
     2 => array(
       'vid' => 'vacancies',

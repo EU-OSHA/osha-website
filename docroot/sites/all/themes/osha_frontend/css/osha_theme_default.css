@@ -1324,6 +1324,8 @@ span.date-display-single{
 	margin:0;
 	padding:0;
 	margin-right: 1em !important;
+	display: flex;
+	flex-wrap: wrap;
 }
 
 .menu-block-3 ul li{
@@ -1331,7 +1333,7 @@ span.date-display-single{
 	list-style-image:none!important;
 	margin:0;
 	padding:0;
-	float: left;
+	float: none;
 	margin:0.5rem 2% 0.7rem 0;
 	overflow: hidden;
 	position: relative;

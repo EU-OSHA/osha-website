@@ -37,3 +37,36 @@
 		}
 	});
 })( jQuery );
+
+
+
+
+
+  //Tools and resources page GRID
+(function( $ ){
+	$(document).ready(function() {
+	  if($('.content-box-sub')) 
+	  {
+	  	var arrayHeight = [];
+	  	var items = $('.content-box-sub');
+	  	var titleBox = $('.content-box-sub .menu__link h2');
+			$.each(items, function( key, value ) {
+				arrayHeight[key] = $('h2',this).height();
+			  $('h2',this).prependTo( $('.menu__link .content-img',this));
+			});
+
+			 maxValueInArray = Math.max.apply(Math, arrayHeight);
+			 $(titleBox).css('min-height',maxValueInArray+'px');
+
+			$(window).resize(function(){
+				$(titleBox).removeAttr('style');
+				var arrayHeight = [];
+				$.each(items, function( key, value ) {
+					arrayHeight[key] = $('h2',this).height();
+				});
+				maxValueInArray = Math.max.apply(Math, arrayHeight);
+				$(titleBox).css('min-height',maxValueInArray+'px');
+			});
+	  };
+	});
+})( jQuery );

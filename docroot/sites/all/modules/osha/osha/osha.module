@@ -1080,9 +1080,9 @@ function osha_form_alter(&$form, &$form_state, $form_id) {
     $form_state['build_info']['args'][0]->field = array();
     $form['views_bulk_operations'] = FALSE;
   } else if ($form_id == 'lang_dropdown_form') {
-    $form['lang_dropdown_select']['#attributes']['accesskey'] = '8';
+    $form['lang_dropdown_select']['#attributes']['accesskey'] = 'L';
   } else if ($form_id == 'search_block_form') {
-    $form['search_block_form']['#attributes']['accesskey'] = '4';
+    $form['search_block_form']['#attributes']['accesskey'] = 'Q';
   }
 
   // Change cardinality (one value) for activity field

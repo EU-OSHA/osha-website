@@ -656,6 +656,15 @@ function osha_alert_service_views_default_views() {
   $handler->display->display_options['filters']['field_publication_date_value']['operator'] = '<=';
   $handler->display->display_options['filters']['field_publication_date_value']['group'] = 1;
   $handler->display->display_options['filters']['field_publication_date_value']['default_date'] = 'now';
+  /* Filter criterion: Content: Reserve List (field_reserve_list) */
+  $handler->display->display_options['filters']['field_reserve_list_value']['id'] = 'field_reserve_list_value';
+  $handler->display->display_options['filters']['field_reserve_list_value']['table'] = 'field_data_field_reserve_list';
+  $handler->display->display_options['filters']['field_reserve_list_value']['field'] = 'field_reserve_list_value';
+  $handler->display->display_options['filters']['field_reserve_list_value']['operator'] = 'not';
+  $handler->display->display_options['filters']['field_reserve_list_value']['value'] = array(
+    1 => '1',
+  );
+  $handler->display->display_options['filters']['field_reserve_list_value']['group'] = 1;
   /* Filter criterion: Content: Deadline (field_job_vacancies_deadline) */
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['id'] = 'field_job_vacancies_deadline_value';
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['table'] = 'field_data_field_job_vacancies_deadline';
@@ -999,6 +1008,15 @@ function osha_alert_service_views_default_views() {
   $handler->display->display_options['filters']['field_publication_date_value']['operator'] = '<=';
   $handler->display->display_options['filters']['field_publication_date_value']['group'] = 1;
   $handler->display->display_options['filters']['field_publication_date_value']['default_date'] = 'now';
+  /* Filter criterion: Content: Reserve List (field_reserve_list) */
+  $handler->display->display_options['filters']['field_reserve_list_value']['id'] = 'field_reserve_list_value';
+  $handler->display->display_options['filters']['field_reserve_list_value']['table'] = 'field_data_field_reserve_list';
+  $handler->display->display_options['filters']['field_reserve_list_value']['field'] = 'field_reserve_list_value';
+  $handler->display->display_options['filters']['field_reserve_list_value']['operator'] = 'not';
+  $handler->display->display_options['filters']['field_reserve_list_value']['value'] = array(
+    1 => '1',
+  );
+  $handler->display->display_options['filters']['field_reserve_list_value']['group'] = 1;
   /* Filter criterion: Content: Deadline (field_job_vacancies_deadline) */
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['id'] = 'field_job_vacancies_deadline_value';
   $handler->display->display_options['filters']['field_job_vacancies_deadline_value']['table'] = 'field_data_field_job_vacancies_deadline';

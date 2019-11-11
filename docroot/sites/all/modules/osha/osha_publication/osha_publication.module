@@ -526,15 +526,20 @@ function osha_publication_download_pdf($node) {
   if (!$node || $node->type != 'publication') {
     return '';
   }
+  $langs = [];
   foreach ($_REQUEST['languages'] as $lang) {
     if (!empty($node->field_file[$lang])) {
       $files[$lang] = $node->field_file[$lang][0];
+      $langs[$lang] = $lang;
     }
+    }
+  if ($langs) {
+    ksort($langs);
   }
   if (count($files) > 1) {
     $drupal_dir_path = OSHA_PDF_DOWN_PATH;
     $dir_path = drupal_realpath($drupal_dir_path);
-    $base_name = $nid . '_publication_download_' . rand(10, 9999) . '.zip';
+    $base_name = $nid . '_publication_download_' . implode('_', $langs) . '.zip';
     $archive_path = osha_publication_get_archive_drupal_path($files, $base_name, $dir_path, $drupal_dir_path);
     if ($archive_path) {
       $headers = array(

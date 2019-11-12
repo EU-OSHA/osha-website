@@ -13,6 +13,14 @@ if (!defined('PCLZIP_TEMPORARY_DIR')) {
   define('PCLZIP_TEMPORARY_DIR', variable_get('file_temporary_path', '/tmp') . '/');
 }
 
+function store_score($score = false) {
+  static $rs = [];
+  if ($score) {
+    $rs = $score;
+  }
+  return $rs;
+}
+
 function osha_publication_t($title) {
   return t($title);
 }
@@ -532,7 +540,7 @@ function osha_publication_download_pdf($node) {
       $files[$lang] = $node->field_file[$lang][0];
       $langs[$lang] = $lang;
     }
-    }
+  }
   if ($langs) {
     ksort($langs);
   }

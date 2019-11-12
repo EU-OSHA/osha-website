@@ -52,3 +52,10 @@ function osha_seminar_update_7003() {
   }
 }
 
+/**
+ * MDR-3265 Revamp - events: Summary report should be on top and the number of pages is in new line.
+ */
+function osha_seminar_update_7004() {
+  features_revert(array('osha_events' => array('field_instance')));
+  features_revert(array('osha_seminar' => array('field_instance')));
+}

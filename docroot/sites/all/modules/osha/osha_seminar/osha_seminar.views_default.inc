@@ -338,7 +338,7 @@ function osha_seminar_views_default_views() {
     t('Start date'),
     t('End date'),
     t('Facets block'),
-    t('Tags'),
+    t('Main Tags'),
     t('All'),
     t('Seminar Topics Facet'),
   );

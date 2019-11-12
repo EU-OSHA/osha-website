@@ -72,8 +72,66 @@ function osha_seminar_field_formatter_info() {
       'field types' => array('file'),
       'description' => 'Displays default icon per file type and file description.',
     ),
+    'field_pages_count' => array(
+      'label' => 'Seminar number of pages',
+      'field types' => array('number_integer', 'number_decimal', 'number_float'),
+      'settings' => array(
+        'prefix' => '',
+        'suffix' => '',
+        'tag' => 'div',
+        'class' => '',
+      ),
+    ),
   );
   return $info;
+}
+
+/**
+ * Implements hook_field_formatter_settings_form().
+ */
+function osha_seminar_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+  $elements = array();
+  if ($display['type'] == 'field_pages_count') {
+    $elements['prefix'] = array(
+      '#type' => 'textfield',
+      '#title' => t('field prefix'),
+      '#default_value' => $settings['prefix'],
+    );
+    $elements['suffix'] = array(
+      '#type' => 'textfield',
+      '#title' => t('field suffix'),
+      '#default_value' => $settings['suffix'],
+    );
+    $elements['tag'] = array(
+      '#type' => 'textfield',
+      '#title' => t('tag'),
+      '#default_value' => $settings['tag'],
+    );
+    $elements['class'] = array(
+      '#type' => 'textfield',
+      '#title' => t('tag class'),
+      '#default_value' => $settings['class'],
+    );
+  }
+
+  return $elements;
+}
+
+/**
+ * Implements hook_field_formatter_settings_summary().
+ */
+function osha_seminar_field_formatter_settings_summary($field, $instance, $view_mode) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+  $output = array();
+  if ($display['type'] == 'field_pages_count') {
+    foreach($settings as $key => $value) {
+      $output[] = t('@key: @value', array('@key' => ucfirst($key), '@value' => $value));
+    }
+  }
+  return implode('<br>', $output);
 }
 
 /**
@@ -84,6 +142,9 @@ function osha_seminar_theme() {
     'osha_seminar_file_related_resources_format' => array(
       'variables' => array('file' => NULL, 'delta' => NULL),
     ),
+    'osha_seminar_pages_count_format' => array(
+      'variables' => array('item' => NULL, 'settings' => NULL, 'delta' => NULL),
+    ),
   );
 }
 
@@ -93,6 +154,16 @@ function osha_seminar_theme() {
 function osha_seminar_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
   $element = array();
   switch ($display['type']) {
+    case 'field_pages_count':
+      foreach ($items as $delta => $item) {
+        $element[$delta] = array(
+          '#theme' => 'osha_seminar_pages_count_format',
+          '#item' => $item,
+          '#settings' => $display['settings'],
+          '#delta' => $delta,
+        );
+      }
+      break;
     case 'field_related_resources':
       foreach ($items as $delta => $item) {
         $element[$delta] = array(
@@ -104,6 +175,28 @@ function osha_seminar_field_formatter_view($entity_type, $entity, $field, $insta
       break;
   }
   return $element;
+}
+
+/*
+ * Formats the related resources (attached files) as icon and description/filename
+ */
+function theme_osha_seminar_pages_count_format($element) {
+  $output = [];
+  $value = $element['item']['value'];
+  if (!$value) {
+    return '';
+  }
+  $tag = 'div';
+  if ($element['settings']['tag']) {
+    $tag = $element['settings']['tag'];
+  }
+  if ($title = $element['settings']['prefix']) {
+    $output []= '<' . $tag . ' class="' . $element['settings']['class'] . '">' . t($title) . ' ' . $element['item']['value'] . '</' . $tag . '>';
+  }
+  if ($title = $element['settings']['suffix']) {
+    $output []= '<' . $tag . ' class="' . $element['settings']['class'] . '">' . $element['item']['value'] . ' ' . t($title) . '</' . $tag . '>';
+  }
+  return implode(' ', $output);
 }
 
 /*

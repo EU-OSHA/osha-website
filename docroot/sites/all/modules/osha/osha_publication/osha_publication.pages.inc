@@ -202,15 +202,14 @@ function osha_publication_menu_publications_search_native($form_state) {
       list ($nid, $lang) = explode('/', $row['id']);
       if (isset($scores[$nid])) {
         if ($row['score'] > $scores[$nid]['score']) {
-      $scores[$nid] = $row;
-    }
+          $scores[$nid] = $row;
+        }
       }
       else {
         $scores[$nid] = $row;
       }
     }
     store_score($scores);
-    krumo($scores);
 
     if (!empty($results['results'])) {
       foreach ($results['results'] as $result) {

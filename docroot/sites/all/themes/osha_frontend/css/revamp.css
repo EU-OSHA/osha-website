@@ -1832,6 +1832,15 @@ img.icon-play:hover{
     font-weight: normal !important;
     padding-bottom: 0.1em;
     padding-top: 1em;
+    font-size: 14px;
+}
+
+.sidebars_first .content-filters .form-item.form-type-checkboxes{
+    clear: both;
+}
+
+.sidebars_first .content-filters > .form-item.form-type-checkboxes > label{
+    font-weight: bold !important;
 }
 
 .sidebars_first .new-select-style{
@@ -1844,15 +1853,6 @@ img.icon-play:hover{
 .page-oshevents .block-osha-events .new-select-style{
     background: url("../images/ico-calendar.png") no-repeat scroll 96% center #FFF;
 }  
-
-.sidebars_first #edit-tags  label {
-    color: #55575d !important;
-    font-size: 0.9em !important;
-}
-
-.sidebars_first #edit-tags input[type=checkbox] + label:before {
-    border: 1px solid #55575d;
-}
 
 .view-latest-seminars .view-content{
     display: flex;

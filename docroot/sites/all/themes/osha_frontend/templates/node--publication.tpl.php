@@ -7,6 +7,11 @@
 if (empty($url_query)) {
   $url_query = [];
 }
+$score = '';
+$scores = store_score();
+if (!empty($scores[$nid]) && variable_get('test_publication_search_score', FALSE)) {
+  $score = '<div>score: ' . $scores[$nid]['score'] . ', excerpt: ' . $scores[$nid]['excerpt'] . '</div>';
+}
 
 if ($view_mode == 'full') {
   $publications_related_resources = [];
@@ -216,10 +221,11 @@ elseif ($view_mode != 'osha_search_teaser') {
 <?php
 }
 else {
+  // osha search teaser.
   $publication_type = '<strong>' . t('Type') . ': </strong>' . strip_tags(render($content['field_publication_type']));
   $pages_count = strip_tags(render($content['field_pages_count']));
 ?>
-<div class="revamp-row">
+<div class="revamp-row"><?php echo $score ?>
     <div class="publications-left-column"><?php print render($content['field_cover_image']); ?></div>
     <div class="publications-right-column">
         <div class="content-publication-info">

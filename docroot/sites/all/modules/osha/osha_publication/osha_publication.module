@@ -166,6 +166,16 @@ function osha_publication_export() {
 function osha_publication_url_inbound_alter(&$path, $original_path, $path_language) {
   global $language_url;
   $args = arg();
+
+  if (
+    count($args) >= 3 &&
+    $args[0] == 'tools-and-publications' &&
+    $args[1] == 'publications'
+  ) {
+    unset($args[0]);
+    drupal_goto(implode('/', $args));
+    return;
+  }
   // MC-175 - publication search pretty path.
   // break down in filters the publication search path.
   if (strpos($path, 'publications') !== FALSE) {

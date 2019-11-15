@@ -442,6 +442,21 @@ function osha_frontend_block_view_alter(&$data, $block) {
  * Implements hook_preprocess_page().
  */
 function osha_frontend_preprocess_page(&$variables) {
+  if (arg(0) == 'photo-gallery') {
+    $breadcrumb = drupal_get_breadcrumb();
+    array_pop($breadcrumb);
+    if ($tid = intval(arg(1))) {
+      $term = taxonomy_term_load($tid);
+      if ($term && $term->vocabulary_machine_name == 'photo_gallery_type') {
+        $w = entity_metadata_wrapper('taxonomy_term', $tid);
+        $name = $w->label();
+        drupal_set_title($name);
+        $breadcrumb[] = $name;
+      }
+    }
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
   if (arg(0) == 'related-content') {
     $breadcrumb = drupal_get_breadcrumb();
     unset($breadcrumb[1]);

@@ -2568,3 +2568,13 @@ article.node-seminar{
     color: #000;
     font-size: 1em;
 }
+
+.page-photo-gallery a.back-to-link{
+    width: auto;
+    padding-left: 3em;
+}
+
+.node-type-flickr-gallery a.back-to-link{
+    width: auto;
+    padding-left: 3em;
+}

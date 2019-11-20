@@ -110,3 +110,10 @@ function osha_search_update_7007() {
 function osha_search_update_7008() {
   features_revert_module('osha_search');
 }
+
+/**
+ * MDR-3308 improve publications search.
+ */
+function osha_search_update_7009() {
+  features_revert_module('osha_search');
+}

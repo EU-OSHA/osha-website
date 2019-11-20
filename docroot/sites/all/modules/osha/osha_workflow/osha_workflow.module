@@ -465,6 +465,9 @@ function osha_workflow_permission() {
     $permissions['edit any content in ' . $state->name] = array(
       'title' => t('Edit any content in @state', array('@state' => $state->label)),
     );
+    $permissions['edit calls content in ' . $state->name] = array(
+      'title' => t('Edit calls content in @state', array('@state' => $state->label)),
+    );
   }
 
   $permissions['view osh approver needs review tab'] = array('title' => t("View Approver's 'Needs Aproval' tab in My Workbench"));
@@ -572,7 +575,12 @@ function osha_workflow_node_access($node, $operation, $user) {
     $state = $node->workbench_moderation['current']->state;
     // Deny access if @todo
     if ($state && variable_get('workbench_moderation_per_node_type', FALSE) && !user_access('edit any content in ' . $state, $user)) {
+      if ($node->type == 'calls' && user_access('edit calls content in ' . $state, $user)) {
+        return NODE_ACCESS_IGNORE;
+      }
+      else {
       return NODE_ACCESS_DENY;
+    }
     }
 
     /* Editor role */

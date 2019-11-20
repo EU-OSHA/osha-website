@@ -454,6 +454,12 @@ function osha_frontend_preprocess_page(&$variables) {
         drupal_set_title($name);
         $breadcrumb[] = $name;
       }
+      $link_title = t('Back to gallery');
+      $link_href = 'photo-gallery';
+      $variables['page']['above_title']['back-to-link'] = array(
+        '#type' => 'item',
+        '#markup' => l($link_title, $link_href, array('attributes' => array('class' => array('back-to-link pull-right')))),
+      );
     }
     drupal_set_breadcrumb($breadcrumb);
   }

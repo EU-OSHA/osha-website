@@ -444,6 +444,7 @@ function osha_frontend_block_view_alter(&$data, $block) {
 function osha_frontend_preprocess_page(&$variables) {
   if (arg(0) == 'photo-gallery') {
     $breadcrumb = drupal_get_breadcrumb();
+    unset($breadcrumb[1]);
     array_pop($breadcrumb);
     if ($tid = intval(arg(1))) {
       $term = taxonomy_term_load($tid);

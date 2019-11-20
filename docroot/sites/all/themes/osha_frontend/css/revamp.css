@@ -1832,6 +1832,15 @@ img.icon-play:hover{
     font-weight: normal !important;
     padding-bottom: 0.1em;
     padding-top: 1em;
+    font-size: 14px;
+}
+
+.sidebars_first .content-filters .form-item.form-type-checkboxes{
+    clear: both;
+}
+
+.sidebars_first .content-filters > .form-item.form-type-checkboxes > label{
+    font-weight: bold !important;
 }
 
 .sidebars_first .new-select-style{
@@ -1844,15 +1853,6 @@ img.icon-play:hover{
 .page-oshevents .block-osha-events .new-select-style{
     background: url("../images/ico-calendar.png") no-repeat scroll 96% center #FFF;
 }  
-
-.sidebars_first #edit-tags  label {
-    color: #55575d !important;
-    font-size: 0.9em !important;
-}
-
-.sidebars_first #edit-tags input[type=checkbox] + label:before {
-    border: 1px solid #55575d;
-}
 
 .view-latest-seminars .view-content{
     display: flex;
@@ -2324,6 +2324,48 @@ article.node-seminar{
 /*Remove double arrow in Focal points detail pages*/
 .view-fop-page-links div a{
     background:none;
+}
+
+/*MDR-3279 Wrong display of the pdf files*/
+.field-name-field-colection-related-resource .field-label{
+    font-family: 'Open Sans',sans-serif;
+    background: transparent;
+    padding-left: 0;
+    font-weight: 600;
+    font-size: 1.35rem;
+    color: #003399;
+    margin-bottom: 0;
+    line-height: 30px;
+}
+
+.field-name-field-colection-related-resource .field-items .field-item {
+    margin-bottom:0;
+}
+
+.field-name-field-colection-related-resource .field-items .field-item .field-collection-view{
+    padding: 0.3em 0 1em 0;
+    background: url(/sites/all/themes/osha_frontend/images/back-tit-blue.png) repeat-x scroll 0 100% transparent;
+    border-bottom:none;
+}
+
+.field-collection-item-field-colection-related-resource .content .field-name-field-related-resource-title .field-label{
+    display:none;
+}
+
+.field-collection-item-field-colection-related-resource .content .field-name-field-related-resource-title .field-items .field-item{
+    font-size: 1.17em;
+    font-weight: bold;
+    line-height: 1.28205em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.field-collection-item-field-colection-related-resource .content .field-name-field-related-resources-files .field-label{
+    display:none;
+}
+
+.field-collection-container{
+    border-bottom:0;
 }
 
 /*MDR-2930 Revamp the press room as the HWC2020 one*/

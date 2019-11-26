@@ -78,8 +78,9 @@ function osha_events_search_api_solr_query_alter(array &$call_args, SearchApiQue
       }
     }
   }
+  $field_start_date = variable_get('oshevents_field_start_date', 'field_start_date\:value:');
   foreach($call_args['params']['fq'] as &$fq) {
-    if (strpos($fq, 'field_start_date\:value:')) {
+    if (strpos($fq, $field_start_date)) {
       $fq = '(' . $fq . ') OR (' . str_replace(':value:',':value2:', $fq) . ')';
     }
   }

@@ -437,6 +437,7 @@ table.pagerer tbody tr td div.item-list, table.pagerer tbody tr td div.item-list
     border-top: 0px solid #003399;
     margin-top: 0;
     margin-right: 0em;
+    margin-bottom: 2em;
 }
 
 .page-tools-and-resources #content{

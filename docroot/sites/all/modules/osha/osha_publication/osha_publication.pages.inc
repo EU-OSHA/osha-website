@@ -462,5 +462,6 @@ function _osha_publication_tags_options_list($map_only = FALSE) {
       }
     }
   }
+  asort($return);
   return $return;
 }

@@ -1,0 +1,303 @@
+<?php
+
+/**
+ * @file
+ * Provides development tools for sites using Solr.
+ */
+
+/**
+ * Implements hook_permission().
+ */
+function solr_devel_permission() {
+  return array(
+    'view solr_devel information' => array(
+      'description' => t('View the devel information for Solr searches. Raw data is returned by Solr meaning that sensitive data could be exposed that would normally be protected by various access control systems.'),
+      'title' => t('Access Solr Devel Information'),
+      'restrict access' => TRUE,
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function solr_devel_menu() {
+  $items = array();
+
+  $items['admin/config/search/solr_devel'] = array(
+    'title' => 'Solr Devel settings',
+    'description' =>  'Configure debugging settings for Solr searches.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('solr_devel_settings_form'),
+    'file' => 'solr_devel.admin.inc',
+    'access arguments' => array('view solr_devel information'),
+  );
+
+  $items['node/%node/devel/solr'] = array(
+    'title' => 'Solr Index',
+    'page callback' => 'solr_devel_node_overview_page',
+    'page arguments' => array(1),
+    'access arguments' => array('view solr_devel information'),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'solr_devel.pages.inc',
+  );
+
+  $items['node/%node/devel/solr/%solr_devel_environment/entity'] = array(
+    'title' => 'Solr Entity Analysis',
+    'page callback' => 'solr_devel_node_entity_analysis_page',
+    'page arguments' => array(1, 4),
+    'access arguments' => array('view solr_devel information'),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'solr_devel.pages.inc',
+  );
+
+  $items['node/%node/devel/solr/%solr_devel_environment/document'] = array(
+    'title' => 'Solr Document Analysis',
+    'page callback' => 'solr_devel_node_document_analysis_page',
+    'page arguments' => array(1, 4),
+    'access arguments' => array('view solr_devel information'),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'solr_devel.pages.inc',
+  );
+
+  $items['node/%node/devel/solr/%solr_devel_environment/query'] = array(
+    'title' => 'Solr Query Analysis',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('solr_devel_node_query_analysis_form', 1, 4),
+    'access arguments' => array('view solr_devel information'),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'solr_devel.pages.inc',
+  );
+
+  $items['node/%node/devel/solr/%solr_devel_environment/queue'] = array(
+    'title' => 'Solr Queue Analysis',
+    'page callback' => 'solr_devel_node_queue_analysis_page',
+    'page arguments' => array(1, 4),
+    'access arguments' => array('view solr_devel information'),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'solr_devel.pages.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function solr_devel_menu_alter(&$items) {
+  unset($items['node/%node/devel/apachesolr']);
+}
+
+/**
+ * Implements hook_solr_devel_environment_info() for apachesolr.module
+ */
+function apachesolr_solr_devel_environment_info() {
+  $info = array();
+  foreach (apachesolr_load_all_environments() as $env_id => $environment) {
+    $info['apachesolr:' . $env_id] = array(
+      'label' => 'Apache Solr: ' . $environment['name'],
+      'adapter' => 'Drupal_SolrDevel_Adapter_ApacheSolr',
+      'adapter options' => array('env_id' => $env_id),
+    );
+  }
+  return $info;
+}
+
+/**
+ * Implements hook_solr_devel_environment_info() for search_api_solr.module
+ */
+function search_api_solr_solr_devel_environment_info() {
+  $info = array();
+  $search_api_indexes = search_api_index_load_multiple(FALSE);
+  if ($search_api_indexes) {
+    $search_api_indexes = array_filter($search_api_indexes, function($item) {
+      // We supports only nodes for now.
+      return $item->item_type == 'node';
+    });
+    foreach ($search_api_indexes as $index_id => $index) {
+      if ($index->enabled && $index->server) {
+        $server_id = $index->server;
+        $server = search_api_server_load($server_id);
+        if ($server->class == "search_api_solr_service" || $server->class == "acquia_search_service") {
+          $info['search_api:' . $index_id] = array(
+            'label' => 'Search API Solr Index: ' . $index_id,
+            'adapter' => 'Drupal_SolrDevel_Adapter_SearchApi',
+            'adapter options' => array(
+              'server_id' => $server_id,
+              'index_id' => $index_id,
+            ),
+          );
+        }
+      }
+    }
+  }
+  return $info;
+}
+
+/**
+ * Gets environment info.
+ *
+ * @return array
+ *   An array of environment info.
+ */
+function solr_devel_get_environment_info() {
+  $environments = array();
+  foreach (module_invoke_all('solr_devel_environment_info') as $name => $info) {
+    $environments[$name] = $info + array(
+      'name' => $name,
+      'label' => $name,
+      'adapter options' => array(),
+    );
+  }
+  return $environments;
+}
+
+/**
+ * Loads an environment.
+ *
+ * @param string $id
+ *   The unique identifier of the environment.
+ *
+ * @return array|FALSE
+ *   The environment definition, FALE if not available.
+ */
+function solr_devel_environment_load($id) {
+  $environments = solr_devel_get_environment_info();
+  return isset($environments[$id]) ? $environments[$id] : FALSE;
+}
+
+/**
+ * Loads an adapter from an environment definition.
+ *
+ * @param array $environment
+ *   The environment definition as returned by solr_devel_environment_load().
+ *
+ * @return Drupal_SolrDevel_Adapter
+ *   The adapter instance.
+ */
+function solr_devel_adapter_load(array $environment) {
+  return new $environment['adapter']($environment['label'], $environment['adapter options']);
+}
+
+/**
+ * Implements hook_apachesolr_query_alter().
+ */
+function solr_devel_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
+  $force = &drupal_static('solr_devel_force_query_alter', FALSE);
+  if ($force || (variable_get('solr_devel:debug_queries', 1) && user_access('view solr_devel information'))) {
+    // Add the Solr debug parameter.
+    $query->addParam('debugQuery', 'on');
+
+    // Store the searcher so we can get the active searchers later.
+    $searchers = &drupal_static('solr_devel_apachesolr_searchers', array());
+    $searchers[] = $query->getSearcher();
+  }
+}
+
+/**
+ * Implements hook_search_api_solr_query_alter().
+ */
+function solr_devel_search_api_solr_query_alter(array &$call_args, SearchApiQueryInterface $query) {
+  $force = &drupal_static('solr_devel_force_query_alter', FALSE);
+  if ($force || (variable_get('solr_devel:debug_queries', 1) && user_access('view solr_devel information'))) {
+    // Add the Solr debug parameter.
+    $call_args['params']['debugQuery'] = 'on';
+  }
+}
+
+/**
+ * Implements hook_search_api_solr_search_results_alter().
+ */
+function solr_devel_search_api_solr_search_results_alter(array &$results, SearchApiQueryInterface $query, $response) {
+  $force = &drupal_static('solr_devel_force_query_alter', FALSE);
+  if ($force || (variable_get('solr_devel:debug_queries', 1) && user_access('view solr_devel information'))) {
+    // Store the response so we can get all the responses later.
+    $responses = &drupal_static('solr_devel_search_api_responses', array());
+    $responses['search_api@' . $query->getIndex()->machine_name . ' #' . (count($responses) + 1)] = $response;
+  }
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function solr_devel_block_info() {
+  $blocks = array();
+
+  $blocks['query_debug'] = array(
+    'info' => 'Solr Devel: Query Debugger',
+    'cache' => DRUPAL_NO_CACHE,
+    'region' => 'content',
+    'status' => 1,
+    'weight' => -1,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function solr_devel_block_view($delta = '') {
+
+  if ('query_debug' == $delta) {
+    $debug = array();
+
+    // Iterate over Apache Solr searchers and gather debug data for all of them.
+    $searchers = &drupal_static('solr_devel_apachesolr_searchers', array());
+    foreach ($searchers as $searcher) {
+      if ($response = apachesolr_static_response_cache($searcher)) {
+        $debug[$searcher] = solr_devel_prepare_debug_output($response);
+      }
+    }
+
+    // Iterate over Search API responses and gather debug data for all of them.
+    $responses = &drupal_static('solr_devel_search_api_responses', array());
+    foreach ($responses as $key => $response) {
+      // Get the debug output, initialize request array.
+      $debug[$key] = solr_devel_prepare_debug_output($response);
+    }
+
+    // If we have debug information, display.
+    if ($debug) {
+      return array(
+        'subject' => t('Solr query debugger'),
+        'content' => kprint_r($debug, TRUE),
+      );
+    }
+  }
+}
+
+/**
+ * Process the debug information for output.
+ *
+ * @param $response
+ *   The Solr response with debug query information.
+ */
+function solr_devel_prepare_debug_output($response) {
+  // Get the debug output, initialize request array.
+  $debug['debug'] = $response->debug;
+  $debug['request'] = array(
+    'method' => '',
+    'uri' => '',
+    'parseduri' => array(),
+  );
+
+  // Parse the request, check whether GET or POST was issued.
+  $pattern = '@(GET|POST)\s+(.*)\s+(?:HTTP/1.[01])@s';
+  if (preg_match_all($pattern, $response->request, $matches)) {
+    $debug['request'] = array(
+      'method' => $matches[1][0],
+      'uri' => $matches[2][0],
+      'parseduri' => parse_url($matches[2][0]),
+    );
+
+    // Parses query string into an array. Note that drupal_parse_url()
+    // strips params such as 'q', so we use native PHP functions instead.
+    if (!empty($debug['request']['parseduri']['query'])) {
+      $query = &$debug['request']['parseduri']['query'];
+      parse_str($query, $query);
+    }
+  }
+  return $debug;
+}
+

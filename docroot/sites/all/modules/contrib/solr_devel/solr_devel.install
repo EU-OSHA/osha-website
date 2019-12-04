@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall functions for the Solr Devel module.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function solr_devel_uninstall() {
+  variable_del('solr_devel:debug_queries');
+}

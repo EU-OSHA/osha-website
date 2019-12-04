@@ -579,8 +579,8 @@ function osha_workflow_node_access($node, $operation, $user) {
         return NODE_ACCESS_IGNORE;
       }
       else {
-        return NODE_ACCESS_DENY;
-      }
+      return NODE_ACCESS_DENY;
+    }
     }
 
     /* Editor role */

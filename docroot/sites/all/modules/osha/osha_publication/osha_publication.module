@@ -172,6 +172,8 @@ function osha_publication_url_inbound_alter(&$path, $original_path, $path_langua
     $args[0] == 'tools-and-publications' &&
     $args[1] == 'publications'
   ) {
+    module_load_include('inc', 'pathauto');
+    $args[2] = pathauto_cleanstring($args[2]);
     unset($args[0]);
     drupal_goto(implode('/', $args));
     return;

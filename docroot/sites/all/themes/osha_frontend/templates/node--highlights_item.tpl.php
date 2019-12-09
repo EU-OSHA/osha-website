@@ -81,7 +81,7 @@ if (!empty($campaign_id)) {
                               'path' => (isset($field_image_oshmail) && !empty($field_image_oshmail)) ? $field_image_oshmail['und'][0]['uri'] : '',
                               'width' => ($node->old_newsletter ? '100%' : ''),
                               'alt' => (isset($field_image_oshmail) && !empty($field_image_oshmail)) ? $field_image_oshmail['und'][0]['alt'] : '',
-                              'attributes' => array('style' => 'border: 0px;max-width: 100%;height:auto;background-color: #ffffff;vertical-align:middle;')
+                              'attributes' => array('style' => 'border: 0px;height:auto;background-color: #ffffff;vertical-align:middle;')
                             )), url('node/' . $node->nid, array('absolute' => TRUE)), array(
                               'html' => TRUE,
                               'query' => $url_query,

@@ -173,9 +173,25 @@ function osha_publication_url_inbound_alter(&$path, $original_path, $path_langua
     $args[1] == 'publications'
   ) {
     module_load_include('inc', 'pathauto');
-    $args[2] = pathauto_cleanstring($args[2]);
+    $map = variable_get('publication_redirect_map', []);
+    foreach($args as &$part) {
+      $part = pathauto_cleanstring($part);
+    }
     unset($args[0]);
-    drupal_goto(implode('/', $args));
+    if ((count($args) > 3) && ($args[4] == 'view')) {
+      unset($args[2]);
+    }
+    $new_url = implode('/', $args);
+    $suffix = '';
+    if (strpos($new_url, '/view')) {
+      $suffix = '/view';
+      $new_url = str_replace($suffix, '', $new_url);
+    }
+    if (isset($map[$new_url])) {
+      $new_url = $map[$new_url];
+    }
+    $new_url .= $suffix;
+    drupal_goto($new_url);
     return;
   }
   // MC-175 - publication search pretty path.

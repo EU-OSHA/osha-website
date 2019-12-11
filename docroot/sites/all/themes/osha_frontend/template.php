@@ -443,7 +443,7 @@ function osha_frontend_block_view_alter(&$data, $block) {
  */
 function osha_frontend_preprocess_page(&$variables) {
 
-  if (variable_get('google_no_index', TRUE)) {
+  if (variable_get('google_no_index', FALSE)) {
     $robots_noindex = array(
       '#type' => 'html_tag',
       '#tag' => 'meta',

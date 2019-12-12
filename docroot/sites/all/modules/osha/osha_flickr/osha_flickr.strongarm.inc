@@ -107,6 +107,12 @@ function osha_flickr_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'dangerous_substances' => array(
+        'custom_settings' => TRUE,
+      ),
+      'question' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -127,6 +133,9 @@ function osha_flickr_strongarm() {
         ),
         'xmlsitemap' => array(
           'weight' => '7',
+        ),
+        'language' => array(
+          'weight' => '5',
         ),
       ),
       'display' => array(),

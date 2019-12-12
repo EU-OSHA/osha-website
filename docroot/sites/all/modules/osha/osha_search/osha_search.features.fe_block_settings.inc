@@ -348,7 +348,6 @@ search/wiki',
     'module' => 'osha_search',
     'node_types' => array(),
     'pages' => 'search/*
-publications
 tools-and-publications/publications
 tools-and-publications/seminars
 legislation/directives/*

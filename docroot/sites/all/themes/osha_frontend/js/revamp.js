@@ -146,6 +146,22 @@ jQuery(document).ready(function($){
 		$('#sliding-popup').remove();
 	});
 
+	/* Track in Matomo if Page not found, the URl that led to it */
+	if (typeof _paq != 'undefined') {
+		var url = document.location.href;
+
+		var http = new XMLHttpRequest();
+		http.open("HEAD", url, false);
+		http.send();
+
+		if (http.status == 404)
+		{
+			console.log("PAGE NOT FOUND");
+			_paq.push(['trackEvent', 'Page not found', 'Page not found', url, 1]);
+		}        
+    }
+
+
   jQuery(".page-themes-dangerous-substances-glossary .view-content .glossary_type .type-name").click(function(){
     jQuery(this).parent().toggleClass("active");
   });

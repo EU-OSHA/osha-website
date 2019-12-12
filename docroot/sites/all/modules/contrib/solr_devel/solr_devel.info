@@ -1,0 +1,22 @@
+name = Solr Devel
+description = Provides development tools for sites using Solr.
+dependencies[] = devel
+package = Development
+core = 7.x
+
+files[] = lib/Drupal/SolrDevel/Adapter/ApacheSolr.php
+files[] = lib/Drupal/SolrDevel/Adapter/SearchApi.php
+files[] = lib/Drupal/SolrDevel/Adapter.php
+files[] = lib/Drupal/SolrDevel/Documentation.php
+files[] = lib/Drupal/SolrDevel/Queue/ApacheSolr.php
+files[] = lib/Drupal/SolrDevel/Queue/SearchApi.php
+files[] = lib/Drupal/SolrDevel/Queue.php
+
+configure = admin/config/search/solr_devel
+
+; Information added by Drupal.org packaging script on 2016-04-25
+version = "7.x-1.0-alpha4"
+core = "7.x"
+project = "solr_devel"
+datestamp = "1461621840"
+

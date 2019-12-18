@@ -90,11 +90,11 @@ function osha_flickr_views_default_views() {
   $handler->display->display_options['fields']['nothing']['alter']['strip_tags'] = TRUE;
   $handler->display->display_options['fields']['nothing']['alter']['preserve_tags'] = '<span> <a>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Sort criterion: Field: Publication date (field_publication_date) */
+  $handler->display->display_options['sorts']['field_publication_date_value']['id'] = 'field_publication_date_value';
+  $handler->display->display_options['sorts']['field_publication_date_value']['table'] = 'field_data_field_publication_date';
+  $handler->display->display_options['sorts']['field_publication_date_value']['field'] = 'field_publication_date_value';
+  $handler->display->display_options['sorts']['field_publication_date_value']['order'] = 'DESC';
   /* Contextual filter: Content: Photo Gallery Type (field_photo_gallery_type) */
   $handler->display->display_options['arguments']['field_photo_gallery_type_tid']['id'] = 'field_photo_gallery_type_tid';
   $handler->display->display_options['arguments']['field_photo_gallery_type_tid']['table'] = 'field_data_field_photo_gallery_type';

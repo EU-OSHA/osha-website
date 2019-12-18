@@ -76,12 +76,13 @@ if (!empty($campaign_id)) {
                             }
                           }
                           else {
+                            if (!empty($field_image_oshmail)) {
                             print l(theme('image_style', array(
-                              'style_name' => ($node->old_newsletter ? 'thumbnail' : 'newsletter_highlight'),
-                              'path' => (isset($field_image) && !empty($field_image)) ? $field_image[0]['uri'] : '',
+                              'style_name' => ($node->old_newsletter ? 'thumbnail' : 'oshmail'),
+                              'path' => (isset($field_image_oshmail) && !empty($field_image_oshmail)) ? $field_image_oshmail['und'][0]['uri'] : '',
                               'width' => ($node->old_newsletter ? '100%' : ''),
-                              'alt' => (isset($field_image) && !empty($field_image)) ? $field_image[0]['alt'] : '',
-                              'attributes' => array('style' => 'border: 0px;max-width: 100%;height:auto;background-color: #ffffff;vertical-align:middle;')
+                              'alt' => (isset($field_image_oshmail) && !empty($field_image_oshmail)) ? $field_image_oshmail['und'][0]['alt'] : '',
+                              'attributes' => array('style' => 'border: 0px;height:auto;background-color: #ffffff;vertical-align:middle;')
                             )), url('node/' . $node->nid, array('absolute' => TRUE)), array(
                               'html' => TRUE,
                               'query' => $url_query,
@@ -90,6 +91,22 @@ if (!empty($campaign_id)) {
                                 'style' => 'display:block;border:1px solid #efefef;',
                               ),
                             ));
+                            }else{
+                              print l(theme('image_style', array(
+                              'style_name' => ($node->old_newsletter ? 'thumbnail' : 'oshmail'),
+                              'path' => (isset($field_image) && !empty($field_image)) ? $field_image[0]['uri'] : '',
+                              'width' => ($node->old_newsletter ? '100%' : ''),
+                              'alt' => (isset($field_image) && !empty($field_image)) ? $field_image[0]['alt'] : '',
+                              'attributes' => array('style' => 'border: 0px;height:auto;background-color: #ffffff;vertical-align:middle;')
+                            )), url('node/' . $node->nid, array('absolute' => TRUE)), array(
+                              'html' => TRUE,
+                              'query' => $url_query,
+                              'external' => TRUE,
+                              'attributes' => array(
+                                'style' => 'display:block;border:1px solid #efefef;',
+                              ),
+                            ));
+                            }
                           }
                         ?>
                       </td>

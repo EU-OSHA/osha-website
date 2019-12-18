@@ -2,12 +2,12 @@
 function dvs_preprocess_node(&$vars) {
 	if($vars['type'] == 'dvs_survey' && $vars['view_mode'] == 'full'){
 		global $language;
-		
+
 		$survey = $vars['content']['field_dvs_code'][0]['#markup'];
 
 		//We must construct the path to redirect to the new DVS
-		$domain = "https://test-visualisation.osha.europa.eu/esener#!";
-		
+    $domain = variable_get('esener_visualisation_domain', "https://visualisation.osha.europa.eu/esener#!");
+
 		if(isset($_GET["locale"])){
 			$localeget = $_GET["locale"];
 			$locale = strtolower($_GET["locale"]);
@@ -32,33 +32,33 @@ function dvs_preprocess_node(&$vars) {
 			//Activity sector
 			if ($subsetV=="1--Producing-Industries"){
 				$sectorId = 15;
-			} 
+			}
 			if ($subsetV=="2--Private-Services"){
 				$sectorId = 16;
-			} 
+			}
 			if ($subsetV=="3--Public-Services"){
 				$sectorId = 17;
-			} 
+			}
 
 			//Establishment size
 			if ($subsetV=="1--10-to-19-employees"){
 				$sizeId = 12;
-			} 
+			}
 			if ($subsetV=="2--20-to-49-employees"){
 				$sizeId = 13;
-			} 
+			}
 			if ($subsetV=="3--50-to-249-employees"){
 				$sizeId = 14;
-			} 
+			}
 			if ($subsetV=="4--250-employees-or-more"){
 				$sizeId = 15;
-			} 
+			}
 
 		}
 
 		$answers = array("Yes","No","Regularly","Only when particular issues arise","Not at all","No, not required","Yes, but I don't always use it","(very) Well informed","Not very or not at all well informed","Not at all satisfied","Not very satisfied","Satisfied","Very satisfied","(Almost) all of the time","(Almost) never","Between 1/4 and 3/4 of the time","Mean","Always or most of the time","Rarely or never","Sometimes","Agree","Disagree","Neither agree nor disagree","Never","Once or more","At least 1/4 of the time","Less than 1/4 of the time","Conducted mainly by internal staff","Contracted mainly to external providers","Both about equally","Yes but only some of them","Yes, and I always use it","","Often","In some departments","DK/ NA","No answer","Occasionally","Practically never","Very high","Quite high","Quite low","Very low","Major reason","Minor reason","Not a reason","Major difficulty ",	"Minor difficulty ","Not a difficulty ","Major concern","Some concern","No concern","Work-related stress is not an issue in our establishment","These problems are not an issue in our establishment","Work-related violence is not an issue in our establishment","Long or irregular working hours are not an issue in our establishment","More difficult","Less difficult","No difference","Yes, but only to some types of employees","2010","2011","2012","2013","2014","before 2010","don´t know","That depends on the type of measures","There are conflicting views about this","Partly","Yes, but only some of them","In some departments only","Often","In some departments"
 		);
-		
+
 		switch ($plot) {
 		 	case "heatMap":
 				$plotName="detailpage-european-map";
@@ -86,7 +86,7 @@ function dvs_preprocess_node(&$vars) {
 				}
 				break;
 
-			case "euBars":	
+			case "euBars":
 				$plotName="detailpage-european-bar-chart";
 
 				if($_GET["subset"]=='Sectorgrp'){
@@ -94,9 +94,9 @@ function dvs_preprocess_node(&$vars) {
 				}else{
 					$end_url = "/company-size/".$sectorId ."/".$sizeId;
 				}
-				
+
 				break;
-			case "inCountry":	
+			case "inCountry":
 				$plotName="detailpage-national-bar-chart";
 
 				$countryCode = $_GET["country"];
@@ -109,10 +109,10 @@ function dvs_preprocess_node(&$vars) {
 				}else{
 					$end_url = "/company-size/".$countryCode ;
 				}
-				
-				break;	
 
-			case "crossCountry":	
+				break;
+
+			case "crossCountry":
 				$plotName="detailpage-national-comparisons";
 
 				$countryCode = $_GET["country"];
@@ -130,9 +130,9 @@ function dvs_preprocess_node(&$vars) {
 				}else{
 					$end_url = "/company-size/".$sectorId ."/".$sizeId."/".$countryCode ."/". $countryCodeB ;
 				}
-				
-				break;		
-				
+
+				break;
+
 			default:
 				$plotName="datavisualisation";
 		}
@@ -152,12 +152,12 @@ function dvs_preprocess_node(&$vars) {
 		if($plotName=="datavisualisation"){
 			//front page no question selected
 			if($survey=="esener1"){
-				$path = $domain . "/".$language->language."/survey/".$plotName."/2009"; 
+				$path = $domain . "/".$language->language."/survey/".$plotName."/2009";
 			}else{
 				$path = $domain . "/".$language->language."/survey/".$plotName."/2014";
 			}
 			drupal_goto($path, array(), 301);
-			
+
 		}
 		else{
 			//plot and question selected
@@ -165,19 +165,19 @@ function dvs_preprocess_node(&$vars) {
 			$questionId = $_GET["question"];
 
 			if (in_array($questionId,$question_group1)){
-				$groupUrl= 	$groupName1;			
+				$groupUrl= 	$groupName1;
 			}
 
 			if (in_array($questionId,$question_group2)){
-				$groupUrl= 	$groupName2;			
+				$groupUrl= 	$groupName2;
 			}
 
 			if (in_array($questionId,$question_group3)){
-				$groupUrl= 	$groupName3;			
+				$groupUrl= 	$groupName3;
 			}
 
 			if (in_array($questionId,$question_group4)){
-				$groupUrl= 	$groupName4;			
+				$groupUrl= 	$groupName4;
 			}
 
 		}
@@ -193,12 +193,12 @@ function dvs_preprocess_node(&$vars) {
 		/*global $language ;
 		$lang_name = $language->language ;
 		$locale = "";
-		
+
 		if(isset($_GET["locale"])){
 			$localeget = $_GET["locale"];
 			$locale = $_GET["locale"];
 		}
-		
+
 		if (isset($_SESSION["idiomaweb"])==""){
 			$_SESSION["idiomaweb"]=$lang_name;
 			if ($locale == ""){
@@ -211,7 +211,7 @@ function dvs_preprocess_node(&$vars) {
 				$locale = $lang_name;
 			}
 		}
-		
+
 
 		$DVScontent = file_get_contents('http://194.30.34.27/DVS/DVT/survey.php?dataSource=' . $survey."&locale=" . strtoupper($locale));
 		$vars['content']['field_dvs_code'][0]['#markup'] = $DVScontent;*/

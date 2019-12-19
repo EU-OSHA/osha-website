@@ -5,6 +5,7 @@ package = OSHA
 version = 7.x-1.4
 project = osha_press_contact
 dependencies[] = ctools
+dependencies[] = date
 dependencies[] = email
 dependencies[] = fe_nodequeue
 dependencies[] = features

@@ -28,7 +28,7 @@ function osha_publication_views_default_views() {
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '250';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '25';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
@@ -94,6 +94,10 @@ function osha_publication_views_default_views() {
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
   $handler->display->display_options['fields']['changed']['date_format'] = 'pubdate_rss';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'year';
+  /* Sort criterion: Content: Number of pages (field_pages_count) */
+  $handler->display->display_options['sorts']['field_pages_count_value']['id'] = 'field_pages_count_value';
+  $handler->display->display_options['sorts']['field_pages_count_value']['table'] = 'field_data_field_pages_count';
+  $handler->display->display_options['sorts']['field_pages_count_value']['field'] = 'field_pages_count_value';
   /* Sort criterion: Content: Updated date */
   $handler->display->display_options['sorts']['changed']['id'] = 'changed';
   $handler->display->display_options['sorts']['changed']['table'] = 'node';

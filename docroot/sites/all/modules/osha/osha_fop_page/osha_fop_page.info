@@ -4,6 +4,7 @@ package = OSHA
 version = 7.x-1.2
 project = osha_fop_page
 dependencies[] = ctools
+dependencies[] = date
 dependencies[] = features
 dependencies[] = field_collection
 dependencies[] = i18n_taxonomy

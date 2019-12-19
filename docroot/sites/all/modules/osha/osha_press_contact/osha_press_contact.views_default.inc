@@ -45,7 +45,7 @@ function osha_press_contact_views_default_views() {
   $handler->display->display_options['relationships']['field_wg_category_tid']['table'] = 'field_data_field_wg_category';
   $handler->display->display_options['relationships']['field_wg_category_tid']['field'] = 'field_wg_category_tid';
   $handler->display->display_options['relationships']['field_wg_category_tid']['required'] = TRUE;
-  /* Relationship: Content: WG Role1 (field_wg_role_1) */
+  /* Relationship: Content: WG Role 1 (field_wg_role_1) */
   $handler->display->display_options['relationships']['field_wg_role_1_tid']['id'] = 'field_wg_role_1_tid';
   $handler->display->display_options['relationships']['field_wg_role_1_tid']['table'] = 'field_data_field_wg_role_1';
   $handler->display->display_options['relationships']['field_wg_role_1_tid']['field'] = 'field_wg_role_1_tid';
@@ -68,7 +68,7 @@ function osha_press_contact_views_default_views() {
   $handler->display->display_options['fields']['field_wg_category']['alter']['text'] = '([field_wg_category])';
   $handler->display->display_options['fields']['field_wg_category']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_wg_category']['type'] = 'i18n_taxonomy_term_reference_plain';
-  /* Field: Content: WG Role1 */
+  /* Field: Content: WG Role 1 */
   $handler->display->display_options['fields']['field_wg_role_1']['id'] = 'field_wg_role_1';
   $handler->display->display_options['fields']['field_wg_role_1']['table'] = 'field_data_field_wg_role_1';
   $handler->display->display_options['fields']['field_wg_role_1']['field'] = 'field_wg_role_1';
@@ -307,7 +307,7 @@ function osha_press_contact_views_default_views() {
   $handler->display->display_options['relationships']['field_wg_category_tid']['id'] = 'field_wg_category_tid';
   $handler->display->display_options['relationships']['field_wg_category_tid']['table'] = 'field_data_field_wg_category';
   $handler->display->display_options['relationships']['field_wg_category_tid']['field'] = 'field_wg_category_tid';
-  /* Relationship: Content: WG Role1 (field_wg_role_1) */
+  /* Relationship: Content: WG Role 1 (field_wg_role_1) */
   $handler->display->display_options['relationships']['field_wg_role_1_tid']['id'] = 'field_wg_role_1_tid';
   $handler->display->display_options['relationships']['field_wg_role_1_tid']['table'] = 'field_data_field_wg_role_1';
   $handler->display->display_options['relationships']['field_wg_role_1_tid']['field'] = 'field_wg_role_1_tid';
@@ -344,7 +344,7 @@ function osha_press_contact_views_default_views() {
   $handler->display->display_options['fields']['field_wg_category']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_wg_category']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_wg_category']['type'] = 'i18n_taxonomy_term_reference_plain';
-  /* Field: Content: WG Role1 */
+  /* Field: Content: WG Role 1 */
   $handler->display->display_options['fields']['field_wg_role_1']['id'] = 'field_wg_role_1';
   $handler->display->display_options['fields']['field_wg_role_1']['table'] = 'field_data_field_wg_role_1';
   $handler->display->display_options['fields']['field_wg_role_1']['field'] = 'field_wg_role_1';
@@ -718,7 +718,7 @@ function osha_press_contact_views_default_views() {
     ),
   );
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* Relationship: Content: WG Role1 (field_wg_role_1) */
+  /* Relationship: Content: WG Role 1 (field_wg_role_1) */
   $handler->display->display_options['relationships']['field_wg_role_1_tid']['id'] = 'field_wg_role_1_tid';
   $handler->display->display_options['relationships']['field_wg_role_1_tid']['table'] = 'field_data_field_wg_role_1';
   $handler->display->display_options['relationships']['field_wg_role_1_tid']['field'] = 'field_wg_role_1_tid';
@@ -732,7 +732,7 @@ function osha_press_contact_views_default_views() {
   $handler->display->display_options['relationships']['field_wg_role_2_tid']['id'] = 'field_wg_role_2_tid';
   $handler->display->display_options['relationships']['field_wg_role_2_tid']['table'] = 'field_data_field_wg_role_2';
   $handler->display->display_options['relationships']['field_wg_role_2_tid']['field'] = 'field_wg_role_2_tid';
-  /* Field: Content: WG Role1 */
+  /* Field: Content: WG Role 1 */
   $handler->display->display_options['fields']['field_wg_role_1']['id'] = 'field_wg_role_1';
   $handler->display->display_options['fields']['field_wg_role_1']['table'] = 'field_data_field_wg_role_1';
   $handler->display->display_options['fields']['field_wg_role_1']['field'] = 'field_wg_role_1';

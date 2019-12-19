@@ -875,21 +875,18 @@ el.remove();
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '11',
-        ),
-        'path' => array(
-          'weight' => '8',
-        ),
-        'redirect' => array(
-          'weight' => '10',
-        ),
-        'workbench_access' => array(
-          'weight' => '6',
-        ),
-        'xmlsitemap' => array(
           'weight' => '9',
         ),
-        'language' => array(
+        'path' => array(
+          'weight' => '6',
+        ),
+        'redirect' => array(
+          'weight' => '8',
+        ),
+        'workbench_access' => array(
+          'weight' => '5',
+        ),
+        'xmlsitemap' => array(
           'weight' => '7',
         ),
       ),
@@ -955,6 +952,15 @@ el.remove();
       'osha_resources' => array(
         'custom_settings' => TRUE,
       ),
+      'dangerous_substances' => array(
+        'custom_settings' => TRUE,
+      ),
+      'osha_search_teaser' => array(
+        'custom_settings' => FALSE,
+      ),
+      'question' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -972,6 +978,9 @@ el.remove();
         ),
         'workbench_access' => array(
           'weight' => '1',
+        ),
+        'xmlsitemap' => array(
+          'weight' => '23',
         ),
       ),
       'display' => array(),
@@ -1837,7 +1846,7 @@ el.remove();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_seminar_pattern';
-  $strongarm->value = 'tools-and-publications/seminars/[node:title]';
+  $strongarm->value = 'tools-and-resources/seminars/[node:title]';
   $export['pathauto_node_seminar_pattern'] = $strongarm;
 
   $strongarm = new stdClass();

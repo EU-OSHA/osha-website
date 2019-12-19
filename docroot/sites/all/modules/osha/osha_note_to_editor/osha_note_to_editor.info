@@ -5,6 +5,7 @@ package = OSHA
 version = 7.x-1.2
 project = osha_note_to_editor
 dependencies[] = ctools
+dependencies[] = date
 dependencies[] = features
 dependencies[] = number
 dependencies[] = osha

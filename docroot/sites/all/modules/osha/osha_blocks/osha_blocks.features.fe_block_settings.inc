@@ -50,7 +50,7 @@ function osha_blocks_default_fe_block_settings() {
         'region' => 'content',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 7,
+        'weight' => 6,
       ),
       'seven' => array(
         'region' => '',
@@ -120,7 +120,8 @@ node/13962',
       5 => 'press_release',
       6 => 'seminar',
     ),
-    'pages' => '',
+    'pages' => 'node/880
+node/880/*',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -139,7 +140,7 @@ node/13962',
         'region' => 'content',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 16,
+        'weight' => 14,
       ),
       'seven' => array(
         'region' => '',
@@ -182,7 +183,7 @@ node/13962',
         'region' => '',
         'status' => 0,
         'theme' => 'osha_frontend',
-        'weight' => 42,
+        'weight' => 40,
       ),
       'seven' => array(
         'region' => '',

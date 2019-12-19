@@ -85,7 +85,7 @@ blog/*
         'region' => 'sidebar_second',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 3,
+        'weight' => 14,
       ),
       'seven' => array(
         'region' => '',
@@ -125,7 +125,7 @@ blog/*
         'region' => 'content',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 0,
+        'weight' => 16,
       ),
       'seven' => array(
         'region' => '',
@@ -168,7 +168,7 @@ search/blog*',
         'region' => 'sidebar_second',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 10,
+        'weight' => 11,
       ),
       'seven' => array(
         'region' => '',

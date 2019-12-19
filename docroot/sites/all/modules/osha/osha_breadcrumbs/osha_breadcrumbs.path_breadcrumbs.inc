@@ -27,7 +27,7 @@ function osha_breadcrumbs_path_breadcrumbs_settings_info() {
     'arguments' => array(),
     'access' => array(),
   );
-  $path_breadcrumb->weight = 0;
+  $path_breadcrumb->weight = -81;
   $export['blog_search'] = $path_breadcrumb;
 
   $path_breadcrumb = new stdClass();
@@ -49,7 +49,7 @@ function osha_breadcrumbs_path_breadcrumbs_settings_info() {
     'arguments' => array(),
     'access' => array(),
   );
-  $path_breadcrumb->weight = 0;
+  $path_breadcrumb->weight = -80;
   $export['calls_archive_view'] = $path_breadcrumb;
 
   $path_breadcrumb = new stdClass();
@@ -71,7 +71,7 @@ function osha_breadcrumbs_path_breadcrumbs_settings_info() {
     'arguments' => array(),
     'access' => array(),
   );
-  $path_breadcrumb->weight = 0;
+  $path_breadcrumb->weight = -82;
   $export['contact_form'] = $path_breadcrumb;
 
   $path_breadcrumb = new stdClass();
@@ -119,7 +119,7 @@ function osha_breadcrumbs_path_breadcrumbs_settings_info() {
       'logic' => 'and',
     ),
   );
-  $path_breadcrumb->weight = 0;
+  $path_breadcrumb->weight = -83;
   $export['directive'] = $path_breadcrumb;
 
   $path_breadcrumb = new stdClass();
@@ -141,7 +141,7 @@ function osha_breadcrumbs_path_breadcrumbs_settings_info() {
     'arguments' => array(),
     'access' => array(),
   );
-  $path_breadcrumb->weight = 0;
+  $path_breadcrumb->weight = -85;
   $export['directive_search'] = $path_breadcrumb;
 
   $path_breadcrumb = new stdClass();
@@ -171,7 +171,7 @@ function osha_breadcrumbs_path_breadcrumbs_settings_info() {
     ),
     'access' => array(),
   );
-  $path_breadcrumb->weight = 0;
+  $path_breadcrumb->weight = -84;
   $export['directive_view'] = $path_breadcrumb;
 
   $path_breadcrumb = new stdClass();
@@ -215,7 +215,7 @@ function osha_breadcrumbs_path_breadcrumbs_settings_info() {
       'logic' => 'and',
     ),
   );
-  $path_breadcrumb->weight = 0;
+  $path_breadcrumb->weight = -79;
   $export['events'] = $path_breadcrumb;
 
   $path_breadcrumb = new stdClass();
@@ -225,7 +225,7 @@ function osha_breadcrumbs_path_breadcrumbs_settings_info() {
   $path_breadcrumb->path = 'oshevents';
   $path_breadcrumb->data = array(
     'titles' => array(
-      0 => '!page_title',
+      0 => 'Events',
     ),
     'paths' => array(
       0 => '<none>',
@@ -235,7 +235,7 @@ function osha_breadcrumbs_path_breadcrumbs_settings_info() {
     'arguments' => array(),
     'access' => array(),
   );
-  $path_breadcrumb->weight = 0;
+  $path_breadcrumb->weight = -78;
   $export['events_list'] = $path_breadcrumb;
 
   $path_breadcrumb = new stdClass();
@@ -281,7 +281,7 @@ legal-notice',
       'logic' => 'and',
     ),
   );
-  $path_breadcrumb->weight = 0;
+  $path_breadcrumb->weight = -73;
   $export['footer_links'] = $path_breadcrumb;
 
   $path_breadcrumb = new stdClass();
@@ -329,7 +329,7 @@ legal-notice',
       'logic' => 'and',
     ),
   );
-  $path_breadcrumb->weight = 0;
+  $path_breadcrumb->weight = -74;
   $export['guideline'] = $path_breadcrumb;
 
   $path_breadcrumb = new stdClass();
@@ -351,7 +351,7 @@ legal-notice',
     'arguments' => array(),
     'access' => array(),
   );
-  $path_breadcrumb->weight = 0;
+  $path_breadcrumb->weight = -75;
   $export['guideline_search'] = $path_breadcrumb;
 
   $path_breadcrumb = new stdClass();
@@ -383,7 +383,7 @@ legal-notice',
     ),
     'access' => array(),
   );
-  $path_breadcrumb->weight = 0;
+  $path_breadcrumb->weight = -77;
   $export['guideline_view'] = $path_breadcrumb;
 
   $path_breadcrumb = new stdClass();
@@ -427,7 +427,7 @@ legal-notice',
       'logic' => 'and',
     ),
   );
-  $path_breadcrumb->weight = 0;
+  $path_breadcrumb->weight = -76;
   $export['highlights'] = $path_breadcrumb;
 
   $path_breadcrumb = new stdClass();
@@ -447,7 +447,7 @@ legal-notice',
     'arguments' => array(),
     'access' => array(),
   );
-  $path_breadcrumb->weight = 0;
+  $path_breadcrumb->weight = -86;
   $export['highlights_view'] = $path_breadcrumb;
 
   $path_breadcrumb = new stdClass();
@@ -491,7 +491,7 @@ safety-and-health-legislation/european-guidelines',
       'logic' => 'and',
     ),
   );
-  $path_breadcrumb->weight = 0;
+  $path_breadcrumb->weight = -87;
   $export['legislation'] = $path_breadcrumb;
 
   $path_breadcrumb = new stdClass();
@@ -535,7 +535,7 @@ safety-and-health-legislation/european-guidelines',
       'logic' => 'and',
     ),
   );
-  $path_breadcrumb->weight = 0;
+  $path_breadcrumb->weight = -96;
   $export['news'] = $path_breadcrumb;
 
   $path_breadcrumb = new stdClass();
@@ -570,6 +570,7 @@ safety-and-health-legislation/european-guidelines',
           'settings' => array(
             'type' => array(
               'blog' => 'blog',
+              'dangerous_substances' => 'dangerous_substances',
               'highlight' => 'highlight',
               'directive' => 'directive',
               'guideline' => 'guideline',
@@ -584,7 +585,34 @@ safety-and-health-legislation/european-guidelines',
           'name' => 'path_visibility',
           'settings' => array(
             'visibility_setting' => '1',
-            'paths' => 'tools-and-resources/blog',
+            'paths' => 'tools-and-publications/blog',
+          ),
+          'context' => 'empty',
+          'not' => TRUE,
+        ),
+        2 => array(
+          'name' => 'path_visibility',
+          'settings' => array(
+            'visibility_setting' => '1',
+            'paths' => 'node/874',
+          ),
+          'context' => 'empty',
+          'not' => TRUE,
+        ),
+        3 => array(
+          'name' => 'path_visibility',
+          'settings' => array(
+            'visibility_setting' => '1',
+            'paths' => 'node/12285',
+          ),
+          'context' => 'empty',
+          'not' => TRUE,
+        ),
+        4 => array(
+          'name' => 'path_visibility',
+          'settings' => array(
+            'visibility_setting' => '1',
+            'paths' => 'node/886',
           ),
           'context' => 'empty',
           'not' => TRUE,
@@ -593,7 +621,7 @@ safety-and-health-legislation/european-guidelines',
       'logic' => 'and',
     ),
   );
-  $path_breadcrumb->weight = 100;
+  $path_breadcrumb->weight = -72;
   $export['node_breadcrumbs'] = $path_breadcrumb;
 
   $path_breadcrumb = new stdClass();
@@ -617,7 +645,7 @@ safety-and-health-legislation/european-guidelines',
     'arguments' => array(),
     'access' => array(),
   );
-  $path_breadcrumb->weight = 0;
+  $path_breadcrumb->weight = -95;
   $export['open_job_vacancies_view'] = $path_breadcrumb;
 
   $path_breadcrumb = new stdClass();
@@ -637,14 +665,14 @@ safety-and-health-legislation/european-guidelines',
     'arguments' => array(),
     'access' => array(),
   );
-  $path_breadcrumb->weight = 0;
+  $path_breadcrumb->weight = -97;
   $export['osh_news'] = $path_breadcrumb;
 
   $path_breadcrumb = new stdClass();
   $path_breadcrumb->api_version = 1;
   $path_breadcrumb->machine_name = 'osh_publications';
   $path_breadcrumb->name = 'Publications list';
-  $path_breadcrumb->path = 'publications';
+  $path_breadcrumb->path = 'tools-and-publications/publications';
   $path_breadcrumb->data = array(
     'titles' => array(
       0 => '%site:current-page:menu-link:pb-join:name',
@@ -659,7 +687,7 @@ safety-and-health-legislation/european-guidelines',
     'arguments' => array(),
     'access' => array(),
   );
-  $path_breadcrumb->weight = 0;
+  $path_breadcrumb->weight = -98;
   $export['osh_publications'] = $path_breadcrumb;
 
   $path_breadcrumb = new stdClass();
@@ -683,7 +711,7 @@ safety-and-health-legislation/european-guidelines',
     'arguments' => array(),
     'access' => array(),
   );
-  $path_breadcrumb->weight = 0;
+  $path_breadcrumb->weight = -100;
   $export['press_releases_view'] = $path_breadcrumb;
 
   $path_breadcrumb = new stdClass();
@@ -705,7 +733,7 @@ safety-and-health-legislation/european-guidelines',
     'arguments' => array(),
     'access' => array(),
   );
-  $path_breadcrumb->weight = 0;
+  $path_breadcrumb->weight = -99;
   $export['press_room_view'] = $path_breadcrumb;
 
   $path_breadcrumb = new stdClass();
@@ -748,7 +776,7 @@ safety-and-health-legislation/european-guidelines',
       'logic' => 'and',
     ),
   );
-  $path_breadcrumb->weight = 0;
+  $path_breadcrumb->weight = -94;
   $export['privacy_statement_alerts'] = $path_breadcrumb;
 
   $path_breadcrumb = new stdClass();
@@ -791,7 +819,7 @@ safety-and-health-legislation/european-guidelines',
       'logic' => 'and',
     ),
   );
-  $path_breadcrumb->weight = 0;
+  $path_breadcrumb->weight = -93;
   $export['privacy_statement_oshmail'] = $path_breadcrumb;
 
   $path_breadcrumb = new stdClass();
@@ -835,7 +863,7 @@ safety-and-health-legislation/european-guidelines',
       'logic' => 'and',
     ),
   );
-  $path_breadcrumb->weight = 0;
+  $path_breadcrumb->weight = -88;
   $export['publications'] = $path_breadcrumb;
 
   $path_breadcrumb = new stdClass();
@@ -845,7 +873,7 @@ safety-and-health-legislation/european-guidelines',
   $path_breadcrumb->path = 'search/seminars';
   $path_breadcrumb->data = array(
     'titles' => array(
-      0 => 'Tools & Publications',
+      0 => 'Tools &amp; Publications',
       1 => 'Seminar reports',
       2 => '!page_title',
     ),
@@ -859,7 +887,7 @@ safety-and-health-legislation/european-guidelines',
     'arguments' => array(),
     'access' => array(),
   );
-  $path_breadcrumb->weight = 0;
+  $path_breadcrumb->weight = -89;
   $export['seminars_search_view'] = $path_breadcrumb;
 
   $path_breadcrumb = new stdClass();
@@ -879,7 +907,7 @@ safety-and-health-legislation/european-guidelines',
     'arguments' => array(),
     'access' => array(),
   );
-  $path_breadcrumb->weight = 0;
+  $path_breadcrumb->weight = -90;
   $export['sitemap'] = $path_breadcrumb;
 
   $path_breadcrumb = new stdClass();
@@ -925,7 +953,7 @@ about-eu-osha',
       'logic' => 'and',
     ),
   );
-  $path_breadcrumb->weight = 0;
+  $path_breadcrumb->weight = -92;
   $export['top_level_nodes'] = $path_breadcrumb;
 
   return $export;

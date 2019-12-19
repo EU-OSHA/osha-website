@@ -274,14 +274,14 @@ function osha_newsletter_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'osha_newsletter_image_block_text_end';
-  $strongarm->value = 'subscribers';
+  $strongarm->value = '';
   $export['osha_newsletter_image_block_text_end'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'osha_newsletter_image_block_text_start';
-  $strongarm->value = 'Join';
+  $strongarm->value = '';
   $export['osha_newsletter_image_block_text_start'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -429,7 +429,7 @@ function osha_newsletter_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'subscribe_extra_block_intro_text';
-  $strongarm->value = 'Once a month, OSHmail keeps you updated on ocupational safety and health.<br/> You can sign up below:';
+  $strongarm->value = 'Once a month, OSHmail keeps you updated on occupational safety and health.<br/> You can sign up below:';
   $export['subscribe_extra_block_intro_text'] = $strongarm;
 
   return $export;

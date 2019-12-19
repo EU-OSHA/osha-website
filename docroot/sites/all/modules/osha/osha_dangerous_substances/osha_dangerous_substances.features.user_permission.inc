@@ -15,6 +15,8 @@ function osha_dangerous_substances_user_default_permissions() {
     'name' => 'create dangerous_substances content',
     'roles' => array(
       'OSH Collaborator' => 'OSH Collaborator',
+      'Project Manager' => 'Project Manager',
+      'Review Manager' => 'Review Manager',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -24,6 +26,7 @@ function osha_dangerous_substances_user_default_permissions() {
   $permissions['delete any dangerous_substances content'] = array(
     'name' => 'delete any dangerous_substances content',
     'roles' => array(
+      'Project Manager' => 'Project Manager',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -33,7 +36,7 @@ function osha_dangerous_substances_user_default_permissions() {
   $permissions['delete own dangerous_substances content'] = array(
     'name' => 'delete own dangerous_substances content',
     'roles' => array(
-      'OSH Collaborator' => 'OSH Collaborator',
+      'Project Manager' => 'Project Manager',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -44,6 +47,8 @@ function osha_dangerous_substances_user_default_permissions() {
     'name' => 'edit any dangerous_substances content',
     'roles' => array(
       'OSH Collaborator' => 'OSH Collaborator',
+      'Project Manager' => 'Project Manager',
+      'Review Manager' => 'Review Manager',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -54,6 +59,8 @@ function osha_dangerous_substances_user_default_permissions() {
     'name' => 'edit own dangerous_substances content',
     'roles' => array(
       'OSH Collaborator' => 'OSH Collaborator',
+      'Project Manager' => 'Project Manager',
+      'Review Manager' => 'Review Manager',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -64,6 +71,7 @@ function osha_dangerous_substances_user_default_permissions() {
     'name' => 'use text format dangerous_substances',
     'roles' => array(
       'OSH Collaborator' => 'OSH Collaborator',
+      'Project Manager' => 'Project Manager',
       'administrator' => 'administrator',
     ),
     'module' => 'filter',

@@ -61,7 +61,14 @@ function osha_menu_default_fe_block_settings() {
     'module' => 'menu_block',
     'node_types' => array(),
     'pages' => 'node/5445
-themes/dangerous-substances/practical-tools-dangerous-substances',
+themes/dangerous-substances/practical-tools-dangerous-substances
+photo-gallery
+photo-gallery/*
+tools-and-publications
+tools-and-resources
+news-events
+oshevents
+node/20',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -80,7 +87,7 @@ themes/dangerous-substances/practical-tools-dangerous-substances',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'seven' => array(
         'region' => '',
@@ -101,7 +108,8 @@ themes/dangerous-substances/practical-tools-dangerous-substances',
     'i18n_mode' => 0,
     'module' => 'menu_block',
     'node_types' => array(),
-    'pages' => 'node/1409',
+    'pages' => 'node/1409
+node/13822',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -120,7 +128,7 @@ themes/dangerous-substances/practical-tools-dangerous-substances',
         'region' => 'content',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 10,
+        'weight' => 35,
       ),
       'seven' => array(
         'region' => '',
@@ -200,7 +208,7 @@ themes/dangerous-substances/practical-tools-dangerous-substances',
         'region' => 'footer',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 0,
+        'weight' => 2,
       ),
       'seven' => array(
         'region' => '',
@@ -221,7 +229,11 @@ themes/dangerous-substances/practical-tools-dangerous-substances',
     'i18n_mode' => 0,
     'module' => 'menu_block',
     'node_types' => array(),
-    'pages' => '',
+    'pages' => 'node/13530
+node/13823
+node/13822
+node/1409
+node/15070',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
@@ -240,7 +252,7 @@ themes/dangerous-substances/practical-tools-dangerous-substances',
         'region' => 'content',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 11,
+        'weight' => 36,
       ),
       'seven' => array(
         'region' => '',
@@ -250,7 +262,7 @@ themes/dangerous-substances/practical-tools-dangerous-substances',
       ),
     ),
     'title' => '<none>',
-    'visibility' => 0,
+    'visibility' => 1,
   );
 
   return $export;

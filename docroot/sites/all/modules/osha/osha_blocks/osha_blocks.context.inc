@@ -77,7 +77,7 @@ function osha_blocks_context_default_contexts() {
         'node/21' => 'node/21',
         'about-eu-osha/procurement' => 'about-eu-osha/procurement',
         'node/1472' => 'node/1472',
-        'tools-and-resources/blog' => 'tools-and-resources/blog',
+        'tools-and-publications/blog' => 'tools-and-publications/blog',
         'node/5445' => 'node/5445',
         'node/1460' => 'node/1460',
         'node/1411' => 'node/1411',

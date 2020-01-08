@@ -39,7 +39,7 @@ function osha_content_default_fe_block_settings() {
         'region' => 'content',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 28,
+        'weight' => 26,
       ),
       'seven' => array(
         'region' => '',
@@ -79,7 +79,7 @@ function osha_content_default_fe_block_settings() {
         'region' => '',
         'status' => 0,
         'theme' => 'osha_frontend',
-        'weight' => -7,
+        'weight' => 143,
       ),
       'seven' => array(
         'region' => '',
@@ -122,7 +122,7 @@ function osha_content_default_fe_block_settings() {
         'region' => '',
         'status' => 0,
         'theme' => 'osha_frontend',
-        'weight' => -1,
+        'weight' => 144,
       ),
       'seven' => array(
         'region' => '',
@@ -164,7 +164,7 @@ function osha_content_default_fe_block_settings() {
         'region' => '',
         'status' => 0,
         'theme' => 'osha_frontend',
-        'weight' => -2,
+        'weight' => 145,
       ),
       'seven' => array(
         'region' => '',
@@ -206,7 +206,7 @@ function osha_content_default_fe_block_settings() {
         'region' => '',
         'status' => 0,
         'theme' => 'osha_frontend',
-        'weight' => -6,
+        'weight' => 146,
       ),
       'seven' => array(
         'region' => '',
@@ -248,7 +248,7 @@ function osha_content_default_fe_block_settings() {
         'region' => '',
         'status' => 0,
         'theme' => 'osha_frontend',
-        'weight' => -29,
+        'weight' => 148,
       ),
       'seven' => array(
         'region' => '',
@@ -290,7 +290,7 @@ function osha_content_default_fe_block_settings() {
         'region' => '',
         'status' => 0,
         'theme' => 'osha_frontend',
-        'weight' => -4,
+        'weight' => 149,
       ),
       'seven' => array(
         'region' => '',
@@ -330,7 +330,7 @@ function osha_content_default_fe_block_settings() {
         'region' => '',
         'status' => 0,
         'theme' => 'osha_frontend',
-        'weight' => 0,
+        'weight' => 150,
       ),
       'seven' => array(
         'region' => '',

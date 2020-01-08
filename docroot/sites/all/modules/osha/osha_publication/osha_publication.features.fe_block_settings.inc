@@ -81,7 +81,7 @@ tools-and-publications/publications',
         'region' => 'content',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 9,
+        'weight' => 8,
       ),
       'seven' => array(
         'region' => '',

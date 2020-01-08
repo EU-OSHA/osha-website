@@ -156,9 +156,6 @@ function osha_wysiwyg_default_profiles() {
         'charactersremaining' => array(
           'charactersremaining' => 1,
         ),
-        'linkchecker' => array(
-          'linkchecker' => 1,
-        ),
         'drupal' => array(
           'media' => 1,
           'accordion' => 1,
@@ -216,9 +213,6 @@ function osha_wysiwyg_default_profiles() {
         ),
         'charactersremaining' => array(
           'charactersremaining' => 1,
-        ),
-        'linkchecker' => array(
-          'linkchecker' => 1,
         ),
       ),
       'toolbar_loc' => 'top',

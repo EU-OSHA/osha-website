@@ -149,6 +149,7 @@ features[field_instance][] = node-musculoskeletal_disorders-field_original_desc_
 features[field_instance][] = node-musculoskeletal_disorders-field_original_desc_language
 features[field_instance][] = node-musculoskeletal_disorders-field_prevention_measures
 features[field_instance][] = node-musculoskeletal_disorders-field_prevention_measures_other
+features[field_instance][] = node-musculoskeletal_disorders-field_priority_area
 features[field_instance][] = node-musculoskeletal_disorders-field_publication_year
 features[field_instance][] = node-musculoskeletal_disorders-field_purpose_of_the_material
 features[field_instance][] = node-musculoskeletal_disorders-field_resource_type

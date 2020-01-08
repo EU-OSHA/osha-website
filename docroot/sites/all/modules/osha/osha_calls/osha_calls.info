@@ -13,6 +13,7 @@ dependencies[] = number
 dependencies[] = options
 dependencies[] = osha
 dependencies[] = osha_blocks
+dependencies[] = osha_calls
 dependencies[] = osha_job_vacancies
 dependencies[] = osha_taxonomies
 dependencies[] = quicktabs

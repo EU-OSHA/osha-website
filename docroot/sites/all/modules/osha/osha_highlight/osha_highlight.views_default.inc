@@ -93,7 +93,7 @@ function osha_highlight_views_default_views() {
   $handler->display->display_options['footer']['result']['id'] = 'result';
   $handler->display->display_options['footer']['result']['table'] = 'views';
   $handler->display->display_options['footer']['result']['field'] = 'result';
-  $handler->display->display_options['footer']['result']['content'] = '<span class="result_summary">Displaying @start - @end of @total</span>';
+  $handler->display->display_options['footer']['result']['content'] = '<div class="pager-total"><span>@start - @end / @total</span></div>';
   $handler->display->display_options['path'] = 'highlights';
 
   /* Display: Latest Highlights */
@@ -123,7 +123,7 @@ function osha_highlight_views_default_views() {
   $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Image */
+  /* Field: Field: Image */
   $handler->display->display_options['fields']['field_image']['id'] = 'field_image';
   $handler->display->display_options['fields']['field_image']['table'] = 'field_data_field_image';
   $handler->display->display_options['fields']['field_image']['field'] = 'field_image';
@@ -227,7 +227,7 @@ function osha_highlight_views_default_views() {
     t('›'),
     t('»'),
     t('Highlights - all'),
-    t('<span class="result_summary">Displaying @start - @end of @total</span>'),
+    t('<div class="pager-total"><span>@start - @end / @total</span></div>'),
     t('Latest Highlights'),
     t('View all highlights'),
     t('See more'),

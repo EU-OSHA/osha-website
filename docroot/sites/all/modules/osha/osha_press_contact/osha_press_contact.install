@@ -62,3 +62,10 @@ function osha_press_contact_update_7003() {
 function osha_press_contact_update_7004() {
   features_revert(array('osha_press_contact' => array('field_base', 'field_instance')));
 }
+
+/**
+ * MDR-3383 New category for the Management Board members.
+ */
+function osha_press_contact_update_7005() {
+  features_revert(array('osha_press_contact' => array('views_view', 'fe_block_settings')));
+}

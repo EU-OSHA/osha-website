@@ -5,6 +5,7 @@ version = 7.x-0.4
 project = osha_eguide
 dependencies[] = better_exposed_filters
 dependencies[] = ctools
+dependencies[] = date
 dependencies[] = features
 dependencies[] = i18n_field
 dependencies[] = i18n_taxonomy

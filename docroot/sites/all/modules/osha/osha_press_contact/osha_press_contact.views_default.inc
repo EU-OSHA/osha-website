@@ -543,6 +543,60 @@ function osha_press_contact_views_default_views() {
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'press_contact' => 'press_contact',
+  );
+  /* Filter criterion: Content: Type (field_contact_type) */
+  $handler->display->display_options['filters']['field_contact_type_tid']['id'] = 'field_contact_type_tid';
+  $handler->display->display_options['filters']['field_contact_type_tid']['table'] = 'field_data_field_contact_type';
+  $handler->display->display_options['filters']['field_contact_type_tid']['field'] = 'field_contact_type_tid';
+  $handler->display->display_options['filters']['field_contact_type_tid']['value'] = array(
+    2971 => '2971',
+  );
+  $handler->display->display_options['filters']['field_contact_type_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_contact_type_tid']['vocabulary'] = 'contact_type';
+  /* Filter criterion: Taxonomy term: Country Status (field_country_status) */
+  $handler->display->display_options['filters']['field_country_status_tid']['id'] = 'field_country_status_tid';
+  $handler->display->display_options['filters']['field_country_status_tid']['table'] = 'field_data_field_country_status';
+  $handler->display->display_options['filters']['field_country_status_tid']['field'] = 'field_country_status_tid';
+  $handler->display->display_options['filters']['field_country_status_tid']['relationship'] = 'field_country_tid';
+  $handler->display->display_options['filters']['field_country_status_tid']['value'] = array(
+    3016 => '3016',
+  );
+  $handler->display->display_options['filters']['field_country_status_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_country_status_tid']['vocabulary'] = 'country_status';
+  /* Filter criterion: Content: Is Observer (field_is_observer) */
+  $handler->display->display_options['filters']['field_is_observer_value']['id'] = 'field_is_observer_value';
+  $handler->display->display_options['filters']['field_is_observer_value']['table'] = 'field_data_field_is_observer';
+  $handler->display->display_options['filters']['field_is_observer_value']['field'] = 'field_is_observer_value';
+  $handler->display->display_options['filters']['field_is_observer_value']['operator'] = 'empty';
+  $handler->display->display_options['filters']['field_is_observer_value']['value'] = array(
+    0 => '0',
+  );
+  /* Filter criterion: Content: Category (field_wg_category) */
+  $handler->display->display_options['filters']['field_wg_category_tid']['id'] = 'field_wg_category_tid';
+  $handler->display->display_options['filters']['field_wg_category_tid']['table'] = 'field_data_field_wg_category';
+  $handler->display->display_options['filters']['field_wg_category_tid']['field'] = 'field_wg_category_tid';
+  $handler->display->display_options['filters']['field_wg_category_tid']['operator'] = 'not';
+  $handler->display->display_options['filters']['field_wg_category_tid']['value'] = array(
+    4859 => '4859',
+    3027 => '3027',
+  );
+  $handler->display->display_options['filters']['field_wg_category_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_wg_category_tid']['vocabulary'] = 'wg_category';
 
   /* Display: Block EFTA */
   $handler = $view->new_display('block', 'Block EFTA', 'block_1');
@@ -595,6 +649,7 @@ function osha_press_contact_views_default_views() {
   $handler->display->display_options['filters']['field_wg_category_tid']['field'] = 'field_wg_category_tid';
   $handler->display->display_options['filters']['field_wg_category_tid']['operator'] = 'not';
   $handler->display->display_options['filters']['field_wg_category_tid']['value'] = array(
+    4859 => '4859',
     3027 => '3027',
   );
   $handler->display->display_options['filters']['field_wg_category_tid']['type'] = 'select';
@@ -662,6 +717,61 @@ function osha_press_contact_views_default_views() {
   $handler->display->display_options['filters']['field_wg_category_tid']['group'] = 2;
   $handler->display->display_options['filters']['field_wg_category_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_wg_category_tid']['vocabulary'] = 'wg_category';
+
+  /* Display: Block Expert nominated by the european parliament */
+  $handler = $view->new_display('block', 'Block Expert nominated by the european parliament', 'block_3');
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Taxonomy term: Weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['relationship'] = 'field_wg_category_tid';
+  /* Sort criterion: Taxonomy term: Weight */
+  $handler->display->display_options['sorts']['weight_1']['id'] = 'weight_1';
+  $handler->display->display_options['sorts']['weight_1']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['sorts']['weight_1']['field'] = 'weight';
+  $handler->display->display_options['sorts']['weight_1']['relationship'] = 'field_wg_role_1_tid';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+  );
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'press_contact' => 'press_contact',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Type (field_contact_type) */
+  $handler->display->display_options['filters']['field_contact_type_tid']['id'] = 'field_contact_type_tid';
+  $handler->display->display_options['filters']['field_contact_type_tid']['table'] = 'field_data_field_contact_type';
+  $handler->display->display_options['filters']['field_contact_type_tid']['field'] = 'field_contact_type_tid';
+  $handler->display->display_options['filters']['field_contact_type_tid']['value'] = array(
+    2971 => '2971',
+  );
+  $handler->display->display_options['filters']['field_contact_type_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_contact_type_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_contact_type_tid']['vocabulary'] = 'contact_type';
+  /* Filter criterion: Content: Category (field_wg_category) */
+  $handler->display->display_options['filters']['field_wg_category_tid']['id'] = 'field_wg_category_tid';
+  $handler->display->display_options['filters']['field_wg_category_tid']['table'] = 'field_data_field_wg_category';
+  $handler->display->display_options['filters']['field_wg_category_tid']['field'] = 'field_wg_category_tid';
+  $handler->display->display_options['filters']['field_wg_category_tid']['value'] = array(
+    4859 => '4859',
+  );
+  $handler->display->display_options['filters']['field_wg_category_tid']['group'] = 2;
+  $handler->display->display_options['filters']['field_wg_category_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_wg_category_tid']['vocabulary'] = 'wg_category';
   $translatables['board_members'] = array(
     t('Master'),
     t('Board members'),
@@ -685,6 +795,7 @@ function osha_press_contact_views_default_views() {
     t('Block'),
     t('Block EFTA'),
     t('Block EC - Obs'),
+    t('Block Expert nominated by the european parliament'),
   );
   $export['board_members'] = $view;
 

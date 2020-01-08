@@ -3003,12 +3003,11 @@ Grey - Only web or not attendance',
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-seminar-field_country_code'.
-  $field_instances['node-seminar-field_country_code'] = array(
-    'bundle' => 'seminar',
-    'default_value' => NULL,
+  // Exported field_instance: 'node-highlight-field_image_oshmail'.
+  $field_instances['node-highlight-field_image_oshmail'] = array(
+    'bundle' => 'highlight',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'This image is displayed on OSHmail. The image should be: width:300px height:200px',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -3017,10 +3016,10 @@ Grey - Only web or not attendance',
         'weight' => 0,
       ),
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 8,
+        'weight' => 16,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -3040,12 +3039,6 @@ Grey - Only web or not attendance',
         'type' => 'hidden',
         'weight' => 0,
       ),
-      'osha_slideshow' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 8,
-      ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -3054,173 +3047,61 @@ Grey - Only web or not attendance',
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_country_code',
-    'label' => 'Country',
+    'field_name' => 'field_image_oshmail',
+    'label' => 'Image OSHmail',
     'required' => 0,
     'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
       'entity_translation_sync' => FALSE,
+      'file_directory' => '',
+      'file_extensions' => 'png gif jpg jpeg',
+      'image_field_caption' => 0,
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'options',
+      'module' => 'media',
       'settings' => array(
-        'apply_chosen' => '',
-      ),
-      'type' => 'options_select',
-      'weight' => 38,
-    ),
-    'workbench_access_field' => 0,
-  );
-
-  // Exported field_instance: 'node-seminar-field_pages_count'.
-  $field_instances['node-seminar-field_pages_count'] = array(
-    'bundle' => 'seminar',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'dangerous_substances' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'default' => array(
-        'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => '',
+        'allowed_schemes' => array(
+          'public' => 'public',
         ),
-        'type' => 'number_integer',
-        'weight' => 4,
+        'allowed_types' => array(
+          'audio' => 0,
+          'document' => 0,
+          'image' => 'image',
+          'video' => 0,
+        ),
+        'browser_plugins' => array(
+          'media_browser_osha--media_browser_osha' => 0,
+          'media_browser_osha--media_browser_osha_my_files' => 0,
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 0,
+          'upload' => 0,
+        ),
+        'manualcrop_crop_info' => 1,
+        'manualcrop_default_crop_area' => 1,
+        'manualcrop_enable' => 1,
+        'manualcrop_inline_crop' => 0,
+        'manualcrop_instant_crop' => FALSE,
+        'manualcrop_instant_preview' => 1,
+        'manualcrop_keyboard' => 1,
+        'manualcrop_maximize_default_crop_area' => 0,
+        'manualcrop_require_cropping' => array(
+          'oshmail' => 'oshmail',
+        ),
+        'manualcrop_styles_list' => array(
+          'oshmail' => 'oshmail',
+        ),
+        'manualcrop_styles_mode' => 'include',
+        'manualcrop_thumblist' => 0,
       ),
-      'highlights_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'newsletter_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_resources' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_slideshow' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 7,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_pages_count',
-    'label' => 'Number of pages',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'max' => '',
-      'min' => '',
-      'prefix' => '',
-      'suffix' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'number',
-      'settings' => array(),
-      'type' => 'number',
-      'weight' => 34,
-    ),
-    'workbench_access_field' => 0,
-  );
-
-  // Exported field_instance: 'node-seminar-field_show_eu_flag'.
-  $field_instances['node-seminar-field_show_eu_flag'] = array(
-    'bundle' => 'seminar',
-    'default_value' => array(
-      0 => array(
-        'value' => 0,
-      ),
-    ),
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'dangerous_substances' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 7,
-      ),
-      'highlights_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'newsletter_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_resources' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_slideshow' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 6,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_show_eu_flag',
-    'label' => 'Show EU flag',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(
-        'display_label' => 1,
-      ),
-      'type' => 'options_onoff',
-      'weight' => 32,
+      'type' => 'media_generic',
+      'weight' => 3,
     ),
     'workbench_access_field' => 0,
   );
@@ -3360,6 +3241,7 @@ Grey - Only web or not attendance',
   t('For the web / Public');
   t('Grab Flickr photos taken on or between these dates only.');
   t('If you want some special promotion for this event, please contact the editorial team at <a href="mailto:urrutia@osha.europa.eu">urrutia@osha.europa.eu</a> at least 4 weeks before the event is taking place.');
+  t('Image OSHmail');
   t('Key Performance Indicator');
   t('Location');
   t('Main Topic');
@@ -3369,7 +3251,6 @@ Grey - Only web or not attendance',
   t('Migration Source');
   t('Name');
   t('Number of attendees');
-  t('Number of pages');
   t('Organisation');
   t('Organized by EU-OSHA');
   t('Place where the event takes place.');
@@ -3401,6 +3282,7 @@ Grey - Only web or not attendance');
   t('Show in NCW');
   t('Show on');
   t('Source url');
+  t('This image is displayed on OSHmail. The image should be: width:300px height:200px');
   t('Title');
   t('Type');
   t('Unit Ref');

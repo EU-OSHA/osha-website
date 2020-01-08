@@ -13,6 +13,14 @@ if (!defined('PCLZIP_TEMPORARY_DIR')) {
   define('PCLZIP_TEMPORARY_DIR', variable_get('file_temporary_path', '/tmp') . '/');
 }
 
+function store_score($score = false) {
+  static $rs = [];
+  if ($score) {
+    $rs = $score;
+  }
+  return $rs;
+}
+
 function osha_publication_t($title) {
   return t($title);
 }
@@ -158,6 +166,44 @@ function osha_publication_export() {
 function osha_publication_url_inbound_alter(&$path, $original_path, $path_language) {
   global $language_url;
   $args = arg();
+
+  if (
+    count($args) >= 3 &&
+    $args[0] == 'tools-and-publications' &&
+    $args[1] == 'publications'
+  ) {
+    module_load_include('inc', 'pathauto');
+    $map = variable_get('publication_redirect_map', []);
+    $url_parts = explode('/view', implode('/', $args));
+    $redirect = redirect_load_by_source($url_parts[0], 'en');
+    if ($redirect) {
+      $alias = drupal_lookup_path('alias', $redirect->redirect);
+      if (count($url_parts) > 1) {
+        $alias .= '/view';
+      }
+      drupal_goto($alias);
+      return;
+    }
+    foreach($args as &$part) {
+      $part = pathauto_cleanstring($part);
+    }
+    unset($args[0]);
+    if ((count($args) > 3) && ($args[4] == 'view')) {
+      unset($args[2]);
+    }
+    $new_url = implode('/', $args);
+    $suffix = '';
+    if (strpos($new_url, '/view')) {
+      $suffix = '/view';
+      $new_url = str_replace($suffix, '', $new_url);
+    }
+    if (isset($map[$new_url])) {
+      $new_url = $map[$new_url];
+    }
+    $new_url .= $suffix;
+    drupal_goto($new_url);
+    return;
+  }
   // MC-175 - publication search pretty path.
   // break down in filters the publication search path.
   if (strpos($path, 'publications') !== FALSE) {
@@ -526,15 +572,20 @@ function osha_publication_download_pdf($node) {
   if (!$node || $node->type != 'publication') {
     return '';
   }
+  $langs = [];
   foreach ($_REQUEST['languages'] as $lang) {
     if (!empty($node->field_file[$lang])) {
       $files[$lang] = $node->field_file[$lang][0];
+      $langs[$lang] = $lang;
     }
+  }
+  if ($langs) {
+    ksort($langs);
   }
   if (count($files) > 1) {
     $drupal_dir_path = OSHA_PDF_DOWN_PATH;
     $dir_path = drupal_realpath($drupal_dir_path);
-    $base_name = $nid . '_publication_download_' . rand(10, 9999) . '.zip';
+    $base_name = $nid . '_publication_download_' . implode('_', $langs) . '.zip';
     $archive_path = osha_publication_get_archive_drupal_path($files, $base_name, $dir_path, $drupal_dir_path);
     if ($archive_path) {
       $headers = array(

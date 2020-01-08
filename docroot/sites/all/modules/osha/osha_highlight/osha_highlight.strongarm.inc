@@ -156,22 +156,22 @@ function osha_highlight_strongarm() {
           'weight' => '1',
         ),
         'path' => array(
-          'weight' => '12',
+          'weight' => '13',
         ),
         'redirect' => array(
-          'weight' => '11',
+          'weight' => '12',
         ),
         'language' => array(
           'weight' => '2',
         ),
         'metatags' => array(
-          'weight' => '13',
+          'weight' => '14',
         ),
         'workbench_access' => array(
           'weight' => '0',
         ),
         'xmlsitemap' => array(
-          'weight' => '30',
+          'weight' => '18',
         ),
       ),
       'display' => array(),

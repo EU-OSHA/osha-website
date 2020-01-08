@@ -5,6 +5,7 @@ package = OSHA
 version = 7.x-1.5
 dependencies[] = field_group
 dependencies[] = flickr_sets
+dependencies[] = media
 dependencies[] = taxonomy
 features[ctools][] = field_group:field_group:1
 features[ctools][] = strongarm:strongarm:1

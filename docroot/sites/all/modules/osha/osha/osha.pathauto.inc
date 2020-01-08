@@ -25,6 +25,7 @@ function osha_pathauto_punctuation_chars_alter(array &$punctuation) {
   $punctuation['double-exclamation-mark'] = array('value' => '‼', 'name' => t('Double exclamation mark'));
   $punctuation['overline'] = array('value' => '‾', 'name' => t('Overline'));
   $punctuation['U+2026'] = array('value' => '…', 'name' => t('Horizontal ellipsis'));
+  $punctuation['U+2021'] = array('value' => '”', 'name' => t('RIGHT DOUBLE QUOTATION MARK'));
 }
 
 /**

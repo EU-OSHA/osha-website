@@ -94,7 +94,7 @@ function osha_news_views_default_views() {
   $handler->display->display_options['footer']['result']['id'] = 'result';
   $handler->display->display_options['footer']['result']['table'] = 'views';
   $handler->display->display_options['footer']['result']['field'] = 'result';
-  $handler->display->display_options['footer']['result']['content'] = '<span class="result_summary">Displaying @start - @end of @total</span>';
+  $handler->display->display_options['footer']['result']['content'] = '<div class="pager-total"><span>@start - @end / @total</span></div>';
   $handler->display->display_options['path'] = 'oshnews';
 
   /* Display: OSH news - latest */
@@ -320,7 +320,7 @@ function osha_news_views_default_views() {
     t('»'),
     t('Get the actual content from a content revision.'),
     t('OSH news list'),
-    t('<span class="result_summary">Displaying @start - @end of @total</span>'),
+    t('<div class="pager-total"><span>@start - @end / @total</span></div>'),
     t('OSH news - latest'),
     t('View all'),
     t('OSH news - front'),

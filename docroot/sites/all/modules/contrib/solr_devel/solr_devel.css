@@ -1,0 +1,29 @@
+
+table.solr-devel-overview {
+  margin-top: 30px;
+}
+
+table.solr-devel-queue tr.solr-devel-ok {
+  background-color: #E5FFE2;
+}
+
+table.solr-devel-queue tr.solr-devel-warning {
+  background-color: #FFFCE5;
+}
+
+table.solr-devel-queue tr.solr-devel-error td {
+  color: #8C2E0B;
+}
+
+table.solr-devel-queue td.solr-devel-criteria {
+  width: 30%;
+}
+
+table.solr-devel-queue td.solr-devel-status {
+  width: 12%;
+}
+
+a.solr-devel-overview-link {
+  display: block;
+  margin-bottom: 30px;
+}

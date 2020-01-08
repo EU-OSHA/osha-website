@@ -3132,6 +3132,18 @@ function osha_events_views_default_views() {
   $handler->display->display_options['filters']['field_publication_date_1']['operator'] = '<=';
   $handler->display->display_options['filters']['field_publication_date_1']['value'] = 'now';
   $handler->display->display_options['filters']['field_publication_date_1']['group'] = 2;
+  /* Filter criterion: Date: Start date (indexed) */
+  $handler->display->display_options['filters']['field_start_date_value_1']['id'] = 'field_start_date_value_1';
+  $handler->display->display_options['filters']['field_start_date_value_1']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['filters']['field_start_date_value_1']['field'] = 'field_start_date_value';
+  $handler->display->display_options['filters']['field_start_date_value_1']['operator'] = 'not empty';
+  /* Filter criterion: Indexed Multilingual Content: Language */
+  $handler->display->display_options['filters']['language']['id'] = 'language';
+  $handler->display->display_options['filters']['language']['table'] = 'search_api_index_default_multilingual_node_index';
+  $handler->display->display_options['filters']['language']['field'] = 'language';
+  $handler->display->display_options['filters']['language']['value'] = array(
+    'en' => 'en',
+  );
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');

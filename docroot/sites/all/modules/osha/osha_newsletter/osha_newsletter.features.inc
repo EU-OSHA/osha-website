@@ -60,44 +60,13 @@ function osha_newsletter_image_default_styles() {
   $styles['newsletter_highlight'] = array(
     'label' => 'Newsletter highlight (reuse crop highlight)',
     'effects' => array(
-      5 => array(
-        'name' => 'manualcrop_reuse',
-        'data' => array(
-          'reuse_crop_style' => 'highlight_image',
-          'apply_all_effects' => 0,
-        ),
-        'weight' => -10,
-      ),
-      9 => array(
-        'name' => 'image_scale',
+      11 => array(
+        'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 300,
           'height' => 200,
-          'upscale' => 0,
         ),
-        'weight' => -9,
-      ),
-      6 => array(
-        'name' => 'canvasactions_definecanvas',
-        'data' => array(
-          'RGB' => array(
-            'HEX' => '#FFFFFF',
-          ),
-          'under' => 1,
-          'exact' => array(
-            'width' => 300,
-            'height' => 200,
-            'xpos' => 'center',
-            'ypos' => 'center',
-          ),
-          'relative' => array(
-            'leftdiff' => '',
-            'rightdiff' => '',
-            'topdiff' => '',
-            'bottomdiff' => '',
-          ),
-        ),
-        'weight' => -8,
+        'weight' => 1,
       ),
     ),
   );

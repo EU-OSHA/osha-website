@@ -28,6 +28,7 @@ function osha_musculoskeletal_disorders_views_default_views() {
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
     14 => '14',
+    6 => '6',
   );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -39,8 +40,10 @@ function osha_musculoskeletal_disorders_views_default_views() {
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['tags']['first'] = '«';
   $handler->display->display_options['pager']['options']['tags']['previous'] = '‹';
   $handler->display->display_options['pager']['options']['tags']['next'] = '›';
+  $handler->display->display_options['pager']['options']['tags']['last'] = '»';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'entity';
   $handler->display->display_options['row_options']['view_mode'] = 'osha_search_teaser';
@@ -323,10 +326,10 @@ function osha_musculoskeletal_disorders_views_default_views() {
     t('Items per page'),
     t('- All -'),
     t('Offset'),
-    t('« first'),
+    t('«'),
     t('‹'),
     t('›'),
-    t('last »'),
+    t('»'),
     t('No results'),
     t('Broken handler search_api_index_musculoskeletal_disorders_index.search_api_et_id'),
     t('Publication year'),

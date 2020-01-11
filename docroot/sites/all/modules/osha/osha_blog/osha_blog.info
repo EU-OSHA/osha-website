@@ -15,6 +15,7 @@ dependencies[] = media
 dependencies[] = number
 dependencies[] = options
 dependencies[] = osha
+dependencies[] = osha_blog
 dependencies[] = osha_highlight
 dependencies[] = osha_legislation
 dependencies[] = osha_taxonomies

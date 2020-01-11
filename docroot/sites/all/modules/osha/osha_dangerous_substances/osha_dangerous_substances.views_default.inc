@@ -305,7 +305,7 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_priority_area']['field'] = 'field_priority_area';
   $handler->display->display_options['fields']['field_priority_area']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_priority_area']['delta_offset'] = '0';
-  /* Field: Content: Image */
+  /* Field: Field: Image */
   $handler->display->display_options['fields']['field_image']['id'] = 'field_image';
   $handler->display->display_options['fields']['field_image']['table'] = 'field_data_field_image';
   $handler->display->display_options['fields']['field_image']['field'] = 'field_image';

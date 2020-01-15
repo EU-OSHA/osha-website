@@ -988,7 +988,7 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
     font-size: 0.6rem;
 }
 
-#footer * li.menu__item:nth-child(7){
+#footer * li.menu__item:last-child{
     margin-right:0;
 }
 

@@ -155,12 +155,14 @@ function osha_slideshare_field_formatter_info() {
  */
 function osha_slideshare_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
   $element = array();
+  $wrapper = entity_metadata_wrapper('node', $entity);
+  $thumbnails = $wrapper->field_thumbnail->value();
   switch ($display['type']) {
     case 'slideshare_default' :
       foreach ($items as $delta => $item) {
         if (isset($item['slide_url'])) {
           $element[$delta]['#markup'] =
-            getSlideshareInfos($item['slide_url'], $item['slide_id']);
+            osha_slideshare_infos($item['slide_url'], $item['slide_id'], @$thumbnails[$delta]);
         }
       }
       break;
@@ -228,15 +230,21 @@ function saveThumbnail($api_key, $secret_key, $slideshow_id) {
  * Connect to Slideshare and get information
  * about the URL provided
  */
-function getSlideshareInfos($slideshow_url, $slideshow_id) {
+function osha_slideshare_infos($slideshow_url, $slideshow_id, $thumbnail = '') {
   $files = variable_get('file_public_path', conf_path() . '/files');
   $file_name = $slideshow_id . '.jpg';
   $dest = $files . '/slideshare/' . $file_name;
   $image = '';
-
-  if(file_exists($dest))
+  if ($thumbnail) {
+    $image = [
+      'style_name' => 'publication_youtube',
+      'path' => $thumbnail['uri'],
+    ];
+    $image = theme('image_style', $image);
+  }
+  elseif (file_exists($dest)) {
     $image = theme('image', array('path' => $dest));
-
+  }
   return theme('slideshare_display',array(
     'path' => $slideshow_url,
     'image' => $image,
@@ -253,12 +261,19 @@ function save_slideshare_oembed($slideshare_id, $slideshare_url) {
   }
 }
 
-function get_slideshare_oembed($slideshare_id, $slideshare_url) {
+function get_slideshare_oembed($slideshare_id, $slideshare_url, $thumbnail = '') {
   $files = variable_get('file_public_path', conf_path() . '/files');
   $file_name = $slideshare_id . '.json';
   $dest = $files . '/slideshare/' . $file_name;
   $json = [];
-  if (!file_exists($dest)) {
+  if ($thumbnail) {
+    $image = [
+      'style_name' => 'publication_youtube',
+      'path' => $thumbnail['uri'],
+    ];
+    $image = theme('image_style', $image);
+  }
+  elseif (!file_exists($dest)) {
     save_slideshare_oembed($slideshare_id, $slideshare_url);
   }
   if (file_exists($dest)) {
@@ -267,12 +282,19 @@ function get_slideshare_oembed($slideshare_id, $slideshare_url) {
   return $json;
 }
 
-function get_slideshare_img($slideshare_id) {
+function get_slideshare_img($slideshare_id, $thumbnail = '') {
   $files = variable_get('file_public_path', conf_path() . '/files');
   $file_name = $slideshare_id . '.jpg';
   $dest = $files . '/slideshare/' . $file_name;
   $image = '';
-  if (file_exists($dest)) {
+  if ($thumbnail) {
+    $image = [
+      'style_name' => 'publication_youtube',
+      'path' => $thumbnail['uri'],
+    ];
+    $image = theme('image_style', $image);
+  }
+  elseif (file_exists($dest)) {
     $image = theme('image', array('path' => $dest));
   }
   return $image;

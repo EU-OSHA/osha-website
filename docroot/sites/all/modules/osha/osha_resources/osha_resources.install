@@ -104,3 +104,10 @@ function osha_resources_update_7003() {
 function osha_resources_update_7004() {
   features_revert(array('osha_resources' => array('field_base', 'field_instance')));
 }
+
+/**
+ * MDR-3443 The improved Slideshare option doesn't work well.
+ */
+function osha_resources_update_7005() {
+  features_revert(array('osha_resources' => array('field_instance')));
+}

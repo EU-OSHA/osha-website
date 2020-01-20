@@ -79,6 +79,10 @@ function osha_publication_node_autocomplete($string = '') {
 }
 
 function osha_copy_publication_translation($form, &$form_state) {
+  $country_options = osha_lingua_tools_get_country_codes();
+  drupal_add_js(drupal_get_path('module', 'osha_lingua_tools') . '/js/osha_lingua_tools.js');
+  drupal_add_css(drupal_get_path('module', 'osha_lingua_tools') . '/css/osha_lingua_tools.css', array('group' => CSS_THEME));
+
   $form['node'] = array(
     '#type' => 'textfield',
     '#required' => TRUE,
@@ -92,6 +96,30 @@ function osha_copy_publication_translation($form, &$form_state) {
   $form['suffix_title'] = array(
     '#title' => 'Suffix title',
     '#type' => 'textfield',
+  );
+  $form['copy_option'] = array(
+    '#type' => 'radios',
+    '#title' => '',
+    '#options' => array(
+      'publication' => 'Publication',
+      'one' => 'One publication for each country',
+    ),
+    '#required' => TRUE,
+  );
+  $form['publication_per_country'] = array(
+    '#type' => 'fieldset',
+  );
+  $form['publication_per_country']['select_all_countries'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Select all countries'),
+  );
+  $form['publication_per_country']['countries'] = array(
+    '#type' => 'select',
+    '#title' => '',
+    '#options' => $country_options,
+    '#multiple' => TRUE,
+    '#chosen' => FALSE,
+    '#size' => 20,
   );
   $form['create'] = array(
     '#type' => 'submit',
@@ -109,19 +137,36 @@ function osha_copy_publication_translation($form, &$form_state) {
 }
 
 function osha_copy_publication_translation_preview($form, &$form_state) {
-  $node = node_load($form_state['values']['node']);
+  $source_node = node_load($form_state['values']['node']);
 
-  $selected_languages = osha_copy_publication_translation_get_selected_languages($form_state, $node);
+  $selected_languages = osha_copy_publication_translation_get_selected_languages($source_node);
   $rows = [];
   $header = array(t('Language'), t('Title'), t('Translated Title'));
 
   $prefix_title = $form_state['values']['prefix_title'];
   $suffix_title = $form_state['values']['suffix_title'];
-  foreach ($selected_languages as $lang_code => $lang_title) {
-    if (isset($node->title_field[$lang_code])) {
-      $title = $node->title_field[$lang_code][0]['value'];
-      $new_title = osha_copy_publication_translation_get_title($prefix_title, $suffix_title, $title, $lang_code);
-      $rows[] = [$lang_title, $title, $new_title];
+  $copy_option = $form_state['values']['copy_option'];
+  if ($copy_option == 'one') {
+    $country_codes = osha_lingua_tools_get_country_codes();
+    $countries = $form_state['values']['countries'];
+    foreach ($countries as $country_code) {
+      foreach ($selected_languages as $lang_code => $lang_title) {
+        if (isset($source_node->title_field[$lang_code])) {
+          $title = $source_node->title_field[$lang_code][0]['value'];
+          $country = $country_codes[$country_code];
+          $new_title = osha_copy_publication_translation_get_title($prefix_title, $suffix_title, $title, $lang_code, $country);
+          $rows[] = [$lang_title, $title, $new_title];
+        }
+      }
+    }
+  }
+  else {
+    foreach ($selected_languages as $lang_code => $lang_title) {
+      if (isset($source_node->title_field[$lang_code])) {
+        $title = $source_node->title_field[$lang_code][0]['value'];
+        $new_title = osha_copy_publication_translation_get_title($prefix_title, $suffix_title, $title, $lang_code);
+        $rows[] = [$lang_title, $title, $new_title];
+      }
     }
   }
   $form_state['translation_info'] = '<h2>' . t('Preview titles:') . '</h2>';
@@ -129,7 +174,10 @@ function osha_copy_publication_translation_preview($form, &$form_state) {
   $form_state['rebuild'] = TRUE;
 }
 
-function osha_copy_publication_translation_get_title($prefix_title, $suffix_title, $title, $lang_code) {
+function osha_copy_publication_translation_get_title($prefix_title, $suffix_title, $title, $lang_code, $country = '') {
+  if ($country) {
+    $title = t(trim($country), [], ['langcode' => $lang_code]) . ' ' . $title;
+  }
   if ($prefix_title) {
     $title = t(trim($prefix_title), [], ['langcode' => $lang_code]) . ' ' . $title;
   }
@@ -139,10 +187,7 @@ function osha_copy_publication_translation_get_title($prefix_title, $suffix_titl
   return $title;
 }
 
-function osha_copy_publication_translation_get_selected_languages($form_state, $node = NULL) {
-  if (!$node) {
-    $node = node_load($form_state['values']['node']);
-  }
+function osha_copy_publication_translation_get_selected_languages($node) {
   $languages = tmgmt_available_languages();
   unset($languages[$node->translations->original]);
   return array_intersect_key($languages, osha_language_list_options());
@@ -187,7 +232,16 @@ function osha_copy_publication_translation_submit($form, &$form_state) {
     return;
   }
 
-  $source_node = node_load($form_state['values']['node']);
+  $copy_option = $form_state['values']['copy_option'];
+  if ($copy_option == 'one') {
+    return osha_lingua_tools_copy_one_publication_for_each_country($form, $form_state);
+  }
+  $nid = $form_state['values']['node'];
+  osha_copy_publication_translation_original($nid, $form_state, $prefix_title, $suffix_title);
+}
+
+function osha_copy_publication_translation_original($nid, &$form_state, $prefix_title, $suffix_title, $country = '') {
+  $source_node = node_load($nid);
   $source_lang = $source_node->translations->original;
   $source_title = $source_node->title_field[$source_lang][0]['value'];
   $languages = $source_node->title_field;
@@ -196,10 +250,11 @@ function osha_copy_publication_translation_submit($form, &$form_state) {
   $rows = [];
   $header = array(t('Language'), t('New Title'), t('Old Title'));
 
-  $new_title = osha_copy_publication_translation_get_title($prefix_title, $suffix_title, $source_title, $source_lang);
+  $new_title = osha_copy_publication_translation_get_title($prefix_title, $suffix_title, $source_title, $source_lang, $country);
   $node = osha_copy_publication_translation_create_base_publication($new_title, $source_node->type, $source_node, $source_lang);
-
-  drupal_set_message('Source ' . l($source_title,'node/' . $source_node->nid . '/translate') .' publication ' . $source_node->nid, 'status');
+  if (!$country) {
+    drupal_set_message('Source ' . l($source_title,'node/' . $source_node->nid . '/translate') .' publication ' . $source_node->nid, 'status');
+  }
   drupal_set_message('Created ' . l($new_title,'node/' . $node->nid . '/translate') .' publication (' . $source_lang . ') ' . $node->nid, 'status');
 
   if ($languages) {
@@ -229,7 +284,7 @@ function osha_copy_publication_translation_submit($form, &$form_state) {
   $new_node->bundle = $source_node->type;
   $new_node->translations = $node->translations;
 
-  $selected_languages = osha_copy_publication_translation_get_selected_languages($form_state, $source_node);
+  $selected_languages = osha_copy_publication_translation_get_selected_languages($source_node);
   $fields = field_info_instances('node', $source_node->type);
   foreach ($languages as $lang_code => $value) {
     if ($value) {
@@ -239,7 +294,7 @@ function osha_copy_publication_translation_submit($form, &$form_state) {
         }
         if ($field['field_name'] == 'title_field') {
           $source_title = $source_node->title_field[$lang_code][0]['value'];
-          $new_title = osha_copy_publication_translation_get_title($prefix_title, $suffix_title, $source_title, $lang_code);
+          $new_title = osha_copy_publication_translation_get_title($prefix_title, $suffix_title, $source_title, $lang_code, $country);
           $rows[] = [$selected_languages[$lang_code], $new_title, $source_title];
           $new_node->{$field['field_name']}[$lang_code][0]['value'] = $new_title;
         }
@@ -268,9 +323,13 @@ function osha_copy_publication_translation_submit($form, &$form_state) {
     }
   }
   if ($rows) {
-    $form_state['translation_info'] = '<h2>' . t('Translated titles:') . '</h2>';
+    if (empty($form_state['translation_info'])) {
+      $form_state['translation_info'] = '';
+    }
+    $form_state['translation_info'] .= '<h2>' . t('Translated titles:') . '</h2>';
     $form_state['translation_info'] .= theme('table', array('header' => $header, 'rows' => $rows));
   }
+  return $node;
 }
 
 /**
@@ -747,4 +806,67 @@ function osha_lingua_tools_spread_files($form, &$form_state) {
   }
 
   node_save($node);
+}
+
+function osha_lingua_tools_get_country_codes() {
+  $field = field_info_field('field_country_code');
+  return list_allowed_values($field);
+}
+
+function osha_lingua_tools_batch_operation_copy($nid, $settings, &$context) {
+  $countries = array_keys($settings['countries']);
+  $country_codes = osha_lingua_tools_get_country_codes();
+  if (!isset($context['sandbox']['progress'])) {
+    $context['sandbox']['progress'] = 0;
+    $context['sandbox']['max'] = count($settings['countries']);
+    $context['results']['settings'] = $settings;
+    $context['results']['results'] = array();
+  }
+
+  $prefix_title = $settings['prefix_title'];
+  $suffix_title = $settings['suffix_title'];
+  $country_code = $countries[$context['sandbox']['progress']];
+  $country = $country_codes[$country_code];
+
+  $node = osha_copy_publication_translation_original($nid, $form_state, $prefix_title, $suffix_title, $country);
+
+  $context['results']['results'][$node->nid] = $node->title;
+  $context['sandbox']['progress']++;
+  $context['message'] = t('Now processing \'%node\'', array('%node' => $node->title));
+  if ($context['sandbox']['progress'] != $context['sandbox']['max']) {
+    $context['finished'] = $context['sandbox']['progress'] / $context['sandbox']['max'];
+  }
+}
+
+function osha_lingua_tools_batch_copy_finished($success, $results, $operations) {
+  if ($success) {
+    $message = t('@count publications successfully copied.', array('@count' => count($results['results'])));
+    drupal_set_message($message);
+  }
+  else {
+    $error_operation = reset($operations);
+    $message = t('An error occurred while processing %error_operation with arguments: @arguments',
+      array('%error_operation' => $error_operation[0], '@arguments' => print_r($error_operation[1], TRUE)));
+    drupal_set_message($message, 'error');
+  }
+}
+
+function osha_lingua_tools_copy_one_publication_for_each_country($form, &$form_state) {
+  $values = $form_state['values'];
+  if (!empty($form['#node'])) {
+    $values['node'] = $form['#node'];
+  }
+  $nid = $values['node'];
+  $batch = array(
+    'operations' => array(
+      array('osha_lingua_tools_batch_operation_copy', array($nid, $values)),
+    ),
+    'finished' => 'osha_lingua_tools_batch_copy_finished',
+    'title' => t('Processing Copy Publication Translation Batch'),
+    'init_message' => t('Copy Publication Translation Batch is starting.'),
+    'progress_message' => t('Processed @current out of @total.'),
+    'error_message' => t('Copy Publication Translation Batch has encountered an error.'),
+  );
+  batch_set($batch);
+  batch_process();
 }

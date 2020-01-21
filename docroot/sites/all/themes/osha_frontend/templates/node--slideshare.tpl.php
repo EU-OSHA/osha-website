@@ -13,7 +13,7 @@ if ($view_mode == 'osha_resources') {
     $oembed = get_slideshare_oembed($slideshare_id, $slideshare_url);
     $wrapper = entity_metadata_wrapper('node', $node);
     $thumbnail = '';
-    $thumbnails = $wrapper->field_thumbnail->value();
+    $thumbnails = $wrapper->field_slideshare_thumbnail->value();
     if ($thumbnails) {
       $thumbnail = $thumbnails[0];
     }

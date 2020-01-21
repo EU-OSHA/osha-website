@@ -1219,8 +1219,8 @@ function osha_resources_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-slideshare-field_thumbnail'.
-  $field_instances['node-slideshare-field_thumbnail'] = array(
+  // Exported field_instance: 'node-slideshare-field_slideshare_thumbnail'.
+  $field_instances['node-slideshare-field_slideshare_thumbnail'] = array(
     'bundle' => 'slideshare',
     'deleted' => 0,
     'description' => '',
@@ -1235,7 +1235,7 @@ function osha_resources_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 6,
       ),
       'osha_resources' => array(
         'label' => 'above',
@@ -1251,13 +1251,13 @@ function osha_resources_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_thumbnail',
+    'field_name' => 'field_slideshare_thumbnail',
     'label' => 'Thumbnail',
     'required' => 0,
     'settings' => array(
       'alt_field' => 0,
       'default_image' => 0,
-      'entity_translation_sync' => 0,
+      'entity_translation_sync' => FALSE,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'image_field_caption' => 0,
@@ -1301,7 +1301,7 @@ function osha_resources_field_default_field_instances() {
         'manualcrop_thumblist' => 0,
       ),
       'type' => 'media_generic',
-      'weight' => 48,
+      'weight' => 49,
     ),
     'workbench_access_field' => 0,
   );

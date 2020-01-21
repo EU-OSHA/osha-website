@@ -156,13 +156,13 @@ function osha_slideshare_field_formatter_info() {
 function osha_slideshare_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
   $element = array();
   $wrapper = entity_metadata_wrapper('node', $entity);
-  $thumbnails = $wrapper->field_thumbnail->value();
+  $thumbnail = $wrapper->field_thumbnail->value();
   switch ($display['type']) {
     case 'slideshare_default' :
       foreach ($items as $delta => $item) {
         if (isset($item['slide_url'])) {
           $element[$delta]['#markup'] =
-            osha_slideshare_infos($item['slide_url'], $item['slide_id'], @$thumbnails[$delta]);
+            osha_slideshare_infos($item['slide_url'], $item['slide_id'], $thumbnail);
         }
       }
       break;

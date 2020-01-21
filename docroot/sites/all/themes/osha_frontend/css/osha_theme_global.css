@@ -2259,7 +2259,7 @@ ul[data-sa-theme="basic-blue"].ui-menu{
 
 }
 @media screen and (max-width: 680px) {
-	.menu-block-3 ul li {
+	.menu-block-3 ul li, .page-node-5 .menu-block-3 ul li {
 	 	padding: 0;
    		width: 100%;
 	}

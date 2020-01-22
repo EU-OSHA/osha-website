@@ -125,7 +125,7 @@ global $language;
                 <p><?php $text = t('No longer wish to receive OSHmail? <a href="@url" style="@style">Unsubscribe here.</a>',
                     array(
                       '@style' => 'color: #003399; text-decoration: none;',
-                      '@url' => 'https://analytics-eu.clickdimensions.com/oshaeuropaeu-arn3o/pages/knqquecaeemaabqvrpqfg.html',
+                      '@url' => 'https://analytics-eu.clickdimensions.com/oshaeuropaeu-a1cuo/pages/tvcgmcleema3qbqvroocg.html',                      
                     )
                   );
                   $text = str_replace('href', 'target="_blank" href', $text);

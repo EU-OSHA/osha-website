@@ -87,6 +87,31 @@ function osha_resources_field_default_field_bases() {
     'type' => 'slideshare',
   );
 
+  // Exported field_base: 'field_slideshare_thumbnail'.
+  $field_bases['field_slideshare_thumbnail'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_slideshare_thumbnail',
+    'indexes' => array(
+      'fid' => array(
+        0 => 'fid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'image',
+    'settings' => array(
+      'default_image' => 0,
+      'entity_translation_sync' => array(
+        0 => 'fid',
+      ),
+      'uri_scheme' => 'public',
+    ),
+    'translatable' => 1,
+    'type' => 'image',
+  );
+
   // Exported field_base: 'field_youtube'.
   $field_bases['field_youtube'] = array(
     'active' => 1,

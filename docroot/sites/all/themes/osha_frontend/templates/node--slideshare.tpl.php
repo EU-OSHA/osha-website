@@ -11,10 +11,16 @@ if ($view_mode == 'osha_resources') {
     $slideshare_url = $slideshare['slide_url'];
     $slideshare_id = $slideshare['slide_id'];
     $oembed = get_slideshare_oembed($slideshare_id, $slideshare_url);
+    $wrapper = entity_metadata_wrapper('node', $node);
+    $thumbnail = '';
+    $thumbnails = $wrapper->field_slideshare_thumbnail->value();
+    if ($thumbnails) {
+      $thumbnail = $thumbnails[0];
+    }
   }
   ?>
     <div class="box">
-        <?php print get_slideshare_img($slideshare_id); ?>
+        <?php print get_slideshare_img($slideshare_id, $thumbnail); ?>
         <span class="date-display-single"></span>
         <span class="time-video"><?php print $oembed['total_slides'] . ' ' . t('slides') ?></span>
         <h2><?php print strip_tags(render($content['title_field']), '<a>'); ?></h2>

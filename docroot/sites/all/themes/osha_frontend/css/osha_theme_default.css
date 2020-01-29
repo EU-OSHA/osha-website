@@ -9649,3 +9649,8 @@ table.quiz-feedback-table.sticky-enabled.tableheader-processed.sticky-table > tb
     border: 1px solid #003399; 
     color: #FFF;
 }
+
+
+.page-node-5 .menu-block-3 ul li{
+	padding-right: 15px;
+}

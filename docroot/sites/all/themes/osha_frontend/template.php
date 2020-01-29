@@ -611,6 +611,9 @@ function osha_frontend_preprocess_html(&$variables) {
   if (arg(0) . arg(1) == 'publications') {
     $variables['classes_array'][] = 'page-tools-and-publications';
   }
+  if (arg(0) . arg(1) . arg(2) == 'themes/musculoskeletal-disorders/practical-tools-musculoskeletal-disorders') {
+    $variables['classes_array'][] = 'page-practical-tools-musculoskeletal-disorders';
+  }
   if ($list_page == 'oshevents') {
     $variables['classes_array'][] = 'revamp';
     $variables['classes_array'][] = 'page-publications';

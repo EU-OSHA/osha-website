@@ -104,7 +104,7 @@ function osha_copy_publication_translation($form, &$form_state) {
       'publication' => 'Publication',
       'one' => 'One publication for each country',
     ),
-    '#required' => TRUE,
+    '#default_value' => 'publication',
   );
   $form['publication_per_country'] = array(
     '#type' => 'fieldset',
@@ -809,8 +809,28 @@ function osha_lingua_tools_spread_files($form, &$form_state) {
 }
 
 function osha_lingua_tools_get_country_codes() {
-  $field = field_info_field('field_country_code');
-  return list_allowed_values($field);
+  $exclude_country_codes = variable_get('osha_lingua_tools_exclude_country_codes', []);
+  $exclude_country_statuses = variable_get('osha_lingua_tools_exclude_country_status', [3018, 3021]);
+  $voc = taxonomy_vocabulary_machine_name_load('country');
+  if (empty($voc)) {
+    return ;
+  }
+  $list = [];
+  $term_tree = taxonomy_get_tree($voc->vid, 0, NULL, TRUE);
+  foreach($term_tree as $term) {
+    $iso = $term->field_iso2[LANGUAGE_NONE][0][value];
+    if (!$term->field_country_status) {
+      continue;
+    }
+    if (in_array($iso, $exclude_country_codes)) {
+      continue;
+    }
+    if (in_array($term->field_country_status[LANGUAGE_NONE][0]['tid'], $exclude_country_statuses)) {
+      continue;
+    }
+    $list[$iso] = $term->name;
+  }
+  return $list;
 }
 
 function osha_lingua_tools_batch_operation_copy($nid, $settings, &$context) {

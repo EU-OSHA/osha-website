@@ -144,3 +144,10 @@ function osha_musculoskeletal_disorders_update_7007() {
     }
   }
 }
+
+/**
+ * MDR-3435 Development:Fields and filters for MSDs database.
+ */
+function osha_musculoskeletal_disorders_update_7008() {
+  features_revert_module('osha_musculoskeletal_disorders');
+}

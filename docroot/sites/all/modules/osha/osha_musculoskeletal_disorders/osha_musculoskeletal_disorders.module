@@ -122,6 +122,10 @@ function osha_musculoskeletal_disorders_form_alter(&$form, &$form_state, $form_i
     );
   }
 
+  if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-musculoskeletal-disorders-list-page') {
+    $form['text']['#suffix'] = '<input type="submit" id="edit-submit-musculoskeletal-disorders" name="" value="Apply" class="form-submit">';
+  }
+
   if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-musculoskeletal-disorders-overview-page') {
     $filter_id = 'description';
     $form[$filter_id]['#title'] = t('Empty description');
@@ -364,10 +368,11 @@ function osha_musculoskeletal_disorders_get_provider_name($original_language, $e
  */
 function osha_musculoskeletal_disorders_views_post_render(&$view, &$output, &$cache) {
   if ($view->name == 'musculoskeletal_disorders_list') {
-    drupal_add_js(drupal_get_path('module', 'osha_musculoskeletal_disorders') . '/js/sort.js', array('weight' => 20));
-    $form = drupal_get_form('osha_musculoskeletal_disorders_sort_form');
-    $order_html = '<div class="sort-container col-xs-3">' . drupal_render($form) . '</div><span class="count-container pull-right">';
-    $output = trim(str_replace('@order', $order_html, $output)) . '</span>';
+//    drupal_add_js(drupal_get_path('module', 'osha_musculoskeletal_disorders') . '/js/sort.js', array('weight' => 20));
+//    $form = drupal_get_form('osha_musculoskeletal_disorders_sort_form');
+//    drupal_render($form)
+//    $order_html = '<div class="sort-container col-xs-3">' . '' . '</div><span class="count-container pull-right">';
+//    $output = trim(str_replace('@order', $order_html, $output)) . '</span>';
   }
 }
 

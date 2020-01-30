@@ -17,6 +17,12 @@ function osha_press_contact_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -93,6 +99,12 @@ function osha_press_contact_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Select Type for this content.',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'i18n_taxonomy',
@@ -164,6 +176,12 @@ function osha_press_contact_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -241,6 +259,12 @@ function osha_press_contact_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Select Country for this content.',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'i18n_taxonomy',
@@ -311,6 +335,12 @@ function osha_press_contact_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Grab Flickr photos taken on or between these dates only.',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'format_type' => 'long',
         'label' => 'above',
@@ -403,6 +433,12 @@ function osha_press_contact_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -478,6 +514,12 @@ function osha_press_contact_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -549,6 +591,12 @@ function osha_press_contact_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -624,6 +672,12 @@ function osha_press_contact_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Contact CV file.',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'file',
@@ -699,6 +753,12 @@ function osha_press_contact_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Contact Declaration of Interests file.',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'file',
@@ -774,6 +834,12 @@ function osha_press_contact_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'email',
@@ -846,6 +912,12 @@ function osha_press_contact_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -927,6 +999,12 @@ function osha_press_contact_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -1004,6 +1082,12 @@ function osha_press_contact_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -1080,6 +1164,12 @@ function osha_press_contact_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -1161,6 +1251,12 @@ function osha_press_contact_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'link',
@@ -1254,6 +1350,12 @@ function osha_press_contact_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Select Category for this content.',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'i18n_taxonomy',
@@ -1325,6 +1427,12 @@ function osha_press_contact_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Select WG Role 1 for this content.',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'i18n_taxonomy',
@@ -1396,6 +1504,12 @@ function osha_press_contact_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Select WG Role 2 for this content.',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'i18n_taxonomy',
@@ -1467,6 +1581,12 @@ function osha_press_contact_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -1543,6 +1663,12 @@ function osha_press_contact_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),

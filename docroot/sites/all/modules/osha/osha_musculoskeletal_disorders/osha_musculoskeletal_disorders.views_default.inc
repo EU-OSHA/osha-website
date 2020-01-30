@@ -263,7 +263,6 @@ function osha_musculoskeletal_disorders_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['path'] = 'themes/musculoskeletal-disorders/practical-tools-musculoskeletal-disorders';
   $translatables['musculoskeletal_disorders_list'] = array(
     t('Master'),

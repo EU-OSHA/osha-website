@@ -648,48 +648,8 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'weight' => 0,
       ),
     ),
-    'title' => '',
+    'title' => 'Type of visual resource',
     'visibility' => 0,
-  );
-
-  $export['views-49e5cde0d1734e17d7b0c4a53ff8ee28'] = array(
-    'cache' => -1,
-    'custom' => 0,
-    'delta' => '49e5cde0d1734e17d7b0c4a53ff8ee28',
-    'i18n_block_language' => array(),
-    'i18n_mode' => 0,
-    'module' => 'views',
-    'node_types' => array(),
-    'pages' => 'themes/musculoskeletal-disorders/practical-tools-musculoskeletal-disorders',
-    'roles' => array(),
-    'themes' => array(
-      'bartik' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'bartik',
-        'weight' => 0,
-      ),
-      'osha_admin' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'osha_admin',
-        'weight' => 0,
-      ),
-      'osha_frontend' => array(
-        'region' => 'sidebar_first',
-        'status' => 1,
-        'theme' => 'osha_frontend',
-        'weight' => 3,
-      ),
-      'seven' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'seven',
-        'weight' => 0,
-      ),
-    ),
-    'title' => '',
-    'visibility' => 1,
   );
 
   return $export;

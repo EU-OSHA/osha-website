@@ -53,7 +53,7 @@ function osha_musculoskeletal_disorders_views_default_views() {
   $handler->display->display_options['header']['result']['id'] = 'result';
   $handler->display->display_options['header']['result']['table'] = 'views';
   $handler->display->display_options['header']['result']['field'] = 'result';
-  $handler->display->display_options['header']['result']['content'] = '@order Showing @start - @end from @total';
+  $handler->display->display_options['header']['result']['content'] = 'Showing @start - @end from @total';
   /* No results behavior: Global: Unfiltered text */
   $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
   $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
@@ -280,7 +280,7 @@ function osha_musculoskeletal_disorders_views_default_views() {
     t('‹'),
     t('›'),
     t('»'),
-    t('@order Showing @start - @end from @total'),
+    t('Showing @start - @end from @total'),
     t('No results'),
     t('<div class="views-field-nothing">
 <div class="av-type">

@@ -8828,13 +8828,15 @@ div.flickr-photoset{
 .node-type-dangerous-substances .node-dangerous-substances .field-name-field-msd-provider .field-items .field-item,
 .node-type-dangerous-substances .node-dangerous-substances .field-name-field-available-in-languages .field-items .field-item{
 	display: inline-block;
-	background-color: #99b5d6;
-	border-radius: 5px;
+    background-color: #e8eef7;
+    border-radius: 5px;
     padding: 1px 10px;
     margin-right: 5px;
     color: white;
-    font-size: 13px;
+    font-size: 11px;
     margin-bottom: 5px;
+    color: #003399;
+    margin-left: 2px;
 }
 
 .node-type-dangerous-substances .node-dangerous-substances h3{

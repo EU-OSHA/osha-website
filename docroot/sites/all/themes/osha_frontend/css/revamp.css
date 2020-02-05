@@ -2578,3 +2578,139 @@ article.node-seminar{
     width: auto;
     padding-left: 3em;
 }
+
+
+
+
+
+/*  Practical tools and guidance on musculoskeletal disordersPractical tools and guidance on musculoskeletal disorders*/
+
+.page-themes-musculoskeletal-disorders aside.sidebars_first #block-osha-dangerous-substances-osha-ds-search-clear-filters h3{
+    font-weight: 300;
+    background: url(../images/separator_search.png) repeat-x scroll 0 100% rgba(0, 0, 0, 0); 
+    margin-top: 5px;   
+    padding-bottom: 0.7em;
+}
+
+.page-practical-tools-musculoskeletal-disorders .views-exposed-form .views-exposed-widget{
+    float: none;
+    padding: 0px;
+}
+.page-practical-tools-musculoskeletal-disorders .sidebars_first #views-exposed-form-musculoskeletal-disorders-list-page .views-exposed-widgets{
+    position: relative;
+    margin-top: 15px;
+}
+.page-practical-tools-musculoskeletal-disorders .sidebars_first #views-exposed-form-musculoskeletal-disorders-list-page .views-exposed-widget.views-widget-filter-search_api_views_fulltext{
+    width: 100%;
+    padding: 0px;
+    
+}
+.page-practical-tools-musculoskeletal-disorders .sidebars_first #views-exposed-form-musculoskeletal-disorders-list-page .views-exposed-widget.views-widget-filter-search_api_views_fulltext input{
+    margin-bottom: 0px;
+    padding-right: 55px;
+}
+
+.page-practical-tools-musculoskeletal-disorders .sidebars_first #views-exposed-form-musculoskeletal-disorders-list-page .views-widget-sort-by,
+.page-practical-tools-musculoskeletal-disorders .sidebars_first #views-exposed-form-musculoskeletal-disorders-list-page .views-widget-sort-order{
+    display: none;
+}
+
+.page-practical-tools-musculoskeletal-disorders .sidebars_first #views-exposed-form-musculoskeletal-disorders-list-page .views-exposed-form .views-exposed-widget.views-submit-button{
+    height: inherit;
+    padding: 0px !important;
+    margin: 0px !important;
+    background: inherit;
+    width: inherit;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+
+.view-musculoskeletal-disorders-list > .view-content{
+    padding: 1em 0;
+}
+
+.view-musculoskeletal-disorders-list .view-header{
+    display: none;
+}
+
+.view-musculoskeletal-disorders-list .views-exposed-widgets{
+    border-top: 2px solid #e8eef7;
+    padding-top: 2em;
+}
+
+.view-musculoskeletal-disorders-list .views-exposed-widgets label{
+    font-weight: 600;
+}
+
+.view-musculoskeletal-disorders-list .views-exposed-widgets #edit-text-wrapper,
+.view-musculoskeletal-disorders-list .views-exposed-widgets .views-widget-sort-by,
+.view-musculoskeletal-disorders-list .views-exposed-widgets .views-widget-sort-order{
+    float: left;
+    padding-top: 0!important;
+    width: 32.1%!important;
+    margin-right: 1em;
+    position: relative;
+}
+
+.view-musculoskeletal-disorders-list .views-exposed-widgets .views-widget-sort-order{
+    margin-right: 0;
+}
+
+.view-musculoskeletal-disorders-list .views-exposed-widget.views-submit-button{
+    display: none;
+}
+
+.view-musculoskeletal-disorders-list  #edit-text-wrapper input[type=submit] {
+    position: absolute;
+    width: 20px;
+    top: 8px;
+    right: 6px;
+    background: url(/sites/all/themes/osha_frontend/images/pink-search.png) no-repeat 96% 55%;
+    border: 0;
+    text-indent: -9999999px;
+}
+
+
+.view-musculoskeletal-disorders-list .views-exposed-widgets #edit-text{
+    height: 37px;
+    border: 1px solid #003399;
+    border-radius: 5px;
+    width: 100%!important;
+    float: left;
+    margin-top: 0;
+    padding-left: 10px;
+    color: #003399;
+    padding-right: 30px;
+    font-size: 13px;
+}
+
+
+.view-musculoskeletal-disorders-list > .view-content .views-field-title-field{
+    margin-bottom: 10px;
+}
+
+.view-musculoskeletal-disorders-list > .view-content .views-field-nothing .av-type span{
+    display: inline-block;
+    background-color: #e8eef7;
+    border-radius: 5px;
+    padding: 1px 10px;
+    margin-right: 5px;
+    color: white;
+    font-size: 11px;
+    margin-bottom: 5px;
+    color:#003399;
+}
+
+.view-musculoskeletal-disorders-list > .view-content .views-field-nothing .av-type .views-label{
+    display: none;
+}
+
+.view-musculoskeletal-disorders-list > .view-content .views-field-nothing .av-type br{
+    display: none;
+}
+
+.view-musculoskeletal-disorders-list .view-empty{
+    padding: 15px;
+    font-size: 1.2em;
+}

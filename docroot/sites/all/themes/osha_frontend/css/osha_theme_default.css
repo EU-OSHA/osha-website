@@ -8795,9 +8795,38 @@ div.flickr-photoset{
 	font-size: 1.2em;
 }
 /*search ds detail page*/
+.node-dangerous-substances .view-header.back{
+	margin-top: 0;
+}
+
+.node-type-dangerous-substances .node-dangerous-substances .field-type-list-text,
 .node-type-dangerous-substances .node-dangerous-substances .field-name-field-item-type,
 .node-type-dangerous-substances .node-dangerous-substances .field-name-field-material-country,
-.node-type-dangerous-substances .node-dangerous-substances .field-name-field-available-in-languages{
+.node-type-dangerous-substances .node-dangerous-substances .field-name-field-available-in-languages,
+.node-type-dangerous-substances .node-dangerous-substances .field-collection-container{
+	display: inline-block;
+	float: left;
+	margin-top: 0;
+	padding-right: 1em;
+	padding-top: 0.5em;
+	padding-left: 0 !important;
+}
+
+.node-type-dangerous-substances .node-dangerous-substances .field-type-list-text .field-label,
+.node-type-dangerous-substances .node-dangerous-substances .field-name-field-item-type .field-label ,
+.node-type-dangerous-substances .node-dangerous-substances .field-name-field-material-country .field-label,
+.node-type-dangerous-substances .node-dangerous-substances .field-name-field-msd-provider .field-label,
+.node-type-dangerous-substances .node-dangerous-substances .field-name-field-available-in-languages .field-label{
+	float: left;
+	color: #003399;
+	min-width: auto;
+}
+
+.node-type-dangerous-substances .node-dangerous-substances .field-type-list-text .field-items .field-item,
+.node-type-dangerous-substances .node-dangerous-substances .field-name-field-item-type .field-items .field-item ,
+.node-type-dangerous-substances .node-dangerous-substances .field-name-field-material-country .field-items .field-item,
+.node-type-dangerous-substances .node-dangerous-substances .field-name-field-msd-provider .field-items .field-item,
+.node-type-dangerous-substances .node-dangerous-substances .field-name-field-available-in-languages .field-items .field-item{
 	display: inline-block;
 	background-color: #99b5d6;
 	border-radius: 5px;
@@ -8809,22 +8838,35 @@ div.flickr-photoset{
 }
 
 .node-type-dangerous-substances .node-dangerous-substances h3{
-	background: url(../images/separator_home.jpg) repeat-x scroll 100% 125% rgba(0, 0, 0, 0);
-	padding-bottom: 12px;
-	font-family: 'Open Sans Condensed';
-    font-weight: 300;
-    font-size: 2em;
-    color: black;
-    text-decoration: none;
-    margin-bottom: 20px;
+	font-family: 'Open Sans',sans-serif;
+    background: transparent;
+    padding-left: 0;
+    font-weight: 600;
+    font-size: 1.35rem;
+    color: #003399;
+    margin-bottom: 0;
+    line-height: 30px;
+    clear: both;
+    padding-top: 1em;
+    margin-top: 0;
+}
+
+.node-type-dangerous-substances .node-dangerous-substances .field-name-body{
+	clear: both;
+}
+
+.node-type-dangerous-substances .node-dangerous-substances .field-name-body p{
+	padding: 0;
+	margin: 0;
 }
 
 .node-type-dangerous-substances .node-dangerous-substances .field-label{
 	min-width: 200px;
+	float: none;
 }
 
 .node-type-dangerous-substances .node-dangerous-substances .field-label-inline{
-	margin-bottom: 15px;
+	margin-bottom: 0.2em;
 }
 
 .logged-in.node-type-dangerous-substances .node-dangerous-substances .field-name-field-item-type,

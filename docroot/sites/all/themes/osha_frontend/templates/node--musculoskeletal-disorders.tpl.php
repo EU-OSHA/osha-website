@@ -9,7 +9,7 @@
 
 <?php if ($page) { ?>
 <!--    <div id="page-title" class="page__title title">--><?php //print t('Musculoskeletal Disorders');?><!--</div>-->
-    <div class="view-header back"><?php print l(t('Back to MSDs and filter'), MUSCULOSKELETAL_DISORDERS_PATH); ?></div>
+  <div class="view-header back"><?php print l(t('Back to MSDs and filter'), 'themes/musculoskeletal-disorders/search'); ?></div>
 <?php } ?>
 <?php
 if (!empty($content['field_type_of_item'])) {
@@ -42,7 +42,7 @@ if ($view_mode == 'dangerous_substances') {
   $add_field_group = TRUE;
 }
 if ($page && ($view_mode == 'dangerous_substances')) { ?>
-  <div class="view-header back"><?php print l(t('Back to MSDs'), 'themes/musculoskeletal-disorders/search'); ?></div>
+  <div class="view-header back"><?php print l(t('Back to MSDs and filter'), MUSCULOSKELETAL_DISORDERS_PATH); ?></div>
 <?php
 }
 ?>

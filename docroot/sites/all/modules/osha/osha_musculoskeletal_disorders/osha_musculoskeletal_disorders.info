@@ -115,7 +115,6 @@ features[fe_block_settings][] = facetapi-lflhfumXFA1jHdQKRm3gckIOmwADtTkV
 features[fe_block_settings][] = facetapi-mgmRoip1sH4Hg97gFVC3zsm2dzmIYGR9
 features[fe_block_settings][] = facetapi-tN10RR1GhTwEjOu0qZRhPRkfCe4HJKdy
 features[fe_block_settings][] = facetapi-zjhTXjlZM2tx82i0zG20DKexKaoVXirW
-features[fe_block_settings][] = views-49e5cde0d1734e17d7b0c4a53ff8ee28
 features[features_api][] = api:2
 features[field_base][] = field_comments
 features[field_base][] = field_for_pictogram_guide

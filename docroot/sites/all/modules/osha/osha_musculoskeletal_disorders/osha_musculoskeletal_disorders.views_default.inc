@@ -25,10 +25,7 @@ function osha_musculoskeletal_disorders_views_default_views() {
   $handler->display->display_options['title'] = 'Practical tools and guidance on musculoskeletal disorders';
   $handler->display->display_options['css_class'] = 'view-search view-practical-tools-and-guidance-on-dangerous-substances';
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'role';
-  $handler->display->display_options['access']['role'] = array(
-    2 => '2',
-  );
+  $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['search_api_bypass_access'] = 0;

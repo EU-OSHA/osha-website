@@ -8796,7 +8796,7 @@ div.flickr-photoset{
 }
 /*search ds detail page*/
 .node-dangerous-substances .view-header.back{
-	margin-top: 0;
+	margin-top: 0.7em;
 }
 
 .node-type-dangerous-substances .node-dangerous-substances .field-type-list-text,

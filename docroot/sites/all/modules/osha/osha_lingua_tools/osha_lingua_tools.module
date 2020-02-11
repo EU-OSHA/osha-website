@@ -253,15 +253,15 @@ function osha_copy_publication_translation_submit($form, &$form_state) {
   $countries = $form_state['values']['countries'];
   if (!$prefix_title && !$suffix_title) {
     if (!$copy_option) {
-    drupal_set_message(t('No prefix or suffix!'), 'error');
-    return;
-  }
-  }
-  if ($copy_option && !$countries) {
-    drupal_set_message(t('No countries selected!'), 'error');
-    return;
+      drupal_set_message(t('No prefix or suffix!'), 'error');
+      return;
+    }
   }
   if ($copy_option == 'one') {
+    if (!$countries) {
+      drupal_set_message(t('No countries selected!'), 'error');
+      return;
+    }
     return osha_lingua_tools_copy_one_publication_for_each_country($form, $form_state);
   }
   $nid = $form_state['values']['node'];

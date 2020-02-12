@@ -286,10 +286,11 @@ function osha_publication_url_inbound_alter(&$path, $original_path, $path_langua
     }
     $path_alias = path_load($path_source);
 
+    $publication_path = $path;
     if (!empty($redirect->redirect)) {
       $path_alias = path_load(array('source' => $redirect->redirect));
       if ($path_alias) {
-        $path = $path_alias['source'];
+        $publication_path = $path_alias['source'];
       }
     }
 
@@ -313,7 +314,7 @@ function osha_publication_url_inbound_alter(&$path, $original_path, $path_langua
             || !empty($node->field_file['en'][0])
           ) {
             // Append the file_view identifier to be used in hook_node_view().
-            $path .= '/file_view';
+            $path = $publication_path . '/file_view';
           }
         }
       }

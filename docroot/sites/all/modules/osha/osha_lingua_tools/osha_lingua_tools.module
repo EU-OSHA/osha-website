@@ -278,7 +278,7 @@ function osha_copy_publication_translation_original($nid, &$form_state, $prefix_
   $rows = [];
   $header = array(t('Language'), t('New Title'), t('Old Title'));
 
-  $new_title = osha_copy_publication_translation_get_title('', '', $source_title, $source_lang, $country);
+  $new_title = osha_copy_publication_translation_get_title($prefix_title, $suffix_title, $source_title, $source_lang, $country);
   $node = osha_copy_publication_translation_create_base_publication($new_title, $source_node->type, $source_node, $source_lang);
   if (!$country) {
     drupal_set_message('Source ' . l($source_title,'node/' . $source_node->nid . '/translate') .' publication ' . $source_node->nid, 'status');

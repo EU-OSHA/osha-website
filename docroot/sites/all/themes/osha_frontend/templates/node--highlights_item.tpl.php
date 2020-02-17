@@ -151,9 +151,15 @@ if (!empty($campaign_id)) {
                       if (!empty($body_summary_highlight)) {
                         if (trim(strip_tags($body_summary_highlight))) {
                           $body_summary_highlight = strip_tags($body_summary_highlight);
-                          $body_summary_highlight = substr($body_summary_highlight, 0, 260);
-                          $body_summary_highlight = substr($body_summary_highlight, 0, strripos($body_summary_highlight, " "));
-                          $body_summary_highlight .= "...";
+                          $max_length = 260;
+                          if (drupal_strlen($body_summary_highlight) > $max_length) {
+                            if ($node->type == 'youtube') {
+                              $body_summary_highlight = implode("\n", array_filter(explode("\n", $body_summary_highlight)));
+                            }
+                            $body_summary_highlight = substr($body_summary_highlight, 0, $max_length);
+                            $body_summary_highlight = substr($body_summary_highlight, 0, strripos($body_summary_highlight, " "));
+                            $body_summary_highlight .= "...";
+                          }
                           $body_summary_highlight = "<p>" . $body_summary_highlight . "</p>";
                           print $body_summary_highlight;
                         }

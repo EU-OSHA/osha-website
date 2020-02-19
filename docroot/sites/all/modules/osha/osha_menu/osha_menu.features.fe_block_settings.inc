@@ -68,7 +68,8 @@ tools-and-publications
 tools-and-resources
 news-events
 oshevents
-node/20',
+node/20
+node/17',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(

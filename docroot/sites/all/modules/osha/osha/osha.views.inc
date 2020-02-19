@@ -43,18 +43,19 @@ function osha_views_query_alter(&$view, &$query) {
     }
   }
   if (($view->name == 'related_content') && ($view->current_display == 'block_2')) {
+    // Related Content - Publication Block.
     $node = menu_get_object('node');
     if ($node && $node->type == 'publication') {
       $excluded_nids = array($node->nid);
       $w = entity_metadata_wrapper('node', $node->nid);
       $related_publications = $w->field_related_publications->value();
       if ($related_publications) {
-        foreach($related_publications as $publication) {
+        foreach ($related_publications as $publication) {
           $excluded_nids[] = $publication->nid;
         }
       }
 
-      foreach($query->where as $i => $conditions) {
+      foreach ($query->where as $i => $conditions) {
         foreach ($conditions['conditions'] as $idx => $condition) {
           if ($condition['field'] == 'node.nid') {
             $query->where[$i]['conditions'][$idx] = array('field' => 'node.nid', 'value' => $excluded_nids, 'operator' => 'NOT IN');

@@ -92,10 +92,20 @@ function osha_copy_publication_translation($form, &$form_state) {
   $form['prefix_title'] = array(
     '#title' => 'Prefix title',
     '#type' => 'textfield',
+    '#states' => array(
+      'disabled' => array(
+        '#edit-copy-option input[type="radio"]' => array('value' => 'one'),
+      ),
+    ),
   );
   $form['suffix_title'] = array(
     '#title' => 'Suffix title',
     '#type' => 'textfield',
+    '#states' => array(
+      'disabled' => array(
+        '#edit-copy-option input[type="radio"]' => array('value' => 'one'),
+      ),
+    ),
   );
   $form['copy_option'] = array(
     '#type' => 'radios',
@@ -112,6 +122,11 @@ function osha_copy_publication_translation($form, &$form_state) {
   $form['publication_per_country']['select_all_countries'] = array(
     '#type' => 'checkbox',
     '#title' => t('Select all countries'),
+    '#states' => array(
+      'disabled' => array(
+        '#edit-copy-option input[type="radio"]' => array('value' => 'publication'),
+      ),
+    ),
   );
   $form['publication_per_country']['countries'] = array(
     '#type' => 'select',
@@ -120,7 +135,13 @@ function osha_copy_publication_translation($form, &$form_state) {
     '#multiple' => TRUE,
     '#chosen' => FALSE,
     '#size' => 20,
+    '#states' => array(
+      'disabled' => array(
+        '#edit-copy-option input[type="radio"]' => array('value' => 'publication'),
+      ),
+    ),
   );
+
   $form['create'] = array(
     '#type' => 'submit',
     '#value' => t('Copy and translate'),
@@ -150,11 +171,12 @@ function osha_copy_publication_translation_preview($form, &$form_state) {
     $country_codes = osha_lingua_tools_get_country_codes();
     $countries = $form_state['values']['countries'];
     foreach ($countries as $country_code) {
+      $selected_languages['en'] = 'English';
       foreach ($selected_languages as $lang_code => $lang_title) {
         if (isset($source_node->title_field[$lang_code])) {
           $title = $source_node->title_field[$lang_code][0]['value'];
           $country = $country_codes[$country_code];
-          $new_title = osha_copy_publication_translation_get_title($prefix_title, $suffix_title, $title, $lang_code, $country);
+          $new_title = osha_copy_publication_translation_get_title('', '', $title, $lang_code, $country);
           $rows[] = [$lang_title, $title, $new_title];
         }
       }
@@ -227,13 +249,19 @@ function osha_copy_publication_translation_create_base_publication($title, $type
 function osha_copy_publication_translation_submit($form, &$form_state) {
   $prefix_title = $form_state['values']['prefix_title'];
   $suffix_title = $form_state['values']['suffix_title'];
-  if (!$prefix_title && !$suffix_title) {
-    drupal_set_message(t('No prefix or suffix!'), 'error');
-    return;
-  }
-
   $copy_option = $form_state['values']['copy_option'];
+  $countries = $form_state['values']['countries'];
+  if (!$prefix_title && !$suffix_title) {
+    if (!$copy_option) {
+      drupal_set_message(t('No prefix or suffix!'), 'error');
+      return;
+    }
+  }
   if ($copy_option == 'one') {
+    if (!$countries) {
+      drupal_set_message(t('No countries selected!'), 'error');
+      return;
+    }
     return osha_lingua_tools_copy_one_publication_for_each_country($form, $form_state);
   }
   $nid = $form_state['values']['node'];

@@ -8,8 +8,8 @@
     <div class="node-dangerous-substances">
 
 <?php if ($page) { ?>
-    <div id="page-title" class="page__title title"><?php print t('Musculoskeletal Disorders');?></div>
-    <div class="view-header back"><?php print l(t('Back to MSDs and filter'), MUSCULOSKELETAL_DISORDERS_PATH); ?></div>
+<!--    <div id="page-title" class="page__title title">--><?php //print t('Musculoskeletal Disorders');?><!--</div>-->
+  <div class="view-header back"><?php print l(t('Back to MSDs and filter'), 'themes/musculoskeletal-disorders/search'); ?></div>
 <?php } ?>
 <?php
 if (!empty($content['field_type_of_item'])) {
@@ -26,23 +26,23 @@ if ($node->field_original_desc_language && $node->field_original_desc_language['
 }
 $show_title = '';
 $add_field_group = FALSE;
-if ($view_mode == 'dangerous_substances') {
-  $exclude_fields = osha_musculoskeletal_disorders_get_exclude_fields($original_language);
-  $map = [
-    'title_field' => 'field_title_original',
-    'field_title_original' => 'title_field',
-  ];
-  foreach ($exclude_fields as $exclude_field) {
-    if (!empty($map[$exclude_field])) {
-      $show_title = $map[$exclude_field];
-    }
-    unset($content[$exclude_field]);
+$exclude_fields = osha_musculoskeletal_disorders_get_exclude_fields($original_language);
+$map = [
+  'title_field' => 'field_title_original',
+  'field_title_original' => 'title_field',
+];
+foreach ($exclude_fields as $exclude_field) {
+  if (!empty($map[$exclude_field])) {
+    $show_title = $map[$exclude_field];
   }
+  unset($content[$exclude_field]);
+}
+if ($view_mode == 'dangerous_substances') {
   $page = TRUE;
   $add_field_group = TRUE;
 }
 if ($page && ($view_mode == 'dangerous_substances')) { ?>
-    <div class="view-header back"><?php print l(t('Back to MSDs'), 'themes/musculoskeletal-disorders/search'); ?></div>
+  <div class="view-header back"><?php print l(t('Back to MSDs and filter'), MUSCULOSKELETAL_DISORDERS_PATH); ?></div>
 <?php
 }
 ?>

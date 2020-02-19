@@ -24,3 +24,25 @@ function osha_fop_page_update_7001() {
 function osha_fop_page_update_7002() {
   features_revert(array('osha_fop_page' => array('field_base', 'field_instance')));
 }
+
+/**
+ * MDR-3492 New tag and new block under the FOP page
+ */
+function osha_fop_page_update_7003() {
+  $name = 'National Focal Point';
+  $term = taxonomy_get_term_by_name($name, 'tags');
+  if (empty($term)) {
+    $voc = taxonomy_vocabulary_machine_name_load('tags');
+    $term = new stdClass();
+    $term->parent = 0;
+    $term->language = 'en';
+    $term->name = $name;
+    $term->vid = $voc->vid;
+    $term->field_tags_code[LANGUAGE_NONE][]['value'] = 'national_focal_point';
+    taxonomy_term_save($term);
+    variable_set('national_focal_point_tid', $term->tid);
+    $node = node_load(1457);
+    $node->field_tags[LANGUAGE_NONE][] = ['tid' => $term->tid];
+    node_save($node);
+  }
+}

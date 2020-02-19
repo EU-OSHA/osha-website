@@ -167,6 +167,11 @@ function osha_publication_url_inbound_alter(&$path, $original_path, $path_langua
   global $language_url;
   $args = arg();
 
+  if (count($args) == 2 && $args[0] == 'tools-and-publications' && $args[1] == 'publications') {
+    drupal_goto('publications');
+    return;
+  }
+
   if (
     count($args) >= 3 &&
     $args[0] == 'tools-and-publications' &&

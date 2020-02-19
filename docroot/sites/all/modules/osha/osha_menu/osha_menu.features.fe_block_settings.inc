@@ -109,7 +109,8 @@ node/20',
     'module' => 'menu_block',
     'node_types' => array(),
     'pages' => 'node/1409
-node/13822',
+node/13822
+node/17',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(

@@ -9698,3 +9698,7 @@ table.quiz-feedback-table.sticky-enabled.tableheader-processed.sticky-table > tb
 .page-node-5 .menu-block-3 ul li{
 	padding-right: 15px;
 }
+
+.node-events .field-name-title-field h1, .node-job-vacancies .field-name-title-field h1{
+	padding-top: 14px;
+}

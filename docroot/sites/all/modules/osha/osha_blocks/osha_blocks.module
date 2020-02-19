@@ -92,11 +92,16 @@ function oshwiki_featured_articles_block_view() {
 }
 
 function osha_block_related_content_blocks_view() {
-  $block1 = block_load('views', 'related_content-block_2');
   $block2 = block_load('views', 'related_content-block_1');
-  $block7 = block_load('views', 'related_content-block_7');
-  $block3 = block_load('views', 'related_events-block_6');
-  $array = _block_get_renderable_array(_block_render_blocks(array($block1, $block2, $block7, $block3)));
+  $block6 = block_load('views', 'related_events-block_6');
+  $blocks = array($block2, $block6);
+
+  if (arg(1) != 1457) {
+    $block1 = block_load('views', 'related_content-block_2');
+    $block7 = block_load('views', 'related_content-block_7');
+    $blocks = array($block1, $block2, $block7, $block6);
+  }
+  $array = _block_get_renderable_array(_block_render_blocks($blocks));
   drupal_add_js(drupal_get_path('module', 'osha_blocks') . '/js/related_content.js');
   return render($array);
 }

@@ -1,0 +1,19 @@
+diff --git a/docroot/sites/all/modules/contrib/workbench_access/workbench_access.module b/docroot/sites/all/modules/contrib/workbench_access/workbench_access.module
+index 86005b576..e77748830 100644
+--- a/docroot/sites/all/modules/contrib/workbench_access/workbench_access.module
++++ b/docroot/sites/all/modules/contrib/workbench_access/workbench_access.module
+@@ -410,6 +410,14 @@ function workbench_access_node_access($node, $op, $account) {
+   if ($result !== FALSE) {
+     return NODE_ACCESS_IGNORE;
+   }
++  if ($type && $op) {
++    $access_exceptions = [];
++    // Workaround to allow role to skip access control.
++    drupal_alter('workbench_access_exceptions', $access_exceptions, $op, $type);
++    if ($access_exceptions) {
++      return NODE_ACCESS_IGNORE;
++    }
++  }
+   return NODE_ACCESS_DENY;
+ }
+ 

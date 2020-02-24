@@ -410,6 +410,14 @@ function workbench_access_node_access($node, $op, $account) {
   if ($result !== FALSE) {
     return NODE_ACCESS_IGNORE;
   }
+  if ($type && $op) {
+    $access_exceptions = [];
+    // Workaround to allow role to skip access control.
+    drupal_alter('workbench_access_exceptions', $access_exceptions, $op, $type);
+    if ($access_exceptions) {
+      return NODE_ACCESS_IGNORE;
+    }
+  }
   return NODE_ACCESS_DENY;
 }
 

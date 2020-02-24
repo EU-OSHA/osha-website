@@ -60,7 +60,6 @@ function osha_news_workbench_access_node_element_alter(&$element, $form_state) {
   if (!in_array($type, ['news', 'highlight', 'press_release', 'press-release'])) {
     return;
   }
-
   $element['#type'] = 'select';
   $element['#options'] = osha_news_workbench_access_options();
 }
@@ -76,17 +75,17 @@ function osha_news_workbench_access_options() {
     return;
   }
   $options = array();
-  $multiple = variable_get('workbench_access_allow_multiple', 0);
-  // Force user selection if not set. See http://drupal.org/node/1348626.
-  if (empty($multiple) && empty($default)) {
     $options[NULL] = t('- Select a value -');
-  }
+  $options['section'] = t(' Section');
   // Get the user options.
-  $active = workbench_access_get_active_tree();
-  $account = node_load(1);
-  $tree = workbench_access_get_user_tree($account);
-  $options += workbench_access_options($tree, $active['active']);
-  $options += workbench_access_active_options();
+  $active_tree = workbench_access_get_active_tree();
+  foreach ($active_tree['active'] as $active) {
+    $access_id = $active['access_id'];
+    if ($access_id == 'section') {
+      continue;
+    }
+    $options[$access_id] = '- ' . $active_tree['tree'][$access_id]['name'];
+  }
   return $options;
 }
 

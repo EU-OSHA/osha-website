@@ -75,7 +75,7 @@ function osha_news_workbench_access_options() {
     return;
   }
   $options = array();
-    $options[NULL] = t('- Select a value -');
+  $options[NULL] = t('- Select a value -');
   $options['section'] = t(' Section');
   // Get the user options.
   $active_tree = workbench_access_get_active_tree();
@@ -103,12 +103,18 @@ function osha_news_form_alter(&$form, &$form_state, $form_id) {
   if (!$is_news_editor) {
     return;
   }
+  if (count($form['workbench_access']['workbench_access']['#options']) == 1) {
+    osha_news_workbench_access_node_element_alter($form['workbench_access']['workbench_access'], $form_state);
+  }
   // Only for NEWS EDITOR role and news, highlight and press release node pages.
   $form['#after_build'][] = 'osha_news_workbench_access_remove_after_build';
 }
 
 function osha_news_workbench_access_remove_after_build($form, $form_state) {
   unset($form['workbench_access']['message']);
+  if (count($form['workbench_access']['workbench_access']['#options']) == 1) {
+    osha_news_workbench_access_node_element_alter($form['workbench_access']['workbench_access'], $form_state);
+  }
   return $form;
 }
 

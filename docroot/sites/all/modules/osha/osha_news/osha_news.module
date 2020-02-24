@@ -112,3 +112,13 @@ function osha_news_workbench_access_remove_after_build($form, $form_state) {
   unset($form['workbench_access']['message']);
   return $form;
 }
+
+/**
+ * Implements workaround hook_workbench_access_exceptions().
+ */
+function osha_news_workbench_access_exceptions_alter(&$exception, $op, $type) {
+  if (!in_array($type, ['news', 'highlight', 'press_release'])) {
+    return;
+  }
+  $exception = TRUE;
+}

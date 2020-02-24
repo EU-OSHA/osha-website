@@ -503,6 +503,13 @@ function osha_workflow_node_access($node, $operation, $user) {
     return NODE_ACCESS_IGNORE;
   }
 
+  if (!is_object($node)) {
+    $type = $node;
+  }
+  else {
+    $type = $node->type;
+  }
+
   $is_approver = OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_APPROVER, $user);
   $is_events_coordinator = OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_EVENTS_COORDINATOR, $user);
   $is_events_editor = OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_EVENTS_EDITOR, $user);
@@ -579,8 +586,8 @@ function osha_workflow_node_access($node, $operation, $user) {
         return NODE_ACCESS_IGNORE;
       }
       else {
-      return NODE_ACCESS_DENY;
-    }
+        return NODE_ACCESS_DENY;
+      }
     }
 
     /* Editor role */
@@ -613,6 +620,10 @@ function osha_workflow_node_access($node, $operation, $user) {
   if ($operation == 'delete') {
     $node_in_pm_section = osha_workflow_node_in_pm_section($node, $user);
     if ($node_in_pm_section && in_array($node->type, ['musculoskeletal_disorders', 'dangerous_substances'])) {
+      return NODE_ACCESS_IGNORE;
+    }
+
+    if ($type == 'events' && $is_events_coordinator) {
       return NODE_ACCESS_IGNORE;
     }
   }

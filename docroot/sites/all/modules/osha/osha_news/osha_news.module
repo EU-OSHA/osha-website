@@ -7,6 +7,7 @@
 include_once 'osha_news.features.inc';
 
 define('OSHA_NEWS_CONTENT_TYPE_NEWS', 'news');
+define('OSHA_WORKFLOW_ROLE_NEWS_EDITOR', 'News Editor');
 
 /**
  * Implements hook_post_features_enable_feature().
@@ -38,4 +39,76 @@ function osha_news_post_features_enable_feature($component) {
 function osha_news_osha_tmgmt_i18n_string_list() {
   module_load_include('inc', 'osha_news', 'osha_news.translations');
   return osha_news_get_translatable_strings();
+}
+
+/*
+ * Implements hook_node_element_alter.
+ */
+function osha_news_workbench_access_node_element_alter(&$element, $form_state) {
+  global $user;
+  $is_news_editor = OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_NEWS_EDITOR, $user);
+  if (!$is_news_editor) {
+    return;
+  }
+  $node = menu_get_object();
+  if ($node) {
+    $type = $node->type;
+  }
+  else {
+    $type = arg(2);
+  }
+  if (!in_array($type, ['news', 'highlight', 'press_release', 'press-release'])) {
+    return;
+  }
+
+  $element['#type'] = 'select';
+  $element['#options'] = osha_news_workbench_access_options();
+}
+
+/**
+ * Provides all sections.
+ */
+function osha_news_workbench_access_options() {
+  // Prepare the form element.
+  $active = workbench_access_get_active_tree();
+  if (empty($active['active'])) {
+    drupal_set_message(workbench_access_sections_needed_message(), 'warning');
+    return;
+  }
+  $options = array();
+  $multiple = variable_get('workbench_access_allow_multiple', 0);
+  // Force user selection if not set. See http://drupal.org/node/1348626.
+  if (empty($multiple) && empty($default)) {
+    $options[NULL] = t('- Select a value -');
+  }
+  // Get the user options.
+  $active = workbench_access_get_active_tree();
+  $account = node_load(1);
+  $tree = workbench_access_get_user_tree($account);
+  $options += workbench_access_options($tree, $active['active']);
+  $options += workbench_access_active_options();
+  return $options;
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function osha_news_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+  if (!in_array($form_id, [
+    'news_node_form', 'highlight_node_form', 'press_release_node_form',
+  ])) {
+    return;
+  }
+  $is_news_editor = OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_NEWS_EDITOR, $user);
+  if (!$is_news_editor) {
+    return;
+  }
+  // Only for NEWS EDITOR role and news, highlight and press release node pages.
+  $form['#after_build'][] = 'osha_news_workbench_access_remove_after_build';
+}
+
+function osha_news_workbench_access_remove_after_build($form, $form_state) {
+  unset($form['workbench_access']['message']);
+  return $form;
 }

@@ -42,6 +42,28 @@ function osha_news_osha_tmgmt_i18n_string_list() {
 }
 
 /*
+ * Implements hook_node_element_options_alter.
+ */
+function osha_news_workbench_access_node_element_options_alter(&$options, $form) {
+  global $user;
+  $is_news_editor = OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_NEWS_EDITOR, $user);
+  if (!$is_news_editor) {
+    return;
+  }
+  $node = menu_get_object();
+  if ($node) {
+    $type = $node->type;
+  }
+  else {
+    $type = arg(2);
+  }
+  if (!in_array($type, ['news', 'highlight', 'press_release', 'press-release'])) {
+    return;
+  }
+  $options = osha_news_workbench_access_options();
+}
+
+/*
  * Implements hook_node_element_alter.
  */
 function osha_news_workbench_access_node_element_alter(&$element, $form_state) {

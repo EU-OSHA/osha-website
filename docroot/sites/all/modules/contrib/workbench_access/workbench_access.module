@@ -1497,6 +1497,7 @@ function workbench_access_node_form_element(&$form, $form_state) {
   }
   // Get the user options.
   $options += workbench_access_active_options();
+  workbench_access_alter_form('node_element_options', $options, $form);
 
   // If there are no options and the 'workbench_access' variable has not been set
   // then it seems that Workbench Access has not been configured.

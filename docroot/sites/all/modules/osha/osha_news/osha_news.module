@@ -112,6 +112,17 @@ function osha_news_workbench_access_options() {
 }
 
 /**
+ * Implements hook_form_views_exposed_form_alter().
+ */
+function osha_news_form_views_exposed_form_alter(&$form, &$form_state) {
+  global $user;
+  $is_news_editor = OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_NEWS_EDITOR, $user);
+  if ($is_news_editor && $form['#id'] == 'views-exposed-form-administration-content-main-page') {
+    $form['access_id']['#options'] = osha_news_workbench_access_options();
+  }
+}
+
+/**
  * Implements hook_form_alter().
  */
 function osha_news_form_alter(&$form, &$form_state, $form_id) {

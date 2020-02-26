@@ -503,9 +503,17 @@ function osha_workflow_node_access($node, $operation, $user) {
     return NODE_ACCESS_IGNORE;
   }
 
+  if (!is_object($node)) {
+    $type = $node;
+  }
+  else {
+    $type = $node->type;
+  }
+
   $is_approver = OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_APPROVER, $user);
   $is_events_coordinator = OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_EVENTS_COORDINATOR, $user);
   $is_events_editor = OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_EVENTS_EDITOR, $user);
+  $is_news_editor = OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_NEWS_EDITOR, $user);
 
   $is_rm = OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_REVIEW_MANAGER, $user);
   $is_pm = OshaWorkflowPermissions::userHasRole(OSHA_WORKFLOW_ROLE_PROJECT_MANAGER, $user);
@@ -514,9 +522,13 @@ function osha_workflow_node_access($node, $operation, $user) {
 
   /* Global whitelist independend of create/update */
   // If is not DS/Editor/PM/RM leave permissions to Drupal.
-  if (!$is_osh_db_editor && !$is_editor && !$is_rm && !$is_pm && !$is_approver) {
+  if (!$is_osh_db_editor && !$is_editor && !$is_rm && !$is_pm && !$is_approver && !$is_news_editor) {
     return NODE_ACCESS_IGNORE;
   }
+  if ($is_news_editor && $operation != 'update') {
+    return NODE_ACCESS_IGNORE;
+  }
+
   // Event editors can add any event.
   if ($node == 'events' && ($is_events_editor || $is_events_coordinator)) {
     return NODE_ACCESS_IGNORE;
@@ -579,8 +591,11 @@ function osha_workflow_node_access($node, $operation, $user) {
         return NODE_ACCESS_IGNORE;
       }
       else {
-      return NODE_ACCESS_DENY;
+        return NODE_ACCESS_DENY;
+      }
     }
+    if ($is_news_editor && $state && variable_get('workbench_moderation_per_node_type', FALSE) && user_access('edit any content in ' . $state, $user)) {
+      return NODE_ACCESS_IGNORE;
     }
 
     /* Editor role */
@@ -613,6 +628,10 @@ function osha_workflow_node_access($node, $operation, $user) {
   if ($operation == 'delete') {
     $node_in_pm_section = osha_workflow_node_in_pm_section($node, $user);
     if ($node_in_pm_section && in_array($node->type, ['musculoskeletal_disorders', 'dangerous_substances'])) {
+      return NODE_ACCESS_IGNORE;
+    }
+
+    if ($type == 'events' && $is_events_coordinator) {
       return NODE_ACCESS_IGNORE;
     }
   }

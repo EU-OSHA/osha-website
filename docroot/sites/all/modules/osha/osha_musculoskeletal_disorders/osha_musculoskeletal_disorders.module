@@ -6,17 +6,20 @@
 
 include_once 'osha_musculoskeletal_disorders.features.inc';
 
+define('MUSCULOSKELETAL_DISORDERS_PATH', 'themes/musculoskeletal-disorders/practical-tools-musculoskeletal-disorders');
+// 'themes/musculoskeletal-disorders/search'
+
 /**
  * Implements hook_entity_view_mode_alter().
  */
-/*function osha_musculoskeletal_disorders_entity_view_mode_alter(&$view_mode, $context) {
+function osha_musculoskeletal_disorders_entity_view_mode_alter(&$view_mode, $context) {
   // Only alter the view mode if we are on the test callback.
   if (($context['entity_type'] == 'node') && ($context['entity']->type == 'musculoskeletal_disorders')) {
-    if (user_is_anonymous() || isset($_REQUEST['ds_public'])) {
-      //      $view_mode = 'dangerous_substances';
+    if (user_is_anonymous() || isset($_REQUEST['msd_public'])) {
+      $view_mode = 'dangerous_substances';
     }
   }
-}*/
+}
 
 /**
  * Empty description filter.
@@ -45,14 +48,15 @@ function osha_musculoskeletal_disorders_entity_property_info_alter(&$info) {
 /**
  * Implements hook_node_access().
  */
-function osha_musculoskeletal_disorders_node_access($node, $op, $account) {
+
+/*function osha_musculoskeletal_disorders_node_access($node, $op, $account) {
   if ($op == 'view' && $node->type == 'musculoskeletal_disorders') {
     if (user_is_anonymous()) {
       return NODE_ACCESS_DENY;
     }
   }
   return NODE_ACCESS_IGNORE;
-}
+}*/
 
 /**
  * Custom cancel button callback.
@@ -116,6 +120,10 @@ function osha_musculoskeletal_disorders_form_alter(&$form, &$form_state, $form_i
       '#limit_validation_errors' => array(),
       '#attributes' => array('class' => array('btn-cancel'), 'onclick' => 'if(!confirm("' . $text . '")){return false;}'),
     );
+  }
+
+  if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-musculoskeletal-disorders-list-page') {
+    $form['text']['#suffix'] = '<input type="submit" id="edit-submit-musculoskeletal-disorders" name="" value="Apply" class="form-submit">';
   }
 
   if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-musculoskeletal-disorders-overview-page') {
@@ -337,4 +345,58 @@ function osha_musculoskeletal_disorders_add_terms() {
       }
     }
   }
+}
+
+function osha_musculoskeletal_disorders_get_exclude_fields($original_language) {
+  global $language;
+  if ($language->language == $original_language) {
+    return ['title_field', 'body'];
+  }
+  return ['field_title_original', 'field_body_original'];
+}
+
+function osha_musculoskeletal_disorders_get_provider_name($original_language, $entity) {
+  global $language;
+  if ($language->language == $original_language) {
+    return $entity->field_msd_provider_name_o['und'][0]['value'];
+  }
+  return $entity->field_msd_provider_name['und'][0]['value'];
+}
+
+/**
+ * Implements hook_views_post_render().
+ */
+function osha_musculoskeletal_disorders_views_post_render(&$view, &$output, &$cache) {
+  if ($view->name == 'musculoskeletal_disorders_list') {
+//    drupal_add_js(drupal_get_path('module', 'osha_musculoskeletal_disorders') . '/js/sort.js', array('weight' => 20));
+//    $form = drupal_get_form('osha_musculoskeletal_disorders_sort_form');
+//    drupal_render($form)
+//    $order_html = '<div class="sort-container col-xs-3">' . '' . '</div><span class="count-container pull-right">';
+//    $output = trim(str_replace('@order', $order_html, $output)) . '</span>';
+  }
+}
+
+function osha_musculoskeletal_disorders_sort_form($form, $form_state) {
+  $form = array();
+  $form['sort_by'] = [
+    '#type' => 'select',
+    '#title' => t('Sort by'),
+    '#default_value' => 'search_api_relevance',
+    '#options' => [
+      'search_api_relevance' => t('Relevance'),
+      'field_publication_year' => t('Year of publication'),
+    ],
+  ];
+  $form['sort_order'] = [
+    '#type' => 'select',
+    '#title' => t('Order'),
+    '#default_value' => 'DESC',
+    '#options' => [
+      'DESC' => t('DESC'),
+      'ASC' => t('ASC'),
+    ],
+  ];
+  $form['sort_by']['#value'] = @$_REQUEST['sort_by'];
+  $form['sort_order']['#value'] = @$_REQUEST['sort_order'];
+  return $form;
 }

@@ -236,6 +236,12 @@
         font-size: 0.8rem;
     }
 
+    .view-musculoskeletal-disorders-list .views-exposed-widgets #edit-text-wrapper, 
+    .view-musculoskeletal-disorders-list .views-exposed-widgets .views-widget-sort-by,
+    .view-musculoskeletal-disorders-list .views-exposed-widgets .views-widget-sort-order {
+        width: 31.1%!important;
+    }
+
     /*Footer*/
 
     .content-subscribe{
@@ -760,6 +766,21 @@
     /*Publications detail*/
     .publications-detail-right-column{
         width: 93%;
+    }
+
+    /*  Practical tools and guidance on musculoskeletal disordersPractical tools and guidance on musculoskeletal disorders*/
+    .view-musculoskeletal-disorders-list .views-exposed-widgets #edit-text-wrapper, 
+    .view-musculoskeletal-disorders-list .views-exposed-widgets .views-widget-sort-by, 
+    .view-musculoskeletal-disorders-list .views-exposed-widgets .views-widget-sort-order{
+        width: 100%!important;
+    }
+
+    .view-musculoskeletal-disorders-list #edit-text-wrapper input[type=submit] {
+        top: 14px;
+    }
+
+    .view-musculoskeletal-disorders-list .views-exposed-widgets #edit-sort-by, .view-musculoskeletal-disorders-list .views-exposed-widgets #edit-sort-order{
+        background: url(../images/pink-select.png) no-repeat scroll 99% center #FFF;
     }
 
 }

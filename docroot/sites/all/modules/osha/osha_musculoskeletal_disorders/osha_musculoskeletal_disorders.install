@@ -144,3 +144,29 @@ function osha_musculoskeletal_disorders_update_7007() {
     }
   }
 }
+
+/**
+ * MDR-3435 Development:Fields and filters for MSDs database.
+ */
+function osha_musculoskeletal_disorders_update_7008() {
+  features_revert_module('osha_musculoskeletal_disorders');
+}
+
+/**
+ * MDR-3435 Development:Fields and filters for MSDs database.
+ */
+function osha_musculoskeletal_disorders_update_7009() {
+  variable_set('pathauto_node_musculoskeletal_disorders_pattern', 'themes/musculoskeletal-disorders/practical-tools-musculoskeletal-disorders/[node:title]');
+}
+
+/**
+ * MDR-3435 Development:Fields and filters for MSDs database.
+ */
+function osha_musculoskeletal_disorders_update_7010() {
+  $resource = db_query("SELECT nid FROM node WHERE type='musculoskeletal_disorders' AND status=1");
+  foreach ($resource as $result) {
+    $node = node_load($result->nid);
+    $node->path['pathauto'] = TRUE;
+    pathauto_node_update_alias($node, 'update');
+  }
+}

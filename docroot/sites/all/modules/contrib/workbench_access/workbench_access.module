@@ -410,6 +410,14 @@ function workbench_access_node_access($node, $op, $account) {
   if ($result !== FALSE) {
     return NODE_ACCESS_IGNORE;
   }
+  if ($type && $op) {
+    $access_exceptions = [];
+    // Workaround to allow role to skip access control.
+    drupal_alter('workbench_access_exceptions', $access_exceptions, $op, $type);
+    if ($access_exceptions) {
+      return NODE_ACCESS_IGNORE;
+    }
+  }
   return NODE_ACCESS_DENY;
 }
 
@@ -1489,6 +1497,7 @@ function workbench_access_node_form_element(&$form, $form_state) {
   }
   // Get the user options.
   $options += workbench_access_active_options();
+  workbench_access_alter_form('node_element_options', $options, $form);
 
   // If there are no options and the 'workbench_access' variable has not been set
   // then it seems that Workbench Access has not been configured.

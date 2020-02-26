@@ -65,6 +65,7 @@ function osha_authentication_get_role_and_section_from_dn($group_dn) {
     'APPROVER' => 'Approver',
     'EVENTCOOR' => 'Events Coordinator',
     'EVENTEDT' => 'Events Editor',
+    'NEWSEDT' => 'News Editor',
     'LAYVAL' => 'Layout Validator',
     'READ' => 'authenticated user',
     'OSHCOLL' => 'OSH Collaborator',

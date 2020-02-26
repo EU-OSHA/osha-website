@@ -11,6 +11,445 @@ function osha_musculoskeletal_disorders_views_default_views() {
   $export = array();
 
   $view = new view();
+  $view->name = 'musculoskeletal_disorders_list';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'search_api_index_musculoskeletal_disorders_index';
+  $view->human_name = 'Musculoskeletal Disorders list';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Practical tools and guidance on musculoskeletal disorders';
+  $handler->display->display_options['css_class'] = 'view-search view-practical-tools-and-guidance-on-dangerous-substances';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['search_api_bypass_access'] = 0;
+  $handler->display->display_options['query']['options']['parse_mode'] = 'direct';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '7';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['tags']['first'] = '«';
+  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹';
+  $handler->display->display_options['pager']['options']['tags']['next'] = '›';
+  $handler->display->display_options['pager']['options']['tags']['last'] = '»';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Header: Global: Unfiltered text */
+  $handler->display->display_options['header']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['header']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['header']['area_text_custom']['field'] = 'area_text_custom';
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  $handler->display->display_options['header']['result']['content'] = 'Showing @start - @end from @total';
+  /* No results behavior: Global: Unfiltered text */
+  $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area_text_custom']['content'] = 'No results';
+  /* Field: Indexed Content: Original description language */
+  $handler->display->display_options['fields']['field_original_desc_language']['id'] = 'field_original_desc_language';
+  $handler->display->display_options['fields']['field_original_desc_language']['table'] = 'search_api_index_musculoskeletal_disorders_index';
+  $handler->display->display_options['fields']['field_original_desc_language']['field'] = 'field_original_desc_language';
+  $handler->display->display_options['fields']['field_original_desc_language']['label'] = '';
+  $handler->display->display_options['fields']['field_original_desc_language']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_original_desc_language']['settings'] = array(
+    'format' => array(
+      'name' => 'name',
+      'iso' => 0,
+      'name_native' => 0,
+    ),
+  );
+  $handler->display->display_options['fields']['field_original_desc_language']['delta_offset'] = '0';
+  /* Field: Indexed Content: Title (original) */
+  $handler->display->display_options['fields']['field_title_original']['id'] = 'field_title_original';
+  $handler->display->display_options['fields']['field_title_original']['table'] = 'search_api_index_musculoskeletal_disorders_index';
+  $handler->display->display_options['fields']['field_title_original']['field'] = 'field_title_original';
+  $handler->display->display_options['fields']['field_title_original']['label'] = '';
+  $handler->display->display_options['fields']['field_title_original']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_title_original']['type'] = 'title_linked';
+  $handler->display->display_options['fields']['field_title_original']['settings'] = array(
+    'title_style' => '_none',
+    'title_link' => 'content',
+    'title_class' => '',
+  );
+  /* Field: Indexed Content: Title */
+  $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['table'] = 'search_api_index_musculoskeletal_disorders_index';
+  $handler->display->display_options['fields']['title_field']['field'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['label'] = '';
+  $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title_field']['type'] = 'title_linked';
+  $handler->display->display_options['fields']['title_field']['settings'] = array(
+    'title_style' => '_none',
+    'title_link' => 'content',
+    'title_class' => '',
+  );
+  /* Field: Indexed Content: Type of item */
+  $handler->display->display_options['fields']['field_type_of_item']['id'] = 'field_type_of_item';
+  $handler->display->display_options['fields']['field_type_of_item']['table'] = 'search_api_index_musculoskeletal_disorders_index';
+  $handler->display->display_options['fields']['field_type_of_item']['field'] = 'field_type_of_item';
+  $handler->display->display_options['fields']['field_type_of_item']['label'] = '';
+  $handler->display->display_options['fields']['field_type_of_item']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_type_of_item']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_type_of_item']['delta_offset'] = '0';
+  /* Field: Indexed Content: Country */
+  $handler->display->display_options['fields']['field_material_country']['id'] = 'field_material_country';
+  $handler->display->display_options['fields']['field_material_country']['table'] = 'search_api_index_musculoskeletal_disorders_index';
+  $handler->display->display_options['fields']['field_material_country']['field'] = 'field_material_country';
+  $handler->display->display_options['fields']['field_material_country']['label'] = '';
+  $handler->display->display_options['fields']['field_material_country']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_material_country']['element_type'] = 'span';
+  $handler->display->display_options['fields']['field_material_country']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_material_country']['link_to_entity'] = 0;
+  $handler->display->display_options['fields']['field_material_country']['view_mode'] = 'full';
+  $handler->display->display_options['fields']['field_material_country']['bypass_access'] = 0;
+  /* Field: Indexed Content: Available in languages */
+  $handler->display->display_options['fields']['field_available_in_languages']['id'] = 'field_available_in_languages';
+  $handler->display->display_options['fields']['field_available_in_languages']['table'] = 'search_api_index_musculoskeletal_disorders_index';
+  $handler->display->display_options['fields']['field_available_in_languages']['field'] = 'field_available_in_languages';
+  $handler->display->display_options['fields']['field_available_in_languages']['label'] = '';
+  $handler->display->display_options['fields']['field_available_in_languages']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_available_in_languages']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_available_in_languages']['settings'] = array(
+    'format' => array(
+      'name' => 'name',
+      'iso' => 0,
+      'name_native' => 0,
+    ),
+  );
+  $handler->display->display_options['fields']['field_available_in_languages']['delta_offset'] = '0';
+  /* Field: Indexed Content: URL */
+  $handler->display->display_options['fields']['url']['id'] = 'url';
+  $handler->display->display_options['fields']['url']['table'] = 'search_api_index_musculoskeletal_disorders_index';
+  $handler->display->display_options['fields']['url']['field'] = 'url';
+  $handler->display->display_options['fields']['url']['label'] = '';
+  $handler->display->display_options['fields']['url']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['url']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['url']['display_as_link'] = FALSE;
+  $handler->display->display_options['fields']['url']['link_to_entity'] = 0;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="views-field-nothing">
+<div class="av-type">
+<span class="views-label first">Type </span><span>[field_type_of_item]</span>
+<span>[field_material_country]</span>
+<span class="views-label">Language</span><span>[field_available_in_languages]</span>
+';
+  $handler->display->display_options['fields']['nothing']['element_type'] = '0';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['nothing']['element_wrapper_type'] = '0';
+  /* Field: Indexed Content: Provider */
+  $handler->display->display_options['fields']['field_msd_provider']['id'] = 'field_msd_provider';
+  $handler->display->display_options['fields']['field_msd_provider']['table'] = 'search_api_index_musculoskeletal_disorders_index';
+  $handler->display->display_options['fields']['field_msd_provider']['field'] = 'field_msd_provider';
+  $handler->display->display_options['fields']['field_msd_provider']['label'] = '';
+  $handler->display->display_options['fields']['field_msd_provider']['element_type'] = '0';
+  $handler->display->display_options['fields']['field_msd_provider']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_msd_provider']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['field_msd_provider']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_msd_provider']['link_to_entity'] = 0;
+  $handler->display->display_options['fields']['field_msd_provider']['display'] = 'id';
+  $handler->display->display_options['fields']['field_msd_provider']['view_mode'] = 'full';
+  $handler->display->display_options['fields']['field_msd_provider']['bypass_access'] = 0;
+  /* Field: Indexed Content: The main body text */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'search_api_index_musculoskeletal_disorders_index';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['body']['type'] = 'smart_trim_format';
+  $handler->display->display_options['fields']['body']['settings'] = array(
+    'trim_link' => '0',
+    'trim_length' => '300',
+    'trim_type' => 'chars',
+    'trim_suffix' => '...',
+    'more_link' => '1',
+    'more_text' => 'See more',
+    'summary_handler' => 'full',
+    'trim_options' => array(
+      'text' => 0,
+    ),
+    'trim_preserve_tags' => '',
+  );
+  /* Field: Indexed Content: Content (original language) */
+  $handler->display->display_options['fields']['field_body_original']['id'] = 'field_body_original';
+  $handler->display->display_options['fields']['field_body_original']['table'] = 'search_api_index_musculoskeletal_disorders_index';
+  $handler->display->display_options['fields']['field_body_original']['field'] = 'field_body_original';
+  $handler->display->display_options['fields']['field_body_original']['label'] = '';
+  $handler->display->display_options['fields']['field_body_original']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_body_original']['type'] = 'smart_trim_format';
+  $handler->display->display_options['fields']['field_body_original']['settings'] = array(
+    'trim_link' => '0',
+    'trim_length' => '300',
+    'trim_type' => 'chars',
+    'trim_suffix' => '...',
+    'more_link' => '1',
+    'more_text' => 'See more',
+    'trim_options' => array(
+      'text' => 0,
+    ),
+    'trim_preserve_tags' => '',
+  );
+  /* Sort criterion: Indexed Content: Year of publication */
+  $handler->display->display_options['sorts']['field_publication_year']['id'] = 'field_publication_year';
+  $handler->display->display_options['sorts']['field_publication_year']['table'] = 'search_api_index_musculoskeletal_disorders_index';
+  $handler->display->display_options['sorts']['field_publication_year']['field'] = 'field_publication_year';
+  $handler->display->display_options['sorts']['field_publication_year']['order'] = 'DESC';
+  $handler->display->display_options['sorts']['field_publication_year']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['field_publication_year']['expose']['label'] = 'Publication year';
+  /* Sort criterion: Search: Relevance */
+  $handler->display->display_options['sorts']['search_api_relevance']['id'] = 'search_api_relevance';
+  $handler->display->display_options['sorts']['search_api_relevance']['table'] = 'search_api_index_musculoskeletal_disorders_index';
+  $handler->display->display_options['sorts']['search_api_relevance']['field'] = 'search_api_relevance';
+  $handler->display->display_options['sorts']['search_api_relevance']['order'] = 'DESC';
+  $handler->display->display_options['sorts']['search_api_relevance']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['search_api_relevance']['expose']['label'] = 'Relevance';
+  /* Filter criterion: Indexed Content: Status */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'search_api_index_musculoskeletal_disorders_index';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = array(
+    1 => '1',
+  );
+  /* Filter criterion: Indexed Content: Content type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'search_api_index_musculoskeletal_disorders_index';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'musculoskeletal_disorders' => 'musculoskeletal_disorders',
+  );
+  /* Filter criterion: Search: Fulltext search */
+  $handler->display->display_options['filters']['search_api_views_fulltext']['id'] = 'search_api_views_fulltext';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['table'] = 'search_api_index_musculoskeletal_disorders_index';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['field'] = 'search_api_views_fulltext';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['operator_id'] = 'search_api_views_fulltext_op';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['label'] = 'Search';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['operator'] = 'search_api_views_fulltext_op';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['identifier'] = 'text';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    14 => 0,
+  );
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Indexed Content: Original description language */
+  $handler->display->display_options['fields']['field_original_desc_language']['id'] = 'field_original_desc_language';
+  $handler->display->display_options['fields']['field_original_desc_language']['table'] = 'search_api_index_musculoskeletal_disorders_index';
+  $handler->display->display_options['fields']['field_original_desc_language']['field'] = 'field_original_desc_language';
+  $handler->display->display_options['fields']['field_original_desc_language']['label'] = '';
+  $handler->display->display_options['fields']['field_original_desc_language']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_original_desc_language']['settings'] = array(
+    'format' => array(
+      'name' => 'name',
+      'iso' => 0,
+      'name_native' => 0,
+    ),
+  );
+  $handler->display->display_options['fields']['field_original_desc_language']['delta_offset'] = '0';
+  /* Field: Indexed Content: Title (original) */
+  $handler->display->display_options['fields']['field_title_original']['id'] = 'field_title_original';
+  $handler->display->display_options['fields']['field_title_original']['table'] = 'search_api_index_musculoskeletal_disorders_index';
+  $handler->display->display_options['fields']['field_title_original']['field'] = 'field_title_original';
+  $handler->display->display_options['fields']['field_title_original']['label'] = '';
+  $handler->display->display_options['fields']['field_title_original']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_title_original']['type'] = 'title_linked';
+  $handler->display->display_options['fields']['field_title_original']['settings'] = array(
+    'title_style' => '_none',
+    'title_link' => 'content',
+    'title_class' => '',
+  );
+  /* Field: Indexed Content: Title */
+  $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['table'] = 'search_api_index_musculoskeletal_disorders_index';
+  $handler->display->display_options['fields']['title_field']['field'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['label'] = '';
+  $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title_field']['type'] = 'title_linked';
+  $handler->display->display_options['fields']['title_field']['settings'] = array(
+    'title_style' => '_none',
+    'title_link' => 'content',
+    'title_class' => '',
+  );
+  /* Field: Indexed Content: Type of item */
+  $handler->display->display_options['fields']['field_type_of_item']['id'] = 'field_type_of_item';
+  $handler->display->display_options['fields']['field_type_of_item']['table'] = 'search_api_index_musculoskeletal_disorders_index';
+  $handler->display->display_options['fields']['field_type_of_item']['field'] = 'field_type_of_item';
+  $handler->display->display_options['fields']['field_type_of_item']['label'] = '';
+  $handler->display->display_options['fields']['field_type_of_item']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_type_of_item']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_type_of_item']['delta_offset'] = '0';
+  /* Field: Indexed Content: Country */
+  $handler->display->display_options['fields']['field_material_country']['id'] = 'field_material_country';
+  $handler->display->display_options['fields']['field_material_country']['table'] = 'search_api_index_musculoskeletal_disorders_index';
+  $handler->display->display_options['fields']['field_material_country']['field'] = 'field_material_country';
+  $handler->display->display_options['fields']['field_material_country']['label'] = '';
+  $handler->display->display_options['fields']['field_material_country']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_material_country']['element_type'] = 'span';
+  $handler->display->display_options['fields']['field_material_country']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_material_country']['link_to_entity'] = 0;
+  $handler->display->display_options['fields']['field_material_country']['view_mode'] = 'full';
+  $handler->display->display_options['fields']['field_material_country']['bypass_access'] = 0;
+  /* Field: Indexed Content: Available in languages */
+  $handler->display->display_options['fields']['field_available_in_languages']['id'] = 'field_available_in_languages';
+  $handler->display->display_options['fields']['field_available_in_languages']['table'] = 'search_api_index_musculoskeletal_disorders_index';
+  $handler->display->display_options['fields']['field_available_in_languages']['field'] = 'field_available_in_languages';
+  $handler->display->display_options['fields']['field_available_in_languages']['label'] = '';
+  $handler->display->display_options['fields']['field_available_in_languages']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_available_in_languages']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_available_in_languages']['settings'] = array(
+    'format' => array(
+      'name' => 'name',
+      'iso' => 0,
+      'name_native' => 0,
+    ),
+  );
+  $handler->display->display_options['fields']['field_available_in_languages']['delta_offset'] = '0';
+  /* Field: Indexed Content: URL */
+  $handler->display->display_options['fields']['url']['id'] = 'url';
+  $handler->display->display_options['fields']['url']['table'] = 'search_api_index_musculoskeletal_disorders_index';
+  $handler->display->display_options['fields']['url']['field'] = 'url';
+  $handler->display->display_options['fields']['url']['label'] = '';
+  $handler->display->display_options['fields']['url']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['url']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['url']['display_as_link'] = FALSE;
+  $handler->display->display_options['fields']['url']['link_to_entity'] = 0;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="views-field-nothing">
+<div class="av-type">
+<span class="views-label first">Type </span><span>[field_type_of_item]</span>
+<span>[field_material_country]</span>
+<span class="views-label">Language</span><span>[field_available_in_languages]</span>
+';
+  $handler->display->display_options['fields']['nothing']['element_type'] = '0';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['nothing']['element_wrapper_type'] = '0';
+  /* Field: Indexed Content: Provider */
+  $handler->display->display_options['fields']['field_msd_provider']['id'] = 'field_msd_provider';
+  $handler->display->display_options['fields']['field_msd_provider']['table'] = 'search_api_index_musculoskeletal_disorders_index';
+  $handler->display->display_options['fields']['field_msd_provider']['field'] = 'field_msd_provider';
+  $handler->display->display_options['fields']['field_msd_provider']['label'] = '';
+  $handler->display->display_options['fields']['field_msd_provider']['element_type'] = '0';
+  $handler->display->display_options['fields']['field_msd_provider']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_msd_provider']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['field_msd_provider']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_msd_provider']['link_to_entity'] = 0;
+  $handler->display->display_options['fields']['field_msd_provider']['display'] = 'id';
+  $handler->display->display_options['fields']['field_msd_provider']['view_mode'] = 'full';
+  $handler->display->display_options['fields']['field_msd_provider']['bypass_access'] = 0;
+  /* Field: Indexed Content: The main body text */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'search_api_index_musculoskeletal_disorders_index';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['element_class'] = 'see-more-arrow';
+  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['body']['type'] = 'smart_trim_format';
+  $handler->display->display_options['fields']['body']['settings'] = array(
+    'trim_link' => '0',
+    'trim_length' => '300',
+    'trim_type' => 'chars',
+    'trim_suffix' => '...',
+    'more_link' => '0',
+    'more_text' => 'See more',
+    'summary_handler' => 'full',
+    'trim_options' => array(
+      'text' => 0,
+    ),
+    'trim_preserve_tags' => '',
+  );
+  /* Field: Indexed Content: Content (original language) */
+  $handler->display->display_options['fields']['field_body_original']['id'] = 'field_body_original';
+  $handler->display->display_options['fields']['field_body_original']['table'] = 'search_api_index_musculoskeletal_disorders_index';
+  $handler->display->display_options['fields']['field_body_original']['field'] = 'field_body_original';
+  $handler->display->display_options['fields']['field_body_original']['label'] = '';
+  $handler->display->display_options['fields']['field_body_original']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_body_original']['type'] = 'smart_trim_format';
+  $handler->display->display_options['fields']['field_body_original']['settings'] = array(
+    'trim_link' => '0',
+    'trim_length' => '300',
+    'trim_type' => 'chars',
+    'trim_suffix' => '...',
+    'more_link' => '0',
+    'more_text' => 'See more',
+    'trim_options' => array(
+      'text' => 0,
+    ),
+    'trim_preserve_tags' => '',
+  );
+  /* Field: Content: Link */
+  $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['label'] = '';
+  $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['view_node']['text'] = 'See more';
+  $handler->display->display_options['path'] = 'themes/musculoskeletal-disorders/practical-tools-musculoskeletal-disorders';
+  $translatables['musculoskeletal_disorders_list'] = array(
+    t('Master'),
+    t('Practical tools and guidance on musculoskeletal disorders'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('«'),
+    t('‹'),
+    t('›'),
+    t('»'),
+    t('Showing @start - @end from @total'),
+    t('No results'),
+    t('<div class="views-field-nothing">
+<div class="av-type">
+<span class="views-label first">Type </span><span>[field_type_of_item]</span>
+<span>[field_material_country]</span>
+<span class="views-label">Language</span><span>[field_available_in_languages]</span>
+'),
+    t('Publication year'),
+    t('Relevance'),
+    t('Search'),
+    t('Page'),
+    t('See more'),
+  );
+  $export['musculoskeletal_disorders_list'] = $view;
+
+  $view = new view();
   $view->name = 'musculoskeletal_disorders_overview';
   $view->description = '';
   $view->tag = 'default';

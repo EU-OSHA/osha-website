@@ -47,3 +47,10 @@ function osha_news_update_7006() {
 function osha_news_update_7007() {
   features_revert(array('osha_news' => array('views_view')));
 }
+
+/**
+ * MDR-3505 Development on How to manage news editor profiles.
+ */
+function osha_news_update_7008() {
+  features_revert(array('osha_news' => array('user_role')));
+}

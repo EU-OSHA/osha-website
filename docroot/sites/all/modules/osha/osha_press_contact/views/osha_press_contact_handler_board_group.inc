@@ -4,20 +4,26 @@
  * Provides a custom views field.
  */
 class osha_press_contact_handler_board_group extends views_handler_field {
-  function option_definition() {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function option_definition() {
     $options = parent::option_definition();
     return $options;
   }
 
-  function options_form(&$form, &$form_state) {
-    parent::options_form($form, $form_state);
+  /**
+   * {@inheritdoc}
+   */
+  public function query() {
+    // Do nothing -- to override the parent query.
   }
 
-  function query() {
-    // do nothing -- to override the parent query.
-  }
-
-  function render($data) {
+  /**
+   * {@inheritdoc}
+   */
+  public function render($data) {
     $output = NULL;
     if (!empty($data->_field_data)) {
       reset($data->_field_data);
@@ -32,6 +38,9 @@ class osha_press_contact_handler_board_group extends views_handler_field {
         }
         elseif (!empty($wg_category) && $wg_category->name_field['en'][0]['value'] == 'European Commission') {
           $output = t('European Commission');
+        }
+        elseif (variable_get('expert_nominated_title', '') && !empty($wg_category) && $wg_category->name_field['en'][0]['value'] == 'expert nominated by the european parliament') {
+          $output = t(variable_get('expert_nominated_title', ''));
         }
         else {
           $output = $wrapper->field_country->value()->name;

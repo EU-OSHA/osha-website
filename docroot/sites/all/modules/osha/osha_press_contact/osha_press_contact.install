@@ -69,3 +69,11 @@ function osha_press_contact_update_7004() {
 function osha_press_contact_update_7005() {
   features_revert(array('osha_press_contact' => array('views_view', 'fe_block_settings')));
 }
+
+/**
+ * MDR-3525 Show the category "Expert nominated by the European Parliament" to country level.
+ */
+function osha_press_contact_update_7006() {
+  features_revert(array('osha_press_contact' => array('views_view', 'fe_block_settings')));
+}
+

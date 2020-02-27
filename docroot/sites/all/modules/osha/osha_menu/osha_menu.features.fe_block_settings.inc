@@ -65,10 +65,10 @@ themes/dangerous-substances/practical-tools-dangerous-substances
 photo-gallery
 photo-gallery/*
 tools-and-publications
+themes/musculoskeletal-disorders/practical-tools-musculoskeletal-disorders
 tools-and-resources
 news-events
-oshevents
-node/20',
+oshevents',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(

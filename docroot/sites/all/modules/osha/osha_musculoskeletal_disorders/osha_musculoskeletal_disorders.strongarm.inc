@@ -163,6 +163,13 @@ function osha_musculoskeletal_disorders_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'metatag_enable_node__musculoskeletal_disorders';
+  $strongarm->value = TRUE;
+  $export['metatag_enable_node__musculoskeletal_disorders'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'node_options_musculoskeletal_disorders';
   $strongarm->value = array(
     0 => 'status',
@@ -182,6 +189,13 @@ function osha_musculoskeletal_disorders_strongarm() {
   $strongarm->name = 'node_submitted_musculoskeletal_disorders';
   $strongarm->value = 0;
   $export['node_submitted_musculoskeletal_disorders'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_musculoskeletal_disorders_pattern';
+  $strongarm->value = 'themes/musculoskeletal-disorders/practical-tools-musculoskeletal-disorders/[node:title]';
+  $export['pathauto_node_musculoskeletal_disorders_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

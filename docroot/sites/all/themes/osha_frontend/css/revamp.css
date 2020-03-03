@@ -2714,3 +2714,31 @@ article.node-seminar{
     padding: 15px;
     font-size: 1.2em;
 }
+
+.related-resources div div a{
+    background-color: #ecf1fb;
+    margin-bottom: 20px;
+    padding: 10px;
+    display: block;
+}
+
+.related-resources a{
+    text-decoration: none;
+}
+
+.related-resources a:hover{
+    text-decoration: underline;
+    color: #000;
+}
+
+.related-resources img{
+    float: left;
+    padding-right: 0.7em;
+}
+
+.related-resources span{
+    font-family: Open Sans Condensed;
+    font-size: 1.4em;
+    color: #000;
+    font-weight: lighter;
+}

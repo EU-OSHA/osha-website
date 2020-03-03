@@ -75,5 +75,6 @@ function osha_press_contact_update_7005() {
  */
 function osha_press_contact_update_7006() {
   features_revert(array('osha_press_contact' => array('views_view', 'fe_block_settings')));
+  variable_set('expert_nominated_title', 'Expert Nominated by the European Parliament');
 }
 

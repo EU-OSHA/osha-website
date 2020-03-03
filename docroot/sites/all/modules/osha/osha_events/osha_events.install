@@ -318,3 +318,10 @@ function osha_events_update_7031() {
   features_revert_module('osha_news');
   features_revert_module('osha_highlight');
 }
+
+/**
+ * MDR-3498 Estimation - Development of moderate tab for events.
+ */
+function osha_events_update_7032() {
+  features_revert(array('osha_events' => array('variable')));
+}

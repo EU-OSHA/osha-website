@@ -2742,3 +2742,23 @@ article.node-seminar{
     color: #000;
     font-weight: lighter;
 }
+
+.view-msds-glossary{
+    padding-top: 1em;
+}
+
+#content .view-msds-glossary h2{
+    color: #003399;
+    padding-left: 0;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;    
+}
+
+
+#content .view-msds-glossary .views-field-description-field p{
+    padding: 0;
+    margin: 0;
+}

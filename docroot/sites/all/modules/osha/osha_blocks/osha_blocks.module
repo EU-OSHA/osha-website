@@ -28,12 +28,13 @@ function osha_blocks_block_info() {
     'info' => t('Translations extra links'),
     'cache' => DRUPAL_CACHE_PER_USER | DRUPAL_CACHE_PER_PAGE,
   );
-
   $blocks['osha_block_group_related'] = array(
     'info' => t('Related content'),
     'cache' => DRUPAL_CACHE_PER_USER | DRUPAL_CACHE_PER_PAGE,
   );
-
+  $blocks['article_related_icons'] = array(
+    'info' => t('Article related resources'),
+  );
   return $blocks;
 }
 
@@ -41,9 +42,44 @@ function osha_blocks_block_info() {
  * Implements hook_block_view().
  */
 function osha_blocks_block_view($delta = '') {
+  global $language;
   $block = array();
 
   switch ($delta) {
+
+    case 'article_related_icons':
+      $block['title'] = '<none>';
+      $block['subject'] = "<none>";
+      $node = menu_get_object();
+      if ($node->field_resources) {
+        $resources = [];
+        foreach($node->field_resources[LANGUAGE_NONE] as $term) {
+          $wrapper = entity_metadata_wrapper('taxonomy_term', $term['tid']);
+          $icon = $wrapper->language($language->language)->field_icon->value()['uri'];
+          $image = theme('image_style', [
+            'style_name' => 'relres',
+            'path' => $icon
+          ]);
+          $name = $wrapper->label();
+          $resource_link = $wrapper->language($language->language)->field_link->value();
+          $link = $resource_link['url'];
+          $options = [
+            'html' => TRUE,
+            'attributes' => ['class' => ['recommended-tool max-width']]
+          ];
+          if (!empty($resource_link['attributes']['target'])) {
+            $options['attributes']['target'] = $resource_link['attributes']['target'];
+          }
+          $resources[] = '<div>' . l($image . '<span>' . $name . '</span>', $link, $options) . '</div>';
+          $block['subject'] = t('Related resources');
+          $block['content'] = '
+<div class="related-resources">
+   <div class="related-resources-boxes container-recommended-tools direction-column">' . implode('', $resources) . '</div>
+</div>';
+        }
+      }
+      break;
+
     case 'oshwiki_featured_articles':
       $block['subject'] = t('OSHwiki featured articles');
       $block['content'] = oshwiki_featured_articles_block_view();
@@ -111,13 +147,13 @@ function osha_archived_content_block_view() {
   $node = menu_get_object();
   if (isset($node) && isset($node->field_archived[LANGUAGE_NONE][0]['value']) &&
     $node->field_archived[LANGUAGE_NONE][0]['value'] == 1) {
-      return theme('osha_archived_content', array());
+    return theme('osha_archived_content', array());
   }
   return '';
 }
 
 function osha_legislation_notification_content_block_view() {
-    return theme('osha_legislation_notification_content', array());
+  return theme('osha_legislation_notification_content', array());
 }
 
 /**

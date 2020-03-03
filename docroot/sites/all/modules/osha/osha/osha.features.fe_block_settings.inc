@@ -62,12 +62,8 @@ function osha_default_fe_block_settings() {
     'i18n_mode' => 0,
     'module' => 'devel_node_access',
     'node_types' => array(),
-    'pages' => 'use pre node
-node/13906
-node/13906/edit',
-    'roles' => array(
-      'administrator' => 3,
-    ),
+    'pages' => '',
+    'roles' => array(),
     'themes' => array(
       'bartik' => array(
         'region' => '',
@@ -79,7 +75,7 @@ node/13906/edit',
         'region' => '',
         'status' => 0,
         'theme' => 'osha_admin',
-        'weight' => 3,
+        'weight' => 0,
       ),
       'osha_frontend' => array(
         'region' => '',
@@ -95,7 +91,7 @@ node/13906/edit',
       ),
     ),
     'title' => '',
-    'visibility' => 1,
+    'visibility' => 0,
   );
 
   $export['devel_node_access-dna_user'] = array(
@@ -106,10 +102,8 @@ node/13906/edit',
     'i18n_mode' => 0,
     'module' => 'devel_node_access',
     'node_types' => array(),
-    'pages' => 'node/13906',
-    'roles' => array(
-      'administrator' => 3,
-    ),
+    'pages' => '',
+    'roles' => array(),
     'themes' => array(
       'bartik' => array(
         'region' => '',
@@ -121,7 +115,7 @@ node/13906/edit',
         'region' => '',
         'status' => 0,
         'theme' => 'osha_admin',
-        'weight' => 4,
+        'weight' => 0,
       ),
       'osha_frontend' => array(
         'region' => '',
@@ -137,7 +131,7 @@ node/13906/edit',
       ),
     ),
     'title' => '',
-    'visibility' => 1,
+    'visibility' => 0,
   );
 
   $export['lang_dropdown-language'] = array(

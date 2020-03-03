@@ -1,7 +1,8 @@
 <?php
 
 /**
- * .
+ * MDR-3519 HWC 20-22 Glossary.
  */
-//function osha_glossary_update_7001() {
-//}
+function osha_glossary_update_7001() {
+  features_revert_module('osha_glossary');
+}

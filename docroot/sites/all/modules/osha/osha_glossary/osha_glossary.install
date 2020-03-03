@@ -5,4 +5,14 @@
  */
 function osha_glossary_update_7001() {
   features_revert_module('osha_glossary');
+  $item = array(
+    'link_path' => 'themes/musculoskeletal-disorders/glossary',
+    'link_title' => 'Glossary',
+    'menu_name' => 'main-menu',
+    'weight' => 5,
+    'expanded' => 0,
+    'plid' => 639, // set parent - "Musculoskeletal disorders"
+    'options' => array(),
+  );
+  menu_link_save($item);
 }

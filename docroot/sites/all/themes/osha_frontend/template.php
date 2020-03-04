@@ -234,12 +234,6 @@ function osha_frontend_menu_link__menu_block($variables) {
 
     $output_image = l($image, $element['#href'], array('html' => TRUE));
   }
-  if (($variables['element']['#theme'][0] == 'menu_link__menu_block__3') && (arg(1) == 20)) {
-    $options = $element['#localized_options'];
-    $options['html'] = TRUE;
-    $text = '<span class="content-img">' . $image . '</span><h2>' . $element['#title'] . '</h2>';
-    return '<div class="content-box-sub">' . l($text, $element['#href'], $options) . '</div>';
-  }
   return '<li' . drupal_attributes($element['#attributes']) . '>
     <div class="introduction-title">' . $output_link . '</div>
     <div class="introduction-image">' . $output_image . '</div>

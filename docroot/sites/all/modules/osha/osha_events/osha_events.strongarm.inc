@@ -106,10 +106,13 @@ function osha_events_strongarm() {
     'search_result' => 0,
     'diff_standard' => 0,
     'osha_slideshow' => 0,
+    'osha_search_teaser' => 0,
+    'dangerous_substances' => 0,
     'highlights_item' => 0,
     'newsletter_item' => 0,
     'osha_wiki' => 0,
     'print' => 0,
+    'question' => 0,
     'token' => 0,
     'nodeform' => 0,
   );
@@ -233,7 +236,9 @@ function osha_events_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_options_events';
-  $strongarm->value = array();
+  $strongarm->value = array(
+    0 => 'revision',
+  );
   $export['node_options_events'] = $strongarm;
 
   $strongarm = new stdClass();

@@ -401,10 +401,13 @@ function osha_resources_strongarm() {
     'search_result' => 0,
     'diff_standard' => 0,
     'osha_slideshow' => 0,
+    'osha_search_teaser' => 0,
+    'dangerous_substances' => 0,
     'highlights_item' => 0,
     'newsletter_item' => 0,
     'osha_wiki' => 0,
     'print' => 0,
+    'question' => 0,
     'token' => 0,
     'nodeform' => 0,
   );
@@ -423,10 +426,13 @@ function osha_resources_strongarm() {
     'search_result' => 0,
     'diff_standard' => 0,
     'osha_slideshow' => 0,
+    'osha_search_teaser' => 0,
+    'dangerous_substances' => 0,
     'highlights_item' => 0,
     'newsletter_item' => 0,
     'osha_wiki' => 0,
     'print' => 0,
+    'question' => 0,
     'token' => 0,
     'nodeform' => 0,
   );
@@ -445,10 +451,13 @@ function osha_resources_strongarm() {
     'search_result' => 0,
     'diff_standard' => 0,
     'osha_slideshow' => 0,
+    'osha_search_teaser' => 0,
+    'dangerous_substances' => 0,
     'highlights_item' => 0,
     'newsletter_item' => 0,
     'osha_wiki' => 0,
     'print' => 0,
+    'question' => 0,
     'token' => 0,
     'nodeform' => 0,
   );
@@ -467,10 +476,13 @@ function osha_resources_strongarm() {
     'search_result' => 0,
     'diff_standard' => 0,
     'osha_slideshow' => 0,
+    'osha_search_teaser' => 0,
+    'dangerous_substances' => 0,
     'highlights_item' => 0,
     'newsletter_item' => 0,
     'osha_wiki' => 0,
     'print' => 0,
+    'question' => 0,
     'token' => 0,
     'nodeform' => 0,
   );
@@ -489,10 +501,13 @@ function osha_resources_strongarm() {
     'search_result' => 0,
     'diff_standard' => 0,
     'osha_slideshow' => 0,
+    'osha_search_teaser' => 0,
+    'dangerous_substances' => 0,
     'highlights_item' => 0,
     'newsletter_item' => 0,
     'osha_wiki' => 0,
     'print' => 0,
+    'question' => 0,
     'token' => 0,
     'nodeform' => 0,
   );
@@ -710,12 +725,6 @@ function osha_resources_strongarm() {
       'osha_resources' => array(
         'custom_settings' => TRUE,
       ),
-      'dangerous_substances' => array(
-        'custom_settings' => TRUE,
-      ),
-      'osha_search_teaser' => array(
-        'custom_settings' => FALSE,
-      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -871,6 +880,9 @@ function osha_resources_strongarm() {
         ),
         'language' => array(
           'weight' => '5',
+        ),
+        'xmlsitemap' => array(
+          'weight' => '30',
         ),
       ),
       'display' => array(),

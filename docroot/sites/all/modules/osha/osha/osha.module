@@ -1314,6 +1314,10 @@ function osha_node_view($node, $view_mode, $langcode) {
       $term = taxonomy_term_load($node->field_article_type[LANGUAGE_NONE][0]['tid']);
       $node->article_type_code = $term->field_article_type_code[LANGUAGE_NONE][0]['value'];
     }
+    $node->show_only_related_icons = FASLE;
+    if ($node->article_type_code = 'section' && !empty($node->field_resources[LANGUAGE_NONE][0]['tid'])) {
+      $node->show_only_related_icons = TRUE;
+    }
   }
 
   // For webform content type - hide introduction field in Preview Mode

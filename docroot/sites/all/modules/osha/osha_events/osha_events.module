@@ -6,6 +6,212 @@
 
 include_once 'osha_events.features.inc';
 
+/**
+ * Implements hook_admin_paths().
+ */
+function osha_events_admin_paths() {
+  if (variable_get('node_admin_theme')) {
+    $paths = array(
+      'node/*/event_moderation' => TRUE,
+      'node/*/event_moderation/*/unpublish' => TRUE,
+      'node/*/event_moderation/*/change-state/*' => TRUE,
+      'node/*/event_moderation/view' => TRUE,
+      'node/*/event_moderation/diff' => TRUE,
+      'node/*/event_moderation/diff/list' => TRUE,
+      'node/*/event_moderation/diff/view' => TRUE,
+      'node/*/event_moderation/diff/view/*/*' => TRUE,
+    );
+    return $paths;
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function osha_events_menu() {
+  $items = array();
+  // Display a node's moderation history
+  $items["node/%node/event_moderation"] = array(
+    'title' => 'Moderate',
+    'description' => 'Show the content moderation history.',
+    'type' => MENU_LOCAL_TASK,
+    'page callback' => 'osha_events_moderation_node_history_view',
+    'page arguments' => array(1),
+    'access callback' => '_osha_events_moderation_access',
+    'access arguments' => array('view history', 1),
+  );
+
+  $items['node/%node/event_moderation/view'] = array(
+    'title' => 'Revisions',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -1,
+  );
+
+  // If the diff module is present, replicate its pages under the moderation tab.
+  if (module_exists('diff')) {
+    $diff_menu_items  = diff_menu();
+
+    $items['node/%node/event_moderation/diff'] = array(
+      'type' => MENU_LOCAL_TASK,
+      'file path' => drupal_get_path('module', 'diff'),
+      'title' => 'Compare revisions',
+      'page arguments' => array(1),
+    );
+
+    $items['node/%node/event_moderation/diff'] += $diff_menu_items['node/%node/revisions/list'];
+
+
+    $items['node/%node/event_moderation/diff/list'] = array(
+      'title' => 'Compare revisions',
+      'type' => MENU_DEFAULT_LOCAL_TASK,
+      'weight' => -1,
+    );
+
+    $items['node/%node/event_moderation/diff/view'] = array(
+      'page arguments' => array(1, 5, 6),
+      'tab_parent' => 'node/%/event_moderation/diff/list',
+      'file path' => drupal_get_path('module', 'diff'),
+    );
+
+    $items['node/%node/event_moderation/diff/view'] += $diff_menu_items['node/%node/revisions/view'];
+  }
+
+  return $items;
+}
+
+/**
+ * Custom access handler for node operations.
+ *
+ * @param $op
+ *   The operation being requested.
+ * @param $node
+ *   The node being acted upon.
+ *
+ * @return
+ *   Boolean TRUE or FALSE.
+ */
+function _osha_events_moderation_access($op, $node) {
+  global $user;
+
+//  // If we do not control this node type, deny access.
+  if ($node->type != 'events') {
+    return FALSE;
+  }
+  $access = TRUE;
+
+  // The user must be able to view the moderation history.
+  $access &= user_access('view moderation history');
+
+  // The user must be able to edit this node.
+  $access &= node_access('update', $node);
+  return $access;
+}
+
+function osha_events_moderation_access_link($text, $internal_path, $options = array()) {
+  if (($item = menu_get_item($internal_path)) && !empty($item['access'])) {
+    return l($text, $internal_path, $options);
+  }
+}
+
+/**
+ * Display a node's moderation history.
+ *
+ * @param $node
+ *   The node being acted upon.
+ *
+ * @return
+ *   A themed table of data and links for node moderation actions.
+ */
+function osha_events_moderation_node_history_view($node) {
+  global $user;
+
+  // Page title.
+  drupal_set_title(t('History of %title', array('%title' => $node->title)), PASS_THROUGH);
+
+  // Get all of the node revisions, each with its most recent moderation.
+  $query = db_select('node', 'n')->extend('PagerDefault');
+  $query->leftJoin('node_revision', 'r', 'n.nid = r.nid');
+  $query->leftJoin('users', 'u', 'r.uid = u.uid');
+  $query->addField('n', 'vid', 'live_revision');
+  $query->condition('n.nid', $node->nid)
+    ->orderBy('r.vid', 'DESC')
+    ->fields('r', array('nid', 'vid', 'title', 'log', 'uid', 'timestamp'))
+    ->fields('u', array('name'))
+    ->limit(30);
+
+  $revisions = $query->execute()
+    ->fetchAllAssoc('vid');
+
+  // Build the table rows.
+  $rows = array();
+  foreach ($revisions as $revision) {
+    $row = array(
+      'data' => array(
+        'vid' => '',
+        'info' => '',
+        'date' => '',
+        'revision' => '',
+      ),
+      'class' => array('revision'),
+    );
+
+    // Add row classes.
+    if ($revision->vid == $node->workbench_moderation['current']->vid) {
+      $row['class'][] = 'current-revision';
+    }
+    if (isset($node->workbench_moderation['published']) && $revision->vid == $node->workbench_moderation['published']->vid) {
+      $row['class'][] = 'published-revision';
+    }
+    else {
+      $row['class'][] = 'unpublished-revision';
+    }
+
+    // Add row data.
+    $row['data']['vid'] = $revision->vid;
+    $row['data']['info'] .= '<div class="revision-title">' . check_plain($revision->title) . '</div>';
+    $row['data']['info'] .= '<div class="revision-log description">' . filter_xss($revision->log) . '</div>';
+    $row['data']['info'] .= '<div class="revision-user description">' . t('Revised by !user', array('!user' => theme('username', array('account' => $revision)))) . '</div>';
+    $row['data']['date'] = format_date($revision->timestamp, 'short');
+
+    // Revision operations.
+    $revision_operations = array();
+    if (isset($node->workbench_moderation['published']) && $revision->vid == $node->workbench_moderation['published']->vid) {
+      $revision_operations['view'] = osha_events_moderation_access_link(t('view'), "node/{$revision->nid}");
+    }
+    elseif ($revision->vid == $node->workbench_moderation['current']->vid) {
+      $revision_operations['view'] = osha_events_moderation_access_link(t('view'), "node/{$revision->nid}/current-revision");
+    }
+    else {
+      $revision_operations['view'] = osha_events_moderation_access_link(t('view'), "node/{$revision->nid}/revisions/{$revision->vid}/view");
+    }
+
+    $revision_operations['revert'] = osha_events_moderation_access_link(t('revert'), "node/{$revision->nid}/revisions/{$revision->vid}/revert");
+    $revision_operations['delete'] = osha_events_moderation_access_link(t('delete'), "node/{$revision->nid}/revisions/{$revision->vid}/delete");
+
+    $row['data']['revision'] = implode(' | ', array_filter($revision_operations));
+    $rows[] = $row;
+  }
+
+  // Set the table header.
+  $header = array(t('Revision'), t('Title'), t('Date'), t('Revision actions'));
+
+  // Return properly styled output.
+  $build['pager_table'] = array(
+    '#attached' => array(
+      'css' => array(
+        drupal_get_path('module', 'workbench_moderation') . '/css/workbench_moderation.css',
+      ),
+    ),
+    '#theme' => 'table',
+    '#header' => $header,
+    '#rows' => $rows,
+  );
+
+  // Attach the pager theme.
+  $build['pager_pager'] = array('#theme' => 'pager');
+
+  return $build;
+}
 
 /**
  * Implements hook_node_access().

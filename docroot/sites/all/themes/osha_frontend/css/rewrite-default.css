@@ -870,6 +870,7 @@ footer{
 
 #block-views-highlight-block-2 .more-link a, #block-osha-homepage-osha-homepage-news-events .more-link a{
     padding: 5px 1.5em!important;
+    margin-left: 0;
 }
 
 .not-front #block-views-highlight-block-2 .more-link a:hover, .not-front #block-osha-homepage-osha-homepage-news-events .more-link a:hover{

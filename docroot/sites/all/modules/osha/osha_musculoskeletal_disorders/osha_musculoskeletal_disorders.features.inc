@@ -74,6 +74,7 @@ function osha_musculoskeletal_disorders_default_search_api_index() {
         "field_languages_other" : { "type" : "text" },
         "field_material_country" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_material_purpose_type" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
+        "field_msd_priority_area" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_msd_provider" : {
           "type" : "list\\u003Cinteger\\u003E",
           "entity_type" : "field_collection_item"
@@ -83,7 +84,6 @@ function osha_musculoskeletal_disorders_default_search_api_index() {
         "field_original_desc_language:safe_value" : { "type" : "list\\u003Cstring\\u003E" },
         "field_original_desc_language:value" : { "type" : "list\\u003Cstring\\u003E" },
         "field_prevention_measures" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
-        "field_priority_area" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_publication_year" : { "type" : "date" },
         "field_purpose_of_the_material" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_resource_type" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },

@@ -19,7 +19,9 @@
     $show_25th = FALSE;
     $node = menu_get_object();
     if (isset($node) && isset($node->article_type_code) && $node->article_type_code != 'section') {
+      if (!$node->show_only_related_icons) {
         unset($page['sidebar_second']);
+      }
     }
     $sidebar_second = render($page['sidebar_second']);
     if (isset($node) && ($node->type == '25th_anniversary')) {
@@ -68,7 +70,7 @@
       <?php print render($page['content']); ?>
       <?php print $feed_icons; ?>
     </div>
-	
+
 	 <?php if ($sidebar_second): ?>
       <aside class="sidebars_second">
         <?php print $sidebar_second; ?>
@@ -80,7 +82,7 @@
         <?php print render($page['before_footer']); ?>
       </div>
     <?php endif; ?>
-	
+
   </div>
 
   <?php if (isset($page['footer'])) : ?>

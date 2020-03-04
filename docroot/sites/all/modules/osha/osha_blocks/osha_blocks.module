@@ -6,6 +6,22 @@
 
 include_once 'osha_blocks.features.inc';
 
+/* *
+ * Implements hook_block_list_alter() to hide the related wiki under publication
+ * when manual wiki articles have been linked to the current publication
+ */
+
+function osha_blocks_block_list_alter(&$blocks) {
+  $node = menu_get_object();
+  if ($node && $node->show_only_related_icons) {
+    foreach ($blocks as $block_id => $block) {
+      if ($block->delta != 'article_related_icons' && $block->region == 'sidebar_second') {
+        unset ($blocks[$block_id]);
+      }
+    }
+  }
+}
+
 /**
  * Implements hook_block_info().
  */

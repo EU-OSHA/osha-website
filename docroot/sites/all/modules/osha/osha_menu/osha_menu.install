@@ -19,14 +19,11 @@ function osha_menu_update_7002() {
  */
 function osha_menu_update_7003() {
   features_revert(array('osha_menu' => array('fe_block_settings')));
-//  $nid = 17;
-//  $node = node_load($nid);
-//  $items = [665, 5544, 15471, 671];
-//  $node->body['en'][0]['value'] .= '<div class="wysiwyg_accordion">';
-//  foreach($items as $mlid) {
-//    $link = menu_link_load($mlid);
-//    $node->body['en'][0]['value'] .= '<h3>'.$link['link_title'].'</h3><div class="wysiwyg_accordion_panel"><p></p></div>';
-//  }
-//  $node->body['en'][0]['value'] .= '</div>';
-//  node_save($node);
+}
+
+/**
+ * MDR-3514 make the design of tools and resources the same as for the other pages at the same level.
+ */
+function osha_menu_update_7004() {
+  features_revert(array('osha_menu' => array('fe_block_settings')));
 }

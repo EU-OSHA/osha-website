@@ -592,7 +592,7 @@ function osha_press_contact_views_default_views() {
   $handler->display->display_options['filters']['field_wg_category_tid']['field'] = 'field_wg_category_tid';
   $handler->display->display_options['filters']['field_wg_category_tid']['operator'] = 'not';
   $handler->display->display_options['filters']['field_wg_category_tid']['value'] = array(
-    4859 => '4859',
+    4881 => '4881',
     3027 => '3027',
   );
   $handler->display->display_options['filters']['field_wg_category_tid']['type'] = 'select';
@@ -649,7 +649,7 @@ function osha_press_contact_views_default_views() {
   $handler->display->display_options['filters']['field_wg_category_tid']['field'] = 'field_wg_category_tid';
   $handler->display->display_options['filters']['field_wg_category_tid']['operator'] = 'not';
   $handler->display->display_options['filters']['field_wg_category_tid']['value'] = array(
-    4859 => '4859',
+    4881 => '4881',
     3027 => '3027',
   );
   $handler->display->display_options['filters']['field_wg_category_tid']['type'] = 'select';
@@ -712,6 +712,7 @@ function osha_press_contact_views_default_views() {
   $handler->display->display_options['filters']['field_wg_category_tid']['table'] = 'field_data_field_wg_category';
   $handler->display->display_options['filters']['field_wg_category_tid']['field'] = 'field_wg_category_tid';
   $handler->display->display_options['filters']['field_wg_category_tid']['value'] = array(
+    4881 => '4881',
     3027 => '3027',
   );
   $handler->display->display_options['filters']['field_wg_category_tid']['group'] = 2;
@@ -767,7 +768,7 @@ function osha_press_contact_views_default_views() {
   $handler->display->display_options['filters']['field_wg_category_tid']['table'] = 'field_data_field_wg_category';
   $handler->display->display_options['filters']['field_wg_category_tid']['field'] = 'field_wg_category_tid';
   $handler->display->display_options['filters']['field_wg_category_tid']['value'] = array(
-    4859 => '4859',
+    4881 => '4881',
   );
   $handler->display->display_options['filters']['field_wg_category_tid']['group'] = 2;
   $handler->display->display_options['filters']['field_wg_category_tid']['type'] = 'select';

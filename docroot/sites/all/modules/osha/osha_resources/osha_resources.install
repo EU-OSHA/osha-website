@@ -118,3 +118,9 @@ function osha_resources_update_7006() {
   features_revert(array('osha_resources' => array('field_base', 'field_instance')));
 }
 
+/**
+ * MDR-3536 Development in the NCW the HWC20 Related resources (Icon) management.
+ */
+function osha_resources_update_7007() {
+  features_revert(array('osha_resources' => array('views_view')));
+}

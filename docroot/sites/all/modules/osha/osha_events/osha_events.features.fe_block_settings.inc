@@ -81,7 +81,7 @@ oshevents',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'seven' => array(
         'region' => '',

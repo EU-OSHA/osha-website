@@ -5,3 +5,7 @@
     line-height: 1.231em;
     margin: 5px;
 }
+
+.view-rel-res .views-exposed-form .views-exposed-widget .form-submit{
+  margin-top: 0.4em;
+}

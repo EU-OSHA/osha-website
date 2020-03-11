@@ -133,7 +133,7 @@ div.view-header.back.revamp{
 }
 
 .search-new-design.events{
-    margin-top: 12px;
+    margin-top: 12px; 
     margin-bottom: 17px;
 }
 
@@ -184,7 +184,7 @@ div.view-header.back.revamp{
      -moz-appearance:none; /* Firefox */
     -webkit-appearance:none; /* Safari and Chrome */
     appearance:none;
-}
+}   
 
 #edit-sort-by{
     min-height: 37px;
@@ -227,7 +227,7 @@ a.see-more-arrow:hover, .node-readmore a:hover, .more-link a:hover, .view .views
     display: none;
 }
 
-.see-link{
+.see-link{  
     text-align: right;
 }
 
@@ -516,7 +516,7 @@ a.box-link{
     float: left;
     margin-top: 0;
     background: url(../images/img-border-more-link.png) repeat-x center 50%;
-}
+}   
 
 .more-link.revamp a{
     font-family: 'Open Sans',sans-serif!important; ;
@@ -528,7 +528,7 @@ a.box-link{
     border-bottom: 2px solid #003399!important;
     color:#003399!important;
     font-size: 1rem!important;
-}
+} 
 
 .more-link.revamp a:hover{
     background: #003399 !important;
@@ -536,7 +536,7 @@ a.box-link{
 }
 
 .front div.more-link > a:nth-child(2){
-    margin-left: -6px;
+    margin-left: -6px; 
 }
 
 .region-footer-sitemap .form-submit{
@@ -723,8 +723,8 @@ html[lang=de] .content-home-event .tag-news-events{
 
 .btn-light-blue{
     float: left;
-    background:#b2c7e5;
-    color:#003399;
+    background:#b2c7e5; 
+    color:#003399; 
     border: 0px;
     border-radius: 3px;
     padding: 0.5em 1em;
@@ -831,7 +831,7 @@ input[type=checkbox] + label:before {
     clear: both;
     background: #FFF;
     margin-right: 10px;
-    border: 1px solid #003399;
+    border: 1px solid #003399; 
 }
 
 input[type=checkbox] + label {
@@ -901,12 +901,12 @@ a.privacy {
 .btn-light-white, .region-footer-sitemap #edit-email--3, .region-footer-sitemap #edit-email--4, #security_code{
     clear: both;
     float: left;
-    background:#FFF;
-    color:#003399;
+    background:#FFF; 
+    color:#003399; 
     border: 0px;
     border-radius: 3px;
     padding: 0.5em 1em;
-    font-weight: normal;
+    font-weight: normal;  
     margin-right: 10px;
     min-width: 420px;
     height: 35px;
@@ -918,7 +918,7 @@ a.privacy {
 }
 
 .btn-light-white.right-column{
-    border:1px solid #003399;
+    border:1px solid #003399; 
     min-width: 210px;
 }
 
@@ -1064,11 +1064,11 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
     border-bottom: 0;
 }
 
-.content-box-sub a:hover img{
-    opacity: 0.8;
+.content-box-sub a:hover img{      
+    opacity: 0.8; 
 }
 
-.content-box-sub a:hover h2{
+.content-box-sub a:hover h2{ 
     opacity: 0.8;
 }
 
@@ -1146,7 +1146,7 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
     font-size: 0.8rem;
 }
 
-.box-latest-publications .label{
+.box-latest-publications .label{ 
     color:#003399;
     display: block;
     float: none;
@@ -1201,7 +1201,7 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
 }
 
 .form-item-languages .chosen-container .search-choice span{
-    color:#003399;
+    color:#003399;    
 }
 
 .form-item-languages .chosen-container .search-choice a.search-choice-close{
@@ -1260,7 +1260,7 @@ html[lang=et] #footer > div > div.footer.footer-line.footer-site-map.container >
     line-height: 1.7em;
 }
 
-.publications-left-column{
+.publications-left-column{  
     float: left;
     margin-right: 2em;
 }
@@ -1308,7 +1308,7 @@ html[lang=hu] .page-tools-and-publications .views-exposed-widget label{
     padding: 1em 0;
     margin: 0;
     color:#003399;
-
+   
 }
 
 .publications-right-column{
@@ -1437,7 +1437,7 @@ html[lang=hu] .page-tools-and-publications .views-exposed-widget label{
 
 .content-languages-download{
     color:#003399;
-    padding: 0.5em;
+    padding: 0.5em;  
     float: left;
     width: 100%;
     padding-top: 25px;
@@ -1556,7 +1556,7 @@ div.publications-detail-right-column > a.download{
 }
 
 .page-publication-detail .related-resources h3 span{
-    background: #cfddee;
+    background: #cfddee;    
     font-size: 1.2rem;
     padding-right: 1em;
 }
@@ -1573,7 +1573,7 @@ div.publications-detail-right-column > a.download{
 
 .content-related-publications .content-publication-info{
     padding-top: 1em;
-    padding-right: 6em;
+    padding-right: 6em;  
 }
 
 .content-related-publications h2{
@@ -1799,7 +1799,7 @@ img.icon-play:hover{
   height: 80%;
 }
 
-.modal-content iframe{
+.modal-content iframe{ 
     width: 100%;
     height: 96%;
 }
@@ -1852,7 +1852,7 @@ img.icon-play:hover{
 
 .page-oshevents .block-osha-events .new-select-style{
     background: url("../images/ico-calendar.png") no-repeat scroll 96% center #FFF;
-}
+}  
 
 .view-latest-seminars .view-content{
     display: flex;
@@ -2124,8 +2124,8 @@ input[type=checkbox].add-to-calendar-checkbox {
 
 .box-events-summary a.see-more-arrow{
     font-size: 1rem;
-    clear: both;
-    display: inline-block;
+    clear: both;  
+    display: inline-block; 
 }
 
 .box-events-summary .report-available{
@@ -2157,7 +2157,7 @@ input[type=checkbox].add-to-calendar-checkbox {
     padding-right: 1em;
 }
 
-.page-oshevents .more-link {
+.page-oshevents .more-link {    
     background: transparent;
     text-align: center;
     display: flex;
@@ -2173,7 +2173,7 @@ input[type=checkbox].add-to-calendar-checkbox {
 
 
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-     .page-oshevents .more-link a {
+     .page-oshevents .more-link a { 
             margin-left: -140px;
         } /* IE11 */
 }
@@ -2182,7 +2182,7 @@ input[type=checkbox].add-to-calendar-checkbox {
     height: 1%;
     overflow: hidden;
     border-bottom: 2px solid #003399;
-    padding-bottom: 3em;
+    padding-bottom: 3em;        
 }
 
 .revamp-row.events{
@@ -2516,7 +2516,7 @@ article.node-seminar{
     font-weight: bold;
 }
 
-.glossary_type > .content-term, .view-glossary-list .glossary_type.active:nth-child(4)  > .content-term{
+.glossary_type > .content-term, .view-glossary-list .glossary_type.active:nth-child(4)  > .content-term{ 
     max-height: 0;
     transition: max-height 0.4s ease-out;
     overflow: hidden;
@@ -2552,7 +2552,7 @@ article.node-seminar{
 .e-guide-links ul{
     list-style: none;
     padding:0;
-    display: flex;
+    display: flex; 
     justify-content: flex-start;
 }
 .e-guide-links ul li{
@@ -2713,4 +2713,52 @@ article.node-seminar{
 .view-musculoskeletal-disorders-list .view-empty{
     padding: 15px;
     font-size: 1.2em;
+}
+
+.related-resources div div a{
+    background-color: #ecf1fb;
+    margin-bottom: 20px;
+    padding: 10px;
+    display: block;
+}
+
+.related-resources a{
+    text-decoration: none;
+}
+
+.related-resources a:hover{
+    text-decoration: underline;
+    color: #000;
+}
+
+.related-resources img{
+    float: left;
+    padding-right: 0.7em;
+}
+
+.related-resources span{
+    font-family: Open Sans Condensed;
+    font-size: 1.4em;
+    color: #000;
+    font-weight: lighter;
+}
+
+.view-msds-glossary{
+    padding-top: 1em;
+}
+
+#content .view-msds-glossary h2{
+    color: #003399;
+    padding-left: 0;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;    
+}
+
+
+#content .view-msds-glossary .views-field-description-field p{
+    padding: 0;
+    margin: 0;
 }

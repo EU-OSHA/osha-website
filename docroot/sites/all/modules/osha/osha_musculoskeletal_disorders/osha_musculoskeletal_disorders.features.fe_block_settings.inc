@@ -39,7 +39,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 24,
+        'weight' => 27,
       ),
       'seven' => array(
         'region' => '',
@@ -79,7 +79,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 28,
+        'weight' => 32,
       ),
       'seven' => array(
         'region' => '',
@@ -119,7 +119,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 10,
+        'weight' => 12,
       ),
       'seven' => array(
         'region' => '',
@@ -159,7 +159,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 13,
+        'weight' => 15,
       ),
       'seven' => array(
         'region' => '',
@@ -279,7 +279,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 17,
+        'weight' => 19,
       ),
       'seven' => array(
         'region' => '',
@@ -319,7 +319,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 8,
+        'weight' => 7,
       ),
       'seven' => array(
         'region' => '',
@@ -332,10 +332,10 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
     'visibility' => 1,
   );
 
-  $export['facetapi-WJxfQBb3GyLaLTVAbvwRmV0GdYyE0EwN'] = array(
+  $export['facetapi-arJeDweSgVLVhj7yJFOc17uGLezW8lYX'] = array(
     'cache' => -1,
     'custom' => 0,
-    'delta' => 'WJxfQBb3GyLaLTVAbvwRmV0GdYyE0EwN',
+    'delta' => 'arJeDweSgVLVhj7yJFOc17uGLezW8lYX',
     'i18n_block_language' => array(),
     'i18n_mode' => 0,
     'module' => 'facetapi',
@@ -359,7 +359,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 14,
+        'weight' => 18,
       ),
       'seven' => array(
         'region' => '',
@@ -439,7 +439,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 19,
+        'weight' => 20,
       ),
       'seven' => array(
         'region' => '',
@@ -479,7 +479,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 20,
+        'weight' => 22,
       ),
       'seven' => array(
         'region' => '',
@@ -519,7 +519,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 25,
+        'weight' => 30,
       ),
       'seven' => array(
         'region' => '',
@@ -559,7 +559,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 23,
+        'weight' => 26,
       ),
       'seven' => array(
         'region' => '',
@@ -599,7 +599,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 22,
+        'weight' => 24,
       ),
       'seven' => array(
         'region' => '',
@@ -639,7 +639,7 @@ function osha_musculoskeletal_disorders_default_fe_block_settings() {
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 55,
+        'weight' => 28,
       ),
       'seven' => array(
         'region' => '',

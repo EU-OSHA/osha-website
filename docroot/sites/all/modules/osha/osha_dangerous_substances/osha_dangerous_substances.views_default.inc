@@ -87,7 +87,7 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_country_other']['table'] = 'field_data_field_country_other';
   $handler->display->display_options['fields']['field_country_other']['field'] = 'field_country_other';
   $handler->display->display_options['fields']['field_country_other']['type'] = 'text_plain';
-  /* Field: Content: External URL */
+  /* Field: Content: URL */
   $handler->display->display_options['fields']['field_external_url']['id'] = 'field_external_url';
   $handler->display->display_options['fields']['field_external_url']['table'] = 'field_data_field_external_url';
   $handler->display->display_options['fields']['field_external_url']['field'] = 'field_external_url';
@@ -801,7 +801,7 @@ function osha_dangerous_substances_views_default_views() {
     t('Languages other'),
     t('Country'),
     t('Country other'),
-    t('External URL'),
+    t('URL'),
     t('Type of item'),
     t('Date of Publication / Year '),
     t('Sector / Industry covered other'),
@@ -881,8 +881,10 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['tags']['first'] = '«';
   $handler->display->display_options['pager']['options']['tags']['previous'] = '‹';
   $handler->display->display_options['pager']['options']['tags']['next'] = '›';
+  $handler->display->display_options['pager']['options']['tags']['last'] = '»';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'entity';
   $handler->display->display_options['row_options']['view_mode'] = 'osha_search_teaser';
@@ -1295,10 +1297,10 @@ function osha_dangerous_substances_views_default_views() {
     t('Items per page'),
     t('- All -'),
     t('Offset'),
-    t('« first'),
+    t('«'),
     t('‹'),
     t('›'),
-    t('last »'),
+    t('»'),
     t('No results'),
     t('Broken handler search_api_index_default_content_index.search_api_et_id'),
     t('Publication year'),

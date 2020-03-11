@@ -7,6 +7,21 @@
 include_once 'osha_menu.features.inc';
 define('OSHA_MENU_RENDER_IMG_VAR_NAME', 'render_menu_image');
 
+function osha_menu_local_tasks_alter(&$data, $router_item, $root_path) {
+  switch($root_path) {
+    case 'admin/content/related-resources':
+      $item = menu_get_item('admin/structure/taxonomy/related_icons/add');
+      $item['title'] = t('Add new related resource');
+      if ($item['access']) {
+        $data['actions']['output'][] = array(
+          '#theme' => 'menu_local_action',
+          '#link' => $item,
+        );
+      }
+      break;
+  }
+}
+
 /**
  * Implements hook_block_configure_alter().
  */

@@ -15,3 +15,18 @@ function osha_blocks_ctools_plugin_api($module = NULL, $api = NULL) {
     return array("version" => "1");
   }
 }
+
+/**
+ * Implements hook_image_default_styles().
+ */
+function osha_blocks_image_default_styles() {
+  $styles = array();
+
+  // Exported image style: relres.
+  $styles['relres'] = array(
+    'label' => 'relres',
+    'effects' => array(),
+  );
+
+  return $styles;
+}

@@ -116,23 +116,29 @@ function osha_glossary_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Glossary';
   $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_text'] = 'más';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Restablecer';
+  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Ordenar por';
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_options']['row_class'] = 'revamp-row';
+  $handler->display->display_options['style_options']['default_row_class'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Field: Taxonomy term: Name */
   $handler->display->display_options['fields']['name_field']['id'] = 'name_field';
   $handler->display->display_options['fields']['name_field']['table'] = 'field_data_name_field';
   $handler->display->display_options['fields']['name_field']['field'] = 'name_field';
   $handler->display->display_options['fields']['name_field']['label'] = '';
+  $handler->display->display_options['fields']['name_field']['element_type'] = 'h2';
   $handler->display->display_options['fields']['name_field']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['name_field']['settings'] = array(
     'field_formatter_class' => '',
   );
-  $handler->display->display_options['fields']['name_field']['link_to_entity'] = 1;
+  $handler->display->display_options['fields']['name_field']['link_to_entity'] = 0;
   /* Field: Taxonomy term: Description */
   $handler->display->display_options['fields']['description_field']['id'] = 'description_field';
   $handler->display->display_options['fields']['description_field']['table'] = 'field_data_description_field';
@@ -176,14 +182,15 @@ function osha_glossary_views_default_views() {
   $translatables['msds_glossary'] = array(
     t('Master'),
     t('Glossary'),
-    t('more'),
+    t('más'),
     t('Apply'),
-    t('Reset'),
-    t('Sort by'),
+    t('Restablecer'),
+    t('Ordenar por'),
     t('Asc'),
     t('Desc'),
     t('All'),
     t('Page'),
+    t('more'),
   );
   $export['msds_glossary'] = $view;
 

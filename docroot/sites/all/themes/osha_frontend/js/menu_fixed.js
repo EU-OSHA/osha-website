@@ -29,7 +29,7 @@
 					$('#header').addClass('hide-header');
 					if( ($(this).scrollTop() <= 80) )
 					{
-						//$('#header').removeClass('hide-header');
+						$('#header').removeClass('hide-header');
 					}		        
 	      }
 		    prevScrollpos = currentScrollPos;

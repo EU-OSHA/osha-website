@@ -70,3 +70,14 @@
 	  };
 	});
 })( jQuery );
+
+
+/* Hide border on publications */
+(function( $ ){
+	$(document).ready(function() {
+
+		if ($(".container.additional")[0]){
+			$(".publications-detail").addClass('add-border');
+		}
+	});
+})( jQuery );

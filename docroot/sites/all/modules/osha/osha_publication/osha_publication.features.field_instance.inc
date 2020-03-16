@@ -305,13 +305,14 @@ function osha_publication_field_default_field_instances() {
         'close_modal' => 0,
         'pass_argument' => 0,
         'pass_arguments' => '',
-        'rendered_entity' => FALSE,
-        'view' => 'aditional_resources|entityreference_view_widget_1',
-        'view_mode' => FALSE,
+        'rendered_entity' => 0,
+        'view' => 'aditional_resources|publication',
+        'view_mode' => 'full',
       ),
       'type' => 'entityreference_view_widget',
       'weight' => 25,
     ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-publication-field_archived'.

@@ -1429,4 +1429,12 @@
     table.pagerer tbody tr td div.item-list ul.pager li.pager-first, table.pagerer tbody tr td div.item-list ul.pager li.pager-previous, table.pagerer tbody tr td div.item-list ul.pager li.pager-next, table.pagerer tbody tr td div.item-list ul.pager li.pager-last{
         font-size: 9px;
     }
+
+    .page-publication-detail .field-name-field-file a{
+        clear: both;
+    }
+
+    .page-publication-detail span.slash{ 
+        display: none;
+    }
 }

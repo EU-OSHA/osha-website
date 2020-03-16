@@ -1058,6 +1058,7 @@ span.date-display-single{
 	color: #7c7d81;
     font-size: 0.9em;
     font-weight: bold;
+    float: left;
 }
 
 .node-publication.view-mode-full .field-name-field-publication-type a{
@@ -9126,6 +9127,10 @@ blockquote.image-field-caption span.blockquote-copyright{
 
 img.file-icon {
 	width: auto!important;
+}
+
+.publications-detail img.file-icon {
+	float: left;
 }
 
 /* MDR-2694 - Remove the arrows in the Anniversary articles and add 'view all */

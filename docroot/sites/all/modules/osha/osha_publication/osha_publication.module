@@ -1145,7 +1145,7 @@ function theme_osha_publication_file_publication_file_format($element) {
 
   foreach ($node->field_file as $lang => $object) {
     if ( $lang == $node->language || $file_fid != $object[0]['fid'] ) {
-      $output .= '<a target="_blank" href="' . file_create_url($object[0]['uri']) . '">' . strtoupper($lang) . '</a> | ';
+      $output .= '<a target="_blank" href="' . file_create_url($object[0]['uri']) . '">' . strtoupper($lang) . '</a> <span>|</span> ';
     }
   }
   $output = substr($output, 0, -3);

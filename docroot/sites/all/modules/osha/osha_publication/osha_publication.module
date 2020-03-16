@@ -1150,7 +1150,7 @@ function theme_osha_publication_file_publication_file_format($element) {
     }
   }
   if ($links) {
-    $output .= implode(' <span>|</span> ', $links);
+    $output .= implode(' <span class="slash">|</span> ', $links);
   }
   $output = substr($output, 0, -3);
   return $output;

@@ -28,6 +28,7 @@
     width:100%;
     float: left;
     padding-bottom: 3em;
+    margin-top: -1px;
 }
 
 .page-oshevents .content-fluid{
@@ -1355,7 +1356,11 @@ html[lang=hu] .page-tools-and-publications .views-exposed-widget label{
     width: 100%;
     padding-bottom: 2em;
     /*MDR-3261 revamp: publications detail too much space for the intro text*/
-    border-bottom: 1px solid #003399;
+    border-bottom: 0;
+}
+
+.page-publication-detail .publications-detail.add-border{
+   border-bottom: 1px solid #003399;
 }
 
 .page-publication-detail .publications-detail h1{
@@ -1384,6 +1389,46 @@ html[lang=hu] .page-tools-and-publications .views-exposed-widget label{
 .page-publication-detail .publications-detail h2 a:hover{
     text-decoration: underline;
 }
+
+.page-publication-detail .field-name-field-file a{
+    text-decoration: none;
+    color:#003399;
+    font-weight: bold;
+    float: left;
+}
+
+.page-publication-detail .field-name-field-file a:hover{
+    text-decoration: underline;
+}
+
+
+.page-publication-detail span.slash{ 
+    float: left;
+    padding: 0 5px;
+    font-weight: 600;
+    margin-top: -1px;
+}
+
+.page-publication-detail div.field.field-name-field-file span:nth-child(3){
+    padding-right: 10px;
+}
+
+.page-publication-detail .field-name-field-file a:before{ 
+    content: ' ';
+    display: block;
+    float: left;
+    background: url(../images/down_arrow.jpg) no-repeat 1px 3px;
+    width: 19px;
+    height: 20px;
+    float: left;
+    padding-right: 3px;    
+}
+
+.page-publication-detail .content-order-copy a:before{ 
+    content: none;
+}
+
+
 
 .publications-detail-right-column {
     width: 100%;
@@ -1505,7 +1550,7 @@ html[lang=el] .content-languages-download .new-select-style input, html[lang=hu]
 
 .content-order-copy{
     color:#003399;
-    padding: 1.5em 0 0 1em;
+    padding: 1.5em 0 0 0;
     border-top:10px solid #FFF;
     clear: both;
 }

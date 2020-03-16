@@ -16,7 +16,7 @@ function osha_blocks_block_list_alter(&$blocks) {
   if ($node && $node->show_only_related_icons) {
     foreach ($blocks as $block_id => $block) {
       if ($block->delta != 'article_related_icons' && $block->region == 'sidebar_second') {
-        unset ($blocks[$block_id]);
+//        unset ($blocks[$block_id]);
       }
     }
   }

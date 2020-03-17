@@ -46,6 +46,9 @@
 	}
 
 
+	body.logged-in.node-type-dangerous-substances #content{
+   		padding: 0;
+	}
 
 	/*Caption image*/
 

@@ -67,7 +67,7 @@ function osha_blocks_block_view($delta = '') {
       $block['title'] = '<none>';
       $block['subject'] = "<none>";
       $node = menu_get_object();
-      if ($node->field_resources) {
+      if ($node && $node->field_resources) {
         $resources = [];
         foreach($node->field_resources[LANGUAGE_NONE] as $term) {
           $wrapper = entity_metadata_wrapper('taxonomy_term', $term['tid']);

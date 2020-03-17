@@ -1,4 +1,10 @@
-<div class="content-fluid related-resources">
+<?php
+$classes = ['content-fluid', 'related-resources'];
+if ($type) {
+  $classes[] = $type . '_related_resources';
+}
+?>
+<div class="<?php echo implode(' ', $classes); ?>">
     <div class="container">
         <h2><?php print t('Related resources'); ?></h2>
       <?php

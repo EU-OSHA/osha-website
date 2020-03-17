@@ -1585,82 +1585,6 @@ div.publications-detail-right-column > a.download{
     padding-left: 1em;
 }
 
-/* Publications Related Resources */
-
-.related-resources  h2{
-    margin-bottom: 0;
-}
-
-.page-publication-detail .related-resources h3{
-    width: 100%;
-    float: left;
-    background: url(../images/grey-h3-line.png) 0 60% repeat-x;
-    color: #5a5a5b;
-    margin: 1.5em 0 0 0;
-    padding: 0;
-}
-
-.page-publication-detail .related-resources h3 span{
-    background: #cfddee;    
-    font-size: 1.2rem;
-    padding-right: 1em;
-}
-
-
-.content-related-publications{
-    float: left;
-    width: 100%;
-    height: 220px;
-    background: #FFF;
-    margin-top: 1em;
-    margin-bottom: 1em;
-}
-
-.content-related-publications .content-publication-info{
-    padding-top: 1em;
-    padding-right: 6em;  
-}
-
-.content-related-publications h2{
-    width: 90%;
-    height: 80px;
-    margin-bottom: 1em;
-    line-height: 25px;
-}
-
-.content-related-publications h2 a{
-    text-decoration: none;
-    font-size: 1.2rem;
-    color: #003399;
-    font-weight: 400;
-}
-
-.content-related-publications h2 a:hover{
-    text-decoration: underline;
-}
-
-.content-related-publications.oshwiki{
-    padding: 1em 1em 2em 2em;
-    width: auto;
-    height: auto;
-}
-
-.content-related-publications.oshwiki h2 {
-    width: 90%;
-    height: auto;
-    margin-bottom: 1em;
-    line-height: 25px;
-}
-
-.content-related-publications.oshwiki h2 a{
-    font-weight: 600;
-}
-
-.content-related-publications.oshwiki p{
-    color:#003399;
-}
-
-
 
 /* Additional publications on this topic */
 .container.additional{
@@ -1787,7 +1711,7 @@ div.publications-detail-right-column > a.download{
 img.icon-play{
     width: 70px;
     position: absolute;
-    top: 29%;
+    top: 24%;
     left: 41%;
     cursor: pointer;
 }
@@ -2302,29 +2226,6 @@ input[type=checkbox].add-to-calendar-checkbox {
 	border: 1px solid #003399;
 }
 
-/*MDR-3156 Article - Additional resources - Youtube videos*/
-article.node-article .related-resources .container{
-	padding-left: 1em;
-}
-
-article.node-article .related-resources .container h3{
-	margin-bottom: 0.5em;
-}
-
-article.node-article .related-resources .video .icon-play{
-	top:9%;
-	left:37%;
-	width: 50px;
-}
-
-article.node-article .related-resources .video h2{
-	font-size: 1rem;
-}
-
-article.node-article .related-resources .box h2{
-	font-size: 1rem;
-}
-
 /*MDR-3218 Revamp - Try alert button misplaced*/
 .region-footer-sitemap .content-subscribe .try-alert{
 	max-width: 220px;
@@ -2760,28 +2661,28 @@ article.node-seminar{
     font-size: 1.2em;
 }
 
-.related-resources div div a{
+.sidebars_second .related-resources div div a{
     background-color: #ecf1fb;
     margin-bottom: 20px;
     padding: 10px;
     display: block;
 }
 
-.related-resources a{
+.sidebars_second .related-resources a{
     text-decoration: none;
 }
 
-.related-resources a:hover{
+.sidebars_second .related-resources a:hover{
     text-decoration: underline;
     color: #000;
 }
 
-.related-resources img{
+.sidebars_second .related-resources img{
     float: left;
     padding-right: 0.7em;
 }
 
-.related-resources span{
+.sidebars_second .related-resources span{
     font-family: Open Sans Condensed;
     font-size: 1.4em;
     color: #000;
@@ -2802,8 +2703,224 @@ article.node-seminar{
     padding-bottom: 0;    
 }
 
-
 #content .view-msds-glossary .views-field-description-field p{
     padding: 0;
     margin: 0;
+}
+
+
+/* Related Resources */
+
+.content-fluid.related-resources h2{
+    margin-bottom: 0;
+}
+
+.content-fluid.related-resources h3{
+    width: 100%;
+    float: left;
+    background: url(../images/grey-h3-line.png) 0 60% repeat-x;
+    color: #5a5a5b;
+    margin: 1.5em 0 0 0;
+    padding: 0;
+}
+
+.content-fluid.related-resources h3 span{
+    background: #cfddee;    
+    font-size: 1.2rem;
+    padding-right: 1em;
+}
+
+.content-fluid.related-resources .content-related-boxes .node-file{
+    clear: both;
+    float: none;
+    width: 100%;
+    padding-bottom: 0.5em;
+}
+
+.content-related-publications{
+    float: left;
+    width: 100%;
+    height: 220px;
+    background: #FFF;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.content-related-publications .content-publication-info{
+    padding-top: 1em;
+    padding-right: 6em;  
+}
+
+.content-related-publications h2{
+    width: 90%;
+    height: 80px;
+    margin-bottom: 1em;
+    line-height: 25px;
+}
+
+.content-related-publications h2 a{
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: #003399;
+    font-weight: 400;
+}
+
+.content-related-publications h2 a:hover{
+    text-decoration: underline;
+}
+
+.content-related-publications.oshwiki{
+    padding: 1em 1em 2em 2em;
+    width: auto;
+    height: auto;
+}
+
+.content-related-publications.oshwiki h2 {
+    width: 90%;
+    height: auto;
+    margin-bottom: 1em;
+    line-height: 25px;
+}
+
+.content-related-publications.oshwiki h2 a{
+    font-weight: 600;
+}
+
+.content-related-publications.oshwiki p{
+    color:#003399;
+}
+
+
+/* All Related Resources */
+#slideshare-popup-container .slideshare-widget-container{
+    top: 30%;
+    position: absolute;
+}
+
+#slideshare-popup-container .close-slideshare-popup-container {
+    position: fixed;
+    top: 30%;
+    right: 35%;
+    z-index: 9999999;
+}
+
+/* Related Resources - Publications */
+
+.page-publication-detail .publication_related_resources .content-related-boxes ul.contextual-links{
+    background: transparent;
+}
+
+.page-publication-detail .publication_related_resources div.contextual-links-wrapper{
+    background: #cfddee;
+}
+
+.page-publication-detail .publication_related_resources a.see-more-arrow:hover{
+    margin-left: 0;
+}
+
+.page-publication-detail .content-fluid.related-resources.publication_related_resources .field-name-field-file a{
+    padding-top: 0.5em;
+    font-weight: normal;
+}
+
+.page-publication-detail .content-fluid.related-resources.publication_related_resources .field-name-field-file a:before{
+    content: none;
+}
+
+
+/* Related Resources - Articles - Not publications */
+.content-fluid.related-resources.article_related_resources{
+    background: transparent;
+}
+
+.content-fluid.related-resources.article_related_resources h3 span {
+    background: #FFF;
+}
+
+article.node-article .article_related_resources.sidebars_second_true .video .icon-play {
+    top: 19%;
+    left: 40%;
+    width: 50px;
+}
+
+.content-fluid.related-resources.article_related_resources .content-related-boxes .node-file a{ 
+    border-bottom: 0 !important;
+}
+
+.content-fluid.related-resources.article_related_resources .content-related-boxes .node-file a:hover{ 
+    text-decoration: underline !important;
+}
+
+.content-fluid.related-resources.article_related_resources .content-related-boxes .node-file .content-related-boxes img{
+    float: left;
+}
+
+.content-fluid.related-resources.article_related_resources .content-related-boxes .box{
+    margin-top: 0em;
+}
+
+.content-fluid.related-resources.article_related_resources .publications-right-column,
+.content-fluid.related-resources.article_related_resources .content-related-publications .content-publication-info{
+    padding-right: 0;
+}
+
+.content-fluid.related-resources.article_related_resources .content-related-publications.publications{
+    width: 100%;
+    clear: both;
+    background: url(../images/back-tit-blue.png) repeat-x scroll 0 100% transparent;
+    margin-bottom: 1.3em;
+    padding-bottom: 1.3em;
+}
+
+.content-fluid.related-resources.article_related_resources .content-related-publications.publications:nth-last-child(1){
+    background: none;
+}
+
+.content-fluid.related-resources.article_related_resources .content-related-publications h2 {
+    width: 100%;
+}
+
+.content-fluid.related-resources.article_related_resources .content-related-publications.publications a.see-more-arrow:hover{
+    margin-left: 0;
+}
+
+
+/* Related Resources - Articles - Not publications - Two columns */
+article.node-article .article_related_resources.sidebars_first_true.sidebars_second_true .video .icon-play {
+    top: 9%;
+    left: 37%;
+    width: 50px;
+} 
+
+article.node-article .article_related_resources.sidebars_first_true.sidebars_second_true .container h3{
+    margin-bottom: 0.5em;
+}
+
+article.node-article .article_related_resources.sidebars_first_true.sidebars_second_true .box h2,
+article.node-article .article_related_resources.sidebars_first_true.sidebars_second_true .video h2,
+#content .content-fluid.related-resources.article_related_resources .content-related-publications h2 a{
+    font-family: 'Open Sans',sans-serif!important;
+    font-weight: 400;
+    font-size: 1.15rem;
+    line-height: 20px;
+}
+
+article.node-article .article_related_resources.sidebars_first_true.sidebars_second_true .time-video{
+    float: left;
+}
+
+article.node-article .article_related_resources.sidebars_first_true.sidebars_second_true .content-related-boxes .box a,
+article.node-article .article_related_resources.sidebars_first_true.sidebars_second_true a.see-more-arrow{
+    font-size: 12px!important;
+}
+
+article.node-article .article_related_resources.sidebars_first_true.sidebars_second_true .content-related-boxes .box,
+.article_related_resources.sidebars_first_true.sidebars_second_true .content-related-videos .video{
+    width: 245px;
+}
+
+article.node-article .article_related_resources.sidebars_first_true.sidebars_second_true .video .icon-play{
+    top: 21%;
+    left: 40%;
+    width: 50px;
 }

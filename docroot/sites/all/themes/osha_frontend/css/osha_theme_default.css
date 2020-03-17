@@ -8850,8 +8850,16 @@ div.flickr-photoset{
     margin-bottom: 0;
     line-height: 30px;
     clear: both;
-    padding-top: 1em;
+    padding-top: 0.5em;
     margin-top: 0;
+}
+
+body.logged-in.node-type-dangerous-substances #page-title{
+    padding-bottom: 1em;
+}
+
+body.logged-in.node-type-dangerous-substances .node-dangerous-substances > div{
+    clear: both;
 }
 
 .node-type-dangerous-substances .node-dangerous-substances .field-name-body{
@@ -8870,6 +8878,13 @@ div.flickr-photoset{
 
 .node-type-dangerous-substances .node-dangerous-substances .field-label-inline{
 	margin-bottom: 0.2em;
+	clear: both;
+	padding-top: 0;
+}
+
+.node-type-dangerous-substances .node-dangerous-substances .field-label-inline p{
+	padding: 0;
+	margin: 0;
 }
 
 .logged-in.node-type-dangerous-substances .node-dangerous-substances .field-name-field-item-type,

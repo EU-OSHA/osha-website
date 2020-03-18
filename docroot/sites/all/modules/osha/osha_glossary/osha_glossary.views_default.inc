@@ -182,15 +182,14 @@ function osha_glossary_views_default_views() {
   $translatables['msds_glossary'] = array(
     t('Master'),
     t('Glossary'),
-    t('más'),
+    t('more'),
     t('Apply'),
-    t('Restablecer'),
-    t('Ordenar por'),
+    t('Reset'),
+    t('Sort by'),
     t('Asc'),
     t('Desc'),
     t('All'),
     t('Page'),
-    t('more'),
   );
   $export['msds_glossary'] = $view;
 

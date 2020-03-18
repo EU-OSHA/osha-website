@@ -2661,28 +2661,28 @@ article.node-seminar{
     font-size: 1.2em;
 }
 
-.sidebars_second .related-resources div div a{
+.sidebars_second .sidebar-related-resources div div a{
     background-color: #ecf1fb;
     margin-bottom: 20px;
     padding: 10px;
     display: block;
 }
 
-.sidebars_second .related-resources a{
+.sidebars_second .sidebar-related-resources a{
     text-decoration: none;
 }
 
-.sidebars_second .related-resources a:hover{
+.sidebars_second .sidebar-related-resources a:hover{
     text-decoration: underline;
     color: #000;
 }
 
-.sidebars_second .related-resources img{
+.sidebars_second .sidebar-related-resources img{
     float: left;
     padding-right: 0.7em;
 }
 
-.sidebars_second .related-resources span{
+.sidebars_second .sidebar-related-resources span{
     font-family: Open Sans Condensed;
     font-size: 1.4em;
     color: #000;
@@ -2795,6 +2795,14 @@ article.node-seminar{
 #slideshare-popup-container .slideshare-widget-container{
     top: 30%;
     position: absolute;
+    background: #FFF;
+}
+
+#slideshare-popup-container .slideshare-widget-container a{
+    font-family: "Open Sans", sans-serif;
+    text-decoration: none;
+    color: #003399;
+    border-bottom: 1px solid #dc2f82;
 }
 
 #slideshare-popup-container .close-slideshare-popup-container {
@@ -2827,6 +2835,9 @@ article.node-seminar{
     content: none;
 }
 
+#footer.no-margin{
+    margin-top: 0;
+}
 
 /* Related Resources - Articles - Not publications */
 .content-fluid.related-resources.article_related_resources{

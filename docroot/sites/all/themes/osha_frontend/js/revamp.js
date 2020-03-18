@@ -93,6 +93,10 @@ jQuery(document).ready(function($){
 		$('.article_related_resources').addClass('sidebars_second_true');
 	}
 
+	if ($(".publication_related_resources")[0]){
+		$('#footer').addClass('no-margin');
+	}
+
 
 	/*Ellipsis News and Events Home page*/
 

@@ -496,7 +496,7 @@ function osha_publication_views_pre_render(&$view) {
           $codes[] = $code;
         }
       }
-      $link_url = 'related-publications/topic/' . implode('+', $codes) . '/' . $node->nid;
+      $link_url = 'publications/topic/' . implode('+', $codes) . '/' . $node->nid;
       $view->display_handler->set_option('link_url', $link_url);
     }
   }
@@ -1185,6 +1185,24 @@ function _osha_publication_get_tag_by_code($code) {
   $query = new EntityFieldQuery();
   $query->entityCondition('entity_type', 'taxonomy_term')
     ->fieldCondition('field_tags_code', 'value', $code, '=')
+    ->range(0, 1);
+  $result = $query->execute();
+
+  if (isset($result['taxonomy_term'])) {
+    $tid = current(array_keys($result['taxonomy_term']));
+  }
+  return $tid;
+}
+
+/**
+ * Get publication type tid by publication type code.
+ */
+function _osha_publication_get_publication_type_by_code($code) {
+  $code = str_replace('__', '/', $code);
+  $tid = FALSE;
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'taxonomy_term')
+    ->fieldCondition('field_publication_type_code', 'value', $code, '=')
     ->range(0, 1);
   $result = $query->execute();
 

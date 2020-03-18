@@ -2607,50 +2607,62 @@ article.node-seminar{
     padding: 0 0 4px 1px;
 }
 
-.box .flickr-credit a{
+
+#content .box a{
+    border-bottom: 0;
+}
+
+#content .box .osha_target_external_link{
+    display: none;
+}
+
+#content .box .flickr-credit a{
     font-family: 'Open Sans',sans-serif;
     float: none;
     clear: both;
     line-height: 25px;
     margin: 0;
     padding: 0 6px 0 0;
-    font-size: 1.2rem;
-    font-weight: normal;
+    font-size: 1.2rem !important;
+    font-weight: normal !important;
     color: #003399;
     text-decoration: none;
     font-weight: 400;
+    border-bottom: 0;
 }
 
-.box .flickr-credit .flickr-metadata{
+#content .box .flickr-credit .flickr-metadata{
     font-family: 'Open Sans',sans-serif;
     float: left;
     width: 100%;
     line-height: 25px;
     margin: 0;
     padding: 0 6px 0 0;
-    font-size: 0.8rem;
-    font-weight: normal;
+    font-size: 0.8rem !important;
+    font-weight: normal !important;
     color: #333;
     text-decoration: none;
     font-weight: normal;
+    border-bottom: 0;
 }
 
-.box .flickr-credit .flickr-metadata a{
+#content .box .flickr-credit .flickr-metadata a{
     font-family: 'Open Sans',sans-serif;
     float: left;
     width: auto;
     line-height: 25px;
     margin: 0;
     padding: 0 6px 0 0;
-    font-size: 0.8rem;
-    font-weight: normal;
+    font-size: 0.8rem !important;
+    font-weight: normal !important;
     color: #003399;
     text-decoration: none;
     font-weight: normal;
+    border-bottom: 0;
 }
 
 .box .flickr-credit .flickr-metadata a:nth-child(1){
-    color: #333;
+    color: #333 !important;
 }
 
 

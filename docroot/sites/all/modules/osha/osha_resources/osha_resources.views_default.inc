@@ -448,6 +448,7 @@ function osha_resources_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'file' => 'file',
+    'flickr' => 'flickr',
     'infographic' => 'infographic',
     'publication' => 'publication',
     'slideshare' => 'slideshare',
@@ -524,6 +525,7 @@ function osha_resources_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'file' => 'file',
+    'flickr' => 'flickr',
     'infographic' => 'infographic',
     'publication' => 'publication',
     'slideshare' => 'slideshare',

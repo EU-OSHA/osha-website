@@ -89,7 +89,7 @@ function osha_blocks_block_view($delta = '') {
           $resources[] = '<div>' . l($image . '<span>' . $name . '</span>', $link, $options) . '</div>';
           $block['subject'] = t('Related resources');
           $block['content'] = '
-<div class="related-resources">
+<div class="sidebar-related-resources">
    <div class="related-resources-boxes container-recommended-tools direction-column">' . implode('', $resources) . '</div>
 </div>';
         }

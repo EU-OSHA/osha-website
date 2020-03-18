@@ -9,7 +9,7 @@
                 '<div class="slideshare-widget-container">' +
                 Drupal.settings.osha_slideshare.html[id] +
                 '</div></div>';
-                jQuery('.block-related-resources').append(popup);
+                jQuery('.related-resources').append(popup);
                 jQuery('#slideshare-popup-container button').click(function (e) {
                     jQuery("#slideshare-popup-container").remove();
                 });

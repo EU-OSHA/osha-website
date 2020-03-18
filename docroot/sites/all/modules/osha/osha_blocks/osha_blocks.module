@@ -16,7 +16,7 @@ function osha_blocks_block_list_alter(&$blocks) {
   if ($node && $node->show_only_related_icons) {
     foreach ($blocks as $block_id => $block) {
       if ($block->delta != 'article_related_icons' && $block->region == 'sidebar_second') {
-        unset ($blocks[$block_id]);
+//        unset ($blocks[$block_id]);
       }
     }
   }
@@ -67,7 +67,7 @@ function osha_blocks_block_view($delta = '') {
       $block['title'] = '<none>';
       $block['subject'] = "<none>";
       $node = menu_get_object();
-      if ($node->field_resources) {
+      if ($node && $node->field_resources) {
         $resources = [];
         foreach($node->field_resources[LANGUAGE_NONE] as $term) {
           $wrapper = entity_metadata_wrapper('taxonomy_term', $term['tid']);
@@ -89,7 +89,7 @@ function osha_blocks_block_view($delta = '') {
           $resources[] = '<div>' . l($image . '<span>' . $name . '</span>', $link, $options) . '</div>';
           $block['subject'] = t('Related resources');
           $block['content'] = '
-<div class="related-resources">
+<div class="sidebar-related-resources">
    <div class="related-resources-boxes container-recommended-tools direction-column">' . implode('', $resources) . '</div>
 </div>';
         }

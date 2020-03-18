@@ -1,5 +1,5 @@
 <?php
-$classes = ['content-fluid', 'related-resources'];
+$classes = ['block-related-resources', 'content-fluid', 'related-resources'];
 if ($type) {
   $classes[] = $type . '_related_resources';
 }

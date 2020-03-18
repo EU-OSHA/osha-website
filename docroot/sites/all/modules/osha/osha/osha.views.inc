@@ -7,6 +7,31 @@
  * to LEFT JOIN node_revision ON node.nid = node_revision.nid
  */
 function osha_views_query_alter(&$view, &$query) {
+  if ($view->name == 'related_content') {
+    if ($view->current_display == 'publication') {
+      $codes = arg(2);
+      $tids = [];
+      $names = [];
+      foreach (explode('+', $codes) as $code) {
+        $tid = _osha_publication_get_tag_by_code($code);
+        $term = taxonomy_term_load($tid);
+        $names[] = $term->name;
+        $tids[] = $tid;
+      }
+      $query->where[1]['conditions'][] = array(
+        'field' => 'node.nid',
+        'value' => intval(arg(3)),
+        'operator' => '!=',
+      );
+      $query->where[1]['conditions'][] = array(
+        'field' => 'taxonomy_term_data_field_data_field_tags.tid',
+        'value' => $tids,
+        'operator' => 'IN',
+      );
+      $view->display_handler->set_option('title', 'Publication tagged with "'.implode(' + ', $names).'"');
+    }
+  }
+
   if ($view->name == 'press_releases') {
     if (!empty($query->table_queue['field_data_field_show_on'])) {
       $query->table_queue['field_data_field_show_on']['join']->type = "LEFT";

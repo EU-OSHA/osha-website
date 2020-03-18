@@ -482,6 +482,25 @@ function osha_publication_form_publication_node_form_alter(&$form, $form_state) 
  * Implements hook_views_pre_render().
  */
 function osha_publication_views_pre_render(&$view) {
+  if ($view->name == 'related_content') {
+    if ($view->current_display == 'block_2') {
+      $node = menu_get_object('node');
+      $codes = [];
+      if ($node && $node->field_tags) {
+        foreach ($node->field_tags[LANGUAGE_NONE] as $tag) {
+          $term = taxonomy_term_load($tag['tid']);
+          $code = $term->field_tags_code[LANGUAGE_NONE][0]['value'];
+          if (!$code) {
+            $code = $term->tid;
+          }
+          $codes[] = $code;
+        }
+      }
+      $link_url = 'related-publications/topic/' . implode('+', $codes) . '/' . $node->nid;
+      $view->display_handler->set_option('link_url', $link_url);
+    }
+  }
+
   $jssor_path = libraries_get_path('jquery-slider-master');
 
   if ($view->name == 'publications') {

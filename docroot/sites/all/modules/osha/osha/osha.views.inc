@@ -59,16 +59,16 @@ function osha_views_query_alter(&$view, &$query) {
     }
   }
 
-  if (($view->name == 'news') && ($view->current_display == 'oshnews_latest')) {
-    $limit = variable_get('osha_hp_news_limit', 2);
-    if ($limit) {
-      $view->set_items_per_page($limit);
+  if (($view->name == 'news') && ($view->current_display == 'front')) {
+    $items = osha_homepage_get_news_and_events_limit();
+    if ($items['news']) {
+      $view->set_items_per_page($items['news']);
     }
   }
   if (($view->name == 'homepage_events') && ($view->current_display == 'block')) {
-    $limit = 3 - variable_get('osha_hp_news_limit', 2);
-    if ($limit) {
-      $view->set_items_per_page($limit);
+    $items = osha_homepage_get_news_and_events_limit();
+    if ($items['events']) {
+      $view->set_items_per_page($items['events']);
     }
   }
   if ($view->name == 'related_content') {

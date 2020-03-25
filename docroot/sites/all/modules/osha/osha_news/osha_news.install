@@ -54,3 +54,10 @@ function osha_news_update_7007() {
 function osha_news_update_7008() {
   features_revert(array('osha_news' => array('user_role')));
 }
+
+/**
+ * MDR-3598 Can we 'hide' the events from the home page.
+ */
+function osha_news_update_7009() {
+  features_revert(array('osha_news' => array('views_view')));
+}

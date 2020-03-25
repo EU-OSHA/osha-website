@@ -198,7 +198,7 @@ function osha_copy_publication_translation_preview($form, &$form_state) {
 
 function osha_copy_publication_translation_get_title($prefix_title, $suffix_title, $title, $lang_code, $country = '') {
   if ($country) {
-    $title = t(trim($country), [], ['langcode' => $lang_code]) . ' ' . $title;
+    $title = t(trim($country), [], ['langcode' => $lang_code]) . ': ' . $title;
   }
   if ($prefix_title) {
     $title = t(trim($prefix_title), [], ['langcode' => $lang_code]) . ' ' . $title;

@@ -101,23 +101,7 @@ jQuery(document).ready(function($){
 	/*Ellipsis News and Events Home page*/
 
 	var character = 60;
-	var count1 = $("div.view-news-and-events > div.row > div:nth-child(1) > h3 > a").text().length;
-	var count2 = $("div.view-news-and-events > div.row > div:nth-child(2) > h3 > a").text().length;
 	var count3 = $("div.view-news-and-events > div.row > div:nth-child(3) > div:nth-child(2) > h3 > a").text().length;
-
-	if (count1 > character){
-		$("div.view-news-and-events > div.row > div:nth-child(1) > h3 a").text(function(){
-    		return $(this).text().substring(0,character);
-		});
-		$( "div.view-news-and-events > div.row > div:nth-child(1) > h3 a" ).append( "..." );
-	}
-
-	if (count2 > character){
-		$("div.view-news-and-events > div.row > div:nth-child(2) > h3 a").text(function(){
-    		return $(this).text().substring(0,character);
-		});
-		$( "div.view-news-and-events > div.row > div:nth-child(2) > h3 a" ).append( "..." );
-	}
 
 	if (count3 > character){
 		$("div.view-news-and-events > div.row > div:nth-child(3) > div:nth-child(2) > h3 a").text(function(){
@@ -171,7 +155,7 @@ jQuery(document).ready(function($){
 		{
 			console.log("PAGE NOT FOUND");
 			_paq.push(['trackEvent', 'Page not found', 'Page not found', url, 1]);
-		}        
+		}
     }
 
 

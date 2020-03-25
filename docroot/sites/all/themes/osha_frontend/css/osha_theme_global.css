@@ -1579,6 +1579,19 @@ body.page-search-publications aside.sidebars_first {
 	width: auto;
 }
 
+.node-article .content-related-videos img,
+.node-article .content-related-boxes img{
+    width: 100%;
+}
+
+.node-article img.icon-play {
+    width: 70px;
+    position: absolute;
+    top: 24%;
+    left: 41%;
+    cursor: pointer;
+}
+
 
 .contact_us_box{
 	clear:both;

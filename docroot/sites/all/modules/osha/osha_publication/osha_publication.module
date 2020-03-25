@@ -922,7 +922,7 @@ function osha_publication_theme() {
     ),
     'osha_publications_related_resources' => array(
       'template' => 'osha_publications_related_resources',
-      'variables' => array('items' => NULL),
+      'variables' => array('items' => NULL, 'type' => NULL),
       'path' => $path . '/templates'
     ),
     'osha_publications_aditional_resources' => array(

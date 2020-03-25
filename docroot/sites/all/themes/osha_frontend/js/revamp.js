@@ -84,6 +84,19 @@ jQuery(document).ready(function($){
 		$('.pager-total').addClass('no-pagerer');
 	}
 
+	/* Add class to Related Resources content depend the sidebars*/
+	if ($(".sidebars_first")[0]){
+		$('.article_related_resources').addClass('sidebars_first_true');
+	}
+
+	if ($(".sidebars_second")[0]){
+		$('.article_related_resources').addClass('sidebars_second_true');
+	}
+
+	if ($(".publication_related_resources")[0]){
+		$('#footer').addClass('no-margin');
+	}
+
 
 	/*Ellipsis News and Events Home page*/
 

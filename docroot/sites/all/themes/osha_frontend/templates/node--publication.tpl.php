@@ -103,6 +103,7 @@ if ($view_mode == 'full') {
     if ($related_resources) {
       print theme('osha_publications_related_resources', [
         'items' => $related_resources,
+        'type' => $node->type,
       ]);
     }
   }

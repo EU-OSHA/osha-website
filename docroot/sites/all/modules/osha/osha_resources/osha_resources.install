@@ -124,3 +124,12 @@ function osha_resources_update_7006() {
 function osha_resources_update_7007() {
   features_revert(array('osha_resources' => array('views_view')));
 }
+
+/**
+ * MDR-3501 related resources not nicely displayed.
+ */
+function osha_resources_update_7008() {
+  features_revert(array('osha_resources' => array('views_view')));
+  features_revert(array('osha' => array('field_instance')));
+  features_revert(array('osha_publication' => array('field_instance')));
+}

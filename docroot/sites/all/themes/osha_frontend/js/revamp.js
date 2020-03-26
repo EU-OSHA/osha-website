@@ -84,27 +84,24 @@ jQuery(document).ready(function($){
 		$('.pager-total').addClass('no-pagerer');
 	}
 
+	/* Add class to Related Resources content depend the sidebars*/
+	if ($(".sidebars_first")[0]){
+		$('.article_related_resources').addClass('sidebars_first_true');
+	}
+
+	if ($(".sidebars_second")[0]){
+		$('.article_related_resources').addClass('sidebars_second_true');
+	}
+
+	if ($(".publication_related_resources")[0]){
+		$('#footer').addClass('no-margin');
+	}
+
 
 	/*Ellipsis News and Events Home page*/
 
 	var character = 60;
-	var count1 = $("div.view-news-and-events > div.row > div:nth-child(1) > h3 > a").text().length;
-	var count2 = $("div.view-news-and-events > div.row > div:nth-child(2) > h3 > a").text().length;
 	var count3 = $("div.view-news-and-events > div.row > div:nth-child(3) > div:nth-child(2) > h3 > a").text().length;
-
-	if (count1 > character){
-		$("div.view-news-and-events > div.row > div:nth-child(1) > h3 a").text(function(){
-    		return $(this).text().substring(0,character);
-		});
-		$( "div.view-news-and-events > div.row > div:nth-child(1) > h3 a" ).append( "..." );
-	}
-
-	if (count2 > character){
-		$("div.view-news-and-events > div.row > div:nth-child(2) > h3 a").text(function(){
-    		return $(this).text().substring(0,character);
-		});
-		$( "div.view-news-and-events > div.row > div:nth-child(2) > h3 a" ).append( "..." );
-	}
 
 	if (count3 > character){
 		$("div.view-news-and-events > div.row > div:nth-child(3) > div:nth-child(2) > h3 a").text(function(){
@@ -158,12 +155,17 @@ jQuery(document).ready(function($){
 		{
 			console.log("PAGE NOT FOUND");
 			_paq.push(['trackEvent', 'Page not found', 'Page not found', url, 1]);
-		}        
+		}
     }
 
 
   jQuery(".page-themes-dangerous-substances-glossary .view-content .glossary_type .type-name").click(function(){
     jQuery(this).parent().toggleClass("active");
   });
+
+
 });
+
+
+
 

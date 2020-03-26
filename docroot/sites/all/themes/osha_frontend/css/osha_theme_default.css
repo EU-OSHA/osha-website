@@ -1058,6 +1058,7 @@ span.date-display-single{
 	color: #7c7d81;
     font-size: 0.9em;
     font-weight: bold;
+    float: left;
 }
 
 .node-publication.view-mode-full .field-name-field-publication-type a{
@@ -7202,16 +7203,13 @@ a.contextual-links-trigger{
 #sliding-popup.sliding-popup-top{
 	display: block;
 	z-index: 9999999!important;
-	background: #575958!important;
-	height: 95px!important; /*minimum height*/
+	background: url(/sites/all/themes/osha_frontend/images/background-cookies.png) repeat !important;
+	height: 75px!important; /*minimum height*/
+	position: fixed;
 }
 
 #sliding-popup .popup-content #popup-text {
 	max-width: 62%;
-}
-
-#sliding-popup .popup-content #popup-text h2, #sliding-popup .popup-content #popup-text p{
-	background: #575958!important;
 }
 
 .view-footer .result_summary{
@@ -8849,8 +8847,16 @@ div.flickr-photoset{
     margin-bottom: 0;
     line-height: 30px;
     clear: both;
-    padding-top: 1em;
+    padding-top: 0.5em;
     margin-top: 0;
+}
+
+body.logged-in.node-type-dangerous-substances #page-title{
+    padding-bottom: 1em;
+}
+
+body.logged-in.node-type-dangerous-substances .node-dangerous-substances > div{
+    clear: both;
 }
 
 .node-type-dangerous-substances .node-dangerous-substances .field-name-body{
@@ -8869,6 +8875,13 @@ div.flickr-photoset{
 
 .node-type-dangerous-substances .node-dangerous-substances .field-label-inline{
 	margin-bottom: 0.2em;
+	clear: both;
+	padding-top: 0;
+}
+
+.node-type-dangerous-substances .node-dangerous-substances .field-label-inline p{
+	padding: 0;
+	margin: 0;
 }
 
 .logged-in.node-type-dangerous-substances .node-dangerous-substances .field-name-field-item-type,
@@ -9126,6 +9139,10 @@ blockquote.image-field-caption span.blockquote-copyright{
 
 img.file-icon {
 	width: auto!important;
+}
+
+.publications-detail img.file-icon {
+	float: left;
 }
 
 /* MDR-2694 - Remove the arrows in the Anniversary articles and add 'view all */

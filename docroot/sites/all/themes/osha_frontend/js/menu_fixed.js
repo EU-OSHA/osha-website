@@ -29,7 +29,7 @@
 					$('#header').addClass('hide-header');
 					if( ($(this).scrollTop() <= 80) )
 					{
-						//$('#header').removeClass('hide-header');
+						$('#header').removeClass('hide-header');
 					}		        
 	      }
 		    prevScrollpos = currentScrollPos;
@@ -68,5 +68,16 @@
 				$(titleBox).css('min-height',maxValueInArray+'px');
 			});
 	  };
+	});
+})( jQuery );
+
+
+/* Hide border on publications */
+(function( $ ){
+	$(document).ready(function() {
+
+		if ($(".container.additional")[0]){
+			$(".publications-detail").addClass('add-border');
+		}
 	});
 })( jQuery );

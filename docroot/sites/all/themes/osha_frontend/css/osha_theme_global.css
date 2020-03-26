@@ -46,6 +46,9 @@
 	}
 
 
+	body.logged-in.node-type-dangerous-substances #content{
+   		padding: 0;
+	}
 
 	/*Caption image*/
 
@@ -1572,11 +1575,24 @@ body.page-search-publications aside.sidebars_first {
 	display: none!important;
 }
 /* All Images same style */
-.node-highlight.view-mode-full .field-name-field-image img , .node-news img, .node-article  img {
+.node-highlight.view-mode-full .field-name-field-image img , .node-news img, .node-article img {
 	float: none;
 	height: auto;	
 	max-width: 987px;
 	width: auto;
+}
+
+.node-article .content-related-videos img,
+.node-article .content-related-boxes img{
+    width: 100%;
+}
+
+.node-article img.icon-play {
+    width: 70px;
+    position: absolute;
+    top: 24%;
+    left: 41%;
+    cursor: pointer;
 }
 
 

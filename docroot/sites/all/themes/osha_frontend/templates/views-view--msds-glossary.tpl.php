@@ -75,7 +75,7 @@
             $term_title = $term->field_name_field[0]['rendered']['#markup'];
             $term_desc = $term->field_description_field[0]['rendered']['#markup'];
             $letter = drupal_substr($term_title, 0, 1);
-            if (count($letter_num[$letter]) == 1) {
+            if ($letter_num[$letter] == 1) {
               $dd_class = ' one-term';
             }
             if ($prev_letter != $letter) { ?>

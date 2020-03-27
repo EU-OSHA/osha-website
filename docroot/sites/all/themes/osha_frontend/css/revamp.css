@@ -2993,10 +2993,14 @@ article.node-article .article_related_resources.sidebars_first_true.sidebars_sec
     width: 100%;
     border-top: 2px solid #003399;
     border-bottom: 2px solid #003399;
-    padding: 1em;
     margin-top: 16px;
     margin-bottom: 2em;
-    width: 96.5%;
+    width: 100%;
+}
+
+#glossary-letters .container{
+    float: left;
+    padding: 1em;
 }
 
 #glossary-letters span {

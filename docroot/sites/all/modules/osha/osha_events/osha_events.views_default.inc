@@ -1292,6 +1292,13 @@ function osha_events_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: URL */
+  $handler->display->display_options['fields']['path']['id'] = 'path';
+  $handler->display->display_options['fields']['path']['table'] = 'node';
+  $handler->display->display_options['fields']['path']['field'] = 'path';
+  $handler->display->display_options['fields']['path']['ui_name'] = 'URL';
+  $handler->display->display_options['fields']['path']['label'] = 'URL';
+  $handler->display->display_options['fields']['path']['absolute'] = TRUE;
   /* Field: Country */
   $handler->display->display_options['fields']['field_country_code']['id'] = 'field_country_code';
   $handler->display->display_options['fields']['field_country_code']['table'] = 'field_data_field_country_code';
@@ -2044,6 +2051,7 @@ function osha_events_views_default_views() {
     t('Location'),
     t('[field_start_date_1] - Events'),
     t('Data export'),
+    t('URL'),
     t('[field_start_date-value]'),
     t('[field_start_date_1-value2]'),
     t('Color (field_color)'),

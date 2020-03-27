@@ -41,10 +41,12 @@
       $alphas = t('A B C D E F G H I J K L M N O P Q R S T U V W X Y Z');
       $alphas = explode(' ', $alphas);
       $letters = [];
+      $letter_num = [];
       foreach ($glossary_list as $term) {
         $term_title = $term->field_name_field[0]['rendered']['#markup'];
         $letter = drupal_substr($term_title, 0, 1);
         $letters[$letter] = $letter;
+        @$letter_num[$letter]++;
       }
       ksort($letters);
       echo '<div id="glossary-letters"><div class="container">';
@@ -69,9 +71,13 @@
         <dl>
           <?php
           foreach ($glossary_list as $term) {
+            $dd_class = '';
             $term_title = $term->field_name_field[0]['rendered']['#markup'];
             $term_desc = $term->field_description_field[0]['rendered']['#markup'];
             $letter = drupal_substr($term_title, 0, 1);
+            if (count($letter_num[$letter]) == 1) {
+              $dd_class = ' one-term';
+            }
             if ($prev_letter != $letter) { ?>
               <div class="glossary_letter" id="glossary-<?php print $letter; ?>">
                 <?php print $letter; ?><hr/>
@@ -82,7 +88,7 @@
             <dt class="term-title">
               <?php print $term_title; ?>
             </dt>
-            <dd class="term-description">
+            <dd class="term-description<?php echo $dd_class;?>">
               <?php print $term_desc; ?>
             </dd>
             <?php

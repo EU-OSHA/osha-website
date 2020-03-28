@@ -114,19 +114,19 @@ function osha_dangerous_substances_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '3',
+          'weight' => '4',
         ),
         'path' => array(
           'weight' => '0',
         ),
         'redirect' => array(
-          'weight' => '2',
+          'weight' => '3',
         ),
         'workbench_access' => array(
-          'weight' => '0',
+          'weight' => '1',
         ),
         'xmlsitemap' => array(
-          'weight' => '1',
+          'weight' => '2',
         ),
       ),
       'display' => array(),

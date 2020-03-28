@@ -333,3 +333,5 @@ features_exclude[dependencies][views] = views
 features_exclude[dependencies][views_data_export] = views_data_export
 features_exclude[dependencies][osha_publication] = osha_publication
 features_exclude[dependencies][metatag] = metatag
+features_exclude[field_base][field_non_applicable_url] = field_non_applicable_url
+features_exclude[field_instance][node-dangerous_substances-field_non_applicable_url] = node-dangerous_substances-field_non_applicable_url

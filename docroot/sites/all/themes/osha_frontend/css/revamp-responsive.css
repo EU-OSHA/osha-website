@@ -808,6 +808,11 @@
         margin: 1.5em 1em 1.5em 0em;
     }
 
+
+    .view-dangerous-substances-overview .field-name-field-external-url{
+        padding:0 0 5px 0;
+    }
+
 }
 
 
@@ -969,6 +974,11 @@
 
     #footer * li.menu__item {
         margin: 5px 1em 0 0;
+    }
+
+    .view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search .form-item-sort-by{
+        clear: both;
+        padding-top: 1em !important;
     }
 
 }

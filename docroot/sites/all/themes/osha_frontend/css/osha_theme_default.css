@@ -8270,7 +8270,7 @@ body.page-entity-collection h1#page-title{
     bottom: -1em;
     padding: 1.5em 0 1em;
 }
-.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search .form-submit,
+
 .view-musculoskeletal-disorders-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search .form-submit{
     border: 0;
     background: url(../images/searchico.png) no-repeat scroll 5px 5px rgba(255, 255, 255, 1);

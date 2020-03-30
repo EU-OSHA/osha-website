@@ -3068,3 +3068,59 @@ article.node-article .article_related_resources.sidebars_first_true.sidebars_sec
     margin: 0;
 }
 
+.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search > div{
+    padding-right: 20px;
+}
+
+.view-dangerous-substances-overview .h4-title{
+    padding-left: 15px;
+}
+
+.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search .form-submit, .view-musculoskeletal-disorders-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search .form-submit {
+    border: 0;
+    background: transparent;
+    color: #003399;
+    font-family: "Open Sans Condensed",sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: left;
+    text-decoration: none;
+    display: block;
+    padding-left: 0px;
+    float: left;
+    clear: none;
+    padding: 10px 10px;
+    display: block;
+    margin-top: -27px;
+}
+
+.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search #edit-text-wrapper input{
+    min-height: 37px;
+    height: auto;
+    border: 1px solid #003399;
+    border-radius: 5px;
+    width: 100%!important;
+    color: #003399;
+    font-size: 13px;
+    line-height: 32px;
+    margin-top: 2px;
+    padding-left: 10px;
+}
+
+.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper .views-exposed-widgets{
+    padding: 10px 15px 30px 15px;
+}
+
+.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search #checkboxes-wrapper{
+    padding: 0;
+    bottom: -20px;
+}
+
+.view-id-dangerous_substances_overview .feed-icon{
+    clear: both;
+    padding: 1em 0 1em 1em;
+}
+
+.view-id-dangerous_substances_overview .feed-icon a{
+    margin-right: 1em;
+}

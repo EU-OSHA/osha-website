@@ -1348,6 +1348,18 @@ span.date-display-single{
 	width: 30%;
 }
 
+.menu-block-6 ul li{
+	list-style-type: none!important;
+	list-style-image:none!important;
+	margin:0;
+	padding:0;
+	float: none;
+	margin:0.5rem 2% 0.7rem 0;
+	overflow: hidden;
+	position: relative;
+	width: 30%;
+}
+
 .menu-block-3 ul li.active .introduction-title {
   border-bottom: 10px solid #DC2E81;
 }
@@ -9131,11 +9143,6 @@ blockquote.image-field-caption span.blockquote-copyright{
 	margin:0;
 }
 
-#block-menu-block-6 .menu-block-6 ul li{
-	width: 48%;
-	margin: 0.5rem 1% 0.5rem 1%;
-}
-
 #block-menu-block-6 .menu-block-6 ul li img{
 	width: 100%;
 }
@@ -9717,6 +9724,10 @@ table.quiz-feedback-table.sticky-enabled.tableheader-processed.sticky-table > tb
 
 .page-node-5 .menu-block-3 ul li{
 	padding-right: 15px;
+}
+
+.page-node-13822 .menu-block-6 ul li {
+    padding-right: 15px;
 }
 
 .node-events .field-name-title-field h1, .node-job-vacancies .field-name-title-field h1{

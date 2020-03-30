@@ -2466,6 +2466,10 @@ article.node-seminar{
     color:#003399;
 }
 
+.view-musculoskeletal-disorders-list .view-content .views-row .views-field-body p{
+    margin-bottom: 0;
+}
+
 .view-musculoskeletal-disorders-list > .view-content .views-field-nothing .av-type .views-label{
     display: none;
 }

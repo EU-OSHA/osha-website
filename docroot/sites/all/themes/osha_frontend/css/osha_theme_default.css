@@ -8793,6 +8793,10 @@ div.flickr-photoset{
 	font-size: 1.2em;
 }
 /*search ds detail page*/
+.node-type-dangerous-substances .view-header.back{
+	padding-top:1em;
+}
+
 .node-dangerous-substances .view-header.back{
 	margin-top: 0.7em;
 }

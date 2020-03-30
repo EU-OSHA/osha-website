@@ -3095,7 +3095,7 @@ article.node-article .article_related_resources.sidebars_first_true.sidebars_sec
 }
 
 .view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search #edit-text-wrapper input{
-    min-height: 37px;
+    min-height: 36px;
     height: auto;
     border: 1px solid #003399;
     border-radius: 5px;
@@ -3121,6 +3121,11 @@ article.node-article .article_related_resources.sidebars_first_true.sidebars_sec
     padding: 1em 0 1em 1em;
 }
 
-.view-id-dangerous_substances_overview .feed-icon a{
+#content .view-id-dangerous_substances_overview .feed-icon a{
     margin-right: 1em;
+    border-bottom: 0;
+}
+
+#content .view-id-dangerous_substances_overview .feed-icon a:hover{
+    opacity: 0.8;
 }

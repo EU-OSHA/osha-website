@@ -5,8 +5,8 @@
  */
 ?>
 <?php if ($page) { ?>
+  <div class="view-header back"><?php print l(t('Back to dangerous substances and filter'), 'themes/dangerous-substances/search'); ?></div>
     <div id="page-title" class="page__title title"><?php print t('Dangerous substances');?></div>
-    <div class="view-header back"><?php print l(t('Back to dangerous substances and filter'), 'themes/dangerous-substances/search'); ?></div>
 <?php } ?>
 <?php
 $add_field_group = FALSE;

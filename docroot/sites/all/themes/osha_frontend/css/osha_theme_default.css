@@ -8696,9 +8696,6 @@ div.flickr-photoset{
 	
 }
 
-
-//search dangerous sustances
-//first column
 .page-themes-dangerous-substances-practical-tools-dangerous-substances .views-exposed-form .views-exposed-widget{
 	float: none;
 	padding: 0px;
@@ -8716,8 +8713,6 @@ div.flickr-photoset{
 	margin-bottom: 0px;
 	padding-right: 55px;
 }
-
-
 
 .page-themes-dangerous-substances-practical-tools-dangerous-substances .sidebars_first #views-exposed-form-practical-tools-and-guidance-on-dangerous-substances-page .views-widget-sort-by,
 .page-themes-dangerous-substances-practical-tools-dangerous-substances .sidebars_first #views-exposed-form-practical-tools-and-guidance-on-dangerous-substances-page .views-widget-sort-order{
@@ -8793,8 +8788,16 @@ div.flickr-photoset{
 	font-size: 1.2em;
 }
 /*search ds detail page*/
+.node-type-dangerous-substances .view-header.back{
+	padding-top:1em;
+}
+
 .node-dangerous-substances .view-header.back{
 	margin-top: 0.7em;
+}
+
+.node-type-dangerous-substances h1.page-title{
+	padding-bottom: 0.5em;
 }
 
 .node-type-dangerous-substances .node-dangerous-substances .field-type-list-text,
@@ -8806,7 +8809,6 @@ div.flickr-photoset{
 	float: left;
 	margin-top: 0;
 	padding-right: 1em;
-	padding-top: 0.5em;
 	padding-left: 0 !important;
 }
 
@@ -8859,12 +8861,14 @@ body.logged-in.node-type-dangerous-substances .node-dangerous-substances > div{
     clear: both;
 }
 
-.node-type-dangerous-substances .node-dangerous-substances .field-name-body{
+.node-type-dangerous-substances .node-dangerous-substances .field-name-body,
+.node-type-dangerous-substances .node-dangerous-substances .field-name-field-body-original{
 	clear: both;
 }
 
-.node-type-dangerous-substances .node-dangerous-substances .field-name-body p{
-	padding: 0;
+.node-type-dangerous-substances .node-dangerous-substances .field-name-body p,
+.node-type-dangerous-substances .node-dangerous-substances .field-name-field-body-original p{
+	padding: 0 0 10px 0;
 	margin: 0;
 }
 
@@ -8875,7 +8879,6 @@ body.logged-in.node-type-dangerous-substances .node-dangerous-substances > div{
 
 .node-type-dangerous-substances .node-dangerous-substances .field-label-inline{
 	margin-bottom: 0.2em;
-	clear: both;
 	padding-top: 0;
 }
 

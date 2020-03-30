@@ -138,6 +138,9 @@ class MigrateOshaBureauMembers extends OSHADynamicMigration {
         MigrationUtil::getOrCreateTaxonomyTerm('wg_role_2', $roles[1], array('language' => 'en'));
         $row->field_wg_role_2 = trim($roles[1]);
       }
+      elseif ($roles[0] == 'Observer') {
+        $row->field_wg_role_1 = strtolower($row->field_wg_role_1);
+      }
     }
     return TRUE;
   }

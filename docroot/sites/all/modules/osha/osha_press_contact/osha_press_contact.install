@@ -78,3 +78,13 @@ function osha_press_contact_update_7006() {
   variable_set('expert_nominated_title', 'Expert Nominated by the European Parliament');
 }
 
+/**
+ * MDR-3578 New Role for the Executive Board.
+ */
+function osha_press_contact_update_7007() {
+  $tid = 3026;
+  $term = taxonomy_term_load($tid);
+  $term->weight = 10;
+  taxonomy_term_save($term);
+  features_revert(array('osha_press_contact' => array('views_view')));
+}

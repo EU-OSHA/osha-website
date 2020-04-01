@@ -506,7 +506,7 @@ function osha_publication_views_pre_render(&$view) {
           $codes[] = $code;
         }
       }
-      $link_url = 'publications/topic/' . implode('+', $codes) . '/' . $node->nid;
+      $link_url = 'publications/topic/' . implode('+', $codes);
       $view->display_handler->set_option('link_url', $link_url);
     }
   }

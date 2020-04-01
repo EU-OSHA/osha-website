@@ -485,11 +485,11 @@
     }
 
     
-        .container-inline-date{
-            float: left;
-            clear: none;
-            padding-left: 1em;
-        }
+    .container-inline-date{
+        float: left;
+        clear: none;
+        padding-left: 1em;
+    }
    
 
     /* Footer */
@@ -504,6 +504,10 @@
 
     #footer div#block-menu-block-5 {
         padding-top: 5px;
+    }
+
+    .introduction-title{
+        height: 57px;
     }
 
 }

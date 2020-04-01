@@ -13,6 +13,16 @@ if (!defined('PCLZIP_TEMPORARY_DIR')) {
   define('PCLZIP_TEMPORARY_DIR', variable_get('file_temporary_path', '/tmp') . '/');
 }
 
+function osha_publication_menu_publications_get_query() {
+  $server = search_api_server_load('solr_server');
+  $index = search_api_index_load(SOLR_SEARCH_INDEX);
+  $query = new SearchApiQuery($index);
+  // Avoid PHP notice.
+  $query->fields(array());
+  $solr = new SearchApiSolrService($server);
+  return array($solr, $query);
+}
+
 function store_score($score = false) {
   static $rs = [];
   if ($score) {
@@ -482,6 +492,25 @@ function osha_publication_form_publication_node_form_alter(&$form, $form_state) 
  * Implements hook_views_pre_render().
  */
 function osha_publication_views_pre_render(&$view) {
+  if ($view->name == 'related_content') {
+    if ($view->current_display == 'block_2') {
+      $node = menu_get_object('node');
+      $codes = [];
+      if ($node && $node->field_tags) {
+        foreach ($node->field_tags[LANGUAGE_NONE] as $tag) {
+          $term = taxonomy_term_load($tag['tid']);
+          $code = $term->field_tags_code[LANGUAGE_NONE][0]['value'];
+          if (!$code) {
+            $code = $term->tid;
+          }
+          $codes[] = $code;
+        }
+      }
+      $link_url = 'publications/topic/' . implode('+', $codes);
+      $view->display_handler->set_option('link_url', $link_url);
+    }
+  }
+
   $jssor_path = libraries_get_path('jquery-slider-master');
 
   if ($view->name == 'publications') {

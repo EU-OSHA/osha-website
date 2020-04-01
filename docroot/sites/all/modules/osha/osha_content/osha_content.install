@@ -34,3 +34,9 @@ function osha_content_update_7005() {
   variable_set('no_translation_type_exceptions', $no_translation_type_exceptions);
 }
 
+/**
+ * MDR-3545 Improve Publications search.
+ */
+function osha_content_update_7006() {
+  features_revert(array('osha_content' => array('views_view')));
+}

@@ -371,3 +371,20 @@ function osha_dangerous_substances_update_7031() {
 function osha_dangerous_substances_update_7032() {
   features_revert(array('osha_dangerous_substances' => array('field_instance')));
 }
+
+/**
+ * MDR-3515 DS database - New improvements estimation.
+ */
+function osha_dangerous_substances_update_7033() {
+  $link = menu_link_load(15799);
+  $link['link_title'] = 'Practical tools and guidance - Dangerous substances';
+  $link['title'] = 'Practical tools and guidance - Dangerous substances';
+  menu_link_save($link);
+  features_revert(array('osha_dangerous_substances' => array(
+    'field_base',
+    'field_instance',
+    'views_view',
+    'variable',
+    'field_group',
+    )));
+}

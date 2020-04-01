@@ -500,6 +500,14 @@ function osha_frontend_preprocess_page(&$variables) {
       case "publication":
         $variables['theme_hook_suggestions'][] = 'page__node__publication';
         break;
+
+      case "dangerous_substances":
+        $variables['theme_hook_suggestions'][] = 'page__node__dangerous_substances';
+        $variables['back_back'] = '';
+        if (user_is_anonymous() || isset($_REQUEST['ds_public'])) {
+          $variables['back_back'] = '<div class="view-header back">'.l(t('Back to Practical tools and guidance on dangerous substances'), 'themes/dangerous-substances/practical-tools-dangerous-substances').'</div>';
+        }
+        break;
     }
   }
   if (arg(0) . arg(1) == 'publicationstype') {

@@ -13,6 +13,16 @@ if (!defined('PCLZIP_TEMPORARY_DIR')) {
   define('PCLZIP_TEMPORARY_DIR', variable_get('file_temporary_path', '/tmp') . '/');
 }
 
+function osha_publication_menu_publications_get_query() {
+  $server = search_api_server_load('solr_server');
+  $index = search_api_index_load(SOLR_SEARCH_INDEX);
+  $query = new SearchApiQuery($index);
+  // Avoid PHP notice.
+  $query->fields(array());
+  $solr = new SearchApiSolrService($server);
+  return array($solr, $query);
+}
+
 function store_score($score = false) {
   static $rs = [];
   if ($score) {

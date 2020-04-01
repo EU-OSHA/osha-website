@@ -1059,6 +1059,7 @@ span.date-display-single{
     font-size: 0.9em;
     font-weight: bold;
     float: left;
+    padding-right: 2px;
 }
 
 .node-publication.view-mode-full .field-name-field-publication-type a{

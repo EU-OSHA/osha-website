@@ -238,7 +238,8 @@ function osha_dangerous_substances_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Please describe the material (max. 150 words)
 Please note: the first paragraph will be displayed as short description, 
-please take this into consideration when you are writing the first paragraph.',
+Please take this into consideration when you are writing the first paragraph.
+Please use "Paste from Word" button when you copy text from MS Word.',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'hidden',
@@ -740,7 +741,7 @@ please take this into consideration when you are writing the first paragraph.',
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please add a short description in original language (only if a description is available on the website or material – no extra drafting or translation)',
+    'description' => 'Please add a short description in original language (only if a description is available on the website or material – no extra drafting or translation). Please use "Paste from Word" button when you copy text from MS Word',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -933,8 +934,7 @@ please take this into consideration when you are writing the first paragraph.',
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please add the contact address for the material
-',
+    'description' => 'Please add the contact address for the material. Please use "Paste from Word" button when you copy text from MS Word',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -1126,7 +1126,7 @@ please take this into consideration when you are writing the first paragraph.',
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please add the disclaimer for the material
+    'description' => 'Please add the disclaimer for the material. Please use "Paste from Word" button when you copy text from MS Word
 ',
     'display' => array(
       'dangerous_substances' => array(
@@ -3584,7 +3584,7 @@ please take this into consideration when you are writing the first paragraph.',
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please add the other information for the material',
+    'description' => 'Please add the other information for the material. Please use "Paste from Word" button when you copy text from MS Word',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -3681,7 +3681,7 @@ please take this into consideration when you are writing the first paragraph.',
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please add the ownership information for the material
+    'description' => 'Please add the ownership information for the material. Please use "Paste from Word" button when you copy text from MS Word
 ',
     'display' => array(
       'dangerous_substances' => array(
@@ -4528,7 +4528,7 @@ please take this into consideration when you are writing the first paragraph.',
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please add the name of the substance or substance group',
+    'description' => 'Please add the name of the substance or substance group. Please use "Paste from Word" button when you copy text from MS Word',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'inline',
@@ -6617,19 +6617,18 @@ please take this into consideration when you are writing the first paragraph.',
   t('Ownership information');
   t('Please add a country code from the list');
   t('Please add a language code from the list');
-  t('Please add a short description in original language (only if a description is available on the website or material – no extra drafting or translation)');
+  t('Please add a short description in original language (only if a description is available on the website or material – no extra drafting or translation). Please use "Paste from Word" button when you copy text from MS Word');
   t('Please add format and quality of the material');
   t('Please add the CAS number of the substances covered, if possible');
   t('Please add the EC numbers of the substances, if possible');
   t('Please add the NACE code of the sector covered in the material');
-  t('Please add the contact address for the material
-');
-  t('Please add the disclaimer for the material
+  t('Please add the contact address for the material. Please use "Paste from Word" button when you copy text from MS Word');
+  t('Please add the disclaimer for the material. Please use "Paste from Word" button when you copy text from MS Word
 ');
   t('Please add the measurement method used');
-  t('Please add the name of the substance or substance group');
-  t('Please add the other information for the material');
-  t('Please add the ownership information for the material
+  t('Please add the name of the substance or substance group. Please use "Paste from Word" button when you copy text from MS Word');
+  t('Please add the other information for the material. Please use "Paste from Word" button when you copy text from MS Word');
+  t('Please add the ownership information for the material. Please use "Paste from Word" button when you copy text from MS Word
 ');
   t('Please add the time in minutes');
   t('Please check if advertising is included in the material');
@@ -6640,7 +6639,8 @@ please take this into consideration when you are writing the first paragraph.',
 ');
   t('Please describe the material (max. 150 words)
 Please note: the first paragraph will be displayed as short description, 
-please take this into consideration when you are writing the first paragraph.');
+Please take this into consideration when you are writing the first paragraph.
+Please use "Paste from Word" button when you copy text from MS Word.');
   t('Please fill in the English title of the material');
   t('Please fill in the original title of the material');
   t('Please fill in the type of the material');

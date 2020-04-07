@@ -353,16 +353,6 @@ function osha_publication_menu_publications_search_native($form_state) {
   return $ret;
 }
 
-function osha_publication_menu_publications_get_query() {
-  $server = search_api_server_load('solr_server');
-  $index = search_api_index_load(SOLR_SEARCH_INDEX);
-  $query = new SearchApiQuery($index);
-  // Avoid PHP notice.
-  $query->fields(array());
-  $solr = new SearchApiSolrService($server);
-  return array($solr, $query);
-}
-
 /**
  * Get options for publication type filter.
  */

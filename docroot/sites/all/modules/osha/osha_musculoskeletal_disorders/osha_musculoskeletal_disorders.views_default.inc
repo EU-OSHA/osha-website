@@ -386,7 +386,7 @@ function osha_musculoskeletal_disorders_views_default_views() {
     'more_text' => 'See more',
     'summary_handler' => 'full',
     'trim_options' => array(
-      'text' => 0,
+      'text' => 'text',
     ),
     'trim_preserve_tags' => '',
   );
@@ -405,7 +405,7 @@ function osha_musculoskeletal_disorders_views_default_views() {
     'more_link' => '0',
     'more_text' => 'See more',
     'trim_options' => array(
-      'text' => 0,
+      'text' => 'text',
     ),
     'trim_preserve_tags' => '',
   );

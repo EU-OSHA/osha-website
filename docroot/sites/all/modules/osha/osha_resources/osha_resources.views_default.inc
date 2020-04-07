@@ -395,6 +395,7 @@ function osha_resources_views_default_views() {
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'allwords';
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
@@ -412,6 +413,10 @@ function osha_resources_views_default_views() {
     9 => 0,
     10 => 0,
     11 => 0,
+    12 => 0,
+    13 => 0,
+    14 => 0,
+    16 => 0,
   );
 
   /* Display: Entity Reference View Widget */
@@ -482,6 +487,7 @@ function osha_resources_views_default_views() {
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'allwords';
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
@@ -499,6 +505,10 @@ function osha_resources_views_default_views() {
     9 => 0,
     10 => 0,
     11 => 0,
+    12 => 0,
+    13 => 0,
+    14 => 0,
+    16 => 0,
   );
 
   /* Display: Publication Entity Reference View Widget */
@@ -559,6 +569,7 @@ function osha_resources_views_default_views() {
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'allwords';
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
@@ -576,6 +587,10 @@ function osha_resources_views_default_views() {
     9 => 0,
     10 => 0,
     11 => 0,
+    12 => 0,
+    13 => 0,
+    14 => 0,
+    16 => 0,
   );
   $translatables['aditional_resources'] = array(
     t('Master'),

@@ -12,6 +12,9 @@ function osha_press_contact_views_handlers() {
       'osha_press_contact_handler_board_group' => array(
         'parent' => 'views_handler_field',
       ),
+      'osha_press_contact_handler_bureau_group' => array(
+        'parent' => 'views_handler_field',
+      ),
     ),
   );
 }
@@ -33,6 +36,13 @@ function osha_press_contact_views_data() {
     'help' => t('Country and Observer, EC'),
     'field' => array(
       'handler' => 'osha_press_contact_handler_board_group',
+    ),
+  );
+  $data['osha_press_contact']['bureau_group'] = array(
+    'title' => t('Bureau members group field'),
+    'help' => t('Executive Board'),
+    'field' => array(
+      'handler' => 'osha_press_contact_handler_bureau_group',
     ),
   );
   return $data;

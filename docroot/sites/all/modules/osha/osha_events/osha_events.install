@@ -325,3 +325,10 @@ function osha_events_update_7031() {
 function osha_events_update_7032() {
   features_revert(array('osha_events' => array('variable')));
 }
+
+/**
+ * MDR-3563 Estimation - events export (XLS) to include URL field.
+ */
+function osha_events_update_7033() {
+  features_revert(array('osha_events' => array('views_view')));
+}

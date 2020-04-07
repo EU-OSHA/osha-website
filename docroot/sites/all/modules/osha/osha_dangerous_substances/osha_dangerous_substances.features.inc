@@ -78,7 +78,7 @@ function osha_dangerous_substances_default_search_api_index() {
         "field_ec_number" : { "type" : "list\\u003Ctext\\u003E" },
         "field_evaluation" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "field_exposure_route" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
-        "field_external_url:url" : { "type" : "uri" },
+        "field_external_url:url" : { "type" : "list\\u003Curi\\u003E" },
         "field_fc_provider" : {
           "type" : "list\\u003Cinteger\\u003E",
           "entity_type" : "field_collection_item"

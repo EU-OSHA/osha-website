@@ -18,6 +18,9 @@ function osha_lingua_tools_permission() {
 function linguatools_access($node) {
   global $user;
   $type = is_string($node) ? $node : $node->type;
+  if (variable_get('language_content_type_' . $type, 0) == 0) {
+    return FALSE;
+  }
   if ($type == 'calls') {
     if (user_access('use linguatools forms for calls content', $user)) {
       return TRUE;

@@ -104,18 +104,18 @@ function osha_publication_menu_publications_form($form, $form_state) {
     ];
   }
 
-  $form['left-column']['publication_type'] = array(
-    '#type' => 'checkboxes',
-    '#options' => _publication_type_options_list(TRUE),
-    '#default_value' => $publication_type,
-    '#title' => t('Type'),
-  );
-
   $form['left-column']['tags'] = array(
     '#type' => 'checkboxes',
     '#options' => _osha_publication_tags_options_list(TRUE),
     '#default_value' => $tags,
     '#title' => t('Topics'),
+  );
+
+  $form['left-column']['publication_type'] = array(
+    '#type' => 'checkboxes',
+    '#options' => _publication_type_options_list(TRUE),
+    '#default_value' => $publication_type,
+    '#title' => t('Type'),
   );
 
   if (empty($form_state['input'])) {
@@ -392,7 +392,6 @@ function _publication_type_options_list($map_only = FALSE) {
   }
   return $return;
 }
-
 
 /**
  * Get options for publication type filter.

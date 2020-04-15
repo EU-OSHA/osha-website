@@ -123,6 +123,12 @@
         margin-right: 1.3em;
     }
 
+    /* Tools and resources */
+    .page-tools-and-resources #content{
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
     /*News and Events*/
 
     .section-oshevents .content-fluid.events .container{
@@ -262,7 +268,6 @@
     }
 
 }
-
 
 @media screen and (max-width: 1024px) {
 
@@ -480,11 +485,11 @@
     }
 
     
-        .container-inline-date{
-            float: left;
-            clear: none;
-            padding-left: 1em;
-        }
+    .container-inline-date{
+        float: left;
+        clear: none;
+        padding-left: 1em;
+    }
    
 
     /* Footer */
@@ -501,8 +506,11 @@
         padding-top: 5px;
     }
 
-}
+    .introduction-title{
+        height: 57px;
+    }
 
+}
 
 @media screen and (max-width: 1006px){
     body > .mean-bar{
@@ -799,6 +807,16 @@
         background: url(../images/pink-select.png) no-repeat scroll 99% center #FFF;
     }
 
+    /* Tools and resources */
+    .page-tools-and-resources #block-menu-block-3{
+        margin: 1.5em 1em 1.5em 0em;
+    }
+
+
+    .view-dangerous-substances-overview .field-name-field-external-url{
+        padding:0 0 5px 0;
+    }
+
 }
 
 
@@ -918,6 +936,11 @@
         background: url(../images/flecha.png) no-repeat scroll 87% 53% transparent;
     } 
 
+    /* Tools and resources */
+    .page-tools-and-resources .menu-block-3 ul li {
+        width: 31%;
+    }
+
     /*Pagination*/
 
     .item-list ul.pager{
@@ -955,6 +978,11 @@
 
     #footer * li.menu__item {
         margin: 5px 1em 0 0;
+    }
+
+    .view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search .form-item-sort-by{
+        clear: both;
+        padding-top: 1em !important;
     }
 
 }
@@ -1100,6 +1128,11 @@
         width: 60%;
     }
 
+    /* Tools and resources */
+    .page-tools-and-resources .menu-block-3 ul li {
+        width: 48%;
+    }
+
      /*Publications*/
 
     .page-tools-and-publications.revamp #content, .page-oshevents #content{
@@ -1243,7 +1276,7 @@
         padding-top: 0;
         margin-top: 0;
     }
-    
+
     .region-footer-sitemap .form-submit{
         margin-left: 0em;
     }
@@ -1437,6 +1470,10 @@
         width: 95%;
     }
 
+    .page-tools-and-resources .menu-block-3 ul li {
+        width: 100%;
+    }
+
     /*Footer*/
 
     a.try-alert{
@@ -1452,6 +1489,14 @@
 
     table.pagerer tbody tr td div.item-list ul.pager li.pager-first, table.pagerer tbody tr td div.item-list ul.pager li.pager-previous, table.pagerer tbody tr td div.item-list ul.pager li.pager-next, table.pagerer tbody tr td div.item-list ul.pager li.pager-last{
         font-size: 9px;
+    }
+
+    .page-publication-detail .field-name-field-file a{
+        clear: both;
+    }
+
+    .page-publication-detail span.slash{ 
+        display: none;
     }
 }
 

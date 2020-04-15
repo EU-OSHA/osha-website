@@ -1058,6 +1058,8 @@ span.date-display-single{
 	color: #7c7d81;
     font-size: 0.9em;
     font-weight: bold;
+    float: left;
+    padding-right: 2px;
 }
 
 .node-publication.view-mode-full .field-name-field-publication-type a{
@@ -1336,6 +1338,18 @@ span.date-display-single{
 }
 
 .menu-block-3 ul li{
+	list-style-type: none!important;
+	list-style-image:none!important;
+	margin:0;
+	padding:0;
+	float: none;
+	margin:0.5rem 2% 0.7rem 0;
+	overflow: hidden;
+	position: relative;
+	width: 30%;
+}
+
+.menu-block-6 ul li{
 	list-style-type: none!important;
 	list-style-image:none!important;
 	margin:0;
@@ -7202,16 +7216,13 @@ a.contextual-links-trigger{
 #sliding-popup.sliding-popup-top{
 	display: block;
 	z-index: 9999999!important;
-	background: #575958!important;
-	height: 95px!important; /*minimum height*/
+	background: url(/sites/all/themes/osha_frontend/images/background-cookies.png) repeat !important;
+	height: 75px!important; /*minimum height*/
+	position: fixed;
 }
 
 #sliding-popup .popup-content #popup-text {
 	max-width: 62%;
-}
-
-#sliding-popup .popup-content #popup-text h2, #sliding-popup .popup-content #popup-text p{
-	background: #575958!important;
 }
 
 .view-footer .result_summary{
@@ -8272,7 +8283,7 @@ body.page-entity-collection h1#page-title{
     bottom: -1em;
     padding: 1.5em 0 1em;
 }
-.view-dangerous-substances-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search .form-submit,
+
 .view-musculoskeletal-disorders-overview .dangerous-substances-search-list.form-wrapper #dangerous-substances-search .form-submit{
     border: 0;
     background: url(../images/searchico.png) no-repeat scroll 5px 5px rgba(255, 255, 255, 1);
@@ -8698,9 +8709,6 @@ div.flickr-photoset{
 	
 }
 
-
-//search dangerous sustances
-//first column
 .page-themes-dangerous-substances-practical-tools-dangerous-substances .views-exposed-form .views-exposed-widget{
 	float: none;
 	padding: 0px;
@@ -8718,8 +8726,6 @@ div.flickr-photoset{
 	margin-bottom: 0px;
 	padding-right: 55px;
 }
-
-
 
 .page-themes-dangerous-substances-practical-tools-dangerous-substances .sidebars_first #views-exposed-form-practical-tools-and-guidance-on-dangerous-substances-page .views-widget-sort-by,
 .page-themes-dangerous-substances-practical-tools-dangerous-substances .sidebars_first #views-exposed-form-practical-tools-and-guidance-on-dangerous-substances-page .views-widget-sort-order{
@@ -8795,8 +8801,16 @@ div.flickr-photoset{
 	font-size: 1.2em;
 }
 /*search ds detail page*/
+.node-type-dangerous-substances .view-header.back{
+	padding-top:1em;
+}
+
 .node-dangerous-substances .view-header.back{
 	margin-top: 0.7em;
+}
+
+.node-type-dangerous-substances h1.page-title{
+	padding-bottom: 0.5em;
 }
 
 .node-type-dangerous-substances .node-dangerous-substances .field-type-list-text,
@@ -8808,7 +8822,6 @@ div.flickr-photoset{
 	float: left;
 	margin-top: 0;
 	padding-right: 1em;
-	padding-top: 0.5em;
 	padding-left: 0 !important;
 }
 
@@ -8849,15 +8862,25 @@ div.flickr-photoset{
     margin-bottom: 0;
     line-height: 30px;
     clear: both;
-    padding-top: 1em;
+    padding-top: 0.5em;
     margin-top: 0;
 }
 
-.node-type-dangerous-substances .node-dangerous-substances .field-name-body{
+body.logged-in.node-type-dangerous-substances #page-title{
+    padding-bottom: 1em;
+}
+
+body.logged-in.node-type-dangerous-substances .node-dangerous-substances > div{
+    clear: both;
+}
+
+.node-type-dangerous-substances .node-dangerous-substances .field-name-body,
+.node-type-dangerous-substances .node-dangerous-substances .field-name-field-body-original{
 	clear: both;
 }
 
-.node-type-dangerous-substances .node-dangerous-substances .field-name-body p{
+.node-type-dangerous-substances .node-dangerous-substances .field-name-body p,
+.node-type-dangerous-substances .node-dangerous-substances .field-name-field-body-original p{
 	padding: 0;
 	margin: 0;
 }
@@ -8869,6 +8892,12 @@ div.flickr-photoset{
 
 .node-type-dangerous-substances .node-dangerous-substances .field-label-inline{
 	margin-bottom: 0.2em;
+	padding-top: 0;
+}
+
+.node-type-dangerous-substances .node-dangerous-substances .field-label-inline p{
+	padding: 0;
+	margin: 0;
 }
 
 .logged-in.node-type-dangerous-substances .node-dangerous-substances .field-name-field-item-type,
@@ -9115,17 +9144,16 @@ blockquote.image-field-caption span.blockquote-copyright{
 	margin:0;
 }
 
-#block-menu-block-6 .menu-block-6 ul li{
-	width: 48%;
-	margin: 0.5rem 1% 0.5rem 1%;
-}
-
 #block-menu-block-6 .menu-block-6 ul li img{
 	width: 100%;
 }
 
 img.file-icon {
 	width: auto!important;
+}
+
+.publications-detail img.file-icon {
+	float: left;
 }
 
 /* MDR-2694 - Remove the arrows in the Anniversary articles and add 'view all */
@@ -9697,6 +9725,10 @@ table.quiz-feedback-table.sticky-enabled.tableheader-processed.sticky-table > tb
 
 .page-node-5 .menu-block-3 ul li{
 	padding-right: 15px;
+}
+
+.page-node-13822 .menu-block-6 ul li {
+    padding-right: 15px;
 }
 
 .node-events .field-name-title-field h1, .node-job-vacancies .field-name-title-field h1{

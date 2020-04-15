@@ -46,6 +46,9 @@
 	}
 
 
+	body.logged-in.node-type-dangerous-substances #content{
+   		padding: 0;
+	}
 
 	/*Caption image*/
 
@@ -1572,7 +1575,7 @@ body.page-search-publications aside.sidebars_first {
 	display: none!important;
 }
 /* All Images same style */
-.node-highlight.view-mode-full .field-name-field-image img , .node-news img, .node-article  img {
+.node-highlight.view-mode-full .field-name-field-image img , .node-news img, .node-article img {
 	float: none;
 	height: auto;	
 	max-width: 987px;
@@ -2251,9 +2254,12 @@ ul[data-sa-theme="basic-blue"].ui-menu{
     	width: 47%;
 	}
 
-	.page-node-5 .menu-block-3 ul li {
+	.page-node-5 .menu-block-3 ul li,
+	.page-node-13822 .menu-block-6 ul li{
 	 	padding-right: 0;
 	}
+
+
 
 	.introduction-image .image-field-caption{
 		width: 100% !important;

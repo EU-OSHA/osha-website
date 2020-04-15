@@ -824,7 +824,7 @@ function osha_press_contact_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['style_options']['grouping'] = array(
     0 => array(
-      'field' => 'field_wg_role_1',
+      'field' => 'bureau_group',
       'rendered' => 1,
       'rendered_strip' => 0,
     ),
@@ -887,6 +887,10 @@ function osha_press_contact_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['text'] = '<strong>[field_personal_title] [title]</strong> ([field_wg_category])[field_wg_role_2]';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Osha press contact: Bureau members group field */
+  $handler->display->display_options['fields']['bureau_group']['id'] = 'bureau_group';
+  $handler->display->display_options['fields']['bureau_group']['table'] = 'osha_press_contact';
+  $handler->display->display_options['fields']['bureau_group']['field'] = 'bureau_group';
   /* Sort criterion: Taxonomy term: Weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
   $handler->display->display_options['sorts']['weight']['table'] = 'taxonomy_term_data';
@@ -933,6 +937,57 @@ function osha_press_contact_views_default_views() {
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: WG Role 1 */
+  $handler->display->display_options['fields']['field_wg_role_1']['id'] = 'field_wg_role_1';
+  $handler->display->display_options['fields']['field_wg_role_1']['table'] = 'field_data_field_wg_role_1';
+  $handler->display->display_options['fields']['field_wg_role_1']['field'] = 'field_wg_role_1';
+  $handler->display->display_options['fields']['field_wg_role_1']['label'] = '';
+  $handler->display->display_options['fields']['field_wg_role_1']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_wg_role_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_wg_role_1']['type'] = 'i18n_taxonomy_term_reference_plain';
+  /* Field: Content: Category */
+  $handler->display->display_options['fields']['field_wg_category']['id'] = 'field_wg_category';
+  $handler->display->display_options['fields']['field_wg_category']['table'] = 'field_data_field_wg_category';
+  $handler->display->display_options['fields']['field_wg_category']['field'] = 'field_wg_category';
+  $handler->display->display_options['fields']['field_wg_category']['label'] = '';
+  $handler->display->display_options['fields']['field_wg_category']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_wg_category']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_wg_category']['type'] = 'i18n_taxonomy_term_reference_plain';
+  /* Field: Content: Personal Title */
+  $handler->display->display_options['fields']['field_personal_title']['id'] = 'field_personal_title';
+  $handler->display->display_options['fields']['field_personal_title']['table'] = 'field_data_field_personal_title';
+  $handler->display->display_options['fields']['field_personal_title']['field'] = 'field_personal_title';
+  $handler->display->display_options['fields']['field_personal_title']['label'] = '';
+  $handler->display->display_options['fields']['field_personal_title']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_personal_title']['element_label_colon'] = FALSE;
+  /* Field: Content: WG Role 2 */
+  $handler->display->display_options['fields']['field_wg_role_2']['id'] = 'field_wg_role_2';
+  $handler->display->display_options['fields']['field_wg_role_2']['table'] = 'field_data_field_wg_role_2';
+  $handler->display->display_options['fields']['field_wg_role_2']['field'] = 'field_wg_role_2';
+  $handler->display->display_options['fields']['field_wg_role_2']['label'] = '';
+  $handler->display->display_options['fields']['field_wg_role_2']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_wg_role_2']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_wg_role_2']['alter']['text'] = ', [field_wg_role_2]';
+  $handler->display->display_options['fields']['field_wg_role_2']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_wg_role_2']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['field_wg_role_2']['type'] = 'i18n_taxonomy_term_reference_plain';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['text'] = '<strong>[field_personal_title] [title]</strong> ([field_wg_category])[field_wg_role_2]';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Osha press contact: Bureau members group field */
+  $handler->display->display_options['fields']['bureau_group']['id'] = 'bureau_group';
+  $handler->display->display_options['fields']['bureau_group']['table'] = 'osha_press_contact';
+  $handler->display->display_options['fields']['bureau_group']['field'] = 'bureau_group';
+  $handler->display->display_options['fields']['bureau_group']['label'] = '';
+  $handler->display->display_options['fields']['bureau_group']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['bureau_group']['element_label_colon'] = FALSE;
   $translatables['bureau_members'] = array(
     t('Master'),
     t('Composition of the Bureau of the Governing Board'),
@@ -947,6 +1002,7 @@ function osha_press_contact_views_default_views() {
     t('term from field_wg_role_2'),
     t(', [field_wg_role_2]'),
     t('<strong>[field_personal_title] [title]</strong> ([field_wg_category])[field_wg_role_2]'),
+    t('Bureau members group field'),
     t('Block'),
   );
   $export['bureau_members'] = $view;

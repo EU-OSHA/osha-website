@@ -234,12 +234,6 @@ function osha_frontend_menu_link__menu_block($variables) {
 
     $output_image = l($image, $element['#href'], array('html' => TRUE));
   }
-  if (($variables['element']['#theme'][0] == 'menu_link__menu_block__3') && (arg(1) == 20)) {
-    $options = $element['#localized_options'];
-    $options['html'] = TRUE;
-    $text = '<span class="content-img">' . $image . '</span><h2>' . $element['#title'] . '</h2>';
-    return '<div class="content-box-sub">' . l($text, $element['#href'], $options) . '</div>';
-  }
   return '<li' . drupal_attributes($element['#attributes']) . '>
     <div class="introduction-title">' . $output_link . '</div>
     <div class="introduction-image">' . $output_image . '</div>
@@ -506,7 +500,21 @@ function osha_frontend_preprocess_page(&$variables) {
       case "publication":
         $variables['theme_hook_suggestions'][] = 'page__node__publication';
         break;
+
+      case "dangerous_substances":
+        $variables['theme_hook_suggestions'][] = 'page__node__dangerous_substances';
+        $variables['back_back'] = '';
+        if (user_is_anonymous() || isset($_REQUEST['ds_public'])) {
+          $variables['back_back'] = '<div class="view-header back">'.l(t('Back to Practical tools and guidance on dangerous substances'), 'themes/dangerous-substances/practical-tools-dangerous-substances').'</div>';
+        }
+        break;
     }
+  }
+  if (arg(0) . arg(1) == 'publicationstype') {
+    $variables['theme_hook_suggestions'][] = 'page__publications_related';
+    }
+  if (arg(0) . arg(1) == 'publicationstopic') {
+    $variables['theme_hook_suggestions'][] = 'page__publications_related';
   }
   if (arg(0) . arg(1) == 'oshevents') {
     $variables['theme_hook_suggestions'][] = 'page__newevents';

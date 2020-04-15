@@ -104,18 +104,18 @@ function osha_publication_menu_publications_form($form, $form_state) {
     ];
   }
 
-  $form['left-column']['publication_type'] = array(
-    '#type' => 'checkboxes',
-    '#options' => _publication_type_options_list(TRUE),
-    '#default_value' => $publication_type,
-    '#title' => t('Type'),
-  );
-
   $form['left-column']['tags'] = array(
     '#type' => 'checkboxes',
     '#options' => _osha_publication_tags_options_list(TRUE),
     '#default_value' => $tags,
     '#title' => t('Topics'),
+  );
+
+  $form['left-column']['publication_type'] = array(
+    '#type' => 'checkboxes',
+    '#options' => _publication_type_options_list(TRUE),
+    '#default_value' => $publication_type,
+    '#title' => t('Type'),
   );
 
   if (empty($form_state['input'])) {
@@ -158,6 +158,8 @@ function osha_publication_menu_publications_form_submit($form, &$form_state) {
 
 function osha_publication_menu_publications_search_native($form_state) {
   global $language;
+  /** @var SearchApiQuery $query */
+  /** @var SearchApiSolrService $server */
   $languages = osha_publication_req_param($form_state, 'languages', array($language->language));
   $text = osha_publication_req_param($form_state, 'text');
   $sort_by = osha_publication_req_param($form_state, 'sort_by', 'field_publication_date');
@@ -167,24 +169,20 @@ function osha_publication_menu_publications_search_native($form_state) {
   $is_search = !empty($text);
   $restrict = array();
   if ($is_search) {
-    /** @var SearchApiQuery $query */
-    /** @var SearchApiSolrService $server */
     list($server, $query) = osha_publication_menu_publications_get_query();
     $query->setOption('conjunction', 'OR');
+    $query->keys($text);
+    $fields = [
+      'title_field',
+      'body:value',
+    ];
+    $query->fields($fields);
+
     $query->condition('status', 1);
     $query->condition('type', 'publication');
     $query->condition('field_file:file', 0, '>');
 
     $query->condition('field_publication_date', time(), '<');
-
-    $query->keys($text);
-    $fields = array(
-      'title_field',
-      'body:value',
-      'field_tags:name',
-      'field_publication_type:name',
-    );
-    $query->fields($fields);
 
     if ($sort_by == 'field_publication_date') {
       $query->sort('field_publication_date', 'DESC');
@@ -355,16 +353,6 @@ function osha_publication_menu_publications_search_native($form_state) {
   return $ret;
 }
 
-function osha_publication_menu_publications_get_query() {
-  $server = search_api_server_load('solr_server');
-  $index = search_api_index_load(SOLR_SEARCH_INDEX);
-  $query = new SearchApiQuery($index);
-  // Avoid PHP notice.
-  $query->fields(array());
-  $solr = new SearchApiSolrService($server);
-  return array($solr, $query);
-}
-
 /**
  * Get options for publication type filter.
  */
@@ -404,7 +392,6 @@ function _publication_type_options_list($map_only = FALSE) {
   }
   return $return;
 }
-
 
 /**
  * Get options for publication type filter.

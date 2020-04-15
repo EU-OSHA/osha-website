@@ -82,17 +82,15 @@ if ($view_mode == 'full') {
                     </div>
                     <?php } ?>
                     <div class="pub-text"><?php print render($content['body']) ?></div>
-                </div>
-            </div>
-            <div class="content-downloads">
               <?php
-              print render($content['download_form']);
+                  print render($content['field_file']);
               if ($content['field_banner_publications_office']['#items'][0]['value']) {
                 echo theme('osha_publication_bookshop_id_format', ['title' => $node->title]);
               }
               ?>
             </div>
         </div>
+    </div>
     </div>
   <?php
   if ($publications_related_resources) {

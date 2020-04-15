@@ -583,6 +583,7 @@ function osha_dangerous_substances_form_alter(&$form, &$form_state, $form_id) {
       $form['#after_build'] = array();
     }
     $form['#after_build'][] = '_osha_dangerous_substances_form_after_build';
+    $form['#validate'][] = 'osha_dangerous_substances_form_validate';
     // Removed, see MDR-969
     //$form['actions']['submit']['#submit'][] = 'osha_dangerous_substances_node_save_redirect_submit';
     //if (isset($form['actions']['save_preview'])) {
@@ -603,7 +604,26 @@ function _osha_dangerous_substances_get_other_tid($element, $field, $other_name 
   return '-1';
 }
 
+function osha_dangerous_substances_form_validate($form, &$form_state) {
+  // No checkbox selected.
+  if (empty($form_state['values']['field_non_applicable_url'][LANGUAGE_NONE][0]['value'])) {
+    if (empty($form_state['values']['field_external_url']['en'][0]['url'])) {
+      form_set_error('field_external_url', 'URL field is required.');
+    }
+  }
+  else {
+    if (!empty($form_state['values']['field_external_url']['en'][0]['url'])) {
+      form_set_error('field_non_applicable_url', 'Non empty URL field and Non applicable url selected.');
+    }
+  }
+}
+
 function _osha_dangerous_substances_form_after_build($form, $form_state) {
+  $form['field_external_url']['#states'] = [
+    'invisible'=>[
+      ':input[name="field_non_applicable_url[und]"]' => array('checked' => TRUE),
+    ]
+  ];
 
   // Provider other
   foreach (element_children($form['field_fc_provider'][LANGUAGE_NONE]) as $key) {

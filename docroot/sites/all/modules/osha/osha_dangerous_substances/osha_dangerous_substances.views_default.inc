@@ -87,7 +87,7 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_country_other']['table'] = 'field_data_field_country_other';
   $handler->display->display_options['fields']['field_country_other']['field'] = 'field_country_other';
   $handler->display->display_options['fields']['field_country_other']['type'] = 'text_plain';
-  /* Field: Content: URL */
+  /* Field: Content: External URL */
   $handler->display->display_options['fields']['field_external_url']['id'] = 'field_external_url';
   $handler->display->display_options['fields']['field_external_url']['table'] = 'field_data_field_external_url';
   $handler->display->display_options['fields']['field_external_url']['field'] = 'field_external_url';
@@ -801,7 +801,7 @@ function osha_dangerous_substances_views_default_views() {
     t('Languages other'),
     t('Country'),
     t('Country other'),
-    t('URL'),
+    t('External URL'),
     t('Type of item'),
     t('Date of Publication / Year '),
     t('Sector / Industry covered other'),
@@ -1000,12 +1000,13 @@ function osha_dangerous_substances_views_default_views() {
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'themes/dangerous-substances/search';
 
-  /* Display: Data export */
-  $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
+  /* Display: XLS Data export */
+  $handler = $view->new_display('views_data_export', 'XLS Data export', 'xls');
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['style_plugin'] = 'osha_dangerous_substances_doc';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_xlsx';
   $handler->display->display_options['style_options']['provide_file'] = 1;
+  $handler->display->display_options['style_options']['filename'] = '%ds-export.xls';
   $handler->display->display_options['style_options']['parent_sort'] = 0;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Indexed Content: Title */
@@ -1280,7 +1281,7 @@ function osha_dangerous_substances_views_default_views() {
   $handler->display->display_options['fields']['field_fc_provider']['display'] = 'view';
   $handler->display->display_options['fields']['field_fc_provider']['view_mode'] = 'full';
   $handler->display->display_options['fields']['field_fc_provider']['bypass_access'] = 0;
-  $handler->display->display_options['path'] = 'themes/dangerous-substances/search/doc';
+  $handler->display->display_options['path'] = 'themes/dangerous-substances/search/xls';
   $handler->display->display_options['displays'] = array(
     'page' => 'page',
     'default' => 0,
@@ -1308,7 +1309,7 @@ function osha_dangerous_substances_views_default_views() {
     t('Search'),
     t('Status'),
     t('Page'),
-    t('Data export'),
+    t('XLS Data export'),
     t('Title'),
     t('Title (original)'),
     t('Available in languages'),

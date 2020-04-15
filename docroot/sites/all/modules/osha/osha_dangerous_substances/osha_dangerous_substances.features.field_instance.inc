@@ -238,7 +238,8 @@ function osha_dangerous_substances_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Please describe the material (max. 150 words)
 Please note: the first paragraph will be displayed as short description, 
-please take this into consideration when you are writing the first paragraph.',
+Please take this into consideration when you are writing the first paragraph.
+Please use "Paste from Word" button when you copy text from MS Word.',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'hidden',
@@ -343,7 +344,7 @@ please take this into consideration when you are writing the first paragraph.',
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 39,
+      'weight' => 42,
     ),
     'workbench_access_field' => 0,
   );
@@ -437,7 +438,7 @@ please take this into consideration when you are writing the first paragraph.',
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 52,
+      'weight' => 55,
     ),
     'workbench_access_field' => 0,
   );
@@ -541,7 +542,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 13,
+      'weight' => 16,
     ),
     'workbench_access_field' => 0,
   );
@@ -633,7 +634,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 21,
+      'weight' => 24,
     ),
     'workbench_access_field' => 0,
   );
@@ -730,7 +731,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 22,
+      'weight' => 25,
     ),
     'workbench_access_field' => 0,
   );
@@ -740,7 +741,7 @@ please take this into consideration when you are writing the first paragraph.',
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please add a short description in original language (only if a description is available on the website or material – no extra drafting or translation)',
+    'description' => 'Please add a short description in original language (only if a description is available on the website or material – no extra drafting or translation). Please use "Paste from Word" button when you copy text from MS Word',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -826,7 +827,7 @@ please take this into consideration when you are writing the first paragraph.',
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 40,
+      'weight' => 43,
     ),
     'workbench_access_field' => 0,
   );
@@ -923,7 +924,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 30,
+      'weight' => 33,
     ),
     'workbench_access_field' => 0,
   );
@@ -933,8 +934,7 @@ please take this into consideration when you are writing the first paragraph.',
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please add the contact address for the material
-',
+    'description' => 'Please add the contact address for the material. Please use "Paste from Word" button when you copy text from MS Word',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -1116,7 +1116,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 12,
+      'weight' => 15,
     ),
     'workbench_access_field' => 0,
   );
@@ -1126,7 +1126,7 @@ please take this into consideration when you are writing the first paragraph.',
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please add the disclaimer for the material
+    'description' => 'Please add the disclaimer for the material. Please use "Paste from Word" button when you copy text from MS Word
 ',
     'display' => array(
       'dangerous_substances' => array(
@@ -1310,7 +1310,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 31,
+      'weight' => 34,
     ),
     'workbench_access_field' => 0,
   );
@@ -1400,7 +1400,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 43,
+      'weight' => 46,
     ),
     'workbench_access_field' => 0,
   );
@@ -1490,7 +1490,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 44,
+      'weight' => 47,
     ),
     'workbench_access_field' => 0,
   );
@@ -1581,7 +1581,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 27,
+      'weight' => 30,
     ),
     'workbench_access_field' => 0,
   );
@@ -1671,7 +1671,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 28,
+      'weight' => 31,
     ),
     'workbench_access_field' => 0,
   );
@@ -1681,7 +1681,7 @@ please take this into consideration when you are writing the first paragraph.',
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please fill in the URL to access the material if available. You should enter the full url, including http:// or https://',
+    'description' => '<span class="form-required" title="This field is required.">*</span> Please fill in the URL to access the material if available or select \'Non applicable URL\'. You should enter the full url, including http:// or https://',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'inline',
@@ -1787,7 +1787,7 @@ please take this into consideration when you are writing the first paragraph.',
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 8,
+      'weight' => 11,
     ),
     'workbench_access_field' => 0,
   );
@@ -1880,7 +1880,7 @@ please take this into consideration when you are writing the first paragraph.',
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 9,
+      'weight' => 12,
     ),
     'workbench_access_field' => 0,
   );
@@ -1978,7 +1978,7 @@ please take this into consideration when you are writing the first paragraph.',
         'year_range' => '-100:+1',
       ),
       'type' => 'date_popup',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -2057,7 +2057,7 @@ please take this into consideration when you are writing the first paragraph.',
     'entity_type' => 'node',
     'field_name' => 'field_hazard_health_effects',
     'label' => 'Hazard - health effects',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
@@ -2069,7 +2069,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 25,
+      'weight' => 28,
     ),
     'workbench_access_field' => 0,
   );
@@ -2159,7 +2159,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 26,
+      'weight' => 29,
     ),
     'workbench_access_field' => 0,
   );
@@ -2249,7 +2249,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 24,
+      'weight' => 27,
     ),
     'workbench_access_field' => 0,
   );
@@ -2341,7 +2341,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 23,
+      'weight' => 26,
     ),
     'workbench_access_field' => 0,
   );
@@ -2482,7 +2482,7 @@ please take this into consideration when you are writing the first paragraph.',
         'manualcrop_thumblist' => 0,
       ),
       'type' => 'media_generic',
-      'weight' => 53,
+      'weight' => 56,
     ),
     'workbench_access_field' => 0,
   );
@@ -2576,7 +2576,7 @@ please take this into consideration when you are writing the first paragraph.',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 49,
+      'weight' => 52,
     ),
     'workbench_access_field' => 0,
   );
@@ -2669,7 +2669,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 4,
+      'weight' => 5,
     ),
     'workbench_access_field' => 0,
   );
@@ -2758,7 +2758,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 14,
+      'weight' => 17,
     ),
     'workbench_access_field' => 0,
   );
@@ -2850,7 +2850,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 11,
+      'weight' => 14,
     ),
     'workbench_access_field' => 0,
   );
@@ -2940,7 +2940,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 38,
+      'weight' => 41,
     ),
     'workbench_access_field' => 0,
   );
@@ -3032,7 +3032,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 37,
+      'weight' => 40,
     ),
     'workbench_access_field' => 0,
   );
@@ -3129,7 +3129,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 32,
+      'weight' => 35,
     ),
     'workbench_access_field' => 0,
   );
@@ -3225,7 +3225,95 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 48,
+      'weight' => 51,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance:
+  // 'node-dangerous_substances-field_non_applicable_url'.
+  $field_instances['node-dangerous_substances-field_non_applicable_url'] = array(
+    'bundle' => 'dangerous_substances',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 65,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_search_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_non_applicable_url',
+    'label' => 'Non applicable url',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 10,
     ),
     'workbench_access_field' => 0,
   );
@@ -3308,7 +3396,7 @@ please take this into consideration when you are writing the first paragraph.',
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 55,
+      'weight' => 58,
     ),
   );
 
@@ -3397,7 +3485,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 16,
+      'weight' => 19,
     ),
     'workbench_access_field' => 0,
   );
@@ -3485,7 +3573,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 15,
+      'weight' => 18,
     ),
     'workbench_access_field' => 0,
   );
@@ -3496,7 +3584,7 @@ please take this into consideration when you are writing the first paragraph.',
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please add the other information for the material',
+    'description' => 'Please add the other information for the material. Please use "Paste from Word" button when you copy text from MS Word',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -3593,7 +3681,7 @@ please take this into consideration when you are writing the first paragraph.',
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please add the ownership information for the material
+    'description' => 'Please add the ownership information for the material. Please use "Paste from Word" button when you copy text from MS Word
 ',
     'display' => array(
       'dangerous_substances' => array(
@@ -3772,7 +3860,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 35,
+      'weight' => 38,
     ),
     'workbench_access_field' => 0,
   );
@@ -3869,7 +3957,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 36,
+      'weight' => 39,
     ),
     'workbench_access_field' => 0,
   );
@@ -3940,7 +4028,7 @@ please take this into consideration when you are writing the first paragraph.',
     'entity_type' => 'node',
     'field_name' => 'field_priority_area',
     'label' => 'Priority area',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
@@ -3952,7 +4040,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 5,
+      'weight' => 7,
     ),
     'workbench_access_field' => 0,
   );
@@ -4062,7 +4150,7 @@ please take this into consideration when you are writing the first paragraph.',
         'year_range' => '1990:+3',
       ),
       'type' => 'date_select',
-      'weight' => 10,
+      'weight' => 13,
     ),
     'workbench_access_field' => 0,
   );
@@ -4160,7 +4248,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 50,
+      'weight' => 53,
     ),
     'workbench_access_field' => 0,
   );
@@ -4252,7 +4340,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 17,
+      'weight' => 20,
     ),
     'workbench_access_field' => 0,
   );
@@ -4342,7 +4430,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 18,
+      'weight' => 21,
     ),
     'workbench_access_field' => 0,
   );
@@ -4430,7 +4518,7 @@ please take this into consideration when you are writing the first paragraph.',
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 54,
+      'weight' => 57,
     ),
     'workbench_access_field' => 0,
   );
@@ -4440,7 +4528,7 @@ please take this into consideration when you are writing the first paragraph.',
     'bundle' => 'dangerous_substances',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please add the name of the substance or substance group',
+    'description' => 'Please add the name of the substance or substance group. Please use "Paste from Word" button when you copy text from MS Word',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'inline',
@@ -4539,7 +4627,7 @@ please take this into consideration when you are writing the first paragraph.',
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 29,
+      'weight' => 32,
     ),
     'workbench_access_field' => 0,
   );
@@ -4630,7 +4718,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 41,
+      'weight' => 44,
     ),
     'workbench_access_field' => 0,
   );
@@ -4720,7 +4808,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 42,
+      'weight' => 45,
     ),
     'workbench_access_field' => 0,
   );
@@ -4811,7 +4899,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 19,
+      'weight' => 22,
     ),
     'workbench_access_field' => 0,
   );
@@ -4907,7 +4995,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 20,
+      'weight' => 23,
     ),
     'workbench_access_field' => 0,
   );
@@ -5008,7 +5096,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 7,
+      'weight' => 9,
     ),
     'workbench_access_field' => 0,
   );
@@ -5096,7 +5184,7 @@ please take this into consideration when you are writing the first paragraph.',
       'module' => 'cck_time',
       'settings' => array(),
       'type' => 'cck_time_select',
-      'weight' => 47,
+      'weight' => 50,
     ),
     'workbench_access_field' => 0,
   );
@@ -5186,7 +5274,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 46,
+      'weight' => 49,
     ),
     'workbench_access_field' => 0,
   );
@@ -5277,7 +5365,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 45,
+      'weight' => 48,
     ),
     'workbench_access_field' => 0,
   );
@@ -5367,7 +5455,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 34,
+      'weight' => 37,
     ),
     'workbench_access_field' => 0,
   );
@@ -5458,7 +5546,7 @@ please take this into consideration when you are writing the first paragraph.',
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 33,
+      'weight' => 36,
     ),
     'workbench_access_field' => 0,
   );
@@ -5563,7 +5651,7 @@ please take this into consideration when you are writing the first paragraph.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 6,
+      'weight' => 8,
     ),
     'workbench_access_field' => 0,
   );
@@ -6489,6 +6577,7 @@ please take this into consideration when you are writing the first paragraph.',
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('<span class="form-required" title="This field is required.">*</span> Please fill in the URL to access the material if available or select \'Non applicable URL\'. You should enter the full url, including http:// or https://');
   t('Advertising');
   t('Available in languages');
   t('Biological hazard');
@@ -6519,6 +6608,7 @@ please take this into consideration when you are writing the first paragraph.',
   t('Length of the video');
   t('Level');
   t('Measurement method');
+  t('Non applicable url');
   t('Notes');
   t('Original description language');
   t('Original description languages other');
@@ -6527,19 +6617,18 @@ please take this into consideration when you are writing the first paragraph.',
   t('Ownership information');
   t('Please add a country code from the list');
   t('Please add a language code from the list');
-  t('Please add a short description in original language (only if a description is available on the website or material – no extra drafting or translation)');
+  t('Please add a short description in original language (only if a description is available on the website or material – no extra drafting or translation). Please use "Paste from Word" button when you copy text from MS Word');
   t('Please add format and quality of the material');
   t('Please add the CAS number of the substances covered, if possible');
   t('Please add the EC numbers of the substances, if possible');
   t('Please add the NACE code of the sector covered in the material');
-  t('Please add the contact address for the material
-');
-  t('Please add the disclaimer for the material
+  t('Please add the contact address for the material. Please use "Paste from Word" button when you copy text from MS Word');
+  t('Please add the disclaimer for the material. Please use "Paste from Word" button when you copy text from MS Word
 ');
   t('Please add the measurement method used');
-  t('Please add the name of the substance or substance group');
-  t('Please add the other information for the material');
-  t('Please add the ownership information for the material
+  t('Please add the name of the substance or substance group. Please use "Paste from Word" button when you copy text from MS Word');
+  t('Please add the other information for the material. Please use "Paste from Word" button when you copy text from MS Word');
+  t('Please add the ownership information for the material. Please use "Paste from Word" button when you copy text from MS Word
 ');
   t('Please add the time in minutes');
   t('Please check if advertising is included in the material');
@@ -6550,9 +6639,9 @@ please take this into consideration when you are writing the first paragraph.',
 ');
   t('Please describe the material (max. 150 words)
 Please note: the first paragraph will be displayed as short description, 
-please take this into consideration when you are writing the first paragraph.');
+Please take this into consideration when you are writing the first paragraph.
+Please use "Paste from Word" button when you copy text from MS Word.');
   t('Please fill in the English title of the material');
-  t('Please fill in the URL to access the material if available. You should enter the full url, including http:// or https://');
   t('Please fill in the original title of the material');
   t('Please fill in the type of the material');
   t('Please select a target group from the drop down list');

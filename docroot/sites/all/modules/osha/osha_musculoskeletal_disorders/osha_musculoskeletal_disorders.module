@@ -347,10 +347,15 @@ function osha_musculoskeletal_disorders_add_terms() {
   }
 }
 
-function osha_musculoskeletal_disorders_get_exclude_fields($original_language) {
+function osha_musculoskeletal_disorders_get_exclude_fields($original_languages) {
   global $language;
-  if ($language->language == $original_language) {
+  foreach ($original_languages as $original_language) {
+    if ($original_language['value'] == 'en') {
+      continue;
+    }
+    if ($language->language == $original_language['value']) {
     return ['title_field', 'body'];
+  }
   }
   return ['field_title_original', 'field_body_original'];
 }

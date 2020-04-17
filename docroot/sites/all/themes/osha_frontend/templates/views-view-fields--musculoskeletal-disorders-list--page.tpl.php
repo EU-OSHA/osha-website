@@ -23,10 +23,11 @@
  *
  * @ingroup views_templates
  */
+$original_languages = [];
 if ($row->_entity_properties['entity object']->field_original_desc_language && $row->_entity_properties['entity object']->field_original_desc_language['und'][0]['value']) {
-  $original_language = $row->_entity_properties['entity object']->field_original_desc_language['und'][0]['value'];
+  $original_languages = $row->_entity_properties['entity object']->field_original_desc_language['und'];
 }
-$exclude_fields = osha_musculoskeletal_disorders_get_exclude_fields($original_language);
+$exclude_fields = osha_musculoskeletal_disorders_get_exclude_fields($original_languages);
 unset($fields['field_original_desc_language']);
 foreach ($fields as $id => $field) {
   if (in_array($id, $exclude_fields)) {

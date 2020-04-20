@@ -30,20 +30,23 @@
     </header>
   <?php endif; ?>
   <?php
-  $query = db_select('node', 'n');
-  $query->leftJoin('node_revision', 'r', 'n.nid = r.nid');
-  $query->addField('n', 'vid', 'live_revision');
-  $query->condition('r.vid', $node->vid)
-    ->fields('r', array('nid', 'vid', 'title', 'log', 'timestamp'));
-  $revisions = $query->execute()->fetchAllAssoc('vid');
+  /** @var string $view_mode */
+  if ('full' == $view_mode) {
+    $query = db_select('node', 'n');
+    $query->leftJoin('node_revision', 'r', 'n.nid = r.nid');
+    $query->addField('n', 'vid', 'live_revision');
+    $query->condition('r.vid', $node->vid)
+      ->fields('r', array('nid', 'vid', 'title', 'log', 'timestamp'));
+    $revisions = $query->execute()->fetchAllAssoc('vid');
 
-  // We hide the comments and links now so that we can render them later.
-  hide($content['comments']);
-  hide($content['links']);
-  print render($content['title_field']);
-  hide($content['title_field']);
-  $latest_update_format = variable_get('latest_update_format', 'd/m/Y');
-  echo '<div class="latest-update">' . t('Latest update: !changed', array('!changed' => date($latest_update_format, $revisions[$node->vid]->timestamp))) . '</div>';
+    // We hide the comments and links now so that we can render them later.
+    hide($content['comments']);
+    hide($content['links']);
+    print render($content['title_field']);
+    hide($content['title_field']);
+    $latest_update_format = variable_get('latest_update_format', 'd/m/Y');
+    echo '<div class="latest-update">' . t('Latest update: !changed', array('!changed' => date($latest_update_format, $revisions[$node->vid]->timestamp))) . '</div>';
+  }
   print render($content);
   ?>
   <?php print render($content['links']); ?>

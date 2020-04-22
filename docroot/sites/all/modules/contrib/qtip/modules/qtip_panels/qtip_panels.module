@@ -1,0 +1,85 @@
+<?php
+
+/**
+ * @file
+ * Qtip panels primary module file.
+ */
+
+/**
+ * Implements hook_form_alter().
+ */
+function qtip_panels_form_alter(&$form, $form_state, $form_id) {
+  if (isset($form_state['pane']) && isset($form['override_title'])) {
+    $settings = isset($form_state['pane']->configuration['qtip']) ? $form_state['pane']->configuration['qtip'] : array('text' => '', 'instance' => qtip_fetch_default_instance());
+
+    $form['instance']['qtip'] = array(
+      '#type'        => 'fieldset',
+      '#title'       => t('qTip settings'),
+      '#collapsible' => 1,
+      '#collapsed'   => ($settings['qtip_title'] != 0) ? 0 : 1,
+      '#weight'      => $form['override_title_markup']['#weight'] + 1,
+      '#states' => array(
+        'visible' => array(
+          ':input[name="override_title"]' => array('checked' => TRUE),
+        ),
+      ),
+    );
+    $form['instance']['qtip']['qtip_title'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Add qTip to pane title.'),
+      '#description' => t('If checked qTip will be shown after the title in the rendered pane.'),
+      '#default_value' => isset($settings['qtip_title']) ? $settings['qtip_title'] : 0,
+    );
+    $form['instance']['qtip']['custom_text'] = array(
+      '#type'          => 'textarea',
+      '#title'         => t('Custom text'),
+      '#description'   => t('Enter the text that will show in the tooltip. Use this option if you would like to have the help text field display normally, but still have text display in a qTip. HTML is allowed.'),
+      '#default_value' => isset($settings['custom_text']) ? $settings['custom_text'] : '',
+      '#weight' => 10,
+      '#states' => array(
+        'visible' => array(
+          ':input[name="qtip_title"]' => array('checked' => TRUE),
+        ),
+      ),
+    );
+
+    $form['instance']['qtip']['instance'] = qtip_fetch_instances_field($settings['instance'], array('weight' => 20));
+    $form['instance']['qtip']['instance'] += array(
+      '#states' => array(
+        'visible' => array(
+          ':input[name="qtip_title"]' => array('checked' => TRUE),
+        ),
+      ),
+    );
+
+    $form['#submit'][] = 'qtip_panels_content_configure_form_defaults_submit';
+  }
+}
+
+/**
+ * Submit handler to store qtip override info.
+ */
+function qtip_panels_content_configure_form_defaults_submit(&$form, &$form_state) {
+  if (isset($form_state['values']['qtip_title'])) {
+    $form_state['conf']['qtip']['qtip_title'] = $form_state['values']['qtip_title'];
+    $form_state['conf']['qtip']['custom_text'] = $form_state['values']['custom_text'];
+    $form_state['conf']['qtip']['instance'] = $form_state['values']['instance'];
+  }
+}
+
+/**
+ * Implements hook_panels_pane_prerender().
+ */
+function qtip_panels_panels_pane_prerender($pane) {
+  if (isset($pane->configuration['qtip']['qtip_title']) && $pane->configuration['qtip']['qtip_title'] == 1) {
+    $qtip_help_image = theme('image', array(
+      'path' => base_path() . 'misc/help.png',
+    ));
+    $qtip = theme('qtip', array(
+      'content' => $qtip_help_image,
+      'instance' => $pane->configuration['qtip']['instance'],
+      'tooltip' => $pane->configuration['qtip']['custom_text'],
+    ));
+    $pane->configuration['override_title_text'] .= $qtip;
+  }
+}

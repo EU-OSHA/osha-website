@@ -605,6 +605,7 @@ function osha_dangerous_substances_form_alter(&$form, &$form_state, $form_id) {
       $tooltips[$ds_field] = osha_qtip_text('<img src="/sites/all/modules/osha/osha_dangerous_substances/images/tooltip.png" />', $term->description);
     }
     drupal_add_js(array('tooltips' => $tooltips), 'setting');
+    drupal_add_css(drupal_get_path('module', 'osha_dangerous_substances') . '/css/osha_dangerous_substances.css');
   }
 }
 

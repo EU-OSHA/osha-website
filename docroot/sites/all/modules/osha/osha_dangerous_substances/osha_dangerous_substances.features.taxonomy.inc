@@ -12,12 +12,12 @@ function osha_dangerous_substances_taxonomy_default_vocabularies() {
     'biological_hazard' => array(
       'name' => 'Biological hazard',
       'machine_name' => 'biological_hazard',
-      'description' => NULL,
+      'description' => '',
       'hierarchy' => 0,
       'module' => 'taxonomy',
       'weight' => 0,
       'language' => 'und',
-      'i18n_mode' => 0,
+      'i18n_mode' => 1,
       'rdf_mapping' => array(
         'rdftype' => array(
           0 => 'skos:ConceptScheme',
@@ -87,12 +87,12 @@ function osha_dangerous_substances_taxonomy_default_vocabularies() {
     'hazard_health_effects' => array(
       'name' => 'Chemical hazards related to health effects',
       'machine_name' => 'hazard_health_effects',
-      'description' => NULL,
-      'hierarchy' => 1,
+      'description' => '',
+      'hierarchy' => 0,
       'module' => 'taxonomy',
       'weight' => 0,
       'language' => 'und',
-      'i18n_mode' => 0,
+      'i18n_mode' => 1,
       'rdf_mapping' => array(
         'rdftype' => array(
           0 => 'skos:ConceptScheme',
@@ -112,12 +112,12 @@ function osha_dangerous_substances_taxonomy_default_vocabularies() {
     'hazard_physical_state' => array(
       'name' => 'Chemical and biological hazards related to state and occurrence in the workplace',
       'machine_name' => 'hazard_physical_state',
-      'description' => NULL,
+      'description' => '',
       'hierarchy' => 0,
       'module' => 'taxonomy',
       'weight' => 0,
       'language' => 'und',
-      'i18n_mode' => 0,
+      'i18n_mode' => 1,
       'rdf_mapping' => array(
         'rdftype' => array(
           0 => 'skos:ConceptScheme',
@@ -142,7 +142,7 @@ function osha_dangerous_substances_taxonomy_default_vocabularies() {
       'module' => 'taxonomy',
       'weight' => 0,
       'language' => 'und',
-      'i18n_mode' => 0,
+      'i18n_mode' => 1,
       'rdf_mapping' => array(
         'rdftype' => array(
           0 => 'skos:ConceptScheme',
@@ -242,7 +242,7 @@ function osha_dangerous_substances_taxonomy_default_vocabularies() {
       'module' => 'taxonomy',
       'weight' => 0,
       'language' => 'und',
-      'i18n_mode' => 0,
+      'i18n_mode' => 1,
       'rdf_mapping' => array(
         'rdftype' => array(
           0 => 'skos:ConceptScheme',
@@ -287,12 +287,37 @@ function osha_dangerous_substances_taxonomy_default_vocabularies() {
     'target_group' => array(
       'name' => 'Proposal for target groups',
       'machine_name' => 'target_group',
-      'description' => NULL,
+      'description' => '',
       'hierarchy' => 0,
       'module' => 'taxonomy',
       'weight' => 0,
       'language' => 'und',
-      'i18n_mode' => 0,
+      'i18n_mode' => 1,
+      'rdf_mapping' => array(
+        'rdftype' => array(
+          0 => 'skos:ConceptScheme',
+        ),
+        'name' => array(
+          'predicates' => array(
+            0 => 'dc:title',
+          ),
+        ),
+        'description' => array(
+          'predicates' => array(
+            0 => 'rdfs:comment',
+          ),
+        ),
+      ),
+    ),
+    'tooltips' => array(
+      'name' => 'Tooltips',
+      'machine_name' => 'tooltips',
+      'description' => 'DS database tooltips ',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+      'language' => 'und',
+      'i18n_mode' => 1,
       'rdf_mapping' => array(
         'rdftype' => array(
           0 => 'skos:ConceptScheme',

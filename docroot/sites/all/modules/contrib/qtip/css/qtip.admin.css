@@ -1,0 +1,8 @@
+form#qtip-configure-instance-form .corners-images {
+  float: right;
+}
+
+form#qtip-configure-instance-form .corners-images .credit {
+  font-size: 10px;
+  text-align: right;
+}

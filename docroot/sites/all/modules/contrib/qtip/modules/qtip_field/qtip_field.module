@@ -1,0 +1,242 @@
+<?php
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function qtip_field_form_field_ui_field_edit_form_alter(&$form, &$form_state) {
+  if (!_qtip_is_supported_field($form['#field']['type'], $form['#instance']['widget']['type'])) {
+    return;
+  }
+
+  $settings = isset($form['#instance']['qtip']) ? $form['#instance']['qtip'] : array('text' => 'none', 'instance' => qtip_fetch_default_instance());
+
+  $form['instance']['qtip'] = array(
+    '#type'        => 'fieldset',
+    '#title'       => t('qTip settings'),
+    '#collapsible' => 1,
+    '#collapsed'   => ($settings['text'] != 'none') ? 0 : 1,
+    '#weight'      => $form['instance']['description']['#weight'] + 1,
+  );
+  $form['instance']['qtip']['text'] = array(
+      '#type'        => 'radios',
+      '#title'       => t('How to display qTip'),
+      '#description' => t('Select how to display the tooltip for this instance.'),
+      '#options'     => array(
+        'none'        => t('Do not display'),
+        'description' => t('Use text from help text field above'),
+        'filter'      => t('Use qTip filter in Help text'),
+        'custom'      => t('Custom text'),
+      ),
+      '#default_value' => isset($settings['text']) ? $settings['text'] : 'none',
+      '#weight'        => 0,
+  );
+  // I had to use {} instead of [] like qtip_filter because if the token module is enabled
+  // the admin gets errors about [qtip:...] not being a valid token.
+  $form['instance']['qtip']['filter_help'] = array(
+    '#type' => 'item',
+    '#title' => t('Filter format'),
+    '#markup' => '<strong>' . t('With title') . ':</strong> {qtip:Text to display on page|Tooltip title|Text to appear in tooltip}<br>
+                  <strong>' . t('Without title') . ':</strong> {qtip:Text to display on page|Text to appear in tooltip}',
+    '#states' => array(
+      'visible' => array(
+        ':input[name="instance[qtip][text]"]' => array('value' => 'filter'),
+      )
+    )
+  );
+
+  $form['instance']['qtip']['title'] = array(
+    '#type'          => 'textfield',
+    '#title'         => t('Title'),
+    '#description'   => t('Enter the title, if any, that will show with the tooltip.'),
+    '#default_value' => isset($settings['title']) ? $settings['title'] : '',
+    '#states'        => array(
+      'invisible' => array(
+        array(':input[name="instance[qtip][text]"]' => array('value' => 'none')),
+        array(':input[name="instance[qtip][text]"]' => array('value' => 'filter')),
+      ),
+    ),
+    '#weight' => 10,
+  );
+
+  $form['instance']['qtip']['custom_text'] = array(
+    '#type'          => 'textarea',
+    '#title'         => t('Custom text'),
+    '#description'   => t('Enter the text that will show in the tooltip. Use this option if you would like to have the help text field display normally, but still have text display in a qTip. HTML is allowed.'),
+    '#default_value' => isset($settings['custom_text']) ? $settings['custom_text'] : '',
+    '#states'        => array(
+      'visible' => array(
+        ':input[name="instance[qtip][text]"]' => array('value' => 'custom'),
+      ),
+      'required' => array(
+        ':input[name="instance[qtip][text]"]' => array('value' => 'custom'),
+      ),
+    ),
+    '#weight' => 20,
+  );
+  $form['instance']['qtip']['qtip_label'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Add qTip to field label.'),
+    '#description' => t('If checked qTip will be shown after the label in the rendered field.'),
+    '#default_value' => isset($settings['qtip_label']) ? $settings['qtip_label'] : 0,
+  );
+
+  $form['instance']['qtip']['instance'] = qtip_fetch_instances_field($settings['instance'], array('weight' => 30));
+  $form['instance']['qtip']['instance'] += array(
+    '#states' => array(
+      'invisible' => array(
+        ':input[name="instance[qtip][text]"]' => array('value' => 'none'),
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function qtip_field_field_widget_form_alter(&$element, &$form_state, $context) {
+  if (!_qtip_is_supported_field($context['field']['type'], $context['instance']['widget']['type'])) {
+    return;
+  }
+
+  if (isset($context['instance']['qtip']) && $context['instance']['qtip']['text'] != 'none') {
+    // Get type of field
+    $field_type = $context['field']['type'];
+    switch ($field_type) {
+      case 'text':
+      case 'number_decimal':
+        $local_element =& $element['value'];
+        break;
+      // case 'image':
+      //   $local_element =& $element[0];
+      //   break;
+      default:
+        $local_element =& $element;
+        break;
+    }
+
+    $local_element['#attributes']['class'][] = 'qtip-link';
+
+    $tooltip_title = isset($context['instance']['qtip']['title']) ? $context['instance']['qtip']['title'] : '';
+
+    $tooltip_text = '';
+    // Get the Help text for the tooltip if that is what is supposed to be used
+    switch ($context['instance']['qtip']['text']) {
+      case 'description':
+        if (isset($local_element['#description'])) {
+          $tooltip_text = $local_element['#description'];
+          // Remove the description since it will be displaying in the tooltip
+          unset($local_element['#description']);
+        }
+        break;
+      case 'filter':
+        if (preg_match_all("/{qtip:\s?([^\|\}]+)\|([^\}]*)?}/i", $local_element['#description'], $match)) {
+          foreach ($match[0] as $key => $value) {
+            $search[] = $match[0][$key];
+
+            $title = '';
+            $tooltip = $match[2][$key];
+            if (strpos($tooltip, '|') !== FALSE) {
+              list($title, $tooltip) = explode('|', $match[2][$key]);
+            }
+
+            $theme_variables = array(
+              'instance' => $context['instance']['qtip']['instance'],
+              'content'  => $match[1][$key],
+              'title'    => $title,
+              'tooltip'  => $tooltip,
+            );
+
+            $replace[] = theme('qtip', $theme_variables);
+          }
+
+          $local_element['#description'] = str_replace($search, $replace, $local_element['#description']);
+        }
+        break;
+      case 'custom':
+        $tooltip_text = isset($context['instance']['qtip']['custom_text']) ? $context['instance']['qtip']['custom_text'] : '';
+        break;
+    }
+
+    $local_element['#suffix'] = theme('qtip_form', array('instance' => $context['instance']['qtip']['instance'], 'title' => $tooltip_title, 'tooltip' => $tooltip_text));
+  }
+}
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function qtip_field_preprocess_field(&$variables) {
+  $settings = field_info_instance($variables['element']['#entity_type'], $variables['element']['#field_name'], $variables['element']['#bundle']);
+  if ($variables['label_hidden'] == FALSE && isset($settings['qtip']) && $settings['qtip']['qtip_label'] === 1 && $settings['qtip']['text'] != 'none') {
+    $qtip_help_image = theme('image', array(
+      'path' => base_path() . 'misc/help.png',
+    ));
+    $tooltip_text = '';
+    switch ($settings['qtip']['text']) {
+      case 'description':
+        if (isset($settings['description'])) {
+          $tooltip_text = $settings['description'];
+        }
+        break;
+
+      case 'custom':
+        $tooltip_text = isset($settings['qtip']['custom_text']) ? $settings['qtip']['custom_text'] : '';
+        break;
+    }
+    $qtip = theme('qtip', array(
+      'content' => $qtip_help_image,
+      'instance' => $settings['qtip']['instance'],
+      'tooltip' => $tooltip_text,
+    ));
+    $variables['label'] = $variables['label'] . $qtip;
+  }
+}
+
+/**
+ * Helper function to only show qTip information on currently supported fields.
+ */
+function qtip_supported_fields() {
+  return array(
+    'text' => array(),
+    'text_long' => array(),
+    'text_with_summary' => array(),
+    // 'image' => array(),
+    'list_boolean' => array(),
+    'list_text' => array(
+      'options_select',
+    ),
+    'list_float' => array(
+      'options_select',
+    ),
+    'list_integer' => array(
+      'options_select',
+    ),
+    'taxonomy_term_reference' => array(
+      'taxonomy_autocomplete',
+      'options_select',
+      'autocomplete_deluxe_taxonomy',
+    ),
+    'number_decimal' => array(),
+    'number_integer' => array(),
+  );
+}
+
+/**
+ * Check to see whether a field type and it's widget type is supported.
+ */
+function _qtip_is_supported_field($form_type, $widget_type) {
+   // Only display qTip settings for fields that are currently supported.
+  $supported_fields = qtip_supported_fields();
+  if (array_key_exists($form_type, $supported_fields)) {
+    $supported_type = $supported_fields[$form_type];
+
+    // If $supported_type is empty then all widgets for the type are supported.
+    if (!empty($supported_type) && !in_array($widget_type, $supported_type)) {
+      // The current field type and it's widget are not supported.
+      return FALSE;
+    }
+
+    return TRUE;
+  }
+
+  return FALSE;
+}

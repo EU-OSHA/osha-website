@@ -598,9 +598,6 @@ function osha_dangerous_substances_form_alter(&$form, &$form_state, $form_id) {
     $terms = taxonomy_get_tree($voc->vid, 0,NULL, TRUE);
     foreach($terms as $key => $term) {
       $ds_field = $term->field_ds_field[LANGUAGE_NONE][0]['value'];
-      if ($ds_field == 'field_biological_hazard') {
-        continue;
-      }
       $ds_field = 'edit-' . str_replace('_','-', $ds_field);
       $tooltips[$ds_field] = osha_qtip_text('<img src="/sites/all/modules/osha/osha_dangerous_substances/images/tooltip.png" />', $term->description);
     }

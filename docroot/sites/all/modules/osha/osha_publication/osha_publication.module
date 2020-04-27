@@ -569,6 +569,7 @@ function osha_publication_post_features_enable_feature($component) {
  * Implements hook_workbench_moderation_transition().
  */
 function osha_publication_workbench_moderation_transition($node, $old, $new) {
+  global $language;
   if ($node->type == 'publication' && $new == 'published') {
     $destination = 'node/' . $node->nid;
     $path = path_load(array('source' => $destination));
@@ -576,6 +577,19 @@ function osha_publication_workbench_moderation_transition($node, $old, $new) {
       $destination = $path['alias'];
     }
     $_GET['destination'] = $destination . '/view';
+  }
+  else if ($node->type == 'publication') {
+    if (!empty($node->field_file[$language->language][0]['fid'])) {
+      $file = file_load($node->field_file[$language->language][0]['fid']);
+      if ($file->filemime != 'application/pdf') {
+        $destination = 'node/' . $node->nid;
+        $path = path_load(array('source' => $destination));
+        if (!empty($path)) {
+          $destination = $path['alias'];
+        }
+        $_GET['destination'] = $destination . '/view';
+      }
+    }
   }
 }
 

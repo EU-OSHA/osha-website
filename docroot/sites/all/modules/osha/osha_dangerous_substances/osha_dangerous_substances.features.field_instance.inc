@@ -6492,6 +6492,120 @@ Please use "Paste from Word" button when you copy text from MS Word.',
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'taxonomy_term-tooltips-description_field'.
+  $field_instances['taxonomy_term-tooltips-description_field'] = array(
+    'bundle' => 'tooltips',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'description_field',
+    'label' => 'Help text',
+    'required' => 0,
+    'settings' => array(
+      'display_summary' => 0,
+      'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 20,
+        'summary_rows' => 5,
+      ),
+      'type' => 'text_textarea_with_summary',
+      'weight' => 1,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'taxonomy_term-tooltips-field_ds_field'.
+  $field_instances['taxonomy_term-tooltips-field_ds_field'] = array(
+    'bundle' => 'tooltips',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_ds_field',
+    'label' => 'DS field',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
+      'type' => 'options_select',
+      'weight' => 2,
+    ),
+    'workbench_access_field' => 0,
+  );
+
+  // Exported field_instance: 'taxonomy_term-tooltips-name_field'.
+  $field_instances['taxonomy_term-tooltips-name_field'] = array(
+    'bundle' => 'tooltips',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'name_field',
+    'label' => 'Name',
+    'required' => TRUE,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'hide_label' => array(
+        'entity' => FALSE,
+        'page' => FALSE,
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 0,
+    ),
+  );
+
   // Exported field_instance: 'taxonomy_term-worker_groups-field_thesaurus_id'.
   $field_instances['taxonomy_term-worker_groups-field_thesaurus_id'] = array(
     'bundle' => 'worker_groups',
@@ -6589,6 +6703,7 @@ Please use "Paste from Word" button when you copy text from MS Word.',
   t('Content (original language)');
   t('Country');
   t('Country other');
+  t('DS field');
   t('Disclaimer');
   t('EC number');
   t('Evaluation');
@@ -6602,12 +6717,14 @@ Please use "Paste from Word" button when you copy text from MS Word.',
   t('Hazard - health effects other');
   t('Hazard - physical state');
   t('Hazard - physical state other');
+  t('Help text');
   t('Image');
   t('Intellectual property rights');
   t('Languages other');
   t('Length of the video');
   t('Level');
   t('Measurement method');
+  t('Name');
   t('Non applicable url');
   t('Notes');
   t('Original description language');

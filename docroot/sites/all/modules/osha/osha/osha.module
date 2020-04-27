@@ -239,7 +239,8 @@ function osha_menu() {
 
   $items['node/%node/view_all_translations'] = array(
     'title' => 'View all translations',
-    'access arguments' => array('view the administration theme'),
+    'access callback' => 'osha_all_translations_access',
+    'access arguments' => array(1),
     'page callback' => 'osha_view_all_node_translations',
     'page arguments' => array(1),
     'weight' => 8,
@@ -248,7 +249,8 @@ function osha_menu() {
 
   $items['node/%node/open_all_translations'] = array(
     'title' => 'Edit all translations',
-    'access arguments' => array('view the administration theme'),
+    'access callback' => 'osha_all_translations_access',
+    'access arguments' => array(1),
     'page callback' => 'osha_open_all_node_translations',
     'page arguments' => array(1),
     'weight' => 9,
@@ -263,6 +265,19 @@ function osha_menu() {
 //    'type' => MENU_CALLBACK,
 //  );
   return $items;
+}
+
+function osha_all_translations_access($node) {
+  global $user;
+  $type = is_string($node) ? $node : $node->type;
+
+  if (variable_get('language_content_type_' . $type, 0) == 0) {
+    return FALSE;
+  }
+  if (user_access('view the administration theme', $user)) {
+    return TRUE;
+  }
+  return FALSE;
 }
 
 /**

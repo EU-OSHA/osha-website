@@ -1,0 +1,10 @@
+<?php
+
+/**
+ * Implements hook_disable().
+ */
+function qtip_views_disable() {
+  // Clear views cache so that a fatal error isn't thrown when this sub-module
+  // is disabled.
+  views_invalidate_cache();
+}

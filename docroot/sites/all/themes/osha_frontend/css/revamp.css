@@ -2299,6 +2299,16 @@ article.node-seminar{
     margin-top: 5px;
 }
 
+.page-themes-dangerous-substances-glossary .view-glossary-list .glossary_type .term-title{
+    padding-left: 0;
+}
+
+.page-themes-dangerous-substances-glossary .view-glossary-list .term-description p {
+    background: none;
+    padding-bottom: 0;
+    margin-top: 0;
+}
+
 /* MDR-3272:revamp - Links to the stress e-guide are missing */
 
 .e-guide-links{
@@ -3018,6 +3028,7 @@ article.node-article .article_related_resources.sidebars_first_true.sidebars_sec
     color: #003399;
     text-transform: uppercase;
     font-weight: bold;
+    border-bottom: 0;
 }
 
 .content-term dl{

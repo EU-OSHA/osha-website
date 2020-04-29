@@ -1,0 +1,75 @@
+<?php
+
+/**
+ * Implements hook_filter_info().
+ */
+function qtip_filter_filter_info() {
+  $filters['qtip'] = array(
+    'title'             => t('qTip tooltips'),
+    'process callback'  => '_qtip_filter_process',
+    'settings callback' => '_qtip_filter_settings',
+    'tips callback'     => '_qtip_filter_tips',
+  );
+
+  return $filters;
+}
+
+/**
+ * Private callback function for qtip_filter_filter_info().
+ */
+function _qtip_filter_process($text, $filter) {
+  if (preg_match_all("/\[qtip\-?([a-z0-9_]*)?:([^\|\\]]+)\|([^\\]]*)?\]/i", $text, $match)) {
+    foreach ($match[0] as $key => $value) {
+      $search[] = $match[0][$key];
+
+      $instance = $match[1][$key];
+      if (empty($instance) || !qtip_load($instance)) {
+        // Load the default instance
+        $instance = $filter->settings['instance'];
+      }
+
+      $title = '';
+      $tooltip = $match[3][$key];
+      if (strpos($tooltip, '|') !== FALSE) {
+        list($title, $tooltip) = explode('|', $match[3][$key]);
+      }
+
+      $theme_variables = array(
+        'instance' => $instance,
+        'content'  => $match[2][$key],
+        'title'    => $title,
+        'tooltip'  => $tooltip,
+      );
+
+      $replace[] = theme('qtip', $theme_variables);
+    }
+
+    return str_replace($search, $replace, $text);
+  }
+  return $text;
+}
+
+/**
+ * Private callback function for qtip_filter_filter_info().
+ */
+function _qtip_filter_settings($form, $form_state, $filter, $format, $defaults, $filters) {
+  $filter->settings += $defaults;
+
+  $settings['info'] = array(
+    '#markup' => '<strong> '. t('The qtip filter needs to be placed after the \'Limit allowed HTML tags\' filter, if used.') . '</strong>',
+  );
+
+  $settings['instance'] = qtip_fetch_instances_field($filter->settings['instance'], array('required' => TRUE, 'weight' => 100));
+  // We need to make some modifications to the default field settings
+  $settings['instance']['#title'] = t('Default instance');
+  $settings['instance']['#description'] = t('Select the default !link that will display when using this filter. This setting can be overridden on a per-tooltip basis by using [qtip-{machine name of tooltip}...] in the filter.', array('!link' => l(t('qTip instance'), 'admin/config/user-interface/qtip', array('attributes' => array('target' => '_blank')))));
+
+  return $settings;
+}
+
+/**
+ * Private callback function for qtip_filter_filter_info().
+ */
+function _qtip_filter_tips($delta, $format, $long = FALSE) {
+  return "Generate stylish tooltips. Format: [qtip:Text to display on page|Tooltip title (optional)|Text to appear in tooltip]";
+}

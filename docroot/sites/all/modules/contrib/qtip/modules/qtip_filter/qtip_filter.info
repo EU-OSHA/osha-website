@@ -1,0 +1,13 @@
+name = "qTip: Filter"
+description = "Provides a text format filter to easily add qTip tooltips to content."
+package = User interface
+core = 7.x
+
+dependencies[] = qtip
+
+; Information added by Drupal.org packaging script on 2017-03-19
+version = "7.x-2.0"
+core = "7.x"
+project = "qtip"
+datestamp = "1489934602"
+

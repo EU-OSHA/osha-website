@@ -155,7 +155,7 @@ jQuery(document).ready(function($){
 		{
 			console.log("PAGE NOT FOUND");
 			_paq.push(['trackEvent', 'Page not found', 'Page not found', url, 1]);
-		}        
+		}
     }
 
 

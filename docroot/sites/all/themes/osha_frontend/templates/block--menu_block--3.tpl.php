@@ -7,7 +7,7 @@
  * @see https://drupal.org/node/1728246
  */
 ?>
-<?php 
+<?php
     $node = menu_get_object();
     if (isset($node) && isset($node->article_type_code) && $node->article_type_code == 'introduction') {
     ?>

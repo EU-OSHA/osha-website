@@ -592,6 +592,17 @@ function osha_dangerous_substances_form_alter(&$form, &$form_state, $form_id) {
     //if (isset($form['actions']['send_for_approval'])) {
     //  $form['actions']['send_for_approval']['#submit'][] = 'osha_dangerous_substances_node_save_redirect_submit';
     //}
+    drupal_add_js(drupal_get_path('module', 'osha_dangerous_substances') . '/js/tooltip.js');
+    $tooltips = [];
+    $voc = taxonomy_vocabulary_machine_name_load('tooltips');
+    $terms = taxonomy_get_tree($voc->vid, 0,NULL, TRUE);
+    foreach($terms as $key => $term) {
+      $ds_field = $term->field_ds_field[LANGUAGE_NONE][0]['value'];
+      $ds_field = 'edit-' . str_replace('_','-', $ds_field);
+      $tooltips[$ds_field] = osha_qtip_text('<img src="/sites/all/modules/osha/osha_dangerous_substances/images/tooltip.png" />', $term->description);
+    }
+    drupal_add_js(array('tooltips' => $tooltips), 'setting');
+    drupal_add_css(drupal_get_path('module', 'osha_dangerous_substances') . '/css/osha_dangerous_substances.css');
   }
 }
 
@@ -882,4 +893,23 @@ function osha_dangerous_substances_add_taxonomy() {
       }
     }
   }
+}
+
+/**
+ * Implements hook_permission().
+ */
+function osha_dangerous_substances_permission() {
+  return array(
+    'DS tooltips' => array(
+      'title' => t('DS tooltips'),
+    ),
+  );
+}
+
+function osha_qtip_text($content, $tooltip) {
+  return theme('qtip', array(
+    'content' => $content,
+    'instance' => 'default',
+    'tooltip' => $tooltip,
+  ));
 }

@@ -354,8 +354,8 @@ function osha_musculoskeletal_disorders_get_exclude_fields($original_languages) 
       continue;
     }
     if ($language->language == $original_language['value']) {
-    return ['title_field', 'body'];
-  }
+      return ['title_field', 'body'];
+    }
   }
   return ['field_title_original', 'field_body_original'];
 }

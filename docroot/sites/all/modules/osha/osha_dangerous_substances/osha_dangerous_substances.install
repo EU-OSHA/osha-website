@@ -388,3 +388,11 @@ function osha_dangerous_substances_update_7033() {
     'field_group',
     )));
 }
+
+/**
+ * MDR-3575 DS database - New improvements - tooltips - estimation.
+ */
+function osha_dangerous_substances_update_7034() {
+  module_enable(array('qtip'));
+  features_revert(array('osha_dangerous_substances' => array('field_instance','field_base', 'views_view', 'taxonomy')));
+}

@@ -512,7 +512,7 @@ function osha_frontend_preprocess_page(&$variables) {
   }
   if (arg(0) . arg(1) == 'publicationstype') {
     $variables['theme_hook_suggestions'][] = 'page__publications_related';
-    }
+  }
   if (arg(0) . arg(1) == 'publicationstopic') {
     $variables['theme_hook_suggestions'][] = 'page__publications_related';
   }

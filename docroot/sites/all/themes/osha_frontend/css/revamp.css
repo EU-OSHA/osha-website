@@ -3147,3 +3147,13 @@ article.node-article .article_related_resources.sidebars_first_true.sidebars_sec
 #content .view-id-dangerous_substances_overview .feed-icon a:hover{
     opacity: 0.8;
 }
+
+a.facetapi-limit-link{
+    color: #003399;
+    font-size: 0.9em;
+    font-weight: 600;
+}
+
+a.facetapi-limit-link:hover{
+    text-decoration: none;
+}

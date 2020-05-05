@@ -2289,8 +2289,16 @@ ul[data-sa-theme="basic-blue"].ui-menu{
 		margin-top: 1em;
 	}
 
+	.view-press-releases .row{
+		padding-bottom: 1em;
+	}
+
 	.view-press-releases .row .views-field-view-node span a{
 		padding-left: 0 !important;
+	}
+
+	#block-views-press-contacts-block table tr td  .views-field-field-press-contact-email{
+		padding-bottom: 0;
 	}
 
 }

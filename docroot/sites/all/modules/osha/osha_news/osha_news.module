@@ -28,7 +28,7 @@ function osha_news_field_widget_form_alter(&$element, &$form_state, $context) {
 
 function osha_news_caption_widget_process($element, &$form_state, $form) {
   // Add the additional alt and title fields.
-  $element['image_field_caption']['#title'] = t('Caption (copyright)');
+  $element['image_field_caption']['#title'] = t('Caption (copy-right)');
   return $element;
 }
 

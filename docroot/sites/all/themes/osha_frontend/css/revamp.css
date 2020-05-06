@@ -2952,6 +2952,9 @@ article.node-article .article_related_resources.sidebars_second_true .video .ico
 
 .content-fluid.related-resources.article_related_resources .content-related-publications h2 {
     width: 100%;
+    height: auto;
+    margin-top: 0;
+    margin-bottom: 1em;
 }
 
 .content-fluid.related-resources.article_related_resources .content-related-publications.publications a.see-more-arrow:hover{
@@ -3143,4 +3146,14 @@ article.node-article .article_related_resources.sidebars_first_true.sidebars_sec
 
 #content .view-id-dangerous_substances_overview .feed-icon a:hover{
     opacity: 0.8;
+}
+
+a.facetapi-limit-link{
+    color: #003399;
+    font-size: 0.9em;
+    font-weight: 600;
+}
+
+a.facetapi-limit-link:hover{
+    text-decoration: none;
 }

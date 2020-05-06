@@ -64,3 +64,10 @@ function osha_highlight_update_7004() {
 function osha_highlight_update_7005() {
   features_revert(array('osha_highlight' => array('field_instance')));
 }
+
+/**
+ * MDR-3576 Published highlight dissapears when translations are being uploaded.
+ */
+function osha_highlight_update_7006() {
+  features_revert(array('osha_highlight' => array('views_view')));
+}

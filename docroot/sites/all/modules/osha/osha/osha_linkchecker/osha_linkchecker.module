@@ -65,6 +65,15 @@ function osha_linkchecker_entity_property_info() {
     'entity views field' => TRUE,
     'schema field' => 'code',
   );
+  $properties['status'] = array(
+    'label' => t("Check link status"),
+    'type' => 'integer',
+    'description' => t("Unchecked if you wish to ignore this link"),
+    'getter callback' => 'entity_property_verbatim_get',
+    'setter callback' => 'entity_property_verbatim_set',
+    'entity views field' => TRUE,
+    'schema field' => 'status',
+  );
   $properties['error'] = array(
     'label' => t("Error"),
     'type' => 'text',

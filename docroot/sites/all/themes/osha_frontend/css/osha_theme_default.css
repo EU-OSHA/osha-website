@@ -7449,6 +7449,12 @@ display:block!important;
 		display:table-header-group;
 		width:100%;
 	}
+
+	#block-views-press-contacts-block table tr td {
+	    padding-bottom: 10px;
+	    display: block;
+	}
+
   .newsletter-container td {
     display: table-cell;
     width:auto;

@@ -182,11 +182,46 @@ function osha_admin_redirection_errors() {
   return $output;
 }
 
+function osha_config_link_domains_form() {
+  $form = array();
+  $link_extra_domains = variable_get('link_extra_domains', []);
+  $form['link_domains'] = array(
+    '#type' => 'textarea',
+    '#rows' => 7,
+    '#title' => t('List of allowed domains'),
+    '#default_value' => implode("\n", $link_extra_domains),
+  );
+  $form['#submit'][] = 'osha_config_link_domains_form_submit';
+  return system_settings_form($form);
+}
+
+function osha_config_link_domains_form_submit($form, &$form_state) {
+  variable_set('link_extra_domains', explode("\n", $form_state['values']['link_domains']));
+}
+
+/**
+ * Implements hook_permission().
+ */
+function osha_permission() {
+  $perms = array(
+    'administer link domains' => array('title' => t('Administer link domains'),),
+  );
+  return $perms;
+}
+
 /**
  * Implements hook_menu().
  */
 function osha_menu() {
   $items = array();
+
+  $items['admin/config/content/link_domains'] = array(
+    'title' => 'Link domains',
+    'description' => 'Administer list of allowed domains',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('osha_config_link_domains_form'),
+    'access arguments' => array('administer link domains'),
+  );
 
   $items['admin/reports/redirection_errors'] = array(
     'title' => 'Redirection errors',

@@ -1175,6 +1175,20 @@ span.date-display-single{
 	background-position: bottom,left;
 }
 
+.node-wiki-page:last-child{
+	background: url("../images/separator_home.jpg") repeat-x;
+	background-position: bottom,left;
+	background-image: none;
+}
+
+#related-wiki .oshwiki-featured-articles article:last-child{
+	padding-bottom: 0;
+}
+
+#related-wiki .oshwiki-featured-articles article:last-child .field-name-field-wiki-page-url a{
+	padding-bottom: 0.5em;
+}
+
 .node-wiki-page .field-name-title-field{
     color: #003399;
     font-family: Open Sans Condensed;

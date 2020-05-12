@@ -50,6 +50,10 @@
   }
   print render($content);
 
+  $oshwiki = block_load('osha_blocks', 'oshwiki_featured_articles');
+  $array = _block_get_renderable_array(_block_render_blocks([$oshwiki]));
+  echo render($array);
+
   if ($publications_related_resources) {
     $related_resources = [];
     foreach (array_keys($publications_related_resources['#items']) as $key) {

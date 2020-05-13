@@ -793,7 +793,7 @@ function osha_publication_field_default_field_instances() {
         'manualcrop_maximize_default_crop_area' => 0,
         'manualcrop_require_cropping' => array(),
         'manualcrop_styles_list' => array(
-          'cover_images' => 'cover_images',
+          'publications' => 'publications',
         ),
         'manualcrop_styles_mode' => 'include',
         'manualcrop_thumblist' => 0,

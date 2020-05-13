@@ -9,6 +9,7 @@ if ($type) {
         <h2><?php print t('Related resources'); ?></h2>
       <?php
       $bundles = array(
+        'twin_publication' => t('Twin publications'),
         'publication' => t('Related publications'),
         'slideshare' => t('Presentations'),
         'infographic' => t('Infographics'),

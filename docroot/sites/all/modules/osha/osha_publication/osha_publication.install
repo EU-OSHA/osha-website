@@ -878,3 +878,10 @@ function osha_publication_update_7030() {
   ];
   variable_set('publication_redirect_map', $map);
 }
+
+/**
+ * MDR-3654 Create a cropping feature for the publications.
+ */
+function osha_publication_update_7031() {
+  features_revert(array('osha_publication' => array('field_base', 'field_instance')));
+}

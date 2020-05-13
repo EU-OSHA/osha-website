@@ -310,7 +310,7 @@ class OshaMigrateSourceWiki extends MigrateSource {
 
         $ob->updated = '';
         if (!empty($data['printouts']['Modification date'][0])) {
-          $updated = $data['printouts']['Modification date'][0];
+          $updated = $data['printouts']['Modification date'][0]['timestamp'];
           $ob->updated = $updated;
           if ($updated <= $this->newestItemDate && $this->skip_datecheck === FALSE) {
             // We hit the oldest updated item, end the migration.

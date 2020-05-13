@@ -794,3 +794,13 @@ function osha_update_7055() {
 function osha_update_7056() {
   module_enable(array('osha_glossary'));
 }
+
+/**
+ * MDR-3637 add .blog to the list of domains.
+ */
+function osha_update_7057() {
+  $link_extra_domains = variable_get('link_extra_domains', []);
+  $link_extra_domains[] = 'blog';
+  variable_set('link_extra_domains', $link_extra_domains);
+  user_role_grant_permissions(3, array('administer link domains'));
+}

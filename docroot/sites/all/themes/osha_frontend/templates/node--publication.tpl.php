@@ -12,16 +12,30 @@ $scores = store_score();
 if (!empty($scores[$nid]) && variable_get('test_publication_search_score', FALSE)) {
   $score = '<div>score: ' . $scores[$nid]['score'] . ', excerpt: ' . $scores[$nid]['excerpt'] . '</div>';
 }
-
+/** @var string $view_mode */
 if ($view_mode == 'full') {
   $publications_related_resources = [];
+  // Append Twin publications in Related resources as twin_publication.
+  foreach ($content['field_related_publications']['#items'] as $idx => $row) {
+    $content['field_related_publications'][$idx]['node'][$row['entity']->nid]['#bundle'] = 'twin_publication';
+    $publications_related_resources['#items'][] = $row;
+    $publications_related_resources[] = $content['field_related_publications'][$idx];
+  }
+  if (isset($content['field_related_publications'])) {
+    hide($content['field_related_publications']);
+  }
+
   // Move Additional Resources into Related resources.
   if (!empty($content['field_aditional_resources'])) {
-    $publications_related_resources = $content['field_aditional_resources'];
-    unset($content['field_aditional_resources']);
+    foreach ($content['field_aditional_resources']['#items'] as $idx => $row) {
+      $publications_related_resources['#items'][] = $row;
+      $publications_related_resources[] = $content['field_aditional_resources'][$idx];
+    }
   }
+
   // Move Based on topic Related Publications into Additional resources.
   $publications_aditional_resources = [];
+  /** @var array $tagged_related_publications */
   if ($tagged_related_publications) {
     foreach ($tagged_related_publications as $rel_related_publication) {
       $publications_aditional_resources['#items'][] = [
@@ -44,14 +58,6 @@ if ($view_mode == 'full') {
   }
   if (isset($content['field_related_oshwiki_articles'])) {
     hide($content['field_related_oshwiki_articles']);
-  }
-  // Append Twin publications in Related resources.
-  foreach ($content['field_related_publications']['#items'] as $idx => $row) {
-    $publications_related_resources['#items'][] = $row;
-    $publications_related_resources[] = $content['field_related_publications'][$idx];
-  }
-  if (isset($content['field_related_publications'])) {
-    hide($content['field_related_publications']);
   }
 
   $tags = strip_tags(render($content['field_tags']));

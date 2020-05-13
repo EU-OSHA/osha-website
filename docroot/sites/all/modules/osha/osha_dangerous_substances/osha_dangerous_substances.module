@@ -617,13 +617,16 @@ function _osha_dangerous_substances_get_other_tid($element, $field, $other_name 
 
 function osha_dangerous_substances_form_validate($form, &$form_state) {
   // No checkbox selected.
+  $external_url = $form_state['values']['field_external_url'];
+  reset($external_url);
+  $lang = key($external_url);
   if (empty($form_state['values']['field_non_applicable_url'][LANGUAGE_NONE][0]['value'])) {
-    if (empty($form_state['values']['field_external_url']['en'][0]['url'])) {
+    if (empty($external_url[$lang][0]['url'])) {
       form_set_error('field_external_url', 'URL field is required.');
     }
   }
   else {
-    if (!empty($form_state['values']['field_external_url']['en'][0]['url'])) {
+    if (!empty($external_url[$lang][0]['url'])) {
       form_set_error('field_non_applicable_url', 'Non empty URL field and Non applicable url selected.');
     }
   }

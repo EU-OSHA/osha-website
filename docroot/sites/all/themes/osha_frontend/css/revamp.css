@@ -3157,3 +3157,9 @@ a.facetapi-limit-link{
 a.facetapi-limit-link:hover{
     text-decoration: none;
 }
+
+.node-17594 header > .node__title,
+.node-17595 header > .node__title {
+    visibility: hidden;
+    display: none;
+}

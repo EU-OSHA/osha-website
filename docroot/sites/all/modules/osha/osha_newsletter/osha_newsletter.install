@@ -265,3 +265,43 @@ function osha_newsletter_update_7010() {
   features_revert(array('osha_note_to_editor' => array('field_base', 'field_instance')));
 
 }
+
+/**
+ * MDR-3698 Add a new section in the OSHmail: OShwiki.
+ */
+function osha_newsletter_update_7011() {
+  $active = variable_get('osha_newsletter_active_sections');
+  $term = taxonomy_term_load(3080);
+  $term->name = 'OSHwiki';
+  unset($term->tid);
+  taxonomy_term_save($term);
+  $active[] = $term->tid;
+  variable_set('osha_newsletter_new_3080', $term->tid);
+  variable_set('osha_newsletter_active_sections', $active);
+}
+
+/**
+ * MDR-3698 Add a new section in the OSHmail: OShwiki.
+ */
+function osha_newsletter_update_7012() {
+  $new_tid = variable_get('osha_newsletter_new_3080');
+  $term = taxonomy_term_load($new_tid);
+
+  $old_tid = 3080;
+  $entities = entity_load_multiple_by_name('entity_collection', FALSE, array('bundle' => 'newsletter_content_collection'));
+  /** @var EntityCollection $entity */
+  /** @var EntityCollectionTreeNode $tree */
+  foreach ($entities as $entity) {
+    if ($entity->field_publication_date[LANGUAGE_NONE][0]['value'] > '2020-02-20') {
+      continue;
+    }
+    $tree = $entity->getTree();
+    if ($old = $tree->getChild('taxonomy_term:' . $old_tid)) {
+      $item = new EntityCollectionTreeNode('taxonomy_term', $term->tid, $entity);
+      $item->position = $old->position;
+      entity_collection_append_item($entity, $item);
+      entity_collection_content_delete($entity, 'taxonomy_term', [$old_tid]);
+    }
+  }
+  variable_set('osha_newsletter_new_3080');
+}

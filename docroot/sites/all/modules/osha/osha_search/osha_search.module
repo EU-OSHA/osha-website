@@ -571,6 +571,11 @@ function osha_search_facetapi_widgets() {
 }
 
 function osha_search_facet_items_alter(&$build, &$settings) {
+  if ($settings->facet == "field_sector_industry_covered") {
+    foreach ($build as $key => $item) {
+      $build[$key]["#markup"] = drupal_ucfirst(drupal_strtolower($item["#markup"]));
+    }
+  }
   if ($settings->facet == "type") {
     $adapter = facetapi_adapter_load($settings->searcher);
     $facet = facetapi_facet_load($settings->facet, $settings->searcher);

@@ -1,0 +1,198 @@
+<?php
+/**
+ * @file
+ * Code for the osha Register records feature.
+ */
+
+include_once 'osha_register_records.features.inc';
+
+/**
+ * Implements Elysia hook_cronapi().
+ */
+function osha_register_records_cronapi() {
+  return array('osha_register_records_cron' => array(
+    'description' => 'Register of records update pdf files ',
+    'rule' => '0 3 * * 0', // Synchronize weekly
+  ));
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function osha_register_records_field_formatter_info() {
+  $info = [
+    'register_records' => [
+      'label' => 'Register of records',
+      'field types' => ['file'],
+    ],
+  ];
+  return $info;
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function osha_register_records_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  global $language;
+  $element = [];
+  switch ($display['type']) {
+    case 'register_records':
+      $field_name = $field['field_name'];
+      $lv_map = [];
+      if ($language->language != 'en') {
+        foreach ($items as $delta => $item) {
+          $filename = str_replace('_' . $language->language . '.','.', $item['filename']);
+          $lv_map[$filename] = $item;
+        }
+      }
+      $items = $entity->$field_name;
+      $files = [];
+      foreach ($items['en'] as $delta => $item) {
+        if (!empty($lv_map) && $lv_map[$item['filename']]) {
+          $item = $lv_map[$item['filename']];
+        }
+        $files[] = (object) $item;
+      }
+      $element[0] = array(
+        '#theme' => 'osha_register_records',
+        '#files' => $files
+      );
+      break;
+  }
+  return $element;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function osha_register_records_theme() {
+  return [
+    'osha_register_records' => array(
+      'variables' => array('files' => NULL),
+    ),
+  ];
+}
+
+function theme_osha_register_records($variables) {
+  $output = '';
+  foreach($variables['files'] as $delta => $file) {
+    $output .= theme('file_link', ['file' => $file]);
+    if (count($variables['files']) > 1) {
+      $classes = 'field-item ' . ($delta % 2 ? 'even' : 'odd');
+      $output .= '</div><div class="' . $classes . '">';
+    }
+  }
+  return $output;
+}
+
+function _osha_register_records_is_new($filename, $field_value, $lang) {
+  if (empty($field_value[$lang])) {
+    return TRUE;
+  }
+  foreach ($field_value[$lang] as $file) {
+    if ($file['filename'] == $filename) {
+      return FALSE;
+    }
+  }
+  return TRUE;
+}
+
+function _osha_register_records_get_map() {
+  return variable_get('register_records_get_map', [
+    'Documentation' => 'field_documentation',
+    'Events and meetings' => 'field_events_and_meetings',
+    'Finance and Procurement' => 'field_finance_and_procurement',
+    'Governance Services' => 'field_general_services',
+    'Governance' => 'field_governance',
+    'Human Resources' => 'field_human_resources',
+    'ICT' => 'field_ict',
+    'MISSIONS' => 'field_missions',
+    'Client Relationship Management' => 'field_relationship_management',
+    'RESEARCH ACTIVITIES' => 'field_research_activities',
+    'STAFF COMMITTEE' => 'field_staff_committee',
+    'Websites and online services' => 'field_websites_online_services',
+  ]);
+}
+
+function _osha_register_records_add_file(&$field, $lang, $file_path) {
+  global $user;
+  $file = (object) array(
+    'uid' => $user->uid,
+    'uri' => $file_path,
+    'filemime' => file_get_mimetype($file_path),
+    'status' => 1,
+    'display' => 1,
+  );
+  $file = file_copy($file, 'public://', FILE_EXISTS_REPLACE);
+  $field[$lang][] = (array)$file;
+}
+
+function _osha_register_records_split($name, $map) {
+  $parts = explode(' - ', $name);
+  $tmp_name = strtolower(str_replace(' ', '-', $name));
+  foreach(array_keys($map) as $group) {
+    $tmp_group = strtolower(str_replace(' ', '-', $group));
+    if (substr($tmp_name, 0, strlen($tmp_group)) == $tmp_group) {
+      $parts = [
+        $group,
+        substr($name, strlen($tmp_group) + 1)
+      ];
+    }
+  }
+  return $parts;
+}
+
+function _osha_register_records_get_pdf_files($path, $map) {
+  $list = array();
+  $files = file_scan_directory($path, '/^.*\.pdf$/');
+  foreach ($files as $filename => $file) {
+    $parts = _osha_register_records_split($file->name, $map);
+    $group = $parts[0];
+    $name = $parts[1];
+    if (count($parts) > 2) {
+      watchdog('osha_register_records', 'Error! The file !path accessed!', array('!path' => $file->filename), WATCHDOG_ERROR);
+      unset($parts[0]);
+      $name = implode(' - ', $parts);
+    }
+    $name_parts = explode('-', $name);
+    if (count($name_parts) < 2) {
+      watchdog('osha_register_records', 'Error! The file !path accessed!', array('!path' => $file->filename), WATCHDOG_ERROR);
+    }
+    $lang = 'en';
+    if (!empty($name_parts[1])) {
+      $lang = strtolower(array_pop($name_parts));
+    }
+    $list[$group][$lang][implode('-', $name_parts)] = $file->filename;
+  }
+  return $list;
+}
+
+function osha_register_records_cron() {
+  $nid = db_query('SELECT nid FROM {node} WHERE status = 1 AND type = :type', array(':type' => 'register_records'))->fetchField();
+  if (!$nid) {
+    return;
+  }
+  $node = node_load($nid);
+  $path = variable_get('virtua_path', '/expert/SYNC_VIRTUA');
+  $map = _osha_register_records_get_map();
+  $new = FALSE;
+  $pdf_files = _osha_register_records_get_pdf_files($path, $map);
+  foreach ($pdf_files as $group => $data) {
+    foreach ($data as $lang => $files) {
+      $field = $map[$group];
+      if (!$field) {
+        continue;
+      }
+      foreach ($files as $filename) {
+        if (_osha_register_records_is_new($filename, $node->$field, $lang)) {
+          $file_path = drupal_realpath($path . '/' . $filename);
+          _osha_register_records_add_file($node->$field, $lang, $file_path);
+          $new = TRUE;
+        }
+      }
+    }
+  }
+  if ($new) {
+    node_save($node);
+  }
+}

@@ -885,3 +885,10 @@ function osha_publication_update_7030() {
 function osha_publication_update_7031() {
   features_revert(array('osha_publication' => array('field_base', 'field_instance')));
 }
+
+/**
+ * MHWC-25 Booklets.
+ */
+function osha_publication_update_7032() {
+  features_revert(array('osha_publication' => array('field_base', 'field_instance')));
+}

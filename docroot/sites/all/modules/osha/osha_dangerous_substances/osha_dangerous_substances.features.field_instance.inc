@@ -6552,7 +6552,7 @@ Please use "Paste from Word" button when you copy text from MS Word.',
     'entity_type' => 'taxonomy_term',
     'field_name' => 'field_ds_field',
     'label' => 'DS field',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,

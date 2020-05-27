@@ -335,6 +335,13 @@ function fill_related_publications(&$vars) {
         }
       }
     }
+    if (($vars['node']->type == 'publication') && $vars['node']->field_aditional_resources) {
+      foreach ($vars['node']->field_aditional_resources as $aditional_resources) {
+        foreach ($aditional_resources as $aditional_resource) {
+          array_push($excluded_nids, $aditional_resource['target_id']);
+        }
+      }
+    }
 
     $query->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', 'publication')
@@ -345,6 +352,7 @@ function fill_related_publications(&$vars) {
     $result = $query->execute();
     $limit = 3;
     global $user;
+
     if (!empty($result)) {
       $vars['total_related_publications'] = count($result['node']);
       $vars['tagged_related_publications'] = array();
@@ -361,7 +369,7 @@ function fill_related_publications(&$vars) {
           $vars['tagged_related_publications'][] = $node;
           $count++;
         }
-        if ($count == $limit) {
+        if (count($vars['tagged_related_publications']) == $limit) {
           // Max 3 related publications.
           break;
         }

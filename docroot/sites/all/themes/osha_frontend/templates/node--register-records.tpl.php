@@ -29,6 +29,11 @@
   <?php endif; ?>
 
   <?php
+  foreach ($content['group_related_resources'] as $group => $data) {
+    if (!$data['#items']) {
+        unset($content['group_related_resources'][$group]);
+    }
+  }
   $publications_related_resources = [];
   // Move Additional Resources into Related resources.
   if (!empty($content['field_aditional_resources'])) {

@@ -159,8 +159,8 @@ abstract class FacetapiWidget {
       'facetName' => $this->facet['name'],
       'queryType' => $this->facet['query type'],
       'widget' => $this->settings->settings['widget'],
-      'showMoreText' => $this->settings->settings['facet_more_text'],
-      'showFewerText' => $this->settings->settings['facet_fewer_text'],
+      'showMoreText' => t($this->settings->settings['facet_more_text']),
+      'showFewerText' => t($this->settings->settings['facet_fewer_text']),
     );
 
     return $this;

@@ -42,14 +42,23 @@ function osha_register_records_field_formatter_view($entity_type, $entity, $fiel
       if ($language->language != 'en') {
         foreach ($items as $delta => $item) {
           $filename = str_replace('_' . $language->language . '.','.', $item['filename']);
+          $filename = str_replace('_' . strtoupper($language->language) . '.','.', $filename);
+          $filename = str_replace('-' . strtoupper($language->language) . '.','.', $filename);
+          $filename = str_replace('-' . $language->language . '.','.', $filename);
+          $lv_map[$filename] = $item;
           $lv_map[$filename] = $item;
         }
       }
       $items = $entity->$field_name;
       $files = [];
+      $_language = 'en';
       foreach ($items['en'] as $delta => $item) {
-        if (!empty($lv_map) && $lv_map[$item['filename']]) {
-          $item = $lv_map[$item['filename']];
+        $filename = str_replace('_' . $_language . '.','.', $item['filename']);
+        $filename = str_replace('_' . strtoupper($_language) . '.','.', $filename);
+        $filename = str_replace('-' . strtoupper($_language) . '.','.', $filename);
+        $filename = str_replace('-' . $_language . '.','.', $filename);
+        if (!empty($lv_map) && $lv_map[$filename]) {
+          $item = $lv_map[$filename];
         }
         $files[] = (object) $item;
       }

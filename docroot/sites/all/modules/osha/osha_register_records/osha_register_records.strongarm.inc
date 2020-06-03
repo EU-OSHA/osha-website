@@ -132,7 +132,7 @@ function osha_register_records_strongarm() {
           'weight' => '17',
         ),
         'language' => array(
-          'weight' => '14',
+          'weight' => '15',
         ),
         'workbench_access' => array(
           'weight' => '15',

@@ -169,7 +169,7 @@ function osha_register_records_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 22,
+      'weight' => 24,
     ),
     'workbench_access_field' => 0,
   );
@@ -1139,6 +1139,86 @@ function osha_register_records_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
+  // Exported field_instance: 'node-register_records-field_surveys'.
+  $field_instances['node-register_records-field_surveys'] = array(
+    'bundle' => 'register_records',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'dangerous_substances' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'osha_register_records',
+        'settings' => array(),
+        'type' => 'register_records',
+        'weight' => 14,
+      ),
+      'highlights_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'newsletter_item' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_resources' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_slideshow' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'osha_wiki' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_surveys',
+    'label' => 'Surveys',
+    'required' => 0,
+    'settings' => array(
+      'description_field' => 0,
+      'entity_translation_sync' => FALSE,
+      'file_directory' => '',
+      'file_extensions' => 'pdf',
+      'max_filesize' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'file',
+      'settings' => array(
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'file_generic',
+      'weight' => 14,
+    ),
+    'workbench_access_field' => 0,
+  );
+
   // Exported field_instance: 'node-register_records-field_tags'.
   $field_instances['node-register_records-field_tags'] = array(
     'bundle' => 'register_records',
@@ -1210,7 +1290,7 @@ function osha_register_records_field_default_field_instances() {
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 20,
+      'weight' => 22,
     ),
     'workbench_access_field' => 0,
   );
@@ -1233,7 +1313,7 @@ function osha_register_records_field_default_field_instances() {
         'module' => 'osha_register_records',
         'settings' => array(),
         'type' => 'register_records',
-        'weight' => 14,
+        'weight' => 15,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -1291,7 +1371,7 @@ function osha_register_records_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 14,
+      'weight' => 15,
     ),
     'workbench_access_field' => 0,
   );
@@ -1367,7 +1447,7 @@ function osha_register_records_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 21,
+      'weight' => 23,
     ),
     'workbench_access_field' => 0,
   );
@@ -1471,6 +1551,7 @@ function osha_register_records_field_default_field_instances() {
   t('Select Tags for this content.');
   t('Staff Committee');
   t('Summary');
+  t('Surveys');
   t('Tag');
   t('Title');
   t('Websites and online services');

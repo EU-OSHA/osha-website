@@ -376,6 +376,7 @@ function osha_press_release_views_default_views() {
   $handler->display->display_options['filters']['type_1']['field'] = 'type';
   $handler->display->display_options['filters']['type_1']['value'] = array(
     'highlight' => 'highlight',
+    'news' => 'news',
   );
   $handler->display->display_options['filters']['type_1']['group'] = 2;
   /* Filter criterion: Content: Show on (field_show_on) */

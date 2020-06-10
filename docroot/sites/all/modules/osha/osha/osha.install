@@ -804,3 +804,10 @@ function osha_update_7057() {
   variable_set('link_extra_domains', $link_extra_domains);
   user_role_grant_permissions(3, array('administer link domains'));
 }
+
+/**
+ * MDR-3433 Development - Automatise the page with the privacy statements.
+ */
+function osha_update_7058() {
+  module_enable(array('osha_register_records'));
+}

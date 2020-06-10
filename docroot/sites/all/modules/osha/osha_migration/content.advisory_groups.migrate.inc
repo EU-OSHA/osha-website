@@ -16,9 +16,10 @@ class MigrateOshaAdvisoryGroups extends OSHADynamicMigration {
     $root_dir = $arguments['root_dir'];
     $prag_xml = $root_dir . '/AdvisoryGroupsPRAG.xml';
     $agcp_xml = $root_dir . '/AdvisoryGroupsAGCP.xml';
+    $wesag_xml = $root_dir . '/AdvisoryGroupsWESAG.xml';
 
     $this->source = new MigrateSourceList(
-      new AdvisoryGroupsMigrateList($prag_xml, $agcp_xml),
+      new AdvisoryGroupsMigrateList($prag_xml, $agcp_xml, $wesag_xml),
       new AdvisoryGroupMigrateItem(),
       $this->fields()
     );
@@ -269,15 +270,17 @@ class AdvisoryGroupsMigrateList extends MigrateList {
 
   protected $prag_xml = NULL;
   protected $agcp_xml = NULl;
+  protected $wesag_xml = NULl;
 
 
   /**
    * {@inheritdoc}
    */
-  public function __construct($prag_xml, $agcp_xml) {
+  public function __construct($prag_xml, $agcp_xml, $wesag_xml) {
     parent::__construct();
     $this->prag_xml = $prag_xml;
     $this->agcp_xml = $agcp_xml;
+    $this->wesag_xml = $wesag_xml;
     $this->parseSourceFiles();
   }
 
@@ -291,8 +294,9 @@ class AdvisoryGroupsMigrateList extends MigrateList {
   protected function parseSourceFiles() {
     $prag = $this->parseXMLFile($this->prag_xml, 'Prevention and Research Advisory Group', 'prag');
     $agcp = $this->parseXMLFile($this->agcp_xml, 'Advisory Group on Communication & Promotion', 'agcp');
-    // Both XML files are migrated as separate records (even if people are duplicate)
-    self::$data = array_merge($prag, $agcp);
+    $wesag = $this->parseXMLFile($this->wesag_xml, 'WESAG - Worker’s Exposure Survey Advisory Group', 'wesag');
+    // All XML files are migrated as separate records (even if people are duplicate).
+    self::$data = array_merge($prag, $agcp, $wesag);
   }
 
   /**

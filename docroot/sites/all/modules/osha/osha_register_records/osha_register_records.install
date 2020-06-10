@@ -1,0 +1,42 @@
+<?php
+/**
+ * MDR-3433 Development - Automatise the page with the privacy statements.
+ */
+function osha_register_records_update_7001() {
+  $nid = db_query('SELECT nid FROM {node} WHERE status = 1 AND type = :type', array(':type' => 'register_records'))->fetchField();
+  if ($nid) {
+    return;
+  }
+  $new_node = (object) array(
+    'title' => 'Register of records',
+    'type' => 'register_records',
+    'language' => 'en',
+  );
+  node_save($new_node);
+}
+
+/**
+ * MDR-3433 Development - Automatise the page with the privacy statements.
+ */
+function osha_register_records_update_7002() {
+  $nid = db_query('SELECT nid FROM {node} WHERE status = 1 AND type = :type', [':type' => 'register_records'])->fetchField();
+  $node = node_load($nid);
+  $languages = osha_language_list();
+  foreach (array_keys($languages) as $language) {
+    if (!empty($node->title_field[$language])) {
+      continue;
+    }
+    $translation_handler = entity_translation_get_handler('node', $node);
+    $node->title_field[$language][0]['value'] = $node->title;
+    if ($language != 'en') {
+      $translation_handler->setTranslation(array(
+        'translate' => 0,
+        'status' => 1,
+        'uid' => 1,
+        'language' => $language,
+        'source' => 'en',
+      ));
+    }
+    node_save($node);
+  }
+}

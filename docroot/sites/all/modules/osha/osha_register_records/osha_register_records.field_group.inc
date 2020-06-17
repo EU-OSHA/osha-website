@@ -35,6 +35,7 @@ function osha_register_records_field_group_info() {
       9 => 'field_research_activities',
       10 => 'field_staff_committee',
       11 => 'field_websites_online_services',
+      12 => 'field_surveys',
     ),
     'format_type' => 'div',
     'format_settings' => array(

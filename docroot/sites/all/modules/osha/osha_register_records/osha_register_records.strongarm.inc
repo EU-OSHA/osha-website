@@ -117,25 +117,25 @@ function osha_register_records_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '19',
+          'weight' => '21',
         ),
         'title' => array(
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '16',
-        ),
-        'redirect' => array(
           'weight' => '18',
         ),
+        'redirect' => array(
+          'weight' => '20',
+        ),
         'xmlsitemap' => array(
-          'weight' => '17',
+          'weight' => '19',
         ),
         'language' => array(
-          'weight' => '15',
+          'weight' => '17',
         ),
         'workbench_access' => array(
-          'weight' => '15',
+          'weight' => '16',
         ),
       ),
       'display' => array(),

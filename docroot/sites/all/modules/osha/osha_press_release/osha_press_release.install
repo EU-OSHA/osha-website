@@ -107,3 +107,10 @@ function osha_press_release_update_7004() {
 function osha_press_release_update_7005() {
   features_revert_module('osha_press_release');
 }
+
+/**
+ * MDR-3721 Make possible the news items to appear in the press room.
+ */
+function osha_press_release_update_7006() {
+  features_revert_module('osha_press_release');
+}

@@ -1,5 +1,26 @@
 <?php
 
+function osha_get_nace_usage($tid) {
+  static $usage;
+  if (!$usage) {
+    $result = views_get_view_result('used_nace_codes', 'block_1');
+    foreach ($result as $row) {
+      @$usage[$row->tid][$row->field_nace_codes_taxonomy_term_data_nid]++;
+    }
+    $result = views_get_view_result('used_nace_codes', 'block_2');
+    foreach ($result as $row) {
+      @$usage[$row->tid][$row->field_sector_industry_covered_taxonomy_term_data_nid]++;
+    }
+  }
+  if (empty($tid)) {
+    return array_keys($usage);
+  }
+  if (!empty($usage[$tid])) {
+    return count($usage[$tid]);
+  }
+  return '';
+}
+
 /**
  * Alter the view tmgmt_node_selection_view to show latest node state.
  *
@@ -7,6 +28,16 @@
  * to LEFT JOIN node_revision ON node.nid = node_revision.nid
  */
 function osha_views_query_alter(&$view, &$query) {
+
+  if (($view->name == 'used_nace_codes') && ($view->current_display == 'page')) {
+    $query->where[1]['conditions'][1]['value'] = osha_get_nace_usage('');
+    $query->where[1]['conditions'][1]['operator'] = 'in';
+  }
+  if (($view->name == 'used_nace_codes') && ($view->current_display == 'views_data_export_1')) {
+    $query->where[1]['conditions'][1]['value'] = osha_get_nace_usage('');
+    $query->where[1]['conditions'][1]['operator'] = 'in';
+  }
+
   if ($view->name == 'related_content') {
     if (($view->current_display == 'topic')||($view->current_display == 'type')) {
       $codes = arg(2);

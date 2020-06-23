@@ -114,3 +114,10 @@ function osha_press_release_update_7005() {
 function osha_press_release_update_7006() {
   features_revert_module('osha_press_release');
 }
+
+/**
+ * MDR-3790 Press Room - Display an extract of the summar/body.
+ */
+function osha_press_release_update_7007() {
+  features_revert(array('osha_press_release' => array('views_view')));
+}

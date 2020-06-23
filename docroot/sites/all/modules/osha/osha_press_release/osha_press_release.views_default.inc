@@ -296,6 +296,7 @@ function osha_press_release_views_default_views() {
     'summary_handler' => 'full',
     'trim_options' => array(
       'text' => 'text',
+      'use_field_summary' => 'use_field_summary',
     ),
     'trim_preserve_tags' => '',
   );

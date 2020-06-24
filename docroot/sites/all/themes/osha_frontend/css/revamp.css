@@ -2126,6 +2126,15 @@ article.node-seminar{
      background: transparent;
 }
 
+.node-type-register-records .group-related-resources .field-collection-view .field-items .field-item{ 
+    margin-bottom: 8px;
+}
+
+.node-type-register-records .group-related-resources .field-collection-view .field-items span.file img{ 
+    float: left;
+    margin-top: 3px;
+}
+
 /*
 .entity-field-collection-item.field-collection-item-field-colection-related-resource{
     padding: 0.3em 0 2em 0;

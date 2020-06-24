@@ -2115,6 +2115,10 @@ article.node-seminar{
     border-bottom: 0;
 }
 
+.node-type-register-records .field-name-body p{
+    padding-right: 1em;
+}
+
 .node-type-register-records .group-related-resources .field-collection-view{
     padding: 0.3em 0 1em 0;
     background: url(/sites/all/themes/osha_frontend/images/back-tit-blue.png) repeat-x scroll 0 100% transparent;
@@ -2128,7 +2132,7 @@ article.node-seminar{
 
 .node-type-register-records .group-related-resources .field-collection-view .field-items .field-item{ 
     margin-bottom: 8px;
-    padding-right: 1em;
+    padding-right: 2em;
 }
 
 .node-type-register-records .group-related-resources .field-collection-view .field-items span.file img{ 

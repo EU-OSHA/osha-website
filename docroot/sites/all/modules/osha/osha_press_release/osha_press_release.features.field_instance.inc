@@ -1389,7 +1389,7 @@ function osha_press_release_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'hidden',
-        'module' => 'smart_trim',
+        'module' => 'osha',
         'settings' => array(
           'more_link' => 0,
           'more_text' => 'Read more',

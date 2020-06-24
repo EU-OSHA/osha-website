@@ -20,7 +20,7 @@ function osha_register_records_field_group_info() {
   $field_group->mode = 'default';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Related Resources:',
+    'label' => '',
     'weight' => '2',
     'children' => array(
       0 => 'field_documentation',
@@ -35,10 +35,11 @@ function osha_register_records_field_group_info() {
       9 => 'field_research_activities',
       10 => 'field_staff_committee',
       11 => 'field_websites_online_services',
+      12 => 'field_surveys',
     ),
     'format_type' => 'div',
     'format_settings' => array(
-      'label' => 'Related Resources:',
+      'label' => '',
       'instance_settings' => array(
         'id' => '',
         'classes' => 'group-related-resources field-group-div',
@@ -52,10 +53,6 @@ function osha_register_records_field_group_info() {
     ),
   );
   $field_groups['group_related_resources|node|register_records|default'] = $field_group;
-
-  // Translatables
-  // Included for use with string extractors like potx.
-  t('Related Resources:');
 
   return $field_groups;
 }

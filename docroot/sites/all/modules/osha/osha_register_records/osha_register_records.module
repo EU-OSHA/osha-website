@@ -119,6 +119,7 @@ function _osha_register_records_get_map() {
     'Client Relationship Management' => 'field_relationship_management',
     'RESEARCH ACTIVITIES' => 'field_research_activities',
     'STAFF COMMITTEE' => 'field_staff_committee',
+    'Surveys' => 'field_surveys',
     'Websites and online services' => 'field_websites_online_services',
   ]);
 }

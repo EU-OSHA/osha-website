@@ -1848,6 +1848,7 @@ font-weight: normal;
 	background:none!important;
 	font-weight:normal!important;
 	padding-left:0em!important;
+	margin-right: 0;
 }
 
 #edit-search-api-views-fulltext-wrapper{

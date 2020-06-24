@@ -74,3 +74,10 @@ function osha_taxonomies_update_7003() {
   features_revert(array('osha_blocks' => array('fe_block_settings')));
   features_revert(array('osha' => array('field_base', 'field_instance')));
 }
+
+/**
+ * MDR-3759 Could it be possible to make a list with the used nace codes?.
+ */
+function osha_taxonomies_update_7004() {
+  features_revert(array('osha_taxonomies' => array('views_view')));
+}

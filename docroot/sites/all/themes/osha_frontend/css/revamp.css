@@ -2657,7 +2657,7 @@ article.node-seminar{
     display: none;
 }
 
-#content .box .flickr-credit a{
+.box .flickr-credit a{
     font-family: 'Open Sans',sans-serif;
     float: none;
     clear: both;
@@ -2672,7 +2672,7 @@ article.node-seminar{
     border-bottom: 0;
 }
 
-#content .box .flickr-credit .flickr-metadata{
+.box .flickr-credit .flickr-metadata{
     font-family: 'Open Sans',sans-serif;
     float: left;
     width: 100%;
@@ -2687,7 +2687,7 @@ article.node-seminar{
     border-bottom: 0;
 }
 
-#content .box .flickr-credit .flickr-metadata a{
+.box .flickr-credit .flickr-metadata a{
     font-family: 'Open Sans',sans-serif;
     float: left;
     width: auto;

@@ -83,7 +83,7 @@ function osha_taxonomies_update_7004() {
 }
 
 /**
- * MDR-3799 MSDs DB extract lliterals for the filters in EN and SK.
+ * MDR-3799 MSDs DB extract literals for the filters in EN and SK.
  */
 function osha_taxonomies_update_7005() {
   features_revert(array('osha_taxonomies' => array('views_view')));

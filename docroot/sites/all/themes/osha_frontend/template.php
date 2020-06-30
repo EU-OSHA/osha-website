@@ -357,16 +357,19 @@ function fill_related_publications(&$vars) {
       $vars['total_related_publications'] = count($result['node']);
       $vars['tagged_related_publications'] = array();
       $count = 0;
+      $nids = [];
       foreach ($result['node'] as $n) {
         $node = node_load($n->nid);
         if ($node->status == 0) {
           // Add unpublished only for admin, do not include in count.
           if (OshaWorkflowPermissions::userHasRole('administrator', $user)) {
             $vars['tagged_related_publications'][] = $node;
+            $nids[] = $node->nid;
           }
         }
         else {
           $vars['tagged_related_publications'][] = $node;
+          $nids[] = $node->nid;
           $count++;
         }
         if (count($vars['tagged_related_publications']) == $limit) {
@@ -374,7 +377,7 @@ function fill_related_publications(&$vars) {
           break;
         }
       }
-      $vars['view_all'] = l(t('View all'), 'related-content/' . $vars['node']->nid . '/publication/' . implode('+', $tids));
+      $vars['view_all'] = l(t('View all'), 'related-content/' . $vars['node']->nid . '/publication/' . implode('+', $tids) . '/' . implode('+', $nids));
     }
   }
 }

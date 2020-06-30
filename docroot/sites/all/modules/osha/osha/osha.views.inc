@@ -154,6 +154,19 @@ function osha_views_query_alter(&$view, &$query) {
   }
   if ($view->name == 'related_content') {
     if (in_array($view->current_display, ['page_1', 'block_1'])) {
+      if ($view->current_display == 'page_1') {
+        $value = [];
+        foreach (explode('+', arg(4)) as $nid) {
+          $value[] = intval($nid);
+        }
+        if ($value) {
+          $query->where[0]['conditions'][] = [
+            'field' => 'node.nid',
+            'value' => $value,
+            'operator' => 'NOT IN',
+          ];
+        }
+      }
       if ($query->where[0]['conditions'][1]['value'] == 'news') {
         $query->where[0]['conditions'][1]['value'] = ['highlight', 'news'];
         $query->where[0]['conditions'][1]['operator'] = 'IN';

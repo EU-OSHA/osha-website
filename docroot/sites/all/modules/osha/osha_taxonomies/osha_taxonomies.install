@@ -81,3 +81,10 @@ function osha_taxonomies_update_7003() {
 function osha_taxonomies_update_7004() {
   features_revert(array('osha_taxonomies' => array('views_view')));
 }
+
+/**
+ * MDR-3799 MSDs DB extract lliterals for the filters in EN and SK.
+ */
+function osha_taxonomies_update_7005() {
+  features_revert(array('osha_taxonomies' => array('views_view')));
+}

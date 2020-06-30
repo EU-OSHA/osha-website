@@ -119,6 +119,7 @@ features[variable][] = pathauto_taxonomy_term_nace_codes_pattern
 features[variable][] = pathauto_taxonomy_term_publication_types_pattern
 features[variable][] = pathauto_taxonomy_term_tags_pattern
 features[variable][] = pathauto_taxonomy_term_thesaurus_pattern
+features[views_view][] = msd_used_terms
 features[views_view][] = used_nace_codes
 features_exclude[field_base][field_tags] = field_tags
 features_exclude[field_instance][taxonomy_term-legislation_category-field_directive_category_code] = taxonomy_term-legislation_category-field_directive_category_code

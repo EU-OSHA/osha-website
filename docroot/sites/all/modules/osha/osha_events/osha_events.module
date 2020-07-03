@@ -130,7 +130,7 @@ function osha_events_diff_node_revisions_submit($form, &$form_state) {
 function _osha_events_moderation_access($op, $node) {
   global $user;
 
-//  // If we do not control this node type, deny access.
+  //  // If we do not control this node type, deny access.
   if ($node->type != 'events') {
     return FALSE;
   }
@@ -610,7 +610,7 @@ function osha_events_form_validate($form, &$form_state) {
       form_set_error('field_event_type', 'Events of type <b>Visit</b> can not be published');
     }
     if (empty($values['field_organization'][LANGUAGE_NONE][0]['value'])) {
-//      form_set_error('field_organization', 'You have to add an Organization.');
+      //      form_set_error('field_organization', 'You have to add an Organization.');
     }
 
     if (empty($values['field_tags'][LANGUAGE_NONE][0]['tid'])) {
@@ -623,21 +623,21 @@ function osha_events_form_validate($form, &$form_state) {
   }
 
   // Country and city are not required for webminar events.
-  if ($type == 'Webminar') {
-    // Country and city fields need to be NULL for webminar events so that
-    // they will not show in frontend.
-    form_set_error('field_city', '', array());
-    form_set_error('field_country_code', '', array());
-    $form_state['values']['field_country_code'][LANGUAGE_NONE][0]['value'] = $form_state['values']['field_city'][LANGUAGE_NONE][0]['value'] = NULL;
+  //  if ($type == 'Webminar') {
+  // Country and city fields need to be NULL for webminar events so that
+  // they will not show in frontend.
+  //    form_set_error('field_city', '', array());
+  //    form_set_error('field_country_code', '', array());
+  //    $form_state['values']['field_country_code'][LANGUAGE_NONE][0]['value'] = $form_state['values']['field_city'][LANGUAGE_NONE][0]['value'] = NULL;
+  //  }
+  //  else {
+  if (empty($values['field_country_code'][LANGUAGE_NONE][0]['value'])) {
+    form_set_error('field_country_code', 'Country field is required.');
   }
-  else {
-    if (empty($values['field_country_code'][LANGUAGE_NONE][0]['value'])) {
-      form_set_error('field_country_code', 'Country field is required.');
-    }
-    if (empty($values['field_city'][LANGUAGE_NONE][0]['value'])) {
-      form_set_error('field_city', 'City field is required.');
-    }
+  if (empty($values['field_city'][LANGUAGE_NONE][0]['value'])) {
+    form_set_error('field_city', 'City field is required.');
   }
+  //  }
 
   // Check if the event is unique by Start and End Date field.
   $start_date = $form_state['values']['field_start_date']['und'][0]['value'];
@@ -645,10 +645,10 @@ function osha_events_form_validate($form, &$form_state) {
 
   $query = new EntityFieldQuery;
   $query->entityCondition('entity_type', 'node')
-      ->entityCondition('bundle', 'events')
-      ->fieldCondition('field_start_date', 'value', $start_date, '=')
-      ->fieldCondition('field_start_date', 'value2', $end_date, '=')
-      ->entityOrderBy('entity_id', 'DESC');
+    ->entityCondition('bundle', 'events')
+    ->fieldCondition('field_start_date', 'value', $start_date, '=')
+    ->fieldCondition('field_start_date', 'value2', $end_date, '=')
+    ->entityOrderBy('entity_id', 'DESC');
   if (isset($node->nid)) {
     $query->entityCondition('entity_id', $node->nid, '!=');
   }
@@ -683,7 +683,7 @@ function osha_events_query_alter($query) {
     }
     $sql = strtr($sql, $quoted);
     dpm($sql);
-}
+  }
 }
 
 

@@ -188,7 +188,7 @@ function osha_taxonomies_taxonomy_default_vocabularies() {
       'name' => 'Nace Codes',
       'machine_name' => 'nace_codes',
       'description' => 'The list of Nace Codes',
-      'hierarchy' => 0,
+      'hierarchy' => 1,
       'module' => 'taxonomy',
       'weight' => -5,
       'language' => 'und',

@@ -1900,6 +1900,7 @@ input[type=checkbox].add-to-calendar-checkbox {
     clear: both;
     color:#003399;
     font-size: 0.9rem;
+    line-height: initial;
     font-weight: bold!important;
     text-decoration: none;
 }
@@ -1911,6 +1912,7 @@ input[type=checkbox].add-to-calendar-checkbox {
 
 .box-events-summary a.see-more-arrow{
     font-size: 1rem;
+    margin-left: 0;
     clear: both;  
     display: inline-block; 
 }
@@ -2655,7 +2657,7 @@ article.node-seminar{
     display: none;
 }
 
-#content .box .flickr-credit a{
+.box .flickr-credit a{
     font-family: 'Open Sans',sans-serif;
     float: none;
     clear: both;
@@ -2670,7 +2672,7 @@ article.node-seminar{
     border-bottom: 0;
 }
 
-#content .box .flickr-credit .flickr-metadata{
+.box .flickr-credit .flickr-metadata{
     font-family: 'Open Sans',sans-serif;
     float: left;
     width: 100%;
@@ -2685,7 +2687,7 @@ article.node-seminar{
     border-bottom: 0;
 }
 
-#content .box .flickr-credit .flickr-metadata a{
+.box .flickr-credit .flickr-metadata a{
     font-family: 'Open Sans',sans-serif;
     float: left;
     width: auto;

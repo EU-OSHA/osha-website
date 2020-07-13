@@ -1265,6 +1265,14 @@ function osha_thesaurus_feeds_importer_default() {
             'debug' => 0,
             'weight' => '153',
           ),
+          'published' => array(
+            'name' => 'published',
+            'value' => 'published',
+            'raw' => 0,
+            'inner' => 0,
+            'debug' => 0,
+            'weight' => '154',
+          ),
         ),
         'context' => array(
           'value' => '/concepts/concept',
@@ -2051,6 +2059,11 @@ function osha_thesaurus_feeds_importer_default() {
           153 => array(
             'source' => 'notes_sv',
             'target' => 'field_notes:et:sv',
+            'unique' => FALSE,
+          ),
+          154 => array(
+            'source' => 'published',
+            'target' => 'status',
             'unique' => FALSE,
           ),
         ),

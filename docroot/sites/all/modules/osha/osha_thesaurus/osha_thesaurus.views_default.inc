@@ -37,16 +37,13 @@ function osha_thesaurus_views_default_views() {
   );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* Relationship: Content: Author */
-  $handler->display->display_options['relationships']['uid']['id'] = 'uid';
-  $handler->display->display_options['relationships']['uid']['table'] = 'node';
-  $handler->display->display_options['relationships']['uid']['field'] = 'uid';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -176,6 +173,7 @@ function osha_thesaurus_views_default_views() {
 
   /* Display: Thesaurus */
   $handler = $view->new_display('page', 'Thesaurus', 'page');
+  $handler->display->display_options['field_language_add_to_query'] = 0;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
@@ -185,6 +183,7 @@ function osha_thesaurus_views_default_views() {
   $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
   $handler->display->display_options['pager']['options']['expose']['items_per_page_options'] = '10, 50, 100';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all'] = TRUE;
+  $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Offset label';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
@@ -477,6 +476,7 @@ function osha_thesaurus_views_default_views() {
 <li>[delete_node]</li>
 </ul>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Type */
@@ -487,18 +487,18 @@ function osha_thesaurus_views_default_views() {
     'thesaurus' => 'thesaurus',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Content: Title */
-  $handler->display->display_options['filters']['title']['id'] = 'title';
-  $handler->display->display_options['filters']['title']['table'] = 'node';
-  $handler->display->display_options['filters']['title']['field'] = 'title';
-  $handler->display->display_options['filters']['title']['operator'] = 'contains';
-  $handler->display->display_options['filters']['title']['group'] = 1;
-  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
-  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
-  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+  /* Filter criterion: Content: Title (title_field) */
+  $handler->display->display_options['filters']['title_field_value']['id'] = 'title_field_value';
+  $handler->display->display_options['filters']['title_field_value']['table'] = 'field_data_title_field';
+  $handler->display->display_options['filters']['title_field_value']['field'] = 'title_field_value';
+  $handler->display->display_options['filters']['title_field_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['title_field_value']['group'] = 1;
+  $handler->display->display_options['filters']['title_field_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title_field_value']['expose']['operator_id'] = 'title_field_value_op';
+  $handler->display->display_options['filters']['title_field_value']['expose']['label'] = 'Title';
+  $handler->display->display_options['filters']['title_field_value']['expose']['operator'] = 'title_field_value_op';
+  $handler->display->display_options['filters']['title_field_value']['expose']['identifier'] = 'title_field_value';
+  $handler->display->display_options['filters']['title_field_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
@@ -510,11 +510,16 @@ function osha_thesaurus_views_default_views() {
     9 => 0,
     10 => 0,
     11 => 0,
+    12 => 0,
+    13 => 0,
+    14 => 0,
+    15 => 0,
   );
   /* Filter criterion: Content: Glossary (field_glossary_the) */
   $handler->display->display_options['filters']['field_glossary_the_tid']['id'] = 'field_glossary_the_tid';
   $handler->display->display_options['filters']['field_glossary_the_tid']['table'] = 'field_data_field_glossary_the';
   $handler->display->display_options['filters']['field_glossary_the_tid']['field'] = 'field_glossary_the_tid';
+  $handler->display->display_options['filters']['field_glossary_the_tid']['group'] = 1;
   $handler->display->display_options['filters']['field_glossary_the_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_glossary_the_tid']['expose']['operator_id'] = 'field_glossary_the_tid_op';
   $handler->display->display_options['filters']['field_glossary_the_tid']['expose']['label'] = 'Glossary (field_glossary_the)';
@@ -544,6 +549,171 @@ function osha_thesaurus_views_default_views() {
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['metatags'] = array(
+    'und' => array(
+      'title' => array(
+        'value' => '[view:title] | [current-page:pager][site:name]',
+        'default' => '[view:title] | [current-page:pager][site:name]',
+      ),
+      'description' => array(
+        'value' => '[view:description]',
+        'default' => '[view:description]',
+      ),
+      'abstract' => array(
+        'value' => '',
+        'default' => '',
+      ),
+      'keywords' => array(
+        'value' => 'eu osha, eu-osha, osha, regulations, standards, legislation, surveys, risk assessment, accident prevention, european agency, safety and health, health at work, safety at work, statistics, workplace safety, frequent hazards, occupational health and safety, assessment tools, eu, esener, napo, oshwiki, oira, healthy workplaces, information, emerging risks',
+        'default' => 'eu osha, eu-osha, osha, regulations, standards, legislation, surveys, risk assessment, accident prevention, european agency, safety and health, health at work, safety at work, statistics, workplace safety, frequent hazards, occupational health and safety, assessment tools, eu, esener, napo, oshwiki, oira, healthy workplaces, information, emerging risks',
+      ),
+      'robots' => array(
+        'value' => array(
+          'index' => 0,
+          'follow' => 0,
+          'noindex' => 0,
+          'nofollow' => 0,
+          'noarchive' => 0,
+          'nosnippet' => 0,
+          'noodp' => 0,
+          'noydir' => 0,
+          'noimageindex' => 0,
+          'notranslate' => 0,
+        ),
+        'default' => array(
+          'index' => 0,
+          'follow' => 0,
+          'noindex' => 0,
+          'nofollow' => 0,
+          'noarchive' => 0,
+          'nosnippet' => 0,
+          'noodp' => 0,
+          'noydir' => 0,
+          'noimageindex' => 0,
+          'notranslate' => 0,
+        ),
+      ),
+      'news_keywords' => array(
+        'value' => '',
+        'default' => '',
+      ),
+      'standout' => array(
+        'value' => '',
+        'default' => '',
+      ),
+      'rating' => array(
+        'value' => '',
+      ),
+      'referrer' => array(
+        'value' => '',
+      ),
+      'rights' => array(
+        'value' => '',
+        'default' => '',
+      ),
+      'image_src' => array(
+        'value' => '',
+        'default' => '',
+      ),
+      'canonical' => array(
+        'value' => '[view:url]',
+        'default' => '[view:url]',
+      ),
+      'shortlink' => array(
+        'value' => '[current-page:url:unaliased]',
+        'default' => '[current-page:url:unaliased]',
+      ),
+      'original-source' => array(
+        'value' => '',
+        'default' => '',
+      ),
+      'prev' => array(
+        'value' => '',
+      ),
+      'next' => array(
+        'value' => '',
+      ),
+      'content-language' => array(
+        'value' => '',
+        'default' => '',
+      ),
+      'geo.position' => array(
+        'value' => '',
+      ),
+      'geo.placename' => array(
+        'value' => '',
+      ),
+      'geo.region' => array(
+        'value' => '',
+      ),
+      'icbm' => array(
+        'value' => '',
+      ),
+      'refresh' => array(
+        'value' => '',
+      ),
+      'revisit-after' => array(
+        'value' => '',
+        'period' => '',
+        'default' => '',
+      ),
+      'pragma' => array(
+        'value' => '',
+      ),
+      'cache-control' => array(
+        'value' => '',
+      ),
+      'expires' => array(
+        'value' => '',
+      ),
+      'dcterms.title' => array(
+        'value' => '',
+      ),
+      'dcterms.creator' => array(
+        'value' => '',
+      ),
+      'dcterms.subject' => array(
+        'value' => '',
+      ),
+      'dcterms.description' => array(
+        'value' => '',
+      ),
+      'dcterms.publisher' => array(
+        'value' => '',
+      ),
+      'dcterms.contributor' => array(
+        'value' => '',
+      ),
+      'dcterms.date' => array(
+        'value' => '',
+      ),
+      'dcterms.type' => array(
+        'value' => '',
+      ),
+      'dcterms.format' => array(
+        'value' => '',
+      ),
+      'dcterms.identifier' => array(
+        'value' => '',
+      ),
+      'dcterms.source' => array(
+        'value' => '',
+      ),
+      'dcterms.language' => array(
+        'value' => '',
+      ),
+      'dcterms.relation' => array(
+        'value' => '',
+      ),
+      'dcterms.coverage' => array(
+        'value' => '',
+      ),
+      'dcterms.rights' => array(
+        'value' => '',
+      ),
+    ),
+  );
   $handler->display->display_options['path'] = 'admin/content/thesaurus';
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Thesaurus';
@@ -561,13 +731,12 @@ function osha_thesaurus_views_default_views() {
   $handler->display->display_options['style_options']['parent_sort'] = 1;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['ui_name'] = 'Title';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['table'] = 'field_data_title_field';
+  $handler->display->display_options['fields']['title_field']['field'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['ui_name'] = 'Title';
+  $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title_field']['link_to_entity'] = 0;
   /* Field: Father */
   $handler->display->display_options['fields']['field_father']['id'] = 'field_father';
   $handler->display->display_options['fields']['field_father']['table'] = 'field_data_field_father';
@@ -774,18 +943,18 @@ function osha_thesaurus_views_default_views() {
     'thesaurus' => 'thesaurus',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Content: Title */
-  $handler->display->display_options['filters']['title']['id'] = 'title';
-  $handler->display->display_options['filters']['title']['table'] = 'node';
-  $handler->display->display_options['filters']['title']['field'] = 'title';
-  $handler->display->display_options['filters']['title']['operator'] = 'contains';
-  $handler->display->display_options['filters']['title']['group'] = 1;
-  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
-  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
-  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+  /* Filter criterion: Content: Title (title_field) */
+  $handler->display->display_options['filters']['title_field_value']['id'] = 'title_field_value';
+  $handler->display->display_options['filters']['title_field_value']['table'] = 'field_data_title_field';
+  $handler->display->display_options['filters']['title_field_value']['field'] = 'title_field_value';
+  $handler->display->display_options['filters']['title_field_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['title_field_value']['group'] = 1;
+  $handler->display->display_options['filters']['title_field_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title_field_value']['expose']['operator_id'] = 'title_field_value_op';
+  $handler->display->display_options['filters']['title_field_value']['expose']['label'] = 'Título';
+  $handler->display->display_options['filters']['title_field_value']['expose']['operator'] = 'title_field_value_op';
+  $handler->display->display_options['filters']['title_field_value']['expose']['identifier'] = 'title_field_value';
+  $handler->display->display_options['filters']['title_field_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
@@ -797,6 +966,10 @@ function osha_thesaurus_views_default_views() {
     9 => 0,
     10 => 0,
     11 => 0,
+    12 => 0,
+    13 => 0,
+    14 => 0,
+    15 => 0,
   );
   /* Filter criterion: Content: Glossary (field_glossary_the) */
   $handler->display->display_options['filters']['field_glossary_the_tid']['id'] = 'field_glossary_the_tid';
@@ -832,6 +1005,7 @@ function osha_thesaurus_views_default_views() {
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['path'] = 'admin/content/thesaurus-tree';
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Thesaurus - Tree';
@@ -855,6 +1029,13 @@ function osha_thesaurus_views_default_views() {
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Entity Reference View Widget Checkbox: Content */
+  $handler->display->display_options['fields']['entityreference_view_widget']['id'] = 'entityreference_view_widget';
+  $handler->display->display_options['fields']['entityreference_view_widget']['table'] = 'node';
+  $handler->display->display_options['fields']['entityreference_view_widget']['field'] = 'entityreference_view_widget';
+  $handler->display->display_options['fields']['entityreference_view_widget']['label'] = '';
+  $handler->display->display_options['fields']['entityreference_view_widget']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['entityreference_view_widget']['ervw']['force_single'] = 0;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -895,6 +1076,64 @@ function osha_thesaurus_views_default_views() {
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  /* Filter criterion: Content: Title (title_field) */
+  $handler->display->display_options['filters']['title_field_value_1']['id'] = 'title_field_value_1';
+  $handler->display->display_options['filters']['title_field_value_1']['table'] = 'field_data_title_field';
+  $handler->display->display_options['filters']['title_field_value_1']['field'] = 'title_field_value';
+  $handler->display->display_options['filters']['title_field_value_1']['operator'] = 'contains';
+  $handler->display->display_options['filters']['title_field_value_1']['group'] = 1;
+  $handler->display->display_options['filters']['title_field_value_1']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title_field_value_1']['expose']['operator_id'] = 'title_field_value_1_op';
+  $handler->display->display_options['filters']['title_field_value_1']['expose']['label'] = 'Título';
+  $handler->display->display_options['filters']['title_field_value_1']['expose']['operator'] = 'title_field_value_1_op';
+  $handler->display->display_options['filters']['title_field_value_1']['expose']['identifier'] = 'title_field_value_1';
+  $handler->display->display_options['filters']['title_field_value_1']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    14 => 0,
+    15 => 0,
+  );
+  /* Filter criterion: Content: Glossary (field_glossary_the) */
+  $handler->display->display_options['filters']['field_glossary_the_tid']['id'] = 'field_glossary_the_tid';
+  $handler->display->display_options['filters']['field_glossary_the_tid']['table'] = 'field_data_field_glossary_the';
+  $handler->display->display_options['filters']['field_glossary_the_tid']['field'] = 'field_glossary_the_tid';
+  $handler->display->display_options['filters']['field_glossary_the_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_glossary_the_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_glossary_the_tid']['expose']['operator_id'] = 'field_glossary_the_tid_op';
+  $handler->display->display_options['filters']['field_glossary_the_tid']['expose']['label'] = 'Glossary';
+  $handler->display->display_options['filters']['field_glossary_the_tid']['expose']['operator'] = 'field_glossary_the_tid_op';
+  $handler->display->display_options['filters']['field_glossary_the_tid']['expose']['identifier'] = 'field_glossary_the_tid';
+  $handler->display->display_options['filters']['field_glossary_the_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    14 => 0,
+    15 => 0,
+  );
+  $handler->display->display_options['filters']['field_glossary_the_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_glossary_the_tid']['vocabulary'] = 'glossary_the';
   $translatables['thesaurus'] = array(
     t('Master'),
     t('Thesaurus'),

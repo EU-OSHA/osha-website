@@ -8,9 +8,8 @@ dependencies[] = nodequeue
 
 files[] = nodequeue_service.inc
 
-; Information added by drupal.org packaging script on 2011-09-20
-version = "7.x-2.0-beta1"
+; Information added by Drupal.org packaging script on 2019-11-22
+version = "7.x-2.2"
 core = "7.x"
 project = "nodequeue"
-datestamp = "1316558104"
-
+datestamp = "1574395688"

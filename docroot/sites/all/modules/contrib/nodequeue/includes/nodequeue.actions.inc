@@ -6,32 +6,6 @@
  */
 
 /**
- * Implements hook_action_info().
- */
-function nodequeue_action_info() {
-  return array(
-    'nodequeue_add_action' => array(
-      'type' => 'node',
-      'label' => t('Add to Nodequeues'),
-      'configurable' => TRUE,
-      'triggers' => array(
-        'node_presave',
-        'node_insert',
-        'node_update',
-      ),
-    ),
-    'nodequeue_remove_action' => array(
-      'type' => 'node',
-      'label' => t('Remove from Nodequeues'),
-      'configurable' => TRUE,
-      'triggers' => array(
-        'node_delete',
-      ),
-    ),
-  );
-}
-
-/**
  * Configuration form for Add to Nodequeues action.
  */
 function nodequeue_add_action_form($context) {

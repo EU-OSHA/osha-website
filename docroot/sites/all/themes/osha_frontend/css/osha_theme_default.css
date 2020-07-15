@@ -7232,7 +7232,7 @@ a.contextual-links-trigger{
 	display: block;
 	z-index: 9999999!important;
 	background: url(/sites/all/themes/osha_frontend/images/background-cookies.png) repeat !important;
-	height: 75px!important; /*minimum height*/
+	height: auto!important; /*minimum height*/
 	position: fixed;
 }
 

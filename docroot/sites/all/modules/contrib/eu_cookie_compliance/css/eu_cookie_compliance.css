@@ -34,6 +34,12 @@
   max-width: 40%;
 }
 
+.eu-cookie-compliance-categories-buttons {
+  margin: 0 0 1em 0;
+  max-width: 60%;
+  float: left;
+}
+
 #sliding-popup .eu-cookie-compliance-more-button {
   cursor: pointer;
   display: inline;
@@ -57,7 +63,9 @@
 #sliding-popup .eu-cookie-compliance-default-button,
 #sliding-popup .eu-cookie-compliance-hide-button,
 #sliding-popup .eu-cookie-compliance-more-button-thank-you,
-#sliding-popup .eu-cookie-withdraw-button {
+#sliding-popup .eu-cookie-withdraw-button,
+.eu-cookie-withdraw-button,
+.eu-cookie-compliance-save-preferences-button {
   cursor: pointer;
   margin-right: 5px;
   margin-top: 1em;
@@ -113,6 +121,19 @@
   font-weight: bold;
   margin: 5px 0 0;
   max-width: 60%;
+}
+
+.eu-cookie-compliance-banner--categories .eu-cookie-compliance-message {
+  max-width: 100%;
+}
+
+.eu-cookie-compliance-categories {
+  clear: both;
+  padding-top: 1em;
+}
+
+.eu-cookie-compliance-categories label {
+  display: inline;
 }
 
 #sliding-popup .popup-content #popup-text h1,
@@ -171,11 +192,16 @@
   transform: translate(-50%, -100%) scaleY(-1);
 }
 
+.eu-cookie-compliance-hidden {
+  display: none;
+}
+
 @media screen and (max-width: 600px) {
   #sliding-popup .popup-content {
     max-width: 95%;
   }
 
+  .eu-cookie-compliance-categories,
   #sliding-popup .popup-content #popup-text {
     max-width: 100%;
   }
@@ -185,5 +211,16 @@
     float: none;
     margin: 5px 0 1em;
     max-width: 100%;
+  }
+
+  .eu-cookie-compliance-buttons.eu-cookie-compliance-has-categories {
+    float: right;
+    margin-top: -56px;
+  }
+
+  .eu-cookie-compliance-banner--categories .eu-cookie-compliance-buttons {
+    position: initial;
+    bottom: unset;
+    right: unset;
   }
 }

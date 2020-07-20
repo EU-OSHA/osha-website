@@ -1175,6 +1175,20 @@ span.date-display-single{
 	background-position: bottom,left;
 }
 
+.node-wiki-page:last-child{
+	background: url("../images/separator_home.jpg") repeat-x;
+	background-position: bottom,left;
+	background-image: none;
+}
+
+#related-wiki .oshwiki-featured-articles article:last-child{
+	padding-bottom: 0;
+}
+
+#related-wiki .oshwiki-featured-articles article:last-child .field-name-field-wiki-page-url a{
+	padding-bottom: 0.5em;
+}
+
 .node-wiki-page .field-name-title-field{
     color: #003399;
     font-family: Open Sans Condensed;
@@ -1834,6 +1848,7 @@ font-weight: normal;
 	background:none!important;
 	font-weight:normal!important;
 	padding-left:0em!important;
+	margin-right: 0;
 }
 
 #edit-search-api-views-fulltext-wrapper{
@@ -7217,7 +7232,7 @@ a.contextual-links-trigger{
 	display: block;
 	z-index: 9999999!important;
 	background: url(/sites/all/themes/osha_frontend/images/background-cookies.png) repeat !important;
-	height: 75px!important; /*minimum height*/
+	height: auto!important; /*minimum height*/
 	position: fixed;
 }
 
@@ -7449,6 +7464,12 @@ display:block!important;
 		display:table-header-group;
 		width:100%;
 	}
+
+	#block-views-press-contacts-block table tr td {
+	    padding-bottom: 10px;
+	    display: block;
+	}
+
   .newsletter-container td {
     display: table-cell;
     width:auto;

@@ -49,7 +49,7 @@ Installation.
    enable the banner
 
 5. If you want to customise the banner background and text color, either type
-   in the hex values or simply install 
+   in the hex values or simply install
    http://drupal.org/project/jquery_colorpicker
 
 6. If you want to theme your banner override the themes in the template file.
@@ -84,3 +84,9 @@ If you want to conditionally set cookies in your module, there is a javascript
 function provided that returns TRUE if the current user has given his consent:
 
 Drupal.eu_cookie_compliance.hasAgreed()
+
+Prevent "Consent by clicking" for some links
+============================================
+The module offers a feature to accept consent by clicking. It may be relevant to
+prevent this for certain links. In such cases, the link(s) can be wrapped in an
+element with the class "popup-content".

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This exporter creates an XLSX file readable by newer versions of Excel.
  */
@@ -10,7 +11,10 @@ class webform_exporter_excel_xlsx extends webform_exporter {
   const DATE_REGEX_DATE = '/^((\d{4})(-(\d{2}))(-(\d{2})))$/';
   const DATE_REGEX_TIME = '/^(([T \s]?(\d{2}))(:(\d{2}))(:(\d{2}))?)?$/';
 
-  function add_row(&$file_handle, $data, $row_count) {
+  /**
+   * {@inheritdoc}
+   */
+  public function add_row(&$file_handle, array $data, $row_count) {
     $row = $row_count + 1;
     $col = 'A';
 
@@ -20,17 +24,14 @@ class webform_exporter_excel_xlsx extends webform_exporter {
       // Strip UTF8 characters that are not legal in XML files.
       // See http://www.w3.org/TR/xml/#charsets
       // See http://stackoverflow.com/questions/3466035/how-to-skip-invalid-characters-in-xml-file-using-php
+      // @code
       // Char ::= #x9 | #xA | #xD | [#x20-#xD7FF] | [#xE000-#xFFFD] | [#x10000-#x10FFFF]
+      // @endcode
       $value = preg_replace('/[^\x{0009}\x{000a}\x{000d}\x{0020}-\x{D7FF}\x{E000}-\x{FFFD}]+/u', '', $value);
 
       $cell_position = $col . $row;
       if (strlen($value) === 0) {
         // Skip empty cells.
-      }
-      elseif (is_numeric($value) && $value[0] !== '+') {
-        $output .= '<c r="' . $cell_position . '"><v>';
-        $output .= $value;
-        $output .= '</v></c>';
       }
       elseif (preg_match(self::DATE_REGEX_ANY, $value)) {
         // An Excel timestamp is the number of days since Jan 1, 1900, with
@@ -97,20 +98,27 @@ class webform_exporter_excel_xlsx extends webform_exporter {
     @fwrite($file_handle, $output);
   }
 
-  function bof(&$file_handle) {
-    // Our beginning of file needs to include unknown data (the number of
-    // columns and rows) at this point. Instead of writing the true BOF, we
-    // output enough empty space to fill in the BOF later.
-    // See webform_exporter_excel_xlsx::eof().
+  /**
+   * Output space for the BOF.
+   *
+   * Our beginning of file needs to include unknown data (the number of columns
+   * and rows) at this point. Instead of writing the true BOF, we output enough
+   * empty space to fill in the BOF later. See
+   * webform_exporter_excel_xlsx::eof().
+   */
+  public function bof(&$file_handle) {
     $output = str_repeat(' ', 1024);
     @fwrite($file_handle, $output . "\n");
   }
 
-  function eof(&$file_handle, $row_count, $col_count) {
-    // We output a chunk of empty data in webform_exporter_excel_xlsx::bof()
-    // to leave room for our real header, which includes the important
-    // <dimension> tag. This is required for proper importing into Google Docs.
-
+  /**
+   * Output the BOF and end the file.
+   *
+   * We output a chunk of empty data in webform_exporter_excel_xlsx::bof() to
+   * leave room for our real header, which includes the important <dimension>
+   * tag. This is required for proper importing into Google Docs.
+   */
+  public function eof(&$file_handle, $row_count, $col_count) {
     // Convert column count to letter representation.
     $col = 'A';
     for ($n = 1; $n < $col_count; $n++) {
@@ -134,7 +142,10 @@ class webform_exporter_excel_xlsx extends webform_exporter {
     fwrite($file_handle, $eof);
   }
 
-  function post_process(&$results) {
+  /**
+   * {@inheritdoc}
+   */
+  public function post_process(&$results) {
     // Our download file is currently a single XML sheet file. We need to add
     // the peripheral XML files to make this into a XLSX directory, then zip it.
     $file_uri = $results['file_name'];
@@ -143,8 +154,8 @@ class webform_exporter_excel_xlsx extends webform_exporter {
     // ZipArchive does not support stream wrappers, convert to filesystem path.
     $zip_filepath = drupal_realpath($zip_uri);
     $file_filepath = drupal_realpath($file_uri);
-    $zip = new ZipArchive;
-    if ($zip->open($zip_filepath, ZipArchive::CREATE) === TRUE) {
+    $zip = new ZipArchive();
+    if ($zip->open($zip_filepath, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
       // Create a bare-bones Office Open XML format directory structure. This is
       // based on the sample simple XLSX file at
       // http://blogs.msdn.com/b/chrisrae/archive/2011/08/18/creating-a-simple-xlsx-from-scratch-using-the-open-xml-sdk.aspx
@@ -167,24 +178,35 @@ class webform_exporter_excel_xlsx extends webform_exporter {
       // Switch the results file name to the new zip (xlsx) file.
       unlink($file_uri);
       if (!@rename($zip_uri, $file_uri)) {
-        // The file could not be renamed, probably due to different stream wrappers during drush wfx execution.
+        // The file could not be renamed, probably due to different stream
+        // wrappers during drush wfx execution.
         copy($zip_uri, $file_uri);
         unlink($zip_uri);
       }
     }
   }
 
-  function set_headers($filename) {
+  /**
+   * {@inheritdoc}
+   */
+  public function set_headers($filename) {
     drupal_add_http_header('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-    drupal_add_http_header('Content-Disposition', "attachment; filename=$filename.xlsx");
+    drupal_add_http_header('Content-Disposition', 'attachment; filename=' . $this->get_filename($filename));
     drupal_add_http_header('Pragma', 'public');
     drupal_add_http_header('Cache-Control', 'max-age=0');
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public function get_filename($filename) {
+    return $filename . '.xlsx';
+  }
+
+  /**
    * Return all the parts needed to assemble a bare-bones XLSX package.
    */
-  function xlsx_parts() {
+  public function xlsx_parts() {
     $parts['_rels'] = '';
     $parts['_rels/.rels'] = <<<EOL
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>

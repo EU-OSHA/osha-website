@@ -1,5 +1,67 @@
 <?php
 
+function osha_msd_get_term_usage($tid) {
+  global $language;
+  static $usage;
+  if (!$usage) {
+    $result = views_get_view_result('msd_used_terms', 'target_audience');
+    foreach ($result as $row) {
+      @$usage[$row->tid][$row->field_target_audience_taxonomy_term_data_nid]++;
+    }
+    $result = views_get_view_result('msd_used_terms', 'worker_groups');
+    foreach ($result as $row) {
+      @$usage[$row->tid][$row->field_worker_groups_covered_taxonomy_term_data_nid]++;
+    }
+    $result = views_get_view_result('msd_used_terms', 'prevention_measures');
+    foreach ($result as $row) {
+      @$usage[$row->tid][$row->field_prevention_measures_taxonomy_term_data_nid]++;
+    }
+    $result = views_get_view_result('msd_used_terms', 'hazards');
+    foreach ($result as $row) {
+      @$usage[$row->tid][$row->field_hazards_taxonomy_term_data_nid]++;
+    }
+    $result = views_get_view_result('msd_used_terms', 'sector');
+    foreach ($result as $row) {
+      @$usage[$row->tid][$row->field_sector_industry_covered_taxonomy_term_data_nid]++;
+    }
+  }
+  if (empty($tid)) {
+    return array_keys($usage);
+  }
+  if (!empty($usage[$tid])) {
+    $term = taxonomy_term_load($tid);
+    $lang = 'sk';
+    if ($language->language != 'en') {
+      $lang = $language->language;
+    }
+    if (!empty($term->name_field[$lang][0]['value'])) {
+      return $term->name_field[$lang][0]['value'];
+    }
+  }
+  return '';
+}
+
+function osha_get_nace_usage($tid) {
+  static $usage;
+  if (!$usage) {
+    $result = views_get_view_result('used_nace_codes', 'block_1');
+    foreach ($result as $row) {
+      @$usage[$row->tid][$row->field_nace_codes_taxonomy_term_data_nid]++;
+    }
+    $result = views_get_view_result('used_nace_codes', 'block_2');
+    foreach ($result as $row) {
+      @$usage[$row->tid][$row->field_sector_industry_covered_taxonomy_term_data_nid]++;
+    }
+  }
+  if (empty($tid)) {
+    return array_keys($usage);
+  }
+  if (!empty($usage[$tid])) {
+    return count($usage[$tid]);
+  }
+  return '';
+}
+
 /**
  * Alter the view tmgmt_node_selection_view to show latest node state.
  *
@@ -7,6 +69,25 @@
  * to LEFT JOIN node_revision ON node.nid = node_revision.nid
  */
 function osha_views_query_alter(&$view, &$query) {
+
+  if (($view->name == 'msd_used_terms') && ($view->current_display == 'page')) {
+    $query->where[1]['conditions'][1]['value'] = osha_msd_get_term_usage('');
+    $query->where[1]['conditions'][1]['operator'] = 'in';
+  }
+  if (($view->name == 'msd_used_terms') && ($view->current_display == 'export')) {
+    $query->where[1]['conditions'][1]['value'] = osha_msd_get_term_usage('');
+    $query->where[1]['conditions'][1]['operator'] = 'in';
+  }
+
+  if (($view->name == 'used_nace_codes') && ($view->current_display == 'page')) {
+    $query->where[1]['conditions'][1]['value'] = osha_get_nace_usage('');
+    $query->where[1]['conditions'][1]['operator'] = 'in';
+  }
+  if (($view->name == 'used_nace_codes') && ($view->current_display == 'views_data_export_1')) {
+    $query->where[1]['conditions'][1]['value'] = osha_get_nace_usage('');
+    $query->where[1]['conditions'][1]['operator'] = 'in';
+  }
+
   if ($view->name == 'related_content') {
     if (($view->current_display == 'topic')||($view->current_display == 'type')) {
       $codes = arg(2);
@@ -73,6 +154,19 @@ function osha_views_query_alter(&$view, &$query) {
   }
   if ($view->name == 'related_content') {
     if (in_array($view->current_display, ['page_1', 'block_1'])) {
+      if ($view->current_display == 'page_1') {
+        $value = [];
+        foreach (explode('+', arg(4)) as $nid) {
+          $value[] = intval($nid);
+        }
+        if ($value) {
+          $query->where[0]['conditions'][] = [
+            'field' => 'node.nid',
+            'value' => $value,
+            'operator' => 'NOT IN',
+          ];
+        }
+      }
       if ($query->where[0]['conditions'][1]['value'] == 'news') {
         $query->where[0]['conditions'][1]['value'] = ['highlight', 'news'];
         $query->where[0]['conditions'][1]['operator'] = 'IN';

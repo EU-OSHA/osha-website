@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the osha_thesaurus feature.
+ */
+
+include_once 'osha_thesaurus.features.inc';

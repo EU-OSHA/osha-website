@@ -182,11 +182,46 @@ function osha_admin_redirection_errors() {
   return $output;
 }
 
+function osha_config_link_domains_form() {
+  $form = array();
+  $link_extra_domains = variable_get('link_extra_domains', []);
+  $form['link_domains'] = array(
+    '#type' => 'textarea',
+    '#rows' => 7,
+    '#title' => t('List of allowed domains'),
+    '#default_value' => implode("\n", $link_extra_domains),
+  );
+  $form['#submit'][] = 'osha_config_link_domains_form_submit';
+  return system_settings_form($form);
+}
+
+function osha_config_link_domains_form_submit($form, &$form_state) {
+  variable_set('link_extra_domains', explode("\n", $form_state['values']['link_domains']));
+}
+
+/**
+ * Implements hook_permission().
+ */
+function osha_permission() {
+  $perms = array(
+    'administer link domains' => array('title' => t('Administer link domains'),),
+  );
+  return $perms;
+}
+
 /**
  * Implements hook_menu().
  */
 function osha_menu() {
   $items = array();
+
+  $items['admin/config/content/link_domains'] = array(
+    'title' => 'Link domains',
+    'description' => 'Administer list of allowed domains',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('osha_config_link_domains_form'),
+    'access arguments' => array('administer link domains'),
+  );
 
   $items['admin/reports/redirection_errors'] = array(
     'title' => 'Redirection errors',
@@ -1165,9 +1200,84 @@ function osha_date_field_formatter_settings_form_alter(&$form, &$form_state, $co
  * Implements hook_field_formatter_info_alter().
  */
 function osha_field_formatter_info_alter(&$info) {
+  $info['smart_trim_format']['module'] = 'osha';
   if (isset($info['date_default'])) {
     $info['date_default']['settings'] += array('osha_date_theme' => '');
   }
+}
+
+/**
+ * Implements hook_field_formatter_settings_form().
+ *
+ * Alter the settings form of title_linked formatter.
+ */
+function osha_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
+  $display = $instance['display'][$view_mode];
+  switch ($display['type']) {
+
+    case 'smart_trim_format':
+      $form = smart_trim_field_formatter_settings_form($field, $instance, $view_mode, $form, $form_state);
+      $settings = $instance['display'][$view_mode]['settings'];
+      $form['trim_options']['#options']['use_field_summary'] = t('Display field_summary instead if it is not empty');
+      $form['trim_options']['#default_value'] = empty($settings['trim_options']) ? array() : $settings['trim_options'];
+      break;
+
+  }
+
+  // Let other modules to interact with this form.
+  drupal_alter('osha_field_formatter_settings_form', $field, $instance, $view_mode, $form, $form_state);
+  return $form;
+}
+
+/**
+ * Implements hook_field_formatter_settings_form().
+ *
+ * Alter the settings form of title_linked formatter.
+ */
+function osha_field_formatter_settings_summary($field, $instance, $view_mode) {
+  $display = $instance['display'][$view_mode];
+  switch ($display['type']) {
+
+    case 'smart_trim_format':
+      return smart_trim_field_formatter_settings_summary($field, $instance, $view_mode);
+
+  }
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function osha_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $entity_info = entity_get_info($entity_type);
+  $bundle_field = 'type';
+  if (!empty($entity_info['entity keys']['bundle'])) {
+    $bundle_field = $entity_info['entity keys']['bundle'];
+  }
+  switch ($display['type']) {
+
+    case 'smart_trim_format':
+      if (function_exists('osha_smart_trim_formatter_' . $entity->{$bundle_field} . '_view')) {
+        $element = call_user_func('osha_smart_trim_formatter_' . $entity->{$bundle_field} . '_view', $entity_type, $entity, $field, $instance, $langcode, $items, $display);
+      }
+      else {
+        $settings = $display['settings'];
+        $summary_items = field_get_items($entity_type, $entity, 'field_summary', $langcode);
+        $add_items = FALSE;
+        if (!empty($settings['trim_options'])
+          && !empty($settings['trim_options']['use_field_summary'])
+          && !empty($summary_items)) {
+          $add_items = TRUE;
+          $items = $summary_items;
+        }
+        $element = smart_trim_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display);
+        if ($add_items) {
+          $element['#items'] = $items;
+        }
+      }
+      break;
+
+  }
+  return $element;
 }
 
 /**

@@ -271,15 +271,14 @@ function osha_press_release_views_default_views() {
     'osha_date_theme' => '',
   );
   /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['element_type'] = 'h3';
-  $handler->display->display_options['fields']['title']['element_class'] = 'views-field-title';
-  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['table'] = 'field_data_title_field';
+  $handler->display->display_options['fields']['title_field']['field'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['label'] = '';
+  $handler->display->display_options['fields']['title_field']['element_type'] = 'h3';
+  $handler->display->display_options['fields']['title_field']['element_class'] = 'views-field-title';
+  $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title_field']['link_to_entity'] = 1;
   /* Field: Content: Body */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
@@ -297,6 +296,7 @@ function osha_press_release_views_default_views() {
     'summary_handler' => 'full',
     'trim_options' => array(
       'text' => 'text',
+      'use_field_summary' => 'use_field_summary',
     ),
     'trim_preserve_tags' => '',
   );
@@ -377,6 +377,7 @@ function osha_press_release_views_default_views() {
   $handler->display->display_options['filters']['type_1']['field'] = 'type';
   $handler->display->display_options['filters']['type_1']['value'] = array(
     'highlight' => 'highlight',
+    'news' => 'news',
   );
   $handler->display->display_options['filters']['type_1']['group'] = 2;
   /* Filter criterion: Content: Show on (field_show_on) */

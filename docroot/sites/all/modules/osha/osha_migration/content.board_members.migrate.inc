@@ -1,7 +1,7 @@
 <?php
 /**
  * Class MigrateOshaBoardMembers imports contents from Board.xml.
- * The data is stored inside the press_contact
+ * The data is stored inside the press_contact.
  */
 class MigrateOshaBoardMembers extends OSHADynamicMigration {
 

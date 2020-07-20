@@ -163,6 +163,11 @@ jQuery(document).ready(function($){
     jQuery(this).parent().toggleClass("active");
   });
 
+  /* Hide country and location if is empty */
+  $("body.page-oshevents .event-country").filter(function() {
+    return $(this).text() === ", ";
+	}).css("display", "none");
+
 
 });
 

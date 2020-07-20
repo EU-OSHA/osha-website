@@ -226,6 +226,7 @@ function osha_musculoskeletal_disorders_search_api_solr_query_alter(array &$call
       }
       $call_args['params']['sort'] .= $sort_order;
     }
+    $call_args['params']['sort'] .= ', sort_title2 asc';
   }
 }
 

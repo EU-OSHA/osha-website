@@ -102,6 +102,7 @@ function osha_musculoskeletal_disorders_default_search_api_index() {
         "search_api_language" : { "type" : "string" },
         "status" : { "type" : "boolean" },
         "title" : { "type" : "text" },
+        "title2" : { "type" : "string" },
         "title_field" : { "type" : "text" },
         "type" : { "type" : "string" },
         "url" : { "type" : "uri" }

@@ -1900,6 +1900,7 @@ input[type=checkbox].add-to-calendar-checkbox {
     clear: both;
     color:#003399;
     font-size: 0.9rem;
+    line-height: initial;
     font-weight: bold!important;
     text-decoration: none;
 }
@@ -1911,6 +1912,7 @@ input[type=checkbox].add-to-calendar-checkbox {
 
 .box-events-summary a.see-more-arrow{
     font-size: 1rem;
+    margin-left: 0;
     clear: both;  
     display: inline-block; 
 }
@@ -2109,7 +2111,47 @@ article.node-seminar{
 .field-name-field-colection-related-resource .field-items .field-item .field-collection-view{
     padding: 0.3em 0 1em 0;
     background: url(/sites/all/themes/osha_frontend/images/back-tit-blue.png) repeat-x scroll 0 100% transparent;
-    border-bottom:none;
+    border-bottom:none; 
+    border-bottom: 0;
+}
+
+.node-type-register-records .field-name-body p{
+    padding-right: 1em;
+}
+
+.node-type-register-records .group-related-resources .field-collection-view{
+    padding: 0.3em 0 1em 0;
+    background: url(/sites/all/themes/osha_frontend/images/back-tit-blue.png) repeat-x scroll 0 100% transparent;
+    border-bottom: 0;
+    margin-bottom: 0.5em;
+}
+
+.node-type-register-records div.group-related-resources > div:last-child{
+     background: transparent;
+}
+
+.node-type-register-records .group-related-resources .field-collection-view .field-items .field-item{ 
+    margin-bottom: 8px;
+    padding-right: 2em;
+}
+
+.node-type-register-records .group-related-resources .field-collection-view .field-items span.file img{ 
+    float: left;
+    margin-top: 3px;
+}
+
+/*
+.entity-field-collection-item.field-collection-item-field-colection-related-resource{
+    padding: 0.3em 0 2em 0;
+    background: url(/sites/all/themes/osha_frontend/images/back-tit-blue.png) repeat-x scroll 0 100% transparent;
+    border-bottom:none; 
+    border-bottom: 0;
+}
+*/
+
+.field-name-field-colection-related-resource .field-collection-view{
+    padding-top: 0;
+    border-bottom: 0;
 }
 
 .field-collection-item-field-colection-related-resource .content .field-name-field-related-resource-title .field-label{
@@ -2615,7 +2657,7 @@ article.node-seminar{
     display: none;
 }
 
-#content .box .flickr-credit a{
+.box .flickr-credit a{
     font-family: 'Open Sans',sans-serif;
     float: none;
     clear: both;
@@ -2630,7 +2672,7 @@ article.node-seminar{
     border-bottom: 0;
 }
 
-#content .box .flickr-credit .flickr-metadata{
+.box .flickr-credit .flickr-metadata{
     font-family: 'Open Sans',sans-serif;
     float: left;
     width: 100%;
@@ -2645,7 +2687,7 @@ article.node-seminar{
     border-bottom: 0;
 }
 
-#content .box .flickr-credit .flickr-metadata a{
+.box .flickr-credit .flickr-metadata a{
     font-family: 'Open Sans',sans-serif;
     float: left;
     width: auto;
@@ -2952,6 +2994,9 @@ article.node-article .article_related_resources.sidebars_second_true .video .ico
 
 .content-fluid.related-resources.article_related_resources .content-related-publications h2 {
     width: 100%;
+    height: auto;
+    margin-top: 0;
+    margin-bottom: 1em;
 }
 
 .content-fluid.related-resources.article_related_resources .content-related-publications.publications a.see-more-arrow:hover{
@@ -3143,4 +3188,20 @@ article.node-article .article_related_resources.sidebars_first_true.sidebars_sec
 
 #content .view-id-dangerous_substances_overview .feed-icon a:hover{
     opacity: 0.8;
+}
+
+a.facetapi-limit-link{
+    color: #003399;
+    font-size: 0.9em;
+    font-weight: 600;
+}
+
+a.facetapi-limit-link:hover{
+    text-decoration: none;
+}
+
+.node-17594 header > .node__title,
+.node-17595 header > .node__title {
+    visibility: hidden;
+    display: none;
 }

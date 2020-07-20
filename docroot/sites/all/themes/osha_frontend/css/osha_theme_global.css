@@ -482,7 +482,7 @@
 
 .separator_recomended_resources_home, .title_recomended_resources_home , 
 #recommended_resources, #block-views-upcoming-events-block, #block-views-news-oshnews-latest,
-.oshwiki-featured-articles, #block-views-related-content-block-2, #block-views-related-content-block-1 , .region-sidebar-second h4 {
+.oshwiki-featured-articles, #block-views-related-content-block-2, #block-views-related-content-block-1 , .region-sidebar-second h4, #related-wiki{
 	display: none;
 }
 
@@ -2279,6 +2279,27 @@ ul[data-sa-theme="basic-blue"].ui-menu{
 		height: 60px;
 	}
 
+	.view-press-releases .img-pressreleases{
+		width: 100%;
+		height: auto;
+	}
+
+	.view-press-releases .views-field-view-node{
+		float: left;
+		margin-top: 1em;
+	}
+
+	.view-press-releases .row{
+		padding-bottom: 1em;
+	}
+
+	.view-press-releases .row .views-field-view-node span a{
+		padding-left: 0 !important;
+	}
+
+	#block-views-press-contacts-block table tr td  .views-field-field-press-contact-email{
+		padding-bottom: 0;
+	}
 
 }
 @media screen and (max-width: 680px) {

@@ -44,28 +44,28 @@ function osha_linkchecker_views_default_views() {
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
     'code' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'url' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'title_field' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'type' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -161,6 +161,11 @@ function osha_linkchecker_views_default_views() {
   $handler->display->display_options['filters']['error']['table'] = 'linkchecker_link';
   $handler->display->display_options['filters']['error']['field'] = 'error';
   $handler->display->display_options['filters']['error']['operator'] = '!=';
+  /* Filter criterion: Linkchecker Links: Check link status */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'linkchecker_link';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value']['value'] = '1';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');

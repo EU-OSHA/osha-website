@@ -2,7 +2,6 @@
 
 /**
  * @file
- *
  * Menu callbacks and functions for configuring and editing webforms.
  */
 
@@ -13,6 +12,11 @@ function webform_configure_form($form, &$form_state, $node) {
   form_load_include($form_state, 'inc', 'webform', 'includes/webform.components');
 
   $form['#attached']['library'][] = array('webform', 'admin');
+
+  // Refresh the entity cache to get the latest submission number.
+  $nid = $node->nid;
+  entity_get_controller('node')->resetCache(array($nid));
+  $node = node_load($nid);
 
   $form['#node'] = $node;
 
@@ -68,7 +72,7 @@ function webform_configure_form($form, &$form_state, $node) {
     '#theme' => 'webform_advanced_redirection_form',
     '#description' => t('Choose where to redirect the user upon successful submission.') . ' ' . t('The <em>Custom URL</em> option supports Webform token replacements.') . ' ' . theme('webform_token_help', array('groups' => array('node', 'submission'))),
   );
-  $form['submission']['redirection']['redirect']= array(
+  $form['submission']['redirection']['redirect'] = array(
     '#type' => 'radios',
     '#default_value' => $redirect,
     '#options' => array(
@@ -109,13 +113,13 @@ function webform_configure_form($form, &$form_state, $node) {
     '#parents' => array('total_submit_limit'),
   );
   $interval_options = array(
-      '-1' => t('ever'),
-      '60' => t('every minute'),
-      '300' => t('every 5 minutes'),
-      '3600' => t('every hour'),
-      '86400' => t('every day'),
-      '604800' => t('every week'),
-    );
+    '-1' => t('ever'),
+    '60' => t('every minute'),
+    '300' => t('every 5 minutes'),
+    '3600' => t('every hour'),
+    '86400' => t('every day'),
+    '604800' => t('every week'),
+  );
   $form['submission']['total_submit_limit']['total_submit_interval'] = array(
     '#type' => 'select',
     '#options' => $interval_options,
@@ -206,7 +210,7 @@ function webform_configure_form($form, &$form_state, $node) {
     $node->webform['progressbar_pagebreak_labels'] ? 'progressbar_pagebreak_labels' : NULL,
     $node->webform['progressbar_include_confirmation'] ? 'progressbar_include_confirmation' : NULL,
   ));
-  $form['progressbar']['webform_progressbar_style']  = array(
+  $form['progressbar']['webform_progressbar_style'] = array(
     '#type' => 'checkboxes',
     '#title' => t('Progress bar style'),
     '#options' => array(
@@ -260,7 +264,7 @@ function webform_configure_form($form, &$form_state, $node) {
     '#title' => t('Enable preview page'),
     '#description' => t('Add a page for previewing the form before submitting.'),
     '#default_value' => $node->webform['preview'],
-    '#id' => 'webform-preview-enable'
+    '#id' => 'webform-preview-enable',
   );
   $form['preview']['settings'] = array(
     '#type' => 'container',
@@ -299,7 +303,7 @@ function webform_configure_form($form, &$form_state, $node) {
     '#title' => t('Preview message'),
     '#default_value' => $node->webform['preview_message'],
     '#format' => $node->webform['preview_message_format'],
-    '#description' => t('A message to be displayed on the preview page. If left blank, the message "!default" will be used. Supports Webform token replacements.', array('!default' => $preview_default_message))  . ' ' . theme('webform_token_help', array('groups' => array('node', 'submission'))),
+    '#description' => t('A message to be displayed on the preview page. If left blank, the message "!default" will be used. Supports Webform token replacements.', array('!default' => $preview_default_message)) . ' ' . theme('webform_token_help', array('groups' => array('node', 'submission'))),
   );
   $form['preview']['settings']['preview_components'] = array(
     '#type' => 'select',
@@ -407,19 +411,11 @@ function webform_configure_form_validate($form, &$form_state) {
   }
 
   // Ensure only positive integers are entered as submission limits.
-  foreach (array('total_submit_limit', 'submit_limit') as $field) {
+  foreach (array('total_submit_limit' => 'enforce_total_limit', 'submit_limit' => 'enforce_limit') as $field => $enforce_fk) {
     $limit = $form['submission'][$field][$field]['#value'];
-    if ($limit !== '' && (int) $limit < 1 && (int) $limit !== -1) {
+    if ($form['submission'][$field][$enforce_fk]['#value'] !== 'no' && $limit !== '' && (int) $limit < 1 && (int) $limit !== -1) {
       form_error($form['submission'][$field][$field], t('The submission limit must be at least 1.'));
     }
-  }
-
-  // Serial number must be a positive integer greater than any existing serial number.
-  $next_min = _webform_submission_serial_next_value_used($form['#node']->nid);
-  if ((int) $form['advanced']['next_serial']['#value'] < $next_min) {
-    form_error($form['advanced']['next_serial'],
-               t('The next submission number must be at least %min (greater than any existing serial number).',
-                 array('%min' => $next_min)));
   }
 
   // Prohibit the combination of confidential + per-user limit + ip-only
@@ -430,7 +426,7 @@ function webform_configure_form_validate($form, &$form_state) {
     // Note that FAPI doesn't actually support error highlighting on radio or
     // checkbox form elements.
     form_error($form['advanced']['confidential'],
-               t('Choose a "Per user submission limit" or "Confidential submissions", but not both. Or ask the adminstrator to track anonymous users by cookie, rather than IP address only.'));
+      t('Choose a "Per user submission limit" or "Confidential submissions", but not both. Or ask the adminstrator to track anonymous users by cookie, rather than IP address only.'));
   }
 }
 
@@ -445,7 +441,7 @@ function webform_configure_form_submit($form, &$form_state) {
   $node->webform['confirmation'] = $form_state['values']['confirmation']['value'];
   $node->webform['confirmation_format'] = $form_state['values']['confirmation']['format'];
 
-  // Save the redirect URL
+  // Save the redirect URL.
   $node->webform['redirect_url'] = $form_state['values']['redirect_url'];
 
   // Overall form status.
@@ -517,8 +513,17 @@ function webform_configure_form_submit($form, &$form_state) {
   // Set submit button text.
   $node->webform['submit_text'] = $form_state['values']['submit_text'];
 
-  // Set next serial number.
-  $node->webform['next_serial'] = (int) $form_state['values']['next_serial'];
+  // Set next serial number. It must be a positive integer greater than any
+  // existing serial number, which could have increased while this form was
+  // being edited.
+  $next_min = _webform_submission_serial_next_value_used($node->nid);
+  $next_serial = (int) $form_state['values']['next_serial'];
+  if ($next_serial < $next_min) {
+    drupal_set_message(t('The next submission number was increased to @min to make it higher than existing submissions.',
+      array('@min' => $next_min)));
+    $next_serial = $next_min;
+  }
+  $node->webform['next_serial'] = $next_serial;
 }
 
 /**
@@ -528,11 +533,12 @@ function webform_configure_form_submit($form, &$form_state) {
  * to add properties if needed into the $form['#node'] object before save.
  */
 function webform_configure_form_submit_save($form, &$form_state) {
+  $transaction = db_transaction();
   node_save($form['#node']);
   drupal_set_message(t('The form settings have been updated.'));
 
   $node = &$form['#node'];
-  if (!$node->webform['block'] && function_exists('block_load') && 
+  if (!$node->webform['block'] && function_exists('block_load') &&
       ($block = block_load('webform', 'client-block-' . $node->nid)) &&
       !empty($block->bid)) {
     // An existing block for this not-currently-available block was already configured.
@@ -545,7 +551,7 @@ function webform_configure_form_submit_save($form, &$form_state) {
       ->condition('module', 'webform')
       ->condition('delta', $block->delta)
       ->execute();
-    // Remove any roles associated with the block
+    // Remove any roles associated with the block.
     db_delete('block_role')
       ->condition('module', 'webform')
       ->condition('delta', $block->delta)

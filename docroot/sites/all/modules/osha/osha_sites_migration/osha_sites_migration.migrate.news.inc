@@ -87,10 +87,9 @@ class HWCNewsSource extends AbstractNCWNodeSource {
       'field_expiration_date_timezone',
       'field_expiration_date_value2',
       'field_archived',
-//      'field_activity',
-//      'field_aditional_resources',
-//      'field_tags',
+      'field_show_on',
     );
     return array_combine($fields, $fields);
   }
+
 }

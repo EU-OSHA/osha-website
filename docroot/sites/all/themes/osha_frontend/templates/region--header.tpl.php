@@ -10,7 +10,7 @@
 	</div>
 </div>
 <div id="languagesAndSearch">
-	<div id="contact"><span class="a_small"><a  onclick="zoomSmall()">a</a></span><span class="a_medium"><a onclick="zoomMedium()">a</a></span><span class="a_big"><a  onclick="zoomBig()">a</a></span><a href="#" onclick="if(window.print)window.print();" class="printfriendly" title="Print page"><span class="glyphicon glyphicon-print"></span></a><?php print l(t('News & Events'), 'news-events') ?><?php print l(t('Press'), 'about-eu-osha/press-room') ?><!-- <?php print l(t('Contact us'), 'contact-us') ?>  --></div>
+	<div id="contact"><span class="a_small"><a title="<?php print t('Smaller text'); ?>" onclick="zoomSmall()">a</a></span><span class="a_medium"><a title="<?php print t('Optimised defaults'); ?>" onclick="zoomMedium()">a</a></span><span class="a_big"><a title="<?php print t('Bigger text'); ?>" onclick="zoomBig()">a</a></span><a href="#" onclick="if(window.print)window.print();" class="printfriendly" title="<?php print t('Print page'); ?>"><span class="glyphicon glyphicon-print"></span></a><?php print l(t('News & Events'), 'news-events') ?><?php print l(t('Press'), 'about-eu-osha/press-room') ?><!-- <?php print l(t('Contact us'), 'contact-us') ?>  --></div>
 	<div>
 		<img src="/sites/all/themes/osha_frontend/images/languageico.png" alt="Select language">
 	</div>
@@ -20,6 +20,6 @@ global $language;
 $url = "/" . $language->language . "/about-eu-osha/our-story";
 ?>
 
-<div id="agencyLogo"><a href="<?php echo url('<front>');?>"><img src="/sites/all/themes/osha_frontend/images/eu-osha-logo/EU-OSHA-<?php print (in_array($language->language, osha_enabled_language_list()))?$language->language:'en';?>.png" alt="<?php echo t('European Agency for Safety and Health at Work');?>"></a></div>
+<div id="agencyLogo"><a title="<?php print t('EU-OSHA corporate website')?>" href="<?php echo url('<front>');?>"><img src="/sites/all/themes/osha_frontend/images/eu-osha-logo/EU-OSHA-<?php print (in_array($language->language, osha_enabled_language_list()))?$language->language:'en';?>.png" alt="<?php echo t('European Agency for Safety and Health at Work');?>"></a></div>
 <div id="europeLogo"><img src="/sites/all/themes/osha_frontend/images/europeLogo.png" alt="Europe Flag"></div>
 <?php print render($content); ?>

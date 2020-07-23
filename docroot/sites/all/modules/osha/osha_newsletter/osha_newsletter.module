@@ -804,9 +804,10 @@ function osha_newsletter_file_get_contents($url) {
 function osha_newsletter_block_subscribe_captcha_form_submit($form, &$form_state) {
   $email = $form_state['values']['email'];
   $type = variable_get('crm_subscribe_type', 'OSH');
-  $port = variable_get('crm_subscribe_port', '8081'); // 8082
-  $url = 'https://jira.osha.europa.eu:' . $port . '/OSHAService/ServiceApp.svc/subscriber?email=' . $email . '&type=' . $type;
-  $result = osha_newsletter_file_get_contents($url);
+  $port = variable_get('crm_subscribe_port', '8084'); // 8084 = prod. 8083 = staging.
+  $path = variable_get('crm_subscribe_path', '/OshaService/OSHAService.svc/subscriber');
+  $url = 'https://jira.osha.europa.eu:' . $port . $path . '?email=' . $email . '&type=' . $type;
+  osha_newsletter_file_get_contents($url);
   // Need to redirect due to Ajax handling.
   $referer = empty($_SERVER['HTTP_REFERER']) ? '/' : $_SERVER['HTTP_REFERER'];
   $form_state['redirect'] = $referer;

@@ -20,7 +20,7 @@ function migrate_ui_dashboard_form($form, &$form_state) {
 
   $build['overview'] = array(
     '#prefix' => '<div>',
-    '#markup' => migrate_overview(),
+    '#markup' => filter_xss_admin(migrate_overview()),
     '#suffix' => '</div>',
   );
 
@@ -123,7 +123,7 @@ function migrate_ui_dashboard_form($form, &$form_state) {
     else {
       $row['lastthroughput'] = t('N/A');
     }
-    $row['lastimported'] = $migration->getLastImported();
+    $row['lastimported'] = check_plain($migration->getLastImported());
     $rows[$machine_name] = $row;
   }
 
@@ -505,8 +505,8 @@ function migrate_migration_info($form, $form_state, $migration) {
   foreach ($team as $group => $list) {
     $form['overview'][$group] = array(
       '#type' => 'item',
-      '#title' => $group,
-      '#markup' => implode(', ', $list),
+      '#title' => filter_xss_admin($group),
+      '#markup' => filter_xss_admin(implode(', ', $list)),
     );
   }
 
@@ -514,7 +514,7 @@ function migrate_migration_info($form, $form_state, $migration) {
   if (count($dependencies) > 0) {
     $form['overview']['dependencies'] = array(
       '#title' => t('Dependencies') ,
-      '#markup' => implode(', ', $dependencies),
+      '#markup' => filter_xss_admin(implode(', ', $dependencies)),
       '#type' => 'item',
     );
   }
@@ -522,7 +522,7 @@ function migrate_migration_info($form, $form_state, $migration) {
   if (count($soft_dependencies) > 0) {
     $form['overview']['soft_dependencies'] = array(
       '#title' => t('Soft Dependencies'),
-      '#markup' => implode(', ', $soft_dependencies),
+      '#markup' => filter_xss_admin(implode(', ', $soft_dependencies)),
       '#type' => 'item',
     );
   }
@@ -568,7 +568,7 @@ function migrate_migration_info($form, $form_state, $migration) {
     $form['destination']['type'] = array(
       '#type' => 'item',
       '#title' => t('Type'),
-      '#markup' => (string)$destination,
+      '#markup' => filter_xss_admin((string) $destination),
     );
     $dest_key = $destination->getKeySchema();
     $header = array(t('Machine name'), t('Description'));
@@ -583,7 +583,10 @@ function migrate_migration_info($form, $form_state, $migration) {
         // Add class for mapped/unmapped. Used in summary.
         $classes[] = !isset($destination_fields[$machine_name]) ? 'migrate-error' : '';
       }
-      $rows[] = array(array('data' => $machine_name, 'class' => $classes), array('data' => $description, 'class' => $classes));
+      $rows[] = array(
+        array('data' => check_plain($machine_name), 'class' => $classes),
+        array('data' => filter_xss_admin($description), 'class' => $classes),
+      );
     }
     $classes = array();
 
@@ -609,7 +612,7 @@ function migrate_migration_info($form, $form_state, $migration) {
     $form['source']['query'] = array(
       '#type' => 'item',
       '#title' => t('Query'),
-      '#markup' => '<pre>' . $source . '</pre>',
+      '#markup' => '<pre>' . filter_xss_admin($source) . '</pre>',
     );
     $source_key = $migration->getMap()->getSourceKey();
     $header = array(t('Machine name'), t('Description'));
@@ -623,7 +626,10 @@ function migrate_migration_info($form, $form_state, $migration) {
         // Add class for mapped/unmapped. Used in summary.
         $classes = !isset($source_fields[$machine_name]) ? 'migrate-error' : '';
       }
-      $rows[] = array(array('data' => $machine_name, 'class' => $classes), array('data' => $description, 'class' => $classes));
+      $rows[] = array(
+        array('data' => check_plain($machine_name), 'class' => $classes),
+        array('data' => filter_xss_admin($description), 'class' => $classes),
+      );
     }
     $classes = array();
 
@@ -648,16 +654,16 @@ function migrate_migration_info($form, $form_state, $migration) {
       if (!is_null($source_field) && !isset($source_fields[$source_field])) {
         drupal_set_message(t('"!source" was used as source field in the
           "!destination" mapping but is not in list of source fields', array(
-            '!source' => $source_field,
-            '!destination' => $destination_field
+            '!source' => filter_xss_admin($source_field),
+            '!destination' => filter_xss_admin($destination_field),
           )),
         'warning');
       }
       if (!is_null($destination_field) && !isset($destination_fields[$destination_field])) {
         drupal_set_message(t('"!destination" was used as destination field in
           "!source" mapping but is not in list of destination fields', array(
-            '!source' => $source_field,
-            '!destination' => $destination_field)),
+            '!source' => filter_xss_admin($source_field),
+            '!destination' => filter_xss_admin($destination_field))),
         'warning');
       }
       $descriptions[$mapping->getIssueGroup()][] = $mapping;
@@ -667,7 +673,7 @@ function migrate_migration_info($form, $form_state, $migration) {
     foreach ($descriptions as $group => $mappings) {
       $form[$group] = array(
         '#type' => 'fieldset',
-        '#title' => t('Mapping: !group', array('!group' => $group)),
+        '#title' => t('Mapping: !group', array('!group' => filter_xss_admin($group))),
         '#group' => 'detail',
         '#attributes' => array('class' => array('migrate-mapping')),
       );
@@ -696,11 +702,11 @@ function migrate_migration_info($form, $form_state, $migration) {
           $classes[] = 'migrate-priority-' . 1;
         }
         $row = array(
-          array('data' => $mapping->getDestinationField(), 'class' => $classes),
-          array('data' => $mapping->getSourceField(), 'class' => $classes),
-          array('data' => $default, 'class' => $classes),
-          array('data' => $mapping->getDescription(),  'class' => $classes),
-          array('data' => $priority, 'class' => $classes),
+          array('data' => filter_xss_admin($mapping->getDestinationField()), 'class' => $classes),
+          array('data' => filter_xss_admin($mapping->getSourceField()), 'class' => $classes),
+          array('data' => filter_xss_admin($default), 'class' => $classes),
+          array('data' => filter_xss_admin($mapping->getDescription()),  'class' => $classes),
+          array('data' => filter_xss_admin($priority), 'class' => $classes),
         );
         $rows[] = $row;
         $classes = array();
@@ -837,9 +843,9 @@ function migrate_ui_handlers_form($form, &$form_state) {
               ->condition('type', 'class')
               ->execute()
               ->fetchField();
-    $row['module'] = $module;
-    $row['class'] = $class_name;
-    $row['types'] = implode(', ', $handler->getTypesHandled());
+    $row['module'] = check_plain($module);
+    $row['class'] = check_plain($class_name);
+    $row['types'] = filter_xss_admin(implode(', ', $handler->getTypesHandled()));
     $default_values[$class_name] = !in_array($class_name, $disabled);
     $rows[$class_name] = $row;
   }
@@ -874,9 +880,9 @@ function migrate_ui_handlers_form($form, &$form_state) {
               ->condition('type', 'class')
               ->execute()
               ->fetchField();
-    $row['module'] = $module;
-    $row['class'] = $class_name;
-    $row['types'] = implode(', ', $handler->getTypesHandled());
+    $row['module'] = check_plain($module);
+    $row['class'] = check_plain($class_name);
+    $row['types'] = filter_xss_admin(implode(', ', $handler->getTypesHandled()));
     $default_values[$class_name] = !in_array($class_name, $disabled);
     $rows[$class_name] = $row;
   }

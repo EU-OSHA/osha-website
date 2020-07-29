@@ -68,26 +68,19 @@ function osha_thesaurus_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_thesaurus_2020',
-    'label' => 'Thesaurus',
+    'label' => 'Thesaurus 2020',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
-      'module' => 'entityreference_view_widget',
+      'active' => 0,
+      'module' => 'multiple_selects',
       'settings' => array(
-        'allow_duplicates' => 0,
         'apply_chosen' => '',
-        'close_modal' => 0,
-        'pass_argument' => 0,
-        'pass_arguments' => '',
-        'rendered_entity' => 0,
-        'view' => 'thesaurus|entityreference_view_widget_1',
-        'view_mode' => 'full',
       ),
-      'type' => 'entityreference_view_widget',
+      'type' => 'multiple_selects',
       'weight' => 13,
     ),
     'workbench_access_field' => 0,
@@ -151,7 +144,7 @@ function osha_thesaurus_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_thesaurus_2020',
-    'label' => 'Thesaurus',
+    'label' => 'Thesaurus 2020',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -159,7 +152,7 @@ function osha_thesaurus_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'entityreference_view_widget',
+      'module' => 'multiple_selects',
       'settings' => array(
         'allow_duplicates' => 0,
         'apply_chosen' => '',
@@ -170,7 +163,7 @@ function osha_thesaurus_field_default_field_instances() {
         'view' => 'thesaurus|entityreference_view_widget_1',
         'view_mode' => 'full',
       ),
-      'type' => 'entityreference_view_widget',
+      'type' => 'multiple_selects',
       'weight' => 11,
     ),
     'workbench_access_field' => 0,
@@ -234,7 +227,7 @@ function osha_thesaurus_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_thesaurus_2020',
-    'label' => 'Thesaurus',
+    'label' => 'Thesaurus 2020',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -242,7 +235,7 @@ function osha_thesaurus_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'entityreference_view_widget',
+      'module' => 'multiple_selects',
       'settings' => array(
         'allow_duplicates' => 0,
         'apply_chosen' => '',
@@ -253,7 +246,7 @@ function osha_thesaurus_field_default_field_instances() {
         'view' => 'thesaurus|entityreference_view_widget_1',
         'view_mode' => 'full',
       ),
-      'type' => 'entityreference_view_widget',
+      'type' => 'multiple_selects',
       'weight' => 12,
     ),
     'workbench_access_field' => 0,
@@ -317,7 +310,7 @@ function osha_thesaurus_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_thesaurus_2020',
-    'label' => 'Thesaurus',
+    'label' => 'Thesaurus 2020',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -325,7 +318,7 @@ function osha_thesaurus_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'entityreference_view_widget',
+      'module' => 'multiple_selects',
       'settings' => array(
         'allow_duplicates' => 0,
         'apply_chosen' => '',
@@ -336,7 +329,7 @@ function osha_thesaurus_field_default_field_instances() {
         'view' => 'thesaurus|entityreference_view_widget_1',
         'view_mode' => 'full',
       ),
-      'type' => 'entityreference_view_widget',
+      'type' => 'multiple_selects',
       'weight' => 13,
     ),
     'workbench_access_field' => 0,
@@ -388,7 +381,7 @@ function osha_thesaurus_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_thesaurus_2020',
-    'label' => 'Thesaurus',
+    'label' => 'Thesaurus 2020',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -396,7 +389,7 @@ function osha_thesaurus_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'entityreference_view_widget',
+      'module' => 'multiple_selects',
       'settings' => array(
         'allow_duplicates' => 0,
         'apply_chosen' => '',
@@ -407,7 +400,7 @@ function osha_thesaurus_field_default_field_instances() {
         'view' => 'thesaurus|entityreference_view_widget_1',
         'view_mode' => 'full',
       ),
-      'type' => 'entityreference_view_widget',
+      'type' => 'multiple_selects',
       'weight' => 10,
     ),
     'workbench_access_field' => 0,
@@ -459,7 +452,7 @@ function osha_thesaurus_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_thesaurus_2020',
-    'label' => 'Thesaurus',
+    'label' => 'Thesaurus 2020',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -467,7 +460,7 @@ function osha_thesaurus_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'entityreference_view_widget',
+      'module' => 'multiple_selects',
       'settings' => array(
         'allow_duplicates' => 0,
         'apply_chosen' => '',
@@ -478,7 +471,7 @@ function osha_thesaurus_field_default_field_instances() {
         'view' => 'thesaurus|entityreference_view_widget_1',
         'view_mode' => 'full',
       ),
-      'type' => 'entityreference_view_widget',
+      'type' => 'multiple_selects',
       'weight' => 18,
     ),
     'workbench_access_field' => 0,
@@ -530,7 +523,7 @@ function osha_thesaurus_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_thesaurus_2020',
-    'label' => 'Thesaurus',
+    'label' => 'Thesaurus 2020',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -601,7 +594,7 @@ function osha_thesaurus_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_thesaurus_2020',
-    'label' => 'Thesaurus',
+    'label' => 'Thesaurus 2020',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -609,7 +602,7 @@ function osha_thesaurus_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'entityreference_view_widget',
+      'module' => 'multiple_selects',
       'settings' => array(
         'allow_duplicates' => 0,
         'apply_chosen' => '',
@@ -620,7 +613,7 @@ function osha_thesaurus_field_default_field_instances() {
         'view' => 'thesaurus|entityreference_view_widget_1',
         'view_mode' => 'full',
       ),
-      'type' => 'entityreference_view_widget',
+      'type' => 'multiple_selects',
       'weight' => 13,
     ),
     'workbench_access_field' => 0,
@@ -690,7 +683,7 @@ function osha_thesaurus_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_thesaurus_2020',
-    'label' => 'Thesaurus',
+    'label' => 'Thesaurus 2020',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -698,7 +691,7 @@ function osha_thesaurus_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'entityreference_view_widget',
+      'module' => 'multiple_selects',
       'settings' => array(
         'allow_duplicates' => 0,
         'apply_chosen' => '',
@@ -709,7 +702,7 @@ function osha_thesaurus_field_default_field_instances() {
         'view' => 'thesaurus|entityreference_view_widget_1',
         'view_mode' => 'full',
       ),
-      'type' => 'entityreference_view_widget',
+      'type' => 'multiple_selects',
       'weight' => 12,
     ),
     'workbench_access_field' => 0,
@@ -761,7 +754,7 @@ function osha_thesaurus_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_thesaurus_2020',
-    'label' => 'Thesaurus',
+    'label' => 'Thesaurus 2020',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -769,7 +762,7 @@ function osha_thesaurus_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'entityreference_view_widget',
+      'module' => 'multiple_selects',
       'settings' => array(
         'allow_duplicates' => 0,
         'close_modal' => 0,
@@ -779,7 +772,7 @@ function osha_thesaurus_field_default_field_instances() {
         'view' => 'thesaurus|entityreference_view_widget_1',
         'view_mode' => 'full',
       ),
-      'type' => 'entityreference_view_widget',
+      'type' => 'multiple_selects',
       'weight' => 8,
     ),
     'workbench_access_field' => 0,
@@ -803,7 +796,7 @@ function osha_thesaurus_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 6,
+        'weight' => 2,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -886,7 +879,7 @@ function osha_thesaurus_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 3,
+        'weight' => 0,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -966,13 +959,9 @@ function osha_thesaurus_field_default_field_instances() {
       ),
       'default' => array(
         'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'bypass_access' => FALSE,
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 5,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 8,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -1053,10 +1042,9 @@ function osha_thesaurus_field_default_field_instances() {
       ),
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 1,
+        'type' => 'hidden',
+        'weight' => 6,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -1136,9 +1124,8 @@ function osha_thesaurus_field_default_field_instances() {
       ),
       'default' => array(
         'label' => 'above',
-        'module' => 'i18n_taxonomy',
         'settings' => array(),
-        'type' => 'i18n_taxonomy_term_reference_link',
+        'type' => 'hidden',
         'weight' => 9,
       ),
       'highlights_item' => array(
@@ -1216,7 +1203,7 @@ function osha_thesaurus_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 8,
+        'weight' => 4,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -1299,7 +1286,7 @@ function osha_thesaurus_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 4,
+        'weight' => 1,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -1378,11 +1365,15 @@ function osha_thesaurus_field_default_field_instances() {
         'weight' => 0,
       ),
       'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 2,
+        'label' => 'hidden',
+        'module' => 'title',
+        'settings' => array(
+          'title_class' => '',
+          'title_link' => '',
+          'title_style' => '',
+        ),
+        'type' => 'title_linked',
+        'weight' => 5,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -1465,7 +1456,7 @@ function osha_thesaurus_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 7,
+        'weight' => 3,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -1544,10 +1535,10 @@ function osha_thesaurus_field_default_field_instances() {
         'weight' => 0,
       ),
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 7,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -1653,7 +1644,7 @@ function osha_thesaurus_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_thesaurus_2020',
-    'label' => 'Thesaurus',
+    'label' => 'Thesaurus 2020',
     'required' => 0,
     'settings' => array(
       'entity_translation_sync' => FALSE,
@@ -1661,7 +1652,7 @@ function osha_thesaurus_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'entityreference_view_widget',
+      'module' => 'multiple_selects',
       'settings' => array(
         'allow_duplicates' => 0,
         'close_modal' => 0,
@@ -1671,7 +1662,7 @@ function osha_thesaurus_field_default_field_instances() {
         'view' => 'thesaurus|entityreference_view_widget_1',
         'view_mode' => 'full',
       ),
-      'type' => 'entityreference_view_widget',
+      'type' => 'multiple_selects',
       'weight' => 14,
     ),
     'workbench_access_field' => 0,
@@ -1688,7 +1679,7 @@ function osha_thesaurus_field_default_field_instances() {
   t('Notes');
   t('Synonyms');
   t('Term reference');
-  t('Thesaurus');
+  t('Thesaurus 2020');
   t('Title');
 
   return $field_instances;

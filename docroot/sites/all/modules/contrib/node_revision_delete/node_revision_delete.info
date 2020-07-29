@@ -12,7 +12,8 @@ datestamp = "1400084030"
 
 
 ; Information added by Drupal.org packaging script on 2014-09-01
-version = "7.x-2.6"
+actual_version = "7.x-2.6"
+version = "7.x-3.1"
 core = "7.x"
 project = "node_revision_delete"
 datestamp = "1409588933"

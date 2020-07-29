@@ -217,3 +217,14 @@ ul.primary {
   visibility: hidden;
   display: none;
 }
+
+/* View Search */
+
+.thesaurus_element_select{
+display: inline-block;
+}
+
+.thesaurus_element_select.title{
+display: inline-block;
+padding-left: 5px;
+}

@@ -1,0 +1,8 @@
+<?php
+
+/*
+ *	Update V 1.1
+ */
+function osha_thesaurus_update_7001() {
+  features_revert_module('osha_thesaurus');
+}

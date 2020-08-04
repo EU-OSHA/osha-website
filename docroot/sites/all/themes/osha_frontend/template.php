@@ -613,6 +613,20 @@ function osha_frontend_preprocess_page(&$variables) {
  * Implements hook_preprocess_html().
  */
 function osha_frontend_preprocess_html(&$variables) {
+  global $language;
+
+  if ($language->language != 'en') {
+    if (
+    ((arg(0) == 'node') && (arg(1) == '2427'))
+    ||
+    (arg(0) == 'oshevents')
+    ) {
+      drupal_add_js(
+        drupal_get_path('module', 'jquery_update') . '/replace/ui/ui/i18n/jquery.ui.datepicker-' . $language->language . '.js',
+        array('group' => JS_THEME));
+    }
+  }
+
   $node = menu_get_object();
   if ($node && $node->type == 'publication') {
     $variables['classes_array'][] = 'page-publication-detail';

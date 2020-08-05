@@ -29,7 +29,9 @@ function i18n_string_install() {
     i18n_string_update_7001();
   }
   // Create new index in {locales_source}, performance improvement in sites with i18n.
-  db_add_index('locales_source', 'textgroup_context', array('textgroup', 'context'));
+  if (!db_index_exists('locales_source', 'textgroup_context')) {
+    db_add_index('locales_source', 'textgroup_context', array('textgroup', array('context', 50)));
+  }
 }
 
 /**
@@ -92,6 +94,7 @@ function i18n_string_schema() {
       ),
       'objectindex' => array(
         'type' => 'int',
+        'size' => 'big',
         'not null' => TRUE,
         'default' => 0,
         'description' => 'Integer value of Object ID.',
@@ -106,7 +109,7 @@ function i18n_string_schema() {
     ),
     'primary key' => array('lid'),
     'indexes' => array(
-      'group_context' => array('textgroup', 'context'),
+      'group_context' => array('textgroup', array('context', 50)),
     ),
   );
   return $schema;
@@ -238,9 +241,29 @@ function i18n_string_update_7001() {
  *  Create new index in {locales_source}, performance improvement in sites with i18n.
  */
 function i18n_string_update_7002() {
-  db_add_index('locales_source', 'textgroup_context', array('textgroup', 'context'));
+  if (!db_index_exists('locales_source', 'textgroup_context')) {
+    db_add_index('locales_source', 'textgroup_context', array('textgroup', array('context', 50)));
+  }
 }
 
+/**
+ * Removed due to buggy upgrade for #2200647.
+ */
+function i18n_string_update_7003() {
+}
+
+/**
+ * Change objectindex from int to bigint.
+ */
+function i18n_string_update_7004() {
+  db_change_field('i18n_string', 'objectindex', 'objectindex', array(
+    'type' => 'int',
+    'size' => 'big',
+    'not null' => TRUE,
+    'default' => 0,
+    'description' => 'Integer value of Object ID.',
+  ));
+}
 
 /**
  * Notes for update script

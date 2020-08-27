@@ -13,6 +13,30 @@
         //Add class to li when have childs
         $('#tree li:has(.item-list)').addClass('has-child');
 
+        // Expand tree for current element if it comes on the URL
+        if (window.location.pathname.indexOf("/tools-and-resources/eu-osha-thesaurus/hierarchical") > -1)
+        {
+          if (window.location.search.length > 0 && window.location.search.indexOf("term") > -1)
+          {
+            var term = window.location.search;
+            term = term.substring(term.indexOf("term=")+5);
+            if (term.indexOf("&") > -1)
+            {
+              term = term.substring(0, term.indexOf("&"));  
+            }
+            // Open the accordion for the current term
+            $("span.thesaurus-term-"+term).parent().siblings("span.expand_menu").click();
+            // Open the accordion for the children elements
+            $("span.thesaurus-term-"+term).parent().siblings("div.item-list").find("span.expand_menu").click();
+            // Open the accordion for the parent elements
+            var elem = $("span.thesaurus-term-"+term).closest("div.item-list");
+            while(elem.length > 0)
+            {
+              elem.siblings("span.expand_menu").click();
+              elem = elem.parent().closest("div.item-list");
+            }
+          }
+        }
     });
 })( jQuery );
 
@@ -43,6 +67,18 @@
             .siblings(".content")
             .slideDown(200);
         }
+      });
+    });
+})( jQuery );
+
+// Thesaurus Export language
+(function( $ ){
+    $(document).ready(function() {
+      $("select#language-export-select").change(function()
+      {
+        var language= $(this).val();
+        var href = "/" + language + "/tools-and-resources/eu-osha-thesaurus/export";
+        $("a#language-export-button").attr("href",href);
       });
     });
 })( jQuery );

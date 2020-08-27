@@ -161,6 +161,7 @@
     width: auto;
     float: left;
     padding-left: 10px;
+    border-bottom: 0;
 }
 
 .node-type-thesaurus .field-label{

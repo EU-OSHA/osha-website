@@ -531,7 +531,7 @@ function osha_thesaurus_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'entityreference_view_widget',
+      'module' => 'multiple_selects',
       'settings' => array(
         'allow_duplicates' => 0,
         'apply_chosen' => '',
@@ -542,7 +542,7 @@ function osha_thesaurus_field_default_field_instances() {
         'view' => 'thesaurus|entityreference_view_widget_1',
         'view_mode' => 'full',
       ),
-      'type' => 'entityreference_view_widget',
+      'type' => 'multiple_selects',
       'weight' => 10,
     ),
     'workbench_access_field' => 0,
@@ -958,10 +958,11 @@ function osha_thesaurus_field_default_field_instances() {
         'weight' => 0,
       ),
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
+        'module' => 'entityreference',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 8,
+        'type' => 'entityreference_entity_id',
+        'weight' => 6,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -1044,7 +1045,7 @@ function osha_thesaurus_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 7,
       ),
       'highlights_item' => array(
         'label' => 'above',
@@ -1538,7 +1539,7 @@ function osha_thesaurus_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 8,
       ),
       'highlights_item' => array(
         'label' => 'above',

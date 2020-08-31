@@ -35,10 +35,47 @@
     <?php endif; ?>
     <?php print render($title_suffix); ?>
 
-    <?php
-      $block = block_load('block','3');
-      print drupal_render(_block_get_renderable_array(_block_render_blocks(array($block))));
-    ?>
+    <div class="intro-text-content">
+      <div class="intro-text-thesaurus">
+        <?php
+          $block = block_load('block','3');
+          print drupal_render(_block_get_renderable_array(_block_render_blocks(array($block))));
+        ?>
+      </div>
+      <div class="download-content-theasaurus">
+        <label><?php print t('Download'); ?></label>
+        <img src="/sites/all/themes/osha_frontend/images/info-thesaurus.png" alt="Info" 
+        title="<?php print t('Download your complete EU-OSHA thesaurus terms in Excel format. Choose the language from the box'); ?>" >
+        <select id="language-export-select" class="form-select">
+          <option value="bg">Български</option>
+          <option value="cs">Čeština</option>
+          <option value="da">Dansk</option>
+          <option value="de">Deutsch</option>
+          <option value="et">Eesti</option>
+          <option value="el">Ελληνικά</option>
+          <option value="en" selected="selected">English</option>
+          <option value="es">Español</option>
+          <option value="fr">Français</option>
+          <option value="hr">Hrvatski</option>
+          <option value="is">Íslenska</option>
+          <option value="it">Italiano</option>
+          <option value="lv">Latviešu</option>
+          <option value="lt">Lietuvių</option>
+          <option value="hu">Magyar</option>
+          <option value="mt">Malti</option>
+          <option value="nl">Nederlands</option>
+          <option value="no">Norsk</option>
+          <option value="pl">Polski</option>
+          <option value="pt">Português</option>
+          <option value="ro">Română</option>
+          <option value="sk">Slovenčina</option>
+          <option value="sl">Slovenščina</option>
+          <option value="fi">Suomi</option>
+          <option value="sv">Svenska</option>
+        </select>
+        <a id="language-export-button" href="/en/tools-and-resources/eu-osha-thesaurus/export"><img class="download" src="/sites/all/themes/osha_frontend/images/download-thesaurus.png" alt="<?php print t('Download'); ?>" title="<?php print t('Download'); ?>"></a>
+      </div>
+    </div>
 
     <div id="tabs">
       <a href="/tools-and-resources/eu-osha-thesaurus/search"><?php print t("Search"); ?></a>

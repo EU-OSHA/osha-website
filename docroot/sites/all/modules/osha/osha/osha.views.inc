@@ -30,7 +30,7 @@ function osha_msd_get_term_usage($tid) {
   }
   if (!empty($usage[$tid])) {
     $term = taxonomy_term_load($tid);
-    $lang = 'sk';
+    $lang = variable_get('msd_term_usage_lang', 'sl');
     if ($language->language != 'en') {
       $lang = $language->language;
     }

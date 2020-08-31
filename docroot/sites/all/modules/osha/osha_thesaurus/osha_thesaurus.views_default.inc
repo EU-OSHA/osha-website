@@ -871,6 +871,7 @@ function osha_thesaurus_views_default_views() {
   $handler->display->display_options['defaults']['group_by'] = FALSE;
   $handler->display->display_options['defaults']['query'] = FALSE;
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['query']['options']['pure_distinct'] = TRUE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'none';
@@ -1126,6 +1127,55 @@ function osha_thesaurus_views_default_views() {
   );
   $handler->display->display_options['filters']['field_glossary_the_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_glossary_the_tid']['vocabulary'] = 'glossary_the';
+
+  /* Display: Export JSON */
+  $handler = $view->new_display('page', 'Export JSON', 'page_export_json');
+  $handler->display->display_options['defaults']['access'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'views_json';
+  $handler->display->display_options['style_options']['root_object'] = 'items';
+  $handler->display->display_options['style_options']['top_child_object'] = 'item';
+  $handler->display->display_options['style_options']['plaintext_output'] = 1;
+  $handler->display->display_options['style_options']['remove_newlines'] = 0;
+  $handler->display->display_options['style_options']['jsonp_prefix'] = '';
+  $handler->display->display_options['style_options']['using_views_api_mode'] = 0;
+  $handler->display->display_options['style_options']['object_arrays'] = 0;
+  $handler->display->display_options['style_options']['numeric_strings'] = 0;
+  $handler->display->display_options['style_options']['bigint_string'] = 0;
+  $handler->display->display_options['style_options']['pretty_print'] = 1;
+  $handler->display->display_options['style_options']['unescaped_slashes'] = 0;
+  $handler->display->display_options['style_options']['unescaped_unicode'] = 0;
+  $handler->display->display_options['style_options']['char_encoding'] = array();
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'thesaurus' => 'thesaurus',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Published status */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['path'] = 'export/thesaurus/list';
   $translatables['thesaurus'] = array(
     t('Master'),
     t('Thesaurus'),
@@ -1184,8 +1234,534 @@ function osha_thesaurus_views_default_views() {
     t('Título'),
     t('Entity Reference View Widget'),
     t('<div class="thesaurus_element_select">[entityreference_view_widget]</div><div class="thesaurus_element_select title">[title_field]</div>'),
+    t('Export JSON'),
   );
   $export['thesaurus'] = $view;
+
+  $view = new view();
+  $view->name = 'thesaurus_front';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'Thesaurus front';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'EU-OSHA thesaurus';
+  $handler->display->display_options['use_ajax'] = TRUE;
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
+  $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Clear filter';
+  $handler->display->display_options['exposed_form']['options']['expose_sort_order'] = FALSE;
+  $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  $handler->display->display_options['header']['result']['content'] = 'Total: @total';
+  /* Footer: Global: Result summary */
+  $handler->display->display_options['footer']['result']['id'] = 'result';
+  $handler->display->display_options['footer']['result']['table'] = 'views';
+  $handler->display->display_options['footer']['result']['field'] = 'result';
+  $handler->display->display_options['footer']['result']['content'] = '<span class="result_summary">Displaying @start - @end of @total</span>';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['table'] = 'field_data_title_field';
+  $handler->display->display_options['fields']['title_field']['field'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['label'] = '';
+  $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title_field']['settings'] = array(
+    'title_style' => '_none',
+    'title_link' => 'content',
+    'title_class' => '',
+  );
+  $handler->display->display_options['fields']['title_field']['link_to_entity'] = 1;
+  /* Field: Content: Synonyms */
+  $handler->display->display_options['fields']['field_synonyms']['id'] = 'field_synonyms';
+  $handler->display->display_options['fields']['field_synonyms']['table'] = 'field_data_field_synonyms';
+  $handler->display->display_options['fields']['field_synonyms']['field'] = 'field_synonyms';
+  $handler->display->display_options['fields']['field_synonyms']['label'] = 'Synonyms: ';
+  $handler->display->display_options['fields']['field_synonyms']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_synonyms']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['field_synonyms']['delta_offset'] = '0';
+  /* Field: Content: Definition */
+  $handler->display->display_options['fields']['field_definition']['id'] = 'field_definition';
+  $handler->display->display_options['fields']['field_definition']['table'] = 'field_data_field_definition';
+  $handler->display->display_options['fields']['field_definition']['field'] = 'field_definition';
+  $handler->display->display_options['fields']['field_definition']['label'] = '';
+  $handler->display->display_options['fields']['field_definition']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_definition']['hide_empty'] = TRUE;
+  /* Field: See more link (PHP) */
+  $handler->display->display_options['fields']['php']['id'] = 'php';
+  $handler->display->display_options['fields']['php']['table'] = 'views';
+  $handler->display->display_options['fields']['php']['field'] = 'php';
+  $handler->display->display_options['fields']['php']['ui_name'] = 'See more link (PHP)';
+  $handler->display->display_options['fields']['php']['label'] = '';
+  $handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+  $handler->display->display_options['fields']['php']['php_output'] = '<?php
+//print var_dump($data);
+print "<a href=\'/node/876\'>". t("See more") ."</a>";
+?>';
+  $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+  $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
+  /* Sort criterion: Alphabetical */
+  $handler->display->display_options['sorts']['title_field_value']['id'] = 'title_field_value';
+  $handler->display->display_options['sorts']['title_field_value']['table'] = 'field_data_title_field';
+  $handler->display->display_options['sorts']['title_field_value']['field'] = 'title_field_value';
+  $handler->display->display_options['sorts']['title_field_value']['ui_name'] = 'Alphabetical';
+  $handler->display->display_options['sorts']['title_field_value']['expose']['label'] = 'Alphabetically';
+  /* Filter criterion: Content: Published status */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'thesaurus' => 'thesaurus',
+  );
+
+  /* Display: Alphabetical View */
+  $handler = $view->new_display('page', 'Alphabetical View', 'thesaurus_alphabetical');
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['table'] = 'field_data_title_field';
+  $handler->display->display_options['fields']['title_field']['field'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['label'] = '';
+  $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title_field']['settings'] = array(
+    'title_style' => '_none',
+    'title_link' => 'content',
+    'title_class' => '',
+  );
+  $handler->display->display_options['fields']['title_field']['link_to_entity'] = 1;
+  /* Field: Content: Synonyms */
+  $handler->display->display_options['fields']['field_synonyms']['id'] = 'field_synonyms';
+  $handler->display->display_options['fields']['field_synonyms']['table'] = 'field_data_field_synonyms';
+  $handler->display->display_options['fields']['field_synonyms']['field'] = 'field_synonyms';
+  $handler->display->display_options['fields']['field_synonyms']['label'] = '';
+  $handler->display->display_options['fields']['field_synonyms']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_synonyms']['alter']['text'] = '<label>AAAA</label>';
+  $handler->display->display_options['fields']['field_synonyms']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_synonyms']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['field_synonyms']['delta_offset'] = '0';
+  /* Field: Content: Link to content */
+  $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['label'] = '';
+  $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['view_node']['text'] = 'See more';
+  /* Field: Content: Definition */
+  $handler->display->display_options['fields']['field_definition']['id'] = 'field_definition';
+  $handler->display->display_options['fields']['field_definition']['table'] = 'field_data_field_definition';
+  $handler->display->display_options['fields']['field_definition']['field'] = 'field_definition';
+  $handler->display->display_options['fields']['field_definition']['label'] = '';
+  $handler->display->display_options['fields']['field_definition']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_definition']['alter']['text'] = '[field_definition]
+[view_node]';
+  $handler->display->display_options['fields']['field_definition']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_definition']['hide_empty'] = TRUE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Title */
+  $handler->display->display_options['sorts']['title']['id'] = 'title';
+  $handler->display->display_options['sorts']['title']['table'] = 'node';
+  $handler->display->display_options['sorts']['title']['field'] = 'title';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published status */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'thesaurus' => 'thesaurus',
+  );
+  $handler->display->display_options['path'] = 'tools-and-resources/eu-osha-thesaurus/alphabetical';
+
+  /* Display: Hierarchical View */
+  $handler = $view->new_display('page', 'Hierarchical View', 'thesaurus_hierarchical');
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'tree';
+  $handler->display->display_options['style_options']['main_field'] = 'nid';
+  $handler->display->display_options['style_options']['parent_field'] = 'field_father';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['row_options']['default_field_elements'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Field: Content: Father */
+  $handler->display->display_options['fields']['field_father']['id'] = 'field_father';
+  $handler->display->display_options['fields']['field_father']['table'] = 'field_data_field_father';
+  $handler->display->display_options['fields']['field_father']['field'] = 'field_father';
+  $handler->display->display_options['fields']['field_father']['label'] = '';
+  $handler->display->display_options['fields']['field_father']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_father']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_father']['settings'] = array(
+    'bypass_access' => 0,
+    'link' => 0,
+  );
+  /* Field: Content: ID */
+  $handler->display->display_options['fields']['field_term_id']['id'] = 'field_term_id';
+  $handler->display->display_options['fields']['field_term_id']['table'] = 'field_data_field_term_id';
+  $handler->display->display_options['fields']['field_term_id']['field'] = 'field_term_id';
+  $handler->display->display_options['fields']['field_term_id']['label'] = '';
+  $handler->display->display_options['fields']['field_term_id']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_term_id']['element_label_colon'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['table'] = 'field_data_title_field';
+  $handler->display->display_options['fields']['title_field']['field'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['label'] = '';
+  $handler->display->display_options['fields']['title_field']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['title_field']['alter']['text'] = '<span class="thesaurus-term-[field_term_id]">[title_field]</span>';
+  $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title_field']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['title_field']['settings'] = array(
+    'title_style' => '_none',
+    'title_link' => 'content',
+    'title_class' => '',
+  );
+  $handler->display->display_options['fields']['title_field']['link_to_entity'] = 1;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published status */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'thesaurus' => 'thesaurus',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  $handler->display->display_options['path'] = 'tools-and-resources/eu-osha-thesaurus/hierarchical';
+  $translatables['thesaurus_front'] = array(
+    t('Master'),
+    t('EU-OSHA thesaurus'),
+    t('more'),
+    t('Apply'),
+    t('Clear filter'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('Total: @total'),
+    t('<span class="result_summary">Displaying @start - @end of @total</span>'),
+    t('Synonyms: '),
+    t('Alphabetically'),
+    t('Alphabetical View'),
+    t('<label>AAAA</label>'),
+    t('See more'),
+    t('[field_definition]
+[view_node]'),
+    t('Hierarchical View'),
+    t('<span class="thesaurus-term-[field_term_id]">[title_field]</span>'),
+  );
+  $export['thesaurus_front'] = $view;
+
+  $view = new view();
+  $view->name = 'thesaurus_front_indexed';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'search_api_index_thesaurus';
+  $view->human_name = 'Thesaurus front indexed';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'EU-OSHA thesaurus';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['expose_sort_order'] = FALSE;
+  $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
+  $handler->display->display_options['pager']['type'] = 'pagerer';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['preset'] = 'pager-responsive';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_options']['row_class'] = 'revamp-row';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Footer: Global: Result summary */
+  $handler->display->display_options['footer']['result']['id'] = 'result';
+  $handler->display->display_options['footer']['result']['table'] = 'views';
+  $handler->display->display_options['footer']['result']['field'] = 'result';
+  $handler->display->display_options['footer']['result']['content'] = '<div class="pager-total"><span>@start - @end / @total</span></div>';
+  /* Field: Indexed Multilingual Content: Title */
+  $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['fields']['title_field']['field'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['label'] = '';
+  $handler->display->display_options['fields']['title_field']['element_type'] = 'h2';
+  $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title_field']['type'] = 'title_linked';
+  $handler->display->display_options['fields']['title_field']['settings'] = array(
+    'title_style' => '_none',
+    'title_link' => 'content',
+    'title_class' => '',
+  );
+  /* Field: Indexed Multilingual Content: Synonyms */
+  $handler->display->display_options['fields']['field_synonyms']['id'] = 'field_synonyms';
+  $handler->display->display_options['fields']['field_synonyms']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['fields']['field_synonyms']['field'] = 'field_synonyms';
+  $handler->display->display_options['fields']['field_synonyms']['label'] = 'Synonyms:';
+  $handler->display->display_options['fields']['field_synonyms']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_synonyms']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['field_synonyms']['delta_offset'] = '0';
+  /* Field: Indexed Multilingual Content: Definition */
+  $handler->display->display_options['fields']['field_definition']['id'] = 'field_definition';
+  $handler->display->display_options['fields']['field_definition']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['fields']['field_definition']['field'] = 'field_definition';
+  $handler->display->display_options['fields']['field_definition']['label'] = '';
+  $handler->display->display_options['fields']['field_definition']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_definition']['hide_empty'] = TRUE;
+  /* Field: Content: Link to content */
+  $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['label'] = '';
+  $handler->display->display_options['fields']['view_node']['element_type'] = 'div';
+  $handler->display->display_options['fields']['view_node']['element_class'] = 'views-field views-field-view-node';
+  $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['view_node']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['view_node']['text'] = 'See more';
+  /* Sort criterion: Search: Relevance */
+  $handler->display->display_options['sorts']['search_api_relevance']['id'] = 'search_api_relevance';
+  $handler->display->display_options['sorts']['search_api_relevance']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['sorts']['search_api_relevance']['field'] = 'search_api_relevance';
+  $handler->display->display_options['sorts']['search_api_relevance']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['search_api_relevance']['expose']['label'] = 'Relevance';
+  /* Sort criterion: Indexed Multilingual Content: Title */
+  $handler->display->display_options['sorts']['title_field']['id'] = 'title_field';
+  $handler->display->display_options['sorts']['title_field']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['sorts']['title_field']['field'] = 'title_field';
+  $handler->display->display_options['sorts']['title_field']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['title_field']['expose']['label'] = 'Alphabetically';
+  /* Filter criterion: Indexed Multilingual Content: Item language */
+  $handler->display->display_options['filters']['search_api_language']['id'] = 'search_api_language';
+  $handler->display->display_options['filters']['search_api_language']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['filters']['search_api_language']['field'] = 'search_api_language';
+  $handler->display->display_options['filters']['search_api_language']['value'] = array(
+    'current' => 'current',
+  );
+  /* Filter criterion: Global: Combine fields filter */
+  $handler->display->display_options['filters']['combine']['id'] = 'combine';
+  $handler->display->display_options['filters']['combine']['table'] = 'views';
+  $handler->display->display_options['filters']['combine']['field'] = 'combine';
+  $handler->display->display_options['filters']['combine']['operator'] = 'contains';
+  $handler->display->display_options['filters']['combine']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['combine']['expose']['operator_id'] = 'combine_op';
+  $handler->display->display_options['filters']['combine']['expose']['label'] = 'Search';
+  $handler->display->display_options['filters']['combine']['expose']['operator'] = 'combine_op';
+  $handler->display->display_options['filters']['combine']['expose']['identifier'] = 'combine';
+  $handler->display->display_options['filters']['combine']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  $handler->display->display_options['filters']['combine']['fields'] = array(
+    'title_field' => 'title_field',
+    'field_synonyms' => 'field_synonyms',
+    'field_definition' => 'field_definition',
+  );
+
+  /* Display: Search */
+  $handler = $view->new_display('page', 'Search', 'thesaurus_search');
+  $handler->display->display_options['path'] = 'tools-and-resources/eu-osha-thesaurus/search';
+
+  /* Display: Data export */
+  $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_xlsx';
+  $handler->display->display_options['style_options']['provide_file'] = 1;
+  $handler->display->display_options['style_options']['filename'] = 'thesaurus.xls';
+  $handler->display->display_options['style_options']['parent_sort'] = 0;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Title */
+  $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['fields']['title_field']['field'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['ui_name'] = 'Title';
+  $handler->display->display_options['fields']['title_field']['element_type'] = 'h2';
+  $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title_field']['type'] = 'text_plain';
+  $handler->display->display_options['fields']['title_field']['settings'] = array(
+    'title_style' => '_none',
+    'title_link' => 'content',
+    'title_class' => '',
+  );
+  /* Field: Father */
+  $handler->display->display_options['fields']['field_father']['id'] = 'field_father';
+  $handler->display->display_options['fields']['field_father']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['fields']['field_father']['field'] = 'field_father';
+  $handler->display->display_options['fields']['field_father']['ui_name'] = 'Father';
+  $handler->display->display_options['fields']['field_father']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_father']['link_to_entity'] = 0;
+  $handler->display->display_options['fields']['field_father']['view_mode'] = 'full';
+  $handler->display->display_options['fields']['field_father']['bypass_access'] = 0;
+  /* Field: Full URL */
+  $handler->display->display_options['fields']['field_full_url']['id'] = 'field_full_url';
+  $handler->display->display_options['fields']['field_full_url']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['fields']['field_full_url']['field'] = 'field_full_url';
+  $handler->display->display_options['fields']['field_full_url']['ui_name'] = 'Full URL';
+  $handler->display->display_options['fields']['field_full_url']['element_label_colon'] = FALSE;
+  /* Field: ID */
+  $handler->display->display_options['fields']['field_term_id']['id'] = 'field_term_id';
+  $handler->display->display_options['fields']['field_term_id']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['fields']['field_term_id']['field'] = 'field_term_id';
+  $handler->display->display_options['fields']['field_term_id']['ui_name'] = 'ID';
+  $handler->display->display_options['fields']['field_term_id']['element_label_colon'] = FALSE;
+  /* Field: Definition */
+  $handler->display->display_options['fields']['field_definition']['id'] = 'field_definition';
+  $handler->display->display_options['fields']['field_definition']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['fields']['field_definition']['field'] = 'field_definition';
+  $handler->display->display_options['fields']['field_definition']['ui_name'] = 'Definition';
+  $handler->display->display_options['fields']['field_definition']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_definition']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['field_definition']['type'] = 'text_plain';
+  /* Field: Context */
+  $handler->display->display_options['fields']['field_context']['id'] = 'field_context';
+  $handler->display->display_options['fields']['field_context']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['fields']['field_context']['field'] = 'field_context';
+  $handler->display->display_options['fields']['field_context']['ui_name'] = 'Context';
+  $handler->display->display_options['fields']['field_context']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_context']['type'] = 'text_plain';
+  /* Field: Synonyms */
+  $handler->display->display_options['fields']['field_synonyms']['id'] = 'field_synonyms';
+  $handler->display->display_options['fields']['field_synonyms']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['fields']['field_synonyms']['field'] = 'field_synonyms';
+  $handler->display->display_options['fields']['field_synonyms']['ui_name'] = 'Synonyms';
+  $handler->display->display_options['fields']['field_synonyms']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_synonyms']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['field_synonyms']['delta_offset'] = '0';
+  /* Field: Term reference */
+  $handler->display->display_options['fields']['field_term_reference']['id'] = 'field_term_reference';
+  $handler->display->display_options['fields']['field_term_reference']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['fields']['field_term_reference']['field'] = 'field_term_reference';
+  $handler->display->display_options['fields']['field_term_reference']['ui_name'] = 'Term reference';
+  $handler->display->display_options['fields']['field_term_reference']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_term_reference']['type'] = 'text_plain';
+  /* Field: Glossary */
+  $handler->display->display_options['fields']['field_glossary_the']['id'] = 'field_glossary_the';
+  $handler->display->display_options['fields']['field_glossary_the']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['fields']['field_glossary_the']['field'] = 'field_glossary_the';
+  $handler->display->display_options['fields']['field_glossary_the']['ui_name'] = 'Glossary';
+  $handler->display->display_options['fields']['field_glossary_the']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_glossary_the']['link_to_entity'] = 0;
+  $handler->display->display_options['fields']['field_glossary_the']['view_mode'] = 'full';
+  $handler->display->display_options['fields']['field_glossary_the']['bypass_access'] = 0;
+  /* Field: Notes */
+  $handler->display->display_options['fields']['field_notes']['id'] = 'field_notes';
+  $handler->display->display_options['fields']['field_notes']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['fields']['field_notes']['field'] = 'field_notes';
+  $handler->display->display_options['fields']['field_notes']['ui_name'] = 'Notes';
+  $handler->display->display_options['fields']['field_notes']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_notes']['type'] = 'text_plain';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Indexed Multilingual Content: Item language */
+  $handler->display->display_options['filters']['search_api_language']['id'] = 'search_api_language';
+  $handler->display->display_options['filters']['search_api_language']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['filters']['search_api_language']['field'] = 'search_api_language';
+  $handler->display->display_options['filters']['search_api_language']['value'] = array(
+    'current' => 'current',
+  );
+  $handler->display->display_options['path'] = 'tools-and-resources/eu-osha-thesaurus/export';
+  $translatables['thesaurus_front_indexed'] = array(
+    t('Master'),
+    t('EU-OSHA thesaurus'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('<div class="pager-total"><span>@start - @end / @total</span></div>'),
+    t('Synonyms:'),
+    t('See more'),
+    t('Relevance'),
+    t('Alphabetically'),
+    t('Search'),
+    t('Data export'),
+    t('Title'),
+    t('Father'),
+    t('Full URL'),
+    t('ID'),
+    t('Definition'),
+    t('Context'),
+    t('Synonyms'),
+    t('Term reference'),
+    t('Glossary'),
+    t('Notes'),
+  );
+  $export['thesaurus_front_indexed'] = $view;
 
   return $export;
 }

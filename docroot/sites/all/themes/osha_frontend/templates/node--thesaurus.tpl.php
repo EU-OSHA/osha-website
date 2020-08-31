@@ -11,10 +11,47 @@ $lang = $language->language;
 	<h1 id="page-title" class="page__title title"><?php print t('EU-OSHA thesaurus');?></h1>
 	<div class="view-header back"><?php print l(t('Back to list of terms'), 'tools-and-resources/eu-osha-thesaurus/search'); ?></div>
 
-	<?php
-		$block = block_load('block','3');
-		print drupal_render(_block_get_renderable_array(_block_render_blocks(array($block))));
-	?>
+	<div class="intro-text-content">
+		<div class="intro-text-thesaurus">
+			<?php
+				$block = block_load('block','3');
+				print drupal_render(_block_get_renderable_array(_block_render_blocks(array($block))));
+			?>
+		</div>
+		<div class="download-content-theasaurus">
+			<label><?php print t('Download'); ?></label>
+			<img src="/sites/all/themes/osha_frontend/images/info-thesaurus.png" alt="Info" 
+			title="<?php print t('Download your complete EU-OSHA thesaurus terms in Excel format. Choose the language from the box'); ?>" >
+			<select id="language-export-select" class="form-select">
+				<option value="bg">Български</option>
+				<option value="cs">Čeština</option>
+				<option value="da">Dansk</option>
+				<option value="de">Deutsch</option>
+				<option value="et">Eesti</option>
+				<option value="el">Ελληνικά</option>
+				<option value="en" selected="selected">English</option>
+				<option value="es">Español</option>
+				<option value="fr">Français</option>
+				<option value="hr">Hrvatski</option>
+				<option value="is">Íslenska</option>
+				<option value="it">Italiano</option>
+				<option value="lv">Latviešu</option>
+				<option value="lt">Lietuvių</option>
+				<option value="hu">Magyar</option>
+				<option value="mt">Malti</option>
+				<option value="nl">Nederlands</option>
+				<option value="no">Norsk</option>
+				<option value="pl">Polski</option>
+				<option value="pt">Português</option>
+				<option value="ro">Română</option>
+				<option value="sk">Slovenčina</option>
+				<option value="sl">Slovenščina</option>
+				<option value="fi">Suomi</option>
+				<option value="sv">Svenska</option>
+			</select>
+			<a id="language-export-button" href="/en/tools-and-resources/eu-osha-thesaurus/export"><img class="download" src="/sites/all/themes/osha_frontend/images/download-thesaurus.png" alt="<?php print t('Download'); ?>" title="<?php print t('Download'); ?>"></a>
+		</div>
+	</div>
 <?php endif; ?>
 
 <?php if ($title_prefix || $title_suffix || $display_submitted || $unpublished || !$page && $title): ?>
@@ -113,28 +150,28 @@ $lang = $language->language;
 
 <div class="accordion-container">
   <div class="set">
-      <h3>
-      	<?php print t('Translations');?>
-      	<span class="accordion-icon"></span>
-      </h3>
-    <div class="content accordion">
-    	<?php
-    		$languages = $content['links']['translation']['#links'];
-    		foreach($node->title_field as $code=>$titleTranslation)
-    		{
+	  <h3>
+		<?php print t('Translations');?>
+		<span class="accordion-icon"></span>
+	  </h3>
+	<div class="content accordion">
+		<?php
+			$languages = $content['links']['translation']['#links'];
+			foreach($node->title_field as $code=>$titleTranslation)
+			{
 
-    			if ($code != "en" && $languages[$code]["title"])
-    			{    				
-    				print "<div class='label-item'>".$languages[$code]["title"].":</div>";	
-    			}
-    			else if ($code == "en")
-    			{
-    				print "<div class='label-item'>English:</div>";	
-    			}
-    			print "<div class='field-item'>".$titleTranslation[0]["value"]."</div>";
-    		}
-    	?>
-    </div>
+				if ($code != "en" && $languages[$code]["title"])
+				{    				
+					print "<div class='label-item'>".$languages[$code]["title"].":</div>";	
+				}
+				else if ($code == "en")
+				{
+					print "<div class='label-item'>English:</div>";	
+				}
+				print "<div class='field-item'>".$titleTranslation[0]["value"]."</div>";
+			}
+		?>
+	</div>
   </div>
 </div>
 

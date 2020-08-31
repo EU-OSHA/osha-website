@@ -161,6 +161,7 @@
     width: auto;
     float: left;
     padding-left: 10px;
+    border-bottom: 0;
 }
 
 .node-type-thesaurus .field-label{
@@ -297,6 +298,10 @@ h3.active .accordion-icon{
 	float: left;
 	width: 462px;
 	margin-right: 1em;
+}
+
+.page-node.node-type-thesaurus .intro-text-thesaurus {
+    width: 811px;
 }
 
 .download-content-theasaurus{

@@ -509,6 +509,10 @@ function osha_frontend_preprocess_page(&$variables) {
         $variables['theme_hook_suggestions'][] = 'page__node__publication';
         break;
 
+      case "thesaurus":
+        $variables['theme_hook_suggestions'][] = 'page__node__thesaurus';
+        break;
+
       case "dangerous_substances":
         $variables['theme_hook_suggestions'][] = 'page__node__dangerous_substances';
         $variables['back_back'] = '';

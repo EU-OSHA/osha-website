@@ -82,3 +82,12 @@
       });
     });
 })( jQuery );
+
+// Add classes to active the left menu item
+(function( $ ){
+    $(document).ready(function() {
+      if ($(".page-tools-and-resources-eu-osha-thesaurus ")[0]){
+        $('.page-tools-and-resources-eu-osha-thesaurus #block-menu-block-2 li:last-child > a').addClass('is-active is-active-trail active-trail active');
+      }
+    });
+})( jQuery );

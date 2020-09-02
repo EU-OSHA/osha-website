@@ -71,7 +71,6 @@ function osha_thesaurus_default_search_api_index() {
         "field_father" : { "type" : "integer", "entity_type" : "node" },
         "field_full_url" : { "type" : "text" },
         "field_glossary_the" : { "type" : "integer", "entity_type" : "taxonomy_term" },
-        "field_notes:value" : { "type" : "text" },
         "field_synonyms" : { "type" : "list\\u003Ctext\\u003E" },
         "field_term_id" : { "type" : "text" },
         "field_term_reference:value" : { "type" : "text" },

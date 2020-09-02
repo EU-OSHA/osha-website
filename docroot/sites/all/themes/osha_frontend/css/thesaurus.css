@@ -267,12 +267,15 @@ h3.active .accordion-icon{
 	color: #003399;
 }
 
-.view-thesaurus-front-indexed #edit-combine-wrapper{
+.view-thesaurus-front-indexed #edit-search-api-views-fulltext-wrapper{
 	background-image: none;
     margin-right: 1em;
+    padding-top: 1em;
 }
 
-.view-thesaurus-front-indexed #edit-combine{
+
+
+.view-thesaurus-front-indexed #edit-search-api-views-fulltext{
 	height: 37px;
     border: 1px solid #003399;
     border-radius: 5px;

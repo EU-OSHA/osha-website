@@ -9755,3 +9755,17 @@ table.quiz-feedback-table.sticky-enabled.tableheader-processed.sticky-table > tb
 .node-events .field-name-title-field h1, .node-job-vacancies .field-name-title-field h1{
 	padding-top: 14px;
 }
+
+/*MDR-3867*/
+
+.page-node-15682 .menu-block-3 ul{
+	margin-right: 0 !important;
+}
+
+.page-node-15682 .menu-block-6 ul li{
+	width: 49%;
+}
+
+.page-node-15682 .menu-block-6 ul  > li:nth-child(2){
+	margin-right: 0;
+}

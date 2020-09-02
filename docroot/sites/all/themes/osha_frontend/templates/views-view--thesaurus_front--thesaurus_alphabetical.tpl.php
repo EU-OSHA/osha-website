@@ -26,6 +26,8 @@
  *
  * @ingroup views_templates
  */
+global $language;
+$lang = $language->language;
 ?>
 <div class="container-fluid">
   <div class="<?php print $classes; ?>">
@@ -47,31 +49,31 @@
         <img src="/sites/all/themes/osha_frontend/images/info-thesaurus.png" alt="Info" 
         title="<?php print t('Download your complete EU-OSHA thesaurus terms in Excel format. Choose the language from the box'); ?>" >
         <select id="language-export-select" class="form-select">
-          <option value="bg">Български</option>
-          <option value="cs">Čeština</option>
-          <option value="da">Dansk</option>
-          <option value="de">Deutsch</option>
-          <option value="et">Eesti</option>
-          <option value="el">Ελληνικά</option>
-          <option value="en" selected="selected">English</option>
-          <option value="es">Español</option>
-          <option value="fr">Français</option>
-          <option value="hr">Hrvatski</option>
-          <option value="is">Íslenska</option>
-          <option value="it">Italiano</option>
-          <option value="lv">Latviešu</option>
-          <option value="lt">Lietuvių</option>
-          <option value="hu">Magyar</option>
-          <option value="mt">Malti</option>
-          <option value="nl">Nederlands</option>
-          <option value="no">Norsk</option>
-          <option value="pl">Polski</option>
-          <option value="pt">Português</option>
-          <option value="ro">Română</option>
-          <option value="sk">Slovenčina</option>
-          <option value="sl">Slovenščina</option>
-          <option value="fi">Suomi</option>
-          <option value="sv">Svenska</option>
+          <option value="bg" <?php if($lang=="bg"): print 'selected="selected"'; endif;?>>Български</option>
+          <option value="cs" <?php if($lang=="cs"): print 'selected="selected"'; endif;?>>Čeština</option>
+          <option value="da" <?php if($lang=="da"): print 'selected="selected"'; endif;?>>Dansk</option>
+          <option value="de" <?php if($lang=="de"): print 'selected="selected"'; endif;?>>Deutsch</option>
+          <option value="et" <?php if($lang=="et"): print 'selected="selected"'; endif;?>>Eesti</option>
+          <option value="el" <?php if($lang=="el"): print 'selected="selected"'; endif;?>>Ελληνικά</option>
+          <option value="en" <?php if($lang=="en"): print 'selected="selected"'; endif;?>>English</option>
+          <option value="es" <?php if($lang=="es"): print 'selected="selected"'; endif;?>>Español</option>
+          <option value="fr" <?php if($lang=="fr"): print 'selected="selected"'; endif;?>>Français</option>
+          <option value="hr" <?php if($lang=="hr"): print 'selected="selected"'; endif;?>>Hrvatski</option>
+          <option value="is" <?php if($lang=="is"): print 'selected="selected"'; endif;?>>Íslenska</option>
+          <option value="it" <?php if($lang=="it"): print 'selected="selected"'; endif;?>>Italiano</option>
+          <option value="lv" <?php if($lang=="lv"): print 'selected="selected"'; endif;?>>Latviešu</option>
+          <option value="lt" <?php if($lang=="lt"): print 'selected="selected"'; endif;?>>Lietuvių</option>
+          <option value="hu" <?php if($lang=="hu"): print 'selected="selected"'; endif;?>>Magyar</option>
+          <option value="mt" <?php if($lang=="mt"): print 'selected="selected"'; endif;?>>Malti</option>
+          <option value="nl" <?php if($lang=="nl"): print 'selected="selected"'; endif;?>>Nederlands</option>
+          <option value="no" <?php if($lang=="no"): print 'selected="selected"'; endif;?>>Norsk</option>
+          <option value="pl" <?php if($lang=="pl"): print 'selected="selected"'; endif;?>>Polski</option>
+          <option value="pt" <?php if($lang=="pt"): print 'selected="selected"'; endif;?>>Português</option>
+          <option value="ro" <?php if($lang=="ro"): print 'selected="selected"'; endif;?>>Română</option>
+          <option value="sk" <?php if($lang=="sk"): print 'selected="selected"'; endif;?>>Slovenčina</option>
+          <option value="sl" <?php if($lang=="sl"): print 'selected="selected"'; endif;?>>Slovenščina</option>
+          <option value="fi" <?php if($lang=="fi"): print 'selected="selected"'; endif;?>>Suomi</option>
+          <option value="sv" <?php if($lang=="sv"): print 'selected="selected"'; endif;?>>Svenska</option>
         </select>
         <a id="language-export-button" href="/en/tools-and-resources/eu-osha-thesaurus/export"><img class="download" src="/sites/all/themes/osha_frontend/images/download-thesaurus.png" alt="<?php print t('Download'); ?>" title="<?php print t('Download'); ?>"></a>
       </div>

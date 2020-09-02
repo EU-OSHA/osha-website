@@ -80,7 +80,7 @@ function osha_thesaurus_default_search_api_index() {
         "search_api_language" : { "type" : "string" },
         "status" : { "type" : "boolean" },
         "title" : { "type" : "text" },
-        "title_field" : { "type" : "text" }
+        "title_field" : { "type" : "string" }
       },
       "data_alter_callbacks" : {
         "search_api_alter_bundle_filter" : {

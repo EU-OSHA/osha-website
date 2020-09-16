@@ -157,7 +157,7 @@ function osha_thesaurus_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'menu_parent_thesaurus';
-  $strongarm->value = 'main-menu:0';
+  $strongarm->value = 'main-menu:18438';
   $export['menu_parent_thesaurus'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -180,6 +180,251 @@ function osha_thesaurus_strongarm() {
   $strongarm->name = 'node_submitted_thesaurus';
   $strongarm->value = 1;
   $export['node_submitted_thesaurus'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_bg_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_bg_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_bs_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_bs_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_cs_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_cs_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_da_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_da_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_de_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_de_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_el_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_el_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_en_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_en_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_eo_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_eo_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_es_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_es_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_et_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_et_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_fi_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_fi_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_fr_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_fr_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_hr_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_hr_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_hu_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_hu_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_is_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_is_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_it_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_it_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_lt_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_lt_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_lv_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_lv_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_mk_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_mk_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_mt_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_mt_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_nl_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_nl_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_no_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_no_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_pattern';
+  $strongarm->value = 'tools-and-resources/eu-osha-thesaurus/term/[node:field_term_id]';
+  $export['pathauto_node_thesaurus_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_pl_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_pl_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_pt_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_pt_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_ro_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_ro_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_ru_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_ru_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_sh_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_sh_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_sk_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_sk_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_sl_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_sl_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_sq_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_sq_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_sr_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_sr_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_sv_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_sv_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_tr_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_tr_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_thesaurus_und_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_thesaurus_und_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

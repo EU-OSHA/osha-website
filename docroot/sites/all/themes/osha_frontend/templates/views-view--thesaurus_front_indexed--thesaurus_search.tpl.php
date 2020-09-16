@@ -151,7 +151,7 @@ $lang = $language->language;
               }
             }
           ?>
-          <a href="<?php print '/en/tools-and-resources/eu-osha-thesaurus/search/export' .$params ?>"><img class="download" src="/sites/all/themes/osha_frontend/images/download-thesaurus.png" alt="<?php print t('Download'); ?>" title="<?php print t('Download'); ?>"></a>
+          <a href="<?php print '/' . $lang . '/tools-and-resources/eu-osha-thesaurus/search/export' .$params ?>"><img class="download" src="/sites/all/themes/osha_frontend/images/download-thesaurus.png" alt="<?php print t('Download'); ?>" title="<?php print t('Download'); ?>"></a>
     	  </div>
       </div>
     <?php endif; ?>

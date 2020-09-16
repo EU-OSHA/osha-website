@@ -1493,7 +1493,6 @@
 
     .page-publication-detail .field-name-field-file a{
         clear: both;
-        display: flex;
     }
 
     .page-publication-detail span.slash{ 

@@ -1341,7 +1341,9 @@ span.date-display-single{
 	margin-bottom: 15px;
 }
 
-.menu-block-3 ul{
+.menu-block-3 ul, 
+.menu-block-6 ul, 
+.menu-block-7 ul{
 	list-style-type: none!important;
 	list-style-image:none!important;
 	margin:0;
@@ -1351,7 +1353,9 @@ span.date-display-single{
 	flex-wrap: wrap;
 }
 
-.menu-block-3 ul li{
+.menu-block-3 ul li, 
+.menu-block-6 ul li, 
+.menu-block-7  ul li{
 	list-style-type: none!important;
 	list-style-image:none!important;
 	margin:0;
@@ -1363,22 +1367,13 @@ span.date-display-single{
 	width: 30%;
 }
 
-.menu-block-6 ul li{
-	list-style-type: none!important;
-	list-style-image:none!important;
-	margin:0;
-	padding:0;
-	float: none;
-	margin:0.5rem 2% 0.7rem 0;
-	overflow: hidden;
-	position: relative;
-	width: 30%;
-}
-
-.menu-block-3 ul li.active .introduction-title {
+.menu-block-3 ul li.active .introduction-title, 
+.menu-block-6 ul li.active .introduction-title , 
+.menu-block-7 ul li.active .introduction-title  {
   border-bottom: 10px solid #DC2E81;
 }
-.menu-block-3 ul li.active .introduction-title a {
+.menu-block-3 ul li.active .introduction-title a, 
+.menu-block-7 ul li.active .introduction-title a {
   background: url(/sites/all/themes/osha_frontend/images/flecha.png) 100% 0.48rem no-repeat;
 }
 .introduction-title {

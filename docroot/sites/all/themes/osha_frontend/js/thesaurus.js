@@ -26,8 +26,10 @@
             }
             // Open the accordion for the current term
             $("span.thesaurus-term-"+term).parent().siblings("span.expand_menu").click();
-            // Open the accordion for the children elements
-            $("span.thesaurus-term-"+term).parent().siblings("div.item-list").find("span.expand_menu").click();
+            // Add the class to highlight the term
+            $("span.thesaurus-term-"+term).addClass("highlight");
+            // Open the accordion for the children elements - Not required ofr now
+            // $("span.thesaurus-term-"+term).parent().siblings("div.item-list").find("span.expand_menu").click();
             // Open the accordion for the parent elements
             var elem = $("span.thesaurus-term-"+term).closest("div.item-list");
             while(elem.length > 0)
@@ -35,6 +37,25 @@
               elem.siblings("span.expand_menu").click();
               elem = elem.parent().closest("div.item-list");
             }
+          }
+        }
+
+        // Remove the duplicated element in the breadcrumb
+        var breadcrumb = $("div.breadcrumb span.inline");
+        var urls = [];
+        for (var i = 0; i < breadcrumb.size(); i++)
+        {
+          var url = $(" a", breadcrumb[i]).attr("href");
+          if (urls.indexOf(url) == -1)
+          {
+            // The URL has not appeared yet
+            urls.push(url);
+          }
+          else
+          {
+            // Duplicated element, remove the element
+            breadcrumb[i].nextElementSibling.remove();
+            breadcrumb[i].remove();
           }
         }
     });
@@ -91,3 +112,13 @@
       }
     });
 })( jQuery );
+
+// Submit the search form if the order changes
+(function ( $ ){
+  $(document).ready(function() {
+    $("form#views-exposed-form-thesaurus-front-indexed-thesaurus-search select#edit-sort-by").change(function()
+    {
+      $(this).parents('form').submit();
+    });
+  })
+})(jQuery);

@@ -1399,8 +1399,7 @@ html[lang=hu] .page-tools-and-publications .views-exposed-widget label{
     text-decoration: none;
     color:#003399;
     font-weight: bold;
-    float: none;
-    display: inline-flex;
+    float: left;
 }
 
 .page-publication-detail .field-name-field-file a:hover{
@@ -1409,13 +1408,10 @@ html[lang=hu] .page-tools-and-publications .views-exposed-widget label{
 
 
 .page-publication-detail span.slash{ 
-    float: none;
+    float: left;
     padding: 0 5px;
     font-weight: 600;
     margin-top: -1px;
-    display: inline-block;
-    position: relative;
-    top: -4px;
 }
 
 .page-publication-detail div.field.field-name-field-file span:nth-child(3){
@@ -1425,10 +1421,11 @@ html[lang=hu] .page-tools-and-publications .views-exposed-widget label{
 .page-publication-detail .field-name-field-file a:before{ 
     content: ' ';
     display: block;
+    float: left;
     background: url(../images/down_arrow.jpg) no-repeat 1px 3px;
     width: 19px;
     height: 20px;
-    float: none;
+    float: left;
     padding-right: 3px;    
 }
 

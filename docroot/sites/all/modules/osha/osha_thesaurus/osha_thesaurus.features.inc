@@ -14,6 +14,9 @@ function osha_thesaurus_ctools_plugin_api($module = NULL, $api = NULL) {
   if ($module == "feeds_tamper" && $api == "feeds_tamper_default") {
     return array("version" => "2");
   }
+  if ($module == "path_breadcrumbs" && $api == "path_breadcrumbs") {
+    return array("version" => "1");
+  }
   if ($module == "strongarm" && $api == "strongarm") {
     return array("version" => "1");
   }
@@ -77,10 +80,11 @@ function osha_thesaurus_default_search_api_index() {
         "language" : { "type" : "string" },
         "nid" : { "type" : "integer" },
         "search_api_access_node" : { "type" : "list\\u003Cstring\\u003E" },
+        "search_api_aggregation_2" : { "type" : "string" },
         "search_api_language" : { "type" : "string" },
         "status" : { "type" : "boolean" },
         "title" : { "type" : "text" },
-        "title_field" : { "type" : "string" }
+        "title_field" : { "type" : "text" }
       },
       "data_alter_callbacks" : {
         "search_api_alter_bundle_filter" : {
@@ -105,7 +109,18 @@ function osha_thesaurus_default_search_api_index() {
         },
         "search_api_alter_add_viewed_entity" : { "status" : 0, "weight" : "0", "settings" : { "mode" : "full" } },
         "search_api_alter_add_url" : { "status" : 0, "weight" : "0", "settings" : [] },
-        "search_api_alter_add_aggregation" : { "status" : 0, "weight" : "0", "settings" : [] },
+        "search_api_alter_add_aggregation" : {
+          "status" : 1,
+          "weight" : "0",
+          "settings" : { "fields" : { "search_api_aggregation_2" : {
+                "name" : "Thesaurus title order",
+                "type" : "fulltext",
+                "fields" : [ "title_field" ],
+                "description" : "A Fulltext aggregation of the following fields: Title."
+              }
+            }
+          }
+        },
         "search_api_metatag_alter_callback" : { "status" : 0, "weight" : "0", "settings" : [] },
         "search_api_alter_add_hierarchy" : { "status" : 1, "weight" : "0", "settings" : { "fields" : [] } }
       },
@@ -142,7 +157,6 @@ function osha_thesaurus_default_search_api_index() {
           "settings" : {
             "fields" : {
               "title" : true,
-              "title_field" : true,
               "field_synonyms" : true,
               "field_definition:value" : true
             },
@@ -183,4 +197,32 @@ function osha_thesaurus_default_search_api_index() {
     "rdf_mapping" : []
   }');
   return $items;
+}
+
+/**
+ * Implements hook_search_autocomplete_config_features_default_settings().
+ */
+function osha_thesaurus_search_autocomplete_config_features_default_settings() {
+  return array(
+    0 => array(
+      'fid' => 4,
+      'title' => 'Thesaurus',
+      'selector' => '#edit-search-api-views-fulltext',
+      'weight' => 0,
+      'enabled' => 1,
+      'parent_fid' => 0,
+      'min_char' => 3,
+      'max_sug' => 10,
+      'no_results' => '{"label":"No results found for [search-phrase]. Click to perform full search.","value":"[search-phrase]","link":"","group":{"group_id":"no_results"}}',
+      'auto_submit' => 1,
+      'auto_redirect' => 1,
+      'translite' => 1,
+      'data_source' => 'callback',
+      'data_callback' => 'thesaurus-search-autocomplete',
+      'data_static' => '',
+      'data_view' => '',
+      'theme' => 'basic-blue.css',
+      'all_results' => '{"label":"View all results for [search-phrase].","value":"[search-phrase]","link":"","group":{"group_id":"all_results"}}',
+    ),
+  );
 }

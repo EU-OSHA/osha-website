@@ -130,8 +130,28 @@ $lang = $language->language;
         <div class="download-content-theasaurus-label">
           <img src="/sites/all/themes/osha_frontend/images/info-thesaurus.png" alt="Info" 
           title="<?php print t('Download your complete EU-OSHA thesaurus terms in Excel format. Choose the language from the box'); ?>" >
-          <label><?php print t('Download'); ?></label>
-          <a href="/en/tools-and-resources/eu-osha-thesaurus/search/export?search_api_views_fulltext=contrato&amp;sort_by=search_api_relevance"><img class="download" src="/sites/all/themes/osha_frontend/images/download-thesaurus.png" alt="<?php print t('Download'); ?>" title="<?php print t('Download'); ?>"></a>
+          <label><?php print t('Download');?></label>
+          <?php
+            $urlParams = drupal_get_query_parameters();
+            $params = "";
+            if (sizeof($urlParams) > 0)
+            {
+              $i = 0;
+              foreach ($urlParams as $key => $value) {
+                if ($i==0)
+                {
+                  $params = "?";
+                  $i++;
+                }
+                else
+                {
+                  $params = $params."&";
+                }
+                $params = $params.$key."=".$value;
+              }
+            }
+          ?>
+          <a href="<?php print '/en/tools-and-resources/eu-osha-thesaurus/search/export' .$params ?>"><img class="download" src="/sites/all/themes/osha_frontend/images/download-thesaurus.png" alt="<?php print t('Download'); ?>" title="<?php print t('Download'); ?>"></a>
     	  </div>
       </div>
     <?php endif; ?>

@@ -40,53 +40,66 @@ $lang = $language->language;
     <div class="intro-text-content">
       <div class="intro-text-thesaurus">
         <?php
-          $block = block_load('block','3');
+          $block = block_load('osha_thesaurus','osha_thesaurus_test_block');
           print drupal_render(_block_get_renderable_array(_block_render_blocks(array($block))));
         ?>
       </div>
       <div class="download-content-theasaurus">
-        <label><?php print t('Download'); ?></label>
-        <img src="/sites/all/themes/osha_frontend/images/info-thesaurus.png" alt="Info" 
-        title="<?php print t('Download your complete EU-OSHA thesaurus terms in Excel format. Choose the language from the box'); ?>" >
-        <select id="language-export-select" class="form-select">
-          <option value="bg" <?php if($lang=="bg"): print 'selected="selected"'; endif;?>>Български</option>
-          <option value="cs" <?php if($lang=="cs"): print 'selected="selected"'; endif;?>>Čeština</option>
-          <option value="da" <?php if($lang=="da"): print 'selected="selected"'; endif;?>>Dansk</option>
-          <option value="de" <?php if($lang=="de"): print 'selected="selected"'; endif;?>>Deutsch</option>
-          <option value="et" <?php if($lang=="et"): print 'selected="selected"'; endif;?>>Eesti</option>
-          <option value="el" <?php if($lang=="el"): print 'selected="selected"'; endif;?>>Ελληνικά</option>
-          <option value="en" <?php if($lang=="en"): print 'selected="selected"'; endif;?>>English</option>
-          <option value="es" <?php if($lang=="es"): print 'selected="selected"'; endif;?>>Español</option>
-          <option value="fr" <?php if($lang=="fr"): print 'selected="selected"'; endif;?>>Français</option>
-          <option value="hr" <?php if($lang=="hr"): print 'selected="selected"'; endif;?>>Hrvatski</option>
-          <option value="is" <?php if($lang=="is"): print 'selected="selected"'; endif;?>>Íslenska</option>
-          <option value="it" <?php if($lang=="it"): print 'selected="selected"'; endif;?>>Italiano</option>
-          <option value="lv" <?php if($lang=="lv"): print 'selected="selected"'; endif;?>>Latviešu</option>
-          <option value="lt" <?php if($lang=="lt"): print 'selected="selected"'; endif;?>>Lietuvių</option>
-          <option value="hu" <?php if($lang=="hu"): print 'selected="selected"'; endif;?>>Magyar</option>
-          <option value="mt" <?php if($lang=="mt"): print 'selected="selected"'; endif;?>>Malti</option>
-          <option value="nl" <?php if($lang=="nl"): print 'selected="selected"'; endif;?>>Nederlands</option>
-          <option value="no" <?php if($lang=="no"): print 'selected="selected"'; endif;?>>Norsk</option>
-          <option value="pl" <?php if($lang=="pl"): print 'selected="selected"'; endif;?>>Polski</option>
-          <option value="pt" <?php if($lang=="pt"): print 'selected="selected"'; endif;?>>Português</option>
-          <option value="ro" <?php if($lang=="ro"): print 'selected="selected"'; endif;?>>Română</option>
-          <option value="sk" <?php if($lang=="sk"): print 'selected="selected"'; endif;?>>Slovenčina</option>
-          <option value="sl" <?php if($lang=="sl"): print 'selected="selected"'; endif;?>>Slovenščina</option>
-          <option value="fi" <?php if($lang=="fi"): print 'selected="selected"'; endif;?>>Suomi</option>
-          <option value="sv" <?php if($lang=="sv"): print 'selected="selected"'; endif;?>>Svenska</option>
-        </select>
-        <a id="language-export-button" href="/en/tools-and-resources/eu-osha-thesaurus/export"><img class="download" src="/sites/all/themes/osha_frontend/images/download-thesaurus.png" alt="<?php print t('Download'); ?>" title="<?php print t('Download'); ?>"></a>
+        <div class="download-content-theasaurus-label">
+          <label><?php print t('Download'); ?></label>
+          <img src="/sites/all/themes/osha_frontend/images/info-thesaurus.png" alt="Info" 
+          title="<?php print t('Download your complete EU-OSHA thesaurus terms in Excel format. Choose the language from the box'); ?>" >
+        </div>
+        <div class="download-content-theasaurus-action">
+          <select id="language-export-select" class="form-select">
+            <option value="bg" <?php if($lang=="bg"): print 'selected="selected"'; endif;?>>Български</option>
+            <option value="cs" <?php if($lang=="cs"): print 'selected="selected"'; endif;?>>Čeština</option>
+            <option value="da" <?php if($lang=="da"): print 'selected="selected"'; endif;?>>Dansk</option>
+            <option value="de" <?php if($lang=="de"): print 'selected="selected"'; endif;?>>Deutsch</option>
+            <option value="et" <?php if($lang=="et"): print 'selected="selected"'; endif;?>>Eesti</option>
+            <option value="el" <?php if($lang=="el"): print 'selected="selected"'; endif;?>>Ελληνικά</option>
+            <option value="en" <?php if($lang=="en"): print 'selected="selected"'; endif;?>>English</option>
+            <option value="es" <?php if($lang=="es"): print 'selected="selected"'; endif;?>>Español</option>
+            <option value="fr" <?php if($lang=="fr"): print 'selected="selected"'; endif;?>>Français</option>
+            <option value="hr" <?php if($lang=="hr"): print 'selected="selected"'; endif;?>>Hrvatski</option>
+            <option value="is" <?php if($lang=="is"): print 'selected="selected"'; endif;?>>Íslenska</option>
+            <option value="it" <?php if($lang=="it"): print 'selected="selected"'; endif;?>>Italiano</option>
+            <option value="lv" <?php if($lang=="lv"): print 'selected="selected"'; endif;?>>Latviešu</option>
+            <option value="lt" <?php if($lang=="lt"): print 'selected="selected"'; endif;?>>Lietuvių</option>
+            <option value="hu" <?php if($lang=="hu"): print 'selected="selected"'; endif;?>>Magyar</option>
+            <option value="mt" <?php if($lang=="mt"): print 'selected="selected"'; endif;?>>Malti</option>
+            <option value="nl" <?php if($lang=="nl"): print 'selected="selected"'; endif;?>>Nederlands</option>
+            <option value="no" <?php if($lang=="no"): print 'selected="selected"'; endif;?>>Norsk</option>
+            <option value="pl" <?php if($lang=="pl"): print 'selected="selected"'; endif;?>>Polski</option>
+            <option value="pt" <?php if($lang=="pt"): print 'selected="selected"'; endif;?>>Português</option>
+            <option value="ro" <?php if($lang=="ro"): print 'selected="selected"'; endif;?>>Română</option>
+            <option value="sk" <?php if($lang=="sk"): print 'selected="selected"'; endif;?>>Slovenčina</option>
+            <option value="sl" <?php if($lang=="sl"): print 'selected="selected"'; endif;?>>Slovenščina</option>
+            <option value="fi" <?php if($lang=="fi"): print 'selected="selected"'; endif;?>>Suomi</option>
+            <option value="sv" <?php if($lang=="sv"): print 'selected="selected"'; endif;?>>Svenska</option>
+          </select>
+          <a id="language-export-button" href="/en/tools-and-resources/eu-osha-thesaurus/export"><img class="download" src="/sites/all/themes/osha_frontend/images/download-thesaurus.png" alt="<?php print t('Download'); ?>" title="<?php print t('Download'); ?>"></a>
+        </div>
       </div>
     </div>
 
     <div id="tabs">
-      <a href="/tools-and-resources/eu-osha-thesaurus/search"><?php print t("Search"); ?></a>
-      <a class="active" href="/tools-and-resources/eu-osha-thesaurus/alphabetical"><?php print t("Alphabetical view"); ?></a>
-      <a href="/tools-and-resources/eu-osha-thesaurus/hierarchical"><?php print t("Hierarchical View"); ?></a>
+      <?php
+        print l(t('Search'), 'tools-and-resources/eu-osha-thesaurus/search');
+        print l(t('Alphabetical view'), 'tools-and-resources/eu-osha-thesaurus/alphabetical');
+        print l(t('Hierarchical view'), 'tools-and-resources/eu-osha-thesaurus/hierarchical');
+      ?>
     </div>
 
     <div class="view-content">
       <?php
+      $path = current_path();
+      // The selected letter is the one on the end pf the URL
+      $path = explode("/",$path);
+      if (end($path) != "alphabetical")
+      {
+        $selectedLetter = mb_strtoupper(end($path));
+      }
       $thesaurus_list = views_get_view_result('thesaurus_front', 'thesaurus_alphabetical');
       $alphas = t('A B C D E F G H I J K L M N O P Q R S T U V W X Y Z');
       $alphas = explode(' ', $alphas);
@@ -95,24 +108,38 @@ $lang = $language->language;
       foreach ($thesaurus_list as $term) {
         $term_title = $term->field_title_field[0]['rendered']['#markup'];
         $letter = drupal_substr($term_title, 0, 1);
+        $letter = mb_strtoupper($letter);
         $letters[$letter] = $letter;
         @$letter_num[$letter]++;
       }
       ksort($letters);
+      // Check if the selected letter is one of the letters for the current language
+      if (!in_array($selectedLetter, $alphas) && !in_array($selectedLetter, $letters))
+      {
+        unset($selectedLetter);
+      }
       echo '<div id="glossary-letters"><div class="container">';
       foreach ($alphas as $letter) {
         if (!empty($letters[$letter])) {
-          print '<span><a href="#glossary-' . $letter . '">' . $letter . '</a></span>';
+          if ($selectedLetter == null)
+          {
+            $selectedLetter = mb_strtoupper($letter);
+          }
+          print '<span><a href="/'.$lang.'/tools-and-resources/eu-osha-thesaurus/alphabetical/' . mb_strtolower($letter) . '">' . $letter . '</a></span>';
         }
         else {
           print '<span>' . $letter . '</span>';
         }
       }
       foreach ($letters as $letter) {
-        if (in_array(strtoupper($letter), $alphas)) {
+        if (in_array(mb_strtoupper($letter), $alphas)) {
           continue;
         }
-        print '<span><a href="#glossary-' . $letter . '">' . $letter . '</a></span>';
+        if ($selectedLetter == null)
+        {
+          $selectedLetter = mb_strtoupper($letter);
+        }
+        print '<span><a href="/'.$lang.'/tools-and-resources/eu-osha-thesaurus/alphabetical/' . mb_strtolower($letter) . '">' . $letter . '</a></span>';
       }
       echo '</div></div>';
       $prev_letter = '';
@@ -125,6 +152,12 @@ $lang = $language->language;
             $dd_class = '';
             $term_path = "/node/".$term->nid;
             $term_title = $term->field_title_field[0]['rendered']['#markup'];
+            $titleFirstLetter = mb_strtoupper(drupal_substr($term_title, 0, 1));
+
+            if ($titleFirstLetter != $selectedLetter)
+            {
+              continue;
+            }
             $term_desc = $term->field_field_definition[0]['rendered']['#markup'];
             $term_synonyms = [];
             foreach($term->field_field_synonyms as $synonym)
@@ -164,7 +197,7 @@ $lang = $language->language;
           }
           ?>
         </dl>
-      </div>      
+      </div>    
     </div>
 
   </div><?php /* class view */ ?>

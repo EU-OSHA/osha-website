@@ -5,3 +5,128 @@
  */
 
 include_once 'osha_thesaurus.features.inc';
+
+/**
+ * Implements hook_block_info().
+ */
+function osha_thesaurus_block_info() {
+  $blocks = array();
+  $blocks['osha_thesaurus_test_block'] = array(
+    'info' => t('Thesaurus test block'),
+    'status' => 1,
+    'cache' => DRUPAL_CACHE_PER_PAGE,
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ *
+ * {@inheritdoc}
+ */
+function osha_thesaurus_block_view($delta) {
+  $block = array();
+  switch ($delta) {
+    case 'osha_thesaurus_test_block':
+      $block['subject'] = '';
+      $block['content'] = osha_thesaurus_block_content();
+      break;
+  }
+  return $block;
+}
+
+function osha_thesaurus_block_content()
+{
+	$content = "<p>".t("EU-OSHA’s multilingual thesaurus of occupational safety and health terminology lists words grouped together in a hierarchy. It includes synonyms and antonyms of those words and some definitions.")."</p>";
+
+	return $content;
+}
+
+/**
+ * Implements hook_menu().
+ */
+function osha_thesaurus_menu() {
+  $items = array();
+  $items['thesaurus-search-autocomplete/%'] = array(
+    'page callback' => 'osha_thesaurus_autocomplete_callback',
+    'access callback' => TRUE,
+    'page arguments' => array(1),
+  );
+  $items['thesaurus-search-autocomplete'] = array(
+    'page callback' => 'osha_thesaurus_autocomplete_callback',
+    'access callback' => TRUE,
+  );
+  return $items;
+}
+
+/**
+ *
+ * When using search_autocomplete module.
+ */
+function osha_thesaurus_autocomplete_callback($search = '*') {
+  if (empty(arg(1)) && !empty($_REQUEST['term'])) {
+    $search = $_REQUEST['term'];
+  }
+  $search = check_plain($search);
+  global $language;
+  $lang = $language->language;
+  $allowed_bundles = array("thesaurus"=>"thesaurus");
+  $bundles = node_type_get_types();
+
+  $index = search_api_index_load('thesaurus');
+  $server = search_api_server_load('solr_server');
+  $connection = new SearchApiSolrConnection($server->options);
+
+  // Build params - group by bundle, 3 rows each.
+  $params = array(
+    'group' => 'true',
+    'group.field' => 'ss_type',
+    'group.limit' => 10,
+  );
+  $params['fq'][] = 'ss_search_api_language:"' . $lang . '"';
+  // Add condition for excluded bundles.
+  $params['fq'][]='index_id:"thesaurus"';
+  // Add searchable fields.
+  $fields = $index->getFields();
+  $search_fields = array("title_field"=>"title_field");
+  foreach ($search_fields as $field) {
+    $params['qf'][] = 'tm_' . $field . '^' . $fields[$field]['boost'];
+    $params['qf'][] = 'tm_und' . $field . '^' . $fields[$field]['boost'];
+    $params['qf'][] = 'tm_' . $lang . '_' . $field . '^' . $fields[$field]['boost'];
+  }
+  // Make the search.
+  $request = $connection->search($search, $params);
+
+  $data = json_decode($request->data);
+  $total_groups = count($data->grouped->ss_type->groups);
+  $total_items = $data->grouped->ss_type->matches;
+  $return = array();
+
+  $showing_categ = 10;
+  $showing_items = 10;
+  $count_categ = 0;
+  $showed_items = 0;
+  $showed_categ = 0;
+  $total_on_showed_categ = 0;
+  $wiki_result = array();
+  $total_wiki_results = 0;
+
+  foreach ($data->grouped->ss_type->groups as &$group) {
+    if ($count_categ++ >= $showing_categ) {
+      // If not found wiki by now, continue loop trough groups.
+      if (!empty($wiki_result)) {
+        break;
+      }
+      else {
+        continue;
+      }
+    }
+    $ret = osha_search_autocomplete_add_group($group, $lang, $showing_items, $search);
+    $showed_items += $ret['count'];
+    $showed_categ += ($ret['count']) ? 1 : 0;
+    $total_on_showed_categ += $group->doclist->numFound;
+    $return = array_merge($return, $ret['results']);
+  }
+  print_r(json_encode($return));
+  exit;
+}

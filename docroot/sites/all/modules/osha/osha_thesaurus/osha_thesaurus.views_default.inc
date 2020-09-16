@@ -733,7 +733,7 @@ function osha_thesaurus_views_default_views() {
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'views_data_export_xlsx';
   $handler->display->display_options['style_options']['provide_file'] = 1;
-  $handler->display->display_options['style_options']['filename'] = 'thesaurus.xls';
+  $handler->display->display_options['style_options']['filename'] = 'EU-OSHA_thesaurus_search.xls';
   $handler->display->display_options['style_options']['parent_sort'] = 1;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Title */
@@ -788,12 +788,6 @@ function osha_thesaurus_views_default_views() {
   $handler->display->display_options['fields']['field_term_reference']['field'] = 'field_term_reference';
   $handler->display->display_options['fields']['field_term_reference']['ui_name'] = 'Term reference';
   $handler->display->display_options['fields']['field_term_reference']['type'] = 'text_plain';
-  /* Field: Glossary */
-  $handler->display->display_options['fields']['field_glossary_the']['id'] = 'field_glossary_the';
-  $handler->display->display_options['fields']['field_glossary_the']['table'] = 'field_data_field_glossary_the';
-  $handler->display->display_options['fields']['field_glossary_the']['field'] = 'field_glossary_the';
-  $handler->display->display_options['fields']['field_glossary_the']['ui_name'] = 'Glossary';
-  $handler->display->display_options['fields']['field_glossary_the']['type'] = 'i18n_taxonomy_term_reference_plain';
   /* Field: Notes */
   $handler->display->display_options['fields']['field_notes']['id'] = 'field_notes';
   $handler->display->display_options['fields']['field_notes']['table'] = 'field_data_field_notes';
@@ -1599,7 +1593,7 @@ print "<a href=\'/node/876\'>". t("See more") ."</a>";
   $handler->display->display_options['sorts']['search_api_relevance']['field'] = 'search_api_relevance';
   $handler->display->display_options['sorts']['search_api_relevance']['exposed'] = TRUE;
   $handler->display->display_options['sorts']['search_api_relevance']['expose']['label'] = 'Relevance';
-  /* Sort criterion: Indexed Multilingual Content: Title */
+  /* Sort criterion: Broken/missing handler */
   $handler->display->display_options['sorts']['title_field']['id'] = 'title_field';
   $handler->display->display_options['sorts']['title_field']['table'] = 'search_api_index_thesaurus';
   $handler->display->display_options['sorts']['title_field']['field'] = 'title_field';
@@ -1633,6 +1627,63 @@ print "<a href=\'/node/876\'>". t("See more") ."</a>";
 
   /* Display: Search */
   $handler = $view->new_display('page', 'Search', 'thesaurus_search');
+  $handler->display->display_options['defaults']['use_ajax'] = FALSE;
+  $handler->display->display_options['defaults']['exposed_form'] = FALSE;
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['expose_sort_order'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Indexed Multilingual Content: Title */
+  $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['fields']['title_field']['field'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['label'] = '';
+  $handler->display->display_options['fields']['title_field']['element_type'] = 'h2';
+  $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title_field']['type'] = 'title_linked';
+  $handler->display->display_options['fields']['title_field']['settings'] = array(
+    'title_style' => '_none',
+    'title_link' => 'content',
+    'title_class' => '',
+  );
+  /* Field: Indexed Multilingual Content: Synonyms */
+  $handler->display->display_options['fields']['field_synonyms']['id'] = 'field_synonyms';
+  $handler->display->display_options['fields']['field_synonyms']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['fields']['field_synonyms']['field'] = 'field_synonyms';
+  $handler->display->display_options['fields']['field_synonyms']['label'] = 'Synonyms:';
+  $handler->display->display_options['fields']['field_synonyms']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_synonyms']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['field_synonyms']['delta_offset'] = '0';
+  /* Field: Indexed Multilingual Content: Definition */
+  $handler->display->display_options['fields']['field_definition']['id'] = 'field_definition';
+  $handler->display->display_options['fields']['field_definition']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['fields']['field_definition']['field'] = 'field_definition';
+  $handler->display->display_options['fields']['field_definition']['label'] = '';
+  $handler->display->display_options['fields']['field_definition']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_definition']['hide_empty'] = TRUE;
+  /* Field: Content: Link to content */
+  $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['label'] = '';
+  $handler->display->display_options['fields']['view_node']['element_type'] = 'div';
+  $handler->display->display_options['fields']['view_node']['element_class'] = 'views-field views-field-view-node';
+  $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['view_node']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['view_node']['text'] = 'See more';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Search: Relevance */
+  $handler->display->display_options['sorts']['search_api_relevance']['id'] = 'search_api_relevance';
+  $handler->display->display_options['sorts']['search_api_relevance']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['sorts']['search_api_relevance']['field'] = 'search_api_relevance';
+  $handler->display->display_options['sorts']['search_api_relevance']['order'] = 'DESC';
+  $handler->display->display_options['sorts']['search_api_relevance']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['search_api_relevance']['expose']['label'] = 'Relevance';
+  /* Sort criterion: Indexed Multilingual Content: Thesaurus title order */
+  $handler->display->display_options['sorts']['search_api_aggregation_2']['id'] = 'search_api_aggregation_2';
+  $handler->display->display_options['sorts']['search_api_aggregation_2']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['sorts']['search_api_aggregation_2']['field'] = 'search_api_aggregation_2';
+  $handler->display->display_options['sorts']['search_api_aggregation_2']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['search_api_aggregation_2']['expose']['label'] = 'Alphabetically';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Indexed Multilingual Content: Item language */
@@ -1657,6 +1708,14 @@ print "<a href=\'/node/876\'>". t("See more") ."</a>";
   $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['remember_roles'] = array(
     2 => '2',
   );
+  $handler->display->display_options['filters']['search_api_views_fulltext']['group_info']['label'] = 'Fulltext search';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['group_info']['identifier'] = 'search_api_views_fulltext';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['group_info']['remember'] = FALSE;
+  $handler->display->display_options['filters']['search_api_views_fulltext']['group_info']['group_items'] = array(
+    1 => array(),
+    2 => array(),
+    3 => array(),
+  );
   $handler->display->display_options['filters']['search_api_views_fulltext']['fields'] = array(
     'field_definition:value' => 'field_definition:value',
     'field_synonyms' => 'field_synonyms',
@@ -1665,8 +1724,8 @@ print "<a href=\'/node/876\'>". t("See more") ."</a>";
   );
   $handler->display->display_options['path'] = 'tools-and-resources/eu-osha-thesaurus/search';
 
-  /* Display: Data export */
-  $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
+  /* Display: Data export Full Thesaurus */
+  $handler = $view->new_display('views_data_export', 'Data export Full Thesaurus', 'views_data_export_1');
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'views_data_export_xlsx';
@@ -1738,15 +1797,6 @@ print "<a href=\'/node/876\'>". t("See more") ."</a>";
   $handler->display->display_options['fields']['field_term_reference']['ui_name'] = 'Term reference';
   $handler->display->display_options['fields']['field_term_reference']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_term_reference']['type'] = 'text_plain';
-  /* Field: Glossary */
-  $handler->display->display_options['fields']['field_glossary_the']['id'] = 'field_glossary_the';
-  $handler->display->display_options['fields']['field_glossary_the']['table'] = 'search_api_index_thesaurus';
-  $handler->display->display_options['fields']['field_glossary_the']['field'] = 'field_glossary_the';
-  $handler->display->display_options['fields']['field_glossary_the']['ui_name'] = 'Glossary';
-  $handler->display->display_options['fields']['field_glossary_the']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_glossary_the']['link_to_entity'] = 0;
-  $handler->display->display_options['fields']['field_glossary_the']['view_mode'] = 'full';
-  $handler->display->display_options['fields']['field_glossary_the']['bypass_access'] = 0;
   /* Field: Notes */
   $handler->display->display_options['fields']['field_notes']['id'] = 'field_notes';
   $handler->display->display_options['fields']['field_notes']['table'] = 'search_api_index_thesaurus';
@@ -1754,6 +1804,19 @@ print "<a href=\'/node/876\'>". t("See more") ."</a>";
   $handler->display->display_options['fields']['field_notes']['ui_name'] = 'Notes';
   $handler->display->display_options['fields']['field_notes']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_notes']['type'] = 'text_plain';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Search: Relevance */
+  $handler->display->display_options['sorts']['search_api_relevance']['id'] = 'search_api_relevance';
+  $handler->display->display_options['sorts']['search_api_relevance']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['sorts']['search_api_relevance']['field'] = 'search_api_relevance';
+  $handler->display->display_options['sorts']['search_api_relevance']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['search_api_relevance']['expose']['label'] = 'Relevance';
+  /* Sort criterion: Indexed Multilingual Content: Thesaurus title order */
+  $handler->display->display_options['sorts']['search_api_aggregation_2']['id'] = 'search_api_aggregation_2';
+  $handler->display->display_options['sorts']['search_api_aggregation_2']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['sorts']['search_api_aggregation_2']['field'] = 'search_api_aggregation_2';
+  $handler->display->display_options['sorts']['search_api_aggregation_2']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['search_api_aggregation_2']['expose']['label'] = 'Alphabetically';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Indexed Multilingual Content: Item language */
@@ -1764,6 +1827,139 @@ print "<a href=\'/node/876\'>". t("See more") ."</a>";
     'current' => 'current',
   );
   $handler->display->display_options['path'] = 'tools-and-resources/eu-osha-thesaurus/export';
+
+  /* Display: Data export Result */
+  $handler = $view->new_display('views_data_export', 'Data export Result', 'views_data_export_2');
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_xlsx';
+  $handler->display->display_options['style_options']['provide_file'] = 1;
+  $handler->display->display_options['style_options']['filename'] = 'EU-OSHA_thesaurus_search_results.xls';
+  $handler->display->display_options['style_options']['parent_sort'] = 0;
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  /* Footer: Global: Result summary */
+  $handler->display->display_options['footer']['result']['id'] = 'result';
+  $handler->display->display_options['footer']['result']['table'] = 'views';
+  $handler->display->display_options['footer']['result']['field'] = 'result';
+  $handler->display->display_options['footer']['result']['content'] = '<div class="pager-total"><span>@start - @end / @total</span></div>';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Title */
+  $handler->display->display_options['fields']['title_field']['id'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['fields']['title_field']['field'] = 'title_field';
+  $handler->display->display_options['fields']['title_field']['ui_name'] = 'Title';
+  $handler->display->display_options['fields']['title_field']['element_type'] = 'h2';
+  $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title_field']['type'] = 'text_plain';
+  $handler->display->display_options['fields']['title_field']['settings'] = array(
+    'title_style' => '_none',
+    'title_link' => 'content',
+    'title_class' => '',
+  );
+  /* Field: Father */
+  $handler->display->display_options['fields']['field_father']['id'] = 'field_father';
+  $handler->display->display_options['fields']['field_father']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['fields']['field_father']['field'] = 'field_father';
+  $handler->display->display_options['fields']['field_father']['ui_name'] = 'Father';
+  $handler->display->display_options['fields']['field_father']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_father']['link_to_entity'] = 0;
+  $handler->display->display_options['fields']['field_father']['view_mode'] = 'full';
+  $handler->display->display_options['fields']['field_father']['bypass_access'] = 0;
+  /* Field: Full URL */
+  $handler->display->display_options['fields']['field_full_url']['id'] = 'field_full_url';
+  $handler->display->display_options['fields']['field_full_url']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['fields']['field_full_url']['field'] = 'field_full_url';
+  $handler->display->display_options['fields']['field_full_url']['ui_name'] = 'Full URL';
+  $handler->display->display_options['fields']['field_full_url']['element_label_colon'] = FALSE;
+  /* Field: ID */
+  $handler->display->display_options['fields']['field_term_id']['id'] = 'field_term_id';
+  $handler->display->display_options['fields']['field_term_id']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['fields']['field_term_id']['field'] = 'field_term_id';
+  $handler->display->display_options['fields']['field_term_id']['ui_name'] = 'ID';
+  $handler->display->display_options['fields']['field_term_id']['element_label_colon'] = FALSE;
+  /* Field: Definition */
+  $handler->display->display_options['fields']['field_definition']['id'] = 'field_definition';
+  $handler->display->display_options['fields']['field_definition']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['fields']['field_definition']['field'] = 'field_definition';
+  $handler->display->display_options['fields']['field_definition']['ui_name'] = 'Definition';
+  $handler->display->display_options['fields']['field_definition']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_definition']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['field_definition']['type'] = 'text_plain';
+  /* Field: Context */
+  $handler->display->display_options['fields']['field_context']['id'] = 'field_context';
+  $handler->display->display_options['fields']['field_context']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['fields']['field_context']['field'] = 'field_context';
+  $handler->display->display_options['fields']['field_context']['ui_name'] = 'Context';
+  $handler->display->display_options['fields']['field_context']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_context']['type'] = 'text_plain';
+  /* Field: Synonyms */
+  $handler->display->display_options['fields']['field_synonyms']['id'] = 'field_synonyms';
+  $handler->display->display_options['fields']['field_synonyms']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['fields']['field_synonyms']['field'] = 'field_synonyms';
+  $handler->display->display_options['fields']['field_synonyms']['ui_name'] = 'Synonyms';
+  $handler->display->display_options['fields']['field_synonyms']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_synonyms']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['field_synonyms']['delta_offset'] = '0';
+  /* Field: Term reference */
+  $handler->display->display_options['fields']['field_term_reference']['id'] = 'field_term_reference';
+  $handler->display->display_options['fields']['field_term_reference']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['fields']['field_term_reference']['field'] = 'field_term_reference';
+  $handler->display->display_options['fields']['field_term_reference']['ui_name'] = 'Term reference';
+  $handler->display->display_options['fields']['field_term_reference']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_term_reference']['type'] = 'text_plain';
+  /* Field: Notes */
+  $handler->display->display_options['fields']['field_notes']['id'] = 'field_notes';
+  $handler->display->display_options['fields']['field_notes']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['fields']['field_notes']['field'] = 'field_notes';
+  $handler->display->display_options['fields']['field_notes']['ui_name'] = 'Notes';
+  $handler->display->display_options['fields']['field_notes']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_notes']['type'] = 'text_plain';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Search: Relevance */
+  $handler->display->display_options['sorts']['search_api_relevance']['id'] = 'search_api_relevance';
+  $handler->display->display_options['sorts']['search_api_relevance']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['sorts']['search_api_relevance']['field'] = 'search_api_relevance';
+  $handler->display->display_options['sorts']['search_api_relevance']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['search_api_relevance']['expose']['label'] = 'Relevance';
+  /* Sort criterion: Indexed Multilingual Content: Thesaurus title order */
+  $handler->display->display_options['sorts']['search_api_aggregation_2']['id'] = 'search_api_aggregation_2';
+  $handler->display->display_options['sorts']['search_api_aggregation_2']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['sorts']['search_api_aggregation_2']['field'] = 'search_api_aggregation_2';
+  $handler->display->display_options['sorts']['search_api_aggregation_2']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['search_api_aggregation_2']['expose']['label'] = 'Alphabetically';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Indexed Multilingual Content: Item language */
+  $handler->display->display_options['filters']['search_api_language']['id'] = 'search_api_language';
+  $handler->display->display_options['filters']['search_api_language']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['filters']['search_api_language']['field'] = 'search_api_language';
+  $handler->display->display_options['filters']['search_api_language']['value'] = array(
+    'current' => 'current',
+  );
+  /* Filter criterion: Search: Fulltext search */
+  $handler->display->display_options['filters']['search_api_views_fulltext']['id'] = 'search_api_views_fulltext';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['field'] = 'search_api_views_fulltext';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['operator'] = 'OR';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['operator_id'] = 'search_api_views_fulltext_op';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['label'] = 'Search';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['operator'] = 'search_api_views_fulltext_op';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['identifier'] = 'search_api_views_fulltext';
+  $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['remember_roles'] = array(
+    2 => '2',
+  );
+  $handler->display->display_options['filters']['search_api_views_fulltext']['fields'] = array(
+    'field_definition:value' => 'field_definition:value',
+    'field_synonyms' => 'field_synonyms',
+    'title' => 'title',
+    'title_field' => 'title_field',
+  );
+  $handler->display->display_options['path'] = 'tools-and-resources/eu-osha-thesaurus/search/export';
+  $handler->display->display_options['displays'] = array(
+    'thesaurus_search' => 'thesaurus_search',
+    'default' => 0,
+  );
   $translatables['thesaurus_front_indexed'] = array(
     t('Master'),
     t('EU-OSHA thesaurus'),
@@ -1786,7 +1982,8 @@ print "<a href=\'/node/876\'>". t("See more") ."</a>";
     t('Relevance'),
     t('Alphabetically'),
     t('Search'),
-    t('Data export'),
+    t('Fulltext search'),
+    t('Data export Full Thesaurus'),
     t('Title'),
     t('Father'),
     t('Full URL'),
@@ -1795,8 +1992,8 @@ print "<a href=\'/node/876\'>". t("See more") ."</a>";
     t('Context'),
     t('Synonyms'),
     t('Term reference'),
-    t('Glossary'),
     t('Notes'),
+    t('Data export Result'),
   );
   $export['thesaurus_front_indexed'] = $view;
 

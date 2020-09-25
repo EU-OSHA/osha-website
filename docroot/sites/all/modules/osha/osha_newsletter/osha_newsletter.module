@@ -1471,6 +1471,12 @@ function osha_newsletter_entity_info_alter(&$entity_info) {
     'label' => t('Newsletter Item'),
     'custom settings' => TRUE,
   );
+
+  $entity_info['node']['view modes']['newsletter_alt'] = array(
+    'label' => t('Newsletter new format'),
+    'custom settings' => TRUE,
+  );
+
 }
 
 function osha_newsletter_preprocess_node(&$vars) {

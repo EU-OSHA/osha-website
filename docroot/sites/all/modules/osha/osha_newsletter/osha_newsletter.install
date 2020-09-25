@@ -305,3 +305,38 @@ function osha_newsletter_update_7012() {
   }
   variable_set('osha_newsletter_new_3080');
 }
+
+/**
+ * MDR-3887 OSHmail improvements.
+ */
+function osha_newsletter_update_7013() {
+  $voc = taxonomy_vocabulary_machine_name_load('newsletter_sections');
+  $names = array('National Focal Points in action', 'EU news bites', 'OSHwiki', 'COVID-19 outbreak and workplace safety and health');
+  foreach ($names as $name) {
+    $term = taxonomy_get_term_by_name($name, 'newsletter_sections');
+    $term = current($term);
+    if (empty($term)) {
+      $term = new stdClass();
+      $term->vid = $voc->vid;
+      $term->name = $name;
+    }
+    $term->field_newsletter_template = [LANGUAGE_NONE => [0 => ['value' => 'newsletter_half_image_left']]];
+    taxonomy_term_save($term);
+  }
+
+  $names = array('National Focal Points in action', 'EU news bites');
+  $active = variable_get('osha_newsletter_active_sections');
+  foreach ($names as $name) {
+    $term = taxonomy_get_term_by_name($name, 'newsletter_sections');
+    $term = current($term);
+    if (!empty($term)) {
+      $active[] = $term->tid;
+    }
+  }
+  variable_set('osha_newsletter_active_sections', $active);
+
+  $term = taxonomy_get_term_by_name('National Focal Points in action', 'newsletter_sections');
+  $term = current($term);
+  variable_set('newsletter_section_type_style_map', [$term->tid . '-events' =>'newsletter_alt']);
+
+}

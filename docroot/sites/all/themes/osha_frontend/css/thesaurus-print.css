@@ -1,0 +1,40 @@
+@media print{
+    .intro-text-thesaurus{
+        display:inline-block; 
+        float:none; /* float elements don't work properly in media print */
+        vertical-align:top;
+    }
+    .download-content-theasaurus{
+        float: none;/* float elements don't work properly in media print */
+        display:inline-block;
+        vertical-align:top;
+        margin-left:2cm !important; /* "!important" is required for the spacing in media print */
+    }
+    .download-content-theasaurus-label,
+    .download-content-theasaurus-action{
+        display:inline-block;
+        vertical-align:top;
+    }
+    .download-content-theasaurus label{
+        width:auto;
+        float:none; /* float elements don't work properly in media print */
+    }
+    .download-content-theasaurus img{
+        float:none;  /* float elements don't work properly in media print */
+    }
+    .download-content-theasaurus select{
+        float:none; /* float elements don't work properly in media print */
+    }
+    #content .view #tabs{
+        float: none; /* float elements don't work properly in media print */
+        margin:2rem 0px !important; /* "!important" is required for the spacing in media print */
+    }
+    #content .view #tabs a{
+        display:inline-block;
+        float:none; /* float elements don't work properly in media print */
+        padding:0px 16px !important; /* "!important" is required for the spacing in media print */
+    }
+    #content .view #tabs a + a{
+        margin-left:-5px !important; /* "!important" is required for the spacing in media print */
+    }
+}

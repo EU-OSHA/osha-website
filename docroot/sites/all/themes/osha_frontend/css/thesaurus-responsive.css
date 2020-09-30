@@ -1,0 +1,104 @@
+@media screen and (max-width: 1023px){
+    
+    #views-exposed-form-thesaurus-front-indexed-thesaurus-search .views-exposed-widget.views-submit-button{
+        padding:0px!important;
+    }
+    #edit-submit-thesaurus-front-indexed[type=submit]{
+        margin-top: 0px;
+        transform: translate(-240%,-380%);
+        left: 100%;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .page-node.node-type-thesaurus .intro-text-thesaurus{
+        width:auto;
+    }
+    .intro-text-thesaurus{
+        float:none;
+        width:auto;
+    }
+    .download-content-theasaurus{
+        display:flex;
+        flex-direction: row;
+        float:none;
+        margin:1rem 0px;
+        width:auto;
+        align-items:center;
+        justify-content: flex-start;
+    }
+    .download-content-theasaurus-label label{
+        float:none;
+        display:inline-block;
+        width:auto;
+        vertical-align: middle;
+    }
+    .download-content-theasaurus-label img{
+        float:none;
+        display:inline-block;
+        vertical-align: middle;
+    }
+    .download-content-theasaurus-action{
+        margin-left:1rem;
+    }
+    .download-content-theasaurus-action select{
+        float:none;
+        margin-left:0px;
+    }
+    .download-content-theasaurus-action img{
+        float:none;
+    }
+    .download-content-theasaurus-action a{
+        display:inline-flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #content .download-content-theasaurus-action a{
+        border-bottom:0px;
+    }
+    .view-thesaurus-front-indexed.view #tabs,
+    .view-thesaurus-front #tabs{
+        float:none;
+    }
+    .view-thesaurus-front-indexed #edit-search-api-views-fulltext-wrapper{
+        margin-right:0px!important;
+    }
+    .view-thesaurus-front-indexed .views-exposed-widget.views-widget-sort-by {
+        width: 100%!important;
+    }
+    .view-thesaurus-front-indexed #edit-search-api-views-fulltext{
+        float:none;
+    }
+    .view-thesaurus-front-indexed .views-exposed-form .views-exposed-widget label{
+        margin-top:0px;
+    }
+    .view-thesaurus-front-indexed .views-widget-sort-by{
+        padding-top:0.75rem!important;
+    }
+    #content.one_column{
+        width:auto!important; /* Review this class in non-media styles, it breaks the width of the page and doesn't generate space at right */
+    }
+    #views-exposed-form-thesaurus-front-indexed-thesaurus-search .views-exposed-widget.views-submit-button{
+        padding:0px!important;
+    }
+    #edit-submit-thesaurus-front-indexed[type=submit]{
+        margin-top: 0px;
+        transform: translate(-180%,-416%);
+        left: 100%;
+    }
+}
+
+@media screen and (max-width: 480px){
+    .download-content-theasaurus{
+        display:flex;
+        flex-direction: column;
+        float:none;
+        margin:1rem 0px;
+        width:auto;
+        align-items: flex-start;
+    }
+    .download-content-theasaurus-action{
+        margin-top:0.75rem;
+        margin-left:0px;
+    }
+}

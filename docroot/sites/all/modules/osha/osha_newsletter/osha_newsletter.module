@@ -1490,6 +1490,15 @@ function osha_newsletter_preprocess_node(&$vars) {
     $vars['theme_hook_suggestions'][] = 'node__' . $vars['node']->nid . '__highlights_item';
   }
 
+  if ($vars['view_mode'] == 'newsletter_alt') {
+    if (array_key_exists('links', $vars)) {
+      unset($vars['links']);
+    }
+
+    $vars['theme_hook_suggestions'][] = 'node__newsletter_alt';
+    $vars['theme_hook_suggestions'][] = 'node__' . $vars['node']->type . '__newsletter_alt';
+  }
+
   if ($vars['view_mode'] == 'newsletter_item') {
     if (array_key_exists('links', $vars)) {
       unset($vars['links']);

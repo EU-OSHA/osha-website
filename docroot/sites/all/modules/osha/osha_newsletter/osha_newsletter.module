@@ -1471,6 +1471,12 @@ function osha_newsletter_entity_info_alter(&$entity_info) {
     'label' => t('Newsletter Item'),
     'custom settings' => TRUE,
   );
+
+  $entity_info['node']['view modes']['newsletter_alt'] = array(
+    'label' => t('Newsletter new format'),
+    'custom settings' => TRUE,
+  );
+
 }
 
 function osha_newsletter_preprocess_node(&$vars) {
@@ -1482,6 +1488,15 @@ function osha_newsletter_preprocess_node(&$vars) {
     $vars['theme_hook_suggestions'][] = 'node__highlights_item';
     $vars['theme_hook_suggestions'][] = 'node__' . $vars['node']->type . '__highlights_item';
     $vars['theme_hook_suggestions'][] = 'node__' . $vars['node']->nid . '__highlights_item';
+  }
+
+  if ($vars['view_mode'] == 'newsletter_alt') {
+    if (array_key_exists('links', $vars)) {
+      unset($vars['links']);
+    }
+
+    $vars['theme_hook_suggestions'][] = 'node__newsletter_alt';
+    $vars['theme_hook_suggestions'][] = 'node__' . $vars['node']->type . '__newsletter_alt';
   }
 
   if ($vars['view_mode'] == 'newsletter_item') {

@@ -35,7 +35,7 @@ class OSHNewsletter {
   }
 
   public static function alterContentForm(&$form, &$form_state) {
-    // add submit button to send newsletter and send test newsletter
+    // Add submit button to send newsletter and send test newsletter.
     if (isset($form['content'])) {
       $q = db_select('field_data_field_newsletter_template', 'nt');
       $q->fields('nt', ['entity_id', 'field_newsletter_template_value']);
@@ -74,7 +74,7 @@ class OSHNewsletter {
         '#type' => 'textfield',
         '#title' => t('Test email addresses'),
         '#description' => t('A single email address or a comma-separated list of email addresses cam be used as test addresses.'),
-        '#default_value' => $user->mail,
+        '#default_value' => '',
         '#size' => 60,
         '#maxlength' => 128,
       );
@@ -108,7 +108,7 @@ class OSHNewsletter {
    */
   public static function saveConfiguration(EntityCollection $entityCollection) {
     $voc = taxonomy_vocabulary_machine_name_load('newsletter_sections');
-    $sections = taxonomy_get_tree($voc->vid, 0, null, true);
+    $sections = taxonomy_get_tree($voc->vid, 0, NULL, TRUE);
 
     $configuration = [
       'sections' => [],
@@ -159,10 +159,10 @@ class OSHNewsletter {
    *
    * @return array
    */
-  public static function getConfiguration(EntityCollection $entityCollection, $config_name, $section = null, $default_value = null) {
+  public static function getConfiguration(EntityCollection $entityCollection, $config_name, $section = NULL, $default_value = NULL) {
     $configuration = !empty($entityCollection->field_newsletter_configuration[LANGUAGE_NONE][0]['value'])
-      ? json_decode($entityCollection->field_newsletter_configuration[LANGUAGE_NONE][0]['value'], true)
-      : null;
+      ? json_decode($entityCollection->field_newsletter_configuration[LANGUAGE_NONE][0]['value'], TRUE)
+      : NULL;
 
     switch ($config_name) {
       case 'tweets':
@@ -224,14 +224,14 @@ class OSHNewsletter {
         'class' => [
           drupal_clean_css_identifier($template),
           'newsletter-section',
-          'template-container'
+          'template-container',
         ],
         'width' => '100%',
         'cellpadding' => '0',
         'cellspacing' => '0',
       ],
-      '#printed' => false,
-      '#sticky' => false,
+      '#printed' => FALSE,
+      '#sticky' => FALSE,
       '#children' => [],
     ];
     if (!empty($variables['section']->name)) {
@@ -253,7 +253,7 @@ class OSHNewsletter {
     if (!empty($variables['section']->field_link[LANGUAGE_NONE][0]['url'])) {
       $url = $variables['section']->field_link[LANGUAGE_NONE][0]['url'];
       $arrow = theme('image', array(
-        'path' => drupal_get_path('module','osha_newsletter') . '/images/' . 'pink-arrow.png',
+        'path' => drupal_get_path('module','osha_newsletter') . '/images/pink-arrow.png',
         'width' => '19',
         'height' => '11',
         'attributes' => array('style' => 'border:0px;width:19px;height:11px;')
@@ -264,8 +264,8 @@ class OSHNewsletter {
         '#rows' => [0 => [
           [
             'data' => l(t('View all') . $arrow, $url, [
-              'html' => true,
-              'absolute' => true,
+              'html' => TRUE,
+              'absolute' => TRUE,
               'query' => $url_query,
               'attributes' => ['class' => ['view-all', 'see-more']]
             ]),
@@ -279,8 +279,8 @@ class OSHNewsletter {
           'cellpadding' => '0',
           'cellspacing' => '0',
         ],
-        '#printed' => false,
-        '#sticky' => false,
+        '#printed' => FALSE,
+        '#sticky' => FALSE,
         '#children' => [],
       ];
       $content['#suffix'] = render($view_all);
@@ -300,10 +300,10 @@ class OSHNewsletter {
       case 'newsletter_full_width_list':
       case 'newsletter_half_width_list':
       case 'newsletter_full_width_details':
-        if($template === 'newsletter_half_width_list') {
+        if ($template === 'newsletter_half_width_list') {
           $content['#attributes']['width'] = '100%';
         }
-        if($template !== 'newsletter_full_width_details') {
+        if ($template !== 'newsletter_full_width_details') {
           $content['#rows'][]['data'][] = [
             'data' => '&nbsp;',
             'colspan' => 1,
@@ -315,10 +315,10 @@ class OSHNewsletter {
           $content['#rows'][] = [
             'data' => [$cellContent],
             'class' => ['row', drupal_clean_css_identifier("{$template}-row")],
-            'no_striping' => true,
+            'no_striping' => TRUE,
           ];
         }
-        if($template !== 'newsletter_full_width_details') {
+        if ($template !== 'newsletter_full_width_details') {
           $content['#rows'][]['data'][] = [
             'data' => '&nbsp;',
             'colspan' => 1,
@@ -326,12 +326,13 @@ class OSHNewsletter {
           ];
         }
         break;
+
       case 'newsletter_half_image_left':
         $content['#header'][0]['data'][0]['colspan'] = '2';
         $image_url = self::getConfiguration($entityCollection, 'field_background_image', $variables['section'], '');
         $image_fallback_bg = self::getConfiguration($entityCollection, 'field_background_color', $variables['section'], '');
 
-        // Avoid rendering the section title twice
+        // Avoid rendering the section title twice.
         unset($variables['section']);
         $content['#rows'][]['data'][] = [
           'data' => '&nbsp;',
@@ -341,19 +342,17 @@ class OSHNewsletter {
         $content['#rows'][] = [
           'data' => [
             [
-              //'data' => sprintf("<img src=\"%s\" style=\"width:100%%;max-width:100%%;background-color:%s; \"/>", $image_url, $image_fallback_bg),
               'data' => sprintf("<img src=\"%s\" style=\"display:block;margin:auto;background-color:%s; \"/>", $image_url, $image_fallback_bg),
               'width' => '380',
               'class' => ['template-column', 'newsletter-half-image'],
-              'style' => sprintf("max-width: 380px;background-color: %s;",$image_fallback_bg),
+              'style' => sprintf("max-width: 380px;background-color: %s;", $image_fallback_bg),
             ],
             [
 
               'data' => self::renderTemplate($entityCollection, 'newsletter_full_width_list', $variables),
               'width' => '380',
-              // 'height' => '100%',
               'class' => ['template-column', 'newsletter-half-content'],
-              'style' => sprintf("max-width: 380px;background-color: %s;",$image_fallback_bg),
+              'style' => sprintf("max-width: 380px;background-color: %s;", $image_fallback_bg),
 
             ],
           ],
@@ -364,51 +363,52 @@ class OSHNewsletter {
           'style' => 'padding-top: 0; padding-bottom: 20px;font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;',
         ];
         break;
+
         case 'newsletter_oira_half_image_left':
-        $content['#header'][0]['data'][0]['colspan'] = '2';
-        $image_url = self::getConfiguration($entityCollection, 'field_background_image', $variables['section'], '');
-        $image_fallback_bg = self::getConfiguration($entityCollection, 'field_background_color', $variables['section'], '');
+          $content['#header'][0]['data'][0]['colspan'] = '2';
+          $image_url = self::getConfiguration($entityCollection, 'field_background_image', $variables['section'], '');
+          $image_fallback_bg = self::getConfiguration($entityCollection, 'field_background_color', $variables['section'], '');
 
-        // Avoid rendering the section title twice
-        unset($variables['section']);
-        $content['#rows'][]['data'][] = [
-          'data' => '&nbsp;',
-          'colspan' => 2,
-          'style' => 'padding-top: 0; padding-bottom: 20px;font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;',
-        ];
-        $content['#rows'][] = [
-          'data' => [
-            [
-              //'data' => sprintf("<img src=\"%s\" style=\"width:100%%;max-width:100%%;background-color:%s; \"/>", $image_url, $image_fallback_bg),
-              'data' => sprintf("<img src=\"%s\" style=\"display:block;margin:auto;background-color:%s; \"/>", $image_url, $image_fallback_bg),
-              'width' => '380',
-              'class' => ['template-column', 'newsletter-half-image'],
-              'style' => sprintf("max-width: 380px;background-color: %s;",$image_fallback_bg),
+          // Avoid rendering the section title twice.
+          unset($variables['section']);
+          $content['#rows'][]['data'][] = [
+            'data' => '&nbsp;',
+            'colspan' => 2,
+            'style' => 'padding-top: 0; padding-bottom: 20px;font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;',
+          ];
+          $content['#rows'][] = [
+            'data' => [
+              [
+                //'data' => sprintf("<img src=\"%s\" style=\"width:100%%;max-width:100%%;background-color:%s; \"/>", $image_url, $image_fallback_bg),
+                'data' => sprintf("<img src=\"%s\" style=\"display:block;margin:auto;background-color:%s; \"/>", $image_url, $image_fallback_bg),
+                'width' => '380',
+                'class' => ['template-column', 'newsletter-half-image'],
+                'style' => sprintf("max-width: 380px;background-color: %s;",$image_fallback_bg),
+              ],
+              [
+
+                'data' => self::renderTemplate($entityCollection, 'newsletter_full_width_list', $variables),
+                'width' => '380',
+                'class' => ['template-column', 'newsletter-half-content'],
+                'style' => sprintf("max-width: 380px;background-color: %s;", $image_fallback_bg),
+
+              ],
             ],
-            [
+          ];
+          $content['#rows'][]['data'][] = [
+            'data' => '&nbsp;',
+            'colspan' => 2,
+            'style' => 'padding-top: 0; padding-bottom: 20px;font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;',
+          ];
+          break;
 
-              'data' => self::renderTemplate($entityCollection, 'newsletter_full_width_list', $variables),
-              'width' => '380',
-              // 'height' => '100%',
-              'class' => ['template-column', 'newsletter-half-content'],
-              'style' => sprintf("max-width: 380px;background-color: %s;",$image_fallback_bg),
-
-            ],
-          ],
-        ];
-        $content['#rows'][]['data'][] = [
-          'data' => '&nbsp;',
-          'colspan' => 2,
-          'style' => 'padding-top: 0; padding-bottom: 20px;font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;',
-        ];
-        break;
       case 'newsletter_full_width_2_col_blocks':
         $content['#header'][0]['data'][0]['colspan'] = '3';
 
         $currentRow = 0;
         $currentCol = 0;
 
-        $content['#rows'][$currentRow]['no_striping'] = true;
+        $content['#rows'][$currentRow]['no_striping'] = TRUE;
         $content['#rows'][$currentRow]['data'][] = [
           'data' => '&nbsp;',
           'colspan' => '3',
@@ -421,7 +421,6 @@ class OSHNewsletter {
           $cellContent = self::getCellContent($template, $node);
           $cellWidth = 378;
           $cellContent['width'] = $cellWidth; // half - 2px of margin
-          // $cellContent['height'] = '100%';
           $cellContent['align'] = 'left';
           $cellContent['valign'] = 'top';
           $cellStyle = sprintf('max-width:%spx;background-color: #003399;', $cellWidth);
@@ -437,7 +436,7 @@ class OSHNewsletter {
             $content['#rows'][$currentRow] = [
               'data' => [$cellContent],
               'class' => ['row', drupal_clean_css_identifier("{$template}-row")],
-              'no_striping' => true,
+              'no_striping' => TRUE,
             ];
             $content['#rows'][$currentRow]['data'][] = ['data' => '&nbsp;', 'style' => 'padding-bottom: 4px; min-width:4px; padding-top: 0; width: 4px; margin:0;font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;', 'class' => 'template-column' ];
           }
@@ -447,13 +446,14 @@ class OSHNewsletter {
             $currentCol = 0;
           }
         }
-        $content['#rows'][++$currentRow]['no_striping'] = true;
+        $content['#rows'][++$currentRow]['no_striping'] = TRUE;
         $content['#rows'][$currentRow]['data'][] = [
           'data' => '&nbsp;',
           'colspan' => '3',
           'style' => 'padding-top: 0; padding-bottom: 20px;font-size: 0px; line-height: 0px; mso-line-height-rule: exactly;',
         ];
         break;
+
       case 'newsletter_half_width_twitter':
         $content['#header'][0]['data'][0]['colspan'] = '2';
 
@@ -463,7 +463,7 @@ class OSHNewsletter {
         $content['#header'][0]['data'][0]['data'] .= '&nbsp;<img height="20" style="vertical-align:middle;height:20px!important;" src="' . $image_path . '"/>';
         $currentRow = $currentCol = 0;
 
-        $content['#rows'][$currentRow]['no_striping'] = true;
+        $content['#rows'][$currentRow]['no_striping'] = TRUE;
         // $content['#rows'][$currentRow]['height'] = 0;
         $content['#rows'][$currentRow]['data'][] = [
           'data' => '&nbsp;',
@@ -501,7 +501,7 @@ class OSHNewsletter {
             $content['#rows'][$currentRow] = [
               'data' => [$cellContent],
               'class' => ['row', drupal_clean_css_identifier("{$template}-row")],
-              'no_striping' => true,
+              'no_striping' => TRUE,
             ];
           }
           else {
@@ -509,7 +509,7 @@ class OSHNewsletter {
             $currentCol = 0;
           }
         }
-        $content['#rows'][++$currentRow]['no_striping'] = true;
+        $content['#rows'][++$currentRow]['no_striping'] = TRUE;
         $content['#rows'][$currentRow]['data'][] = [
           'data' => '&nbsp;',
           'colspan' => 2,
@@ -523,7 +523,7 @@ class OSHNewsletter {
     if (!empty($content['#rows'])) {
       foreach ($content['#rows'] as $key => $row) {
         if (!empty($row)) {
-          $content['#rows'][$key]['no_striping'] = true;
+          $content['#rows'][$key]['no_striping'] = TRUE;
         }
       }
     }
@@ -553,6 +553,7 @@ class OSHNewsletter {
 
     $items = $entityCollectionItems->children;
     $last_section = null;
+    $map = variable_get('newsletter_section_type_style_map', []);
 
     $templatesList = self::getTemplatesList();
     foreach ($items as $item) {
@@ -561,7 +562,7 @@ class OSHNewsletter {
           $current_section = $item->entity_id;
           $section = $item->content;
           $section->campaign_id = $campaign_id;
-          $section->old_newsletter = false;
+          $section->old_newsletter = FALSE;
           $content[$current_section] = [
             '#style' => !empty($item->style) ? $item->style : key($templatesList),
             'section' => $section,
@@ -569,7 +570,7 @@ class OSHNewsletter {
           ];
 
           if ($isOldNewsletter) {
-            $section->old_newsletter = true;
+            $section->old_newsletter = TRUE;
             $term = taxonomy_term_view($section, 'token');
             switch($current_section) {
               case '11': // News
@@ -586,6 +587,7 @@ class OSHNewsletter {
             }
           }
           break;
+
         case 'node':
           if (empty($current_section)) {
             // Found a node before all sections
@@ -595,32 +597,46 @@ class OSHNewsletter {
           $node = $item->content;
           $node->campaign_id = $campaign_id;
           $node->parent_section = $current_section;
-          $node->old_newsletter = false;
+          $node->old_newsletter = FALSE;
           $node->hide_summary = $item->hide_summary;
+          $style = self::getChildStyle($content[$current_section]['#style']);
+
+          if (!empty($map[$current_section . '-' . $node->type])) {
+            $style = $map[$current_section . '-' . $node->type];
+          }
+
           $content[$current_section]['nodes'][] = [
-            '#style' => self::getChildStyle($content[$current_section]['#style']),
+            '#style' => $style,
             'node' => $node,
           ];
 
           if ($isOldNewsletter) {
-            $node->old_newsletter = true;
+            $node->old_newsletter = TRUE;
             $node = node_view($node, $item->style);
             $node['#campaign_id'] = $campaign_id;
-            switch($current_section) {
-              case '11': // News
+            switch ($current_section) {
+
+              // News.
+              case '11':
                 $oldNewsletter['news'][] = $node;
                 break;
-              case '14': // Blog
+
+              // Blog.
+              case '14':
                 $oldNewsletter['blogs'][] = $node;
                 break;
-              case '15': // Events
+
+              // Events.
+              case '15':
                 $oldNewsletter['events'][] = $node;
                 break;
+
               default:
                 $oldNewsletter['elements'][] = $node;
             }
-          }
-          break;
+        }
+        break;
+
       }
     }
 
@@ -699,17 +715,17 @@ class OSHNewsletter {
       '#rows' => [
         'header' => [
           'data' => [$header],
-          'no_striping' => true,
+          'no_striping' => TRUE,
           'class' => 'header-container',
         ],
         'content' => [
           'data' => [$renderedContent],
-          'no_striping' => true,
+          'no_striping' => TRUE,
           'class' => 'content-container',
         ],
         'footer' => [
           'data' => [$footer],
-          'no_striping' => true,
+          'no_striping' => TRUE,
           'class' => 'footer-container',
         ],
       ],
@@ -734,8 +750,8 @@ class OSHNewsletter {
 
   public static function getTwitterNodes(EntityCollection $entityCollection) {
     $configuration = !empty($entityCollection->field_newsletter_configuration[LANGUAGE_NONE][0]['value'])
-      ? json_decode($entityCollection->field_newsletter_configuration[LANGUAGE_NONE][0]['value'], true)
-      : null;
+      ? json_decode($entityCollection->field_newsletter_configuration[LANGUAGE_NONE][0]['value'], TRUE)
+      : NULL;
     $tweetsLimit = !empty($entityCollection->field_tweets_count[LANGUAGE_NONE][0]['value'])
       ? $entityCollection->field_tweets_count[LANGUAGE_NONE][0]['value']
       : 4;
@@ -789,7 +805,7 @@ class OSHNewsletter {
   public static function appendFontInHead($html) {
     $domDocument = new \DOMDocument('1.0', 'UTF-8');
     $domDocument->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
-    $domDocument->formatOutput = true;
+    $domDocument->formatOutput = TRUE;
 
     $font = $domDocument->createElement('link');
     $font->setAttribute('rel', 'stylesheet');

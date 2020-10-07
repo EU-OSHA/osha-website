@@ -1,0 +1,1 @@
+../osha_frontend/templates/node--newsletter_alt.tpl.php

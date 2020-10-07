@@ -6,7 +6,7 @@ function dvs_preprocess_node(&$vars) {
 		$survey = $vars['content']['field_dvs_code'][0]['#markup'];
 
 		//We must construct the path to redirect to the new DVS
-		$domain = "https://test-visualisation.osha.europa.eu/esener#!";
+    $domain = variable_get('esener_visualisation_domain', "https://visualisation.osha.europa.eu/esener#!");
 		
 		if(isset($_GET["locale"])){
 			$localeget = $_GET["locale"];

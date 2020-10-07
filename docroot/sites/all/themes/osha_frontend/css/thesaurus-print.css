@@ -37,4 +37,19 @@
     #content .view #tabs a + a{
         margin-left:-5px !important; /* "!important" is required for the spacing in media print */
     }
+    .view-thesaurus-front-indexed .view-filters{
+        display:block!important;
+    }
+
+    .view-thesaurus-front-indexed .view-filters .views-exposed-widget {
+        display:inline-block;
+        float:none;
+        vertical-align:top!important;
+        padding-top:0px!important;
+        margin-top:0px!important;
+    }
+    
+    .view-thesaurus-front-indexed .view-filters .views-exposed-widget.views-widget-sort-by{
+        margin-left:1.5rem!important;
+    }
 }

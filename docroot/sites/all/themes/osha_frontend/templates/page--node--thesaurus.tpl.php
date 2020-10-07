@@ -13,8 +13,16 @@
     </header>
   <?php if ($breadcrumb) print '<div class="breadcrumb-fluid">' . $breadcrumb . '</div>'; ?>
   <div id="main">
+  	<aside class="sidebars_first">
+  	  <section class="region region-sidebar-first column sidebar">
+  		<?php
+	  		$block = block_load('menu_block','2');
+			print drupal_render(_block_get_renderable_array(_block_render_blocks(array($block))));
+	  	?>
+	  </section>
+  	</aside>
 	  <?php if ((!$sidebar_second) && (!$sidebar_first)): ?>
-			<div id="content" class="one_column">
+			<div id="content" class="two_column">
 		<?php endif; ?>
 		<?php if (($sidebar_second) && ($sidebar_first)): ?>
 			<div id="content" class="three_column">

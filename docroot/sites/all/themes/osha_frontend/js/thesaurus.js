@@ -4,6 +4,7 @@
     $(document).ready(function() {
         $('.view-display-id-thesaurus_hierarchical > div.view-content > div > ul').attr('id', 'tree');
         $('#tree li a').before("<span class='expand_menu'>&nbsp;</span>");
+        $('#tree li a').attr('title', Drupal.t("See more"));
         $('#tree ul').hide();
         $('.expand_menu').click(function() {
             $(this).toggleClass('expanded');
@@ -12,6 +13,7 @@
 
         //Add class to li when have childs
         $('#tree li:has(.item-list)').addClass('has-child');
+        $('#tree li.has-child > span.expand_menu').attr("title", Drupal.t("Expand / Collapse tree"));
 
         // Expand tree for current element if it comes on the URL
         if (window.location.pathname.indexOf("/tools-and-resources/eu-osha-thesaurus/hierarchical") > -1)
@@ -119,6 +121,22 @@
     $("form#views-exposed-form-thesaurus-front-indexed-thesaurus-search select#edit-sort-by").change(function()
     {
       $(this).parents('form').submit();
+    });
+  })
+})(jQuery);
+
+// Sticky behaviour of the alphabetical menu
+(function ( $ ){
+  $(document).ready(function() {
+    var glosaryLettersOffset= $("#glossary-letters").offset();
+    var glosaryLettersWidth= $("#glossary-letters").outerWidth(true);
+    var glosaryLettersTop=glosaryLettersOffset.top + 206; //206 is the padding giving in the css to the body as 12.9rem
+    $(window).on("scroll", function () {
+      if ($(document).scrollTop() >= glosaryLettersTop ) {
+        $("#glossary-letters").css({"position":"fixed", "top":"0px", "left":glosaryLettersOffset.left, "z-index":"8888", "background-color":"#ffffff", "width": glosaryLettersWidth + "px", "margin":"0px"});
+      } else if ($(document).scrollTop() < glosaryLettersTop) {
+        $("#glossary-letters").css({"position":"", "top":"", "left":"", "z-index":"", "background-color":"", "width": "", "margin":""});
+      }
     });
   })
 })(jQuery);

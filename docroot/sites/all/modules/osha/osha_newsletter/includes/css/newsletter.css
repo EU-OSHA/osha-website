@@ -320,3 +320,7 @@ p.tweet-link a {
 .newsletter-container tr.odd {
   background-color: transparent;
 }
+.newsletter-half-image{
+  height: 100%;
+  vertical-align: middle;
+}

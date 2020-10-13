@@ -1544,3 +1544,32 @@ function substrwords($text, $maxchar, $end='...') {
   }
   return $output;
 }
+
+function osha_newsletter_update_old_newsletters_image_and_background_color(EntityCollection $entity_collection) {
+  if ($newsletter_configuration = $entity_collection->field_newsletter_configuration[LANGUAGE_NONE][0]['value']) {
+    if (is_string($newsletter_configuration)) {
+      $newsletter_configuration = json_decode($newsletter_configuration, TRUE);
+    }
+    $changed = FALSE;
+    if (!empty($newsletter_configuration['sections'])) {
+      foreach($newsletter_configuration['sections'] as $tid => &$section) {
+        if (count($section) < 2) {
+          continue;
+        }
+        $term = taxonomy_term_load($tid);
+        if ($section['field_background_image'][LANGUAGE_NONE][0]['uri'] != $term->field_background_image[LANGUAGE_NONE][0]['uri']) {
+          $section['field_background_image'][LANGUAGE_NONE][0] = $term->field_background_image[LANGUAGE_NONE][0];
+          $changed = TRUE;
+        }
+        if ($section['field_background_color'][LANGUAGE_NONE][0]['value'] != $term->field_background_color[LANGUAGE_NONE][0]['value']) {
+          $section['field_background_color'][LANGUAGE_NONE][0] = $term->field_background_color[LANGUAGE_NONE][0];
+          $changed = TRUE;
+        }
+      }
+    }
+    if ($changed) {
+      $entity_collection->field_newsletter_configuration[LANGUAGE_NONE][0]['value'] = json_encode($newsletter_configuration);
+      entity_save('entity_collection', $entity_collection);
+    }
+  }
+}

@@ -61,3 +61,11 @@ function osha_news_update_7008() {
 function osha_news_update_7009() {
   features_revert(array('osha_news' => array('views_view')));
 }
+
+/**
+ * MDR-3925 Add an option (like a tick-box) to avoid a news item to be archived after 6 months.
+ */
+function osha_news_update_7010() {
+  features_revert(array('osha_news' => array('field_base', 'field_instance')));
+  features_revert(array('osha_highlight' => array('field_base', 'field_instance')));
+}

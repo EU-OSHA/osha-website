@@ -83,6 +83,7 @@ function osha_news_strongarm() {
     'dangerous_substances' => 0,
     'highlights_item' => 0,
     'newsletter_item' => 0,
+    'newsletter_alt' => 0,
     'osha_wiki' => 0,
     'print' => 0,
     'question' => 0,

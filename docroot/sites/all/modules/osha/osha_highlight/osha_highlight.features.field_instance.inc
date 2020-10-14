@@ -450,6 +450,16 @@ function osha_highlight_field_default_field_instances() {
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
     ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 37,
+    ),
+    'workbench_access_field' => 0,
   );
 
   // Exported field_instance: 'node-highlight-field_character_count'.

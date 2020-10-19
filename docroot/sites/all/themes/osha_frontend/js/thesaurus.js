@@ -130,6 +130,8 @@
   $(document).ready(function() {
     var glosaryLettersOffset= $("#glossary-letters").offset();
     var glosaryLettersWidth= $("#glossary-letters").outerWidth(true);
+    if (glosaryLettersOffset != null)
+    {
     var glosaryLettersTop=glosaryLettersOffset.top + 206; //206 is the padding giving in the css to the body as 12.9rem
     $(window).on("scroll", function () {
       if ($(document).scrollTop() >= glosaryLettersTop ) {
@@ -138,5 +140,6 @@
         $("#glossary-letters").css({"position":"", "top":"", "left":"", "z-index":"", "background-color":"", "width": "", "margin":""});
       }
     });
+    }    
   })
 })(jQuery);

@@ -28,18 +28,29 @@ $langList = osha_language_list(TRUE);
 			<div class="download-content-theasaurus-action">
 				<select id="language-export-select" class="form-select">
 					<?php
+              			$selectedLang = '';
               			foreach($langList as $code => $currentLang)
-	              		{
-	                		print '<option value="'.$code.'" ';
-	                		if ($code == $lang)
-	                		{
-	                  			print ' selected="selected" class="navigation-language"';
-	                		}
-	                		print '>'.$currentLang->native . '</option>';
-	              		}
+              			{
+                			if (file_exists('public://thesaurus-export/EU-OSHA_thesaurus_' . $code . '.xls'))
+                			{
+                  				if ($selectedLang == '')
+                  				{
+                    				$selectedLang = $code;
+                  				}
+                  				print '<option value="'.$code.'" ';
+                  				if ($code == $lang)
+                  				{
+                    				$selectedLang = $code;
+                    				print ' selected="selected" class="navigation-language"';
+                  				}
+                  				print '>'.$currentLang->native . '</option>';
+                			}
+              			}
+              			$path = "public://";
+              			$path = file_create_url($path);
 	            	?>
 				</select>
-				<a id="language-export-button" href="/<?php print $lang; ?>/tools-and-resources/eu-osha-thesaurus/export"><img class="download" src="/sites/all/themes/osha_frontend/images/download-thesaurus.png" alt="<?php print t('Download'); ?>" title="<?php print t('Download'); ?>"></a>
+				<a id="language-export-button" href="<?php print $path; ?>thesaurus-export/EU-OSHA_thesaurus_<?php print $selectedLang; ?>.xls"><img class="download" src="/sites/all/themes/osha_frontend/images/download-thesaurus.png" alt="<?php print t('Download'); ?>" title="<?php print t('Download'); ?>"></a>
 			</div>
 		</div>
 	</div>

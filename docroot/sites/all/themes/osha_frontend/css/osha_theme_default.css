@@ -3564,9 +3564,9 @@ a.button-submit {
   float: left;
   padding-right: 1em;
 }
-.node-highlight.view-mode-full  .field-name-field-image img{
-	max-width:300px;
-	max-height:200px;
+.node-highlight.view-mode-full .field-name-field-image img{
+	max-width:220px;
+	max-height:220px;
 	float:none;
 	margin-right:0em;
 	margin-top:0.7em;

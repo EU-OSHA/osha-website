@@ -340,3 +340,13 @@ function osha_newsletter_update_7013() {
   variable_set('newsletter_section_type_style_map', [$term->tid . '-events' =>'newsletter_alt']);
 
 }
+
+/**
+ * MDR-3935 The old issue with OSHmails have some broken styles.
+ */
+function osha_newsletter_update_7014() {
+  $entity_collections = entity_load_multiple_by_name('entity_collection');
+  foreach($entity_collections as $entity_collection) {
+    osha_newsletter_update_old_newsletters_image_and_background_color($entity_collection);
+  }
+}

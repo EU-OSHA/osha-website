@@ -101,6 +101,11 @@ function osha_unpublish_cron() {
       if (!empty($unpublishing_nids)) {
         $nodes = node_load_multiple($unpublishing_nids);
         foreach ($nodes as $node) {
+          if (in_array($node->type, ['news', 'highlight'])) {
+            if (!empty($node->field_avoid_archived) && $node->field_avoid_archived[LANGUAGE_NONE][0]['value']) {
+              continue;
+            }
+          }
           $node->status = 0;
           node_save($node);
         }

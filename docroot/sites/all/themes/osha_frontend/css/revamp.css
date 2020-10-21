@@ -446,7 +446,7 @@ a.box-link{
 	float: left;
     padding-right: 1em;
     width: 220px;
-    height: 173px;
+    height: 220px;
 }
 
 .view-highlight h3 {
@@ -483,7 +483,7 @@ a.box-link{
     background: url(../images/separator_home.jpg) repeat-x scroll 0% 100% rgba(0,0,0,0);
     float: left;
     padding-top: 1em;
-    padding-bottom: 2em;
+    padding-bottom: 1.5em;
     width: 100%;
 }
 
@@ -492,7 +492,7 @@ a.box-link{
 }
 
 .view-highlight .views-field-view-node{
-    margin-top: 1.6em;
+    margin-top: 3.6em;
     float: right;
 }
 
@@ -2188,7 +2188,7 @@ article.node-seminar{
 
 .view-press-releases .img-pressreleases img{
     width: 220px;
-    height: 173px;
+    height: 220px;
 }
 
 .view-press-releases h3 {

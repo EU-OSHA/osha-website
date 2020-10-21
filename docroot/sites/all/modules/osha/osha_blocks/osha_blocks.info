@@ -15,6 +15,7 @@ dependencies[] = osha_news
 dependencies[] = osha_press_release
 dependencies[] = osha_publication
 dependencies[] = osha_seminar
+dependencies[] = osha_thesaurus
 dependencies[] = strongarm
 features[context][] = context_latest_oshnews
 features[context][] = context_newsletter

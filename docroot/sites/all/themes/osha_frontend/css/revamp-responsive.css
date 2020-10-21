@@ -316,7 +316,7 @@
     }
 
     .view-highlight .img-highlight{
-        height: 200px;
+        height: 220px;
     }
 
      .pager-total{
@@ -1519,10 +1519,11 @@ and (max-device-width : 1024px)  {
 @media only screen 
 and (min-device-width : 991px) 
 and (max-device-width : 1155px)  { 
-.home-boxes{
-	width: 32.2%;
-	height: auto;
-}
-.home-boxes .content-background{
-	height: 100%;
+    .home-boxes{
+    	width: 32.2%;
+    	height: auto;
+    }
+    .home-boxes .content-background{
+    	height: 100%;
+    }
 }

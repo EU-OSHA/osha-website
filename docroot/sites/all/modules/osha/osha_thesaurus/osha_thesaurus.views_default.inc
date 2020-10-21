@@ -382,6 +382,13 @@ function osha_thesaurus_views_default_views() {
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: PHP */
+  $handler->display->display_options['header']['php']['id'] = 'php';
+  $handler->display->display_options['header']['php']['table'] = 'views';
+  $handler->display->display_options['header']['php']['field'] = 'php';
+  $handler->display->display_options['header']['php']['php_output'] = '<p><?php 
+print l(t(\'Create Excel Files\'), \'admin/content/thesaurus-excel-generation\')
+?></p>';
   /* Header: Global: Result summary */
   $handler->display->display_options['header']['result']['id'] = 'result';
   $handler->display->display_options['header']['result']['table'] = 'views';
@@ -1379,6 +1386,12 @@ print "<a href=\'/node/876\'>". t("See more") ."</a>";
 [view_node]';
   $handler->display->display_options['fields']['field_definition']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_definition']['hide_empty'] = TRUE;
+  /* Field: Content: ID */
+  $handler->display->display_options['fields']['field_term_id']['id'] = 'field_term_id';
+  $handler->display->display_options['fields']['field_term_id']['table'] = 'field_data_field_term_id';
+  $handler->display->display_options['fields']['field_term_id']['field'] = 'field_term_id';
+  $handler->display->display_options['fields']['field_term_id']['label'] = '';
+  $handler->display->display_options['fields']['field_term_id']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Title (title_field) */
   $handler->display->display_options['sorts']['title_field_value']['id'] = 'title_field_value';
@@ -1671,6 +1684,12 @@ print "<a href=\'/node/876\'>". t("See more") ."</a>";
   $handler->display->display_options['fields']['view_node']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['view_node']['text'] = 'See more';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Indexed Multilingual Content: Thesaurus title order */
+  $handler->display->display_options['sorts']['search_api_aggregation_2']['id'] = 'search_api_aggregation_2';
+  $handler->display->display_options['sorts']['search_api_aggregation_2']['table'] = 'search_api_index_thesaurus';
+  $handler->display->display_options['sorts']['search_api_aggregation_2']['field'] = 'search_api_aggregation_2';
+  $handler->display->display_options['sorts']['search_api_aggregation_2']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['search_api_aggregation_2']['expose']['label'] = 'Alphabetically';
   /* Sort criterion: Search: Relevance */
   $handler->display->display_options['sorts']['search_api_relevance']['id'] = 'search_api_relevance';
   $handler->display->display_options['sorts']['search_api_relevance']['table'] = 'search_api_index_thesaurus';
@@ -1678,12 +1697,6 @@ print "<a href=\'/node/876\'>". t("See more") ."</a>";
   $handler->display->display_options['sorts']['search_api_relevance']['order'] = 'DESC';
   $handler->display->display_options['sorts']['search_api_relevance']['exposed'] = TRUE;
   $handler->display->display_options['sorts']['search_api_relevance']['expose']['label'] = 'Relevance';
-  /* Sort criterion: Indexed Multilingual Content: Thesaurus title order */
-  $handler->display->display_options['sorts']['search_api_aggregation_2']['id'] = 'search_api_aggregation_2';
-  $handler->display->display_options['sorts']['search_api_aggregation_2']['table'] = 'search_api_index_thesaurus';
-  $handler->display->display_options['sorts']['search_api_aggregation_2']['field'] = 'search_api_aggregation_2';
-  $handler->display->display_options['sorts']['search_api_aggregation_2']['exposed'] = TRUE;
-  $handler->display->display_options['sorts']['search_api_aggregation_2']['expose']['label'] = 'Alphabetically';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Indexed Multilingual Content: Item language */

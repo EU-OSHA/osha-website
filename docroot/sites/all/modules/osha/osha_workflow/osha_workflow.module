@@ -24,6 +24,7 @@ define('OSHA_WORKFLOW_ROLE_LAYOUT_VALIDATOR', 'Layout Validator');
 define('OSHA_WORKFLOW_ROLE_CONTENT_VALIDATOR', 'Content Validator');
 /* Drupal administrator role */
 define('OSHA_WORKFLOW_ROLE_ADMINISTRATOR', 'administrator');
+define('OSHA_WORKFLOW_ROLE_READ_ONLY', 'Read only');
 
 /* Workflow states */
 define('OSHA_WORKFLOW_STATE_DRAFT', 'draft');

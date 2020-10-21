@@ -660,3 +660,19 @@ function osha_workflow_update_7013() {
 function osha_workflow_update_7014() {
   features_revert(array('osha_workflow' => array('workbench_moderation_transitions')));
 }
+
+/**
+ * MDR-3922 New role for the main site: READ.
+ */
+function osha_workflow_update_7015() {
+  if ($role = user_role_load_by_name(OSHA_WORKFLOW_ROLE_READ_ONLY)) {
+    $permissions = array(
+      'view revisions',
+      'access administration pages',
+      'view the administration theme',
+      'access toolbar',
+      'view all unpublished content',
+    );
+    user_role_grant_permissions($role->rid, $permissions);
+  }
+}

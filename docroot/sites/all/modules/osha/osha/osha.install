@@ -811,3 +811,13 @@ function osha_update_7057() {
 function osha_update_7058() {
   module_enable(array('osha_register_records'));
 }
+
+/**
+ * MDR-3903 Sitemap translation for DE.
+ */
+function osha_update_7059() {
+  $result = db_query("SELECT * FROM {locales_target} WHERE lid = :lid AND language = :language", array(':lid' => 20832, ':language' => 'de'));
+  $record = (array)$result->fetch();
+  $record['translation'] = 'Site Map';
+  drupal_write_record('locales_target', $record, ['lid', 'language']);
+}

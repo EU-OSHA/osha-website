@@ -100,7 +100,9 @@
       $("select#language-export-select").change(function()
       {
         var language= $(this).val();
-        var href = "/" + language + "/tools-and-resources/eu-osha-thesaurus/export";
+        var href = $("a#language-export-button").attr("href");
+        href = href.substring(0,href.indexOf("EU-OSHA_thesaurus_"));
+        var href = href + "EU-OSHA_thesaurus_" + language + ".xls";
         $("a#language-export-button").attr("href",href);
       });
     });

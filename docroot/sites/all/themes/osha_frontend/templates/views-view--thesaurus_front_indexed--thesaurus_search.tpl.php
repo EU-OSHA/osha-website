@@ -34,7 +34,7 @@ $langList = osha_language_list(TRUE);
   <div class="<?php print $classes; ?>">
     <?php print render($title_prefix); ?>
     <?php if ($title): ?>
-      <?php print $title; ?>
+      <?php print t($title); ?>
     <?php endif; ?>
     <?php print render($title_suffix); ?>
 
@@ -54,18 +54,29 @@ $langList = osha_language_list(TRUE);
         <div class="download-content-theasaurus-action">
           <select id="language-export-select" class="form-select">
             <?php
+              $selectedLang = '';
               foreach($langList as $code => $currentLang)
               {
-                print '<option value="'.$code.'" ';
-                if ($code == $lang)
+                if (file_exists('public://thesaurus-export/EU-OSHA_thesaurus_' . $code . '.xls'))
                 {
-                  print ' selected="selected" class="navigation-language"';
+                  if ($selectedLang == '')
+                  {
+                    $selectedLang = $code;
+                  }
+                  print '<option value="'.$code.'" ';
+                  if ($code == $lang)
+                  {
+                    $selectedLang = $code;
+                    print ' selected="selected" class="navigation-language"';
+                  }
+                  print '>'.$currentLang->native . '</option>';
                 }
-                print '>'.$currentLang->native . '</option>';
               }
+              $path = "public://";
+              $path = file_create_url($path);
             ?>
           </select>
-          <a id="language-export-button" href="/<?php print $lang; ?>/tools-and-resources/eu-osha-thesaurus/export"><img class="download" src="/sites/all/themes/osha_frontend/images/download-thesaurus.png" alt="<?php print t('Download'); ?>" title="<?php print t('Download'); ?>"></a>
+          <a id="language-export-button" href="<?php print $path; ?>thesaurus-export/EU-OSHA_thesaurus_<?php print $selectedLang; ?>.xls"><img class="download" src="/sites/all/themes/osha_frontend/images/download-thesaurus.png" alt="<?php print t('Download'); ?>" title="<?php print t('Download'); ?>"></a>
     	  </div>
       </div>
     </div>
@@ -116,7 +127,7 @@ $langList = osha_language_list(TRUE);
     	<div class="download-content-theasaurus download-content-theasaurus-small">
         <div class="download-content-theasaurus-label">
           <img src="/sites/all/themes/osha_frontend/images/info-thesaurus.png" alt="Info" 
-          title="<?php print t('Download your complete EU-OSHA thesaurus terms in Excel format. Choose the language from the box'); ?>" >
+          title="<?php print t('Download the EU-OSHA thesaurus terms from your search in Excel format'); ?>" >
           <label><?php print t('Download results');?></label>
           <?php
             $urlParams = drupal_get_query_parameters();

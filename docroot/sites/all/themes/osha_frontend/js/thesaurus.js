@@ -100,7 +100,9 @@
       $("select#language-export-select").change(function()
       {
         var language= $(this).val();
-        var href = "/" + language + "/tools-and-resources/eu-osha-thesaurus/export";
+        var href = $("a#language-export-button").attr("href");
+        href = href.substring(0,href.indexOf("EU-OSHA_thesaurus_"));
+        var href = href + "EU-OSHA_thesaurus_" + language + ".xls";
         $("a#language-export-button").attr("href",href);
       });
     });
@@ -132,14 +134,14 @@
     var glosaryLettersWidth= $("#glossary-letters").outerWidth(true);
     if (glosaryLettersOffset != null)
     {
-    var glosaryLettersTop=glosaryLettersOffset.top + 206; //206 is the padding giving in the css to the body as 12.9rem
-    $(window).on("scroll", function () {
-      if ($(document).scrollTop() >= glosaryLettersTop ) {
-        $("#glossary-letters").css({"position":"fixed", "top":"0px", "left":glosaryLettersOffset.left, "z-index":"8888", "background-color":"#ffffff", "width": glosaryLettersWidth + "px", "margin":"0px"});
-      } else if ($(document).scrollTop() < glosaryLettersTop) {
-        $("#glossary-letters").css({"position":"", "top":"", "left":"", "z-index":"", "background-color":"", "width": "", "margin":""});
-      }
-    });
+      var glosaryLettersTop=glosaryLettersOffset.top + 206; //206 is the padding giving in the css to the body as 12.9rem
+      $(window).on("scroll", function () {
+        if ($(document).scrollTop() >= glosaryLettersTop ) {
+         $("#glossary-letters").css({"position":"fixed", "top":"0px", "left":glosaryLettersOffset.left, "z-index":"8888", "background-color":"#ffffff", "width": glosaryLettersWidth + "px", "margin":"0px"});
+        } else if ($(document).scrollTop() < glosaryLettersTop) {
+          $("#glossary-letters").css({"position":"", "top":"", "left":"", "z-index":"", "background-color":"", "width": "", "margin":""});
+        }
+      });
     }    
   })
 })(jQuery);

@@ -180,12 +180,6 @@ td.social {
   border-bottom: none;
 }
 
-.newsletter-half-content .newsletter-full-width-list {
-  max-width: 380px;
-}
-.newsletter-half-content .newsletter-full-width-list .newsletter-item {
-  max-width: 380px;
-}
 .newsletter-half-image-left-container {
   background-size: cover;
   background-repeat: no-repeat;

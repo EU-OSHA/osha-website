@@ -159,6 +159,15 @@ function osha_news_strongarm() {
       'osha_search_teaser' => array(
         'custom_settings' => FALSE,
       ),
+      'dangerous_substances' => array(
+        'custom_settings' => TRUE,
+      ),
+      'newsletter_alt' => array(
+        'custom_settings' => TRUE,
+      ),
+      'question' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(

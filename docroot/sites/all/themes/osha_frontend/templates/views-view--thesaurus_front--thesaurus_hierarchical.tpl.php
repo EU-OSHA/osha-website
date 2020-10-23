@@ -48,8 +48,10 @@ $langList = osha_language_list(TRUE);
       <div class="download-content-theasaurus">
         <div class="download-content-theasaurus-label">
           <label><?php print t('Download'); ?></label>
-          <img src="/sites/all/themes/osha_frontend/images/info-thesaurus.png" alt="Info" 
-          title="<?php print t('Download your complete EU-OSHA thesaurus terms in Excel format. Choose the language from the box'); ?>" >
+          <div class="content-tooltip">
+            <img src="/sites/all/themes/osha_frontend/images/info-thesaurus.png" alt="Info">
+            <span class="thesaurus-tooltip"><?php print t("Download your complete EU-OSHA thesaurus terms in Excel format. Choose the language from the box"); ?><span class="close-thes-tooltip">x</span></span>
+          </div>
         </div>
         <div class="download-content-theasaurus-action">
           <select id="language-export-select" class="form-select">

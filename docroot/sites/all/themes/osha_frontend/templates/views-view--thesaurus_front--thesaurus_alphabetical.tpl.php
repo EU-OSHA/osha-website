@@ -48,8 +48,10 @@ $langList = osha_language_list(TRUE);
       <div class="download-content-theasaurus">
         <div class="download-content-theasaurus-label">
           <label><?php print t('Download'); ?></label>
-          <img src="/sites/all/themes/osha_frontend/images/info-thesaurus.png" alt="Info" 
-          title="<?php print t('Download your complete EU-OSHA thesaurus terms in Excel format. Choose the language from the box'); ?>" >
+          <div class="content-tooltip">
+			<img src="/sites/all/themes/osha_frontend/images/info-thesaurus.png" alt="Info">
+			<span class="thesaurus-tooltip"><?php print t("Download your complete EU-OSHA thesaurus terms in Excel format. Choose the language from the box"); ?><span class="close-thes-tooltip">x</span></span>
+		  </div>
         </div>
         <div class="download-content-theasaurus-action">
           <select id="language-export-select" class="form-select">
@@ -178,7 +180,12 @@ $langList = osha_language_list(TRUE);
           {
             $selectedLetter = mb_strtoupper($letter);
           }
-          print '<span><a href="/'.$lang.'/tools-and-resources/eu-osha-thesaurus/alphabetical/' . mb_strtolower($letter) . '">' . $letter . '</a></span>';
+          print '<span><a href="/'.$lang.'/tools-and-resources/eu-osha-thesaurus/alphabetical/' . mb_strtolower($letter) . '"';
+          if ($letter==$selectedLetter)
+          {
+          	print 'class="active"';
+          }
+          print '>' . $letter . '</a></span>';
         }
         else {
           print '<span>' . $letter . '</span>';
@@ -200,7 +207,12 @@ $langList = osha_language_list(TRUE);
         {
           $selectedLetter = mb_strtoupper($letter);
         }
-        print '<span><a href="/'.$lang.'/tools-and-resources/eu-osha-thesaurus/alphabetical/' . mb_strtolower($letter) . '">' . $letter . '</a></span>';
+        print '<span><a href="/'.$lang.'/tools-and-resources/eu-osha-thesaurus/alphabetical/' . mb_strtolower($letter) . '"';
+        if ($letter==$selectedLetter)
+	    {
+	      print 'class="active"';
+	    }
+	    print '>' . $letter . '</a></span>';
       }
       echo '</div></div>';
       $prev_letter = '';

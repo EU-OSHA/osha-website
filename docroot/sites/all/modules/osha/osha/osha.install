@@ -829,3 +829,31 @@ function osha_update_7060() {
   features_revert(array('osha' => 'views_view'));
 }
 
+/**
+ * MDR-3936 Wrong symbols in the tweets in OSHmail.
+ */
+function osha_update_7061() {
+
+  $tweets = db_select('node', 'n')
+    ->fields('n', array('nid'))
+    ->condition('type', 'twitter_tweet_feed')
+    ->orderBy('nid', 'DESC')
+    ->execute()
+    ->fetchCol();
+
+  foreach($tweets as $nid) {
+    $node = node_load($nid);
+    $value = $node->field_tweet_contents[LANGUAGE_NONE][0]['value'];
+    $value = str_replace('ð','--', $value);
+    $value = str_replace('â','✔', $value);
+    $value = str_replace('º','', $value);
+    $value = str_replace('ª','', $value);
+    $value = str_replace('','', $value);
+    $value = str_replace('','', $value);
+    $value = str_replace('','', $value);
+    if ($node->field_tweet_contents[LANGUAGE_NONE][0]['value'] !== $value) {
+      $node->field_tweet_contents[LANGUAGE_NONE][0]['value'] = $value;
+      node_save($node);
+    }
+  }
+}

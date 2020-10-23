@@ -821,3 +821,11 @@ function osha_update_7059() {
   $record['translation'] = 'Site Map';
   drupal_write_record('locales_target', $record, ['lid', 'language']);
 }
+
+/**
+ * MDR-3944 add "tags" taxonomy to the downloads report.
+ */
+function osha_update_7060() {
+  features_revert(array('osha' => 'views_view'));
+}
+

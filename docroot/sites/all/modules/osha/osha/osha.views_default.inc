@@ -2828,6 +2828,10 @@ function osha_views_default_views() {
       'empty_column' => 0,
     ),
   );
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
   /* Relationship: File Usage: Content */
   $handler->display->display_options['relationships']['file_to_node']['id'] = 'file_to_node';
   $handler->display->display_options['relationships']['file_to_node']['table'] = 'file_usage';
@@ -3075,6 +3079,13 @@ function osha_views_default_views() {
   $handler->display->display_options['fields']['field_activity']['ui_name'] = 'Activity';
   $handler->display->display_options['fields']['field_activity']['type'] = 'i18n_taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_activity']['delta_offset'] = '0';
+  /* Field: Field: Tags */
+  $handler->display->display_options['fields']['field_tags']['id'] = 'field_tags';
+  $handler->display->display_options['fields']['field_tags']['table'] = 'field_data_field_tags';
+  $handler->display->display_options['fields']['field_tags']['field'] = 'field_tags';
+  $handler->display->display_options['fields']['field_tags']['relationship'] = 'file_to_node';
+  $handler->display->display_options['fields']['field_tags']['type'] = 'i18n_taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_tags']['delta_offset'] = '0';
   $handler->display->display_options['path'] = 'admin/reports/files_content';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Files report';
@@ -3171,6 +3182,14 @@ function osha_views_default_views() {
   $handler->display->display_options['fields']['uri']['ui_name'] = 'File path';
   $handler->display->display_options['fields']['uri']['label'] = 'File path';
   $handler->display->display_options['fields']['uri']['file_download_path'] = TRUE;
+  /* Field: Tags */
+  $handler->display->display_options['fields']['field_tags']['id'] = 'field_tags';
+  $handler->display->display_options['fields']['field_tags']['table'] = 'field_data_field_tags';
+  $handler->display->display_options['fields']['field_tags']['field'] = 'field_tags';
+  $handler->display->display_options['fields']['field_tags']['relationship'] = 'file_to_node';
+  $handler->display->display_options['fields']['field_tags']['ui_name'] = 'Tags';
+  $handler->display->display_options['fields']['field_tags']['type'] = 'i18n_taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_tags']['delta_offset'] = '0';
   $handler->display->display_options['path'] = 'admin/reports/files_content_xls';
   $handler->display->display_options['displays'] = array(
     'page' => 'page',
@@ -3192,6 +3211,7 @@ function osha_views_default_views() {
     t('‹ previous'),
     t('next ›'),
     t('last »'),
+    t('Displaying @start - @end of @total'),
     t('Content'),
     t('File ID'),
     t('File Name'),
@@ -3207,6 +3227,7 @@ function osha_views_default_views() {
     t('Publication Date From'),
     t('Publication date To'),
     t('Page'),
+    t('Tags'),
     t('Data export'),
   );
   $export['file_content_report'] = $view;

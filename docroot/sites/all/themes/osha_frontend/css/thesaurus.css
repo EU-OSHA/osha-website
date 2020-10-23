@@ -25,6 +25,10 @@
 	padding-top: 1em;
 }
 
+.view-thesaurus-front #glossary-letters span a.active{
+	border-bottom: 2px solid #dc2f82 !important;
+}
+
 /*Hierarchical*/
 #tree{
 	padding: 2px;

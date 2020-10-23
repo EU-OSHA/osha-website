@@ -1,12 +1,27 @@
-@media screen and (max-width: 1023px){
+@media screen and (max-width: 1007px){
     
     #views-exposed-form-thesaurus-front-indexed-thesaurus-search .views-exposed-widget.views-submit-button{
         padding:0px!important;
     }
     #edit-submit-thesaurus-front-indexed[type=submit]{
         margin-top: 0px;
-        transform: translate(-240%,-380%);
+        transform: translate(-197%,-380%);
         left: 100%;
+    }
+    .view-thesaurus-front-indexed .view-filters{
+        max-width: 320px;
+    }
+
+    .view-thesaurus-front-indexed .views-exposed-widget.views-widget-sort-by {
+        width: 320px!important;
+    }
+
+    #edit-search-api-views-fulltext-wrapper label {
+        color: #003399 !important;
+    }
+
+    .view-thesaurus-front-indexed #edit-search-api-views-fulltext-wrapper{
+        margin-right: 0;
     }
 }
 

@@ -174,8 +174,16 @@ jQuery(document).ready(function($){
 		$('.fixedHeader').toggleClass('no-fixed-menu-expanded');
 	});
 
+	if (typeof _paq != 'undefined') {
+		jQuery('.view-osha-home-banner-top .home-boxes a').click(function(e) {
+			var l = document.createElement("a");
+			l.href = jQuery(this).attr('href');
+			var path = l.href;
+			if (l.hostname === 'osha.europa.eu') {
+				path = l.pathname.substring(3);
+			}
+			path += '|' + jQuery(this).closest('.home-boxes').data('changed');
+			_paq.push(['trackEvent', 'Banner', 'LinkedIn', 'Click', path]);
+		});
+	}
 });
-
-
-
-

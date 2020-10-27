@@ -818,7 +818,7 @@ function osha_update_7058() {
 function osha_update_7059() {
   $result = db_query("SELECT * FROM {locales_target} WHERE lid = :lid AND language = :language", array(':lid' => 20832, ':language' => 'de'));
   $record = (array)$result->fetch();
-  $record['translation'] = 'Site Map';
+  $record['translation'] = 'Sitemap';
   drupal_write_record('locales_target', $record, ['lid', 'language']);
 }
 

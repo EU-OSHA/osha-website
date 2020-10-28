@@ -17,7 +17,7 @@ function osha_short_messages_menu(){
     'title' => 'Short Message',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('osha_short_messages_form'),
-    'access arguments' => array('access administration pages'),
+    'access arguments' => array('osha access administration pages'),
     'type' => MENU_LOCAL_TASK,
   );
   return $items;

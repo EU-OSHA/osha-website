@@ -312,7 +312,7 @@ function osha_all_translations_access($node) {
   if (variable_get('language_content_type_' . $type, 0) == 0) {
     return FALSE;
   }
-  if (user_access('view the administration theme', $user)) {
+  if (user_access('osha access administration pages', $user)) {
     return TRUE;
   }
   return FALSE;

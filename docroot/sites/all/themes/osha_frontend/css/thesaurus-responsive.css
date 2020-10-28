@@ -124,6 +124,7 @@
     html:lang(fr) .intro-text-thesaurus, 
     html:lang(hr) .intro-text-thesaurus, 
     html:lang(lv) .intro-text-thesaurus, 
+    html:lang(nl) .intro-text-thesaurus, 
     html:lang(pt) .intro-text-thesaurus{
         width: 100%;
     }
@@ -142,6 +143,7 @@
     html:lang(fr) .download-content-theasaurus,
     html:lang(hr) .download-content-theasaurus,
     html:lang(lv) .download-content-theasaurus,
+    html:lang(nl) .download-content-theasaurus,
     html:lang(pt) .download-content-theasaurus{
         width: 340px;
     }

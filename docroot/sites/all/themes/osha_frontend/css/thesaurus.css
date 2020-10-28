@@ -129,6 +129,14 @@
 	left: -8px;
 }
 
+html:lang(sk) #tabs > a.active:nth-child(2):after{
+	min-width:  93%;
+}
+
+html:lang(is) #tabs > a.active:nth-child(2):after{
+ 	min-width: 80%;
+}
+
 #tabs > a.active:nth-child(3):after{
 	min-width: 87%;
 	left: -8px;
@@ -467,6 +475,7 @@ html:lang(el) .intro-text-thesaurus,
 html:lang(fr) .intro-text-thesaurus,
 html:lang(hr) .intro-text-thesaurus,
 html:lang(lv) .intro-text-thesaurus,
+html:lang(nl) .intro-text-thesaurus,
 html:lang(pt) .intro-text-thesaurus{
 	width: 435px;
 }
@@ -480,6 +489,7 @@ html:lang(el) .download-content-theasaurus{
 html:lang(fr) .download-content-theasaurus,
 html:lang(hr) .download-content-theasaurus,
 html:lang(lv) .download-content-theasaurus,
+html:lang(nl) .download-content-theasaurus,
 html:lang(pt) .download-content-theasaurus{
 	width: 310px;
 }

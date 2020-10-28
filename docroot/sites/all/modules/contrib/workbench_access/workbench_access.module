@@ -362,6 +362,10 @@ function workbench_access_node_access($node, $op, $account) {
     return NODE_ACCESS_IGNORE;
   }
 
+  if ($op == 'view' && !$node->status && user_access('view all unpublished content', $account)) {
+    return NODE_ACCESS_IGNORE;
+  }
+
   // If disabled for this content type, do nothing.
   if (!is_object($node)) {
     $type = $node;

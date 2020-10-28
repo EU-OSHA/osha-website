@@ -175,15 +175,15 @@ jQuery(document).ready(function($){
 	});
 
 	if (typeof _paq != 'undefined') {
-		jQuery('.view-osha-home-banner-top .home-boxes a').click(function(e) {
+		$('.view-osha-home-banner-top .home-boxes a').click(function(e) {
 			var l = document.createElement("a");
 			l.href = jQuery(this).attr('href');
-			var path = l.href;
+			var path = l.pathname;
 			if (l.hostname === 'osha.europa.eu') {
 				path = l.pathname.substring(3);
 			}
-			path += '|' + jQuery(this).closest('.home-boxes').data('changed');
-			_paq.push(['trackEvent', 'Banner', 'LinkedIn', 'Click', path]);
+			path = 'https://' + l.hostname + path + '|' + $(this).closest('.home-boxes').data('changed');
+			_paq.push(['trackEvent', 'Banner', 'Click', path]);
 		});
 	}
 });

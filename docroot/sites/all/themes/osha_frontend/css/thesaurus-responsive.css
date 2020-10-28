@@ -1,12 +1,27 @@
-@media screen and (max-width: 1023px){
+@media screen and (max-width: 1007px){
     
     #views-exposed-form-thesaurus-front-indexed-thesaurus-search .views-exposed-widget.views-submit-button{
         padding:0px!important;
     }
     #edit-submit-thesaurus-front-indexed[type=submit]{
         margin-top: 0px;
-        transform: translate(-240%,-380%);
+        transform: translate(-197%,-380%);
         left: 100%;
+    }
+    .view-thesaurus-front-indexed .view-filters{
+        max-width: 320px;
+    }
+
+    .view-thesaurus-front-indexed .views-exposed-widget.views-widget-sort-by {
+        width: 320px!important;
+    }
+
+    #edit-search-api-views-fulltext-wrapper label {
+        color: #003399 !important;
+    }
+
+    .view-thesaurus-front-indexed #edit-search-api-views-fulltext-wrapper{
+        margin-right: 0;
     }
 }
 
@@ -100,5 +115,40 @@
     .download-content-theasaurus-action{
         margin-top:0.75rem;
         margin-left:0px;
+    }
+}
+
+@media screen and (max-width: 1200px){
+    html:lang(de) .intro-text-thesaurus,
+    html:lang(el) .intro-text-thesaurus, 
+    html:lang(fr) .intro-text-thesaurus, 
+    html:lang(hr) .intro-text-thesaurus, 
+    html:lang(lv) .intro-text-thesaurus, 
+    html:lang(nl) .intro-text-thesaurus, 
+    html:lang(pt) .intro-text-thesaurus{
+        width: 100%;
+    }
+    .intro-text-thesaurus{
+        width: 100%;
+    }
+    .download-content-theasaurus{
+        margin-top: 0;
+        margin-bottom: 1.5em;
+    }
+    html:lang(de) .download-content-theasaurus, 
+    html:lang(el) .download-content-theasaurus {
+        width: 365px;
+    }
+
+    html:lang(fr) .download-content-theasaurus,
+    html:lang(hr) .download-content-theasaurus,
+    html:lang(lv) .download-content-theasaurus,
+    html:lang(nl) .download-content-theasaurus,
+    html:lang(pt) .download-content-theasaurus{
+        width: 340px;
+    }
+
+    .download-content-theasaurus{
+        width: 325px;
     }
 }

@@ -11,6 +11,7 @@ dependencies[] = features
 dependencies[] = i18n_taxonomy
 dependencies[] = image
 dependencies[] = link
+dependencies[] = list
 dependencies[] = media
 dependencies[] = multiple_selects
 dependencies[] = number

@@ -818,6 +818,42 @@ function osha_update_7058() {
 function osha_update_7059() {
   $result = db_query("SELECT * FROM {locales_target} WHERE lid = :lid AND language = :language", array(':lid' => 20832, ':language' => 'de'));
   $record = (array)$result->fetch();
-  $record['translation'] = 'Site Map';
+  $record['translation'] = 'Sitemap';
   drupal_write_record('locales_target', $record, ['lid', 'language']);
+}
+
+/**
+ * MDR-3944 add "tags" taxonomy to the downloads report.
+ */
+function osha_update_7060() {
+  features_revert(array('osha' => 'views_view'));
+}
+
+/**
+ * MDR-3936 Wrong symbols in the tweets in OSHmail.
+ */
+function osha_update_7061() {
+
+  $tweets = db_select('node', 'n')
+    ->fields('n', array('nid'))
+    ->condition('type', 'twitter_tweet_feed')
+    ->orderBy('nid', 'DESC')
+    ->execute()
+    ->fetchCol();
+
+  foreach($tweets as $nid) {
+    $node = node_load($nid);
+    $value = $node->field_tweet_contents[LANGUAGE_NONE][0]['value'];
+    $value = str_replace('ð','--', $value);
+    $value = str_replace('â','✔', $value);
+    $value = str_replace('º','', $value);
+    $value = str_replace('ª','', $value);
+    $value = str_replace('','', $value);
+    $value = str_replace('','', $value);
+    $value = str_replace('','', $value);
+    if ($node->field_tweet_contents[LANGUAGE_NONE][0]['value'] !== $value) {
+      $node->field_tweet_contents[LANGUAGE_NONE][0]['value'] = $value;
+      node_save($node);
+    }
+  }
 }

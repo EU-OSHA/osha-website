@@ -145,3 +145,21 @@
     }    
   })
 })(jQuery);
+
+// Tootip
+
+(function ( $ ){
+  $(document).ready(function() {
+	$('.content-tooltip img').mouseenter(function() {
+		$(".thesaurus-tooltip").fadeIn(300);
+    });
+	$('.close-thes-tooltip').click(function() {
+		$(".thesaurus-tooltip").fadeOut(300);
+    });
+	
+  })
+})(jQuery);
+
+
+
+

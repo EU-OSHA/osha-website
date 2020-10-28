@@ -25,9 +25,14 @@
 	padding-top: 1em;
 }
 
+.view-thesaurus-front #glossary-letters span a.active{
+	border-bottom: 2px solid #dc2f82 !important;
+}
+
 /*Hierarchical*/
 #tree{
 	padding: 2px;
+	clear: both;
 }
 
 #tree li {
@@ -115,22 +120,38 @@
 }
 
 #tabs > a.active:nth-child(1):after{
-	min-width: 85px;
+	min-width: 80%;
 	left: 0;
 }
 
 #tabs > a.active:nth-child(2):after{
-	min-width:  150px;
+	min-width:  87%;
 	left: -8px;
 }
 
+html:lang(sk) #tabs > a.active:nth-child(2):after{
+	min-width:  93%;
+}
+
+html:lang(is) #tabs > a.active:nth-child(2):after{
+ 	min-width: 80%;
+}
+
 #tabs > a.active:nth-child(3):after{
-	min-width: 142px;
+	min-width: 87%;
 	left: -8px;
 }
 
 #content .view #tabs a.active{
 	font-weight: bold;
+}
+
+.glossary-letters{
+	clear: both;
+}
+
+.content-term{
+	clear: both;
 }
 
 /* Detail page */
@@ -280,6 +301,10 @@ h3.active .accordion-icon{
 
 /* View Thesaurus Search */
 
+.view-thesaurus-front-indexed .view-filters{
+	clear: both;
+}
+
 .view-thesaurus-front-indexed .views-label-field-synonyms{
 	color: #003399;
 }
@@ -335,7 +360,7 @@ h3.active .accordion-icon{
 }
 
 .download-content-theasaurus-small{
-	width:auto;
+	width:auto !important;
 	float:right;
 	margin-top:0px;
 	margin-bottom:1.5rem;
@@ -369,6 +394,7 @@ h3.active .accordion-icon{
 .download-content-theasaurus-small label,
 .download-content-theasaurus-small a{
 	margin-left:0.375rem;
+	border-bottom: 0 !important;
 }
 
 .download-content-theasaurus select{
@@ -444,19 +470,57 @@ h3.active .accordion-icon{
 	margin-left:0.25rem;
 }
 
-/* .view-thesaurus-front #glossary-letters{
-	position: -webkit-sticky;
-	position: sticky;
-	top: 0;
-	float:none;
-}
-.view-thesaurus-front #glossary-letters .container{
-	float:none;
-	display:flex;
-	flex-direction: row;
-	align-items: center;
+html:lang(de) .intro-text-thesaurus,
+html:lang(el) .intro-text-thesaurus,
+html:lang(fr) .intro-text-thesaurus,
+html:lang(hr) .intro-text-thesaurus,
+html:lang(lv) .intro-text-thesaurus,
+html:lang(nl) .intro-text-thesaurus,
+html:lang(pt) .intro-text-thesaurus{
+	width: 435px;
 }
 
-.view-thesaurus-front #glossary-letters span{
-	float:none
-} */
+html:lang(de) .download-content-theasaurus,
+html:lang(el) .download-content-theasaurus{
+	width: 327px;
+
+}
+
+html:lang(fr) .download-content-theasaurus,
+html:lang(hr) .download-content-theasaurus,
+html:lang(lv) .download-content-theasaurus,
+html:lang(nl) .download-content-theasaurus,
+html:lang(pt) .download-content-theasaurus{
+	width: 310px;
+}
+
+/* Tooltip */
+
+.content-tooltip{
+	position: relative;
+}
+
+.thesaurus-tooltip{
+	display: none;
+	position: absolute;
+    width: 225px;
+    height: auto;
+    top: 37px;
+    left: 0;
+    background: #FFF;
+    padding: 1.5em 1em 1em 1em;
+    border: 1px solid #dedede;
+    border-radius: 3px;
+    font-size: 0.9em;
+    line-height: 18px;
+}
+
+.close-thes-tooltip{
+	position: absolute;
+	font-size: 1.3em;
+    top: 0;
+    right: 7px;
+    color: #003399;
+    font-weight: bold;
+    cursor: pointer;
+}

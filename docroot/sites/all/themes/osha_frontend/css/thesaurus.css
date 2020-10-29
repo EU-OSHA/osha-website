@@ -137,6 +137,14 @@ html:lang(is) #tabs > a.active:nth-child(2):after{
  	min-width: 80%;
 }
 
+html:lang(lv) #tabs > a.active:nth-child(2):after{
+ 	min-width: 92%;
+}
+
+html:lang(lv) #tabs > a.active:nth-child(3):after{
+ 	min-width: 93%;
+}
+
 #tabs > a.active:nth-child(3):after{
 	min-width: 87%;
 	left: -8px;

@@ -1352,13 +1352,11 @@ html[lang=hu] .page-tools-and-publications .views-exposed-widget label{
 
 .publications-row {
     float: left;
-    width: 100%;
     padding-top: 0.5em;
+    display: flex;
 }
 
 .page-publication-detail .publications-detail {
-    float: left;
-    width: 100%;
     padding-bottom: 2em;
     /*MDR-3261 revamp: publications detail too much space for the intro text*/
     border-bottom: 0;
@@ -1366,6 +1364,7 @@ html[lang=hu] .page-tools-and-publications .views-exposed-widget label{
 
 .page-publication-detail .publications-detail.add-border{
    border-bottom: 1px solid #003399;
+   float: left;
 }
 
 .page-publication-detail .publications-detail h1{
@@ -1439,11 +1438,19 @@ html[lang=hu] .page-tools-and-publications .views-exposed-widget label{
     width: 100%;
 }
 
+.publications-detail-right-column .field-name-field-file{
+	float: left;
+}
+
 .page-publication-detail .content-publication-info{
     padding-top:0;
     /*MDR-3263 - revamp - Publications: too small font size for type and number of pages*/
     /*font-size: 0.7rem;*/
     font-size: 0.9rem;
+}
+
+.page-publication-detail .publications-detail-right-column .field-name-body{
+	padding-bottom: 1em;
 }
 
 .page-publication-detail .content-publication-info .date-display-single{
@@ -1555,9 +1562,10 @@ html[lang=el] .content-languages-download .new-select-style input, html[lang=hu]
 
 .content-order-copy{
     color:#003399;
-    padding: 1.5em 0 0 0;
-    border-top:10px solid #FFF;
+    padding: 0;
+    float: none;
     clear: both;
+    padding-top: 2em;
 }
 
 .content-order-copy img{
@@ -1574,7 +1582,7 @@ html[lang=el] .content-languages-download .new-select-style input, html[lang=hu]
     font-size: 0.9rem;
     padding-right: 20px;
     float: left;
-    padding-top: 1.5em;
+    padding-top: 0;
 }
 
 .content-order-copy a:hover{

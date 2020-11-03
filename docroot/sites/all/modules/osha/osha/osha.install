@@ -833,26 +833,71 @@ function osha_update_7060() {
  * MDR-3936 Wrong symbols in the tweets in OSHmail.
  */
 function osha_update_7061() {
+}
 
-  $tweets = db_select('node', 'n')
-    ->fields('n', array('nid'))
-    ->condition('type', 'twitter_tweet_feed')
-    ->orderBy('nid', 'DESC')
+/**
+ * MDR-3936 Wrong symbols in the tweets in OSHmail.
+ */
+function osha_update_7062() {
+
+  $fid = 1;
+  $feed = tweet_feed_get_feed_object($fid);
+  if (empty($feed)) {
+    return FALSE;
+  }
+  module_load_include('inc', 'tweet_feed', 'inc/twitter-oauth');
+  $con = new TwitterOAuth($feed->consumer_key, $feed->consumer_secret, $feed->oauth_token, $feed->oauth_token_secret);
+  $params = array('user_id' => $feed->timeline_id, 'count' => 120, 'tweet_mode' => 'extended');
+  $params['include_rts'] = FALSE;
+  $tdata = [];
+  while (1) {
+    $data = json_decode(
+      $con->oAuthRequest(
+        'https://api.twitter.com/1.1/statuses/user_timeline.json',
+        'GET',
+        $params
+      )
+    );
+    if (!$data) {
+      break;
+    }
+    foreach ($data as $row) {
+      $tdata[$row->id_str] = $row;
+    }
+    $end_of_the_line = array_pop($tdata);
+    array_push($tdata, $end_of_the_line);
+    $lowest_id = $end_of_the_line->id_str;
+    if ($lowest_id > 0) {
+      $params['max_id'] = $lowest_id;
+    }
+  }
+  $map_id_text = [];
+  foreach($tdata as $data) {
+    $id = $data->id_str;
+    $tweet_html = tweet_feed_filter_iconv_text(
+      tweet_feed_filter_smart_quotes(
+        tweet_feed_format_output(
+          $data->full_text, 1)
+      )
+    );
+    $map_id_text[$id] = $tweet_html;
+  }
+
+  $map_tweet_id_nid = db_select('field_data_field_tweet_id', 'n')
+    ->fields('n', array('field_tweet_id_value', 'entity_id'))
     ->execute()
-    ->fetchCol();
+    ->fetchAllKeyed(0, 1);
 
-  foreach($tweets as $nid) {
+  foreach ($map_id_text as $id_str => $new_value) {
+    $nid = $map_tweet_id_nid[$id_str];
+    if (!$nid) {
+      continue;
+    }
     $node = node_load($nid);
-    $value = $node->field_tweet_contents[LANGUAGE_NONE][0]['value'];
-    $value = str_replace('ð','--', $value);
-    $value = str_replace('â','✔', $value);
-    $value = str_replace('º','', $value);
-    $value = str_replace('ª','', $value);
-    $value = str_replace('','', $value);
-    $value = str_replace('','', $value);
-    $value = str_replace('','', $value);
-    if ($node->field_tweet_contents[LANGUAGE_NONE][0]['value'] !== $value) {
-      $node->field_tweet_contents[LANGUAGE_NONE][0]['value'] = $value;
+    $new_value = $map_id_text[$node->field_tweet_id[LANGUAGE_NONE][0]['value']];
+    $old_value = $node->field_tweet_contents[LANGUAGE_NONE][0]['value'];
+    if ($old_value !== $new_value) {
+      $node->field_tweet_contents[LANGUAGE_NONE][0]['value'] = $new_value;
       node_save($node);
     }
   }

@@ -205,6 +205,9 @@ function osha_config_link_domains_form_submit($form, &$form_state) {
 function osha_permission() {
   $perms = array(
     'administer link domains' => array('title' => t('Administer link domains'),),
+    'osha access administration pages' => array(
+      'title' => t('OSHA Use the administration pages and help'),
+    ),
   );
   return $perms;
 }
@@ -309,7 +312,7 @@ function osha_all_translations_access($node) {
   if (variable_get('language_content_type_' . $type, 0) == 0) {
     return FALSE;
   }
-  if (user_access('view the administration theme', $user)) {
+  if (user_access('osha access administration pages', $user)) {
     return TRUE;
   }
   return FALSE;
@@ -323,6 +326,9 @@ function osha_menu_alter(&$items) {
   if (isset($items['aggregator/sources/%aggregator_feed'])) {
     $items['aggregator/sources/%aggregator_feed']['page callback'] = 'osha_aggregator_page_source';
   }
+  // Remove pages from access administration pages permission.
+  $items['admin/structure']['access arguments'] = array('osha access administration pages');
+  $items['admin/config']['access arguments'] = array('osha access administration pages');
 }
 
 function osha_disable_taxonomy_term_feed() {
@@ -1863,6 +1869,15 @@ function osha_page_build(&$page) {
     drupal_add_css(drupal_get_path('module', 'osha') . '/styles/osha_admin.css', array('group' => CSS_THEME));
     drupal_add_css(drupal_get_path('module', 'osha') . '/styles/osha_linkchecker.css', array('group' => CSS_THEME));
   }
+}
+
+function osha_tweet_feed_tweet_save_alter($node, $tweet) {
+  $tweet_text = !empty($tweet->retweeted_status->full_text) ? $tweet->retweeted_status->full_text : $tweet->full_text;
+  $value = tweet_feed_filter_iconv_text(tweet_feed_filter_smart_quotes($tweet_text));
+  $node->field_tweet_contents[$node->language][0] = array(
+    'value' => $value,
+    'format' => 'full_html',
+  );
 }
 
 /**

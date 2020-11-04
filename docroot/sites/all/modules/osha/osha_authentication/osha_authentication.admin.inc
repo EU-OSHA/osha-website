@@ -77,6 +77,7 @@ function osha_authentication_get_role_and_section_from_dn($group_dn) {
     'EDT' => 'Editor',
     'PM' => 'Project Manager',
     'RVMN' => 'Review Manager',
+    'READONLY', OSHA_WORKFLOW_ROLE_READ_ONLY,
   );
   // LDAP group DN patterns:
   // * cn=SECTION_ROLE,ou=MainSite,ou=Sites,dc=osha,dc=europa,dc=eu

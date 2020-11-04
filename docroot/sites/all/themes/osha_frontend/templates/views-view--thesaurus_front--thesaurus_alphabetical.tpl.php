@@ -28,12 +28,13 @@
  */
 global $language;
 $lang = $language->language;
+$langList = osha_language_list(TRUE);
 ?>
 <div class="container-fluid">
   <div class="<?php print $classes; ?>">
     <?php print render($title_prefix); ?>
     <?php if ($title): ?>
-      <?php print $title; ?>
+      <?php print t($title); ?>
     <?php endif; ?>
     <?php print render($title_suffix); ?>
 
@@ -47,38 +48,37 @@ $lang = $language->language;
       <div class="download-content-theasaurus">
         <div class="download-content-theasaurus-label">
           <label><?php print t('Download'); ?></label>
-          <img src="/sites/all/themes/osha_frontend/images/info-thesaurus.png" alt="Info" 
-          title="<?php print t('Download your complete EU-OSHA thesaurus terms in Excel format. Choose the language from the box'); ?>" >
+          <div class="content-tooltip">
+			<img src="/sites/all/themes/osha_frontend/images/info-thesaurus.png" alt="Info">
+			<span class="thesaurus-tooltip"><?php print t("Download your complete EU-OSHA thesaurus terms in Excel format. Choose the language from the box"); ?><span class="close-thes-tooltip">x</span></span>
+		  </div>
         </div>
         <div class="download-content-theasaurus-action">
           <select id="language-export-select" class="form-select">
-            <option value="bg" <?php if($lang=="bg"): print 'selected="selected"'; endif;?>>Български</option>
-            <option value="cs" <?php if($lang=="cs"): print 'selected="selected"'; endif;?>>Čeština</option>
-            <option value="da" <?php if($lang=="da"): print 'selected="selected"'; endif;?>>Dansk</option>
-            <option value="de" <?php if($lang=="de"): print 'selected="selected"'; endif;?>>Deutsch</option>
-            <option value="et" <?php if($lang=="et"): print 'selected="selected"'; endif;?>>Eesti</option>
-            <option value="el" <?php if($lang=="el"): print 'selected="selected"'; endif;?>>Ελληνικά</option>
-            <option value="en" <?php if($lang=="en"): print 'selected="selected"'; endif;?>>English</option>
-            <option value="es" <?php if($lang=="es"): print 'selected="selected"'; endif;?>>Español</option>
-            <option value="fr" <?php if($lang=="fr"): print 'selected="selected"'; endif;?>>Français</option>
-            <option value="hr" <?php if($lang=="hr"): print 'selected="selected"'; endif;?>>Hrvatski</option>
-            <option value="is" <?php if($lang=="is"): print 'selected="selected"'; endif;?>>Íslenska</option>
-            <option value="it" <?php if($lang=="it"): print 'selected="selected"'; endif;?>>Italiano</option>
-            <option value="lv" <?php if($lang=="lv"): print 'selected="selected"'; endif;?>>Latviešu</option>
-            <option value="lt" <?php if($lang=="lt"): print 'selected="selected"'; endif;?>>Lietuvių</option>
-            <option value="hu" <?php if($lang=="hu"): print 'selected="selected"'; endif;?>>Magyar</option>
-            <option value="mt" <?php if($lang=="mt"): print 'selected="selected"'; endif;?>>Malti</option>
-            <option value="nl" <?php if($lang=="nl"): print 'selected="selected"'; endif;?>>Nederlands</option>
-            <option value="no" <?php if($lang=="no"): print 'selected="selected"'; endif;?>>Norsk</option>
-            <option value="pl" <?php if($lang=="pl"): print 'selected="selected"'; endif;?>>Polski</option>
-            <option value="pt" <?php if($lang=="pt"): print 'selected="selected"'; endif;?>>Português</option>
-            <option value="ro" <?php if($lang=="ro"): print 'selected="selected"'; endif;?>>Română</option>
-            <option value="sk" <?php if($lang=="sk"): print 'selected="selected"'; endif;?>>Slovenčina</option>
-            <option value="sl" <?php if($lang=="sl"): print 'selected="selected"'; endif;?>>Slovenščina</option>
-            <option value="fi" <?php if($lang=="fi"): print 'selected="selected"'; endif;?>>Suomi</option>
-            <option value="sv" <?php if($lang=="sv"): print 'selected="selected"'; endif;?>>Svenska</option>
+            <?php
+              $selectedLang = '';
+              foreach($langList as $code => $currentLang)
+              {
+                if (file_exists('public://thesaurus-export/EU-OSHA_thesaurus_' . $code . '.xls'))
+                {
+                  if ($selectedLang == '')
+                  {
+                    $selectedLang = $code;
+                  }
+                  print '<option value="'.$code.'" ';
+                  if ($code == $lang)
+                  {
+                    $selectedLang = $code;
+                    print ' selected="selected" class="navigation-language"';
+                  }
+                  print '>'.$currentLang->native . '</option>';
+                }
+              }
+              $path = "public://";
+              $path = file_create_url($path);
+            ?>
           </select>
-          <a id="language-export-button" href="/en/tools-and-resources/eu-osha-thesaurus/export"><img class="download" src="/sites/all/themes/osha_frontend/images/download-thesaurus.png" alt="<?php print t('Download'); ?>" title="<?php print t('Download'); ?>"></a>
+          <a id="language-export-button" href="<?php print $path; ?>thesaurus-export/EU-OSHA_thesaurus_<?php print $selectedLang; ?>.xls"><img class="download" src="/sites/all/themes/osha_frontend/images/download-thesaurus.png" alt="<?php print t('Download'); ?>" title="<?php print t('Download'); ?>"></a>
         </div>
       </div>
     </div>
@@ -86,7 +86,20 @@ $lang = $language->language;
     <div id="tabs">
       <?php
         print l(t('Search'), 'tools-and-resources/eu-osha-thesaurus/search');
-        print l(t('Alphabetical view'), 'tools-and-resources/eu-osha-thesaurus/alphabetical');
+        $path = current_path();
+        // The selected letter is the one on the end of the URL
+        $path = explode("/",$path);
+        if (end($path) != "alphabetical")
+        {
+          $selectedLetter = mb_strtoupper(end($path));
+          // Add the class to the selected link on the tabs
+          print l(t('Alphabetical view'), 'tools-and-resources/eu-osha-thesaurus/alphabetical', array('attributes' => array('class' => 'active')));
+        }
+        else
+        {
+          // No need to add the class to the link
+          print l(t('Alphabetical view'), 'tools-and-resources/eu-osha-thesaurus/alphabetical');
+        }        
         print l(t('Hierarchical view'), 'tools-and-resources/eu-osha-thesaurus/hierarchical');
       ?>
     </div>
@@ -94,19 +107,61 @@ $lang = $language->language;
     <div class="view-content">
       <?php
       $path = current_path();
-      // The selected letter is the one on the end pf the URL
+      // The selected letter is the one on the end of the URL
       $path = explode("/",$path);
       if (end($path) != "alphabetical")
       {
         $selectedLetter = mb_strtoupper(end($path));
       }
       $thesaurus_list = views_get_view_result('thesaurus_front', 'thesaurus_alphabetical');
-      $alphas = t('A B C D E F G H I J K L M N O P Q R S T U V W X Y Z');
+      $alphabets = array(
+        "bg"=>'А Б В Г Д Е Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Ъ Ь Ю Я',
+        "cs"=>'A B C Č D Ď E F G H I J K L M N Ň O P Q R Ř S Š T Ť U V W X Y Z Ž',
+        "da"=>'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z Å Æ Ø',
+        "de"=>'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z Ä Ö Ü ß',
+        "et"=>'A B C D E F G H I J K L M N O P Q R S Š Z Ž T U V W Õ Ä Ö Ü X Y',
+        "el"=>'Α Β Γ Δ Ε Ζ Η Θ Ι Κ Λ Μ Ν Ξ Ο Π Ρ Σ Τ Υ Φ Χ Ψ Ω',
+        "en"=>'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z',
+        "es"=>'A B C D E F G H I J K L M N Ñ O P Q R S T U V W X Y Z',
+        "fr"=>'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z',
+        "hr"=>'A B C Č Ć D Đ E F G H I J K L M N O P Q R S Š T U V W Z Ž',
+        "is"=>'A Á B C D Đ E É F G H I Í J K L M N O Ó P Q R S T U Ú V W X Y Ý Þ Æ Ö',
+        "it"=>'A B C D E F G H I K L M N O P Q R S T U V Z',
+        "lv"=>'A Ā B C Č D E Ē F G Ģ H I Ī J K Ķ L Ļ M N Ņ O P R S Š T U Ū V Z Ž',
+        "lt"=>'A Ą B C Č D E Ę Ė F G H I Į Y J K L M N O P R S Š T U Ų Ū V Z Ž',
+        "hu"=>'A Á B C D E É F G H I Í J K L M N O Ó Ö Ő P Q R S T U Ú Ü Ű V W X Y Z',
+        "mt"=>'A B Ċ D E F Ġ G H Ħ I J K L M N O P Q R S T U V W X Ż Z',
+        "nl"=>'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z',
+        "no"=>'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z Æ Ø Å',
+        "pl"=>'A Ą B C Ć D E Ę F G H I J K L Ł M N Ń O Ó P R S Ś T U V W Y Z Ź Ż',
+        "pt"=>'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z',
+        "ro"=>'A Ă Â B C D E F G H I Î J K L M N O P Q R S Ș T U V W X Y Z',
+        "sk"=>'A Á Ä B C Č D Ď E É F G H I Í J K L Ĺ Ľ M N Ň O Ó Ô P Q R Ŕ S Š T Ť U Ú V W X Y Ý Z Ž',
+        "sl"=>'A B C Č D E F G H I J K L M N O P R S Š T U V W Z Ž',
+        "fi"=>'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z Å Ä Ö',
+        "sv"=>'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z Å Ä Ö',
+      );
+      $alphas = t($alphabets[$lang]);
       $alphas = explode(' ', $alphas);
       $letters = [];
       $letter_num = [];
       foreach ($thesaurus_list as $term) {
         $term_title = $term->field_title_field[0]['rendered']['#markup'];
+        if (drupal_substr($term_title, 0, 1) == "«" || drupal_substr($term_title, 0, 1) == "1")
+        {
+          /*dpm(preg_replace('/\W+/', '', $term_title));
+          dpm(preg_replace('/[^\w]+/', '', $term_title));
+          dpm(preg_replace("/&#?[a-z0-9]+;/i",'',$term_title));*/
+        }
+        // Remove the quotation marks from the string
+        $term_title = preg_replace("/&#?[a-z0-9]+;/i",'',$term_title);
+        if (drupal_substr($term_title, 0, 1) == "«" || drupal_substr($term_title, 0, 1) == "„" || drupal_substr($term_title, 0, 1) == "("
+            || drupal_substr($term_title, 0, 1) == "“" || drupal_substr($term_title, 0, 1) == "[")
+        {
+          $term_title = preg_replace('/[^\w]+/', '', $term_title);
+        }
+        // Remove white space from beginning and end of the string
+        $term_title = trim($term_title);
         $letter = drupal_substr($term_title, 0, 1);
         $letter = mb_strtoupper($letter);
         $letters[$letter] = $letter;
@@ -125,7 +180,12 @@ $lang = $language->language;
           {
             $selectedLetter = mb_strtoupper($letter);
           }
-          print '<span><a href="/'.$lang.'/tools-and-resources/eu-osha-thesaurus/alphabetical/' . mb_strtolower($letter) . '">' . $letter . '</a></span>';
+          print '<span><a href="/'.$lang.'/tools-and-resources/eu-osha-thesaurus/alphabetical/' . mb_strtolower($letter) . '"';
+          if ($letter==$selectedLetter)
+          {
+          	print 'class="active"';
+          }
+          print '>' . $letter . '</a></span>';
         }
         else {
           print '<span>' . $letter . '</span>';
@@ -135,11 +195,24 @@ $lang = $language->language;
         if (in_array(mb_strtoupper($letter), $alphas)) {
           continue;
         }
+        if ($lang == "cs" || $lang == "es" || $lang == "et" || $lang == "fr" || $lang == "pt" || $lang == "ro")
+        {
+          if (mb_strtoupper($letter) == "Á" || mb_strtoupper($letter) == "Â" || mb_strtoupper($letter) == "É" || mb_strtoupper($letter) == "Ó" ||
+          mb_strtoupper($letter) == "Ş" || mb_strtoupper($letter) == "Ś" || mb_strtoupper($letter) == "Ţ" || mb_strtoupper($letter) == "Ú")
+          {
+            continue;
+          }
+        }
         if ($selectedLetter == null)
         {
           $selectedLetter = mb_strtoupper($letter);
         }
-        print '<span><a href="/'.$lang.'/tools-and-resources/eu-osha-thesaurus/alphabetical/' . mb_strtolower($letter) . '">' . $letter . '</a></span>';
+        print '<span><a href="/'.$lang.'/tools-and-resources/eu-osha-thesaurus/alphabetical/' . mb_strtolower($letter) . '"';
+        if ($letter==$selectedLetter)
+	    {
+	      print 'class="active"';
+	    }
+	    print '>' . $letter . '</a></span>';
       }
       echo '</div></div>';
       $prev_letter = '';
@@ -150,9 +223,48 @@ $lang = $language->language;
           <?php
           foreach ($thesaurus_list as $term) {
             $dd_class = '';
-            $term_path = "/node/".$term->nid;
+            $term_path = "/".$lang."/tools-and-resources/eu-osha-thesaurus/term/". $term->field_field_term_id['0']['raw']['value'];
             $term_title = $term->field_title_field[0]['rendered']['#markup'];
-            $titleFirstLetter = mb_strtoupper(drupal_substr($term_title, 0, 1));
+            $titleFirstLetter = trim(preg_replace("/&#?[a-z0-9]+;/i",'',$term_title));
+            if (drupal_substr($titleFirstLetter, 0, 1) == "«" || drupal_substr($titleFirstLetter, 0, 1) == "„" || drupal_substr($titleFirstLetter, 0, 1) == "("
+            || drupal_substr($titleFirstLetter, 0, 1) == "“" || drupal_substr($titleFirstLetter, 0, 1) == "[")
+            {
+              $titleFirstLetter = preg_replace('/[^\w]+/', '', $titleFirstLetter);
+            }
+            $titleFirstLetter = mb_strtoupper(drupal_substr($titleFirstLetter, 0, 1));
+
+            if (($lang == "es" || $lang == "pt") && $titleFirstLetter == "Á")
+            {
+              $titleFirstLetter = "A";
+            }
+            else if ($lang == "fr" && $titleFirstLetter == "Â")
+            {
+              $titleFirstLetter = "A";
+            }
+            else if (($lang == "cs" || $lang == "es" || $lang=="fr" || $lang == "pt") && $titleFirstLetter == "É")
+            {
+              $titleFirstLetter = "E";
+            }
+            else if (($lang == "es" || $lang == "pt") && $titleFirstLetter == "Ó")
+            {
+              $titleFirstLetter = "O";
+            }
+            else if ($lang == "et" && $titleFirstLetter == "Ś")
+            {
+              $titleFirstLetter = "S";
+            }
+            else if ($lang == "ro" && $titleFirstLetter == "Ş")
+            {
+              $titleFirstLetter = "Ș";
+            }
+            else if ($lang == "ro" && $titleFirstLetter == "Ţ")
+            {
+              $titleFirstLetter = "T";
+            }
+            else if (($lang == "cs" || $lang == "es") && $titleFirstLetter == "Ú")
+            {
+              $titleFirstLetter = "U";
+            }
 
             if ($titleFirstLetter != $selectedLetter)
             {
@@ -171,12 +283,6 @@ $lang = $language->language;
             $letter = strtoupper(drupal_substr($term_title, 0, 1));
             if ($letter_num[$letter] == 1) {
               $dd_class = ' one-term';
-            }
-            if ($prev_letter != $letter) { ?>
-              <div class="glossary_letter" id="glossary-<?php print $letter; ?>">
-                <?php print $letter; ?><hr/>
-              </div>
-              <?php
             }
             ?>
             <dt class="term-title">

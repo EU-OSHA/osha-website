@@ -43,23 +43,6 @@ function osha_thesaurus_block_content()
 }
 
 /**
- * Implements hook_menu().
- */
-function osha_thesaurus_menu() {
-  $items = array();
-  $items['thesaurus-search-autocomplete/%'] = array(
-    'page callback' => 'osha_thesaurus_autocomplete_callback',
-    'access callback' => TRUE,
-    'page arguments' => array(1),
-  );
-  $items['thesaurus-search-autocomplete'] = array(
-    'page callback' => 'osha_thesaurus_autocomplete_callback',
-    'access callback' => TRUE,
-  );
-  return $items;
-}
-
-/**
  *
  * When using search_autocomplete module.
  */
@@ -112,15 +95,6 @@ function osha_thesaurus_autocomplete_callback($search = '*') {
   $total_wiki_results = 0;
 
   foreach ($data->grouped->ss_type->groups as &$group) {
-    if ($count_categ++ >= $showing_categ) {
-      // If not found wiki by now, continue loop trough groups.
-      if (!empty($wiki_result)) {
-        break;
-      }
-      else {
-        continue;
-      }
-    }
     $ret = osha_search_autocomplete_add_group($group, $lang, $showing_items, $search);
     $showed_items += $ret['count'];
     $showed_categ += ($ret['count']) ? 1 : 0;
@@ -130,3 +104,112 @@ function osha_thesaurus_autocomplete_callback($search = '*') {
   print_r(json_encode($return));
   exit;
 }
+
+/**
+ * Function to check if the user can access the Thesaurus Excel Generation page or not
+ */
+function osha_thesaurus_excel_generate_access() {
+  if (user_access('edit any thesaurus content')) {
+    return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+* Form to generate the Excel files with the thesaurus files
+**/
+function osha_thesaurus_excel_generate()
+{
+  global $language;
+
+  $currentLang = $language;
+
+  $installed = osha_language_list(TRUE);
+  // Check if the language argument comes in the URL
+  if ($selected = arg(3))
+  {
+    global $base_root;
+
+    // Check if the directory exists and create it if it doesn't
+    $directory = 'public://thesaurus-export/';
+    file_prepare_directory($directory, FILE_CREATE_DIRECTORY);
+
+    // Define the destination route for the file
+  	$dest = 'public://' . 'thesaurus-export/EU-OSHA_thesaurus_' . $selected . '.xls';  	
+
+    // Call to the export view in order to create the Excel file
+  	$file = file_get_contents($base_root . "/" . $selected . "/tools-and-resources/eu-osha-thesaurus/export");
+    
+    file_unmanaged_save_data($file, $dest, FILE_EXISTS_REPLACE);
+  }
+  else
+  {
+    // Add js and css
+    $form = array(
+      '#attached' => array(
+        'js' => array(
+          array(
+            'data' => drupal_get_path('module', 'osha_thesaurus') . '/js/osha_thesaurus.js',
+            'type' => 'file',
+            'weight' => 10,
+          )
+        ),
+      ),
+    );
+
+    $form['intro']['#markup'] = t('<p>Please select the language version that you want to generate the Thesaurs XLS file, and click on the "Generate Excel" button in the corresponding column.<br>
+  Please remember that the Excel is generated using the published content of the thesaurus.</p>');
+
+    $header = [t('Language'), t('Actions'), t('Date of the Excel file')];
+    $rows = [];
+    foreach ($installed as $code => $lang) {
+      $dest = 'public://' . 'thesaurus-export/EU-OSHA_thesaurus_' . $code . '.xls';
+      $date = '';
+      if (file_exists($dest)) {
+        $date = date('d-m-Y', filemtime($dest));
+      }
+      $rows[] = [
+        $lang->name,
+        "<a href='javascript:generateExcel(\"".$code."\");'>Generate Excel</a>",
+        // l(t('Generate Excel'), 'admin/content/thesaurus-excel-generation/' . $code),
+        $date
+      ];
+    }
+    $form['rows']['#markup'] = theme('table', array(
+      'header' => $header,
+      'rows' => $rows,
+    ));
+    return $form;
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function osha_thesaurus_menu() {
+  $items = array();
+  $items['thesaurus-search-autocomplete/%'] = array(
+    'page callback' => 'osha_thesaurus_autocomplete_callback',
+    'access callback' => TRUE,
+    'page arguments' => array(1),
+  );
+  $items['thesaurus-search-autocomplete'] = array(
+    'page callback' => 'osha_thesaurus_autocomplete_callback',
+    'access callback' => TRUE,
+  );  
+  $items['admin/content/thesaurus-excel-generation'] = array(
+    'title' => 'Generate Excel files',
+    'page callback' => 'osha_thesaurus_excel_generate',
+    'access callback' => 'osha_thesaurus_excel_generate_access',
+    // 'type' => MENU_LOCAL_TASK,
+  );
+  $items['admin/content/thesaurus-excel-generation/%'] = array(
+    'title' => 'Generate Excel files',
+    'page callback' => 'osha_thesaurus_excel_generate',
+    'access callback' => 'osha_thesaurus_excel_generate_access',
+    'page arguments' => array(1),
+    // 'type' => MENU_LOCAL_TASK,
+  );
+  return $items;
+}
+

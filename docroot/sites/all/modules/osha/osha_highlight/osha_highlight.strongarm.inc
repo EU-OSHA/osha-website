@@ -153,6 +153,9 @@ function osha_highlight_strongarm() {
       'question' => array(
         'custom_settings' => FALSE,
       ),
+      'newsletter_alt' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(

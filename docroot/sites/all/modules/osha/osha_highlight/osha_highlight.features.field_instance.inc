@@ -406,10 +406,9 @@ function osha_highlight_field_default_field_instances() {
       ),
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 17,
+        'type' => 'hidden',
+        'weight' => 6,
       ),
       'highlights_item' => array(
         'label' => 'above',

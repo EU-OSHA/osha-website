@@ -417,10 +417,9 @@ function osha_news_field_default_field_instances() {
       ),
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 19,
+        'type' => 'hidden',
+        'weight' => 7,
       ),
       'highlights_item' => array(
         'label' => 'above',

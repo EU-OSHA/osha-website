@@ -153,10 +153,3 @@ function osha_homepage_update_7006() {
 function osha_homepage_update_7007() {
   features_revert(array('osha_homepage' => array('views_view')));
 }
-
-/**
- * MDR-3957 Create an event for Matomo (Piwik) to measure the clicks on the banners of the homepage.
- */
-function osha_homepage_update_7008() {
-  features_revert(array('osha_homepage' => array('views_view')));
-}

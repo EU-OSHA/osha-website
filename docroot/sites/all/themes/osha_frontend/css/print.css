@@ -196,4 +196,28 @@
   #share-popup-container {
     display: none;
   }
+  
+  /* Thesaurus */
+  
+  #glossary-letters{
+	height: 40px;
+	padding-top: 1em;
+  }
+
+  .download-content-theasaurus{
+  	padding-left: 0;
+  	margin-left: 0;
+  	margin-bottom: 1em;
+  	margin-top: 1em;
+  	padding-top: 1em;
+  }
+
+  	.content-tooltip{
+		display: none;
+	}
+
+	#block-osha-thesaurus-osha-thesaurus-test-block{
+		padding-bottom: 1em;
+	}
+  
 }

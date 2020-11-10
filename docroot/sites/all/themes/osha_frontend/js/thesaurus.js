@@ -148,7 +148,7 @@
 
 (function ( $ ){
   $(document).ready(function() {
-	$('.content-tooltip img').mouseenter(function() {
+	$('.content-tooltip img').click(function() {
 		$(".thesaurus-tooltip").fadeIn(300);
     });
 	$('.close-thes-tooltip').click(function() {

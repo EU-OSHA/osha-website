@@ -179,7 +179,16 @@ jQuery(document).ready(function($){
 			var l = document.createElement("a");
 			l.href = jQuery(this).attr('href');
 			var path = l.pathname;
+			if (l.hostname === 'healthy-workplaces.eu') {
+				path = l.pathname.substring(3);
+			}
+			if (l.hostname === 'oiraproject.eu') {
+				path = l.pathname.substring(3);
+			}
 			if (l.hostname === 'osha.europa.eu') {
+				path = l.pathname.substring(3);
+			}
+			if (l.hostname === 'www.napofilm.net') {
 				path = l.pathname.substring(3);
 			}
 			path = 'https://' + l.hostname + path + '|' + $(this).closest('.home-boxes').data('changed');

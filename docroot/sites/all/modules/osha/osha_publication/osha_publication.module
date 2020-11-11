@@ -1054,13 +1054,15 @@ function theme_osha_publication_file_publication_related_res_format($element) {
 }
 
 /*
- * Formats the bookshop id as link to bookshop.europa.eu
+ * Formats the bookshop id as link to op.europa.eu
  */
 function theme_osha_publication_bookshop_id_format($element) {
-  $url = 'https://publications.europa.eu/en/search-results' .
-    '?p_p_id=portal2012searchExecutor_WAR_portal2012portlet_INSTANCE_q8EzsBteHybf' .
-    '&p_p_lifecycle=1&p_p_state=normal&facet.author=OSHA&facet.collection=EUPub' .
-    '&language=en&startRow=1&resultsPerPage=10&SEARCH_TYPE=SIMPLE&queryText=' . urlencode(trim($element['title']));
+  $url = 'https://op.europa.eu/en/search-results' .
+    '?p_p_id=eu_europa_publications_portlet_search_executor_SearchExecutorPortlet_INSTANCE_q8EzsBteHybf' .
+    '&p_p_lifecycle=1&p_p_state=normal'.
+    '&queryText=' . urlencode(trim($element['title'])).
+    '&facet.author=OSHA&facet.collection=EUPub' .
+    '&language=en&startRow=1&resultsPerPage=10&SEARCH_TYPE=SIMPLE';
   $image_path = drupal_get_path('theme', 'osha_frontend') . '/images/content/EUPublications_logo.svg';
   return '<div class="content-order-copy">' .
     '<a href="' . $url . '" target="_blank">' . t('Order a printed copy') . '<img src="/' . $image_path .

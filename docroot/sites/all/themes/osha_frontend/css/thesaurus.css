@@ -137,6 +137,14 @@ html:lang(is) #tabs > a.active:nth-child(2):after{
  	min-width: 80%;
 }
 
+html:lang(lv) #tabs > a.active:nth-child(2):after{
+ 	min-width: 92%;
+}
+
+html:lang(lv) #tabs > a.active:nth-child(3):after{
+ 	min-width: 93%;
+}
+
 #tabs > a.active:nth-child(3):after{
 	min-width: 87%;
 	left: -8px;
@@ -380,6 +388,7 @@ h3.active .accordion-icon{
 	float: left;
 	padding-left: 5px;
 	padding-top: 5px;
+	cursor: pointer;
 }
 
 .download-content-theasaurus-small img{
@@ -513,6 +522,7 @@ html:lang(pt) .download-content-theasaurus{
     border-radius: 3px;
     font-size: 0.9em;
     line-height: 18px;
+    z-index: 999;
 }
 
 .close-thes-tooltip{

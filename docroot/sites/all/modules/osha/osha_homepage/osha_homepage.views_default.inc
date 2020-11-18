@@ -415,6 +415,15 @@ function osha_homepage_views_default_views() {
   $handler->display->display_options['fields']['field_copyright']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['field_copyright']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_copyright']['type'] = 'text_plain';
+  /* Field: Content: Updated date */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'node';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['label'] = '';
+  $handler->display->display_options['fields']['changed']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['changed']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['changed']['date_format'] = 'year';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'year';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */

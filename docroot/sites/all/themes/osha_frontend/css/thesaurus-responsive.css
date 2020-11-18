@@ -43,11 +43,16 @@
         justify-content: flex-start;
     }
     .download-content-theasaurus-label label{
-        float:none;
+        float: left;
         display:inline-block;
         width:auto;
         vertical-align: middle;
     }
+
+    .download-content-theasaurus-label .content-tooltip{
+        float: left;
+    }
+
     .download-content-theasaurus-label img{
         float:none;
         display:inline-block;
@@ -109,12 +114,27 @@
         flex-direction: column;
         float:none;
         margin:1rem 0px;
-        width:auto;
+        width: 90%!important;
         align-items: flex-start;
     }
     .download-content-theasaurus-action{
         margin-top:0.75rem;
         margin-left:0px;
+    }
+
+    .view-thesaurus-front-indexed.view #tabs, .view-thesaurus-front #tabs{
+        border-bottom: 0;
+    }
+
+    .view #tabs{
+        height: auto;
+    }
+
+    #content .view #tabs a{
+        float: none;
+        height: auto;
+        padding-left: 0;
+        margin-bottom: 1em;
     }
 }
 

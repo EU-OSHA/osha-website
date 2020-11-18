@@ -174,4 +174,25 @@ jQuery(document).ready(function($){
 		$('.fixedHeader').toggleClass('no-fixed-menu-expanded');
 	});
 
+	if (typeof _paq != 'undefined') {
+		$('.view-osha-home-banner-top .home-boxes a').click(function(e) {
+			var l = document.createElement("a");
+			l.href = jQuery(this).attr('href');
+			var path = l.pathname;
+			if (l.hostname === 'healthy-workplaces.eu') {
+				path = l.pathname.substring(3);
+			}
+			if (l.hostname === 'oiraproject.eu') {
+				path = l.pathname.substring(3);
+			}
+			if (l.hostname === 'osha.europa.eu') {
+				path = l.pathname.substring(3);
+			}
+			if (l.hostname === 'www.napofilm.net') {
+				path = l.pathname.substring(3);
+			}
+			path = 'https://' + l.hostname + path + '|' + $(this).closest('.home-boxes').data('changed');
+			_paq.push(['trackEvent', 'Banner', 'Click', path]);
+		});
+	}
 });

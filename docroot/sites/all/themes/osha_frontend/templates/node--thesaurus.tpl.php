@@ -117,11 +117,11 @@ $langList = osha_language_list(TRUE);
 	?>
 </div>
 
-<?php if ($content['field_definition']): ?>
+<?php if ($content['field_definition'] && $content['field_definition']['#language'] == $lang): ?>
 	<?php print render($content['field_definition']); ?>
 <?php endif; ?>
 
-<?php if ($content['field_synonyms'] && strlen($content['field_synonyms'][0]['#markup']) > 0): ?>
+<?php if ($content['field_synonyms'] && strlen($content['field_synonyms'][0]['#markup']) > 0  && $content['field_synonyms']['#language'] == $lang): ?>
 	<div class="field field-name-field-synonyms field-type-text field-label-above">
 		<div class="field-label"><?php print t('Synonyms'); ?>:&nbsp;
 		</div>
@@ -142,7 +142,7 @@ $langList = osha_language_list(TRUE);
 	</div>
 <?php endif; ?>
 
-<?php if ($content['field_context']): ?>
+<?php if ($content['field_context'] && $content['field_context']['#language'] == $lang): ?>
 	<div class="field field-name-field-context field-type-text-long field-label-above">
 		<div class="field-label">
 			<span class="field-aligned">
@@ -159,11 +159,11 @@ $langList = osha_language_list(TRUE);
 	</div>
 <?php endif; ?>
 
-<?php if ($content['field_term_reference']): ?>
+<?php if ($content['field_term_reference'] && $content['field_term_reference']['#language'] == $lang): ?>
 	<?php print render($content['field_term_reference']); ?>
 <?php endif; ?>
 
-<?php if ($content['field_notes']): ?>
+<?php if ($content['field_notes'] && $content['field_notes']['#langauge'] == $lang): ?>
 	<?php print render($content['field_notes']); ?>
 <?php endif; ?>
 

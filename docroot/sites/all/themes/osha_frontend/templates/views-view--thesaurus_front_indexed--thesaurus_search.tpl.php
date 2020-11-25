@@ -86,7 +86,7 @@ $langList = osha_language_list(TRUE);
 
     <div id="tabs">
       <?php
-        print l(t('Search'), 'tools-and-resources/eu-osha-thesaurus/search');
+        print l(t('Search'), 'tools-and-resources/eu-osha-thesaurus');
         print l(t('Alphabetical view'), 'tools-and-resources/eu-osha-thesaurus/alphabetical');
         print l(t('Hierarchical view'), 'tools-and-resources/eu-osha-thesaurus/hierarchical');
       ?>
@@ -112,7 +112,56 @@ $langList = osha_language_list(TRUE);
 
     <?php if ($rows): ?>
       <div class="view-content">
-        <?php print $rows; ?>
+      	<?php
+      	  $view_display = $view->style_plugin->rendered_fields;
+      	  $view_result = $view->result;
+      	  $i = 0;
+      	  foreach ($view_display as $key=>$element)
+      	  {
+      	  	$synonyms = $view_result[$i]->_entity_properties['entity object']->field_synonyms;
+      	  	$i++;
+      	  	$rowClasess = "views-row revamp-row views-row-".$i." ";
+      	  	if ($i % 2 == 0)
+      	  	{
+      	  	  $rowClasess = $rowClasess . "views-row-even";
+      	  	  if ($i == sizeof($view_display))
+      	  	  {
+      	  	  	$rowClasess = $rowClasess . " views-row-last";
+      	  	  }
+      	  	}
+      	  	else
+      	  	{
+      	  	  $rowClasess = $rowClasess . "views-row-odd";
+      	  	  if ($i == 1)
+      	  	  {
+      	  	  	$rowClasess = $rowClasess . " views-row-first";
+      	  	  }
+      	  	  else if ($i == sizeof($view_display))
+      	  	  {
+      	  	  	$rowClasess = $rowClasess . " views-row-last";
+      	  	  }
+      	  	}
+      	  	print '<div class="'.$rowClasess.'">';
+      	  	if ($element['title_field'])
+      	  	{
+      	  	  print '<div class="views-field views-field-title-field"><h2 class="field-content">'.$element['title_field'].'</h2></div>';
+      	  	}
+      	  	if ($synonyms[$lang] && $synonyms[$lang][0]['value'] != "")
+      	  	{
+      	  	  print '<div class="views-field views-field-field-synonyms"><span class="views-label views-label-field-synonyms">'.t("Synonyms").':</span> ';
+      	  	  print '<span class="field-content">'.$element['field_synonyms'].'</span></div>';
+      	  	}
+      	  	if ($element['field_definition'])
+      	  	{
+      	  	  print '<div class="views-field views-field-field-definition"><span class="field-content">'.$element['field_definition'].'</span></div>';
+      	  	}
+      	  	if ($element['view_node'])
+      	  	{
+      	  	  print '<div><div class="views-field views-field-view-node">'.$element['view_node'].'</div></div>';
+      	  	}
+      	  	print '</div>';
+      	  }
+      	?>
       </div>
     <?php elseif ($empty): ?>
       <div class="view-empty">

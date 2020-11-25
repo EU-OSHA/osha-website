@@ -272,13 +272,17 @@ $langList = osha_language_list(TRUE);
             }
             $term_desc = $term->field_field_definition[0]['rendered']['#markup'];
             $term_synonyms = [];
-            foreach($term->field_field_synonyms as $synonym)
+            // Check if there is any value for the current language in the synonyms field
+            if (sizeof($term->_field_data['nid']['entity']->field_synonyms[$lang]))
             {
-              if (strlen($synonym["rendered"]["#markup"]) > 0 && $synonym["rendered"]["#markup"] != "")
-              {
-                array_push($term_synonyms, $synonym["rendered"]["#markup"]);
-              }
-            }
+              foreach($term->field_field_synonyms as $synonym)
+	            {
+	              if (strlen($synonym["rendered"]["#markup"]) > 0 && $synonym["rendered"]["#markup"] != "")
+	              {
+	                array_push($term_synonyms, $synonym["rendered"]["#markup"]);
+	              }
+	            }	
+            }            
             $term_synonyms = implode(", ", $term_synonyms);
             $letter = strtoupper(drupal_substr($term_title, 0, 1));
             if ($letter_num[$letter] == 1) {

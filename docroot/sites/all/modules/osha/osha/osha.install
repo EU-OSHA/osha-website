@@ -839,6 +839,12 @@ function osha_update_7061() {
  * MDR-3936 Wrong symbols in the tweets in OSHmail.
  */
 function osha_update_7062() {
+}
+
+/**
+ * MDR-3936 Wrong symbols in the tweets in OSHmail.
+ */
+function osha_update_7063() {
 
   $fid = 1;
   $feed = tweet_feed_get_feed_object($fid);

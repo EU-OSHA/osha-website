@@ -85,7 +85,7 @@ $langList = osha_language_list(TRUE);
 
     <div id="tabs">
       <?php
-        print l(t('Search'), 'tools-and-resources/eu-osha-thesaurus/search');
+        print l(t('Search'), 'tools-and-resources/eu-osha-thesaurus');
         print l(t('Alphabetical view'), 'tools-and-resources/eu-osha-thesaurus/alphabetical');
         print l(t('Hierarchical view'), 'tools-and-resources/eu-osha-thesaurus/hierarchical');
       ?>

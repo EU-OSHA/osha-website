@@ -85,7 +85,7 @@ $langList = osha_language_list(TRUE);
 
     <div id="tabs">
       <?php
-        print l(t('Search'), 'tools-and-resources/eu-osha-thesaurus/search');
+        print l(t('Search'), 'tools-and-resources/eu-osha-thesaurus');
         $path = current_path();
         // The selected letter is the one on the end of the URL
         $path = explode("/",$path);

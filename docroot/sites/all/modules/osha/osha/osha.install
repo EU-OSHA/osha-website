@@ -908,3 +908,12 @@ function osha_update_7063() {
     }
   }
 }
+
+/**
+ * MDR-4029 MSDs database - "priority area" not in English.
+ */
+function osha_update_7064() {
+  $term = taxonomy_term_load(4668);
+  $term->name_original = $term->name_field['en'][0]['value'];
+  taxonomy_term_save($term);
+}

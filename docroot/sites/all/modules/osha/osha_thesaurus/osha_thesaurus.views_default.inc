@@ -1735,7 +1735,7 @@ print "<a href=\'/node/876\'>". t("See more") ."</a>";
     'title' => 'title',
     'title_field' => 'title_field',
   );
-  $handler->display->display_options['path'] = 'tools-and-resources/eu-osha-thesaurus/search';
+  $handler->display->display_options['path'] = 'tools-and-resources/eu-osha-thesaurus';
 
   /* Display: Data export Full Thesaurus */
   $handler = $view->new_display('views_data_export', 'Data export Full Thesaurus', 'views_data_export_1');

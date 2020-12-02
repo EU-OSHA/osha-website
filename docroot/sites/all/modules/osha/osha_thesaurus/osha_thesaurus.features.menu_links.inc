@@ -35,11 +35,11 @@ function osha_thesaurus_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -35,
+    'weight' => -50,
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_tools--resources:node/20',
+    'parent_identifier' => 'main-menu_eu-osha-thesaurus:tools-and-resources/eu-osha-thesaurus',
   );
   // Exported menu link: main-menu_eu-osha-thesaurus-alphabetical:tools-and-resources/eu-osha-thesaurus/alphabetical.
   $menu_links['main-menu_eu-osha-thesaurus-alphabetical:tools-and-resources/eu-osha-thesaurus/alphabetical'] = array(
@@ -66,45 +66,11 @@ function osha_thesaurus_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -33,
+    'weight' => -48,
     'customized' => 1,
     'language' => 'und',
     'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_tools--resources:node/20',
-  );
-  // Exported menu link: main-menu_eu-osha-thesaurus:tools-and-resources/eu-osha-thesaurus/search.
-  $menu_links['main-menu_eu-osha-thesaurus:tools-and-resources/eu-osha-thesaurus/search'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'tools-and-resources/eu-osha-thesaurus/search',
-    'router_path' => 'tools-and-resources/eu-osha-thesaurus/search',
-    'link_title' => 'EU-OSHA thesaurus',
-    'options' => array(
-      'alter' => TRUE,
-      'identifier' => 'main-menu_eu-osha-thesaurus:tools-and-resources/eu-osha-thesaurus/search',
-      'copyright' => array(
-        'copyright' => '',
-        'author' => '',
-      ),
-      'attributes' => array(),
-      'item_attributes' => array(
-        'id' => '',
-        'class' => '',
-        'style' => '',
-      ),
-      'content' => array(
-        'image' => 'public://menuimage/thesaurus.png',
-      ),
-    ),
-    'module' => 'menu',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => -34,
-    'customized' => 1,
-    'language' => 'und',
-    'menu_links_customized' => 1,
-    'parent_identifier' => 'main-menu_tools--resources:node/20',
+    'parent_identifier' => 'main-menu_eu-osha-thesaurus:tools-and-resources/eu-osha-thesaurus',
   );
   // Exported menu link: main-menu_thesaurus-content-type-menu-position-rule:menu-position/22.
   $menu_links['main-menu_thesaurus-content-type-menu-position-rule:menu-position/22'] = array(
@@ -126,17 +92,16 @@ function osha_thesaurus_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => 0,
-    'customized' => 0,
+    'weight' => -49,
+    'customized' => 1,
     'language' => 'und',
-    'menu_links_customized' => 0,
-    'parent_identifier' => 'main-menu_eu-osha-thesaurus:tools-and-resources/eu-osha-thesaurus/search',
+    'menu_links_customized' => 1,
+    'parent_identifier' => 'main-menu_eu-osha-thesaurus:tools-and-resources/eu-osha-thesaurus',
   );
 
   // Translatables
   // Included for use with string extractors like potx.
   t('EU-OSHA hierarchical');
-  t('EU-OSHA thesaurus');
   t('EU-OSHA thesaurus alphabetical');
   t('Thesaurus Content Type (menu position rule)');
 

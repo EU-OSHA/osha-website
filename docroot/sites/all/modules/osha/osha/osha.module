@@ -1871,6 +1871,22 @@ function osha_page_build(&$page) {
   }
 }
 
+function osha_tweet_feed_tweet_save_alter($node, $tweet) {
+
+  $tweet_text = !empty($tweet->retweeted_status->full_text) ? $tweet->retweeted_status->full_text : $tweet->full_text;
+
+  $value = tweet_feed_filter_iconv_text(
+    tweet_feed_filter_smart_quotes(
+      tweet_feed_format_output($tweet_text, 1)
+    )
+  );
+
+  $node->field_tweet_contents[$node->language][0] = array(
+    'value' => $value,
+    'format' => 'full_html',
+  );
+}
+
 /**
  * Add alt and title attributes to images thumbnails
  */

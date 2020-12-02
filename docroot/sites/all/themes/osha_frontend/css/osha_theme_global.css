@@ -342,6 +342,13 @@
 	    overflow-x: auto;
 	    width: 300px;
 	}
+
+	.content-order-copy img{
+		display: block;
+	    float: none;
+	    margin-left: 0;
+	    margin-top: 1em;
+	}
 }
 
  

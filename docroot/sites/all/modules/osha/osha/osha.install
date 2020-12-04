@@ -913,7 +913,29 @@ function osha_update_7063() {
  * MDR-4029 MSDs database - "priority area" not in English.
  */
 function osha_update_7064() {
-  $term = taxonomy_term_load(4668);
-  $term->name_original = $term->name_field['en'][0]['value'];
-  taxonomy_term_save($term);
+}
+
+/**
+ * MDR-4029 MSDs database - "priority area" not in English.
+ */
+function osha_update_7065() {
+  $vocabularies = taxonomy_get_vocabularies();
+  foreach ($vocabularies as $vid => $vocabulary) {
+    if (!$vocabulary->base_i18n_mode) {
+      continue;
+    }
+    $tree = taxonomy_get_tree($vocabulary->vid, 0, NULL, TRUE);
+    foreach ($tree as $term) {
+      if (!property_exists($term, 'name_field')) {
+        continue;
+      }
+      if (count($term->name_field) > 2) {
+        if (($term->language != 'en') || ($term->name_original != $term->name_field['en'][0]['value'])) {
+          $term->name_original = $term->name_field['en'][0]['value'];
+          $term->language = 'en';
+          taxonomy_term_save($term);
+        }
+      }
+    }
+  }
 }

@@ -16,6 +16,7 @@ dependencies[] = osha_press_release
 dependencies[] = osha_seminar
 dependencies[] = osha_sites_migration
 dependencies[] = osha_taxonomies
+dependencies[] = osha_thesaurus
 dependencies[] = text
 dependencies[] = title
 dependencies[] = views

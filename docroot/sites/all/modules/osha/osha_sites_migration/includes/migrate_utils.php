@@ -61,9 +61,13 @@ function osha_migration_normalize_field_text_long($row, $field_name, $field_info
       if (!empty($filter_languages) && !in_array($language, $filter_languages)) {
         continue;
       }
-      foreach($values as $v) {
+      foreach ($values as $v) {
         $field[] = $v['value'];
         $languages[] = $language;
+        $v['format'] = str_replace('audio_visual', 'full_html', $v['format']);
+        if (!$v['format']) {
+          $v['format'] = 'full_html';
+        }
         $format[] = $v['format'];
       }
     }

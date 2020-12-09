@@ -7,6 +7,17 @@ include_once 'osha.pathauto.inc';
 define('OSHA_ARTICLE_CONTENT_TYPE_ARTICLE', 'article');
 define('OSHA', 'OSHA');
 
+function osha_clone_link($nid, $type) {
+  global $user;
+  if (user_access('edit any dangerous_substances content', $user) && ($type == 'dangerous_substances')) {
+    return ' ' . l('clone', 'node/' . $nid . '/clone');
+  }
+  if (user_access('edit any musculoskeletal_disorders content', $user) && ($type == 'musculoskeletal_disorders')) {
+    return ' ' . l('clone', 'node/' . $nid . '/clone');
+  }
+  return '';
+}
+
 /**
  * Implements hook_token_info().
  */

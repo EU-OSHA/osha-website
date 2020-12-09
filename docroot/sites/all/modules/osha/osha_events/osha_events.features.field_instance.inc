@@ -1057,7 +1057,7 @@ Grey - Only web or not attendance',
     'bundle' => 'events',
     'default_value' => array(
       0 => array(
-        'value' => 'Yes',
+        'value' => 'No',
       ),
     ),
     'deleted' => 0,

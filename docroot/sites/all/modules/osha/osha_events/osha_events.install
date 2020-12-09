@@ -337,5 +337,4 @@ function osha_events_update_7033() {
  * MHWC-539 Event creation: For the web/Public field should be 'YES'.
  */
 function osha_events_update_7034() {
-  features_revert(array('osha_events' => array('field_instance')));
 }

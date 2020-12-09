@@ -8,18 +8,18 @@
 /**
  * Implements hook_menu().
  */
-function eu_captcha_menu() {
-  $items = array();
-  $items['admin/config/people/captcha/eu_captcha'] = array(
-    'title' => 'EU CAPTCHA',
-    'file' => 'eu_captcha.admin.inc',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('eu_captcha_settings_form'),
-    'access arguments' => array('administer CAPTCHA settings'),
-    'type' => MENU_LOCAL_TASK,
-  );
-  return $items;
-}
+//function eu_captcha_menu() {
+//  $items = array();
+//  $items['admin/config/people/captcha/eu_captcha'] = array(
+//    'title' => 'EU CAPTCHA',
+//    'file' => 'eu_captcha.admin.inc',
+//    'page callback' => 'drupal_get_form',
+//    'page arguments' => array('eu_captcha_settings_form'),
+//    'access arguments' => array('administer CAPTCHA settings'),
+//    'type' => MENU_LOCAL_TASK,
+//  );
+//  return $items;
+//}
 
 /**
  * Implements hook_captcha().
@@ -31,75 +31,19 @@ function eu_captcha_captcha($op, $captcha_type = '') {
 
     case 'generate':
       if ($captcha_type == 'EUCAPTCHA') {
-        $eu_captcha_type = variable_get('eu_captcha_type', 'string');
-
-        $result = array();
-
-        $captcha_path = drupal_get_path('module', 'eu_captcha');
-        drupal_add_js($captcha_path . '/captcha.js', array('defer' => TRUE, 'async' => TRUE, 'preprocess' => FALSE));
-        require_once $captcha_path . '/captchalib.php';
-
-        global $language;
-
-        $use_transparent_text = variable_get('eu_captcha_use_transparent_text', '0') ? 'true' : 'false';
-        $case_sensitive = variable_get('eu_captcha_case_sensitive', '0') ? 'true' : 'false';
-        $autodetect_protocol = variable_get('eu_captcha_autodetect_protocol', '1') ? 'true' : 'false';
-        $lang = 'en';
-        if (!empty($language->language) && $language->language != LANGUAGE_NONE) {
-          $lang = $language->language;
-        }
-
-        $create_captcha
-          = '<SPAN class="captcha"><!--
-          {
-              "lang":"' . $lang . '",
-              "type":"' . $eu_captcha_type . '",
-              "length":' . variable_get('eu_captcha_length', 6) . ',
-              "case_sensitive":' . $case_sensitive . ',
-              "autodetect_protocol":"' . $autodetect_protocol . '",
-              "perturbation":' . variable_get('eu_captcha_perturbation', 0.6) . ',
-              "num_lines":' . variable_get('eu_captcha_num_lines', 8) . ',
-              "noise_level":' . variable_get('eu_captcha_noise_level', 0) . ',
-              "image_bg_color":"' . variable_get('eu_captcha_image_bg_color', '') . '",
-              "text_color":"' . variable_get('eu_captcha_text_color', '') . '",
-              "line_color":"' . variable_get('eu_captcha_line_color', '') . '",
-              "noise_color":"' . variable_get('eu_captcha_noise_color', '') . '",
-              "use_transparent_text":' . $use_transparent_text . ',
-              "text_transparency_percentage":' . variable_get('eu_captcha_text_transparency_percentage', 0) . '
-          }
-          //--></SPAN>';
-
+        drupal_add_js('https://europa.eu/webtools/load.js', array('defer' => TRUE, 'async' => TRUE));
         $result['form']['captcha_image'] = array(
-          '#type' => 'markup',
-          '#markup' => $create_captcha,
           '#weight' => -1,
-        );
-        if ($eu_captcha_type == 'string') {
-          $title = t('What code is in the image?');
-          $description = t('Enter the characters shown in the image.');
-        }
-        else {
-          $title = t('Answer the math problem:');
-          $description = t('Solve the problem and write the answer.');
-        }
-        $result['form']['captcha_response'] = array(
-          '#type' => 'textfield',
-          '#title' => $title,
-          '#description' => $description,
-          '#weight' => 0,
-          '#name' => 'security_code',
-          '#size' => 15,
-          '#attributes' => array(
-            'id' => 'security_code',
-          ),
-        );
-        $result['captcha_validate'] = 'eu_captcha_validation';
-        $result['solution'] = '';
+          '#type' => 'markup',
+          '#markup' => '<script type="application/json">{
+        "service": "captcha"
 
+</script>
+',
+        );
         return $result;
       }
       break;
-
   }
 }
 
@@ -107,8 +51,22 @@ function eu_captcha_captcha($op, $captcha_type = '') {
  * Implements hook_validate().
  */
 function eu_captcha_validation() {
-  $captcha_path = drupal_get_path('module', 'eu_captcha');
-  require_once $captcha_path . '/captchalib.php';
-  $check = captcha_check_answer();
-  return $check->is_valid;
+  if (isset($_REQUEST['wt_captcha_answer']) && isset($_REQUEST['wt_captcha_sid'])) {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL,"https://europa.eu/webtools/rest/captcha/verify.php");
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS,
+      "sid=" . $_REQUEST['wt_captcha_sid'] . "&answer=" . $_REQUEST['wt_captcha_answer']);
+
+    curl_setopt($ch, CURLOPT_FILETIME, TRUE);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+    $content = curl_exec($ch);
+    curl_close($ch);
+    if ($content['http_code'] == 200) {
+      return TRUE;
+    }
+    return FALSE;
+  }
+  return FALSE;
 }

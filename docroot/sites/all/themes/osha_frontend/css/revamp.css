@@ -1480,6 +1480,13 @@ html[lang=hu] .page-tools-and-publications .views-exposed-widget label{
     border-bottom: 1px solid #dc2f82;
 }
 
+.pub-text a[target="_blank"] { 
+    background: url(../images/external_link.png) no-repeat scroll 100% 40% rgba(0,0,0,0);
+    padding-right: 12px;
+    margin-right: 2px;
+    background-size: 8px 10px;
+}
+
 .content-downloads {
     float: left;
     width: 30%;

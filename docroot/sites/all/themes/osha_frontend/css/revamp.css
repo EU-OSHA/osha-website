@@ -1475,12 +1475,9 @@ html[lang=hu] .page-tools-and-publications .views-exposed-widget label{
 }
 
 .pub-text a{
-    color:#c72272;
-
-}
-
-.pub-text a:hover{
-    color:#003399;
+    text-decoration: none;
+    color: #003399;
+    border-bottom: 1px solid #dc2f82;
 }
 
 .content-downloads {

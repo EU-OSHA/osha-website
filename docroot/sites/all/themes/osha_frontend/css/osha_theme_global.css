@@ -2308,6 +2308,10 @@ ul[data-sa-theme="basic-blue"].ui-menu{
 		padding-bottom: 0;
 	}
 
+	.contact-form{
+		width: 86%;
+	}
+
 }
 @media screen and (max-width: 680px) {
 	.menu-block-3 ul li, .page-node-5 .menu-block-3 ul li {

@@ -100,6 +100,7 @@ function osha_events_strongarm() {
   $strongarm->value = array(
     'full' => 'full',
     'teaser' => 'teaser',
+    'newsletter_alt' => 'newsletter_alt',
     'osha_resources' => 'osha_resources',
     'rss' => 0,
     'search_index' => 0,

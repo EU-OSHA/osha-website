@@ -6727,9 +6727,22 @@ body.page-node-5429 .oshwiki-featured-articles {
 	background: #e8eef7;
 }
 
+.contact-form .form-item{
+	padding-top: 10px;
+}
+
+.contact-form .fieldset-description{
+	line-height: initial;
+    padding-bottom: 10px;
+}
+
 .contact-form fieldset{
 	margin-top:1em;
 	margin-bottom:1em;
+}
+
+.wt-captcha__inner{
+	width: 80% !important;
 }
 
 .contact-form fieldset.captcha{

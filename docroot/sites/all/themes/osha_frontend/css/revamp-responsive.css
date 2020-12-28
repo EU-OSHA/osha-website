@@ -602,7 +602,27 @@
         padding: 0;
     }
 
-    #edit-actions{
+    #block-search-form #edit-actions{
+        background: url(../images/menu-search-ico.png) no-repeat scroll 100% 0 rgba(0, 0, 0, 0);
+        border-color: inherit;
+        border-style: none;
+        border-width: 0;
+        color: transparent;
+        cursor: pointer;
+        height: 25px;
+        margin-left: 5px;
+        text-align: left;
+        width: 30px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 99999999999999999999;
+        cursor: pointer;
+        margin: 0;
+        padding: 0;
+    }
+
+    #block-search-form #edit-actions--2{
         background: url(../images/menu-search-ico.png) no-repeat scroll 100% 0 rgba(0, 0, 0, 0);
         border-color: inherit;
         border-style: none;
@@ -649,7 +669,11 @@
         transition: width .3s ease-in-out;
     }   
 
-    #edit-submit--2{
+    #block-search-form #edit-submit--2{
+        pointer-events: none;
+    }
+
+    #block-search-form #edit-submit--3{
         pointer-events: none;
     }
 

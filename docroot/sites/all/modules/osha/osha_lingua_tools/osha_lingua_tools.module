@@ -42,7 +42,7 @@ function osha_lingua_clone_node($source_node) {
 
   $node->language = $source_node->language;
   $node->uid = $user->uid;
-  $node->status = 0;
+  $node->status = $source_node->status;
   $node->promote = $source_node->promote;
 
   $fields = field_info_instances('node', $source_node->type);

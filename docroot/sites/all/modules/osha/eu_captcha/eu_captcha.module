@@ -6,22 +6,6 @@
  */
 
 /**
- * Implements hook_menu().
- */
-//function eu_captcha_menu() {
-//  $items = array();
-//  $items['admin/config/people/captcha/eu_captcha'] = array(
-//    'title' => 'EU CAPTCHA',
-//    'file' => 'eu_captcha.admin.inc',
-//    'page callback' => 'drupal_get_form',
-//    'page arguments' => array('eu_captcha_settings_form'),
-//    'access arguments' => array('administer CAPTCHA settings'),
-//    'type' => MENU_LOCAL_TASK,
-//  );
-//  return $items;
-//}
-
-/**
  * Implements hook_captcha().
  */
 function eu_captcha_captcha($op, $captcha_type = '') {

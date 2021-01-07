@@ -1475,12 +1475,16 @@ html[lang=hu] .page-tools-and-publications .views-exposed-widget label{
 }
 
 .pub-text a{
-    color:#c72272;
-
+    text-decoration: none;
+    color: #003399;
+    border-bottom: 1px solid #dc2f82;
 }
 
-.pub-text a:hover{
-    color:#003399;
+.pub-text a[target="_blank"] { 
+    background: url(../images/external_link.png) no-repeat scroll 100% 40% rgba(0,0,0,0);
+    padding-right: 12px;
+    margin-right: 2px;
+    background-size: 8px 10px;
 }
 
 .content-downloads {

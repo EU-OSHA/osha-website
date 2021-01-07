@@ -6719,27 +6719,39 @@ body.page-node-5429 .oshwiki-featured-articles {
 
 /*CONTACT US*/
 
-.contact-form {
+.contact-form{
 	border: 1px solid #CCC;
-	width: 40%;
+	width: 60%;
 	padding: 1em;
 	margin-top: 1em;
 	background: #e8eef7;
 }
 
-.contact-form  fieldset{
+.contact-form .form-item{
+	padding-top: 10px;
+}
+
+.contact-form .fieldset-description{
+	line-height: initial;
+    padding-bottom: 10px;
+}
+
+.contact-form fieldset{
 	margin-top:1em;
 	margin-bottom:1em;
 }
 
-.contact-form  fieldset.captcha{
+.wt-captcha__inner{
+	width: 80% !important;
+}
+
+.contact-form fieldset.captcha{
 	display:block;
 }
 
-.contact-form  fieldset.captcha legend span{
+.contact-form fieldset.captcha legend span{
 	padding:1em;
 }
-
 
 .contact_us_box{
 	float:left;
@@ -6748,11 +6760,9 @@ body.page-node-5429 .oshwiki-featured-articles {
 	min-height:11em;
 }
 
-
 .contact_us_box.clear{
 	clear:both;
 }
-
 
 .contact_us_title{
 	color: #003399;
@@ -6767,7 +6777,7 @@ body.page-node-5429 .oshwiki-featured-articles {
 	width:100%!important;
 }
 
-.contact-form  #edit-actions  #edit-submit{
+#content .contact-form #edit-actions #edit-submit{
 	background: url("../images/flecha.png") no-repeat scroll 96% center #e8eef7;
 	border: 0 none;
 	color: #003399;
@@ -6782,6 +6792,11 @@ body.page-node-5429 .oshwiki-featured-articles {
 	text-align: left;
 	width: auto!important;
 	margin-top: 1em;
+	position: relative;
+}
+
+#content .contact-form label{
+	padding-top: 10px;
 }
 
 .contact-form div .grippie{

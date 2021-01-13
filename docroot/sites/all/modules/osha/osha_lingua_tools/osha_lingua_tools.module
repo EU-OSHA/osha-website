@@ -15,6 +15,26 @@ function osha_lingua_tools_permission() {
   return $permissions;
 }
 
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ */
+function osha_lingua_tools_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+  if ($form_id == 'dangerous_substances_node_form') {
+    if (user_access('edit any dangerous_substances content', $user)) {
+      $form['options']['#access'] = TRUE;
+    }
+  }
+
+  if ($form_id == 'musculoskeletal_disorders_node_form') {
+    if (user_access('edit any musculoskeletal_disorders content', $user)) {
+      $form['options']['#access'] = TRUE;
+    }
+  }
+}
+
+
 function linguatools_access($node) {
   global $user;
   $type = is_string($node) ? $node : $node->type;
@@ -42,7 +62,7 @@ function osha_lingua_clone_node($source_node) {
 
   $node->language = $source_node->language;
   $node->uid = $user->uid;
-  $node->status = 0;
+  $node->status = $source_node->status;
   $node->promote = $source_node->promote;
 
   $fields = field_info_instances('node', $source_node->type);

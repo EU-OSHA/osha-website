@@ -76,20 +76,6 @@ jQuery(document).ready(function($){
 		        //$("#edit-submit--2").click() TO DO
 		    }
 		});
-
-		$('#edit-actions--2').on('click', function() {
-		    if ($('#edit-search-block-form--2').css('opacity') == 0) {
-		       $('#edit-search-block-form--2').css('display', 'block');
-		       $('#edit-search-block-form--2').addClass('expand');
-		       $('#block-search-form').addClass('expand');
-		    }
-		    else {
-		        $('#edit-search-block-form--2').css('display', 'none');
-		        $('#edit-search-block-form--2').removeClass('expand');
-		        $('#block-search-form').removeClass('expand');
-		        //$("#edit-submit--2").click() TO DO
-		    }
-		});
 	}
 
 

@@ -6745,6 +6745,120 @@ body.page-node-5429 .oshwiki-featured-articles {
 	width: 80% !important;
 }
 
+
+/* Captcha Right column Home page */
+.region-sidebar-second #block-osha-newsletter-osha-newsletter-subscribe .wt-captcha__inner{
+	width: 222px !important;
+	padding-right: 10px;
+}
+
+.region-sidebar-second #block-osha-newsletter-osha-newsletter-subscribe .wt-captcha__inner label{
+	color: #404040;
+	font-weight: normal;
+	font-size: 13px;
+	padding-top: 0;
+	padding-right: 0;
+	line-height: 18px;
+}
+
+.region-sidebar-second #block-osha-newsletter-osha-newsletter-subscribe .wt-captcha__inner br{
+	display: none;
+}
+
+.region-sidebar-second #block-osha-newsletter-osha-newsletter-subscribe .wt-captcha__inner strong{
+	display: block;
+	padding-bottom: 5px;
+}
+
+.region-sidebar-second #block-osha-newsletter-osha-newsletter-subscribe .wt-captcha .wt-captcha__slider{
+	padding-bottom: 0;
+}
+
+.region-sidebar-second #block-osha-newsletter-osha-newsletter-subscribe .wt-captcha .wt-captcha__answer{
+	font-size: 13px;
+    padding-top: 20px;
+}
+/* END Captcha Right column Home page */
+
+/* Captcha Footer Home page */
+#footer .wt-captcha{
+	margin-top: 15px;
+}
+
+#footer .wt-captcha__inner{
+	width: 398px !important;
+	padding-right: 10px;
+}
+
+#footer .wt-captcha__inner label{
+	color: #404040;
+	font-weight: normal;
+	font-size: 13px;
+	padding-top: 0;
+	padding-right: 0;
+	line-height: 18px;
+}
+
+#footer .wt-captcha__inner br{
+	display: none;
+}
+
+#footer .wt-captcha__inner strong{
+	display: block;
+	padding-bottom: 5px;
+}
+
+#footer .wt-captcha .wt-captcha__slider{
+	padding-bottom: 0;
+}
+
+#footer .wt-captcha .wt-captcha__answer{
+	color: #404040;
+	font-size: 13px;
+    padding-top: 10px;
+}
+/* END Captcha Footer Home page */
+
+/* Captcha Contact us */
+#content .contact-form .wt-captcha{
+	margin-top: 15px;
+}
+
+#content .contact-form .wt-captcha__inner{
+	width: 96% !important;
+	padding-right: 10px;
+}
+
+#content .contact-form .wt-captcha__inner label{
+	color: #404040;
+	font-weight: normal;
+	font-size: 13px;
+	padding-top: 0;
+	padding-right: 0;
+	line-height: 18px;
+}
+
+#content .contact-form .wt-captcha__inner br{
+	display: none;
+}
+
+#content .contact-form .wt-captcha__inner strong{
+	display: block;
+	padding-bottom: 5px;
+}
+
+#content .contact-form .wt-captcha .wt-captcha__slider{
+	padding-bottom: 0;
+}
+
+#content .contact-form .wt-captcha .wt-captcha__answer{
+	color: #404040;
+	font-size: 13px;
+    padding-top: 10px;
+}
+
+/* END Captcha Contact us */
+
 .contact-form fieldset.captcha{
 	display:block;
 }

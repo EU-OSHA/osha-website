@@ -550,7 +550,7 @@ a.box-link{
     font-weight: bold;
     min-width: 120px;
     height: 35px;
-    margin-top: -22px !important;
+    margin-top: 0 !important;
     margin-left: 2em;
 }
 

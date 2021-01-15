@@ -83,6 +83,11 @@ $langList = osha_language_list(TRUE);
       </div>
     </div>
 
+    <?php
+      $block = block_load('views','f8943d024f1b482909a322eb70d8f514');
+      print drupal_render(_block_get_renderable_array(_block_render_blocks(array($block))));
+    ?>
+
     <div id="tabs">
       <?php
         print l(t('Search'), 'tools-and-resources/eu-osha-thesaurus');

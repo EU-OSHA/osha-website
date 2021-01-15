@@ -313,17 +313,24 @@ h3.active .accordion-icon{
 	clear: both;
 }
 
+.view-thesaurus-front-indexed .views-exposed-widgets,
+.view-thesaurus-front .views-exposed-widgets{
+	clear: both;
+}
+
 .view-thesaurus-front-indexed .views-label-field-synonyms{
 	color: #003399;
 }
 
-.view-thesaurus-front-indexed #edit-search-api-views-fulltext-wrapper{
+.view-thesaurus-front-indexed #edit-search-api-views-fulltext-wrapper,
+.view-thesaurus-front #edit-search-api-views-fulltext-wrapper{
 	background-image: none;
     margin-right: 1em;
     padding-top: 1em;
 }
 
-.view-thesaurus-front-indexed #edit-search-api-views-fulltext{
+.view-thesaurus-front-indexed #edit-search-api-views-fulltext,
+.view-thesaurus-front #edit-search-api-views-fulltext{
 	height: 37px;
     border: 1px solid #003399;
     border-radius: 5px;
@@ -336,7 +343,8 @@ h3.active .accordion-icon{
     font-size: 13px;
 }
 
-.view-thesaurus-front-indexed .views-exposed-widget.views-widget-sort-by {
+.view-thesaurus-front-indexed .views-exposed-widget.views-widget-sort-by,
+.view-thesaurus-front .views-exposed-widget.views-widget-sort-by{
     width: 22%!important;
 }
 
@@ -349,6 +357,10 @@ h3.active .accordion-icon{
 	float: left;
 	width: 462px;
 	margin-right: 1em;
+}
+
+.intro-text-thesaurus p{
+	margin: 1.5em 0;
 }
 
 .page-node.node-type-thesaurus .intro-text-thesaurus {

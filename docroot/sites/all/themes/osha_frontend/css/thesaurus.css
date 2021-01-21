@@ -29,6 +29,36 @@
 	border-bottom: 2px solid #dc2f82 !important;
 }
 
+
+.glossary-letters .container {
+    float: left;
+    padding: 1em;
+}
+.glossary-letters {
+    float: left;
+    clear: both;
+    width: 100%;
+    border-top: 2px solid #003399;
+    border-bottom: 2px solid #003399;
+    margin-top: 16px;
+    margin-bottom: 2em;    
+}
+.glossary-letters span {
+    display: block;
+    float: left;
+    padding-right: 1em;
+}
+#content .glossary-letters span a {
+    color: #003399;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-bottom: 0;
+}
+.view-thesaurus-front .glossary-letters span a.active {
+    border-bottom: 2px solid #dc2f82 !important;
+}
+
+
 /*Hierarchical*/
 #tree{
 	padding: 2px;
@@ -545,4 +575,8 @@ html:lang(pt) .download-content-theasaurus{
     color: #003399;
     font-weight: bold;
     cursor: pointer;
+}
+
+html[lang=el] .view-thesaurus-front .views-exposed-form label{
+	font-size: 0.9em;
 }

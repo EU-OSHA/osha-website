@@ -29,7 +29,6 @@
 	border-bottom: 2px solid #dc2f82 !important;
 }
 
-
 .glossary-letters .container {
     float: left;
     padding: 1em;
@@ -57,7 +56,6 @@
 .view-thesaurus-front .glossary-letters span a.active {
     border-bottom: 2px solid #dc2f82 !important;
 }
-
 
 /*Hierarchical*/
 #tree{
@@ -534,7 +532,6 @@ html:lang(pt) .intro-text-thesaurus{
 html:lang(de) .download-content-theasaurus,
 html:lang(el) .download-content-theasaurus{
 	width: 327px;
-
 }
 
 html:lang(fr) .download-content-theasaurus,

@@ -1,5 +1,5 @@
-<?php
-
+﻿<?php
+header ('Content-type: text/html; charset=utf-8');
 /**
  * @file
  * Main view template.
@@ -78,11 +78,18 @@ $langList = osha_language_list(TRUE);
               $path = file_create_url($path);
             ?>
           </select>
-          <a id="language-export-button" href="<?php print $path; ?>thesaurus-export/EU-OSHA_thesaurus_<?php print $selectedLang; ?>.xls"><img class="download" src="/sites/all/themes/osha_frontend/images/download-thesaurus.png" alt="<?php print t('Download'); ?>" title="<?php print t('Download'); ?>"></a>
+		    <a id="language-export-button" href="<?php print $path; ?>thesaurus-export/EU-OSHA_thesaurus_<?php print $selectedLang; ?>.xls"><img class="download" src="/sites/all/themes/osha_frontend/images/download-thesaurus.png" alt="<?php print t('Download'); ?>" title="<?php print t('Download'); ?>"></a>
         </div>
       </div>
+	  
     </div>
+  
+	
 
+    <?php
+      $block = block_load('views','f8943d024f1b482909a322eb70d8f514');
+      print drupal_render(_block_get_renderable_array(_block_render_blocks(array($block))));
+    ?>
     <div id="tabs">
       <?php
         print l(t('Search'), 'tools-and-resources/eu-osha-thesaurus');
@@ -104,211 +111,49 @@ $langList = osha_language_list(TRUE);
       ?>
     </div>
 
-    <div class="view-content">
-      <?php
-      $path = current_path();
-      // The selected letter is the one on the end of the URL
-      $path = explode("/",$path);
-      if (end($path) != "alphabetical")
-      {
-        $selectedLetter = mb_strtoupper(end($path));
-      }
-      $thesaurus_list = views_get_view_result('thesaurus_front', 'thesaurus_alphabetical');
-      $alphabets = array(
-        "bg"=>'А Б В Г Д Е Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Ъ Ь Ю Я',
-        "cs"=>'A B C Č D Ď E F G H I J K L M N Ň O P Q R Ř S Š T Ť U V W X Y Z Ž',
-        "da"=>'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z Å Æ Ø',
-        "de"=>'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z Ä Ö Ü ß',
-        "et"=>'A B C D E F G H I J K L M N O P Q R S Š Z Ž T U V W Õ Ä Ö Ü X Y',
-        "el"=>'Α Β Γ Δ Ε Ζ Η Θ Ι Κ Λ Μ Ν Ξ Ο Π Ρ Σ Τ Υ Φ Χ Ψ Ω',
-        "en"=>'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z',
-        "es"=>'A B C D E F G H I J K L M N Ñ O P Q R S T U V W X Y Z',
-        "fr"=>'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z',
-        "hr"=>'A B C Č Ć D Đ E F G H I J K L M N O P Q R S Š T U V W Z Ž',
-        "is"=>'A Á B C D Đ E É F G H I Í J K L M N O Ó P Q R S T U Ú V W X Y Ý Þ Æ Ö',
-        "it"=>'A B C D E F G H I K L M N O P Q R S T U V Z',
-        "lv"=>'A Ā B C Č D E Ē F G Ģ H I Ī J K Ķ L Ļ M N Ņ O P R S Š T U Ū V Z Ž',
-        "lt"=>'A Ą B C Č D E Ę Ė F G H I Į Y J K L M N O P R S Š T U Ų Ū V Z Ž',
-        "hu"=>'A Á B C D E É F G H I Í J K L M N O Ó Ö Ő P Q R S T U Ú Ü Ű V W X Y Z',
-        "mt"=>'A B Ċ D E F Ġ G H Ħ I J K L M N O P Q R S T U V W X Ż Z',
-        "nl"=>'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z',
-        "no"=>'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z Æ Ø Å',
-        "pl"=>'A Ą B C Ć D E Ę F G H I J K L Ł M N Ń O Ó P R S Ś T U V W Y Z Ź Ż',
-        "pt"=>'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z',
-        "ro"=>'A Ă Â B C D E F G H I Î J K L M N O P Q R S Ș T U V W X Y Z',
-        "sk"=>'A Á Ä B C Č D Ď E É F G H I Í J K L Ĺ Ľ M N Ň O Ó Ô P Q R Ŕ S Š T Ť U Ú V W X Y Ý Z Ž',
-        "sl"=>'A B C Č D E F G H I J K L M N O P R S Š T U V W Z Ž',
-        "fi"=>'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z Å Ä Ö',
-        "sv"=>'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z Å Ä Ö',
-      );
-      $alphas = t($alphabets[$lang]);
-      $alphas = explode(' ', $alphas);
-      $letters = [];
-      $letter_num = [];
-      foreach ($thesaurus_list as $term) {
-        $term_title = $term->field_title_field[0]['rendered']['#markup'];
-        if (drupal_substr($term_title, 0, 1) == "«" || drupal_substr($term_title, 0, 1) == "1")
-        {
-          /*dpm(preg_replace('/\W+/', '', $term_title));
-          dpm(preg_replace('/[^\w]+/', '', $term_title));
-          dpm(preg_replace("/&#?[a-z0-9]+;/i",'',$term_title));*/
-        }
-        // Remove the quotation marks from the string
-        $term_title = preg_replace("/&#?[a-z0-9]+;/i",'',$term_title);
-        if (drupal_substr($term_title, 0, 1) == "«" || drupal_substr($term_title, 0, 1) == "„" || drupal_substr($term_title, 0, 1) == "("
-            || drupal_substr($term_title, 0, 1) == "“" || drupal_substr($term_title, 0, 1) == "[")
-        {
-          $term_title = preg_replace('/[^\w]+/', '', $term_title);
-        }
-        // Remove white space from beginning and end of the string
-        $term_title = trim($term_title);
-        $letter = drupal_substr($term_title, 0, 1);
-        $letter = mb_strtoupper($letter);
-        $letters[$letter] = $letter;
-        @$letter_num[$letter]++;
-      }
-      ksort($letters);
-      // Check if the selected letter is one of the letters for the current language
-      if (!in_array($selectedLetter, $alphas) && !in_array($selectedLetter, $letters))
-      {
-        unset($selectedLetter);
-      }
-      echo '<div id="glossary-letters"><div class="container">';
-      foreach ($alphas as $letter) {
-        if (!empty($letters[$letter])) {
-          if ($selectedLetter == null)
-          {
-            $selectedLetter = mb_strtoupper($letter);
-          }
-          print '<span><a href="/'.$lang.'/tools-and-resources/eu-osha-thesaurus/alphabetical/' . mb_strtolower($letter) . '"';
-          if ($letter==$selectedLetter)
-          {
-          	print 'class="active"';
-          }
-          print '>' . $letter . '</a></span>';
-        }
-        else {
-          print '<span>' . $letter . '</span>';
-        }
-      }
-      foreach ($letters as $letter) {
-        if (in_array(mb_strtoupper($letter), $alphas)) {
-          continue;
-        }
-        if ($lang == "cs" || $lang == "es" || $lang == "et" || $lang == "fr" || $lang == "pt" || $lang == "ro")
-        {
-          if (mb_strtoupper($letter) == "Á" || mb_strtoupper($letter) == "Â" || mb_strtoupper($letter) == "É" || mb_strtoupper($letter) == "Ó" ||
-          mb_strtoupper($letter) == "Ş" || mb_strtoupper($letter) == "Ś" || mb_strtoupper($letter) == "Ţ" || mb_strtoupper($letter) == "Ú")
-          {
-            continue;
-          }
-        }
-        if ($selectedLetter == null)
-        {
-          $selectedLetter = mb_strtoupper($letter);
-        }
-        print '<span><a href="/'.$lang.'/tools-and-resources/eu-osha-thesaurus/alphabetical/' . mb_strtolower($letter) . '"';
-        if ($letter==$selectedLetter)
-	    {
-	      print 'class="active"';
-	    }
-	    print '>' . $letter . '</a></span>';
-      }
-      echo '</div></div>';
-      $prev_letter = '';
-      ?>
-
-      <div class="content-term">
-        <dl>
-          <?php
-          foreach ($thesaurus_list as $term) {
-            $dd_class = '';
-            $term_path = "/".$lang."/tools-and-resources/eu-osha-thesaurus/term/". $term->field_field_term_id['0']['raw']['value'];
-            $term_title = $term->field_title_field[0]['rendered']['#markup'];
-            $titleFirstLetter = trim(preg_replace("/&#?[a-z0-9]+;/i",'',$term_title));
-            if (drupal_substr($titleFirstLetter, 0, 1) == "«" || drupal_substr($titleFirstLetter, 0, 1) == "„" || drupal_substr($titleFirstLetter, 0, 1) == "("
-            || drupal_substr($titleFirstLetter, 0, 1) == "“" || drupal_substr($titleFirstLetter, 0, 1) == "[")
-            {
-              $titleFirstLetter = preg_replace('/[^\w]+/', '', $titleFirstLetter);
-            }
-            $titleFirstLetter = mb_strtoupper(drupal_substr($titleFirstLetter, 0, 1));
-
-            if (($lang == "es" || $lang == "pt") && $titleFirstLetter == "Á")
-            {
-              $titleFirstLetter = "A";
-            }
-            else if ($lang == "fr" && $titleFirstLetter == "Â")
-            {
-              $titleFirstLetter = "A";
-            }
-            else if (($lang == "cs" || $lang == "es" || $lang=="fr" || $lang == "pt") && $titleFirstLetter == "É")
-            {
-              $titleFirstLetter = "E";
-            }
-            else if (($lang == "es" || $lang == "pt") && $titleFirstLetter == "Ó")
-            {
-              $titleFirstLetter = "O";
-            }
-            else if ($lang == "et" && $titleFirstLetter == "Ś")
-            {
-              $titleFirstLetter = "S";
-            }
-            else if ($lang == "ro" && $titleFirstLetter == "Ş")
-            {
-              $titleFirstLetter = "Ș";
-            }
-            else if ($lang == "ro" && $titleFirstLetter == "Ţ")
-            {
-              $titleFirstLetter = "T";
-            }
-            else if (($lang == "cs" || $lang == "es") && $titleFirstLetter == "Ú")
-            {
-              $titleFirstLetter = "U";
-            }
-
-            if ($titleFirstLetter != $selectedLetter)
-            {
-              continue;
-            }
-            $term_desc = $term->field_field_definition[0]['rendered']['#markup'];
-            $term_synonyms = [];
-            // Check if there is any value for the current language in the synonyms field
-            if (sizeof($term->_field_data['nid']['entity']->field_synonyms[$lang]))
-            {
-              foreach($term->field_field_synonyms as $synonym)
-	            {
-	              if (strlen($synonym["rendered"]["#markup"]) > 0 && $synonym["rendered"]["#markup"] != "")
-	              {
-	                array_push($term_synonyms, $synonym["rendered"]["#markup"]);
-	              }
-	            }	
-            }            
-            $term_synonyms = implode(", ", $term_synonyms);
-            $letter = strtoupper(drupal_substr($term_title, 0, 1));
-            if ($letter_num[$letter] == 1) {
-              $dd_class = ' one-term';
-            }
-            ?>
-            <dt class="term-title">
-              <a href="<?php print $term_path ?>"><?php print $term_title; ?></a>
-            </dt>
-            <dd class="term-description<?php echo $dd_class;?>">
-              <?php if (strlen($term_synonyms) > 0) { ?>
-                <label><?php print t("Synonyms"); ?>:</label>
-                <span><?php print $term_synonyms?></span>
-              <?php } ?>
-              <?php print $term_desc; ?>
-              <div class="views-field views-field-view-node">
-                <a href="<?php print $term_path ?>"><?php print t("See more"); ?></a>
-              </div>
-            </dd>
-            <?php
-            $prev_letter = $letter;
-          }
-          ?>
-        </dl>
-      </div>    
-    </div>
-
-  </div><?php /* class view */ ?>
+    <div class="view-content">   
+	<?php include(drupal_get_path('theme', 'osha_frontend').'/templates/thesaurus-alphabetical-tpl/'. $language->language .'-alphabetical.php'); ?>
+	</div>
 </div>
+</div>
+
+
+<!--</div>-->
+<script>
+var lang = "<?php echo $lang  ?>";
+//document.getElementById("content_"+ lang).style.display = "block";
+
+	
+var url = window.location.href; 
+var parts = url.split("/");
+var last_part = parts[parts.length-1];
+if (last_part == ""){
+	last_part = parts[parts.length-2];
+}
+
+last_part=decodeURIComponent(last_part);
+if (last_part != "alphabetical"){
+	var letter = lang + "_letter_" + last_part;
+	var term = lang+"_term_"+last_part; 	
+
+	if(document.getElementById(term)){
+	    tablinks = document.getElementsByClassName("glossary-letter");
+		x = document.getElementsByClassName("content-term");
+		for (i = 0; i < x.length; i++) {
+			x[i].style.display = "none";
+		}	
+		for (i = 0; i < x.length; i++) {
+			if (tablinks[i]  != 'undefined' && tablinks[i] != null){
+				tablinks[i].className = tablinks[i].className.replace(" active", "");
+			}
+		}
+		var element = document.getElementById(letter);			
+			element.classList.add("active");
+			document.getElementById(term).style.display = "block";   
+		}else{ //if the letter does not exist we go to main
+			window.location.replace("/" +lang + "/tools-and-resources/eu-osha-thesaurus/alphabetical");
+   }
+}
+	
+</script>
+

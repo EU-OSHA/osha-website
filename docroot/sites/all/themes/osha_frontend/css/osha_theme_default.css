@@ -6721,16 +6721,143 @@ body.page-node-5429 .oshwiki-featured-articles {
 
 .contact-form{
 	border: 1px solid #CCC;
-	width: 40%;
+	width: 60%;
 	padding: 1em;
 	margin-top: 1em;
 	background: #e8eef7;
+}
+
+.contact-form .form-item{
+	padding-top: 10px;
+}
+
+.contact-form .fieldset-description{
+	line-height: initial;
+    padding-bottom: 10px;
 }
 
 .contact-form fieldset{
 	margin-top:1em;
 	margin-bottom:1em;
 }
+
+.wt-captcha__inner{
+	width: 80% !important;
+}
+
+
+/* Captcha Right column Home page */
+.region-sidebar-second #block-osha-newsletter-osha-newsletter-subscribe .wt-captcha__inner{
+	width: 222px !important;
+	padding-right: 10px;
+}
+
+.region-sidebar-second #block-osha-newsletter-osha-newsletter-subscribe .wt-captcha__inner label{
+	color: #404040;
+	font-weight: normal;
+	font-size: 13px;
+	padding-top: 0;
+	padding-right: 0;
+	line-height: 18px;
+}
+
+.region-sidebar-second #block-osha-newsletter-osha-newsletter-subscribe .wt-captcha__inner br{
+	display: none;
+}
+
+.region-sidebar-second #block-osha-newsletter-osha-newsletter-subscribe .wt-captcha__inner strong{
+	display: block;
+	padding-bottom: 5px;
+}
+
+.region-sidebar-second #block-osha-newsletter-osha-newsletter-subscribe .wt-captcha .wt-captcha__slider{
+	padding-bottom: 0;
+}
+
+.region-sidebar-second #block-osha-newsletter-osha-newsletter-subscribe .wt-captcha .wt-captcha__answer{
+	font-size: 13px;
+    padding-top: 20px;
+}
+/* END Captcha Right column Home page */
+
+/* Captcha Footer Home page */
+#footer .wt-captcha{
+	margin-top: 15px;
+}
+
+#footer .wt-captcha__inner{
+	width: 398px !important;
+	padding-right: 10px;
+}
+
+#footer .wt-captcha__inner label{
+	color: #404040;
+	font-weight: normal;
+	font-size: 13px;
+	padding-top: 0;
+	padding-right: 0;
+	line-height: 18px;
+}
+
+#footer .wt-captcha__inner br{
+	display: none;
+}
+
+#footer .wt-captcha__inner strong{
+	display: block;
+	padding-bottom: 5px;
+}
+
+#footer .wt-captcha .wt-captcha__slider{
+	padding-bottom: 0;
+}
+
+#footer .wt-captcha .wt-captcha__answer{
+	color: #404040;
+	font-size: 13px;
+    padding-top: 10px;
+}
+/* END Captcha Footer Home page */
+
+/* Captcha Contact us */
+#content .contact-form .wt-captcha{
+	margin-top: 15px;
+}
+
+#content .contact-form .wt-captcha__inner{
+	width: 96% !important;
+	padding-right: 10px;
+}
+
+#content .contact-form .wt-captcha__inner label{
+	color: #404040;
+	font-weight: normal;
+	font-size: 13px;
+	padding-top: 0;
+	padding-right: 0;
+	line-height: 18px;
+}
+
+#content .contact-form .wt-captcha__inner br{
+	display: none;
+}
+
+#content .contact-form .wt-captcha__inner strong{
+	display: block;
+	padding-bottom: 5px;
+}
+
+#content .contact-form .wt-captcha .wt-captcha__slider{
+	padding-bottom: 0;
+}
+
+#content .contact-form .wt-captcha .wt-captcha__answer{
+	color: #404040;
+	font-size: 13px;
+    padding-top: 10px;
+}
+
+/* END Captcha Contact us */
 
 .contact-form fieldset.captcha{
 	display:block;
@@ -6740,7 +6867,6 @@ body.page-node-5429 .oshwiki-featured-articles {
 	padding:1em;
 }
 
-
 .contact_us_box{
 	float:left;
 	width:30%;
@@ -6748,11 +6874,9 @@ body.page-node-5429 .oshwiki-featured-articles {
 	min-height:11em;
 }
 
-
 .contact_us_box.clear{
 	clear:both;
 }
-
 
 .contact_us_title{
 	color: #003399;
@@ -6767,7 +6891,7 @@ body.page-node-5429 .oshwiki-featured-articles {
 	width:100%!important;
 }
 
-.contact-form  #edit-actions  #edit-submit{
+#content .contact-form #edit-actions #edit-submit{
 	background: url("../images/flecha.png") no-repeat scroll 96% center #e8eef7;
 	border: 0 none;
 	color: #003399;
@@ -6782,6 +6906,11 @@ body.page-node-5429 .oshwiki-featured-articles {
 	text-align: left;
 	width: auto!important;
 	margin-top: 1em;
+	position: relative;
+}
+
+#content .contact-form label{
+	padding-top: 10px;
 }
 
 .contact-form div .grippie{

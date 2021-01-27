@@ -29,6 +29,36 @@
 	border-bottom: 2px solid #dc2f82 !important;
 }
 
+
+.glossary-letters .container {
+    float: left;
+    padding: 1em;
+}
+.glossary-letters {
+    float: left;
+    clear: both;
+    width: 100%;
+    border-top: 2px solid #003399;
+    border-bottom: 2px solid #003399;
+    margin-top: 16px;
+    margin-bottom: 2em;    
+}
+.glossary-letters span {
+    display: block;
+    float: left;
+    padding-right: 1em;
+}
+#content .glossary-letters span a {
+    color: #003399;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-bottom: 0;
+}
+.view-thesaurus-front .glossary-letters span a.active {
+    border-bottom: 2px solid #dc2f82 !important;
+}
+
+
 /*Hierarchical*/
 #tree{
 	padding: 2px;
@@ -313,17 +343,24 @@ h3.active .accordion-icon{
 	clear: both;
 }
 
+.view-thesaurus-front-indexed .views-exposed-widgets,
+.view-thesaurus-front .views-exposed-widgets{
+	clear: both;
+}
+
 .view-thesaurus-front-indexed .views-label-field-synonyms{
 	color: #003399;
 }
 
-.view-thesaurus-front-indexed #edit-search-api-views-fulltext-wrapper{
+.view-thesaurus-front-indexed #edit-search-api-views-fulltext-wrapper,
+.view-thesaurus-front #edit-search-api-views-fulltext-wrapper{
 	background-image: none;
     margin-right: 1em;
     padding-top: 1em;
 }
 
-.view-thesaurus-front-indexed #edit-search-api-views-fulltext{
+.view-thesaurus-front-indexed #edit-search-api-views-fulltext,
+.view-thesaurus-front #edit-search-api-views-fulltext{
 	height: 37px;
     border: 1px solid #003399;
     border-radius: 5px;
@@ -336,7 +373,8 @@ h3.active .accordion-icon{
     font-size: 13px;
 }
 
-.view-thesaurus-front-indexed .views-exposed-widget.views-widget-sort-by {
+.view-thesaurus-front-indexed .views-exposed-widget.views-widget-sort-by,
+.view-thesaurus-front .views-exposed-widget.views-widget-sort-by{
     width: 22%!important;
 }
 
@@ -349,6 +387,10 @@ h3.active .accordion-icon{
 	float: left;
 	width: 462px;
 	margin-right: 1em;
+}
+
+.intro-text-thesaurus p{
+	margin: 1.5em 0;
 }
 
 .page-node.node-type-thesaurus .intro-text-thesaurus {
@@ -533,4 +575,8 @@ html:lang(pt) .download-content-theasaurus{
     color: #003399;
     font-weight: bold;
     cursor: pointer;
+}
+
+html[lang=el] .view-thesaurus-front .views-exposed-form label{
+	font-size: 0.9em;
 }

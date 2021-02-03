@@ -524,6 +524,7 @@ function osha_newsletter_subscribe_extra_form() {
     '#type' => 'checkbox',
     '#title' => t('I agree to the processing of my personal data'),
     '#default_value' => 0,
+    '#required' => TRUE,
   );
 
   if (user_is_anonymous()) {
@@ -615,7 +616,11 @@ function osha_newsletter_footer_block_subscribe_form($form, &$form_state) {
     $form['submit'] = array(
       '#type' => 'submit',
       '#value' => t('Subscribe'),
-      '#attributes' => ['class' => array('btn-light-blue')],
+      '#attributes' => [
+        'class' => array('btn-light-blue'),
+        'onclick' => "return onFooterSubscribe(this);",
+        'disabled' => 'disabled',
+      ],
     );
     $form['#validate'] = array('osha_newsletter_block_subscribe_captcha_form_validate');
     $form['#submit'] = array('osha_newsletter_block_subscribe_captcha_form_submit');
@@ -624,6 +629,7 @@ function osha_newsletter_footer_block_subscribe_form($form, &$form_state) {
     '#type' => 'checkbox',
     '#title' => t('I agree to the processing of my personal data'),
     '#default_value' => 0,
+    '#required' => TRUE,
   );
   $form['details_link'] = array(
     '#markup' => '<a class="privacy" href=' . url($link_url) . '>' . $link_label . '</a><br/>',
@@ -666,6 +672,7 @@ function osha_newsletter_block_subscribe_form($form, &$form_state) {
     '#type' => 'checkbox',
     '#title' => t('I agree to the processing of my personal data'),
     '#default_value' => 0,
+    '#required' => TRUE,
   );
   if (user_is_anonymous()) {
     drupal_add_library('system', 'drupal.ajax');
@@ -683,6 +690,10 @@ function osha_newsletter_block_subscribe_form($form, &$form_state) {
     $form['submit'] = array(
       '#type' => 'submit',
       '#value' => t('Subscribe'),
+      '#attributes' => array(
+        'onclick' => "return onSubscribe(this);",
+        'disabled' => 'disabled',
+      ),
     );
     $form['#validate'] = array('osha_newsletter_block_subscribe_captcha_form_validate');
     $form['#submit'] = array('osha_newsletter_block_subscribe_captcha_form_submit');
@@ -713,6 +724,10 @@ function osha_newsletter_block_subscribe_captcha_form($form, &$form_state) {
     '#type' => 'checkbox',
     '#title' => t('I agree to the processing of my personal data'),
     '#default_value' => 0,
+    '#required' => TRUE,
+    '#attributes' => array(
+      'onclick' => "return onCaptchaCheckboxChange(this);",
+    ),
   );
   $form['captcha'] = array(
     '#type' => 'captcha',
@@ -726,6 +741,10 @@ function osha_newsletter_block_subscribe_captcha_form($form, &$form_state) {
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Subscribe'),
+    '#attributes' => array(
+      'onclick' => "return onCaptchaSubscribe(this);",
+      'disabled' => 'disabled',
+    ),
   );
   return $form;
 }

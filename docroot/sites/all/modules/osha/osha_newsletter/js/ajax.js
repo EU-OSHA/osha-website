@@ -1,6 +1,13 @@
 (function($){
   Drupal.behaviors.osha_newsletter_captcha_block = {
     attach: function (context, settings) {
+      // Left newsletter captcha form.
+      var captcha_checkbox_id = '#osha-newsletter-block-subscribe-captcha-form';
+      var captcha_submit_id = '#edit-agree-processing-personal-data--3';
+      jQuery(captcha_checkbox_id).click(function () {
+        toggleNewsletterSubmit(captcha_checkbox_id, captcha_submit_id);
+      });
+
       $('#edit-email').once('osha_newsletter_captcha_block', function () {
         var ajax_settings = {};
         ajax_settings.url = Drupal.settings.basePath + Drupal.settings.pathPrefix + 'newsletter/ajax/block';

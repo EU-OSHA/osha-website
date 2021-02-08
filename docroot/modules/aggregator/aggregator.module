@@ -419,6 +419,11 @@ function aggregator_block_view($delta = '') {
     $items = array();
     if (!empty($result)) {
       foreach ($result as $item) {
+
+        $item->title = utf8_decode($item->title);
+        $item->author = utf8_decode($item->author);
+        $item->description = utf8_decode($item->description);
+
         $items[] = theme('aggregator_block_item', array('item' => $item));
       }
     }

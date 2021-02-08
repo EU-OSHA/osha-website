@@ -148,6 +148,11 @@ function aggregator_feed_items_load($type, $data = NULL) {
 
   foreach ($result as $item) {
     $item->categories = db_query('SELECT c.title, c.cid FROM {aggregator_category_item} ci LEFT JOIN {aggregator_category} c ON ci.cid = c.cid WHERE ci.iid = :iid ORDER BY c.title', array(':iid' => $item->iid))->fetchAll();
+
+    $item->title = utf8_decode($item->title);
+    $item->author = utf8_decode($item->author);
+    $item->description = utf8_decode($item->description);
+
     $items[] = $item;
   }
 

@@ -725,9 +725,9 @@ function osha_newsletter_block_subscribe_captcha_form($form, &$form_state) {
     '#title' => t('I agree to the processing of my personal data'),
     '#default_value' => 0,
     '#required' => TRUE,
-    '#attributes' => array(
-      'onclick' => "return onCaptchaCheckboxChange(this);",
-    ),
+//    '#attributes' => array(
+//      'onchange' => "alert(this.value)",
+//    ),
   );
   $form['captcha'] = array(
     '#type' => 'captcha',

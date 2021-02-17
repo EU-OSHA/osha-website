@@ -1,0 +1,18 @@
+diff --git a/modules/aggregator/aggregator.processor.inc b/modules/aggregator/aggregator.processor.inc
+index 534cca577..49b91efba 100644
+--- a/modules/aggregator/aggregator.processor.inc
++++ b/modules/aggregator/aggregator.processor.inc
+@@ -152,10 +152,10 @@ function aggregator_save_item($edit) {
+   if ($edit['title'] && empty($edit['iid'])) {
+     $edit['iid'] = db_insert('aggregator_item')
+       ->fields(array(
+-        'title' => $edit['title'],
++        'title' => utf8_encode($edit['title']),
+         'link' => $edit['link'],
+-        'author' => $edit['author'],
+-        'description' => $edit['description'],
++        'author' => utf8_encode($edit['author']),
++        'description' => utf8_encode($edit['description']),
+         'guid' => $edit['guid'],
+         'timestamp' => $edit['timestamp'],
+         'fid' => $edit['fid'],

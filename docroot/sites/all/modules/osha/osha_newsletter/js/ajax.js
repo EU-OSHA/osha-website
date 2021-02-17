@@ -1,13 +1,6 @@
 (function($){
   Drupal.behaviors.osha_newsletter_captcha_block = {
     attach: function (context, settings) {
-      // Left newsletter captcha form.
-      var captcha_checkbox_id = '#osha-newsletter-block-subscribe-captcha-form';
-      var captcha_submit_id = '#edit-agree-processing-personal-data--3';
-      jQuery(captcha_checkbox_id).click(function () {
-        toggleNewsletterSubmit(captcha_checkbox_id, captcha_submit_id);
-      });
-
       $('#edit-email').once('osha_newsletter_captcha_block', function () {
         var ajax_settings = {};
         ajax_settings.url = Drupal.settings.basePath + Drupal.settings.pathPrefix + 'newsletter/ajax/block';
@@ -48,7 +41,16 @@ var captcha_ready = false;
 (function($) {
   $.fn.captcha_init = function() {
     if (!captcha_ready) {
-      captcha.init();
+      // Left newsletter captcha form.
+      var captcha_checkbox_id = '#edit-agree-processing-personal-data--3';
+      var captcha_submit_id = '#osha-newsletter-block-subscribe-captcha-form #edit-submit--3';
+
+      if (agree_processing(captcha_checkbox_id)) {
+        jQuery(captcha_submit_id).prop('disabled', false).removeAttr('disabled');
+      }
+      jQuery(captcha_checkbox_id).click(function () {
+        toggleNewsletterSubmit(captcha_checkbox_id, captcha_submit_id);
+      });
     }
     captcha_ready = true;
   };

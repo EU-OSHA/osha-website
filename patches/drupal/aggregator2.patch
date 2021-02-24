@@ -1,0 +1,32 @@
+diff --git a/modules/aggregator/aggregator.module b/modules/aggregator/aggregator.module
+index 02c9ec46a..ebeb5ddf5 100644
+--- a/modules/aggregator/aggregator.module
++++ b/modules/aggregator/aggregator.module
+@@ -419,6 +419,11 @@ function aggregator_block_view($delta = '') {
+     $items = array();
+     if (!empty($result)) {
+       foreach ($result as $item) {
++
++        $item->title = utf8_decode($item->title);
++        $item->author = utf8_decode($item->author);
++        $item->description = utf8_decode($item->description);
++
+         $items[] = theme('aggregator_block_item', array('item' => $item));
+       }
+     }
+diff --git a/modules/aggregator/aggregator.pages.inc b/modules/aggregator/aggregator.pages.inc
+index bfba3fffb..01830d8ff 100644
+--- a/modules/aggregator/aggregator.pages.inc
++++ b/modules/aggregator/aggregator.pages.inc
+@@ -148,6 +148,11 @@ function aggregator_feed_items_load($type, $data = NULL) {
+ 
+   foreach ($result as $item) {
+     $item->categories = db_query('SELECT c.title, c.cid FROM {aggregator_category_item} ci LEFT JOIN {aggregator_category} c ON ci.cid = c.cid WHERE ci.iid = :iid ORDER BY c.title', array(':iid' => $item->iid))->fetchAll();
++
++    $item->title = utf8_decode($item->title);
++    $item->author = utf8_decode($item->author);
++    $item->description = utf8_decode($item->description);
++
+     $items[] = $item;
+   }
+ 

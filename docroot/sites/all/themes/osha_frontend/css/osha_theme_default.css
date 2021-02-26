@@ -3018,6 +3018,20 @@ hr{
 
 #block-osha-newsletter-osha-newsletter-subscribe input {
   font-size: 110%;
+  display: block;
+  float: left;
+  clear: both;
+  margin-top: 17px;
+  margin-right: 10px;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe input[type=checkbox] + label:before{
+	content: none;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe input[type=checkbox] + label{
+	float: left;
+	clear: none;
 }
 
 #block-osha-newsletter-osha-newsletter-subscribe #edit-captcha-response{

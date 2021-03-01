@@ -3223,3 +3223,15 @@ a.facetapi-limit-link:hover{
     visibility: hidden;
     display: none;
 }
+
+/* MDR-4185 */
+.three_column .block-related-resources .content-related-boxes .publications-right-column .content-publication-info{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.three_column .block-related-resources .content-related-boxes .publications-right-column .content-publication-info span{
+   width: 100%;
+   clear: both;
+   float: none;
+}

@@ -3038,6 +3038,7 @@ hr{
 #block-osha-newsletter-osha-newsletter-subscribe input[type=checkbox] + label{
 	float: left;
 	clear: none;
+	width: 80%;
 }
 
 #block-osha-newsletter-osha-newsletter-subscribe #edit-captcha-response{

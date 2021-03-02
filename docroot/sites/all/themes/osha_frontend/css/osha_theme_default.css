@@ -2166,6 +2166,13 @@ font-weight: normal;
 	font-weight:bold;
 	font-family: "Open Sans", sans-serif;
 	font-size:0.8em;
+	clear: both;
+    display: block;
+    width: max-content;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe-extra label.option{
+	padding-top: 13px;
 }
 
 #block-osha-newsletter-osha-newsletter-subscribe-extra #edit-submit--3 {
@@ -3022,7 +3029,7 @@ hr{
 	line-height:1.5em;
 }
 
-#block-osha-newsletter-osha-newsletter-subscribe input {
+#block-osha-newsletter-osha-newsletter-subscribe input, #block-osha-newsletter-osha-newsletter-subscribe-extra input{
   font-size: 110%;
   display: block;
   float: left;
@@ -3031,14 +3038,18 @@ hr{
   margin-right: 10px;
 }
 
-#block-osha-newsletter-osha-newsletter-subscribe input[type=checkbox] + label:before{
+#block-osha-newsletter-osha-newsletter-subscribe input[type=checkbox] + label:before, #block-osha-newsletter-osha-newsletter-subscribe-extra input[type=checkbox] + label:before{
 	content: none;
 }
 
-#block-osha-newsletter-osha-newsletter-subscribe input[type=checkbox] + label{
+#block-osha-newsletter-osha-newsletter-subscribe input[type=checkbox] + label, #block-osha-newsletter-osha-newsletter-subscribe-extra input[type=checkbox] + label{
 	float: left;
 	clear: none;
 	width: 80%;
+}
+
+#block-osha-newsletter-osha-newsletter-subscribe-extra input[type=checkbox]{
+	display: block;
 }
 
 #block-osha-newsletter-osha-newsletter-subscribe #edit-captcha-response{

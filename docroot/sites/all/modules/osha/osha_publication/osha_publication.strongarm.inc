@@ -84,6 +84,7 @@ function osha_publication_strongarm() {
     'dangerous_substances' => 0,
     'highlights_item' => 0,
     'newsletter_item' => 0,
+    'newsletter_alt' => 0,
     'print' => 0,
     'question' => 0,
     'token' => 0,
@@ -171,7 +172,7 @@ function osha_publication_strongarm() {
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '21',
+          'weight' => '22',
         ),
         'workbench_access' => array(
           'weight' => '0',
@@ -180,13 +181,13 @@ function osha_publication_strongarm() {
           'weight' => '1',
         ),
         'redirect' => array(
-          'weight' => '22',
-        ),
-        'metatags' => array(
           'weight' => '23',
         ),
+        'metatags' => array(
+          'weight' => '24',
+        ),
         'xmlsitemap' => array(
-          'weight' => '26',
+          'weight' => '28',
         ),
       ),
       'display' => array(),

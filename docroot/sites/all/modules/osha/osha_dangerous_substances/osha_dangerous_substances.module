@@ -262,7 +262,7 @@ function osha_dangerous_substances_field_formatter_view($entity_type, $entity, $
 
   switch ($display['type']) {
     case 'practical_tool_title':
-      $output = isset($items[0]) ? $items[0]['safe_value'] : '';
+      $output = isset($items[0]) ? $items[0]['value'] : '';
       if (!empty($output)) {
         $output = l($output, 'node/' . $entity->nid, ['query' => ['destination' => request_uri()], 'absolute' => TRUE]);
       }

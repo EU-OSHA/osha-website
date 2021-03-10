@@ -170,3 +170,42 @@ function osha_musculoskeletal_disorders_update_7010() {
     pathauto_node_update_alias($node, 'update');
   }
 }
+
+/**
+ * MDR-4147 MSDs database - change Teleworking category to a priority area.
+ */
+function osha_musculoskeletal_disorders_update_7011() {
+  if ($voc = taxonomy_vocabulary_machine_name_load('msd_priority_area')) {
+    $v = (object) ['name' => 'Teleworking', 'vid' => $voc->vid];
+    taxonomy_term_save($v);
+  }
+}
+
+/**
+ * MDR-4147 MSDs database - change Teleworking category to a priority area.
+ */
+function osha_musculoskeletal_disorders_update_7012() {
+  $term = taxonomy_get_term_by_name('Teleworking', 'msd_priority_area');
+  $resource = db_query("
+  SELECT distinct nid FROM {node} n 
+  JOIN {field_data_field_hazards} hh ON hh.entity_id = n.nid
+  WHERE type='musculoskeletal_disorders' and field_hazards_tid = :tid",
+    array(':tid' => 4985)
+  );
+  if (count($term)) {
+    $term = reset($term);
+    foreach ($resource as $result) {
+      $node = node_load($result->nid);
+      if ($node->field_msd_priority_area) {
+        foreach ($node->field_msd_priority_area[LANGUAGE_NONE] as $key => $row) {
+          if ($row['tid'] != $term->tid) {
+            continue;
+          }
+          unset($node->field_msd_priority_area[LANGUAGE_NONE][$key]);
+        }
+      }
+      $node->field_msd_priority_area[LANGUAGE_NONE][] = ['tid' => $term->tid];
+      node_save($node);
+    }
+  }
+}

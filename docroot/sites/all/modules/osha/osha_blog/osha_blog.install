@@ -57,3 +57,12 @@ function osha_blog_update_7004() {
 function osha_blog_update_7005() {
   features_revert(array('osha_blog' => array('field_base', 'field_instance')));
 }
+
+/**
+ * MDR-4244 remove the old thesaurus.
+ */
+function osha_blog_update_7006() {
+  $instance = field_info_instance('node','field_thesaurus','blog');
+  field_delete_instance($instance);
+  features_revert_module('osha_blog');
+}

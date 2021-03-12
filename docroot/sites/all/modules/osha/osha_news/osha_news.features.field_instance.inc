@@ -751,7 +751,7 @@ function osha_news_field_default_field_instances() {
   $field_instances['node-news-field_image'] = array(
     'bundle' => 'news',
     'deleted' => 0,
-    'description' => 'The header image that will be displayed on page.',
+    'description' => 'The header image that will be displayed on page. The image should be 220x220px',
     'display' => array(
       'dangerous_substances' => array(
         'label' => 'above',
@@ -881,10 +881,11 @@ function osha_news_field_default_field_instances() {
         'manualcrop_instant_preview' => 1,
         'manualcrop_keyboard' => 1,
         'manualcrop_maximize_default_crop_area' => 0,
-        'manualcrop_require_cropping' => array(),
+        'manualcrop_require_cropping' => array(
+          'home_news' => 'home_news',
+        ),
         'manualcrop_styles_list' => array(
-          'highlight_image' => 'highlight_image',
-          'medium_crop_220' => 'medium_crop_220',
+          'home_news' => 'home_news',
         ),
         'manualcrop_styles_mode' => 'include',
         'manualcrop_thumblist' => 0,
@@ -1744,101 +1745,6 @@ function osha_news_field_default_field_instances() {
     'workbench_access_field' => 0,
   );
 
-  // Exported field_instance: 'node-news-field_thesaurus'.
-  $field_instances['node-news-field_thesaurus'] = array(
-    'bundle' => 'news',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'dangerous_substances' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'default' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 12,
-      ),
-      'highlights_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 13,
-      ),
-      'newsletter_alt' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'newsletter_item' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 3,
-      ),
-      'osha_resources' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 7,
-      ),
-      'osha_slideshow' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'osha_wiki' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'rss' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 11,
-      ),
-      'scs' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 3,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 8,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_thesaurus',
-    'label' => 'Thesaurus',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'multiple_selects',
-      'settings' => array(
-        'autocomplete_path' => 'taxonomy/autocomplete',
-        'size' => 60,
-      ),
-      'type' => 'multiple_selects',
-      'weight' => 9,
-    ),
-    'workbench_access_field' => 0,
-  );
-
   // Exported field_instance: 'node-news-title_field'.
   $field_instances['node-news-title_field'] = array(
     'bundle' => 'news',
@@ -1992,8 +1898,7 @@ function osha_news_field_default_field_instances() {
   t('Source url');
   t('Summary');
   t('Tags');
-  t('The header image that will be displayed on page.');
-  t('Thesaurus');
+  t('The header image that will be displayed on page. The image should be 220x220px');
   t('Title');
 
   return $field_instances;

@@ -82,7 +82,7 @@ search/guidelines',
         'region' => 'sidebar_first',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 3,
+        'weight' => 5,
       ),
       'seven' => array(
         'region' => '',

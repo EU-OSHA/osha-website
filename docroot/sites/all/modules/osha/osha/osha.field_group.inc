@@ -21,7 +21,7 @@ function osha_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Group',
-    'weight' => '1',
+    'weight' => '33',
     'children' => array(
       0 => 'field_related_resource_title',
       1 => 'field_related_resources_files',

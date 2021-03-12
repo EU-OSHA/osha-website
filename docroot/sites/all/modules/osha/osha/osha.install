@@ -939,3 +939,12 @@ function osha_update_7065() {
     }
   }
 }
+
+/**
+ * MDR-4244 remove the old thesaurus.
+ */
+function osha_update_7066() {
+  $instance = field_info_instance('node','field_thesaurus','article');
+  field_delete_instance($instance);
+  features_revert_module('osha');
+}

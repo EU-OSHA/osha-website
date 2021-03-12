@@ -1,7 +1,7 @@
 name = osha
 core = 7.x
 package = OSHA
-version = 7.x-1.53
+version = 7.x-1.54
 project = osha
 dependencies[] = aggregator
 dependencies[] = comment
@@ -176,7 +176,6 @@ features[field_instance][] = node-article-field_related_oshwiki_articles
 features[field_instance][] = node-article-field_resources
 features[field_instance][] = node-article-field_summary
 features[field_instance][] = node-article-field_tags
-features[field_instance][] = node-article-field_thesaurus
 features[field_instance][] = node-article-field_wiki_categories
 features[field_instance][] = node-article-title_field
 features[field_instance][] = node-dvs_survey-field_dvs_code

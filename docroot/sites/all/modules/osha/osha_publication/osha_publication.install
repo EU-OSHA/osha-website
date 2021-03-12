@@ -892,3 +892,12 @@ function osha_publication_update_7031() {
 function osha_publication_update_7032() {
   features_revert(array('osha_publication' => array('field_base', 'field_instance')));
 }
+
+/**
+ * MDR-4244 remove the old thesaurus.
+ */
+function osha_publication_update_7033() {
+  $instance = field_info_instance('node','field_thesaurus','publication');
+  field_delete_instance($instance);
+  features_revert_module('osha_publication');
+}

@@ -66,5 +66,5 @@ function osha_seminar_update_7004() {
 function osha_seminar_update_7005() {
   $instance = field_info_instance('node','field_thesaurus','seminar');
   field_delete_instance($instance);
-  features_revert_module('osha_wiki');
+  features_revert_module('osha_seminar');
 }

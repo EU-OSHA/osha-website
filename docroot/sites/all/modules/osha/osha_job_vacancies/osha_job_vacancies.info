@@ -60,7 +60,6 @@ features[field_instance][] = node-job_vacancies-field_related_resources
 features[field_instance][] = node-job_vacancies-field_reserve_list
 features[field_instance][] = node-job_vacancies-field_summary
 features[field_instance][] = node-job_vacancies-field_tags
-features[field_instance][] = node-job_vacancies-field_thesaurus
 features[field_instance][] = node-job_vacancies-title_field
 features[node][] = job_vacancies
 features[path_breadcrumbs][] = closed_job_vacancies_view

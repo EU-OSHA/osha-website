@@ -7,11 +7,17 @@
  */
 class OiraNewsMigration extends AbstractNCWNodeMigration {
 
+  /**
+   * {@inheritdoc}
+   */
   public function __construct($arguments) {
     parent::__construct($arguments, 'OiraNewsSource', 'news');
     $this->description = 'Import news from HWC';
   }
 
+  /**
+   * {@inheritdoc}
+   */
   function addFieldMappings() {
     parent::addFieldMappings();
 

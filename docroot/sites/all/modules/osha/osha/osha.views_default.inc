@@ -958,13 +958,6 @@ function osha_views_default_views() {
   $handler->display->display_options['fields']['field_tags']['type'] = 'i18n_taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_tags']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_tags']['multi_type'] = 'ul';
-  /* Field: File: Thesaurus */
-  $handler->display->display_options['fields']['field_thesaurus']['id'] = 'field_thesaurus';
-  $handler->display->display_options['fields']['field_thesaurus']['table'] = 'field_data_field_thesaurus';
-  $handler->display->display_options['fields']['field_thesaurus']['field'] = 'field_thesaurus';
-  $handler->display->display_options['fields']['field_thesaurus']['label'] = 'thesaurus';
-  $handler->display->display_options['fields']['field_thesaurus']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['field_thesaurus']['multi_type'] = 'ol';
   /* Field: Content: Activity */
   $handler->display->display_options['fields']['field_activity']['id'] = 'field_activity';
   $handler->display->display_options['fields']['field_activity']['table'] = 'field_data_field_activity';
@@ -1125,16 +1118,6 @@ function osha_views_default_views() {
   $handler->display->display_options['fields']['field_tags']['type'] = 'i18n_taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_tags']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_tags']['separator'] = '\\n';
-  /* Field: File: Thesaurus */
-  $handler->display->display_options['fields']['field_thesaurus']['id'] = 'field_thesaurus';
-  $handler->display->display_options['fields']['field_thesaurus']['table'] = 'field_data_field_thesaurus';
-  $handler->display->display_options['fields']['field_thesaurus']['field'] = 'field_thesaurus';
-  $handler->display->display_options['fields']['field_thesaurus']['label'] = 'thesaurus';
-  $handler->display->display_options['fields']['field_thesaurus']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['field_thesaurus']['hide_alter_empty'] = FALSE;
-  $handler->display->display_options['fields']['field_thesaurus']['type'] = 'i18n_taxonomy_term_reference_plain';
-  $handler->display->display_options['fields']['field_thesaurus']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['field_thesaurus']['separator'] = '\\n';
   /* Field: Content: Activity */
   $handler->display->display_options['fields']['field_activity']['id'] = 'field_activity';
   $handler->display->display_options['fields']['field_activity']['table'] = 'field_data_field_activity';
@@ -1604,16 +1587,6 @@ function osha_views_default_views() {
   $handler->display->display_options['fields']['field_nace_codes']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_nace_codes']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_nace_codes']['separator'] = '\\n';
-  /* Field: File: Thesaurus */
-  $handler->display->display_options['fields']['field_thesaurus']['id'] = 'field_thesaurus';
-  $handler->display->display_options['fields']['field_thesaurus']['table'] = 'field_data_field_thesaurus';
-  $handler->display->display_options['fields']['field_thesaurus']['field'] = 'field_thesaurus';
-  $handler->display->display_options['fields']['field_thesaurus']['label'] = 'thesaurus';
-  $handler->display->display_options['fields']['field_thesaurus']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['field_thesaurus']['hide_alter_empty'] = FALSE;
-  $handler->display->display_options['fields']['field_thesaurus']['type'] = 'i18n_taxonomy_term_reference_plain';
-  $handler->display->display_options['fields']['field_thesaurus']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['field_thesaurus']['separator'] = '\\n';
   /* Field: Content: Activity */
   $handler->display->display_options['fields']['field_activity']['id'] = 'field_activity';
   $handler->display->display_options['fields']['field_activity']['table'] = 'field_data_field_activity';
@@ -1763,16 +1736,6 @@ function osha_views_default_views() {
   $handler->display->display_options['fields']['field_tags']['type'] = 'i18n_taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_tags']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_tags']['separator'] = '\\n';
-  /* Field: File: Thesaurus */
-  $handler->display->display_options['fields']['field_thesaurus']['id'] = 'field_thesaurus';
-  $handler->display->display_options['fields']['field_thesaurus']['table'] = 'field_data_field_thesaurus';
-  $handler->display->display_options['fields']['field_thesaurus']['field'] = 'field_thesaurus';
-  $handler->display->display_options['fields']['field_thesaurus']['label'] = 'thesaurus';
-  $handler->display->display_options['fields']['field_thesaurus']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['field_thesaurus']['hide_alter_empty'] = FALSE;
-  $handler->display->display_options['fields']['field_thesaurus']['type'] = 'i18n_taxonomy_term_reference_plain';
-  $handler->display->display_options['fields']['field_thesaurus']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['field_thesaurus']['separator'] = '\\n';
   /* Field: Field: Nace */
   $handler->display->display_options['fields']['field_nace_codes']['id'] = 'field_nace_codes';
   $handler->display->display_options['fields']['field_nace_codes']['table'] = 'field_data_field_nace_codes';
@@ -1965,16 +1928,6 @@ function osha_views_default_views() {
   $handler->display->display_options['fields']['field_tags']['type'] = 'i18n_taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_tags']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_tags']['separator'] = '\\n';
-  /* Field: File: Thesaurus */
-  $handler->display->display_options['fields']['field_thesaurus']['id'] = 'field_thesaurus';
-  $handler->display->display_options['fields']['field_thesaurus']['table'] = 'field_data_field_thesaurus';
-  $handler->display->display_options['fields']['field_thesaurus']['field'] = 'field_thesaurus';
-  $handler->display->display_options['fields']['field_thesaurus']['label'] = 'thesaurus';
-  $handler->display->display_options['fields']['field_thesaurus']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['field_thesaurus']['hide_alter_empty'] = FALSE;
-  $handler->display->display_options['fields']['field_thesaurus']['type'] = 'i18n_taxonomy_term_reference_plain';
-  $handler->display->display_options['fields']['field_thesaurus']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['field_thesaurus']['separator'] = '\\n';
   /* Field: Content: Activity */
   $handler->display->display_options['fields']['field_activity']['id'] = 'field_activity';
   $handler->display->display_options['fields']['field_activity']['table'] = 'field_data_field_activity';
@@ -2420,16 +2373,6 @@ function osha_views_default_views() {
   $handler->display->display_options['fields']['field_nace_codes']['type'] = 'i18n_taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_nace_codes']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_nace_codes']['separator'] = '\\n';
-  /* Field: File: Thesaurus */
-  $handler->display->display_options['fields']['field_thesaurus']['id'] = 'field_thesaurus';
-  $handler->display->display_options['fields']['field_thesaurus']['table'] = 'field_data_field_thesaurus';
-  $handler->display->display_options['fields']['field_thesaurus']['field'] = 'field_thesaurus';
-  $handler->display->display_options['fields']['field_thesaurus']['label'] = 'thesaurus';
-  $handler->display->display_options['fields']['field_thesaurus']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['field_thesaurus']['hide_alter_empty'] = FALSE;
-  $handler->display->display_options['fields']['field_thesaurus']['type'] = 'i18n_taxonomy_term_reference_plain';
-  $handler->display->display_options['fields']['field_thesaurus']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['field_thesaurus']['separator'] = '\\n';
   /* Field: Content: Activity */
   $handler->display->display_options['fields']['field_activity']['id'] = 'field_activity';
   $handler->display->display_options['fields']['field_activity']['table'] = 'field_data_field_activity';
@@ -2594,16 +2537,6 @@ function osha_views_default_views() {
   $handler->display->display_options['fields']['field_tags']['type'] = 'i18n_taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_tags']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_tags']['separator'] = '\\n';
-  /* Field: File: Thesaurus */
-  $handler->display->display_options['fields']['field_thesaurus']['id'] = 'field_thesaurus';
-  $handler->display->display_options['fields']['field_thesaurus']['table'] = 'field_data_field_thesaurus';
-  $handler->display->display_options['fields']['field_thesaurus']['field'] = 'field_thesaurus';
-  $handler->display->display_options['fields']['field_thesaurus']['label'] = 'thesaurus';
-  $handler->display->display_options['fields']['field_thesaurus']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['field_thesaurus']['hide_alter_empty'] = FALSE;
-  $handler->display->display_options['fields']['field_thesaurus']['type'] = 'i18n_taxonomy_term_reference_plain';
-  $handler->display->display_options['fields']['field_thesaurus']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['field_thesaurus']['separator'] = '\\n';
   /* Field: Field: Nace */
   $handler->display->display_options['fields']['field_nace_codes']['id'] = 'field_nace_codes';
   $handler->display->display_options['fields']['field_nace_codes']['table'] = 'field_data_field_nace_codes';
@@ -2730,7 +2663,6 @@ function osha_views_default_views() {
     t('expiration_date'),
     t('body'),
     t('tags'),
-    t('thesaurus'),
     t('activity'),
     t('post_date'),
     t('pr_embargo_date'),
@@ -3581,17 +3513,6 @@ function osha_views_default_views() {
   $handler->display->display_options['filters']['field_wiki_categories_tid']['reduce_duplicates'] = TRUE;
   $handler->display->display_options['filters']['field_wiki_categories_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_wiki_categories_tid']['vocabulary'] = 'wiki_categories';
-  /* Filter criterion: File: Thesaurus (field_thesaurus) */
-  $handler->display->display_options['filters']['field_thesaurus_tid']['id'] = 'field_thesaurus_tid';
-  $handler->display->display_options['filters']['field_thesaurus_tid']['table'] = 'field_data_field_thesaurus';
-  $handler->display->display_options['filters']['field_thesaurus_tid']['field'] = 'field_thesaurus_tid';
-  $handler->display->display_options['filters']['field_thesaurus_tid']['value'] = array(
-    1487 => '1487',
-  );
-  $handler->display->display_options['filters']['field_thesaurus_tid']['group'] = 2;
-  $handler->display->display_options['filters']['field_thesaurus_tid']['reduce_duplicates'] = TRUE;
-  $handler->display->display_options['filters']['field_thesaurus_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_thesaurus_tid']['vocabulary'] = 'thesaurus';
   $handler->display->display_options['path'] = 'export/oira_wiki';
 
   /* Display: Gallery */

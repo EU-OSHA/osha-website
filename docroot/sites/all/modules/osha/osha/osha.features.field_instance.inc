@@ -309,60 +309,6 @@ function osha_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'file-document-field_thesaurus'.
-  $field_instances['file-document-field_thesaurus'] = array(
-    'bundle' => 'document',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'i18n_taxonomy',
-        'settings' => array(),
-        'type' => 'i18n_taxonomy_term_reference_link',
-        'weight' => 1,
-      ),
-      'preview' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'wysiwyg' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'file',
-    'field_name' => 'field_thesaurus',
-    'label' => 'Thesaurus',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'user_register_form' => FALSE,
-      'wysiwyg_override' => 1,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'multiple_selects',
-      'settings' => array(
-        'autocomplete_path' => 'taxonomy/autocomplete',
-        'size' => 60,
-      ),
-      'type' => 'multiple_selects',
-      'weight' => 4,
-    ),
-  );
-
   // Exported field_instance: 'file-image-field_file_description'.
   $field_instances['file-image-field_file_description'] = array(
     'bundle' => 'image',
@@ -694,60 +640,6 @@ function osha_field_default_field_instances() {
       ),
       'type' => 'options_select',
       'weight' => 5,
-    ),
-  );
-
-  // Exported field_instance: 'file-image-field_thesaurus'.
-  $field_instances['file-image-field_thesaurus'] = array(
-    'bundle' => 'image',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'i18n_taxonomy',
-        'settings' => array(),
-        'type' => 'i18n_taxonomy_term_reference_link',
-        'weight' => 4,
-      ),
-      'preview' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'wysiwyg' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'file',
-    'field_name' => 'field_thesaurus',
-    'label' => 'Thesaurus',
-    'required' => 0,
-    'settings' => array(
-      'entity_translation_sync' => FALSE,
-      'user_register_form' => FALSE,
-      'wysiwyg_override' => 1,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'multiple_selects',
-      'settings' => array(
-        'autocomplete_path' => 'taxonomy/autocomplete',
-        'size' => 60,
-      ),
-      'type' => 'multiple_selects',
-      'weight' => 7,
     ),
   );
 
@@ -7887,7 +7779,6 @@ function osha_field_default_field_instances() {
   t('Summary');
   t('Tags');
   t('The header image that will be displayed on page.');
-  t('Thesaurus');
   t('Title');
   t('Title text');
   t('Title text is used in the tool tip when a user hovers their mouse over the image. Adding title text makes it easier to understand the context of an image and improves usability.');

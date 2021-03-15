@@ -93,7 +93,7 @@ function osha_metatag_export_default() {
         'value' => '[node:summary]',
       ),
       'keywords' => array(
-        'value' => '[node:field_tags] [node:field_thesaurus]',
+        'value' => '[node:field_tags]',
       ),
     ),
   );

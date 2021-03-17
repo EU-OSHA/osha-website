@@ -89,7 +89,6 @@ features[field_instance][] = node-publication-field_related_publications
 features[field_instance][] = node-publication-field_relevant_for
 features[field_instance][] = node-publication-field_show_on
 features[field_instance][] = node-publication-field_tags
-features[field_instance][] = node-publication-field_thesaurus
 features[field_instance][] = node-publication-field_wiki_categories
 features[field_instance][] = node-publication-title_field
 features[field_instance][] = taxonomy_term-publication_types-field_main_category

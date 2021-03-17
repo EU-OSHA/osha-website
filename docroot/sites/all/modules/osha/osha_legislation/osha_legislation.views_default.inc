@@ -90,7 +90,7 @@ function osha_legislation_views_default_views() {
   $handler->display->display_options['fields']['title_field']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title_field']['link_to_entity'] = 1;
-  /* Field: Content: Link */
+  /* Field: Content: Link to content */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
@@ -141,7 +141,7 @@ function osha_legislation_views_default_views() {
   $handler->display->display_options['arguments']['field_directive_category_code_value']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_directive_category_code_value']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['field_directive_category_code_value']['limit'] = '0';
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
@@ -166,7 +166,7 @@ function osha_legislation_views_default_views() {
   $handler->display->display_options['fields']['title_field']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title_field']['link_to_entity'] = 1;
-  /* Field: Content: Link */
+  /* Field: Content: Link to content */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
@@ -295,7 +295,7 @@ function osha_legislation_views_default_views() {
   $handler->display->display_options['arguments']['field_guideline_category_code_value']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_guideline_category_code_value']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['field_guideline_category_code_value']['limit'] = '0';
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: Content: Published status */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';

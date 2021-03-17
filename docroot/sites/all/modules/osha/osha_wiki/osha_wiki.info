@@ -29,7 +29,6 @@ features[field_instance][] = node-wiki_page-field_flickr_date
 features[field_instance][] = node-wiki_page-field_nace_codes
 features[field_instance][] = node-wiki_page-field_summary
 features[field_instance][] = node-wiki_page-field_tags
-features[field_instance][] = node-wiki_page-field_thesaurus
 features[field_instance][] = node-wiki_page-field_updated
 features[field_instance][] = node-wiki_page-field_wiki_categories
 features[field_instance][] = node-wiki_page-field_wiki_page_url

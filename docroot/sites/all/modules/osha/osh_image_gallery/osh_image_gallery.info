@@ -1,11 +1,11 @@
 name = osh_image_gallery
 core = 7.x
 package = OSHA
-version = 7.x-1.0
+version = 7.x-1.1
 project = osha_image_gallery
+dependencies[] = ctools
 dependencies[] = media
 dependencies[] = views
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
 features[views_view][] = media_browser_osha
-mtime = 1453725143

@@ -50,7 +50,6 @@ features[facetapi][] = search_api@default_multilingual_node_index:block:field_st
 features[facetapi][] = search_api@default_multilingual_node_index:block:field_summary
 features[facetapi][] = search_api@default_multilingual_node_index:block:field_tags
 features[facetapi][] = search_api@default_multilingual_node_index:block:field_tags:name
-features[facetapi][] = search_api@default_multilingual_node_index:block:field_thesaurus
 features[facetapi][] = search_api@default_multilingual_node_index:block:field_wiki_categories
 features[facetapi][] = search_api@default_multilingual_node_index:block:field_wiki_page_url:title
 features[facetapi][] = search_api@default_multilingual_node_index:block:field_wiki_page_url:url

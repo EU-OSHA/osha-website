@@ -96,7 +96,11 @@ function osha_blog_strongarm() {
     'search_result' => 0,
     'diff_standard' => 0,
     'osha_slideshow' => 0,
+    'osha_search_teaser' => 0,
+    'dangerous_substances' => 0,
+    'newsletter_alt' => 0,
     'print' => 0,
+    'question' => 0,
     'token' => 0,
     'nodeform' => 0,
   );

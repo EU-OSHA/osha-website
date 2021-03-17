@@ -62,8 +62,10 @@ function osha_default_fe_block_settings() {
     'i18n_mode' => 0,
     'module' => 'devel_node_access',
     'node_types' => array(),
-    'pages' => '',
-    'roles' => array(),
+    'pages' => 'node/1495',
+    'roles' => array(
+      'administrator' => 3,
+    ),
     'themes' => array(
       'bartik' => array(
         'region' => '',
@@ -91,7 +93,7 @@ function osha_default_fe_block_settings() {
       ),
     ),
     'title' => '',
-    'visibility' => 0,
+    'visibility' => 1,
   );
 
   $export['devel_node_access-dna_user'] = array(
@@ -102,8 +104,10 @@ function osha_default_fe_block_settings() {
     'i18n_mode' => 0,
     'module' => 'devel_node_access',
     'node_types' => array(),
-    'pages' => '',
-    'roles' => array(),
+    'pages' => 'node/1495',
+    'roles' => array(
+      'administrator' => 3,
+    ),
     'themes' => array(
       'bartik' => array(
         'region' => '',
@@ -131,7 +135,7 @@ function osha_default_fe_block_settings() {
       ),
     ),
     'title' => '',
-    'visibility' => 0,
+    'visibility' => 1,
   );
 
   $export['lang_dropdown-language'] = array(
@@ -321,7 +325,7 @@ function osha_default_fe_block_settings() {
         'region' => 'content',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 20,
+        'weight' => 21,
       ),
       'seven' => array(
         'region' => '',
@@ -383,7 +387,8 @@ function osha_default_fe_block_settings() {
     'module' => 'osha_newsletter',
     'node_types' => array(),
     'pages' => 'alertservice
-alertservice/*',
+alertservice/*
+oshmail-newsletter',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(

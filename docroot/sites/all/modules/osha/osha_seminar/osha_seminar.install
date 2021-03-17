@@ -59,3 +59,12 @@ function osha_seminar_update_7004() {
   features_revert(array('osha_events' => array('field_instance')));
   features_revert(array('osha_seminar' => array('field_instance')));
 }
+
+/**
+ * MDR-4244 remove the old thesaurus.
+ */
+function osha_seminar_update_7005() {
+  $instance = field_info_instance('node','field_thesaurus','seminar');
+  field_delete_instance($instance);
+  features_revert_module('osha_seminar');
+}

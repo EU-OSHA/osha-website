@@ -16,3 +16,10 @@ function osh_image_gallery_update_7001() {
     ->condition('name', 'osh_image_gallery')
     ->execute();
 }
+
+/**
+ * MDR-4244 remove the old thesaurus.
+ */
+function osh_image_gallery_update_7002() {
+  features_revert_module('osh_image_gallery');
+}

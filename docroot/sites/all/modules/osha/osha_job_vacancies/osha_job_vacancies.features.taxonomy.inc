@@ -18,6 +18,8 @@ function osha_job_vacancies_taxonomy_default_vocabularies() {
       'weight' => -3,
       'language' => 'und',
       'i18n_mode' => 1,
+      'base_i18n_mode' => 1,
+      'base_language' => 'und',
       'rdf_mapping' => array(
         'rdftype' => array(
           0 => 'skos:ConceptScheme',
@@ -43,6 +45,8 @@ function osha_job_vacancies_taxonomy_default_vocabularies() {
       'weight' => 10,
       'language' => 'und',
       'i18n_mode' => 1,
+      'base_i18n_mode' => 1,
+      'base_language' => 'und',
       'rdf_mapping' => array(
         'rdftype' => array(
           0 => 'skos:ConceptScheme',

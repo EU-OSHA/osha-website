@@ -50,7 +50,6 @@ features[field_instance][] = node-blog-field_project_manager
 features[field_instance][] = node-blog-field_publication_date
 features[field_instance][] = node-blog-field_summary
 features[field_instance][] = node-blog-field_tags
-features[field_instance][] = node-blog-field_thesaurus
 features[field_instance][] = node-blog-title_field
 features[node][] = blog
 features[rules_config][] = rules_send_email_on_new_blog_comment

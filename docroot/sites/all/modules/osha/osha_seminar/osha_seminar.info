@@ -57,7 +57,6 @@ features[field_instance][] = node-seminar-field_seminar_location
 features[field_instance][] = node-seminar-field_seminar_start_date
 features[field_instance][] = node-seminar-field_show_eu_flag
 features[field_instance][] = node-seminar-field_tags
-features[field_instance][] = node-seminar-field_thesaurus
 features[field_instance][] = node-seminar-title_field
 features[node][] = seminar
 features[variable][] = comment_anonymous_seminar

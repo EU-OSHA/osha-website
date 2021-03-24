@@ -121,3 +121,12 @@ function osha_press_release_update_7006() {
 function osha_press_release_update_7007() {
   features_revert(array('osha_press_release' => array('views_view')));
 }
+
+/**
+ * MDR-4244 remove the old thesaurus.
+ */
+function osha_press_release_update_7008() {
+  $instance = field_info_instance('node','field_thesaurus','press_release');
+  field_delete_instance($instance);
+  features_revert_module('osha_press_release');
+}

@@ -125,7 +125,7 @@ blog/*
         'region' => 'content',
         'status' => 1,
         'theme' => 'osha_frontend',
-        'weight' => 16,
+        'weight' => 17,
       ),
       'seven' => array(
         'region' => '',

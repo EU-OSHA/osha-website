@@ -807,7 +807,11 @@ html[lang=de] .content-home-event .tag-news-events{
 }
 
 .content-subscribe .form-checkbox[type=checkbox] {
-  display: none;
+  display: block;
+}
+
+.content-subscribe .form-checkbox[type=checkbox] + label:before {
+	content: none;
 }
 
 label.option{
@@ -2066,6 +2070,8 @@ input[type=checkbox].add-to-calendar-checkbox {
 
 .region-footer-sitemap .content-subscribe #footer-newsletter-subscription-form-wrapper .form-item-agree-processing-personal-data .option{
 	width: 420px;
+    float: left;
+    clear: none;
 }
 
 .region-footer-sitemap .content-subscribe #footer-newsletter-subscription-form-wrapper .privacy{
@@ -3216,4 +3222,16 @@ a.facetapi-limit-link:hover{
 .node-17595 header > .node__title {
     visibility: hidden;
     display: none;
+}
+
+/* MDR-4185 */
+.three_column .block-related-resources .content-related-boxes .publications-right-column .content-publication-info{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.three_column .block-related-resources .content-related-boxes .publications-right-column .content-publication-info span{
+   width: 100%;
+   clear: both;
+   float: none;
 }

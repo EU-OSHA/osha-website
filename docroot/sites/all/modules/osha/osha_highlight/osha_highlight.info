@@ -48,7 +48,6 @@ features[field_instance][] = node-highlight-field_page_count
 features[field_instance][] = node-highlight-field_publication_date
 features[field_instance][] = node-highlight-field_show_on
 features[field_instance][] = node-highlight-field_tags
-features[field_instance][] = node-highlight-field_thesaurus
 features[field_instance][] = node-highlight-title_field
 features[node][] = highlight
 features[variable][] = comment_anonymous_highlight

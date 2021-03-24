@@ -219,6 +219,7 @@ function osha_user_default_permissions() {
   $permissions['moderate guideline state from approved to ready_to_publish'] = array(
     'name' => 'moderate guideline state from approved to ready_to_publish',
     'roles' => array(
+      'Project Manager' => 'Project Manager',
       'administrator' => 'administrator',
     ),
     'module' => 'workbench_moderation',
@@ -535,6 +536,7 @@ function osha_user_default_permissions() {
       'Events Coordinator' => 'Events Coordinator',
       'Events Editor' => 'Events Editor',
       'Layout Validator' => 'Layout Validator',
+      'News Editor' => 'News Editor',
       'Project Manager' => 'Project Manager',
       'Review Manager' => 'Review Manager',
       'Translation Liaison' => 'Translation Liaison',
@@ -554,6 +556,7 @@ function osha_user_default_permissions() {
       'Events Coordinator' => 'Events Coordinator',
       'Events Editor' => 'Events Editor',
       'Layout Validator' => 'Layout Validator',
+      'News Editor' => 'News Editor',
       'Project Manager' => 'Project Manager',
       'Review Manager' => 'Review Manager',
       'Translation Liaison' => 'Translation Liaison',

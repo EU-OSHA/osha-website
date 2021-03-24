@@ -265,7 +265,7 @@ function osha_blocks_get_related_wiki($node) {
     // But only if the wiki category is set (see MC-75)
     if (!empty($wiki_categories_tids) && $count = count($tagged_wikis) < 2) {
       $limit = 2 - $count;
-      $taxon_fields = array('field_thesaurus', 'field_nace_codes');
+      $taxon_fields = array('field_nace_codes');
       $solr_taxon_fields = array();
       foreach ($taxon_fields as $field) {
         if (!empty($node->{$field}[LANGUAGE_NONE])) {

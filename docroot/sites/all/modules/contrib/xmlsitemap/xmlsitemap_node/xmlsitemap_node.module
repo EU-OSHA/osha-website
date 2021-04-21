@@ -232,11 +232,19 @@ function xmlsitemap_node_create_link(stdClass $node, $lang = LANGUAGE_NONE) {
   //$access = &drupal_static('node_access');
   //unset($access[0][$node->nid]);
   //node_access_acquire_grants($node);
+  // Set access flag based on node_access.
+
+  $access = $node->nid ? xmlsitemap_node_view_access($node, drupal_anonymous_user()) : 1;
+
+  // Check if node is 'published', if not overwrite the 'access' flag to 0 to exclude it from the sitemap.
+  if ($node->status == NODE_NOT_PUBLISHED) {
+      $access = 0;
+  }
 
   // The following values must always be checked because they are volatile.
   $node->xmlsitemap['loc'] = $uri['path'];
   $node->xmlsitemap['lastmod'] = count($timestamps) ? max($timestamps) : 0;
-  $node->xmlsitemap['access'] = $node->nid ? xmlsitemap_node_view_access($node, drupal_anonymous_user()) : 1;
+  $node->xmlsitemap['access'] = $access;
   $node->xmlsitemap['language'] = $lang;
 
   return $node->xmlsitemap;

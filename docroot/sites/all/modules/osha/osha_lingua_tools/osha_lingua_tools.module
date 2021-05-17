@@ -935,7 +935,7 @@ function osha_lingua_tools_get_country_codes() {
   $list = [];
   $term_tree = taxonomy_get_tree($voc->vid, 0, NULL, TRUE);
   foreach($term_tree as $term) {
-    $iso = $term->field_iso2[LANGUAGE_NONE][0][value];
+    $iso = $term->field_iso2[LANGUAGE_NONE][0]['value'];
     if (!$term->field_country_status) {
       continue;
     }

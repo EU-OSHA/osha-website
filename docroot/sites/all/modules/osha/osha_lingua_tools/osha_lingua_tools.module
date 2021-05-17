@@ -327,6 +327,14 @@ function osha_copy_publication_translation_create_base_publication($title, $type
   return $node;
 }
 
+function osha_copy_publication_translation_validate($form, &$form_state) {
+  $nid = $form_state['values']['node'];
+  if (!is_numeric($nid)) {
+    form_set_error('node', 'The publciation selected is not correct, please could you select another publication?');
+    return FALSE;
+  }
+}
+
 function osha_copy_publication_translation_submit($form, &$form_state) {
   $prefix_title = $form_state['values']['prefix_title'];
   $suffix_title = $form_state['values']['suffix_title'];

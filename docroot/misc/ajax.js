@@ -149,7 +149,7 @@ Drupal.ajax = function (base, element, element_settings) {
   // The 'this' variable will not persist inside of the options object.
   var ajax = this;
   ajax.options = {
-    url: ajax.url,
+    url: Drupal.sanitizeAjaxUrl(ajax.url),
     data: ajax.submit,
     beforeSerialize: function (element_settings, options) {
       return ajax.beforeSerialize(element_settings, options);
@@ -195,6 +195,7 @@ Drupal.ajax = function (base, element, element_settings) {
       }
     },
     dataType: 'json',
+    jsonp: false,
     type: 'POST'
   };
 
@@ -407,7 +408,7 @@ Drupal.ajax.prototype.beforeSend = function (xmlhttprequest, options) {
 
   // Insert progressbar or throbber.
   if (this.progress.type == 'bar') {
-    var progressBar = new Drupal.progressBar('ajax-progress-' + this.element.id, eval(this.progress.update_callback), this.progress.method, eval(this.progress.error_callback));
+    var progressBar = new Drupal.progressBar('ajax-progress-' + this.element.id, $.noop, this.progress.method, $.noop);
     if (this.progress.message) {
       progressBar.setProgress(-1, this.progress.message);
     }

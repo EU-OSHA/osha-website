@@ -25,6 +25,10 @@ function xmlsitemap_node_cron() {
     $limit--;
     try {
       $node = node_load($item->data['nid']);
+      if (!$node) {
+        $queue->deleteItem($item);
+        continue;
+      }
       $link = xmlsitemap_node_create_link($node, $item->data['language']);
       xmlsitemap_link_save($link, array($link['type'] => $node));
       $queue->deleteItem($item);

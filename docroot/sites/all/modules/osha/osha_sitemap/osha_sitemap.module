@@ -67,6 +67,7 @@ function osha_sitemap_exclude_menu_to_node($link) {
     drupal_write_record('xmlsitemap', $link, array('type', 'id', 'language'));
   }
 }
+
 function osha_sitemap_xmlsitemap_link_alter(array &$link, array $context) {
   if ($link['type'] == 'node' && $context['node']->status == FALSE) {
     $link['access'] = FALSE;

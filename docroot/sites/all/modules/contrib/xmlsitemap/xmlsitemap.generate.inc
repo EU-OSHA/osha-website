@@ -443,7 +443,6 @@ function xmlsitemap_rebuild_batch_fetch($entity, &$context) {
   $query = new EntityFieldQuery();
   $query->entityCondition('entity_type', $entity);
   $query->entityCondition('entity_id', $context['sandbox']['last_id'], '>');
-  $query->propertyCondition('status', 1);
   $query->addTag('xmlsitemap_link_bundle_access');
   $query->addTag('xmlsitemap_rebuild');
   $query->addMetaData('entity', $entity);

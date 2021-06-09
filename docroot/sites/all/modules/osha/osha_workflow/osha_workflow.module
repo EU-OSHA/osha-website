@@ -35,6 +35,16 @@ define('OSHA_WORKFLOW_STATE_TO_BE_REVIEWED', 'needs_review');
 define('OSHA_WORKFLOW_STATE_TO_BE_APPROVED', 'to_be_approved');
 define('OSHA_WORKFLOW_STATE_READY_TO_PUBLISH', 'ready_to_publish');
 define('OSHA_WORKFLOW_STATE_PUBLISHED', 'published');
+define('OSHA_LEGISLATION_TID', 3048);
+
+function osha_workflow_is_legislation($node) {
+  reset($node->workbench_access);
+  $section = current($node->workbench_access);
+  if (OSHA_LEGISLATION_TID == $section) {
+    return TRUE;
+  }
+  return FALSE;
+}
 
 /**
  * Implements hook_token_info().
@@ -341,6 +351,9 @@ function osha_workflow_menu_alter(&$items) {
  *   Access permission to the screen.
  */
 function osha_workflow_node_approval_access($node) {
+  if (osha_workflow_is_legislation($node)) {
+    return FALSE;
+  }
   return OshaWorkflowPermissions::userCanAccessApprovalScreen($node);
 }
 
@@ -1234,6 +1247,20 @@ function osha_workflow_form_alter(&$form, &$form_state, $form_id) {
         $form['#access'] = FALSE;
       }
     }
+
+    $node = $form['node']['#value'];
+    if (!osha_workflow_is_legislation($node)) {
+      return;
+    }
+    $exclude_list = ['to_be_approved', 'approved'];
+    if (in_array($node->workbench_moderation['current']->state, $exclude_list)) {
+      return;
+    }
+    foreach($exclude_list as $key) {
+      if (!empty($form['state']['#options'][$key])) {
+        unset($form['state']['#options'][$key]);
+      }
+    }
   }
 
   if ($form_id == 'entity_collection_content_add_form') {
@@ -1338,6 +1365,18 @@ function osha_workflow_form_node_form_alter(&$form, $form_state) {
   $form['options']['vesafe_workflow_list'] = _osha_workflow_get_states_list($state);
   $form['revision_information']['vesafe_workflow_list'] = _osha_workflow_get_states_list($state);
 
+  if (!osha_workflow_is_legislation($node)) {
+    return;
+  }
+  $exclude_list = ['to_be_approved', 'approved'];
+  if (in_array($form['options']['workbench_moderation_state_new']['#default_value'], $exclude_list)) {
+    return;
+  }
+  foreach($exclude_list as $key) {
+    if (!empty($form['options']['workbench_moderation_state_new']['#options'][$key])) {
+      unset($form['options']['workbench_moderation_state_new']['#options'][$key]);
+    }
+  }
 }
 
 
@@ -1549,8 +1588,19 @@ function _osha_workflow_get_states() {
 function _osha_workflow_get_states_list($active_state) {
   $states = _osha_workflow_get_states();
 
+  $node = menu_get_object();
+  $exclude_list = [];
+  if (osha_workflow_is_legislation($node)) {
+    $exclude_list = ['to_be_approved', 'approved'];
+    if (in_array($node->workbench_moderation['current']->state, $exclude_list)) {
+      $exclude_list = [];
+    }
+  }
   $items = [];
   foreach ($states as $state_key => $state_label) {
+    if (in_array($state_key, $exclude_list)) {
+      continue;
+    }
     $items[] = [
       'data' => $state_label,
       'class' => [$state_key == $active_state ? 'active' : ''],

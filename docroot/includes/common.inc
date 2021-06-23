@@ -6685,41 +6685,30 @@ function element_children(&$elements, $sort = FALSE) {
   $sort = isset($elements['#sorted']) ? !$elements['#sorted'] : $sort;
 
   // Filter out properties from the element, leaving only children.
-  $count = count($elements);
-  $child_weights = array();
-  $i = 0;
+  $children = array();
   $sortable = FALSE;
   foreach ($elements as $key => $value) {
     if (is_int($key) || $key === '' || $key[0] !== '#') {
+      $children[$key] = $value;
       if (is_array($value) && isset($value['#weight'])) {
-        $weight = $value['#weight'];
         $sortable = TRUE;
       }
-      else {
-        $weight = 0;
       }
-      // Support weights with up to three digit precision and conserve the
-      // insertion order.
-      $child_weights[$key] = floor($weight * 1000) + $i / $count;
     }
-    $i++;
-  }
-
   // Sort the children if necessary.
   if ($sort && $sortable) {
-    asort($child_weights);
+    uasort($children, 'element_sort');
     // Put the sorted children back into $elements in the correct order, to
     // preserve sorting if the same element is passed through
     // element_children() twice.
-    foreach ($child_weights as $key => $weight) {
-      $value = $elements[$key];
+    foreach ($children as $key => $child) {
       unset($elements[$key]);
-      $elements[$key] = $value;
+      $elements[$key] = $child;
     }
     $elements['#sorted'] = TRUE;
   }
 
-  return array_keys($child_weights);
+  return array_keys($children);
 }
 
 /**

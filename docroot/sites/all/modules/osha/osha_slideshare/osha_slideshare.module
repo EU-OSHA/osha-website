@@ -120,7 +120,7 @@ function osha_slideshare_field_validate($entity_type, $entity, $field, $instance
 }
 
 function valid_slide_url($url){
-  $pattern = '/(http:\/\/)www\.slideshare\.net\/([\w\d-_\/]+)/';
+  $pattern = '/(http:\/\/)www\.slideshare\.net\/([\w\d\-_\/]+)/';
 
   if(valid_url($url) && preg_match($pattern, $url)){
     return TRUE;
